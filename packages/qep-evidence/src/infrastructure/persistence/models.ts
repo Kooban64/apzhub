@@ -64,6 +64,7 @@ export type PersistenceEvidenceRecord = {
   readonly relationshipIds: readonly string[];
   readonly sealedAt?: string;
   readonly sealedBy?: string;
+  readonly lifecycleGovernanceJson?: Readonly<Record<string, unknown>>;
   readonly revision: number;
   readonly historyEntries: readonly {
     readonly sequence: number;

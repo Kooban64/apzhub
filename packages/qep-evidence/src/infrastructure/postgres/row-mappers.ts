@@ -67,6 +67,9 @@ export function evidenceToRowValues(evidence: Evidence) {
     relationshipIdsJson: [...record.relationshipIds],
     sealedAt: record.sealedAt ? new Date(record.sealedAt) : null,
     sealedBy: record.sealedBy ?? null,
+    lifecycleGovernanceJson: record.lifecycleGovernanceJson
+      ? { ...record.lifecycleGovernanceJson }
+      : {},
     historyJson: record.historyEntries.map((h) => ({ ...h })),
     revision: record.revision,
     createdAt: new Date(record.createdAt),
@@ -117,6 +120,7 @@ export function rowToPersistenceRecord(
     relationshipIds: row.relationshipIdsJson ?? [],
     sealedAt: toIso(row.sealedAt),
     sealedBy: row.sealedBy ?? undefined,
+    lifecycleGovernanceJson: row.lifecycleGovernanceJson ?? undefined,
     revision: row.revision,
     historyEntries: row.historyJson ?? [],
     createdAt: toIso(row.createdAt) ?? new Date(0).toISOString(),

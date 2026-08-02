@@ -67,6 +67,11 @@ import {
   type EvidenceStatus,
   type HashAlgorithm,
 } from "./value-objects";
+import {
+  createDefaultLifecycleGovernance,
+  type EvidenceLifecycleGovernance,
+  type LifecycleGovernanceState,
+} from "./lifecycle-governance";
 
 export type EvidenceVersion = {
   readonly version: number;
@@ -111,6 +116,8 @@ export type Evidence = {
   readonly relationshipIds: readonly string[];
   readonly sealedAt?: string;
   readonly sealedBy?: string;
+  /** S06 — authoritative lifecycle governance state (catalogue). */
+  readonly lifecycleGovernance: EvidenceLifecycleGovernance;
   readonly revision: number;
   readonly history: EvidenceHistory;
   readonly createdAt: string;
@@ -275,6 +282,11 @@ export function captureEvidence(input: CaptureEvidenceInput): Evidence {
       },
     ],
     relationshipIds: [],
+    lifecycleGovernance: createDefaultLifecycleGovernance({
+      retentionClass: retention.retentionClass,
+      retentionUntil: retention.retainUntil,
+      legalHold: retention.legalHold,
+    }),
     revision: 1,
     history: appendEvidenceHistory(createEmptyEvidenceHistory(), {
       command: "captureEvidence",
@@ -502,6 +514,10 @@ export function quarantineEvidence(
     ctx,
     {
       status: "quarantined",
+      lifecycleGovernance: {
+        ...current.lifecycleGovernance,
+        state: "RESTRICTED",
+      },
       provenance: appendProvenance(current, "quarantined", ctx, reason),
     },
     "quarantineEvidence",
@@ -618,6 +634,10 @@ export function applyLegalHold(
     ctx,
     {
       retention,
+      lifecycleGovernance: {
+        ...current.lifecycleGovernance,
+        holdStatus: "HELD",
+      },
       provenance: appendProvenance(current, "legal_hold_applied", ctx, reason),
     },
     "applyLegalHold",
@@ -639,6 +659,10 @@ export function releaseLegalHold(evidence: Evidence, ctx: CommandContext): Evide
     ctx,
     {
       retention,
+      lifecycleGovernance: {
+        ...current.lifecycleGovernance,
+        holdStatus: "NOT_HELD",
+      },
       provenance: appendProvenance(current, "legal_hold_released", ctx),
     },
     "releaseLegalHold",
@@ -676,6 +700,13 @@ export function archiveEvidence(evidence: Evidence, ctx: CommandContext): Eviden
     ctx,
     {
       status: "archived",
+      lifecycleGovernance: {
+        ...current.lifecycleGovernance,
+        state: "ARCHIVED",
+        archivedAt: ctx.changedAt,
+        archivedBy: ctx.actorId,
+        archiveReason: "archiveEvidence",
+      },
       provenance: appendProvenance(current, "archived", ctx),
     },
     "archiveEvidence",
@@ -710,7 +741,7 @@ export function disposeEvidence(
     dispositionedAt: ctx.changedAt,
     dispositionedBy: ctx.actorId,
     reason,
-    method: input.method?.trim() || "authorised_disposal",
+    method: input.method?.trim() || "logical_deletion",
   };
   return withMutation(
     current,
@@ -718,12 +749,115 @@ export function disposeEvidence(
     {
       status: "disposed",
       disposition,
+      lifecycleGovernance: {
+        ...current.lifecycleGovernance,
+        state: "LOGICALLY_DELETED",
+        logicallyDeletedAt: ctx.changedAt,
+        logicallyDeletedBy: ctx.actorId,
+        logicalDeleteReason: reason,
+      },
       provenance: appendProvenance(current, "disposed", ctx, reason),
     },
     "disposeEvidence",
-    "Evidence disposed",
+    "Evidence logically deleted",
     [buildEvidenceDisposedEvent(eventBase(current, ctx), reason)],
     { from: current.status, to: "disposed" },
+  );
+}
+
+/**
+ * Apply a governed lifecycle state transition (S06).
+ * Does not delete content bytes. Does not bypass Dispose/Hold policies for
+ * LOGICALLY_DELETED — callers must evaluate policy first.
+ */
+export function applyLifecycleGovernanceTransition(
+  evidence: Evidence,
+  ctx: CommandContext,
+  input: {
+    readonly targetState: LifecycleGovernanceState;
+    readonly reason?: string;
+    readonly successorEvidenceId?: string;
+    readonly workflowStatus?: EvidenceStatus;
+  },
+): Evidence {
+  const current = beginCommand(evidence, ctx);
+  const governance: EvidenceLifecycleGovernance = {
+    ...current.lifecycleGovernance,
+    state: input.targetState,
+    archiveEligibleAt:
+      input.targetState === "ARCHIVE_ELIGIBLE"
+        ? ctx.changedAt
+        : current.lifecycleGovernance.archiveEligibleAt,
+    archivedAt:
+      input.targetState === "ARCHIVED"
+        ? ctx.changedAt
+        : current.lifecycleGovernance.archivedAt,
+    archivedBy:
+      input.targetState === "ARCHIVED"
+        ? ctx.actorId
+        : current.lifecycleGovernance.archivedBy,
+    archiveReason:
+      input.targetState === "ARCHIVED"
+        ? input.reason
+        : current.lifecycleGovernance.archiveReason,
+    disposalEligibleAt:
+      input.targetState === "DISPOSAL_ELIGIBLE"
+        ? ctx.changedAt
+        : current.lifecycleGovernance.disposalEligibleAt,
+    supersededByEvidenceId:
+      input.targetState === "SUPERSEDED"
+        ? input.successorEvidenceId
+        : current.lifecycleGovernance.supersededByEvidenceId,
+    logicallyDeletedAt:
+      input.targetState === "LOGICALLY_DELETED"
+        ? ctx.changedAt
+        : current.lifecycleGovernance.logicallyDeletedAt,
+    logicallyDeletedBy:
+      input.targetState === "LOGICALLY_DELETED"
+        ? ctx.actorId
+        : current.lifecycleGovernance.logicallyDeletedBy,
+    logicalDeleteReason:
+      input.targetState === "LOGICALLY_DELETED"
+        ? input.reason
+        : current.lifecycleGovernance.logicalDeleteReason,
+  };
+
+  let nextStatus: EvidenceStatus | undefined = input.workflowStatus;
+  let nextDisposition: EvidenceDisposition | undefined;
+  if (!nextStatus) {
+    if (input.targetState === "RESTRICTED") nextStatus = "quarantined";
+    else if (input.targetState === "ARCHIVED") nextStatus = "archived";
+    else if (input.targetState === "LOGICALLY_DELETED") {
+      nextStatus = "disposed";
+      nextDisposition = {
+        dispositionedAt: ctx.changedAt,
+        dispositionedBy: ctx.actorId,
+        reason: input.reason ?? "logical_deletion",
+        method: "logical_deletion",
+      };
+    } else if (input.targetState === "ACTIVE" && current.status === "quarantined") {
+      nextStatus = "classified";
+    }
+  }
+
+  return withMutation(
+    current,
+    ctx,
+    {
+      lifecycleGovernance: governance,
+      provenance: appendProvenance(
+        current,
+        `lifecycle_${input.targetState.toLowerCase()}`,
+        ctx,
+        input.reason,
+      ),
+      ...(nextStatus ? { status: nextStatus } : {}),
+      ...(nextDisposition ? { disposition: nextDisposition } : {}),
+    },
+    "lifecycleTransition",
+    `Lifecycle → ${input.targetState}`,
+    [],
+    nextStatus ? { from: current.status, to: nextStatus } : undefined,
   );
 }
 

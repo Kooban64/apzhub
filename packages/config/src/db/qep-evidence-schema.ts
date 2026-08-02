@@ -93,6 +93,10 @@ export const qepEvidence = pgTable(
       .default([]),
     sealedAt: timestamp("sealed_at", { withTimezone: true }),
     sealedBy: text("sealed_by"),
+    lifecycleGovernanceJson: jsonb("lifecycle_governance_json")
+      .$type<Record<string, unknown>>()
+      .notNull()
+      .default({}),
     historyJson: jsonb("history_json")
       .$type<QepEvidenceHistoryEntryJson[]>()
       .notNull()
@@ -297,6 +301,49 @@ export const qepEvidenceAccessGrant = pgTable(
   ],
 );
 
+/** Append-only lifecycle transition history — APZQEP-120-S06. */
+export const qepEvidenceLifecycleHistory = pgTable(
+  "qep_evidence_lifecycle_history",
+  {
+    id: text("id").primaryKey(),
+    tenantId: text("tenant_id").notNull(),
+    evidenceId: text("evidence_id").notNull(),
+    projectId: text("project_id"),
+    workspaceId: text("workspace_id"),
+    sourceState: varchar("source_state", { length: 32 }).notNull(),
+    targetState: varchar("target_state", { length: 32 }).notNull(),
+    action: varchar("action", { length: 64 }).notNull(),
+    reasonCode: varchar("reason_code", { length: 64 }).notNull(),
+    reasonText: text("reason_text"),
+    actorId: text("actor_id").notNull(),
+    actorType: varchar("actor_type", { length: 32 }).notNull().default("user"),
+    occurredAt: timestamp("occurred_at", { withTimezone: true }).notNull(),
+    correlationId: text("correlation_id"),
+    causationId: text("causation_id"),
+    revisionBefore: integer("revision_before"),
+    revisionAfter: integer("revision_after"),
+    policyDecisionJson: jsonb("policy_decision_json")
+      .$type<Record<string, unknown>>()
+      .notNull()
+      .default({}),
+    metadataJson: jsonb("metadata_json")
+      .$type<Record<string, unknown>>()
+      .notNull()
+      .default({}),
+  },
+  (table) => [
+    index("qep_evidence_lifecycle_history_evidence_idx").on(
+      table.tenantId,
+      table.evidenceId,
+      table.occurredAt,
+    ),
+    index("qep_evidence_lifecycle_history_tenant_occurred_idx").on(
+      table.tenantId,
+      table.occurredAt,
+    ),
+  ],
+);
+
 export const qepEvidenceSchema = {
   qepEvidence,
   qepEvidenceVersion,
@@ -305,4 +352,5 @@ export const qepEvidenceSchema = {
   qepEvidenceCollection,
   qepEvidenceSet,
   qepEvidenceAccessGrant,
+  qepEvidenceLifecycleHistory,
 };

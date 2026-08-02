@@ -16,12 +16,14 @@ import {
   type EvidenceApplicationServices,
   type StoragePort,
 } from "../../application";
+import { createPostgresEvidenceLifecycleHistoryRepository } from "../postgres/lifecycle-history-repository";
 import { createPostgresEvidenceUnitOfWork } from "../postgres/unit-of-work";
 import {
   createEvidenceStorageSync,
   resolveEvidenceStorageConfigFromEnv,
 } from "../storage/platform/create-evidence-storage";
 import type { EvidenceStoragePlatformConfig } from "../storage/platform/types";
+import { createInMemoryLifecycleHistoryRepository } from "../../application/lifecycle/in-memory-lifecycle-history";
 
 export type EvidenceCatalogueMode = "memory" | "postgres";
 
@@ -76,12 +78,18 @@ function buildRuntime(input: CreateEvidenceRuntimeInput): EvidenceRuntimeBundle 
       ? createPostgresEvidenceUnitOfWork(input.db!)
       : createInMemoryUnitOfWork();
 
+  const lifecycleHistory =
+    catalogueMode === "postgres"
+      ? createPostgresEvidenceLifecycleHistoryRepository(input.db!)
+      : createInMemoryLifecycleHistoryRepository();
+
   const application = createEvidenceApplicationServices({
     uow,
     storage: manager,
     clock: createInMemoryClockPort(input.now),
     ids: createInMemoryIdPort(),
     audit: createInMemoryAuditPort(),
+    lifecycleHistory,
     secure: true,
   });
 

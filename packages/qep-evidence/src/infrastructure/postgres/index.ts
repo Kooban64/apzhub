@@ -16,6 +16,7 @@ export { createPostgresEvidenceCollectionRepository } from "./collection-reposit
 export { createPostgresEvidenceSetRepository } from "./set-repository";
 export { createPostgresEvidenceAccessGrantRepository } from "./access-grant-repository";
 export { createPostgresEvidenceUnitOfWork } from "./unit-of-work";
+export { createPostgresEvidenceLifecycleHistoryRepository } from "./lifecycle-history-repository";
 export {
   evidenceToRowValues,
   rowToPersistenceRecord,

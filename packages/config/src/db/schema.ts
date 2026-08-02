@@ -254,6 +254,7 @@ export {
   qepEvidenceCollection,
   qepEvidenceSet,
   qepEvidenceAccessGrant,
+  qepEvidenceLifecycleHistory,
 } from "./qep-evidence-schema";
 export {
   platformAdminSchema,

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { deriveCatalogueState } from "./catalogue-state";
 
-describe("APZQEP-120-S05 catalogue state", () => {
+describe("APZQEP-120-S05/S06 catalogue state", () => {
   it("maps active evidence to ACTIVE", () => {
     expect(
       deriveCatalogueState({
@@ -19,7 +19,7 @@ describe("APZQEP-120-S05 catalogue state", () => {
 
   it("maps archived / disposed / quarantined distinctly", () => {
     expect(deriveCatalogueState({ status: "archived" })).toBe("ARCHIVED");
-    expect(deriveCatalogueState({ status: "disposed" })).toBe("DELETED_LOGICALLY");
+    expect(deriveCatalogueState({ status: "disposed" })).toBe("LOGICALLY_DELETED");
     expect(deriveCatalogueState({ status: "quarantined" })).toBe("RESTRICTED");
   });
 
@@ -35,5 +35,18 @@ describe("APZQEP-120-S05 catalogue state", () => {
         },
       }),
     ).toBe("UNAVAILABLE");
+  });
+
+  it("prefers authoritative lifecycleGovernance state", () => {
+    expect(
+      deriveCatalogueState({
+        status: "captured",
+        lifecycleGovernance: {
+          state: "ARCHIVE_ELIGIBLE",
+          retentionStatus: "NOT_CONFIGURED",
+          holdStatus: "NOT_HELD",
+        },
+      }),
+    ).toBe("ARCHIVE_ELIGIBLE");
   });
 });

@@ -221,6 +221,7 @@ export {
   qepEvidenceCollection,
   qepEvidenceSet,
   qepEvidenceAccessGrant,
+  qepEvidenceLifecycleHistory,
   type QepEvidenceHistoryEntryJson,
   type QepEvidenceProvenanceJson,
   type QepEvidencePolicyRefJson,

@@ -49,8 +49,8 @@ describe("APZQEP-RELEASE-004 architecture boundaries", () => {
       "APZQEP-RELEASE-004 — PRODUCTION BASELINE 1.0.0",
     );
     expect(QEP_EVIDENCE_DOMAIN_STATUS).toBe("implemented-eng-110b");
-    expect(QEP_EVIDENCE_APPLICATION_STATUS).toBe("catalogue-platform-s05");
-    expect(QEP_EVIDENCE_INFRASTRUCTURE_STATUS).toBe("catalogue-platform-s05");
+    expect(QEP_EVIDENCE_APPLICATION_STATUS).toBe("lifecycle-platform-s06");
+    expect(QEP_EVIDENCE_INFRASTRUCTURE_STATUS).toBe("lifecycle-platform-s06");
     expect(QEP_EVIDENCE_MODULE_ID).toBe("qep-evidence");
     expect(QEP_EVIDENCE_API_BASE_PATH).toBe("/api/v1/qep/evidence");
     expect(QEP_EVIDENCE_API_STATUS).toBe("implemented-eng-110f");

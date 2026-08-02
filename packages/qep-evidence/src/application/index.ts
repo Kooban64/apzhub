@@ -2,7 +2,7 @@
  * Application layer — ENG-110D orchestration + ENG-110E security enforcement.
  * Business rules remain in Domain. Transport remains absent.
  */
-export const QEP_EVIDENCE_APPLICATION_STATUS = "catalogue-platform-s05" as const;
+export const QEP_EVIDENCE_APPLICATION_STATUS = "lifecycle-platform-s06" as const;
 
 export * from "./ports/index";
 export * from "./context";
@@ -19,3 +19,4 @@ export * from "./policy/index";
 export * from "./query/index";
 export * from "./integrity/index";
 export * from "./catalogue/index";
+export * from "./lifecycle/index";

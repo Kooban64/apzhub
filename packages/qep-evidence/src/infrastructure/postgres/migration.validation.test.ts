@@ -41,4 +41,21 @@ describe("APZQEP-120-S05 migration SQL", () => {
     expect(sql).toContain("current_setting('app.tenant_id'");
     expect(sql.toLowerCase()).not.toContain("drop table");
   });
+
+  it("APZQEP-120-S06: additive lifecycle governance migration", () => {
+    const path = join(drizzleDir, "0091_apz_qep_evidence_lifecycle.sql");
+    expect(existsSync(path)).toBe(true);
+    const sql = readFileSync(path, "utf8");
+    expect(sql).toContain("lifecycle_governance_json");
+    expect(sql).toContain("qep_evidence_lifecycle_history");
+    expect(sql.toLowerCase()).not.toContain("drop table");
+    expect(sql).not.toMatch(/ALTER TABLE .* DROP COLUMN/i);
+
+    const rls = readFileSync(
+      join(drizzleDir, "0092_apz_qep_evidence_lifecycle_rls.sql"),
+      "utf8",
+    );
+    expect(rls).toContain("FORCE ROW LEVEL SECURITY");
+    expect(rls).toContain("qep_evidence_lifecycle_history_tenant_isolation");
+  });
 });

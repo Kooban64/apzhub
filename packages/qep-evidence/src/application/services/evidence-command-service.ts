@@ -98,6 +98,7 @@ async function recordAudit(
   ctx: EvidenceRequestContext,
   evidenceId: string,
   action: string,
+  details?: Readonly<Record<string, unknown>>,
 ): Promise<void> {
   const occurredAt = deps.clock.now();
   await deps.uow.audit.append({
@@ -109,6 +110,7 @@ async function recordAudit(
     outcome: "allowed",
     correlationId: ctx.correlationId,
     occurredAt,
+    details,
   });
   await deps.audit?.append({
     tenantId: ctx.tenantId,
@@ -588,10 +590,14 @@ export function createEvidenceCommandService(
         mutated,
         command.expectedRevision,
       );
-      if (locator) {
-        await deps.storage.dispose(ctx.tenantId, locator);
-      }
-      await recordAudit(deps, ctx, stored.id, "disposeEvidence");
+      // S06: logical deletion only — do not delete evidence bytes (no purge).
+      // Storage reference and content remain for audit / integrity continuity.
+      void locator;
+      await recordAudit(deps, ctx, stored.id, "disposeEvidence", {
+        logicalDeletion: true,
+        contentBytesPreserved: true,
+        storageLocator: locator,
+      });
       return { data: toEvidenceDto(stored), collectedEvents: events };
     },
 

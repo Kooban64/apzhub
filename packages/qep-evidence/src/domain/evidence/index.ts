@@ -6,6 +6,7 @@ export * from "./policies";
 export * from "./domain-services";
 export * from "./evidence";
 export * from "./catalogue-state";
+export * from "./lifecycle-governance";
 export * from "./collection";
 export * from "./set";
 export * from "./relationship";

@@ -35,6 +35,12 @@ import {
   type EvidenceCatalogueService,
 } from "../catalogue";
 import {
+  createEvidenceLifecyclePlatformService,
+  createInMemoryLifecycleHistoryRepository,
+  type EvidenceLifecyclePlatformService,
+} from "../lifecycle";
+import type { EvidenceLifecycleHistoryRepository } from "../../domain/ports/lifecycle-history";
+import {
   createEvidenceCommandService,
   type EvidenceCommandService,
 } from "./evidence-command-service";
@@ -56,6 +62,7 @@ export type CreateEvidenceApplicationServicesInput = {
    */
   readonly secure?: boolean;
   readonly permissions?: PermissionPort;
+  readonly lifecycleHistory?: EvidenceLifecycleHistoryRepository;
 };
 
 export type EvidenceApplicationServices = {
@@ -76,6 +83,8 @@ export type EvidenceApplicationServices = {
   readonly integrity: EvidenceIntegrityPlatformService;
   /** APZQEP-120-S05 — logical evidence catalogue facade. */
   readonly catalogue: EvidenceCatalogueService;
+  /** APZQEP-120-S06 — lifecycle governance platform. */
+  readonly lifecycle: EvidenceLifecyclePlatformService;
 };
 
 /**
@@ -151,6 +160,14 @@ export function createEvidenceApplicationServices(
     queries,
   } as EvidenceApplicationServices);
 
+  const lifecycleHistory =
+    input.lifecycleHistory ?? createInMemoryLifecycleHistoryRepository();
+  const lifecycle = createEvidenceLifecyclePlatformService({
+    deps,
+    securityGate,
+    lifecycleHistory,
+  });
+
   return {
     programme: "APZQEP-ENG-110E",
     commands,
@@ -166,5 +183,6 @@ export function createEvidenceApplicationServices(
     enumeration,
     integrity,
     catalogue,
+    lifecycle,
   };
 }

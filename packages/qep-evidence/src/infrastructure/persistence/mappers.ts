@@ -7,6 +7,13 @@ import type { EvidenceCollection } from "../../domain/evidence/collection";
 import type { Evidence, EvidenceVersion } from "../../domain/evidence/evidence";
 import type { EvidenceRelationship } from "../../domain/evidence/relationship";
 import type { EvidenceSet } from "../../domain/evidence/set";
+import {
+  createDefaultLifecycleGovernance,
+  type EvidenceLifecycleGovernance,
+  type LifecycleGovernanceState,
+  type HoldHookStatus,
+  type RetentionHookStatus,
+} from "../../domain/evidence/lifecycle-governance";
 import type {
   EvidenceClassification,
   EvidenceContent,
@@ -113,12 +120,40 @@ export function toPersistenceEvidence(
     relationshipIds: evidence.relationshipIds,
     sealedAt: evidence.sealedAt,
     sealedBy: evidence.sealedBy,
+    lifecycleGovernanceJson: {
+      ...evidence.lifecycleGovernance,
+    },
     revision: evidence.revision,
     historyEntries: mapHistory(evidence.history),
     createdAt: evidence.createdAt,
     createdBy: evidence.createdBy,
     updatedAt: evidence.updatedAt,
     updatedBy: evidence.updatedBy,
+  };
+}
+
+function governanceFromRecord(
+  record: PersistenceEvidenceRecord,
+): EvidenceLifecycleGovernance {
+  const raw = record.lifecycleGovernanceJson;
+  if (!raw || typeof raw !== "object") {
+    return createDefaultLifecycleGovernance({
+      retentionClass: record.retentionClass,
+      retentionUntil: record.retainUntil,
+      legalHold: record.legalHold,
+    });
+  }
+  return {
+    ...createDefaultLifecycleGovernance({
+      retentionClass: record.retentionClass,
+      retentionUntil: record.retainUntil,
+      legalHold: record.legalHold,
+    }),
+    ...(raw as EvidenceLifecycleGovernance),
+    state: (raw.state as LifecycleGovernanceState) ?? "ACTIVE",
+    retentionStatus: (raw.retentionStatus as RetentionHookStatus) ?? "NOT_CONFIGURED",
+    holdStatus:
+      (raw.holdStatus as HoldHookStatus) ?? (record.legalHold ? "HELD" : "NOT_HELD"),
   };
 }
 
@@ -249,6 +284,7 @@ export function fromPersistenceEvidence(
     relationshipIds: record.relationshipIds,
     sealedAt: record.sealedAt,
     sealedBy: record.sealedBy,
+    lifecycleGovernance: governanceFromRecord(record),
     revision: record.revision,
     history: { entries: record.historyEntries },
     createdAt: record.createdAt,
