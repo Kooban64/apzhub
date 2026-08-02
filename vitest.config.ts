@@ -513,6 +513,11 @@ const packageAliases = {
     __dirname,
     "packages/qep-test-plans/src/index.ts",
   ),
+  // APZQEP-151 — drizzle used by Cap postgres adapters under vitest
+  "drizzle-orm": path.resolve(
+    __dirname,
+    "node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.20.0_kysely@0.29.2_pg@8.22.0/node_modules/drizzle-orm",
+  ),
   // APZQEP-140 Caps A–F + readiness chain (APZQEP-150)
   "@apzhub/qep-suites": path.resolve(__dirname, "packages/qep-suites/src/index.ts"),
   "@apzhub/qep-execution-plans": path.resolve(
@@ -748,6 +753,8 @@ export default defineConfig({
       "apps/**/*.test.{ts,tsx}",
       "integrations/**/*.test.{ts,tsx}",
       "testing/apzqep-150/**/*.test.{ts,tsx}",
+      "testing/apzqep-151/**/*.test.{ts,tsx}",
+
       "testing/wave1/**/*.test.{ts,tsx}",
       "testing/wave2/**/*.test.{ts,tsx}",
       "testing/playwright/**/*.test.{ts,tsx}",

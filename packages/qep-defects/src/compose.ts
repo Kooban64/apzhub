@@ -19,6 +19,7 @@ export function createEnterpriseDefectManagement(
     readonly repository?: DefectRepository;
     readonly executions?: ExecutionSessionPort;
     readonly publisher?: DefectEventPublisher;
+    readonly runInTransaction?: <T>(fn: () => Promise<T>) => Promise<T>;
   } = {},
 ): EnterpriseDefectManagement {
   const repository = options.repository ?? createInMemoryDefectRepository();
@@ -26,6 +27,7 @@ export function createEnterpriseDefectManagement(
     repository,
     ...(options.executions ? { executions: options.executions } : {}),
     ...(options.publisher ? { publisher: options.publisher } : {}),
+    ...(options.runInTransaction ? { runInTransaction: options.runInTransaction } : {}),
   });
   return { service, repository };
 }

@@ -17,12 +17,14 @@ export function createEnterpriseTestSuiteManagement(
   options: {
     readonly repository?: SuiteRepository;
     readonly publisher?: SuiteEventPublisher;
+    readonly runInTransaction?: <T>(fn: () => Promise<T>) => Promise<T>;
   } = {},
 ): EnterpriseTestSuiteManagement {
   const repository = options.repository ?? createInMemorySuiteRepository();
   const service = createSuiteApplicationService({
     repository,
     ...(options.publisher ? { publisher: options.publisher } : {}),
+    ...(options.runInTransaction ? { runInTransaction: options.runInTransaction } : {}),
   });
   return { service, repository };
 }

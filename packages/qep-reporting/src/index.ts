@@ -24,3 +24,4 @@ export {
   parseQepReportingTemplateId,
   isQepEnterpriseReportingMetricsRoute,
 } from "./presentation/index";
+export { createReportingPersistence } from "./infrastructure/persistence";

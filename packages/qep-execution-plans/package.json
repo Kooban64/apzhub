@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "APZQEP Enterprise Test Execution Planning — Capability B (APZQEP-140-B).",
+  "description": "APZQEP Enterprise Test Execution Planning \u2014 Capability B (APZQEP-140-B).",
   "exports": {
     ".": "./src/index.ts",
     "./domain": "./src/domain/index.ts",
     "./application": "./src/application/index.ts",
-    "./presentation": "./src/presentation/index.ts"
+    "./presentation": "./src/presentation/index.ts",
+    "./persistence": "./src/infrastructure/persistence.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",
@@ -20,6 +21,8 @@
     "@apzhub/qep-command": "workspace:*",
     "@apzhub/qep-knowledge-index": "workspace:*",
     "@apzhub/qep-notification": "workspace:*",
-    "@apzhub/qep-suites": "workspace:*"
+    "@apzhub/qep-suites": "workspace:*",
+    "@apzhub/config": "workspace:*",
+    "drizzle-orm": "^0.45.2"
   }
 }

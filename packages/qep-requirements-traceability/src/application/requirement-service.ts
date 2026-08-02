@@ -169,9 +169,13 @@ export function createRequirementApplicationService(deps: {
   readonly repository: RequirementRepository;
   readonly ports?: QualityArtefactPorts;
   readonly publisher?: RequirementEventPublisher;
+  /** When set (postgres), mutators run inside one DB transaction with outbox. */
+  readonly runInTransaction?: <T>(fn: () => Promise<T>) => Promise<T>;
 }): RequirementApplicationService {
   const pending: RequirementDomainEvent[] = [];
   const ports = deps.ports ?? {};
+  const run =
+    deps.runInTransaction ?? (async <T>(fn: () => Promise<T>): Promise<T> => fn());
 
   async function emit(
     eventId: QepRequirementEventId,
@@ -203,7 +207,7 @@ export function createRequirementApplicationService(deps: {
     return agg;
   }
 
-  return {
+  const service: RequirementApplicationService = {
     drainEvents() {
       return [...pending];
     },
@@ -519,4 +523,29 @@ export function createRequirementApplicationService(deps: {
       return rows;
     },
   };
+
+  const mutating = new Set([
+    "create",
+    "update",
+    "transition",
+    "linkSuite",
+    "unlinkSuite",
+  ]);
+
+  return new Proxy(service, {
+    get(target, prop, receiver) {
+      const value = Reflect.get(target, prop, receiver);
+      if (
+        typeof prop === "string" &&
+        mutating.has(prop) &&
+        typeof value === "function"
+      ) {
+        return (...args: unknown[]) =>
+          run(() =>
+            (value as (...a: unknown[]) => Promise<unknown>).apply(target, args),
+          );
+      }
+      return typeof value === "function" ? value.bind(target) : value;
+    },
+  });
 }

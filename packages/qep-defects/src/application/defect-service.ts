@@ -163,8 +163,12 @@ export function createDefectApplicationService(deps: {
   readonly repository: DefectRepository;
   readonly executions?: ExecutionSessionPort;
   readonly publisher?: DefectEventPublisher;
+  /** When set (postgres), mutators run inside one DB transaction with outbox. */
+  readonly runInTransaction?: <T>(fn: () => Promise<T>) => Promise<T>;
 }): DefectApplicationService {
   const pending: DefectDomainEvent[] = [];
+  const run =
+    deps.runInTransaction ?? (async <T>(fn: () => Promise<T>): Promise<T> => fn());
 
   async function emit(
     eventId: QepDefectEventId,
@@ -191,7 +195,7 @@ export function createDefectApplicationService(deps: {
     return agg;
   }
 
-  return {
+  const service: DefectApplicationService = {
     drainEvents() {
       return [...pending];
     },
@@ -621,4 +625,31 @@ export function createDefectApplicationService(deps: {
       return agg.history;
     },
   };
+
+  const mutating = new Set([
+    "create",
+    "createFromExecution",
+    "update",
+    "transition",
+    "assign",
+    "attachEvidence",
+    "linkRelationship",
+  ]);
+
+  return new Proxy(service, {
+    get(target, prop, receiver) {
+      const value = Reflect.get(target, prop, receiver);
+      if (
+        typeof prop === "string" &&
+        mutating.has(prop) &&
+        typeof value === "function"
+      ) {
+        return (...args: unknown[]) =>
+          run(() =>
+            (value as (...a: unknown[]) => Promise<unknown>).apply(target, args),
+          );
+      }
+      return typeof value === "function" ? value.bind(target) : value;
+    },
+  });
 }

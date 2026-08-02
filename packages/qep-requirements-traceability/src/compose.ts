@@ -19,6 +19,7 @@ export function createEnterpriseRequirementsTraceability(
     readonly repository?: RequirementRepository;
     readonly ports?: QualityArtefactPorts;
     readonly publisher?: RequirementEventPublisher;
+    readonly runInTransaction?: <T>(fn: () => Promise<T>) => Promise<T>;
   } = {},
 ): EnterpriseRequirementsTraceability {
   const repository = options.repository ?? createInMemoryRequirementRepository();
@@ -26,6 +27,7 @@ export function createEnterpriseRequirementsTraceability(
     repository,
     ...(options.ports ? { ports: options.ports } : {}),
     ...(options.publisher ? { publisher: options.publisher } : {}),
+    ...(options.runInTransaction ? { runInTransaction: options.runInTransaction } : {}),
   });
   return { service, repository };
 }

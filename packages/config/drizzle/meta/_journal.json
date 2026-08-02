@@ -666,6 +666,20 @@
       "when": 1786200000009,
       "tag": "0094_apz_platform_outbox_event_rls",
       "breakpoints": true
+    },
+    {
+      "idx": 95,
+      "version": "7",
+      "when": 1786200000010,
+      "tag": "0095_apz_qep_core_qe_persistence",
+      "breakpoints": true
+    },
+    {
+      "idx": 96,
+      "version": "7",
+      "when": 1786200000011,
+      "tag": "0096_apz_qep_core_qe_persistence_rls",
+      "breakpoints": true
     }
   ]
 }

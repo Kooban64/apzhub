@@ -22,3 +22,4 @@ export {
   isQepSuitesNewRoute,
   parseQepSuiteRouteId,
 } from "./presentation/index";
+export { createSuitePersistence } from "./infrastructure/persistence";

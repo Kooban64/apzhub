@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "APZQEP Enterprise Test Execution Workspace — Capability C (APZQEP-140-C). Performs execution from Cap B handoffs; does not redesign planning.",
+  "description": "APZQEP Enterprise Test Execution Workspace \u2014 Capability C (APZQEP-140-C). Performs execution from Cap B handoffs; does not redesign planning.",
   "exports": {
     ".": "./src/index.ts",
     "./domain": "./src/domain/index.ts",
     "./application": "./src/application/index.ts",
-    "./presentation": "./src/presentation/index.ts"
+    "./presentation": "./src/presentation/index.ts",
+    "./persistence": "./src/infrastructure/persistence.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",
@@ -21,6 +22,8 @@
     "@apzhub/qep-execution-plans": "workspace:*",
     "@apzhub/qep-knowledge-index": "workspace:*",
     "@apzhub/qep-notification": "workspace:*",
-    "@apzhub/qep-suites": "workspace:*"
+    "@apzhub/qep-suites": "workspace:*",
+    "@apzhub/config": "workspace:*",
+    "drizzle-orm": "^0.45.2"
   }
 }

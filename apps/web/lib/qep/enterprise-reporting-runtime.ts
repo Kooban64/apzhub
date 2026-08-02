@@ -1,19 +1,24 @@
 /**
- * Process-local Enterprise Reporting runtime (APZQEP-140-F).
+ * Enterprise Reporting runtime (APZQEP-140-F / APZQEP-151).
  * Derived facts from Cap A–E — Reporting is never business SoR.
  */
 
+import { runInDatabaseTransaction } from "@apzhub/config";
 import {
   createEnterpriseReportingAnalytics,
+  createReportingPersistence,
   type EnterpriseReportingAnalytics,
   type QualityFacts,
   type QualityFactsPort,
+  type ReportingEventPublisher,
 } from "@apzhub/qep-reporting";
 
 import { getDefectRuntime } from "./defect-runtime";
 import { getEnterpriseRequirementsRuntime } from "./enterprise-requirements-runtime";
 import { getExecutionPlanRuntime } from "./execution-plan-runtime";
 import { getExecutionWorkspaceRuntime } from "./execution-workspace-runtime";
+import { createCoreQeOutboxPublisher } from "./persistence/core-qe-outbox";
+import { resolveCoreQePersistence } from "./persistence/resolve-core-qe-persistence";
 import { getSuiteRuntime } from "./suite-runtime";
 
 const globalForReporting = globalThis as typeof globalThis & {
@@ -182,8 +187,30 @@ function qualityFactsPort(): QualityFactsPort {
 
 export function getEnterpriseReportingRuntime(): EnterpriseReportingAnalytics {
   if (!globalForReporting.__apzqepEnterpriseReportingRuntime) {
+    const persistence = resolveCoreQePersistence();
+    const repository = createReportingPersistence({
+      mode: persistence.mode,
+      ...(persistence.db ? { db: persistence.db } : {}),
+      allowInMemoryPersistence: persistence.mode === "memory",
+    });
+    const publisher =
+      persistence.mode === "postgres" && persistence.db
+        ? (createCoreQeOutboxPublisher({
+            db: persistence.db,
+            aggregateType: "qep_saved_report",
+          }) as unknown as ReportingEventPublisher)
+        : undefined;
+    const runInTransaction =
+      persistence.mode === "postgres" && persistence.db
+        ? <T>(fn: () => Promise<T>) => runInDatabaseTransaction(persistence.db!, fn)
+        : undefined;
     globalForReporting.__apzqepEnterpriseReportingRuntime =
-      createEnterpriseReportingAnalytics({ facts: qualityFactsPort() });
+      createEnterpriseReportingAnalytics({
+        facts: qualityFactsPort(),
+        repository,
+        ...(publisher ? { publisher } : {}),
+        ...(runInTransaction ? { runInTransaction } : {}),
+      });
   }
   return globalForReporting.__apzqepEnterpriseReportingRuntime;
 }

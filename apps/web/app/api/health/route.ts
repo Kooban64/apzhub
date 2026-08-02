@@ -18,6 +18,7 @@ import {
   loadActivityFrameworkHealthSummary,
   loadTimelineFrameworkHealthSummary,
 } from "@/lib/activity-timeline-hydration";
+import { getCoreQePersistenceHealth } from "@/lib/qep/persistence/resolve-core-qe-persistence";
 
 export async function GET() {
   const env = getEnv();
@@ -102,6 +103,10 @@ export async function GET() {
         enabled: securityDiagnostics.rateLimit.enabled,
       },
     },
+    // APZQEP-151: Core QE persistence provider (Caps A–F)
+    coreQePersistence: getCoreQePersistenceHealth(),
+  } as PlatformHealthResponse & {
+    coreQePersistence: ReturnType<typeof getCoreQePersistenceHealth>;
   };
 
   return NextResponse.json(body, {

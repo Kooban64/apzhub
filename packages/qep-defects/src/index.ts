@@ -22,3 +22,4 @@ export {
   isQepDefectsNewRoute,
   parseQepDefectRouteId,
 } from "./presentation/index";
+export { createDefectPersistence } from "./infrastructure/persistence";

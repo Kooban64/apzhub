@@ -27,3 +27,4 @@ export {
   isQepEnterpriseRequirementsCoverageRoute,
   parseQepEnterpriseRequirementRouteId,
 } from "./presentation/index";
+export { createRequirementPersistence } from "./infrastructure/persistence";

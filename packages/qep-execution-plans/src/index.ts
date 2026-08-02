@@ -25,3 +25,4 @@ export {
   isQepExecutionPlansNewRoute,
   parseQepExecutionPlanRouteId,
 } from "./presentation/index";
+export { createExecutionPlanPersistence } from "./infrastructure/persistence";

@@ -1,17 +1,22 @@
 /**
- * Process-local Enterprise Requirements & Traceability runtime (APZQEP-140-E).
- * In-memory SoR — LIMITED_AVAILABILITY. Cap A–D ports are read-only.
+ * Enterprise Requirements & Traceability runtime (APZQEP-140-E / APZQEP-151).
+ * Cap A–D ports are read-only.
  */
 
+import { runInDatabaseTransaction } from "@apzhub/config";
 import {
   createEnterpriseRequirementsTraceability,
+  createRequirementPersistence,
   type EnterpriseRequirementsTraceability,
   type QualityArtefactPorts,
+  type RequirementEventPublisher,
 } from "@apzhub/qep-requirements-traceability";
 
 import { getDefectRuntime } from "./defect-runtime";
 import { getExecutionPlanRuntime } from "./execution-plan-runtime";
 import { getExecutionWorkspaceRuntime } from "./execution-workspace-runtime";
+import { createCoreQeOutboxPublisher } from "./persistence/core-qe-outbox";
+import { resolveCoreQePersistence } from "./persistence/resolve-core-qe-persistence";
 import { getSuiteRuntime } from "./suite-runtime";
 
 const globalForReq = globalThis as typeof globalThis & {
@@ -86,8 +91,30 @@ function qualityPorts(): QualityArtefactPorts {
 
 export function getEnterpriseRequirementsRuntime(): EnterpriseRequirementsTraceability {
   if (!globalForReq.__apzqepEnterpriseRequirementsRuntime) {
+    const persistence = resolveCoreQePersistence();
+    const repository = createRequirementPersistence({
+      mode: persistence.mode,
+      ...(persistence.db ? { db: persistence.db } : {}),
+      allowInMemoryPersistence: persistence.mode === "memory",
+    });
+    const publisher =
+      persistence.mode === "postgres" && persistence.db
+        ? (createCoreQeOutboxPublisher({
+            db: persistence.db,
+            aggregateType: "qep_enterprise_requirement",
+          }) as unknown as RequirementEventPublisher)
+        : undefined;
+    const runInTransaction =
+      persistence.mode === "postgres" && persistence.db
+        ? <T>(fn: () => Promise<T>) => runInDatabaseTransaction(persistence.db!, fn)
+        : undefined;
     globalForReq.__apzqepEnterpriseRequirementsRuntime =
-      createEnterpriseRequirementsTraceability({ ports: qualityPorts() });
+      createEnterpriseRequirementsTraceability({
+        ports: qualityPorts(),
+        repository,
+        ...(publisher ? { publisher } : {}),
+        ...(runInTransaction ? { runInTransaction } : {}),
+      });
   }
   return globalForReq.__apzqepEnterpriseRequirementsRuntime;
 }

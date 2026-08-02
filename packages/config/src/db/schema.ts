@@ -258,6 +258,17 @@ export {
 } from "./qep-evidence-schema";
 export { platformOutboxSchema, platformOutboxEvent } from "./platform-outbox-schema";
 export {
+  qepCoreQeSchema,
+  qepSuite,
+  qepExecutionPlan,
+  qepExecutionSession,
+  qepDefect,
+  qepEnterpriseRequirement,
+  qepSavedReport,
+  qepReportingTrendSample,
+  qepCoreQeIdempotency,
+} from "./qep-core-qe-schema";
+export {
   platformAdminSchema,
   platformAdminModule,
   platformAdminCategory,

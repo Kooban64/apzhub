@@ -178,8 +178,12 @@ export function createExecutionPlanApplicationService(deps: {
   readonly repository: ExecutionPlanRepository;
   readonly suites: SuiteReferencePort;
   readonly publisher?: PlanEventPublisher;
+  /** When set (postgres), mutators run inside one DB transaction with outbox. */
+  readonly runInTransaction?: <T>(fn: () => Promise<T>) => Promise<T>;
 }): ExecutionPlanApplicationService {
   const pending: ExecutionPlanDomainEvent[] = [];
+  const run =
+    deps.runInTransaction ?? (async <T>(fn: () => Promise<T>): Promise<T> => fn());
 
   async function emit(
     eventId: QepExecutionPlanEventId,
@@ -244,7 +248,7 @@ export function createExecutionPlanApplicationService(deps: {
     };
   }
 
-  return {
+  const service: ExecutionPlanApplicationService = {
     drainEvents() {
       return [...pending];
     },
@@ -656,4 +660,32 @@ export function createExecutionPlanApplicationService(deps: {
       return agg.history;
     },
   };
+
+  const mutating = new Set([
+    "create",
+    "update",
+    "transition",
+    "evaluateReadiness",
+    "schedule",
+    "assign",
+    "clone",
+    "handoff",
+  ]);
+
+  return new Proxy(service, {
+    get(target, prop, receiver) {
+      const value = Reflect.get(target, prop, receiver);
+      if (
+        typeof prop === "string" &&
+        mutating.has(prop) &&
+        typeof value === "function"
+      ) {
+        return (...args: unknown[]) =>
+          run(() =>
+            (value as (...a: unknown[]) => Promise<unknown>).apply(target, args),
+          );
+      }
+      return typeof value === "function" ? value.bind(target) : value;
+    },
+  });
 }

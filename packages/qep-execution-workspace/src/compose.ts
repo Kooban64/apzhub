@@ -18,12 +18,14 @@ export function createEnterpriseTestExecutionWorkspace(options: {
   readonly plans: PlanHandoffPort;
   readonly repository?: ExecutionSessionRepository;
   readonly publisher?: SessionEventPublisher;
+  readonly runInTransaction?: <T>(fn: () => Promise<T>) => Promise<T>;
 }): EnterpriseTestExecutionWorkspace {
   const repository = options.repository ?? createInMemoryExecutionSessionRepository();
   const service = createExecutionSessionApplicationService({
     repository,
     plans: options.plans,
     ...(options.publisher ? { publisher: options.publisher } : {}),
+    ...(options.runInTransaction ? { runInTransaction: options.runInTransaction } : {}),
   });
   return { service, repository };
 }

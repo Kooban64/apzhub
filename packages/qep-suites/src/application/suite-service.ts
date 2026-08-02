@@ -132,8 +132,12 @@ export type SuiteApplicationService = {
 export function createSuiteApplicationService(deps: {
   readonly repository: SuiteRepository;
   readonly publisher?: SuiteEventPublisher;
+  /** When set (postgres), mutators run inside one DB transaction with outbox. */
+  readonly runInTransaction?: <T>(fn: () => Promise<T>) => Promise<T>;
 }): SuiteApplicationService {
   const pending: SuiteDomainEvent[] = [];
+  const run =
+    deps.runInTransaction ?? (async <T>(fn: () => Promise<T>): Promise<T> => fn());
 
   async function emit(
     eventId: QepSuiteEventId,
@@ -162,7 +166,7 @@ export function createSuiteApplicationService(deps: {
     return agg;
   }
 
-  return {
+  const service: SuiteApplicationService = {
     drainEvents() {
       return [...pending];
     },
@@ -430,4 +434,32 @@ export function createSuiteApplicationService(deps: {
       return agg.history;
     },
   };
+
+  const mutating = new Set([
+    "create",
+    "update",
+    "transition",
+    "clone",
+    "version",
+    "move",
+    "favourite",
+    "pin",
+  ]);
+
+  return new Proxy(service, {
+    get(target, prop, receiver) {
+      const value = Reflect.get(target, prop, receiver);
+      if (
+        typeof prop === "string" &&
+        mutating.has(prop) &&
+        typeof value === "function"
+      ) {
+        return (...args: unknown[]) =>
+          run(() =>
+            (value as (...a: unknown[]) => Promise<unknown>).apply(target, args),
+          );
+      }
+      return typeof value === "function" ? value.bind(target) : value;
+    },
+  });
 }

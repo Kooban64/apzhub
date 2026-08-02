@@ -18,12 +18,14 @@ export function createEnterpriseReportingAnalytics(options: {
   readonly facts: QualityFactsPort;
   readonly repository?: ReportingRepository;
   readonly publisher?: ReportingEventPublisher;
+  readonly runInTransaction?: <T>(fn: () => Promise<T>) => Promise<T>;
 }): EnterpriseReportingAnalytics {
   const repository = options.repository ?? createInMemoryReportingRepository();
   const service = createReportingApplicationService({
     repository,
     facts: options.facts,
     ...(options.publisher ? { publisher: options.publisher } : {}),
+    ...(options.runInTransaction ? { runInTransaction: options.runInTransaction } : {}),
   });
   return { service, repository };
 }

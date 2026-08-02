@@ -125,8 +125,12 @@ export function createReportingApplicationService(deps: {
   readonly repository: ReportingRepository;
   readonly facts: QualityFactsPort;
   readonly publisher?: ReportingEventPublisher;
+  /** When set (postgres), mutators run inside one DB transaction with outbox. */
+  readonly runInTransaction?: <T>(fn: () => Promise<T>) => Promise<T>;
 }): ReportingApplicationService {
   const pending: ReportingDomainEvent[] = [];
+  const run =
+    deps.runInTransaction ?? (async <T>(fn: () => Promise<T>): Promise<T> => fn());
 
   async function emit(
     eventId: ReportingDomainEvent["eventId"],
@@ -156,7 +160,7 @@ export function createReportingApplicationService(deps: {
     });
   }
 
-  return {
+  const service: ReportingApplicationService = {
     drainEvents() {
       return [...pending];
     },
@@ -376,6 +380,25 @@ export function createReportingApplicationService(deps: {
       });
     },
   };
+
+  const mutating = new Set(["createSavedReport", "updateSavedReport"]);
+
+  return new Proxy(service, {
+    get(target, prop, receiver) {
+      const value = Reflect.get(target, prop, receiver);
+      if (
+        typeof prop === "string" &&
+        mutating.has(prop) &&
+        typeof value === "function"
+      ) {
+        return (...args: unknown[]) =>
+          run(() =>
+            (value as (...a: unknown[]) => Promise<unknown>).apply(target, args),
+          );
+      }
+      return typeof value === "function" ? value.bind(target) : value;
+    },
+  });
 }
 
 export { templateMetricKeys };

@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "APZQEP Enterprise Requirements & Traceability — Capability E (APZQEP-140-E). Derived traceability and coverage across Suites, Execution, Evidence and Defects.",
+  "description": "APZQEP Enterprise Requirements & Traceability \u2014 Capability E (APZQEP-140-E). Derived traceability and coverage across Suites, Execution, Evidence and Defects.",
   "exports": {
     ".": "./src/index.ts",
     "./domain": "./src/domain/index.ts",
     "./application": "./src/application/index.ts",
-    "./presentation": "./src/presentation/index.ts"
+    "./presentation": "./src/presentation/index.ts",
+    "./persistence": "./src/infrastructure/persistence.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",
@@ -19,6 +20,8 @@
     "@apzhub/platform-processing": "workspace:*",
     "@apzhub/qep-command": "workspace:*",
     "@apzhub/qep-knowledge-index": "workspace:*",
-    "@apzhub/qep-notification": "workspace:*"
+    "@apzhub/qep-notification": "workspace:*",
+    "@apzhub/config": "workspace:*",
+    "drizzle-orm": "^0.45.2"
   }
 }

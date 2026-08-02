@@ -7,6 +7,16 @@ export {
   type DatabaseExecutor,
   type DatabaseTransaction,
 } from "./client";
+export { getDatabaseExecutor, runInDatabaseTransaction } from "./transaction-context";
+export {
+  createPostgresCoreQeIdempotencyStore,
+  type CoreQeIdempotencyStore,
+} from "./core-qe-idempotency";
+export {
+  auditCoreQeDataIntegrity,
+  type CoreQeIntegrityFinding,
+  type CoreQeIntegrityReport,
+} from "./core-qe-integrity";
 export * from "./schema";
 export {
   platformIdentitySchema,
@@ -226,6 +236,17 @@ export {
   type QepEvidenceProvenanceJson,
   type QepEvidencePolicyRefJson,
 } from "./qep-evidence-schema";
+export {
+  qepCoreQeSchema,
+  qepSuite,
+  qepExecutionPlan,
+  qepExecutionSession,
+  qepDefect,
+  qepEnterpriseRequirement,
+  qepSavedReport,
+  qepReportingTrendSample,
+  qepCoreQeIdempotency,
+} from "./qep-core-qe-schema";
 export { platformOutboxSchema, platformOutboxEvent } from "./platform-outbox-schema";
 export {
   platformAdminSchema,

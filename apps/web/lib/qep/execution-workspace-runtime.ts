@@ -1,15 +1,19 @@
 /**
- * Process-local Enterprise Test Execution Workspace runtime (APZQEP-140-C).
- * In-memory SoR — LIMITED_AVAILABILITY, consistent with Caps A/B.
+ * Enterprise Test Execution Workspace runtime (APZQEP-140-C / APZQEP-151).
  */
 
+import { runInDatabaseTransaction } from "@apzhub/config";
 import {
   createEnterpriseTestExecutionWorkspace,
+  createExecutionSessionPersistence,
   type EnterpriseTestExecutionWorkspace,
   type PlanHandoffPort,
+  type SessionEventPublisher,
 } from "@apzhub/qep-execution-workspace";
 
 import { getExecutionPlanRuntime } from "./execution-plan-runtime";
+import { createCoreQeOutboxPublisher } from "./persistence/core-qe-outbox";
+import { resolveCoreQePersistence } from "./persistence/resolve-core-qe-persistence";
 
 const globalForWorkspace = globalThis as typeof globalThis & {
   __apzqepExecutionWorkspaceRuntime?: EnterpriseTestExecutionWorkspace;
@@ -60,8 +64,30 @@ function planHandoffPort(): PlanHandoffPort {
 
 export function getExecutionWorkspaceRuntime(): EnterpriseTestExecutionWorkspace {
   if (!globalForWorkspace.__apzqepExecutionWorkspaceRuntime) {
+    const persistence = resolveCoreQePersistence();
+    const repository = createExecutionSessionPersistence({
+      mode: persistence.mode,
+      ...(persistence.db ? { db: persistence.db } : {}),
+      allowInMemoryPersistence: persistence.mode === "memory",
+    });
+    const publisher =
+      persistence.mode === "postgres" && persistence.db
+        ? (createCoreQeOutboxPublisher({
+            db: persistence.db,
+            aggregateType: "qep_execution_session",
+          }) as unknown as SessionEventPublisher)
+        : undefined;
+    const runInTransaction =
+      persistence.mode === "postgres" && persistence.db
+        ? <T>(fn: () => Promise<T>) => runInDatabaseTransaction(persistence.db!, fn)
+        : undefined;
     globalForWorkspace.__apzqepExecutionWorkspaceRuntime =
-      createEnterpriseTestExecutionWorkspace({ plans: planHandoffPort() });
+      createEnterpriseTestExecutionWorkspace({
+        plans: planHandoffPort(),
+        repository,
+        ...(publisher ? { publisher } : {}),
+        ...(runInTransaction ? { runInTransaction } : {}),
+      });
   }
   return globalForWorkspace.__apzqepExecutionWorkspaceRuntime;
 }

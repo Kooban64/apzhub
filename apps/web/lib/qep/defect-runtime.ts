@@ -1,16 +1,20 @@
 /**
- * Process-local Enterprise Defect Management runtime (APZQEP-140-D).
- * In-memory SoR — LIMITED_AVAILABILITY, consistent with Caps A–C.
+ * Enterprise Defect Management runtime (APZQEP-140-D / APZQEP-151).
  * Cap C sessions are read-only via ExecutionSessionPort.
  */
 
+import { runInDatabaseTransaction } from "@apzhub/config";
 import {
+  createDefectPersistence,
   createEnterpriseDefectManagement,
+  type DefectEventPublisher,
   type EnterpriseDefectManagement,
   type ExecutionSessionPort,
 } from "@apzhub/qep-defects";
 
 import { getExecutionWorkspaceRuntime } from "./execution-workspace-runtime";
+import { createCoreQeOutboxPublisher } from "./persistence/core-qe-outbox";
+import { resolveCoreQePersistence } from "./persistence/resolve-core-qe-persistence";
 
 const globalForDefects = globalThis as typeof globalThis & {
   __apzqepDefectRuntime?: EnterpriseDefectManagement;
@@ -53,8 +57,28 @@ function executionSessionPort(): ExecutionSessionPort {
 
 export function getDefectRuntime(): EnterpriseDefectManagement {
   if (!globalForDefects.__apzqepDefectRuntime) {
+    const persistence = resolveCoreQePersistence();
+    const repository = createDefectPersistence({
+      mode: persistence.mode,
+      ...(persistence.db ? { db: persistence.db } : {}),
+      allowInMemoryPersistence: persistence.mode === "memory",
+    });
+    const publisher =
+      persistence.mode === "postgres" && persistence.db
+        ? (createCoreQeOutboxPublisher({
+            db: persistence.db,
+            aggregateType: "qep_defect",
+          }) as unknown as DefectEventPublisher)
+        : undefined;
+    const runInTransaction =
+      persistence.mode === "postgres" && persistence.db
+        ? <T>(fn: () => Promise<T>) => runInDatabaseTransaction(persistence.db!, fn)
+        : undefined;
     globalForDefects.__apzqepDefectRuntime = createEnterpriseDefectManagement({
       executions: executionSessionPort(),
+      repository,
+      ...(publisher ? { publisher } : {}),
+      ...(runInTransaction ? { runInTransaction } : {}),
     });
   }
   return globalForDefects.__apzqepDefectRuntime;

@@ -24,3 +24,4 @@ export {
   isQepExecutionWorkspaceRoute,
   parseQepExecutionSessionRouteId,
 } from "./presentation/index";
+export { createExecutionSessionPersistence } from "./infrastructure/persistence";
