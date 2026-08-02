@@ -10,15 +10,37 @@ function emptyCounts(): Record<OutboxStatus, number> {
     failed: 0,
     retrying: 0,
     "dead-letter": 0,
+    cancelled: 0,
   };
+}
+
+export type InMemoryOutboxStore = OutboxStore & {
+  /** Synchronous enqueue for Application Service publishers (same-tick). */
+  enqueueSync(event: OutboxEvent): { readonly duplicate: boolean };
+  /** Cancel a pending / retrying event. */
+  cancel(outboxEventId: string, now: string): boolean;
+  /** Test / recovery inspection. */
+  get(outboxEventId: string): OutboxEvent | undefined;
+  /** Snapshot of all rows (ordering preserved by createdAt). */
+  list(): readonly OutboxEvent[];
+};
+
+function idempotencyKeyOf(event: OutboxEvent): string | undefined {
+  const key = event.payload?.deliveryIdempotencyKey;
+  return typeof key === "string" && key.length > 0 ? key : undefined;
 }
 
 export function createInMemoryOutboxStore(
   seed: readonly OutboxEvent[] = [],
-): OutboxStore {
+): InMemoryOutboxStore {
   const rows = new Map<string, OutboxEvent>(
     seed.map((e) => [e.outboxEventId, { ...e }]),
   );
+  const byIdempotency = new Map<string, string>();
+  for (const event of seed) {
+    const key = idempotencyKeyOf(event);
+    if (key) byIdempotency.set(key, event.outboxEventId);
+  }
 
   function isClaimable(event: OutboxEvent, now: string): boolean {
     if (event.status === "pending") return true;
@@ -121,8 +143,52 @@ export function createInMemoryOutboxStore(
       return counts;
     },
 
-    async insert(event) {
+    enqueueSync(event) {
+      if (rows.has(event.outboxEventId)) {
+        return { duplicate: true };
+      }
+      const key = idempotencyKeyOf(event);
+      if (key && byIdempotency.has(key)) {
+        return { duplicate: true };
+      }
       rows.set(event.outboxEventId, { ...event });
+      if (key) byIdempotency.set(key, event.outboxEventId);
+      return { duplicate: false };
+    },
+
+    async enqueue(event) {
+      return this.enqueueSync(event);
+    },
+
+    async insert(event) {
+      await this.enqueue(event);
+    },
+
+    cancel(outboxEventId, now) {
+      const current = rows.get(outboxEventId);
+      if (!current) return false;
+      if (
+        current.status !== "pending" &&
+        current.status !== "retrying" &&
+        current.status !== "failed"
+      ) {
+        return false;
+      }
+      rows.set(outboxEventId, {
+        ...current,
+        status: "cancelled",
+        updatedAt: now,
+        nextAttemptAt: undefined,
+      });
+      return true;
+    },
+
+    get(outboxEventId) {
+      return rows.get(outboxEventId);
+    },
+
+    list() {
+      return [...rows.values()].sort((a, b) => a.createdAt.localeCompare(b.createdAt));
     },
   };
 }

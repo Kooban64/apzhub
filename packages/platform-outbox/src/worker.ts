@@ -1,12 +1,17 @@
 /**
- * Outbox worker — drains claimed events through handlers (PCv2-02).
+ * Outbox worker — drains claimed events through handlers (PCv2-02 / S08).
  * Must run outside HTTP request handlers.
  */
 
+import type {
+  DeadLetterPreparationHook,
+  DeliveryObservabilityHooks,
+} from "./delivery/observability";
 import { isPermanentFailureMessage, nextAttemptIso, shouldRetry } from "./retry-policy";
 import type { OutboxStore } from "./store/port";
 import type {
   BatchPolicy,
+  DeliveryAttemptRecord,
   OutboxDiagnostics,
   OutboxDrainResult,
   OutboxHandler,
@@ -30,6 +35,8 @@ export type CreateOutboxWorkerOptions = {
   readonly retryPolicy?: RetryPolicy;
   readonly batchPolicy?: BatchPolicy;
   readonly now?: () => string;
+  readonly observability?: DeliveryObservabilityHooks;
+  readonly onDeadLetterReady?: DeadLetterPreparationHook;
 };
 
 export function createOutboxWorker(options: CreateOutboxWorkerOptions): OutboxWorker {
@@ -37,9 +44,14 @@ export function createOutboxWorker(options: CreateOutboxWorkerOptions): OutboxWo
   const retryPolicy = options.retryPolicy ?? DEFAULT_RETRY_POLICY;
   const batchPolicy = options.batchPolicy ?? DEFAULT_BATCH_POLICY;
   const handlers = options.handlers;
+  const obs = options.observability;
 
   if (handlers.length === 0) {
     throw new Error("OutboxWorker requires at least one handler");
+  }
+
+  function recordAttempt(partial: DeliveryAttemptRecord): void {
+    obs?.onAttempt?.(partial);
   }
 
   return {
@@ -57,6 +69,8 @@ export function createOutboxWorker(options: CreateOutboxWorkerOptions): OutboxWo
       let deadLetter = 0;
 
       for (const event of claimed) {
+        const startedAt = now();
+        const startedMs = Date.parse(startedAt);
         let lastError: string | undefined;
         let permanent = false;
         let allOk = true;
@@ -72,12 +86,28 @@ export function createOutboxWorker(options: CreateOutboxWorkerOptions): OutboxWo
           }
         }
 
+        const finishedAt = now();
+        const durationMs = Math.max(0, Date.parse(finishedAt) - startedMs);
+
         if (allOk) {
           await options.store.markPublished({
             outboxEventId: event.outboxEventId,
-            now: now(),
+            now: finishedAt,
           });
           published += 1;
+          recordAttempt({
+            attempt: event.attemptCount,
+            startedAt,
+            finishedAt,
+            durationMs,
+            outcome: "delivered",
+          });
+          obs?.onTerminalState?.({
+            outboxEventId: event.outboxEventId,
+            state: "Delivered",
+            retryCount: event.attemptCount,
+            lastAttemptAt: finishedAt,
+          });
           continue;
         }
 
@@ -86,7 +116,7 @@ export function createOutboxWorker(options: CreateOutboxWorkerOptions): OutboxWo
 
         await options.store.markFailed({
           outboxEventId: event.outboxEventId,
-          now: now(),
+          now: finishedAt,
           lastError: errorMessage,
           nextAttemptAt: null,
           to: "failed",
@@ -96,23 +126,60 @@ export function createOutboxWorker(options: CreateOutboxWorkerOptions): OutboxWo
         if (!shouldRetry(attemptCount, permanent, retryPolicy)) {
           await options.store.markFailed({
             outboxEventId: event.outboxEventId,
-            now: now(),
+            now: finishedAt,
             lastError: errorMessage,
             nextAttemptAt: null,
             to: "dead-letter",
             attemptCount,
           });
           deadLetter += 1;
+          recordAttempt({
+            attempt: attemptCount,
+            startedAt,
+            finishedAt,
+            durationMs,
+            outcome: "dead-letter",
+            failureReason: errorMessage,
+          });
+          options.onDeadLetterReady?.({
+            event,
+            reason: errorMessage,
+            attemptCount,
+          });
+          obs?.onTerminalState?.({
+            outboxEventId: event.outboxEventId,
+            state: "DeadLetterReady",
+            retryCount: attemptCount,
+            failureReason: errorMessage,
+            lastAttemptAt: finishedAt,
+          });
         } else {
+          const nextAttemptAt = nextAttemptIso(attemptCount, now, retryPolicy);
           await options.store.markFailed({
             outboxEventId: event.outboxEventId,
-            now: now(),
+            now: finishedAt,
             lastError: errorMessage,
-            nextAttemptAt: nextAttemptIso(attemptCount, now, retryPolicy),
+            nextAttemptAt,
             to: "retrying",
             attemptCount,
           });
           failed += 1;
+          recordAttempt({
+            attempt: attemptCount,
+            startedAt,
+            finishedAt,
+            durationMs,
+            outcome: "retry-scheduled",
+            failureReason: errorMessage,
+          });
+          obs?.onTerminalState?.({
+            outboxEventId: event.outboxEventId,
+            state: "RetryScheduled",
+            retryCount: attemptCount,
+            failureReason: errorMessage,
+            lastAttemptAt: finishedAt,
+            nextAttemptAt,
+          });
         }
       }
 
@@ -138,6 +205,7 @@ export function createOutboxWorker(options: CreateOutboxWorkerOptions): OutboxWo
         failed: counts.failed,
         retrying: counts.retrying,
         deadLetter: counts["dead-letter"],
+        cancelled: counts.cancelled ?? 0,
       };
     },
   };

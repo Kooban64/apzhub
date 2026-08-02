@@ -226,6 +226,7 @@ export {
   type QepEvidenceProvenanceJson,
   type QepEvidencePolicyRefJson,
 } from "./qep-evidence-schema";
+export { platformOutboxSchema, platformOutboxEvent } from "./platform-outbox-schema";
 export {
   platformAdminSchema,
   platformAdminModule,

@@ -12,6 +12,7 @@ export {
   type OutboxDrainResult,
   type OutboxDiagnostics,
   type ReplayFilter,
+  type DeliveryAttemptRecord,
 } from "./types";
 export {
   computeBackoffDelayMs,
@@ -20,8 +21,9 @@ export {
   nextAttemptIso,
 } from "./retry-policy";
 export type { OutboxStore } from "./store/port";
-export { createInMemoryOutboxStore } from "./store/memory";
+export { createInMemoryOutboxStore, type InMemoryOutboxStore } from "./store/memory";
 export { createPostgresLawOutboxStore } from "./store/postgres";
+export { createPostgresPlatformOutboxStore } from "./store/postgres-platform";
 export {
   createOutboxWorker,
   type OutboxWorker,
@@ -33,3 +35,23 @@ export {
   createFailingHandler,
 } from "./handlers";
 export { isPlatformOutboxWorkerEnabled } from "./env";
+export {
+  DELIVERY_LIFECYCLE_STATES,
+  toDeliveryLifecycleState,
+  deliveryLifecycleTransitions,
+  createNullTransportAdapter,
+  createTransportDeliveryHandler,
+  createReliableDeliveryPlatform,
+  enqueueOutboxEvent,
+  createInMemoryDeliveryAudit,
+  type DeliveryLifecycleState,
+  type DeliveryPort,
+  type TransportAdapter,
+  type DeliveryResult,
+  type ReliableDeliveryPlatform,
+  type EnqueueOutboxEventInput,
+  type EnqueueResult,
+  type DeliveryObservabilityHooks,
+  type DeadLetterPreparationHook,
+  type InMemoryDeliveryAudit,
+} from "./delivery";

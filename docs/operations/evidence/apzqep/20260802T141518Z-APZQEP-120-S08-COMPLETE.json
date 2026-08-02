@@ -1,0 +1,24 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "S08",
+  "title": "Reliable Event Delivery (Outbox Drain)",
+  "status": "COMPLETE",
+  "certification": "PASS",
+  "timestampUtc": "20260802T141518Z",
+  "packages": {
+    "platform-outbox": "0.2.0",
+    "qep-evidence": "1.0.0"
+  },
+  "tests": {
+    "platform-outbox": "12/12",
+    "qep-evidence": "131/131"
+  },
+  "transport": "null-transport",
+  "persistence": "platform_outbox_event",
+  "migrations": [
+    "0093_apz_platform_outbox_event",
+    "0094_apz_platform_outbox_event_rls"
+  ],
+  "outstandingIssues": [],
+  "recommendation": "Ready for APZQEP-120-S09"
+}

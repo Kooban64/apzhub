@@ -1,9 +1,9 @@
 {
   "name": "@apzhub/platform-outbox",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "APZHUB Platform Outbox Workers — batch drain, retry, DLQ, replay (PCv2-02)",
+  "description": "APZHUB Platform Outbox — reliable delivery, transport-neutral drain, retry, DLQ (PCv2-02 · APZQEP-120-S08)",
   "exports": {
     ".": "./src/index.ts"
   },

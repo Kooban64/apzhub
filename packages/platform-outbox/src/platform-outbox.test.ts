@@ -30,8 +30,8 @@ function event(
 }
 
 describe("@apzhub/platform-outbox (PCv2-02)", () => {
-  it("exports version 0.1.0", () => {
-    expect(PLATFORM_OUTBOX_VERSION).toBe("0.1.0");
+  it("exports version 0.2.0", () => {
+    expect(PLATFORM_OUTBOX_VERSION).toBe("0.2.0");
   });
 
   it("drains pending events through acknowledging handler", async () => {

@@ -1,6 +1,6 @@
 /**
  * APZQEP-120-S07 — Application-owned Evidence event publisher port.
- * Transport adapters (platform-event-bus / outbox) may wrap this later (S08+).
+ * S08: prefer createOutboxQepEvidenceEventPublisher for durable enqueue.
  * Repositories and storage MUST NOT call this.
  */
 

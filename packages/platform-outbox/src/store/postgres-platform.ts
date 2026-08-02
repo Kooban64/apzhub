@@ -1,17 +1,16 @@
 /**
- * Postgres adapter over `law_outbox_event` (PCv2-02).
- * Claim uses status transitions; SKIP LOCKED preferred when available.
+ * Postgres adapter over enterprise `platform_outbox_event` (APZQEP-120-S08).
  */
 
 import { and, asc, eq, inArray, isNull, lte, or, sql } from "drizzle-orm";
 
-import { lawOutboxEvent, type DatabaseExecutor } from "@apzhub/config";
+import { platformOutboxEvent, type DatabaseExecutor } from "@apzhub/config";
 
 import type { OutboxEvent, OutboxStatus, ReplayFilter } from "../types";
 import { OUTBOX_STATUSES } from "../types";
 import type { OutboxStore } from "./port";
 
-type LawOutboxRow = typeof lawOutboxEvent.$inferSelect;
+type PlatformOutboxRow = typeof platformOutboxEvent.$inferSelect;
 
 function toIso(value: Date | string | null | undefined): string | undefined {
   if (value == null) return undefined;
@@ -19,15 +18,19 @@ function toIso(value: Date | string | null | undefined): string | undefined {
   return value;
 }
 
-function mapRow(row: LawOutboxRow): OutboxEvent {
+function mapRow(row: PlatformOutboxRow): OutboxEvent {
   const status = (row.status ?? "pending") as OutboxStatus;
+  const payload = { ...(row.payload ?? {}) };
+  if (row.idempotencyKey && payload.deliveryIdempotencyKey == null) {
+    payload.deliveryIdempotencyKey = row.idempotencyKey;
+  }
   return {
     outboxEventId: row.outboxEventId,
     tenantId: row.tenantId,
     aggregateType: row.aggregateType,
     aggregateId: row.aggregateId,
     eventType: row.eventType,
-    payload: row.payload ?? {},
+    payload,
     status: OUTBOX_STATUSES.includes(status) ? status : "pending",
     attemptCount: row.attemptCount ?? 0,
     maxAttempts: row.maxAttempts ?? 5,
@@ -41,33 +44,38 @@ function mapRow(row: LawOutboxRow): OutboxEvent {
   };
 }
 
-export function createPostgresLawOutboxStore(db: DatabaseExecutor): OutboxStore {
+function extractIdempotencyKey(event: OutboxEvent): string | null {
+  const key = event.payload?.deliveryIdempotencyKey;
+  return typeof key === "string" && key.length > 0 ? key : null;
+}
+
+export function createPostgresPlatformOutboxStore(db: DatabaseExecutor): OutboxStore {
   return {
     async claimBatch({ limit, now }) {
       const nowDate = new Date(now);
       const candidates = await db
         .select()
-        .from(lawOutboxEvent)
+        .from(platformOutboxEvent)
         .where(
           or(
-            eq(lawOutboxEvent.status, "pending"),
+            eq(platformOutboxEvent.status, "pending"),
             and(
-              eq(lawOutboxEvent.status, "retrying"),
+              eq(platformOutboxEvent.status, "retrying"),
               or(
-                isNull(lawOutboxEvent.nextAttemptAt),
-                lte(lawOutboxEvent.nextAttemptAt, nowDate),
+                isNull(platformOutboxEvent.nextAttemptAt),
+                lte(platformOutboxEvent.nextAttemptAt, nowDate),
               ),
             ),
           ),
         )
-        .orderBy(asc(lawOutboxEvent.createdAt))
+        .orderBy(asc(platformOutboxEvent.createdAt))
         .limit(limit);
 
       const claimed: OutboxEvent[] = [];
       for (const row of candidates) {
         const nextAttempt = (row.attemptCount ?? 0) + 1;
         const updated = await db
-          .update(lawOutboxEvent)
+          .update(platformOutboxEvent)
           .set({
             status: "processing",
             attemptCount: nextAttempt,
@@ -75,8 +83,8 @@ export function createPostgresLawOutboxStore(db: DatabaseExecutor): OutboxStore 
           })
           .where(
             and(
-              eq(lawOutboxEvent.outboxEventId, row.outboxEventId),
-              inArray(lawOutboxEvent.status, ["pending", "retrying"]),
+              eq(platformOutboxEvent.outboxEventId, row.outboxEventId),
+              inArray(platformOutboxEvent.status, ["pending", "retrying"]),
             ),
           )
           .returning();
@@ -90,7 +98,7 @@ export function createPostgresLawOutboxStore(db: DatabaseExecutor): OutboxStore 
     async markPublished({ outboxEventId, now }) {
       const nowDate = new Date(now);
       await db
-        .update(lawOutboxEvent)
+        .update(platformOutboxEvent)
         .set({
           status: "published",
           publishedAt: nowDate,
@@ -98,7 +106,7 @@ export function createPostgresLawOutboxStore(db: DatabaseExecutor): OutboxStore 
           lastError: null,
           nextAttemptAt: null,
         })
-        .where(eq(lawOutboxEvent.outboxEventId, outboxEventId));
+        .where(eq(platformOutboxEvent.outboxEventId, outboxEventId));
     },
 
     async markFailed({
@@ -111,7 +119,7 @@ export function createPostgresLawOutboxStore(db: DatabaseExecutor): OutboxStore 
     }) {
       const nowDate = new Date(now);
       await db
-        .update(lawOutboxEvent)
+        .update(platformOutboxEvent)
         .set({
           status: to,
           attemptCount,
@@ -119,7 +127,7 @@ export function createPostgresLawOutboxStore(db: DatabaseExecutor): OutboxStore 
           nextAttemptAt: nextAttemptAt ? new Date(nextAttemptAt) : null,
           updatedAt: nowDate,
         })
-        .where(eq(lawOutboxEvent.outboxEventId, outboxEventId));
+        .where(eq(platformOutboxEvent.outboxEventId, outboxEventId));
     },
 
     async replay(filter: ReplayFilter & { readonly now: string }) {
@@ -131,23 +139,25 @@ export function createPostgresLawOutboxStore(db: DatabaseExecutor): OutboxStore 
 
       const rows = await db
         .select()
-        .from(lawOutboxEvent)
+        .from(platformOutboxEvent)
         .where(
           and(
-            inArray(lawOutboxEvent.status, statuses),
+            inArray(platformOutboxEvent.status, statuses),
             filter.outboxEventId
-              ? eq(lawOutboxEvent.outboxEventId, filter.outboxEventId)
+              ? eq(platformOutboxEvent.outboxEventId, filter.outboxEventId)
               : sql`true`,
-            filter.tenantId ? eq(lawOutboxEvent.tenantId, filter.tenantId) : sql`true`,
+            filter.tenantId
+              ? eq(platformOutboxEvent.tenantId, filter.tenantId)
+              : sql`true`,
           ),
         )
-        .orderBy(asc(lawOutboxEvent.createdAt))
+        .orderBy(asc(platformOutboxEvent.createdAt))
         .limit(limit);
 
       let count = 0;
       for (const row of rows) {
         await db
-          .update(lawOutboxEvent)
+          .update(platformOutboxEvent)
           .set({
             status: "pending",
             publishedAt: null,
@@ -155,7 +165,7 @@ export function createPostgresLawOutboxStore(db: DatabaseExecutor): OutboxStore 
             nextAttemptAt: null,
             updatedAt: nowDate,
           })
-          .where(eq(lawOutboxEvent.outboxEventId, row.outboxEventId));
+          .where(eq(platformOutboxEvent.outboxEventId, row.outboxEventId));
         count += 1;
       }
       return count;
@@ -164,11 +174,11 @@ export function createPostgresLawOutboxStore(db: DatabaseExecutor): OutboxStore 
     async countByStatus() {
       const rows = await db
         .select({
-          status: lawOutboxEvent.status,
+          status: platformOutboxEvent.status,
           count: sql<number>`count(*)::int`,
         })
-        .from(lawOutboxEvent)
-        .groupBy(lawOutboxEvent.status);
+        .from(platformOutboxEvent)
+        .groupBy(platformOutboxEvent.status);
 
       const counts: Record<OutboxStatus, number> = {
         pending: 0,
@@ -190,7 +200,7 @@ export function createPostgresLawOutboxStore(db: DatabaseExecutor): OutboxStore 
 
     async enqueue(event) {
       try {
-        await db.insert(lawOutboxEvent).values({
+        await db.insert(platformOutboxEvent).values({
           outboxEventId: event.outboxEventId,
           tenantId: event.tenantId,
           aggregateType: event.aggregateType,
@@ -203,6 +213,7 @@ export function createPostgresLawOutboxStore(db: DatabaseExecutor): OutboxStore 
           nextAttemptAt: event.nextAttemptAt ? new Date(event.nextAttemptAt) : null,
           lastError: null,
           correlationId: event.correlationId ?? null,
+          idempotencyKey: extractIdempotencyKey(event),
           createdAt: new Date(event.createdAt),
           updatedAt: new Date(event.updatedAt),
           publishedAt: null,

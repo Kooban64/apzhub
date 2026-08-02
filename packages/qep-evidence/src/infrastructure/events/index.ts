@@ -1,8 +1,9 @@
 /**
- * Transport adapter scaffold for platform-event-bus / outbox (S08+).
- * Application catalogue publish lives in application/events (APZQEP-120-S07).
- * Persistence event contracts: persistence/persistence-events.ts (ENG-110C).
+ * Evidence event transport scaffolding — APZQEP-120-S08.
+ * Application Services publish via outbox-backed publisher (application/events).
+ * Infrastructure hosts DeliveryPort adapters only (null transport in S08).
  */
+
 export type EventPublisherScaffoldId = "EvidenceEventOutboxAdapter";
 
 export interface EventPublisherScaffold {
@@ -11,5 +12,7 @@ export interface EventPublisherScaffold {
 
 /** Bus event family reserved — see events/qep-evidence/README.md */
 export const EVIDENCE_BUS_EVENT_FAMILY = "evidence" as const;
+
+export const EVIDENCE_OUTBOX_ADAPTER_ID = "EvidenceEventOutboxAdapter" as const;
 
 /** Persistence event contracts live in `persistence/persistence-events.ts` (ENG-110C). */

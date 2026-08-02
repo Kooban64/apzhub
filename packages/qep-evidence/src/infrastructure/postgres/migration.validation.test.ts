@@ -58,4 +58,22 @@ describe("APZQEP-120-S05 migration SQL", () => {
     expect(rls).toContain("FORCE ROW LEVEL SECURITY");
     expect(rls).toContain("qep_evidence_lifecycle_history_tenant_isolation");
   });
+
+  it("APZQEP-120-S08: enterprise platform outbox migration", () => {
+    const path = join(drizzleDir, "0093_apz_platform_outbox_event.sql");
+    expect(existsSync(path)).toBe(true);
+    const sql = readFileSync(path, "utf8");
+    expect(sql).toContain('CREATE TABLE IF NOT EXISTS "platform_outbox_event"');
+    expect(sql).toContain("idempotency_key");
+    expect(sql).toContain("platform_outbox_event_claim_idx");
+    expect(sql.toLowerCase()).not.toContain("drop table");
+    expect(sql).not.toMatch(/ALTER TABLE .* DROP COLUMN/i);
+
+    const rls = readFileSync(
+      join(drizzleDir, "0094_apz_platform_outbox_event_rls.sql"),
+      "utf8",
+    );
+    expect(rls).toContain("FORCE ROW LEVEL SECURITY");
+    expect(rls).toContain("platform_outbox_event_tenant_isolation");
+  });
 });

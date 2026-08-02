@@ -9,6 +9,7 @@ export const OUTBOX_STATUSES = [
   "failed",
   "retrying",
   "dead-letter",
+  "cancelled",
 ] as const;
 
 export type OutboxStatus = (typeof OUTBOX_STATUSES)[number];
@@ -77,6 +78,18 @@ export type OutboxDiagnostics = {
   readonly failed: number;
   readonly retrying: number;
   readonly deadLetter: number;
+  readonly cancelled: number;
+};
+
+/** Delivery attempt audit metadata (metrics only — no dashboards). */
+export type DeliveryAttemptRecord = {
+  readonly attempt: number;
+  readonly startedAt: string;
+  readonly finishedAt?: string;
+  readonly durationMs?: number;
+  readonly outcome: "delivered" | "failed" | "dead-letter" | "retry-scheduled";
+  readonly failureReason?: string;
+  readonly transport?: string;
 };
 
 export type ReplayFilter = {

@@ -1,10 +1,10 @@
 # APZQEP / APZHUB — Portfolio Status Snapshot
 
-| Field     | Value                                         |
-| --------- | --------------------------------------------- |
-| Date      | 2026-08-02                                    |
-| Authority | Product Board — post APZQEP-120-S07 CERTIFIED |
-| Status    | **IN FORCE**                                  |
+| Field     | Value                                        |
+| --------- | -------------------------------------------- |
+| Date      | 2026-08-02                                   |
+| Authority | Product Board — post APZQEP-120-S08 COMPLETE |
+| Status    | **IN FORCE**                                 |
 
 ---
 
@@ -16,8 +16,8 @@
 | APZHUB Product Framework | ✅ Closed                                                           |
 | APZQEP v1.0 Release      | ✅ Closed                                                           |
 | APZQEP v1.1 Planning     | ✅ Closed                                                           |
-| APZQEP-120 S01–S07       | ✅ Complete · S07 Product Board **CERTIFIED**                       |
-| APZQEP-120 S08           | ⏳ Recommended next · Owner instruction required                    |
+| APZQEP-120 S01–S08       | ✅ Complete · S08 Reliable Delivery **PASS**                        |
+| APZQEP-120 S09           | ⏳ Recommended next · Owner instruction required                    |
 | APZQEP-ENG-001           | ✅ **Closed** (CERTIFIED / ARCHIVED)                                |
 | APZHUB-ENG-002           | ✅ Foundation COMPLETE · Phase 1 CLOSED · ES promotions **ON HOLD** |
 
@@ -30,8 +30,8 @@
 | Governance                      | ✅ Complete                    |
 | Engineering Framework           | ✅ Complete                    |
 | Evidence Platform (S01–S06)     | ✅ Complete                    |
-| Event Platform foundation (S07) | ✅ Complete · catalogue v1.0.1 |
-| Reliable delivery (S08)         | ⏳ Not authorised              |
+| Event Platform foundation (S07) | ✅ Complete · catalogue v1.0.2 |
+| Reliable delivery (S08)         | ✅ Complete · outbox 0.2.0     |
 | Core Platform Engineering       | 🚧 In Progress                 |
 | Product Feature Engineering     | 🚧 Ready to Continue           |
 

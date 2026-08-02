@@ -3,7 +3,7 @@
  * Business rules remain in Domain. Transport remains absent.
  * APZQEP-120-S07 — Domain Event Catalogue & Application publish.
  */
-export const QEP_EVIDENCE_APPLICATION_STATUS = "event-platform-s07" as const;
+export const QEP_EVIDENCE_APPLICATION_STATUS = "reliable-delivery-outbox-s08" as const;
 
 export * from "./ports/index";
 export * from "./context";

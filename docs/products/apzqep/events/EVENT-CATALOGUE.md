@@ -6,10 +6,11 @@
 | Product           | APZQEP                                         |
 | Domain            | Evidence                                       |
 | Programme         | APZQEP-120-S07                                 |
-| Catalogue version | **1.0.1**                                      |
+| Catalogue version | **1.0.2**                                      |
 | Status            | **ACTIVE** · Product Board **CERTIFIED** (S07) |
 | Publisher         | `qep-evidence` (Application Services)          |
-| Timestamp (UTC)   | 20260802T124553Z                               |
+| Delivery          | Platform Outbox (S08) · transport-neutral      |
+| Timestamp (UTC)   | 20260802T141518Z                               |
 
 This catalogue is a **first-class product asset**. Event semantics are owned by the Evidence domain. Infrastructure transports events; it does not define them.
 
@@ -37,7 +38,19 @@ Conforms to: APZQEP Engineering Framework v1.0 · Governance 1.0 STABLE · Enter
 
 ---
 
-## Registered events (v1.0.1)
+## Delivery consumer metadata (S08)
+
+| Field                    | Value                                                               |
+| ------------------------ | ------------------------------------------------------------------- |
+| Delivery mechanism       | `@apzhub/platform-outbox` Reliable Delivery Platform                |
+| Enqueue path             | Application `createOutboxQepEvidenceEventPublisher` → `OutboxStore` |
+| Default transport        | Null `DeliveryPort` (no external bus)                               |
+| Idempotency              | Catalogue `idempotencyKey` → outbox `deliveryIdempotencyKey`        |
+| Event / payload / schema | **Unchanged** from S07 (no redesign)                                |
+
+---
+
+## Registered events (v1.0.2 — semantics unchanged from v1.0.1)
 
 | Event ID                             | Name                           | Version | Stability | Introduced In  | Status | Doc                                                                                    |
 | ------------------------------------ | ------------------------------ | ------- | --------- | -------------- | ------ | -------------------------------------------------------------------------------------- |
@@ -82,5 +95,6 @@ Machine-readable manifests: `events/qep/<slug>/event.yaml` at repository root.
 ## Related
 
 - Implementation: `packages/qep-evidence/src/application/events/`
+- Outbox: `packages/platform-outbox` · [OUTBOX-ARCHITECTURE.md](../v1.1/apzqep-120/OUTBOX-ARCHITECTURE.md)
 - Product Board: `docs/products/apzqep/v1.1/apzqep-120/S07-PRODUCT-BOARD-CERTIFICATION.md`
-- Slice notes: `docs/products/apzqep/v1.1/apzqep-120/S07-ENGINEERING-NOTES.md`
+- Slice notes: S07 · [S08-ENGINEERING-NOTES.md](../v1.1/apzqep-120/S08-ENGINEERING-NOTES.md)

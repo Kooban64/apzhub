@@ -25,6 +25,12 @@ export type OutboxStore = {
 
   countByStatus(): Promise<Record<OutboxStatus, number>>;
 
-  /** Test / seed helper — insert a pending event. */
+  /**
+   * Persist a pending outbox event (Application Services / product adapters).
+   * Idempotent when the same outboxEventId already exists.
+   */
+  enqueue(event: OutboxEvent): Promise<{ readonly duplicate?: boolean } | void>;
+
+  /** @deprecated Prefer enqueue — retained for older call sites. */
   insert?(event: OutboxEvent): Promise<void>;
 };
