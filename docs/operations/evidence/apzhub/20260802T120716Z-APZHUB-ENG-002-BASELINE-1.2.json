@@ -1,0 +1,15 @@
+{
+  "programme": "APZHUB-ENG-002",
+  "artefact": "APZHUB-ENTERPRISE-ENGINEERING-BASELINE",
+  "baselineVersion": "1.2",
+  "status": "ACTIVE",
+  "milestone": "ESTABLISHED",
+  "includedStandards": ["ES-001", "ES-002", "ES-003"],
+  "capability": ["Specify", "Test", "Certify"],
+  "supersedes": "1.1",
+  "timestampUtc": "20260802T120716Z",
+  "trigger": "ES-003 CERTIFIED",
+  "phase1A": "OPEN",
+  "es004": "NOT_AUTHORISED",
+  "path": "docs/engineering/APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md"
+}

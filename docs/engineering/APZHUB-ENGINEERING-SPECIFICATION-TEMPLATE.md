@@ -1,26 +1,29 @@
 # APZHUB Enterprise Engineering Specification Template
 
-| Field                    | Value                                                                                                                     |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| Document                 | APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE                                                                                 |
-| Catalogue ID             | **ES-003**                                                                                                                |
-| Programme                | APZHUB-ENG-002                                                                                                            |
-| Classification           | Enterprise Engineering Standard                                                                                           |
-| Status                   | **DRAFT — Under Review** (awaiting Dual Approval → Active)                                                                |
-| Version                  | **1.0** (candidate)                                                                                                       |
-| Authority                | [Portfolio Engineering Charter](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md)                                        |
-| Catalogue                | [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)                                  |
-| Baseline                 | [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](./APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) **1.1** (unchanged until Active) |
-| Ownership                | APZHUB Engineering Governance                                                                                             |
-| Implementation authority | All APZHUB products (when Active)                                                                                         |
-| Reference source         | APZQEP Engineering Specification Template v1.0 (abstracted, not duplicated)                                               |
-| Source framework         | APZQEP Engineering Framework v1.0                                                                                         |
-| Promotion method         | Abstraction                                                                                                               |
-| Related Active standards | [ES-001](./APZHUB-TESTING-STANDARD.md) · [ES-002](./APZHUB-CERTIFICATION-STANDARD.md)                                     |
-| Process parents          | APZHUB-ENG-001 / ADR-0092                                                                                                 |
-| Scope                    | All APZHUB engineering programmes and engineering slices                                                                  |
-| Compliance               | **Mandatory** when Active                                                                                                 |
-| Exceptions               | Only by approved ADR                                                                                                      |
+| Field                    | Value                                                                                            |
+| ------------------------ | ------------------------------------------------------------------------------------------------ |
+| Document                 | APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE                                                        |
+| Catalogue ID             | **ES-003**                                                                                       |
+| Programme                | APZHUB-ENG-002                                                                                   |
+| Classification           | **Enterprise Engineering Standard**                                                              |
+| Status                   | **ACTIVE**                                                                                       |
+| Version                  | **1.0**                                                                                          |
+| Authority                | [Portfolio Engineering Charter](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md)               |
+| Catalogue                | [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)         |
+| Baseline                 | [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](./APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) **1.2** |
+| Ownership                | APZHUB Engineering Governance                                                                    |
+| Implementation authority | All APZHUB products                                                                              |
+| Reference source         | APZQEP Engineering Specification Template v1.0 (abstracted, not duplicated)                      |
+| Source framework         | APZQEP Engineering Framework v1.0                                                                |
+| Promotion method         | Abstraction                                                                                      |
+| Architecture Review      | PASS (`20260802T120151Z`)                                                                        |
+| Certified                | Product Board — 2026-08-02 (`20260802T120716Z`)                                                  |
+| Related Active standards | [ES-001](./APZHUB-TESTING-STANDARD.md) · [ES-002](./APZHUB-CERTIFICATION-STANDARD.md)            |
+| Process parents          | APZHUB-ENG-001 / ADR-0092                                                                        |
+| Scope                    | All APZHUB engineering programmes and engineering slices                                         |
+| Compliance               | **Mandatory**                                                                                    |
+| Review frequency         | Annual                                                                                           |
+| Exceptions               | Only by approved ADR                                                                             |
 
 ---
 
@@ -478,9 +481,9 @@ Products SHOULD use this template for non-trivial engineering contracts. The ENG
 
 ## Document history
 
-| Version | Programme phase        | Status               | Notes                                                                         |
-| ------- | ---------------------- | -------------------- | ----------------------------------------------------------------------------- |
-| 1.0     | APZHUB-ENG-002 Phase 1 | DRAFT — Under Review | First enterprise Specification Template; abstracted from APZQEP template v1.0 |
+| Version | Programme phase        | Status     | Notes                                                                                |
+| ------- | ---------------------- | ---------- | ------------------------------------------------------------------------------------ |
+| 1.0     | APZHUB-ENG-002 Phase 1 | **Active** | Dual Approval satisfied; abstracted from APZQEP Spec Template v1.0; Baseline **1.2** |
 
 ---
 

@@ -5,13 +5,14 @@
 | Document          | APZHUB-ENTERPRISE-ENGINEERING-BASELINE                                                             |
 | Programme         | APZHUB-ENG-002                                                                                     |
 | Classification    | Enterprise Engineering Governance                                                                  |
-| Status            | **ACTIVE** · Product Board **CERTIFIED**                                                           |
-| Current version   | **1.1**                                                                                            |
-| Certified (1.1)   | Product Board — 2026-08-02 (`20260802T115728Z`)                                                    |
+| Status            | **ACTIVE** · **ESTABLISHED** (Governance Milestone)                                                |
+| Current version   | **1.2**                                                                                            |
+| Certified (1.2)   | Product Board — 2026-08-02 (`20260802T120716Z`)                                                    |
 | Authority         | [Portfolio Engineering Charter](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md) (**CERTIFIED**) |
 | Companion         | [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)           |
 | Technical content | **NONE** — adopted-set inventory only                                                              |
 | Engineering       | NONE                                                                                               |
+| Next wave         | **PAUSED** — Phase 1A Baseline 1.2 Review before ES-004                                            |
 
 ---
 
@@ -21,7 +22,7 @@
 Baseline Status
 
 Current Version:
-1.1
+1.2
 
 Current Authority:
 Product Board
@@ -29,25 +30,30 @@ Product Board
 Effective Date:
 2026-08-02
 
+Status:
+ACTIVE · ESTABLISHED
+
 Current Standards:
 ES-001
 ES-002
+ES-003
+
+Capability:
+Specify → Test → Certify
 
 Next Planned Version:
-1.2 (Pending ES-003 Certification)
-
-ES-003 Catalogue Status:
-UNDER REVIEW (does not change this Baseline)
+1.3 (Paused — after Phase 1A; Pending ES-004)
 ```
 
-| Field                | Value                                  |
-| -------------------- | -------------------------------------- |
-| Current version      | **1.1**                                |
-| Current authority    | Product Board                          |
-| Effective date       | 2026-08-02                             |
-| Current standards    | ES-001, ES-002                         |
-| Next planned version | **1.2** (Pending ES-003 Certification) |
-| ES-003 status        | **UNDER REVIEW** (Baseline unchanged)  |
+| Field                | Value                                                               |
+| -------------------- | ------------------------------------------------------------------- |
+| Current version      | **1.2**                                                             |
+| Current authority    | Product Board                                                       |
+| Effective date       | 2026-08-02                                                          |
+| Current standards    | ES-001, ES-002, ES-003                                              |
+| Milestone            | **ESTABLISHED** — first operational enterprise engineering baseline |
+| Next planned version | **1.3** (PAUSED — Phase 1A review before ES-004)                    |
+| ES-004 status        | **NOT AUTHORISED**                                                  |
 
 ---
 
@@ -64,9 +70,7 @@ It answers:
 | **Standards Catalogue**  | _What engineering standards exist?_                                         |
 | **Engineering Baseline** | _What engineering standards are currently mandatory across the enterprise?_ |
 
-The Baseline is the governance equivalent of a software release for engineering standards.
-
-**Strong rule:** Baseline changes **only** when a standard becomes **ACTIVE** (Dual Approval: Architecture Review PASS **and** Product Board CERTIFIED). Drafting or reviewing a standard does **not** change the Baseline.
+**Strong rule:** Baseline changes **only** when a standard becomes **ACTIVE** (Dual Approval).
 
 ---
 
@@ -76,181 +80,175 @@ The Baseline is the governance equivalent of a software release for engineering 
 Engineering Baseline
 
 Version:
-1.1
+1.2
 
 Status:
-ACTIVE
+ACTIVE · ESTABLISHED
 
-Included Standards
+Enterprise Standards
 
 ES-001
 Enterprise Testing Standard
 
 ES-002
 Enterprise Certification Standard
+
+ES-003
+Enterprise Engineering Specification Template
 ```
 
 | Field                 | Value                              |
 | --------------------- | ---------------------------------- |
-| Baseline version      | **1.1**                            |
-| Status                | ACTIVE · CERTIFIED                 |
+| Baseline version      | **1.2**                            |
+| Status                | ACTIVE · ESTABLISHED               |
 | Effective (UTC)       | 2026-08-02                         |
-| Board CERTIFIED (1.1) | `20260802T115728Z` (ES-002 Active) |
-| Included standards    | ES-001, ES-002                     |
-| Supersedes            | Baseline **1.0** (ES-001 only)     |
+| Board CERTIFIED (1.2) | `20260802T120716Z` (ES-003 Active) |
+| Included standards    | ES-001, ES-002, ES-003             |
+| Supersedes            | Baseline **1.1**                   |
+
+### Delivery lifecycle (Baseline 1.2)
+
+```text
+Engineering Governance Milestone
+
+Enterprise Engineering Baseline
+
+Version:
+1.2
+
+Status:
+ESTABLISHED
+
+Capability:
+
+Specify   (ES-003)
+    ↓
+Test      (ES-001)
+    ↓
+Certify   (ES-002)
+
+Enterprise-wide.
+```
 
 ---
 
-## 3. Included standards (Baseline 1.1)
+## 3. Included standards (Baseline 1.2)
 
 ### ES-001 — Enterprise Testing Standard
 
-```text
-Enterprise Engineering Standard
-
-ID: ES-001
-Title: APZHUB Enterprise Testing Standard
-Version: 1.0
-Status: ACTIVE
-Authority: APZHUB Engineering Governance
-Origin: APZQEP Engineering Framework v1.0
-Promotion Method: ABSTRACTION
-Reference Implementation: APZQEP
-Scope: Enterprise
-Implementation: Mandatory for all APZHUB products
-Review: Annual
-```
-
-| Field          | Value                                                                   |
-| -------------- | ----------------------------------------------------------------------- |
-| Normative path | [`APZHUB-TESTING-STANDARD.md`](./APZHUB-TESTING-STANDARD.md)            |
-| Promotion date | 2026-08-02                                                              |
-| Board decision | [`ES-001-PROMOTION-PACK.md`](./APZHUB-ENG-002/ES-001-PROMOTION-PACK.md) |
+| Field          | Value                                                        |
+| -------------- | ------------------------------------------------------------ |
+| Status         | ACTIVE v1.0                                                  |
+| Normative path | [`APZHUB-TESTING-STANDARD.md`](./APZHUB-TESTING-STANDARD.md) |
+| Role           | How engineering work is **tested**                           |
+| Promotion date | 2026-08-02                                                   |
 
 ### ES-002 — Enterprise Certification Standard
 
+| Field          | Value                                                                    |
+| -------------- | ------------------------------------------------------------------------ |
+| Status         | ACTIVE v1.0                                                              |
+| Normative path | [`APZHUB-CERTIFICATION-STANDARD.md`](./APZHUB-CERTIFICATION-STANDARD.md) |
+| Role           | How engineering work is **certified / accepted**                         |
+| Promotion date | 2026-08-02                                                               |
+
+### ES-003 — Enterprise Engineering Specification Template
+
 ```text
 Enterprise Engineering Standard
 
-ID: ES-002
-Title: APZHUB Enterprise Certification Standard
+ID: ES-003
+Title: APZHUB Enterprise Engineering Specification Template
 Version: 1.0
 Status: ACTIVE
 Authority: APZHUB Engineering Governance
-Origin: APZQEP Engineering Framework v1.0
 Promotion Method: ABSTRACTION
 Architecture Review: PASS
 Product Board: CERTIFIED
-Reference Implementation: APZQEP
 Scope: Enterprise
 Implementation: Mandatory for all APZHUB products
 Review: Annual
 Superseded By: None
 ```
 
-| Field               | Value                                                                             |
-| ------------------- | --------------------------------------------------------------------------------- |
-| Normative path      | [`APZHUB-CERTIFICATION-STANDARD.md`](./APZHUB-CERTIFICATION-STANDARD.md)          |
-| Promotion date      | 2026-08-02 (`20260802T115728Z`)                                                   |
-| Board decision      | [`ES-002-PROMOTION-PACK.md`](./APZHUB-ENG-002/ES-002-PROMOTION-PACK.md)           |
-| Architecture Review | [`ES-002-ARCHITECTURE-REVIEW.md`](./APZHUB-ENG-002/ES-002-ARCHITECTURE-REVIEW.md) |
+| Field          | Value                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------ |
+| Normative path | [`APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md`](./APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md) |
+| Role           | How engineering work is **specified**                                                            |
+| Promotion date | 2026-08-02 (`20260802T120716Z`)                                                                  |
+| Board decision | [`ES-003-PROMOTION-PACK.md`](./APZHUB-ENG-002/ES-003-PROMOTION-PACK.md)                          |
 
-**Product obligation:** All APZHUB products SHALL conform to Active Baseline standards (ES-001 and ES-002). Product specialisations MAY tighten, never weaken, Active Baseline obligations.
+**Product obligation:** All APZHUB products SHALL conform to Active Baseline **1.2** standards. Specialisations MAY tighten, never weaken.
 
 ---
 
 ## 4. Baseline version history
 
-| Baseline Version | Included Standards     | Effective (UTC) | Board / evidence                                             |
-| ---------------- | ---------------------- | --------------- | ------------------------------------------------------------ |
-| 1.0              | ES-001                 | 2026-08-02      | Established `20260802T113952Z`; CERTIFIED `20260802T114211Z` |
-| **1.1**          | ES-001, ES-002         | 2026-08-02      | ES-002 CERTIFIED `20260802T115728Z`                          |
-| 1.2 _(planned)_  | ES-001, ES-002, ES-003 | —               | After ES-003 ACTIVE                                          |
-
-Planned rows are forward guidance only. They do not authorise promotion.
+| Baseline Version | Included Standards     | Effective (UTC) | Board / evidence                                      |
+| ---------------- | ---------------------- | --------------- | ----------------------------------------------------- |
+| 1.0              | ES-001                 | 2026-08-02      | CERTIFIED `20260802T114211Z`                          |
+| 1.1              | ES-001, ES-002         | 2026-08-02      | ES-002 CERTIFIED `20260802T115728Z`                   |
+| **1.2**          | ES-001, ES-002, ES-003 | 2026-08-02      | ES-003 CERTIFIED `20260802T120716Z` · **ESTABLISHED** |
+| 1.3 _(paused)_   | + ES-004 (planned)     | —               | After Phase 1A + ES-004 Dual Approval                 |
 
 ---
 
 ## 5. Versioning policy
 
-### 5.1 When the Baseline changes
+| Change type | Example         | Meaning                                                  |
+| ----------- | --------------- | -------------------------------------------------------- |
+| **Minor**   | 1.0 → 1.1 → 1.2 | One or more standards become **ACTIVE**                  |
+| **Major**   | 1.x → 2.0       | Significant governance restructuring / mass supersession |
 
-| Event                                        | Baseline impact                   |
-| -------------------------------------------- | --------------------------------- |
-| Standard drafted                             | **No change**                     |
-| Standard Under Review                        | **No change**                     |
-| Architecture Review only                     | **No change**                     |
-| Dual Approval complete → standard **ACTIVE** | **New Baseline version required** |
-
-### 5.2 Version numbers
-
-| Change type | Example         | Meaning                                                                                                         |
-| ----------- | --------------- | --------------------------------------------------------------------------------------------------------------- |
-| **Minor**   | 1.0 → 1.1 → 1.2 | One or more standards become **ACTIVE**                                                                         |
-| **Major**   | 1.x → 2.0       | Significant governance change — e.g. restructuring the engineering framework, or superseding multiple standards |
-
-### 5.3 Additional rules
-
-1. Each minor bump lists the **full** adopted set (not deltas only).
-2. Major bumps require explicit Product Board decision.
-3. Removing or superseding a standard from the adopted set requires Board decision and a new Baseline version.
-4. Catalogue rows for Proposed / Under Review / Deferred standards are **not** in the Baseline until Active.
-5. Baseline versions are never rewritten in place for adoption history; append a new version row.
-6. Future promotions SHALL increment the Baseline version in accordance with Product Board approval.
+Baseline changes **only** on Dual Approval → Active. Drafting / Under Review do not change the Baseline.
 
 ---
 
 ## 6. Related enterprise artefacts (outside this Baseline series)
 
-| Artefact                      | Path / ID                                | Notes                                |
-| ----------------------------- | ---------------------------------------- | ------------------------------------ |
-| Engineering Slice Standard    | ES-000 · `ENGINEERING-SLICE-STANDARD.md` | Frozen ADR-0092                      |
-| Portfolio Engineering Charter | APZHUB-ENG-002                           | Governs promotion; Dual Approval §12 |
-| Document 000 / Foundation     | `docs/000-…` · Foundation pack           | Supreme / architecture               |
+| Artefact                      | Path / ID                                                                             | Notes                 |
+| ----------------------------- | ------------------------------------------------------------------------------------- | --------------------- |
+| Engineering Slice Standard    | ES-000 · `ENGINEERING-SLICE-STANDARD.md`                                              | Frozen ADR-0092       |
+| Portfolio Engineering Charter | APZHUB-ENG-002                                                                        | Dual Approval §12     |
+| Phase 1A Review               | [`PHASE-1A-BASELINE-1.2-REVIEW.md`](./APZHUB-ENG-002/PHASE-1A-BASELINE-1.2-REVIEW.md) | Governance checkpoint |
 
 ---
 
 ## 7. Change control
 
-1. Promote standard to Active in the **Catalogue** first (after Dual Approval).
-2. Publish or amend the normative standard body.
-3. Publish a new **Baseline** version listing the full adopted set.
-4. Record Board decision reference and effective date here.
-5. Do not claim Baseline membership for standards that are only Proposed or Under Review.
+1. Dual Approval → Catalogue Active.
+2. Publish normative body.
+3. New Baseline version with full adopted set.
+4. Record Board decision and effective date.
+5. No Baseline membership for Proposed / Under Review standards.
 
 ---
 
-## 8. Product Board records
-
-### Baseline 1.0
-
-```text
-Version: 1.0 · CERTIFIED · Initial set: ES-001
-```
-
-### Baseline 1.1
+## 8. Product Board record (Baseline 1.2)
 
 ```text
 Programme: APZHUB-ENG-002
 Phase: 1
 Artefact: APZHUB Enterprise Engineering Baseline
-Version: 1.1
-Status: ACTIVE
-Included: ES-001, ES-002
-Trigger: ES-002 Product Board CERTIFIED
-Decision (UTC): 20260802T115728Z
+Version: 1.2
+Status: ACTIVE · ESTABLISHED
+Included: ES-001, ES-002, ES-003
+Trigger: ES-003 Product Board CERTIFIED
+Decision (UTC): 20260802T120716Z
 Engineering: NONE
 Repository: CLEAN
+Next: Phase 1A Baseline 1.2 Review — pause before ES-004
 ```
 
 ---
 
 ## 9. Document history
 
-| Baseline | Event                   | Notes                                            |
-| -------- | ----------------------- | ------------------------------------------------ |
-| 1.0      | Established + CERTIFIED | First Baseline; ES-001 only                      |
-| 1.1      | Active                  | ES-002 added; Dual Approval exercised end-to-end |
+| Baseline | Event                     | Notes                                             |
+| -------- | ------------------------- | ------------------------------------------------- |
+| 1.0      | ESTABLISHED / CERTIFIED   | ES-001 only                                       |
+| 1.1      | Active                    | ES-002 added                                      |
+| 1.2      | **ESTABLISHED** milestone | Specify → Test → Certify complete; Phase 1A pause |
 
 ---
 

@@ -10,7 +10,7 @@
 | Version                  | **1.0**                                                                                          |
 | Authority                | [Portfolio Engineering Charter](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md)               |
 | Catalogue                | [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)         |
-| Baseline                 | [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](./APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) **1.1** |
+| Baseline                 | [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](./APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) **1.2** |
 | Ownership                | APZHUB Engineering Governance                                                                    |
 | Implementation authority | All APZHUB products                                                                              |
 | Reference source         | APZQEP Certification Standard v1.0 (reference implementation — abstracted, not duplicated)       |
@@ -31,7 +31,7 @@
 
 The key words **MUST**, **MUST NOT**, **SHALL**, **SHALL NOT**, **SHOULD**, and **MAY** are to be interpreted as RFC 2119 obligations.
 
-This document is the **Active** enterprise Certification Standard (ES-002). It is mandatory portfolio law for all APZHUB products and is included in Enterprise Engineering Baseline **1.1**.
+This document is the **Active** enterprise Certification Standard (ES-002). It is mandatory portfolio law for all APZHUB products and is included in Enterprise Engineering Baseline **1.2**.
 
 Product certification standards MAY remain as specialisations; they MUST NOT contradict this standard.
 

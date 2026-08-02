@@ -87,13 +87,13 @@ Aligned with [PORTFOLIO-LIFECYCLE.md](./APZHUB-ENG-002/PORTFOLIO-LIFECYCLE.md).
 
 ### 4.2 Promotion wave
 
-| ID     | Title                                         | Status           | Current Version | Source Framework                          | Source Product  | Product Board Decision                                                  | Promotion Date | Owner                                             | Review Frequency                   | Superseded By | Normative Home                                                  |
-| ------ | --------------------------------------------- | ---------------- | --------------- | ----------------------------------------- | --------------- | ----------------------------------------------------------------------- | -------------- | ------------------------------------------------- | ---------------------------------- | ------------- | --------------------------------------------------------------- |
-| ES-001 | Enterprise Testing Standard                   | **Active**       | **1.0**         | APZQEP Engineering Framework v1.0         | APZQEP          | CERTIFIED 20260802T113408Z · APPROVED → ACTIVE                          | 2026-08-02     | APZHUB Engineering Governance                     | Annual or major framework revision | —             | `docs/engineering/APZHUB-TESTING-STANDARD.md`                   |
-| ES-002 | Enterprise Certification Standard             | **Active**       | **1.0**         | APZQEP Engineering Framework v1.0         | APZQEP          | CERTIFIED 20260802T115728Z · Arch Review PASS · APPROVED → ACTIVE       | 2026-08-02     | APZHUB Engineering Governance                     | Annual                             | —             | `docs/engineering/APZHUB-CERTIFICATION-STANDARD.md`             |
-| ES-003 | Enterprise Engineering Specification Template | **Under Review** | 1.0 (candidate) | APZQEP Engineering Framework v1.0         | APZQEP          | Authorised for Review 20260802T120151Z; Arch Review PASS; Board pending | —              | APZHUB Engineering Governance                     | Annual                             | —             | `docs/engineering/APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md` |
-| ES-004 | Enterprise Engineering Workflow               | **Proposed**     | —               | APZQEP / APZHUB-ENG-001 pack              | APZQEP / APZHUB | —                                                                       | —              | Product Board / Enterprise Engineering Governance | Annual / Major release             | —             | Align `AI-ENGINEERING-WORKFLOW.md` + checklists (TBD)           |
-| ES-005 | Enterprise Engineering Standards              | **Proposed**     | —               | APZQEP Engineering Framework v1.0 (SPLIT) | APZQEP          | —                                                                       | —              | Product Board / Enterprise Engineering Governance | Annual / Major release             | —             | `docs/engineering/APZHUB-ENGINEERING-STANDARDS.md` (TBD)        |
+| ID     | Title                                         | Status       | Current Version | Source Framework                          | Source Product  | Product Board Decision                                            | Promotion Date | Owner                                             | Review Frequency                   | Superseded By | Normative Home                                                  |
+| ------ | --------------------------------------------- | ------------ | --------------- | ----------------------------------------- | --------------- | ----------------------------------------------------------------- | -------------- | ------------------------------------------------- | ---------------------------------- | ------------- | --------------------------------------------------------------- |
+| ES-001 | Enterprise Testing Standard                   | **Active**   | **1.0**         | APZQEP Engineering Framework v1.0         | APZQEP          | CERTIFIED 20260802T113408Z · APPROVED → ACTIVE                    | 2026-08-02     | APZHUB Engineering Governance                     | Annual or major framework revision | —             | `docs/engineering/APZHUB-TESTING-STANDARD.md`                   |
+| ES-002 | Enterprise Certification Standard             | **Active**   | **1.0**         | APZQEP Engineering Framework v1.0         | APZQEP          | CERTIFIED 20260802T115728Z · Arch Review PASS · APPROVED → ACTIVE | 2026-08-02     | APZHUB Engineering Governance                     | Annual                             | —             | `docs/engineering/APZHUB-CERTIFICATION-STANDARD.md`             |
+| ES-003 | Enterprise Engineering Specification Template | **Active**   | **1.0**         | APZQEP Engineering Framework v1.0         | APZQEP          | CERTIFIED 20260802T120716Z · Arch Review PASS · APPROVED → ACTIVE | 2026-08-02     | APZHUB Engineering Governance                     | Annual                             | —             | `docs/engineering/APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md` |
+| ES-004 | Enterprise Engineering Workflow               | **Proposed** | —               | APZQEP / APZHUB-ENG-001 pack              | APZQEP / APZHUB | —                                                                 | —              | Product Board / Enterprise Engineering Governance | Annual / Major release             | —             | Align `AI-ENGINEERING-WORKFLOW.md` + checklists (TBD)           |
+| ES-005 | Enterprise Engineering Standards              | **Proposed** | —               | APZQEP Engineering Framework v1.0 (SPLIT) | APZQEP          | —                                                                 | —              | Product Board / Enterprise Engineering Governance | Annual / Major release             | —             | `docs/engineering/APZHUB-ENGINEERING-STANDARDS.md` (TBD)        |
 
 ### 4.3 Deferred (not in current wave)
 
@@ -110,9 +110,9 @@ Aligned with [PORTFOLIO-LIFECYCLE.md](./APZHUB-ENG-002/PORTFOLIO-LIFECYCLE.md).
 ## 5. Recommended promotion sequence
 
 1. **ES-001** Enterprise Testing Standard — **ACTIVE** (first APZHUB-owned enterprise engineering standard)
-2. **ES-002** Enterprise Certification Standard — **ACTIVE** (Baseline **1.1**)
-3. **ES-003** Enterprise Engineering Specification Template — **Under Review** (Baseline unchanged until Active)
-4. **ES-004** Enterprise Engineering Workflow
+2. **ES-002** Enterprise Certification Standard — **ACTIVE**
+3. **ES-003** Enterprise Engineering Specification Template — **ACTIVE** (Baseline **1.2 ESTABLISHED**)
+4. **ES-004** Enterprise Engineering Workflow — **PAUSED** (Phase 1A before authorisation)
 5. **ES-005** Enterprise Engineering Standards (generic portion only)
 
 API / Database / Domain Event remain **Deferred** until Board revisits.
@@ -157,6 +157,9 @@ API / Database / Domain Event remain **Deferred** until Board revisits.
 | 20260802T115728Z | ES-002 | Dual Approval complete; Product Board **CERTIFIED**; Status → **APPROVED → ACTIVE** v1.0                                 | `ES-002-PROMOTION-PACK.md` · evidence CERTIFIED                |
 | 20260802T115728Z | —      | Enterprise Engineering Baseline **1.0 → 1.1** (ES-001, ES-002)                                                           | `APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md` · `BASELINE-1.1-*` |
 | 20260802T120151Z | ES-003 | Authorised for Review; body authored by abstraction; Arch Review PASS; Status → **Under Review**; Baseline **unchanged** | `APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md` · `ES-003-*`    |
+| 20260802T120716Z | ES-003 | Dual Approval complete; Product Board **CERTIFIED**; Status → **APPROVED → ACTIVE** v1.0                                 | `ES-003-PROMOTION-PACK.md` · evidence CERTIFIED                |
+| 20260802T120716Z | —      | Enterprise Engineering Baseline **1.1 → 1.2** (ES-001, ES-002, ES-003) · **ESTABLISHED**                                 | `BASELINE-1.2-*` · `GOVERNANCE-MILESTONE-BASELINE-1.2.md`      |
+| 20260802T120716Z | —      | Phase **1A** Baseline 1.2 Review **OPEN**; ES-004 not authorised                                                         | `PHASE-1A-BASELINE-1.2-REVIEW.md`                              |
 
 ---
 

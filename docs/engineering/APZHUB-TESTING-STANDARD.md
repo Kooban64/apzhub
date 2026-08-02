@@ -10,7 +10,7 @@
 | Version                  | **1.0**                                                                                          |
 | Authority                | [Portfolio Engineering Charter](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md)               |
 | Catalogue                | [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)         |
-| Baseline                 | [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](./APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) **1.1** |
+| Baseline                 | [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](./APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) **1.2** |
 | Ownership                | APZHUB Engineering Governance                                                                    |
 | Implementation authority | All APZHUB products                                                                              |
 | Reference source         | APZQEP Testing Standard v1.0 (reference implementation — abstracted, not duplicated)             |

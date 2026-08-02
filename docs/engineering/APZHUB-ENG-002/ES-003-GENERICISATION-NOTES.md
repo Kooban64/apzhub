@@ -83,7 +83,7 @@ Review APZQEP Specification Template
 - [x] ES-001 / ES-002 cited, not redefined
 - [x] Baseline not modified
 - [x] Architecture Review recorded
-- [ ] Product Board Certification (pending)
+- [x] Product Board Certification — **CERTIFIED** 20260802T120716Z → ACTIVE · Baseline 1.2
 
 ---
 
