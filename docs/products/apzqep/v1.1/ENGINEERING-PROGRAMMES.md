@@ -9,48 +9,47 @@ Estimates: S / M / L / XL (planning bands).
 
 ---
 
-## APZQEP-120 — Enterprise Core Platform
+## APZQEP-120 — Platform Foundation
 
-| Field               | Value                                                                                                                                                                                             |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Title (Owner)       | Enterprise Core Platform (also referenced historically as Enterprise Foundation)                                                                                                                  |
-| Objective           | Make v1.0 LA capabilities trustworthy and wire cross-cutting discovery                                                                                                                            |
-| Scope               | Evidence durable storage path + ACL; TE operability/E2E/OpenAPI; domain event publication; unified search providers; notifications; command palette registration; QI skeleton (QS/RC/EVCOMP/RISK) |
-| Out of scope        | Suites/Runs/Defects UI domains; AI skills; ALM sync                                                                                                                                               |
-| Dependencies        | APZQEP-111 approved; Owner ADR-0088 decision (D-001) for durable storage slices                                                                                                                   |
-| Acceptance criteria | LA limitations updated; events on bus; search covers v1.0 entities + hooks for new; UCP actions for existing modules; QI API returns MVP scores; CERT delta pack                                  |
-| Release target      | 1.1                                                                                                                                                                                               |
-| Estimate            | XL (multi-track) — **sliced as APZQEP-120-S01…S20** in [apzqep-120/SLICE-CATALOGUE.md](./apzqep-120/SLICE-CATALOGUE.md)                                                                           |
-| Execution planning  | **COMPLETE** — [apzqep-120/](./apzqep-120/README.md) — Board review pending; implementation authority **NOT GRANTED**                                                                             |
-| Business value      | Critical — trust & platform integration                                                                                                                                                           |
+| Field          | Value                                                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Title (Board)  | Platform Foundation (historically: Enterprise Core Platform)                                                             |
+| Status         | **CERTIFIED · PROGRAMME COMPLETE · CLOSED** (20260802T163026Z)                                                           |
+| Objective      | Event-driven enterprise runtime: Evidence, Events, Outbox, Processing, QKI, Notifications, Command Platform              |
+| Delivered      | S01–S13 — [apzqep-120/APZQEP-120-PRODUCT-BOARD-CERTIFICATION.md](./apzqep-120/APZQEP-120-PRODUCT-BOARD-CERTIFICATION.md) |
+| Out of scope   | Suites/Runs/Defects product domains (moved to APZQEP-140)                                                                |
+| Business value | Critical — trust & platform integration                                                                                  |
+
+> **Do not continue slices under APZQEP-120.**
 
 ---
 
-## APZQEP-130 — Quality Engineering Core
+## APZQEP-130 — Quality Engineering Core (HISTORICAL BAND)
 
-| Field               | Value                                                                                                                                 |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Objective           | Complete the daily QE operating model                                                                                                 |
-| Scope               | Test Suites; Test Runs; Defects — domain, services, APIs, Workbench, permissions, events                                              |
-| Dependencies        | 120 (events/search hooks preferred); TE/Evidence baselines                                                                            |
-| Acceptance criteria | Non-stub modules; full lifecycle tests; Workbench flows; run↔execution links; defect links; CERT for each capability or combined CERT |
-| Release target      | 1.1                                                                                                                                   |
-| Estimate            | XL                                                                                                                                    |
-| Business value      | High — competitive operating completeness                                                                                             |
+| Field  | Value                                                                                           |
+| ------ | ----------------------------------------------------------------------------------------------- |
+| Status | **SUPERSEDED** — Board reassigned Core Quality Engineering to **APZQEP-140** (20260802T163026Z) |
+| Note   | Retained for historical planning only. Do not open APZQEP-130.                                  |
 
 ---
 
-## APZQEP-140 — Executive Experience
+## APZQEP-140 — Core Quality Engineering
 
-| Field               | Value                                                                                                         |
-| ------------------- | ------------------------------------------------------------------------------------------------------------- |
-| Objective           | Role-aware visibility and release confidence UX                                                               |
-| Scope               | QEP Home; QA/Tester/Developer/Project/Risk dashboards; Release Readiness MVP; personal workspace; saved views |
-| Dependencies        | 120 QI skeleton; 130 for run/defect widgets                                                                   |
-| Acceptance criteria | Permission-aware dashboards; AA; tokens only; readiness read-only; no auto-release                            |
-| Release target      | 1.1                                                                                                           |
-| Estimate            | L                                                                                                             |
-| Business value      | High — adoption & decision support                                                                            |
+| Field              | Value                                                                                                                      |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| Title (Board)      | Core Quality Engineering                                                                                                   |
+| Status             | **NOT STARTED** · Recommended                                                                                              |
+| Objective          | User-facing QE capabilities on the closed APZQEP-120 runtime                                                               |
+| Capability streams | A Test Management · B Execution · C Quality · D Reporting                                                                  |
+| First phase        | **APZQEP-140-000** Product Capability Architecture (before Suite implementation)                                           |
+| Historical note    | Prior planning used “140 = Executive Experience”. **Board redefinition (20260802):** 140 = Core QE. Executive UX deferred. |
+| Hub                | [apzqep-140/README.md](./apzqep-140/README.md)                                                                             |
+| Dependencies       | APZQEP-120 **CLOSED**                                                                                                      |
+| Business value     | High — competitive operating completeness                                                                                  |
+
+### Former “Executive Experience” band
+
+Role-aware dashboards / Release Readiness UX previously sketched as APZQEP-140 are **deferred** (likely under a future band or Capability D after Core QE). Not authorised.
 
 ---
 

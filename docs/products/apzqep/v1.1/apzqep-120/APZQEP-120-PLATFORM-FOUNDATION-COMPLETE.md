@@ -1,12 +1,13 @@
 # APZQEP-120 — Platform Foundation COMPLETE
 
-| Field           | Value                                       |
-| --------------- | ------------------------------------------- |
-| Programme       | APZQEP-120                                  |
-| Status          | **PLATFORM FOUNDATION COMPLETE**            |
-| Closing slice   | S13 Enterprise Command Platform             |
-| Timestamp (UTC) | 20260802T162714Z                            |
-| Authority       | Owner Authorisation + Engineering CERT PASS |
+| Field           | Value                                                                   |
+| --------------- | ----------------------------------------------------------------------- |
+| Programme       | APZQEP-120                                                              |
+| Status          | **PLATFORM FOUNDATION COMPLETE** · Product Board **CERTIFIED / CLOSED** |
+| Closing slice   | S13 Enterprise Command Platform                                         |
+| Timestamp (UTC) | 20260802T162714Z                                                        |
+| Board (UTC)     | 20260802T163026Z                                                        |
+| Authority       | Product Board **CERTIFIED · PROGRAMME COMPLETE · CLOSED**               |
 
 ---
 
@@ -36,27 +37,30 @@ Business Domain
         → Command Platform (QKI discovery + handlers)
 ```
 
-## Programme structure recommendation
+## Product Board (accepted)
 
-| Programme      | Focus                    | Status                   |
-| -------------- | ------------------------ | ------------------------ |
-| **APZQEP-120** | Platform Foundation      | **COMPLETE** (after S13) |
-| **APZQEP-140** | Core Quality Engineering | **Recommended next**     |
-| **APZQEP-160** | Intelligence & AI        | Future                   |
+See [APZQEP-120-PRODUCT-BOARD-CERTIFICATION.md](./APZQEP-120-PRODUCT-BOARD-CERTIFICATION.md).
 
-### APZQEP-140 — Core Quality Engineering (proposed)
+```text
+CERTIFIED
+PROGRAMME COMPLETE
+CLOSED
+```
 
-End-user capabilities on the mature foundation:
+## Programme structure (Board)
 
-- Suite Management
-- Test Run Management
-- Test Execution
-- Defect Management
-- Requirements & Traceability
-- Reporting & Analytics
+| Programme      | Focus                    | Status          |
+| -------------- | ------------------------ | --------------- |
+| **APZQEP-120** | Platform Engineering     | **CLOSED**      |
+| **APZQEP-140** | Core Quality Engineering | **NOT STARTED** |
+| **APZQEP-160** | Intelligence & AI        | Future          |
 
-First slice candidate: **APZQEP-140-S14 Suite Management** (or renumbered S01 under 140 per Owner preference).
+### APZQEP-140 next
+
+First phase: **APZQEP-140-000 Core Quality Engineering Architecture** (lightweight design).  
+Implementation (S14+) only after 000 approval.  
+Hub: [../apzqep-140/README.md](../apzqep-140/README.md).
 
 ## Authority
 
-Opening APZQEP-140 requires a formal Owner Authorisation Pack. Do not start Suite/Run/Execution product slices under APZQEP-120 without Owner direction.
+Do **not** continue under APZQEP-120. Opening APZQEP-140-000 requires Owner Authorisation Pack.

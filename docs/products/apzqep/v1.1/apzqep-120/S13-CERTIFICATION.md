@@ -29,4 +29,6 @@ PASS
 
 **Platform Foundation COMPLETE** with S13.
 
-Recommend transition to **APZQEP-140 – Core Quality Engineering** (or APZQEP-140-S14 Suite Management).
+Product Board (programme): **CERTIFIED · PROGRAMME COMPLETE · CLOSED** — see [APZQEP-120-PRODUCT-BOARD-CERTIFICATION.md](./APZQEP-120-PRODUCT-BOARD-CERTIFICATION.md).
+
+Recommend **APZQEP-140-000** Capability Architecture (not Suite coding) under Owner Auth Pack.

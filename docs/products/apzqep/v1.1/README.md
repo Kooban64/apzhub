@@ -1,13 +1,14 @@
 # APZQEP v1.1 — Product Planning, Architecture & Execution Planning
 
-| Field                 | Value                                                               |
-| --------------------- | ------------------------------------------------------------------- |
-| Product planning      | **APZQEP-110** — COMPLETE / APPROVED                                |
-| Solution architecture | **APZQEP-111** — COMPLETE / **APPROVED**                            |
-| Execution planning    | **APZQEP-120** — IN PROGRESS · S01 COMPLETE · **S02 CERTIFIED**     |
-| Positioning           | [PRODUCT-POSITIONING.md](./PRODUCT-POSITIONING.md) — Enterprise QEP |
-| Engineering           | Per-slice Owner directive (APZHUB-ENG-001 / ADR-0092)               |
-| Date                  | 2026-08-01                                                          |
+| Field                 | Value                                                                |
+| --------------------- | -------------------------------------------------------------------- |
+| Product planning      | **APZQEP-110** — COMPLETE / APPROVED                                 |
+| Solution architecture | **APZQEP-111** — COMPLETE / **APPROVED**                             |
+| Execution planning    | **APZQEP-120** — **CERTIFIED / PROGRAMME COMPLETE / CLOSED**         |
+| Next programme        | **APZQEP-140** — NOT STARTED · [apzqep-140/](./apzqep-140/README.md) |
+| Positioning           | [PRODUCT-POSITIONING.md](./PRODUCT-POSITIONING.md) — Enterprise QEP  |
+| Engineering           | Per-slice Owner directive (APZHUB-ENG-001 / ADR-0092)                |
+| Date                  | 2026-08-02                                                           |
 
 ---
 
@@ -44,24 +45,31 @@
 
 ---
 
-## Engineering execution planning pack (APZQEP-120)
+## Engineering execution — APZQEP-120 (CLOSED)
 
-| Document                                                                               | Role                      |
-| -------------------------------------------------------------------------------------- | ------------------------- |
-| [apzqep-120/README.md](./apzqep-120/README.md)                                         | Pack hub                  |
-| [apzqep-120/OWNER-APPROVAL-SUMMARY.md](./apzqep-120/OWNER-APPROVAL-SUMMARY.md)         | Board decision surface    |
-| [apzqep-120/SLICE-CATALOGUE.md](./apzqep-120/SLICE-CATALOGUE.md)                       | S01–S20 executable slices |
-| [apzqep-120/ENGINEERING-EXECUTION-PLAN.md](./apzqep-120/ENGINEERING-EXECUTION-PLAN.md) | Programme plan            |
+| Document                                                                                                         | Role                         |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| [apzqep-120/APZQEP-120-PRODUCT-BOARD-CERTIFICATION.md](./apzqep-120/APZQEP-120-PRODUCT-BOARD-CERTIFICATION.md)   | Board **CERTIFIED / CLOSED** |
+| [apzqep-120/APZQEP-120-PLATFORM-FOUNDATION-COMPLETE.md](./apzqep-120/APZQEP-120-PLATFORM-FOUNDATION-COMPLETE.md) | Foundation close-out         |
+| [apzqep-120/README.md](./apzqep-120/README.md)                                                                   | Historical pack hub          |
 
-Full pack listing: [apzqep-120/README.md](./apzqep-120/README.md).
+---
+
+## Core Quality Engineering — APZQEP-140 (NOT STARTED)
+
+| Document                                                                                                                 | Role                             |
+| ------------------------------------------------------------------------------------------------------------------------ | -------------------------------- |
+| [apzqep-140/README.md](./apzqep-140/README.md)                                                                           | Programme hub                    |
+| [apzqep-140/APZQEP-140-000-PRODUCT-BOARD-RECOMMENDATION.md](./apzqep-140/APZQEP-140-000-PRODUCT-BOARD-RECOMMENDATION.md) | Architecture phase (recommended) |
+| [apzqep-140/CAPABILITY-STREAMS.md](./apzqep-140/CAPABILITY-STREAMS.md)                                                   | Streams A–D                      |
 
 ---
 
 ## Authority note
 
-Provisional engineering IDs in `TECHNICAL-ROADMAP.md` (112–126) are **superseded** by bands in `ENGINEERING-PROGRAMMES.md` (**120 / 130 / 140 / 150 / 160 / 170 / 180**).
+Programme bands: see [ENGINEERING-PROGRAMMES.md](./ENGINEERING-PROGRAMMES.md) (Board-updated 20260802: **140 = Core Quality Engineering**).
 
-APZQEP-120 **planning** does not grant implementation authority. First recommended slice after Board approval: **APZQEP-120-S01**.
+APZQEP-120 is **CLOSED**. Do not open further 120 slices. Next authority target: **APZQEP-140-000**.
 
 ---
 
@@ -70,6 +78,7 @@ APZQEP-120 **planning** does not grant implementation authority. First recommend
 ```text
 APZQEP-110 = APPROVED
 APZQEP-111 = APPROVED
-APZQEP-120 PLANNING = COMPLETE / AWAITING PRODUCT BOARD REVIEW
-ENGINEERING IMPLEMENTATION = NOT AUTHORISED
+APZQEP-120 = CERTIFIED / PROGRAMME COMPLETE / CLOSED
+APZQEP-140 = NOT STARTED
+NEXT = OWNER AUTH PACK FOR APZQEP-140-000
 ```

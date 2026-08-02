@@ -1,0 +1,27 @@
+{
+  "programme": "APZQEP-120",
+  "title": "Platform Foundation",
+  "productBoardDecision": "CERTIFIED",
+  "programmeStatus": "COMPLETE",
+  "programmeLifecycle": "CLOSED",
+  "closingSlice": "S13",
+  "timestampUtc": "20260802T163026Z",
+  "maturity": {
+    "governance": "100%",
+    "engineeringFramework": "100%",
+    "platformFoundation": "100%",
+    "evidencePlatform": "95%",
+    "eventPlatform": "100%",
+    "knowledgePlatform": "100%",
+    "notificationPlatform": "100%",
+    "commandPlatform": "100%",
+    "backend": "90-92%",
+    "frontend": "20-25%",
+    "overallProduct": "84-86%"
+  },
+  "recommendedNextProgramme": "APZQEP-140",
+  "recommendedNextPhase": "APZQEP-140-000 Core Quality Engineering Architecture",
+  "doNotContinue": "APZQEP-120 slices",
+  "governance": "UNCHANGED",
+  "baseline": "UNCHANGED"
+}
