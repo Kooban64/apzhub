@@ -1,0 +1,16 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "S10",
+  "title": "Business Processor Integration",
+  "status": "COMPLETE",
+  "certification": "PASS",
+  "timestampUtc": "20260802T145206Z",
+  "evidenceProcessors": 7,
+  "tests": {
+    "qep-evidence": "138/138",
+    "platform-processing": "13/13"
+  },
+  "platformRule": "Processing Engine executes registered processors only; no business logic in engine",
+  "outstandingIssues": [],
+  "recommendation": "Ready for APZQEP-120-S11"
+}

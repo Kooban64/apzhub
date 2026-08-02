@@ -21,6 +21,7 @@
   "dependencies": {
     "@apzhub/config": "workspace:*",
     "@apzhub/platform-outbox": "workspace:*",
+    "@apzhub/platform-processing": "workspace:*",
     "drizzle-orm": "^0.45.2"
   }
 }

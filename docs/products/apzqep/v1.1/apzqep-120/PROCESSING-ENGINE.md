@@ -18,6 +18,20 @@
 | S09   | Reliable execution       |
 | S10+  | Business capabilities    |
 
+## Platform Architecture Rule (S10)
+
+```text
+The Processing Engine SHALL execute registered processors.
+
+The Processing Engine SHALL never contain business processing logic.
+
+Business processing SHALL exist only inside registered processors.
+
+Processor registration SHALL be the only extension mechanism.
+```
+
+This is a **platform architecture rule** — not an Enterprise Standard. Evidence processors (S10) and future Search/Notification/UCP processors register; they do not modify the engine.
+
 ## Package
 
 ```text

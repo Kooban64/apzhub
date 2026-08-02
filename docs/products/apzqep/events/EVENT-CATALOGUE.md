@@ -1,16 +1,17 @@
 # APZQEP Evidence Domain Event Catalogue
 
-| Field             | Value                                                             |
-| ----------------- | ----------------------------------------------------------------- |
-| Document          | EVENT-CATALOGUE                                                   |
-| Product           | APZQEP                                                            |
-| Domain            | Evidence                                                          |
-| Programme         | APZQEP-120-S07                                                    |
-| Catalogue version | **1.0.2**                                                         |
-| Status            | **ACTIVE** · S07 Board **CERTIFIED** · S08 delivery **CERTIFIED** |
-| Publisher         | `qep-evidence` (Application Services)                             |
-| Delivery          | `@apzhub/platform-outbox` (S08 Board **CERTIFIED**)               |
-| Timestamp (UTC)   | 20260802T141518Z                                                  |
+| Field             | Value                                                              |
+| ----------------- | ------------------------------------------------------------------ |
+| Document          | EVENT-CATALOGUE                                                    |
+| Product           | APZQEP                                                             |
+| Domain            | Evidence                                                           |
+| Programme         | APZQEP-120-S07                                                     |
+| Catalogue version | **1.0.3**                                                          |
+| Status            | **ACTIVE** · S07–S08 Board **CERTIFIED** · S10 processors **PASS** |
+| Publisher         | `qep-evidence` (Application Services)                              |
+| Delivery          | `@apzhub/platform-outbox` (S08 Board **CERTIFIED**)                |
+| Processing        | `@apzhub/platform-processing` + Evidence processor bundle (S10)    |
+| Timestamp (UTC)   | 20260802T145206Z                                                   |
 
 This catalogue is a **first-class product asset**. Event semantics are owned by the Evidence domain. Infrastructure transports events; it does not define them.
 
@@ -50,18 +51,35 @@ Conforms to: APZQEP Engineering Framework v1.0 · Governance 1.0 STABLE · Enter
 
 ---
 
-## Registered events (v1.0.2 — semantics unchanged from v1.0.1)
+## Processor ownership (S10)
 
-| Event ID                             | Name                           | Version | Stability | Introduced In  | Status | Doc                                                                                    |
-| ------------------------------------ | ------------------------------ | ------- | --------- | -------------- | ------ | -------------------------------------------------------------------------------------- |
-| `qep.evidence.created`               | Evidence Created               | 1.0.0   | Stable    | APZQEP-120-S07 | active | [events/evidence-created.md](./events/evidence-created.md)                             |
-| `qep.evidence.updated`               | Evidence Updated               | 1.0.0   | Stable    | APZQEP-120-S07 | active | [events/evidence-updated.md](./events/evidence-updated.md)                             |
-| `qep.evidence.lifecycle_changed`     | Evidence Lifecycle Changed     | 1.0.0   | Stable    | APZQEP-120-S07 | active | [events/evidence-lifecycle-changed.md](./events/evidence-lifecycle-changed.md)         |
-| `qep.evidence.integrity_established` | Evidence Integrity Established | 1.0.0   | Stable    | APZQEP-120-S07 | active | [events/evidence-integrity-established.md](./events/evidence-integrity-established.md) |
-| `qep.evidence.integrity_verified`    | Evidence Integrity Verified    | 1.0.0   | Stable    | APZQEP-120-S07 | active | [events/evidence-integrity-verified.md](./events/evidence-integrity-verified.md)       |
-| `qep.evidence.archived`              | Evidence Archived              | 1.0.0   | Stable    | APZQEP-120-S07 | active | [events/evidence-archived.md](./events/evidence-archived.md)                           |
-| `qep.evidence.superseded`            | Evidence Superseded            | 1.0.0   | Stable    | APZQEP-120-S07 | active | [events/evidence-superseded.md](./events/evidence-superseded.md)                       |
-| `qep.evidence.deleted`               | Evidence Deleted               | 1.0.0   | Stable    | APZQEP-120-S07 | active | [events/evidence-deleted.md](./events/evidence-deleted.md)                             |
+| Event ID                             | Owning processor                      |
+| ------------------------------------ | ------------------------------------- |
+| `qep.evidence.created`               | `qep.evidence.processor.created`      |
+| `qep.evidence.updated`               | `qep.evidence.processor.updated`      |
+| `qep.evidence.lifecycle_changed`     | `qep.evidence.processor.lifecycle`    |
+| `qep.evidence.integrity_established` | `qep.evidence.processor.integrity`    |
+| `qep.evidence.integrity_verified`    | `qep.evidence.processor.integrity`    |
+| `qep.evidence.archived`              | `qep.evidence.processor.archive`      |
+| `qep.evidence.superseded`            | `qep.evidence.processor.supersession` |
+| `qep.evidence.deleted`               | `qep.evidence.processor.delete`       |
+
+See [BUSINESS-PROCESSORS.md](../v1.1/apzqep-120/BUSINESS-PROCESSORS.md). Event semantics unchanged.
+
+---
+
+## Registered events (v1.0.3 — semantics unchanged from v1.0.1)
+
+| Event ID                             | Name                           | Version | Stability | Introduced In  | Status | Processor                 | Doc                                                                                    |
+| ------------------------------------ | ------------------------------ | ------- | --------- | -------------- | ------ | ------------------------- | -------------------------------------------------------------------------------------- |
+| `qep.evidence.created`               | Evidence Created               | 1.0.0   | Stable    | APZQEP-120-S07 | active | `…processor.created`      | [events/evidence-created.md](./events/evidence-created.md)                             |
+| `qep.evidence.updated`               | Evidence Updated               | 1.0.0   | Stable    | APZQEP-120-S07 | active | `…processor.updated`      | [events/evidence-updated.md](./events/evidence-updated.md)                             |
+| `qep.evidence.lifecycle_changed`     | Evidence Lifecycle Changed     | 1.0.0   | Stable    | APZQEP-120-S07 | active | `…processor.lifecycle`    | [events/evidence-lifecycle-changed.md](./events/evidence-lifecycle-changed.md)         |
+| `qep.evidence.integrity_established` | Evidence Integrity Established | 1.0.0   | Stable    | APZQEP-120-S07 | active | `…processor.integrity`    | [events/evidence-integrity-established.md](./events/evidence-integrity-established.md) |
+| `qep.evidence.integrity_verified`    | Evidence Integrity Verified    | 1.0.0   | Stable    | APZQEP-120-S07 | active | `…processor.integrity`    | [events/evidence-integrity-verified.md](./events/evidence-integrity-verified.md)       |
+| `qep.evidence.archived`              | Evidence Archived              | 1.0.0   | Stable    | APZQEP-120-S07 | active | `…processor.archive`      | [events/evidence-archived.md](./events/evidence-archived.md)                           |
+| `qep.evidence.superseded`            | Evidence Superseded            | 1.0.0   | Stable    | APZQEP-120-S07 | active | `…processor.supersession` | [events/evidence-superseded.md](./events/evidence-superseded.md)                       |
+| `qep.evidence.deleted`               | Evidence Deleted               | 1.0.0   | Stable    | APZQEP-120-S07 | active | `…processor.delete`       | [events/evidence-deleted.md](./events/evidence-deleted.md)                             |
 
 ---
 
@@ -95,6 +113,6 @@ Machine-readable manifests: `events/qep/<slug>/event.yaml` at repository root.
 ## Related
 
 - Implementation: `packages/qep-evidence/src/application/events/`
-- Outbox: `packages/platform-outbox` · [OUTBOX-ARCHITECTURE.md](../v1.1/apzqep-120/OUTBOX-ARCHITECTURE.md)
-- Product Board: `docs/products/apzqep/v1.1/apzqep-120/S07-PRODUCT-BOARD-CERTIFICATION.md`
-- Slice notes: S07 · [S08-ENGINEERING-NOTES.md](../v1.1/apzqep-120/S08-ENGINEERING-NOTES.md)
+- Processors: `packages/qep-evidence/src/application/processors/`
+- Outbox: `packages/platform-outbox` · Processing: `packages/platform-processing`
+- [BUSINESS-PROCESSORS.md](../v1.1/apzqep-120/BUSINESS-PROCESSORS.md) · [S10-ENGINEERING-NOTES.md](../v1.1/apzqep-120/S10-ENGINEERING-NOTES.md)
