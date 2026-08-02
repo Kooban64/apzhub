@@ -1,0 +1,18 @@
+{
+  "name": "@apzhub/qep-command",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZQEP Enterprise Command Platform — UI-independent action/navigation execution (APZQEP-120-S13). Palette is the first client.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-command"
+  },
+  "dependencies": {
+    "@apzhub/qep-knowledge-index": "workspace:*"
+  }
+}

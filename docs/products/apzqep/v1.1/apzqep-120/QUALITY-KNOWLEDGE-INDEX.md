@@ -11,11 +11,11 @@
 
 > The Quality Knowledge Index is the enterprise read model for APZQEP.
 
-| Model       | Owner                                                                          |
-| ----------- | ------------------------------------------------------------------------------ |
-| Write model | Business domains (Evidence, Suites, Runs, …)                                   |
-| Read model  | Quality Knowledge Index                                                        |
-| Consumers   | Search, **Notifications (S12)**, Command Palette, AI, QI, Executive Dashboards |
+| Model       | Owner                                                                                 |
+| ----------- | ------------------------------------------------------------------------------------- |
+| Write model | Business domains (Evidence, Suites, Runs, …)                                          |
+| Read model  | Quality Knowledge Index                                                               |
+| Consumers   | Search, Notifications (S12), **Command Platform (S13)**, AI, QI, Executive Dashboards |
 
 ## Platform Architecture Rule
 
@@ -42,6 +42,7 @@ Business Event → Outbox → Processing Engine
         → Notification Processor (S12)  ← subscribes; does not query SoR
               → Projection Repository
                     → Search Query Service
+                    → Command Platform Discovery (S13)
 ```
 
 ## Initial domain

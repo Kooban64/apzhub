@@ -1,0 +1,21 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "S13",
+  "title": "Enterprise Command Platform",
+  "status": "COMPLETE",
+  "engineering": "COMPLETE",
+  "certification": "PASS",
+  "regression": "PASS",
+  "timestampUtc": "20260802T162714Z",
+  "package": "@apzhub/qep-command",
+  "packageVersion": "0.1.0",
+  "tests": { "passed": 12, "failed": 0 },
+  "commandRegistry": "COMPLETE",
+  "commandHandlers": "COMPLETE",
+  "platformFoundation": "COMPLETE",
+  "platformRule": "Command Platform consumes QKI; executes registered handlers; no direct business service calls",
+  "recommendedNextProgramme": "APZQEP-140 Core Quality Engineering",
+  "recommendedNextSlice": "APZQEP-140-S14 Suite Management",
+  "governance": "UNCHANGED",
+  "baseline": "UNCHANGED"
+}

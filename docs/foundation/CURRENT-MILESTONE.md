@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-02  
-> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120-S12 COMPLETE · CERT PASS** · Recommended next: **APZQEP-120-S13 Command Palette** (Owner Auth Pack required) · **APZQEP v1.0 Lifecycle Complete** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
+> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120 PLATFORM FOUNDATION COMPLETE** (S01–S13) · Recommended next programme: **APZQEP-140 Core Quality Engineering** (Owner Auth Pack required) · **APZQEP v1.0 Lifecycle Complete** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
 
 ---
 
@@ -29,17 +29,19 @@
 
 ### Latest completed product slice
 
-**APZQEP-120-S12 — Notification & Subscription Platform — COMPLETE / PASS**
+**APZQEP-120-S13 — Enterprise Command Platform — COMPLETE / PASS**
 
-- Completion: [S12-COMPLETION.md](../products/apzqep/v1.1/apzqep-120/S12-COMPLETION.md)
-- Platform: [NOTIFICATION-PLATFORM.md](../products/apzqep/v1.1/apzqep-120/NOTIFICATION-PLATFORM.md)
-- Package: `@apzhub/qep-notification` **0.1.0**
-- Catalogue: [EVENT-CATALOGUE.md](../products/apzqep/events/EVENT-CATALOGUE.md) **v1.0.5**
-- Pattern: notifications are **subscribers**, not callers
+- Completion: [S13-COMPLETION.md](../products/apzqep/v1.1/apzqep-120/S13-COMPLETION.md)
+- Platform: [COMMAND-PLATFORM.md](../products/apzqep/v1.1/apzqep-120/COMMAND-PLATFORM.md)
+- Package: `@apzhub/qep-command` **0.1.0**
+- Foundation close-out: [APZQEP-120-PLATFORM-FOUNDATION-COMPLETE.md](../products/apzqep/v1.1/apzqep-120/APZQEP-120-PLATFORM-FOUNDATION-COMPLETE.md)
+- Pattern: Palette is first client; discovery via QKI only
 
-### Recommended next product programme (not authorised)
+### Recommended next programme (not authorised)
 
-**APZQEP-120-S13 — Command Palette** — Owner Authorisation Pack required.
+**APZQEP-140 — Core Quality Engineering** — Owner Authorisation Pack required.
+
+First slice candidate: Suite Management (APZQEP-140-S14 or S01 under 140).
 
 ---
 
