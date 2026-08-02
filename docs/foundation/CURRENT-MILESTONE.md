@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-02  
-> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120 CLOSED** · **APZQEP-140 CLOSED** (Core Quality Engineering COMPLETE · Caps A–F CERTIFIED) · Next recommended: **APZQEP-150 Product Readiness & Production Certification** (**NOT AUTHORISED**) · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
+> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120 CLOSED** · **APZQEP-140 CLOSED** · **APZQEP-150 COMPLETE / STOPPED** (Product Readiness audit · Go/No-Go **NO-GO** for unrestricted production · RC evidence ready for Product Board) · Feature freeze **ACTIVE** · Release/Deployment **NOT AUTHORISED** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
 
 ---
 
@@ -46,13 +46,15 @@
 - Cap F board: [APZQEP-140-F-PRODUCT-BOARD-CERTIFICATION.md](../products/apzqep/v1.1/apzqep-140/f/APZQEP-140-F-PRODUCT-BOARD-CERTIFICATION.md)
 - Do **not** continue feature programmes under APZQEP-140
 
-### Recommended next programme (not authorised)
+### Latest readiness programme
 
-**APZQEP-150 — Product Readiness & Production Certification**
+**APZQEP-150 — Enterprise Product Readiness & Production Certification — COMPLETE / STOPPED**
 
-- Recommendation: [APZQEP-150-PRODUCT-BOARD-RECOMMENDATION.md](../products/apzqep/v1.1/apzqep-150/APZQEP-150-PRODUCT-BOARD-RECOMMENDATION.md)
-- Owner Authorisation Pack required before engineering
-- Intent: production hardening and release certification — **not** new capabilities
+- Owner Auth: [OWNER-AUTHORISATION.md](../products/apzqep/v1.1/apzqep-150/OWNER-AUTHORISATION.md)
+- Completion: [APZQEP-150-COMPLETION.md](../products/apzqep/v1.1/apzqep-150/APZQEP-150-COMPLETION.md)
+- Go/No-Go: [GO-NO-GO-REPORT.md](../products/apzqep/v1.1/apzqep-150/GO-NO-GO-REPORT.md) — **NO-GO** (RB-001, RB-002)
+- Do **not** start feature programmes or production deploy without new Owner Authorisation
+- Feature freeze remains until Owner lifts it
 
 ---
 

@@ -513,6 +513,34 @@ const packageAliases = {
     __dirname,
     "packages/qep-test-plans/src/index.ts",
   ),
+  // APZQEP-140 Caps A–F + readiness chain (APZQEP-150)
+  "@apzhub/qep-suites": path.resolve(__dirname, "packages/qep-suites/src/index.ts"),
+  "@apzhub/qep-execution-plans": path.resolve(
+    __dirname,
+    "packages/qep-execution-plans/src/index.ts",
+  ),
+  "@apzhub/qep-execution-workspace": path.resolve(
+    __dirname,
+    "packages/qep-execution-workspace/src/index.ts",
+  ),
+  "@apzhub/qep-defects": path.resolve(__dirname, "packages/qep-defects/src/index.ts"),
+  "@apzhub/qep-requirements-traceability": path.resolve(
+    __dirname,
+    "packages/qep-requirements-traceability/src/index.ts",
+  ),
+  "@apzhub/qep-reporting": path.resolve(
+    __dirname,
+    "packages/qep-reporting/src/index.ts",
+  ),
+  "@apzhub/qep-command": path.resolve(__dirname, "packages/qep-command/src/index.ts"),
+  "@apzhub/qep-knowledge-index": path.resolve(
+    __dirname,
+    "packages/qep-knowledge-index/src/index.ts",
+  ),
+  "@apzhub/qep-notification": path.resolve(
+    __dirname,
+    "packages/qep-notification/src/index.ts",
+  ),
   "@apzhub/lifecycle-engine": path.resolve(
     __dirname,
     "packages/lifecycle-engine/src/index.ts",
@@ -719,6 +747,7 @@ export default defineConfig({
       "packages/**/*.test.{ts,tsx}",
       "apps/**/*.test.{ts,tsx}",
       "integrations/**/*.test.{ts,tsx}",
+      "testing/apzqep-150/**/*.test.{ts,tsx}",
       "testing/wave1/**/*.test.{ts,tsx}",
       "testing/wave2/**/*.test.{ts,tsx}",
       "testing/playwright/**/*.test.{ts,tsx}",

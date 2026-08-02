@@ -1,14 +1,14 @@
 # APZQEP v1.1 — Product Planning, Architecture & Execution Planning
 
-| Field                 | Value                                                                                                                         |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| Product planning      | **APZQEP-110** — COMPLETE / APPROVED                                                                                          |
-| Solution architecture | **APZQEP-111** — COMPLETE / **APPROVED**                                                                                      |
-| Execution planning    | **APZQEP-120** — **CERTIFIED / PROGRAMME COMPLETE / CLOSED**                                                                  |
-| Next programme        | **APZQEP-150** — recommended · **NOT AUTHORISED** · [Recommendation](./apzqep-150/APZQEP-150-PRODUCT-BOARD-RECOMMENDATION.md) |
-| Positioning           | [PRODUCT-POSITIONING.md](./PRODUCT-POSITIONING.md) — Enterprise QEP                                                           |
-| Engineering           | Per-slice Owner directive (APZHUB-ENG-001 / ADR-0092)                                                                         |
-| Date                  | 2026-08-02                                                                                                                    |
+| Field                 | Value                                                                                                                                        |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Product planning      | **APZQEP-110** — COMPLETE / APPROVED                                                                                                         |
+| Solution architecture | **APZQEP-111** — COMPLETE / **APPROVED**                                                                                                     |
+| Execution planning    | **APZQEP-120** — **CERTIFIED / PROGRAMME COMPLETE / CLOSED**                                                                                 |
+| Next programme        | **None** — APZQEP-150 **COMPLETE / STOPPED** · awaiting Product Board release decision · [Completion](./apzqep-150/APZQEP-150-COMPLETION.md) |
+| Positioning           | [PRODUCT-POSITIONING.md](./PRODUCT-POSITIONING.md) — Enterprise QEP                                                                          |
+| Engineering           | Per-slice Owner directive (APZHUB-ENG-001 / ADR-0092)                                                                                        |
+| Date                  | 2026-08-02                                                                                                                                   |
 
 ---
 
@@ -67,20 +67,22 @@
 
 ---
 
-## Recommended next — APZQEP-150 (NOT AUTHORISED)
+## Product readiness — APZQEP-150 (COMPLETE / STOPPED)
 
-| Document                                                                                                         | Role                |
-| ---------------------------------------------------------------------------------------------------------------- | ------------------- |
-| [apzqep-150/APZQEP-150-PRODUCT-BOARD-RECOMMENDATION.md](./apzqep-150/APZQEP-150-PRODUCT-BOARD-RECOMMENDATION.md) | Readiness programme |
-| [apzqep-150/README.md](./apzqep-150/README.md)                                                                   | Pack hub            |
+| Document                                                                     | Role                        |
+| ---------------------------------------------------------------------------- | --------------------------- |
+| [apzqep-150/OWNER-AUTHORISATION.md](./apzqep-150/OWNER-AUTHORISATION.md)     | Owner **AUTHORISED** (done) |
+| [apzqep-150/APZQEP-150-COMPLETION.md](./apzqep-150/APZQEP-150-COMPLETION.md) | Programme **COMPLETE**      |
+| [apzqep-150/GO-NO-GO-REPORT.md](./apzqep-150/GO-NO-GO-REPORT.md)             | **NO-GO** unrestricted prod |
+| [apzqep-150/README.md](./apzqep-150/README.md)                               | Pack hub                    |
 
 ---
 
 ## Authority note
 
-Programme bands: see [ENGINEERING-PROGRAMMES.md](./ENGINEERING-PROGRAMMES.md) (**140 = Core Quality Engineering** · **CLOSED**).
+Programme bands: see [ENGINEERING-PROGRAMMES.md](./ENGINEERING-PROGRAMMES.md) (**140 CLOSED** · **150 COMPLETE**).
 
-APZQEP-120 is **CLOSED**. APZQEP-140 is **CLOSED**. Next: Owner Auth Pack for **APZQEP-150** (readiness — not features).
+APZQEP-120 / 140 / 150 are **CLOSED**. Release and Deployment require separate Owner authority. Feature freeze remains until lifted.
 
 ---
 
@@ -91,6 +93,10 @@ APZQEP-110 = APPROVED
 APZQEP-111 = APPROVED
 APZQEP-120 = CLOSED
 APZQEP-140 = CLOSED / CORE QUALITY ENGINEERING COMPLETE
-NEXT = OWNER AUTH PACK FOR APZQEP-150 (Product Readiness & Production Certification)
-DO NOT OPEN FURTHER CORE QE FEATURE PROGRAMMES UNDER APZQEP-140
+APZQEP-150 = COMPLETE / STOPPED
+GO/NO-GO = NO-GO (unrestricted enterprise production)
+RECOMMENDATION = READY FOR VERSION 1.0 PRODUCT BOARD RELEASE DECISION
+RELEASE = NOT AUTHORISED
+DEPLOYMENT = NOT AUTHORISED
+FEATURE FREEZE = ACTIVE
 ```

@@ -1,13 +1,13 @@
 # Product Board Recommendation — APZQEP-150
 
-| Field        | Value                                                     |
-| ------------ | --------------------------------------------------------- |
-| Programme    | APZQEP-150                                                |
-| Title        | Product Readiness & Production Certification              |
-| Status       | **RECOMMENDED · NOT AUTHORISED**                          |
-| Prerequisite | APZQEP-140 **CLOSED** (Core Quality Engineering COMPLETE) |
-| Authority    | Product Board recommendation                              |
-| Timestamp    | 20260802T182400Z                                          |
+| Field        | Value                                                                       |
+| ------------ | --------------------------------------------------------------------------- |
+| Programme    | APZQEP-150                                                                  |
+| Title        | Product Readiness & Production Certification                                |
+| Status       | **SUPERSEDED** — see [APZQEP-150-COMPLETION.md](./APZQEP-150-COMPLETION.md) |
+| Prerequisite | APZQEP-140 **CLOSED** (Core Quality Engineering COMPLETE)                   |
+| Authority    | Product Board recommendation                                                |
+| Timestamp    | 20260802T182400Z                                                            |
 
 ---
 
