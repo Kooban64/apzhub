@@ -213,6 +213,19 @@ export {
   qepTestExecutionOutbox,
 } from "./qep-test-execution-schema";
 export {
+  qepEvidenceSchema,
+  qepEvidence,
+  qepEvidenceVersion,
+  qepEvidenceRelationship,
+  qepEvidenceAudit,
+  qepEvidenceCollection,
+  qepEvidenceSet,
+  qepEvidenceAccessGrant,
+  type QepEvidenceHistoryEntryJson,
+  type QepEvidenceProvenanceJson,
+  type QepEvidencePolicyRefJson,
+} from "./qep-evidence-schema";
+export {
   platformAdminSchema,
   platformAdminModule,
   platformAdminCategory,

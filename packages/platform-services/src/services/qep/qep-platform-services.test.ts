@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { describe, expect, it } from "vitest";
 
 import {
@@ -518,12 +519,13 @@ describe("APZQEP-ENG-020C qep platform services", () => {
       permissions: [...QEP_EVIDENCE_PERMISSIONS],
     };
 
+    const contentBytes = Buffer.from("hello");
     const captured = await bundle.gateway.qep.evidence.capture(evidenceCtx, {
       projectId: "proj_1",
       sourceKind: "manual_upload",
       mediaType: "text/plain",
-      contentBase64: Buffer.from("hello").toString("base64"),
-      contentHash: "a".repeat(64),
+      contentBase64: contentBytes.toString("base64"),
+      contentHash: createHash("sha256").update(contentBytes).digest("hex"),
       title: "Demo",
     });
     expect(captured.status).toBe("captured");

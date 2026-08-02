@@ -320,11 +320,16 @@ function buildBundle(input: {
           ...input.execution,
         });
 
-  // Evidence: memory-backed Application runtime until storage selection (ADR-0088).
+  // Evidence: catalogue may use PostgreSQL (S05); storage remains Storage Platform (S03).
   const evidenceBundle =
-    input.persistenceMode === "postgres"
-      ? createQepEvidencePlatformServicesForProduction()
-      : createQepEvidencePlatformServicesForTest();
+    input.persistenceMode === "postgres" && input.postgresDb
+      ? createQepEvidencePlatformServicesForProduction({
+          postgresDb: input.postgresDb,
+        })
+      : createQepEvidencePlatformServicesForTest({
+          allowInMemoryPersistence: true,
+          postgresDb: input.postgresDb,
+        });
 
   const gatewaySurface: QepPlatformGatewaySurface = {
     requirements,

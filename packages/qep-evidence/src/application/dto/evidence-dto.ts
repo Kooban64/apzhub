@@ -13,6 +13,8 @@ export type EvidenceDto = {
   readonly byteSize?: number;
   readonly contentHash?: string;
   readonly hashAlgorithm?: string;
+  /** Opaque S03 storage reference (never a filesystem path). */
+  readonly storageLocator?: string;
   readonly verificationState?: string;
   readonly sealed: boolean;
   readonly legalHold: boolean;

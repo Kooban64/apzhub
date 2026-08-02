@@ -31,6 +31,10 @@ import {
   type EvidenceIntegrityPlatformService,
 } from "../integrity";
 import {
+  createEvidenceCatalogueService,
+  type EvidenceCatalogueService,
+} from "../catalogue";
+import {
   createEvidenceCommandService,
   type EvidenceCommandService,
 } from "./evidence-command-service";
@@ -70,6 +74,8 @@ export type EvidenceApplicationServices = {
   readonly enumeration: EvidenceEnumerationService | undefined;
   /** APZQEP-120-S04 — content integrity verification platform. */
   readonly integrity: EvidenceIntegrityPlatformService;
+  /** APZQEP-120-S05 — logical evidence catalogue facade. */
+  readonly catalogue: EvidenceCatalogueService;
 };
 
 /**
@@ -140,6 +146,11 @@ export function createEvidenceApplicationServices(
     securityGate,
   });
 
+  const catalogue = createEvidenceCatalogueService({
+    commands,
+    queries,
+  } as EvidenceApplicationServices);
+
   return {
     programme: "APZQEP-ENG-110E",
     commands,
@@ -154,5 +165,6 @@ export function createEvidenceApplicationServices(
     queryBuilder,
     enumeration,
     integrity,
+    catalogue,
   };
 }

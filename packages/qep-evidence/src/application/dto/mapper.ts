@@ -23,6 +23,7 @@ export function toEvidenceDto(evidence: Evidence): EvidenceDto {
     byteSize: evidence.content?.byteSize,
     contentHash: evidence.content?.contentHash,
     hashAlgorithm: evidence.content?.hashAlgorithm,
+    storageLocator: evidence.content?.storageLocator,
     verificationState: evidence.integrity?.verificationState,
     sealed: evidence.integrity?.sealed === true || evidence.status === "sealed",
     legalHold: evidence.retention.legalHold,

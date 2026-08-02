@@ -69,11 +69,14 @@ export function mapEvidenceDomainError(
     case "integrity_failed":
       return new PlatformServiceError({
         category: "conflict",
-        code: error.code.startsWith("INTEGRITY_") ? error.code : "CONFLICT",
+        code: "CONFLICT",
         message: error.message,
         correlationId,
         retryable: false,
-        details: error.details,
+        details: {
+          ...error.details,
+          integrityCode: error.code,
+        },
       });
     case "precondition_failed":
     case "invariant_violation":

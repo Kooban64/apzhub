@@ -49,8 +49,8 @@ describe("APZQEP-RELEASE-004 architecture boundaries", () => {
       "APZQEP-RELEASE-004 — PRODUCTION BASELINE 1.0.0",
     );
     expect(QEP_EVIDENCE_DOMAIN_STATUS).toBe("implemented-eng-110b");
-    expect(QEP_EVIDENCE_APPLICATION_STATUS).toBe("integrity-platform-s04");
-    expect(QEP_EVIDENCE_INFRASTRUCTURE_STATUS).toBe("storage-platform-s03");
+    expect(QEP_EVIDENCE_APPLICATION_STATUS).toBe("catalogue-platform-s05");
+    expect(QEP_EVIDENCE_INFRASTRUCTURE_STATUS).toBe("catalogue-platform-s05");
     expect(QEP_EVIDENCE_MODULE_ID).toBe("qep-evidence");
     expect(QEP_EVIDENCE_API_BASE_PATH).toBe("/api/v1/qep/evidence");
     expect(QEP_EVIDENCE_API_STATUS).toBe("implemented-eng-110f");
@@ -218,5 +218,32 @@ describe("APZQEP-RELEASE-004 architecture boundaries", () => {
         );
       }
     }
+  });
+
+  it("APZQEP-120-S05: drizzle is confined to infrastructure/postgres", () => {
+    const infraRoot = join(packageRoot, "src", "infrastructure");
+    const postgresRoot = join(infraRoot, "postgres");
+    expect(existsSync(postgresRoot)).toBe(true);
+    for (const file of collectSourceFiles(infraRoot)) {
+      if (file.startsWith(postgresRoot)) continue;
+      const source = readFileSync(file, "utf8");
+      expect(
+        source.includes("drizzle-orm") || source.includes('from "drizzle'),
+        `${file} must not import drizzle (postgres adapters only)`,
+      ).toBe(false);
+    }
+    const evidenceRepo = readFileSync(
+      join(postgresRoot, "evidence-repository.ts"),
+      "utf8",
+    );
+    expect(evidenceRepo.includes("createPostgresEvidenceRepository")).toBe(true);
+    expect(evidenceRepo.includes("EvidenceRepository")).toBe(true);
+  });
+
+  it("APZQEP-120-S05: Catalogue Repository Port is EvidenceRepository (no duplicate port)", () => {
+    expect(EVIDENCE_REPOSITORY_IDS).toContain("EvidenceRepository");
+    expect(
+      EVIDENCE_REPOSITORY_IDS.filter((id) => id.includes("Catalogue")).length,
+    ).toBe(0);
   });
 });

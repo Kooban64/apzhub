@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "APZ QEP Evidence Management \u2014 Production baseline 1.0.0 (APZQEP-RELEASE-004). Promoted from FREEZE-004 RC 1.0.0-rc.2 @ 4e1b6f01. CERT-003 PRODUCTION_READY_WITH_LIMITATIONS. LIMITED_AVAILABILITY. ADR-0088 storage undecided.",
+  "description": "APZ QEP Evidence Management — Production baseline 1.0.0 (APZQEP-RELEASE-004). Promoted from FREEZE-004 RC 1.0.0-rc.2 @ 4e1b6f01. CERT-003 PRODUCTION_READY_WITH_LIMITATIONS. LIMITED_AVAILABILITY. ADR-0088 storage undecided.",
   "exports": {
     ".": "./src/index.ts",
     "./domain": "./src/domain/index.ts",
@@ -19,6 +19,7 @@
     "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-evidence"
   },
   "dependencies": {
-    "@apzhub/config": "workspace:*"
+    "@apzhub/config": "workspace:*",
+    "drizzle-orm": "^0.45.2"
   }
 }
