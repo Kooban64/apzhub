@@ -6,7 +6,8 @@
 | Title                    | Portfolio Engineering Standards                                          |
 | Classification           | Enterprise Engineering Governance                                        |
 | Status                   | **AUTHORISATION PENDING** — design complete; matrix ACCEPTED; not opened |
-| Prerequisite             | APZHUB-ENG-001 (IN FORCE) · APZQEP Engineering Framework v1.0 BASELINED  |
+| Predecessor              | APZQEP-ENG-001 **ARCHIVED** (`b9626ada`) — no further programme activity |
+| Prerequisite             | APZQEP Engineering Framework v1.0 BASELINED · ENG-001 archived           |
 | Reference implementation | APZQEP (flagship proving ground)                                         |
 | Engineering              | **NONE** until Owner opens execution phases                              |
 | Release / Deployment     | NONE                                                                     |
