@@ -1,11 +1,12 @@
 # APZQEP-150-COMPLETION
 
-| Field     | Value                                                   |
-| --------- | ------------------------------------------------------- |
-| Programme | APZQEP-150                                              |
-| Title     | Enterprise Product Readiness & Production Certification |
-| Status    | **COMPLETE / STOPPED**                                  |
-| Timestamp | 20260802T184500Z                                        |
+| Field     | Value                                                                                    |
+| --------- | ---------------------------------------------------------------------------------------- |
+| Programme | APZQEP-150                                                                               |
+| Title     | Enterprise Product Readiness & Production Certification                                  |
+| Status    | **CERTIFIED / COMPLETE / STOPPED**                                                       |
+| Board     | [APZQEP-150-PRODUCT-BOARD-CERTIFICATION.md](./APZQEP-150-PRODUCT-BOARD-CERTIFICATION.md) |
+| Timestamp | 20260802T192200Z                                                                         |
 
 ---
 
@@ -19,7 +20,10 @@ Title:
 Enterprise Product Readiness & Production Certification
 
 Status:
-COMPLETE / STOPPED
+CERTIFIED / COMPLETE / STOPPED
+
+Product Board:
+PROGRAMME CERTIFIED — READINESS AUDIT PASSED — PRODUCTION RELEASE NO-GO
 
 Engineering:
 COMPLETE
@@ -90,5 +94,8 @@ READY FOR APZQEP VERSION 1.0 PRODUCT BOARD RELEASE DECISION
 ## Stop
 
 - No automatic follow-on
-- Release / Deployment remain NOT AUTHORISED until separate Owner authority
-- Feature freeze remains until Owner lifts it
+- Do **not** reopen APZQEP-120 or APZQEP-140
+- Do **not** open APZQEP-160 as next work
+- Recommended next (NOT AUTHORISED): APZQEP-151 → APZQEP-152 → re-run APZQEP-150
+- Release / Deployment remain NOT AUTHORISED until separate Owner authority after blockers cleared
+- Feature freeze remains until Owner lifts it for an authorised programme

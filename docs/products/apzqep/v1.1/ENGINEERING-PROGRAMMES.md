@@ -57,16 +57,45 @@ Role-aware dashboards / Release Readiness UX previously sketched as APZQEP-140 a
 
 ## APZQEP-150 — Enterprise Product Readiness & Production Certification
 
-| Field               | Value                                                                                                                                                                     |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Objective           | Prove APZQEP Version 1.0 readiness for enterprise production (audit — not features)                                                                                       |
-| Scope               | Verification, performance, security, ops readiness, documentation, release candidate / Go-No-Go evidence                                                                  |
-| Dependencies        | APZQEP-120 COMPLETE; APZQEP-140 COMPLETE; Governance 1.0 STABLE; Baseline 1.2                                                                                             |
-| Acceptance criteria | Evidence pack complete; issues classified; RC produced; Product Board can decide Go/No-Go; feature freeze honoured                                                        |
-| Release target      | 1.0 readiness bridge                                                                                                                                                      |
-| Estimate            | L                                                                                                                                                                         |
-| Business value      | Critical — production certification                                                                                                                                       |
-| Note                | Former “AI Native Platform” content previously sketched under band 150 is **deferred** (enhancement / future band). AI is **out of scope** for this authorised programme. |
+| Field               | Value                                                                                                              |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Status              | **CERTIFIED / COMPLETE / STOPPED** — programme PASSED; production release NO-GO                                    |
+| Objective           | Prove APZQEP Version 1.0 readiness for enterprise production (audit — not features)                                |
+| Scope               | Verification, performance, security, ops readiness, documentation, release candidate / Go-No-Go evidence           |
+| Dependencies        | APZQEP-120 COMPLETE; APZQEP-140 COMPLETE; Governance 1.0 STABLE; Baseline 1.2                                      |
+| Acceptance criteria | Evidence pack complete; issues classified; RC produced; Product Board can decide Go/No-Go; feature freeze honoured |
+| Release target      | 1.0 readiness bridge                                                                                               |
+| Estimate            | L                                                                                                                  |
+| Business value      | Critical — production certification                                                                                |
+| Note                | Board dual decision recorded. Re-run after APZQEP-151/152. Former AI content under band 150 remains deferred.      |
+
+---
+
+## APZQEP-151 — Durable Product Persistence (recommended)
+
+| Field               | Value                                                                                  |
+| ------------------- | -------------------------------------------------------------------------------------- |
+| Status              | **RECOMMENDED · NOT AUTHORISED**                                                       |
+| Objective           | PostgreSQL-backed durable SoR for Caps A–F — clears **RB-001**                         |
+| Scope               | Persistence only — nothing else                                                        |
+| Dependencies        | APZQEP-150 CERTIFIED                                                                   |
+| Acceptance criteria | Caps A–F survive restart; multi-instance durable SoR; RB-001 closed in issues register |
+| Estimate            | M                                                                                      |
+| Pack                | [apzqep-151/](./apzqep-151/)                                                           |
+
+---
+
+## APZQEP-152 — Production RBAC Hardening (recommended)
+
+| Field               | Value                                                                          |
+| ------------------- | ------------------------------------------------------------------------------ |
+| Status              | **RECOMMENDED · NOT AUTHORISED**                                               |
+| Objective           | Remove HTTP permission elevation; certify production authz — clears **RB-002** |
+| Scope               | RBAC hardening only — nothing else                                             |
+| Dependencies        | APZQEP-150 CERTIFIED; preferably after/with APZQEP-151                         |
+| Acceptance criteria | No Cap A–F HTTP elevation; production RBAC proven; RB-002 closed               |
+| Estimate            | M                                                                              |
+| Pack                | [apzqep-152/](./apzqep-152/)                                                   |
 
 ---
 
@@ -74,6 +103,7 @@ Role-aware dashboards / Release Readiness UX previously sketched as APZQEP-140 a
 
 | Field               | Value                                                                                                            |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Status              | **NOT NEXT** — Product Board: no justification to open after APZQEP-150                                          |
 | Objective           | Deep QI + portfolio-oriented intelligence                                                                        |
 | Scope               | Full QI metric catalogue; history UX; coverage/impact engines; Certification Engine product; executive dashboard |
 | Dependencies        | 130; 140; 150 soft                                                                                               |

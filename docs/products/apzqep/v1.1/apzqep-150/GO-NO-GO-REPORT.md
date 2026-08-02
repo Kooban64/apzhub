@@ -1,11 +1,12 @@
 # GO-NO-GO-REPORT — APZQEP Version 1.0
 
-| Field             | Value                            |
-| ----------------- | -------------------------------- |
-| Programme         | APZQEP-150                       |
-| Authority         | Product Board (decision pending) |
-| Evidence complete | **YES**                          |
-| Timestamp         | 20260802T184500Z                 |
+| Field             | Value                                                                                    |
+| ----------------- | ---------------------------------------------------------------------------------------- |
+| Programme         | APZQEP-150                                                                               |
+| Authority         | Product Board — **DECIDED**                                                              |
+| Evidence complete | **YES**                                                                                  |
+| Board             | [APZQEP-150-PRODUCT-BOARD-CERTIFICATION.md](./APZQEP-150-PRODUCT-BOARD-CERTIFICATION.md) |
+| Timestamp         | 20260802T192200Z                                                                         |
 
 ---
 
@@ -53,13 +54,14 @@ Both were previously accepted by Product Board as controlled deferrals for Core 
 
 ---
 
-## Recommendation to Product Board
+## Product Board resolution (recorded)
 
 ```text
-READY FOR APZQEP VERSION 1.0 PRODUCT BOARD RELEASE DECISION
+PROGRAMME: CERTIFIED — READINESS AUDIT PASSED
+PRODUCTION RELEASE: NO-GO
+REASON: Outstanding Release Blockers (RB-001, RB-002)
 ```
 
-The Board may:
+Recommended clearing path (NOT AUTHORISED here): APZQEP-151 (durable persistence) → APZQEP-152 (production RBAC) → re-run APZQEP-150.
 
-1. Accept **NO-GO** for unrestricted production and commission durable SoR / RBAC programmes; or
-2. Explicitly authorise a **LIMITED_AVAILABILITY** release under separate Release authority (outside this pack).
+Version posture: [APZQEP-VERSION-1.0-ENGINEERING-COMPLETE.md](../APZQEP-VERSION-1.0-ENGINEERING-COMPLETE.md)
