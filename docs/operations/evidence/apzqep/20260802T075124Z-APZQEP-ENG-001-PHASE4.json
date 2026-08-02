@@ -1,0 +1,93 @@
+{
+  "programme": "APZQEP-ENG-001",
+  "title": "Engineering Documentation Framework",
+  "phase": "4",
+  "classification": "Product Engineering Documentation",
+  "status": "PHASE_4_COMPLETE",
+  "timestampUtc": "20260802T075124Z",
+  "engineering": "NONE",
+  "packageChanges": "NONE",
+  "release": "NONE",
+  "deployment": "NONE",
+  "deliverable": "docs/products/apzqep/engineering/APZQEP-SLICE-TEMPLATE.md",
+  "sliceTemplate": {
+    "status": "COMPLETE",
+    "documentStatus": "Normative",
+    "version": "1.0",
+    "title": "Engineering Specification Template",
+    "role": "Product Board ↔ Engineering contract",
+    "approxLines": 487,
+    "sections": [
+      "Identity",
+      "Authority",
+      "Purpose",
+      "Business Objective",
+      "Architecture Impact",
+      "Current Baseline",
+      "Repository Inspection",
+      "Dependencies (mandatory)",
+      "Scope",
+      "Domain Changes",
+      "API Changes",
+      "Database Changes",
+      "Events",
+      "Security",
+      "Performance",
+      "Migration",
+      "Testing",
+      "Documentation",
+      "Evidence",
+      "Certification",
+      "Acceptance Criteria",
+      "Stop Conditions",
+      "Constraints",
+      "Deliverables",
+      "Final Report"
+    ],
+    "dependenciesFields": [
+      "Depends On",
+      "Delivers",
+      "Blocks",
+      "Deferred To",
+      "Related ADRs",
+      "Related Programmes"
+    ]
+  },
+  "phase3ProductBoard": "CERTIFIED — 20260802T075000Z-APZQEP-ENG-001-PHASE3-PRODUCT-BOARD.json",
+  "frameworkV1Core": {
+    "milestone": "APZQEP Engineering Framework v1.0",
+    "kind": "Documentation milestone — not a Git product release tag",
+    "readyForBaselineCommit": true,
+    "commitAuthorised": false,
+    "includes": [
+      "README",
+      "Constitution",
+      "Handbook",
+      "Standards",
+      "Engineering Specification Template",
+      "Specialised skeletons",
+      "Evidence"
+    ]
+  },
+  "roadmapReorderApplied": [
+    "Testing Standard (next)",
+    "Certification Standard",
+    "API Standard",
+    "Domain Event Standard",
+    "Database Standard",
+    "Documentation Standard",
+    "Engineering Checklists",
+    "Final Completion Report"
+  ],
+  "evidence": {
+    "documentGeneration": "PASS",
+    "contractStructure": "PASS — 25 fillable sections",
+    "mandatoryDependencies": "PASS",
+    "placeholdersOnly": "PASS — no feature-slice content",
+    "crossReferenceValidation": "PASS",
+    "completenessReview": "PASS for Phase 4 — specialised standards remain"
+  },
+  "outstandingIssues": "NONE for Phase 4",
+  "nextStep": "Product Board certify Phase 4; Owner may authorise Framework v1.0 docs baseline commit; then author Testing Standard",
+  "recommendation": "Treat Phase 4 completion as Engineering Framework v1.0 documentation milestone. Proceed to Testing Standard after baseline commit when Owner authorises."
+}

@@ -1,0 +1,32 @@
+{
+  "product": "APZQEP Engineering Framework",
+  "version": "1.0",
+  "status": "BASELINED",
+  "programme": "APZQEP-ENG-001",
+  "timestampUtc": "20260802T075610Z",
+  "kind": "Documentation milestone — not a Git product release tag",
+  "declaration": "docs/products/apzqep/engineering/APZQEP-ENGINEERING-FRAMEWORK.md",
+  "citation": "Conforms to APZQEP Engineering Framework v1.0",
+  "coreComponents": [
+    "docs/products/apzqep/engineering/README.md",
+    "docs/products/apzqep/engineering/APZQEP-ENGINEERING-CONSTITUTION.md",
+    "docs/products/apzqep/engineering/APZQEP-ENGINEERING-HANDBOOK.md",
+    "docs/products/apzqep/engineering/APZQEP-ENGINEERING-STANDARDS.md",
+    "docs/products/apzqep/engineering/APZQEP-SLICE-TEMPLATE.md"
+  ],
+  "extensions": "Specialised standards (Testing, Certification, API, Events, Database, Documentation, Checklists) evolve after baseline without reopening v1.0 unless Product Board versions the Framework",
+  "hierarchy": [
+    "APZHUB Engineering Standard",
+    "APZQEP Engineering Constitution",
+    "APZQEP Engineering Framework v1.0",
+    "Handbook / Standards / Specification Template",
+    "Engineering Specifications",
+    "Specialised Standards"
+  ],
+  "engineering": "NONE",
+  "packageChanges": "NONE",
+  "release": "NONE",
+  "deployment": "NONE",
+  "phase4Decision": "CERTIFIED",
+  "nextPhase": "APZQEP-TESTING-STANDARD.md"
+}

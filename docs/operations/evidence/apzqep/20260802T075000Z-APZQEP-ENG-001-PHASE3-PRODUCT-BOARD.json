@@ -1,0 +1,20 @@
+{
+  "programme": "APZQEP-ENG-001",
+  "phase": "3",
+  "title": "Engineering Standards",
+  "decision": "CERTIFIED",
+  "decisionAuthority": "Product Board",
+  "timestampUtc": "20260802T075000Z",
+  "engineeringStandards": "APPROVED",
+  "recommendation": "Proceed to Phase 4 — Engineering Specification Template; Engineering Framework v1.0 baseline after Phase 4",
+  "roadmapReorder": [
+    "Slice Template",
+    "Testing Standard",
+    "Certification Standard",
+    "API Standard",
+    "Domain Event Standard",
+    "Database Standard",
+    "Documentation Standard",
+    "Engineering Checklists"
+  ]
+}

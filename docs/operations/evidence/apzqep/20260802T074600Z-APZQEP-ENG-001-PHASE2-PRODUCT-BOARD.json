@@ -1,0 +1,17 @@
+{
+  "programme": "APZQEP-ENG-001",
+  "phase": "2",
+  "title": "Engineering Handbook",
+  "decision": "CERTIFIED",
+  "decisionAuthority": "Product Board",
+  "timestampUtc": "20260802T074600Z",
+  "engineeringHandbook": "APPROVED",
+  "repository": "CLEAN",
+  "recommendation": "Proceed to Phase 3 — Engineering Standards",
+  "hierarchyAffirmed": [
+    "APZHUB Engineering Standard",
+    "APZQEP Engineering Handbook",
+    "APZQEP Engineering Standards",
+    "Engineering Slice Specifications"
+  ]
+}

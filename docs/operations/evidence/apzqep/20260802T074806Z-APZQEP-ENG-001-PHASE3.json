@@ -1,0 +1,71 @@
+{
+  "programme": "APZQEP-ENG-001",
+  "title": "Engineering Documentation Framework",
+  "phase": "3",
+  "classification": "Product Engineering Documentation",
+  "status": "PHASE_3_COMPLETE",
+  "timestampUtc": "20260802T074806Z",
+  "engineering": "NONE",
+  "packageChanges": "NONE",
+  "release": "NONE",
+  "deployment": "NONE",
+  "deliverable": "docs/products/apzqep/engineering/APZQEP-ENGINEERING-STANDARDS.md",
+  "engineeringStandards": {
+    "status": "COMPLETE",
+    "documentStatus": "Normative",
+    "version": "1.0",
+    "compliance": "Mandatory",
+    "exceptions": "Only by approved ADR",
+    "approxLines": 533,
+    "normativeKeywordOccurrences": 121,
+    "sections": [
+      "0 Normative language",
+      "1 Product and package identity",
+      "2 Repository layout",
+      "3 TypeScript and module conventions",
+      "4 Naming — types and symbols",
+      "5 Manifests",
+      "6 Persistence and migrations",
+      "7 Storage providers",
+      "8 Errors",
+      "9 Logging",
+      "10 Testing names",
+      "11 Documentation names",
+      "12 ADR numbering",
+      "13 Commit messages",
+      "14 Evidence naming",
+      "15 Certification naming",
+      "16 Release naming",
+      "17 API surface naming",
+      "18 Security naming",
+      "19 Versioning",
+      "20 Compliance and exceptions",
+      "21 Quick reference",
+      "22 Related documents"
+    ]
+  },
+  "phase2ProductBoard": "CERTIFIED — recorded in 20260802T074600Z-APZQEP-ENG-001-PHASE2-PRODUCT-BOARD.json",
+  "hierarchyAffirmed": [
+    "APZHUB Engineering Standard",
+    "APZQEP Engineering Handbook",
+    "APZQEP Engineering Standards",
+    "Engineering Slice Specifications"
+  ],
+  "updates": {
+    "readme": "Standards COMPLETE; hierarchy diagram; baseline note after Slice Template",
+    "handbook": "Inheritance hierarchy section aligned with Product Board",
+    "documentMapping": "Phase 3 progress",
+    "completionDraft": "Phase 3 notes"
+  },
+  "evidence": {
+    "documentGeneration": "PASS",
+    "normativeHeader": "PASS — Status Normative, Version 1.0, Mandatory, ADR exceptions",
+    "rfcLanguage": "PASS — MUST/SHALL/SHOULD/MAY; soft language avoided in requirements",
+    "deterministicCoverage": "PASS — packages, layers, names, commits, evidence, certification, release, ADR",
+    "crossReferenceValidation": "PASS",
+    "completenessReview": "PASS for Phase 3 — full ENG-001 framework not claimed COMPLETE"
+  },
+  "outstandingIssues": "NONE for Phase 3",
+  "nextStep": "Author APZQEP-SLICE-TEMPLATE.md (Phase 4); then Engineering Framework v1.0 baseline commit",
+  "recommendation": "Proceed to Slice Template. After Template COMPLETE, commit Engineering Framework v1.0 baseline before specialised standards."
+}

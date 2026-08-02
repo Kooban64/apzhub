@@ -1,90 +1,189 @@
-# APZ QEP — Engineering Foundation
+# APZQEP Engineering Documentation Framework
 
-> **Programme:** **APZQEP-ENG-010**  
-> **Title:** Repository Bootstrap & Sprint Zero  
-> **Classification:** ENGINEERING FOUNDATION  
-> **Status:** **ACCEPTED**  
-> **Baseline:** APZQEP-PLAN-001 — **ACCEPTED** (1.0.0-plan)  
-> **Date accepted:** 2026-07-24  
-> **Rule:** Foundation only — no business functionality  
-> **Next after this pack:** [APZQEP-ENG-020A](../requirements/domain-foundation/README.md) (**ACCEPTED / CLOSED**) · then **APZQEP-ENG-020B**
+| Field          | Value                                                                  |
+| -------------- | ---------------------------------------------------------------------- |
+| Programme      | APZQEP-ENG-001                                                         |
+| Title          | Engineering Documentation Framework                                    |
+| Product        | [APZQEP Engineering Framework v1.0](./APZQEP-ENGINEERING-FRAMEWORK.md) |
+| Classification | Product Engineering Documentation                                      |
+| Path           | `docs/products/apzqep/engineering/`                                    |
+| Engineering    | **NONE** — documentation only                                          |
+| Status         | **Framework v1.0 BASELINED** — specialised standards continue          |
+
+---
 
 ## Purpose
 
-This pack documents the **QEP engineering foundation** delivered inside the existing APZHUB pnpm monorepo. APZQEP-ENG-010 implements Sprint Zero from the accepted Engineering Plan: repository layout, manifest stubs, shared packages, test scaffold, audit gates, and developer documentation — **without** requirements, verification, execution, or any other domain behaviour.
+This folder hosts the **APZQEP Engineering Framework** and its specialised extensions.
 
-## Pack index
+The Framework exists to:
 
-| Document                                                 | Purpose                                                                |
-| -------------------------------------------------------- | ---------------------------------------------------------------------- |
-| [ENGINEERING-FOUNDATION.md](./ENGINEERING-FOUNDATION.md) | Principles, platform reuse, modular monolith posture, scope boundaries |
-| [REPOSITORY-STRUCTURE.md](./REPOSITORY-STRUCTURE.md)     | Actual layout created under the monorepo roots                         |
-| [DEVELOPMENT-GUIDE.md](./DEVELOPMENT-GUIDE.md)           | Local setup, pnpm scripts, contribution workflow                       |
-| [TESTING-GUIDE.md](./TESTING-GUIDE.md)                   | Vitest scope, fixtures, deferred E2E strategy                          |
-| [CI-CD.md](./CI-CD.md)                                   | Root CI participation, audit script, no deploy                         |
-| [QUALITY-GATES.md](./QUALITY-GATES.md)                   | Build, lint, typecheck, tests, architecture boundaries                 |
-| [COMPLETION-REPORT.md](./COMPLETION-REPORT.md)           | Delivery summary, confirmations, evidence reference                    |
-| [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md)             | Owner checklist and downstream gate                                    |
+- eliminate duplication of methodology from future slice instructions;
+- preserve engineering quality and consistency;
+- give Product Board, engineers, and AI agents a single inheritance point;
+- keep APZHUB Foundation, ADR-0092, and certified slices authoritative without rewriting them.
 
-## What APZQEP-ENG-010 delivered
+**Future engineering slices shall conform to APZQEP Engineering Framework v1.0** rather than redefining engineering methodology.
 
-| #   | Deliverable                                            | Location                                            |
-| --- | ------------------------------------------------------ | --------------------------------------------------- |
-| 1   | Shared QEP packages (types, contracts, foundation, UI) | `packages/qep-*`                                    |
-| 2   | Module manifest stubs M01–M22                          | `modules/qep-*/module.yaml`                         |
-| 3   | Platform service shell + 16 domain service stubs       | `services/qep/`                                     |
-| 4   | Core lifecycle event manifests (8)                     | `events/qep/*/event.yaml`                           |
-| 5   | GitHub integration stub                                | `integrations/qep-github/`                          |
-| 6   | Test fixtures and Vitest participation                 | `testing/qep/`                                      |
-| 7   | Foundation audit script                                | `scripts/apzqep-eng-010-foundation-audit.mjs`       |
-| 8   | Root pnpm scripts                                      | `test:qep`, `typecheck:qep`, `audit:qep-foundation` |
-| 9   | Engineering documentation pack                         | This folder                                         |
+---
 
-## Platform reuse (unchanged)
+## APZQEP Engineering Framework v1.0 (product)
 
-APZ QEP **consumes** certified Platform 1.4 capabilities. ENG-010 did not redesign or replace:
+The Framework is the **named collection** of core documents—not a separate methodology essay.
 
-| Platform capability | QEP posture                                              |
-| ------------------- | -------------------------------------------------------- |
-| Identity & auth     | BetterAuth + APZHUB PermissionService                    |
-| Desktop shell       | Module registration via existing shell (005/016)         |
-| Search              | Platform Search Service (020) — no module search UIs     |
-| Notifications       | Attention Engine (021) — events only, no direct notify   |
-| Observability       | Platform metrics, logs, traces, health (014)             |
-| Configuration       | Platform metadata PostgreSQL; connector refs not secrets |
+| Component              | Document                                                                   | Status                     |
+| ---------------------- | -------------------------------------------------------------------------- | -------------------------- |
+| Product declaration    | [APZQEP-ENGINEERING-FRAMEWORK.md](./APZQEP-ENGINEERING-FRAMEWORK.md)       | **BASELINED**              |
+| README (this file)     | [README.md](./README.md)                                                   | COMPLETE                   |
+| Constitution           | [APZQEP-ENGINEERING-CONSTITUTION.md](./APZQEP-ENGINEERING-CONSTITUTION.md) | COMPLETE                   |
+| Handbook               | [APZQEP-ENGINEERING-HANDBOOK.md](./APZQEP-ENGINEERING-HANDBOOK.md)         | COMPLETE / Board CERTIFIED |
+| Standards              | [APZQEP-ENGINEERING-STANDARDS.md](./APZQEP-ENGINEERING-STANDARDS.md)       | COMPLETE / Board CERTIFIED |
+| Specification Template | [APZQEP-SLICE-TEMPLATE.md](./APZQEP-SLICE-TEMPLATE.md)                     | COMPLETE / Board CERTIFIED |
 
-QEP packages extend the monorepo workspace; platform packages, auth flows, gateway, and shell behaviour remain authoritative.
-
-## Lifecycle gate
+Citation form:
 
 ```text
-APZQEP-PLAN-001 ACCEPTED
-  → APZQEP-ENG-010 (this pack) ACCEPTED
-    → APZQEP-ENG-020A ACCEPTED / CLOSED
-      → APZQEP-ENG-020B AUTHORISED / NOT STARTED
+Conforms to APZQEP Engineering Framework v1.0
 ```
 
-## STOP
+---
 
-This foundation pack is **ACCEPTED**. Requirements Domain Foundation (**APZQEP-ENG-020A**) is **ACCEPTED / CLOSED**. Next authorised programme: **APZQEP-ENG-020B**.
+## Structure (all documents in this folder)
 
-## Related packs
+| Document                                                                   | Role                                           | Authoring status              |
+| -------------------------------------------------------------------------- | ---------------------------------------------- | ----------------------------- |
+| [APZQEP-ENGINEERING-FRAMEWORK.md](./APZQEP-ENGINEERING-FRAMEWORK.md)       | Named Framework product / baseline declaration | **BASELINED** v1.0            |
+| [APZQEP-ENGINEERING-CONSTITUTION.md](./APZQEP-ENGINEERING-CONSTITUTION.md) | Immutable principles only                      | **COMPLETE**                  |
+| [APZQEP-ENGINEERING-HANDBOOK.md](./APZQEP-ENGINEERING-HANDBOOK.md)         | Master how-to manual                           | **COMPLETE**                  |
+| [APZQEP-ENGINEERING-STANDARDS.md](./APZQEP-ENGINEERING-STANDARDS.md)       | Normative coding & repository standard         | **COMPLETE** (v1.0)           |
+| [APZQEP-SLICE-TEMPLATE.md](./APZQEP-SLICE-TEMPLATE.md)                     | Engineering Specification Template             | **COMPLETE** (v1.0 Normative) |
+| [APZQEP-TESTING-STANDARD.md](./APZQEP-TESTING-STANDARD.md)                 | Test pyramid and evidence                      | SKELETON — **next**           |
+| [APZQEP-CERTIFICATION-STANDARD.md](./APZQEP-CERTIFICATION-STANDARD.md)     | PASS / FAIL / STOP and gates                   | SKELETON                      |
+| [APZQEP-API-STANDARD.md](./APZQEP-API-STANDARD.md)                         | REST / command / query API rules               | SKELETON                      |
+| [APZQEP-DOMAIN-EVENT-STANDARD.md](./APZQEP-DOMAIN-EVENT-STANDARD.md)       | Event naming, envelope, evolution              | SKELETON                      |
+| [APZQEP-DATABASE-STANDARD.md](./APZQEP-DATABASE-STANDARD.md)               | Schema, migration, repository rules            | SKELETON                      |
+| [APZQEP-DOCUMENTATION-STANDARD.md](./APZQEP-DOCUMENTATION-STANDARD.md)     | Doc structure and lifecycle                    | SKELETON                      |
+| [APZQEP-CHECKLISTS.md](./APZQEP-CHECKLISTS.md)                             | Reusable review checklists                     | SKELETON                      |
+| [APZQEP-ENG-001-COMPLETION.md](./APZQEP-ENG-001-COMPLETION.md)             | Programme completion report                    | DRAFT                         |
 
-| Pack                           | Path                                                                              | Status                |
-| ------------------------------ | --------------------------------------------------------------------------------- | --------------------- |
-| Engineering Plan               | [../engineering-plan/](../engineering-plan/README.md)                             | **ACCEPTED**          |
-| Enterprise Architecture        | [../architecture/](../architecture/README.md)                                     | **ACCEPTED**          |
-| Product Definition             | [../product-definition/](../product-definition/README.md)                         | **ACCEPTED**          |
-| Requirements Domain Foundation | [../requirements/domain-foundation/](../requirements/domain-foundation/README.md) | **ACCEPTED / CLOSED** |
-| Product root                   | [../README.md](../README.md)                                                      | —                     |
+Specialised standards are **extensions** to Framework v1.0. They do not reopen the baseline unless Product Board versions the Framework.
 
-## Quick commands
+---
 
-```bash
-pnpm install
-pnpm test:qep
-pnpm typecheck:qep
-pnpm audit:qep-foundation
+## How to use this framework
+
+### For a new engineering slice
+
+1. State conformance: `Conforms to APZQEP Engineering Framework v1.0`.
+2. Copy [APZQEP-SLICE-TEMPLATE.md](./APZQEP-SLICE-TEMPLATE.md) Section 2 into a new Engineering Specification.
+3. Fill all placeholders (use `NONE` / `N/A` where empty—especially **Dependencies**).
+4. **Reference** — do not copy — Constitution, Handbook, and applicable Standards.
+5. Inherit process from APZHUB-ENG-001 / ADR-0092.
+6. Certify using [APZQEP-CERTIFICATION-STANDARD.md](./APZQEP-CERTIFICATION-STANDARD.md) and [APZQEP-CHECKLISTS.md](./APZQEP-CHECKLISTS.md) when COMPLETE.
+
+### For Cursor / AI agents
+
+- Cite the Framework product; read the Constitution first on conflict.
+- Do not invent a second engineering process in a slice instruction.
+- Do not modify packages under a documentation-only programme.
+- Prefer Handbook + Standards over restating methodology in chat.
+
+### For Product Board
+
+- Constitution = non-negotiable principles.
+- Framework v1.0 = stable citation baseline.
+- Handbook = how work is done.
+- Certification Standard + Checklists = gate language (when COMPLETE).
+
+---
+
+## Relationship to APZHUB Engineering Standards
+
+```text
+APZHUB Engineering Standard
+        │
+        ▼
+APZQEP Engineering Constitution
+        │
+        ▼
+APZQEP Engineering Framework v1.0
+        │
+        ├── Engineering Handbook
+        ├── Engineering Standards
+        └── Engineering Specification Template
+                │
+                ▼
+        Engineering Specifications (per slice)
+                │
+                ▼
+        Specialised Standards (extensions)
 ```
 
-See [DEVELOPMENT-GUIDE.md](./DEVELOPMENT-GUIDE.md) for full local setup.
+| Layer                                                                                          | Authority                                              |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| [docs/000-apzhub-engineering-constitution.md](../../../000-apzhub-engineering-constitution.md) | Platform-wide supreme engineering constitution         |
+| APZHUB Engineering Standard / APZHUB-ENG-001 / ADR-0092                                        | Enterprise engineering model and slice process freeze  |
+| Foundation docs 001–029                                                                        | Architecture and SDKs                                  |
+| [APZQEP Engineering Constitution](./APZQEP-ENGINEERING-CONSTITUTION.md)                        | Immutable APZQEP principles                            |
+| [Engineering Framework v1.0](./APZQEP-ENGINEERING-FRAMEWORK.md)                                | Named product / baseline citation                      |
+| [Handbook](./APZQEP-ENGINEERING-HANDBOOK.md)                                                   | How engineering is performed (guidance)                |
+| [Engineering Standards](./APZQEP-ENGINEERING-STANDARDS.md)                                     | Exactly how artefacts MUST look (**normative**)        |
+| Slice specifications                                                                           | Scope and acceptance only — no methodology restatement |
+
+On conflict:
+
+1. APZHUB Document 000
+2. ADR-0092 / APZHUB-ENG-001 slice process
+3. APZQEP Engineering Constitution
+4. Engineering Framework core (Handbook / Standards / Specification Template)
+5. Specialised Standards
+6. Individual slice specifications
+
+---
+
+## Relationship to APZQEP Engineering
+
+- APZQEP-120-S01…S06 remain **certified** and must not be rewritten.
+- Product roadmap, solution architecture, and execution plan remain authoritative.
+- This Framework governs **how** future APZQEP slices are specified and certified; it does not reopen S01–S06.
+
+---
+
+## Phased authoring sequence (APZQEP-ENG-001)
+
+1. README — COMPLETE
+2. Engineering Constitution — COMPLETE
+3. Engineering Handbook — COMPLETE / Board CERTIFIED
+4. Engineering Standards — COMPLETE / Board CERTIFIED
+5. Engineering Specification Template — COMPLETE / Board CERTIFIED (Phase 4)
+6. **Engineering Framework v1.0 BASELINED**
+7. Testing Standard — next
+8. Certification Standard
+9. API Standard
+10. Domain Event Standard
+11. Database Standard
+12. Documentation Standard
+13. Engineering Checklists
+14. Completion Report (final)
+
+Until a specialised document’s status is **COMPLETE**, treat it as non-authoritative skeleton. Normative documents state `Status: Normative` in their header.
+
+---
+
+## Constraints (this programme)
+
+- Documentation only
+- No package, API, architecture, slice, release, or certification record rewrites of S01–S06
+- No deployment
+
+---
+
+## Prior artefacts in this folder
+
+Older guides (`ENGINEERING-FOUNDATION.md`, `DEVELOPMENT-GUIDE.md`, `TESTING-GUIDE.md`, `QUALITY-GATES.md`, `CI-CD.md`, `REPOSITORY-STRUCTURE.md`, etc.) remain preserved. They are **not** rewritten by APZQEP-ENG-001. New slices inherit the Engineering Framework; historical guides stay for reference.
+
+---
+
+## Evidence
+
+Programme evidence is filed under `docs/operations/evidence/apzqep/` with prefix `APZQEP-ENG-001`.

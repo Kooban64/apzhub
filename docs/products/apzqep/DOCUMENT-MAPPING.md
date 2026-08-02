@@ -35,16 +35,18 @@
 
 ## v1.1 programme document map (active)
 
-| Programme                                 | Path                                                                     | Status                                                              |
-| ----------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------- |
-| APZQEP-110 Product Planning               | `docs/products/apzqep/v1.1/`                                             | **APPROVED**                                                        |
-| APZQEP-111 Solution Architecture          | `docs/products/apzqep/v1.1/*ARCHITECTURE*` · `ENGINEERING-PROGRAMMES.md` | **APPROVED**                                                        |
-| APZQEP-120 Engineering Execution Planning | `docs/products/apzqep/v1.1/apzqep-120/`                                  | **PLANNING COMPLETE** — Board review; implementation not authorised |
-| Standing record                           | `docs/products/apzqep/STANDING-PROGRAMME-RECORD.md`                      | **IN FORCE**                                                        |
-| Evidence Catalogue Platform (S05)         | `docs/products/apzqep/EVIDENCE-CATALOGUE-PLATFORM.md`                    | **IMPLEMENTED** (LA)                                                |
-| S05 engineering notes                     | `docs/products/apzqep/v1.1/apzqep-120/S05-ENGINEERING-NOTES.md`          | **COMPLETE**                                                        |
-| Evidence Lifecycle & Governance (S06)     | `docs/products/apzqep/EVIDENCE-LIFECYCLE-GOVERNANCE.md`                  | **IMPLEMENTED** (LA)                                                |
-| S06 engineering notes                     | `docs/products/apzqep/v1.1/apzqep-120/S06-ENGINEERING-NOTES.md`          | **COMPLETE**                                                        |
+| Programme                                 | Path                                                                     | Status                                                                                                        |
+| ----------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| APZQEP-110 Product Planning               | `docs/products/apzqep/v1.1/`                                             | **APPROVED**                                                                                                  |
+| APZQEP-111 Solution Architecture          | `docs/products/apzqep/v1.1/*ARCHITECTURE*` · `ENGINEERING-PROGRAMMES.md` | **APPROVED**                                                                                                  |
+| APZQEP-120 Engineering Execution Planning | `docs/products/apzqep/v1.1/apzqep-120/`                                  | **PLANNING COMPLETE** — Board review; implementation not authorised                                           |
+| Standing record                           | `docs/products/apzqep/STANDING-PROGRAMME-RECORD.md`                      | **IN FORCE**                                                                                                  |
+| Evidence Catalogue Platform (S05)         | `docs/products/apzqep/EVIDENCE-CATALOGUE-PLATFORM.md`                    | **IMPLEMENTED** (LA)                                                                                          |
+| S05 engineering notes                     | `docs/products/apzqep/v1.1/apzqep-120/S05-ENGINEERING-NOTES.md`          | **COMPLETE**                                                                                                  |
+| Evidence Lifecycle & Governance (S06)     | `docs/products/apzqep/EVIDENCE-LIFECYCLE-GOVERNANCE.md`                  | **IMPLEMENTED** (LA)                                                                                          |
+| S06 engineering notes                     | `docs/products/apzqep/v1.1/apzqep-120/S06-ENGINEERING-NOTES.md`          | **COMPLETE**                                                                                                  |
+| APZQEP Engineering Framework v1.0         | `docs/products/apzqep/engineering/APZQEP-ENGINEERING-FRAMEWORK.md`       | **BASELINED** — core product (Constitution, Handbook, Standards, Spec Template)                               |
+| APZQEP-ENG-001 programme                  | `docs/products/apzqep/engineering/`                                      | Phases 1–4 CERTIFIED; Framework BASELINED; specialised standards continue; next = Testing Standard; docs only |
 
 ## Indexes updated in this programme
 

@@ -1,0 +1,12 @@
+{
+  "programme": "APZQEP-ENG-001",
+  "phase": "4",
+  "title": "Engineering Specification Template",
+  "decision": "CERTIFIED",
+  "decisionAuthority": "Product Board",
+  "timestampUtc": "20260802T075610Z",
+  "engineeringSpecificationTemplate": "APPROVED",
+  "engineeringFramework": "READY",
+  "recommendation": "Authorise Engineering Framework v1.0 baseline; proceed to Phase 5 Testing Standard",
+  "strategicNote": "After Testing + Certification Standards, review promotion of reusable portions to APZHUB-wide standards; APZQEP as reference implementation"
+}

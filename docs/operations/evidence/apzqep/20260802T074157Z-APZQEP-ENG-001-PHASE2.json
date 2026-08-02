@@ -1,0 +1,67 @@
+{
+  "programme": "APZQEP-ENG-001",
+  "title": "Engineering Documentation Framework",
+  "phase": "2",
+  "classification": "Product Engineering Documentation",
+  "status": "PHASE_2_COMPLETE",
+  "timestampUtc": "20260802T074157Z",
+  "engineering": "NONE",
+  "packageChanges": "NONE",
+  "release": "NONE",
+  "deployment": "NONE",
+  "deliverable": "docs/products/apzqep/engineering/APZQEP-ENGINEERING-HANDBOOK.md",
+  "handbook": {
+    "status": "COMPLETE",
+    "approxLines": 894,
+    "parts": [
+      "I Engineering Philosophy",
+      "II Architecture",
+      "III Domain Engineering",
+      "IV Application Layer",
+      "V Persistence",
+      "VI Security",
+      "VII Storage",
+      "VIII Domain Events",
+      "IX Testing",
+      "X Documentation",
+      "XI Certification",
+      "XII Release",
+      "XIII AI Engineering",
+      "XIV Operational Engineering",
+      "XV Engineering Workflow"
+    ],
+    "appendices": [
+      "A Glossary",
+      "B Terminology",
+      "C Reference documents",
+      "D Repository conventions",
+      "E Principles summary",
+      "F Slice citation pattern"
+    ],
+    "durabilityPosture": "Principles and responsibilities preferred over transient implementation detail; APZQEP as reference implementation for APZHUB portfolio",
+    "constitutionNotRewritten": true,
+    "specialisedStandardsNotDuplicated": true
+  },
+  "updates": {
+    "readme": "Handbook status COMPLETE; next = Engineering Standards",
+    "documentMapping": "Phase 1+2 progress reflected",
+    "completionDraft": "Phase 2 notes added"
+  },
+  "evidence": {
+    "documentGeneration": "PASS",
+    "documentValidation": "PASS — Parts I–XV and Appendices A–F present",
+    "crossReferenceValidation": "PASS — Handbook links Constitution and specialised standard stubs",
+    "linkValidation": "PASS — relative framework links resolve",
+    "completenessReview": "PASS for Phase 2 scope — full ENG-001 framework not claimed COMPLETE"
+  },
+  "authorityPreserved": [
+    "APZHUB Foundation / Governance / Engineering / Lifecycle / AI Operational Framework",
+    "APZHUB-ENG-001 / ADR-0092",
+    "APZQEP roadmap / architecture / execution plan",
+    "APZQEP-120-S01 through S06 Certified",
+    "APZQEP Engineering Constitution"
+  ],
+  "outstandingIssues": "NONE for Phase 2",
+  "nextStep": "Author APZQEP-ENGINEERING-STANDARDS.md",
+  "recommendation": "Proceed to Engineering Standards. Future slices shall reference Constitution + Handbook rather than redefining methodology."
+}
