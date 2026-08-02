@@ -1,18 +1,21 @@
 # APZHUB-ENG-002 — Phase 1A: Enterprise Baseline 1.2 Review
 
-| Field               | Value                                        |
-| ------------------- | -------------------------------------------- |
-| Programme           | APZHUB-ENG-002                               |
-| Phase               | **1A**                                       |
-| Title               | Enterprise Engineering Baseline 1.2 Review   |
-| Status              | **COMPLETE** · Product Board **CERTIFIED**   |
-| Prerequisite        | Baseline **1.2 ESTABLISHED**                 |
-| Engineering         | NONE                                         |
-| Standards promotion | **NONE**                                     |
-| Series outcome      | Baseline **1.x STABLE**                      |
-| ES-004              | First enhancement candidate (not authorised) |
-| Review pack (UTC)   | 20260802T121256Z                             |
-| Decision (UTC)      | 20260802T121525Z                             |
+| Field                 | Value                                            |
+| --------------------- | ------------------------------------------------ |
+| Programme             | APZHUB-ENG-002                                   |
+| Phase                 | **1A**                                           |
+| Title                 | Enterprise Engineering Baseline 1.2 Review       |
+| Status                | **COMPLETE** · Product Board **FINAL CERTIFIED** |
+| Prerequisite          | Baseline **1.2 ESTABLISHED**                     |
+| Engineering           | NONE                                             |
+| Standards promotion   | **NONE**                                         |
+| Series outcome        | Baseline **1.x STABLE**                          |
+| Governance Version    | **1.0 STABLE**                                   |
+| Era                   | Governance Era 1 **COMPLETE**                    |
+| ES-004                | First enhancement candidate (not authorised)     |
+| Review pack (UTC)     | 20260802T121256Z                                 |
+| CERTIFIED (UTC)       | 20260802T121525Z                                 |
+| FINAL CERTIFIED (UTC) | 20260802T121905Z                                 |
 
 ---
 

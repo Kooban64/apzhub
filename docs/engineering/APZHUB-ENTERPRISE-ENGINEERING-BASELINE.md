@@ -1,23 +1,25 @@
 # APZHUB Enterprise Engineering Baseline
 
-| Field             | Value                                                                                              |
-| ----------------- | -------------------------------------------------------------------------------------------------- |
-| Document          | APZHUB-ENTERPRISE-ENGINEERING-BASELINE                                                             |
-| Programme         | APZHUB-ENG-002                                                                                     |
-| Classification    | **Enterprise Engineering System**                                                                  |
-| Series status     | **STABLE** (Baseline **1.x**)                                                                      |
-| Current version   | **1.2**                                                                                            |
-| Status            | **ACTIVE** · **STABLE**                                                                            |
-| Certified (1.2)   | Product Board — 2026-08-02 (`20260802T120716Z`)                                                    |
-| Series STABLE     | Product Board — 2026-08-02 (`20260802T121525Z`) · Phase 1A **CERTIFIED**                           |
-| Authority         | [Portfolio Engineering Charter](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md) (**CERTIFIED**) |
-| Companion         | [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)           |
-| Policy            | [STABLE-BASELINE-POLICY.md](./APZHUB-ENG-002/STABLE-BASELINE-POLICY.md)                            |
-| Declaration       | [BASELINE-1.x-STABLE.md](./APZHUB-ENG-002/BASELINE-1.x-STABLE.md)                                  |
-| Technical content | **NONE** — adopted-set inventory only                                                              |
-| Engineering       | NONE                                                                                               |
-| Governance era    | **Evolving** a stable system (establishment complete)                                              |
-| Next enhancement  | ES-004 — first enhancement candidate (**NOT AUTHORISED** until Owner instruction)                  |
+| Field              | Value                                                                                              |
+| ------------------ | -------------------------------------------------------------------------------------------------- |
+| Document           | APZHUB-ENTERPRISE-ENGINEERING-BASELINE                                                             |
+| Programme          | APZHUB-ENG-002                                                                                     |
+| Classification     | **Enterprise Engineering System**                                                                  |
+| Series status      | **STABLE** (Baseline **1.x**)                                                                      |
+| Current version    | **1.2**                                                                                            |
+| Status             | **ACTIVE** · **STABLE**                                                                            |
+| Certified (1.2)    | Product Board — 2026-08-02 (`20260802T120716Z`)                                                    |
+| Series STABLE      | Product Board — 2026-08-02 (`20260802T121525Z`) · Phase 1A **CERTIFIED**                           |
+| Governance Version | [APZHUB-ENGINEERING-GOVERNANCE.md](./APZHUB-ENGINEERING-GOVERNANCE.md) **1.0 STABLE**              |
+| Authority          | [Portfolio Engineering Charter](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md) (**CERTIFIED**) |
+| Companion          | [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)           |
+| Policy             | [STABLE-BASELINE-POLICY.md](./APZHUB-ENG-002/STABLE-BASELINE-POLICY.md)                            |
+| Process freeze     | [GOVERNANCE-PROCESS-FREEZE.md](./APZHUB-ENG-002/GOVERNANCE-PROCESS-FREEZE.md) · Charter §14        |
+| Declaration        | [BASELINE-1.x-STABLE.md](./APZHUB-ENG-002/BASELINE-1.x-STABLE.md)                                  |
+| Technical content  | **NONE** — adopted-set inventory only                                                              |
+| Engineering        | NONE                                                                                               |
+| Governance era     | Era 1 **COMPLETE** · Phase **C — Evolve the Enterprise**                                           |
+| Next enhancement   | ES-004 — first enhancement candidate (**NOT AUTHORISED** until Owner instruction)                  |
 
 ---
 

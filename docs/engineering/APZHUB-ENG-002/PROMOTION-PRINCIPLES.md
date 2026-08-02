@@ -144,12 +144,28 @@ When the Enterprise Engineering Baseline series is declared **STABLE** ([STABLE-
 
 ES-004 (when authorised) is the **first enhancement** candidate under Baseline **1.x STABLE**.
 
+Promotion packs for ES-004+ SHALL also state governance context, for example:
+
+```text
+Classification: Enhancement to Stable Baseline 1.x
+Governance context: Enhancement after Governance Era 1 COMPLETE
+Governance Version: 1.0 STABLE (unchanged by this promotion)
+```
+
 ---
 
-## 9. Phase constraints
+## 9. Governance Process Freeze
+
+Ordinary Enterprise Standard promotions SHALL NOT modify the promotion lifecycle, Dual Approval Rule, Stable Baseline Policy, Catalogue/Baseline **models**, or this principles document’s permanent rules.
+
+Process change requires a dedicated Governance Programme, Architecture Review, Product Board approval, and Governance Version increment ([GOVERNANCE-PROCESS-FREEZE.md](./GOVERNANCE-PROCESS-FREEZE.md) · Charter §14).
+
+---
+
+## 10. Phase constraints
 
 - **Phase 0:** No standards promoted (satisfied — CERTIFIED).
 - **Phase 1 Opening:** Catalogue only (CERTIFIED).
 - **Phase 1 body promotions ES-001…ES-003:** Foundational (COMPLETE).
-- **Phase 1A:** System review — CERTIFIED; Baseline **1.x STABLE**.
-- **Post-STABLE enhancements:** Catalogue row first; abstraction; Dual Approval; minor Baseline bump; enhancement classification mandatory.
+- **Phase 1A:** System review — **FINAL CERTIFIED**; Baseline **1.x STABLE**; Governance **1.0 STABLE**; Era 1 **COMPLETE**.
+- **Post-STABLE enhancements:** Catalogue row first; abstraction; Dual Approval; minor Baseline bump; enhancement classification mandatory; governance process frozen.

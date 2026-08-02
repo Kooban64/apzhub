@@ -243,7 +243,40 @@ Formally adopted by Product Board with Phase 1A CERTIFIED and Baseline **1.x STA
 
 ---
 
-## 14. Change control
+## 14. Governance Process Freeze (permanent)
+
+```text
+Governance Process Freeze
+
+The Enterprise Engineering Promotion Lifecycle,
+Standards Catalogue,
+Enterprise Engineering Baseline,
+Dual Approval Rule,
+and Stable Baseline Policy
+
+are themselves governed artefacts.
+
+They shall not be modified during ordinary Enterprise Standard promotions.
+
+Changes to the governance process itself require:
+
+• a dedicated Governance Programme,
+• Architecture Review,
+• Product Board approval,
+• and an explicit governance version increment.
+```
+
+This policy is **permanent Charter law**. It keeps the **process** as stable as the **standards**.
+
+Operating detail: [GOVERNANCE-PROCESS-FREEZE.md](./GOVERNANCE-PROCESS-FREEZE.md).
+
+Governance Version face: [APZHUB-ENGINEERING-GOVERNANCE.md](../APZHUB-ENGINEERING-GOVERNANCE.md) (**1.0 STABLE**).
+
+Formally adopted by Product Board with Phase 1A **FINAL CERTIFIED** and Engineering Governance Era 1 **COMPLETE** (`20260802T121905Z`).
+
+---
+
+## 15. Change control
 
 1. No silent enterprise standards.
 2. No dual competing authorities for one concern.
@@ -254,11 +287,12 @@ Formally adopted by Product Board with Phase 1A CERTIFIED and Baseline **1.x STA
 7. When a standard becomes Active, the [Enterprise Engineering Baseline](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) SHALL be updated to a new version listing the full adopted set.
 8. Dual Approval Rule (§12) MUST be satisfied before catalogue **Active**.
 9. When the Baseline series is **STABLE**, new Active standards are **enhancements** (§13); they do not reopen stability evaluation.
-10. Documentation-only programmes remain documentation-only unless Owner expands authority.
+10. Governance process artefacts SHALL NOT change during ordinary promotions (§14); process change requires Governance Version increment.
+11. Documentation-only programmes remain documentation-only unless Owner expands authority.
 
 ---
 
-## 15. Success criteria
+## 16. Success criteria
 
 The Charter succeeds when Product Board can answer:
 
@@ -270,7 +304,7 @@ Measurable criteria: [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md)
 
 ---
 
-## 16. Exit criteria (Phase 0)
+## 17. Exit criteria (Phase 0)
 
 | Criterion                                   | Required                  |
 | ------------------------------------------- | ------------------------- |
@@ -286,15 +320,19 @@ Measurable criteria: [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md)
 
 ---
 
-## 17. Related documents
+## 18. Related documents
 
 | Document                                                                                  | Role                                    |
 | ----------------------------------------------------------------------------------------- | --------------------------------------- |
 | [PROGRAMME-CHARTER.md](./PROGRAMME-CHARTER.md)                                            | APZHUB-ENG-002 programme charter        |
+| [APZHUB-ENGINEERING-GOVERNANCE.md](../APZHUB-ENGINEERING-GOVERNANCE.md)                   | Governance Version **1.0 STABLE**       |
+| [APZHUB-ENGINEERING-GOVERNANCE-HISTORY.md](../APZHUB-ENGINEERING-GOVERNANCE-HISTORY.md)   | Non-normative history                   |
 | [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | Enterprise standards inventory          |
 | [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) | Adopted enterprise standards set        |
 | [BASELINE-1.x-STABLE.md](./BASELINE-1.x-STABLE.md)                                        | Baseline 1.x STABLE declaration         |
 | [STABLE-BASELINE-POLICY.md](./STABLE-BASELINE-POLICY.md)                                  | Stable Baseline Policy                  |
+| [GOVERNANCE-PROCESS-FREEZE.md](./GOVERNANCE-PROCESS-FREEZE.md)                            | Governance Process Freeze               |
+| [ENGINEERING-GOVERNANCE-ERA-1.md](./ENGINEERING-GOVERNANCE-ERA-1.md)                      | Era 1 COMPLETE milestone                |
 | [PORTFOLIO-GOVERNANCE-MODEL.md](./PORTFOLIO-GOVERNANCE-MODEL.md)                          | Decision rights and conflict resolution |
 | [PORTFOLIO-LIFECYCLE.md](./PORTFOLIO-LIFECYCLE.md)                                        | Standard lifecycle states               |
 | [PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md)                                      | Mandatory promotion rules               |
