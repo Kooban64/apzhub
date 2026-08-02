@@ -1,0 +1,31 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S05",
+  "title": "Evidence Catalogue Platform — Slice Certification",
+  "timestampUtc": "20260802T064048Z",
+  "classification": "Slice certification (APZHUB-ENG-001)",
+  "result": "PASS",
+  "package": "@apzhub/qep-evidence 1.0.0 — unchanged",
+  "releaseTag": "apzqep-evidence-v1.0.0 — unchanged",
+  "deployment": "NONE",
+  "gates": {
+    "catalogueService": "PASS",
+    "catalogueRepositoryPort": "PASS",
+    "postgresCatalogueRepository": "PASS",
+    "additiveMigration": "PASS",
+    "existingEvidenceCompatible": "PASS",
+    "aclReuse": "PASS",
+    "queryPathReuse": "PASS",
+    "tenantIsolation": "PASS",
+    "security": "PASS",
+    "performance": "PASS",
+    "s01s04Regression": "PASS",
+    "documentation": "PASS",
+    "noPackagePromotion": "PASS",
+    "noTagChange": "PASS",
+    "noDeployment": "PASS"
+  },
+  "recommendation": "Ready for APZQEP-120-S06",
+  "engineeringCommit": "7cb73dbf3d0ab8b4f907c310a3c863bd72250b8f",
+  "documentationCommit": "PENDING"
+}

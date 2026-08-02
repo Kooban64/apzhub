@@ -18,7 +18,7 @@ Executable engineering slices. Future instruction: _Implement APZQEP-120-SNN exa
 | S02 | Evidence Query Service & Permission Engine   | B   | P0  | 2   | R0  | M    | 3–5               |
 | S03 | Evidence Storage Platform (+ Local provider) | A   | P0  | 3   | R2  | L    | 8–12              |
 | S04 | Evidence Integrity Platform                  | A   | P0  | 4   | R2  | L    | 8–12              |
-| S05 | Evidence PostgreSQL metadata SoR             | A   | P0  | 5*  | R2  | L    | 10–15             |
+| S05 | Evidence Catalogue Platform                  | A   | P0  | 5*  | R2  | L    | 10–15             |
 | S06 | Evidence audit durability & retention hooks  | A/J | P0  | 6   | R2  | M    | 4–6               |
 | S07 | QEP domain event catalogue & publish         | D   | P0  | 7   | R1  | M    | 5–7               |
 | S08 | TE outbox drain worker (L-03)                | C/G | P0  | 8   | R1  | L    | 7–10              |
@@ -35,7 +35,7 @@ Executable engineering slices. Future instruction: _Implement APZQEP-120-SNN exa
 | S19 | Security verification suite (tenant/upload)  | J   | P0  | 19  | R4  | M    | 5–7               |
 | S20 | APZQEP-120 programme certification gate      | —   | P3  | 20  | R4  | M    | 3–5               |
 
-\* **S04** = Evidence Integrity Platform (Owner redefine; absorbs former catalogue hashing scope). **S05** = PostgreSQL metadata SoR. Cloud content backends still depend on Owner **D-001**.
+\* **S04** = Evidence Integrity Platform. **S05** = Evidence Catalogue Platform (PostgreSQL first durable adapter; catalogue ≠ PostgreSQL). Cloud content backends still depend on Owner **D-001**.
 
 ---
 
@@ -301,69 +301,52 @@ See Owner S04 instruction §34 — all PASS at certification.
 
 ---
 
-# APZQEP-120-S05 — Evidence PostgreSQL metadata SoR
+# APZQEP-120-S05 — Evidence Catalogue Platform
 
 ### Identification
 
-| Field            | Value                                         |
-| ---------------- | --------------------------------------------- |
-| ID               | APZQEP-120-S05                                |
-| Title            | Evidence PostgreSQL metadata system of record |
-| Workstream       | A                                             |
-| Priority         | P0                                            |
-| Sequence         | 5                                             |
-| Release boundary | R2                                            |
+| Field            | Value                                       |
+| ---------------- | ------------------------------------------- |
+| ID               | APZQEP-120-S05                              |
+| Title            | Evidence Catalogue Platform                 |
+| Workstream       | A                                           |
+| Priority         | P0                                          |
+| Sequence         | 5                                           |
+| Release boundary | R2                                          |
+| Status           | **COMPLETE** (Owner instruction 2026-08-02) |
 
 ### Objective
 
-Replace memory-only Evidence **metadata** with tenant-scoped PostgreSQL SoR (additive migration). Content bytes remain behind Storage Platform (S03). Integrity metadata fields persist with the aggregate (S04).
-
-### Current state
-
-Memory repository in production factory; no Evidence metadata tables in platform schema.
-
-### Scope
-
-- Additive migration: evidence metadata tables (ids, tenant, project refs, classification, links, versions, hash/integrity fields, lifecycle, audit fields per 011).
-- Repository adapter implementing existing ports.
-- Factory switch: memory → PG (config/env).
-
-### Explicit exclusions
-
-- Cloud object-store providers (later); integrity algorithm work (S04 COMPLETE); bus (S07).
-
-### Dependencies
-
-- Platform PostgreSQL · S01–S04 preferred.
+Deliver the Evidence Catalogue as the logical SoR for evidence records, with PostgreSQL as the first durable repository adapter behind the existing `EvidenceRepository` port. Content bytes remain behind Storage Platform (S03). Integrity remains S04.
 
 ### Architecture
 
-- Platform DB owns metadata only; blobs never in PG as SoR.
-- RLS/tenant columns mandatory.
+```text
+Catalogue → Catalogue Repository Port (EvidenceRepository) → PostgreSQL Catalogue Repository
+```
 
-### Acceptance criteria
+Do not equate Catalogue = PostgreSQL.
 
-1. Evidence create/get/list survives process restart.
-2. Tenant RLS/isolation proven.
-3. Memory mode remains for tests if needed.
-4. Migration rollback documented.
-5. No v1.0 API break.
+### Scope (delivered)
 
-### Tests
+- EvidenceCatalogueService facade
+- PostgreSQL adapters for full EvidenceUnitOfWork
+- Additive migrations `0089` / `0090` (+ FORCE RLS)
+- Catalogue state model; relationship persistence; ACL/query reuse
+- Orthogonal catalogue mode vs storage provider
 
-Unit repo · Integration PG · Migration up/down · Tenant isolation · Compatibility API.
+### Explicit exclusions
 
-### Data/migration
+- Cloud providers · retention/legal-hold productisation (S06) · bus (S07) · TE EvidenceAccessPort · package promotion
 
-See [DATA-AND-MIGRATION-PLAN.md](./DATA-AND-MIGRATION-PLAN.md).
+### Acceptance
 
-### Complexity / effort
+See Owner S05 instruction §36 — certification evidence under `docs/operations/evidence/apzqep/`.
 
-**L** · 10–15 eng-days.
+### Docs
 
-### Releasability
-
-Feature-flagged cutover; internal prerelease then R2.
+- [EVIDENCE-CATALOGUE-PLATFORM.md](../../EVIDENCE-CATALOGUE-PLATFORM.md)
+- [S05-ENGINEERING-NOTES.md](./S05-ENGINEERING-NOTES.md)
 
 ---
 

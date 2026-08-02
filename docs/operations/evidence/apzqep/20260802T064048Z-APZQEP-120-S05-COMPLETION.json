@@ -1,0 +1,24 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S05",
+  "title": "Evidence Catalogue Platform",
+  "status": "COMPLETE",
+  "timestampUtc": "20260802T064048Z",
+  "baselineCommit": "4f366436268a305669540a75d8b5ba5f2fec6084",
+  "process": "APZHUB-ENG-001 / ADR-0092 / ADR-0093 / ADR-0094",
+  "ownerClarification": "S05 is Evidence Catalogue Platform; PostgreSQL is first durable adapter behind Catalogue Repository Port",
+  "outstandingIssues": "NONE",
+  "deferred": [
+    "S06 audit durability / retention hooks",
+    "Cloud providers (D-001)",
+    "Platform event bus publish (S07)",
+    "TE EvidenceAccessPort wiring",
+    "Live PG upgrade soak (DATABASE_URL unset in cert env)",
+    "Package promotion / release / deployment"
+  ],
+  "nextAuthorisedSlice": "APZQEP-120-S06",
+  "implementationAuthorityConsumed": "APZQEP-120-S05 only",
+  "engineeringCommit": "7cb73dbf3d0ab8b4f907c310a3c863bd72250b8f",
+  "documentationCommit": "PENDING",
+  "evidenceCommit": "PENDING"
+}

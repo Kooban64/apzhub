@@ -8,7 +8,7 @@
 | 2   | S02       | Query Service & Permission Engine — **COMPLETE**            |
 | 3   | S03       | Evidence Storage Platform + Local (ADR-0094) — **COMPLETE** |
 | 4   | S04       | Evidence Integrity Platform — **COMPLETE**                  |
-| 5   | S05       | PG metadata SoR                                             |
+| 5   | S05       | Evidence Catalogue Platform (PG first durable adapter)      |
 | —   | **D-001** | Cloud content backends later — not required for S03/S04     |
 | 6   | S06       | Audit/retention                                             |
 | 7   | S07       | Event catalogue/publish                                     |

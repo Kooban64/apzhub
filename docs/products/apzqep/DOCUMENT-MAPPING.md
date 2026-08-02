@@ -41,6 +41,8 @@
 | APZQEP-111 Solution Architecture          | `docs/products/apzqep/v1.1/*ARCHITECTURE*` · `ENGINEERING-PROGRAMMES.md` | **APPROVED**                                                        |
 | APZQEP-120 Engineering Execution Planning | `docs/products/apzqep/v1.1/apzqep-120/`                                  | **PLANNING COMPLETE** — Board review; implementation not authorised |
 | Standing record                           | `docs/products/apzqep/STANDING-PROGRAMME-RECORD.md`                      | **IN FORCE**                                                        |
+| Evidence Catalogue Platform (S05)         | `docs/products/apzqep/EVIDENCE-CATALOGUE-PLATFORM.md`                    | **IMPLEMENTED** (LA)                                                |
+| S05 engineering notes                     | `docs/products/apzqep/v1.1/apzqep-120/S05-ENGINEERING-NOTES.md`          | **COMPLETE**                                                        |
 
 ## Indexes updated in this programme
 

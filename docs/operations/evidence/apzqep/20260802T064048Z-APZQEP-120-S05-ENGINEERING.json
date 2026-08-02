@@ -1,0 +1,33 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S05",
+  "title": "Evidence Catalogue Platform — Engineering Evidence",
+  "timestampUtc": "20260802T064048Z",
+  "baselineCommit": "4f366436268a305669540a75d8b5ba5f2fec6084",
+  "result": "COMPLETE",
+  "architecture": {
+    "rule": "Catalogue owns logical records; PostgreSQL persists; Storage owns bytes; Integrity owns digests; Permission Engine owns visibility; Query Service owns discovery",
+    "cataloguePort": "EvidenceRepository (existing — no duplicate port)",
+    "path": "EvidenceCatalogueService → ACL/Query → EvidenceRepository → PostgresEvidenceRepository"
+  },
+  "schema": {
+    "tables": [
+      "qep_evidence",
+      "qep_evidence_version",
+      "qep_evidence_relationship",
+      "qep_evidence_audit",
+      "qep_evidence_collection",
+      "qep_evidence_set",
+      "qep_evidence_access_grant"
+    ],
+    "migrations": ["0089_apz_qep_evidence.sql", "0090_apz_qep_evidence_rls.sql"]
+  },
+  "aclReuse": "S01/S02 SecurityGate + enumeration for list/search",
+  "queryServiceReuse": true,
+  "storageCompatibility": "opaque evst:// locators; no FS paths in contracts",
+  "integrityCompatibility": "aggregate integrity fields; S04 policy unchanged",
+  "packageImpact": "@apzhub/qep-evidence 1.0.0 unchanged (no promotion)",
+  "releaseImpact": "apzqep-evidence-v1.0.0 unchanged",
+  "deploymentImpact": "NONE",
+  "engineeringCommit": "7cb73dbf3d0ab8b4f907c310a3c863bd72250b8f"
+}

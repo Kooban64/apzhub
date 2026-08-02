@@ -49,7 +49,7 @@ Works with Memory and Local providers through `StoragePort` only. Future cloud p
 - Not chain of custody
 - Not malware scanning
 - Not automatic repair or re-baselining
-- Metadata SoR remains memory until the authorised PG slice
+- Catalogue / metadata SoR delivered in S05 (PostgreSQL first durable adapter)
 - Platform event bus publish deferred
 
 ## Configuration

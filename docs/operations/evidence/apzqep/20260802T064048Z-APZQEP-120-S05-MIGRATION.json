@@ -1,0 +1,22 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S05",
+  "title": "Evidence Catalogue Platform — Migration Evidence",
+  "timestampUtc": "20260802T064048Z",
+  "result": "PASS",
+  "strategy": "Additive tables + RLS; no destructive rewrite; no content/id/digest migration",
+  "files": [
+    "packages/config/drizzle/0089_apz_qep_evidence.sql",
+    "packages/config/drizzle/0090_apz_qep_evidence_rls.sql",
+    "packages/config/drizzle/meta/_journal.json",
+    "packages/config/src/db/qep-evidence-schema.ts"
+  ],
+  "validation": [
+    "migration.validation.test.ts — CREATE IF NOT EXISTS; no DROP TABLE / TRUNCATE / DROP COLUMN",
+    "FORCE RLS + tenant policies present",
+    "Indexes and uniqueness constraints present"
+  ],
+  "existingEvidenceCompatibility": "Memory catalogue mode unchanged for LA/tests; PG catalogue starts empty on fresh install; no uncontrolled production backfill",
+  "rollback": "Forward-only additive; reverse by not applying 0089/0090 on greenfield; drop tables only via explicit DBA change (not authorised in S05)",
+  "liveUpgradeTest": "SKIPPED — DATABASE_URL unset"
+}

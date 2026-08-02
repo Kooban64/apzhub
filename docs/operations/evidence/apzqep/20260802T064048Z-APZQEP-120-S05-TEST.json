@@ -1,0 +1,29 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S05",
+  "title": "Evidence Catalogue Platform — Testing Evidence",
+  "timestampUtc": "20260802T064048Z",
+  "result": "PASS",
+  "totals": {
+    "packages/qep-evidence": "112 passed / 0 failed",
+    "packages/platform-services qep-platform-services.test.ts": "24 passed / 0 failed"
+  },
+  "suites": [
+    "catalogue-state.test.ts",
+    "evidence-catalogue-service.test.ts",
+    "evidence-repository.test.ts (mocked PG)",
+    "migration.validation.test.ts",
+    "architecture-boundaries.test.ts (S05 drizzle confinement)",
+    "S01 security.enforcement regression",
+    "S02 enumeration/query regression",
+    "S03 storage-platform regression",
+    "S04 integrity-platform regression"
+  ],
+  "livePostgres": "SKIPPED — DATABASE_URL unset; mocked adapter + SQL migration validation used",
+  "performanceObservations": [
+    "List batches version rows by evidence id (no N+1)",
+    "Tenant/project/state/classification indexes defined in 0089",
+    "Catalogue list does not read evidence bytes",
+    "No enterprise SLO claimed"
+  ]
+}

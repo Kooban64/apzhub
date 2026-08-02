@@ -1,0 +1,20 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "APZQEP-120-S05",
+  "title": "Evidence Catalogue Platform — Security Evidence",
+  "timestampUtc": "20260802T064048Z",
+  "result": "PASS",
+  "controls": [
+    "Parameterised Drizzle queries (no raw SQL string concat)",
+    "Tenant scoping on all repository queries",
+    "FORCE RLS policies with app.tenant_id (0090)",
+    "ACL reuse — inaccessible evidence appears nonexistent on list/search",
+    "Cross-tenant list denial covered in catalogue service tests",
+    "Optimistic revision concurrency on save",
+    "Relationship unique constraint → conflict",
+    "No secrets / content / FS paths in catalogue public view",
+    "Immutable identity — no id rewrite in migration",
+    "Default deny via secured application factory"
+  ],
+  "defaultDeny": true
+}
