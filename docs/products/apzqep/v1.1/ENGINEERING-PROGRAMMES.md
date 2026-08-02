@@ -145,9 +145,11 @@ Role-aware dashboards / Release Readiness UX previously sketched as APZQEP-140 a
 ## Dependency overview
 
 ```text
-111 (Architecture) ──approved──► 120 Foundation
-                                  ├─► 130 Core ──► 140 Experience
-                                  │                  └─► 150 AI
-                                  └─► 160 / 170 (1.2)
-                                         └─► 180 (1.3)
+111 (Architecture) ──approved──► 120 Foundation (CLOSED)
+                                  └─► 140 Core QE (CLOSED)
+                                       └─► 150 Readiness (CERTIFIED / prod NO-GO)
+                                            ├─► 151 Durable Persistence (recommended)
+                                            ├─► 152 Production RBAC (recommended)
+                                            └─► re-run 150
+160 / 170 / 180 remain future bands — not next
 ```
