@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 
 import {
   isQepDefectsRoute,
+  isQepEnterpriseRequirementsRoute,
   isQepEvidenceRoute,
   isQepExecutionPlansRoute,
   isQepExecutionWorkspaceRoute,
@@ -17,6 +18,7 @@ import {
 } from "@/lib/qep/routes";
 
 import { QepDefectsRouterView } from "./qep-defects-views";
+import { QepEnterpriseRequirementsRouterView } from "./qep-enterprise-requirements-views";
 import { QepEvidenceRouterView } from "./qep-evidence-views";
 import { QepExecutionPlansRouterView } from "./qep-execution-plans-views";
 import { QepExecutionWorkspaceRouterView } from "./qep-execution-workspace-views";
@@ -30,7 +32,8 @@ import { QepVerificationRouterView } from "./qep-verification-views";
 
 /**
  * QEP workspace router — Suites (A) / Execution Planning (B) / Execution Workspace (C) /
- * Defects (D) / Requirements / Traceability / Verification / Specs / Plans / Legacy TE / Evidence.
+ * Defects (D) / Enterprise Requirements & Traceability (E) /
+ * Legacy ENG Requirements / Traceability / Verification / Specs / Plans / TE / Evidence.
  */
 export function QepWorkspaceRouter() {
   const pathname = usePathname() ?? "";
@@ -53,6 +56,10 @@ export function QepWorkspaceRouter() {
 
   if (isQepDefectsRoute(pathname)) {
     return <QepDefectsRouterView pathname={pathname} />;
+  }
+
+  if (isQepEnterpriseRequirementsRoute(pathname)) {
+    return <QepEnterpriseRequirementsRouterView pathname={pathname} />;
   }
 
   if (isQepEvidenceRoute(pathname)) {

@@ -126,3 +126,20 @@ export const DEFECT_PROJECTION_DEFINITION: ProjectionDefinition = {
     "qep.defect.status_changed",
   ],
 };
+
+export const REQUIREMENT_PROJECTION_DEFINITION: ProjectionDefinition = {
+  projectionId: "qep.knowledge.requirement.v1",
+  entityKind: "requirement",
+  version: QEP_KNOWLEDGE_INDEX_PROJECTION_VERSION,
+  description:
+    "Enterprise Requirements & Traceability Knowledge Index projection (APZQEP-140-E)",
+  eventTypes: [
+    "qep.requirement.created",
+    "qep.requirement.updated",
+    "qep.requirement.approved",
+    "qep.requirement.linked",
+    "qep.requirement.coverage_updated",
+    "qep.requirement.traceability_changed",
+    "qep.requirement.status_changed",
+  ],
+};

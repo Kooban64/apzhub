@@ -10,6 +10,7 @@ import { buildDefectProjection } from "./defect-builder";
 import { buildEvidenceProjection } from "./evidence-builder";
 import { buildExecutionProjection } from "./execution-builder";
 import { buildExecutionPlanProjection } from "./execution-plan-builder";
+import { buildRequirementProjection } from "./requirement-builder";
 import { buildSuiteProjection } from "./suite-builder";
 import type { ProjectionRegistry } from "./registry";
 import type { ProjectionRepository } from "./repository";
@@ -250,6 +251,42 @@ export function createProjectionEngine(options: {
             await options.repository.remove({
               tenantId: built.tenantId,
               entityKind: "defect",
+              entityId: built.entityId,
+            });
+            lastAppliedAt = input.now;
+            return { ok: true, action: "removed", documentId: built.entityId };
+          }
+          const doc = built as KnowledgeIndexDocument;
+          await options.repository.upsert(doc);
+          lastAppliedAt = input.now;
+          return { ok: true, action: "upserted", documentId: doc.documentId };
+        }
+
+        if (defs.some((d) => d.entityKind === "requirement")) {
+          const requirementId =
+            typeof input.payload.requirementId === "string"
+              ? input.payload.requirementId
+              : undefined;
+          const previous =
+            requirementId != null
+              ? await options.repository.get({
+                  tenantId: input.tenantId,
+                  entityKind: "requirement",
+                  entityId: requirementId,
+                })
+              : undefined;
+          const built = buildRequirementProjection({
+            eventType: input.eventType,
+            tenantId: input.tenantId,
+            payload: input.payload,
+            ...(input.correlationId ? { correlationId: input.correlationId } : {}),
+            now: input.now,
+            ...(previous ? { previous } : {}),
+          });
+          if ("remove" in built && built.remove) {
+            await options.repository.remove({
+              tenantId: built.tenantId,
+              entityKind: "requirement",
               entityId: built.entityId,
             });
             lastAppliedAt = input.now;

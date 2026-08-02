@@ -2,6 +2,7 @@ import type { QepBaselineListParams, QepListParams } from "./qep-api";
 import type { QepEvidenceListParams } from "./qep-evidence-api";
 import type { QepExecutionPlanListParams } from "./qep-execution-plans-api";
 import type { QepDefectListParams } from "./qep-defects-api";
+import type { QepEnterpriseRequirementListParams } from "./qep-enterprise-requirements-api";
 import type { QepExecutionSessionListParams } from "./qep-execution-workspace-api";
 import type { QepSuiteListParams } from "./qep-suites-api";
 import type { QepTestExecutionListParams } from "./qep-test-execution-api";
@@ -179,5 +180,22 @@ export const qepQueryKeys = {
       [...qepQueryKeys.defects.all(), "list", params ?? {}] as const,
     detail: (id: string) => [...qepQueryKeys.defects.all(), "detail", id] as const,
     history: (id: string) => [...qepQueryKeys.defects.all(), "history", id] as const,
+  },
+  enterpriseRequirements: {
+    all: () => [...qepQueryKeys.all(), "enterpriseRequirements"] as const,
+    list: (params?: QepEnterpriseRequirementListParams) =>
+      [...qepQueryKeys.enterpriseRequirements.all(), "list", params ?? {}] as const,
+    detail: (id: string) =>
+      [...qepQueryKeys.enterpriseRequirements.all(), "detail", id] as const,
+    traceability: (id: string) =>
+      [...qepQueryKeys.enterpriseRequirements.all(), "traceability", id] as const,
+    matrix: (params?: QepEnterpriseRequirementListParams) =>
+      [...qepQueryKeys.enterpriseRequirements.all(), "matrix", params ?? {}] as const,
+    coverageDashboard: (params?: QepEnterpriseRequirementListParams) =>
+      [
+        ...qepQueryKeys.enterpriseRequirements.all(),
+        "coverageDashboard",
+        params ?? {},
+      ] as const,
   },
 };

@@ -119,6 +119,16 @@ export {
 } from "@apzhub/qep-defects/presentation";
 
 export {
+  QEP_ENTERPRISE_REQUIREMENTS_BASE_PATH,
+  QEP_ENTERPRISE_REQUIREMENT_ROUTES,
+  isQepEnterpriseRequirementsRoute,
+  isQepEnterpriseRequirementsNewRoute,
+  isQepEnterpriseRequirementsMatrixRoute,
+  isQepEnterpriseRequirementsCoverageRoute,
+  parseQepEnterpriseRequirementRouteId,
+} from "@apzhub/qep-requirements-traceability/presentation";
+
+export {
   QEP_EVIDENCE_BASE_PATH,
   QEP_EVIDENCE_ROUTES,
   isQepEvidenceRoute,

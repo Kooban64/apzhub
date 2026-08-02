@@ -4,8 +4,8 @@
 | --------- | --------------------------------------- |
 | Programme | APZQEP-140                              |
 | Status    | **IN FORCE** — primary progress surface |
-| Timestamp | 20260802T210000Z                        |
-| Authority | Product Board (Caps A–D COMPLETE)       |
+| Timestamp | 20260802T220000Z                        |
+| Authority | Product Board (Caps A–E COMPLETE)       |
 
 ---
 
@@ -40,7 +40,7 @@ Capability E
 
 Enterprise Requirements & Traceability
 
-□□□□□□□□□□ 0%
+██████████ 100%
 
 Capability F
 
@@ -55,13 +55,13 @@ Enterprise Reporting & Analytics
 | **B**      | Enterprise Test Execution Planning     | APZQEP-140-B |   **100%** |
 | **C**      | Enterprise Test Execution Workspace    | APZQEP-140-C |   **100%** |
 | **D**      | Enterprise Defect Management           | APZQEP-140-D |   **100%** |
-| **E**      | Enterprise Requirements & Traceability | APZQEP-140-E |     **0%** |
+| **E**      | Enterprise Requirements & Traceability | APZQEP-140-E |   **100%** |
 | **F**      | Enterprise Reporting & Analytics       | APZQEP-140-F |     **0%** |
 
-Packs: [a/](./a/) · [b/](./b/) · [c/](./c/) · [d/](./d/)
+Packs: [a/](./a/) · [b/](./b/) · [c/](./c/) · [d/](./d/) · [e/](./e/)
 
 ---
 
 ## Next
 
-**APZQEP-140-E — Enterprise Requirements & Traceability** — Owner Authorisation required.
+**APZQEP-140-F — Enterprise Reporting & Analytics** — Owner Authorisation required.

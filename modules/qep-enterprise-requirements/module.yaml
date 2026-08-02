@@ -1,0 +1,61 @@
+manifestSchemaVersion: "1.0"
+id: qep-enterprise-requirements
+name: Requirements & Traceability
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Enterprise Requirements & Traceability — APZQEP Capability E (APZQEP-140-E). Derived traceability and coverage across Suites, Execution, Evidence and Defects. Does not reopen frozen ENG requirements/traceability packages."
+  product: apzqep
+  moduleCatalogueId: M-EREQ
+  slug: enterprise-requirements
+  programme: APZQEP-140-E
+  capability: E
+  stakeholderName: Enterprise Requirements & Traceability
+
+dependencies:
+  platform: []
+  packages:
+    - "@apzhub/qep-requirements-traceability"
+    - "@apzhub/qep-suites"
+    - "@apzhub/qep-execution-plans"
+    - "@apzhub/qep-execution-workspace"
+    - "@apzhub/qep-defects"
+    - "@apzhub/qep-knowledge-index"
+    - "@apzhub/qep-notification"
+    - "@apzhub/qep-command"
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: workbench-implemented
+
+permissions:
+  - id: qep.enterprise_requirements.read
+    label: View Enterprise Requirements & Traceability
+  - id: qep.enterprise_requirements.create
+    label: Create Requirements
+  - id: qep.enterprise_requirements.update
+    label: Update Requirements & Links
+  - id: qep.enterprise_requirements.lifecycle
+    label: Manage Requirement Lifecycle
+  - id: qep.enterprise_requirements.admin
+    label: Administer Enterprise Requirements
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Requirements & Traceability
+    icon: git-branch
+    route: /workspace/qep/enterprise-requirements
+    order: 50
+    permission: qep.enterprise_requirements.read
+  view:
+    title: Requirements & Traceability
+    workspace: qep
+    route: /workspace/qep/enterprise-requirements
+    permission: qep.enterprise_requirements.read

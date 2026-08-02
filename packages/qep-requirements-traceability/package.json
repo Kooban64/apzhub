@@ -1,0 +1,24 @@
+{
+  "name": "@apzhub/qep-requirements-traceability",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZQEP Enterprise Requirements & Traceability — Capability E (APZQEP-140-E). Derived traceability and coverage across Suites, Execution, Evidence and Defects.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./domain": "./src/domain/index.ts",
+    "./application": "./src/application/index.ts",
+    "./presentation": "./src/presentation/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-requirements-traceability"
+  },
+  "dependencies": {
+    "@apzhub/platform-processing": "workspace:*",
+    "@apzhub/qep-command": "workspace:*",
+    "@apzhub/qep-knowledge-index": "workspace:*",
+    "@apzhub/qep-notification": "workspace:*"
+  }
+}
