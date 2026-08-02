@@ -6,6 +6,21 @@
 | Status          | **ACCEPTED** — Product Board (Promotion Review CERTIFIED)              |
 | Date            | 2026-08-02                                                             |
 | Source baseline | APZQEP Engineering Framework v1.0 + Testing + Certification extensions |
+| Predecessor     | APZQEP-ENG-001 — **ARCHIVED** (immutable closure `b9626ada`)           |
+
+---
+
+## Promotion Principle (permanent)
+
+No engineering standard may be promoted from a product into the APZHUB enterprise baseline unless:
+
+1. It has been implemented in a production-grade product.
+2. It has completed engineering certification.
+3. It has completed Product Board review.
+4. It has demonstrated practical value through real engineering use.
+5. Product-specific content has been removed or clearly separated.
+
+This principle SHALL be restated in the Portfolio Engineering Charter (Phase 0) and applied to every promotion under this programme.
 
 ---
 

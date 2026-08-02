@@ -46,9 +46,10 @@ This programme MUST NOT:
 ### Phase 0 — Authorisation and Portfolio Engineering Charter
 
 - Owner accepts this design + [PROMOTION-MATRIX.md](./PROMOTION-MATRIX.md).
-- **First artefact of the session:** publish a concise **Portfolio Engineering Charter** defining objectives, scope, success criteria, promotion principles, and governance boundaries for APZHUB-ENG-002 **before** any standards are promoted.
+- **First artefact of the session:** publish a concise **Portfolio Engineering Charter** defining objectives, scope, success criteria, promotion principles, ownership boundaries, versioning, approval workflow, and the distinction between enterprise vs product-specific standards — **before** any standards are promoted.
+- The Charter MUST incorporate the permanent [Promotion Principle](./PROMOTION-MATRIX.md#promotion-principle-permanent).
 - Confirms open questions in the matrix.
-- Explicitly opens Phase 1 only after the Charter is accepted.
+- Explicitly opens Phase 1 only after Product Board approval of the Charter.
 
 ### Phase 1 — Portfolio Testing Standard
 
