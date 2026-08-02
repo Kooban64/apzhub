@@ -1,14 +1,14 @@
 # VERSION-1.0-MANIFEST — APZQEP
 
-| Field                | Value                |
-| -------------------- | -------------------- |
-| Product              | APZQEP               |
-| Version intent       | **1.0 Candidate**    |
-| Candidate id         | `apzqep-1.0-rc.1`    |
-| Build basis commit   | _(filled at commit)_ |
-| Posture              | LIMITED_AVAILABILITY |
-| Governance           | 1.0 STABLE           |
-| Engineering Baseline | 1.x STABLE (1.2)     |
+| Field                | Value                                      |
+| -------------------- | ------------------------------------------ |
+| Product              | APZQEP                                     |
+| Version intent       | **1.0 Candidate**                          |
+| Candidate id         | `apzqep-1.0-rc.1`                          |
+| Build basis commit   | `e453ea4da5981020f0fafd47526a8e25dfd0b9c0` |
+| Posture              | LIMITED_AVAILABILITY                       |
+| Governance           | 1.0 STABLE                                 |
+| Engineering Baseline | 1.x STABLE (1.2)                           |
 
 ## Package inventory (Core QE + foundation slice)
 
