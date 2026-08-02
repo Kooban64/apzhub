@@ -1,0 +1,9 @@
+{
+  "product": "APZQEP Engineering Framework",
+  "version": "1.0",
+  "status": "BASELINED",
+  "baselineCommit": "41741490e9de0caa33cca9383281b25d8541a0c8",
+  "timestampUtc": "20260802T075610Z",
+  "message": "docs(apzqep): baseline APZQEP Engineering Framework v1.0",
+  "gitReleaseTag": "NONE"
+}

@@ -1,0 +1,13 @@
+{
+  "programme": "APZQEP-ENG-001",
+  "phase": "5",
+  "title": "Testing Standard",
+  "decision": "CERTIFIED",
+  "decisionAuthority": "Product Board",
+  "timestampUtc": "20260802T080400Z",
+  "testingStandard": "APPROVED",
+  "framework": "APZQEP Engineering Framework v1.0 — extension only; core not modified",
+  "baselineCommit": "41741490e9de0caa33cca9383281b25d8541a0c8",
+  "recommendation": "Dedicated Phase 5 docs commit; push baseline + Phase 5; proceed to Phase 6 Certification Standard",
+  "strategicNote": "After Testing + Certification, pause for APZHUB-wide promotion review"
+}

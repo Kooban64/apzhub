@@ -88,3 +88,4 @@ Product Board anticipates that portions of Engineering Standards, Testing Standa
 
 - Phase 4 Product Board CERTIFIED — `docs/operations/evidence/apzqep/20260802T075610Z-APZQEP-ENG-001-PHASE4-PRODUCT-BOARD.json`
 - Framework v1.0 BASELINED — `docs/operations/evidence/apzqep/20260802T075610Z-APZQEP-ENGINEERING-FRAMEWORK-v1.0-BASELINE.json`
+- Baseline commit — `41741490e9de0caa33cca9383281b25d8541a0c8` (`20260802T075610Z-APZQEP-ENGINEERING-FRAMEWORK-v1.0-BASELINE-COMMIT.json`)

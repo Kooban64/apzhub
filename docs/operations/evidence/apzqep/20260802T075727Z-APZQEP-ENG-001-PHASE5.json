@@ -1,0 +1,34 @@
+{
+  "programme": "APZQEP-ENG-001",
+  "phase": "5",
+  "title": "Testing Standard",
+  "status": "PHASE_5_COMPLETE",
+  "timestampUtc": "20260802T075727Z",
+  "engineering": "NONE",
+  "framework": "APZQEP Engineering Framework v1.0 (extension — does not reopen baseline)",
+  "frameworkBaselineCommit": "41741490e9de0caa33cca9383281b25d8541a0c8",
+  "deliverable": "docs/products/apzqep/engineering/APZQEP-TESTING-STANDARD.md",
+  "testingStandard": {
+    "status": "COMPLETE",
+    "documentStatus": "Normative",
+    "version": "1.0",
+    "compliance": "Mandatory",
+    "approxLines": 335,
+    "covers": [
+      "Unit",
+      "Integration",
+      "Security",
+      "Migration",
+      "Regression",
+      "Performance",
+      "Architecture boundary",
+      "Evidence collection",
+      "CI requirements",
+      "Failure handling"
+    ]
+  },
+  "phase4ProductBoard": "CERTIFIED",
+  "frameworkBaseline": "BASELINED",
+  "nextStep": "Author APZQEP-CERTIFICATION-STANDARD.md",
+  "outstandingIssues": "NONE for Phase 5"
+}
