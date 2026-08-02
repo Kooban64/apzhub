@@ -1,12 +1,15 @@
 # Standing Programme Record — APZQEP
 
+> **Version 1.0 current product status (authoritative):** [PRODUCT-STATUS.md](./PRODUCT-STATUS.md)  
+> This Standing Programme Record remains the historical programme baseline. For engineering / release posture, **PRODUCT-STATUS.md wins**.
+
 | Field          | Value                                                                                                                                                                                                                                 |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Document       | Standing Programme Record                                                                                                                                                                                                             |
 | Date           | 2026-08-02                                                                                                                                                                                                                            |
-| Status         | **IN FORCE — OFFICIAL STANDING STATE**                                                                                                                                                                                                |
+| Status         | **IN FORCE — HISTORICAL PROGRAMME BASELINE** (current Version 1.0 posture → [PRODUCT-STATUS.md](./PRODUCT-STATUS.md))                                                                                                                 |
 | APZQEP-ENG-001 | **CLOSED** — Engineering Framework v1.0 BASELINED · MAINTENANCE ACTIVE · [completion](./engineering/APZQEP-ENG-001-COMPLETION.md) · Successor **APZHUB-ENG-002** (Foundation COMPLETE · Phase 1 CLOSED · promotions ON HOLD)          |
-| Product state  | **APZQEP v1.0 — Lifecycle Complete · Maintained Product · LIMITED_AVAILABILITY**                                                                                                                                                      |
+| Product state  | **APZQEP v1.0 — ENGINEERING COMPLETE · PRODUCT COMPLETE · PRODUCTION CERTIFICATION PENDING** · production release **NO-GO** · see [PRODUCT-STATUS.md](./PRODUCT-STATUS.md)                                                            |
 | Test Execution | `@apzhub/qep-test-execution` **1.0.1**                                                                                                                                                                                                |
 | Evidence Mgmt  | `@apzhub/qep-evidence` **1.0.0** · tag `apzqep-evidence-v1.0.0` → `79d9851f`                                                                                                                                                          |
 | REM-002        | **APPROVED AND CLOSED**                                                                                                                                                                                                               |

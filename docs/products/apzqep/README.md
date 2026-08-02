@@ -1,5 +1,8 @@
 # APZ QEP — APZ Quality Engineering Platform
 
+> **Authoritative product status (read first):** [PRODUCT-STATUS.md](./PRODUCT-STATUS.md)  
+> **APZQEP Version 1.0** — Engineering COMPLETE · Product COMPLETE · Production Certification **PENDING** (release **NO-GO** on RB-001 / RB-002)
+
 > **Official product name:** **APZ QEP** (APZ Quality Engineering Platform)  
 > **Requirements / Traceability / Verification / Test Specifications / Test Plans:** all **1.0.0 CERTIFIED / FROZEN**  
 > **Test Plans Domain:** **0.1.0 CERTIFIED** · **CERT-060A CLOSED**  

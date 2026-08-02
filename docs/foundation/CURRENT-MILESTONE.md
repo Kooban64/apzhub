@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-02  
-> **Current status:** **APZQEP Version 1.0 — ENGINEERING COMPLETE · PRODUCT COMPLETE · PRODUCTION CERTIFICATION PENDING** · APZQEP-120/140 **CLOSED** · APZQEP-150 **CERTIFIED** (readiness audit PASSED · production release **NO-GO** on RB-001/RB-002) · Next recommended: **APZQEP-151** then **APZQEP-152** (**NOT AUTHORISED**) · Do not open APZQEP-160 · Feature freeze **ACTIVE** until Owner Auth · Release/Deployment **NOT AUTHORISED** · Governance **1.0 STABLE** · Baseline **1.2** · ES-004 **NOT AUTHORISED**.
+> **Current status:** **APZQEP Version 1.0 — ENGINEERING COMPLETE · PRODUCT COMPLETE · PRODUCTION CERTIFICATION PENDING** · Authoritative status: [PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md) · APZQEP-150 **CERTIFIED** (audit PASSED · production **NO-GO**) · Next authorised programme: **NONE** · Recommended (not authorised): APZQEP-151 then APZQEP-152 · Feature freeze **ACTIVE** · Release/Deployment **NOT AUTHORISED** · Governance **1.0 STABLE** · Baseline **1.2** · ES-004 **NOT AUTHORISED**.
 
 ---
 
@@ -54,13 +54,15 @@
 - Completion: [APZQEP-150-COMPLETION.md](../products/apzqep/v1.1/apzqep-150/APZQEP-150-COMPLETION.md)
 - Version declaration: [APZQEP-VERSION-1.0-ENGINEERING-COMPLETE.md](../products/apzqep/v1.1/APZQEP-VERSION-1.0-ENGINEERING-COMPLETE.md)
 
-### Recommended next programmes (not authorised)
+### Authoritative product status
 
-1. **APZQEP-151 — Durable Product Persistence** (clears RB-001) — [recommendation](../products/apzqep/v1.1/apzqep-151/APZQEP-151-PRODUCT-BOARD-RECOMMENDATION.md)
-2. **APZQEP-152 — Production RBAC Hardening** (clears RB-002) — [recommendation](../products/apzqep/v1.1/apzqep-152/APZQEP-152-PRODUCT-BOARD-RECOMMENDATION.md)
-3. Re-run **APZQEP-150** readiness audit
+**[PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md)** — standing Product Board resolution for APZQEP Version 1.0.
 
-Do **not** reopen 120/140. Do **not** open APZQEP-160. No engineering without Owner Authorisation.
+### Next authorised programme
+
+**NONE.** Do not start APZQEP-151 or APZQEP-152 until an explicit Owner Authorisation Pack is issued for one programme.
+
+Recommended sequence (not authorised): 151 (preferred) → 152 → re-run 150. Do **not** reopen 120/140. Do **not** open APZQEP-160.
 
 ---
 

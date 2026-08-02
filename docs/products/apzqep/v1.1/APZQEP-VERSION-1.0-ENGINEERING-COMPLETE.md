@@ -1,15 +1,22 @@
 # APZQEP Version 1.0 — Engineering & Product Complete
 
-| Field     | Value            |
-| --------- | ---------------- |
-| Product   | APZQEP           |
-| Version   | **1.0**          |
-| Authority | Product Board    |
-| Timestamp | 20260802T192200Z |
+| Field                | Value                                                      |
+| -------------------- | ---------------------------------------------------------- |
+| Product              | APZQEP                                                     |
+| Version              | **1.0**                                                    |
+| Authority            | Product Board                                              |
+| Timestamp            | 20260802T192900Z                                           |
+| Authoritative status | **[PRODUCT-STATUS.md](../PRODUCT-STATUS.md)** — read first |
 
 ---
 
 ## Formal declaration
+
+Standing resolution (full text): [PRODUCT-STATUS.md](../PRODUCT-STATUS.md)
+
+---
+
+## Formal declaration (summary)
 
 ```text
 APZQEP Version 1.0

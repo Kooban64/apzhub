@@ -20,11 +20,13 @@ The **programme** passed. The **product** (unrestricted production) did not. See
 - [APZQEP-150-COMPLETION.md](./APZQEP-150-COMPLETION.md)
 - [GO-NO-GO-REPORT.md](./GO-NO-GO-REPORT.md)
 
-## Recommended next (NOT AUTHORISED)
+## Standing product status
 
-- [APZQEP-151 — Durable Product Persistence](../apzqep-151/) (clears RB-001)
-- [APZQEP-152 — Production RBAC Hardening](../apzqep-152/) (clears RB-002)
-- Then re-run APZQEP-150 readiness audit
+**[PRODUCT-STATUS.md](../../PRODUCT-STATUS.md)** — authoritative Version 1.0 resolution.
+
+## Next authorised programme
+
+**NONE.** APZQEP-151 / APZQEP-152 remain recommended only until Owner Authorisation.
 
 ## Version posture
 
