@@ -34,6 +34,9 @@ ES-001
 
 Next Planned Version:
 1.1 (Pending ES-002 Certification)
+
+ES-002 Catalogue Status:
+UNDER REVIEW (does not change this Baseline)
 ```
 
 | Field                | Value                                  |
@@ -43,7 +46,7 @@ Next Planned Version:
 | Effective date       | 2026-08-02                             |
 | Current standards    | ES-001                                 |
 | Next planned version | **1.1** (Pending ES-002 Certification) |
-| ES-002 status        | **AUTHORISATION PENDING**              |
+| ES-002 status        | **UNDER REVIEW** (Baseline unchanged)  |
 
 ---
 

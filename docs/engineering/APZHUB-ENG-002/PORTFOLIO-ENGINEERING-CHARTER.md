@@ -205,7 +205,8 @@ Products inherit enterprise changes by citation update in their next authorised 
 5. No enterprise standard body without a prior row in the [Enterprise Engineering Standards Catalogue](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md).
 6. Enterprise standards shall never be derived by duplication; they shall be derived by **abstraction** ([PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md)).
 7. When a standard becomes Active, the [Enterprise Engineering Baseline](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) SHALL be updated to a new version listing the full adopted set.
-8. Documentation-only programmes remain documentation-only unless Owner expands authority.
+8. No enterprise standard may become Active without **Architecture Review** and **Product Board Certification** (Dual Approval — [PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md)).
+9. Documentation-only programmes remain documentation-only unless Owner expands authority.
 
 ---
 

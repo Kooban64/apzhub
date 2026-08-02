@@ -1,0 +1,23 @@
+{
+  "programme": "APZHUB-ENG-002",
+  "catalogueId": "ES-002",
+  "title": "APZHUB Enterprise Certification Standard",
+  "version": "1.0-candidate",
+  "status": "UNDER_REVIEW",
+  "timestampUtc": "20260802T114832Z",
+  "derivation": "abstraction",
+  "referenceSource": "docs/products/apzqep/engineering/APZQEP-CERTIFICATION-STANDARD.md",
+  "normativePath": "docs/engineering/APZHUB-CERTIFICATION-STANDARD.md",
+  "architectureReview": "PASS",
+  "productBoard": "PENDING",
+  "dualApproval": {
+    "architectureReview": "PASS",
+    "productBoardCertification": "PENDING"
+  },
+  "catalogueStatus": "UNDER_REVIEW",
+  "baselineVersion": "1.0",
+  "baselineImpact": "NONE",
+  "engineering": "NONE",
+  "copyPastePromotion": "PROHIBITED",
+  "outstandingIssues": "NONE — awaiting Product Board Certification"
+}

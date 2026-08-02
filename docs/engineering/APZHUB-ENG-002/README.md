@@ -1,37 +1,37 @@
 # APZHUB-ENG-002 — Portfolio Engineering Standards
 
-| Field                    | Value                                                                    |
-| ------------------------ | ------------------------------------------------------------------------ |
-| Programme                | **APZHUB-ENG-002**                                                       |
-| Title                    | Portfolio Engineering Standards                                          |
-| Classification           | Enterprise Engineering Governance                                        |
-| Phase                    | **1 — Baseline 1.0 CERTIFIED · ES-001 ACTIVE**                           |
-| Status                   | Catalogue **CERTIFIED** · Baseline **1.0 CERTIFIED** · ES-001 **ACTIVE** |
-| Predecessor              | APZQEP-ENG-001 **ARCHIVED** (`b9626ada`)                                 |
-| Reference implementation | APZQEP Engineering Framework v1.0 (not automatic enterprise standard)    |
-| Engineering              | **NONE**                                                                 |
-| Next promotion           | **ES-002** — status **AUTHORISATION PENDING**                            |
+| Field                    | Value                                                                        |
+| ------------------------ | ---------------------------------------------------------------------------- |
+| Programme                | **APZHUB-ENG-002**                                                           |
+| Title                    | Portfolio Engineering Standards                                              |
+| Classification           | Enterprise Engineering Governance                                            |
+| Phase                    | **1 — ES-002 Under Review**                                                  |
+| Status                   | Baseline **1.0 CERTIFIED** · ES-001 **ACTIVE** · ES-002 **Under Review**     |
+| Predecessor              | APZQEP-ENG-001 **ARCHIVED** (`b9626ada`)                                     |
+| Reference implementation | APZQEP Engineering Framework v1.0                                            |
+| Engineering              | **NONE**                                                                     |
+| Next decision            | Product Board Certification of **ES-002** (Architecture Review already PASS) |
 
 ---
 
 ## Purpose
 
-Establish the **governance model** under which engineering standards may be promoted from products into the APZHUB enterprise baseline — then author those standards by **abstraction**, not duplication.
+Establish the **governance model** under which engineering standards may be promoted from products into the APZHUB enterprise baseline — then author those standards by **abstraction**, not duplication, under **Dual Approval**.
 
 ---
 
 ## Authoritative inventory
 
-| Document                                                                                  | Role                                               |
-| ----------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) | **What is mandatory** (Baseline **1.0 CERTIFIED**) |
-| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | What exists (all lifecycle states)                 |
-| [BASELINE-1.0-CERTIFICATION.md](./BASELINE-1.0-CERTIFICATION.md)                          | Baseline 1.0 Board certification record            |
-| [PHASE-1-CATALOGUE-OPENING.md](./PHASE-1-CATALOGUE-OPENING.md)                            | Catalogue opening (**CERTIFIED**)                  |
+| Document                                                                                  | Role                                              |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) | **What is mandatory** (Baseline **1.0** — ES-001) |
+| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | What exists (all lifecycle states)                |
+| [BASELINE-1.0-CERTIFICATION.md](./BASELINE-1.0-CERTIFICATION.md)                          | Baseline 1.0 Board certification record           |
+| [PHASE-1-CATALOGUE-OPENING.md](./PHASE-1-CATALOGUE-OPENING.md)                            | Catalogue opening (**CERTIFIED**)                 |
 
 ---
 
-## Active enterprise standards (ENG-002 promotions)
+## Active enterprise standards (Baseline 1.0)
 
 | ID     | Document                                                    | Status          |
 | ------ | ----------------------------------------------------------- | --------------- |
@@ -39,7 +39,20 @@ Establish the **governance model** under which engineering standards may be prom
 
 ---
 
-## ES-001 pack (CERTIFIED)
+## ES-002 pack (Under Review)
+
+| Document                                                                | Role                      | Status       |
+| ----------------------------------------------------------------------- | ------------------------- | ------------ |
+| [APZHUB-CERTIFICATION-STANDARD.md](../APZHUB-CERTIFICATION-STANDARD.md) | Candidate enterprise body | Under Review |
+| [ES-002-GENERICISATION-NOTES.md](./ES-002-GENERICISATION-NOTES.md)      | Abstraction evidence      | COMPLETE     |
+| [ES-002-ARCHITECTURE-REVIEW.md](./ES-002-ARCHITECTURE-REVIEW.md)        | Dual Approval #1          | **PASS**     |
+| [ES-002-PROMOTION-PACK.md](./ES-002-PROMOTION-PACK.md)                  | Board decision pack       | READY        |
+| [ES-002-STANDARDS-VALIDATION.md](./ES-002-STANDARDS-VALIDATION.md)      | Cross-ref validation      | PASS         |
+| [ES-002-COMPLETION.md](./ES-002-COMPLETION.md)                          | Authorship completion     | COMPLETE     |
+
+---
+
+## ES-001 pack (CERTIFIED / ACTIVE)
 
 | Document                                                           | Role                         |
 | ------------------------------------------------------------------ | ---------------------------- |
@@ -49,32 +62,13 @@ Establish the **governance model** under which engineering standards may be prom
 
 ---
 
-## Phase 0 pack (CERTIFIED)
-
-| #   | Document                                                               | Role                      |
-| --- | ---------------------------------------------------------------------- | ------------------------- |
-| 1   | [PORTFOLIO-ENGINEERING-CHARTER.md](./PORTFOLIO-ENGINEERING-CHARTER.md) | **Governing Charter**     |
-| 2   | [PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md)                   | Mandatory promotion rules |
-| 3   | [OWNERSHIP-MODEL.md](./OWNERSHIP-MODEL.md)                             | Who owns what             |
-| 4   | [PORTFOLIO-GOVERNANCE-MODEL.md](./PORTFOLIO-GOVERNANCE-MODEL.md)       | Decision rights           |
-| 5   | [PORTFOLIO-LIFECYCLE.md](./PORTFOLIO-LIFECYCLE.md)                     | Draft → Archived          |
-| 6   | [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md)                           | Success / exit            |
-| 7   | [PROGRAMME-CHARTER.md](./PROGRAMME-CHARTER.md)                         | Programme charter         |
-| 8   | [DOCUMENT-MAP.md](./DOCUMENT-MAP.md)                                   | Full index                |
-| 9   | [PHASE-0-COMPLETION.md](./PHASE-0-COMPLETION.md)                       | Phase completion          |
-
-Retained design inputs: [PROGRAMME-DESIGN.md](./PROGRAMME-DESIGN.md) · [PROMOTION-MATRIX.md](./PROMOTION-MATRIX.md)
-
----
-
 ## Gate
 
 ```text
-Phase 0: CERTIFIED
-Standards Catalogue: CERTIFIED
-Enterprise Engineering Baseline: 1.0 CERTIFIED (ES-001)
-ES-001: ACTIVE v1.0
-ES-002: AUTHORISATION PENDING (Baseline → 1.1 only after CERTIFIED → ACTIVE)
+Baseline: 1.0 CERTIFIED (ES-001 only) — UNCHANGED
+ES-001: ACTIVE
+ES-002: Under Review · Architecture Review PASS · Product Board PENDING
+Dual Approval: required before Active
 ```
 
 ---
