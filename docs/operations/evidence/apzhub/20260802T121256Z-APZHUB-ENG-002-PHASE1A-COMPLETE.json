@@ -1,0 +1,26 @@
+{
+  "programme": "APZHUB-ENG-002",
+  "phase": "1A",
+  "title": "Enterprise Engineering Baseline 1.2 Review",
+  "status": "COMPLETE",
+  "timestampUtc": "20260802T121256Z",
+  "engineering": "NONE",
+  "baselineVersion": "1.2",
+  "baselineVersionChanged": false,
+  "standardsPromoted": "NONE",
+  "es004": "NOT_AUTHORISED",
+  "deliverables": [
+    "BASELINE-1.2-REVIEW.md",
+    "RESPONSIBILITY-MATRIX.md",
+    "PRODUCT-ADOPTION-REVIEW.md",
+    "GAP-ANALYSIS.md",
+    "BASELINE-READINESS-REPORT.md",
+    "PRODUCT-BOARD-REVIEW-REPORT.md",
+    "PHASE-1A-COMPLETION.md"
+  ],
+  "readiness": "READY",
+  "recommendation": "Baseline 1.2 ACCEPTED",
+  "optionalDeclaration": "Enterprise Engineering Baseline 1.x STABLE",
+  "outstandingIssues": "NONE",
+  "productBoardDecision": "PENDING"
+}

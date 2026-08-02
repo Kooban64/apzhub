@@ -50,13 +50,14 @@
 | APZQEP Portfolio Status Snapshot                     | `docs/products/apzqep/engineering/APZQEP-PORTFOLIO-STATUS.md`                | **IN FORCE** (Board closure snapshot)                               |
 | APZQEP Engineering Framework Changelog               | `docs/products/apzqep/engineering/APZQEP-ENGINEERING-FRAMEWORK-CHANGELOG.md` | **ACTIVE** — governance evolution record                            |
 | APZQEP → APZHUB Promotion Review                     | `docs/products/apzqep/engineering/APZQEP-ENG-001-PROMOTION-REVIEW.md`        | **CERTIFIED** — Standards SPLIT refinement                          |
-| APZHUB-ENG-002 Portfolio Engineering Standards       | `docs/engineering/APZHUB-ENG-002/`                                           | Baseline **1.2 ESTABLISHED** · Phase 1A OPEN                        |
+| APZHUB-ENG-002 Portfolio Engineering Standards       | `docs/engineering/APZHUB-ENG-002/`                                           | Baseline **1.2** · Phase 1A COMPLETE (Board decision pending)       |
 | APZHUB Enterprise Engineering Standards Catalogue    | `docs/engineering/APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md`                 | ES-001…ES-003 Active; ES-004 paused (Phase 1A)                      |
 | APZHUB Enterprise Engineering Baseline               | `docs/engineering/APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md`                 | **1.2 ESTABLISHED** — ES-001, ES-002, ES-003                        |
 | APZHUB Enterprise Testing Standard (ES-001)          | `docs/engineering/APZHUB-TESTING-STANDARD.md`                                | **ACTIVE** v1.0                                                     |
 | APZHUB Enterprise Certification Standard (ES-002)    | `docs/engineering/APZHUB-CERTIFICATION-STANDARD.md`                          | **ACTIVE** v1.0                                                     |
 | APZHUB Enterprise Engineering Spec Template (ES-003) | `docs/engineering/APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md`              | **ACTIVE** v1.0 — Specify (Baseline 1.2)                            |
-| APZHUB-ENG-002 Phase 1A Baseline 1.2 Review          | `docs/engineering/APZHUB-ENG-002/PHASE-1A-BASELINE-1.2-REVIEW.md`            | **OPEN** — checkpoint before ES-004                                 |
+| APZHUB-ENG-002 Phase 1A Baseline 1.2 Review          | `docs/engineering/APZHUB-ENG-002/PHASE-1A-BASELINE-1.2-REVIEW.md`            | **COMPLETE** — await Board ACCEPTED / REMEDIATION                   |
+| APZHUB-ENG-002 Phase 1A Product Board Report         | `docs/engineering/APZHUB-ENG-002/PRODUCT-BOARD-REVIEW-REPORT.md`             | **AWAITING BOARD**                                                  |
 
 ## Indexes updated in this programme
 

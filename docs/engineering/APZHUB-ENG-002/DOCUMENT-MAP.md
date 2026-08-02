@@ -1,39 +1,37 @@
 # APZHUB-ENG-002 — Document Map
 
-| Field     | Value                                               |
-| --------- | --------------------------------------------------- |
-| Programme | APZHUB-ENG-002                                      |
-| Phase     | Baseline **1.2 ESTABLISHED** · Phase **1A OPEN**    |
-| Status    | Specify / Test / Certify operational; ES-004 paused |
+| Field     | Value                                                             |
+| --------- | ----------------------------------------------------------------- |
+| Programme | APZHUB-ENG-002                                                    |
+| Phase     | Baseline **1.2** · Phase **1A COMPLETE** (Board decision pending) |
 
 ---
 
-## Enterprise inventory
+## Phase 1A
 
-| Document                                                                                  | Role                | Status              |
-| ----------------------------------------------------------------------------------------- | ------------------- | ------------------- |
-| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) | Adopted set         | **1.2 ESTABLISHED** |
-| [BASELINE-1.2-CERTIFICATION.md](./BASELINE-1.2-CERTIFICATION.md)                          | Baseline 1.2 record | COMPLETE            |
-| [GOVERNANCE-MILESTONE-BASELINE-1.2.md](./GOVERNANCE-MILESTONE-BASELINE-1.2.md)            | Milestone record    | COMPLETE            |
-| [PHASE-1A-BASELINE-1.2-REVIEW.md](./PHASE-1A-BASELINE-1.2-REVIEW.md)                      | Review phase        | **OPEN**            |
-| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | Register            | CERTIFIED           |
-
----
-
-## Active standards (Baseline 1.2)
-
-| ID     | Document                                                                                        | Status |
-| ------ | ----------------------------------------------------------------------------------------------- | ------ |
-| ES-001 | [APZHUB-TESTING-STANDARD.md](../APZHUB-TESTING-STANDARD.md)                                     | ACTIVE |
-| ES-002 | [APZHUB-CERTIFICATION-STANDARD.md](../APZHUB-CERTIFICATION-STANDARD.md)                         | ACTIVE |
-| ES-003 | [APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md](../APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md) | ACTIVE |
+| Document                                                             | Status         |
+| -------------------------------------------------------------------- | -------------- |
+| [PHASE-1A-BASELINE-1.2-REVIEW.md](./PHASE-1A-BASELINE-1.2-REVIEW.md) | COMPLETE       |
+| [BASELINE-1.2-REVIEW.md](./BASELINE-1.2-REVIEW.md)                   | COMPLETE       |
+| [RESPONSIBILITY-MATRIX.md](./RESPONSIBILITY-MATRIX.md)               | COMPLETE       |
+| [PRODUCT-ADOPTION-REVIEW.md](./PRODUCT-ADOPTION-REVIEW.md)           | COMPLETE       |
+| [GAP-ANALYSIS.md](./GAP-ANALYSIS.md)                                 | COMPLETE       |
+| [BASELINE-READINESS-REPORT.md](./BASELINE-READINESS-REPORT.md)       | COMPLETE       |
+| [PRODUCT-BOARD-REVIEW-REPORT.md](./PRODUCT-BOARD-REVIEW-REPORT.md)   | AWAITING BOARD |
+| [PHASE-1A-COMPLETION.md](./PHASE-1A-COMPLETION.md)                   | COMPLETE       |
 
 ---
 
-## ES-003 pack (CERTIFIED)
+## Baseline & catalogue
 
-| Document                                                         | Status    |
-| ---------------------------------------------------------------- | --------- |
-| [ES-003-PROMOTION-PACK.md](./ES-003-PROMOTION-PACK.md)           | CERTIFIED |
-| [ES-003-ARCHITECTURE-REVIEW.md](./ES-003-ARCHITECTURE-REVIEW.md) | PASS      |
-| [ES-003-COMPLETION.md](./ES-003-COMPLETION.md)                   | COMPLETE  |
+| Document                                                                                  | Status              |
+| ----------------------------------------------------------------------------------------- | ------------------- |
+| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) | **1.2 ESTABLISHED** |
+| [GOVERNANCE-MILESTONE-BASELINE-1.2.md](./GOVERNANCE-MILESTONE-BASELINE-1.2.md)            | COMPLETE            |
+| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | CERTIFIED           |
+
+---
+
+## Active standards
+
+ES-001 · ES-002 · ES-003 — **ACTIVE**

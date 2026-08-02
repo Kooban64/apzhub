@@ -12,7 +12,8 @@
 | Companion         | [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)           |
 | Technical content | **NONE** — adopted-set inventory only                                                              |
 | Engineering       | NONE                                                                                               |
-| Next wave         | **PAUSED** — Phase 1A Baseline 1.2 Review before ES-004                                            |
+| Next wave         | **PAUSED** — Phase 1A pack COMPLETE; await Board ACCEPTED before ES-004                            |
+| Phase 1A          | Review pack COMPLETE `20260802T121256Z` — Board decision pending                                   |
 
 ---
 
@@ -42,18 +43,22 @@ Capability:
 Specify → Test → Certify
 
 Next Planned Version:
-1.3 (Paused — after Phase 1A; Pending ES-004)
+1.3 (Paused — Pending Board ACCEPTED on Phase 1A + ES-004)
+
+Phase 1A:
+COMPLETE (awaiting Product Board ACCEPTED / REQUIRES REMEDIATION)
 ```
 
-| Field                | Value                                                               |
-| -------------------- | ------------------------------------------------------------------- |
-| Current version      | **1.2**                                                             |
-| Current authority    | Product Board                                                       |
-| Effective date       | 2026-08-02                                                          |
-| Current standards    | ES-001, ES-002, ES-003                                              |
-| Milestone            | **ESTABLISHED** — first operational enterprise engineering baseline |
-| Next planned version | **1.3** (PAUSED — Phase 1A review before ES-004)                    |
-| ES-004 status        | **NOT AUTHORISED**                                                  |
+| Field                | Value                                              |
+| -------------------- | -------------------------------------------------- |
+| Current version      | **1.2**                                            |
+| Current authority    | Product Board                                      |
+| Effective date       | 2026-08-02                                         |
+| Current standards    | ES-001, ES-002, ES-003                             |
+| Milestone            | **ESTABLISHED**                                    |
+| Phase 1A             | Pack **COMPLETE** — Board decision pending         |
+| Next planned version | **1.3** (PAUSED)                                   |
+| ES-004 status        | **NOT AUTHORISED** until Baseline 1.2 **ACCEPTED** |
 
 ---
 

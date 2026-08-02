@@ -160,6 +160,7 @@ API / Database / Domain Event remain **Deferred** until Board revisits.
 | 20260802T120716Z | ES-003 | Dual Approval complete; Product Board **CERTIFIED**; Status → **APPROVED → ACTIVE** v1.0                                 | `ES-003-PROMOTION-PACK.md` · evidence CERTIFIED                |
 | 20260802T120716Z | —      | Enterprise Engineering Baseline **1.1 → 1.2** (ES-001, ES-002, ES-003) · **ESTABLISHED**                                 | `BASELINE-1.2-*` · `GOVERNANCE-MILESTONE-BASELINE-1.2.md`      |
 | 20260802T120716Z | —      | Phase **1A** Baseline 1.2 Review **OPEN**; ES-004 not authorised                                                         | `PHASE-1A-BASELINE-1.2-REVIEW.md`                              |
+| 20260802T121256Z | —      | Phase **1A** review pack **COMPLETE**; Board decision pending; Baseline version **unchanged**                            | `PRODUCT-BOARD-REVIEW-REPORT.md` · `PHASE-1A-COMPLETION.md`    |
 
 ---
 

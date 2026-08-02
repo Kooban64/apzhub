@@ -1,44 +1,54 @@
 # APZHUB-ENG-002 — Portfolio Engineering Standards
 
-| Field          | Value                                                                   |
-| -------------- | ----------------------------------------------------------------------- |
-| Programme      | **APZHUB-ENG-002**                                                      |
-| Title          | Portfolio Engineering Standards                                         |
-| Classification | Enterprise Engineering Governance                                       |
-| Phase          | **1A — Baseline 1.2 Review**                                            |
-| Status         | Baseline **1.2 ESTABLISHED** · ES-001…ES-003 **ACTIVE** · ES-004 paused |
-| Predecessor    | APZQEP-ENG-001 **ARCHIVED** (`b9626ada`)                                |
-| Engineering    | **NONE**                                                                |
-| Next promotion | **ES-004** — **NOT AUTHORISED** until Phase 1A completes                |
+| Field       | Value                                                     |
+| ----------- | --------------------------------------------------------- |
+| Programme   | **APZHUB-ENG-002**                                        |
+| Phase       | **1A COMPLETE** — awaiting Board decision on Baseline 1.2 |
+| Status      | Baseline **1.2 ESTABLISHED** · Phase 1A pack complete     |
+| Engineering | **NONE**                                                  |
+| ES-004      | **NOT AUTHORISED** until Baseline 1.2 **ACCEPTED**        |
 
 ---
 
 ## Authoritative inventory
 
-| Document                                                                                  | Role                                     |
-| ----------------------------------------------------------------------------------------- | ---------------------------------------- |
-| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) | **What is mandatory** (Baseline **1.2**) |
-| [GOVERNANCE-MILESTONE-BASELINE-1.2.md](./GOVERNANCE-MILESTONE-BASELINE-1.2.md)            | Milestone: Specify → Test → Certify      |
-| [PHASE-1A-BASELINE-1.2-REVIEW.md](./PHASE-1A-BASELINE-1.2-REVIEW.md)                      | Checkpoint before ES-004                 |
-| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | What exists                              |
-| [PORTFOLIO-ENGINEERING-CHARTER.md](./PORTFOLIO-ENGINEERING-CHARTER.md)                    | Charter + Dual Approval §12              |
+| Document                                                                                  | Role                    |
+| ----------------------------------------------------------------------------------------- | ----------------------- |
+| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) | Mandatory set (**1.2**) |
+| [PHASE-1A-BASELINE-1.2-REVIEW.md](./PHASE-1A-BASELINE-1.2-REVIEW.md)                      | Phase 1A face           |
+| [PRODUCT-BOARD-REVIEW-REPORT.md](./PRODUCT-BOARD-REVIEW-REPORT.md)                        | **Board decision pack** |
+| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | Catalogue               |
 
 ---
 
 ## Active (Baseline 1.2)
 
-| ID     | Document                                                                                        | Role    |
-| ------ | ----------------------------------------------------------------------------------------------- | ------- |
-| ES-003 | [APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md](../APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md) | Specify |
-| ES-001 | [APZHUB-TESTING-STANDARD.md](../APZHUB-TESTING-STANDARD.md)                                     | Test    |
-| ES-002 | [APZHUB-CERTIFICATION-STANDARD.md](../APZHUB-CERTIFICATION-STANDARD.md)                         | Certify |
+| ID     | Role    | Document                                     |
+| ------ | ------- | -------------------------------------------- |
+| ES-003 | Specify | APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md |
+| ES-001 | Test    | APZHUB-TESTING-STANDARD.md                   |
+| ES-002 | Certify | APZHUB-CERTIFICATION-STANDARD.md             |
+
+---
+
+## Phase 1A pack
+
+| Document                                                           | Status         |
+| ------------------------------------------------------------------ | -------------- |
+| [BASELINE-1.2-REVIEW.md](./BASELINE-1.2-REVIEW.md)                 | COMPLETE       |
+| [RESPONSIBILITY-MATRIX.md](./RESPONSIBILITY-MATRIX.md)             | COMPLETE       |
+| [PRODUCT-ADOPTION-REVIEW.md](./PRODUCT-ADOPTION-REVIEW.md)         | COMPLETE       |
+| [GAP-ANALYSIS.md](./GAP-ANALYSIS.md)                               | COMPLETE       |
+| [BASELINE-READINESS-REPORT.md](./BASELINE-READINESS-REPORT.md)     | COMPLETE       |
+| [PRODUCT-BOARD-REVIEW-REPORT.md](./PRODUCT-BOARD-REVIEW-REPORT.md) | AWAITING BOARD |
+| [PHASE-1A-COMPLETION.md](./PHASE-1A-COMPLETION.md)                 | COMPLETE       |
 
 ---
 
 ## Gate
 
 ```text
-Baseline: 1.2 ESTABLISHED
-Phase 1A: OPEN (no new standards)
+Baseline version: 1.2 (unchanged by Phase 1A)
+Phase 1A: COMPLETE → Product Board ACCEPTED / REQUIRES REMEDIATION
 ES-004: NOT AUTHORISED
 ```

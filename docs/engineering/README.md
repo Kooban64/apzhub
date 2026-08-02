@@ -35,7 +35,7 @@ Enterprise governance for promoting proven product engineering standards by **ab
 | [APZHUB-ENG-002/GOVERNANCE-MILESTONE-BASELINE-1.2.md](./APZHUB-ENG-002/GOVERNANCE-MILESTONE-BASELINE-1.2.md) | Milestone record                            |
 | [APZHUB-ENG-002/README.md](./APZHUB-ENG-002/README.md)                                                       | Programme face                              |
 
-**Status:** Baseline **1.2 ESTABLISHED** (Specify → Test → Certify). Phase **1A OPEN**. ES-004 **NOT AUTHORISED**. APZQEP-ENG-001 **ARCHIVED** (`b9626ada`).
+**Status:** Baseline **1.2 ESTABLISHED**. Phase **1A COMPLETE** (awaiting Board ACCEPTED / REMEDIATION). ES-004 **NOT AUTHORISED**. APZQEP-ENG-001 **ARCHIVED** (`b9626ada`).
 
 ---
 

@@ -1,83 +1,57 @@
 # APZHUB-ENG-002 — Phase 1A: Enterprise Baseline 1.2 Review
 
-| Field               | Value                                                        |
-| ------------------- | ------------------------------------------------------------ |
-| Programme           | APZHUB-ENG-002                                               |
-| Phase               | **1A**                                                       |
-| Title               | Enterprise Baseline 1.2 Review                               |
-| Status              | **AUTHORISED / OPEN**                                        |
-| Prerequisite        | Baseline **1.2 ESTABLISHED** (ES-001, ES-002, ES-003 ACTIVE) |
-| Engineering         | NONE                                                         |
-| Standards promotion | **NONE** — no new standards during this phase                |
-| ES-004              | **NOT AUTHORISED**                                           |
+| Field               | Value                                          |
+| ------------------- | ---------------------------------------------- |
+| Programme           | APZHUB-ENG-002                                 |
+| Phase               | **1A**                                         |
+| Title               | Enterprise Engineering Baseline 1.2 Review     |
+| Status              | **COMPLETE** — awaiting Product Board decision |
+| Prerequisite        | Baseline **1.2 ESTABLISHED**                   |
+| Engineering         | NONE                                           |
+| Standards promotion | **NONE**                                       |
+| ES-004              | **NOT AUTHORISED**                             |
+| Completed (UTC)     | 20260802T121256Z                               |
 
 ---
 
 ## Purpose
 
-Governance checkpoint — not uncertainty.
-
-Validate that Baseline 1.2 is a coherent, adoptable **Enterprise Engineering System** before promoting further standards.
+Governance validation of the **system** (Specify → Test → Certify), not authorship of new standards.
 
 ---
 
-## Scope
+## Deliverables (complete)
 
-Phase 1A SHALL:
-
-1. Validate Baseline 1.2 as a coherent engineering baseline.
-2. Confirm there are no conflicts or overlapping responsibilities between ES-001, ES-002, and ES-003.
-3. Review adoption implications for existing APZHUB products (including APZQEP as reference implementation).
-4. Confirm readiness for further enterprise standard promotion.
-5. Produce a **Product Board Review Report**.
-
-Phase 1A SHALL NOT:
-
-- promote ES-004 or any other enterprise standard;
-- change Baseline version except editorial clarification;
-- modify Active standard normative obligations without Board change control;
-- author engineering code or package changes.
-
----
-
-## Review questions
-
-| #   | Question                                                          |
-| --- | ----------------------------------------------------------------- |
-| 1   | Are ES-001 / ES-002 / ES-003 internally consistent?               |
-| 2   | Are responsibilities non-overlapping (Specify / Test / Certify)?  |
-| 3   | Can products realistically adopt Baseline 1.2?                    |
-| 4   | Does the governance model remain simple?                          |
-| 5   | Is the portfolio ready for ES-004 (or should scope/order change)? |
-
----
-
-## Deliverables (Phase 1A)
-
-| Deliverable                     | Path (planned)                           | Status      |
-| ------------------------------- | ---------------------------------------- | ----------- |
-| This opening record             | `PHASE-1A-BASELINE-1.2-REVIEW.md`        | OPEN        |
-| Consistency / conflict analysis | `PHASE-1A-CONSISTENCY-REVIEW.md` (TBD)   | NOT STARTED |
-| Adoption implications note      | `PHASE-1A-ADOPTION-NOTES.md` (TBD)       | NOT STARTED |
-| Product Board Review Report     | `PHASE-1A-PRODUCT-BOARD-REPORT.md` (TBD) | NOT STARTED |
-| Phase 1A completion             | `PHASE-1A-COMPLETION.md` (TBD)           | NOT STARTED |
+| Deliverable           | Path                                                               | Status   |
+| --------------------- | ------------------------------------------------------------------ | -------- |
+| Opening / face        | This document                                                      | COMPLETE |
+| Baseline Structure    | [BASELINE-1.2-REVIEW.md](./BASELINE-1.2-REVIEW.md)                 | COMPLETE |
+| Responsibility Matrix | [RESPONSIBILITY-MATRIX.md](./RESPONSIBILITY-MATRIX.md)             | COMPLETE |
+| Product Adoption      | [PRODUCT-ADOPTION-REVIEW.md](./PRODUCT-ADOPTION-REVIEW.md)         | COMPLETE |
+| Gap Analysis          | [GAP-ANALYSIS.md](./GAP-ANALYSIS.md)                               | COMPLETE |
+| Readiness Report      | [BASELINE-READINESS-REPORT.md](./BASELINE-READINESS-REPORT.md)     | COMPLETE |
+| Board Review Report   | [PRODUCT-BOARD-REVIEW-REPORT.md](./PRODUCT-BOARD-REVIEW-REPORT.md) | COMPLETE |
+| Completion            | [PHASE-1A-COMPLETION.md](./PHASE-1A-COMPLETION.md)                 | COMPLETE |
 
 ---
 
 ## Exit criteria
 
 ```text
-Phase 1A COMPLETE when Product Board Review Report is CERTIFIED / ACCEPTED.
+Phase 1A review pack COMPLETE.
+Product Board decision PENDING:
+  Baseline 1.2 ACCEPTED  |  Baseline 1.2 REQUIRES REMEDIATION
 
-Then Product Board MAY authorise ES-004 (or revise promotion sequence).
-
-Until then:
+Until ACCEPTED:
 ES-004 = NOT AUTHORISED
-Baseline = remains 1.2
+Baseline version = 1.2 (unchanged)
 ```
 
 ---
 
-## Authority
+## Constraints observed
 
-Product Board instruction following ES-003 certification and Baseline 1.2 ESTABLISHED milestone.
+- No ES-004 authored
+- No Baseline version change
+- No Active standard normative rewrites
+- Documentation only
