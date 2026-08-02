@@ -44,6 +44,7 @@ Do **not** list every documentation typo or evidence file. Prefer concise, dated
 
 - **Extension:** [APZQEP-CERTIFICATION-STANDARD.md](./APZQEP-CERTIFICATION-STANDARD.md) v1.0 Normative
 - **Programme phase:** APZQEP-ENG-001 Phase 6
+- **Commit:** `fc8a8d1d3d08aa72165011c3b92ef7f39aebb1cc`
 - **Impact:** Framework core unchanged; PASS / FAIL / STOP, gates, evidence, Board vs engineering vs release certification
 
 ---
