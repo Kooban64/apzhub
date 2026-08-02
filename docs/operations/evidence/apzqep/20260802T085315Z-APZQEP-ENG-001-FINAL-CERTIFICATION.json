@@ -1,0 +1,36 @@
+{
+  "programme": "APZQEP-ENG-001",
+  "title": "Engineering Documentation Framework",
+  "classification": "Product Engineering Framework",
+  "status": "CLOSED",
+  "productBoardDecision": "CERTIFIED",
+  "timestampUtc": "20260802T085315Z",
+  "engineering": "COMPLETE",
+  "documentation": "COMPLETE",
+  "framework": "BASELINED",
+  "frameworkVersion": "1.0",
+  "repository": "CLEAN",
+  "promotionReview": "COMPLETE",
+  "handover": "COMPLETE",
+  "maintenance": "ACTIVE",
+  "successorProgramme": "APZHUB-ENG-002",
+  "recommendation": "Programme Closed.",
+  "mutability": "Immutable except maintenance via normal change control",
+  "priorClosureCommit": "b72d4ac372a9b8aef506f1fcbba4c3c8258b1484",
+  "completionReport": "docs/products/apzqep/engineering/APZQEP-ENG-001-COMPLETION.md",
+  "hierarchy": [
+    "APZHUB Engineering Governance",
+    "APZHUB Enterprise Engineering Standards",
+    "APZQEP Engineering Framework v1.0",
+    "Engineering Slice Specifications",
+    "Engineering Implementation"
+  ],
+  "nextProgramme": {
+    "programme": "APZHUB-ENG-002",
+    "title": "Portfolio Engineering Standards",
+    "status": "AUTHORISATION PENDING",
+    "classification": "Portfolio Governance",
+    "engineering": "NONE (initially)"
+  },
+  "outstandingIssues": "NONE"
+}

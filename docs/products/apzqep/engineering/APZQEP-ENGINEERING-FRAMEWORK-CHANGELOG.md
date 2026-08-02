@@ -69,6 +69,13 @@ Do **not** list every documentation typo or evidence file. Prefer concise, dated
 - **Successor:** APZHUB-ENG-002 (Designed / Awaiting Authorisation)
 - **Portfolio snapshot:** [APZQEP-PORTFOLIO-STATUS.md](./APZQEP-PORTFOLIO-STATUS.md)
 
+### 2026-08-02 — Product Board Final Certification · immutable close
+
+- **Product Board Decision:** CERTIFIED
+- **Mutability:** Programme immutable except maintenance via normal change control
+- **Prior closure commit:** `b72d4ac3`
+- **Successor status:** APZHUB-ENG-002 — AUTHORISATION PENDING
+
 ---
 
 ## Planned (paused pending APZHUB-ENG-002)
