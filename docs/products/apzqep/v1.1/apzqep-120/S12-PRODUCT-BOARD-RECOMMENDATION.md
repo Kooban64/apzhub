@@ -1,11 +1,12 @@
 # APZQEP-120-S12 — Product Board Recommendation
 
-| Field        | Value                                                      |
-| ------------ | ---------------------------------------------------------- |
-| Status       | **RECOMMENDED FOR AUTHORISATION** — not yet authorised     |
-| Prerequisite | APZQEP-120-S11 Product Board **CERTIFIED**                 |
-| Framing      | **Notification & Subscription Platform** (not “send mail”) |
-| Timestamp    | 20260802T155724Z                                           |
+| Field        | Value                                                       |
+| ------------ | ----------------------------------------------------------- |
+| Status       | **SUPERSEDED** — Owner authorised; S12 **COMPLETE** / PASS  |
+| Prerequisite | APZQEP-120-S11 Product Board **CERTIFIED**                  |
+| Framing      | **Notification & Subscription Platform** (not “send mail”)  |
+| Timestamp    | 20260802T155724Z                                            |
+| Completed    | 20260802T161211Z — [S12-COMPLETION.md](./S12-COMPLETION.md) |
 
 ---
 

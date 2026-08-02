@@ -1,18 +1,19 @@
 # APZQEP Evidence Domain Event Catalogue
 
-| Field             | Value                                                       |
-| ----------------- | ----------------------------------------------------------- |
-| Document          | EVENT-CATALOGUE                                             |
-| Product           | APZQEP                                                      |
-| Domain            | Evidence                                                    |
-| Programme         | APZQEP-120-S07                                              |
-| Catalogue version | **1.0.4**                                                   |
-| Status            | **ACTIVE** · S07–S10 Board **CERTIFIED** · S11 QKI **PASS** |
-| Publisher         | `qep-evidence` (Application Services)                       |
-| Delivery          | `@apzhub/platform-outbox` (S08 Board **CERTIFIED**)         |
-| Processing        | `@apzhub/platform-processing` + Evidence processors (S10)   |
-| Projection        | `@apzhub/qep-knowledge-index` Quality Knowledge Index (S11) |
-| Timestamp (UTC)   | 20260802T150615Z                                            |
+| Field             | Value                                                          |
+| ----------------- | -------------------------------------------------------------- |
+| Document          | EVENT-CATALOGUE                                                |
+| Product           | APZQEP                                                         |
+| Domain            | Evidence                                                       |
+| Programme         | APZQEP-120-S07                                                 |
+| Catalogue version | **1.0.5**                                                      |
+| Status            | **ACTIVE** · S07–S11 Board **CERTIFIED** · S12 Notify **PASS** |
+| Publisher         | `qep-evidence` (Application Services)                          |
+| Delivery          | `@apzhub/platform-outbox` (S08 Board **CERTIFIED**)            |
+| Processing        | `@apzhub/platform-processing` + Evidence processors (S10)      |
+| Projection        | `@apzhub/qep-knowledge-index` Quality Knowledge Index (S11)    |
+| Notification      | `@apzhub/qep-notification` Subscription Platform (S12)         |
+| Timestamp (UTC)   | 20260802T161211Z                                               |
 
 This catalogue is a **first-class product asset**. Event semantics are owned by the Evidence domain. Infrastructure transports events; it does not define them.
 
@@ -85,7 +86,35 @@ See [QUALITY-KNOWLEDGE-INDEX.md](../v1.1/apzqep-120/QUALITY-KNOWLEDGE-INDEX.md).
 
 ---
 
-## Registered events (v1.0.4 — semantics unchanged from v1.0.1)
+## Notification / subscription consumer metadata (S12)
+
+| Field            | Value                                                              |
+| ---------------- | ------------------------------------------------------------------ |
+| Consumer         | Notification & Subscription Platform (`@apzhub/qep-notification`)  |
+| Pattern          | **Subscriber** — never invokes business services                   |
+| Sources          | Domain Events (Evidence today); QKI projections ready              |
+| Delivery channel | Internal only (S12); other channels via adapters later             |
+| Reliability      | S09 retry/DLQ + optional S08 delivery intents                      |
+| Classification   | severity · priority · category · audience · expiry · correlationId |
+
+### Notification processor ownership
+
+| Event ID                             | Notification processor                             |
+| ------------------------------------ | -------------------------------------------------- |
+| `qep.evidence.created`               | `qep.notification.processor.evidence.created`      |
+| `qep.evidence.updated`               | `qep.notification.processor.evidence.updated`      |
+| `qep.evidence.lifecycle_changed`     | `qep.notification.processor.evidence.lifecycle`    |
+| `qep.evidence.integrity_established` | `qep.notification.processor.evidence.integrity`    |
+| `qep.evidence.integrity_verified`    | `qep.notification.processor.evidence.integrity`    |
+| `qep.evidence.archived`              | `qep.notification.processor.evidence.archive`      |
+| `qep.evidence.superseded`            | `qep.notification.processor.evidence.supersession` |
+| `qep.evidence.deleted`               | `qep.notification.processor.evidence.delete`       |
+
+See [NOTIFICATION-PLATFORM.md](../v1.1/apzqep-120/NOTIFICATION-PLATFORM.md). Event semantics unchanged.
+
+---
+
+## Registered events (v1.0.5 — semantics unchanged from v1.0.1)
 
 | Event ID                             | Name                           | Version | Stability | Introduced In  | Status | Processor                 | Doc                                                                                    |
 | ------------------------------------ | ------------------------------ | ------- | --------- | -------------- | ------ | ------------------------- | -------------------------------------------------------------------------------------- |

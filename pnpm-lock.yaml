@@ -1181,6 +1181,18 @@ importers:
         specifier: workspace:*
         version: link:../qep-evidence
 
+  packages/qep-notification:
+    dependencies:
+      '@apzhub/platform-outbox':
+        specifier: workspace:*
+        version: link:../platform-outbox
+      '@apzhub/platform-processing':
+        specifier: workspace:*
+        version: link:../platform-processing
+      '@apzhub/qep-evidence':
+        specifier: workspace:*
+        version: link:../qep-evidence
+
   packages/qep-requirements:
     dependencies:
       '@apzhub/config':

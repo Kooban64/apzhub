@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-02  
-> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120-S11 COMPLETE · Product Board CERTIFIED** · Recommended next: **APZQEP-120-S12 Notification & Subscription Platform** (Owner Auth Pack required) · **APZQEP v1.0 Lifecycle Complete** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
+> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120-S12 COMPLETE · CERT PASS** · Recommended next: **APZQEP-120-S13 Command Palette** (Owner Auth Pack required) · **APZQEP v1.0 Lifecycle Complete** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
 
 ---
 
@@ -29,21 +29,17 @@
 
 ### Latest completed product slice
 
-**APZQEP-120-S11 — Quality Knowledge Index — COMPLETE / PASS / Product Board CERTIFIED**
+**APZQEP-120-S12 — Notification & Subscription Platform — COMPLETE / PASS**
 
-- Board: [S11-PRODUCT-BOARD-CERTIFICATION.md](../products/apzqep/v1.1/apzqep-120/S11-PRODUCT-BOARD-CERTIFICATION.md)
-- Completion: [S11-COMPLETION.md](../products/apzqep/v1.1/apzqep-120/S11-COMPLETION.md)
-- Index: [QUALITY-KNOWLEDGE-INDEX.md](../products/apzqep/v1.1/apzqep-120/QUALITY-KNOWLEDGE-INDEX.md)
-- Package: `@apzhub/qep-knowledge-index` **0.1.0**
-- Catalogue: [EVENT-CATALOGUE.md](../products/apzqep/events/EVENT-CATALOGUE.md) **v1.0.4**
-- Pipeline: event → processing → projection **complete** · backbone effectively complete
+- Completion: [S12-COMPLETION.md](../products/apzqep/v1.1/apzqep-120/S12-COMPLETION.md)
+- Platform: [NOTIFICATION-PLATFORM.md](../products/apzqep/v1.1/apzqep-120/NOTIFICATION-PLATFORM.md)
+- Package: `@apzhub/qep-notification` **0.1.0**
+- Catalogue: [EVENT-CATALOGUE.md](../products/apzqep/events/EVENT-CATALOGUE.md) **v1.0.5**
+- Pattern: notifications are **subscribers**, not callers
 
 ### Recommended next product programme (not authorised)
 
-**APZQEP-120-S12 — Notification & Subscription Platform** — Owner Authorisation Pack required.
-
-- Recommendation: [S12-PRODUCT-BOARD-RECOMMENDATION.md](../products/apzqep/v1.1/apzqep-120/S12-PRODUCT-BOARD-RECOMMENDATION.md)
-- Platform rule: Notifications subscribe to QKI or Domain Events; MUST NOT invoke business services directly
+**APZQEP-120-S13 — Command Palette** — Owner Authorisation Pack required.
 
 ---
 

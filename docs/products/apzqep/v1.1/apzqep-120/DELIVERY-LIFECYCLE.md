@@ -1,5 +1,8 @@
 # Delivery Lifecycle — APZQEP-120-S08
 
+> Outbox transport delivery. For **notification** delivery statuses see
+> [NOTIFICATION-DELIVERY-LIFECYCLE.md](./NOTIFICATION-DELIVERY-LIFECYCLE.md) (S12).
+
 ## Owner lifecycle states
 
 | State             | Store status  | Meaning                                   |

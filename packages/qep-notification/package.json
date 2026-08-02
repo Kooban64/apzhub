@@ -1,0 +1,20 @@
+{
+  "name": "@apzhub/qep-notification",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZQEP Notification & Subscription Platform — event/projection subscribers only (APZQEP-120-S12).",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-notification"
+  },
+  "dependencies": {
+    "@apzhub/platform-outbox": "workspace:*",
+    "@apzhub/platform-processing": "workspace:*",
+    "@apzhub/qep-evidence": "workspace:*"
+  }
+}
