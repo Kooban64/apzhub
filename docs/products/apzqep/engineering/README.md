@@ -50,21 +50,22 @@ Conforms to APZQEP Engineering Framework v1.0
 
 ## Structure (all documents in this folder)
 
-| Document                                                                   | Role                                           | Authoring status                      |
-| -------------------------------------------------------------------------- | ---------------------------------------------- | ------------------------------------- |
-| [APZQEP-ENGINEERING-FRAMEWORK.md](./APZQEP-ENGINEERING-FRAMEWORK.md)       | Named Framework product / baseline declaration | **BASELINED** v1.0                    |
-| [APZQEP-ENGINEERING-CONSTITUTION.md](./APZQEP-ENGINEERING-CONSTITUTION.md) | Immutable principles only                      | **COMPLETE**                          |
-| [APZQEP-ENGINEERING-HANDBOOK.md](./APZQEP-ENGINEERING-HANDBOOK.md)         | Master how-to manual                           | **COMPLETE**                          |
-| [APZQEP-ENGINEERING-STANDARDS.md](./APZQEP-ENGINEERING-STANDARDS.md)       | Normative coding & repository standard         | **COMPLETE** (v1.0)                   |
-| [APZQEP-SLICE-TEMPLATE.md](./APZQEP-SLICE-TEMPLATE.md)                     | Engineering Specification Template             | **COMPLETE** (v1.0 Normative)         |
-| [APZQEP-TESTING-STANDARD.md](./APZQEP-TESTING-STANDARD.md)                 | Test pyramid and evidence                      | **COMPLETE** v1.0 Normative (Phase 5) |
-| [APZQEP-CERTIFICATION-STANDARD.md](./APZQEP-CERTIFICATION-STANDARD.md)     | PASS / FAIL / STOP and gates                   | SKELETON — **next**                   |
-| [APZQEP-API-STANDARD.md](./APZQEP-API-STANDARD.md)                         | REST / command / query API rules               | SKELETON                              |
-| [APZQEP-DOMAIN-EVENT-STANDARD.md](./APZQEP-DOMAIN-EVENT-STANDARD.md)       | Event naming, envelope, evolution              | SKELETON                              |
-| [APZQEP-DATABASE-STANDARD.md](./APZQEP-DATABASE-STANDARD.md)               | Schema, migration, repository rules            | SKELETON                              |
-| [APZQEP-DOCUMENTATION-STANDARD.md](./APZQEP-DOCUMENTATION-STANDARD.md)     | Doc structure and lifecycle                    | SKELETON                              |
-| [APZQEP-CHECKLISTS.md](./APZQEP-CHECKLISTS.md)                             | Reusable review checklists                     | SKELETON                              |
-| [APZQEP-ENG-001-COMPLETION.md](./APZQEP-ENG-001-COMPLETION.md)             | Programme completion report                    | DRAFT                                 |
+| Document                                                                                 | Role                                           | Authoring status                             |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------- | -------------------------------------------- |
+| [APZQEP-ENGINEERING-FRAMEWORK.md](./APZQEP-ENGINEERING-FRAMEWORK.md)                     | Named Framework product / baseline declaration | **BASELINED** v1.0                           |
+| [APZQEP-ENGINEERING-CONSTITUTION.md](./APZQEP-ENGINEERING-CONSTITUTION.md)               | Immutable principles only                      | **COMPLETE**                                 |
+| [APZQEP-ENGINEERING-HANDBOOK.md](./APZQEP-ENGINEERING-HANDBOOK.md)                       | Master how-to manual                           | **COMPLETE**                                 |
+| [APZQEP-ENGINEERING-STANDARDS.md](./APZQEP-ENGINEERING-STANDARDS.md)                     | Normative coding & repository standard         | **COMPLETE** (v1.0)                          |
+| [APZQEP-SLICE-TEMPLATE.md](./APZQEP-SLICE-TEMPLATE.md)                                   | Engineering Specification Template             | **COMPLETE** (v1.0 Normative)                |
+| [APZQEP-TESTING-STANDARD.md](./APZQEP-TESTING-STANDARD.md)                               | Test pyramid and evidence                      | **COMPLETE** / Board **CERTIFIED** (Phase 5) |
+| [APZQEP-CERTIFICATION-STANDARD.md](./APZQEP-CERTIFICATION-STANDARD.md)                   | PASS / FAIL / STOP and gates                   | **COMPLETE** v1.0 Normative (Phase 6)        |
+| [APZQEP-ENGINEERING-FRAMEWORK-CHANGELOG.md](./APZQEP-ENGINEERING-FRAMEWORK-CHANGELOG.md) | Framework evolution record                     | **ACTIVE**                                   |
+| [APZQEP-API-STANDARD.md](./APZQEP-API-STANDARD.md)                                       | REST / command / query API rules               | SKELETON                                     |
+| [APZQEP-DOMAIN-EVENT-STANDARD.md](./APZQEP-DOMAIN-EVENT-STANDARD.md)                     | Event naming, envelope, evolution              | SKELETON                                     |
+| [APZQEP-DATABASE-STANDARD.md](./APZQEP-DATABASE-STANDARD.md)                             | Schema, migration, repository rules            | SKELETON                                     |
+| [APZQEP-DOCUMENTATION-STANDARD.md](./APZQEP-DOCUMENTATION-STANDARD.md)                   | Doc structure and lifecycle                    | SKELETON                                     |
+| [APZQEP-CHECKLISTS.md](./APZQEP-CHECKLISTS.md)                                           | Reusable review checklists                     | SKELETON                                     |
+| [APZQEP-ENG-001-COMPLETION.md](./APZQEP-ENG-001-COMPLETION.md)                           | Programme completion report                    | DRAFT                                        |
 
 Specialised standards are **extensions** to Framework v1.0. They do not reopen the baseline unless Product Board versions the Framework.
 
@@ -158,13 +159,15 @@ On conflict:
 5. Engineering Specification Template — COMPLETE / Board CERTIFIED (Phase 4)
 6. **Engineering Framework v1.0 BASELINED** (commit `41741490`)
 7. Testing Standard — **COMPLETE** / Product Board **CERTIFIED** (Phase 5)
-8. Certification Standard — next
-9. API Standard
-10. Domain Event Standard
-11. Database Standard
-12. Documentation Standard
-13. Engineering Checklists
-14. Completion Report (final)
+8. Certification Standard — **COMPLETE** v1.0 Normative (Phase 6)
+9. Framework Changelog — established
+10. API Standard — next
+11. Domain Event Standard
+12. Database Standard
+13. Documentation Standard
+14. Engineering Checklists
+15. Completion Report (final)
+16. **APZHUB promotion review** (after Testing + Certification — Product Board session)
 
 Until a specialised document’s status is **COMPLETE**, treat it as non-authoritative skeleton. Normative documents state `Status: Normative` in their header.
 

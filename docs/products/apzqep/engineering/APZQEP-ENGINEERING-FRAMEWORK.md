@@ -1,15 +1,16 @@
 # APZQEP Engineering Framework
 
-| Field               | Value                                   |
-| ------------------- | --------------------------------------- |
-| Product             | **APZQEP Engineering Framework**        |
-| Version             | **1.0**                                 |
-| Status              | **BASELINED**                           |
-| Programme           | APZQEP-ENG-001                          |
-| Classification      | Product Engineering Framework           |
-| Baseline date (UTC) | 2026-08-02                              |
-| Engineering         | NONE — documentation product            |
-| Git release tag     | **NONE** — documentation milestone only |
+| Field               | Value                                                                                    |
+| ------------------- | ---------------------------------------------------------------------------------------- |
+| Product             | **APZQEP Engineering Framework**                                                         |
+| Version             | **1.0**                                                                                  |
+| Status              | **BASELINED**                                                                            |
+| Changelog           | [APZQEP-ENGINEERING-FRAMEWORK-CHANGELOG.md](./APZQEP-ENGINEERING-FRAMEWORK-CHANGELOG.md) |
+| Programme           | APZQEP-ENG-001                                                                           |
+| Classification      | Product Engineering Framework                                                            |
+| Baseline date (UTC) | 2026-08-02                                                                               |
+| Engineering         | NONE — documentation product                                                             |
+| Git release tag     | **NONE** — documentation milestone only                                                  |
 
 ---
 

@@ -1,0 +1,41 @@
+{
+  "programme": "APZQEP-ENG-001",
+  "phase": "6",
+  "title": "Certification Standard",
+  "status": "PHASE_6_COMPLETE",
+  "timestampUtc": "20260802T080619Z",
+  "engineering": "NONE",
+  "framework": "APZQEP Engineering Framework v1.0 (extension — core not modified)",
+  "baselineCommit": "41741490e9de0caa33cca9383281b25d8541a0c8",
+  "phase5Commit": "54cae6fa81d3caab57c527749f0062729adf4a8f",
+  "deliverables": [
+    "docs/products/apzqep/engineering/APZQEP-CERTIFICATION-STANDARD.md",
+    "docs/products/apzqep/engineering/APZQEP-ENGINEERING-FRAMEWORK-CHANGELOG.md"
+  ],
+  "certificationStandard": {
+    "status": "COMPLETE",
+    "documentStatus": "Normative",
+    "version": "1.0",
+    "approxLines": 358,
+    "defines": [
+      "PASS",
+      "FAIL",
+      "STOP",
+      "CONDITIONAL PASS",
+      "BLOCKED",
+      "Product Board CERTIFIED/REJECTED",
+      "Engineering gates",
+      "Evidence requirements",
+      "Remediation certification",
+      "Release certification boundary",
+      "Closure requirements"
+    ]
+  },
+  "changelog": "ACTIVE",
+  "remote": {
+    "baselineAndPhase5Pushed": true,
+    "tipAtPhase5Push": "54cae6fa81d3caab57c527749f0062729adf4a8f"
+  },
+  "nextStep": "Product Board certify Phase 6; APZHUB promotion review; then API Standard",
+  "outstandingIssues": "NONE for Phase 6"
+}
