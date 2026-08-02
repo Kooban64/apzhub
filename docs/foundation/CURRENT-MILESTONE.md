@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-02  
-> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120-S08 CERTIFIED** · Recommended next: **APZQEP-120-S09 Reliable Processing (execution engine)** — awaits Owner Authorisation Pack · **APZQEP v1.0 Lifecycle Complete** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
+> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120-S09 COMPLETE** · Recommended next: **APZQEP-120-S10** (Owner instruction required) · **APZQEP v1.0 Lifecycle Complete** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
 
 ---
 
@@ -29,24 +29,19 @@
 
 ### Latest completed product slice
 
-**APZQEP-120-S08 — Reliable Event Delivery (Outbox Drain) — COMPLETE / PASS / Product Board CERTIFIED**
+**APZQEP-120-S09 — Reliable Event Processing Engine — COMPLETE / PASS**
 
-- Board: [S08-PRODUCT-BOARD-CERTIFICATION.md](../products/apzqep/v1.1/apzqep-120/S08-PRODUCT-BOARD-CERTIFICATION.md)
-- Completion: [S08-COMPLETION.md](../products/apzqep/v1.1/apzqep-120/S08-COMPLETION.md)
-- Architecture: [OUTBOX-ARCHITECTURE.md](../products/apzqep/v1.1/apzqep-120/OUTBOX-ARCHITECTURE.md) (Platform Outbox ownership rule)
-- Catalogue: [EVENT-CATALOGUE.md](../products/apzqep/events/EVENT-CATALOGUE.md) **v1.0.2**
-- Package: `@apzhub/platform-outbox` **0.2.0**
+- Completion: [S09-COMPLETION.md](../products/apzqep/v1.1/apzqep-120/S09-COMPLETION.md)
+- Engine: [PROCESSING-ENGINE.md](../products/apzqep/v1.1/apzqep-120/PROCESSING-ENGINE.md)
+- Package: `@apzhub/platform-processing` **0.1.0**
+- Prior: S08 Board **CERTIFIED** · `@apzhub/platform-outbox` **0.2.0**
 
 ### Recommended next product programme (not authorised)
 
-**APZQEP-120-S09 — Reliable Processing (execution engine)** — Board recommends authorisation; engineering starts only after Owner Authorisation Pack.
-
-- Recommendation: [S09-PRODUCT-BOARD-RECOMMENDATION.md](../products/apzqep/v1.1/apzqep-120/S09-PRODUCT-BOARD-RECOMMENDATION.md)
-- Pre-concept: Processing Contract (Event → Processor → Ack / Retry / Dead Letter)
-- Excludes: Search, Notifications, Command Palette, business consumers
+**APZQEP-120-S10 — Operational Processing** — Owner instruction required. Business processors begin here (not in S09).
 
 - Status: **NOT AUTHORISED** until Owner slice instruction
-- Stop: Do **not** begin S08 without that instruction
+- Stop: Do **not** begin S10 without that instruction
 
 ---
 

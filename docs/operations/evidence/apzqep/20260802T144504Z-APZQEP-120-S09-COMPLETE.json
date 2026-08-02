@@ -1,0 +1,21 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "S09",
+  "title": "Reliable Event Processing Engine",
+  "status": "COMPLETE",
+  "certification": "PASS",
+  "timestampUtc": "20260802T144504Z",
+  "packages": {
+    "platform-processing": "0.1.0",
+    "platform-outbox": "0.2.0"
+  },
+  "tests": {
+    "platform-processing": "13/13",
+    "platform-outbox": "12/12",
+    "qep-evidence": "131/131"
+  },
+  "principle": "Engine knows how to execute, never why",
+  "businessProcessors": [],
+  "outstandingIssues": [],
+  "recommendation": "Ready for APZQEP-120-S10"
+}

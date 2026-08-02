@@ -1,11 +1,12 @@
 # APZQEP-120-S09 — Product Board Recommendation
 
-| Field        | Value                                                  |
-| ------------ | ------------------------------------------------------ |
-| Status       | **RECOMMENDED FOR AUTHORISATION** — not yet authorised |
-| Prerequisite | APZQEP-120-S08 Product Board **CERTIFIED**             |
-| Framing      | **Execution engine** (not “workers as a product”)      |
-| Timestamp    | 20260802T143404Z                                       |
+| Field        | Value                                                       |
+| ------------ | ----------------------------------------------------------- |
+| Status       | **SUPERSEDED** — Owner authorised; S09 **COMPLETE** / PASS  |
+| Prerequisite | APZQEP-120-S08 Product Board **CERTIFIED**                  |
+| Framing      | **Execution engine** (not “workers as a product”)           |
+| Timestamp    | 20260802T143404Z                                            |
+| Completed    | 20260802T144504Z — [S09-COMPLETION.md](./S09-COMPLETION.md) |
 
 ---
 

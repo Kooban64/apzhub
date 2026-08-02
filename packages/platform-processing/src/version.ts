@@ -1,0 +1,1 @@
+export const PLATFORM_PROCESSING_VERSION = "0.1.0";

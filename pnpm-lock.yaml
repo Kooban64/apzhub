@@ -920,6 +920,12 @@ importers:
         specifier: '>=0.45.2'
         version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
 
+  packages/platform-processing:
+    dependencies:
+      '@apzhub/platform-outbox':
+        specifier: workspace:*
+        version: link:../platform-outbox
+
   packages/platform-provisioning:
     dependencies:
       '@apzhub/event-notification-framework':
