@@ -1,10 +1,11 @@
 # APZQEP-140 — Core Quality Engineering
 
-| Field     | Value                                                            |
-| --------- | ---------------------------------------------------------------- |
-| Programme | APZQEP-140                                                       |
-| Status    | Caps **A · B · C · D · E · F COMPLETE** · Architecture CERTIFIED |
-| Progress  | [CAPABILITY-PROGRESS.md](./CAPABILITY-PROGRESS.md)               |
+| Field     | Value                                                                                                |
+| --------- | ---------------------------------------------------------------------------------------------------- |
+| Programme | APZQEP-140                                                                                           |
+| Status    | **CERTIFIED / PROGRAMME COMPLETE / CLOSED**                                                          |
+| Progress  | [CAPABILITY-PROGRESS.md](./CAPABILITY-PROGRESS.md)                                                   |
+| Close-out | [APZQEP-140-CORE-QUALITY-ENGINEERING-COMPLETE.md](./APZQEP-140-CORE-QUALITY-ENGINEERING-COMPLETE.md) |
 
 ## Product rules
 
@@ -15,15 +16,17 @@
 
 ## Capabilities
 
-| Cap | Title                                  | Pack       |
-| --- | -------------------------------------- | ---------- |
-| A   | Enterprise Test Suite Management       | [a/](./a/) |
-| B   | Enterprise Test Execution Planning     | [b/](./b/) |
-| C   | Enterprise Test Execution Workspace    | [c/](./c/) |
-| D   | Enterprise Defect Management           | [d/](./d/) |
-| E   | Enterprise Requirements & Traceability | [e/](./e/) |
-| F   | Enterprise Reporting & Analytics       | [f/](./f/) |
+| Cap | Title                                  | Pack       | Status               |
+| --- | -------------------------------------- | ---------- | -------------------- |
+| A   | Enterprise Test Suite Management       | [a/](./a/) | COMPLETE             |
+| B   | Enterprise Test Execution Planning     | [b/](./b/) | COMPLETE             |
+| C   | Enterprise Test Execution Workspace    | [c/](./c/) | COMPLETE             |
+| D   | Enterprise Defect Management           | [d/](./d/) | COMPLETE             |
+| E   | Enterprise Requirements & Traceability | [e/](./e/) | COMPLETE             |
+| F   | Enterprise Reporting & Analytics       | [f/](./f/) | COMPLETE / CERTIFIED |
 
 ## Next
 
-Core Quality Engineering **COMPLETE**. Product Board Capability Review recommended.
+**APZQEP-150 — Product Readiness & Production Certification** ([recommendation](../apzqep-150/APZQEP-150-PRODUCT-BOARD-RECOMMENDATION.md)) — **NOT AUTHORISED**.
+
+Do not continue feature programmes under APZQEP-140.

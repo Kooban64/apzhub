@@ -1,52 +1,28 @@
 # Capability Progress — APZQEP-140
 
-| Field     | Value                                   |
-| --------- | --------------------------------------- |
-| Programme | APZQEP-140                              |
-| Status    | **IN FORCE** — primary progress surface |
-| Timestamp | 20260802T230000Z                        |
-| Authority | Product Board (Caps A–F COMPLETE)       |
+| Field     | Value                                                 |
+| --------- | ----------------------------------------------------- |
+| Programme | APZQEP-140                                            |
+| Status    | **CLOSED** — Core Quality Engineering COMPLETE        |
+| Timestamp | 20260802T182400Z                                      |
+| Authority | Product Board (Caps A–F CERTIFIED · Programme CLOSED) |
 
 ---
 
 ## Capability completion
 
 ```text
-Capability A
+Enterprise Test Suite Management          ██████████ 100%
 
-Enterprise Test Suite Management
+Enterprise Test Execution Planning        ██████████ 100%
 
-██████████ 100%
+Enterprise Test Execution Workspace       ██████████ 100%
 
-Capability B
+Enterprise Defect Management              ██████████ 100%
 
-Enterprise Test Execution Planning
+Enterprise Requirements & Traceability    ██████████ 100%
 
-██████████ 100%
-
-Capability C
-
-Enterprise Test Execution Workspace
-
-██████████ 100%
-
-Capability D
-
-Enterprise Defect Management
-
-██████████ 100%
-
-Capability E
-
-Enterprise Requirements & Traceability
-
-██████████ 100%
-
-Capability F
-
-Enterprise Reporting & Analytics
-
-██████████ 100%
+Enterprise Reporting & Analytics          ██████████ 100%
 ```
 
 | Capability | Stakeholder name                       | Programme    | Completion |
@@ -60,8 +36,12 @@ Enterprise Reporting & Analytics
 
 Packs: [a/](./a/) · [b/](./b/) · [c/](./c/) · [d/](./d/) · [e/](./e/) · [f/](./f/)
 
+Close-out: [APZQEP-140-CORE-QUALITY-ENGINEERING-COMPLETE.md](./APZQEP-140-CORE-QUALITY-ENGINEERING-COMPLETE.md)
+
 ---
 
 ## Next
 
-**Core Quality Engineering COMPLETE.** Recommend Product Board Capability Review and product-wide readiness assessment.
+**APZQEP-150 — Product Readiness & Production Certification** — recommended; **NOT AUTHORISED**.
+
+Do **not** open further Core QE feature programmes under APZQEP-140.

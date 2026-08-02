@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-02  
-> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120 CLOSED** · **APZQEP-140-000 CERTIFIED** (Product Architecture APPROVED · READY FOR ENGINEERING) · Next: **APZQEP-140-A Suite Management** (Owner Auth Pack) · **APZQEP v1.0 Lifecycle Complete** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
+> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120 CLOSED** · **APZQEP-140 CLOSED** (Core Quality Engineering COMPLETE · Caps A–F CERTIFIED) · Next recommended: **APZQEP-150 Product Readiness & Production Certification** (**NOT AUTHORISED**) · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
 
 ---
 
@@ -36,20 +36,23 @@
 - Closing slice: S13 Enterprise Command Platform (`@apzhub/qep-command` **0.1.0**)
 - Do **not** continue slices under APZQEP-120
 
-### Latest architecture programme
+### Latest product programme
 
-**APZQEP-140-000 — Core Quality Engineering Architecture — CERTIFIED / APPROVED**
+**APZQEP-140 — Core Quality Engineering — CERTIFIED / PROGRAMME COMPLETE / CLOSED**
 
-- Board: [APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md](../products/apzqep/v1.1/apzqep-140/000/APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md)
-- Progress model: [CAPABILITY-PROGRESS.md](../products/apzqep/v1.1/apzqep-140/CAPABILITY-PROGRESS.md)
-- Platform complete · Product architected · Engineering ready
+- Close-out: [APZQEP-140-CORE-QUALITY-ENGINEERING-COMPLETE.md](../products/apzqep/v1.1/apzqep-140/APZQEP-140-CORE-QUALITY-ENGINEERING-COMPLETE.md)
+- Architecture: [APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md](../products/apzqep/v1.1/apzqep-140/000/APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md)
+- Progress: [CAPABILITY-PROGRESS.md](../products/apzqep/v1.1/apzqep-140/CAPABILITY-PROGRESS.md) — Caps A–F **100%**
+- Cap F board: [APZQEP-140-F-PRODUCT-BOARD-CERTIFICATION.md](../products/apzqep/v1.1/apzqep-140/f/APZQEP-140-F-PRODUCT-BOARD-CERTIFICATION.md)
+- Do **not** continue feature programmes under APZQEP-140
 
-### Recommended next capability (not authorised)
+### Recommended next programme (not authorised)
 
-**APZQEP-140-A — Suite Management** (_Enterprise Test Suite Management_)
+**APZQEP-150 — Product Readiness & Production Certification**
 
-- Recommendation: [APZQEP-140-A-PRODUCT-BOARD-RECOMMENDATION.md](../products/apzqep/v1.1/apzqep-140/APZQEP-140-A-PRODUCT-BOARD-RECOMMENDATION.md)
+- Recommendation: [APZQEP-150-PRODUCT-BOARD-RECOMMENDATION.md](../products/apzqep/v1.1/apzqep-150/APZQEP-150-PRODUCT-BOARD-RECOMMENDATION.md)
 - Owner Authorisation Pack required before engineering
+- Intent: production hardening and release certification — **not** new capabilities
 
 ---
 

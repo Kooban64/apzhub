@@ -1,14 +1,14 @@
 # APZQEP v1.1 — Product Planning, Architecture & Execution Planning
 
-| Field                 | Value                                                                                                 |
-| --------------------- | ----------------------------------------------------------------------------------------------------- |
-| Product planning      | **APZQEP-110** — COMPLETE / APPROVED                                                                  |
-| Solution architecture | **APZQEP-111** — COMPLETE / **APPROVED**                                                              |
-| Execution planning    | **APZQEP-120** — **CERTIFIED / PROGRAMME COMPLETE / CLOSED**                                          |
-| Next programme        | **APZQEP-140** — 000 **CERTIFIED** · next **140-A** · [Progress](./apzqep-140/CAPABILITY-PROGRESS.md) |
-| Positioning           | [PRODUCT-POSITIONING.md](./PRODUCT-POSITIONING.md) — Enterprise QEP                                   |
-| Engineering           | Per-slice Owner directive (APZHUB-ENG-001 / ADR-0092)                                                 |
-| Date                  | 2026-08-02                                                                                            |
+| Field                 | Value                                                                                                                         |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Product planning      | **APZQEP-110** — COMPLETE / APPROVED                                                                                          |
+| Solution architecture | **APZQEP-111** — COMPLETE / **APPROVED**                                                                                      |
+| Execution planning    | **APZQEP-120** — **CERTIFIED / PROGRAMME COMPLETE / CLOSED**                                                                  |
+| Next programme        | **APZQEP-150** — recommended · **NOT AUTHORISED** · [Recommendation](./apzqep-150/APZQEP-150-PRODUCT-BOARD-RECOMMENDATION.md) |
+| Positioning           | [PRODUCT-POSITIONING.md](./PRODUCT-POSITIONING.md) — Enterprise QEP                                                           |
+| Engineering           | Per-slice Owner directive (APZHUB-ENG-001 / ADR-0092)                                                                         |
+| Date                  | 2026-08-02                                                                                                                    |
 
 ---
 
@@ -55,22 +55,32 @@
 
 ---
 
-## Core Quality Engineering — APZQEP-140
+## Core Quality Engineering — APZQEP-140 (CLOSED)
 
-| Document                                                                                                                       | Role                                   |
-| ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------- |
-| [apzqep-140/README.md](./apzqep-140/README.md)                                                                                 | Programme hub                          |
-| [apzqep-140/000/APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md](./apzqep-140/000/APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md) | Board **CERTIFIED**                    |
-| [apzqep-140/CAPABILITY-PROGRESS.md](./apzqep-140/CAPABILITY-PROGRESS.md)                                                       | Capability completion (primary metric) |
-| [apzqep-140/APZQEP-140-A-PRODUCT-BOARD-RECOMMENDATION.md](./apzqep-140/APZQEP-140-A-PRODUCT-BOARD-RECOMMENDATION.md)           | Next: Suite Management                 |
+| Document                                                                                                                       | Role                       |
+| ------------------------------------------------------------------------------------------------------------------------------ | -------------------------- |
+| [apzqep-140/APZQEP-140-CORE-QUALITY-ENGINEERING-COMPLETE.md](./apzqep-140/APZQEP-140-CORE-QUALITY-ENGINEERING-COMPLETE.md)     | Programme **CLOSED**       |
+| [apzqep-140/README.md](./apzqep-140/README.md)                                                                                 | Programme hub              |
+| [apzqep-140/000/APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md](./apzqep-140/000/APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md) | Architecture **CERTIFIED** |
+| [apzqep-140/CAPABILITY-PROGRESS.md](./apzqep-140/CAPABILITY-PROGRESS.md)                                                       | Caps A–F **100%**          |
+| [apzqep-140/f/APZQEP-140-F-PRODUCT-BOARD-CERTIFICATION.md](./apzqep-140/f/APZQEP-140-F-PRODUCT-BOARD-CERTIFICATION.md)         | Cap F board **CERTIFIED**  |
+
+---
+
+## Recommended next — APZQEP-150 (NOT AUTHORISED)
+
+| Document                                                                                                         | Role                |
+| ---------------------------------------------------------------------------------------------------------------- | ------------------- |
+| [apzqep-150/APZQEP-150-PRODUCT-BOARD-RECOMMENDATION.md](./apzqep-150/APZQEP-150-PRODUCT-BOARD-RECOMMENDATION.md) | Readiness programme |
+| [apzqep-150/README.md](./apzqep-150/README.md)                                                                   | Pack hub            |
 
 ---
 
 ## Authority note
 
-Programme bands: see [ENGINEERING-PROGRAMMES.md](./ENGINEERING-PROGRAMMES.md) (**140 = Core Quality Engineering**).
+Programme bands: see [ENGINEERING-PROGRAMMES.md](./ENGINEERING-PROGRAMMES.md) (**140 = Core Quality Engineering** · **CLOSED**).
 
-APZQEP-120 is **CLOSED**. APZQEP-140-000 is **CERTIFIED**. Next: Owner Auth Pack for **APZQEP-140-A**.
+APZQEP-120 is **CLOSED**. APZQEP-140 is **CLOSED**. Next: Owner Auth Pack for **APZQEP-150** (readiness — not features).
 
 ---
 
@@ -80,6 +90,7 @@ APZQEP-120 is **CLOSED**. APZQEP-140-000 is **CERTIFIED**. Next: Owner Auth Pack
 APZQEP-110 = APPROVED
 APZQEP-111 = APPROVED
 APZQEP-120 = CLOSED
-APZQEP-140-000 = CERTIFIED / PRODUCT ARCHITECTURE APPROVED
-NEXT = OWNER AUTH PACK FOR APZQEP-140-A (Enterprise Test Suite Management)
+APZQEP-140 = CLOSED / CORE QUALITY ENGINEERING COMPLETE
+NEXT = OWNER AUTH PACK FOR APZQEP-150 (Product Readiness & Production Certification)
+DO NOT OPEN FURTHER CORE QE FEATURE PROGRAMMES UNDER APZQEP-140
 ```
