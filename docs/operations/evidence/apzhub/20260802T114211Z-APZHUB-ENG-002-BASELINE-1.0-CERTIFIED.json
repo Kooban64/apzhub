@@ -1,0 +1,19 @@
+{
+  "programme": "APZHUB-ENG-002",
+  "phase": "1",
+  "artefact": "APZHUB-ENTERPRISE-ENGINEERING-BASELINE",
+  "version": "1.0",
+  "decision": "CERTIFIED",
+  "status": "ACTIVE",
+  "timestampUtc": "20260802T114211Z",
+  "effectiveDate": "2026-08-02",
+  "initialBaseline": ["ES-001"],
+  "engineering": "NONE",
+  "repository": "CLEAN",
+  "governance": "APPROVED",
+  "nextPlannedVersion": "1.1",
+  "es002Status": "AUTHORISATION_PENDING",
+  "path": "docs/engineering/APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md",
+  "certificationRecord": "docs/engineering/APZHUB-ENG-002/BASELINE-1.0-CERTIFICATION.md",
+  "outstandingIssues": "NONE"
+}

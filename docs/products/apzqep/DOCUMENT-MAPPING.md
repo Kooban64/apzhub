@@ -52,7 +52,7 @@
 | APZQEP → APZHUB Promotion Review                  | `docs/products/apzqep/engineering/APZQEP-ENG-001-PROMOTION-REVIEW.md`        | **CERTIFIED** — Standards SPLIT refinement                           |
 | APZHUB-ENG-002 Portfolio Engineering Standards    | `docs/engineering/APZHUB-ENG-002/`                                           | Phase 0 **CERTIFIED** · Catalogue **CERTIFIED** · ES-001 **ACTIVE**  |
 | APZHUB Enterprise Engineering Standards Catalogue | `docs/engineering/APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md`                 | **CERTIFIED** — ES-001 Active; next ES-002 Proposed                  |
-| APZHUB Enterprise Engineering Baseline            | `docs/engineering/APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md`                 | **1.0 ACTIVE** — adopted set = ES-001                                |
+| APZHUB Enterprise Engineering Baseline            | `docs/engineering/APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md`                 | **1.0 CERTIFIED / ACTIVE** — adopted set = ES-001; next 1.1 pending  |
 | APZHUB Enterprise Testing Standard (ES-001)       | `docs/engineering/APZHUB-TESTING-STANDARD.md`                                | **ACTIVE** v1.0 — first APZHUB-owned enterprise engineering standard |
 
 ## Indexes updated in this programme

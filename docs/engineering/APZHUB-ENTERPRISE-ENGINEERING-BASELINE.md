@@ -5,12 +5,45 @@
 | Document          | APZHUB-ENTERPRISE-ENGINEERING-BASELINE                                                             |
 | Programme         | APZHUB-ENG-002                                                                                     |
 | Classification    | Enterprise Engineering Governance                                                                  |
-| Status            | **ACTIVE**                                                                                         |
+| Status            | **ACTIVE** · Product Board **CERTIFIED**                                                           |
 | Current version   | **1.0**                                                                                            |
+| Certified         | Product Board — 2026-08-02 (`20260802T114211Z`)                                                    |
 | Authority         | [Portfolio Engineering Charter](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md) (**CERTIFIED**) |
 | Companion         | [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)           |
 | Technical content | **NONE** — adopted-set inventory only                                                              |
 | Engineering       | NONE                                                                                               |
+
+---
+
+## Baseline Status
+
+```text
+Baseline Status
+
+Current Version:
+1.0
+
+Current Authority:
+Product Board
+
+Effective Date:
+2026-08-02
+
+Current Standards:
+ES-001
+
+Next Planned Version:
+1.1 (Pending ES-002 Certification)
+```
+
+| Field                | Value                                  |
+| -------------------- | -------------------------------------- |
+| Current version      | **1.0**                                |
+| Current authority    | Product Board                          |
+| Effective date       | 2026-08-02                             |
+| Current standards    | ES-001                                 |
+| Next planned version | **1.1** (Pending ES-002 Certification) |
+| ES-002 status        | **AUTHORISATION PENDING**              |
 
 ---
 
@@ -20,14 +53,16 @@ This Baseline records which enterprise engineering standards **currently define*
 
 It answers:
 
-> **What engineering standards currently define APZHUB?**
+> **What engineering standards are currently mandatory across the enterprise?**
 
-| Artefact                 | Answers                                             |
-| ------------------------ | --------------------------------------------------- |
-| **Standards Catalogue**  | Everything that exists (Proposed → Retired)         |
-| **Engineering Baseline** | What is currently **adopted** as the enterprise set |
+| Artefact                 | Answers                                                                     |
+| ------------------------ | --------------------------------------------------------------------------- |
+| **Standards Catalogue**  | _What engineering standards exist?_                                         |
+| **Engineering Baseline** | _What engineering standards are currently mandatory across the enterprise?_ |
 
 The Baseline is the governance equivalent of a software release for engineering standards.
+
+**Strong rule:** Baseline changes **only** when a standard becomes **ACTIVE** (Product Board certification). Drafting or reviewing a standard does **not** change the Baseline.
 
 ---
 
@@ -41,13 +76,16 @@ Engineering Baseline
 ES-001
 ```
 
-| Field                   | Value                                                               |
-| ----------------------- | ------------------------------------------------------------------- |
-| Baseline version        | **1.0**                                                             |
-| Effective (UTC)         | 2026-08-02 (`20260802T113952Z`)                                     |
-| Included standards      | ES-001                                                              |
-| Product Board authority | ES-001 CERTIFIED `20260802T113408Z`; Baseline established this date |
-| Supersedes              | None (first Baseline)                                               |
+| Field                   | Value                                                                 |
+| ----------------------- | --------------------------------------------------------------------- |
+| Baseline version        | **1.0**                                                               |
+| Status                  | ACTIVE · CERTIFIED                                                    |
+| Effective (UTC)         | 2026-08-02                                                            |
+| Established             | `20260802T113952Z`                                                    |
+| Board CERTIFIED         | `20260802T114211Z`                                                    |
+| Included standards      | ES-001                                                                |
+| Product Board authority | ES-001 CERTIFIED `20260802T113408Z`; Baseline CERTIFIED this decision |
+| Supersedes              | None (first Baseline)                                                 |
 
 ---
 
@@ -105,11 +143,11 @@ Annual
 
 ## 4. Baseline version history
 
-| Baseline Version | Included Standards     | Effective (UTC) | Board / evidence                       |
-| ---------------- | ---------------------- | --------------- | -------------------------------------- |
-| **1.0**          | ES-001                 | 2026-08-02      | ES-001 CERTIFIED; Baseline established |
-| 1.1 _(planned)_  | ES-001, ES-002         | —               | After ES-002 ACTIVE                    |
-| 1.2 _(planned)_  | ES-001, ES-002, ES-003 | —               | After ES-003 ACTIVE                    |
+| Baseline Version | Included Standards     | Effective (UTC) | Board / evidence                                                               |
+| ---------------- | ---------------------- | --------------- | ------------------------------------------------------------------------------ |
+| **1.0**          | ES-001                 | 2026-08-02      | Established `20260802T113952Z`; Product Board **CERTIFIED** `20260802T114211Z` |
+| 1.1 _(planned)_  | ES-001, ES-002         | —               | After ES-002 ACTIVE (AUTHORISATION PENDING)                                    |
+| 1.2 _(planned)_  | ES-001, ES-002, ES-003 | —               | After ES-003 ACTIVE                                                            |
 
 Planned rows are forward guidance only. They do not authorise promotion.
 
@@ -117,12 +155,31 @@ Planned rows are forward guidance only. They do not authorise promotion.
 
 ## 5. Versioning policy
 
+### 5.1 When the Baseline changes
+
+| Event                                            | Baseline impact                   |
+| ------------------------------------------------ | --------------------------------- |
+| Standard drafted                                 | **No change**                     |
+| Standard Under Review                            | **No change**                     |
+| Product Board CERTIFIED → standard **ACTIVE**    | **New Baseline version required** |
+| Standard Approved but not yet Active (if staged) | **No change** until Active        |
+
+### 5.2 Version numbers
+
+| Change type | Example         | Meaning                                                                                                         |
+| ----------- | --------------- | --------------------------------------------------------------------------------------------------------------- |
+| **Minor**   | 1.0 → 1.1 → 1.2 | One or more standards become **ACTIVE** (adopted set grows or is adjusted by Board without restructuring)       |
+| **Major**   | 1.x → 2.0       | Significant governance change — e.g. restructuring the engineering framework, or superseding multiple standards |
+
+### 5.3 Additional rules
+
 1. Baseline **1.0** = first adopted ENG-002 enterprise standard set (ES-001).
-2. Each new **Active** enterprise standard from the promotion wave increments the Baseline minor version (**1.0 → 1.1 → 1.2 …**) and lists the full adopted set.
-3. A **major** Baseline bump (e.g. 2.0) requires Product Board decision (breaking change to the adopted set, mass supersession, or Board-declared reset).
+2. Each minor bump lists the **full** adopted set (not deltas only).
+3. Major bumps require explicit Product Board decision.
 4. Removing or superseding a standard from the adopted set requires Board decision and a new Baseline version.
 5. Catalogue rows for Proposed / Under Review / Deferred standards are **not** in the Baseline until Active.
 6. Baseline versions are never rewritten in place for adoption history; append a new version row.
+7. Future promotions SHALL increment the Baseline version in accordance with Product Board approval.
 
 ---
 
@@ -150,11 +207,32 @@ When Board later decides to fold additional artefacts into the Baseline series, 
 
 ---
 
-## 8. Document history
+## 8. Product Board record (Baseline 1.0)
 
-| Baseline | Event       | Notes                                                   |
-| -------- | ----------- | ------------------------------------------------------- |
-| 1.0      | Established | First Baseline; ES-001 only; promotion lifecycle proven |
+```text
+Programme: APZHUB-ENG-002
+Phase: 1
+Artefact: APZHUB Enterprise Engineering Baseline
+Version: 1.0
+Status: ACTIVE
+Decision: CERTIFIED
+Repository: CLEAN
+Engineering: NONE
+Initial Baseline: ES-001 — APZHUB Enterprise Testing Standard
+Governance: APPROVED
+Recommendation: Enterprise Engineering Baseline 1.0 established.
+Future promotions shall increment the baseline version in accordance with
+Product Board approval.
+```
+
+---
+
+## 9. Document history
+
+| Baseline | Event                   | Notes                                         |
+| -------- | ----------------------- | --------------------------------------------- |
+| 1.0      | Established             | First Baseline; ES-001 only                   |
+| 1.0      | Product Board CERTIFIED | Status summary + versioning policy formalised |
 
 ---
 

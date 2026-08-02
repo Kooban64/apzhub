@@ -1,16 +1,16 @@
 # APZHUB-ENG-002 — Portfolio Engineering Standards
 
-| Field                    | Value                                                                   |
-| ------------------------ | ----------------------------------------------------------------------- |
-| Programme                | **APZHUB-ENG-002**                                                      |
-| Title                    | Portfolio Engineering Standards                                         |
-| Classification           | Enterprise Engineering Governance                                       |
-| Phase                    | **1 — ES-001 ACTIVE · next ES-002**                                     |
-| Status                   | Phase 0 **CERTIFIED** · Catalogue **CERTIFIED** · ES-001 **ACTIVE**     |
-| Predecessor              | APZQEP-ENG-001 **ARCHIVED** (`b9626ada`)                                |
-| Reference implementation | APZQEP Engineering Framework v1.0 (not automatic enterprise standard)   |
-| Engineering              | **NONE**                                                                |
-| Next promotion           | **ES-002** Enterprise Certification Standard (awaits Owner instruction) |
+| Field                    | Value                                                                    |
+| ------------------------ | ------------------------------------------------------------------------ |
+| Programme                | **APZHUB-ENG-002**                                                       |
+| Title                    | Portfolio Engineering Standards                                          |
+| Classification           | Enterprise Engineering Governance                                        |
+| Phase                    | **1 — Baseline 1.0 CERTIFIED · ES-001 ACTIVE**                           |
+| Status                   | Catalogue **CERTIFIED** · Baseline **1.0 CERTIFIED** · ES-001 **ACTIVE** |
+| Predecessor              | APZQEP-ENG-001 **ARCHIVED** (`b9626ada`)                                 |
+| Reference implementation | APZQEP Engineering Framework v1.0 (not automatic enterprise standard)    |
+| Engineering              | **NONE**                                                                 |
+| Next promotion           | **ES-002** — status **AUTHORISATION PENDING**                            |
 
 ---
 
@@ -22,11 +22,12 @@ Establish the **governance model** under which engineering standards may be prom
 
 ## Authoritative inventory
 
-| Document                                                                                  | Role                                       |
-| ----------------------------------------------------------------------------------------- | ------------------------------------------ |
-| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) | **What currently defines APZHUB** (v1.0)   |
-| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | Enterprise standards register (all states) |
-| [PHASE-1-CATALOGUE-OPENING.md](./PHASE-1-CATALOGUE-OPENING.md)                            | Catalogue opening (**CERTIFIED**)          |
+| Document                                                                                  | Role                                               |
+| ----------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) | **What is mandatory** (Baseline **1.0 CERTIFIED**) |
+| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | What exists (all lifecycle states)                 |
+| [BASELINE-1.0-CERTIFICATION.md](./BASELINE-1.0-CERTIFICATION.md)                          | Baseline 1.0 Board certification record            |
+| [PHASE-1-CATALOGUE-OPENING.md](./PHASE-1-CATALOGUE-OPENING.md)                            | Catalogue opening (**CERTIFIED**)                  |
 
 ---
 
@@ -71,9 +72,9 @@ Retained design inputs: [PROGRAMME-DESIGN.md](./PROGRAMME-DESIGN.md) · [PROMOTI
 ```text
 Phase 0: CERTIFIED
 Standards Catalogue: CERTIFIED
-Enterprise Engineering Baseline: 1.0 (ES-001)
-ES-001: ACTIVE v1.0 (first APZHUB-owned enterprise engineering standard)
-ES-002: Proposed — authorship NOT STARTED (awaits Owner instruction; Baseline → 1.1 when Active)
+Enterprise Engineering Baseline: 1.0 CERTIFIED (ES-001)
+ES-001: ACTIVE v1.0
+ES-002: AUTHORISATION PENDING (Baseline → 1.1 only after CERTIFIED → ACTIVE)
 ```
 
 ---

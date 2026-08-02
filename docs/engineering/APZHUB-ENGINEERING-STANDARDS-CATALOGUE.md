@@ -152,6 +152,7 @@ API / Database / Domain Event remain **Deferred** until Board revisits.
 | 20260802T113012Z | ES-001 | Status → **Under Review**; candidate body authored by abstraction | `APZHUB-TESTING-STANDARD.md` · `ES-001-*`           |
 | 20260802T113408Z | ES-001 | Product Board **CERTIFIED**; Status → **APPROVED → ACTIVE** v1.0  | `ES-001-PROMOTION-PACK.md` · evidence CERTIFIED     |
 | 20260802T113952Z | —      | Enterprise Engineering Baseline **1.0** established (ES-001)      | `APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md`         |
+| 20260802T114211Z | —      | Baseline **1.0** Product Board **CERTIFIED**                      | `BASELINE-1.0-CERTIFICATION.md`                     |
 
 ---
 

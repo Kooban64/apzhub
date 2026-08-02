@@ -24,18 +24,18 @@ Does **not** replace [APZHUB Engineering Standard](../governance/APZHUB-ENGINEER
 
 Enterprise governance for promoting proven product engineering standards by **abstraction**. APZQEP remains **reference implementation**.
 
-| Document                                                                                             | Purpose                                          |
-| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](./APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md)             | **What currently defines APZHUB** (Baseline 1.0) |
-| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)             | **Enterprise standards register** (no tech)      |
-| [APZHUB-TESTING-STANDARD.md](./APZHUB-TESTING-STANDARD.md)                                           | **ES-001 ACTIVE** v1.0                           |
-| [APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md) | **Governing Charter** (**CERTIFIED**)            |
-| [APZHUB-ENG-002/PROMOTION-PRINCIPLES.md](./APZHUB-ENG-002/PROMOTION-PRINCIPLES.md)                   | Promotion + Abstraction Principle                |
-| [APZHUB-ENG-002/ES-001-PROMOTION-PACK.md](./APZHUB-ENG-002/ES-001-PROMOTION-PACK.md)                 | ES-001 CERTIFIED + Board observation             |
-| [APZHUB-ENG-002/README.md](./APZHUB-ENG-002/README.md)                                               | Programme face                                   |
-| [APZHUB-ENG-002/DOCUMENT-MAP.md](./APZHUB-ENG-002/DOCUMENT-MAP.md)                                   | Full pack index                                  |
+| Document                                                                                             | Purpose                                            |
+| ---------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](./APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md)             | **What is mandatory** (Baseline **1.0 CERTIFIED**) |
+| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)             | **Enterprise standards register** (no tech)        |
+| [APZHUB-TESTING-STANDARD.md](./APZHUB-TESTING-STANDARD.md)                                           | **ES-001 ACTIVE** v1.0                             |
+| [APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md) | **Governing Charter** (**CERTIFIED**)              |
+| [APZHUB-ENG-002/PROMOTION-PRINCIPLES.md](./APZHUB-ENG-002/PROMOTION-PRINCIPLES.md)                   | Promotion + Abstraction Principle                  |
+| [APZHUB-ENG-002/ES-001-PROMOTION-PACK.md](./APZHUB-ENG-002/ES-001-PROMOTION-PACK.md)                 | ES-001 CERTIFIED + Board observation               |
+| [APZHUB-ENG-002/README.md](./APZHUB-ENG-002/README.md)                                               | Programme face                                     |
+| [APZHUB-ENG-002/DOCUMENT-MAP.md](./APZHUB-ENG-002/DOCUMENT-MAP.md)                                   | Full pack index                                    |
 
-**Status:** Phase 0 **CERTIFIED**. Catalogue **CERTIFIED**. Baseline **1.0** (ES-001). ES-001 **ACTIVE**. Next: ES-002 (then Baseline 1.1). APZQEP-ENG-001 **ARCHIVED** (`b9626ada`).
+**Status:** Phase 0 **CERTIFIED**. Catalogue **CERTIFIED**. Baseline **1.0 CERTIFIED** (ES-001). ES-001 **ACTIVE**. ES-002 **AUTHORISATION PENDING**. APZQEP-ENG-001 **ARCHIVED** (`b9626ada`).
 
 ---
 
