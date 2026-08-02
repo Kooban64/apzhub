@@ -1,15 +1,15 @@
 # APZHUB-ENG-002 — Portfolio Engineering Standards
 
-| Field                    | Value                                                                                   |
-| ------------------------ | --------------------------------------------------------------------------------------- |
-| Programme                | **APZHUB-ENG-002**                                                                      |
-| Title                    | Portfolio Engineering Standards                                                         |
-| Classification           | Enterprise Engineering Governance                                                       |
-| Status                   | **DESIGNED — Promotion matrix ACCEPTED; execution deferred to next governance session** |
-| Prerequisite             | APZHUB-ENG-001 (IN FORCE) · APZQEP Engineering Framework v1.0 BASELINED                 |
-| Reference implementation | APZQEP (flagship proving ground)                                                        |
-| Engineering              | **NONE** until Owner opens execution phases                                             |
-| Release / Deployment     | NONE                                                                                    |
+| Field                    | Value                                                                    |
+| ------------------------ | ------------------------------------------------------------------------ |
+| Programme                | **APZHUB-ENG-002**                                                       |
+| Title                    | Portfolio Engineering Standards                                          |
+| Classification           | Enterprise Engineering Governance                                        |
+| Status                   | **AUTHORISATION PENDING** — design complete; matrix ACCEPTED; not opened |
+| Prerequisite             | APZHUB-ENG-001 (IN FORCE) · APZQEP Engineering Framework v1.0 BASELINED  |
+| Reference implementation | APZQEP (flagship proving ground)                                         |
+| Engineering              | **NONE** until Owner opens execution phases                              |
+| Release / Deployment     | NONE                                                                     |
 
 ---
 
