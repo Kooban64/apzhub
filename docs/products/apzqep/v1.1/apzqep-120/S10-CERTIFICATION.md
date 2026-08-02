@@ -1,11 +1,12 @@
 # APZQEP-120-S10 — Certification
 
-| Field           | Value            |
-| --------------- | ---------------- |
-| Slice           | APZQEP-120-S10   |
-| Standard        | ES-002           |
-| Outcome         | **PASS**         |
-| Timestamp (UTC) | 20260802T145206Z |
+| Field           | Value                              |
+| --------------- | ---------------------------------- |
+| Slice           | APZQEP-120-S10                     |
+| Standard        | ES-002                             |
+| Outcome         | **PASS**                           |
+| Product Board   | **CERTIFIED** (`20260802T145908Z`) |
+| Timestamp (UTC) | 20260802T145206Z                   |
 
 ## Gates
 
@@ -23,6 +24,7 @@
 
 ```text
 PASS
+Product Board: CERTIFIED
 ```
 
-Ready for Owner instruction on **APZQEP-120-S11**.
+S10 closed. Platform → product engineering transition accepted. Ready for Owner instruction on **APZQEP-120-S11** (Quality Knowledge Index). See [S10-PRODUCT-BOARD-CERTIFICATION.md](./S10-PRODUCT-BOARD-CERTIFICATION.md).

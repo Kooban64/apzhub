@@ -1,0 +1,21 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "S10",
+  "title": "Business Processor Integration",
+  "productBoardDecision": "CERTIFIED",
+  "engineeringCertification": "PASS",
+  "timestampUtc": "20260802T145908Z",
+  "transition": "platform-engineering → product-engineering",
+  "recommendedNext": "APZQEP-120-S11 Quality Knowledge Index",
+  "maturity": {
+    "governance": "100%",
+    "engineeringFramework": "100%",
+    "evidencePlatform": "~85%",
+    "eventPlatform": "~90%",
+    "backend": "~82-84%",
+    "frontend": "~20%",
+    "overallProduct": "~75-77%"
+  },
+  "governance": "UNCHANGED",
+  "baseline": "UNCHANGED"
+}

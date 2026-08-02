@@ -7,7 +7,7 @@
 | Domain            | Evidence                                                           |
 | Programme         | APZQEP-120-S07                                                     |
 | Catalogue version | **1.0.3**                                                          |
-| Status            | **ACTIVE** · S07–S08 Board **CERTIFIED** · S10 processors **PASS** |
+| Status            | **ACTIVE** · S07–S08 Board **CERTIFIED** · S10 Board **CERTIFIED** |
 | Publisher         | `qep-evidence` (Application Services)                              |
 | Delivery          | `@apzhub/platform-outbox` (S08 Board **CERTIFIED**)                |
 | Processing        | `@apzhub/platform-processing` + Evidence processor bundle (S10)    |
