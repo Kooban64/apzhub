@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-02  
-> **Current status:** **APZQEP Version 1.0 — ENGINEERING COMPLETE · PRODUCT COMPLETE · PRODUCTION CERTIFICATION PENDING** · Engineering authority **CLOSED** · Authoritative status: [PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md) · Next authorised programme: **NONE** · Owner Authorisation required before APZQEP-151 or APZQEP-152 · Feature freeze **ACTIVE** · Release/Deployment **NOT AUTHORISED** · Governance **1.0 STABLE** · Baseline **1.2** · ES-004 **NOT AUTHORISED**.
+> **Current status:** **APZQEP Version 1.0 engineering thread FORMALLY COMPLETE** · Engineering authority **CLOSED** · Product Board authority **STANDING** · Authoritative status: [PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md) · Next authorised programme: **NONE** · Next action: Owner Authorisation for APZQEP-151 or APZQEP-152 · Feature freeze **ACTIVE** · Release/Deployment **NOT AUTHORISED** · Governance **1.0 STABLE** · Baseline **1.2** · ES-004 **NOT AUTHORISED**.
 
 ---
 
