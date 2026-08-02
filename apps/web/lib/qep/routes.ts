@@ -96,6 +96,14 @@ export {
 } from "@apzhub/qep-suites/presentation";
 
 export {
+  QEP_EXECUTION_PLANS_BASE_PATH,
+  QEP_EXECUTION_PLAN_ROUTES,
+  isQepExecutionPlansRoute,
+  isQepExecutionPlansNewRoute,
+  parseQepExecutionPlanRouteId,
+} from "@apzhub/qep-execution-plans/presentation";
+
+export {
   QEP_EVIDENCE_BASE_PATH,
   QEP_EVIDENCE_ROUTES,
   isQepEvidenceRoute,

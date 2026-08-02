@@ -1,64 +1,69 @@
 # Capability Progress — APZQEP-140
 
-| Field     | Value                                         |
-| --------- | --------------------------------------------- |
-| Programme | APZQEP-140                                    |
-| Status    | **IN FORCE** — primary progress surface       |
-| Timestamp | 20260802T180000Z                              |
-| Authority | Product Board (post APZQEP-140-000 CERTIFIED) |
+| Field     | Value                                                 |
+| --------- | ----------------------------------------------------- |
+| Programme | APZQEP-140                                            |
+| Status    | **IN FORCE** — primary progress surface               |
+| Timestamp | 20260802T171000Z                                      |
+| Authority | Product Board (post Cap A CERTIFIED · Cap B COMPLETE) |
 
-> From this point, APZQEP product progress is measured by **capability completion**, not infrastructure slice IDs.
+> Progress measured by **capability completion**, not infrastructure slice IDs.
 
 ---
 
 ## Capability completion
 
 ```text
-Capability A — Enterprise Test Suite Management
+Capability A
+
+Enterprise Test Suite Management
+
 ██████████ 100%
 
-Capability B — Run Management
-░░░░░░░░░░ 0%
+Capability B
 
-Capability C — Execution
-░░░░░░░░░░ 0%
+Enterprise Test Execution Planning
 
-Capability D — Defects
-░░░░░░░░░░ 0%
+██████████ 100%
 
-Capability E — Traceability
-░░░░░░░░░░ 0%
+Capability C
 
-Capability F — Reporting
-░░░░░░░░░░ 0%
+Enterprise Test Execution
+
+□□□□□□□□□□ 0%
+
+Capability D
+
+Enterprise Defect Management
+
+□□□□□□□□□□ 0%
+
+Capability E
+
+Enterprise Requirements & Traceability
+
+□□□□□□□□□□ 0%
+
+Capability F
+
+Enterprise Reporting & Analytics
+
+□□□□□□□□□□ 0%
 ```
 
-| Capability | Stakeholder name                 | Programme    | Completion |
-| ---------- | -------------------------------- | ------------ | ---------: |
-| **A**      | Enterprise Test Suite Management | APZQEP-140-A |   **100%** |
-| **B**      | Test Run Management              | APZQEP-140-B |     **0%** |
-| **C**      | Test Execution                   | APZQEP-140-C |     **0%** |
-| **D**      | Defect & Quality Findings        | APZQEP-140-D |     **0%** |
-| **E**      | Requirements & Traceability      | APZQEP-140-E |     **0%** |
-| **F**      | Reporting & Analytics            | APZQEP-140-F |     **0%** |
+| Capability | Stakeholder name                       | Programme    | Completion |
+| ---------- | -------------------------------------- | ------------ | ---------: |
+| **A**      | Enterprise Test Suite Management       | APZQEP-140-A |   **100%** |
+| **B**      | Enterprise Test Execution Planning     | APZQEP-140-B |   **100%** |
+| **C**      | Enterprise Test Execution              | APZQEP-140-C |     **0%** |
+| **D**      | Enterprise Defect Management           | APZQEP-140-D |     **0%** |
+| **E**      | Enterprise Requirements & Traceability | APZQEP-140-E |     **0%** |
+| **F**      | Enterprise Reporting & Analytics       | APZQEP-140-F |     **0%** |
 
-Pack: [a/README.md](./a/README.md)
-
----
-
-## Platform capabilities (COMPLETE — do not re-slice)
-
-| Capability (stakeholder language)              | Source             |
-| ---------------------------------------------- | ------------------ |
-| Enterprise Evidence Platform                   | APZQEP-120 S01–S06 |
-| Domain Eventing & Reliable Delivery/Processing | S07–S09            |
-| Business Processor Integration                 | S10                |
-| Enterprise Quality Knowledge Index             | S11                |
-| Enterprise Notification Capability             | S12                |
-| Enterprise Command Experience                  | S13                |
+Packs: [a/](./a/) · [b/](./b/) · Product rule: [PRODUCT-RULE-SUITE-PLAN-EXECUTION.md](./PRODUCT-RULE-SUITE-PLAN-EXECUTION.md)
 
 ---
 
 ## Next
 
-**APZQEP-140-B — Enterprise Test Run Management** — recommended for Owner Authorisation.
+**APZQEP-140-C — Enterprise Test Execution** — Owner Authorisation required. Cap B handoff contract is ready for consumption.

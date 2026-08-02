@@ -31,12 +31,12 @@ Architecture-approved sequencing only. **Engineering remains NOT AUTHORISED** un
 | Depends on | APZQEP-120 CLOSED; 140-000 approved          |
 | Exit gate  | Suites CRUD + events + QKI + commands + CERT |
 
-### Wave 2 — Runs
+### Wave 2 — Execution Planning
 
 | Item       | Detail                                      |
 | ---------- | ------------------------------------------- |
-| Capability | **B** Run Management                        |
-| Programme  | APZQEP-140-B                                |
+| Capability | **B** Enterprise Test Execution Planning    |
+| Programme  | APZQEP-140-B — **COMPLETE** (in-memory LA)  |
 | Depends on | Wave 1                                      |
 | Exit gate  | Plan/assign/schedule + notifications + CERT |
 

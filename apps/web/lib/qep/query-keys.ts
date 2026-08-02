@@ -1,5 +1,6 @@
 import type { QepBaselineListParams, QepListParams } from "./qep-api";
 import type { QepEvidenceListParams } from "./qep-evidence-api";
+import type { QepExecutionPlanListParams } from "./qep-execution-plans-api";
 import type { QepSuiteListParams } from "./qep-suites-api";
 import type { QepTestExecutionListParams } from "./qep-test-execution-api";
 
@@ -155,5 +156,12 @@ export const qepQueryKeys = {
       [...qepQueryKeys.suites.all(), "list", params ?? {}] as const,
     tree: () => [...qepQueryKeys.suites.all(), "tree"] as const,
     detail: (id: string) => [...qepQueryKeys.suites.all(), "detail", id] as const,
+  },
+  executionPlans: {
+    all: () => [...qepQueryKeys.all(), "executionPlans"] as const,
+    list: (params?: QepExecutionPlanListParams) =>
+      [...qepQueryKeys.executionPlans.all(), "list", params ?? {}] as const,
+    detail: (id: string) =>
+      [...qepQueryKeys.executionPlans.all(), "detail", id] as const,
   },
 };

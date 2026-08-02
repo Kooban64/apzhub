@@ -1,0 +1,71 @@
+manifestSchemaVersion: "1.0"
+id: qep-execution-plans
+name: Execution Planning
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Enterprise Test Execution Planning — APZQEP Capability B (APZQEP-140-B). Plans WHEN/WHERE/HOW/BY WHOM suites execute. Does not perform test execution. Consumes Suites (A) and Platform Foundation."
+  product: apzqep
+  moduleCatalogueId: M-EPLAN
+  slug: execution-plans
+  programme: APZQEP-140-B
+  capability: B
+  stakeholderName: Enterprise Test Execution Planning
+
+dependencies:
+  platform: []
+  packages:
+    - "@apzhub/qep-execution-plans"
+    - "@apzhub/qep-suites"
+    - "@apzhub/qep-knowledge-index"
+    - "@apzhub/qep-notification"
+    - "@apzhub/qep-command"
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: workbench-implemented
+
+permissions:
+  - id: qep.execution_plans.read
+    label: View Execution Plans
+  - id: qep.execution_plans.create
+    label: Create Execution Plans
+  - id: qep.execution_plans.update
+    label: Update Execution Plans
+  - id: qep.execution_plans.lifecycle
+    label: Manage Execution Plan Lifecycle
+  - id: qep.execution_plans.handoff
+    label: Handoff Execution Plans
+  - id: qep.execution_plans.admin
+    label: Administer Execution Plans
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Execution Planning
+    icon: calendar-clock
+    route: /workspace/qep/execution-plans
+    order: 25
+    permission: qep.execution_plans.read
+  view:
+    title: Execution Planning
+    workspace: qep
+    route: /workspace/qep/execution-plans
+    permission: qep.execution_plans.read
+
+commands:
+  - id: qep.command.navigate.execution_plans
+    title: Open Execution Planning
+  - id: qep.command.execution_plan.create
+    title: Create execution plan
+  - id: qep.command.execution_plan.open
+    title: Open execution plan
+
+api:
+  basePath: /api/v1/qep/execution-plans

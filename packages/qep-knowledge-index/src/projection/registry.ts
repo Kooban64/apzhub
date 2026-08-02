@@ -67,3 +67,23 @@ export const SUITE_PROJECTION_DEFINITION: ProjectionDefinition = {
     "qep.suite.lifecycle_changed",
   ],
 };
+
+export const EXECUTION_PLAN_PROJECTION_DEFINITION: ProjectionDefinition = {
+  projectionId: "qep.knowledge.execution_plan.v1",
+  entityKind: "run",
+  version: QEP_KNOWLEDGE_INDEX_PROJECTION_VERSION,
+  description:
+    "Enterprise Test Execution Planning Knowledge Index projection (APZQEP-140-B)",
+  eventTypes: [
+    "qep.execution-plan.created",
+    "qep.execution-plan.updated",
+    "qep.execution-plan.submitted-for-review",
+    "qep.execution-plan.approved",
+    "qep.execution-plan.readiness-evaluated",
+    "qep.execution-plan.ready",
+    "qep.execution-plan.scheduled",
+    "qep.execution-plan.handed-off",
+    "qep.execution-plan.cancelled",
+    "qep.execution-plan.archived",
+  ],
+};

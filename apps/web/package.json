@@ -51,6 +51,7 @@
     "@apzhub/qep-test-execution": "workspace:*",
     "@apzhub/qep-evidence": "workspace:*",
     "@apzhub/qep-suites": "workspace:*",
+    "@apzhub/qep-execution-plans": "workspace:*",
     "@apzhub/qep-contracts": "workspace:*",
     "@apzhub/search-qep": "workspace:*",
     "@apzhub/reporting-contracts": "workspace:*",

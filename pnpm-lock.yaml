@@ -326,6 +326,9 @@ importers:
       '@apzhub/qep-evidence':
         specifier: workspace:*
         version: link:../../packages/qep-evidence
+      '@apzhub/qep-execution-plans':
+        specifier: workspace:*
+        version: link:../../packages/qep-execution-plans
       '@apzhub/qep-requirements':
         specifier: workspace:*
         version: link:../../packages/qep-requirements
@@ -1171,6 +1174,24 @@ importers:
       drizzle-orm:
         specifier: '>=0.45.2'
         version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/qep-execution-plans:
+    dependencies:
+      '@apzhub/platform-processing':
+        specifier: workspace:*
+        version: link:../platform-processing
+      '@apzhub/qep-command':
+        specifier: workspace:*
+        version: link:../qep-command
+      '@apzhub/qep-knowledge-index':
+        specifier: workspace:*
+        version: link:../qep-knowledge-index
+      '@apzhub/qep-notification':
+        specifier: workspace:*
+        version: link:../qep-notification
+      '@apzhub/qep-suites':
+        specifier: workspace:*
+        version: link:../qep-suites
 
   packages/qep-foundation:
     dependencies:
