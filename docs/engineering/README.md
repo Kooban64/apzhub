@@ -20,22 +20,22 @@ Does **not** replace [APZHUB Engineering Standard](../governance/APZHUB-ENGINEER
 
 ---
 
-## Portfolio Engineering Standards (APZHUB-ENG-002) — **Baseline 1.2 ESTABLISHED**
+## Portfolio Engineering Standards (APZHUB-ENG-002) — **Baseline 1.x STABLE**
 
-Enterprise governance for promoting proven product engineering standards by **abstraction** under **Dual Approval**. APZQEP remains **reference implementation**.
+Enterprise engineering **system** (Specify → Test → Certify). APZQEP remains **reference implementation**. Era: **evolving** a stable baseline.
 
-| Document                                                                                                     | Purpose                                     |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------- |
-| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](./APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md)                     | **What is mandatory** (Baseline **1.2**)    |
-| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)                     | **Enterprise standards register** (no tech) |
-| [APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md](./APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md)               | **ES-003 ACTIVE** — Specify                 |
-| [APZHUB-TESTING-STANDARD.md](./APZHUB-TESTING-STANDARD.md)                                                   | **ES-001 ACTIVE** — Test                    |
-| [APZHUB-CERTIFICATION-STANDARD.md](./APZHUB-CERTIFICATION-STANDARD.md)                                       | **ES-002 ACTIVE** — Certify                 |
-| [APZHUB-ENG-002/PHASE-1A-BASELINE-1.2-REVIEW.md](./APZHUB-ENG-002/PHASE-1A-BASELINE-1.2-REVIEW.md)           | Phase 1A checkpoint (before ES-004)         |
-| [APZHUB-ENG-002/GOVERNANCE-MILESTONE-BASELINE-1.2.md](./APZHUB-ENG-002/GOVERNANCE-MILESTONE-BASELINE-1.2.md) | Milestone record                            |
-| [APZHUB-ENG-002/README.md](./APZHUB-ENG-002/README.md)                                                       | Programme face                              |
+| Document                                                                                       | Purpose                                          |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](./APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md)       | **What is mandatory** (**1.2** · **1.x STABLE**) |
+| [APZHUB-ENG-002/BASELINE-1.x-STABLE.md](./APZHUB-ENG-002/BASELINE-1.x-STABLE.md)               | STABLE declaration                               |
+| [APZHUB-ENG-002/STABLE-BASELINE-POLICY.md](./APZHUB-ENG-002/STABLE-BASELINE-POLICY.md)         | Stable Baseline Policy                           |
+| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)       | Standards register                               |
+| [APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md](./APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md) | **ES-003** Specify                               |
+| [APZHUB-TESTING-STANDARD.md](./APZHUB-TESTING-STANDARD.md)                                     | **ES-001** Test                                  |
+| [APZHUB-CERTIFICATION-STANDARD.md](./APZHUB-CERTIFICATION-STANDARD.md)                         | **ES-002** Certify                               |
+| [APZHUB-ENG-002/README.md](./APZHUB-ENG-002/README.md)                                         | Programme face                                   |
 
-**Status:** Baseline **1.2 ESTABLISHED**. Phase **1A COMPLETE** (awaiting Board ACCEPTED / REMEDIATION). ES-004 **NOT AUTHORISED**. APZQEP-ENG-001 **ARCHIVED** (`b9626ada`).
+**Status:** Baseline **1.x STABLE**. Phase 1A **CERTIFIED**. Foundation complete. ES-004 = first enhancement (awaits authorisation). APZQEP-ENG-001 **ARCHIVED** (`b9626ada`).
 
 ---
 

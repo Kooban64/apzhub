@@ -1,16 +1,18 @@
 # APZHUB-ENG-002 — Phase 1A: Enterprise Baseline 1.2 Review
 
-| Field               | Value                                          |
-| ------------------- | ---------------------------------------------- |
-| Programme           | APZHUB-ENG-002                                 |
-| Phase               | **1A**                                         |
-| Title               | Enterprise Engineering Baseline 1.2 Review     |
-| Status              | **COMPLETE** — awaiting Product Board decision |
-| Prerequisite        | Baseline **1.2 ESTABLISHED**                   |
-| Engineering         | NONE                                           |
-| Standards promotion | **NONE**                                       |
-| ES-004              | **NOT AUTHORISED**                             |
-| Completed (UTC)     | 20260802T121256Z                               |
+| Field               | Value                                        |
+| ------------------- | -------------------------------------------- |
+| Programme           | APZHUB-ENG-002                               |
+| Phase               | **1A**                                       |
+| Title               | Enterprise Engineering Baseline 1.2 Review   |
+| Status              | **COMPLETE** · Product Board **CERTIFIED**   |
+| Prerequisite        | Baseline **1.2 ESTABLISHED**                 |
+| Engineering         | NONE                                         |
+| Standards promotion | **NONE**                                     |
+| Series outcome      | Baseline **1.x STABLE**                      |
+| ES-004              | First enhancement candidate (not authorised) |
+| Review pack (UTC)   | 20260802T121256Z                             |
+| Decision (UTC)      | 20260802T121525Z                             |
 
 ---
 
