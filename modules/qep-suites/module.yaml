@@ -1,0 +1,88 @@
+manifestSchemaVersion: "1.0"
+id: qep-suites
+name: Enterprise Test Suites
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Enterprise Test Suite Management — APZQEP Capability A (APZQEP-140-A). Authoritative suite lifecycle, structure, governance, and Suite Workspace reference UX. Consumes Platform Foundation (events, QKI, notifications, commands). Test Cases / Runs / Execution out of scope."
+  product: apzqep
+  moduleCatalogueId: M-SUITE
+  slug: suites
+  programme: APZQEP-140-A
+  capability: A
+  stakeholderName: Enterprise Test Suite Management
+
+dependencies:
+  platform: []
+  packages:
+    - "@apzhub/qep-suites"
+    - "@apzhub/qep-knowledge-index"
+    - "@apzhub/qep-notification"
+    - "@apzhub/qep-command"
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: workbench-implemented
+
+permissions:
+  - id: qep.suites.read
+    label: View Suites
+  - id: qep.suites.create
+    label: Create Suites
+  - id: qep.suites.update
+    label: Update Suites
+  - id: qep.suites.lifecycle
+    label: Manage Suite Lifecycle
+  - id: qep.suites.admin
+    label: Administer Suites
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Suites
+    icon: folders
+    route: /workspace/qep/suites
+    order: 20
+    permission: qep.suites.read
+  view:
+    title: Enterprise Test Suites
+    workspace: qep
+    route: /workspace/qep/suites
+    permission: qep.suites.read
+  additionalViews:
+    - id: qep-suites-new
+      title: New Suite
+      workspace: qep
+      route: /workspace/qep/suites/new
+      permission: qep.suites.create
+      navigation:
+        level: none
+        workspace: qep
+        route: /workspace/qep/suites/new
+
+commands:
+  - id: qep.command.navigate.suites
+    title: Open Suites
+  - id: qep.command.suite.create
+    title: Create Suite
+  - id: qep.command.suite.open
+    title: Open Suite
+
+api:
+  basePath: /api/v1/qep/suites
+  operations:
+    - list
+    - create
+    - get
+    - update
+    - lifecycle
+    - clone
+    - version
+    - move
+    - tree

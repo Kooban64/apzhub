@@ -88,6 +88,14 @@ export {
 } from "@apzhub/qep-test-execution/presentation";
 
 export {
+  QEP_SUITES_BASE_PATH,
+  QEP_SUITE_ROUTES,
+  isQepSuitesRoute,
+  isQepSuitesNewRoute,
+  parseQepSuiteRouteId,
+} from "@apzhub/qep-suites/presentation";
+
+export {
   QEP_EVIDENCE_BASE_PATH,
   QEP_EVIDENCE_ROUTES,
   isQepEvidenceRoute,

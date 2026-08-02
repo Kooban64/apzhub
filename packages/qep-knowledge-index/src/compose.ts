@@ -8,6 +8,7 @@ import { createProjectionEngine, type ProjectionEngine } from "./projection/engi
 import {
   createProjectionRegistry,
   EVIDENCE_PROJECTION_DEFINITION,
+  SUITE_PROJECTION_DEFINITION,
 } from "./projection/registry";
 import {
   createInMemoryProjectionRepository,
@@ -32,7 +33,10 @@ export function createQualityKnowledgeIndex(
   } = {},
 ): QualityKnowledgeIndex {
   const repository = options.repository ?? createInMemoryProjectionRepository();
-  const registry = createProjectionRegistry([EVIDENCE_PROJECTION_DEFINITION]);
+  const registry = createProjectionRegistry([
+    EVIDENCE_PROJECTION_DEFINITION,
+    SUITE_PROJECTION_DEFINITION,
+  ]);
   const engine = createProjectionEngine({ repository, registry });
   const search = createKnowledgeSearchService(repository);
   const bundle = createKnowledgeIndexProcessorBundle(engine);

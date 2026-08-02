@@ -49,3 +49,21 @@ export const EVIDENCE_PROJECTION_DEFINITION: ProjectionDefinition = {
     "qep.evidence.deleted",
   ],
 };
+
+export const SUITE_PROJECTION_DEFINITION: ProjectionDefinition = {
+  projectionId: "qep.knowledge.suite.v1",
+  entityKind: "suite",
+  version: QEP_KNOWLEDGE_INDEX_PROJECTION_VERSION,
+  description: "Enterprise Test Suite Knowledge Index projection (APZQEP-140-A)",
+  eventTypes: [
+    "qep.suite.created",
+    "qep.suite.updated",
+    "qep.suite.published",
+    "qep.suite.archived",
+    "qep.suite.versioned",
+    "qep.suite.deleted",
+    "qep.suite.restored",
+    "qep.suite.retired",
+    "qep.suite.lifecycle_changed",
+  ],
+};

@@ -1,32 +1,34 @@
 # APZQEP-140 — Core Quality Engineering
 
-| Field      | Value                                                         |
-| ---------- | ------------------------------------------------------------- |
-| Programme  | APZQEP-140                                                    |
-| Title      | Core Quality Engineering                                      |
-| Status     | **Architecture CERTIFIED** · Capability engineering **ready** |
-| Depends on | APZQEP-120 Platform Foundation **CLOSED**                     |
-| Progress   | [CAPABILITY-PROGRESS.md](./CAPABILITY-PROGRESS.md)            |
+| Field      | Value                                                  |
+| ---------- | ------------------------------------------------------ |
+| Programme  | APZQEP-140                                             |
+| Title      | Core Quality Engineering                               |
+| Status     | **Architecture CERTIFIED** · Capability A **COMPLETE** |
+| Depends on | APZQEP-120 Platform Foundation **CLOSED**              |
+| Progress   | [CAPABILITY-PROGRESS.md](./CAPABILITY-PROGRESS.md)     |
 
 ---
 
 ## Programme boundary
 
-| Programme      | Focus                  | Status                                  |
-| -------------- | ---------------------- | --------------------------------------- |
-| APZQEP-120     | Platform Engineering   | **CLOSED**                              |
-| APZQEP-140-000 | Product Architecture   | **CERTIFIED / APPROVED**                |
-| APZQEP-140-A…F | Capability engineering | A recommended next · Auth Pack required |
+| Programme      | Focus                            | Status                                  |
+| -------------- | -------------------------------- | --------------------------------------- |
+| APZQEP-120     | Platform Engineering             | **CLOSED**                              |
+| APZQEP-140-000 | Product Architecture             | **CERTIFIED / APPROVED**                |
+| APZQEP-140-A   | Enterprise Test Suite Management | **COMPLETE**                            |
+| APZQEP-140-B…F | Capability engineering           | B recommended next · Auth Pack required |
 
 ---
 
 ## Where we are
 
-| Layer                | State                        |
-| -------------------- | ---------------------------- |
-| Platform             | **Complete**                 |
-| Product architecture | **Approved**                 |
-| Product capabilities | **0% each** — ready to build |
+| Layer                | State                                           |
+| -------------------- | ----------------------------------------------- |
+| Platform             | **Complete**                                    |
+| Product architecture | **Approved**                                    |
+| Capability A         | **Complete** — Enterprise Test Suite Management |
+| Capabilities B–F     | **0%** — ready to build                         |
 
 Primary metric: [CAPABILITY-PROGRESS.md](./CAPABILITY-PROGRESS.md).
 
@@ -39,15 +41,22 @@ Primary metric: [CAPABILITY-PROGRESS.md](./CAPABILITY-PROGRESS.md).
 
 ---
 
+## Capability A (COMPLETE)
+
+**Enterprise Test Suite Management** — [a/README.md](./a/README.md)
+
+Package: `@apzhub/qep-suites` · Workspace: `/workspace/qep/suites`
+
+---
+
 ## Next capability
 
-**APZQEP-140-A — Suite Management** → stakeholder: _Enterprise Test Suite Management_
+**APZQEP-140-B — Enterprise Test Run Management**
 
-- Recommendation: [APZQEP-140-A-PRODUCT-BOARD-RECOMMENDATION.md](./APZQEP-140-A-PRODUCT-BOARD-RECOMMENDATION.md)
-- Engineering starts only with Owner Authorisation Pack (`AUTHORISED`)
+Engineering starts only with Owner Authorisation Pack (`AUTHORISED`)
 
 ---
 
 ## Platform consumption (immutable)
 
-`@apzhub/platform-outbox` · `@apzhub/platform-processing` · `@apzhub/qep-knowledge-index` · `@apzhub/qep-notification` · `@apzhub/qep-command` · `@apzhub/qep-evidence`
+`@apzhub/platform-outbox` · `@apzhub/platform-processing` · `@apzhub/qep-knowledge-index` · `@apzhub/qep-notification` · `@apzhub/qep-command` · `@apzhub/qep-evidence` · `@apzhub/qep-suites`

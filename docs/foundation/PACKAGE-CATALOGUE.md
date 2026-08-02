@@ -135,6 +135,7 @@
 | `@apzhub/qep-knowledge-index`       | `packages/qep-knowledge-index/`       | **0.1.0**  | Quality Knowledge Index — event-driven read model + search (APZQEP-120-S11)                                                                         |
 | `@apzhub/qep-notification`          | `packages/qep-notification/`          | **0.1.0**  | Notification & Subscription Platform — event/projection subscribers (APZQEP-120-S12)                                                                |
 | `@apzhub/qep-command`               | `packages/qep-command/`               | **0.1.0**  | Enterprise Command Platform — QKI discovery + handler execution (APZQEP-120-S13)                                                                    |
+| `@apzhub/qep-suites`                | `packages/qep-suites/`                | **0.1.0**  | Enterprise Test Suite Management — Capability A (APZQEP-140-A)                                                                                      |
 | `@apzhub/platform-event-bus`        | `packages/platform-event-bus/`        | **0.1.0**  | Event Bus + webhook ingress + outbox relay (OSS-100-12)                                                                                             |
 
 ## Product packages
@@ -191,6 +192,7 @@ See [Platform Dependency Review](../reviews/APZHUB-Platform-Dependency-Review.md
 | `@apzhub/qep-knowledge-index`        | `0.1.0`            | Quality Knowledge Index · APZQEP-120-S11                  |
 | `@apzhub/qep-notification`           | `0.1.0`            | Notification & Subscription · APZQEP-120-S12              |
 | `@apzhub/qep-command`                | `0.1.0`            | Enterprise Command Platform · APZQEP-120-S13              |
+| `@apzhub/qep-suites`                 | `0.1.0`            | Enterprise Test Suite Management · APZQEP-140-A           |
 | `@apzhub/platform-event-bus`         | `0.1.0`            | OSS-100-12 Event Bus + webhook ingress                    |
 | `@apzhub/platform-service-contracts` | `0.17.1`           | Platform service contracts (+ Time)                       |
 | `@apzhub/search-integration`         | `0.2.0`            | Frozen (APZSEARCH-019)                                    |

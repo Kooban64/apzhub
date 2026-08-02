@@ -1,0 +1,25 @@
+{
+  "name": "@apzhub/qep-suites",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZQEP Enterprise Test Suite Management — Capability A (APZQEP-140-A).",
+  "exports": {
+    ".": "./src/index.ts",
+    "./domain": "./src/domain/index.ts",
+    "./application": "./src/application/index.ts",
+    "./presentation": "./src/presentation/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-suites"
+  },
+  "dependencies": {
+    "@apzhub/platform-outbox": "workspace:*",
+    "@apzhub/platform-processing": "workspace:*",
+    "@apzhub/qep-command": "workspace:*",
+    "@apzhub/qep-knowledge-index": "workspace:*",
+    "@apzhub/qep-notification": "workspace:*"
+  }
+}

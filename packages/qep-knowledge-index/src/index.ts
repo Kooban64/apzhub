@@ -20,10 +20,12 @@ export {
 export {
   createProjectionRegistry,
   EVIDENCE_PROJECTION_DEFINITION,
+  SUITE_PROJECTION_DEFINITION,
   type ProjectionRegistry,
 } from "./projection/registry";
 
 export { buildEvidenceProjection } from "./projection/evidence-builder";
+export { buildSuiteProjection } from "./projection/suite-builder";
 
 export {
   createProjectionEngine,
