@@ -140,6 +140,7 @@
 | `@apzhub/qep-execution-workspace`       | `packages/qep-execution-workspace/`       | **0.1.0**  | Enterprise Test Execution Workspace — Capability C (APZQEP-140-C)                                                                                   |
 | `@apzhub/qep-defects`                   | `packages/qep-defects/`                   | **0.1.0**  | Enterprise Defect Management — Capability D (APZQEP-140-D)                                                                                          |
 | `@apzhub/qep-requirements-traceability` | `packages/qep-requirements-traceability/` | **0.1.0**  | Enterprise Requirements & Traceability — Capability E (APZQEP-140-E)                                                                                |
+| `@apzhub/qep-reporting`                 | `packages/qep-reporting/`                 | **0.1.0**  | Enterprise Reporting & Analytics — Capability F (APZQEP-140-F)                                                                                      |
 | `@apzhub/platform-event-bus`            | `packages/platform-event-bus/`            | **0.1.0**  | Event Bus + webhook ingress + outbox relay (OSS-100-12)                                                                                             |
 
 ## Product packages
@@ -201,6 +202,7 @@ See [Platform Dependency Review](../reviews/APZHUB-Platform-Dependency-Review.md
 | `@apzhub/qep-execution-workspace`       | `0.1.0`            | Enterprise Test Execution Workspace · APZQEP-140-C        |
 | `@apzhub/qep-defects`                   | `0.1.0`            | Enterprise Defect Management · APZQEP-140-D               |
 | `@apzhub/qep-requirements-traceability` | `0.1.0`            | Enterprise Requirements & Traceability · APZQEP-140-E     |
+| `@apzhub/qep-reporting`                 | `0.1.0`            | Enterprise Reporting & Analytics · APZQEP-140-F           |
 | `@apzhub/platform-event-bus`            | `0.1.0`            | OSS-100-12 Event Bus + webhook ingress                    |
 | `@apzhub/platform-service-contracts`    | `0.17.1`           | Platform service contracts (+ Time)                       |
 | `@apzhub/search-integration`            | `0.2.0`            | Frozen (APZSEARCH-019)                                    |

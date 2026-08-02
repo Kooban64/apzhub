@@ -1,0 +1,60 @@
+manifestSchemaVersion: "1.0"
+id: qep-enterprise-reporting
+name: Reporting & Analytics
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: "Enterprise Reporting & Analytics — APZQEP Capability F (APZQEP-140-F). Derived dashboards and metrics over Caps A–E and QKI. Never a business source of truth."
+  product: apzqep
+  moduleCatalogueId: M-ERPT
+  slug: enterprise-reporting
+  programme: APZQEP-140-F
+  capability: F
+  stakeholderName: Enterprise Reporting & Analytics
+
+dependencies:
+  platform: []
+  packages:
+    - "@apzhub/qep-reporting"
+    - "@apzhub/qep-suites"
+    - "@apzhub/qep-execution-plans"
+    - "@apzhub/qep-execution-workspace"
+    - "@apzhub/qep-defects"
+    - "@apzhub/qep-requirements-traceability"
+    - "@apzhub/qep-knowledge-index"
+    - "@apzhub/qep-notification"
+    - "@apzhub/qep-command"
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: workbench-implemented
+
+permissions:
+  - id: qep.reporting.read
+    label: View Reporting & Analytics
+  - id: qep.reporting.create
+    label: Create Saved Reports
+  - id: qep.reporting.update
+    label: Update Saved Reports
+  - id: qep.reporting.admin
+    label: Administer Reporting
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Reporting & Analytics
+    icon: bar-chart-3
+    route: /workspace/qep/enterprise-reporting
+    order: 90
+    permission: qep.reporting.read
+  view:
+    title: Reporting & Analytics
+    workspace: qep
+    route: /workspace/qep/enterprise-reporting
+    permission: qep.reporting.read

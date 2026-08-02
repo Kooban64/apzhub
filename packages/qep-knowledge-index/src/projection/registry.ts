@@ -143,3 +143,15 @@ export const REQUIREMENT_PROJECTION_DEFINITION: ProjectionDefinition = {
     "qep.requirement.status_changed",
   ],
 };
+
+export const DOCUMENT_PROJECTION_DEFINITION: ProjectionDefinition = {
+  projectionId: "qep.knowledge.document.v1",
+  entityKind: "document",
+  version: QEP_KNOWLEDGE_INDEX_PROJECTION_VERSION,
+  description:
+    "Enterprise Reporting document projection — saved reports metadata (APZQEP-140-F)",
+  eventTypes: [
+    "qep.reporting.saved_report_created",
+    "qep.reporting.saved_report_updated",
+  ],
+};

@@ -198,4 +198,15 @@ export const qepQueryKeys = {
         params ?? {},
       ] as const,
   },
+  enterpriseReporting: {
+    all: () => [...qepQueryKeys.all(), "enterpriseReporting"] as const,
+    dashboards: () =>
+      [...qepQueryKeys.enterpriseReporting.all(), "dashboards"] as const,
+    dashboard: (id: string) =>
+      [...qepQueryKeys.enterpriseReporting.all(), "dashboard", id] as const,
+    metrics: () => [...qepQueryKeys.enterpriseReporting.all(), "metrics"] as const,
+    templates: () => [...qepQueryKeys.enterpriseReporting.all(), "templates"] as const,
+    savedReports: () =>
+      [...qepQueryKeys.enterpriseReporting.all(), "savedReports"] as const,
+  },
 };

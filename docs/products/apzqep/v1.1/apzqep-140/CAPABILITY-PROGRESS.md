@@ -4,8 +4,8 @@
 | --------- | --------------------------------------- |
 | Programme | APZQEP-140                              |
 | Status    | **IN FORCE** — primary progress surface |
-| Timestamp | 20260802T220000Z                        |
-| Authority | Product Board (Caps A–E COMPLETE)       |
+| Timestamp | 20260802T230000Z                        |
+| Authority | Product Board (Caps A–F COMPLETE)       |
 
 ---
 
@@ -46,7 +46,7 @@ Capability F
 
 Enterprise Reporting & Analytics
 
-□□□□□□□□□□ 0%
+██████████ 100%
 ```
 
 | Capability | Stakeholder name                       | Programme    | Completion |
@@ -56,12 +56,12 @@ Enterprise Reporting & Analytics
 | **C**      | Enterprise Test Execution Workspace    | APZQEP-140-C |   **100%** |
 | **D**      | Enterprise Defect Management           | APZQEP-140-D |   **100%** |
 | **E**      | Enterprise Requirements & Traceability | APZQEP-140-E |   **100%** |
-| **F**      | Enterprise Reporting & Analytics       | APZQEP-140-F |     **0%** |
+| **F**      | Enterprise Reporting & Analytics       | APZQEP-140-F |   **100%** |
 
-Packs: [a/](./a/) · [b/](./b/) · [c/](./c/) · [d/](./d/) · [e/](./e/)
+Packs: [a/](./a/) · [b/](./b/) · [c/](./c/) · [d/](./d/) · [e/](./e/) · [f/](./f/)
 
 ---
 
 ## Next
 
-**APZQEP-140-F — Enterprise Reporting & Analytics** — Owner Authorisation required.
+**Core Quality Engineering COMPLETE.** Recommend Product Board Capability Review and product-wide readiness assessment.

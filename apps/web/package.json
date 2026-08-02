@@ -55,6 +55,7 @@
     "@apzhub/qep-execution-workspace": "workspace:*",
     "@apzhub/qep-defects": "workspace:*",
     "@apzhub/qep-requirements-traceability": "workspace:*",
+    "@apzhub/qep-reporting": "workspace:*",
     "@apzhub/qep-contracts": "workspace:*",
     "@apzhub/search-qep": "workspace:*",
     "@apzhub/reporting-contracts": "workspace:*",

@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 
 import {
   isQepDefectsRoute,
+  isQepEnterpriseReportingRoute,
   isQepEnterpriseRequirementsRoute,
   isQepEvidenceRoute,
   isQepExecutionPlansRoute,
@@ -18,6 +19,7 @@ import {
 } from "@/lib/qep/routes";
 
 import { QepDefectsRouterView } from "./qep-defects-views";
+import { QepEnterpriseReportingRouterView } from "./qep-enterprise-reporting-views";
 import { QepEnterpriseRequirementsRouterView } from "./qep-enterprise-requirements-views";
 import { QepEvidenceRouterView } from "./qep-evidence-views";
 import { QepExecutionPlansRouterView } from "./qep-execution-plans-views";
@@ -31,9 +33,7 @@ import { QepTraceabilityRouterView } from "./qep-traceability-views";
 import { QepVerificationRouterView } from "./qep-verification-views";
 
 /**
- * QEP workspace router — Suites (A) / Execution Planning (B) / Execution Workspace (C) /
- * Defects (D) / Enterprise Requirements & Traceability (E) /
- * Legacy ENG Requirements / Traceability / Verification / Specs / Plans / TE / Evidence.
+ * QEP workspace router — Caps A–F product surfaces + legacy ENG modules.
  */
 export function QepWorkspaceRouter() {
   const pathname = usePathname() ?? "";
@@ -60,6 +60,10 @@ export function QepWorkspaceRouter() {
 
   if (isQepEnterpriseRequirementsRoute(pathname)) {
     return <QepEnterpriseRequirementsRouterView pathname={pathname} />;
+  }
+
+  if (isQepEnterpriseReportingRoute(pathname)) {
+    return <QepEnterpriseReportingRouterView pathname={pathname} />;
   }
 
   if (isQepEvidenceRoute(pathname)) {

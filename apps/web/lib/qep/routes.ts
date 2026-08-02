@@ -129,6 +129,16 @@ export {
 } from "@apzhub/qep-requirements-traceability/presentation";
 
 export {
+  QEP_ENTERPRISE_REPORTING_BASE_PATH,
+  QEP_ENTERPRISE_REPORTING_ROUTES,
+  isQepEnterpriseReportingRoute,
+  parseQepReportingDashboardId,
+  parseQepReportingReportId,
+  parseQepReportingTemplateId,
+  isQepEnterpriseReportingMetricsRoute,
+} from "@apzhub/qep-reporting/presentation";
+
+export {
   QEP_EVIDENCE_BASE_PATH,
   QEP_EVIDENCE_ROUTES,
   isQepEvidenceRoute,

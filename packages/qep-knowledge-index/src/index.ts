@@ -25,6 +25,7 @@ export {
   EXECUTION_SESSION_PROJECTION_DEFINITION,
   DEFECT_PROJECTION_DEFINITION,
   REQUIREMENT_PROJECTION_DEFINITION,
+  DOCUMENT_PROJECTION_DEFINITION,
   type ProjectionRegistry,
 } from "./projection/registry";
 
@@ -34,6 +35,7 @@ export { buildExecutionPlanProjection } from "./projection/execution-plan-builde
 export { buildExecutionProjection } from "./projection/execution-builder";
 export { buildDefectProjection } from "./projection/defect-builder";
 export { buildRequirementProjection } from "./projection/requirement-builder";
+export { buildDocumentProjection } from "./projection/document-builder";
 
 export {
   createProjectionEngine,
