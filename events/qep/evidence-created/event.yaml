@@ -8,6 +8,8 @@ metadata:
   category: quality-engineering
   description: "Evidence record was captured / created. Authoritative catalogue: docs/products/apzqep/events/EVENT-CATALOGUE.md (APZQEP-120-S07)."
   lifecycleStatus: active
+  stability: Stable
+  introducedIn: APZQEP-120-S07
 
 event:
   category: business

@@ -8,6 +8,8 @@ metadata:
   category: quality-engineering
   description: "Evidence metadata or content identity changed. Authoritative catalogue: docs/products/apzqep/events/EVENT-CATALOGUE.md (APZQEP-120-S07)."
   lifecycleStatus: active
+  stability: Stable
+  introducedIn: APZQEP-120-S07
 
 event:
   category: business

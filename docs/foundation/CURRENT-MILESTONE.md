@@ -29,10 +29,11 @@
 
 ### Latest completed product slice
 
-**APZQEP-120-S07 — QEP Domain Event Catalogue & Publish — COMPLETE / PASS**
+**APZQEP-120-S07 — QEP Domain Event Catalogue & Publish — COMPLETE / PASS / Product Board CERTIFIED**
 
+- Board: [S07-PRODUCT-BOARD-CERTIFICATION.md](../products/apzqep/v1.1/apzqep-120/S07-PRODUCT-BOARD-CERTIFICATION.md)
 - Completion: [S07-COMPLETION.md](../products/apzqep/v1.1/apzqep-120/S07-COMPLETION.md)
-- Catalogue: [EVENT-CATALOGUE.md](../products/apzqep/events/EVENT-CATALOGUE.md)
+- Catalogue: [EVENT-CATALOGUE.md](../products/apzqep/events/EVENT-CATALOGUE.md) **v1.0.1**
 
 ### Recommended next product programme (not authorised)
 

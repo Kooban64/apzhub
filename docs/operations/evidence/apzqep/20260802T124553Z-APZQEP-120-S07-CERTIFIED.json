@@ -1,0 +1,13 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "S07",
+  "decision": "CERTIFIED",
+  "timestampUtc": "20260802T124553Z",
+  "engineeringCertification": "PASS",
+  "catalogueVersion": "1.0.1",
+  "catalogueMaturityFields": ["stability", "introducedIn"],
+  "governanceUnchanged": true,
+  "baselineUnchanged": true,
+  "s08Authorised": false,
+  "recommendedNext": "APZQEP-120-S08"
+}

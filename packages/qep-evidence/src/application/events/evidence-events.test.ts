@@ -38,6 +38,10 @@ describe("APZQEP-120-S07 Evidence event platform", () => {
     for (const id of ids) {
       expect(isRegisteredQepEvidenceEvent(id)).toBe(true);
     }
+    for (const descriptor of QEP_EVIDENCE_EVENT_DESCRIPTORS) {
+      expect(descriptor.stability).toBe("Stable");
+      expect(descriptor.introducedIn).toBe("APZQEP-120-S07");
+    }
   });
 
   it("builds and validates envelopes with version + idempotency", () => {

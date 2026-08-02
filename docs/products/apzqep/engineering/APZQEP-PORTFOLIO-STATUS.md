@@ -1,10 +1,10 @@
 # APZQEP / APZHUB — Portfolio Status Snapshot
 
-| Field     | Value                                              |
-| --------- | -------------------------------------------------- |
-| Date      | 2026-08-02                                         |
-| Authority | Product Board — APZQEP-ENG-001 final certification |
-| Status    | **IN FORCE**                                       |
+| Field     | Value                                         |
+| --------- | --------------------------------------------- |
+| Date      | 2026-08-02                                    |
+| Authority | Product Board — post APZQEP-120-S07 CERTIFIED |
+| Status    | **IN FORCE**                                  |
 
 ---
 
@@ -16,39 +16,65 @@
 | APZHUB Product Framework | ✅ Closed                                                           |
 | APZQEP v1.0 Release      | ✅ Closed                                                           |
 | APZQEP v1.1 Planning     | ✅ Closed                                                           |
-| APZQEP-120 S01–S07       | ✅ Complete (S07 Domain Events PASS)                                |
-| APZQEP-120 S08           | ⏳ Next · Owner instruction required                                |
+| APZQEP-120 S01–S07       | ✅ Complete · S07 Product Board **CERTIFIED**                       |
+| APZQEP-120 S08           | ⏳ Recommended next · Owner instruction required                    |
 | APZQEP-ENG-001           | ✅ **Closed** (CERTIFIED / ARCHIVED)                                |
 | APZHUB-ENG-002           | ✅ Foundation COMPLETE · Phase 1 CLOSED · ES promotions **ON HOLD** |
 
 ---
 
-## APZQEP product state (post ENG-001)
+## APZQEP product state
 
-| Area                        | Status               |
-| --------------------------- | -------------------- |
-| Governance                  | ✅ Complete          |
-| Engineering Framework       | ✅ Complete          |
-| Product Planning            | ✅ Complete          |
-| Solution Architecture       | ✅ Complete          |
-| Engineering Standards       | ✅ Complete          |
-| Evidence Platform (S01–S06) | ✅ Complete          |
-| Core Platform Engineering   | 🚧 In Progress       |
-| Product Feature Engineering | 🚧 Ready to Continue |
+| Area                            | Status                         |
+| ------------------------------- | ------------------------------ |
+| Governance                      | ✅ Complete                    |
+| Engineering Framework           | ✅ Complete                    |
+| Evidence Platform (S01–S06)     | ✅ Complete                    |
+| Event Platform foundation (S07) | ✅ Complete · catalogue v1.0.1 |
+| Reliable delivery (S08)         | ⏳ Not authorised              |
+| Core Platform Engineering       | 🚧 In Progress                 |
+| Product Feature Engineering     | 🚧 Ready to Continue           |
 
 ---
 
 ## Maturity snapshot (Board)
 
-| Area                   | Assessment |
-| ---------------------- | ---------- |
-| Governance             | 100%       |
-| Engineering Framework  | 100%       |
-| Product Planning       | 100%       |
-| Product Architecture   | 100%       |
-| Backend Engineering    | ≈65%       |
-| Frontend               | ≈20%       |
-| Overall Product Vision | ≈55%       |
+| Area                   | Assessment                 |
+| ---------------------- | -------------------------- |
+| Governance             | 100%                       |
+| Engineering Framework  | 100%                       |
+| Evidence Platform      | ~55%                       |
+| Event Platform         | ~20% (foundation complete) |
+| Backend Overall        | ~68–70%                    |
+| Frontend               | ~20%                       |
+| Overall Product Vision | ~58–60%                    |
+
+Percentages reflect foundational runtime capability (events), not planning documents alone.
+
+---
+
+## Critical path (current)
+
+```text
+Evidence Platform (S01–S07) ✅
+        │
+        ▼
+S08  Outbox Drain / Reliable Delivery   ← next (awaiting Owner)
+        │
+        ▼
+S09  Worker Processing
+        │
+        ▼
+S10  Operational Events
+        │
+        ├──────────────┐
+        ▼              ▼
+S11 Search      S12–S13 Notifications
+        │              │
+        └──────────────┘
+               ▼
+S14–S20 Product Features
+```
 
 ---
 
@@ -64,7 +90,7 @@ Future products inherit governance from day one.
 
 ## Related
 
-- [APZQEP-ENG-001-COMPLETION.md](./APZQEP-ENG-001-COMPLETION.md)
+- [S07-PRODUCT-BOARD-CERTIFICATION.md](../v1.1/apzqep-120/S07-PRODUCT-BOARD-CERTIFICATION.md)
+- [EVENT-CATALOGUE.md](../events/EVENT-CATALOGUE.md)
 - [STANDING-PROGRAMME-RECORD.md](../STANDING-PROGRAMME-RECORD.md)
-- [PRODUCT-BOARD-RECOMMENDATION-NEXT-PROGRAMME.md](../v1.1/apzqep-120/PRODUCT-BOARD-RECOMMENDATION-NEXT-PROGRAMME.md)
 - [APZHUB-ENG-002 PHASE-1-CLOSED](../../../engineering/APZHUB-ENG-002/PHASE-1-CLOSED.md)

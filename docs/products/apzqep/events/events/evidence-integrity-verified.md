@@ -2,15 +2,16 @@
 
 | Field            | Value                                             |
 | ---------------- | ------------------------------------------------- |
-| Event name       | **Evidence Integrity Verified**                   |
+| Event            | **Evidence Integrity Verified**                   |
 | Event ID         | `qep.evidence.integrity_verified`                 |
 | Version          | **1.0.0**                                         |
-| Lifecycle status | **active**                                        |
-| Programme        | APZQEP-120-S07                                    |
-| Producer         | EvidenceIntegrityPlatformService.verifyIntegrity  |
-| Known consumers  | S08 workers, audit, certification                 |
+| Stability        | **Stable**                                        |
+| Introduced In    | **APZQEP-120-S07**                                |
+| Lifecycle status | **Active**                                        |
+| Producer         | Evidence Integrity Platform Service               |
+| Consumers        | S08 Outbox, certification, audit                  |
 | Related ADR      | Platform Event SDK (029); additive evolution only |
-| Related slices   | S07 (define/publish); S08–S13 (consume)           |
+| Related slices   | S07 (define/publish); S08–S13+ (consume)          |
 
 ## Purpose
 
@@ -32,6 +33,8 @@ Content integrity verification succeeded.
 ## Compatibility notes
 
 Additive fields MAY be introduced in a minor version bump. Removing or renaming fields is a breaking change and requires ADR + Product Board approval.
+
+Stability **Stable** means consumers may depend on this event under Enterprise Enhancement Policy (backwards-compatible evolution).
 
 ## Manifest
 

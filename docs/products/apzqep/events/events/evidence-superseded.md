@@ -2,15 +2,16 @@
 
 | Field            | Value                                             |
 | ---------------- | ------------------------------------------------- |
-| Event name       | **Evidence Superseded**                           |
+| Event            | **Evidence Superseded**                           |
 | Event ID         | `qep.evidence.superseded`                         |
 | Version          | **1.0.0**                                         |
-| Lifecycle status | **active**                                        |
-| Programme        | APZQEP-120-S07                                    |
-| Producer         | EvidenceLifecyclePlatformService.markSuperseded   |
-| Known consumers  | S08 workers, S11 search, audit                    |
+| Stability        | **Stable**                                        |
+| Introduced In    | **APZQEP-120-S07**                                |
+| Lifecycle status | **Active**                                        |
+| Producer         | Evidence Lifecycle Platform Service               |
+| Consumers        | S08 Outbox, S11 Search, audit                     |
 | Related ADR      | Platform Event SDK (029); additive evolution only |
-| Related slices   | S07 (define/publish); S08–S13 (consume)           |
+| Related slices   | S07 (define/publish); S08–S13+ (consume)          |
 
 ## Purpose
 
@@ -32,6 +33,8 @@ Evidence was superseded by a successor record.
 ## Compatibility notes
 
 Additive fields MAY be introduced in a minor version bump. Removing or renaming fields is a breaking change and requires ADR + Product Board approval.
+
+Stability **Stable** means consumers may depend on this event under Enterprise Enhancement Policy (backwards-compatible evolution).
 
 ## Manifest
 

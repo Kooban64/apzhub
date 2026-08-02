@@ -1,14 +1,16 @@
 # APZQEP-120-S07 — Completion Report
 
-| Field           | Value                                |
-| --------------- | ------------------------------------ |
-| Programme       | APZQEP-120                           |
-| Slice           | S07                                  |
-| Title           | QEP Domain Event Catalogue & Publish |
-| Status          | **COMPLETE**                         |
-| Engineering     | **COMPLETE**                         |
-| Certification   | **PASS**                             |
-| Timestamp (UTC) | 20260802T123953Z                     |
+| Field           | Value                                      |
+| --------------- | ------------------------------------------ |
+| Programme       | APZQEP-120                                 |
+| Slice           | S07                                        |
+| Title           | QEP Domain Event Catalogue & Publish       |
+| Status          | **COMPLETE** · Product Board **CERTIFIED** |
+| Engineering     | **COMPLETE**                               |
+| Certification   | **PASS** · Board **CERTIFIED**             |
+| Catalogue       | **v1.0.1** (Stability + Introduced In)     |
+| Timestamp (UTC) | 20260802T123953Z                           |
+| Board (UTC)     | 20260802T124553Z                           |
 
 ---
 

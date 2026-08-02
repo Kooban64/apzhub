@@ -1,16 +1,17 @@
 # Evidence Integrity Established
 
-| Field            | Value                                               |
-| ---------------- | --------------------------------------------------- |
-| Event name       | **Evidence Integrity Established**                  |
-| Event ID         | `qep.evidence.integrity_established`                |
-| Version          | **1.0.0**                                           |
-| Lifecycle status | **active**                                          |
-| Programme        | APZQEP-120-S07                                      |
-| Producer         | EvidenceIntegrityPlatformService.establishIntegrity |
-| Known consumers  | S08 workers, audit, certification                   |
-| Related ADR      | Platform Event SDK (029); additive evolution only   |
-| Related slices   | S07 (define/publish); S08–S13 (consume)             |
+| Field            | Value                                             |
+| ---------------- | ------------------------------------------------- |
+| Event            | **Evidence Integrity Established**                |
+| Event ID         | `qep.evidence.integrity_established`              |
+| Version          | **1.0.0**                                         |
+| Stability        | **Stable**                                        |
+| Introduced In    | **APZQEP-120-S07**                                |
+| Lifecycle status | **Active**                                        |
+| Producer         | Evidence Integrity Platform Service               |
+| Consumers        | S08 Outbox, certification, audit                  |
+| Related ADR      | Platform Event SDK (029); additive evolution only |
+| Related slices   | S07 (define/publish); S08–S13+ (consume)          |
 
 ## Purpose
 
@@ -32,6 +33,8 @@ Content integrity digest was established.
 ## Compatibility notes
 
 Additive fields MAY be introduced in a minor version bump. Removing or renaming fields is a breaking change and requires ADR + Product Board approval.
+
+Stability **Stable** means consumers may depend on this event under Enterprise Enhancement Policy (backwards-compatible evolution).
 
 ## Manifest
 

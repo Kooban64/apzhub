@@ -18,7 +18,7 @@
 | CLOSE-001      | **CLOSED** — [APZQEP-PROGRAMME-CLOSURE-REPORT.md](./APZQEP-PROGRAMME-CLOSURE-REPORT.md) · Archive [APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md](./APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md)                                             |
 | APZQEP-110     | **APPROVED** — [v1.1 Product Planning](./v1.1/README.md)                                                                                                                                                                     |
 | APZQEP-111     | **APPROVED** — [v1.1 Solution Architecture](./v1.1/EXECUTIVE-ARCHITECTURE-SUMMARY.md)                                                                                                                                        |
-| APZQEP-120     | **S01–S07 COMPLETE** — next **S08** requires Owner instruction — [S07 completion](./v1.1/apzqep-120/S07-COMPLETION.md) · [apzqep-120/](./v1.1/apzqep-120/README.md)                                                          |
+| APZQEP-120     | **S01–S07 COMPLETE** · S07 Product Board **CERTIFIED** — next **S08** requires Owner instruction — [S07 Board](./v1.1/apzqep-120/S07-PRODUCT-BOARD-CERTIFICATION.md) · [apzqep-120/](./v1.1/apzqep-120/README.md)            |
 | APZHUB-ENG-002 | **ACTIVE** · Governance Foundation **COMPLETE** · Phase 1 **CLOSED** · ES promotions **ON HOLD** — [PHASE-1-CLOSED.md](../../engineering/APZHUB-ENG-002/PHASE-1-CLOSED.md)                                                   |
 
 ### Default premise
