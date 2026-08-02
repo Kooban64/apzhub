@@ -20,7 +20,7 @@ Does **not** replace [APZHUB Engineering Standard](../governance/APZHUB-ENGINEER
 
 ---
 
-## Portfolio Engineering Standards (APZHUB-ENG-002) — **Baseline 1.1**
+## Portfolio Engineering Standards (APZHUB-ENG-002) — **ES-003 Under Review**
 
 Enterprise governance for promoting proven product engineering standards by **abstraction** under **Dual Approval**. APZQEP remains **reference implementation**.
 
@@ -30,12 +30,12 @@ Enterprise governance for promoting proven product engineering standards by **ab
 | [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)             | **Enterprise standards register** (no tech) |
 | [APZHUB-TESTING-STANDARD.md](./APZHUB-TESTING-STANDARD.md)                                           | **ES-001 ACTIVE** v1.0                      |
 | [APZHUB-CERTIFICATION-STANDARD.md](./APZHUB-CERTIFICATION-STANDARD.md)                               | **ES-002 ACTIVE** v1.0                      |
+| [APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md](./APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md)       | **ES-003** candidate (Under Review)         |
 | [APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md) | Charter + Dual Approval §12                 |
-| [APZHUB-ENG-002/PROMOTION-PRINCIPLES.md](./APZHUB-ENG-002/PROMOTION-PRINCIPLES.md)                   | Abstraction + Dual Approval                 |
+| [APZHUB-ENG-002/ES-003-PROMOTION-PACK.md](./APZHUB-ENG-002/ES-003-PROMOTION-PACK.md)                 | ES-003 Board pack                           |
 | [APZHUB-ENG-002/README.md](./APZHUB-ENG-002/README.md)                                               | Programme face                              |
-| [APZHUB-ENG-002/DOCUMENT-MAP.md](./APZHUB-ENG-002/DOCUMENT-MAP.md)                                   | Full pack index                             |
 
-**Status:** Baseline **1.1** (ES-001, ES-002). ES-003 **AUTHORISATION PENDING**. APZQEP-ENG-001 **ARCHIVED** (`b9626ada`).
+**Status:** Baseline **1.1** unchanged. ES-003 **Under Review** (Arch Review PASS; Board pending). APZQEP-ENG-001 **ARCHIVED** (`b9626ada`).
 
 ---
 
