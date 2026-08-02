@@ -216,7 +216,7 @@ export function createRequirementCommandHandlers(options: {
       async execute() {
         return {
           ok: true,
-          data: { target: `${base}/coverage?verification=failed` },
+          data: { target: `${base}/coverage?verification=failed` }, // workspace route (not API)
         };
       },
     },

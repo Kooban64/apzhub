@@ -4,4 +4,4 @@
 
 Metrics: suiteCoverage, executionCoverage, evidenceCoverage, defectCoverage, overallCoverage (weighted), verificationStatus, uncovered, highRiskGap.
 
-Dashboard: `GET /api/v1/qep/enterprise-requirements/coverage`.
+Dashboard: `GET /api/v1/qep/enterprise-requirements/coverage-dashboard`.

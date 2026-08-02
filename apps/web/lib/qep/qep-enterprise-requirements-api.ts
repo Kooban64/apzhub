@@ -155,7 +155,7 @@ export async function getRequirementCoverage(
   options?: QepClientRequestOptions,
 ) {
   const response = await fetch(
-    `${BASE}/${encodeURIComponent(requirementId)}/coverage`,
+    `${BASE}/${encodeURIComponent(requirementId)}/coverage-snapshot`,
     { signal: options?.signal },
   );
   return parseJson<CoverageSnapshot>(response);
@@ -189,7 +189,7 @@ export async function getCoverageDashboard(
   params?: QepEnterpriseRequirementListParams,
   options?: QepClientRequestOptions,
 ) {
-  const response = await fetch(`${BASE}/coverage${qs(params)}`, {
+  const response = await fetch(`${BASE}/coverage-dashboard${qs(params)}`, {
     signal: options?.signal,
   });
   return parseJson<{
