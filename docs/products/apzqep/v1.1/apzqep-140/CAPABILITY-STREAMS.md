@@ -1,52 +1,52 @@
 # APZQEP-140 — Capability Streams
 
-| Field     | Value                     |
-| --------- | ------------------------- |
-| Programme | APZQEP-140                |
-| Status    | **DRAFT** (Board framing) |
-| Timestamp | 20260802T163026Z          |
+| Field     | Value                                     |
+| --------- | ----------------------------------------- |
+| Programme | APZQEP-140                                |
+| Status    | **ALIGNED** to APZQEP-140-000 (A–F model) |
+| Timestamp | 20260802T163547Z                          |
 
-Stakeholder-oriented organisation of Core Quality Engineering. Detailed ownership lands in **APZQEP-140-000**.
+Stakeholder-oriented grouping. Authoritative capability sheets: [000/CAPABILITY-MAP.md](./000/CAPABILITY-MAP.md).
+
+---
+
+## Stream ↔ Capability mapping
+
+| Stream              | Board theme                           | Capabilities  |
+| ------------------- | ------------------------------------- | ------------- |
+| **Test Management** | Suites, Cases, Parameters, Libraries  | **A**         |
+| **Execution**       | Runs, Execution, Results, Evidence    | **B** + **C** |
+| **Quality**         | Defects, Traceability, Coverage, Risk | **D** + **E** |
+| **Reporting**       | Dashboards, Analytics, Executive      | **F**         |
 
 ---
 
 ## Capability A — Test Management
 
-| Element    | Notes                         |
-| ---------- | ----------------------------- |
-| Suites     | Organise executable test sets |
-| Cases      | Test case definitions         |
-| Parameters | Data / variation              |
-| Libraries  | Shared reusable assets        |
+Suites · Cases · Parameters · Libraries · Shared Assets · Reusable Components
 
-## Capability B — Execution
+## Capability B — Run Management
 
-| Element   | Notes                                |
-| --------- | ------------------------------------ |
-| Runs      | Planned / scheduled execution units  |
-| Execution | Runtime orchestration                |
-| Results   | Outcomes and status                  |
-| Evidence  | Links to Evidence Platform (S01–S06) |
+Runs · Execution Planning · Scheduling · Assignments · Sessions
 
-## Capability C — Quality
+## Capability C — Test Execution
 
-| Element      | Notes               |
-| ------------ | ------------------- |
-| Defects      | Defect lifecycle    |
-| Traceability | Req ↔ test ↔ defect |
-| Coverage     | Coverage models     |
-| Risk         | Risk signals        |
+Manual · Automated · Hybrid · Evidence links · Execution Status
 
-## Capability D — Reporting
+## Capability D — Defect & Quality Findings
 
-| Element             | Notes                     |
-| ------------------- | ------------------------- |
-| Dashboards          | Role-aware views          |
-| Analytics           | Operational analytics     |
-| Executive Reporting | Decision-support surfaces |
+Defect Lifecycle · Links · Findings · Risk
+
+## Capability E — Requirements & Traceability
+
+Requirements · Coverage · Relationships · Traceability
+
+## Capability F — Reporting
+
+Operational Dashboards · Executive Dashboards · Quality Analytics · Portfolio Views
 
 ---
 
 ## Cross-cutting (consume APZQEP-120)
 
-Every capability stream consumes — never redesigns — Event Platform, QKI, Notifications, Command Platform, Evidence.
+Event Platform · QKI · Notifications · Command Platform · Evidence — never redesign.

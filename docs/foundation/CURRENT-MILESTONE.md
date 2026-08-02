@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-02  
-> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120 CERTIFIED / PROGRAMME COMPLETE / CLOSED** · Recommended next: **APZQEP-140-000 Core Quality Engineering Architecture** (Owner Auth Pack required) · **APZQEP v1.0 Lifecycle Complete** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
+> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120 CLOSED** · **APZQEP-140-000 Architecture COMPLETE** (Ready for Product Board Review) · Implementation **NOT AUTHORISED** · **APZQEP v1.0 Lifecycle Complete** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
 
 ---
 
@@ -36,14 +36,18 @@
 - Closing slice: S13 Enterprise Command Platform (`@apzhub/qep-command` **0.1.0**)
 - Do **not** continue slices under APZQEP-120
 
-### Recommended next programme phase (not authorised)
+### Latest architecture programme
 
-**APZQEP-140-000 — Core Quality Engineering Architecture** — Owner Authorisation Pack required.
+**APZQEP-140-000 — Core Quality Engineering Architecture — COMPLETE**
 
-- Hub: [apzqep-140/README.md](../products/apzqep/v1.1/apzqep-140/README.md)
-- Recommendation: [APZQEP-140-000-PRODUCT-BOARD-RECOMMENDATION.md](../products/apzqep/v1.1/apzqep-140/APZQEP-140-000-PRODUCT-BOARD-RECOMMENDATION.md)
-- Capability streams: A Test Management · B Execution · C Quality · D Reporting
-- Suites/Runs/Execution implementation only **after** 000 approval
+- Board review: [PRODUCT-BOARD-REVIEW.md](../products/apzqep/v1.1/apzqep-140/000/PRODUCT-BOARD-REVIEW.md)
+- Pack: [apzqep-140/000/](../products/apzqep/v1.1/apzqep-140/000/README.md)
+- Capabilities A–F defined; waves Suites → … → Reporting
+- Engineering implementation **NOT AUTHORISED** until Board approval
+
+### Recommended next (after Board approves 000)
+
+**APZQEP-140-A — Suite & Library Management** — Owner Authorisation Pack required.
 
 ---
 

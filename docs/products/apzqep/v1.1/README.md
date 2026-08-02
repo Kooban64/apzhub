@@ -1,14 +1,14 @@
 # APZQEP v1.1 — Product Planning, Architecture & Execution Planning
 
-| Field                 | Value                                                                |
-| --------------------- | -------------------------------------------------------------------- |
-| Product planning      | **APZQEP-110** — COMPLETE / APPROVED                                 |
-| Solution architecture | **APZQEP-111** — COMPLETE / **APPROVED**                             |
-| Execution planning    | **APZQEP-120** — **CERTIFIED / PROGRAMME COMPLETE / CLOSED**         |
-| Next programme        | **APZQEP-140** — NOT STARTED · [apzqep-140/](./apzqep-140/README.md) |
-| Positioning           | [PRODUCT-POSITIONING.md](./PRODUCT-POSITIONING.md) — Enterprise QEP  |
-| Engineering           | Per-slice Owner directive (APZHUB-ENG-001 / ADR-0092)                |
-| Date                  | 2026-08-02                                                           |
+| Field                 | Value                                                                               |
+| --------------------- | ----------------------------------------------------------------------------------- |
+| Product planning      | **APZQEP-110** — COMPLETE / APPROVED                                                |
+| Solution architecture | **APZQEP-111** — COMPLETE / **APPROVED**                                            |
+| Execution planning    | **APZQEP-120** — **CERTIFIED / PROGRAMME COMPLETE / CLOSED**                        |
+| Next programme        | **APZQEP-140** — 000 architecture **COMPLETE** · [000/](./apzqep-140/000/README.md) |
+| Positioning           | [PRODUCT-POSITIONING.md](./PRODUCT-POSITIONING.md) — Enterprise QEP                 |
+| Engineering           | Per-slice Owner directive (APZHUB-ENG-001 / ADR-0092)                               |
+| Date                  | 2026-08-02                                                                          |
 
 ---
 
@@ -55,21 +55,22 @@
 
 ---
 
-## Core Quality Engineering — APZQEP-140 (NOT STARTED)
+## Core Quality Engineering — APZQEP-140
 
-| Document                                                                                                                 | Role                             |
-| ------------------------------------------------------------------------------------------------------------------------ | -------------------------------- |
-| [apzqep-140/README.md](./apzqep-140/README.md)                                                                           | Programme hub                    |
-| [apzqep-140/APZQEP-140-000-PRODUCT-BOARD-RECOMMENDATION.md](./apzqep-140/APZQEP-140-000-PRODUCT-BOARD-RECOMMENDATION.md) | Architecture phase (recommended) |
-| [apzqep-140/CAPABILITY-STREAMS.md](./apzqep-140/CAPABILITY-STREAMS.md)                                                   | Streams A–D                      |
+| Document                                                                                                             | Role                       |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| [apzqep-140/README.md](./apzqep-140/README.md)                                                                       | Programme hub              |
+| [apzqep-140/000/PRODUCT-BOARD-REVIEW.md](./apzqep-140/000/PRODUCT-BOARD-REVIEW.md)                                   | **Board decision surface** |
+| [apzqep-140/000/CORE-QUALITY-ENGINEERING-ARCHITECTURE.md](./apzqep-140/000/CORE-QUALITY-ENGINEERING-ARCHITECTURE.md) | Architecture spine         |
+| [apzqep-140/000/APZQEP-140-000-COMPLETION.md](./apzqep-140/000/APZQEP-140-000-COMPLETION.md)                         | 000 completion             |
 
 ---
 
 ## Authority note
 
-Programme bands: see [ENGINEERING-PROGRAMMES.md](./ENGINEERING-PROGRAMMES.md) (Board-updated 20260802: **140 = Core Quality Engineering**).
+Programme bands: see [ENGINEERING-PROGRAMMES.md](./ENGINEERING-PROGRAMMES.md) (**140 = Core Quality Engineering**).
 
-APZQEP-120 is **CLOSED**. Do not open further 120 slices. Next authority target: **APZQEP-140-000**.
+APZQEP-120 is **CLOSED**. APZQEP-140-000 architecture is **COMPLETE**. Implementation awaits Board approval.
 
 ---
 
@@ -79,6 +80,6 @@ APZQEP-120 is **CLOSED**. Do not open further 120 slices. Next authority target:
 APZQEP-110 = APPROVED
 APZQEP-111 = APPROVED
 APZQEP-120 = CERTIFIED / PROGRAMME COMPLETE / CLOSED
-APZQEP-140 = NOT STARTED
-NEXT = OWNER AUTH PACK FOR APZQEP-140-000
+APZQEP-140-000 = COMPLETE / READY FOR PRODUCT BOARD REVIEW
+APZQEP-140-A…F = NOT AUTHORISED
 ```

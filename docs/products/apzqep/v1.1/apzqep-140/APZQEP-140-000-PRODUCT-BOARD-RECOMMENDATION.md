@@ -1,14 +1,15 @@
 # APZQEP-140-000 — Product Board Recommendation
 
-| Field        | Value                                                                |
-| ------------ | -------------------------------------------------------------------- |
-| Programme    | APZQEP-140                                                           |
-| Phase        | **000**                                                              |
-| Title        | Core Quality Engineering Architecture                                |
-| Status       | **RECOMMENDED FOR AUTHORISATION** — not yet authorised               |
-| Prerequisite | APZQEP-120 Product Board **CERTIFIED / PROGRAMME COMPLETE / CLOSED** |
-| Framing      | Lightweight Product Capability Architecture (not Suite coding)       |
-| Timestamp    | 20260802T163026Z                                                     |
+| Field        | Value                                                                                     |
+| ------------ | ----------------------------------------------------------------------------------------- |
+| Programme    | APZQEP-140                                                                                |
+| Phase        | **000**                                                                                   |
+| Title        | Core Quality Engineering Architecture                                                     |
+| Status       | **SUPERSEDED** — Owner authorised; architecture pack **COMPLETE**                         |
+| Prerequisite | APZQEP-120 Product Board **CERTIFIED / PROGRAMME COMPLETE / CLOSED**                      |
+| Framing      | Lightweight Product Capability Architecture (not Suite coding)                            |
+| Timestamp    | 20260802T163026Z                                                                          |
+| Completed    | 20260802T163547Z — [000/APZQEP-140-000-COMPLETION.md](./000/APZQEP-140-000-COMPLETION.md) |
 
 ---
 

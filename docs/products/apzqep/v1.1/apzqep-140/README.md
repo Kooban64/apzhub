@@ -4,7 +4,7 @@
 | ---------- | --------------------------------------------------------------- |
 | Programme  | APZQEP-140                                                      |
 | Title      | Core Quality Engineering                                        |
-| Status     | **NOT STARTED** · Recommended · Awaiting Owner Auth for 000     |
+| Status     | **ARCHITECTURE COMPLETE** · Implementation **NOT AUTHORISED**   |
 | Depends on | APZQEP-120 Platform Foundation **CLOSED** / Board **CERTIFIED** |
 | Focus      | User-facing quality engineering capabilities on mature runtime  |
 
@@ -12,96 +12,63 @@
 
 ## Programme boundary
 
-| Programme  | Focus                      | Status          |
-| ---------- | -------------------------- | --------------- |
-| APZQEP-120 | Platform Engineering       | **CLOSED**      |
-| APZQEP-140 | Core Quality Engineering   | **NOT STARTED** |
-| APZQEP-160 | Intelligence & AI (future) | Future          |
+| Programme  | Focus                      | Status                                 |
+| ---------- | -------------------------- | -------------------------------------- |
+| APZQEP-120 | Platform Engineering       | **CLOSED**                             |
+| APZQEP-140 | Core Quality Engineering   | Architecture done · impl pending Board |
+| APZQEP-160 | Intelligence & AI (future) | Future                                 |
 
 > Do **not** continue product slices under APZQEP-120.
 
 ---
 
-## Capability streams
+## APZQEP-140-000 (COMPLETE)
 
-### Capability A — Test Management
+Architecture pack (documentation only):
 
-- Suites
-- Cases
-- Parameters
-- Libraries
-
-### Capability B — Execution
-
-- Runs
-- Execution
-- Results
-- Evidence
-
-### Capability C — Quality
-
-- Defects
-- Traceability
-- Coverage
-- Risk
-
-### Capability D — Reporting
-
-- Dashboards
-- Analytics
-- Executive Reporting
+**[000/README.md](./000/README.md)** · [Board review](./000/PRODUCT-BOARD-REVIEW.md) · [Completion](./000/APZQEP-140-000-COMPLETION.md)
 
 ---
 
-## First phase (required before implementation)
+## Capabilities (A–F)
 
-**APZQEP-140-000 — Core Quality Engineering Architecture**
+| ID  | Capability                                         |
+| --- | -------------------------------------------------- |
+| A   | Test Management (Suites, Libraries, Shared Assets) |
+| B   | Run Management                                     |
+| C   | Test Execution                                     |
+| D   | Defect & Quality Findings                          |
+| E   | Requirements & Traceability                        |
+| F   | Reporting                                          |
 
-Lightweight Product Capability Architecture defining:
-
-- capability boundaries
-- domain ownership
-- APIs
-- events
-- UI modules
-- data ownership
-- integration points
-- roadmap sequencing
-
-See [APZQEP-140-000-PRODUCT-BOARD-RECOMMENDATION.md](./APZQEP-140-000-PRODUCT-BOARD-RECOMMENDATION.md).
-
-**No Suite / Run / Execution engineering** until 000 is authorised and approved.
+Stakeholder streams: [CAPABILITY-STREAMS.md](./CAPABILITY-STREAMS.md) · Detail: [000/CAPABILITY-MAP.md](./000/CAPABILITY-MAP.md)
 
 ---
 
-## Indicative implementation sequence (after 000)
+## Implementation programmes (after Board approval of 000)
 
-| Slice | Title                       |
-| ----- | --------------------------- |
-| S14   | Suite Management            |
-| S15   | Test Run Management         |
-| S16   | Test Execution              |
-| S17   | Defect Management           |
-| S18   | Requirements & Traceability |
-| S19   | Reporting & Analytics       |
+| Programme    | Title                         |
+| ------------ | ----------------------------- |
+| APZQEP-140-A | Suite & Library Management    |
+| APZQEP-140-B | Test Run Management           |
+| APZQEP-140-C | Test Execution Productisation |
+| APZQEP-140-D | Defect & Quality Findings     |
+| APZQEP-140-E | Requirements & Traceability   |
+| APZQEP-140-F | Reporting & Analytics         |
 
-Exact IDs and ordering are confirmed by the 000 architecture pack.
+See [000/ENGINEERING-PROGRAMME-BREAKDOWN.md](./000/ENGINEERING-PROGRAMME-BREAKDOWN.md).
 
 ---
 
 ## Platform consumption (immutable)
 
-Consume APZQEP-120 packages — do not redesign:
-
-- `@apzhub/platform-outbox`
-- `@apzhub/platform-processing`
-- `@apzhub/qep-knowledge-index`
-- `@apzhub/qep-notification`
-- `@apzhub/qep-command`
-- `@apzhub/qep-evidence`
+`@apzhub/platform-outbox` · `@apzhub/platform-processing` · `@apzhub/qep-knowledge-index` · `@apzhub/qep-notification` · `@apzhub/qep-command` · `@apzhub/qep-evidence`
 
 ---
 
 ## Authority
 
-Opening engineering under APZQEP-140 requires Owner Authorisation Packs (starting with **140-000**).
+```text
+140-000 architecture = COMPLETE / READY FOR BOARD
+140-A…F engineering = NOT AUTHORISED
+```

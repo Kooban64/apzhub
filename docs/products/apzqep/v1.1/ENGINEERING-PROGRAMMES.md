@@ -35,17 +35,18 @@ Estimates: S / M / L / XL (planning bands).
 
 ## APZQEP-140 — Core Quality Engineering
 
-| Field              | Value                                                                                                                      |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| Title (Board)      | Core Quality Engineering                                                                                                   |
-| Status             | **NOT STARTED** · Recommended                                                                                              |
-| Objective          | User-facing QE capabilities on the closed APZQEP-120 runtime                                                               |
-| Capability streams | A Test Management · B Execution · C Quality · D Reporting                                                                  |
-| First phase        | **APZQEP-140-000** Product Capability Architecture (before Suite implementation)                                           |
-| Historical note    | Prior planning used “140 = Executive Experience”. **Board redefinition (20260802):** 140 = Core QE. Executive UX deferred. |
-| Hub                | [apzqep-140/README.md](./apzqep-140/README.md)                                                                             |
-| Dependencies       | APZQEP-120 **CLOSED**                                                                                                      |
-| Business value     | High — competitive operating completeness                                                                                  |
+| Field                | Value                                                                                                                      |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Title (Board)        | Core Quality Engineering                                                                                                   |
+| Status               | **140-000 Architecture COMPLETE** · Implementation NOT AUTHORISED                                                          |
+| Objective            | User-facing QE capabilities on the closed APZQEP-120 runtime                                                               |
+| Capabilities         | A Suites · B Runs · C Execution · D Defects · E Traceability · F Reporting                                                 |
+| Architecture pack    | [apzqep-140/000/](./apzqep-140/000/README.md) — Ready for Product Board Review                                             |
+| First impl programme | **APZQEP-140-A** Suite & Library Management (after Board approves 000)                                                     |
+| Historical note      | Prior planning used “140 = Executive Experience”. **Board redefinition (20260802):** 140 = Core QE. Executive UX deferred. |
+| Hub                  | [apzqep-140/README.md](./apzqep-140/README.md)                                                                             |
+| Dependencies         | APZQEP-120 **CLOSED**                                                                                                      |
+| Business value       | High — competitive operating completeness                                                                                  |
 
 ### Former “Executive Experience” band
 

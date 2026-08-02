@@ -19,7 +19,7 @@
 | APZQEP-110     | **APPROVED** — [v1.1 Product Planning](./v1.1/README.md)                                                                                                                                                                     |
 | APZQEP-111     | **APPROVED** — [v1.1 Solution Architecture](./v1.1/EXECUTIVE-ARCHITECTURE-SUMMARY.md)                                                                                                                                        |
 | APZQEP-120     | ✅ **CERTIFIED · PROGRAMME COMPLETE · CLOSED** — [Board](./v1.1/apzqep-120/APZQEP-120-PRODUCT-BOARD-CERTIFICATION.md) · [close-out](./v1.1/apzqep-120/APZQEP-120-PLATFORM-FOUNDATION-COMPLETE.md)                            |
-| APZQEP-140     | ⏳ **NOT STARTED** · Core Quality Engineering · next **140-000 Architecture** — [hub](./v1.1/apzqep-140/README.md)                                                                                                           |
+| APZQEP-140     | 🔄 **140-000 Architecture COMPLETE** · Ready for Board · impl **NOT AUTHORISED** — [000](./v1.1/apzqep-140/000/README.md) · [Board review](./v1.1/apzqep-140/000/PRODUCT-BOARD-REVIEW.md)                                    |
 | APZHUB-ENG-002 | **ACTIVE** · Governance Foundation **COMPLETE** · Phase 1 **CLOSED** · ES promotions **ON HOLD** — [PHASE-1-CLOSED.md](../../engineering/APZHUB-ENG-002/PHASE-1-CLOSED.md)                                                   |
 
 ### Default premise
@@ -30,7 +30,7 @@
 - **APZQEP-CLOSE-001** closed the APZQEP v1.0 programme and returned the product to the APZHUB portfolio.
 - B-01 is historical only (cleared before RELEASE-004 execution via authorised `kooban-apzor` HTTPS credentials).
 - Future cross-cutting governance belongs under **APZHUB Governance** (Governance **1.0 STABLE**; further ES promotions **ON HOLD**).
-- **APZQEP-110** and **APZQEP-111** are approved. **APZQEP-120 is CERTIFIED / PROGRAMME COMPLETE / CLOSED**. Do not continue under 120. Immediate priority: Owner Auth Pack for **APZQEP-140-000 Core Quality Engineering Architecture** (not Suite coding).
+- **APZQEP-110** and **APZQEP-111** are approved. **APZQEP-120 is CLOSED**. **APZQEP-140-000 architecture is COMPLETE** and ready for Product Board Review. Implementation (140-A…F) remains **NOT AUTHORISED** until Board approval + Owner Auth Pack.
 
 ### REM-005 note
 
@@ -87,7 +87,8 @@ APZQEP-120
 ✅ APZQEP-120-S12 COMPLETE (Notification & Subscription Platform — CERT PASS)
 ✅ APZQEP-120-S13 COMPLETE (Enterprise Command Platform — CERT PASS)
 ✅ APZQEP-120 CERTIFIED · PROGRAMME COMPLETE · CLOSED (Product Board)
-APZQEP-140 = NOT STARTED · next 140-000 Architecture (Owner Auth Pack)
+✅ APZQEP-140-000 Architecture COMPLETE · Ready for Product Board Review
+APZQEP-140-A…F = NOT AUTHORISED
 TE EvidenceAccessPort wiring: **deferred** (do not pull forward)
 
 APZQEP-ENG-001
@@ -106,11 +107,11 @@ Priority shift → APZQEP product engineering
 
 ## Authorised next delivery
 
-**APZQEP-120 CLOSED** (Product Board CERTIFIED). Next: **APZQEP-140-000** Architecture after Owner Authorisation Pack. Do not start Suites under 120.
+**APZQEP-140-000 COMPLETE.** Architecture pack ready for Product Board Review. Engineering implementation **NOT AUTHORISED**.
 
-Board: [APZQEP-120-PRODUCT-BOARD-CERTIFICATION.md](./v1.1/apzqep-120/APZQEP-120-PRODUCT-BOARD-CERTIFICATION.md).
-APZQEP-140 hub: [apzqep-140/README.md](./v1.1/apzqep-140/README.md).
-140-000 recommendation: [APZQEP-140-000-PRODUCT-BOARD-RECOMMENDATION.md](./v1.1/apzqep-140/APZQEP-140-000-PRODUCT-BOARD-RECOMMENDATION.md).
+Board review: [PRODUCT-BOARD-REVIEW.md](./v1.1/apzqep-140/000/PRODUCT-BOARD-REVIEW.md).
+Completion: [APZQEP-140-000-COMPLETION.md](./v1.1/apzqep-140/000/APZQEP-140-000-COMPLETION.md).
+After Board approval: Owner Auth Pack for **APZQEP-140-A** (Suites).
 
 TE EvidenceAccessPort wiring remains deferred. **No Enterprise Governance work recommended.**
 
@@ -130,8 +131,9 @@ CLOSE-001 = CLOSED
 APZQEP-110 = APPROVED
 APZQEP-111 = APPROVED
 APZQEP-120 = CERTIFIED / PROGRAMME COMPLETE / CLOSED
-APZQEP-140 = NOT STARTED (Core Quality Engineering)
-NEXT = OWNER AUTH PACK FOR APZQEP-140-000 (Capability Architecture)
+APZQEP-140-000 = COMPLETE / READY FOR PRODUCT BOARD REVIEW
+APZQEP-140-A…F = NOT AUTHORISED
+NEXT = PRODUCT BOARD DECISION ON 140-000 → THEN OWNER AUTH FOR 140-A
 APZQEP-ENG-001 = CLOSED (Framework v1.0 · ARCHIVED reference)
 APZHUB-ENG-002 = ACTIVE · Foundation COMPLETE · Phase 1 CLOSED · ES promotions ON HOLD
 NO ENTERPRISE GOVERNANCE WORK RECOMMENDED

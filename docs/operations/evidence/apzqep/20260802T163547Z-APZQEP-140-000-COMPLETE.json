@@ -1,0 +1,27 @@
+{
+  "programme": "APZQEP-140-000",
+  "title": "Core Quality Engineering Architecture",
+  "status": "COMPLETE",
+  "engineering": "NONE",
+  "repository": "documentation-only",
+  "timestampUtc": "20260802T163547Z",
+  "capabilities": ["A", "B", "C", "D", "E", "F"],
+  "deliverables": [
+    "CORE-QUALITY-ENGINEERING-ARCHITECTURE.md",
+    "DOMAIN-MODEL.md",
+    "CAPABILITY-MAP.md",
+    "USER-EXPERIENCE-ARCHITECTURE.md",
+    "EVENT-ARCHITECTURE.md",
+    "API-ARCHITECTURE.md",
+    "IMPLEMENTATION-ROADMAP.md",
+    "ENGINEERING-PROGRAMME-BREAKDOWN.md",
+    "PRODUCT-BOARD-REVIEW.md",
+    "APZQEP-140-000-COMPLETION.md"
+  ],
+  "recommendation": "Ready for Product Board Review",
+  "engineeringImplementation": "NOT AUTHORISED",
+  "recommendedNextAfterBoardApproval": "APZQEP-140-A Suite & Library Management",
+  "governance": "UNCHANGED",
+  "baseline": "UNCHANGED",
+  "platformFoundation": "APZQEP-120 CLOSED — consume only"
+}
