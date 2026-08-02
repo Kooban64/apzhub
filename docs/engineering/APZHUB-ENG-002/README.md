@@ -1,16 +1,16 @@
 # APZHUB-ENG-002 — Portfolio Engineering Standards
 
-| Field                    | Value                                                                      |
-| ------------------------ | -------------------------------------------------------------------------- |
-| Programme                | **APZHUB-ENG-002**                                                         |
-| Title                    | Portfolio Engineering Standards                                            |
-| Classification           | Enterprise Engineering Governance                                          |
-| Phase                    | **1 — ES-001 Under Review**                                                |
-| Status                   | Phase 0 **CERTIFIED** · Catalogue **CERTIFIED** · ES-001 body Under Review |
-| Predecessor              | APZQEP-ENG-001 **ARCHIVED** (`b9626ada`)                                   |
-| Reference implementation | APZQEP Engineering Framework v1.0 (not automatic enterprise standard)      |
-| Engineering              | **NONE**                                                                   |
-| Next decision            | Product Board Certification of **ES-001** Enterprise Testing Standard      |
+| Field                    | Value                                                                   |
+| ------------------------ | ----------------------------------------------------------------------- |
+| Programme                | **APZHUB-ENG-002**                                                      |
+| Title                    | Portfolio Engineering Standards                                         |
+| Classification           | Enterprise Engineering Governance                                       |
+| Phase                    | **1 — ES-001 ACTIVE · next ES-002**                                     |
+| Status                   | Phase 0 **CERTIFIED** · Catalogue **CERTIFIED** · ES-001 **ACTIVE**     |
+| Predecessor              | APZQEP-ENG-001 **ARCHIVED** (`b9626ada`)                                |
+| Reference implementation | APZQEP Engineering Framework v1.0 (not automatic enterprise standard)   |
+| Engineering              | **NONE**                                                                |
+| Next promotion           | **ES-002** Enterprise Certification Standard (awaits Owner instruction) |
 
 ---
 
@@ -29,13 +29,21 @@ Establish the **governance model** under which engineering standards may be prom
 
 ---
 
-## ES-001 pack (Under Review)
+## Active enterprise standards (ENG-002 promotions)
 
-| Document                                                           | Role                        |
-| ------------------------------------------------------------------ | --------------------------- |
-| [APZHUB-TESTING-STANDARD.md](../APZHUB-TESTING-STANDARD.md)        | Candidate enterprise body   |
-| [ES-001-GENERICISATION-NOTES.md](./ES-001-GENERICISATION-NOTES.md) | Abstraction evidence        |
-| [ES-001-PROMOTION-PACK.md](./ES-001-PROMOTION-PACK.md)             | Product Board decision pack |
+| ID     | Document                                                    | Status          |
+| ------ | ----------------------------------------------------------- | --------------- |
+| ES-001 | [APZHUB-TESTING-STANDARD.md](../APZHUB-TESTING-STANDARD.md) | **ACTIVE** v1.0 |
+
+---
+
+## ES-001 pack (CERTIFIED)
+
+| Document                                                           | Role                         |
+| ------------------------------------------------------------------ | ---------------------------- |
+| [ES-001-PROMOTION-PACK.md](./ES-001-PROMOTION-PACK.md)             | Board decision + observation |
+| [ES-001-GENERICISATION-NOTES.md](./ES-001-GENERICISATION-NOTES.md) | Abstraction evidence         |
+| [ES-001-COMPLETION.md](./ES-001-COMPLETION.md)                     | Completion record            |
 
 ---
 
@@ -62,8 +70,8 @@ Retained design inputs: [PROGRAMME-DESIGN.md](./PROGRAMME-DESIGN.md) · [PROMOTI
 ```text
 Phase 0: CERTIFIED
 Standards Catalogue: CERTIFIED
-ES-001: Under Review (abstraction authored)
-ES-001 Active: NOT YET — awaits Product Board Certification of the standard body
+ES-001: ACTIVE v1.0 (first APZHUB-owned enterprise engineering standard)
+ES-002: Proposed — authorship NOT STARTED (awaits Owner instruction)
 ```
 
 ---

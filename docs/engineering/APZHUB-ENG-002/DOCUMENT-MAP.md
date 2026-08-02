@@ -1,10 +1,10 @@
 # APZHUB-ENG-002 — Document Map
 
-| Field     | Value                                                     |
-| --------- | --------------------------------------------------------- |
-| Programme | APZHUB-ENG-002                                            |
-| Phase     | 0 CERTIFIED · 1 Catalogue CERTIFIED · ES-001 Under Review |
-| Status    | Governance + catalogue CERTIFIED; first body under review |
+| Field     | Value                                                   |
+| --------- | ------------------------------------------------------- |
+| Programme | APZHUB-ENG-002                                          |
+| Phase     | 0 CERTIFIED · 1 Catalogue CERTIFIED · ES-001 **ACTIVE** |
+| Status    | First enterprise standard promoted; next ES-002         |
 
 ---
 
@@ -17,13 +17,14 @@
 
 ---
 
-## ES-001 (Under Review)
+## ES-001 (ACTIVE)
 
-| Document                                                           | Role                        | Status       |
-| ------------------------------------------------------------------ | --------------------------- | ------------ |
-| [APZHUB-TESTING-STANDARD.md](../APZHUB-TESTING-STANDARD.md)        | Enterprise Testing Standard | Under Review |
-| [ES-001-GENERICISATION-NOTES.md](./ES-001-GENERICISATION-NOTES.md) | Abstraction notes           | COMPLETE     |
-| [ES-001-PROMOTION-PACK.md](./ES-001-PROMOTION-PACK.md)             | Board decision pack         | READY        |
+| Document                                                           | Role                         | Status     |
+| ------------------------------------------------------------------ | ---------------------------- | ---------- |
+| [APZHUB-TESTING-STANDARD.md](../APZHUB-TESTING-STANDARD.md)        | Enterprise Testing Standard  | **ACTIVE** |
+| [ES-001-GENERICISATION-NOTES.md](./ES-001-GENERICISATION-NOTES.md) | Abstraction notes            | COMPLETE   |
+| [ES-001-PROMOTION-PACK.md](./ES-001-PROMOTION-PACK.md)             | Board decision + observation | CERTIFIED  |
+| [ES-001-COMPLETION.md](./ES-001-COMPLETION.md)                     | Completion record            | COMPLETE   |
 
 ---
 
@@ -58,13 +59,3 @@
 | APZQEP Testing Standard (ref)     | `docs/products/apzqep/engineering/APZQEP-TESTING-STANDARD.md`      |
 | APZHUB-ENG-001 Slice Standard     | `docs/engineering/ENGINEERING-SLICE-STANDARD.md`                   |
 | Document 000                      | `docs/000-apzhub-engineering-constitution.md`                      |
-
----
-
-## Reading order (Product Board — ES-001)
-
-1. APZHUB-TESTING-STANDARD.md
-2. ES-001-GENERICISATION-NOTES.md
-3. PROMOTION-PRINCIPLES.md (Abstraction Principle)
-4. APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md
-5. ES-001-PROMOTION-PACK.md

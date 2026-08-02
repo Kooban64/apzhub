@@ -20,21 +20,21 @@ Does **not** replace [APZHUB Engineering Standard](../governance/APZHUB-ENGINEER
 
 ---
 
-## Portfolio Engineering Standards (APZHUB-ENG-002) — **Catalogue CERTIFIED · ES-001 Under Review**
+## Portfolio Engineering Standards (APZHUB-ENG-002) — **ES-001 ACTIVE**
 
 Enterprise governance for promoting proven product engineering standards by **abstraction**. APZQEP remains **reference implementation**.
 
 | Document                                                                                             | Purpose                                     |
 | ---------------------------------------------------------------------------------------------------- | ------------------------------------------- |
 | [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](./APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)             | **Enterprise standards register** (no tech) |
-| [APZHUB-TESTING-STANDARD.md](./APZHUB-TESTING-STANDARD.md)                                           | **ES-001** candidate (Under Review)         |
+| [APZHUB-TESTING-STANDARD.md](./APZHUB-TESTING-STANDARD.md)                                           | **ES-001 ACTIVE** v1.0                      |
 | [APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md](./APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md) | **Governing Charter** (**CERTIFIED**)       |
 | [APZHUB-ENG-002/PROMOTION-PRINCIPLES.md](./APZHUB-ENG-002/PROMOTION-PRINCIPLES.md)                   | Promotion + Abstraction Principle           |
-| [APZHUB-ENG-002/ES-001-PROMOTION-PACK.md](./APZHUB-ENG-002/ES-001-PROMOTION-PACK.md)                 | ES-001 Board pack                           |
+| [APZHUB-ENG-002/ES-001-PROMOTION-PACK.md](./APZHUB-ENG-002/ES-001-PROMOTION-PACK.md)                 | ES-001 CERTIFIED + Board observation        |
 | [APZHUB-ENG-002/README.md](./APZHUB-ENG-002/README.md)                                               | Programme face                              |
 | [APZHUB-ENG-002/DOCUMENT-MAP.md](./APZHUB-ENG-002/DOCUMENT-MAP.md)                                   | Full pack index                             |
 
-**Status:** Phase 0 **CERTIFIED**. Catalogue **CERTIFIED**. ES-001 Under Review (abstraction authored). APZQEP-ENG-001 **ARCHIVED** (`b9626ada`).
+**Status:** Phase 0 **CERTIFIED**. Catalogue **CERTIFIED**. ES-001 **ACTIVE** (first APZHUB-owned enterprise engineering standard). Next: ES-002. APZQEP-ENG-001 **ARCHIVED** (`b9626ada`).
 
 ---
 

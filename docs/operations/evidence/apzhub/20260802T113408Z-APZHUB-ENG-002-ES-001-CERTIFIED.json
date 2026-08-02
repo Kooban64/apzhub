@@ -1,0 +1,23 @@
+{
+  "programme": "APZHUB-ENG-002",
+  "catalogueId": "ES-001",
+  "title": "APZHUB Enterprise Testing Standard",
+  "version": "1.0",
+  "decision": "CERTIFIED",
+  "catalogueStatus": "APPROVED",
+  "operationalState": "ACTIVE",
+  "promotionMethod": "ABSTRACTION",
+  "referenceImplementation": "APZQEP Engineering Framework v1.0",
+  "ownership": "APZHUB Engineering Governance",
+  "implementationAuthority": "All APZHUB Products",
+  "reviewFrequency": "Annual or on major framework revision",
+  "supersededBy": "None",
+  "promotionDate": "2026-08-02",
+  "timestampUtc": "20260802T113408Z",
+  "engineering": "NONE",
+  "normativePath": "docs/engineering/APZHUB-TESTING-STANDARD.md",
+  "promotionPack": "docs/engineering/APZHUB-ENG-002/ES-001-PROMOTION-PACK.md",
+  "historicalSignificance": "First engineering standard formally promoted into APZHUB Enterprise Engineering Baseline",
+  "nextStandard": "ES-002",
+  "outstandingIssues": "NONE"
+}

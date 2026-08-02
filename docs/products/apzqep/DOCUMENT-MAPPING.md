@@ -35,24 +35,24 @@
 
 ## v1.1 programme document map (active)
 
-| Programme                                         | Path                                                                         | Status                                                                |
-| ------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| APZQEP-110 Product Planning                       | `docs/products/apzqep/v1.1/`                                                 | **APPROVED**                                                          |
-| APZQEP-111 Solution Architecture                  | `docs/products/apzqep/v1.1/*ARCHITECTURE*` · `ENGINEERING-PROGRAMMES.md`     | **APPROVED**                                                          |
-| APZQEP-120 Engineering Execution Planning         | `docs/products/apzqep/v1.1/apzqep-120/`                                      | **PLANNING COMPLETE** — Board review; implementation not authorised   |
-| Standing record                                   | `docs/products/apzqep/STANDING-PROGRAMME-RECORD.md`                          | **IN FORCE**                                                          |
-| Evidence Catalogue Platform (S05)                 | `docs/products/apzqep/EVIDENCE-CATALOGUE-PLATFORM.md`                        | **IMPLEMENTED** (LA)                                                  |
-| S05 engineering notes                             | `docs/products/apzqep/v1.1/apzqep-120/S05-ENGINEERING-NOTES.md`              | **COMPLETE**                                                          |
-| Evidence Lifecycle & Governance (S06)             | `docs/products/apzqep/EVIDENCE-LIFECYCLE-GOVERNANCE.md`                      | **IMPLEMENTED** (LA)                                                  |
-| S06 engineering notes                             | `docs/products/apzqep/v1.1/apzqep-120/S06-ENGINEERING-NOTES.md`              | **COMPLETE**                                                          |
-| APZQEP Engineering Framework v1.0                 | `docs/products/apzqep/engineering/APZQEP-ENGINEERING-FRAMEWORK.md`           | **BASELINED** · Maintenance **ACTIVE** — core product                 |
-| APZQEP-ENG-001 programme                          | `docs/products/apzqep/engineering/`                                          | **CLOSED** — Framework v1.0; successor APZHUB-ENG-002                 |
-| APZQEP Portfolio Status Snapshot                  | `docs/products/apzqep/engineering/APZQEP-PORTFOLIO-STATUS.md`                | **IN FORCE** (Board closure snapshot)                                 |
-| APZQEP Engineering Framework Changelog            | `docs/products/apzqep/engineering/APZQEP-ENGINEERING-FRAMEWORK-CHANGELOG.md` | **ACTIVE** — governance evolution record                              |
-| APZQEP → APZHUB Promotion Review                  | `docs/products/apzqep/engineering/APZQEP-ENG-001-PROMOTION-REVIEW.md`        | **CERTIFIED** — Standards SPLIT refinement                            |
-| APZHUB-ENG-002 Portfolio Engineering Standards    | `docs/engineering/APZHUB-ENG-002/`                                           | Phase 0 **CERTIFIED** · Catalogue **CERTIFIED** · ES-001 Under Review |
-| APZHUB Enterprise Engineering Standards Catalogue | `docs/engineering/APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md`                 | **CERTIFIED** — governance register; ES-001 Under Review              |
-| APZHUB Enterprise Testing Standard (ES-001)       | `docs/engineering/APZHUB-TESTING-STANDARD.md`                                | **Under Review** — abstracted from APZQEP Testing Standard v1.0       |
+| Programme                                         | Path                                                                         | Status                                                               |
+| ------------------------------------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| APZQEP-110 Product Planning                       | `docs/products/apzqep/v1.1/`                                                 | **APPROVED**                                                         |
+| APZQEP-111 Solution Architecture                  | `docs/products/apzqep/v1.1/*ARCHITECTURE*` · `ENGINEERING-PROGRAMMES.md`     | **APPROVED**                                                         |
+| APZQEP-120 Engineering Execution Planning         | `docs/products/apzqep/v1.1/apzqep-120/`                                      | **PLANNING COMPLETE** — Board review; implementation not authorised  |
+| Standing record                                   | `docs/products/apzqep/STANDING-PROGRAMME-RECORD.md`                          | **IN FORCE**                                                         |
+| Evidence Catalogue Platform (S05)                 | `docs/products/apzqep/EVIDENCE-CATALOGUE-PLATFORM.md`                        | **IMPLEMENTED** (LA)                                                 |
+| S05 engineering notes                             | `docs/products/apzqep/v1.1/apzqep-120/S05-ENGINEERING-NOTES.md`              | **COMPLETE**                                                         |
+| Evidence Lifecycle & Governance (S06)             | `docs/products/apzqep/EVIDENCE-LIFECYCLE-GOVERNANCE.md`                      | **IMPLEMENTED** (LA)                                                 |
+| S06 engineering notes                             | `docs/products/apzqep/v1.1/apzqep-120/S06-ENGINEERING-NOTES.md`              | **COMPLETE**                                                         |
+| APZQEP Engineering Framework v1.0                 | `docs/products/apzqep/engineering/APZQEP-ENGINEERING-FRAMEWORK.md`           | **BASELINED** · Maintenance **ACTIVE** — core product                |
+| APZQEP-ENG-001 programme                          | `docs/products/apzqep/engineering/`                                          | **CLOSED** — Framework v1.0; successor APZHUB-ENG-002                |
+| APZQEP Portfolio Status Snapshot                  | `docs/products/apzqep/engineering/APZQEP-PORTFOLIO-STATUS.md`                | **IN FORCE** (Board closure snapshot)                                |
+| APZQEP Engineering Framework Changelog            | `docs/products/apzqep/engineering/APZQEP-ENGINEERING-FRAMEWORK-CHANGELOG.md` | **ACTIVE** — governance evolution record                             |
+| APZQEP → APZHUB Promotion Review                  | `docs/products/apzqep/engineering/APZQEP-ENG-001-PROMOTION-REVIEW.md`        | **CERTIFIED** — Standards SPLIT refinement                           |
+| APZHUB-ENG-002 Portfolio Engineering Standards    | `docs/engineering/APZHUB-ENG-002/`                                           | Phase 0 **CERTIFIED** · Catalogue **CERTIFIED** · ES-001 **ACTIVE**  |
+| APZHUB Enterprise Engineering Standards Catalogue | `docs/engineering/APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md`                 | **CERTIFIED** — ES-001 Active; next ES-002 Proposed                  |
+| APZHUB Enterprise Testing Standard (ES-001)       | `docs/engineering/APZHUB-TESTING-STANDARD.md`                                | **ACTIVE** v1.0 — first APZHUB-owned enterprise engineering standard |
 
 ## Indexes updated in this programme
 

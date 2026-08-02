@@ -9,7 +9,7 @@
 | Prerequisite        | Phase 0 Portfolio Engineering Charter **CERTIFIED** |
 | Engineering         | NONE                                                |
 | Standards body text | NONE in opening — inventory only                    |
-| Follow-on           | ES-001 authorship authorised; body Under Review     |
+| Follow-on           | ES-001 **ACTIVE** (20260802T113408Z); next ES-002   |
 
 ---
 
@@ -46,15 +46,16 @@ Recommendation: Proceed with ES-001 Enterprise Testing Standard
 
 ## Explicitly not done in Opening
 
-- Enterprise Testing Standard body (authorised separately; now Under Review)
+- Enterprise Testing Standard body (completed after Opening — now **ACTIVE**)
 - No product documents rewritten
 - APZQEP-ENG-001 not reopened
 
 ---
 
-## Recommendation
+## Outcome
 
 ```text
 Catalogue CERTIFIED.
-ES-001 candidate authored by abstraction — awaiting Product Board Certification of the standard body.
+ES-001 ACTIVE v1.0 (abstraction; first APZHUB-owned enterprise engineering standard).
+Next: ES-002 — awaits dedicated Owner / Board instruction.
 ```

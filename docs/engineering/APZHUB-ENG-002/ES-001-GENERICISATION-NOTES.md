@@ -96,7 +96,7 @@ After ES-001 becomes **Active**:
 - [x] No mandatory Enterprise Edition / SaaS vendor dependency
 - [x] No product package names as normative requirements
 - [x] Secrets / Zero Trust posture preserved
-- [ ] Product Board Certification of ES-001 body (pending)
+- [x] Product Board Certification of ES-001 body — **CERTIFIED** 20260802T113408Z → ACTIVE
 
 ---
 

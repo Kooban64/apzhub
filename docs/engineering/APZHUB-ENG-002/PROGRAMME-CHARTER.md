@@ -1,14 +1,14 @@
 # APZHUB-ENG-002 — Programme Charter
 
-| Field          | Value                                                             |
-| -------------- | ----------------------------------------------------------------- |
-| Programme      | APZHUB-ENG-002                                                    |
-| Title          | Portfolio Engineering Standards                                   |
-| Phase          | 0 **CERTIFIED** · 1 Catalogue **CERTIFIED** · ES-001 Under Review |
-| Classification | Enterprise Engineering Governance                                 |
-| Status         | Catalogue CERTIFIED · ES-001 body Under Review                    |
-| Engineering    | NONE                                                              |
-| Repository     | Documentation only                                                |
+| Field          | Value                                                           |
+| -------------- | --------------------------------------------------------------- |
+| Programme      | APZHUB-ENG-002                                                  |
+| Title          | Portfolio Engineering Standards                                 |
+| Phase          | 0 **CERTIFIED** · 1 Catalogue **CERTIFIED** · ES-001 **ACTIVE** |
+| Classification | Enterprise Engineering Governance                               |
+| Status         | ES-001 ACTIVE · next ES-002 (not started)                       |
+| Engineering    | NONE                                                            |
+| Repository     | Documentation only                                              |
 
 ---
 
@@ -68,11 +68,11 @@ Phase 0 SHALL NOT:
 
 ## 6. Phase boundary
 
-| Phase  | Concern                                                                     |
-| ------ | --------------------------------------------------------------------------- |
-| **0**  | Governance definition — **CERTIFIED**                                       |
-| **1**  | Catalogue **CERTIFIED** → ES-001 authored by abstraction (**Under Review**) |
-| **1+** | Further standards publication under catalogue change control                |
+| Phase  | Concern                                                                        |
+| ------ | ------------------------------------------------------------------------------ |
+| **0**  | Governance definition — **CERTIFIED**                                          |
+| **1**  | Catalogue **CERTIFIED** → ES-001 **ACTIVE** → next ES-002 (awaits instruction) |
+| **1+** | Further standards publication under catalogue change control                   |
 
 ---
 
