@@ -43,11 +43,12 @@ This programme MUST NOT:
 
 ## 3. Proposed phases (execution — Owner gated)
 
-### Phase 0 — Authorisation
+### Phase 0 — Authorisation and Portfolio Engineering Charter
 
 - Owner accepts this design + [PROMOTION-MATRIX.md](./PROMOTION-MATRIX.md).
+- **First artefact of the session:** publish a concise **Portfolio Engineering Charter** defining objectives, scope, success criteria, promotion principles, and governance boundaries for APZHUB-ENG-002 **before** any standards are promoted.
 - Confirms open questions in the matrix.
-- Explicitly opens Phase 1.
+- Explicitly opens Phase 1 only after the Charter is accepted.
 
 ### Phase 1 — Portfolio Testing Standard
 

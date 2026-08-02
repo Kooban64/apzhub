@@ -83,4 +83,4 @@ No portfolio standard may be rewritten or published under this programme until O
 
 Design artefacts in this folder are documentation only.
 
-**Session boundary:** Do not begin APZHUB-ENG-002 execution in the same session that closed APZQEP-ENG-001. Next governance session opens ENG-002 Phase 0.
+**Session boundary:** Do not begin APZHUB-ENG-002 execution in the same session that closed APZQEP-ENG-001. Next governance session opens ENG-002 Phase 0 with a **Portfolio Engineering Charter** before any promotion work.

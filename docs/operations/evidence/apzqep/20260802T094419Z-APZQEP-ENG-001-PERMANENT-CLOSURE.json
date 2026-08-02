@@ -1,0 +1,29 @@
+{
+  "programme": "APZQEP-ENG-001",
+  "title": "Engineering Documentation Framework",
+  "classification": "Product Engineering Framework",
+  "status": "CLOSED",
+  "productBoardDecision": "CERTIFIED",
+  "timestampUtc": "20260802T094419Z",
+  "engineering": "COMPLETE",
+  "documentation": "COMPLETE",
+  "framework": "BASELINED",
+  "frameworkVersion": "1.0",
+  "repository": "CLEAN",
+  "promotionReview": "COMPLETE",
+  "handover": "COMPLETE",
+  "maintenanceState": "ACTIVE",
+  "changeControl": "Maintenance only",
+  "successorProgramme": "APZHUB-ENG-002",
+  "recommendation": "Programme Permanently Closed",
+  "permanence": "Closed permanently; future modifications via normal maintenance and version control only; programme SHALL NOT be reopened",
+  "noFurtherApzqepDocProgrammes": "Unless justified product enhancement or maintenance requirement",
+  "finalCertificationCommit": "592ee58f113022c92fe37654ae7a3151cd15c7cf",
+  "eng002AuthorisationPendingCommit": "591cf85c",
+  "nextSession": {
+    "programme": "APZHUB-ENG-002",
+    "status": "AUTHORISATION PENDING",
+    "firstArtefact": "Portfolio Engineering Charter (before any standards promotion)"
+  },
+  "outstandingIssues": "NONE"
+}

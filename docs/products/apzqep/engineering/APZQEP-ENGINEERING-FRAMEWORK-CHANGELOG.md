@@ -76,6 +76,13 @@ Do **not** list every documentation typo or evidence file. Prefer concise, dated
 - **Prior closure commit:** `b72d4ac3`
 - **Successor status:** APZHUB-ENG-002 — AUTHORISATION PENDING
 
+### 2026-08-02 — Programme Permanently Closed (authoritative end state)
+
+- **Recommendation:** Programme Permanently Closed
+- **Change Control:** Maintenance only
+- **Rule:** Do not reopen APZQEP-ENG-001; do not open further APZQEP documentation programmes without justified enhancement/maintenance need
+- **ENG-002 first artefact (when authorised):** Portfolio Engineering Charter
+
 ---
 
 ## Planned (paused pending APZHUB-ENG-002)

@@ -1,22 +1,23 @@
 # APZQEP-ENG-001 — Completion Report
 
-| Field                  | Value                                                      |
-| ---------------------- | ---------------------------------------------------------- |
-| Programme              | APZQEP-ENG-001                                             |
-| Title                  | Engineering Documentation Framework                        |
-| Classification         | Product Engineering Framework                              |
-| Status                 | **CLOSED**                                                 |
-| Product Board Decision | **CERTIFIED**                                              |
-| Engineering            | **COMPLETE**                                               |
-| Documentation          | **COMPLETE**                                               |
-| Framework              | **BASELINED** v1.0                                         |
-| Repository             | **CLEAN**                                                  |
-| Promotion Review       | **COMPLETE**                                               |
-| Handover               | **COMPLETE**                                               |
-| Maintenance            | **ACTIVE**                                                 |
-| Successor Programme    | **APZHUB-ENG-002**                                         |
-| Recommendation         | **Programme Closed**                                       |
-| Mutability             | **Immutable** except maintenance via normal change control |
+| Field                  | Value                                                                                          |
+| ---------------------- | ---------------------------------------------------------------------------------------------- |
+| Programme              | APZQEP-ENG-001                                                                                 |
+| Title                  | Engineering Documentation Framework                                                            |
+| Classification         | Product Engineering Framework                                                                  |
+| Status                 | **CLOSED**                                                                                     |
+| Product Board Decision | **CERTIFIED**                                                                                  |
+| Engineering            | **COMPLETE**                                                                                   |
+| Documentation          | **COMPLETE**                                                                                   |
+| Framework              | **BASELINED** v1.0                                                                             |
+| Repository             | **CLEAN**                                                                                      |
+| Promotion Review       | **COMPLETE**                                                                                   |
+| Handover               | **COMPLETE**                                                                                   |
+| Maintenance            | **ACTIVE**                                                                                     |
+| Successor Programme    | **APZHUB-ENG-002**                                                                             |
+| Recommendation         | **Programme Permanently Closed**                                                               |
+| Change Control         | **Maintenance only**                                                                           |
+| Mutability             | **Permanently closed** — maintenance and version control only; programme SHALL NOT be reopened |
 
 ---
 
@@ -59,23 +60,28 @@ COMPLETE
 Handover:
 COMPLETE
 
-Maintenance:
+Maintenance State:
 ACTIVE
+
+Change Control:
+Maintenance only
 
 Successor Programme:
 APZHUB-ENG-002
 
 Recommendation:
-Programme Closed.
+Programme Permanently Closed
 ```
 
 ---
 
-## Immutability
+## Permanence
 
-APZQEP-ENG-001 is **formally complete and immutable**, subject only to future maintenance through normal change control (Framework version bump + changelog + Board/Owner authority as applicable).
+APZQEP-ENG-001 is **closed permanently**.
 
-The programme SHALL NOT be reopened for specialised-standard authoring without an explicit new Owner programme (or APZHUB-ENG-002 sequencing that authorises APZQEP follow-on work).
+Future modifications are governed through normal maintenance and version control (Framework version bump + changelog + Board/Owner authority as applicable)—**not** by reopening this programme.
+
+No additional APZQEP documentation programmes SHALL be opened unless there is a justified product enhancement or maintenance requirement.
 
 ---
 
