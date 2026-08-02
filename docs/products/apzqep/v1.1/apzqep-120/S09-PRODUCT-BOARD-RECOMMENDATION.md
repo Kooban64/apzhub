@@ -1,10 +1,11 @@
 # APZQEP-120-S09 — Product Board Recommendation
 
-| Field        | Value                                      |
-| ------------ | ------------------------------------------ |
-| Status       | **RECOMMENDED** — not authorised           |
-| Prerequisite | APZQEP-120-S08 Product Board **CERTIFIED** |
-| Timestamp    | 20260802T142940Z                           |
+| Field        | Value                                                  |
+| ------------ | ------------------------------------------------------ |
+| Status       | **RECOMMENDED FOR AUTHORISATION** — not yet authorised |
+| Prerequisite | APZQEP-120-S08 Product Board **CERTIFIED**             |
+| Framing      | **Execution engine** (not “workers as a product”)      |
+| Timestamp    | 20260802T143404Z                                       |
 
 ---
 
@@ -15,18 +16,61 @@
 | S08   | Can we reliably **deliver** events? — **YES** |
 | S09   | Can we reliably **process** them? — next      |
 
-## Recommended objective (sharpened)
+## Transition (Board)
 
-Implement **Reliable Processing** on top of the Platform Outbox delivery foundation:
+```text
+Previous foundation work:  Storage → Integrity → Events
+Now entering:              Delivery → Processing → Capability
+```
+
+After S09, subsequent slices (S10–S20) are predominantly **product functionality**.
+
+## Recommended objective
+
+Authorise **S09 as Reliable Processing — the execution engine**.
+
+S08 guarantees delivery. S09 guarantees processing.
+
+Implement:
 
 - Worker lifecycle
 - Reservation
-- Execution
+- Leasing
 - Acknowledgement
-- Failure handling
+- Retry execution
+- Poison message handling
 - Replay
-- Concurrency
+- Concurrency control
 - Idempotent processing
+- Processing metrics
+
+## Processing Contract (pre-S09 architectural concept)
+
+Workers MUST NOT bind directly to business consumers. Define a generic contract:
+
+```text
+Event
+  → Processor
+    → Processing Result
+      → Acknowledged
+      or Retry
+      or Dead Letter
+```
+
+| Responsibility  | Owner                      |
+| --------------- | -------------------------- |
+| What to execute | Product processors (later) |
+| How to execute  | Platform execution engine  |
+| Delivery        | `@apzhub/platform-outbox`  |
+
+Later processors (each a consumer of the contract, not of the engine internals):
+
+- Search (S11)
+- Notifications (S12)
+- Quality Intelligence / AI (later)
+- Other product capabilities
+
+The execution engine never knows **what** it is executing — only **how** to execute reliably.
 
 ## Explicit exclusions (Board)
 
@@ -35,23 +79,26 @@ Do **not** implement business consumers in S09:
 - Search (S11)
 - Notifications (S12)
 - Command Palette (S13)
+- Suites / Runs / Execution / Defects (S14–S17)
 - Quality Intelligence / AI
-- Product feature modules
-
-Those consume the processing platform later.
+- Speculative product features
 
 ## Critical path (Board)
 
 ```text
 S01–S08 ✅
-  → S09 Reliable Processing
-    → S10 Operational Event Processing
+  → S09 Reliable Processing (execution engine)
+    → S10 Operational Processing
       → S11 Search
       → S12 Notifications
       → S13 Command Palette
-        → Product Features
+        → S14 Suites → S15 Runs → S16 Execution
+          → S17 Defects → S18 Traceability
+            → S19 Reporting → S20 Close-out
 ```
 
 ## Authority
 
-S09 requires a new **Owner Authorisation Pack**. Do not start without it.
+Board recommends authorisation of S09 as the next critical-path slice — **one slice, one objective, one certification, no speculative implementation**.
+
+S09 still requires a formal **Owner Authorisation Pack** (`Status: AUTHORISED`) before engineering starts.

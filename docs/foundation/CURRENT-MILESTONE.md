@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-02  
-> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120-S08 CERTIFIED** · Recommended next: **APZQEP-120-S09 Reliable Processing** (Owner instruction required) · **APZQEP v1.0 Lifecycle Complete** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
+> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120-S08 CERTIFIED** · Recommended next: **APZQEP-120-S09 Reliable Processing (execution engine)** — awaits Owner Authorisation Pack · **APZQEP v1.0 Lifecycle Complete** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
 
 ---
 
@@ -39,7 +39,11 @@
 
 ### Recommended next product programme (not authorised)
 
-**APZQEP-120-S09 — Reliable Processing** — [recommendation](../products/apzqep/v1.1/apzqep-120/S09-PRODUCT-BOARD-RECOMMENDATION.md)
+**APZQEP-120-S09 — Reliable Processing (execution engine)** — Board recommends authorisation; engineering starts only after Owner Authorisation Pack.
+
+- Recommendation: [S09-PRODUCT-BOARD-RECOMMENDATION.md](../products/apzqep/v1.1/apzqep-120/S09-PRODUCT-BOARD-RECOMMENDATION.md)
+- Pre-concept: Processing Contract (Event → Processor → Ack / Retry / Dead Letter)
+- Excludes: Search, Notifications, Command Palette, business consumers
 
 - Status: **NOT AUTHORISED** until Owner slice instruction
 - Stop: Do **not** begin S08 without that instruction

@@ -8,6 +8,7 @@
 | Decision                  | **CERTIFIED**                          |
 | Engineering certification | PASS (`S08-CERTIFICATION.md`)          |
 | Decision (UTC)            | 20260802T142940Z                       |
+| Final confirmation (UTC)  | 20260802T143404Z                       |
 | Governance                | UNCHANGED                              |
 | Baseline                  | UNCHANGED                              |
 
@@ -53,10 +54,22 @@ No APZHUB product may implement its own Outbox engine. Products SHALL consume `@
 
 ```text
 Reliable delivery foundation: ESTABLISHED
+Event Platform: operationally reliable (not merely catalogue-complete)
 Downstream slices may consume delivered events via processing (S09+)
-S09: Reliable Processing — recommended next (awaits Owner authorisation)
-S10–S13: operational processing, search, notifications, command palette — later
+S09: Reliable Processing / execution engine — recommended for Owner authorisation
+S10–S20: operational processing then product functionality — later
 ```
+
+## Maturity (Board — final post-CERTIFIED revision)
+
+| Area              |     Current |
+| ----------------- | ----------: |
+| Evidence Platform |    **~72%** |
+| Event Platform    |    **~60%** |
+| Backend           | **~76–78%** |
+| Overall Product   | **~68–70%** |
+
+Authoritative table: [APZQEP-PORTFOLIO-STATUS.md](../../engineering/APZQEP-PORTFOLIO-STATUS.md).
 
 ## Related
 
