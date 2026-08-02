@@ -38,7 +38,7 @@ Enterprise engineering **system** (Specify → Test → Certify). Governance cap
 | [APZHUB-CERTIFICATION-STANDARD.md](./APZHUB-CERTIFICATION-STANDARD.md)                               | **ES-002** Certify                               |
 | [APZHUB-ENG-002/README.md](./APZHUB-ENG-002/README.md)                                               | Programme face                                   |
 
-**Status:** Governance Foundation **COMPLETE**. Governance **1.0 STABLE**. Baseline **1.x STABLE**. Operating mode **Evolve the Enterprise**. ES-004 **NOT AUTHORISED**. APZQEP-ENG-001 **ARCHIVED** (`b9626ada`). Conversation baseline: [GOVERNANCE-FOUNDATION-COMPLETE.md](./APZHUB-ENG-002/GOVERNANCE-FOUNDATION-COMPLETE.md).
+**Status:** Governance Foundation **COMPLETE**. Phase 1 **CLOSED** at ES-003. Future ES promotions **ON HOLD**. Governance **1.0 STABLE**. Baseline **1.x STABLE**. Priority: **APZQEP product engineering**. ES-004 **NOT AUTHORISED**. Conversation baseline: [GOVERNANCE-FOUNDATION-COMPLETE.md](./APZHUB-ENG-002/GOVERNANCE-FOUNDATION-COMPLETE.md) · [PHASE-1-CLOSED.md](./APZHUB-ENG-002/PHASE-1-CLOSED.md).
 
 ---
 

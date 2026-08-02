@@ -10,15 +10,16 @@
 
 ## Programme portfolio
 
-| Programme                | Status                                  |
-| ------------------------ | --------------------------------------- |
-| APZHUB Foundation        | ✅ Closed                               |
-| APZHUB Product Framework | ✅ Closed                               |
-| APZQEP v1.0 Release      | ✅ Closed                               |
-| APZQEP v1.1 Planning     | ✅ Closed                               |
-| APZQEP-120 S01–S06       | ✅ Complete                             |
-| APZQEP-ENG-001           | ✅ **Closed** (CERTIFIED)               |
-| APZHUB-ENG-002           | ⏳ Designed · **Authorisation Pending** |
+| Programme                | Status                                                              |
+| ------------------------ | ------------------------------------------------------------------- |
+| APZHUB Foundation        | ✅ Closed                                                           |
+| APZHUB Product Framework | ✅ Closed                                                           |
+| APZQEP v1.0 Release      | ✅ Closed                                                           |
+| APZQEP v1.1 Planning     | ✅ Closed                                                           |
+| APZQEP-120 S01–S06       | ✅ Complete                                                         |
+| APZQEP-120 S07           | ⏳ Recommended · Owner instruction required                         |
+| APZQEP-ENG-001           | ✅ **Closed** (CERTIFIED / ARCHIVED)                                |
+| APZHUB-ENG-002           | ✅ Foundation COMPLETE · Phase 1 CLOSED · ES promotions **ON HOLD** |
 
 ---
 
@@ -65,4 +66,5 @@ Future products inherit governance from day one.
 
 - [APZQEP-ENG-001-COMPLETION.md](./APZQEP-ENG-001-COMPLETION.md)
 - [STANDING-PROGRAMME-RECORD.md](../STANDING-PROGRAMME-RECORD.md)
-- [APZHUB-ENG-002](../../../engineering/APZHUB-ENG-002/README.md)
+- [PRODUCT-BOARD-RECOMMENDATION-NEXT-PROGRAMME.md](../v1.1/apzqep-120/PRODUCT-BOARD-RECOMMENDATION-NEXT-PROGRAMME.md)
+- [APZHUB-ENG-002 PHASE-1-CLOSED](../../../engineering/APZHUB-ENG-002/PHASE-1-CLOSED.md)

@@ -1,9 +1,9 @@
 # APZHUB-ENG-002 — Document Map
 
-| Field     | Value                                                                         |
-| --------- | ----------------------------------------------------------------------------- |
-| Programme | APZHUB-ENG-002                                                                |
-| Status    | Governance Foundation **COMPLETE** · **1.0 STABLE** · Baseline **1.x STABLE** |
+| Field     | Value                                                                    |
+| --------- | ------------------------------------------------------------------------ |
+| Programme | APZHUB-ENG-002                                                           |
+| Status    | Foundation **COMPLETE** · Phase 1 **CLOSED** · ES promotions **ON HOLD** |
 
 ---
 
@@ -12,6 +12,7 @@
 | Document                                                                                | Status                     |
 | --------------------------------------------------------------------------------------- | -------------------------- |
 | [GOVERNANCE-FOUNDATION-COMPLETE.md](./GOVERNANCE-FOUNDATION-COMPLETE.md)                | Chapter **CLOSED**         |
+| [PHASE-1-CLOSED.md](./PHASE-1-CLOSED.md)                                                | Phase 1 **CLOSED** · HOLD  |
 | [APZHUB-ENGINEERING-GOVERNANCE.md](../APZHUB-ENGINEERING-GOVERNANCE.md)                 | **1.0 STABLE**             |
 | [ENGINEERING-GOVERNANCE-ERA-1.md](./ENGINEERING-GOVERNANCE-ERA-1.md)                    | Era 1 **COMPLETE**         |
 | [GOVERNANCE-PROCESS-FREEZE.md](./GOVERNANCE-PROCESS-FREEZE.md)                          | NORMATIVE                  |

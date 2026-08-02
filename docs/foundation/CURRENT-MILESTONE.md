@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-02  
-> **Current status:** **Engineering Governance Foundation COMPLETE** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZHUB-FOUNDATION-002 CLOSED** · **APZQEP v1.0 Lifecycle Complete** · Maintained product · **LIMITED_AVAILABILITY** · Next active APZQEP programme: **NONE** · ES-004 **NOT AUTHORISED** · Default mode: **product engineering** under Owner-authorised programmes within stable enterprise governance.
+> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · Priority: **APZQEP product engineering** · Recommended next: **APZQEP-120-S07** (Owner instruction required) · **APZQEP v1.0 Lifecycle Complete** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
 
 ---
 
@@ -23,7 +23,17 @@
 - Governance: [APZHUB-ENGINEERING-GOVERNANCE.md](../engineering/APZHUB-ENGINEERING-GOVERNANCE.md)
 - Baseline: [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../engineering/APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md)
 - APZQEP-ENG-001: **ARCHIVED** (`b9626ada`) — reference implementation only
+- Phase 1 (ES-001…ES-003): **CLOSED** — [PHASE-1-CLOSED.md](../engineering/APZHUB-ENG-002/PHASE-1-CLOSED.md)
+- Future ES promotions: **ON HOLD**
 - Stop: Do **not** open ES-004 or redesign governance without explicit Owner instruction / dedicated governance programme
+
+### Recommended next product programme (not authorised)
+
+**APZQEP-120-S07 — QEP domain event catalogue & publish**
+
+- Recommendation: [PRODUCT-BOARD-RECOMMENDATION-NEXT-PROGRAMME.md](../products/apzqep/v1.1/apzqep-120/PRODUCT-BOARD-RECOMMENDATION-NEXT-PROGRAMME.md)
+- Status: **RECOMMENDED** — requires separate Owner slice instruction
+- Stop: Do **not** begin S07 implementation without that instruction
 
 ---
 

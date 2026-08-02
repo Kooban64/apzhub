@@ -1,15 +1,17 @@
 # Engineering Governance Foundation — COMPLETE
 
-| Field           | Value                                   |
-| --------------- | --------------------------------------- |
-| Programme       | APZHUB-ENG-002                          |
-| Chapter         | Engineering Governance Foundation       |
-| Status          | **COMPLETE**                            |
-| Product Board   | Phase 1A **FINAL CERTIFIED · ACCEPTED** |
-| Confirmed (UTC) | 20260802T122802Z                        |
-| Operating Mode  | **Evolve the Enterprise**               |
-| Engineering     | NONE                                    |
-| ES-004          | **NOT AUTHORISED**                      |
+| Field                | Value                                   |
+| -------------------- | --------------------------------------- |
+| Programme            | APZHUB-ENG-002                          |
+| Chapter              | Engineering Governance Foundation       |
+| Status               | **COMPLETE**                            |
+| Product Board        | Phase 1A **FINAL CERTIFIED · ACCEPTED** |
+| Confirmed (UTC)      | 20260802T122802Z                        |
+| Operating Mode       | **Evolve the Enterprise**               |
+| Engineering          | NONE                                    |
+| ES-004               | **NOT AUTHORISED**                      |
+| Phase 1              | **CLOSED** at ES-003                    |
+| Future ES promotions | **ON HOLD**                             |
 
 This document is the **authoritative conversation baseline** for APZHUB engineering governance. Future work applies this foundation; it does not re-establish it.
 
@@ -47,12 +49,15 @@ This document is the **authoritative conversation baseline** for APZHUB engineer
 
 ---
 
-## ES-004 gate
+## ES promotions gate
 
 ```text
-ES-004 remains unopened until explicitly authorised by Owner.
+APZHUB-ENG-002 Phase 1: CLOSED at ES-003
+Future Enterprise Standard promotions: ON HOLD
+ES-004 remains unopened until explicitly authorised by Owner
+  (and only when required by actual engineering experience).
 
-When authorised:
+When eventually authorised:
 
 Programme: APZHUB-ENG-002
 Standard: ES-004
@@ -60,7 +65,7 @@ Classification: Enhancement to Enterprise Engineering Baseline 1.x
 (Governance 1.0 STABLE)
 ```
 
-No recommendation to change the governance model or promotion lifecycle unless a dedicated governance programme is deliberately initiated.
+Primary portfolio focus after this chapter: **APZQEP product engineering** (recommended next: APZQEP-120-S07). No governance redesign unless a dedicated governance programme is deliberately initiated.
 
 ---
 

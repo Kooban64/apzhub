@@ -1,0 +1,21 @@
+{
+  "programme": "APZHUB-ENG-002",
+  "phase": "1",
+  "status": "CLOSED",
+  "closedAtUtc": "20260802T123027Z",
+  "closedAtStandard": "ES-003",
+  "futureEsPromotions": "ON HOLD",
+  "governanceVersion": "1.0",
+  "governanceState": "STABLE",
+  "baselineCurrentMinor": "1.2",
+  "baselineSeriesStatus": "STABLE",
+  "governanceUnchanged": true,
+  "baselineUnchanged": true,
+  "engineering": "NONE",
+  "es004Authorised": false,
+  "productPriority": "APZQEP",
+  "recommendedNextProgramme": "APZQEP-120-S07",
+  "recommendedNextTitle": "QEP domain event catalogue & publish",
+  "implementationStarted": false,
+  "enterpriseGovernanceWorkRecommended": false
+}

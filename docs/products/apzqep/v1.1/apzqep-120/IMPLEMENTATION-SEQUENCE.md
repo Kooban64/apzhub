@@ -69,8 +69,18 @@ Unsafe overlap: concurrent writers to Evidence schema (S03/S04/S05/S06) — **se
 
 ---
 
-## First recommended slice
+## First recommended slice (historical)
 
-**APZQEP-120-S01 — Evidence list/search ACL (L-EM-01)**
+**APZQEP-120-S01 — Evidence list/search ACL (L-EM-01)** — **COMPLETE** (with S02–S06).
 
-Rationale: closes known security limitation; no storage decision; independently releasable; unblocks S02 and search ACL confidence.
+Rationale at programme open: closed known security limitation; no storage decision; independently releasable; unblocked S02 and search ACL confidence.
+
+---
+
+## Current recommended next slice (after S01–S06)
+
+**APZQEP-120-S07 — QEP domain event catalogue & publish**
+
+Rationale: Evidence Platform complete; S07 is the critical-path unlock for async product capability (S08–S10 workers, then search/notify). Requires Owner slice instruction — see [PRODUCT-BOARD-RECOMMENDATION-NEXT-PROGRAMME.md](./PRODUCT-BOARD-RECOMMENDATION-NEXT-PROGRAMME.md).
+
+**Implementation under that recommendation: NONE.**

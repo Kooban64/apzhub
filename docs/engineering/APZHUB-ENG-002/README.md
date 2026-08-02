@@ -1,38 +1,34 @@
 # APZHUB-ENG-002 — Portfolio Engineering Standards
 
-| Field              | Value                                                           |
-| ------------------ | --------------------------------------------------------------- |
-| Programme          | **APZHUB-ENG-002**                                              |
-| Governance Version | **1.0 STABLE**                                                  |
-| Baseline           | **1.2** · series **1.x STABLE**                                 |
-| Phase 1A           | **FINAL CERTIFIED** · **ACCEPTED**                              |
-| Foundation         | **COMPLETE**                                                    |
-| Era                | Governance Era 1 **COMPLETE** · Phase **C — Evolve**            |
-| Engineering        | **NONE**                                                        |
-| Next candidate     | **ES-004** — first **enhancement** (awaits Owner authorisation) |
+| Field                   | Value                              |
+| ----------------------- | ---------------------------------- |
+| Programme               | **APZHUB-ENG-002**                 |
+| Status                  | **ACTIVE**                         |
+| Governance Version      | **1.0 STABLE**                     |
+| Baseline                | **1.2** · series **1.x STABLE**    |
+| Governance Foundation   | **COMPLETE**                       |
+| Phase 1 (ES-001…ES-003) | **CLOSED**                         |
+| Future ES promotions    | **ON HOLD**                        |
+| Engineering             | **NONE**                           |
+| Next ES candidate       | ES-004 — **not authorised** (hold) |
+| Product priority        | **APZQEP** capability engineering  |
 
 ---
 
 ## Authoritative inventory
 
-| Document                                                                                  | Role                                   |
-| ----------------------------------------------------------------------------------------- | -------------------------------------- |
-| [GOVERNANCE-FOUNDATION-COMPLETE.md](./GOVERNANCE-FOUNDATION-COMPLETE.md)                  | Chapter closed · conversation baseline |
-| [APZHUB-ENGINEERING-GOVERNANCE.md](../APZHUB-ENGINEERING-GOVERNANCE.md)                   | Governance **1.0 STABLE**              |
-| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) | Mandatory set (**1.2**)                |
-| [PRODUCT-BOARD-RESOLUTION-PHASE-1A.md](./PRODUCT-BOARD-RESOLUTION-PHASE-1A.md)            | Board ACCEPTED                         |
-| [ENTERPRISE-ENHANCEMENT-POLICY.md](./ENTERPRISE-ENHANCEMENT-POLICY.md)                    | Enhancement Policy                     |
-| [ENGINEERING-GOVERNANCE-ERA-1.md](./ENGINEERING-GOVERNANCE-ERA-1.md)                      | Era 1 COMPLETE                         |
-| [GOVERNANCE-PROCESS-FREEZE.md](./GOVERNANCE-PROCESS-FREEZE.md)                            | Process freeze                         |
-| [STABLE-BASELINE-POLICY.md](./STABLE-BASELINE-POLICY.md)                                  | Stable Baseline Policy                 |
-| [PHASE-1A-CERTIFICATION.md](./PHASE-1A-CERTIFICATION.md)                                  | FINAL CERTIFIED · ACCEPTED             |
-| [PORTFOLIO-ENGINEERING-CHARTER.md](./PORTFOLIO-ENGINEERING-CHARTER.md)                    | Charter §§12–15                        |
-| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | Catalogue                              |
-| [APZHUB-ENGINEERING-GOVERNANCE-HISTORY.md](../APZHUB-ENGINEERING-GOVERNANCE-HISTORY.md)   | Non-normative history                  |
+| Document                                                                                  | Role                                |
+| ----------------------------------------------------------------------------------------- | ----------------------------------- |
+| [PHASE-1-CLOSED.md](./PHASE-1-CLOSED.md)                                                  | Phase 1 closed · promotions ON HOLD |
+| [GOVERNANCE-FOUNDATION-COMPLETE.md](./GOVERNANCE-FOUNDATION-COMPLETE.md)                  | Conversation baseline               |
+| [APZHUB-ENGINEERING-GOVERNANCE.md](../APZHUB-ENGINEERING-GOVERNANCE.md)                   | Governance **1.0 STABLE**           |
+| [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md) | Mandatory set (**1.2**)             |
+| [PORTFOLIO-ENGINEERING-CHARTER.md](./PORTFOLIO-ENGINEERING-CHARTER.md)                    | Charter §§12–15                     |
+| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | Catalogue                           |
 
 ---
 
-## Active (Baseline 1.2)
+## Active (Baseline 1.2) — consume, do not redesign
 
 | ID     | Role    |
 | ------ | ------- |
@@ -45,10 +41,10 @@
 ## Gate
 
 ```text
-Governance Foundation: Complete
-Governance: 1.0 STABLE (frozen under ordinary promotions)
-Baseline 1.x: STABLE
-Era 1: COMPLETE
-ES-004+: enhancements (Charter §15 · Dual Approval)
-ES-004 authorship: NOT AUTHORISED until Owner instruction
+Governance Foundation: COMPLETE
+Phase 1: CLOSED at ES-003
+Future ES promotions: ON HOLD
+ES-004+: do not author
+Primary focus: APZQEP product engineering
+Recommended next product slice: APZQEP-120-S07 (Owner instruction required)
 ```
