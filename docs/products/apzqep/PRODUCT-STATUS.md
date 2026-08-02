@@ -6,7 +6,7 @@
 | Authority    | Product Board                                  |
 | Audience     | Engineers, architects, auditors, AI assistants |
 | Rule         | **Read this document before any APZQEP work**  |
-| Last updated | 20260802T192900Z                               |
+| Last updated | 20260802T193400Z                               |
 
 ---
 
@@ -15,8 +15,8 @@
 ```text
 APZQEP Version 1.0
 
-Engineering:
-COMPLETE
+Status:
+ENGINEERING COMPLETE
 
 Product:
 COMPLETE
@@ -42,17 +42,21 @@ PASSED
 Production Release:
 NO-GO
 
-Reason:
-Outstanding Release Blockers
-
-RB-001
-Durable Product Persistence
-
-RB-002
-Production RBAC Hardening
+Release Blockers:
+RB-001 – Durable Product Persistence
+RB-002 – Production RBAC Hardening
 
 Production Certification:
 PENDING
+
+Current Authorised Programme:
+NONE
+
+Current Engineering Authority:
+CLOSED
+
+Next Engineering Authority:
+Owner Authorisation Required
 ```
 
 ---
