@@ -1,14 +1,14 @@
 # APZHUB-ENG-002 — Programme Charter
 
-| Field          | Value                                        |
-| -------------- | -------------------------------------------- |
-| Programme      | APZHUB-ENG-002                               |
-| Title          | Portfolio Engineering Standards              |
-| Phase          | 0 — Portfolio Engineering Charter            |
-| Classification | Enterprise Engineering Governance            |
-| Status         | **AUTHORISED** (Owner) · Phase 0 in delivery |
-| Engineering    | NONE                                         |
-| Repository     | Documentation only                           |
+| Field          | Value                                                          |
+| -------------- | -------------------------------------------------------------- |
+| Programme      | APZHUB-ENG-002                                                 |
+| Title          | Portfolio Engineering Standards                                |
+| Phase          | 0 **CERTIFIED** · 1 catalogue opening                          |
+| Classification | Enterprise Engineering Governance                              |
+| Status         | Phase 0 CERTIFIED · Catalogue ACTIVE · body promotions pending |
+| Engineering    | NONE                                                           |
+| Repository     | Documentation only                                             |
 
 ---
 
@@ -68,19 +68,22 @@ Phase 0 SHALL NOT:
 
 ## 6. Phase boundary
 
-| Phase  | Concern                                                                    |
-| ------ | -------------------------------------------------------------------------- |
-| **0**  | Governance definition                                                      |
-| **1+** | Standards promotion / publication (NOT AUTHORISED until Charter CERTIFIED) |
+| Phase  | Concern                                                                                           |
+| ------ | ------------------------------------------------------------------------------------------------- |
+| **0**  | Governance definition — **CERTIFIED**                                                             |
+| **1**  | Standards Catalogue (opening complete) → then body promotions by Owner instruction (ES-001 first) |
+| **1+** | Further standards publication under catalogue change control                                      |
 
 ---
 
 ## 7. Governing charter
 
-[PORTFOLIO-ENGINEERING-CHARTER.md](./PORTFOLIO-ENGINEERING-CHARTER.md)
+[PORTFOLIO-ENGINEERING-CHARTER.md](./PORTFOLIO-ENGINEERING-CHARTER.md) (**CERTIFIED**)
+
+Inventory: [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md)
 
 ---
 
 ## 8. Success / exit
 
-See [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md). Exit = Product Board Certification of the Portfolio Engineering Charter.
+See [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md). Phase 0 exit = Product Board Certification of the Portfolio Engineering Charter — **satisfied**.

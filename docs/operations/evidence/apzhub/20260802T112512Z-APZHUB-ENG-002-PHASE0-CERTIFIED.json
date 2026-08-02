@@ -1,0 +1,25 @@
+{
+  "programme": "APZHUB-ENG-002",
+  "phase": "0",
+  "title": "Portfolio Engineering Charter",
+  "classification": "Enterprise Engineering Governance",
+  "status": "CERTIFIED",
+  "timestampUtc": "20260802T112512Z",
+  "productBoardDecision": {
+    "status": "CERTIFIED",
+    "engineering": "NONE",
+    "governance": "COMPLETE",
+    "repository": "CLEAN",
+    "recommendation": "Proceed to Phase 1"
+  },
+  "charterPath": "docs/engineering/APZHUB-ENG-002/PORTFOLIO-ENGINEERING-CHARTER.md",
+  "predecessor": {
+    "programme": "APZQEP-ENG-001",
+    "status": "ARCHIVED",
+    "closure": "b9626ada"
+  },
+  "engineering": "NONE",
+  "standardsBodyPromotion": "NOT_STARTED",
+  "next": "Phase 1 — Enterprise Engineering Standards Catalogue before first body promotion",
+  "outstandingIssues": "NONE"
+}

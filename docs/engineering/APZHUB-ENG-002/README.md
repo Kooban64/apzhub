@@ -5,12 +5,12 @@
 | Programme                | **APZHUB-ENG-002**                                                        |
 | Title                    | Portfolio Engineering Standards                                           |
 | Classification           | Enterprise Engineering Governance                                         |
-| Phase                    | **0 — Portfolio Engineering Charter**                                     |
-| Status                   | **Phase 0 COMPLETE** — Charter DRAFT awaiting Product Board Certification |
+| Phase                    | **1 — Standards Catalogue (opening)**                                     |
+| Status                   | Phase 0 **CERTIFIED** · Catalogue **ACTIVE** · ES body promotions pending |
 | Predecessor              | APZQEP-ENG-001 **ARCHIVED** (`b9626ada`)                                  |
 | Reference implementation | APZQEP Engineering Framework v1.0 (not automatic enterprise standard)     |
-| Engineering              | **NONE**                                                                  |
-| Standards promotion      | **NOT AUTHORISED** until Charter CERTIFIED                                |
+| Engineering              | **NONE** (governance + inventory only to date)                            |
+| Next promotion           | **ES-001** Testing Standard (requires dedicated Owner instruction)        |
 
 ---
 
@@ -18,11 +18,20 @@
 
 Establish the **governance model** under which engineering standards may be promoted from products into the APZHUB enterprise baseline.
 
-Phase 0 defines governance. Phase 1+ defines engineering standards. Those concerns remain separate.
+Phase 0 defines governance. Phase 1+ registers and then promotes engineering standards. Those concerns remain separate.
 
 ---
 
-## Phase 0 pack (read in this order)
+## Authoritative inventory
+
+| Document                                                                                  | Role                               |
+| ----------------------------------------------------------------------------------------- | ---------------------------------- |
+| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | **Enterprise standards inventory** |
+| [PHASE-1-CATALOGUE-OPENING.md](./PHASE-1-CATALOGUE-OPENING.md)                            | Phase 1 opening record             |
+
+---
+
+## Phase 0 pack (CERTIFIED — read in this order)
 
 | #   | Document                                                               | Role                      |
 | --- | ---------------------------------------------------------------------- | ------------------------- |
@@ -49,12 +58,14 @@ Immutable unless maintenance change control applies: APZHUB Foundation, Governan
 ## Gate
 
 ```text
-Phase 1 Standards Promotion: NOT AUTHORISED
-until Product Board Certification of the Portfolio Engineering Charter.
+Phase 0: CERTIFIED
+Standards Catalogue: ACTIVE
+ES-001…ES-005: Proposed (registered)
+First body promotion (ES-001 Testing): NOT STARTED — awaits Owner instruction
 ```
 
 ---
 
 ## Evidence
 
-Filed under `docs/operations/evidence/` with programme prefix `APZHUB-ENG-002` / Phase 0.
+Filed under `docs/operations/evidence/` with programme prefix `APZHUB-ENG-002`.

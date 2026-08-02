@@ -1,27 +1,36 @@
 # APZHUB-ENG-002 — Document Map
 
-| Field     | Value          |
-| --------- | -------------- |
-| Programme | APZHUB-ENG-002 |
-| Phase     | 0              |
-| Status    | Phase 0 pack   |
+| Field     | Value                                       |
+| --------- | ------------------------------------------- |
+| Programme | APZHUB-ENG-002                              |
+| Phase     | 0 CERTIFIED · 1 catalogue opening           |
+| Status    | Governance pack CERTIFIED; catalogue ACTIVE |
+
+---
+
+## Enterprise inventory (Phase 1+)
+
+| Document                                                                                  | Role                              | Status   |
+| ----------------------------------------------------------------------------------------- | --------------------------------- | -------- |
+| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | Authoritative standards inventory | ACTIVE   |
+| [PHASE-1-CATALOGUE-OPENING.md](./PHASE-1-CATALOGUE-OPENING.md)                            | Catalogue establishment record    | COMPLETE |
 
 ---
 
 ## Phase 0 governance pack
 
-| Document                                                               | Role                      | Status                   |
-| ---------------------------------------------------------------------- | ------------------------- | ------------------------ |
-| [README.md](./README.md)                                               | Programme face            | UPDATED                  |
-| [PORTFOLIO-ENGINEERING-CHARTER.md](./PORTFOLIO-ENGINEERING-CHARTER.md) | Governing Charter         | DRAFT → await Board CERT |
-| [PROGRAMME-CHARTER.md](./PROGRAMME-CHARTER.md)                         | Programme charter         | COMPLETE (Phase 0)       |
-| [PORTFOLIO-GOVERNANCE-MODEL.md](./PORTFOLIO-GOVERNANCE-MODEL.md)       | Decision rights           | COMPLETE (Phase 0)       |
-| [PORTFOLIO-LIFECYCLE.md](./PORTFOLIO-LIFECYCLE.md)                     | Standard lifecycle        | COMPLETE (Phase 0)       |
-| [PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md)                   | Mandatory promotion rules | COMPLETE (Phase 0)       |
-| [OWNERSHIP-MODEL.md](./OWNERSHIP-MODEL.md)                             | Roles / RACI              | COMPLETE (Phase 0)       |
-| [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md)                           | Success / exit            | COMPLETE (Phase 0)       |
-| [PHASE-0-COMPLETION.md](./PHASE-0-COMPLETION.md)                       | Phase completion report   | COMPLETE                 |
-| [DOCUMENT-MAP.md](./DOCUMENT-MAP.md)                                   | This index                | COMPLETE                 |
+| Document                                                               | Role                      | Status               |
+| ---------------------------------------------------------------------- | ------------------------- | -------------------- |
+| [README.md](./README.md)                                               | Programme face            | UPDATED              |
+| [PORTFOLIO-ENGINEERING-CHARTER.md](./PORTFOLIO-ENGINEERING-CHARTER.md) | Governing Charter         | **CERTIFIED**        |
+| [PROGRAMME-CHARTER.md](./PROGRAMME-CHARTER.md)                         | Programme charter         | COMPLETE (Phase 0)   |
+| [PORTFOLIO-GOVERNANCE-MODEL.md](./PORTFOLIO-GOVERNANCE-MODEL.md)       | Decision rights           | COMPLETE (Phase 0)   |
+| [PORTFOLIO-LIFECYCLE.md](./PORTFOLIO-LIFECYCLE.md)                     | Standard lifecycle        | COMPLETE (Phase 0)   |
+| [PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md)                   | Mandatory promotion rules | COMPLETE (Phase 0)   |
+| [OWNERSHIP-MODEL.md](./OWNERSHIP-MODEL.md)                             | Roles / RACI              | COMPLETE (Phase 0)   |
+| [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md)                           | Success / exit            | COMPLETE (Phase 0)   |
+| [PHASE-0-COMPLETION.md](./PHASE-0-COMPLETION.md)                       | Phase completion report   | COMPLETE · CERTIFIED |
+| [DOCUMENT-MAP.md](./DOCUMENT-MAP.md)                                   | This index                | COMPLETE             |
 
 ## Design artefacts (pre-Phase 0 / retained)
 
@@ -44,9 +53,11 @@
 ## Reading order (Product Board)
 
 1. PORTFOLIO-ENGINEERING-CHARTER.md
-2. PROMOTION-PRINCIPLES.md
-3. OWNERSHIP-MODEL.md
-4. PORTFOLIO-GOVERNANCE-MODEL.md
-5. PORTFOLIO-LIFECYCLE.md
-6. SUCCESS-CRITERIA.md
-7. PHASE-0-COMPLETION.md
+2. APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md
+3. PROMOTION-PRINCIPLES.md
+4. OWNERSHIP-MODEL.md
+5. PORTFOLIO-GOVERNANCE-MODEL.md
+6. PORTFOLIO-LIFECYCLE.md
+7. SUCCESS-CRITERIA.md
+8. PHASE-0-COMPLETION.md
+9. PHASE-1-CATALOGUE-OPENING.md

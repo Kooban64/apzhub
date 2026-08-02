@@ -1,16 +1,17 @@
 # APZHUB Portfolio Engineering Charter
 
-| Field          | Value                                            |
-| -------------- | ------------------------------------------------ |
-| Document       | PORTFOLIO-ENGINEERING-CHARTER                    |
-| Programme      | APZHUB-ENG-002                                   |
-| Phase          | 0                                                |
-| Classification | Enterprise Engineering Governance                |
-| Status         | **DRAFT — AWAITING PRODUCT BOARD CERTIFICATION** |
-| Version        | 1.0                                              |
-| Engineering    | NONE                                             |
-| Authority      | Owner · Product Board                            |
-| Supersedes     | None (first portfolio engineering charter)       |
+| Field          | Value                                      |
+| -------------- | ------------------------------------------ |
+| Document       | PORTFOLIO-ENGINEERING-CHARTER              |
+| Programme      | APZHUB-ENG-002                             |
+| Phase          | 0                                          |
+| Classification | Enterprise Engineering Governance          |
+| Status         | **CERTIFIED**                              |
+| Certified      | Product Board — APZHUB-ENG-002 Phase 0     |
+| Version        | 1.0                                        |
+| Engineering    | NONE                                       |
+| Authority      | Owner · Product Board                      |
+| Supersedes     | None (first portfolio engineering charter) |
 
 ---
 
@@ -200,8 +201,9 @@ Products inherit enterprise changes by citation update in their next authorised 
 1. No silent enterprise standards.
 2. No dual competing authorities for one concern.
 3. No promotion without the Promotion Principle.
-4. No Phase 1+ standards promotion under APZHUB-ENG-002 until this Charter is Product Board **CERTIFIED**.
-5. Documentation-only programmes remain documentation-only unless Owner expands authority.
+4. No Phase 1+ standards **body** promotion under APZHUB-ENG-002 until this Charter is Product Board **CERTIFIED** _(satisfied — Phase 0 CERTIFIED)_.
+5. No enterprise standard body without a prior row in the [Enterprise Engineering Standards Catalogue](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md).
+6. Documentation-only programmes remain documentation-only unless Owner expands authority.
 
 ---
 
@@ -227,24 +229,25 @@ Measurable criteria: [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md)
 | Governance Model complete                   | YES                       |
 | Lifecycle + versioning defined              | YES                       |
 | Success criteria defined                    | YES                       |
-| Product Board Certification of this Charter | **YES — gate to Phase 1** |
+| Product Board Certification of this Charter | **SATISFIED — CERTIFIED** |
 
-**Phase 1 Standards Promotion remains NOT AUTHORISED until Charter certification.**
+**Phase 0 exit:** CERTIFIED. Phase 1 opens with the Standards Catalogue; each standard body promotion requires a dedicated Owner instruction.
 
 ---
 
 ## 15. Related documents
 
-| Document                                                         | Role                                    |
-| ---------------------------------------------------------------- | --------------------------------------- |
-| [PROGRAMME-CHARTER.md](./PROGRAMME-CHARTER.md)                   | APZHUB-ENG-002 programme charter        |
-| [PORTFOLIO-GOVERNANCE-MODEL.md](./PORTFOLIO-GOVERNANCE-MODEL.md) | Decision rights and conflict resolution |
-| [PORTFOLIO-LIFECYCLE.md](./PORTFOLIO-LIFECYCLE.md)               | Standard lifecycle states               |
-| [PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md)             | Mandatory promotion rules               |
-| [OWNERSHIP-MODEL.md](./OWNERSHIP-MODEL.md)                       | RACI-style ownership                    |
-| [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md)                     | Measurable Phase 0 / programme outcomes |
-| [DOCUMENT-MAP.md](./DOCUMENT-MAP.md)                             | Pack index                              |
-| [PROMOTION-MATRIX.md](./PROMOTION-MATRIX.md)                     | Working promotion dispositions (design) |
+| Document                                                                                  | Role                                    |
+| ----------------------------------------------------------------------------------------- | --------------------------------------- |
+| [PROGRAMME-CHARTER.md](./PROGRAMME-CHARTER.md)                                            | APZHUB-ENG-002 programme charter        |
+| [APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md](../APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md) | Enterprise standards inventory          |
+| [PORTFOLIO-GOVERNANCE-MODEL.md](./PORTFOLIO-GOVERNANCE-MODEL.md)                          | Decision rights and conflict resolution |
+| [PORTFOLIO-LIFECYCLE.md](./PORTFOLIO-LIFECYCLE.md)                                        | Standard lifecycle states               |
+| [PROMOTION-PRINCIPLES.md](./PROMOTION-PRINCIPLES.md)                                      | Mandatory promotion rules               |
+| [OWNERSHIP-MODEL.md](./OWNERSHIP-MODEL.md)                                                | RACI-style ownership                    |
+| [SUCCESS-CRITERIA.md](./SUCCESS-CRITERIA.md)                                              | Measurable Phase 0 / programme outcomes |
+| [DOCUMENT-MAP.md](./DOCUMENT-MAP.md)                                                      | Pack index                              |
+| [PROMOTION-MATRIX.md](./PROMOTION-MATRIX.md)                                              | Working promotion dispositions (design) |
 
 ---
 

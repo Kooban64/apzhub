@@ -1,15 +1,15 @@
 # APZHUB-ENG-002 — Phase 0 Completion Report
 
-| Field               | Value                                               |
-| ------------------- | --------------------------------------------------- |
-| Programme           | APZHUB-ENG-002                                      |
-| Phase               | 0                                                   |
-| Title               | Portfolio Engineering Charter                       |
-| Classification      | Enterprise Engineering Governance                   |
-| Status              | **COMPLETE** — awaiting Product Board Certification |
-| Engineering         | NONE                                                |
-| Repository          | Documentation only                                  |
-| Standards promotion | **NOT AUTHORISED**                                  |
+| Field               | Value                                          |
+| ------------------- | ---------------------------------------------- |
+| Programme           | APZHUB-ENG-002                                 |
+| Phase               | 0                                              |
+| Title               | Portfolio Engineering Charter                  |
+| Classification      | Enterprise Engineering Governance              |
+| Status              | **COMPLETE** · Product Board **CERTIFIED**     |
+| Engineering         | NONE                                           |
+| Repository          | Documentation only                             |
+| Standards promotion | Catalogue authorised; body promotions separate |
 
 ---
 
@@ -21,46 +21,52 @@ Phase 0 only. No package, release, deployment, infrastructure, architecture, or 
 
 ## Deliverables
 
-| Deliverable                      | Status                              |
-| -------------------------------- | ----------------------------------- |
-| PORTFOLIO-ENGINEERING-CHARTER.md | COMPLETE (DRAFT — await Board CERT) |
-| PROGRAMME-CHARTER.md             | COMPLETE                            |
-| PORTFOLIO-GOVERNANCE-MODEL.md    | COMPLETE                            |
-| PORTFOLIO-LIFECYCLE.md           | COMPLETE                            |
-| PROMOTION-PRINCIPLES.md          | COMPLETE                            |
-| OWNERSHIP-MODEL.md               | COMPLETE                            |
-| SUCCESS-CRITERIA.md              | COMPLETE                            |
-| DOCUMENT-MAP.md                  | COMPLETE                            |
-| README.md                        | UPDATED                             |
-| PHASE-0-COMPLETION.md            | COMPLETE                            |
+| Deliverable                      | Status                        |
+| -------------------------------- | ----------------------------- |
+| PORTFOLIO-ENGINEERING-CHARTER.md | **CERTIFIED** (Product Board) |
+| PROGRAMME-CHARTER.md             | COMPLETE                      |
+| PORTFOLIO-GOVERNANCE-MODEL.md    | COMPLETE                      |
+| PORTFOLIO-LIFECYCLE.md           | COMPLETE                      |
+| PROMOTION-PRINCIPLES.md          | COMPLETE                      |
+| OWNERSHIP-MODEL.md               | COMPLETE                      |
+| SUCCESS-CRITERIA.md              | COMPLETE                      |
+| DOCUMENT-MAP.md                  | COMPLETE                      |
+| README.md                        | UPDATED                       |
+| PHASE-0-COMPLETION.md            | COMPLETE                      |
 
 ---
 
 ## Constraints observed
 
 - APZQEP-ENG-001 not reopened (ARCHIVED / `b9626ada`)
-- No standards promoted
+- No standards body text promoted in Phase 0
 - APZQEP Framework treated as reference implementation only
-- Phase 0 = governance; Phase 1+ = engineering (not started)
+- Phase 0 = governance; Phase 1+ = engineering standards (opens with catalogue)
 
 ---
 
-## Success question readiness
+## Product Board decision
 
-The pack is structured so Product Board can answer:
-
-> What governs engineering standards across APZHUB?
-
-using the Portfolio Engineering Charter and its linked Phase 0 satellites.
+```text
+Programme: APZHUB-ENG-002
+Phase: 0
+Title: Portfolio Engineering Charter
+Status: CERTIFIED
+Engineering: NONE
+Governance: COMPLETE
+Repository: CLEAN
+Recommendation: Proceed to Phase 1
+```
 
 ---
 
 ## Recommendation
 
 ```text
-Await Product Board Certification of the Portfolio Engineering Charter.
+Phase 0 CERTIFIED.
 
-Phase 1 Standards Promotion remains NOT AUTHORISED until Charter certification.
+Phase 1 opens with Enterprise Engineering Standards Catalogue
+(no standard body promotion until catalogue exists and Owner instructs ES-001).
 ```
 
 ---
@@ -75,13 +81,16 @@ Phase:
 0
 
 Status:
-COMPLETE
+CERTIFIED
 
 Engineering:
 NONE
 
-Portfolio Engineering Charter:
+Governance:
 COMPLETE
+
+Portfolio Engineering Charter:
+CERTIFIED
 
 Governance Model:
 COMPLETE
@@ -112,7 +121,5 @@ NONE
 
 Recommendation:
 
-Await Product Board Certification.
-
-Phase 1 Standards Promotion remains NOT AUTHORISED until Charter certification.
+Proceed to Phase 1 — establish Standards Catalogue before first promotion.
 ```

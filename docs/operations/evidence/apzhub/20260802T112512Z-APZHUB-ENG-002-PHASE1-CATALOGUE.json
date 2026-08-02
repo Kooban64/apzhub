@@ -1,0 +1,18 @@
+{
+  "programme": "APZHUB-ENG-002",
+  "phase": "1",
+  "title": "Enterprise Engineering Standards Catalogue",
+  "classification": "Enterprise Engineering Governance",
+  "status": "CATALOGUE_ACTIVE",
+  "timestampUtc": "20260802T112512Z",
+  "engineering": "NONE",
+  "technicalContent": "NONE",
+  "cataloguePath": "docs/engineering/APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md",
+  "registeredProposed": ["ES-001", "ES-002", "ES-003", "ES-004", "ES-005"],
+  "deferred": ["ES-010", "ES-011", "ES-012", "ES-013", "ES-014"],
+  "alreadyEnterprise": ["ES-000"],
+  "promotionOrder": ["ES-001", "ES-002", "ES-003", "ES-004", "ES-005"],
+  "bodyPromotions": "NONE — catalogue registration only",
+  "next": "ES-001 Enterprise Testing Standard (awaits Owner instruction)",
+  "outstandingIssues": "NONE"
+}
