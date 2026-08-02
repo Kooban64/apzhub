@@ -1,0 +1,18 @@
+{
+  "programme": "APZHUB-ENG-002",
+  "catalogueId": "ES-003",
+  "title": "APZHUB Enterprise Engineering Specification Template",
+  "version": "1.0-candidate",
+  "status": "UNDER_REVIEW",
+  "timestampUtc": "20260802T120151Z",
+  "derivation": "abstraction",
+  "referenceSource": "docs/products/apzqep/engineering/APZQEP-SLICE-TEMPLATE.md",
+  "normativePath": "docs/engineering/APZHUB-ENGINEERING-SPECIFICATION-TEMPLATE.md",
+  "architectureReview": "PASS",
+  "productBoard": "PENDING",
+  "catalogueStatus": "UNDER_REVIEW",
+  "baselineVersion": "1.1",
+  "baselineImpact": "NONE",
+  "engineering": "NONE",
+  "outstandingIssues": "NONE — awaiting Product Board Certification"
+}
