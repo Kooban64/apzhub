@@ -1,8 +1,29 @@
 # APZHUB Current Milestone
 
 > **Purpose:** Where development currently stops and what requires owner approval  
-> **Last updated:** 2026-08-01  
-> **Current status:** **APZHUB-FOUNDATION-002 CLOSED** — Portfolio Governance Complete · **APZQEP v1.0 Lifecycle Complete** · Maintained product · **LIMITED_AVAILABILITY** · Next active APZQEP programme: **NONE** · Default mode: **product engineering** under Owner-authorised programmes.
+> **Last updated:** 2026-08-02  
+> **Current status:** **Engineering Governance Foundation COMPLETE** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZHUB-FOUNDATION-002 CLOSED** · **APZQEP v1.0 Lifecycle Complete** · Maintained product · **LIMITED_AVAILABILITY** · Next active APZQEP programme: **NONE** · ES-004 **NOT AUTHORISED** · Default mode: **product engineering** under Owner-authorised programmes within stable enterprise governance.
+
+---
+
+## Engineering governance (conversation baseline)
+
+**APZHUB-ENG-002 — Engineering Governance Foundation — COMPLETE:**
+
+| Area                            | State                                             |
+| ------------------------------- | ------------------------------------------------- |
+| Governance Version              | **1.0 STABLE** (frozen under ordinary promotions) |
+| Enterprise Engineering Baseline | **1.x STABLE** (current **1.2**)                  |
+| Engineering Governance Era      | **Era 1 COMPLETE**                                |
+| Operating Mode                  | **Evolve the Enterprise**                         |
+| Governance Foundation           | **COMPLETE**                                      |
+| ES-004                          | **NOT AUTHORISED**                                |
+
+- Face: [GOVERNANCE-FOUNDATION-COMPLETE.md](../engineering/APZHUB-ENG-002/GOVERNANCE-FOUNDATION-COMPLETE.md)
+- Governance: [APZHUB-ENGINEERING-GOVERNANCE.md](../engineering/APZHUB-ENGINEERING-GOVERNANCE.md)
+- Baseline: [APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md](../engineering/APZHUB-ENTERPRISE-ENGINEERING-BASELINE.md)
+- APZQEP-ENG-001: **ARCHIVED** (`b9626ada`) — reference implementation only
+- Stop: Do **not** open ES-004 or redesign governance without explicit Owner instruction / dedicated governance programme
 
 ---
 

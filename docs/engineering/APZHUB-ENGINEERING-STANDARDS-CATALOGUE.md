@@ -164,6 +164,7 @@ API / Database / Domain Event remain **Deferred** until Board revisits.
 | 20260802T121525Z | —      | Phase **1A CERTIFIED**; Baseline 1.2 ACCEPTED; Baseline **1.x STABLE**; era → evolving enhancements                      | `PHASE-1A-CERTIFICATION.md` · `BASELINE-1.x-STABLE.md`                      |
 | 20260802T121905Z | —      | Phase **1A FINAL CERTIFIED**; Governance **1.0 STABLE**; Era 1 **COMPLETE**; Process Freeze adopted                      | `APZHUB-ENGINEERING-GOVERNANCE.md` · `ENGINEERING-GOVERNANCE-ERA-1.md`      |
 | 20260802T122139Z | —      | Phase 1A **ACCEPTED**; Enhancement Policy adopted; Governance Foundation Complete                                        | `PRODUCT-BOARD-RESOLUTION-PHASE-1A.md` · `ENTERPRISE-ENHANCEMENT-POLICY.md` |
+| 20260802T122802Z | —      | Engineering Governance Foundation chapter **CLOSED**; conversation baseline recorded                                     | `GOVERNANCE-FOUNDATION-COMPLETE.md`                                         |
 
 ---
 

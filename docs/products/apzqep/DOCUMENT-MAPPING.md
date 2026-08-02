@@ -50,7 +50,8 @@
 | APZQEP Portfolio Status Snapshot                     | `docs/products/apzqep/engineering/APZQEP-PORTFOLIO-STATUS.md`                | **IN FORCE** (Board closure snapshot)                               |
 | APZQEP Engineering Framework Changelog               | `docs/products/apzqep/engineering/APZQEP-ENGINEERING-FRAMEWORK-CHANGELOG.md` | **ACTIVE** — governance evolution record                            |
 | APZQEP → APZHUB Promotion Review                     | `docs/products/apzqep/engineering/APZQEP-ENG-001-PROMOTION-REVIEW.md`        | **CERTIFIED** — Standards SPLIT refinement                          |
-| APZHUB-ENG-002 Portfolio Engineering Standards       | `docs/engineering/APZHUB-ENG-002/`                                           | Governance **1.0 STABLE** · Phase 1A **ACCEPTED**                   |
+| APZHUB-ENG-002 Portfolio Engineering Standards       | `docs/engineering/APZHUB-ENG-002/`                                           | Governance Foundation **COMPLETE** · **1.0 STABLE**                 |
+| APZHUB-ENG-002 Governance Foundation Complete        | `docs/engineering/APZHUB-ENG-002/GOVERNANCE-FOUNDATION-COMPLETE.md`          | Conversation baseline · chapter closed                              |
 | APZHUB Engineering Governance                        | `docs/engineering/APZHUB-ENGINEERING-GOVERNANCE.md`                          | Governance Version **1.0 STABLE**                                   |
 | APZHUB Engineering Governance History                | `docs/engineering/APZHUB-ENGINEERING-GOVERNANCE-HISTORY.md`                  | Non-normative historical record                                     |
 | APZHUB Enterprise Engineering Standards Catalogue    | `docs/engineering/APZHUB-ENGINEERING-STANDARDS-CATALOGUE.md`                 | ES-001…ES-003 Active; ES-004 = first enhancement candidate          |

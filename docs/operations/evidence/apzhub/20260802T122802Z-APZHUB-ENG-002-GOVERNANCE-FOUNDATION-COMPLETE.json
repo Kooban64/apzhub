@@ -1,0 +1,19 @@
+{
+  "programme": "APZHUB-ENG-002",
+  "chapter": "Engineering Governance Foundation",
+  "status": "COMPLETE",
+  "timestampUtc": "20260802T122802Z",
+  "governanceVersion": "1.0",
+  "governanceState": "STABLE",
+  "baselineSeries": "1.x",
+  "baselineSeriesStatus": "STABLE",
+  "baselineCurrentMinor": "1.2",
+  "engineeringGovernanceEra": "1",
+  "eraStatus": "COMPLETE",
+  "operatingMode": "Evolve the Enterprise",
+  "governanceFoundation": "COMPLETE",
+  "es004Authorised": false,
+  "apzqepEng001": "ARCHIVED",
+  "apzqepRole": "reference implementation",
+  "engineering": "NONE"
+}
