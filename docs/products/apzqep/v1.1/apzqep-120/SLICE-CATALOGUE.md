@@ -419,6 +419,7 @@ R2.
 | Priority         | P0                                         |
 | Sequence         | 7                                          |
 | Release boundary | R1                                         |
+| Implementation   | **COMPLETE** (2026-08-02) · CERT **PASS**  |
 
 ### Objective
 
@@ -426,7 +427,7 @@ Promote `events/qep/*.yaml` to validated manifests; Platform Services publish vi
 
 ### Current state
 
-Stub YAMLs; no QEP→bus publish.
+**COMPLETE (S07):** Product Event Catalogue v1.0.0; Application Service publisher; manifests under `events/qep/evidence-*`. Transport adapter deferred to S08.
 
 ### Scope
 

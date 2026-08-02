@@ -19,6 +19,9 @@ import {
   requireEvidence,
   type ApplicationOrchestrationDeps,
 } from "../orchestration";
+import { QEP_EVIDENCE_PLATFORM_EVENTS } from "../events/catalogue";
+import { buildQepEvidenceEventEnvelope } from "../events/envelope";
+import { publishQepEvidenceEventFailSoft } from "../events/publisher";
 import type { AuditPort } from "../ports";
 import type { EvidenceSecurityGate } from "../security/security-gate";
 import type { IntegrityAlgorithmRegistry } from "./algorithms/integrity-algorithm";
@@ -190,6 +193,23 @@ export function createEvidenceIntegrityPlatformService(
             ctx,
             evidence.id,
             "evidence.integrity.established",
+          );
+          // S07: idempotent establish still emits catalogue event for consumers.
+          publishQepEvidenceEventFailSoft(
+            deps.platformEvents,
+            buildQepEvidenceEventEnvelope({
+              eventId: QEP_EVIDENCE_PLATFORM_EVENTS.integrityEstablished,
+              evidenceId: evidence.id,
+              tenantId: ctx.tenantId,
+              timestamp: deps.clock.now(),
+              actorId: ctx.userId,
+              correlationId: ctx.correlationId,
+              revision: evidence.revision,
+              payload: {
+                algorithm: algorithm.algorithmId,
+                idempotent: true,
+              },
+            }),
           );
           return {
             evidenceId: evidence.id,

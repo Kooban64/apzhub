@@ -77,10 +77,8 @@ Rationale at programme open: closed known security limitation; no storage decisi
 
 ---
 
-## Current recommended next slice (after S01–S06)
+## Current recommended next slice (after S01–S07)
 
-**APZQEP-120-S07 — QEP domain event catalogue & publish**
+**APZQEP-120-S07 — QEP domain event catalogue & publish** — **COMPLETE / PASS** ([S07-COMPLETION.md](./S07-COMPLETION.md)).
 
-Rationale: Evidence Platform complete; S07 is the critical-path unlock for async product capability (S08–S10 workers, then search/notify). Requires Owner slice instruction — see [PRODUCT-BOARD-RECOMMENDATION-NEXT-PROGRAMME.md](./PRODUCT-BOARD-RECOMMENDATION-NEXT-PROGRAMME.md).
-
-**Implementation under that recommendation: NONE.**
+**APZQEP-120-S08 — TE outbox drain worker (L-03)** — next critical-path slice. Requires Owner instruction. Consumes S07 catalogue events; does not redefine them.

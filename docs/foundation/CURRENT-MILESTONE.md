@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-02  
-> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · Priority: **APZQEP product engineering** · Recommended next: **APZQEP-120-S07** (Owner instruction required) · **APZQEP v1.0 Lifecycle Complete** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
+> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120-S07 COMPLETE** · Recommended next: **APZQEP-120-S08** (Owner instruction required) · **APZQEP v1.0 Lifecycle Complete** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
 
 ---
 
@@ -27,13 +27,19 @@
 - Future ES promotions: **ON HOLD**
 - Stop: Do **not** open ES-004 or redesign governance without explicit Owner instruction / dedicated governance programme
 
+### Latest completed product slice
+
+**APZQEP-120-S07 — QEP Domain Event Catalogue & Publish — COMPLETE / PASS**
+
+- Completion: [S07-COMPLETION.md](../products/apzqep/v1.1/apzqep-120/S07-COMPLETION.md)
+- Catalogue: [EVENT-CATALOGUE.md](../products/apzqep/events/EVENT-CATALOGUE.md)
+
 ### Recommended next product programme (not authorised)
 
-**APZQEP-120-S07 — QEP domain event catalogue & publish**
+**APZQEP-120-S08 — TE outbox drain worker**
 
-- Recommendation: [PRODUCT-BOARD-RECOMMENDATION-NEXT-PROGRAMME.md](../products/apzqep/v1.1/apzqep-120/PRODUCT-BOARD-RECOMMENDATION-NEXT-PROGRAMME.md)
-- Status: **RECOMMENDED** — requires separate Owner slice instruction
-- Stop: Do **not** begin S07 implementation without that instruction
+- Status: **NOT AUTHORISED** until Owner slice instruction
+- Stop: Do **not** begin S08 without that instruction
 
 ---
 

@@ -1,0 +1,25 @@
+manifestSchemaVersion: "1.0"
+id: qep-evidence-updated
+name: Evidence Updated
+version: 1.0.0
+kind: event
+
+metadata:
+  category: quality-engineering
+  description: "Evidence metadata or content identity changed. Authoritative catalogue: docs/products/apzqep/events/EVENT-CATALOGUE.md (APZQEP-120-S07)."
+  lifecycleStatus: active
+
+event:
+  category: business
+  publisher: qep-evidence
+  subscribers:
+    - audit:platform.audit
+  payload:
+    evidenceId: string
+    tenantId: string
+    revision: number?
+    correlationId: string?
+
+documentation:
+  eventKey: qep.evidence.updated
+  catalogue: docs/products/apzqep/events/events/evidence-updated.md

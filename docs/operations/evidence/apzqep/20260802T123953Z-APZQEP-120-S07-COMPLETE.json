@@ -1,0 +1,28 @@
+{
+  "programme": "APZQEP-120",
+  "slice": "S07",
+  "title": "QEP Domain Event Catalogue & Publish",
+  "status": "COMPLETE",
+  "timestampUtc": "20260802T123953Z",
+  "engineering": "COMPLETE",
+  "certification": "PASS",
+  "regression": "PASS",
+  "testsPassed": 127,
+  "domainEventCatalogue": "COMPLETE",
+  "eventPublisher": "COMPLETE",
+  "catalogueVersion": "1.0.0",
+  "events": [
+    "qep.evidence.created",
+    "qep.evidence.updated",
+    "qep.evidence.lifecycle_changed",
+    "qep.evidence.integrity_established",
+    "qep.evidence.integrity_verified",
+    "qep.evidence.archived",
+    "qep.evidence.superseded",
+    "qep.evidence.deleted"
+  ],
+  "governanceUnchanged": true,
+  "baselineUnchanged": true,
+  "outstandingIssues": "NONE",
+  "recommendation": "Ready for APZQEP-120-S08"
+}

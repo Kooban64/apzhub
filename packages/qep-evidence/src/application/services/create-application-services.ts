@@ -40,6 +40,7 @@ import {
   type EvidenceLifecyclePlatformService,
 } from "../lifecycle";
 import type { EvidenceLifecycleHistoryRepository } from "../../domain/ports/lifecycle-history";
+import type { QepEvidenceEventPublisher } from "../events/publisher";
 import {
   createEvidenceCommandService,
   type EvidenceCommandService,
@@ -56,6 +57,8 @@ export type CreateEvidenceApplicationServicesInput = {
   readonly ids: IdPort;
   readonly audit?: AuditPort;
   readonly collector?: DomainEventCollector;
+  /** APZQEP-120-S07 — platform event publisher (Application Services only). */
+  readonly platformEvents?: QepEvidenceEventPublisher;
   /**
    * When true (default for ENG-110E factory), wrap orchestration with L-02 security.
    * Inner orchestration remains unchanged.
@@ -70,6 +73,7 @@ export type EvidenceApplicationServices = {
   readonly commands: EvidenceCommandService;
   readonly queries: EvidenceQueryService;
   readonly collector: DomainEventCollector;
+  readonly platformEvents: QepEvidenceEventPublisher | undefined;
   readonly policy: EvidenceAccessPolicyService;
   readonly securityGate: EvidenceSecurityGate;
   readonly securityAudit: SecurityAuditService;
@@ -117,6 +121,7 @@ export function createEvidenceApplicationServices(
     ids: input.ids,
     audit: input.audit,
     collector,
+    platformEvents: input.platformEvents,
   };
 
   const innerCommands = createEvidenceCommandService(deps);
@@ -173,6 +178,7 @@ export function createEvidenceApplicationServices(
     commands,
     queries,
     collector,
+    platformEvents: input.platformEvents,
     policy,
     securityGate,
     securityAudit,

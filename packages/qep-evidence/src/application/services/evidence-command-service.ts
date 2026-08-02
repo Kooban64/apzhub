@@ -1,6 +1,7 @@
 /**
  * Evidence command orchestration — APZQEP-ENG-110D.
- * Coordinates Domain + UnitOfWork + StoragePort. No business rules. No event publish.
+ * Coordinates Domain + UnitOfWork + StoragePort. No business rules.
+ * Platform catalogue events publish via orchestration (APZQEP-120-S07).
  */
 
 import {

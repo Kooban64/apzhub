@@ -1,0 +1,25 @@
+manifestSchemaVersion: "1.0"
+id: qep-evidence-integrity-established
+name: Evidence Integrity Established
+version: 1.0.0
+kind: event
+
+metadata:
+  category: quality-engineering
+  description: "Content integrity digest was established. Authoritative catalogue: docs/products/apzqep/events/EVENT-CATALOGUE.md (APZQEP-120-S07)."
+  lifecycleStatus: active
+
+event:
+  category: business
+  publisher: qep-evidence
+  subscribers:
+    - audit:platform.audit
+  payload:
+    evidenceId: string
+    tenantId: string
+    revision: number?
+    correlationId: string?
+
+documentation:
+  eventKey: qep.evidence.integrity_established
+  catalogue: docs/products/apzqep/events/events/evidence-integrity-established.md

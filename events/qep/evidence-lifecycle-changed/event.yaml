@@ -1,0 +1,25 @@
+manifestSchemaVersion: "1.0"
+id: qep-evidence-lifecycle-changed
+name: Evidence Lifecycle Changed
+version: 1.0.0
+kind: event
+
+metadata:
+  category: quality-engineering
+  description: "Authoritative lifecycle governance state changed. Authoritative catalogue: docs/products/apzqep/events/EVENT-CATALOGUE.md (APZQEP-120-S07)."
+  lifecycleStatus: active
+
+event:
+  category: business
+  publisher: qep-evidence
+  subscribers:
+    - audit:platform.audit
+  payload:
+    evidenceId: string
+    tenantId: string
+    revision: number?
+    correlationId: string?
+
+documentation:
+  eventKey: qep.evidence.lifecycle_changed
+  catalogue: docs/products/apzqep/events/events/evidence-lifecycle-changed.md

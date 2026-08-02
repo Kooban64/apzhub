@@ -1,6 +1,7 @@
 /**
- * Evidence Lifecycle Platform Service — APZQEP-120-S06.
+ * Evidence Lifecycle Platform Service — APZQEP-120-S06 + S07 event publish.
  * Owns transition policy. Catalogue owns authoritative lifecycle state.
+ * Application Services publish lifecycle platform events (S07).
  */
 
 import { applyLifecycleGovernanceTransition } from "../../domain/evidence/evidence";
@@ -9,6 +10,7 @@ import type { EvidenceLifecycleHistoryRepository } from "../../domain/ports/life
 import type { EvidenceUnitOfWork } from "../../domain/ports/repositories";
 import { EvidenceLifecycleError } from "../../shared/lifecycle-errors";
 import type { EvidenceRequestContext } from "../context";
+import { publishLifecyclePlatformEvents } from "../events/publish-lifecycle";
 import type { ApplicationOrchestrationDeps } from "../orchestration";
 import type { EvidenceSecurityGate } from "../security";
 import {
@@ -379,6 +381,21 @@ export function createEvidenceLifecyclePlatformService(input: {
         targetState: decision.targetState,
         historyId,
       },
+    });
+
+    publishLifecyclePlatformEvents({
+      publisher: deps.platformEvents,
+      evidenceId: stored.id,
+      tenantId: ctx.tenantId,
+      actorId: ctx.userId,
+      correlationId: ctx.correlationId,
+      timestamp: deps.clock.now(),
+      revision: stored.revision,
+      sourceState: decision.sourceState,
+      targetState: decision.targetState,
+      action: params.action,
+      reason: params.reason,
+      successorEvidenceId: params.successorEvidenceId,
     });
 
     return { state: toView(stored.id, stored), decision };

@@ -1,8 +1,9 @@
 /**
  * Application layer — ENG-110D orchestration + ENG-110E security enforcement.
  * Business rules remain in Domain. Transport remains absent.
+ * APZQEP-120-S07 — Domain Event Catalogue & Application publish.
  */
-export const QEP_EVIDENCE_APPLICATION_STATUS = "lifecycle-platform-s06" as const;
+export const QEP_EVIDENCE_APPLICATION_STATUS = "event-platform-s07" as const;
 
 export * from "./ports/index";
 export * from "./context";
@@ -20,3 +21,4 @@ export * from "./query/index";
 export * from "./integrity/index";
 export * from "./catalogue/index";
 export * from "./lifecycle/index";
+export * from "./events/index";

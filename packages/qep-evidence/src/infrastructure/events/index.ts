@@ -1,7 +1,7 @@
 /**
- * Event publisher adapter scaffold — non-functional.
+ * Transport adapter scaffold for platform-event-bus / outbox (S08+).
+ * Application catalogue publish lives in application/events (APZQEP-120-S07).
  * Persistence event contracts: persistence/persistence-events.ts (ENG-110C).
- * Bus publication remains unauthorised under ENG-110C.
  */
 export type EventPublisherScaffoldId = "EvidenceEventOutboxAdapter";
 

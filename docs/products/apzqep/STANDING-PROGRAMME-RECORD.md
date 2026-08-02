@@ -18,7 +18,7 @@
 | CLOSE-001      | **CLOSED** — [APZQEP-PROGRAMME-CLOSURE-REPORT.md](./APZQEP-PROGRAMME-CLOSURE-REPORT.md) · Archive [APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md](./APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md)                                             |
 | APZQEP-110     | **APPROVED** — [v1.1 Product Planning](./v1.1/README.md)                                                                                                                                                                     |
 | APZQEP-111     | **APPROVED** — [v1.1 Solution Architecture](./v1.1/EXECUTIVE-ARCHITECTURE-SUMMARY.md)                                                                                                                                        |
-| APZQEP-120     | **S01–S06 COMPLETE** — next **S07** recommended; requires Owner instruction — [recommendation](./v1.1/apzqep-120/PRODUCT-BOARD-RECOMMENDATION-NEXT-PROGRAMME.md) · [apzqep-120/](./v1.1/apzqep-120/README.md)                |
+| APZQEP-120     | **S01–S07 COMPLETE** — next **S08** requires Owner instruction — [S07 completion](./v1.1/apzqep-120/S07-COMPLETION.md) · [apzqep-120/](./v1.1/apzqep-120/README.md)                                                          |
 | APZHUB-ENG-002 | **ACTIVE** · Governance Foundation **COMPLETE** · Phase 1 **CLOSED** · ES promotions **ON HOLD** — [PHASE-1-CLOSED.md](../../engineering/APZHUB-ENG-002/PHASE-1-CLOSED.md)                                                   |
 
 ### Default premise
@@ -29,7 +29,7 @@
 - **APZQEP-CLOSE-001** closed the APZQEP v1.0 programme and returned the product to the APZHUB portfolio.
 - B-01 is historical only (cleared before RELEASE-004 execution via authorised `kooban-apzor` HTTPS credentials).
 - Future cross-cutting governance belongs under **APZHUB Governance** (Governance **1.0 STABLE**; further ES promotions **ON HOLD**).
-- **APZQEP-110** and **APZQEP-111** are approved. **APZQEP-120** is in progress under per-slice Owner authority. **S01–S06 COMPLETE**. Immediate priority: **product engineering** (recommended next: **S07**).
+- **APZQEP-110** and **APZQEP-111** are approved. **APZQEP-120** is in progress under per-slice Owner authority. **S01–S07 COMPLETE**. Immediate priority: **product engineering** (recommended next: **S08**).
 
 ### REM-005 note
 
@@ -78,7 +78,8 @@ APZQEP-120
 ✅ APZQEP-120-S04 COMPLETE (Evidence Integrity Platform)
 ✅ APZQEP-120-S05 COMPLETE (Evidence Catalogue Platform)
 ✅ APZQEP-120-S06 COMPLETE (Evidence Lifecycle & Governance Platform)
-Next slice: APZQEP-120-S07 QEP domain event catalogue & publish — requires Owner instruction
+✅ APZQEP-120-S07 COMPLETE (Domain Event Catalogue & Publish — CERT PASS)
+Next slice: APZQEP-120-S08 TE outbox drain worker — requires Owner instruction
 TE EvidenceAccessPort wiring: **deferred** (do not pull forward)
 
 APZQEP-ENG-001
@@ -97,11 +98,11 @@ Priority shift → APZQEP product engineering
 
 ## Authorised next delivery
 
-**Recommended (not yet authorised):** **APZQEP-120-S07** (QEP domain event catalogue & publish) after Owner slice instruction.
+**APZQEP-120-S07 COMPLETE.** Next recommended delivery: **APZQEP-120-S08** (TE outbox drain worker) after Owner slice instruction.
 
-See [PRODUCT-BOARD-RECOMMENDATION-NEXT-PROGRAMME.md](./v1.1/apzqep-120/PRODUCT-BOARD-RECOMMENDATION-NEXT-PROGRAMME.md).
+Event catalogue: [docs/products/apzqep/events/EVENT-CATALOGUE.md](./events/EVENT-CATALOGUE.md).
 
-Evidence Platform S01–S06 complete. TE EvidenceAccessPort wiring remains deferred. **No Enterprise Governance work recommended.**
+TE EvidenceAccessPort wiring remains deferred. **No Enterprise Governance work recommended.**
 
 ---
 
@@ -119,9 +120,9 @@ CLOSE-001 = CLOSED
 APZQEP-110 = APPROVED
 APZQEP-111 = APPROVED
 APZQEP-120 = IN PROGRESS
-APZQEP-120-S01…S06 = COMPLETE (Evidence Platform)
+APZQEP-120-S01…S07 = COMPLETE (Evidence Platform + Domain Events)
 APZQEP-ENG-001 = CLOSED (Framework v1.0 · ARCHIVED reference)
 APZHUB-ENG-002 = ACTIVE · Foundation COMPLETE · Phase 1 CLOSED · ES promotions ON HOLD
-NEXT = OWNER DIRECTIVE FOR APZQEP-120-S07 (RECOMMENDED)
+NEXT = OWNER DIRECTIVE FOR APZQEP-120-S08
 NO ENTERPRISE GOVERNANCE WORK RECOMMENDED
 ```

@@ -16,8 +16,8 @@
 | APZHUB Product Framework | ✅ Closed                                                           |
 | APZQEP v1.0 Release      | ✅ Closed                                                           |
 | APZQEP v1.1 Planning     | ✅ Closed                                                           |
-| APZQEP-120 S01–S06       | ✅ Complete                                                         |
-| APZQEP-120 S07           | ⏳ Recommended · Owner instruction required                         |
+| APZQEP-120 S01–S07       | ✅ Complete (S07 Domain Events PASS)                                |
+| APZQEP-120 S08           | ⏳ Next · Owner instruction required                                |
 | APZQEP-ENG-001           | ✅ **Closed** (CERTIFIED / ARCHIVED)                                |
 | APZHUB-ENG-002           | ✅ Foundation COMPLETE · Phase 1 CLOSED · ES promotions **ON HOLD** |
 

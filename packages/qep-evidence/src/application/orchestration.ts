@@ -1,6 +1,7 @@
 /**
- * Application orchestration helpers — APZQEP-ENG-110D.
- * Coordinates ports + domain. No business rules. No event bus publication.
+ * Application orchestration helpers — APZQEP-ENG-110D + APZQEP-120-S07.
+ * Coordinates ports + domain. No business rules.
+ * Platform catalogue events are published from Application Services only.
  */
 
 import type { EvidenceDomainEvent } from "../domain/evidence/events";
@@ -15,6 +16,11 @@ import type {
 } from "../domain/ports/repositories";
 import { EvidenceNotFoundError } from "../shared/errors";
 import type { EvidenceRequestContext } from "./context";
+import { mapDomainEventsToPlatformEnvelopes } from "./events/map-domain-events";
+import {
+  publishQepEvidenceEventFailSoft,
+  type QepEvidenceEventPublisher,
+} from "./events/publisher";
 import type { ClockPort, IdPort, StoragePort } from "./ports";
 
 export type DomainEventCollector = {
@@ -38,7 +44,19 @@ export type ApplicationOrchestrationDeps = {
   readonly clock: ClockPort;
   readonly ids: IdPort;
   readonly collector?: DomainEventCollector;
+  /** APZQEP-120-S07 — optional platform event publisher (fail-soft). */
+  readonly platformEvents?: QepEvidenceEventPublisher;
 };
+
+function publishMappedDomainEvents(
+  deps: ApplicationOrchestrationDeps,
+  events: readonly EvidenceDomainEvent[],
+): void {
+  if (!deps.platformEvents || events.length === 0) return;
+  for (const envelope of mapDomainEventsToPlatformEnvelopes(events)) {
+    publishQepEvidenceEventFailSoft(deps.platformEvents, envelope);
+  }
+}
 
 export function nowIso(deps: ApplicationOrchestrationDeps): string {
   return deps.clock.now();
@@ -105,6 +123,7 @@ export async function persistEvidenceMutation(
     const events = takeEvents(mutated);
     const stored = await unit.evidence.save(mutated, expectedRevision);
     deps.collector?.collect(events);
+    publishMappedDomainEvents(deps, events);
     return { stored, events };
   });
 }
@@ -132,6 +151,7 @@ export async function persistCollectionMutation(
     const events = takeEvents(mutated);
     const stored = await unit.collections.save(mutated, expectedRevision);
     deps.collector?.collect(events);
+    publishMappedDomainEvents(deps, events);
     return { stored, events };
   });
 }
@@ -154,6 +174,7 @@ export async function persistSetInsert(
     );
     const storedSet = await unit.sets.insert(set);
     deps.collector?.collect(events);
+    publishMappedDomainEvents(deps, events);
     return { set: storedSet, collection: storedCollection, events };
   });
 }
