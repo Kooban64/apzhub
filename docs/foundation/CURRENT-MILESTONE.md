@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-02  
-> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120 CLOSED** · **APZQEP-140-000 Architecture COMPLETE** (Ready for Product Board Review) · Implementation **NOT AUTHORISED** · **APZQEP v1.0 Lifecycle Complete** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
+> **Current status:** **Engineering Governance Foundation COMPLETE** · APZHUB-ENG-002 Phase 1 **CLOSED** · ES promotions **ON HOLD** · Governance **1.0 STABLE** · Baseline **1.x STABLE (1.2)** · Operating mode **Evolve the Enterprise** · **APZQEP-120 CLOSED** · **APZQEP-140-000 CERTIFIED** (Product Architecture APPROVED · READY FOR ENGINEERING) · Next: **APZQEP-140-A Suite Management** (Owner Auth Pack) · **APZQEP v1.0 Lifecycle Complete** · **LIMITED_AVAILABILITY** · ES-004 **NOT AUTHORISED**.
 
 ---
 
@@ -38,16 +38,18 @@
 
 ### Latest architecture programme
 
-**APZQEP-140-000 — Core Quality Engineering Architecture — COMPLETE**
+**APZQEP-140-000 — Core Quality Engineering Architecture — CERTIFIED / APPROVED**
 
-- Board review: [PRODUCT-BOARD-REVIEW.md](../products/apzqep/v1.1/apzqep-140/000/PRODUCT-BOARD-REVIEW.md)
-- Pack: [apzqep-140/000/](../products/apzqep/v1.1/apzqep-140/000/README.md)
-- Capabilities A–F defined; waves Suites → … → Reporting
-- Engineering implementation **NOT AUTHORISED** until Board approval
+- Board: [APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md](../products/apzqep/v1.1/apzqep-140/000/APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md)
+- Progress model: [CAPABILITY-PROGRESS.md](../products/apzqep/v1.1/apzqep-140/CAPABILITY-PROGRESS.md)
+- Platform complete · Product architected · Engineering ready
 
-### Recommended next (after Board approves 000)
+### Recommended next capability (not authorised)
 
-**APZQEP-140-A — Suite & Library Management** — Owner Authorisation Pack required.
+**APZQEP-140-A — Suite Management** (_Enterprise Test Suite Management_)
+
+- Recommendation: [APZQEP-140-A-PRODUCT-BOARD-RECOMMENDATION.md](../products/apzqep/v1.1/apzqep-140/APZQEP-140-A-PRODUCT-BOARD-RECOMMENDATION.md)
+- Owner Authorisation Pack required before engineering
 
 ---
 

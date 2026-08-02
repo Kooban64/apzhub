@@ -1,26 +1,26 @@
 # Standing Programme Record — APZQEP
 
-| Field          | Value                                                                                                                                                                                                                        |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Document       | Standing Programme Record                                                                                                                                                                                                    |
-| Date           | 2026-08-02                                                                                                                                                                                                                   |
-| Status         | **IN FORCE — OFFICIAL STANDING STATE**                                                                                                                                                                                       |
-| APZQEP-ENG-001 | **CLOSED** — Engineering Framework v1.0 BASELINED · MAINTENANCE ACTIVE · [completion](./engineering/APZQEP-ENG-001-COMPLETION.md) · Successor **APZHUB-ENG-002** (Foundation COMPLETE · Phase 1 CLOSED · promotions ON HOLD) |
-| Product state  | **APZQEP v1.0 — Lifecycle Complete · Maintained Product · LIMITED_AVAILABILITY**                                                                                                                                             |
-| Test Execution | `@apzhub/qep-test-execution` **1.0.1**                                                                                                                                                                                       |
-| Evidence Mgmt  | `@apzhub/qep-evidence` **1.0.0** · tag `apzqep-evidence-v1.0.0` → `79d9851f`                                                                                                                                                 |
-| REM-002        | **APPROVED AND CLOSED**                                                                                                                                                                                                      |
-| REM-005        | **APPROVED AND CLOSED** — documentation-only post-release remediation                                                                                                                                                        |
-| FREEZE-003     | **SUPERSEDED FOR RELEASE** (`ce220a5d` / **1.0.0-rc.1**)                                                                                                                                                                     |
-| FREEZE-004     | **ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED** · RC **1.0.0-rc.2** @ `4e1b6f01` · **IMMUTABLE**                                                                                                                          |
-| RELEASE-003    | **STOPPED / REPLACED BY RELEASE-004** — must not resume                                                                                                                                                                      |
-| RELEASE-004    | [evidence-management/RELEASE-004/](./evidence-management/RELEASE-004/README.md) **CLOSED / COMPLETE** · **1.0.0** · `apzqep-evidence-v1.0.0` → `79d9851f`                                                                    |
-| CLOSE-001      | **CLOSED** — [APZQEP-PROGRAMME-CLOSURE-REPORT.md](./APZQEP-PROGRAMME-CLOSURE-REPORT.md) · Archive [APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md](./APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md)                                             |
-| APZQEP-110     | **APPROVED** — [v1.1 Product Planning](./v1.1/README.md)                                                                                                                                                                     |
-| APZQEP-111     | **APPROVED** — [v1.1 Solution Architecture](./v1.1/EXECUTIVE-ARCHITECTURE-SUMMARY.md)                                                                                                                                        |
-| APZQEP-120     | ✅ **CERTIFIED · PROGRAMME COMPLETE · CLOSED** — [Board](./v1.1/apzqep-120/APZQEP-120-PRODUCT-BOARD-CERTIFICATION.md) · [close-out](./v1.1/apzqep-120/APZQEP-120-PLATFORM-FOUNDATION-COMPLETE.md)                            |
-| APZQEP-140     | 🔄 **140-000 Architecture COMPLETE** · Ready for Board · impl **NOT AUTHORISED** — [000](./v1.1/apzqep-140/000/README.md) · [Board review](./v1.1/apzqep-140/000/PRODUCT-BOARD-REVIEW.md)                                    |
-| APZHUB-ENG-002 | **ACTIVE** · Governance Foundation **COMPLETE** · Phase 1 **CLOSED** · ES promotions **ON HOLD** — [PHASE-1-CLOSED.md](../../engineering/APZHUB-ENG-002/PHASE-1-CLOSED.md)                                                   |
+| Field          | Value                                                                                                                                                                                                                                 |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Document       | Standing Programme Record                                                                                                                                                                                                             |
+| Date           | 2026-08-02                                                                                                                                                                                                                            |
+| Status         | **IN FORCE — OFFICIAL STANDING STATE**                                                                                                                                                                                                |
+| APZQEP-ENG-001 | **CLOSED** — Engineering Framework v1.0 BASELINED · MAINTENANCE ACTIVE · [completion](./engineering/APZQEP-ENG-001-COMPLETION.md) · Successor **APZHUB-ENG-002** (Foundation COMPLETE · Phase 1 CLOSED · promotions ON HOLD)          |
+| Product state  | **APZQEP v1.0 — Lifecycle Complete · Maintained Product · LIMITED_AVAILABILITY**                                                                                                                                                      |
+| Test Execution | `@apzhub/qep-test-execution` **1.0.1**                                                                                                                                                                                                |
+| Evidence Mgmt  | `@apzhub/qep-evidence` **1.0.0** · tag `apzqep-evidence-v1.0.0` → `79d9851f`                                                                                                                                                          |
+| REM-002        | **APPROVED AND CLOSED**                                                                                                                                                                                                               |
+| REM-005        | **APPROVED AND CLOSED** — documentation-only post-release remediation                                                                                                                                                                 |
+| FREEZE-003     | **SUPERSEDED FOR RELEASE** (`ce220a5d` / **1.0.0-rc.1**)                                                                                                                                                                              |
+| FREEZE-004     | **ACCEPTED / PRODUCTION BASELINE FROZEN / CLOSED** · RC **1.0.0-rc.2** @ `4e1b6f01` · **IMMUTABLE**                                                                                                                                   |
+| RELEASE-003    | **STOPPED / REPLACED BY RELEASE-004** — must not resume                                                                                                                                                                               |
+| RELEASE-004    | [evidence-management/RELEASE-004/](./evidence-management/RELEASE-004/README.md) **CLOSED / COMPLETE** · **1.0.0** · `apzqep-evidence-v1.0.0` → `79d9851f`                                                                             |
+| CLOSE-001      | **CLOSED** — [APZQEP-PROGRAMME-CLOSURE-REPORT.md](./APZQEP-PROGRAMME-CLOSURE-REPORT.md) · Archive [APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md](./APZQEP-V1-PROGRAMME-ARCHIVE-INDEX.md)                                                      |
+| APZQEP-110     | **APPROVED** — [v1.1 Product Planning](./v1.1/README.md)                                                                                                                                                                              |
+| APZQEP-111     | **APPROVED** — [v1.1 Solution Architecture](./v1.1/EXECUTIVE-ARCHITECTURE-SUMMARY.md)                                                                                                                                                 |
+| APZQEP-120     | ✅ **CERTIFIED · PROGRAMME COMPLETE · CLOSED** — [Board](./v1.1/apzqep-120/APZQEP-120-PRODUCT-BOARD-CERTIFICATION.md) · [close-out](./v1.1/apzqep-120/APZQEP-120-PLATFORM-FOUNDATION-COMPLETE.md)                                     |
+| APZQEP-140     | ✅ **140-000 CERTIFIED / Architecture APPROVED** · next **140-A Suite Management** (Owner Auth) — [Board](./v1.1/apzqep-140/000/APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md) · [Progress](./v1.1/apzqep-140/CAPABILITY-PROGRESS.md) |
+| APZHUB-ENG-002 | **ACTIVE** · Governance Foundation **COMPLETE** · Phase 1 **CLOSED** · ES promotions **ON HOLD** — [PHASE-1-CLOSED.md](../../engineering/APZHUB-ENG-002/PHASE-1-CLOSED.md)                                                            |
 
 ### Default premise
 
@@ -30,7 +30,7 @@
 - **APZQEP-CLOSE-001** closed the APZQEP v1.0 programme and returned the product to the APZHUB portfolio.
 - B-01 is historical only (cleared before RELEASE-004 execution via authorised `kooban-apzor` HTTPS credentials).
 - Future cross-cutting governance belongs under **APZHUB Governance** (Governance **1.0 STABLE**; further ES promotions **ON HOLD**).
-- **APZQEP-110** and **APZQEP-111** are approved. **APZQEP-120 is CLOSED**. **APZQEP-140-000 architecture is COMPLETE** and ready for Product Board Review. Implementation (140-A…F) remains **NOT AUTHORISED** until Board approval + Owner Auth Pack.
+- **APZQEP-110** and **APZQEP-111** are approved. **APZQEP-120 is CLOSED**. **APZQEP-140-000 is CERTIFIED** (product architecture approved). Progress is measured by **capability completion**. Immediate priority: Owner Auth Pack for **APZQEP-140-A** (Enterprise Test Suite Management).
 
 ### REM-005 note
 
@@ -87,8 +87,9 @@ APZQEP-120
 ✅ APZQEP-120-S12 COMPLETE (Notification & Subscription Platform — CERT PASS)
 ✅ APZQEP-120-S13 COMPLETE (Enterprise Command Platform — CERT PASS)
 ✅ APZQEP-120 CERTIFIED · PROGRAMME COMPLETE · CLOSED (Product Board)
-✅ APZQEP-140-000 Architecture COMPLETE · Ready for Product Board Review
-APZQEP-140-A…F = NOT AUTHORISED
+✅ APZQEP-140-000 CERTIFIED · PRODUCT ARCHITECTURE APPROVED · READY FOR ENGINEERING
+APZQEP-140-A = Recommended (Suite Management) — requires Owner Auth Pack
+Capabilities A–F = 0% (see CAPABILITY-PROGRESS)
 TE EvidenceAccessPort wiring: **deferred** (do not pull forward)
 
 APZQEP-ENG-001
@@ -107,11 +108,11 @@ Priority shift → APZQEP product engineering
 
 ## Authorised next delivery
 
-**APZQEP-140-000 COMPLETE.** Architecture pack ready for Product Board Review. Engineering implementation **NOT AUTHORISED**.
+**APZQEP-140-000 CERTIFIED.** Product architecture approved. Ready for capability engineering.
 
-Board review: [PRODUCT-BOARD-REVIEW.md](./v1.1/apzqep-140/000/PRODUCT-BOARD-REVIEW.md).
-Completion: [APZQEP-140-000-COMPLETION.md](./v1.1/apzqep-140/000/APZQEP-140-000-COMPLETION.md).
-After Board approval: Owner Auth Pack for **APZQEP-140-A** (Suites).
+Board: [APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md](./v1.1/apzqep-140/000/APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md).
+Progress: [CAPABILITY-PROGRESS.md](./v1.1/apzqep-140/CAPABILITY-PROGRESS.md).
+Next: Owner Auth Pack for **APZQEP-140-A** — _Enterprise Test Suite Management_.
 
 TE EvidenceAccessPort wiring remains deferred. **No Enterprise Governance work recommended.**
 
@@ -131,9 +132,10 @@ CLOSE-001 = CLOSED
 APZQEP-110 = APPROVED
 APZQEP-111 = APPROVED
 APZQEP-120 = CERTIFIED / PROGRAMME COMPLETE / CLOSED
-APZQEP-140-000 = COMPLETE / READY FOR PRODUCT BOARD REVIEW
-APZQEP-140-A…F = NOT AUTHORISED
-NEXT = PRODUCT BOARD DECISION ON 140-000 → THEN OWNER AUTH FOR 140-A
+APZQEP-140-000 = CERTIFIED / PRODUCT ARCHITECTURE APPROVED / READY FOR ENGINEERING
+APZQEP-140-A = RECOMMENDED (Enterprise Test Suite Management)
+NEXT = OWNER AUTH PACK FOR APZQEP-140-A
+PROGRESS = CAPABILITY COMPLETION (A–F at 0%)
 APZQEP-ENG-001 = CLOSED (Framework v1.0 · ARCHIVED reference)
 APZHUB-ENG-002 = ACTIVE · Foundation COMPLETE · Phase 1 CLOSED · ES promotions ON HOLD
 NO ENTERPRISE GOVERNANCE WORK RECOMMENDED

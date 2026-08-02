@@ -1,14 +1,14 @@
 # APZQEP v1.1 — Product Planning, Architecture & Execution Planning
 
-| Field                 | Value                                                                               |
-| --------------------- | ----------------------------------------------------------------------------------- |
-| Product planning      | **APZQEP-110** — COMPLETE / APPROVED                                                |
-| Solution architecture | **APZQEP-111** — COMPLETE / **APPROVED**                                            |
-| Execution planning    | **APZQEP-120** — **CERTIFIED / PROGRAMME COMPLETE / CLOSED**                        |
-| Next programme        | **APZQEP-140** — 000 architecture **COMPLETE** · [000/](./apzqep-140/000/README.md) |
-| Positioning           | [PRODUCT-POSITIONING.md](./PRODUCT-POSITIONING.md) — Enterprise QEP                 |
-| Engineering           | Per-slice Owner directive (APZHUB-ENG-001 / ADR-0092)                               |
-| Date                  | 2026-08-02                                                                          |
+| Field                 | Value                                                                                                 |
+| --------------------- | ----------------------------------------------------------------------------------------------------- |
+| Product planning      | **APZQEP-110** — COMPLETE / APPROVED                                                                  |
+| Solution architecture | **APZQEP-111** — COMPLETE / **APPROVED**                                                              |
+| Execution planning    | **APZQEP-120** — **CERTIFIED / PROGRAMME COMPLETE / CLOSED**                                          |
+| Next programme        | **APZQEP-140** — 000 **CERTIFIED** · next **140-A** · [Progress](./apzqep-140/CAPABILITY-PROGRESS.md) |
+| Positioning           | [PRODUCT-POSITIONING.md](./PRODUCT-POSITIONING.md) — Enterprise QEP                                   |
+| Engineering           | Per-slice Owner directive (APZHUB-ENG-001 / ADR-0092)                                                 |
+| Date                  | 2026-08-02                                                                                            |
 
 ---
 
@@ -57,12 +57,12 @@
 
 ## Core Quality Engineering — APZQEP-140
 
-| Document                                                                                                             | Role                       |
-| -------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| [apzqep-140/README.md](./apzqep-140/README.md)                                                                       | Programme hub              |
-| [apzqep-140/000/PRODUCT-BOARD-REVIEW.md](./apzqep-140/000/PRODUCT-BOARD-REVIEW.md)                                   | **Board decision surface** |
-| [apzqep-140/000/CORE-QUALITY-ENGINEERING-ARCHITECTURE.md](./apzqep-140/000/CORE-QUALITY-ENGINEERING-ARCHITECTURE.md) | Architecture spine         |
-| [apzqep-140/000/APZQEP-140-000-COMPLETION.md](./apzqep-140/000/APZQEP-140-000-COMPLETION.md)                         | 000 completion             |
+| Document                                                                                                                       | Role                                   |
+| ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------- |
+| [apzqep-140/README.md](./apzqep-140/README.md)                                                                                 | Programme hub                          |
+| [apzqep-140/000/APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md](./apzqep-140/000/APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md) | Board **CERTIFIED**                    |
+| [apzqep-140/CAPABILITY-PROGRESS.md](./apzqep-140/CAPABILITY-PROGRESS.md)                                                       | Capability completion (primary metric) |
+| [apzqep-140/APZQEP-140-A-PRODUCT-BOARD-RECOMMENDATION.md](./apzqep-140/APZQEP-140-A-PRODUCT-BOARD-RECOMMENDATION.md)           | Next: Suite Management                 |
 
 ---
 
@@ -70,7 +70,7 @@
 
 Programme bands: see [ENGINEERING-PROGRAMMES.md](./ENGINEERING-PROGRAMMES.md) (**140 = Core Quality Engineering**).
 
-APZQEP-120 is **CLOSED**. APZQEP-140-000 architecture is **COMPLETE**. Implementation awaits Board approval.
+APZQEP-120 is **CLOSED**. APZQEP-140-000 is **CERTIFIED**. Next: Owner Auth Pack for **APZQEP-140-A**.
 
 ---
 
@@ -79,7 +79,7 @@ APZQEP-120 is **CLOSED**. APZQEP-140-000 architecture is **COMPLETE**. Implement
 ```text
 APZQEP-110 = APPROVED
 APZQEP-111 = APPROVED
-APZQEP-120 = CERTIFIED / PROGRAMME COMPLETE / CLOSED
-APZQEP-140-000 = COMPLETE / READY FOR PRODUCT BOARD REVIEW
-APZQEP-140-A…F = NOT AUTHORISED
+APZQEP-120 = CLOSED
+APZQEP-140-000 = CERTIFIED / PRODUCT ARCHITECTURE APPROVED
+NEXT = OWNER AUTH PACK FOR APZQEP-140-A (Enterprise Test Suite Management)
 ```

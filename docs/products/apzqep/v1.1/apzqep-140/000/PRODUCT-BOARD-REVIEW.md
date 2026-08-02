@@ -1,12 +1,13 @@
 # Product Board Review — APZQEP-140-000
 
-| Field           | Value                                 |
-| --------------- | ------------------------------------- |
-| Programme       | APZQEP-140-000                        |
-| Title           | Core Quality Engineering Architecture |
-| Status          | **READY FOR PRODUCT BOARD REVIEW**    |
-| Engineering     | NONE                                  |
-| Timestamp (UTC) | 20260802T163547Z                      |
+| Field           | Value                                                                               |
+| --------------- | ----------------------------------------------------------------------------------- |
+| Programme       | APZQEP-140-000                                                                      |
+| Title           | Core Quality Engineering Architecture                                               |
+| Status          | **SUPERSEDED** — Board **CERTIFIED** / Architecture **APPROVED**                    |
+| Engineering     | NONE                                                                                |
+| Timestamp (UTC) | 20260802T163547Z                                                                    |
+| Board (UTC)     | 20260802T164036Z — [CERTIFICATION](./APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md) |
 
 ---
 
@@ -18,10 +19,12 @@ Approve the Core Quality Engineering Architecture so capability programmes **APZ
 
 ```text
 APZQEP-140-000
-Core Quality Engineering Architecture
-
-Decision: APPROVED | REJECTED | REVISE
+Decision: CERTIFIED
+PRODUCT ARCHITECTURE APPROVED
+READY FOR ENGINEERING
 ```
+
+Recorded: [APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md](./APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md).
 
 ## Pack contents
 

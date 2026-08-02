@@ -1,13 +1,15 @@
 # APZQEP-140-000 — Completion Report
 
-| Field           | Value                                 |
-| --------------- | ------------------------------------- |
-| Programme       | APZQEP-140-000                        |
-| Title           | Core Quality Engineering Architecture |
-| Status          | **COMPLETE**                          |
-| Engineering     | **NONE**                              |
-| Repository      | Documentation only                    |
-| Timestamp (UTC) | 20260802T163547Z                      |
+| Field           | Value                                     |
+| --------------- | ----------------------------------------- |
+| Programme       | APZQEP-140-000                            |
+| Title           | Core Quality Engineering Architecture     |
+| Status          | **COMPLETE**                              |
+| Product Board   | **CERTIFIED** · Architecture **APPROVED** |
+| Engineering     | **NONE**                                  |
+| Repository      | Documentation only                        |
+| Timestamp (UTC) | 20260802T163547Z                          |
+| Board (UTC)     | 20260802T164036Z                          |
 
 ---
 
@@ -55,10 +57,13 @@ NONE
 
 Recommendation:
 
-Ready for Product Board Review.
+Product Board CERTIFIED. Ready for engineering.
 
-Engineering implementation remains NOT AUTHORISED until architecture approval.
+Next: Owner Authorisation Pack for APZQEP-140-A
+(Enterprise Test Suite Management).
 ```
+
+Board: [APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md](./APZQEP-140-000-PRODUCT-BOARD-CERTIFICATION.md).
 
 ## Deliverables checklist
 
@@ -78,7 +83,7 @@ Engineering implementation remains NOT AUTHORISED until architecture approval.
 ## Authority reminder
 
 ```text
-Engineering implementation = NOT AUTHORISED
-Await Product Board decision on APZQEP-140-000
-Then Owner Auth Pack for APZQEP-140-A (Suites)
+APZQEP-140-000 = CERTIFIED / PRODUCT ARCHITECTURE APPROVED
+Engineering for 140-A…F = NOT AUTHORISED until Owner Auth Pack
+Next = OWNER AUTH PACK FOR APZQEP-140-A (Enterprise Test Suite Management)
 ```

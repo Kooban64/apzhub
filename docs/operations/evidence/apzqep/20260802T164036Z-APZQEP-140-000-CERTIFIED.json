@@ -1,0 +1,31 @@
+{
+  "programme": "APZQEP-140-000",
+  "title": "Core Quality Engineering Architecture",
+  "productBoardDecision": "CERTIFIED",
+  "productArchitecture": "APPROVED",
+  "engineeringReadiness": "READY FOR ENGINEERING",
+  "timestampUtc": "20260802T164036Z",
+  "progressModel": "capability-completion",
+  "maturity": {
+    "governance": "100%",
+    "engineeringFramework": "100%",
+    "platformFoundation": "100%",
+    "productArchitecture": "100%",
+    "backendPlatform": "92-94%",
+    "productCapability": "35-40%",
+    "frontendExperience": "25-30%",
+    "overallProduct": "86-88%"
+  },
+  "capabilityProgress": {
+    "A": "0%",
+    "B": "0%",
+    "C": "0%",
+    "D": "0%",
+    "E": "0%",
+    "F": "0%"
+  },
+  "recommendedNext": "APZQEP-140-A Suite Management",
+  "engineeringImplementation": "Await Owner Authorisation Pack for 140-A",
+  "governance": "UNCHANGED",
+  "baseline": "UNCHANGED"
+}
