@@ -1,8 +1,8 @@
 # APZHUB Current Milestone
 
 > **Purpose:** Where development currently stops and what requires owner approval  
-> **Last updated:** 20260803T174024Z  
-> **Current status:** **APZQEP flagship** — V1.0 **GA** · Wave 1 **CERTIFIED** · Wave 2 **CERTIFIED** (PBR-APZQEP-162) · **APZQEP-163 AUTHORISED TO OPEN** (Quality Intelligence Platform recommended; not started) · Live: `https://apzhub.apzportal.apzor.com` · Law **PAUSED** · [PRODUCT-STATUS](../products/apzqep/PRODUCT-STATUS.md) · [pbr-apzqep-162/](../products/apzqep/v1.1/pbr-apzqep-162/).
+> **Last updated:** 20260803T175516Z  
+> **Current status:** **APZQEP flagship** — V1.0 **GA** · Waves 1–2 **CERTIFIED** · **APZQEP-163-000 Architecture COMPLETE** (Enterprise Quality Intelligence Platform; AI as provider) · APZQEP-163 eng **NOT STARTED** — await Board approval · Live: `https://apzhub.apzportal.apzor.com` · Law **PAUSED** · [PRODUCT-STATUS](../products/apzqep/PRODUCT-STATUS.md) · [apzqep-163-000/](../products/apzqep/v1.1/apzqep-163-000/).
 
 ---
 

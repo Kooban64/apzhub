@@ -3,7 +3,7 @@
 | Field     | Value                    |
 | --------- | ------------------------ |
 | Document  | PRODUCT-BOARD-REGISTER   |
-| Timestamp | 20260803T174024Z         |
+| Timestamp | 20260803T175516Z         |
 | Authority | Product Board — STANDING |
 
 ## Resolutions
@@ -17,9 +17,11 @@
 
 ## Pending / next
 
-| Item                   | State                                                                                       |
-| ---------------------- | ------------------------------------------------------------------------------------------- |
-| APZQEP-163             | **AUTHORISED TO OPEN** — not started — recommended title **Quality Intelligence Platform**  |
-| APZQEP-164…166         | Planned — **not authorised**                                                                |
-| Remote push (ops)      | Local `main` ahead of `origin/main` — Owner/ops push when credentials available (OI-162-09) |
-| Wave progress register | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                          |
+| Item                   | State                                                                                               |
+| ---------------------- | --------------------------------------------------------------------------------------------------- |
+| APZQEP-163-000         | **COMPLETE** (architecture) — await Board approval — [v1.1/apzqep-163-000/](./v1.1/apzqep-163-000/) |
+| PBR-APZQEP-163-000     | **PENDING** — Architecture Approval                                                                 |
+| APZQEP-163 engineering | Gated — **not started** — title **Enterprise Quality Intelligence Platform**                        |
+| APZQEP-164…166         | Planned — **not authorised**                                                                        |
+| Remote push (ops)      | Local `main` ahead of `origin/main` — Owner/ops push when credentials available (OI-162-09)         |
+| Wave progress register | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                                  |

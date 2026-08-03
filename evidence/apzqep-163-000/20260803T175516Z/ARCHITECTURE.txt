@@ -1,0 +1,4 @@
+PBR-APZQEP-163-000-ARCHITECTURE: docs only
+Provider model: AI/rules/statistical/risk/historical
+Package intent: @apzhub/platform-quality-intelligence
+Waves 1-2 source trees: not modified by this programme
