@@ -15,7 +15,7 @@ Law follows [APZHUB-OPERATIONS-GOVERNANCE.md](../APZHUB-ENG-003/APZHUB-OPERATION
 | Item                       | State                                                                                        |
 | -------------------------- | -------------------------------------------------------------------------------------------- |
 | Standing Law OPS programme | **Established** — [APZHUB-LAW-ADOPT-004](../APZHUB-LAW-ADOPT-004/)                           |
-| Operations Certification   | Await **PBR-APZHUB-LAW-004**                                                                 |
+| Operations Certification   | **CERTIFIED** — [PBR-APZHUB-LAW-004](../PBR-APZHUB-LAW-004/)                                 |
 | Historical ops readiness   | [APZ-LAW-1.0-OPERATIONAL-READINESS](../../releases/law/APZ-LAW-1.0-OPERATIONAL-READINESS.md) |
 | Monitoring / live metrics  | Structure defined; values **Defined – Awaiting Production Measurement**                      |
 | Live tooling               | **Not implemented** (ADOPT-004 exclusion)                                                    |
