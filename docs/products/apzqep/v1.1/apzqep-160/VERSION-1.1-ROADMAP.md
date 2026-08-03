@@ -1,11 +1,11 @@
 # VERSION-1.1-ROADMAP
 
-| Field       | Value                                            |
-| ----------- | ------------------------------------------------ |
-| Programme   | APZQEP-160                                       |
-| Timestamp   | 20260803T141613Z                                 |
-| Board       | **APPROVED** — PBR-APZQEP-160 (20260803T142234Z) |
-| Engineering | **NOT OPEN** until Owner Auth per wave programme |
+| Field       | Value                                                                |
+| ----------- | -------------------------------------------------------------------- |
+| Programme   | APZQEP-160                                                           |
+| Timestamp   | 20260803T160614Z (progress update)                                   |
+| Board       | **APPROVED** — PBR-APZQEP-160; Wave 1 **CERTIFIED** — PBR-APZQEP-161 |
+| Engineering | Wave 1 closed; Wave 2 **AUTHORISED** — await Owner Auth              |
 
 ## North star
 
@@ -22,14 +22,19 @@ Ship Version 1.1 as the Enterprise Quality Platform in six waves, preserving Ver
 | 5    | **APZQEP-165** | Continuous Quality                  | E                   |
 | 6    | **APZQEP-166** | Enterprise Ecosystem / APZHUB depth | F + APZHUB spine    |
 
-## First engineering programme
+## Wave progress (authoritative)
 
-**APZQEP-161 — Enterprise Automation Foundation — Playwright-first**  
-Authorised to open by PBR-APZQEP-160. Awaits separate Owner Authorisation. No engineering in the Board resolution.
+See [../WAVE-PROGRESS-REGISTER.md](../WAVE-PROGRESS-REGISTER.md).
+
+| Wave | State                                                    |
+| ---- | -------------------------------------------------------- |
+| 1    | **CERTIFIED** (APZQEP-161 + 161R + PBR-APZQEP-161)       |
+| 2    | **AUTHORISED** — APZQEP-162; engineering **NOT STARTED** |
+| 3–6  | NOT AUTHORISED                                           |
 
 ## Gates
 
-Each wave: Owner Auth → engineering programme → ES-001 tests → Product Board certification → ops evidence → next wave eligibility.
+Each wave: Owner Auth → engineering programme → ES-001 tests → Product Board certification → ops readiness → next wave eligibility.
 
 ## Three-year horizon (directional)
 

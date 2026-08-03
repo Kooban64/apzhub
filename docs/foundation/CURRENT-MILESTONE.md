@@ -1,8 +1,8 @@
 # APZHUB Current Milestone
 
 > **Purpose:** Where development currently stops and what requires owner approval  
-> **Last updated:** 20260803T152830Z  
-> **Current status:** **APZQEP flagship** — V1.0 **GA** (ops-led) · **APZQEP-161 COMPLETE** · **APZQEP-161R COMPLETE** (Wave 1 ops/usability; eng UNCHANGED; await Product Board eng + ops certification) · **APZQEP-162 NOT AUTHORISED** · Law **PAUSED** · APZQEP: [PRODUCT-STATUS](../products/apzqep/PRODUCT-STATUS.md) · Readiness: [apzqep-161r/](../products/apzqep/v1.1/apzqep-161r/) · Law: [LAW-ADOPTION-STANDING-STATE](../products/law/LAW-ADOPTION-STANDING-STATE.md).
+> **Last updated:** 20260803T160614Z  
+> **Current status:** **APZQEP flagship** — V1.0 **GA** (ops-led) · Wave 1 **CERTIFIED** ([PBR-APZQEP-161](../products/apzqep/v1.1/pbr-apzqep-161/)) · **APZQEP-162 AUTHORISED** (not started; await Owner Auth + recommended hands-on Wave 1 use) · Host URL target: `https://apzhub.apzportal.apzor.com` · Law **PAUSED** · [PRODUCT-STATUS](../products/apzqep/PRODUCT-STATUS.md) · [WAVE-PROGRESS-REGISTER](../products/apzqep/v1.1/WAVE-PROGRESS-REGISTER.md).
 
 ---
 

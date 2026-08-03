@@ -1,0 +1,13 @@
+{
+  "engineeringReview": "PASS",
+  "operationalReview": "PASS",
+  "architectureReview": "PASS",
+  "blockers": [],
+  "residualsNotBlockers": [
+    "live-console-media-viewers",
+    "process-local-execution-store",
+    "dry-run-vs-live-onboarding",
+    "evidence-export-deferred",
+    "executive-dashboards-deferred"
+  ]
+}

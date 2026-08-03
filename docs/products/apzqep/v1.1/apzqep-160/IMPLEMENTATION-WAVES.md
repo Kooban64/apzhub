@@ -13,9 +13,9 @@
 | Objectives            | Make APZQEP useful for real automated execution on day one                                                                                                                                              |
 | Capabilities          | Playwright (browsers, projects, workers, parallel, screenshots/videos/traces, retries, flaky); API testing; visual; accessibility; performance (k6) orchestration; runner abstraction; evidence binding |
 | Dependencies          | V1.0 Caps, authz, evidence model                                                                                                                                                                        |
-| Engineering programme | **APZQEP-161** — AUTHORISED to open (await Owner Auth)                                                                                                                                                  |
-| Board gate            | Product Board certification after APZQEP-161                                                                                                                                                            |
-| Success               | Teams execute automation via APZQEP with evidence packs; no V1.0 regression                                                                                                                             |
+| Engineering programme | **APZQEP-161** — **COMPLETE** · **161R COMPLETE**                                                                                                                                                       |
+| Board gate            | **PBR-APZQEP-161 CERTIFIED** (20260803T160614Z)                                                                                                                                                         |
+| Success               | Teams execute automation via APZQEP with evidence packs; no V1.0 regression — **achieved for Wave 1 foundation**                                                                                        |
 
 ## Wave 2 — Enterprise Integrations (**APZQEP-162**)
 
@@ -24,7 +24,7 @@
 | Objectives            | CI/CD quality without manual intervention                                                 |
 | Capabilities          | GitHub/GitLab (then Azure DevOps/Bitbucket); webhooks; PR checks; Plane/Jira traceability |
 | Dependencies          | Wave 1 runners                                                                            |
-| Engineering programme | **APZQEP-162** — NOT AUTHORISED                                                           |
+| Engineering programme | **APZQEP-162** — **AUTHORISED** (PBR-APZQEP-161); **NOT STARTED** — awaits Owner Auth     |
 | Success               | PR → suites → evidence → status check path proven                                         |
 
 ## Wave 3 — AI Quality Intelligence (**APZQEP-163**)

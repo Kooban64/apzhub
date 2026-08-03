@@ -1,0 +1,22 @@
+{
+  "resolution": "PBR-APZQEP-161",
+  "timestamp": "20260803T160614Z",
+  "decision": "CERTIFIED",
+  "engineering": "UNCHANGED",
+  "engineeringReview": "PASS",
+  "operationalReview": "PASS",
+  "architectureReview": "PASS",
+  "wave1": "CERTIFIED",
+  "nextAuthorisedProgramme": "APZQEP-162",
+  "wave2EngineeringStarted": false,
+  "regression": {
+    "success": true,
+    "numPassedTests": 8
+  },
+  "apzqep161rSourceChanges": [],
+  "inputs": {
+    "apzqep161": "72ab4a11",
+    "apzqep161r": "34c7ae37"
+  },
+  "recommendation": "Proceed to Wave 2 only after Owner Auth; recommended hands-on Wave 1 use first."
+}

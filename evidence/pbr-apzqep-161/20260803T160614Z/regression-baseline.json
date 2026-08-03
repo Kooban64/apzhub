@@ -1,0 +1,121 @@
+{
+  "numTotalTestSuites": 4,
+  "numPassedTestSuites": 4,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 8,
+  "numPassedTests": 8,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1785773330433,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["APZQEP-161 platform-automation"],
+          "fullName": "APZQEP-161 platform-automation registers Playwright as active and others as placeholders",
+          "status": "passed",
+          "title": "registers Playwright as active and others as placeholders",
+          "duration": 2.8786830000001373,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-161 platform-automation"],
+          "fullName": "APZQEP-161 platform-automation runs Playwright dry-run through full lifecycle with evidence",
+          "status": "passed",
+          "title": "runs Playwright dry-run through full lifecycle with evidence",
+          "duration": 5.65582100000006,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-161 platform-automation"],
+          "fullName": "APZQEP-161 platform-automation rejects placeholder provider execution",
+          "status": "passed",
+          "title": "rejects placeholder provider execution",
+          "duration": 2.7208140000000185,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-161 platform-automation"],
+          "fullName": "APZQEP-161 platform-automation retries then fails when provider keeps failing",
+          "status": "passed",
+          "title": "retries then fails when provider keeps failing",
+          "duration": 1.2591370000000097,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-161 platform-automation"],
+          "fullName": "APZQEP-161 platform-automation enforces lifecycle transition rules",
+          "status": "passed",
+          "title": "enforces lifecycle transition rules",
+          "duration": 0.352668999999878,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-161 platform-automation"],
+          "fullName": "APZQEP-161 platform-automation never exposes playwright types on public record",
+          "status": "passed",
+          "title": "never exposes playwright types on public record",
+          "duration": 1.5637919999999212,
+          "failureMessages": [],
+          "meta": {}
+        }
+      ],
+      "startTime": 1785773331855,
+      "endTime": 1785773331870.5637,
+      "status": "passed",
+      "message": "",
+      "name": "/home/ubuntu/apz-portal/packages/platform-automation/src/automation-engine.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["APZQEP-161 qep-automation"],
+          "fullName": "APZQEP-161 qep-automation exposes workspace routes under /workspace/qep/automation",
+          "status": "passed",
+          "title": "exposes workspace routes under /workspace/qep/automation",
+          "duration": 2.440900000000056,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-161 qep-automation"],
+          "fullName": "APZQEP-161 qep-automation integrates platform automation for Playwright dry-run",
+          "status": "passed",
+          "title": "integrates platform automation for Playwright dry-run",
+          "duration": 6.158182000000124,
+          "failureMessages": [],
+          "meta": {}
+        }
+      ],
+      "startTime": 1785773331864,
+      "endTime": 1785773331873.1582,
+      "status": "passed",
+      "message": "",
+      "name": "/home/ubuntu/apz-portal/packages/qep-automation/src/qep-automation.test.ts"
+    }
+  ]
+}
