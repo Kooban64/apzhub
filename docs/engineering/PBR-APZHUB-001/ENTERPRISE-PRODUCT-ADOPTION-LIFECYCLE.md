@@ -27,16 +27,17 @@ Examples: `APZHUB-LAW-ADOPT-001`, `APZHUB-DOCS-ADOPT-002`, …
 
 ## Mapping for APZ Law Platform (first product)
 
-| Standard phase               | Programme ID                | Status after PBR-APZHUB-001          |
-| ---------------------------- | --------------------------- | ------------------------------------ |
-| Assessment                   | Covered by APZHUB-ADOPT-001 | **COMPLETE**                         |
-| Governance Alignment         | **APZHUB-LAW-ADOPT-001**    | **AUTHORISED to open** (not started) |
-| Engineering Alignment        | APZHUB-LAW-ADOPT-002        | Not authorised                       |
-| Certification Alignment      | APZHUB-LAW-ADOPT-003        | Not authorised                       |
-| Operations Alignment         | APZHUB-LAW-ADOPT-004        | Not authorised                       |
-| Board Adoption Certification | APZHUB-LAW-ADOPT-005        | Not authorised                       |
+| Standard phase                              | Programme ID             | Status                           |
+| ------------------------------------------- | ------------------------ | -------------------------------- |
+| Portfolio assessment                        | APZHUB-ADOPT-001         | **COMPLETE**                     |
+| Enterprise Engineering Alignment Assessment | **APZHUB-LAW-ADOPT-001** | **COMPLETE** (20260803T100641Z)  |
+| Governance Alignment                        | APZHUB-LAW-ADOPT-002     | Recommended — **not authorised** |
+| Engineering Alignment                       | APZHUB-LAW-ADOPT-003     | Recommended — **not authorised** |
+| Certification Alignment                     | APZHUB-LAW-ADOPT-004     | Recommended — **not authorised** |
+| Operations Alignment                        | APZHUB-LAW-ADOPT-005     | Recommended — **not authorised** |
+| Board Adoption Certification                | APZHUB-LAW-ADOPT-006     | Recommended — **not authorised** |
 
-Note: Board authorised programme title **APZHUB-LAW-ADOPT-001 — Enterprise Engineering Adoption — APZ Law Platform** as the **first Law adoption programme** (Governance Alignment). Subsequent LAW-ADOPT-00N programmes require their own Owner Authorisations. Assessment already completed at portfolio level; Law does not repeat ADOPT-001 assessment unless Board requests.
+Note: Owner Auth refined **APZHUB-LAW-ADOPT-001** to **Enterprise Engineering Alignment Assessment** (assess before engineer). Subsequent LAW-ADOPT-00N programmes require their own Owner Authorisations.
 
 ## Rules
 
