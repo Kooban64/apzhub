@@ -1,43 +1,34 @@
 # APZQEP-150R — Enterprise Product Readiness Re-certification
 
-| Field                  | Value                                                                       |
-| ---------------------- | --------------------------------------------------------------------------- |
-| Programme              | **APZQEP-150R**                                                             |
-| Title                  | Enterprise Product Readiness Re-certification                               |
-| Status                 | **RECOMMENDED · NOT AUTHORISED**                                            |
-| Prerequisite           | APZQEP-151 CERTIFIED (RB-001 CLOSED) · APZQEP-152 CERTIFIED (RB-002 CLOSED) |
-| Authority              | Product Board recommendation (20260803)                                     |
-| Relation to APZQEP-150 | **New audit** — does not reopen or amend the original 150 NO-GO record      |
-| Last updated           | 20260803T064700Z                                                            |
+| Field          | Value                                              |
+| -------------- | -------------------------------------------------- |
+| Programme      | APZQEP-150R                                        |
+| Title          | Enterprise Product Readiness Re-certification      |
+| Status         | **COMPLETE** — GO recommended; await Product Board |
+| Classification | Independent Product Readiness Audit                |
+| Engineering    | **NONE** (verification only)                       |
+| Authority      | Owner Authorisation 20260803T065200Z               |
+| Baseline       | `4b5c7518`                                         |
+| Last updated   | 20260803T065345Z                                   |
 
-## Why 150R (not reopening 150)
-
-APZQEP-150 is an **immutable historical record** that correctly resulted in **NO-GO** while RB-001 and RB-002 were open.
-
-Re-certification must stand as a **new** audit against the remediated product (post durable persistence and production security hardening).
-
-## Purpose
-
-1. Verify the product after RB-001 and RB-002 are cleared.
-2. Confirm there are **no remaining release blockers**.
-3. Repeat the readiness audit against the updated baseline.
-4. Produce a **new** evidence pack.
-5. Present a fresh Product Board **Go/No-Go** recommendation.
-
-## Authorisation gate
-
-Engineering **SHALL NOT** begin until Owner Authorisation Pack:
+## Result
 
 ```text
-Status: AUTHORISED
-Programme: APZQEP-150R
+Audit: PASS
+Go / No-Go recommendation: GO
+Release blockers: NONE
+Engineering: UNCHANGED
 ```
 
-See [APZQEP-150R-PRODUCT-BOARD-RECOMMENDATION.md](./APZQEP-150R-PRODUCT-BOARD-RECOMMENDATION.md).
+## Key artefacts
 
-## Out of scope
+| Artefact   | Path                                                     |
+| ---------- | -------------------------------------------------------- |
+| Owner Auth | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md)       |
+| Go/No-Go   | [GO-NO-GO-REPORT.md](./GO-NO-GO-REPORT.md)               |
+| Completion | [APZQEP-150R-COMPLETION.md](./APZQEP-150R-COMPLETION.md) |
+| Evidence   | `evidence/apzqep-150r/20260803T065345Z/`                 |
 
-- New features
-- Package promotion
-- Production deployment (requires Board GO after 150R)
-- Reopening APZQEP-120 / 140 / 151 / 152
+## Relation to APZQEP-150
+
+APZQEP-150 is an immutable historical **NO-GO**. This programme is a **new** audit against the remediated product.

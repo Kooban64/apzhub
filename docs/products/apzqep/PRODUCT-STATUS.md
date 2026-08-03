@@ -6,7 +6,7 @@
 | Authority          | Product Board — **STANDING**                   |
 | Audience           | Engineers, architects, auditors, AI assistants |
 | Rule               | **Read this document before any APZQEP work**  |
-| Last updated       | 20260803T064700Z                               |
+| Last updated       | 20260803T065345Z                               |
 | Engineering thread | **FORMALLY COMPLETE**                          |
 
 ---
@@ -46,6 +46,9 @@ COMPLETE
 Product Readiness Audit (APZQEP-150):
 PASSED (historical — NO-GO while RB-001/RB-002 open)
 
+Product Readiness Re-certification (APZQEP-150R):
+COMPLETE — PASS — GO RECOMMENDED
+
 Release Blockers:
 NONE
 
@@ -56,10 +59,10 @@ RB-002:
 FORMALLY CLEARED / CLOSED (APZQEP-152 CERTIFIED)
 
 Production Release:
-PENDING RECERTIFICATION
+GO RECOMMENDED — AWAITING PRODUCT BOARD DECISION
 
 Production Certification:
-PENDING
+PENDING BOARD DECISION
 
 Current Engineering Authority:
 CLOSED
@@ -71,8 +74,8 @@ Next Authorised Programme:
 NONE
 
 Next Action:
-Owner Authorisation required for APZQEP-150R — Enterprise Product Readiness Re-certification.
-Do not declare production GO until APZQEP-150R completes and the Product Board issues a fresh Go/No-Go.
+Product Board Version 1.0 Release Decision (Go/No-Go acceptance).
+Release and Deployment remain NOT AUTHORISED until Board authorises.
 ```
 
 ---
@@ -84,7 +87,7 @@ Do not declare production GO until APZQEP-150R completes and the Product Board i
 | Product               | **APZQEP** — Enterprise Quality Engineering Platform                                                 |
 | Product version       | **1.0**                                                                                              |
 | Working platform name | APZHUB                                                                                               |
-| Posture               | **PENDING RECERTIFICATION** — release blockers cleared; await APZQEP-150R                            |
+| Posture               | **GO RECOMMENDED** — await Product Board release authorisation                                       |
 | Declaration           | [v1.1/APZQEP-VERSION-1.0-ENGINEERING-COMPLETE.md](./v1.1/APZQEP-VERSION-1.0-ENGINEERING-COMPLETE.md) |
 
 ---
@@ -98,8 +101,6 @@ Do not declare production GO until APZQEP-150R completes and the Product Board i
 | Enterprise Standards            | ES-001, ES-002, ES-003 **IN FORCE** |
 | ES-004                          | **NOT AUTHORISED**                  |
 | Operating mode                  | Evolve the Enterprise               |
-| APZQEP-ENG-001                  | **ARCHIVED** (reference only)       |
-| APZHUB-ENG-002 Phase 1          | **CLOSED**                          |
 | Product Board authority         | **STANDING**                        |
 | Engineering authority           | **CLOSED**                          |
 
@@ -107,162 +108,90 @@ Do not declare production GO until APZQEP-150R completes and the Product Board i
 
 ## Programme History (Version 1.0)
 
-| Programme      | Outcome                                                               |
-| -------------- | --------------------------------------------------------------------- |
-| APZQEP-ENG-001 | Archived (Reference Implementation)                                   |
-| APZHUB-ENG-002 | Enterprise Governance Established                                     |
-| APZQEP-120     | Platform Foundation Complete                                          |
-| APZQEP-140-000 | Product Architecture Complete                                         |
-| APZQEP-140-A–F | Core Quality Engineering Capabilities Complete                        |
-| APZQEP-140     | Core Quality Engineering Complete                                     |
-| APZQEP-150     | Product Readiness Audit Complete (**NO-GO** — historical)             |
-| APZQEP-151     | Durable Product Persistence **CERTIFIED / CLOSED** (RB-001)           |
-| APZQEP-152     | Enterprise Production RBAC & Security **CERTIFIED / CLOSED** (RB-002) |
+| Programme   | Outcome                                                               |
+| ----------- | --------------------------------------------------------------------- |
+| APZQEP-120  | Platform Foundation Complete                                          |
+| APZQEP-140  | Core Quality Engineering Complete                                     |
+| APZQEP-150  | Product Readiness Audit Complete (**NO-GO** — historical)             |
+| APZQEP-151  | Durable Product Persistence **CERTIFIED / CLOSED** (RB-001)           |
+| APZQEP-152  | Enterprise Production RBAC & Security **CERTIFIED / CLOSED** (RB-002) |
+| APZQEP-150R | Product Readiness Re-certification **COMPLETE** — **GO recommended**  |
 
 ---
 
 ## Active capabilities (Core QE)
 
-| Cap | Title                                  | Programme    | Package                                       | Status               |
-| --- | -------------------------------------- | ------------ | --------------------------------------------- | -------------------- |
-| A   | Enterprise Test Suite Management       | APZQEP-140-A | `@apzhub/qep-suites` 0.1.0                    | COMPLETE             |
-| B   | Enterprise Test Execution Planning     | APZQEP-140-B | `@apzhub/qep-execution-plans` 0.1.0           | COMPLETE             |
-| C   | Enterprise Test Execution Workspace    | APZQEP-140-C | `@apzhub/qep-execution-workspace` 0.1.0       | COMPLETE             |
-| D   | Enterprise Defect Management           | APZQEP-140-D | `@apzhub/qep-defects` 0.1.0                   | COMPLETE             |
-| E   | Enterprise Requirements & Traceability | APZQEP-140-E | `@apzhub/qep-requirements-traceability` 0.1.0 | COMPLETE             |
-| F   | Enterprise Reporting & Analytics       | APZQEP-140-F | `@apzhub/qep-reporting` 0.1.0                 | COMPLETE / CERTIFIED |
-
-Persistence: PostgreSQL production SoR (APZQEP-151) — in-memory fallback **DISABLED**.  
-Security: Cap A–F fail-closed RBAC (APZQEP-152) — HTTP elevation **REMOVED**.
+| Cap | Title                                 | Package                                  | Status   | Persistence / Security     |
+| --- | ------------------------------------- | ---------------------------------------- | -------- | -------------------------- |
+| A–F | Core Quality Engineering capabilities | `@apzhub/qep-*` **0.1.0** (not promoted) | COMPLETE | Postgres SoR · fail-closed |
 
 ---
 
 ## Certified / closed programmes
 
-| Programme      | Title                                           | Status                                                                      |
-| -------------- | ----------------------------------------------- | --------------------------------------------------------------------------- |
-| APZQEP-110     | Product planning                                | APPROVED                                                                    |
-| APZQEP-111     | Solution architecture                           | APPROVED                                                                    |
-| APZQEP-120     | Platform Foundation                             | **CERTIFIED / CLOSED** (permanent)                                          |
-| APZQEP-140-000 | Core QE Architecture                            | **CERTIFIED**                                                               |
-| APZQEP-140     | Core Quality Engineering (A–F)                  | **CERTIFIED / CLOSED** (permanent)                                          |
-| APZQEP-150     | Product Readiness & Production Certification    | **CERTIFIED** — audit **PASSED**; production release **NO-GO** (historical) |
-| APZQEP-151     | Durable Product Persistence                     | **CERTIFIED / CLOSED** — RB-001 **CLEARED**                                 |
-| APZQEP-152     | Enterprise Production RBAC & Security Hardening | **CERTIFIED / CLOSED** — RB-002 **CLEARED**                                 |
+| Programme   | Status                                                           |
+| ----------- | ---------------------------------------------------------------- |
+| APZQEP-120  | **CERTIFIED / CLOSED**                                           |
+| APZQEP-140  | **CERTIFIED / CLOSED**                                           |
+| APZQEP-150  | **CERTIFIED** — historical production **NO-GO**                  |
+| APZQEP-151  | **CERTIFIED / CLOSED** — RB-001 **CLEARED**                      |
+| APZQEP-152  | **CERTIFIED / CLOSED** — RB-002 **CLEARED**                      |
+| APZQEP-150R | **COMPLETE** — audit **PASS** — **GO recommended** (await Board) |
 
-Board (152): [v1.1/apzqep-152/APZQEP-152-PRODUCT-BOARD-CERTIFICATION.md](./v1.1/apzqep-152/APZQEP-152-PRODUCT-BOARD-CERTIFICATION.md)
+Board / audit:
 
----
-
-## Deferred / recommended only
-
-| Programme                                         | Title                                         | Status                                            |
-| ------------------------------------------------- | --------------------------------------------- | ------------------------------------------------- |
-| **APZQEP-150R**                                   | Enterprise Product Readiness Re-certification | **RECOMMENDED · NOT AUTHORISED** (fresh Go/No-Go) |
-| Former “AI Native” under band 150                 | AI / QI                                       | **Deferred**                                      |
-| APZQEP-160                                        | Portfolio Intelligence                        | **NOT NEXT**                                      |
-| APZQEP-170 / 180                                  | Integrations / Operational Excellence         | Future bands — not next                           |
-| Cloud storage, notify adapters, ALM, CI, calendar | Enhancements                                  | **Deferred**                                      |
-| Shell Cap nav UX (403 after navigate)             | Usability                                     | Future UX — not a security failure                |
-| Project membership ACL                            | Architectural refinement                      | Post–V1.0                                         |
-
-150R: [v1.1/apzqep-150r/](./v1.1/apzqep-150r/)
+- [apzqep-151/APZQEP-151-PRODUCT-BOARD-CERTIFICATION.md](./v1.1/apzqep-151/APZQEP-151-PRODUCT-BOARD-CERTIFICATION.md)
+- [apzqep-152/APZQEP-152-PRODUCT-BOARD-CERTIFICATION.md](./v1.1/apzqep-152/APZQEP-152-PRODUCT-BOARD-CERTIFICATION.md)
+- [apzqep-150r/GO-NO-GO-REPORT.md](./v1.1/apzqep-150r/GO-NO-GO-REPORT.md)
 
 ---
 
 ## Release blockers
 
-| ID         | Title                                | Status                                      |
-| ---------- | ------------------------------------ | ------------------------------------------- |
-| **RB-001** | Durable Product Persistence          | **CLEARED / CLOSED** (APZQEP-151 CERTIFIED) |
-| **RB-002** | Production RBAC & Security Hardening | **CLEARED / CLOSED** (APZQEP-152 CERTIFIED) |
-
-Register: [v1.1/apzqep-150/ISSUES-REGISTER.md](./v1.1/apzqep-150/ISSUES-REGISTER.md)
-
----
-
-## Known limitations
-
-- APZQEP-150 (historical): [v1.1/apzqep-150/KNOWN-LIMITATIONS.md](./v1.1/apzqep-150/KNOWN-LIMITATIONS.md)
-- APZQEP-151 Board-classified: [v1.1/apzqep-151/KNOWN-LIMITATIONS.md](./v1.1/apzqep-151/KNOWN-LIMITATIONS.md)
-- APZQEP-152 Board-classified: [v1.1/apzqep-152/KNOWN-LIMITATIONS.md](./v1.1/apzqep-152/KNOWN-LIMITATIONS.md)
+| ID         | Status               |
+| ---------- | -------------------- |
+| **RB-001** | **CLEARED / CLOSED** |
+| **RB-002** | **CLEARED / CLOSED** |
+| New (150R) | **NONE**             |
 
 ---
 
 ## Production readiness state
 
-| Item                                 | State                                         |
-| ------------------------------------ | --------------------------------------------- |
-| Product readiness audit (APZQEP-150) | **PASSED / CERTIFIED** (historical NO-GO)     |
-| Durable persistence (APZQEP-151)     | **CERTIFIED / CLOSED**                        |
-| Production security (APZQEP-152)     | **CERTIFIED / CLOSED**                        |
-| Release blockers                     | **NONE**                                      |
-| Unrestricted enterprise production   | **PENDING RECERTIFICATION** (APZQEP-150R)     |
-| Production certification             | **PENDING**                                   |
-| Release authority                    | **NOT AUTHORISED**                            |
-| Deployment authority                 | **NOT AUTHORISED**                            |
-| Feature freeze                       | **ACTIVE** until Owner authorises APZQEP-150R |
+| Item                    | State                            |
+| ----------------------- | -------------------------------- |
+| APZQEP-150 (historical) | NO-GO recorded                   |
+| APZQEP-150R             | **GO recommended**               |
+| Release blockers        | **NONE**                         |
+| Release authority       | **NOT AUTHORISED** — await Board |
+| Deployment authority    | **NOT AUTHORISED** — await Board |
+| Package promotion       | **NOT AUTHORISED**               |
+| Feature freeze          | **ACTIVE**                       |
 
 ---
 
-## Path to production certification
+## Path remaining
 
-1. Owner authorises **APZQEP-150R — Enterprise Product Readiness Re-certification**.
-2. Complete re-audit against remediated baseline (do **not** reopen APZQEP-150).
-3. Confirm RB-001 and RB-002 remain objectively closed; no new blockers.
-4. Product Board fresh Version 1.0 **Go/No-Go** decision.
-5. Only then may Production Release change from **PENDING RECERTIFICATION** to **GO**.
-
----
-
-## Engineering Legacy
-
-This programme produced a reusable engineering discipline transferable to future APZHUB products:
-
-- Stable engineering governance
-- Enterprise engineering standards
-- Product Board governance
-- Evidence-first certification
-- Event-driven platform architecture
-- Domain-driven product architecture
-- Capability-based product engineering
-- Release readiness separated from feature engineering
-- Objective Go/No-Go decision making
-- Immutable historical audits with distinct re-certification programmes
+1. Product Board accepts or rejects APZQEP-150R **GO** recommendation.
+2. If accepted: authorise Version 1.0 General Production Release (and separately deployment).
+3. If rejected: commission a new remediation programme before another audit.
 
 ---
 
 ## Thread Closure
 
-The Version 1.0 engineering thread remains **formally complete**. APZQEP-151 and APZQEP-152 are **CERTIFIED / CLOSED**. Release blockers are **NONE**.
-
-No further engineering under this thread unless Owner authorises **APZQEP-150R**.
+Version 1.0 engineering and independent re-certification audits are complete.
 
 Authoritative state:
 
-> **APZQEP Version 1.0 — Engineering Complete. Product Complete. Durable Persistence Complete. Production Security Complete. Release Blockers None. Production Release Pending Recertification (APZQEP-150R).**
+> **APZQEP Version 1.0 — Engineering Complete. Release Blockers None. APZQEP-150R GO Recommended. Awaiting Product Board Release Decision.**
 
 ---
 
 ## Governance principles (still in force)
 
 1. Engineering starts only after formal Owner authorisation.
-2. Product Board decisions are recorded before engineering begins.
-3. Release readiness remains independent of engineering.
-4. One authorised programme at a time.
-5. Do not reopen APZQEP-120, APZQEP-140, APZQEP-150, APZQEP-151, or APZQEP-152.
-6. Do not open APZQEP-160 as the next step.
-7. Do not declare production **GO** without APZQEP-150R + Board decision.
-
----
-
-## Document map (start here)
-
-| Need                              | Path                                                                             |
-| --------------------------------- | -------------------------------------------------------------------------------- |
-| **This status**                   | `docs/products/apzqep/PRODUCT-STATUS.md`                                         |
-| APZQEP-152 Board certification    | `docs/products/apzqep/v1.1/apzqep-152/APZQEP-152-PRODUCT-BOARD-CERTIFICATION.md` |
-| APZQEP-150R recommendation        | `docs/products/apzqep/v1.1/apzqep-150r/README.md`                                |
-| Historical APZQEP-150 NO-GO       | `docs/products/apzqep/v1.1/apzqep-150/`                                          |
-| Version 1.0 declaration           | `docs/products/apzqep/v1.1/APZQEP-VERSION-1.0-ENGINEERING-COMPLETE.md`           |
-| Current milestone (platform-wide) | `docs/foundation/CURRENT-MILESTONE.md`                                           |
+2. Release readiness remains independent of engineering.
+3. Historical APZQEP-150 NO-GO remains immutable.
+4. Do not declare production **GO** without Product Board decision after 150R.
+5. Do not reopen APZQEP-120 / 140 / 150 / 151 / 152.
