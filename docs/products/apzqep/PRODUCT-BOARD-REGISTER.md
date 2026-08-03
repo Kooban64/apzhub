@@ -3,7 +3,7 @@
 | Field     | Value                    |
 | --------- | ------------------------ |
 | Document  | PRODUCT-BOARD-REGISTER   |
-| Timestamp | 20260803T143922Z         |
+| Timestamp | 20260803T152830Z         |
 | Authority | Product Board — STANDING |
 
 ## Resolutions
@@ -15,7 +15,8 @@
 
 ## Pending / next
 
-| Item                                  | State                                                                  |
-| ------------------------------------- | ---------------------------------------------------------------------- |
-| APZQEP-161 Wave 1 Board certification | **PENDING** — engineering COMPLETE ([apzqep-161/](./v1.1/apzqep-161/)) |
-| APZQEP-162…166                        | Planned — **not authorised**                                           |
+| Item                                            | State                                                                  |
+| ----------------------------------------------- | ---------------------------------------------------------------------- |
+| PBR-APZQEP-161 Wave 1 Engineering Certification | **PENDING** — eng COMPLETE ([apzqep-161/](./v1.1/apzqep-161/))         |
+| APZQEP-161R Operational Certification (Board)   | **PENDING** — readiness COMPLETE ([apzqep-161r/](./v1.1/apzqep-161r/)) |
+| APZQEP-162…166                                  | Planned — **not authorised**                                           |

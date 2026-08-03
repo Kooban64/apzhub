@@ -1,0 +1,24 @@
+{
+  "programme": "APZQEP-161R",
+  "title": "Enterprise Automation Operational Readiness & Usability Certification",
+  "timestamp": "20260803T152830Z",
+  "status": "COMPLETE",
+  "engineering": "UNCHANGED",
+  "sourceBaseline": "72ab4a11",
+  "results": {
+    "operationalReadiness": "PASS",
+    "usability": "PASS",
+    "workspace": "PASS",
+    "evidenceExperience": "PASS",
+    "documentation": "PASS",
+    "architectureReadiness": "PASS",
+    "wave2Readiness": "READY",
+    "demonstrationReadiness": "PARTIAL"
+  },
+  "artifacts": [
+    "QUICK-START-GUIDE.md",
+    "DEMO-SCRIPT.md",
+    "docs/products/apzqep/v1.1/apzqep-161r/"
+  ],
+  "recommendation": "Await Product Board Operational Certification before opening APZQEP-162."
+}

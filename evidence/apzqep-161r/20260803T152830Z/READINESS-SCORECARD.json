@@ -1,0 +1,32 @@
+{
+  "programme": "APZQEP-161R",
+  "timestamp": "20260803T152830Z",
+  "demoScenarios": {
+    "createProject": "PARTIAL",
+    "registerProvider": "PARTIAL",
+    "executePlaywrightSuite": "PASS",
+    "collectEvidence": "PASS",
+    "reviewScreenshots": "PARTIAL",
+    "reviewTraces": "PARTIAL",
+    "reviewVideos": "PARTIAL",
+    "reviewLogs": "PARTIAL",
+    "generateReport": "PARTIAL",
+    "displayDashboards": "NOT READY",
+    "explainFailure": "PARTIAL",
+    "showExecutionHistory": "PASS",
+    "exportEvidence": "NOT READY"
+  },
+  "futureArchitecture": {
+    "github": "READY",
+    "gitlab": "READY",
+    "azureDevOps": "READY",
+    "bitbucket": "READY",
+    "rest": "READY",
+    "selenium": "READY",
+    "appium": "READY",
+    "cypress": "READY",
+    "accessibility": "READY",
+    "visual": "READY",
+    "k6": "READY"
+  }
+}

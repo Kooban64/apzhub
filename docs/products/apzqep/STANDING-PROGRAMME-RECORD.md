@@ -16,7 +16,8 @@
 > **Law pivot (20260803T140413Z):** Law adoption **PAUSED** at Ops Certification — portfolio focus returns to **APZQEP** — [LAW-ADOPTION-STANDING-STATE](../law/LAW-ADOPTION-STANDING-STATE.md)  
 > **APZQEP-160 (20260803T141613Z):** Version 1.1 **Enterprise Quality Platform Definition COMPLETE** — [apzqep-160/](./v1.1/apzqep-160/)  
 > **PBR-APZQEP-160 (20260803T142234Z):** V1.1 definition **APPROVED** — **APZQEP-161 AUTHORISED** — [pbr-apzqep-160/](./v1.1/pbr-apzqep-160/) · [PRODUCT-BOARD-REGISTER](./PRODUCT-BOARD-REGISTER.md)  
-> **APZQEP-161 (20260803T143922Z):** Enterprise Automation Foundation **COMPLETE** — await Product Board Wave 1 certification — [apzqep-161/](./v1.1/apzqep-161/) · `@apzhub/platform-automation` 0.1.0
+> **APZQEP-161 (20260803T143922Z):** Enterprise Automation Foundation **COMPLETE** — [apzqep-161/](./v1.1/apzqep-161/) · `@apzhub/platform-automation` 0.1.0  
+> **APZQEP-161R (20260803T152830Z):** Wave 1 Operational Readiness & Usability **COMPLETE** (eng UNCHANGED) — await Board ops cert — [apzqep-161r/](./v1.1/apzqep-161r/)
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

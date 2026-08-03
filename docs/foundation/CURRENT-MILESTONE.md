@@ -1,8 +1,8 @@
 # APZHUB Current Milestone
 
 > **Purpose:** Where development currently stops and what requires owner approval  
-> **Last updated:** 20260803T143922Z  
-> **Current status:** **APZQEP flagship** — V1.0 **GA** (ops-led) · **PBR-APZQEP-160 APPROVED** · **APZQEP-161 COMPLETE** (Enterprise Automation Foundation; await Product Board Wave 1 certification) · Law adoption **PAUSED** at Ops CERTIFIED · APZQEP: [PRODUCT-STATUS](../products/apzqep/PRODUCT-STATUS.md) · Wave 1: [apzqep-161/](../products/apzqep/v1.1/apzqep-161/) · Law: [LAW-ADOPTION-STANDING-STATE](../products/law/LAW-ADOPTION-STANDING-STATE.md).
+> **Last updated:** 20260803T152830Z  
+> **Current status:** **APZQEP flagship** — V1.0 **GA** (ops-led) · **APZQEP-161 COMPLETE** · **APZQEP-161R COMPLETE** (Wave 1 ops/usability; eng UNCHANGED; await Product Board eng + ops certification) · **APZQEP-162 NOT AUTHORISED** · Law **PAUSED** · APZQEP: [PRODUCT-STATUS](../products/apzqep/PRODUCT-STATUS.md) · Readiness: [apzqep-161r/](../products/apzqep/v1.1/apzqep-161r/) · Law: [LAW-ADOPTION-STANDING-STATE](../products/law/LAW-ADOPTION-STANDING-STATE.md).
 
 ---
 
