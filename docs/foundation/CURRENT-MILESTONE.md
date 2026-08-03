@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-03  
-> **Current status:** **APZHUB-LAW-ADOPT-002 COMPLETE** — Law **Governance Alignment** done · Await **PBR-APZHUB-LAW-002** · Engineering **CLOSED** · Adoption lifecycle **FROZEN** · Law status: [law/PRODUCT-STATUS.md](../products/law/PRODUCT-STATUS.md) · Pack: [APZHUB-LAW-ADOPT-002/](../engineering/APZHUB-LAW-ADOPT-002/) · APZQEP: [apzqep/PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md).
+> **Current status:** **PBR-APZHUB-LAW-002 COMPLETE** — Law governance **CERTIFIED** · **LAW-ADOPT-003 AUTHORISED** (not started) · Engineering **CLOSED** until Owner Auth executes ADOPT-003 · Lifecycle **FROZEN** · Law: [PRODUCT-STATUS](../products/law/PRODUCT-STATUS.md) · Board: [PBR-APZHUB-LAW-002/](../engineering/PBR-APZHUB-LAW-002/) · APZQEP: [apzqep/PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md).
 
 ---
 

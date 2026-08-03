@@ -4,7 +4,7 @@
 | --------- | --------------------------------------------- |
 | Product   | APZ Law Platform                              |
 | Status    | **IN FORCE**                                  |
-| Timestamp | 20260803T122217Z                              |
+| Timestamp | 20260803T123550Z                              |
 | Wins over | Conversation memory for Law programme posture |
 
 > Authoritative product posture: [PRODUCT-STATUS.md](../../products/law/PRODUCT-STATUS.md)

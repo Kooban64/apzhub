@@ -1,13 +1,14 @@
 # APZ Law Platform — Product Status (Authoritative)
 
-| Field          | Value                                      |
-| -------------- | ------------------------------------------ |
-| Document       | **PRODUCT-STATUS**                         |
-| Product        | **APZ Law Platform**                       |
-| Authority      | Product Board — **STANDING**               |
-| Rule           | **Read this document before any Law work** |
-| Last updated   | 20260803T122217Z                           |
-| Established by | **APZHUB-LAW-ADOPT-002**                   |
+| Field           | Value                                      |
+| --------------- | ------------------------------------------ |
+| Document        | **PRODUCT-STATUS**                         |
+| Product         | **APZ Law Platform**                       |
+| Authority       | Product Board — **STANDING**               |
+| Rule            | **Read this document before any Law work** |
+| Last updated    | 20260803T123550Z                           |
+| Established by  | **APZHUB-LAW-ADOPT-002**                   |
+| Governance cert | **PBR-APZHUB-LAW-002 CERTIFIED**           |
 
 ---
 
@@ -24,21 +25,20 @@ PRODUCTION_READY_WITH_LIMITATIONS
 APZ-LAW-002 ACCEPTED / CLOSED
 
 Enterprise adoption:
-IN PROGRESS — Governance Alignment (APZHUB-LAW-ADOPT-002)
+IN PROGRESS — Governance **CERTIFIED** (PBR-APZHUB-LAW-002)
 
 Enterprise maturity (ADOPT-001):
 Level 3 — Certified Product (historical packaging)
 PARTIALLY READY for enterprise adoption
 
 Engineering authority:
-CLOSED
+CLOSED — LAW-ADOPT-003 authorised to open; execution not started
 
 Product Board:
 STANDING
 
-Next authorised programme after this alignment:
-Await PBR-APZHUB-LAW-002 (Governance Certification)
-then possible LAW-ADOPT-003 (Engineering Alignment) — not authorised now
+Next authorised programme:
+APZHUB-LAW-ADOPT-003 (Enterprise Engineering Alignment) — await Owner Auth execution
 
 APZQEP relationship:
 APZQEP is Enterprise Reference Implementation — not this product

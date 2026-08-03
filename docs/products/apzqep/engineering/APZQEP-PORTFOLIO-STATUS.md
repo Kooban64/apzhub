@@ -33,7 +33,8 @@
 | APZHUB-LAW-ADOPT-001     | ✅ Alignment Assessment **COMPLETE** — **PARTIALLY READY**          |
 | PBR-APZHUB-LAW-001       | ✅ Assessment **ACCEPTED** — Governance Alignment **APPROVED**      |
 | APZHUB-LAW-ADOPT-002     | ✅ Enterprise Governance Alignment **COMPLETE**                     |
-| PBR-APZHUB-LAW-002       | ⏸ Governance Certification — **next** (not started)                 |
+| PBR-APZHUB-LAW-002       | ✅ Governance **CERTIFIED**                                         |
+| APZHUB-LAW-ADOPT-003     | ⏳ **AUTHORISED** — Enterprise Engineering Alignment (not started)  |
 
 ---
 

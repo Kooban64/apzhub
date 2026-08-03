@@ -7,15 +7,14 @@
 
 ```text
 Where Law stops:
-Enterprise Governance Alignment (APZHUB-LAW-ADOPT-002) COMPLETE.
+Governance CERTIFIED (PBR-APZHUB-LAW-002).
 
 What requires approval next:
-Product Board Governance Certification — PBR-APZHUB-LAW-002.
+Owner Authorisation to execute APZHUB-LAW-ADOPT-003
+(Enterprise Engineering Alignment).
 
 Engineering:
-CLOSED — not authorised.
-
-Do not open LAW-ADOPT-003 until PBR-002 certifies governance.
+CLOSED until ADOPT-003 Owner Auth executes.
 ```
 
 Authoritative status: [PRODUCT-STATUS.md](../../products/law/PRODUCT-STATUS.md)  
