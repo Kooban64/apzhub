@@ -1,14 +1,16 @@
-# ENTERPRISE-ADOPTION-LIFECYCLE-REFINED
+# ENTERPRISE-ADOPTION-LIFECYCLE — FROZEN
 
-| Field      | Value                             |
-| ---------- | --------------------------------- |
-| Resolution | PBR-APZHUB-LAW-001                |
-| Timestamp  | 20260803T102148Z                  |
-| Status     | **STANDING** portfolio convention |
+| Field     | Value                                       |
+| --------- | ------------------------------------------- |
+| Origin    | PBR-APZHUB-LAW-001                          |
+| Frozen by | **APZHUB-LAW-ADOPT-002** (20260803T122217Z) |
+| Status    | **FROZEN / STABLE**                         |
+
+## Freeze rule
+
+This lifecycle is a reusable enterprise asset. **Do not** introduce new phases or change sequence unless a future **enterprise governance programme** explicitly revises it. Product programmes shall execute the phases — not redesign them.
 
 ## Standard lifecycle (every APZHUB product)
-
-Alternation between delivery programmes and independent Product Board certification:
 
 | Phase         | Purpose                                     |
 | ------------- | ------------------------------------------- |
@@ -23,19 +25,19 @@ Alternation between delivery programmes and independent Product Board certificat
 | **ADOPT-005** | Product Readiness Assessment                |
 | **PBR-005**   | Enterprise Adoption Certification           |
 
-## APZ Law Platform mapping (current)
+## APZ Law Platform (current)
 
-| Phase                 | Programme / Resolution | Status                       |
-| --------------------- | ---------------------- | ---------------------------- |
-| ADOPT-001             | APZHUB-LAW-ADOPT-001   | **COMPLETE**                 |
-| PBR-001               | **PBR-APZHUB-LAW-001** | **COMPLETE** — APPROVED      |
-| ADOPT-002             | APZHUB-LAW-ADOPT-002   | **AUTHORISED** — not started |
-| PBR-002 … PBR-005     | Future                 | Not authorised               |
-| ADOPT-003 … ADOPT-005 | Future                 | Not authorised               |
+| Phase      | ID                   | Status                 |
+| ---------- | -------------------- | ---------------------- |
+| ADOPT-001  | APZHUB-LAW-ADOPT-001 | COMPLETE               |
+| PBR-001    | PBR-APZHUB-LAW-001   | COMPLETE — APPROVED    |
+| ADOPT-002  | APZHUB-LAW-ADOPT-002 | **COMPLETE**           |
+| PBR-002    | PBR-APZHUB-LAW-002   | **NEXT** — not started |
+| ADOPT-003+ | —                    | NOT AUTHORISED         |
 
 ## Rules
 
-1. No engineering inside Board resolutions or assessment programmes.
-2. No engineering alignment until Governance Alignment complete and Board-certified (PBR-002).
-3. Each phase requires Owner Authorisation before execution.
-4. One product progresses at a time unless Board parallelises.
+1. Delivery programmes alternate with independent Board certification.
+2. No engineering inside Board resolutions or assessment/governance programmes.
+3. No engineering alignment until Governance Alignment complete **and** Board-certified (PBR-002).
+4. Each phase requires Owner Authorisation before execution.

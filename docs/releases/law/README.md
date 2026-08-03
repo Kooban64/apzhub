@@ -1,12 +1,14 @@
 # APZ Law Platform — Releases
 
+> **Authoritative product status:** [../../products/law/PRODUCT-STATUS.md](../../products/law/PRODUCT-STATUS.md)  
 > **Product:** APZ Law Platform  
-> **Current Production Release:** **1.0.0** (**Awaiting Acceptance** — APZ-LAW-002)  
+> **Current Production Release:** **1.0.0** — APZ-LAW-002 **ACCEPTED / CLOSED**  
 > **Certification class:** PRODUCTION_READY_WITH_LIMITATIONS  
-> **Recommendation:** **PRODUCTION READY**  
+> **Recommendation:** **PRODUCTION READY** (historical packaging)  
 > **Platform basis:** LAW-001…015 · `apps/law-platform` **1.0.0** · `@apzhub/legal-business-core` **1.0.0** · Trust LAW-015  
 > **Planning:** [APZ-LAW-001](../../products/apz-law/README.md) (**ACCEPTED**)  
-> **Evidence index:** [1.0.0/](./1.0.0/README.md)
+> **Evidence index:** [1.0.0/](./1.0.0/README.md)  
+> **Note:** Prior “Awaiting Acceptance” banner superseded by LAW-ADOPT-002 governance alignment.
 
 ---
 

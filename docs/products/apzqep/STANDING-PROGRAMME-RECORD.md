@@ -6,7 +6,8 @@
 > **APZQEP-OPS-001 (20260803T072224Z):** GA Operations & Product Intelligence **COMPLETE** — **operations-led** — Version 1.1 **NOT OPENED** — [apzqep-ops-001/](./v1.1/apzqep-ops-001/)  
 > **PBR-APZHUB-001 (20260803T095342Z):** First enterprise adoption product **APZ Law Platform APPROVED** — [PBR-APZHUB-001](../../engineering/PBR-APZHUB-001/)  
 > **APZHUB-LAW-ADOPT-001 (20260803T100641Z):** Law **Alignment Assessment COMPLETE** — [APZHUB-LAW-ADOPT-001](../../engineering/APZHUB-LAW-ADOPT-001/)  
-> **PBR-APZHUB-LAW-001 (20260803T102148Z):** Assessment **ACCEPTED** — **LAW-ADOPT-002 AUTHORISED** (not started) — [PBR-APZHUB-LAW-001](../../engineering/PBR-APZHUB-LAW-001/)
+> **PBR-APZHUB-LAW-001 (20260803T102148Z):** Assessment **ACCEPTED** — [PBR-APZHUB-LAW-001](../../engineering/PBR-APZHUB-LAW-001/)  
+> **APZHUB-LAW-ADOPT-002 (20260803T122217Z):** Law **Governance Alignment COMPLETE** — await **PBR-APZHUB-LAW-002** — [APZHUB-LAW-ADOPT-002](../../engineering/APZHUB-LAW-ADOPT-002/) · [law/PRODUCT-STATUS](../law/PRODUCT-STATUS.md)
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

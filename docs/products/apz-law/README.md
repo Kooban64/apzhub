@@ -1,15 +1,16 @@
 # APZ Law Platform — Product Pack
 
+> **Authoritative product status:** [../law/PRODUCT-STATUS.md](../law/PRODUCT-STATUS.md) — **wins over pack banners**  
 > **Programme:** APZ-LAW-001 (**ACCEPTED / CLOSED**) · APZ-LAW-002 (**ACCEPTED / CLOSED**)  
 > **Classification:** Commercial planning + packaging  
-> **Lifecycle phase:** Production Release (packaging / certification)  
-> **Standard:** [Platform Delivery Standard](../../engineering/platform-delivery/PLATFORM-DELIVERY-STANDARD.md)  
+> **Lifecycle phase:** Historical Production packaging complete · Enterprise adoption in progress  
+> **Standard:** [Platform Delivery Standard](../../engineering/platform-delivery/PLATFORM-DELIVERY-STANDARD.md) (historical packaging) · Enterprise Baseline 1.2 (adoption)  
 > **Commercial recommendation (1.0.0):** **PRODUCTION READY**  
 > **Certification class:** **PRODUCTION_READY_WITH_LIMITATIONS**  
 > **Delivery path:** **Existing Platform → Commercial Packaging**  
 > **Current SemVer:** **1.0.0** — [evidence](../../releases/law/1.0.0/README.md)  
-> **Prior Definition Pack:** [docs/products/law/](../law/README.md)  
-> **Date:** 2026-07-19
+> **Definition Pack:** [docs/products/law/](../law/README.md)  
+> **Governance alignment:** [APZHUB-LAW-ADOPT-002](../../engineering/APZHUB-LAW-ADOPT-002/)
 
 ---
 

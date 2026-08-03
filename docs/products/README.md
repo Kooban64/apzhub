@@ -51,7 +51,7 @@ Authoritative standard for every APZHUB **product**. Platform Foundation is comp
 | Documents | [documents/](./documents/)                                      | Documents                         | Production                                           |
 | Analytics | [analytics/](./analytics/) · [apz-analytics/](./apz-analytics/) | Analytics                         | **Planning** (APZ-ANALYTICS-001)                     |
 | Workflow  | [workflow/](./workflow/)                                        | Workflow / Automation             | Production                                           |
-| Law       | [law/](./law/)                                                  | Law Platform                      | In Development                                       |
+| Law       | [law/](./law/) · [PRODUCT-STATUS](./law/PRODUCT-STATUS.md)      | Law Platform                      | 1.0.0 PRWL · Enterprise adoption (gov aligned)       |
 
 ---
 
