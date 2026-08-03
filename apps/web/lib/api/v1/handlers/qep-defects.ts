@@ -32,21 +32,11 @@ import { getDefectRuntime } from "@/lib/qep/defect-runtime";
 type RouteContext = { params: Promise<Record<string, string>> };
 
 function actorFromContext(context: PlatformApiRequestContext): DefectActor {
-  const base = context.serviceContext.permissions;
-  const permissions =
-    base.includes("qep.defects.read") || base.includes("qep.defects.admin")
-      ? base
-      : [
-          ...base,
-          "qep.defects.read",
-          "qep.defects.create",
-          "qep.defects.update",
-          "qep.defects.lifecycle",
-        ];
+  // APZQEP-152: fail closed — no LIMITED_AVAILABILITY elevation.
   return {
     userId: context.serviceContext.userId,
     tenantId: context.serviceContext.tenantId,
-    permissions,
+    permissions: context.serviceContext.permissions,
   };
 }
 

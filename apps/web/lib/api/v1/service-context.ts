@@ -15,11 +15,16 @@ export interface BuildServiceRequestContextInput {
  * Build ServiceRequestContext from trusted server-side session data.
  *
  * Never trusts client-supplied roles, permissions, actor IDs, tenant IDs,
- * or organisation memberships. Permissions are left empty — the production
- * AuthorizationProvider resolves grants via the access boundary.
+ * or organisation memberships.
+ *
+ * APZQEP-152: when `permissions` is supplied (from resolveSessionAuthorization),
+ * they are attached for Cap A–F domain enforcement. Gateway paths that use
+ * ProductionAuthorizationProvider may still pass empty and resolve separately.
  */
 export function buildServiceRequestContext(
-  input: BuildServiceRequestContextInput,
+  input: BuildServiceRequestContextInput & {
+    readonly permissions?: readonly string[];
+  },
 ): ServiceRequestContext {
   const { session, tracing } = input;
   const userId = session.user.id;
@@ -45,7 +50,7 @@ export function buildServiceRequestContext(
     tenantId,
     userId,
     correlationId: tracing.correlationId,
-    permissions: [],
+    permissions: input.permissions ? [...input.permissions] : [],
     requestId: tracing.requestId,
     locale: input.locale,
     timezone: input.timezone,

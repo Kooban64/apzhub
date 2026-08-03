@@ -29,23 +29,11 @@ import { getExecutionPlanRuntime } from "@/lib/qep/execution-plan-runtime";
 type RouteContext = { params: Promise<Record<string, string>> };
 
 function actorFromContext(context: PlatformApiRequestContext): PlanActor {
-  const base = context.serviceContext.permissions;
-  const permissions =
-    base.includes("qep.execution_plans.read") ||
-    base.includes("qep.execution_plans.admin")
-      ? base
-      : [
-          ...base,
-          "qep.execution_plans.read",
-          "qep.execution_plans.create",
-          "qep.execution_plans.update",
-          "qep.execution_plans.lifecycle",
-          "qep.execution_plans.handoff",
-        ];
+  // APZQEP-152: fail closed — no LIMITED_AVAILABILITY elevation.
   return {
     userId: context.serviceContext.userId,
     tenantId: context.serviceContext.tenantId,
-    permissions,
+    permissions: context.serviceContext.permissions,
   };
 }
 

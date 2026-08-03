@@ -1,4 +1,12 @@
 import type { AuthorizationService } from "./authorization-service";
+import {
+  DEFAULT_QEP_OPERATOR_ROLE_ID,
+  DEFAULT_QEP_READER_ROLE_ID,
+  QEP_CORE_QE_PERMISSIONS,
+  QEP_OPERATOR_PERMISSIONS,
+  QEP_READER_PERMISSIONS,
+  isQepOperatorAutoAssignEnabled,
+} from "./qep-core-qe-permissions";
 
 /** Aligned with platform identity default tenant (M8-01). */
 export const DEFAULT_PLATFORM_TENANT_ID = "t0000001-0000-4000-8000-000000000001";
@@ -6,6 +14,10 @@ export const DEFAULT_PLATFORM_TENANT_ID = "t0000001-0000-4000-8000-000000000001"
 export const DEFAULT_PLATFORM_ADMIN_ROLE_ID = "role-platform-admin";
 export const DEFAULT_LAW_OPERATOR_ROLE_ID = "role-law-operator";
 export const DEFAULT_TENANT_MEMBER_ROLE_ID = "role-tenant-member";
+export {
+  DEFAULT_QEP_OPERATOR_ROLE_ID,
+  DEFAULT_QEP_READER_ROLE_ID,
+} from "./qep-core-qe-permissions";
 
 const DEFAULT_PERMISSIONS = [
   "*",
@@ -41,6 +53,7 @@ const DEFAULT_PERMISSIONS = [
   "reporting.*",
   "approval.*",
   "dashboard.*",
+  ...QEP_CORE_QE_PERMISSIONS,
 ] as const;
 
 export function seedDefaultAuthorizationCatalog(service: AuthorizationService): void {
@@ -99,6 +112,32 @@ export function seedDefaultAuthorizationCatalog(service: AuthorizationService): 
       ],
     );
   }
+
+  // APZQEP-152 — Cap A–F roles (least privilege; not on tenant-member)
+  if (!service.roleService.getRole(DEFAULT_QEP_OPERATOR_ROLE_ID)) {
+    service.createRole(
+      {
+        roleId: DEFAULT_QEP_OPERATOR_ROLE_ID,
+        slug: "qep-operator",
+        name: "QEP Operator",
+        scope: "product",
+        productKey: "apzqep",
+      },
+      [...QEP_OPERATOR_PERMISSIONS],
+    );
+  }
+  if (!service.roleService.getRole(DEFAULT_QEP_READER_ROLE_ID)) {
+    service.createRole(
+      {
+        roleId: DEFAULT_QEP_READER_ROLE_ID,
+        slug: "qep-reader",
+        name: "QEP Reader",
+        scope: "product",
+        productKey: "apzqep",
+      },
+      [...QEP_READER_PERMISSIONS],
+    );
+  }
 }
 
 export function provisionDefaultAuthorizationForUser(
@@ -119,4 +158,14 @@ export function provisionDefaultAuthorizationForUser(
     roleId: DEFAULT_LAW_OPERATOR_ROLE_ID,
     productKey: "law-platform",
   });
+
+  // Explicit opt-in only — production fail-closed without Cap grants.
+  if (isQepOperatorAutoAssignEnabled()) {
+    service.assignRole({
+      userId: input.userId,
+      roleId: DEFAULT_QEP_OPERATOR_ROLE_ID,
+      tenantId,
+      productKey: "apzqep",
+    });
+  }
 }

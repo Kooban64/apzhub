@@ -6,7 +6,7 @@
 | Authority          | Product Board — **STANDING**                   |
 | Audience           | Engineers, architects, auditors, AI assistants |
 | Rule               | **Read this document before any APZQEP work**  |
-| Last updated       | 20260803T062200Z                               |
+| Last updated       | 20260803T064500Z                               |
 | Engineering thread | **FORMALLY COMPLETE**                          |
 
 ---
@@ -54,13 +54,16 @@ Production Certification:
 PENDING
 
 Outstanding Release Blockers:
-RB-002 — Production RBAC Hardening
+NONE (engineering) — RB-002 Product Board formal clearance + APZQEP-150 re-run pending
 
 RB-001 Status:
 FORMALLY CLEARED / CLOSED (APZQEP-151 CERTIFIED)
 
+RB-002 Status:
+ENGINEERING CLEARED (APZQEP-152) — Product Board formal clearance pending
+
 Current Engineering Authority:
-CLOSED
+CLOSED (APZQEP-152 engineering complete; await Board / APZQEP-150 re-run)
 
 Current Product Board Authority:
 STANDING
@@ -69,8 +72,9 @@ Next Authorised Programme:
 NONE
 
 Next Action:
-Owner Authorisation required for APZQEP-152 — Production RBAC Hardening.
-After APZQEP-152: re-run APZQEP-150 for final Version 1.0 Go/No-Go.
+1. Product Board review of RB-002 clearance.
+2. Re-run APZQEP-150 Product Readiness Audit.
+3. Fresh Go/No-Go — do not declare production GO from APZQEP-152 alone.
 ```
 
 ---
@@ -105,21 +109,22 @@ After APZQEP-152: re-run APZQEP-150 for final Version 1.0 Go/No-Go.
 
 ## Programme History (Version 1.0)
 
-| Programme      | Outcome                                            |
-| -------------- | -------------------------------------------------- |
-| APZQEP-ENG-001 | Archived (Reference Implementation)                |
-| APZHUB-ENG-002 | Enterprise Governance Established                  |
-| APZQEP-120     | Platform Foundation Complete                       |
-| APZQEP-140-000 | Product Architecture Complete                      |
-| APZQEP-140-A   | Enterprise Test Suite Management Complete          |
-| APZQEP-140-B   | Enterprise Test Execution Planning Complete        |
-| APZQEP-140-C   | Enterprise Test Execution Workspace Complete       |
-| APZQEP-140-D   | Enterprise Defect Management Complete              |
-| APZQEP-140-E   | Enterprise Requirements & Traceability Complete    |
-| APZQEP-140-F   | Enterprise Reporting & Analytics Complete          |
-| APZQEP-140     | Core Quality Engineering Complete                  |
-| APZQEP-150     | Product Readiness Audit Complete (NO-GO)           |
-| APZQEP-151     | Durable Product Persistence **CERTIFIED / CLOSED** |
+| Programme      | Outcome                                                              |
+| -------------- | -------------------------------------------------------------------- |
+| APZQEP-ENG-001 | Archived (Reference Implementation)                                  |
+| APZHUB-ENG-002 | Enterprise Governance Established                                    |
+| APZQEP-120     | Platform Foundation Complete                                         |
+| APZQEP-140-000 | Product Architecture Complete                                        |
+| APZQEP-140-A   | Enterprise Test Suite Management Complete                            |
+| APZQEP-140-B   | Enterprise Test Execution Planning Complete                          |
+| APZQEP-140-C   | Enterprise Test Execution Workspace Complete                         |
+| APZQEP-140-D   | Enterprise Defect Management Complete                                |
+| APZQEP-140-E   | Enterprise Requirements & Traceability Complete                      |
+| APZQEP-140-F   | Enterprise Reporting & Analytics Complete                            |
+| APZQEP-140     | Core Quality Engineering Complete                                    |
+| APZQEP-150     | Product Readiness Audit Complete (NO-GO)                             |
+| APZQEP-151     | Durable Product Persistence **CERTIFIED / CLOSED**                   |
+| APZQEP-152     | Enterprise Production RBAC & Security Hardening Engineering Complete |
 
 ---
 
@@ -158,22 +163,22 @@ Board (151): [v1.1/apzqep-151/APZQEP-151-PRODUCT-BOARD-CERTIFICATION.md](./v1.1/
 
 ## Deferred / recommended only
 
-| Programme                                         | Title                                 | Status                                           |
-| ------------------------------------------------- | ------------------------------------- | ------------------------------------------------ |
-| APZQEP-152                                        | Production RBAC Hardening             | **RECOMMENDED · NOT AUTHORISED** (clears RB-002) |
-| Former “AI Native” under band 150                 | AI / QI                               | **Deferred**                                     |
-| APZQEP-160                                        | Portfolio Intelligence                | **NOT NEXT**                                     |
-| APZQEP-170 / 180                                  | Integrations / Operational Excellence | Future bands — not next                          |
-| Cloud storage, notify adapters, ALM, CI, calendar | Enhancements                          | **Deferred**                                     |
+| Programme                                         | Title                                           | Status                                                                          |
+| ------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------- |
+| APZQEP-152                                        | Enterprise Production RBAC & Security Hardening | **AUTHORISED · ENGINEERING COMPLETE** (RB-002 eng. cleared; Board + 150 re-run) |
+| Former “AI Native” under band 150                 | AI / QI                                         | **Deferred**                                                                    |
+| APZQEP-160                                        | Portfolio Intelligence                          | **NOT NEXT**                                                                    |
+| APZQEP-170 / 180                                  | Integrations / Operational Excellence           | Future bands — not next                                                         |
+| Cloud storage, notify adapters, ALM, CI, calendar | Enhancements                                    | **Deferred**                                                                    |
 
 ---
 
 ## Release blockers
 
-| ID         | Title                                                 | Status                                      |
-| ---------- | ----------------------------------------------------- | ------------------------------------------- |
-| **RB-001** | Durable Product Persistence                           | **CLEARED / CLOSED** (APZQEP-151 CERTIFIED) |
-| **RB-002** | Production RBAC Hardening (HTTP permission elevation) | **OPEN** — APZQEP-152 (when authorised)     |
+| ID         | Title                                | Status                                                      |
+| ---------- | ------------------------------------ | ----------------------------------------------------------- |
+| **RB-001** | Durable Product Persistence          | **CLEARED / CLOSED** (APZQEP-151 CERTIFIED)                 |
+| **RB-002** | Production RBAC & Security Hardening | **ENGINEERING CLEARED** — Board + APZQEP-150 re-run pending |
 
 Register: [v1.1/apzqep-150/ISSUES-REGISTER.md](./v1.1/apzqep-150/ISSUES-REGISTER.md)
 
@@ -188,24 +193,25 @@ Register: [v1.1/apzqep-150/ISSUES-REGISTER.md](./v1.1/apzqep-150/ISSUES-REGISTER
 
 ## Production readiness state
 
-| Item                                 | State                                         |
-| ------------------------------------ | --------------------------------------------- |
-| Product readiness audit (APZQEP-150) | **PASSED / CERTIFIED**                        |
-| Durable persistence (APZQEP-151)     | **CERTIFIED / CLOSED**                        |
-| Unrestricted enterprise production   | **NO-GO** (RB-002)                            |
-| Production certification             | **PENDING**                                   |
-| Release authority                    | **NOT AUTHORISED**                            |
-| Deployment authority                 | **NOT AUTHORISED**                            |
-| Feature freeze                       | **ACTIVE** until Owner authorises a programme |
+| Item                                 | State                             |
+| ------------------------------------ | --------------------------------- |
+| Product readiness audit (APZQEP-150) | **PASSED / CERTIFIED**            |
+| Durable persistence (APZQEP-151)     | **CERTIFIED / CLOSED**            |
+| Unrestricted enterprise production   | **NO-GO** (RB-002)                |
+| Production certification             | **PENDING**                       |
+| Release authority                    | **NOT AUTHORISED**                |
+| Deployment authority                 | **NOT AUTHORISED**                |
+| Feature freeze                       | **ACTIVE** (APZQEP-152 exception) |
 
 ---
 
 ## Path to production certification
 
-1. Owner authorises **APZQEP-152 — Production RBAC Hardening**.
-2. Clear **RB-002**.
-3. Re-run **APZQEP-150** (readiness audit — not a new programme version).
+1. Complete **APZQEP-152** (AUTHORISED) — clear **RB-002**.
+2. Re-run **APZQEP-150** (readiness audit — not a new programme version).
+3. Confirm RB-001 and RB-002 objectively closed.
 4. Product Board final Version 1.0 Go/No-Go decision.
+5. Do **not** declare production GO from APZQEP-152 alone.
 
 ---
 
@@ -229,11 +235,11 @@ This programme produced a reusable engineering discipline transferable to future
 
 The Version 1.0 engineering thread remains **formally complete**. APZQEP-151 is **CERTIFIED / CLOSED**.
 
-No further engineering under this thread unless Owner authorises **APZQEP-152 — Production RBAC Hardening**.
+APZQEP-152 engineering is complete. Engineering authority is **CLOSED**.
 
 Authoritative state:
 
-> **APZQEP Version 1.0 — Engineering Complete. Product Complete. Durable Persistence Complete. RB-001 Cleared. Production Certification Pending (RB-002).**
+> **APZQEP Version 1.0 — RB-001 Cleared. RB-002 Engineering Cleared. Await Board clearance and APZQEP-150 re-run before Go/No-Go. Production Certification Pending.**
 
 ---
 

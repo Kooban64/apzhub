@@ -28,23 +28,11 @@ import { getExecutionWorkspaceRuntime } from "@/lib/qep/execution-workspace-runt
 type RouteContext = { params: Promise<Record<string, string>> };
 
 function actorFromContext(context: PlatformApiRequestContext): SessionActor {
-  const base = context.serviceContext.permissions;
-  const permissions =
-    base.includes("qep.execution_workspace.read") ||
-    base.includes("qep.execution_workspace.admin")
-      ? base
-      : [
-          ...base,
-          "qep.execution_workspace.read",
-          "qep.execution_workspace.create",
-          "qep.execution_workspace.execute",
-          "qep.execution_workspace.lifecycle",
-          "qep.execution_workspace.amend",
-        ];
+  // APZQEP-152: fail closed — no LIMITED_AVAILABILITY elevation.
   return {
     userId: context.serviceContext.userId,
     tenantId: context.serviceContext.tenantId,
-    permissions,
+    permissions: context.serviceContext.permissions,
   };
 }
 

@@ -13,9 +13,17 @@ import type { AuthorizationService } from "./authorization-service";
 import {
   DEFAULT_LAW_OPERATOR_ROLE_ID,
   DEFAULT_PLATFORM_ADMIN_ROLE_ID,
+  DEFAULT_QEP_OPERATOR_ROLE_ID,
+  DEFAULT_QEP_READER_ROLE_ID,
   DEFAULT_TENANT_MEMBER_ROLE_ID,
   seedDefaultAuthorizationCatalog,
 } from "./authorization-seed";
+import {
+  QEP_CORE_QE_PERMISSIONS,
+  QEP_OPERATOR_PERMISSIONS,
+  QEP_READER_PERMISSIONS,
+  isQepOperatorAutoAssignEnabled,
+} from "./qep-core-qe-permissions";
 import type {
   ResolveSessionAuthorizationInput,
   SessionAuthorizationSnapshot,
@@ -36,6 +44,7 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
     "legal.client.manage",
     "legal.trust.view",
     "legal.trust.manage",
+    ...QEP_CORE_QE_PERMISSIONS,
   ];
 
   for (const permissionKey of permissions) {
@@ -78,6 +87,24 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
       tenantId: DEFAULT_PLATFORM_TENANT_ID,
       productKey: null,
       parentRoleId: DEFAULT_LAW_OPERATOR_ROLE_ID,
+    },
+    {
+      roleId: DEFAULT_QEP_OPERATOR_ROLE_ID,
+      slug: "qep-operator",
+      name: "QEP Operator",
+      scope: "product",
+      tenantId: null,
+      productKey: "apzqep",
+      parentRoleId: null,
+    },
+    {
+      roleId: DEFAULT_QEP_READER_ROLE_ID,
+      slug: "qep-reader",
+      name: "QEP Reader",
+      scope: "product",
+      tenantId: null,
+      productKey: "apzqep",
+      parentRoleId: null,
     },
   ] as const;
 
@@ -126,6 +153,16 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
       permissionKey: "legal.trust.view",
       grantType: "allow",
     },
+    ...QEP_OPERATOR_PERMISSIONS.map((permissionKey) => ({
+      roleId: DEFAULT_QEP_OPERATOR_ROLE_ID,
+      permissionKey,
+      grantType: "allow" as const,
+    })),
+    ...QEP_READER_PERMISSIONS.map((permissionKey) => ({
+      roleId: DEFAULT_QEP_READER_ROLE_ID,
+      permissionKey,
+      grantType: "allow" as const,
+    })),
   ] as const;
 
   for (const grant of rolePermissions) {
@@ -151,15 +188,26 @@ export async function ensureUserAuthorizationMembership(input: {
       userId: input.userId,
       roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
       tenantId,
-      productKey: null,
+      productKey: null as string | null,
     },
     {
       assignmentId: `asg-${input.userId}-law-operator`,
       userId: input.userId,
       roleId: DEFAULT_LAW_OPERATOR_ROLE_ID,
-      tenantId: null,
+      tenantId: null as string | null,
       productKey: "law-platform",
     },
+    ...(isQepOperatorAutoAssignEnabled()
+      ? [
+          {
+            assignmentId: `asg-${input.userId}-qep-operator`,
+            userId: input.userId,
+            roleId: DEFAULT_QEP_OPERATOR_ROLE_ID,
+            tenantId,
+            productKey: "apzqep",
+          },
+        ]
+      : []),
   ] as const;
 
   for (const assignment of assignments) {

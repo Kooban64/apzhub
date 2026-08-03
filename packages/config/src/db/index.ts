@@ -7,7 +7,12 @@ export {
   type DatabaseExecutor,
   type DatabaseTransaction,
 } from "./client";
-export { getDatabaseExecutor, runInDatabaseTransaction } from "./transaction-context";
+export {
+  getDatabaseExecutor,
+  getRequestTenantId,
+  runInDatabaseTransaction,
+  runWithTenantContext,
+} from "./transaction-context";
 export {
   createPostgresCoreQeIdempotencyStore,
   type CoreQeIdempotencyStore,

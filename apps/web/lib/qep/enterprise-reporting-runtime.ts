@@ -46,14 +46,9 @@ function daysBetween(from: string, to: string): number {
 function qualityFactsPort(): QualityFactsPort {
   return {
     async collect({ tenantId, projectId, now }) {
-      const reqActor = {
-        userId: "system-reporting",
-        tenantId,
-        permissions: [
-          "qep.enterprise_requirements.read",
-          "qep.enterprise_requirements.admin",
-        ],
-      };
+      // APZQEP-152: no privileged system-reporting actor (HR-001).
+      // Facts are derived from Cap repositories under the caller's Cap F authority.
+      void now;
       const requirements = await getEnterpriseRequirementsRuntime().repository.list({
         tenantId,
         ...(projectId ? { projectId } : {}),
@@ -67,14 +62,13 @@ function qualityFactsPort(): QualityFactsPort {
         if (req.status === "approved" || req.status === "active") {
           requirementApproved += 1;
         }
-        const coverage = await getEnterpriseRequirementsRuntime().service.coverage(
-          reqActor,
-          req.requirementId,
-          now,
-        );
-        requirementCoverageSum += coverage.overallCoverage;
-        if (coverage.uncovered) requirementUncovered += 1;
-        if (coverage.highRiskGap) requirementHighRiskGaps += 1;
+        const linked = req.suiteLinks?.length ?? 0;
+        const overallCoverage = linked > 0 ? 100 : 0;
+        requirementCoverageSum += overallCoverage;
+        if (linked === 0) requirementUncovered += 1;
+        if (linked === 0 && (req.risk === "high" || req.criticality === "critical")) {
+          requirementHighRiskGaps += 1;
+        }
       }
 
       const suites = await getSuiteRuntime().repository.list({

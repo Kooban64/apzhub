@@ -30,15 +30,11 @@ import { getEnterpriseReportingRuntime } from "@/lib/qep/enterprise-reporting-ru
 type RouteContext = { params: Promise<Record<string, string>> };
 
 function actorFromContext(context: PlatformApiRequestContext): ReportingActor {
-  const base = context.serviceContext.permissions;
-  const permissions =
-    base.includes("qep.reporting.read") || base.includes("qep.reporting.admin")
-      ? base
-      : [...base, "qep.reporting.read", "qep.reporting.create", "qep.reporting.update"];
+  // APZQEP-152: fail closed — no LIMITED_AVAILABILITY elevation.
   return {
     userId: context.serviceContext.userId,
     tenantId: context.serviceContext.tenantId,
-    permissions,
+    permissions: context.serviceContext.permissions,
   };
 }
 

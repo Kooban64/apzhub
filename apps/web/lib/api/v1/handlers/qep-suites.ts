@@ -24,21 +24,11 @@ import { getSuiteRuntime } from "@/lib/qep/suite-runtime";
 type RouteContext = { params: Promise<Record<string, string>> };
 
 function actorFromContext(context: PlatformApiRequestContext): SuiteActor {
-  const base = context.serviceContext.permissions;
-  const permissions =
-    base.includes("qep.suites.read") || base.includes("qep.suites.admin")
-      ? base
-      : [
-          ...base,
-          "qep.suites.read",
-          "qep.suites.create",
-          "qep.suites.update",
-          "qep.suites.lifecycle",
-        ];
+  // APZQEP-152: fail closed — no LIMITED_AVAILABILITY elevation.
   return {
     userId: context.serviceContext.userId,
     tenantId: context.serviceContext.tenantId,
-    permissions,
+    permissions: context.serviceContext.permissions,
   };
 }
 

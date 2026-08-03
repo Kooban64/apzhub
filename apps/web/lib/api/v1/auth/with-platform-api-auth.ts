@@ -2,6 +2,7 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 import type { EnrichedValidatedSession } from "@apzhub/auth/server";
+import { runWithTenantContext } from "@apzhub/config";
 import type { ServiceRequestContext } from "@apzhub/platform-service-contracts";
 import {
   applyTrafficHeaders,
@@ -44,7 +45,10 @@ export interface WithPlatformApiAuthOptions {
 
 /**
  * Wrap a platform API route handler with tracing, authentication, traffic governance,
- * logging, and error translation. Permission decisions remain in RequestPipeline.
+ * logging, and error translation.
+ *
+ * APZQEP-152: attaches PermissionService grants to ServiceRequestContext and runs
+ * the handler inside tenant RLS context. Cap A–F must fail closed (no elevation).
  */
 export function withPlatformApiAuth(
   handler: PlatformApiRouteHandler,
@@ -72,10 +76,22 @@ export function withPlatformApiAuth(
       session = requireAuthenticatedSession(auth);
       const acceptLanguage = request.headers.get("accept-language") ?? undefined;
       const locale = acceptLanguage?.split(",")[0]?.trim().slice(0, 32);
+      const tenantId =
+        session.tenantId ?? session.user.tenantId ?? session.user.activeTenantId;
+
+      const { resolveSessionAuthorization } =
+        await import("@apzhub/platform-authorization/server");
+      const authz = await resolveSessionAuthorization({
+        userId: session.user.id,
+        tenantId,
+        productKey: "apzqep",
+      });
+
       serviceContext = buildServiceRequestContext({
         session,
         tracing,
         locale: locale || undefined,
+        permissions: authz.permissions,
       });
 
       const traffic = await enforceTrafficGovernanceForHandler(request, {
@@ -94,7 +110,9 @@ export function withPlatformApiAuth(
 
       logPlatformApiRequest(request, context, options.operation);
 
-      const response = await handler(request, context, routeContext);
+      const response = await runWithTenantContext(serviceContext.tenantId, () =>
+        handler(request, context, routeContext),
+      );
       logPlatformApiResponse(
         { tracing, session, serviceContext },
         {

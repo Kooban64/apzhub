@@ -11,7 +11,15 @@ export {
   DEFAULT_PLATFORM_ADMIN_ROLE_ID,
   DEFAULT_LAW_OPERATOR_ROLE_ID,
   DEFAULT_TENANT_MEMBER_ROLE_ID,
+  DEFAULT_QEP_OPERATOR_ROLE_ID,
+  DEFAULT_QEP_READER_ROLE_ID,
 } from "./authorization-seed";
+export {
+  QEP_CORE_QE_PERMISSIONS,
+  QEP_OPERATOR_PERMISSIONS,
+  QEP_READER_PERMISSIONS,
+  isQepOperatorAutoAssignEnabled,
+} from "./qep-core-qe-permissions";
 
 let sharedAuthorizationService: AuthorizationService | undefined;
 let sharedRepositories: AuthorizationRepositoryBundle | undefined;

@@ -30,22 +30,11 @@ import { getEnterpriseRequirementsRuntime } from "@/lib/qep/enterprise-requireme
 type RouteContext = { params: Promise<Record<string, string>> };
 
 function actorFromContext(context: PlatformApiRequestContext): RequirementActor {
-  const base = context.serviceContext.permissions;
-  const permissions =
-    base.includes("qep.enterprise_requirements.read") ||
-    base.includes("qep.enterprise_requirements.admin")
-      ? base
-      : [
-          ...base,
-          "qep.enterprise_requirements.read",
-          "qep.enterprise_requirements.create",
-          "qep.enterprise_requirements.update",
-          "qep.enterprise_requirements.lifecycle",
-        ];
+  // APZQEP-152: fail closed — no LIMITED_AVAILABILITY elevation.
   return {
     userId: context.serviceContext.userId,
     tenantId: context.serviceContext.tenantId,
-    permissions,
+    permissions: context.serviceContext.permissions,
   };
 }
 
