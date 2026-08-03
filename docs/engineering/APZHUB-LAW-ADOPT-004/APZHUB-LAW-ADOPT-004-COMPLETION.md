@@ -29,8 +29,9 @@ None triggered.
 
 ## Next
 
-Await Product Board Operations Certification (**PBR-APZHUB-LAW-004**).  
-Do not open Product Readiness (ADOPT-005) without Board + Owner Auth.
+Product Board Operations Certification (**PBR-APZHUB-LAW-004**) — **CERTIFIED** (20260803T135932Z).  
+Next: Owner Auth for **APZHUB-LAW-ADOPT-005** (Product Readiness Alignment).  
+**PBR-005** (Enterprise Adoption Certification) remains **NOT AUTHORISED**.
 
 ## Portfolio recommendation (not a lifecycle change)
 

@@ -23,7 +23,8 @@
 | APZHUB-LAW-ADOPT-003     | **COMPLETE** (engineering alignment)      |
 | PBR-APZHUB-LAW-003       | **COMPLETE — CERTIFIED**                  |
 | APZHUB-LAW-ADOPT-004     | **COMPLETE** (operations alignment)       |
-| PBR-APZHUB-LAW-004       | **NEXT** — not started                    |
-| LAW-ADOPT-005+           | NOT AUTHORISED                            |
+| PBR-APZHUB-LAW-004       | **COMPLETE — CERTIFIED**                  |
+| APZHUB-LAW-ADOPT-005     | **AUTHORISED** — not started              |
+| PBR-APZHUB-LAW-005       | **NOT AUTHORISED**                        |
 
 Engineering authority: **CLOSED**. Lifecycle: **FROZEN**.

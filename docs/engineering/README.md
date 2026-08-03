@@ -73,7 +73,7 @@ Assessment-only programme. Measures products against ENG-003. No engineering.
 **Board:** [PBR-APZHUB-LAW-001](./PBR-APZHUB-LAW-001/) **APPROVED**.  
 **Law governance:** [APZHUB-LAW-ADOPT-002](./APZHUB-LAW-ADOPT-002/) **COMPLETE** · [PBR-APZHUB-LAW-002](./PBR-APZHUB-LAW-002/) **CERTIFIED**.  
 **Law engineering alignment:** [APZHUB-LAW-ADOPT-003](./APZHUB-LAW-ADOPT-003/) **COMPLETE** · [PBR-APZHUB-LAW-003](./PBR-APZHUB-LAW-003/) **CERTIFIED**.  
-**Law operations alignment:** [APZHUB-LAW-ADOPT-004](./APZHUB-LAW-ADOPT-004/) **COMPLETE** → await **PBR-APZHUB-LAW-004**. Lifecycle **FROZEN**.
+**Law operations alignment:** [APZHUB-LAW-ADOPT-004](./APZHUB-LAW-ADOPT-004/) **COMPLETE** · [PBR-APZHUB-LAW-004](./PBR-APZHUB-LAW-004/) **CERTIFIED** → **LAW-ADOPT-005** authorised (not started). Lifecycle **FROZEN**.
 
 ---
 

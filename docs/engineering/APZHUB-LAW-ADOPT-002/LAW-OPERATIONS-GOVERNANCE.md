@@ -4,7 +4,7 @@
 | --------- | ---------------------------------------------------------- |
 | Programme | APZHUB-LAW-ADOPT-002 (obligation) · **ADOPT-004 executed** |
 | Created   | 20260803T122217Z                                           |
-| Updated   | 20260803T135126Z                                           |
+| Updated   | 20260803T135932Z                                           |
 
 ## Enterprise model (cited, unmodified)
 

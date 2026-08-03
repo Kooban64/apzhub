@@ -3,20 +3,22 @@
 | Field     | Value            |
 | --------- | ---------------- |
 | Product   | APZ Law Platform |
-| Timestamp | 20260803T135126Z |
+| Timestamp | 20260803T135932Z |
 
 ```text
 Where Law stops:
-Operations Alignment COMPLETE (APZHUB-LAW-ADOPT-004).
+Operations CERTIFIED (PBR-APZHUB-LAW-004).
 
 What requires approval next:
-Product Board Operations Certification (PBR-APZHUB-LAW-004).
+Owner Authorisation to execute APZHUB-LAW-ADOPT-005
+(Enterprise Product Readiness Alignment).
 
 Engineering:
 CLOSED / UNCHANGED.
-Do not open ADOPT-005 without Board + Owner Auth.
+Enterprise Adoption Certification (PBR-005): NOT AUTHORISED.
+Keep ADOPT-005 (readiness) separate from PBR-005 (certification).
 ```
 
 Authoritative status: [PRODUCT-STATUS.md](../../products/law/PRODUCT-STATUS.md)  
-Ops pack: [../APZHUB-LAW-ADOPT-004/](../APZHUB-LAW-ADOPT-004/)  
+Board pack: [../PBR-APZHUB-LAW-004/](../PBR-APZHUB-LAW-004/)  
 Portfolio milestone: [CURRENT-MILESTONE.md](../../foundation/CURRENT-MILESTONE.md)

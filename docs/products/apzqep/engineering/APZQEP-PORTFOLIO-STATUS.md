@@ -37,7 +37,8 @@
 | APZHUB-LAW-ADOPT-003     | ✅ Enterprise Engineering Alignment **COMPLETE**                    |
 | PBR-APZHUB-LAW-003       | ✅ Engineering Alignment **CERTIFIED**                              |
 | APZHUB-LAW-ADOPT-004     | ✅ Enterprise Operations Alignment **COMPLETE**                     |
-| PBR-APZHUB-LAW-004       | ⏳ **NEXT** — Operations Certification (not started)                |
+| PBR-APZHUB-LAW-004       | ✅ Operations Alignment **CERTIFIED**                               |
+| APZHUB-LAW-ADOPT-005     | ⏳ **AUTHORISED** — Product Readiness Alignment (not started)       |
 
 ---
 
