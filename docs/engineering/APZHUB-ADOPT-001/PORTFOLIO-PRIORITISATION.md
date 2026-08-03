@@ -30,6 +30,8 @@ Business value · Operational importance · Risk · Complexity · Dependencies �
 | Parallel portfolio modernisation    | **NOT RECOMMENDED**      |
 | APZQEP re-adoption                  | **EXCLUDED** (reference) |
 
-## Board decision requested
+## Board decision
 
-Select the first product to enter **Enterprise Adoption Phase 1 (Governance Alignment)** under a separate Owner Authorisation. Assessment recommends **APZ Law Platform** unless Board prioritises business value differently (e.g. Projects first for customer impact).
+**PBR-APZHUB-001 (20260803T095342Z):** Selected product **APZ Law Platform** — **APPROVED**.  
+Next authorised programme: **APZHUB-LAW-ADOPT-001** (engineering not started).  
+See [../PBR-APZHUB-001/](../PBR-APZHUB-001/).

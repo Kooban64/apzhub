@@ -1,10 +1,11 @@
 # PORTFOLIO-ADOPTION-ROADMAP
 
-| Field     | Value                                     |
-| --------- | ----------------------------------------- |
-| Programme | APZHUB-ADOPT-001                          |
-| Timestamp | 20260803T084305Z                          |
-| Rule      | **Describe phases only — do not execute** |
+| Field        | Value                                                                               |
+| ------------ | ----------------------------------------------------------------------------------- |
+| Programme    | APZHUB-ADOPT-001                                                                    |
+| Timestamp    | 20260803T084305Z                                                                    |
+| Board update | **PBR-APZHUB-001** (20260803T095342Z) — first product **APZ Law Platform** APPROVED |
+| Rule         | Phases described; execution only under product ADOPT programmes                     |
 
 ## Common phase model (every product)
 
@@ -19,16 +20,16 @@
 
 ## Product phase notes
 
-| Product          | Phase 0                    | Next described focus                                                |
-| ---------------- | -------------------------- | ------------------------------------------------------------------- |
-| APZ Projects     | Complete (this assessment) | Phase 1 — PRODUCT-STATUS + reconcile Production vs nascent          |
-| APZ Support      | Complete                   | Phase 1 — PRODUCT-STATUS + adapter version truth                    |
-| APZ Time         | Complete                   | Phase 1 — PRODUCT-STATUS + catalogue correction                     |
-| APZ Documents    | Complete                   | Phase 1 — single authoritative face                                 |
-| APZ Analytics    | Complete                   | Phase 1 blocked until acceptance/catalogue resolved (**NOT READY**) |
-| APZ Workflow     | Complete                   | Phase 1 blocked until acceptance/catalogue resolved (**NOT READY**) |
-| APZ Law Platform | Complete                   | Phase 1 — PRODUCT-STATUS + clear maturity labels                    |
+| Product          | Phase 0                    | Next described focus                                                                                                     |
+| ---------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| APZ Projects     | Complete (this assessment) | Phase 1 — PRODUCT-STATUS + reconcile Production vs nascent                                                               |
+| APZ Support      | Complete                   | Phase 1 — PRODUCT-STATUS + adapter version truth                                                                         |
+| APZ Time         | Complete                   | Phase 1 — PRODUCT-STATUS + catalogue correction                                                                          |
+| APZ Documents    | Complete                   | Phase 1 — single authoritative face                                                                                      |
+| APZ Analytics    | Complete                   | Phase 1 blocked until acceptance/catalogue resolved (**NOT READY**)                                                      |
+| APZ Workflow     | Complete                   | Phase 1 blocked until acceptance/catalogue resolved (**NOT READY**)                                                      |
+| APZ Law Platform | Complete                   | **SELECTED** — next: [APZHUB-LAW-ADOPT-001](../PBR-APZHUB-001/ADOPTION-AUTHORITY.md) (Governance Alignment; not started) |
 
 ## Portfolio rule
 
-Do not modernise the entire portfolio at once. Product Board selects **one** first product after reviewing [PORTFOLIO-PRIORITISATION.md](./PORTFOLIO-PRIORITISATION.md).
+Do not modernise the entire portfolio at once. **PBR-APZHUB-001** selected **APZ Law Platform** first. Other products remain queued. Standard phase IDs: [ENTERPRISE-PRODUCT-ADOPTION-LIFECYCLE.md](../PBR-APZHUB-001/ENTERPRISE-PRODUCT-ADOPTION-LIFECYCLE.md).

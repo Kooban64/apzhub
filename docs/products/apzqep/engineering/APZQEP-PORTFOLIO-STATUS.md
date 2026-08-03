@@ -1,12 +1,12 @@
 # APZQEP / APZHUB — Portfolio Status Snapshot
 
-| Field     | Value                                                         |
-| --------- | ------------------------------------------------------------- |
-| Date      | 2026-08-03                                                    |
-| Timestamp | 20260803T075550Z                                              |
-| Authority | Product Board — **PBR-APZQEP-1.0-001 GO** · OPS-001 · ENG-003 |
-| Status    | **IN FORCE**                                                  |
-| Posture   | **Operations-led** GA · portfolio lifecycle via ENG-003       |
+| Field     | Value                                                                       |
+| --------- | --------------------------------------------------------------------------- |
+| Date      | 2026-08-03                                                                  |
+| Timestamp | 20260803T095342Z                                                            |
+| Authority | Product Board — PBR-APZQEP-1.0-001 · OPS-001 · ENG-003 · **PBR-APZHUB-001** |
+| Status    | **IN FORCE**                                                                |
+| Posture   | APZQEP ops-led GA · first portfolio adoption: **APZ Law Platform**          |
 
 ---
 
@@ -28,6 +28,9 @@
 | APZQEP Version 1.1       | ⏸ **NOT OPENED** — evidence-driven; Board auth required             |
 | APZHUB-ENG-002           | ✅ Foundation COMPLETE · Phase 1 CLOSED · ES promotions **ON HOLD** |
 | APZHUB-ENG-003           | ✅ Enterprise Engineering Adoption **COMPLETE** (portfolio model)   |
+| APZHUB-ADOPT-001         | ✅ Enterprise Product Adoption Assessment **COMPLETE**              |
+| PBR-APZHUB-001           | ✅ First adoption product **APZ Law Platform APPROVED**             |
+| APZHUB-LAW-ADOPT-001     | ⏳ **AUTHORISED** — not started (await Owner Auth execution)        |
 
 ---
 

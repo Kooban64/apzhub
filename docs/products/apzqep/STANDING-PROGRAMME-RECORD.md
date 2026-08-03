@@ -3,7 +3,8 @@
 > **Version 1.0 current product status (authoritative):** [PRODUCT-STATUS.md](./PRODUCT-STATUS.md)  
 > This Standing Programme Record remains the historical programme baseline. For engineering / release posture, **PRODUCT-STATUS.md wins**.  
 > **PBR-APZQEP-1.0-001 (20260803T071607Z):** Product Board **GO** — Version 1.0 **GENERAL AVAILABILITY** — [pbr-apzqep-1.0-001/](./v1.1/pbr-apzqep-1.0-001/)  
-> **APZQEP-OPS-001 (20260803T072224Z):** GA Operations & Product Intelligence **COMPLETE** — **operations-led** — Version 1.1 **NOT OPENED** — [apzqep-ops-001/](./v1.1/apzqep-ops-001/)
+> **APZQEP-OPS-001 (20260803T072224Z):** GA Operations & Product Intelligence **COMPLETE** — **operations-led** — Version 1.1 **NOT OPENED** — [apzqep-ops-001/](./v1.1/apzqep-ops-001/)  
+> **PBR-APZHUB-001 (20260803T095342Z):** First enterprise adoption product **APZ Law Platform APPROVED** — next **APZHUB-LAW-ADOPT-001** (not started) — [PBR-APZHUB-001](../../engineering/PBR-APZHUB-001/)
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
