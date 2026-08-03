@@ -97,6 +97,18 @@ Internet → host nginx (:443 TLS) → Docker nginx-gateway (:8080) → app cont
 | `/home/ubuntu/old-do-not-touch-apzportal/`      | Legacy archive                         | do not touch                           |
 | `/home/ubuntu/apz-portal/`                      | APZHUB monorepo (SPR-001)              | **IN DEVELOPMENT**                     |
 
+## APZHUB public hostname (coexistence)
+
+| Item         | Value                                                                                                              |
+| ------------ | ------------------------------------------------------------------------------------------------------------------ |
+| Public URL   | **https://apzhub.apzportal.apzor.com**                                                                             |
+| DNS          | A record → host (coexists with `*.apzportal.apzor.com`)                                                            |
+| Host nginx   | `/etc/nginx/sites-enabled/05-apzhub-platform.conf` → `127.0.0.1:3300`                                              |
+| TLS          | Dedicated LE cert `apzhub.apzportal.apzor.com` (wildcard LE cert is **EXPIRED** — do not rely on it for this host) |
+| Legacy stack | Unchanged — wildcard still routes other subdomains to gateway `:8080`                                              |
+
+**Bring-up (ops):** Postgres `:54334` + Redis `:6380` via APZHUB compose; set `APP_URL` / `NEXT_PUBLIC_APP_URL` / `BETTER_AUTH_URL` to the public URL; `NODE_ENV=production`; rebuild `@apzhub/web`; start via standalone `node apps/web/.next/standalone/apps/web/server.js` (or supported start script) on **3300**. Do not bind legacy ports.
+
 ## APZHUB development ports (SPR-001)
 
 Dedicated ports for `/home/ubuntu/apz-portal` — chosen to avoid `apz-stack` conflicts (`54333`, `8080`, `18081–18088`, etc.).
@@ -105,7 +117,7 @@ Dedicated ports for `/home/ubuntu/apz-portal` — chosen to avoid `apz-stack` co
 
 | Service                 | Host port | Notes                             |
 | ----------------------- | --------- | --------------------------------- |
-| `@apzhub/web` (Next.js) | **3300**  | `pnpm dev`                        |
+| `@apzhub/web` (Next.js) | **3300**  | Public hostname proxies here      |
 | Storybook               | **6006**  | `pnpm storybook`                  |
 | PostgreSQL (`apzhub`)   | **54334** | Docker; legacy `apzpg` uses 54333 |
 | Redis                   | **6380**  | Docker                            |
