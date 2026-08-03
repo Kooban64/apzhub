@@ -27,6 +27,7 @@
 | APZQEP-OPS-001           | ✅ GA Operations & Product Intelligence **COMPLETE**                |
 | APZQEP Version 1.1       | ⏸ **NOT OPENED** — evidence-driven; Board auth required             |
 | APZHUB-ENG-002           | ✅ Foundation COMPLETE · Phase 1 CLOSED · ES promotions **ON HOLD** |
+| APZHUB-ENG-003           | ✅ Enterprise Engineering Adoption **COMPLETE** (portfolio model)   |
 
 ---
 
