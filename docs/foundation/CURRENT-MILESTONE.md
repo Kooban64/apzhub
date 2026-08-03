@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-03  
-> **Current status:** **APZQEP-152 engineering COMPLETE** (RB-002 eng. cleared; Board + APZQEP-150 re-run pending) · RB-001 **CLEARED** · Engineering authority **CLOSED** · Product Board authority **STANDING** · Authoritative status: [PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md) · Feature freeze **ACTIVE** · Release/Deployment **NOT AUTHORISED** · Governance **1.0 STABLE** · Baseline **1.2** · ES-004 **NOT AUTHORISED**.
+> **Current status:** **APZQEP-152 CERTIFIED / CLOSED** (RB-001 & RB-002 **CLEARED**) · Production Release **PENDING RECERTIFICATION** · Next: Owner Auth for **APZQEP-150R** · Engineering authority **CLOSED** · Product Board authority **STANDING** · Authoritative status: [PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md) · Feature freeze **ACTIVE** · Release/Deployment **NOT AUTHORISED** · Governance **1.0 STABLE** · Baseline **1.2** · ES-004 **NOT AUTHORISED**.
 
 ---
 

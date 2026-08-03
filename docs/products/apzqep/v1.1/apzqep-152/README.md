@@ -1,19 +1,26 @@
 # APZQEP-152 — Enterprise Production RBAC & Security Hardening
 
-| Field           | Value                                                                         |
-| --------------- | ----------------------------------------------------------------------------- |
-| Programme       | APZQEP-152                                                                    |
-| Title           | Enterprise Production RBAC & Security Hardening                               |
-| Release Blocker | RB-002                                                                        |
-| Status          | **ENGINEERING COMPLETE** — Board clearance of RB-002 pending                  |
-| Classification  | Production Blocker Remediation / Enterprise Production Security Certification |
-| Authority       | Owner Authorisation 20260803T063000Z                                          |
-| Prerequisite    | APZQEP-151 CERTIFIED (RB-001 CLOSED)                                          |
-| Last updated    | 20260803T064500Z                                                              |
+| Field              | Value                                                                         |
+| ------------------ | ----------------------------------------------------------------------------- |
+| Programme          | APZQEP-152                                                                    |
+| Title              | Enterprise Production RBAC & Security Hardening                               |
+| Release Blocker    | RB-002                                                                        |
+| Status             | **CERTIFIED / CLOSED** — RB-002 **FORMALLY CLEARED**                          |
+| Classification     | Production Blocker Remediation / Enterprise Production Security Certification |
+| Authority          | Owner Authorisation 20260803T063000Z · Board Certification 20260803T064700Z   |
+| Prerequisite       | APZQEP-151 CERTIFIED (RB-001 CLOSED)                                          |
+| Engineering commit | `f6c22865`                                                                    |
+| Last updated       | 20260803T064700Z                                                              |
+
+## Board certification
+
+[APZQEP-152-PRODUCT-BOARD-CERTIFICATION.md](./APZQEP-152-PRODUCT-BOARD-CERTIFICATION.md)
 
 ## Objective
 
 Certify that APZQEP implements production-grade authentication, authorisation, tenancy isolation and permission enforcement. Clear RB-002. Not feature development.
+
+Next: [APZQEP-150R](../apzqep-150r/) (Owner Authorisation required). Do not declare production GO from this programme.
 
 ## Document pack
 
