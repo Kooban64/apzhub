@@ -3,7 +3,7 @@
 | Field     | Value                    |
 | --------- | ------------------------ |
 | Document  | PRODUCT-BOARD-REGISTER   |
-| Timestamp | 20260803T192906Z         |
+| Timestamp | 20260803T195639Z         |
 | Authority | Product Board — STANDING |
 
 ## Resolutions
@@ -20,10 +20,11 @@
 
 ## Pending / next
 
-| Item              | State                                                                                                             |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------- |
-| APZQEP-164        | **AUTHORISED TO OPEN** — **NOT STARTED** — awaits separate Owner Auth — Enterprise Dashboard & Quality Experience |
-| APZQEP-165…166    | Planned — **not authorised**                                                                                      |
-| APZQEP-163A       | External AI providers — **not authorised**                                                                        |
-| Remote push (ops) | Local `main` ahead of `origin/main` — Owner/ops push when credentials available (OI-164-000-02)                   |
-| Wave progress     | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                                                |
+| Item                | State                                                                                    |
+| ------------------- | ---------------------------------------------------------------------------------------- |
+| APZQEP-164 eng pack | **COMPLETE** — await Wave 4 Board certification — [v1.1/apzqep-164/](./v1.1/apzqep-164/) |
+| PBR-APZQEP-164      | **PENDING** — Wave 4 Product Board Engineering Certification                             |
+| APZQEP-165…166      | Planned — **not authorised**                                                             |
+| APZQEP-163A         | External AI providers — **not authorised**                                               |
+| Remote push (ops)   | Local `main` ahead of `origin/main` — Owner/ops push when credentials available          |
+| Wave progress       | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                       |

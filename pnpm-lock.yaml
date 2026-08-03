@@ -287,6 +287,9 @@ importers:
       '@apzhub/platform-bootstrap':
         specifier: workspace:*
         version: link:../../packages/platform-bootstrap
+      '@apzhub/platform-dashboard':
+        specifier: workspace:*
+        version: link:../../packages/platform-dashboard
       '@apzhub/platform-event-bus':
         specifier: workspace:*
         version: link:../../packages/platform-event-bus
@@ -329,12 +332,18 @@ importers:
       '@apzhub/platform-services':
         specifier: workspace:*
         version: link:../../packages/platform-services
+      '@apzhub/platform-visualization':
+        specifier: workspace:*
+        version: link:../../packages/platform-visualization
       '@apzhub/qep-automation':
         specifier: workspace:*
         version: link:../../packages/qep-automation
       '@apzhub/qep-contracts':
         specifier: workspace:*
         version: link:../../packages/qep-contracts
+      '@apzhub/qep-dashboards':
+        specifier: workspace:*
+        version: link:../../packages/qep-dashboards
       '@apzhub/qep-defects':
         specifier: workspace:*
         version: link:../../packages/qep-defects
@@ -896,6 +905,8 @@ importers:
         specifier: workspace:*
         version: link:../platform-security
 
+  packages/platform-dashboard: {}
+
   packages/platform-event-bus:
     dependencies:
       '@apzhub/event-notification-framework':
@@ -1188,6 +1199,8 @@ importers:
         specifier: '>=0.45.2'
         version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
 
+  packages/platform-visualization: {}
+
   packages/qep-automation:
     dependencies:
       '@apzhub/platform-automation':
@@ -1205,6 +1218,15 @@ importers:
       '@apzhub/qep-types':
         specifier: workspace:*
         version: link:../qep-types
+
+  packages/qep-dashboards:
+    dependencies:
+      '@apzhub/platform-dashboard':
+        specifier: workspace:*
+        version: link:../platform-dashboard
+      '@apzhub/platform-visualization':
+        specifier: workspace:*
+        version: link:../platform-visualization
 
   packages/qep-defects:
     dependencies:

@@ -1,0 +1,16 @@
+{
+  "name": "@apzhub/platform-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB reusable Dashboard Platform — dashboard engine, widget registry, layouts, saved views (APZQEP-164). Product-agnostic; no business logic.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./contracts": "./src/contracts/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/platform-dashboard"
+  }
+}

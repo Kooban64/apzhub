@@ -173,3 +173,11 @@ export {
   isQepQiRoute,
   parseQepQiRecommendationId,
 } from "@apzhub/qep-quality-intelligence/presentation";
+
+export {
+  QEP_DASHBOARDS_BASE_PATH,
+  QEP_DASHBOARDS_ROUTES,
+  isQepDashboardsRoute,
+  parseQepDashboardId,
+  parseQepDashboardAudience,
+} from "@apzhub/qep-dashboards/presentation";

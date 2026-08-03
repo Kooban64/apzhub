@@ -547,6 +547,18 @@ const packageAliases = {
     __dirname,
     "packages/qep-quality-intelligence/src/index.ts",
   ),
+  "@apzhub/platform-dashboard": path.resolve(
+    __dirname,
+    "packages/platform-dashboard/src/index.ts",
+  ),
+  "@apzhub/platform-visualization": path.resolve(
+    __dirname,
+    "packages/platform-visualization/src/index.ts",
+  ),
+  "@apzhub/qep-dashboards": path.resolve(
+    __dirname,
+    "packages/qep-dashboards/src/index.ts",
+  ),
 
   "@apzhub/qep-requirements-traceability": path.resolve(
     __dirname,

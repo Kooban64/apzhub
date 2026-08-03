@@ -118,6 +118,14 @@
       "@apzhub/qep-quality-intelligence/presentation": [
         "../../packages/qep-quality-intelligence/src/presentation/index.ts"
       ],
+      "@apzhub/platform-dashboard": ["../../packages/platform-dashboard/src/index.ts"],
+      "@apzhub/platform-visualization": [
+        "../../packages/platform-visualization/src/index.ts"
+      ],
+      "@apzhub/qep-dashboards": ["../../packages/qep-dashboards/src/index.ts"],
+      "@apzhub/qep-dashboards/presentation": [
+        "../../packages/qep-dashboards/src/presentation/index.ts"
+      ],
 
       "@apzhub/law-platform/api": ["../law-platform/lib/api/index.ts"]
     }

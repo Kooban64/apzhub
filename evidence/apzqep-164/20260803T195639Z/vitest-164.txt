@@ -1,0 +1,25 @@
+Scope: 3 of 119 workspace projects
+packages/platform-dashboard test$ cd ../.. && vitest run --config vitest.config.ts packages/platform-dashboard
+packages/platform-visualization test$ cd ../.. && vitest run --config vitest.config.ts packages/platform-visualization
+packages/platform-dashboard test:  RUN  v3.2.6 /home/ubuntu/apz-portal
+packages/platform-visualization test:  RUN  v3.2.6 /home/ubuntu/apz-portal
+packages/platform-visualization test:  ✓ packages/platform-visualization/src/platform-visualization.test.ts (3 tests) 7ms
+packages/platform-visualization test:  Test Files  1 passed (1)
+packages/platform-visualization test:       Tests  3 passed (3)
+packages/platform-visualization test:    Start at  19:56:29
+packages/platform-visualization test:    Duration  1.59s (transform 105ms, setup 223ms, collect 65ms, tests 7ms, environment 501ms, prepare 119ms)
+packages/platform-dashboard test:  ✓ packages/platform-dashboard/src/platform-dashboard.test.ts (4 tests) 10ms
+packages/platform-dashboard test:  Test Files  1 passed (1)
+packages/platform-dashboard test:       Tests  4 passed (4)
+packages/platform-dashboard test:    Start at  19:56:29
+packages/platform-dashboard test:    Duration  1.65s (transform 149ms, setup 232ms, collect 106ms, tests 10ms, environment 495ms, prepare 126ms)
+packages/platform-visualization test: Done
+packages/platform-dashboard test: Done
+packages/qep-dashboards test$ cd ../.. && vitest run --config vitest.config.ts packages/qep-dashboards
+packages/qep-dashboards test:  RUN  v3.2.6 /home/ubuntu/apz-portal
+packages/qep-dashboards test:  ✓ packages/qep-dashboards/src/qep-dashboards.test.ts (3 tests) 9ms
+packages/qep-dashboards test:  Test Files  1 passed (1)
+packages/qep-dashboards test:       Tests  3 passed (3)
+packages/qep-dashboards test:    Start at  19:56:31
+packages/qep-dashboards test:    Duration  1.40s (transform 200ms, setup 207ms, collect 217ms, tests 9ms, environment 474ms, prepare 98ms)
+packages/qep-dashboards test: Done

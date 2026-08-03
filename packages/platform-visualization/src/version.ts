@@ -1,0 +1,2 @@
+export const PLATFORM_VISUALIZATION_VERSION = "0.1.0" as const;
+export const PLATFORM_VISUALIZATION_PROGRAMME = "APZQEP-164" as const;

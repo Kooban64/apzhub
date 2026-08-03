@@ -18,10 +18,12 @@ import {
   isQepAutomationRoute,
   isQepScmRoute,
   isQepQiRoute,
+  isQepDashboardsRoute,
   isQepWorkspaceRoute,
 } from "@/lib/qep/routes";
 
 import { QepAutomationRouterView } from "./qep-automation-views";
+import { QepDashboardsRouterView } from "./qep-dashboards-views";
 import { QepQualityIntelligenceRouterView } from "./qep-quality-intelligence-views";
 import { QepScmRouterView } from "./qep-scm-views";
 
@@ -59,6 +61,10 @@ export function QepWorkspaceRouter() {
 
   if (isQepQiRoute(pathname)) {
     return <QepQualityIntelligenceRouterView />;
+  }
+
+  if (isQepDashboardsRoute(pathname)) {
+    return <QepDashboardsRouterView />;
   }
 
   if (isQepSuitesRoute(pathname)) {

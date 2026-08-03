@@ -1,0 +1,20 @@
+{
+  "name": "@apzhub/qep-dashboards",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZQEP Enterprise Dashboard & Quality Experience — consumes platform-dashboard and platform-visualization (APZQEP-164)",
+  "exports": {
+    ".": "./src/index.ts",
+    "./presentation": "./src/presentation/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-dashboards"
+  },
+  "dependencies": {
+    "@apzhub/platform-dashboard": "workspace:*",
+    "@apzhub/platform-visualization": "workspace:*"
+  }
+}
