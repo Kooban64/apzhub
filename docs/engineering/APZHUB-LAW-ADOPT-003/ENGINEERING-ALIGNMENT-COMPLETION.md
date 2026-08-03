@@ -24,4 +24,5 @@ None triggered. Governance/standards unmodified. No architecture redesign. No ne
 
 ## Next
 
-Await Product Board Engineering Certification (**PBR-APZHUB-LAW-003**). Do not open ADOPT-004 without Board + Owner Auth.
+Product Board Engineering Certification (**PBR-APZHUB-LAW-003**) — **CERTIFIED** (20260803T133515Z).  
+Next: Owner Auth for **APZHUB-LAW-ADOPT-004** (Operations Alignment).

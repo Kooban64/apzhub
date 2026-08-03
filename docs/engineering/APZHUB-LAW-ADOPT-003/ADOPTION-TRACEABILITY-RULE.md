@@ -4,7 +4,7 @@
 | ---------------- | -------------------------------------------------------------------------------------------------------- |
 | Source programme | APZHUB-LAW-ADOPT-003                                                                                     |
 | Timestamp        | 20260803T132559Z                                                                                         |
-| Status           | **RECORDED** for Product Board / portfolio adoption — **not** injected into frozen enterprise governance |
+| Status           | **ACCEPTED AS RECOMMENDATION** (PBR-APZHUB-LAW-003) — **not** injected into frozen enterprise governance |
 
 ## Rule
 
