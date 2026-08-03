@@ -1,21 +1,21 @@
 # LAW-ENGINEERING-ALIGNMENT-BACKLOG
 
-| Field     | Value                                           |
-| --------- | ----------------------------------------------- |
-| Programme | APZHUB-LAW-ADOPT-002                            |
-| Timestamp | 20260803T122217Z                                |
-| Status    | **CREATED**                                     |
-| Rule      | Record only — **implementation NOT AUTHORISED** |
+| Field     | Value                                                   |
+| --------- | ------------------------------------------------------- |
+| Programme | APZHUB-LAW-ADOPT-002 (created) / **ADOPT-003 executed** |
+| Created   | 20260803T122217Z                                        |
+| Updated   | 20260803T132559Z                                        |
+| Status    | **EXECUTED under APZHUB-LAW-ADOPT-003**                 |
 
-Items requiring engineering (from LAW-ADOPT-001 gaps). Do not execute here.
+Items from LAW-ADOPT-001 gaps. Implementation authorised only under LAW-ADOPT-003.
 
-| ID     | Source | Summary                                                                             | Target phase                |
-| ------ | ------ | ----------------------------------------------------------------------------------- | --------------------------- |
-| EAB-01 | LG-06  | Expand `event.yaml` catalogue for Law domain events                                 | LAW-ADOPT-003               |
-| EAB-02 | LG-07  | Align app-local orchestration with Platform Service SDK (009/027) if Board mandates | LAW-ADOPT-003               |
-| EAB-03 | LG-08  | OpenAPI↔runtime honesty remediation                                                 | LAW-ADOPT-003               |
-| EAB-04 | LG-09  | Close tenant claim placeholder (KL-LAW-05)                                          | LAW-ADOPT-003               |
-| EAB-05 | LG-12  | Law connector pack only if external engine required                                 | LAW-ADOPT-003 (conditional) |
-| EAB-06 | LG-11  | Workspace-session ENG-003 gaps if assessment finds eng need                         | LAW-ADOPT-003 (conditional) |
+| ID     | Source | Summary                                                                             | ADOPT-003 disposition                                 |
+| ------ | ------ | ----------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| EAB-01 | LG-06  | Expand `event.yaml` catalogue for Law domain events                                 | **Implemented**                                       |
+| EAB-02 | LG-07  | Align app-local orchestration with Platform Service SDK (009/027) if Board mandates | **Implemented (docs/metadata)** — extraction deferred |
+| EAB-03 | LG-08  | OpenAPI↔runtime honesty remediation                                                 | **Implemented (honesty)** — Trust OpenAPI residual    |
+| EAB-04 | LG-09  | Close tenant claim placeholder (KL-LAW-05)                                          | **Implemented (verify + KL narrow)**                  |
+| EAB-05 | LG-12  | Law connector pack only if external engine required                                 | **Invalid / N/A** (first-party SoR)                   |
+| EAB-06 | LG-11  | Workspace-session ENG-003 gaps if assessment finds eng need                         | **Deferred** (no proven eng defect)                   |
 
-Governance-only items (LG-01…05, LG-10 docs) addressed or referenced in this programme — not engineering backlog.
+Traceability: [APZHUB-LAW-ADOPT-003](../APZHUB-LAW-ADOPT-003/).

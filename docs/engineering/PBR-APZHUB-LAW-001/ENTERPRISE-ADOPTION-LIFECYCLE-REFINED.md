@@ -27,14 +27,15 @@ This lifecycle is a reusable enterprise asset. **Do not** introduce new phases o
 
 ## APZ Law Platform (current)
 
-| Phase      | ID                   | Status                       |
-| ---------- | -------------------- | ---------------------------- |
-| ADOPT-001  | APZHUB-LAW-ADOPT-001 | COMPLETE                     |
-| PBR-001    | PBR-APZHUB-LAW-001   | COMPLETE — APPROVED          |
-| ADOPT-002  | APZHUB-LAW-ADOPT-002 | **COMPLETE**                 |
-| PBR-002    | PBR-APZHUB-LAW-002   | **COMPLETE — CERTIFIED**     |
-| ADOPT-003  | APZHUB-LAW-ADOPT-003 | **AUTHORISED** — not started |
-| ADOPT-004+ | —                    | NOT AUTHORISED               |
+| Phase      | ID                   | Status                   |
+| ---------- | -------------------- | ------------------------ |
+| ADOPT-001  | APZHUB-LAW-ADOPT-001 | COMPLETE                 |
+| PBR-001    | PBR-APZHUB-LAW-001   | COMPLETE — APPROVED      |
+| ADOPT-002  | APZHUB-LAW-ADOPT-002 | **COMPLETE**             |
+| PBR-002    | PBR-APZHUB-LAW-002   | **COMPLETE — CERTIFIED** |
+| ADOPT-003  | APZHUB-LAW-ADOPT-003 | **COMPLETE**             |
+| PBR-003    | PBR-APZHUB-LAW-003   | **NEXT** — not started   |
+| ADOPT-004+ | —                    | NOT AUTHORISED           |
 
 ## Rules
 

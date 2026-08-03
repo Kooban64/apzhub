@@ -6,9 +6,10 @@
 | Product         | **APZ Law Platform**                       |
 | Authority       | Product Board — **STANDING**               |
 | Rule            | **Read this document before any Law work** |
-| Last updated    | 20260803T123550Z                           |
+| Last updated    | 20260803T132559Z                           |
 | Established by  | **APZHUB-LAW-ADOPT-002**                   |
 | Governance cert | **PBR-APZHUB-LAW-002 CERTIFIED**           |
+| Eng alignment   | **APZHUB-LAW-ADOPT-003 COMPLETE**          |
 
 ---
 
@@ -25,20 +26,20 @@ PRODUCTION_READY_WITH_LIMITATIONS
 APZ-LAW-002 ACCEPTED / CLOSED
 
 Enterprise adoption:
-IN PROGRESS — Governance **CERTIFIED** (PBR-APZHUB-LAW-002)
+IN PROGRESS — Governance **CERTIFIED**; Engineering Alignment **COMPLETE**
 
 Enterprise maturity (ADOPT-001):
 Level 3 — Certified Product (historical packaging)
 PARTIALLY READY for enterprise adoption
 
 Engineering authority:
-CLOSED — LAW-ADOPT-003 authorised to open; execution not started
+CLOSED — LAW-ADOPT-003 complete; await PBR-APZHUB-LAW-003
 
 Product Board:
 STANDING
 
 Next authorised programme:
-APZHUB-LAW-ADOPT-003 (Enterprise Engineering Alignment) — await Owner Auth execution
+PBR-APZHUB-LAW-003 (Engineering Certification) — not started
 
 APZQEP relationship:
 APZQEP is Enterprise Reference Implementation — not this product
@@ -48,18 +49,18 @@ APZQEP is Enterprise Reference Implementation — not this product
 
 ## Product identity
 
-| Item                         | Value                                                                                                                                                                   |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| User-facing name             | APZ Law Platform                                                                                                                                                        |
-| Portfolio id                 | `law`                                                                                                                                                                   |
-| App                          | `apps/law-platform` **1.0.0**                                                                                                                                           |
-| Core package                 | `@apzhub/legal-business-core` **1.0.0**                                                                                                                                 |
-| Search package               | `@apzhub/search-law` **0.1.0** (disclosed residual)                                                                                                                     |
-| Authoritative status         | **This document**                                                                                                                                                       |
-| Definition pack (historical) | [README.md](./README.md)                                                                                                                                                |
-| Commercial / packaging pack  | [../apz-law/](../apz-law/README.md)                                                                                                                                     |
-| Release evidence             | [../../releases/law/1.0.0/](../../releases/law/1.0.0/README.md)                                                                                                         |
-| Adoption programmes          | [../../engineering/APZHUB-LAW-ADOPT-001/](../../engineering/APZHUB-LAW-ADOPT-001/) · [../../engineering/APZHUB-LAW-ADOPT-002/](../../engineering/APZHUB-LAW-ADOPT-002/) |
+| Item                         | Value                                                                                                                                                              |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| User-facing name             | APZ Law Platform                                                                                                                                                   |
+| Portfolio id                 | `law`                                                                                                                                                              |
+| App                          | `apps/law-platform` **1.0.0**                                                                                                                                      |
+| Core package                 | `@apzhub/legal-business-core` **1.0.0**                                                                                                                            |
+| Search package               | `@apzhub/search-law` **0.1.0** (disclosed residual)                                                                                                                |
+| Authoritative status         | **This document**                                                                                                                                                  |
+| Definition pack (historical) | [README.md](./README.md)                                                                                                                                           |
+| Commercial / packaging pack  | [../apz-law/](../apz-law/README.md)                                                                                                                                |
+| Release evidence             | [../../releases/law/1.0.0/](../../releases/law/1.0.0/README.md)                                                                                                    |
+| Adoption programmes          | [ADOPT-001](../../engineering/APZHUB-LAW-ADOPT-001/) · [ADOPT-002](../../engineering/APZHUB-LAW-ADOPT-002/) · [ADOPT-003](../../engineering/APZHUB-LAW-ADOPT-003/) |
 
 ---
 
@@ -90,13 +91,15 @@ APZQEP is Enterprise Reference Implementation — not this product
 
 ## Adoption phase (current)
 
-| Phase      | ID                            | Status                                       |
-| ---------- | ----------------------------- | -------------------------------------------- |
-| ADOPT-001  | APZHUB-LAW-ADOPT-001          | COMPLETE                                     |
-| PBR-001    | PBR-APZHUB-LAW-001            | COMPLETE — APPROVED                          |
-| ADOPT-002  | APZHUB-LAW-ADOPT-002          | **IN EXECUTION / COMPLETE (this programme)** |
-| PBR-002    | PBR-APZHUB-LAW-002            | **NEXT** — not started                       |
-| ADOPT-003+ | Engineering / Ops / Readiness | **NOT AUTHORISED**                           |
+| Phase      | ID                      | Status                   |
+| ---------- | ----------------------- | ------------------------ |
+| ADOPT-001  | APZHUB-LAW-ADOPT-001    | COMPLETE                 |
+| PBR-001    | PBR-APZHUB-LAW-001      | COMPLETE — APPROVED      |
+| ADOPT-002  | APZHUB-LAW-ADOPT-002    | **COMPLETE**             |
+| PBR-002    | PBR-APZHUB-LAW-002      | **COMPLETE — CERTIFIED** |
+| ADOPT-003  | APZHUB-LAW-ADOPT-003    | **COMPLETE**             |
+| PBR-003    | PBR-APZHUB-LAW-003      | **NEXT** — not started   |
+| ADOPT-004+ | Ops / Readiness / later | **NOT AUTHORISED**       |
 
 ---
 

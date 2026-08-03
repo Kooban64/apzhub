@@ -17,11 +17,11 @@
 
 ## Product residuals (from prior packs / ADOPT-001)
 
-| ID                              | Limitation                        | Eng required                           |
-| ------------------------------- | --------------------------------- | -------------------------------------- |
-| KL-LAW-05                       | Tenant claim placeholder          | YES — backlog                          |
-| KL-LAW-11                       | search-law 0.1.0 vs product 1.0.0 | Docs disclosed; eng if behaviour wrong |
-| OpenAPI↔runtime honesty         | Residual                          | YES — backlog                          |
-| Incomplete event.yaml catalogue | Residual                          | YES — backlog                          |
+| ID                              | Limitation                                                                     | Eng required                               |
+| ------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------ |
+| KL-LAW-05                       | Tenant residual when session lacks tenant (narrowed EAB-04)                    | Residual — header/dev fallback only        |
+| KL-LAW-11                       | search-law 0.1.0 vs product 1.0.0                                              | Docs disclosed; eng if behaviour wrong     |
+| OpenAPI↔runtime honesty         | Honesty note added (EAB-03); Trust paths still not fully enumerated in OpenAPI | Partial — Trust OpenAPI expansion deferred |
+| Incomplete event.yaml catalogue | Residual                                                                       | YES — backlog                              |
 
 Historical detail: [apz-law/KNOWN-LIMITATIONS.md](../../products/apz-law/KNOWN-LIMITATIONS.md) · [law/KNOWN-LIMITATIONS.md](../../products/law/KNOWN-LIMITATIONS.md)

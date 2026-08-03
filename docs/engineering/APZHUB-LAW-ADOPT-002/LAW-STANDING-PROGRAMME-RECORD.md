@@ -18,8 +18,10 @@
 | APZHUB-LAW-ADOPT-001     | COMPLETE (alignment assessment)           |
 | PBR-APZHUB-001           | COMPLETE (Law selected first)             |
 | PBR-APZHUB-LAW-001       | COMPLETE (Governance Alignment APPROVED)  |
-| **APZHUB-LAW-ADOPT-002** | **COMPLETE** (this programme)             |
-| PBR-APZHUB-LAW-002       | **NEXT** — not authorised/started         |
-| LAW-ADOPT-003+           | NOT AUTHORISED                            |
+| **APZHUB-LAW-ADOPT-002** | **COMPLETE**                              |
+| PBR-APZHUB-LAW-002       | **COMPLETE — CERTIFIED**                  |
+| APZHUB-LAW-ADOPT-003     | **COMPLETE** (engineering alignment)      |
+| PBR-APZHUB-LAW-003       | **NEXT** — not started                    |
+| LAW-ADOPT-004+           | NOT AUTHORISED                            |
 
-Engineering authority: **CLOSED**. Enterprise Adoption Lifecycle: **FROZEN**.
+Engineering authority: **CLOSED** — await PBR-APZHUB-LAW-003. Lifecycle: **FROZEN**.
