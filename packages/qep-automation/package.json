@@ -1,0 +1,19 @@
+{
+  "name": "@apzhub/qep-automation",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZQEP Automation Workspace — consumes @apzhub/platform-automation (APZQEP-161)",
+  "exports": {
+    ".": "./src/index.ts",
+    "./presentation": "./src/presentation/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-automation"
+  },
+  "dependencies": {
+    "@apzhub/platform-automation": "workspace:*"
+  }
+}

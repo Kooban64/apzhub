@@ -85,8 +85,8 @@ export const QEP_MODULES: readonly QepModuleDescriptor[] = [
     id: "M07",
     slug: "automation",
     packageName: "qep-automation",
-    title: "Automation Management",
-    status: "stub",
+    title: "Enterprise Automation",
+    status: "enabled",
   },
   {
     id: "M08",

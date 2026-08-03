@@ -1,0 +1,25 @@
+{
+  "name": "@apzhub/platform-automation",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Enterprise Automation Foundation — provider-neutral Automation Engine (APZQEP-161). Playwright is the first provider; engine never depends on Playwright directly.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./contracts": "./src/contracts/index.ts",
+    "./providers/playwright": "./src/providers/playwright/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/platform-automation"
+  },
+  "peerDependencies": {
+    "playwright": "^1.40.0"
+  },
+  "peerDependenciesMeta": {
+    "playwright": {
+      "optional": true
+    }
+  }
+}

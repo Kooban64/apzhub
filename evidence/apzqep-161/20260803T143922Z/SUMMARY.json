@@ -1,0 +1,36 @@
+{
+  "programme": "APZQEP-161",
+  "title": "Enterprise Automation Foundation",
+  "timestamp": "20260803T143922Z",
+  "status": "COMPLETE",
+  "packages": {
+    "platform-automation": "@apzhub/platform-automation@0.1.0",
+    "qep-automation": "@apzhub/qep-automation@0.1.0"
+  },
+  "tests": {
+    "platform-automation": "PASS",
+    "qep-automation": "PASS",
+    "qep-types": "PASS",
+    "vitestReport": "vitest-results.json"
+  },
+  "typecheck": {
+    "platform-automation": "PASS",
+    "qep-automation": "PASS",
+    "qep-types": "PASS"
+  },
+  "architecture": {
+    "providerNeutral": true,
+    "engineDependsOnPlaywright": false,
+    "firstProvider": "playwright",
+    "placeholders": [
+      "selenium",
+      "cypress",
+      "appium",
+      "rest",
+      "k6",
+      "visual",
+      "accessibility"
+    ]
+  },
+  "recommendation": "Await Product Board Engineering Certification for Wave 1."
+}

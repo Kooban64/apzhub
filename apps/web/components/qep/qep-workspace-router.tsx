@@ -15,9 +15,11 @@ import {
   isQepTestSpecificationsRoute,
   isQepTraceabilityRoute,
   isQepVerificationRoute,
+  isQepAutomationRoute,
   isQepWorkspaceRoute,
 } from "@/lib/qep/routes";
 
+import { QepAutomationRouterView } from "./qep-automation-views";
 import { QepDefectsRouterView } from "./qep-defects-views";
 import { QepEnterpriseReportingRouterView } from "./qep-enterprise-reporting-views";
 import { QepEnterpriseRequirementsRouterView } from "./qep-enterprise-requirements-views";
@@ -40,6 +42,10 @@ export function QepWorkspaceRouter() {
 
   if (!isQepWorkspaceRoute(pathname)) {
     return null;
+  }
+
+  if (isQepAutomationRoute(pathname)) {
+    return <QepAutomationRouterView />;
   }
 
   if (isQepSuitesRoute(pathname)) {

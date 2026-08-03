@@ -6,12 +6,12 @@
 | Authority          | Product Board — **STANDING**                   |
 | Audience           | Engineers, architects, auditors, AI assistants |
 | Rule               | **Read this document before any APZQEP work**  |
-| Last updated       | 20260803T142234Z                               |
+| Last updated       | 20260803T143922Z                               |
 | Engineering thread | **FORMALLY COMPLETE** (V1.0)                   |
 | Product posture    | **GENERAL AVAILABILITY**                       |
 | Management posture | **Operations-led** (APZQEP-OPS-001)            |
 | V1.1 definition    | **APZQEP-160 APPROVED** (PBR-APZQEP-160)       |
-| V1.1 Wave 1        | **APZQEP-161 AUTHORISED** — await Owner Auth   |
+| V1.1 Wave 1        | **APZQEP-161 COMPLETE** — await Board cert     |
 
 ---
 
@@ -94,14 +94,14 @@ APZQEP-160 COMPLETE — Product Board **APPROVED** (PBR-APZQEP-160)
 
 Version 1.1 engineering:
 Wave programmes 161–166 defined
-APZQEP-161 AUTHORISED to open — Owner Auth required
+APZQEP-161 COMPLETE (Enterprise Automation Foundation) — await Product Board Wave 1 certification
 APZQEP-162…166 NOT AUTHORISED
-No Playwright/integration/AI engineering started
+Platform package: @apzhub/platform-automation 0.1.0 (Playwright first provider; engine provider-neutral)
 
 Next Action:
 Operate Version 1.0 under OPS-001.
-Await Owner Authorisation for APZQEP-161 (Enterprise Automation Foundation).
-Do NOT engineer until APZQEP-161 Owner Auth.
+Await Product Board Engineering Certification for Wave 1 (APZQEP-161).
+Do NOT open APZQEP-162…166 without Board certification + Owner Auth.
 ```
 
 ---
@@ -122,19 +122,20 @@ Do NOT engineer until APZQEP-161 Owner Auth.
 
 ## Governance & baseline
 
-| Item                            | Value                                                    |
-| ------------------------------- | -------------------------------------------------------- |
-| Governance version              | **1.0 STABLE**                                           |
-| Enterprise Engineering Baseline | **1.x STABLE (1.2)**                                     |
-| Enterprise Standards            | ES-001, ES-002, ES-003 **IN FORCE**                      |
-| ES-004                          | **NOT AUTHORISED**                                       |
-| Operating mode                  | Evolve the Enterprise · **operations-led**               |
-| Product Board authority         | **STANDING**                                             |
-| Engineering authority           | **CLOSED**                                               |
-| Version 1.1                     | Definition **APPROVED**; eng Wave 1 authorised to open   |
-| V1.1 definition pack            | [v1.1/apzqep-160/](./v1.1/apzqep-160/)                   |
-| V1.1 Board approval             | [v1.1/pbr-apzqep-160/](./v1.1/pbr-apzqep-160/)           |
-| Product Board Register          | [PRODUCT-BOARD-REGISTER.md](./PRODUCT-BOARD-REGISTER.md) |
+| Item                            | Value                                                          |
+| ------------------------------- | -------------------------------------------------------------- |
+| Governance version              | **1.0 STABLE**                                                 |
+| Enterprise Engineering Baseline | **1.x STABLE (1.2)**                                           |
+| Enterprise Standards            | ES-001, ES-002, ES-003 **IN FORCE**                            |
+| ES-004                          | **NOT AUTHORISED**                                             |
+| Operating mode                  | Evolve the Enterprise · **operations-led**                     |
+| Product Board authority         | **STANDING**                                                   |
+| Engineering authority           | **CLOSED**                                                     |
+| Version 1.1                     | Definition **APPROVED**; Wave 1 eng **COMPLETE** (await Board) |
+| V1.1 definition pack            | [v1.1/apzqep-160/](./v1.1/apzqep-160/)                         |
+| V1.1 Board approval             | [v1.1/pbr-apzqep-160/](./v1.1/pbr-apzqep-160/)                 |
+| V1.1 Wave 1 pack                | [v1.1/apzqep-161/](./v1.1/apzqep-161/)                         |
+| Product Board Register          | [PRODUCT-BOARD-REGISTER.md](./PRODUCT-BOARD-REGISTER.md)       |
 
 ---
 
@@ -152,6 +153,7 @@ Do NOT engineer until APZQEP-161 Owner Auth.
 | **APZQEP-OPS-001**     | GA Operations & Product Intelligence **COMPLETE** (non-engineering)       |
 | **APZQEP-160**         | Enterprise Quality Platform Definition & Roadmap **COMPLETE**             |
 | **PBR-APZQEP-160**     | V1.1 Definition **APPROVED** — Wave 1 (**APZQEP-161**) authorised to open |
+| **APZQEP-161**         | Enterprise Automation Foundation **COMPLETE** — await Board Wave 1 cert   |
 
 ---
 
@@ -224,8 +226,9 @@ Board / audit / ops:
 ## Path remaining
 
 1. Operate Version 1.0 under APZQEP-OPS-001 (populate measured dashboard / intelligence).
-2. Execute packaging/tagging/deployment under release governance when scheduled (not feature engineering).
-3. Open Version 1.1 only after sufficient operational evidence and Product Board authorisation.
+2. Await Product Board Engineering Certification for Wave 1 (APZQEP-161).
+3. Do not open APZQEP-162…166 without Board certification and Owner Auth.
+4. Execute packaging/tagging/deployment under release governance when scheduled.
 
 ---
 
@@ -235,7 +238,7 @@ Version 1.0 engineering lifecycle is formally complete. Product Board authorised
 
 Authoritative state:
 
-> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. Engineering CLOSED. Version 1.1 NOT OPENED. APZQEP-OPS-001 COMPLETE.**
+> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. V1.0 engineering CLOSED. APZQEP-OPS-001 COMPLETE. APZQEP-161 Wave 1 eng COMPLETE — await Product Board Wave 1 certification. Waves 162–166 NOT AUTHORISED.**
 
 ---
 

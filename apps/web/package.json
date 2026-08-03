@@ -43,6 +43,8 @@
     "@apzhub/platform-security": "workspace:*",
     "@apzhub/platform-service-contracts": "workspace:*",
     "@apzhub/platform-services": "workspace:*",
+    "@apzhub/platform-automation": "workspace:*",
+    "@apzhub/qep-automation": "workspace:*",
     "@apzhub/qep-requirements": "workspace:*",
     "@apzhub/qep-traceability": "workspace:*",
     "@apzhub/qep-verification": "workspace:*",

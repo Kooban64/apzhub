@@ -14,9 +14,16 @@ describe("@apzhub/qep-types", () => {
     expect(QEP_PRODUCT_NAME).toBe("APZ QEP");
   });
 
-  it("registers all 22 product modules as stubs", () => {
+  it("registers all 22 product modules with catalogue statuses", () => {
     expect(QEP_MODULE_IDS).toHaveLength(22);
     expect(QEP_MODULES).toHaveLength(22);
-    expect(QEP_MODULES.every((m) => m.status === "stub")).toBe(true);
+    const automation = QEP_MODULES.find((m) => m.id === "M07");
+    expect(automation?.status).toBe("enabled");
+    expect(automation?.title).toBe("Enterprise Automation");
+    expect(
+      QEP_MODULES.every((m) =>
+        m.id === "M07" ? m.status === "enabled" : m.status === "stub",
+      ),
+    ).toBe(true);
   });
 });

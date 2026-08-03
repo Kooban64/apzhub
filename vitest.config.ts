@@ -529,6 +529,14 @@ const packageAliases = {
     "packages/qep-execution-workspace/src/index.ts",
   ),
   "@apzhub/qep-defects": path.resolve(__dirname, "packages/qep-defects/src/index.ts"),
+  "@apzhub/platform-automation": path.resolve(
+    __dirname,
+    "packages/platform-automation/src/index.ts",
+  ),
+  "@apzhub/qep-automation": path.resolve(
+    __dirname,
+    "packages/qep-automation/src/index.ts",
+  ),
   "@apzhub/qep-requirements-traceability": path.resolve(
     __dirname,
     "packages/qep-requirements-traceability/src/index.ts",

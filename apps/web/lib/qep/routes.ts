@@ -152,3 +152,10 @@ export {
   parseQepEvidenceSetId,
   type QepEvidenceDetailMode,
 } from "@apzhub/qep-evidence/presentation";
+
+export {
+  QEP_AUTOMATION_BASE_PATH,
+  QEP_AUTOMATION_ROUTES,
+  isQepAutomationRoute,
+  parseQepAutomationExecutionId,
+} from "@apzhub/qep-automation/presentation";
