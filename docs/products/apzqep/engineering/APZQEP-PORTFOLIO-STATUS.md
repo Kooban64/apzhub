@@ -50,7 +50,8 @@
 | PBR-APZQEP-162             | ✅ Wave 2 **CERTIFIED** — APZQEP-163 **AUTHORISED TO OPEN**         |
 | APZQEP-163-000             | ✅ Architecture **COMPLETE**                                        |
 | PBR-APZQEP-163-000         | ✅ Architecture **APPROVED** — Wave 3 title adopted                 |
-| APZQEP-163                 | ✅ Engineering **COMPLETE** — await PBR-APZQEP-163                  |
+| APZQEP-163                 | ✅ **CERTIFIED** (PBR-APZQEP-163)                                   |
+| APZQEP-164                 | ⏳ **AUTHORISED TO OPEN** — eng **NOT STARTED** (Owner Auth)        |
 | APZQEP-163…166             | ⛔ Planned — **NOT AUTHORISED**                                     |
 
 ---

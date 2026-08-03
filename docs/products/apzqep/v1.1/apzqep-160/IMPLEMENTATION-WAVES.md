@@ -29,23 +29,23 @@
 
 ## Wave 3 — AI Quality Intelligence (**APZQEP-163**)
 
-| Item                  | Content                                                            |
-| --------------------- | ------------------------------------------------------------------ |
-| Objectives            | Differentiated governed AI                                         |
-| Capabilities          | Generator, regression selector, defect clustering, release advisor |
-| Dependencies          | Evidence volume from Waves 1–2                                     |
-| Engineering programme | **APZQEP-163** — NOT AUTHORISED                                    |
-| Success               | Advice audited; humans retain certification authority              |
+| Item                  | Content                                                                                                |
+| --------------------- | ------------------------------------------------------------------------------------------------------ |
+| Objectives            | Differentiated governed AI                                                                             |
+| Capabilities          | Generator, regression selector, defect clustering, release advisor                                     |
+| Dependencies          | Evidence volume from Waves 1–2                                                                         |
+| Engineering programme | **APZQEP-163** — **CERTIFIED** (PBR-APZQEP-163); living title Enterprise Quality Intelligence Platform |
+| Success               | Advice audited; humans retain certification authority                                                  |
 
 ## Wave 4 — Enterprise Dashboards (**APZQEP-164**)
 
-| Item                  | Content                                      |
-| --------------------- | -------------------------------------------- |
-| Objectives            | Executive and engineering truth              |
-| Capabilities          | Exec / Eng / QA / Ops / Readiness dashboards |
-| Dependencies          | Measured metrics; Wave 1–3 data              |
-| Engineering programme | **APZQEP-164** — NOT AUTHORISED              |
-| Success               | Dashboards populated from measured data only |
+| Item                  | Content                                               |
+| --------------------- | ----------------------------------------------------- |
+| Objectives            | Executive and engineering truth                       |
+| Capabilities          | Exec / Eng / QA / Ops / Readiness dashboards          |
+| Dependencies          | Measured metrics; Wave 1–3 data                       |
+| Engineering programme | **APZQEP-164** — **AUTHORISED TO OPEN** — NOT STARTED |
+| Success               | Dashboards populated from measured data only          |
 
 ## Wave 5 — Continuous Quality (**APZQEP-165**)
 

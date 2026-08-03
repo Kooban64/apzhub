@@ -1,0 +1,41 @@
+Scope: 5 of 116 workspace projects
+packages/platform-quality-intelligence test$ cd ../.. && vitest run --config vitest.config.ts packages/platform-quality-intelligence
+packages/platform-automation test$ cd ../.. && vitest run --config vitest.config.ts packages/platform-automation
+packages/platform-scm test$ cd ../.. && vitest run --config vitest.config.ts packages/platform-scm
+packages/platform-automation test:  RUN  v3.2.6 /home/ubuntu/apz-portal
+packages/platform-quality-intelligence test:  RUN  v3.2.6 /home/ubuntu/apz-portal
+packages/platform-scm test:  RUN  v3.2.6 /home/ubuntu/apz-portal
+packages/platform-scm test:  ✓ packages/platform-scm/src/scm-engine.test.ts (7 tests) 16ms
+packages/platform-scm test:  Test Files  1 passed (1)
+packages/platform-scm test:       Tests  7 passed (7)
+packages/platform-scm test:    Start at  18:57:18
+packages/platform-scm test:    Duration  2.14s (transform 221ms, setup 278ms, collect 193ms, tests 16ms, environment 546ms, prepare 162ms)
+packages/platform-automation test:  ✓ packages/platform-automation/src/automation-engine.test.ts (6 tests) 15ms
+packages/platform-automation test:  Test Files  1 passed (1)
+packages/platform-automation test:       Tests  6 passed (6)
+packages/platform-automation test:    Start at  18:57:18
+packages/platform-automation test:    Duration  2.20s (transform 220ms, setup 274ms, collect 196ms, tests 15ms, environment 543ms, prepare 234ms)
+packages/platform-quality-intelligence test:  ✓ packages/platform-quality-intelligence/src/qi-engine.test.ts (10 tests) 30ms
+packages/platform-quality-intelligence test:  Test Files  1 passed (1)
+packages/platform-quality-intelligence test:       Tests  10 passed (10)
+packages/platform-quality-intelligence test:    Start at  18:57:18
+packages/platform-quality-intelligence test:    Duration  2.30s (transform 267ms, setup 290ms, collect 240ms, tests 30ms, environment 530ms, prepare 141ms)
+packages/platform-scm test: Done
+packages/platform-automation test: Done
+packages/platform-quality-intelligence test: Done
+packages/qep-quality-intelligence test$ cd ../.. && vitest run --config vitest.config.ts packages/qep-quality-intelligence
+packages/qep-scm test$ cd ../.. && vitest run --config vitest.config.ts packages/qep-scm
+packages/qep-quality-intelligence test:  RUN  v3.2.6 /home/ubuntu/apz-portal
+packages/qep-scm test:  RUN  v3.2.6 /home/ubuntu/apz-portal
+packages/qep-scm test:  ✓ packages/qep-scm/src/qep-scm.test.ts (2 tests) 8ms
+packages/qep-scm test:  Test Files  1 passed (1)
+packages/qep-scm test:       Tests  2 passed (2)
+packages/qep-scm test:    Start at  18:57:21
+packages/qep-scm test:    Duration  1.70s (transform 217ms, setup 221ms, collect 187ms, tests 8ms, environment 481ms, prepare 157ms)
+packages/qep-quality-intelligence test:  ✓ packages/qep-quality-intelligence/src/qep-qi.test.ts (2 tests) 11ms
+packages/qep-quality-intelligence test:  Test Files  1 passed (1)
+packages/qep-quality-intelligence test:       Tests  2 passed (2)
+packages/qep-quality-intelligence test:    Start at  18:57:21
+packages/qep-quality-intelligence test:    Duration  1.83s (transform 232ms, setup 244ms, collect 244ms, tests 11ms, environment 480ms, prepare 102ms)
+packages/qep-scm test: Done
+packages/qep-quality-intelligence test: Done

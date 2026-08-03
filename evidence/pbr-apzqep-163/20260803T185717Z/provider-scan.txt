@@ -1,0 +1,15 @@
+packages/platform-quality-intelligence/src/qi-engine.test.ts:263:      /openai|anthropic|google|gemini|azure/,
+packages/platform-quality-intelligence/src/sdk/create-qi.ts:5:import { createPlaceholderIntelligenceProviders } from "../providers/placeholders";
+packages/platform-quality-intelligence/src/sdk/create-qi.ts:22: * Registers rules, statistical, historical, dummy_ai (active) + placeholder providers.
+packages/platform-quality-intelligence/src/sdk/create-qi.ts:35:    for (const placeholder of createPlaceholderIntelligenceProviders()) {
+packages/platform-quality-intelligence/src/sdk/create-qi.ts:36:      registry.register(placeholder);
+packages/platform-quality-intelligence/src/sdk/create-qi.ts:50:      providerId: descriptor.providerId,
+packages/platform-quality-intelligence/src/providers/placeholders.ts:5:  "openai",
+packages/platform-quality-intelligence/src/providers/placeholders.ts:8:  "azure_openai",
+packages/platform-quality-intelligence/src/providers/placeholders.ts:14:  providerId: IntelligenceProviderId,
+packages/platform-quality-intelligence/src/providers/placeholders.ts:20:      `Provider ${providerId} is a placeholder and cannot evaluate in APZQEP-163`,
+packages/platform-quality-intelligence/src/providers/placeholders.ts:26:      providerId,
+packages/platform-quality-intelligence/src/providers/placeholders.ts:30:      status: "placeholder",
+packages/platform-quality-intelligence/src/providers/placeholders.ts:33:    health: async () => ({ ok: false, detail: "placeholder" }),
+packages/platform-quality-intelligence/src/providers/placeholders.ts:40:    createPlaceholder("openai", "OpenAI Provider", "ai"),
+packages/platform-quality-intelligence/src/providers/placeholders.ts:43:    createPlaceholder("azure_openai", "Azure OpenAI Provider", "ai"),
