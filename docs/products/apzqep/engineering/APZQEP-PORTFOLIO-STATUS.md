@@ -3,7 +3,7 @@
 | Field     | Value                                                                       |
 | --------- | --------------------------------------------------------------------------- |
 | Date      | 2026-08-03                                                                  |
-| Timestamp | 20260803T160614Z                                                            |
+| Timestamp | 20260803T164801Z                                                            |
 | Authority | Product Board — PBR-APZQEP-1.0-001 · OPS-001 · ENG-003 · **PBR-APZHUB-001** |
 | Status    | **IN FORCE**                                                                |
 | Posture   | APZQEP ops-led GA · first portfolio adoption: **APZ Law Platform**          |
@@ -45,7 +45,8 @@
 | APZQEP-161                 | ✅ Enterprise Automation Foundation **COMPLETE**                    |
 | APZQEP-161R                | ✅ Wave 1 Operational Readiness & Usability **COMPLETE**            |
 | PBR-APZQEP-161             | ✅ Wave 1 **CERTIFIED** — APZQEP-162 **AUTHORISED** (not started)   |
-| APZQEP-162                 | ⏳ **AUTHORISED** — Enterprise Integrations — await Owner Auth      |
+| APZQEP-161-OE              | ✅ Operational Enablement & Internal Adoption **COMPLETE**          |
+| APZQEP-162                 | ⏳ **AUTHORISED** — await OE Board review + Owner Auth              |
 | APZQEP-163…166             | ⛔ Planned — **NOT AUTHORISED**                                     |
 
 ---

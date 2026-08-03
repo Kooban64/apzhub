@@ -1,0 +1,10 @@
+{
+  "error": {
+    "code": "AUTOMATION_ERROR",
+    "message": "Provider selenium is a placeholder and cannot execute in APZQEP-161"
+  },
+  "meta": {
+    "requestId": "76fcd987-23d6-4d96-87b8-2db0e671eb83",
+    "correlationId": "76fcd987-23d6-4d96-87b8-2db0e671eb83"
+  }
+}

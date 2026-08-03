@@ -19,6 +19,8 @@ export const platformEnvSchema = z.object({
   REDIS_URL: z.string().min(1),
   BETTER_AUTH_SECRET: z.string().min(32),
   BETTER_AUTH_URL: z.string().url(),
+  /** Comma-separated extra origins allowed for Better Auth (coexistence / public host). */
+  BETTER_AUTH_TRUSTED_ORIGINS: z.string().optional(),
   EMAIL_FROM: z.string().email().default("noreply@apzhub.local"),
   LAW_REPOSITORY_MODE: z.enum(["memory", "postgres"]).default("memory"),
   LAW_TENANT_ID: z.string().uuid().optional(),

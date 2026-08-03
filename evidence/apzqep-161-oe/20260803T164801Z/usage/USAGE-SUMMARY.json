@@ -1,0 +1,69 @@
+{
+  "timestamp": "20260803T164801Z",
+  "metricClass": "Observed",
+  "runtime": {
+    "status": "healthy",
+    "platformReady": true,
+    "capabilityCount": 340
+  },
+  "publicHealth": {
+    "status": "healthy",
+    "platformReady": true
+  },
+  "auth": {
+    "localSignIn": "PASS",
+    "publicOriginSignIn": "PASS"
+  },
+  "providers": {
+    "count": 8,
+    "active": ["playwright"],
+    "placeholders": [
+      "selenium",
+      "cypress",
+      "appium",
+      "rest",
+      "k6",
+      "visual",
+      "accessibility"
+    ]
+  },
+  "execution": {
+    "id": "acadf351-8e83-4a37-92ca-59daa00665eb",
+    "state": "completed",
+    "summary": "Playwright dry-run OK for oe-internal-smoke",
+    "artifactCount": 7,
+    "artifactKinds": [
+      "console",
+      "log",
+      "metadata",
+      "screenshot",
+      "timing",
+      "trace",
+      "video"
+    ],
+    "evidenceRefs": [
+      "evidence://automation/acadf351-8e83-4a37-92ca-59daa00665eb/6137490d-d365-43dd-8911-58554e23ac60",
+      "evidence://automation/acadf351-8e83-4a37-92ca-59daa00665eb/c423162a-2cde-44c9-a6c0-a46ccb2e0c0d",
+      "evidence://automation/acadf351-8e83-4a37-92ca-59daa00665eb/0e7e8528-b1d6-4121-8528-1c1a3a0cfdd7",
+      "evidence://automation/acadf351-8e83-4a37-92ca-59daa00665eb/46b78e5c-99c5-4e36-a765-d12c7741dc37",
+      "evidence://automation/acadf351-8e83-4a37-92ca-59daa00665eb/66bffc3f-5a51-4e25-81d2-61fa46baace2",
+      "evidence://automation/acadf351-8e83-4a37-92ca-59daa00665eb/bd944841-967b-4cd8-8db1-0cdd82ec47b6",
+      "evidence://automation/acadf351-8e83-4a37-92ca-59daa00665eb/fc109f61-4745-4a75-ac41-2973b76cef2c"
+    ]
+  },
+  "placeholderReject": {
+    "httpError": "AUTOMATION_ERROR",
+    "message": "Provider selenium is a placeholder and cannot execute in APZQEP-161"
+  },
+  "historyCount": 2,
+  "scenarios": {
+    "runPlaywrightDryRun": "PASS",
+    "reviewEvidenceRefs": "PASS",
+    "investigatePlaceholderFailure": "PASS",
+    "rerunTests": "PASS",
+    "exportReports": "NOT READY",
+    "qkiProjections": "PARTIAL",
+    "notifications": "PARTIAL",
+    "commandWorkflows": "PARTIAL"
+  }
+}

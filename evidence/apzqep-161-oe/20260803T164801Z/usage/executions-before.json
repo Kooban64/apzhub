@@ -1,0 +1,10 @@
+{
+  "error": {
+    "code": "AUTHENTICATION_REQUIRED",
+    "message": "Authentication is required."
+  },
+  "meta": {
+    "requestId": "bcd3bd4d-0db8-4403-a9ec-8932f3e28918",
+    "correlationId": "bcd3bd4d-0db8-4403-a9ec-8932f3e28918"
+  }
+}

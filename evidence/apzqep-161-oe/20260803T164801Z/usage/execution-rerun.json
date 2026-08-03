@@ -1,0 +1,110 @@
+{
+  "data": {
+    "execution": {
+      "executionId": "27360f05-16de-4151-83ea-a85d9524a0a8",
+      "tenantId": "t0000001-0000-4000-8000-000000000001",
+      "providerId": "playwright",
+      "correlationId": "1401bac4-d958-4ec1-a7d5-072f7b7b7ca9",
+      "requestedBy": "0HdGfWngsZIp2pc95wv4eAUDMpgkhGje",
+      "target": { "kind": "suite", "name": "oe-rerun-suite", "refs": ["smoke"] },
+      "options": {
+        "workers": 1,
+        "retries": 1,
+        "timeoutMs": 120000,
+        "parallel": false,
+        "collectScreenshots": true,
+        "collectVideos": false,
+        "collectTraces": true,
+        "collectNetworkLogs": false,
+        "collectConsole": true,
+        "dryRun": true
+      },
+      "state": "completed",
+      "attempt": 1,
+      "maxAttempts": 2,
+      "createdAt": "2026-08-03T16:51:33.109Z",
+      "updatedAt": "2026-08-03T16:51:33.110Z",
+      "artifacts": [
+        {
+          "artifactId": "bbea282e-6032-4db8-952b-dfc717b406ef",
+          "kind": "metadata",
+          "name": "execution-metadata.json",
+          "contentType": "application/json",
+          "uri": "memory://playwright/execution-metadata.json",
+          "bytes": 133,
+          "sha256": "d0dadd43756daba1e1390b2705d3157cae3f95cbf811ea62c23a759c9459ea0e",
+          "createdAt": "2026-08-03T16:51:33.109Z"
+        },
+        {
+          "artifactId": "42728882-08af-4b58-b0d7-c37426566a0e",
+          "kind": "log",
+          "name": "provider.log",
+          "contentType": "text/plain",
+          "uri": "memory://playwright/provider.log",
+          "bytes": 28,
+          "sha256": "ec1a7aaf4259dd97d7395f712c2923e8d906a4901e560d9ebd873319362ca00e",
+          "createdAt": "2026-08-03T16:51:33.109Z"
+        },
+        {
+          "artifactId": "fbc509f6-f543-4bf3-940f-ef404e3d325f",
+          "kind": "timing",
+          "name": "timing.json",
+          "contentType": "application/json",
+          "uri": "memory://playwright/timing.json",
+          "bytes": 18,
+          "sha256": "68774afbe14154a3d830b0d524f039d90f76e1a1dffe2315aae5a167b32954b5",
+          "createdAt": "2026-08-03T16:51:33.110Z"
+        },
+        {
+          "artifactId": "0931daf4-be00-459e-9e1a-93ff8f7a6911",
+          "kind": "screenshot",
+          "name": "dry-run-screenshot.png",
+          "contentType": "image/png",
+          "uri": "memory://playwright/dry-run-screenshot.png",
+          "bytes": 15,
+          "sha256": "930d9a9b1674a8484d0ab34410c93e173df16b4492d8916ca7839a9a9fe7de9a",
+          "createdAt": "2026-08-03T16:51:33.110Z"
+        },
+        {
+          "artifactId": "4df13f1e-d9b1-40e4-ba8a-8a5ea8157c13",
+          "kind": "trace",
+          "name": "dry-run-trace.zip",
+          "contentType": "application/zip",
+          "uri": "memory://playwright/dry-run-trace.zip",
+          "bytes": 17,
+          "sha256": "262d9c7176b2f9b0e00ed1e2a828cadf8dfb8f1d39d1bd419142dfbf460a0b6b",
+          "createdAt": "2026-08-03T16:51:33.110Z"
+        },
+        {
+          "artifactId": "09bbaba5-f83a-4718-8466-29f90f82b382",
+          "kind": "console",
+          "name": "console.log",
+          "contentType": "text/plain",
+          "uri": "memory://playwright/console.log",
+          "bytes": 16,
+          "sha256": "b8469660317967f714f6efc93386feb3099a0d984bea4bdef17e8e95d7587959",
+          "createdAt": "2026-08-03T16:51:33.110Z"
+        }
+      ],
+      "timing": {
+        "queuedAt": "2026-08-03T16:51:33.109Z",
+        "startedAt": "2026-08-03T16:51:33.109Z",
+        "finishedAt": "2026-08-03T16:51:33.110Z",
+        "durationMs": 1
+      },
+      "evidenceRefs": [
+        "evidence://automation/27360f05-16de-4151-83ea-a85d9524a0a8/bbea282e-6032-4db8-952b-dfc717b406ef",
+        "evidence://automation/27360f05-16de-4151-83ea-a85d9524a0a8/42728882-08af-4b58-b0d7-c37426566a0e",
+        "evidence://automation/27360f05-16de-4151-83ea-a85d9524a0a8/fbc509f6-f543-4bf3-940f-ef404e3d325f",
+        "evidence://automation/27360f05-16de-4151-83ea-a85d9524a0a8/0931daf4-be00-459e-9e1a-93ff8f7a6911",
+        "evidence://automation/27360f05-16de-4151-83ea-a85d9524a0a8/4df13f1e-d9b1-40e4-ba8a-8a5ea8157c13",
+        "evidence://automation/27360f05-16de-4151-83ea-a85d9524a0a8/09bbaba5-f83a-4718-8466-29f90f82b382"
+      ],
+      "resultSummary": "Playwright dry-run OK for oe-rerun-suite"
+    }
+  },
+  "meta": {
+    "requestId": "b65667b8-ede2-43d7-86bb-5cbe3a1fd2c3",
+    "correlationId": "b65667b8-ede2-43d7-86bb-5cbe3a1fd2c3"
+  }
+}

@@ -18,7 +18,8 @@
 > **PBR-APZQEP-160 (20260803T142234Z):** V1.1 definition **APPROVED** — **APZQEP-161 AUTHORISED** — [pbr-apzqep-160/](./v1.1/pbr-apzqep-160/) · [PRODUCT-BOARD-REGISTER](./PRODUCT-BOARD-REGISTER.md)  
 > **APZQEP-161 (20260803T143922Z):** Enterprise Automation Foundation **COMPLETE** — [apzqep-161/](./v1.1/apzqep-161/) · `@apzhub/platform-automation` 0.1.0  
 > **APZQEP-161R (20260803T152830Z):** Wave 1 Operational Readiness & Usability **COMPLETE** (eng UNCHANGED) — [apzqep-161r/](./v1.1/apzqep-161r/)  
-> **PBR-APZQEP-161 (20260803T160614Z):** Wave 1 **CERTIFIED** — **APZQEP-162 AUTHORISED** (not started) — [pbr-apzqep-161/](./v1.1/pbr-apzqep-161/) · [WAVE-PROGRESS-REGISTER](./v1.1/WAVE-PROGRESS-REGISTER.md)
+> **PBR-APZQEP-161 (20260803T160614Z):** Wave 1 **CERTIFIED** — **APZQEP-162 AUTHORISED** (not started) — [pbr-apzqep-161/](./v1.1/pbr-apzqep-161/) · [WAVE-PROGRESS-REGISTER](./v1.1/WAVE-PROGRESS-REGISTER.md)  
+> **APZQEP-161-OE (20260803T164801Z):** Operational Enablement & Internal Adoption **COMPLETE** — dogfooding evidence + feedback register — [apzqep-161-oe/](./v1.1/apzqep-161-oe/)
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

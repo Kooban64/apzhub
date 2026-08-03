@@ -1,0 +1,13 @@
+{
+  "redirect": false,
+  "token": "***REDACTED***",
+  "user": {
+    "name": "Dev User",
+    "email": "dev@apzhub.local",
+    "emailVerified": false,
+    "image": null,
+    "createdAt": "2026-07-21T10:33:24.540Z",
+    "updatedAt": "2026-07-21T10:33:27.641Z",
+    "id": "0HdGfWngsZIp2pc95wv4eAUDMpgkhGje"
+  }
+}

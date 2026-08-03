@@ -6,7 +6,7 @@
 | Authority          | Product Board — **STANDING**                   |
 | Audience           | Engineers, architects, auditors, AI assistants |
 | Rule               | **Read this document before any APZQEP work**  |
-| Last updated       | 20260803T160614Z                               |
+| Last updated       | 20260803T164801Z                               |
 | Engineering thread | **FORMALLY COMPLETE** (V1.0)                   |
 | Product posture    | **GENERAL AVAILABILITY**                       |
 | Management posture | **Operations-led** (APZQEP-OPS-001)            |
@@ -88,13 +88,14 @@ Management posture:
 OPERATIONS-LED
 
 Next Authorised Programme:
-APZQEP-162 — Enterprise Integrations (AUTHORISED; not started; awaits Owner Auth)
+APZQEP-162 — Enterprise Integrations (AUTHORISED; not started; awaits Owner Auth + OE Board review)
 
 Version 1.1 definition programme:
 APZQEP-160 COMPLETE — Product Board **APPROVED** (PBR-APZQEP-160)
 
 Version 1.1 Wave 1:
 APZQEP-161 COMPLETE · APZQEP-161R COMPLETE · **PBR-APZQEP-161 CERTIFIED**
+APZQEP-161-OE COMPLETE — internal adoption / dogfooding (LIMITED eng)
 Platform package: @apzhub/platform-automation 0.1.0 (Playwright first provider; engine provider-neutral)
 
 Version 1.1 Wave 2+:
@@ -102,8 +103,8 @@ APZQEP-162 AUTHORISED — engineering NOT STARTED
 APZQEP-163…166 NOT AUTHORISED
 
 Next Action:
-Operate Version 1.0 under OPS-001.
-Owner hands-on validation of Wave 1 on https://apzhub.apzportal.apzor.com recommended before APZQEP-162 Owner Auth.
+Continue internal use of Wave 1 on https://apzhub.apzportal.apzor.com.
+Product Board review APZQEP-161-OE findings before APZQEP-162 Owner Auth.
 Do NOT begin APZQEP-162 engineering without Owner Auth.
 ```
 
@@ -162,6 +163,7 @@ Do NOT begin APZQEP-162 engineering without Owner Auth.
 | **APZQEP-161**         | Enterprise Automation Foundation **COMPLETE**                             |
 | **APZQEP-161R**        | Wave 1 Operational Readiness & Usability **COMPLETE**                     |
 | **PBR-APZQEP-161**     | Wave 1 **CERTIFIED** — APZQEP-162 **AUTHORISED** (not started)            |
+| **APZQEP-161-OE**      | Operational Enablement & Internal Adoption **COMPLETE**                   |
 
 ---
 
@@ -246,7 +248,7 @@ Version 1.0 engineering lifecycle is formally complete. Product Board authorised
 
 Authoritative state:
 
-> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. V1.0 engineering CLOSED. APZQEP-OPS-001 COMPLETE. Wave 1 CERTIFIED (PBR-APZQEP-161). APZQEP-162 AUTHORISED — not started. Waves 163–166 NOT AUTHORISED.**
+> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. V1.0 engineering CLOSED. APZQEP-OPS-001 COMPLETE. Wave 1 CERTIFIED (PBR-APZQEP-161). APZQEP-161-OE COMPLETE. APZQEP-162 AUTHORISED — not started. Waves 163–166 NOT AUTHORISED.**
 
 ---
 

@@ -20,6 +20,21 @@ export function createAuth(): AuthInstance {
   const env = getEnv();
   const db = createDb();
 
+  const trustedOrigins = Array.from(
+    new Set(
+      [
+        env.BETTER_AUTH_URL,
+        env.APP_URL,
+        env.NEXT_PUBLIC_APP_URL,
+        ...(env.BETTER_AUTH_TRUSTED_ORIGINS?.split(",")
+          .map((origin) => origin.trim())
+          .filter(Boolean) ?? []),
+        "http://localhost:3300",
+        "http://127.0.0.1:3300",
+      ].filter((origin): origin is string => Boolean(origin)),
+    ),
+  );
+
   const instance = betterAuth({
     database: drizzleAdapter(db, {
       provider: "pg",
@@ -32,6 +47,7 @@ export function createAuth(): AuthInstance {
     }),
     secret: env.BETTER_AUTH_SECRET,
     baseURL: env.BETTER_AUTH_URL,
+    trustedOrigins,
     emailAndPassword: {
       enabled: true,
       disableSignUp: !isDevRegistrationAllowed(),

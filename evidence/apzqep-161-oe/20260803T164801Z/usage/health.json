@@ -1,0 +1,109 @@
+{
+  "status": "healthy",
+  "platformVersion": "0.0.0",
+  "buildNumber": "local",
+  "environment": "development",
+  "timestamp": "2026-08-03T16:51:30.277Z",
+  "dependencies": {
+    "database": { "status": "healthy", "latencyMs": 16 },
+    "redis": { "status": "healthy", "latencyMs": 15 }
+  },
+  "runtime": {
+    "status": "healthy",
+    "platformReady": true,
+    "registryCount": 340,
+    "capabilityCount": 340,
+    "startupDurationMs": 520,
+    "healthSummary": "Runtime health healthy: 4/4 provider(s) healthy"
+  },
+  "commands": {
+    "status": "healthy",
+    "registeredCount": 108,
+    "filteredCount": 108,
+    "platformActionCount": 8,
+    "capabilityActionCount": 100,
+    "toolbarRegionCount": 1,
+    "toolbarItemCount": 1,
+    "registeredShortcutCount": 2
+  },
+  "knowledge": {
+    "status": "healthy",
+    "frameworkStatus": "service",
+    "registeredCount": 15,
+    "filteredCount": 15,
+    "activeSourceCount": 13,
+    "registeredProviderCount": 2,
+    "serviceStatus": "ready",
+    "queryAvailable": true
+  },
+  "events": {
+    "status": "healthy",
+    "frameworkStatus": "ready",
+    "layerStatus": "audit",
+    "registeredCount": 9,
+    "filteredCount": 9,
+    "platformEventCount": 4,
+    "capabilityEventCount": 5,
+    "publishCount": 0,
+    "lastPublishStatus": "none",
+    "subscriberCount": 3
+  },
+  "notifications": {
+    "status": "healthy",
+    "frameworkStatus": "scaffold",
+    "layerStatus": "experiences",
+    "registeredRouteCount": 11,
+    "filteredRouteCount": 11,
+    "platformRouteCount": 4,
+    "capabilityRouteCount": 7,
+    "serviceStatus": "empty",
+    "storedCount": 0,
+    "unreadCount": 0,
+    "mapperStatus": "ready",
+    "mappedCount": 0
+  },
+  "activities": {
+    "status": "healthy",
+    "frameworkStatus": "experiences",
+    "layerStatus": "ready",
+    "registeredTypeCount": 4,
+    "filteredTypeCount": 4,
+    "platformTypeCount": 4,
+    "capabilityTypeCount": 0,
+    "serviceStatus": "empty",
+    "storedCount": 0,
+    "viewedCount": 0,
+    "unviewedCount": 0,
+    "mapperStatus": "ready",
+    "mappedCount": 0,
+    "lastBootstrapStatus": "ok",
+    "subscriberRegistered": true
+  },
+  "timelines": {
+    "status": "healthy",
+    "frameworkStatus": "experiences",
+    "layerStatus": "ready",
+    "registeredTimelineCount": 4,
+    "filteredTimelineCount": 4,
+    "platformTimelineCount": 4,
+    "capabilityTimelineCount": 0,
+    "activeScopeCount": 4,
+    "scopeCounts": {
+      "timeline.personal": 1,
+      "timeline.team": 1,
+      "timeline.organization": 1,
+      "timeline.system": 1
+    },
+    "lastBootstrapStatus": "ok",
+    "hydrationStatus": "hydrated"
+  },
+  "security": {
+    "environmentValid": true,
+    "rateLimit": { "backend": "redis", "enabled": true }
+  },
+  "coreQePersistence": {
+    "provider": "memory",
+    "mode": "memory",
+    "productionLike": false
+  }
+}

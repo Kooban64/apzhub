@@ -12,24 +12,23 @@
 
 ## Prerequisites
 
-- APZHUB monorepo with APZQEP GA stack available (auth, web app).
-- `pnpm` installed; packages present: `@apzhub/platform-automation`, `@apzhub/qep-automation`.
+- APZHUB reachable at **https://apzhub.apzportal.apzor.com** (coexistence host) or local `http://localhost:3300`.
 - Permission to open QEP workspace (automation module M07).
+- Internal adoption context: [../apzqep-161-oe/INTERNAL-ADOPTION-GUIDE.md](../apzqep-161-oe/INTERNAL-ADOPTION-GUIDE.md).
 
-Live browser execution is **optional** and not required for this walkthrough.
+Live browser execution is **optional** and not required for this walkthrough. Dry-run exercises the full enterprise lifecycle without installing browsers.
 
 ---
 
 ## Walkthrough
 
-### 1. Install / start (≈3–5 min)
+### 1. Reach the platform (≈1–3 min)
 
-```bash
-pnpm install
-# Start web / compose per your ENVIRONMENT.md and GA ops runbooks
-```
+Preferred: open https://apzhub.apzportal.apzor.com/login and sign in.
 
-Confirm the app is reachable and you can sign in.
+Local coexistence (same reserved ports): `http://localhost:3300/login`.
+
+If auth returns `Invalid origin`, ensure `BETTER_AUTH_URL` / `BETTER_AUTH_TRUSTED_ORIGINS` include the host you are using (see APZQEP-161-OE OE-001).
 
 ### 2. Open Enterprise Automation (≈1 min)
 

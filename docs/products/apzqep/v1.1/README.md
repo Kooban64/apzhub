@@ -1,15 +1,15 @@
 # APZQEP v1.1 — Product Planning, Architecture & Execution Planning
 
-| Field                 | Value                                                                                                                                                                                                                                |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Product planning      | **APZQEP-110** — COMPLETE / APPROVED                                                                                                                                                                                                 |
-| Solution architecture | **APZQEP-111** — COMPLETE / **APPROVED**                                                                                                                                                                                             |
-| Execution planning    | **APZQEP-120** — **CERTIFIED / PROGRAMME COMPLETE / CLOSED**                                                                                                                                                                         |
-| Product status        | **[PRODUCT-STATUS.md](../PRODUCT-STATUS.md)** — authoritative Version 1.0 standing resolution                                                                                                                                        |
-| Next programme        | Wave 1 **CERTIFIED** · **APZQEP-162 AUTHORISED** (not started) · [pbr-apzqep-161/](./pbr-apzqep-161/) · [WAVE-PROGRESS-REGISTER](./WAVE-PROGRESS-REGISTER.md) · [ENGINEERING COMPLETE](./APZQEP-VERSION-1.0-ENGINEERING-COMPLETE.md) |
-| Positioning           | [PRODUCT-POSITIONING.md](./PRODUCT-POSITIONING.md) — Enterprise QEP                                                                                                                                                                  |
-| Engineering           | Per-slice Owner directive (APZHUB-ENG-001 / ADR-0092)                                                                                                                                                                                |
-| Date                  | 2026-08-02                                                                                                                                                                                                                           |
+| Field                 | Value                                                                                                                                                                                 |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Product planning      | **APZQEP-110** — COMPLETE / APPROVED                                                                                                                                                  |
+| Solution architecture | **APZQEP-111** — COMPLETE / **APPROVED**                                                                                                                                              |
+| Execution planning    | **APZQEP-120** — **CERTIFIED / PROGRAMME COMPLETE / CLOSED**                                                                                                                          |
+| Product status        | **[PRODUCT-STATUS.md](../PRODUCT-STATUS.md)** — authoritative Version 1.0 standing resolution                                                                                         |
+| Next programme        | **APZQEP-161-OE COMPLETE** · Wave 1 dogfooding · **APZQEP-162 AUTHORISED** (not started) · [apzqep-161-oe/](./apzqep-161-oe/) · [WAVE-PROGRESS-REGISTER](./WAVE-PROGRESS-REGISTER.md) |
+| Positioning           | [PRODUCT-POSITIONING.md](./PRODUCT-POSITIONING.md) — Enterprise QEP                                                                                                                   |
+| Engineering           | Per-slice Owner directive (APZHUB-ENG-001 / ADR-0092)                                                                                                                                 |
+| Date                  | 2026-08-02                                                                                                                                                                            |
 
 ---
 

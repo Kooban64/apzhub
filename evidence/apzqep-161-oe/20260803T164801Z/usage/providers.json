@@ -1,0 +1,80 @@
+{
+  "data": {
+    "providers": [
+      {
+        "providerId": "playwright",
+        "name": "Playwright Provider",
+        "version": "0.1.0",
+        "status": "active",
+        "capabilities": [
+          "browser-lifecycle",
+          "projects",
+          "workers",
+          "retries",
+          "timeouts",
+          "parallel",
+          "screenshots",
+          "videos",
+          "traces",
+          "artifact-collection",
+          "result-publication",
+          "evidence-publication",
+          "dry-run"
+        ]
+      },
+      {
+        "providerId": "selenium",
+        "name": "Selenium Provider",
+        "version": "0.0.0",
+        "status": "placeholder",
+        "capabilities": ["registered", "not-implemented-apzqep-161"]
+      },
+      {
+        "providerId": "cypress",
+        "name": "Cypress Provider",
+        "version": "0.0.0",
+        "status": "placeholder",
+        "capabilities": ["registered", "not-implemented-apzqep-161"]
+      },
+      {
+        "providerId": "appium",
+        "name": "Appium Provider",
+        "version": "0.0.0",
+        "status": "placeholder",
+        "capabilities": ["registered", "not-implemented-apzqep-161"]
+      },
+      {
+        "providerId": "rest",
+        "name": "REST / API Provider",
+        "version": "0.0.0",
+        "status": "placeholder",
+        "capabilities": ["registered", "not-implemented-apzqep-161"]
+      },
+      {
+        "providerId": "k6",
+        "name": "k6 Performance Provider",
+        "version": "0.0.0",
+        "status": "placeholder",
+        "capabilities": ["registered", "not-implemented-apzqep-161"]
+      },
+      {
+        "providerId": "visual",
+        "name": "Visual Testing Provider",
+        "version": "0.0.0",
+        "status": "placeholder",
+        "capabilities": ["registered", "not-implemented-apzqep-161"]
+      },
+      {
+        "providerId": "accessibility",
+        "name": "Accessibility Provider",
+        "version": "0.0.0",
+        "status": "placeholder",
+        "capabilities": ["registered", "not-implemented-apzqep-161"]
+      }
+    ]
+  },
+  "meta": {
+    "requestId": "03261e38-6342-4479-a5f8-11eb6adce647",
+    "correlationId": "03261e38-6342-4479-a5f8-11eb6adce647"
+  }
+}

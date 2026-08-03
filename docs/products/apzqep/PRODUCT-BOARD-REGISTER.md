@@ -3,7 +3,7 @@
 | Field     | Value                    |
 | --------- | ------------------------ |
 | Document  | PRODUCT-BOARD-REGISTER   |
-| Timestamp | 20260803T160614Z         |
+| Timestamp | 20260803T164801Z         |
 | Authority | Product Board — STANDING |
 
 ## Resolutions
@@ -16,8 +16,9 @@
 
 ## Pending / next
 
-| Item                   | State                                                                             |
-| ---------------------- | --------------------------------------------------------------------------------- |
-| APZQEP-162 Owner Auth  | Awaited — programme **AUTHORISED** by PBR-APZQEP-161; engineering **not started** |
-| APZQEP-163…166         | Planned — **not authorised**                                                      |
-| Wave progress register | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                |
+| Item                          | State                                                                   |
+| ----------------------------- | ----------------------------------------------------------------------- |
+| APZQEP-161-OE findings review | **PENDING** — [v1.1/apzqep-161-oe/](./v1.1/apzqep-161-oe/)              |
+| APZQEP-162 Owner Auth         | Awaited — **AUTHORISED**; eng **not started**; review OE findings first |
+| APZQEP-163…166                | Planned — **not authorised**                                            |
+| Wave progress register        | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)      |
