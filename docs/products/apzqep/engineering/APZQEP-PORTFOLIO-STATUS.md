@@ -31,7 +31,8 @@
 | APZHUB-ADOPT-001         | ✅ Enterprise Product Adoption Assessment **COMPLETE**              |
 | PBR-APZHUB-001           | ✅ First adoption product **APZ Law Platform APPROVED**             |
 | APZHUB-LAW-ADOPT-001     | ✅ Alignment Assessment **COMPLETE** — **PARTIALLY READY**          |
-| APZHUB-LAW-ADOPT-002     | ⏸ Recommended next (Governance Alignment) — **not authorised**      |
+| PBR-APZHUB-LAW-001       | ✅ Assessment **ACCEPTED** — Governance Alignment **APPROVED**      |
+| APZHUB-LAW-ADOPT-002     | ⏳ **AUTHORISED** — Enterprise Governance Alignment (not started)   |
 
 ---
 

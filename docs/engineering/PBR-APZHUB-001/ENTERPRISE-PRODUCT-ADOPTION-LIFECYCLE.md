@@ -1,47 +1,39 @@
 # ENTERPRISE-PRODUCT-ADOPTION-LIFECYCLE
 
-| Field      | Value                                    |
-| ---------- | ---------------------------------------- |
-| Resolution | PBR-APZHUB-001                           |
-| Timestamp  | 20260803T095342Z                         |
-| Status     | **STANDING** (naming & phase convention) |
+| Field   | Value                                 |
+| ------- | ------------------------------------- |
+| Origin  | PBR-APZHUB-001                        |
+| Refined | PBR-APZHUB-LAW-001 (20260803T102148Z) |
+| Status  | **STANDING**                          |
 
-## Purpose
+Superseded detail for Law mapping: see [../PBR-APZHUB-LAW-001/ENTERPRISE-ADOPTION-LIFECYCLE-REFINED.md](../PBR-APZHUB-LAW-001/ENTERPRISE-ADOPTION-LIFECYCLE-REFINED.md).
 
-Standard adoption journey for every APZHUB product — predictable, independent progress, mirroring APZQEP discipline without inventing per-product process variants.
+## Standard lifecycle (every APZHUB product)
 
-## Programme naming
+| Phase         | Purpose                                     |
+| ------------- | ------------------------------------------- |
+| **ADOPT-001** | Enterprise Engineering Alignment Assessment |
+| **PBR-001**   | Product Board Assessment Review             |
+| **ADOPT-002** | Governance Alignment                        |
+| **PBR-002**   | Governance Certification                    |
+| **ADOPT-003** | Engineering Alignment                       |
+| **PBR-003**   | Engineering Certification                   |
+| **ADOPT-004** | Operations Alignment                        |
+| **PBR-004**   | Operations Certification                    |
+| **ADOPT-005** | Product Readiness Assessment                |
+| **PBR-005**   | Enterprise Adoption Certification           |
 
-Use product token + ADOPT sequence:
+## APZ Law Platform (current)
 
-| Programme             | Phase                                | Intent                                                                          |
-| --------------------- | ------------------------------------ | ------------------------------------------------------------------------------- |
-| `<PRODUCT>-ADOPT-001` | Assessment                           | Portfolio or product assessment (current products: covered by APZHUB-ADOPT-001) |
-| `<PRODUCT>-ADOPT-002` | Governance Alignment                 | PRODUCT-STATUS, Board standing, catalogue/acceptance, ES citations              |
-| `<PRODUCT>-ADOPT-003` | Engineering Alignment                | Map/align delivery to ES/ENG-001 under separate Owner Auth                      |
-| `<PRODUCT>-ADOPT-004` | Certification Alignment              | ES-002 / readiness path                                                         |
-| `<PRODUCT>-ADOPT-005` | Operations Alignment                 | Standing ops governance                                                         |
-| `<PRODUCT>-ADOPT-006` | Product Board Adoption Certification | Board certifies adoption complete                                               |
-
-Examples: `APZHUB-LAW-ADOPT-001`, `APZHUB-DOCS-ADOPT-002`, …
-
-## Mapping for APZ Law Platform (first product)
-
-| Standard phase                              | Programme ID             | Status                           |
-| ------------------------------------------- | ------------------------ | -------------------------------- |
-| Portfolio assessment                        | APZHUB-ADOPT-001         | **COMPLETE**                     |
-| Enterprise Engineering Alignment Assessment | **APZHUB-LAW-ADOPT-001** | **COMPLETE** (20260803T100641Z)  |
-| Governance Alignment                        | APZHUB-LAW-ADOPT-002     | Recommended — **not authorised** |
-| Engineering Alignment                       | APZHUB-LAW-ADOPT-003     | Recommended — **not authorised** |
-| Certification Alignment                     | APZHUB-LAW-ADOPT-004     | Recommended — **not authorised** |
-| Operations Alignment                        | APZHUB-LAW-ADOPT-005     | Recommended — **not authorised** |
-| Board Adoption Certification                | APZHUB-LAW-ADOPT-006     | Recommended — **not authorised** |
-
-Note: Owner Auth refined **APZHUB-LAW-ADOPT-001** to **Enterprise Engineering Alignment Assessment** (assess before engineer). Subsequent LAW-ADOPT-00N programmes require their own Owner Authorisations.
+| Phase     | ID                   | Status                   |
+| --------- | -------------------- | ------------------------ |
+| ADOPT-001 | APZHUB-LAW-ADOPT-001 | COMPLETE                 |
+| PBR-001   | PBR-APZHUB-LAW-001   | COMPLETE — APPROVED      |
+| ADOPT-002 | APZHUB-LAW-ADOPT-002 | AUTHORISED — not started |
 
 ## Rules
 
-1. One product progresses at a time unless Board explicitly parallelises.
-2. No phase skips without Board decision.
-3. No engineering inside Board resolutions or assessment programmes.
+1. Delivery programmes alternate with independent Board certification.
+2. No engineering inside Board resolutions or assessment programmes.
+3. No engineering alignment until Governance Alignment complete and Board-certified (PBR-002).
 4. Each phase requires Owner Authorisation before execution.

@@ -5,7 +5,8 @@
 > **PBR-APZQEP-1.0-001 (20260803T071607Z):** Product Board **GO** — Version 1.0 **GENERAL AVAILABILITY** — [pbr-apzqep-1.0-001/](./v1.1/pbr-apzqep-1.0-001/)  
 > **APZQEP-OPS-001 (20260803T072224Z):** GA Operations & Product Intelligence **COMPLETE** — **operations-led** — Version 1.1 **NOT OPENED** — [apzqep-ops-001/](./v1.1/apzqep-ops-001/)  
 > **PBR-APZHUB-001 (20260803T095342Z):** First enterprise adoption product **APZ Law Platform APPROVED** — [PBR-APZHUB-001](../../engineering/PBR-APZHUB-001/)  
-> **APZHUB-LAW-ADOPT-001 (20260803T100641Z):** Law **Alignment Assessment COMPLETE** — **PARTIALLY READY** — await Board before LAW-ADOPT-002 — [APZHUB-LAW-ADOPT-001](../../engineering/APZHUB-LAW-ADOPT-001/)
+> **APZHUB-LAW-ADOPT-001 (20260803T100641Z):** Law **Alignment Assessment COMPLETE** — [APZHUB-LAW-ADOPT-001](../../engineering/APZHUB-LAW-ADOPT-001/)  
+> **PBR-APZHUB-LAW-001 (20260803T102148Z):** Assessment **ACCEPTED** — **LAW-ADOPT-002 AUTHORISED** (not started) — [PBR-APZHUB-LAW-001](../../engineering/PBR-APZHUB-LAW-001/)
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
