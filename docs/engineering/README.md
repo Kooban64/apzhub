@@ -53,7 +53,22 @@ Portfolio operating model generalised from APZQEP Version 1.0 GA. Makes the prov
 | [APZHUB-ENG-003/APZHUB-PRODUCT-ADOPTION-MATRIX.md](./APZHUB-ENG-003/APZHUB-PRODUCT-ADOPTION-MATRIX.md) | Product adoption status          |
 | [APZHUB-ENG-003/APZHUB-ENG-003-COMPLETION.md](./APZHUB-ENG-003/APZHUB-ENG-003-COMPLETION.md)           | Completion                       |
 
-**Priority:** Portfolio adoption of ENG-003 · APZQEP remains **operations-led GA** (not an ENG-003 engineering target).
+**Priority:** Portfolio adoption assessments · APZQEP remains **operations-led GA**.
+
+---
+
+## Enterprise Product Adoption Assessment (APZHUB-ADOPT-001) — **COMPLETE**
+
+Assessment-only programme. Measures products against ENG-003. No engineering.
+
+| Document                                                                                                 | Purpose              |
+| -------------------------------------------------------------------------------------------------------- | -------------------- |
+| [APZHUB-ADOPT-001/README.md](./APZHUB-ADOPT-001/README.md)                                               | Programme face       |
+| [APZHUB-ADOPT-001/PORTFOLIO-PRIORITISATION.md](./APZHUB-ADOPT-001/PORTFOLIO-PRIORITISATION.md)           | Recommended sequence |
+| [APZHUB-ADOPT-001/PRODUCT-BOARD-ADOPTION-REVIEW.md](./APZHUB-ADOPT-001/PRODUCT-BOARD-ADOPTION-REVIEW.md) | Board pack           |
+| [APZHUB-ADOPT-001/APZHUB-ADOPT-001-COMPLETION.md](./APZHUB-ADOPT-001/APZHUB-ADOPT-001-COMPLETION.md)     | Completion           |
+
+**Next:** Product Board selects first product for Enterprise Adoption Phase 1. No product engineering authorised by ADOPT-001.
 
 ---
 

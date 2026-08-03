@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-03  
-> **Current status:** **APZHUB-ENG-003 COMPLETE** — enterprise engineering lifecycle adopted for portfolio · APZQEP V1.0 **GA** (operations-led; V1.1 **NOT OPENED**) · Product engineering **NONE** authorised · Governance **1.0 STABLE** · Baseline **1.2** · ES-004 **NOT AUTHORISED** · ENG-003 pack: [APZHUB-ENG-003/](../engineering/APZHUB-ENG-003/) · APZQEP status: [PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md).
+> **Current status:** **APZHUB-ADOPT-001 COMPLETE** — portfolio adoption assessments done · Await Product Board first-product decision · APZQEP V1.0 **GA** (ops-led; V1.1 **NOT OPENED**) · Product engineering **NONE** authorised · Governance **1.0 STABLE** · Baseline **1.2** · ADOPT-001: [APZHUB-ADOPT-001/](../engineering/APZHUB-ADOPT-001/) · ENG-003: [APZHUB-ENG-003/](../engineering/APZHUB-ENG-003/) · APZQEP: [PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md).
 
 ---
 
