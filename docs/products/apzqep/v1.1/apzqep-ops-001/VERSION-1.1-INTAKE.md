@@ -1,11 +1,11 @@
 # VERSION-1.1-INTAKE
 
-| Field                   | Value              |
-| ----------------------- | ------------------ |
-| Programme               | APZQEP-OPS-001     |
-| Timestamp               | 20260803T072224Z   |
-| Version 1.1 engineering | **NOT AUTHORISED** |
-| Version 1.1 planning    | **NOT OPENED**     |
+| Field                   | Value                                                                    |
+| ----------------------- | ------------------------------------------------------------------------ |
+| Programme               | APZQEP-OPS-001                                                           |
+| Timestamp               | 20260803T072224Z                                                         |
+| Version 1.1 engineering | **NOT AUTHORISED**                                                       |
+| Version 1.1 planning    | **APZQEP-160 COMPLETE** — await Board ([../apzqep-160/](../apzqep-160/)) |
 
 ## Purpose
 

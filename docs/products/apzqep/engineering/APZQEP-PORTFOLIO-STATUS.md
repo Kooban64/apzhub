@@ -40,6 +40,8 @@
 | PBR-APZHUB-LAW-004         | ✅ Operations Alignment **CERTIFIED**                               |
 | APZHUB-LAW-ADOPT-005       | ⏳ **AUTHORISED** — Product Readiness (paused; await Owner Auth)    |
 | Law pivot 20260803T140413Z | ⏸ Law **PAUSED** at Ops CERTIFIED — focus → **APZQEP**              |
+| APZQEP-160                 | ✅ V1.1 Enterprise Quality Platform Definition **COMPLETE**         |
+| APZQEP V1.1 engineering    | ⛔ **NOT OPENED** — await Board acceptance of APZQEP-160            |
 
 ---
 

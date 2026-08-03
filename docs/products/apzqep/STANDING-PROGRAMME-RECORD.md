@@ -13,7 +13,8 @@
 > **PBR-APZHUB-LAW-003 (20260803T133515Z):** Law engineering **CERTIFIED** — [PBR-APZHUB-LAW-003](../../engineering/PBR-APZHUB-LAW-003/)  
 > **APZHUB-LAW-ADOPT-004 (20260803T135126Z):** Law **Operations Alignment COMPLETE** — [APZHUB-LAW-ADOPT-004](../../engineering/APZHUB-LAW-ADOPT-004/)  
 > **PBR-APZHUB-LAW-004 (20260803T135932Z):** Law operations **CERTIFIED** — **LAW-ADOPT-005 AUTHORISED** (not started) — [PBR-APZHUB-LAW-004](../../engineering/PBR-APZHUB-LAW-004/) · [law/PRODUCT-STATUS](../law/PRODUCT-STATUS.md)  
-> **Law pivot (20260803T140413Z):** Law adoption **PAUSED** at Ops Certification — portfolio focus returns to **APZQEP** — [LAW-ADOPTION-STANDING-STATE](../law/LAW-ADOPTION-STANDING-STATE.md)
+> **Law pivot (20260803T140413Z):** Law adoption **PAUSED** at Ops Certification — portfolio focus returns to **APZQEP** — [LAW-ADOPTION-STANDING-STATE](../law/LAW-ADOPTION-STANDING-STATE.md)  
+> **APZQEP-160 (20260803T141613Z):** Version 1.1 **Enterprise Quality Platform Definition COMPLETE** — await Board — eng **NOT OPENED** — [apzqep-160/](./v1.1/apzqep-160/)
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
