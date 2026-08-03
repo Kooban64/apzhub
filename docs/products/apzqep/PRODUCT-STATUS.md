@@ -1,19 +1,19 @@
 # APZQEP — Product Status (Authoritative)
 
-| Field              | Value                                           |
-| ------------------ | ----------------------------------------------- |
-| Document           | **PRODUCT-STATUS**                              |
-| Authority          | Product Board — **STANDING**                    |
-| Audience           | Engineers, architects, auditors, AI assistants  |
-| Rule               | **Read this document before any APZQEP work**   |
-| Last updated       | 20260803T175516Z                                |
-| Engineering thread | **FORMALLY COMPLETE** (V1.0)                    |
-| Product posture    | **GENERAL AVAILABILITY**                        |
-| Management posture | **Operations-led** (APZQEP-OPS-001)             |
-| V1.1 definition    | **APZQEP-160 APPROVED** (PBR-APZQEP-160)        |
-| V1.1 Wave 1        | **CERTIFIED** (PBR-APZQEP-161)                  |
-| V1.1 Wave 2        | **CERTIFIED** (PBR-APZQEP-162)                  |
-| V1.1 Wave 3 arch   | **APZQEP-163-000 COMPLETE** (architecture only) |
+| Field              | Value                                          |
+| ------------------ | ---------------------------------------------- |
+| Document           | **PRODUCT-STATUS**                             |
+| Authority          | Product Board — **STANDING**                   |
+| Audience           | Engineers, architects, auditors, AI assistants |
+| Rule               | **Read this document before any APZQEP work**  |
+| Last updated       | 20260803T181255Z                               |
+| Engineering thread | **FORMALLY COMPLETE** (V1.0)                   |
+| Product posture    | **GENERAL AVAILABILITY**                       |
+| Management posture | **Operations-led** (APZQEP-OPS-001)            |
+| V1.1 definition    | **APZQEP-160 APPROVED** (PBR-APZQEP-160)       |
+| V1.1 Wave 1        | **CERTIFIED** (PBR-APZQEP-161)                 |
+| V1.1 Wave 2        | **CERTIFIED** (PBR-APZQEP-162)                 |
+| V1.1 Wave 3 arch   | **APPROVED** (PBR-APZQEP-163-000)              |
 
 ---
 
@@ -89,8 +89,7 @@ Management posture:
 OPERATIONS-LED
 
 Next Authorised Programme:
-Await Product Board approval of APZQEP-163-000 architecture.
-APZQEP-163 engineering AUTHORISED TO OPEN only after Board + separate Owner Auth — NOT STARTED.
+APZQEP-163 — Enterprise Quality Intelligence Platform (AUTHORISED TO OPEN; NOT STARTED; awaits Owner Auth)
 APZQEP-164…166 NOT AUTHORISED
 
 Version 1.1 definition programme:
@@ -108,17 +107,18 @@ Board certification: **CERTIFIED** (PBR-APZQEP-162) · eng commit `9fb22b0ee661c
 Durability: process-local SCM store — not production-durable until persistence certified
 
 Version 1.1 Wave 3:
-APZQEP-163-000 COMPLETE — Enterprise Quality Intelligence Platform Architecture (docs only)
-Title: Enterprise Quality Intelligence Platform (AI is a provider, not the platform)
+APZQEP-163-000 COMPLETE · **PBR-APZQEP-163-000 APPROVED**
+Authoritative title: Enterprise Quality Intelligence Platform (AI is a provider)
+Historical APZQEP-160 wording “AI Quality Intelligence” preserved (immutable)
 Intended package: @apzhub/platform-quality-intelligence
-APZQEP-163 engineering: NOT STARTED — await Board approval + Owner Auth
+APZQEP-163 engineering: AUTHORISED TO OPEN — NOT STARTED — separate Owner Auth required
 
 Version 1.1 Wave 4+:
 APZQEP-164…166 NOT AUTHORISED
 
 Next Action:
-Product Board review/approve APZQEP-163-000.
-Do NOT begin APZQEP-163 engineering without Board approval + Owner Auth.
+Owner Authorisation for APZQEP-163 engineering (platform foundation first; AI as provider).
+Do NOT begin APZQEP-163 without Owner Auth.
 Ops: push local main to origin when remote credentials available.
 ```
 
@@ -183,6 +183,7 @@ Ops: push local main to origin when remote credentials available.
 | **APZQEP-162**         | Enterprise Source Control Integration Platform **COMPLETE**               |
 | **PBR-APZQEP-162**     | Wave 2 **CERTIFIED** — APZQEP-163 **AUTHORISED TO OPEN** (gated)          |
 | **APZQEP-163-000**     | Enterprise Quality Intelligence Platform Architecture **COMPLETE**        |
+| **PBR-APZQEP-163-000** | Wave 3 architecture **APPROVED** — APZQEP-163 **AUTHORISED TO OPEN**      |
 
 ---
 
@@ -255,8 +256,8 @@ Board / audit / ops:
 ## Path remaining
 
 1. Operate Version 1.0 under APZQEP-OPS-001.
-2. Product Board approve APZQEP-163-000 architecture.
-3. Open APZQEP-163 engineering only with separate Owner Auth; do not authorise 164–166 yet.
+2. Open APZQEP-163 engineering only with separate Owner Auth (platform foundation first).
+3. Do not authorise APZQEP-164…166 yet.
 
 ---
 
@@ -266,7 +267,7 @@ Version 1.0 engineering lifecycle is formally complete. Product Board authorised
 
 Authoritative state:
 
-> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. V1.0 engineering CLOSED. APZQEP-OPS-001 COMPLETE. Waves 1–2 CERTIFIED. APZQEP-163-000 Architecture COMPLETE. APZQEP-163 engineering NOT STARTED. Waves 164–166 NOT AUTHORISED.**
+> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. V1.0 engineering CLOSED. APZQEP-OPS-001 COMPLETE. Waves 1–2 CERTIFIED. Wave 3 architecture APPROVED (PBR-APZQEP-163-000). APZQEP-163 AUTHORISED TO OPEN — engineering NOT STARTED. Waves 164–166 NOT AUTHORISED.**
 
 ---
 

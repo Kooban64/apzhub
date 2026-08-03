@@ -1,11 +1,15 @@
 # VERSION-1.1-ROADMAP
 
-| Field       | Value                                                                |
-| ----------- | -------------------------------------------------------------------- |
-| Programme   | APZQEP-160                                                           |
-| Timestamp   | 20260803T160614Z (progress update)                                   |
-| Board       | **APPROVED** — PBR-APZQEP-160; Wave 1 **CERTIFIED** — PBR-APZQEP-161 |
-| Engineering | Wave 1 closed; Wave 2 **AUTHORISED** — await Owner Auth              |
+| Field       | Value                                                                                                 |
+| ----------- | ----------------------------------------------------------------------------------------------------- |
+| Programme   | APZQEP-160                                                                                            |
+| Timestamp   | 20260803T181255Z (progress update)                                                                    |
+| Board       | **APPROVED** — PBR-APZQEP-160; Waves 1–2 **CERTIFIED**; Wave 3 arch **APPROVED** — PBR-APZQEP-163-000 |
+| Engineering | Waves 1–2 closed; Wave 3 eng **AUTHORISED TO OPEN** — not started                                     |
+
+> **Historical naming (immutable):** The Wave summary table below preserves APZQEP-160 original wording for Wave 3 (“AI Quality Intelligence”).  
+> **Authoritative Wave 3 title from PBR-APZQEP-163-000 onward:** **Enterprise Quality Intelligence Platform**.  
+> APZQEP-160 is **not rewritten**. See [../pbr-apzqep-163-000/HISTORICAL-NAMING-RESOLUTION.md](../pbr-apzqep-163-000/HISTORICAL-NAMING-RESOLUTION.md).
 
 ## North star
 
@@ -26,11 +30,12 @@ Ship Version 1.1 as the Enterprise Quality Platform in six waves, preserving Ver
 
 See [../WAVE-PROGRESS-REGISTER.md](../WAVE-PROGRESS-REGISTER.md).
 
-| Wave | State                                                    |
-| ---- | -------------------------------------------------------- |
-| 1    | **CERTIFIED** (APZQEP-161 + 161R + PBR-APZQEP-161)       |
-| 2    | **AUTHORISED** — APZQEP-162; engineering **NOT STARTED** |
-| 3–6  | NOT AUTHORISED                                           |
+| Wave | State                                                                                                                                                           |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | **CERTIFIED** (APZQEP-161 + 161R + PBR-APZQEP-161)                                                                                                              |
+| 2    | **CERTIFIED** (APZQEP-162 + PBR-APZQEP-162) — title: Enterprise Source Control Integration Platform                                                             |
+| 3    | Architecture **APPROVED** (APZQEP-163-000 + PBR-APZQEP-163-000); eng **AUTHORISED TO OPEN** / NOT STARTED — title: **Enterprise Quality Intelligence Platform** |
+| 4–6  | NOT AUTHORISED                                                                                                                                                  |
 
 ## Gates
 

@@ -48,8 +48,9 @@
 | APZQEP-161-OE              | ✅ Operational Enablement & Internal Adoption **COMPLETE**          |
 | APZQEP-162                 | ✅ **COMPLETE** — Wave 2 eng delivered                              |
 | PBR-APZQEP-162             | ✅ Wave 2 **CERTIFIED** — APZQEP-163 **AUTHORISED TO OPEN**         |
-| APZQEP-163-000             | ✅ Architecture **COMPLETE** — await Board approval                 |
-| APZQEP-163                 | ⏳ Eng **NOT STARTED** — gated on Board + Owner Auth                |
+| APZQEP-163-000             | ✅ Architecture **COMPLETE**                                        |
+| PBR-APZQEP-163-000         | ✅ Architecture **APPROVED** — Wave 3 title adopted                 |
+| APZQEP-163                 | ⏳ **AUTHORISED TO OPEN** — eng **NOT STARTED** (Owner Auth)        |
 | APZQEP-163…166             | ⛔ Planned — **NOT AUTHORISED**                                     |
 
 ---

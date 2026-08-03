@@ -1,0 +1,7 @@
+PBR-APZQEP-163-000 Evidence — 20260803T181255Z
+Decision: APPROVED
+Architecture commit: 3ba458dfd9c8ad492b6d319c3f633229278bcd14
+Engineering: UNCHANGED
+Wave 3 title: Enterprise Quality Intelligence Platform
+APZQEP-160: NOT REWRITTEN
+APZQEP-163: AUTHORISED TO OPEN / NOT STARTED
