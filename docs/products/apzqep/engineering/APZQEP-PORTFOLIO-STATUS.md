@@ -36,15 +36,16 @@
 
 ## Where we are
 
-| Layer                     | State                                       |
-| ------------------------- | ------------------------------------------- |
-| **Platform**              | Complete                                    |
-| **Core QE Caps A–F**      | Complete — Postgres SoR · fail-closed RBAC  |
-| **Product readiness**     | PASS (150R)                                 |
-| **Production release**    | **AUTHORISED — GENERAL AVAILABILITY**       |
-| **Engineering authority** | **CLOSED**                                  |
-| **Management**            | **Operations-led** (APZQEP-OPS-001)         |
-| **Version 1.1**           | Not opened — measured evidence + Board auth |
+| Layer                     | State                                          |
+| ------------------------- | ---------------------------------------------- |
+| **Platform**              | Complete                                       |
+| **Core QE Caps A–F**      | Complete — Postgres SoR · fail-closed RBAC     |
+| **Product readiness**     | PASS (150R)                                    |
+| **Production release**    | **AUTHORISED — GENERAL AVAILABILITY**          |
+| **Engineering authority** | **CLOSED**                                     |
+| **Management**            | **Operations-led** (APZQEP-OPS-001)            |
+| **Portfolio adoption**    | **APZ Law Platform** selected (PBR-APZHUB-001) |
+| **Version 1.1**           | Not opened — measured evidence + Board auth    |
 
 ---
 
