@@ -1,34 +1,35 @@
 # VERSION-1.1-ROADMAP
 
-| Field       | Value                                                   |
-| ----------- | ------------------------------------------------------- |
-| Programme   | APZQEP-160                                              |
-| Timestamp   | 20260803T141613Z                                        |
-| Engineering | **NOT OPEN** until Board approves + Owner Auth per wave |
+| Field       | Value                                            |
+| ----------- | ------------------------------------------------ |
+| Programme   | APZQEP-160                                       |
+| Timestamp   | 20260803T141613Z                                 |
+| Board       | **APPROVED** — PBR-APZQEP-160 (20260803T142234Z) |
+| Engineering | **NOT OPEN** until Owner Auth per wave programme |
 
 ## North star
 
 Ship Version 1.1 as the Enterprise Quality Platform in six waves, preserving Version 1.0 GA.
 
-## Wave summary
+## Wave summary (Board-authoritative IDs)
 
-| Wave | Name                                | Primary streams     |
-| ---- | ----------------------------------- | ------------------- |
-| 1    | Enterprise Automation Foundation    | A (+ F scaffolding) |
-| 2    | Enterprise Integrations             | B                   |
-| 3    | AI Quality Intelligence             | C                   |
-| 4    | Enterprise Dashboards               | D                   |
-| 5    | Continuous Quality                  | E                   |
-| 6    | Enterprise Ecosystem / APZHUB depth | F + APZHUB spine    |
+| Wave | Programme      | Name                                | Primary streams     |
+| ---- | -------------- | ----------------------------------- | ------------------- |
+| 1    | **APZQEP-161** | Enterprise Automation Foundation    | A (+ F scaffolding) |
+| 2    | **APZQEP-162** | Enterprise Integrations             | B                   |
+| 3    | **APZQEP-163** | AI Quality Intelligence             | C                   |
+| 4    | **APZQEP-164** | Enterprise Dashboards               | D                   |
+| 5    | **APZQEP-165** | Continuous Quality                  | E                   |
+| 6    | **APZQEP-166** | Enterprise Ecosystem / APZHUB depth | F + APZHUB spine    |
 
-## Recommended first engineering programme (post-Board)
+## First engineering programme
 
-**Enterprise Automation Foundation — Playwright-first**  
-Rationale: fastest path to daily team value while platform evolves.
+**APZQEP-161 — Enterprise Automation Foundation — Playwright-first**  
+Authorised to open by PBR-APZQEP-160. Awaits separate Owner Authorisation. No engineering in the Board resolution.
 
 ## Gates
 
-Each wave: Owner Auth → engineering programme(s) → ES-001 tests → Product Board certification → ops evidence → next wave eligibility.
+Each wave: Owner Auth → engineering programme → ES-001 tests → Product Board certification → ops evidence → next wave eligibility.
 
 ## Three-year horizon (directional)
 

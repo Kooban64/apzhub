@@ -1,8 +1,8 @@
 # APZHUB Current Milestone
 
 > **Purpose:** Where development currently stops and what requires owner approval  
-> **Last updated:** 2026-08-03  
-> **Current status:** **PBR-APZHUB-LAW-002 COMPLETE** — Law governance **CERTIFIED** · **LAW-ADOPT-003 AUTHORISED** (not started) · Engineering **CLOSED** until Owner Auth executes ADOPT-003 · Lifecycle **FROZEN** · Law: [PRODUCT-STATUS](../products/law/PRODUCT-STATUS.md) · Board: [PBR-APZHUB-LAW-002/](../engineering/PBR-APZHUB-LAW-002/) · APZQEP: [apzqep/PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md).
+> **Last updated:** 20260803T142234Z  
+> **Current status:** **APZQEP flagship** — V1.0 **GA** (ops-led) · **PBR-APZQEP-160 APPROVED** · **APZQEP-161 AUTHORISED** (Wave 1 Automation; await Owner Auth; **no eng started**) · Law adoption **PAUSED** at Ops CERTIFIED · APZQEP: [PRODUCT-STATUS](../products/apzqep/PRODUCT-STATUS.md) · Board: [pbr-apzqep-160/](../products/apzqep/v1.1/pbr-apzqep-160/) · Law: [LAW-ADOPTION-STANDING-STATE](../products/law/LAW-ADOPTION-STANDING-STATE.md).
 
 ---
 

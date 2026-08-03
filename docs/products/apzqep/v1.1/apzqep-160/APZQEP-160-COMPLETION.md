@@ -32,5 +32,5 @@ None triggered.
 
 ## Next
 
-Await **Product Board** acceptance of APZQEP-160.  
-Do not open Wave 1 engineering without Board acceptance + separate Owner Auth.
+Product Board **APPROVED** APZQEP-160 (PBR-APZQEP-160, 20260803T142234Z).  
+Next: Owner Auth for **APZQEP-161** (Wave 1). Do not engineer until then.

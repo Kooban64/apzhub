@@ -1,11 +1,11 @@
 # VERSION-1.1-INTAKE
 
-| Field                   | Value                                                                    |
-| ----------------------- | ------------------------------------------------------------------------ |
-| Programme               | APZQEP-OPS-001                                                           |
-| Timestamp               | 20260803T072224Z                                                         |
-| Version 1.1 engineering | **NOT AUTHORISED**                                                       |
-| Version 1.1 planning    | **APZQEP-160 COMPLETE** — await Board ([../apzqep-160/](../apzqep-160/)) |
+| Field                   | Value                                                                                                                  |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Programme               | APZQEP-OPS-001                                                                                                         |
+| Timestamp               | 20260803T072224Z                                                                                                       |
+| Version 1.1 engineering | **APZQEP-161 AUTHORISED to open** — await Owner Auth; 162–166 not authorised                                           |
+| Version 1.1 planning    | **APZQEP-160 APPROVED** (PBR-APZQEP-160) — [../apzqep-160/](../apzqep-160/) · [../pbr-apzqep-160/](../pbr-apzqep-160/) |
 
 ## Purpose
 

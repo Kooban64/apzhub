@@ -6,11 +6,12 @@
 | Authority          | Product Board — **STANDING**                   |
 | Audience           | Engineers, architects, auditors, AI assistants |
 | Rule               | **Read this document before any APZQEP work**  |
-| Last updated       | 20260803T141613Z                               |
+| Last updated       | 20260803T142234Z                               |
 | Engineering thread | **FORMALLY COMPLETE** (V1.0)                   |
 | Product posture    | **GENERAL AVAILABILITY**                       |
 | Management posture | **Operations-led** (APZQEP-OPS-001)            |
-| V1.1 definition    | **APZQEP-160 COMPLETE** — await Board review   |
+| V1.1 definition    | **APZQEP-160 APPROVED** (PBR-APZQEP-160)       |
+| V1.1 Wave 1        | **APZQEP-161 AUTHORISED** — await Owner Auth   |
 
 ---
 
@@ -89,13 +90,18 @@ Next Authorised Programme:
 NONE (engineering)
 
 Version 1.1 definition programme:
-APZQEP-160 COMPLETE — await Product Board acceptance
-Version 1.1 engineering: NOT OPENED
+APZQEP-160 COMPLETE — Product Board **APPROVED** (PBR-APZQEP-160)
+
+Version 1.1 engineering:
+Wave programmes 161–166 defined
+APZQEP-161 AUTHORISED to open — Owner Auth required
+APZQEP-162…166 NOT AUTHORISED
+No Playwright/integration/AI engineering started
 
 Next Action:
 Operate Version 1.0 under OPS-001.
-Product Board review of APZQEP-160 (Enterprise Quality Platform Definition).
-Do NOT open Version 1.1 engineering until Board accepts APZQEP-160 and Owner Auth opens Wave 1.
+Await Owner Authorisation for APZQEP-161 (Enterprise Automation Foundation).
+Do NOT engineer until APZQEP-161 Owner Auth.
 ```
 
 ---
@@ -116,33 +122,36 @@ Do NOT open Version 1.1 engineering until Board accepts APZQEP-160 and Owner Aut
 
 ## Governance & baseline
 
-| Item                            | Value                                      |
-| ------------------------------- | ------------------------------------------ |
-| Governance version              | **1.0 STABLE**                             |
-| Enterprise Engineering Baseline | **1.x STABLE (1.2)**                       |
-| Enterprise Standards            | ES-001, ES-002, ES-003 **IN FORCE**        |
-| ES-004                          | **NOT AUTHORISED**                         |
-| Operating mode                  | Evolve the Enterprise · **operations-led** |
-| Product Board authority         | **STANDING**                               |
-| Engineering authority           | **CLOSED**                                 |
-| Version 1.1                     | **NOT OPENED** (definition: APZQEP-160)    |
-| V1.1 definition pack            | [v1.1/apzqep-160/](./v1.1/apzqep-160/)     |
+| Item                            | Value                                                    |
+| ------------------------------- | -------------------------------------------------------- |
+| Governance version              | **1.0 STABLE**                                           |
+| Enterprise Engineering Baseline | **1.x STABLE (1.2)**                                     |
+| Enterprise Standards            | ES-001, ES-002, ES-003 **IN FORCE**                      |
+| ES-004                          | **NOT AUTHORISED**                                       |
+| Operating mode                  | Evolve the Enterprise · **operations-led**               |
+| Product Board authority         | **STANDING**                                             |
+| Engineering authority           | **CLOSED**                                               |
+| Version 1.1                     | Definition **APPROVED**; eng Wave 1 authorised to open   |
+| V1.1 definition pack            | [v1.1/apzqep-160/](./v1.1/apzqep-160/)                   |
+| V1.1 Board approval             | [v1.1/pbr-apzqep-160/](./v1.1/pbr-apzqep-160/)           |
+| Product Board Register          | [PRODUCT-BOARD-REGISTER.md](./PRODUCT-BOARD-REGISTER.md) |
 
 ---
 
 ## Programme History (Version 1.0)
 
-| Programme              | Outcome                                                                                 |
-| ---------------------- | --------------------------------------------------------------------------------------- |
-| APZQEP-120             | Platform Foundation Complete                                                            |
-| APZQEP-140             | Core Quality Engineering Complete                                                       |
-| APZQEP-150             | Product Readiness Audit Complete (**NO-GO** — historical / immutable)                   |
-| APZQEP-151             | Durable Product Persistence **CERTIFIED / CLOSED** (RB-001)                             |
-| APZQEP-152             | Enterprise Production RBAC & Security **CERTIFIED / CLOSED** (RB-002)                   |
-| APZQEP-150R            | Product Readiness Re-certification **COMPLETE** — **GO recommended**                    |
-| **PBR-APZQEP-1.0-001** | Product Board **GO** — General Production Release **AUTHORISED**                        |
-| **APZQEP-OPS-001**     | GA Operations & Product Intelligence **COMPLETE** (non-engineering)                     |
-| **APZQEP-160**         | Enterprise Quality Platform Definition & Roadmap **COMPLETE** (planning; eng unchanged) |
+| Programme              | Outcome                                                                   |
+| ---------------------- | ------------------------------------------------------------------------- |
+| APZQEP-120             | Platform Foundation Complete                                              |
+| APZQEP-140             | Core Quality Engineering Complete                                         |
+| APZQEP-150             | Product Readiness Audit Complete (**NO-GO** — historical / immutable)     |
+| APZQEP-151             | Durable Product Persistence **CERTIFIED / CLOSED** (RB-001)               |
+| APZQEP-152             | Enterprise Production RBAC & Security **CERTIFIED / CLOSED** (RB-002)     |
+| APZQEP-150R            | Product Readiness Re-certification **COMPLETE** — **GO recommended**      |
+| **PBR-APZQEP-1.0-001** | Product Board **GO** — General Production Release **AUTHORISED**          |
+| **APZQEP-OPS-001**     | GA Operations & Product Intelligence **COMPLETE** (non-engineering)       |
+| **APZQEP-160**         | Enterprise Quality Platform Definition & Roadmap **COMPLETE**             |
+| **PBR-APZQEP-160**     | V1.1 Definition **APPROVED** — Wave 1 (**APZQEP-161**) authorised to open |
 
 ---
 

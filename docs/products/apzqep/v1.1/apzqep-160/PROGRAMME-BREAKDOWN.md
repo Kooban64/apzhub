@@ -1,38 +1,34 @@
 # PROGRAMME-BREAKDOWN
 
-| Field     | Value                                                       |
-| --------- | ----------------------------------------------------------- |
-| Programme | APZQEP-160                                                  |
-| Timestamp | 20260803T141613Z                                            |
-| Note      | Proposed IDs for Board — **not authorised for engineering** |
+| Field     | Value                                                |
+| --------- | ---------------------------------------------------- |
+| Programme | APZQEP-160                                           |
+| Updated   | 20260803T142234Z (PBR-APZQEP-160)                    |
+| Note      | Wave-aligned IDs **161–166** are Board-authoritative |
 
-## Definition (this programme)
+## Definition
 
-| ID         | Title                                            | Status                    |
-| ---------- | ------------------------------------------------ | ------------------------- |
-| APZQEP-160 | Enterprise Quality Platform Definition & Roadmap | **COMPLETE** (definition) |
+| ID         | Title                                            | Status                                             |
+| ---------- | ------------------------------------------------ | -------------------------------------------------- |
+| APZQEP-160 | Enterprise Quality Platform Definition & Roadmap | **COMPLETE** · Board **APPROVED** (PBR-APZQEP-160) |
 
-## Proposed Wave 1 engineering (await Board + Owner Auth)
+## Version 1.1 engineering programmes (wave-aligned)
 
-| ID                | Title                                        | Depends                     |
-| ----------------- | -------------------------------------------- | --------------------------- |
-| APZQEP-161        | Automation Orchestrator & Runner Abstraction | APZQEP-160 Board acceptance |
-| APZQEP-162        | Playwright Enterprise Provider               | 161                         |
-| APZQEP-163        | API Testing Provider MVP                     | 161                         |
-| PBR-APZQEP-1.1-W1 | Wave 1 Board certification                   | 161–163 complete            |
+| ID             | Wave | Title                                               | Engineering authority                     |
+| -------------- | ---- | --------------------------------------------------- | ----------------------------------------- |
+| **APZQEP-161** | 1    | Enterprise Automation Foundation (Playwright-first) | **AUTHORISED to open** — await Owner Auth |
+| **APZQEP-162** | 2    | Enterprise Integrations                             | NOT AUTHORISED                            |
+| **APZQEP-163** | 3    | AI Quality Intelligence                             | NOT AUTHORISED                            |
+| **APZQEP-164** | 4    | Enterprise Dashboards                               | NOT AUTHORISED                            |
+| **APZQEP-165** | 5    | Continuous Quality                                  | NOT AUTHORISED                            |
+| **APZQEP-166** | 6    | Enterprise Ecosystem                                | NOT AUTHORISED                            |
 
-## Later waves (placeholder bands)
+## Superseded draft numbering
 
-| Band    | Wave               | Example IDs |
-| ------- | ------------------ | ----------- |
-| 170–179 | Integrations       | APZQEP-170+ |
-| 180–184 | AI                 | APZQEP-180+ |
-| 185–189 | Dashboards         | APZQEP-185+ |
-| 190–194 | Continuous Quality | APZQEP-190+ |
-| 195–199 | Ecosystem          | APZQEP-195+ |
+Earlier draft sub-slices (161 orchestrator / 162 Playwright / 163 API MVP) and 170+ bands are **superseded** by PBR-APZQEP-160 wave-aligned IDs.
 
 ## Rules
 
 1. No engineering until separate Owner Auth per programme.
-2. Historical APZQEP-110/111/120 IDs remain historical; do not reopen.
+2. Historical APZQEP-110/111/120/140/150/151/152/150R remain closed.
 3. OPS-001 remains operations authority for V1.0 GA.
