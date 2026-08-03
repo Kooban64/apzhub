@@ -3,7 +3,7 @@
 | Field     | Value                    |
 | --------- | ------------------------ |
 | Document  | PRODUCT-BOARD-REGISTER   |
-| Timestamp | 20260803T191002Z         |
+| Timestamp | 20260803T192906Z         |
 | Authority | Product Board — STANDING |
 
 ## Resolutions
@@ -16,15 +16,14 @@
 | PBR-APZQEP-162     | Enterprise Source Control Integration Platform Certification (Wave 2)       | **CERTIFIED** | 20260803T174024Z | [v1.1/pbr-apzqep-162/](./v1.1/pbr-apzqep-162/)         |
 | PBR-APZQEP-163-000 | Enterprise Quality Intelligence Platform Architecture Approval (Wave 3)     | **APPROVED**  | 20260803T181255Z | [v1.1/pbr-apzqep-163-000/](./v1.1/pbr-apzqep-163-000/) |
 | PBR-APZQEP-163     | Enterprise Quality Intelligence Platform Engineering Certification (Wave 3) | **CERTIFIED** | 20260803T185717Z | [v1.1/pbr-apzqep-163/](./v1.1/pbr-apzqep-163/)         |
+| PBR-APZQEP-164-000 | Enterprise Dashboard & Quality Experience Architecture Approval (Wave 4)    | **APPROVED**  | 20260803T192906Z | [v1.1/pbr-apzqep-164-000/](./v1.1/pbr-apzqep-164-000/) |
 
 ## Pending / next
 
-| Item               | State                                                                                    |
-| ------------------ | ---------------------------------------------------------------------------------------- |
-| APZQEP-164-000     | **ARCHITECTURE COMPLETE** — await Board — [v1.1/apzqep-164-000/](./v1.1/apzqep-164-000/) |
-| PBR-APZQEP-164-000 | **PENDING** — Wave 4 Architecture Approval                                               |
-| APZQEP-164 eng     | **NOT STARTED** — gated on PBR-APZQEP-164-000 + separate Owner Auth                      |
-| APZQEP-165…166     | Planned — **not authorised**                                                             |
-| APZQEP-163A        | External AI providers — **not authorised**                                               |
-| Remote push (ops)  | Local `main` ahead of `origin/main` — Owner/ops push when credentials available          |
-| Wave progress      | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                       |
+| Item              | State                                                                                                             |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------- |
+| APZQEP-164        | **AUTHORISED TO OPEN** — **NOT STARTED** — awaits separate Owner Auth — Enterprise Dashboard & Quality Experience |
+| APZQEP-165…166    | Planned — **not authorised**                                                                                      |
+| APZQEP-163A       | External AI providers — **not authorised**                                                                        |
+| Remote push (ops) | Local `main` ahead of `origin/main` — Owner/ops push when credentials available (OI-164-000-02)                   |
+| Wave progress     | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                                                |

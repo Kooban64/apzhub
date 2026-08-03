@@ -51,8 +51,8 @@
 | APZQEP-163-000             | ✅ Architecture **COMPLETE**                                        |
 | PBR-APZQEP-163-000         | ✅ Architecture **APPROVED** — Wave 3 title adopted                 |
 | APZQEP-163                 | ✅ **CERTIFIED** (PBR-APZQEP-163)                                   |
-| APZQEP-164-000             | ✅ Architecture **COMPLETE** — await PBR-APZQEP-164-000             |
-| APZQEP-164                 | ⏳ Eng **NOT STARTED** — gated on Board arch approval + Owner Auth  |
+| APZQEP-164-000             | ✅ Architecture **COMPLETE** · **PBR-APZQEP-164-000 APPROVED**      |
+| APZQEP-164                 | ⏳ **AUTHORISED TO OPEN** — eng **NOT STARTED** (Owner Auth)        |
 | APZQEP-163…166             | ⛔ Planned — **NOT AUTHORISED**                                     |
 
 ---

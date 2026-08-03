@@ -1,15 +1,16 @@
 # VERSION-1.1-ROADMAP
 
-| Field       | Value                                                                             |
-| ----------- | --------------------------------------------------------------------------------- |
-| Programme   | APZQEP-160                                                                        |
-| Timestamp   | 20260803T191002Z (progress update)                                                |
-| Board       | **APPROVED** — PBR-APZQEP-160; Waves 1–3 **CERTIFIED** (PBR-APZQEP-163)           |
-| Engineering | Waves 1–3 closed; Wave 4 arch (**APZQEP-164-000**) **COMPLETE** — eng not started |
+| Field       | Value                                                                                          |
+| ----------- | ---------------------------------------------------------------------------------------------- |
+| Programme   | APZQEP-160                                                                                     |
+| Timestamp   | 20260803T192906Z (progress update)                                                             |
+| Board       | **APPROVED** — PBR-APZQEP-160; Waves 1–3 **CERTIFIED**; Wave 4 arch **APPROVED** (PBR-164-000) |
+| Engineering | Waves 1–3 closed; Wave 4 (**APZQEP-164**) **AUTHORISED TO OPEN** — not started                 |
 
-> **Historical naming (immutable):** The Wave summary table below preserves APZQEP-160 original wording for Wave 3 (“AI Quality Intelligence”).  
-> **Authoritative Wave 3 title from PBR-APZQEP-163-000 onward:** **Enterprise Quality Intelligence Platform**.  
-> APZQEP-160 is **not rewritten**. See [../pbr-apzqep-163-000/HISTORICAL-NAMING-RESOLUTION.md](../pbr-apzqep-163-000/HISTORICAL-NAMING-RESOLUTION.md).
+> **Historical naming (immutable):** Wave summary table preserves APZQEP-160 wording for Wave 3 (“AI Quality Intelligence”) and Wave 4 (“Enterprise Dashboards”).  
+> **Authoritative Wave 3 title:** **Enterprise Quality Intelligence Platform** ([pbr-apzqep-163-000](../pbr-apzqep-163-000/HISTORICAL-NAMING-RESOLUTION.md)).  
+> **Authoritative Wave 4 title:** **Enterprise Dashboard & Quality Experience** ([pbr-apzqep-164-000](../pbr-apzqep-164-000/HISTORICAL-NAMING-DECISION.md)).  
+> APZQEP-160 is **not rewritten**.
 
 ## North star
 
@@ -30,13 +31,13 @@ Ship Version 1.1 as the Enterprise Quality Platform in six waves, preserving Ver
 
 See [../WAVE-PROGRESS-REGISTER.md](../WAVE-PROGRESS-REGISTER.md).
 
-| Wave | State                                                                                                                        |
-| ---- | ---------------------------------------------------------------------------------------------------------------------------- |
-| 1    | **CERTIFIED** (APZQEP-161 + 161R + PBR-APZQEP-161)                                                                           |
-| 2    | **CERTIFIED** (APZQEP-162 + PBR-APZQEP-162) — title: Enterprise Source Control Integration Platform                          |
-| 3    | **CERTIFIED** (APZQEP-163 + PBR-APZQEP-163) — title: **Enterprise Quality Intelligence Platform** (AI is a provider)         |
-| 4    | Architecture **COMPLETE** (APZQEP-164-000) — eng NOT STARTED — living title: **Enterprise Dashboards & Experience Platform** |
-| 5–6  | NOT AUTHORISED                                                                                                               |
+| Wave | State                                                                                                                                                            |
+| ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | **CERTIFIED** (APZQEP-161 + 161R + PBR-APZQEP-161)                                                                                                               |
+| 2    | **CERTIFIED** (APZQEP-162 + PBR-APZQEP-162) — title: Enterprise Source Control Integration Platform                                                              |
+| 3    | **CERTIFIED** (APZQEP-163 + PBR-APZQEP-163) — title: **Enterprise Quality Intelligence Platform** (AI is a provider)                                             |
+| 4    | Architecture **APPROVED** (APZQEP-164-000 + PBR-APZQEP-164-000); eng **AUTHORISED TO OPEN** / NOT STARTED — title: **Enterprise Dashboard & Quality Experience** |
+| 5–6  | NOT AUTHORISED                                                                                                                                                   |
 
 ## Gates
 

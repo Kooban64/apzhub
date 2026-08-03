@@ -26,7 +26,8 @@
 > **PBR-APZQEP-163-000 (20260803T181255Z):** Wave 3 architecture **APPROVED** — authoritative title **Enterprise Quality Intelligence Platform** — [pbr-apzqep-163-000/](./v1.1/pbr-apzqep-163-000/) · APZQEP-160 historical wording **preserved**  
 > **APZQEP-163 (20260803T184007Z):** Enterprise Quality Intelligence Platform **ENGINEERING COMPLETE** — `@apzhub/platform-quality-intelligence` 0.1.0 (no external AI) — [apzqep-163/](./v1.1/apzqep-163/)  
 > **PBR-APZQEP-163 (20260803T185717Z):** Wave 3 **CERTIFIED** — [pbr-apzqep-163/](./v1.1/pbr-apzqep-163/)  
-> **APZQEP-164-000 (20260803T191002Z):** Enterprise Dashboard & Quality Experience Architecture **COMPLETE** — await PBR-APZQEP-164-000 — [apzqep-164-000/](./v1.1/apzqep-164-000/)
+> **APZQEP-164-000 (20260803T191002Z):** Enterprise Dashboard & Quality Experience Architecture **COMPLETE** — [apzqep-164-000/](./v1.1/apzqep-164-000/)  
+> **PBR-APZQEP-164-000 (20260803T192906Z):** Wave 4 architecture **APPROVED** — APZQEP-164 **AUTHORISED TO OPEN** (NOT STARTED) — [pbr-apzqep-164-000/](./v1.1/pbr-apzqep-164-000/)
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
