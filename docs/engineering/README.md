@@ -38,7 +38,22 @@ Enterprise engineering **system** (Specify → Test → Certify). Governance cap
 | [APZHUB-CERTIFICATION-STANDARD.md](./APZHUB-CERTIFICATION-STANDARD.md)                               | **ES-002** Certify                               |
 | [APZHUB-ENG-002/README.md](./APZHUB-ENG-002/README.md)                                               | Programme face                                   |
 
-**Status:** Governance Foundation **COMPLETE**. Phase 1 **CLOSED** at ES-003. Future ES promotions **ON HOLD**. Governance **1.0 STABLE**. Baseline **1.x STABLE**. Priority: **APZQEP product engineering**. ES-004 **NOT AUTHORISED**. Conversation baseline: [GOVERNANCE-FOUNDATION-COMPLETE.md](./APZHUB-ENG-002/GOVERNANCE-FOUNDATION-COMPLETE.md) · [PHASE-1-CLOSED.md](./APZHUB-ENG-002/PHASE-1-CLOSED.md).
+**Status:** Governance Foundation **COMPLETE**. Phase 1 **CLOSED** at ES-003. Future ES promotions **ON HOLD**. Governance **1.0 STABLE**. Baseline **1.x STABLE**. ES-004 **NOT AUTHORISED**. Conversation baseline: [GOVERNANCE-FOUNDATION-COMPLETE.md](./APZHUB-ENG-002/GOVERNANCE-FOUNDATION-COMPLETE.md) · [PHASE-1-CLOSED.md](./APZHUB-ENG-002/PHASE-1-CLOSED.md).
+
+---
+
+## Enterprise Engineering Adoption (APZHUB-ENG-003) — **COMPLETE**
+
+Portfolio operating model generalised from APZQEP Version 1.0 GA. Makes the proven product lifecycle the default for all APZHUB products. **Does not** amend ES-001…003.
+
+| Document                                                                                               | Purpose                          |
+| ------------------------------------------------------------------------------------------------------ | -------------------------------- |
+| [APZHUB-ENG-003/README.md](./APZHUB-ENG-003/README.md)                                                 | Programme face                   |
+| [APZHUB-ENG-003/APZHUB-ENGINEERING-LIFECYCLE.md](./APZHUB-ENG-003/APZHUB-ENGINEERING-LIFECYCLE.md)     | End-to-end engineering lifecycle |
+| [APZHUB-ENG-003/APZHUB-PRODUCT-ADOPTION-MATRIX.md](./APZHUB-ENG-003/APZHUB-PRODUCT-ADOPTION-MATRIX.md) | Product adoption status          |
+| [APZHUB-ENG-003/APZHUB-ENG-003-COMPLETION.md](./APZHUB-ENG-003/APZHUB-ENG-003-COMPLETION.md)           | Completion                       |
+
+**Priority:** Portfolio adoption of ENG-003 · APZQEP remains **operations-led GA** (not an ENG-003 engineering target).
 
 ---
 

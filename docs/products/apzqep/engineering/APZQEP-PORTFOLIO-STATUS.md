@@ -1,12 +1,12 @@
 # APZQEP / APZHUB — Portfolio Status Snapshot
 
-| Field     | Value                                               |
-| --------- | --------------------------------------------------- |
-| Date      | 2026-08-03                                          |
-| Timestamp | 20260803T072224Z                                    |
-| Authority | Product Board — **PBR-APZQEP-1.0-001 GO** · OPS-001 |
-| Status    | **IN FORCE**                                        |
-| Posture   | **Operations-led** GA                               |
+| Field     | Value                                                         |
+| --------- | ------------------------------------------------------------- |
+| Date      | 2026-08-03                                                    |
+| Timestamp | 20260803T075550Z                                              |
+| Authority | Product Board — **PBR-APZQEP-1.0-001 GO** · OPS-001 · ENG-003 |
+| Status    | **IN FORCE**                                                  |
+| Posture   | **Operations-led** GA · portfolio lifecycle via ENG-003       |
 
 ---
 

@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-03  
-> **Current status:** APZQEP Version 1.0 **GENERAL AVAILABILITY** · **APZQEP-OPS-001 COMPLETE** (operations-led) · Engineering authority **CLOSED** · Version 1.1 **NOT OPENED** · Authoritative status: [PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md) · Ops pack: [apzqep-ops-001/](../products/apzqep/v1.1/apzqep-ops-001/) · Board: [pbr-apzqep-1.0-001/](../products/apzqep/v1.1/pbr-apzqep-1.0-001/) · Governance **1.0 STABLE** · Baseline **1.2** · ES-004 **NOT AUTHORISED**.
+> **Current status:** **APZHUB-ENG-003 COMPLETE** — enterprise engineering lifecycle adopted for portfolio · APZQEP V1.0 **GA** (operations-led; V1.1 **NOT OPENED**) · Product engineering **NONE** authorised · Governance **1.0 STABLE** · Baseline **1.2** · ES-004 **NOT AUTHORISED** · ENG-003 pack: [APZHUB-ENG-003/](../engineering/APZHUB-ENG-003/) · APZQEP status: [PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md).
 
 ---
 
