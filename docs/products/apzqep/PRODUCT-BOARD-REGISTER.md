@@ -3,7 +3,7 @@
 | Field     | Value                    |
 | --------- | ------------------------ |
 | Document  | PRODUCT-BOARD-REGISTER   |
-| Timestamp | 20260803T185717Z         |
+| Timestamp | 20260803T191002Z         |
 | Authority | Product Board — STANDING |
 
 ## Resolutions
@@ -19,10 +19,12 @@
 
 ## Pending / next
 
-| Item              | State                                                                                         |
-| ----------------- | --------------------------------------------------------------------------------------------- |
-| APZQEP-164        | **AUTHORISED TO OPEN** — **NOT STARTED** — awaits separate Owner Auth — Enterprise Dashboards |
-| APZQEP-165…166    | Planned — **not authorised**                                                                  |
-| APZQEP-163A       | External AI providers — **not authorised**                                                    |
-| Remote push (ops) | Local `main` ahead of `origin/main` — Owner/ops push when credentials available (OI-163-03)   |
-| Wave progress     | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                            |
+| Item               | State                                                                                    |
+| ------------------ | ---------------------------------------------------------------------------------------- |
+| APZQEP-164-000     | **ARCHITECTURE COMPLETE** — await Board — [v1.1/apzqep-164-000/](./v1.1/apzqep-164-000/) |
+| PBR-APZQEP-164-000 | **PENDING** — Wave 4 Architecture Approval                                               |
+| APZQEP-164 eng     | **NOT STARTED** — gated on PBR-APZQEP-164-000 + separate Owner Auth                      |
+| APZQEP-165…166     | Planned — **not authorised**                                                             |
+| APZQEP-163A        | External AI providers — **not authorised**                                               |
+| Remote push (ops)  | Local `main` ahead of `origin/main` — Owner/ops push when credentials available          |
+| Wave progress      | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                       |

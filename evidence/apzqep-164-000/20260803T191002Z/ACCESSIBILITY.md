@@ -1,0 +1,5 @@
+# Accessibility Evidence — APZQEP-164-000
+
+Timestamp: 20260803T191002Z  
+Target: WCAG 2.2 AA  
+See: ACCESSIBILITY-ARCHITECTURE.md

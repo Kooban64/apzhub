@@ -1,0 +1,4 @@
+# Performance Evidence — APZQEP-164-000
+
+Timestamp: 20260803T191002Z  
+See: PERFORMANCE-ARCHITECTURE.md

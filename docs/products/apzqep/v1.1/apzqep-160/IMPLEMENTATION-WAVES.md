@@ -39,13 +39,13 @@
 
 ## Wave 4 — Enterprise Dashboards (**APZQEP-164**)
 
-| Item                  | Content                                               |
-| --------------------- | ----------------------------------------------------- |
-| Objectives            | Executive and engineering truth                       |
-| Capabilities          | Exec / Eng / QA / Ops / Readiness dashboards          |
-| Dependencies          | Measured metrics; Wave 1–3 data                       |
-| Engineering programme | **APZQEP-164** — **AUTHORISED TO OPEN** — NOT STARTED |
-| Success               | Dashboards populated from measured data only          |
+| Item                  | Content                                                                          |
+| --------------------- | -------------------------------------------------------------------------------- |
+| Objectives            | Executive and engineering truth                                                  |
+| Capabilities          | Exec / Eng / QA / Ops / Readiness dashboards                                     |
+| Dependencies          | Measured metrics; Wave 1–3 data                                                  |
+| Engineering programme | **APZQEP-164** — eng NOT STARTED; arch **APZQEP-164-000 COMPLETE** (await Board) |
+| Success               | Dashboards populated from measured data only                                     |
 
 ## Wave 5 — Continuous Quality (**APZQEP-165**)
 

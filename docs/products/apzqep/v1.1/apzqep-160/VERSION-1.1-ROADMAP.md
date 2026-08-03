@@ -1,11 +1,11 @@
 # VERSION-1.1-ROADMAP
 
-| Field       | Value                                                                          |
-| ----------- | ------------------------------------------------------------------------------ |
-| Programme   | APZQEP-160                                                                     |
-| Timestamp   | 20260803T185717Z (progress update)                                             |
-| Board       | **APPROVED** — PBR-APZQEP-160; Waves 1–3 **CERTIFIED** (PBR-APZQEP-163)        |
-| Engineering | Waves 1–3 closed; Wave 4 (**APZQEP-164**) **AUTHORISED TO OPEN** — not started |
+| Field       | Value                                                                             |
+| ----------- | --------------------------------------------------------------------------------- |
+| Programme   | APZQEP-160                                                                        |
+| Timestamp   | 20260803T191002Z (progress update)                                                |
+| Board       | **APPROVED** — PBR-APZQEP-160; Waves 1–3 **CERTIFIED** (PBR-APZQEP-163)           |
+| Engineering | Waves 1–3 closed; Wave 4 arch (**APZQEP-164-000**) **COMPLETE** — eng not started |
 
 > **Historical naming (immutable):** The Wave summary table below preserves APZQEP-160 original wording for Wave 3 (“AI Quality Intelligence”).  
 > **Authoritative Wave 3 title from PBR-APZQEP-163-000 onward:** **Enterprise Quality Intelligence Platform**.  

@@ -1,0 +1,4 @@
+# Workspace Evidence — APZQEP-164-000
+
+Timestamp: 20260803T191002Z  
+See: WORKSPACE-ARCHITECTURE.md
