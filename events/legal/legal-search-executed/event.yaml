@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-search-executed
+name: Search Executed
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: "Emitted when unified legal search is executed."
+
+event:
+  category: business
+  publisher: legal-search
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.search.executed
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

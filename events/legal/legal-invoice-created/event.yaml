@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-invoice-created
+name: Invoice Created
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: "Emitted when an invoice is created."
+
+event:
+  category: business
+  publisher: legal-billing
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.invoice.created
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

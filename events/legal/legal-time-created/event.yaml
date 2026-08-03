@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-time-created
+name: Time Created
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: "Emitted when a time entry is created."
+
+event:
+  category: business
+  publisher: legal-time
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.time.created
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

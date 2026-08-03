@@ -3,9 +3,27 @@ jsonSchemaDialect: https://spec.openapis.org/oas/3.1/dialect/base
 info:
   title: APZHUB Law Platform API
   version: 1.0.0
-  description: Canonical OpenAPI specification for the tenant-scoped Law Platform REST API. Base path `/api/law/v1/`. Business resources (Clients through Invoices) are implemented. Interactive docs at `/api/docs`.
+  description: >
+    Canonical OpenAPI specification for the tenant-scoped Law Platform REST API.
+    Base path `/api/law/v1/`. Business resources (Clients through Invoices) and Health
+    are implemented. Paths marked `x-implementation-status: planned` (Search, Dashboard,
+    Activities, Notifications) are NOT shipped as HTTP routes — do not treat them as
+    callable. Trust Accounting HTTP routes exist under `/api/law/v1/trust/**` on disk
+    and are documented in Law Trust developer notes; they are not yet fully enumerated
+    in this OpenAPI path set (honesty residual tracked under APZHUB-LAW-ADOPT-003 EAB-03).
+    Interactive docs at `/api/docs`.
   contact:
     name: APZHUB API Support
+  x-apzhube-implementation-honesty:
+    programme: APZHUB-LAW-ADOPT-003
+    backlog: EAB-03
+    plannedPathsNotShipped:
+      - /search
+      - /dashboard/*
+      - /activities/*
+      - /notifications/*
+    runtimePresentNotFullyInOpenApi:
+      - /trust/**
 servers:
   - url: https://api.apzhub.com/api/law/v1
     description: Production

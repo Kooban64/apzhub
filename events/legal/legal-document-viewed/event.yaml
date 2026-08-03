@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-document-viewed
+name: Document Viewed
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: "Emitted when a document record is viewed."
+
+event:
+  category: business
+  publisher: legal-documents
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.document.viewed
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

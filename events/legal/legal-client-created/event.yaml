@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-client-created
+name: Client Created
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: "Emitted when a client is created."
+
+event:
+  category: business
+  publisher: legal-clients
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.client.created
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

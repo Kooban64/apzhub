@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-time-updated
+name: Time Updated
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: "Emitted when a time entry is edited."
+
+event:
+  category: business
+  publisher: legal-time
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.time.updated
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-calendar-viewed
+name: Calendar Viewed
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: "Emitted when a calendar event is viewed."
+
+event:
+  category: business
+  publisher: legal-calendar
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.calendar.viewed
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

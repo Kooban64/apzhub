@@ -755,6 +755,7 @@ export default defineConfig({
       "testing/apzqep-150/**/*.test.{ts,tsx}",
       "testing/apzqep-151/**/*.test.{ts,tsx}",
       "testing/apzqep-152/**/*.test.{ts,tsx}",
+      "testing/apzqep-law-adopt-003/**/*.test.{ts,tsx}",
 
       "testing/wave1/**/*.test.{ts,tsx}",
       "testing/wave2/**/*.test.{ts,tsx}",

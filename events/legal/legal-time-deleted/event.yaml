@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-time-deleted
+name: Time Deleted
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: "Emitted when a time entry is soft deleted."
+
+event:
+  category: business
+  publisher: legal-time
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.time.deleted
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

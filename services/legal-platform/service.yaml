@@ -6,7 +6,11 @@ kind: service
 
 metadata:
   category: legal
-  description: Root Law Platform service for platform validation.
+  description: >
+    Root Law Platform service for platform validation.
+    APZHUB-LAW-ADOPT-003 (EAB-02): orchestration remains app-local under
+    apps/law-platform/lib/*-workflow-service.ts; full Platform Service SDK
+    extraction is deferred (architecture redesign out of ADOPT-003 scope).
 
 dependencies:
   platform: []

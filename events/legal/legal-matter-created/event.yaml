@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-matter-created
+name: Matter Created
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: "Emitted when a matter is created."
+
+event:
+  category: business
+  publisher: legal-matters
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.matter.created
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

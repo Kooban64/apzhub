@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-client-viewed
+name: Client Viewed
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: "Emitted when a client record is viewed."
+
+event:
+  category: business
+  publisher: legal-clients
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.client.viewed
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

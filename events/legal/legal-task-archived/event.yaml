@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-task-archived
+name: Task Archived
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: "Emitted when a task is soft archived."
+
+event:
+  category: business
+  publisher: legal-tasks
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.task.archived
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

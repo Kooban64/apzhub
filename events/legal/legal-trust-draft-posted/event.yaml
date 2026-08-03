@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-trust-draft-posted
+name: Trust Draft Posted
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal-trust
+  description: "Trust accounting domain event: legal.trust.draft.posted."
+
+event:
+  category: business
+  publisher: legal-trust
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.trust.draft.posted
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

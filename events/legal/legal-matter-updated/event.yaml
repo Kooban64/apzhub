@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-matter-updated
+name: Matter Updated
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: "Emitted when a matter is edited."
+
+event:
+  category: business
+  publisher: legal-matters
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.matter.updated
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

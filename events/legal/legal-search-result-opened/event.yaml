@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-search-result-opened
+name: Search Result Opened
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: "Emitted when a unified search result is opened."
+
+event:
+  category: business
+  publisher: legal-search
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.search.result.opened
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

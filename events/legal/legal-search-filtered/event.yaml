@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-search-filtered
+name: Search Filtered
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: "Emitted when unified legal search runs with advanced filters."
+
+event:
+  category: business
+  publisher: legal-search
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.search.filtered
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

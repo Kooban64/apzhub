@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-client-deleted
+name: Client Deleted
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: "Emitted when a client is soft deleted."
+
+event:
+  category: business
+  publisher: legal-clients
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.client.deleted
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-invoice-viewed
+name: Invoice Viewed
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: "Emitted when an invoice is viewed."
+
+event:
+  category: business
+  publisher: legal-billing
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.invoice.viewed
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

@@ -14,3 +14,8 @@ event:
   payload:
     featureId: string
     message: string
+
+documentation:
+  eventKey: legal-platform-feature-available
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

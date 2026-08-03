@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-trust-transaction-reversed
+name: Trust Transaction Reversed
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal-trust
+  description: "Trust accounting domain event: legal.trust.transaction.reversed."
+
+event:
+  category: business
+  publisher: legal-trust
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.trust.transaction.reversed
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

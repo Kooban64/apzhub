@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-trust-allocation-updated
+name: Trust Allocation Updated
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal-trust
+  description: "Trust accounting domain event: legal.trust.allocation.updated."
+
+event:
+  category: business
+  publisher: legal-trust
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.trust.allocation.updated
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

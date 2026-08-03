@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-matter-workspace-opened
+name: Matter Workspace Opened
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: "Emitted when the primary matter workspace is opened."
+
+event:
+  category: business
+  publisher: legal-matters
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.matter.workspace.opened
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

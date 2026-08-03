@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-document-updated
+name: Document Updated
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal
+  description: "Emitted when document metadata is edited."
+
+event:
+  category: business
+  publisher: legal-documents
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.document.updated
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01

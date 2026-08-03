@@ -1,0 +1,21 @@
+manifestSchemaVersion: "1.0"
+id: legal-trust-account-created
+name: Trust Account Created
+version: 1.0.0
+kind: event
+
+metadata:
+  category: legal-trust
+  description: "Trust accounting domain event: legal.trust.account.created."
+
+event:
+  category: business
+  publisher: legal-trust
+  payload:
+    correlationId: string
+    tenantId: string
+
+documentation:
+  eventKey: legal.trust.account.created
+  programme: APZHUB-LAW-ADOPT-003
+  backlog: EAB-01
