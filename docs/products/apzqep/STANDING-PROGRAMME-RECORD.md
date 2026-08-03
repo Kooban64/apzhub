@@ -10,7 +10,8 @@
 > **APZHUB-LAW-ADOPT-002 (20260803T122217Z):** Law **Governance Alignment COMPLETE** — [APZHUB-LAW-ADOPT-002](../../engineering/APZHUB-LAW-ADOPT-002/)  
 > **PBR-APZHUB-LAW-002 (20260803T123550Z):** Law governance **CERTIFIED** — [PBR-APZHUB-LAW-002](../../engineering/PBR-APZHUB-LAW-002/)  
 > **APZHUB-LAW-ADOPT-003 (20260803T132559Z):** Law **Engineering Alignment COMPLETE** — [APZHUB-LAW-ADOPT-003](../../engineering/APZHUB-LAW-ADOPT-003/)  
-> **PBR-APZHUB-LAW-003 (20260803T133515Z):** Law engineering **CERTIFIED** — **LAW-ADOPT-004 AUTHORISED** (not started) — [PBR-APZHUB-LAW-003](../../engineering/PBR-APZHUB-LAW-003/) · [law/PRODUCT-STATUS](../law/PRODUCT-STATUS.md)
+> **PBR-APZHUB-LAW-003 (20260803T133515Z):** Law engineering **CERTIFIED** — [PBR-APZHUB-LAW-003](../../engineering/PBR-APZHUB-LAW-003/)  
+> **APZHUB-LAW-ADOPT-004 (20260803T135126Z):** Law **Operations Alignment COMPLETE** — await **PBR-APZHUB-LAW-004** — [APZHUB-LAW-ADOPT-004](../../engineering/APZHUB-LAW-ADOPT-004/) · [law/PRODUCT-STATUS](../law/PRODUCT-STATUS.md)
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

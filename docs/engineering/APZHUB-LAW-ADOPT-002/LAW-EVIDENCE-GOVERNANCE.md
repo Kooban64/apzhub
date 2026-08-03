@@ -11,12 +11,14 @@
 
 ## Law evidence locations
 
-| Class                | Path                                                                  |
-| -------------------- | --------------------------------------------------------------------- |
-| Packaging 1.0.0      | `docs/releases/law/1.0.0/` · `evidence/` related LAW packs if present |
-| Alignment assessment | `evidence/apzhub-law-adopt-001/`                                      |
-| Governance alignment | `evidence/apzhub-law-adopt-002/`                                      |
-| Board decisions      | `evidence/pbr-apzhub-001/` · `evidence/pbr-apzhub-law-001/`           |
+| Class                 | Path                                                                  |
+| --------------------- | --------------------------------------------------------------------- |
+| Packaging 1.0.0       | `docs/releases/law/1.0.0/` · `evidence/` related LAW packs if present |
+| Alignment assessment  | `evidence/apzhub-law-adopt-001/`                                      |
+| Governance alignment  | `evidence/apzhub-law-adopt-002/`                                      |
+| Engineering alignment | `evidence/apzhub-law-adopt-003/`                                      |
+| Operations alignment  | `evidence/apzhub-law-adopt-004/`                                      |
+| Board decisions       | `evidence/pbr-apzhub-law-001/` · `…-002/` · `…-003/`                  |
 
 ## Rules
 
