@@ -1,11 +1,12 @@
 # APZQEP / APZHUB — Portfolio Status Snapshot
 
-| Field     | Value                                     |
-| --------- | ----------------------------------------- |
-| Date      | 2026-08-03                                |
-| Timestamp | 20260803T071607Z                          |
-| Authority | Product Board — **PBR-APZQEP-1.0-001 GO** |
-| Status    | **IN FORCE**                              |
+| Field     | Value                                               |
+| --------- | --------------------------------------------------- |
+| Date      | 2026-08-03                                          |
+| Timestamp | 20260803T072224Z                                    |
+| Authority | Product Board — **PBR-APZQEP-1.0-001 GO** · OPS-001 |
+| Status    | **IN FORCE**                                        |
+| Posture   | **Operations-led** GA                               |
 
 ---
 
@@ -23,21 +24,23 @@
 | APZQEP-152               | ✅ Production Security **CERTIFIED / CLOSED**                       |
 | APZQEP-150R              | ✅ Re-certification **COMPLETE** — GO recommended                   |
 | PBR-APZQEP-1.0-001       | ✅ Product Board **GO** — GA **AUTHORISED**                         |
-| APZQEP Version 1.1       | ⏸ **NOT OPENED** — operate 1.0; plan from production evidence       |
+| APZQEP-OPS-001           | ✅ GA Operations & Product Intelligence **COMPLETE**                |
+| APZQEP Version 1.1       | ⏸ **NOT OPENED** — evidence-driven; Board auth required             |
 | APZHUB-ENG-002           | ✅ Foundation COMPLETE · Phase 1 CLOSED · ES promotions **ON HOLD** |
 
 ---
 
 ## Where we are
 
-| Layer                     | State                                             |
-| ------------------------- | ------------------------------------------------- |
-| **Platform**              | Complete                                          |
-| **Core QE Caps A–F**      | Complete — Postgres SoR · fail-closed RBAC        |
-| **Product readiness**     | PASS (150R)                                       |
-| **Production release**    | **AUTHORISED — GENERAL AVAILABILITY**             |
-| **Engineering authority** | **CLOSED**                                        |
-| **Version 1.1**           | Not opened — evidence-driven planning recommended |
+| Layer                     | State                                       |
+| ------------------------- | ------------------------------------------- |
+| **Platform**              | Complete                                    |
+| **Core QE Caps A–F**      | Complete — Postgres SoR · fail-closed RBAC  |
+| **Product readiness**     | PASS (150R)                                 |
+| **Production release**    | **AUTHORISED — GENERAL AVAILABILITY**       |
+| **Engineering authority** | **CLOSED**                                  |
+| **Management**            | **Operations-led** (APZQEP-OPS-001)         |
+| **Version 1.1**           | Not opened — measured evidence + Board auth |
 
 ---
 

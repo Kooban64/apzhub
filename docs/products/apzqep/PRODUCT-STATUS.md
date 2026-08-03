@@ -6,9 +6,10 @@
 | Authority          | Product Board — **STANDING**                   |
 | Audience           | Engineers, architects, auditors, AI assistants |
 | Rule               | **Read this document before any APZQEP work**  |
-| Last updated       | 20260803T071607Z                               |
+| Last updated       | 20260803T072224Z                               |
 | Engineering thread | **FORMALLY COMPLETE**                          |
 | Product posture    | **GENERAL AVAILABILITY**                       |
+| Management posture | **Operations-led** (APZQEP-OPS-001)            |
 
 ---
 
@@ -77,12 +78,18 @@ CLOSED
 Current Product Board Authority:
 STANDING
 
+Operational Programme (APZQEP-OPS-001):
+COMPLETE — GA operations & product intelligence established
+
+Management posture:
+OPERATIONS-LED
+
 Next Authorised Programme:
-NONE
+NONE (engineering)
 
 Next Action:
-Operate Version 1.0 in production. Collect operational telemetry and feedback.
-Do NOT open Version 1.1 engineering until evidence-driven planning under normal governance.
+Operate Version 1.0 under OPS-001. Populate health dashboard and intelligence from measured production data.
+Do NOT open Version 1.1 until sufficient operational evidence and Product Board authorisation.
 ```
 
 ---
@@ -96,21 +103,23 @@ Do NOT open Version 1.1 engineering until evidence-driven planning under normal 
 | Working platform name | APZHUB                                                                                               |
 | Posture               | **GENERAL AVAILABILITY**                                                                             |
 | Board resolution      | [v1.1/pbr-apzqep-1.0-001/](./v1.1/pbr-apzqep-1.0-001/)                                               |
+| Operations programme  | [v1.1/apzqep-ops-001/](./v1.1/apzqep-ops-001/) — **COMPLETE**                                        |
 | Declaration           | [v1.1/APZQEP-VERSION-1.0-ENGINEERING-COMPLETE.md](./v1.1/APZQEP-VERSION-1.0-ENGINEERING-COMPLETE.md) |
 
 ---
 
 ## Governance & baseline
 
-| Item                            | Value                               |
-| ------------------------------- | ----------------------------------- |
-| Governance version              | **1.0 STABLE**                      |
-| Enterprise Engineering Baseline | **1.x STABLE (1.2)**                |
-| Enterprise Standards            | ES-001, ES-002, ES-003 **IN FORCE** |
-| ES-004                          | **NOT AUTHORISED**                  |
-| Operating mode                  | Evolve the Enterprise               |
-| Product Board authority         | **STANDING**                        |
-| Engineering authority           | **CLOSED**                          |
+| Item                            | Value                                      |
+| ------------------------------- | ------------------------------------------ |
+| Governance version              | **1.0 STABLE**                             |
+| Enterprise Engineering Baseline | **1.x STABLE (1.2)**                       |
+| Enterprise Standards            | ES-001, ES-002, ES-003 **IN FORCE**        |
+| ES-004                          | **NOT AUTHORISED**                         |
+| Operating mode                  | Evolve the Enterprise · **operations-led** |
+| Product Board authority         | **STANDING**                               |
+| Engineering authority           | **CLOSED**                                 |
+| Version 1.1                     | **NOT OPENED**                             |
 
 ---
 
@@ -125,6 +134,7 @@ Do NOT open Version 1.1 engineering until evidence-driven planning under normal 
 | APZQEP-152             | Enterprise Production RBAC & Security **CERTIFIED / CLOSED** (RB-002) |
 | APZQEP-150R            | Product Readiness Re-certification **COMPLETE** — **GO recommended**  |
 | **PBR-APZQEP-1.0-001** | Product Board **GO** — General Production Release **AUTHORISED**      |
+| **APZQEP-OPS-001**     | GA Operations & Product Intelligence **COMPLETE** (non-engineering)   |
 
 ---
 
@@ -147,13 +157,15 @@ Do NOT open Version 1.1 engineering until evidence-driven planning under normal 
 | APZQEP-152         | **CERTIFIED / CLOSED** — RB-002 **CLEARED**             |
 | APZQEP-150R        | **COMPLETE** — audit **PASS** — **GO recommended**      |
 | PBR-APZQEP-1.0-001 | **COMPLETE** — Product Board **GO** — **GA AUTHORISED** |
+| APZQEP-OPS-001     | **COMPLETE** — operations-led GA governance established |
 
-Board / audit:
+Board / audit / ops:
 
 - [apzqep-151/APZQEP-151-PRODUCT-BOARD-CERTIFICATION.md](./v1.1/apzqep-151/APZQEP-151-PRODUCT-BOARD-CERTIFICATION.md)
 - [apzqep-152/APZQEP-152-PRODUCT-BOARD-CERTIFICATION.md](./v1.1/apzqep-152/APZQEP-152-PRODUCT-BOARD-CERTIFICATION.md)
 - [apzqep-150r/GO-NO-GO-REPORT.md](./v1.1/apzqep-150r/GO-NO-GO-REPORT.md)
 - [pbr-apzqep-1.0-001/PRODUCT-BOARD-RELEASE-DECISION.md](./v1.1/pbr-apzqep-1.0-001/PRODUCT-BOARD-RELEASE-DECISION.md)
+- [apzqep-ops-001/OPS-001-COMPLETION.md](./v1.1/apzqep-ops-001/OPS-001-COMPLETION.md)
 
 ---
 
@@ -194,19 +206,19 @@ Board / audit:
 
 ## Path remaining
 
-1. Operate Version 1.0 under General Availability.
-2. Execute packaging/tagging/deployment under release governance and ops procedures when scheduled (not engineering programmes).
-3. Plan Version 1.1 only after production evidence — Owner Authorisation required before any engineering.
+1. Operate Version 1.0 under APZQEP-OPS-001 (populate measured dashboard / intelligence).
+2. Execute packaging/tagging/deployment under release governance when scheduled (not feature engineering).
+3. Open Version 1.1 only after sufficient operational evidence and Product Board authorisation.
 
 ---
 
 ## Thread Closure
 
-Version 1.0 engineering lifecycle is formally complete. Independent re-certification recommended GO. Product Board authorised General Production Release.
+Version 1.0 engineering lifecycle is formally complete. Product Board authorised GA. Operational governance (APZQEP-OPS-001) is established. Management is **operations-led**.
 
 Authoritative state:
 
-> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Production Certification COMPLETE. Engineering Authority CLOSED. Version 1.1 NOT OPENED.**
+> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. Engineering CLOSED. Version 1.1 NOT OPENED. APZQEP-OPS-001 COMPLETE.**
 
 ---
 
@@ -216,5 +228,6 @@ Authoritative state:
 2. Release readiness remains independent of engineering.
 3. Historical APZQEP-150 NO-GO remains immutable.
 4. APZQEP-150R recommended GO; Product Board alone authorises release (recorded in PBR-APZQEP-1.0-001).
-5. Do not reopen APZQEP-120 / 140 / 150 / 151 / 152 / 150R.
-6. Do not open Version 1.1 engineering without evidence-driven planning and Owner Authorisation.
+5. Do not reopen APZQEP-120 / 140 / 150 / 151 / 152 / 150R / PBR-APZQEP-1.0-001.
+6. Do not open Version 1.1 without sufficient operational evidence and Product Board authorisation.
+7. From APZQEP-OPS-001: product evolution is **operations-led** — Board priorities from production data, feedback, and support trends.

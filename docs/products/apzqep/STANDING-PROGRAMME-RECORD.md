@@ -2,7 +2,8 @@
 
 > **Version 1.0 current product status (authoritative):** [PRODUCT-STATUS.md](./PRODUCT-STATUS.md)  
 > This Standing Programme Record remains the historical programme baseline. For engineering / release posture, **PRODUCT-STATUS.md wins**.  
-> **PBR-APZQEP-1.0-001 (20260803T071607Z):** Product Board **GO** — Version 1.0 **GENERAL AVAILABILITY** — [pbr-apzqep-1.0-001/](./v1.1/pbr-apzqep-1.0-001/)
+> **PBR-APZQEP-1.0-001 (20260803T071607Z):** Product Board **GO** — Version 1.0 **GENERAL AVAILABILITY** — [pbr-apzqep-1.0-001/](./v1.1/pbr-apzqep-1.0-001/)  
+> **APZQEP-OPS-001 (20260803T072224Z):** GA Operations & Product Intelligence **COMPLETE** — **operations-led** — Version 1.1 **NOT OPENED** — [apzqep-ops-001/](./v1.1/apzqep-ops-001/)
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -29,7 +30,8 @@
 | APZQEP-152     | ✅ **CERTIFIED / CLOSED** — RB-002 cleared — [Board](./v1.1/apzqep-152/APZQEP-152-PRODUCT-BOARD-CERTIFICATION.md)                                                                                                            |
 | APZQEP-150R    | ✅ **COMPLETE** — re-certification **GO recommended** — [GO-NO-GO](./v1.1/apzqep-150r/GO-NO-GO-REPORT.md)                                                                                                                    |
 | PBR-1.0-001    | ✅ **COMPLETE** — Product Board **GO** — GA **AUTHORISED** — [resolution pack](./v1.1/pbr-apzqep-1.0-001/)                                                                                                                   |
-| Version 1.1    | ⏸ **NOT OPENED** — operate 1.0; evidence-driven planning next                                                                                                                                                                |
+| APZQEP-OPS-001 | ✅ **COMPLETE** — GA ops & product intelligence — **operations-led** — [ops pack](./v1.1/apzqep-ops-001/)                                                                                                                    |
+| Version 1.1    | ⏸ **NOT OPENED** — operate 1.0 under OPS-001; open only after measured evidence + Board auth                                                                                                                                 |
 | APZHUB-ENG-002 | **ACTIVE** · Governance Foundation **COMPLETE** · Phase 1 **CLOSED** · ES promotions **ON HOLD** — [PHASE-1-CLOSED.md](../../engineering/APZHUB-ENG-002/PHASE-1-CLOSED.md)                                                   |
 
 ### Default premise

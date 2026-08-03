@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-03  
-> **Current status:** **PBR-APZQEP-1.0-001 COMPLETE** — Product Board **GO** — APZQEP Version 1.0 **GENERAL AVAILABILITY** · Production Certification **COMPLETE** · Engineering authority **CLOSED** · Product Board authority **STANDING** · Version 1.1 **NOT OPENED** · Authoritative status: [PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md) · Board pack: [pbr-apzqep-1.0-001/](../products/apzqep/v1.1/pbr-apzqep-1.0-001/) · Governance **1.0 STABLE** · Baseline **1.2** · ES-004 **NOT AUTHORISED**.
+> **Current status:** APZQEP Version 1.0 **GENERAL AVAILABILITY** · **APZQEP-OPS-001 COMPLETE** (operations-led) · Engineering authority **CLOSED** · Version 1.1 **NOT OPENED** · Authoritative status: [PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md) · Ops pack: [apzqep-ops-001/](../products/apzqep/v1.1/apzqep-ops-001/) · Board: [pbr-apzqep-1.0-001/](../products/apzqep/v1.1/pbr-apzqep-1.0-001/) · Governance **1.0 STABLE** · Baseline **1.2** · ES-004 **NOT AUTHORISED**.
 
 ---
 
