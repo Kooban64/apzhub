@@ -30,13 +30,13 @@ Ship Version 1.1 as the Enterprise Quality Platform in six waves, preserving Ver
 
 See [../WAVE-PROGRESS-REGISTER.md](../WAVE-PROGRESS-REGISTER.md).
 
-| Wave | State                                                                                                                |
-| ---- | -------------------------------------------------------------------------------------------------------------------- |
-| 1    | **CERTIFIED** (APZQEP-161 + 161R + PBR-APZQEP-161)                                                                   |
-| 2    | **CERTIFIED** (APZQEP-162 + PBR-APZQEP-162) — title: Enterprise Source Control Integration Platform                  |
-| 3    | **CERTIFIED** (APZQEP-163 + PBR-APZQEP-163) — title: **Enterprise Quality Intelligence Platform** (AI is a provider) |
-| 4    | **AUTHORISED TO OPEN** (APZQEP-164) — eng NOT STARTED — Enterprise Dashboards                                        |
-| 5–6  | NOT AUTHORISED                                                                                                       |
+| Wave | State                                                                                                                        |
+| ---- | ---------------------------------------------------------------------------------------------------------------------------- |
+| 1    | **CERTIFIED** (APZQEP-161 + 161R + PBR-APZQEP-161)                                                                           |
+| 2    | **CERTIFIED** (APZQEP-162 + PBR-APZQEP-162) — title: Enterprise Source Control Integration Platform                          |
+| 3    | **CERTIFIED** (APZQEP-163 + PBR-APZQEP-163) — title: **Enterprise Quality Intelligence Platform** (AI is a provider)         |
+| 4    | Architecture **COMPLETE** (APZQEP-164-000) — eng NOT STARTED — living title: **Enterprise Dashboards & Experience Platform** |
+| 5–6  | NOT AUTHORISED                                                                                                               |
 
 ## Gates
 
