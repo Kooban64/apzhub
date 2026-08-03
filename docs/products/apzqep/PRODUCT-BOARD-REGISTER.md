@@ -3,7 +3,7 @@
 | Field     | Value                    |
 | --------- | ------------------------ |
 | Document  | PRODUCT-BOARD-REGISTER   |
-| Timestamp | 20260803T181255Z         |
+| Timestamp | 20260803T184007Z         |
 | Authority | Product Board — STANDING |
 
 ## Resolutions
@@ -18,9 +18,10 @@
 
 ## Pending / next
 
-| Item                   | State                                                                                                       |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------- |
-| APZQEP-163 engineering | **AUTHORISED TO OPEN** — **NOT STARTED** — awaits separate Owner Auth                                       |
-| APZQEP-164…166         | Planned — **not authorised**                                                                                |
-| Remote push (ops)      | Local `main` ahead of `origin/main` — Owner/ops push when credentials available (OI-162-09 / OI-163-000-02) |
-| Wave progress register | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                                          |
+| Item                | State                                                                                    |
+| ------------------- | ---------------------------------------------------------------------------------------- |
+| APZQEP-163 eng pack | **COMPLETE** — await Wave 3 Board certification — [v1.1/apzqep-163/](./v1.1/apzqep-163/) |
+| PBR-APZQEP-163      | **PENDING** — Wave 3 Product Board Engineering Certification                             |
+| APZQEP-164…166      | Planned — **not authorised**                                                             |
+| Remote push (ops)   | Local `main` ahead of `origin/main` — Owner/ops push when credentials available          |
+| Wave progress       | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                       |

@@ -1,0 +1,4 @@
+
+> @apzhub/qep-quality-intelligence@0.1.0 typecheck /home/ubuntu/apz-portal/packages/qep-quality-intelligence
+> tsc --noEmit -p tsconfig.json
+

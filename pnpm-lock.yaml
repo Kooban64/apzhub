@@ -311,6 +311,9 @@ importers:
       '@apzhub/platform-provisioning':
         specifier: workspace:*
         version: link:../../packages/platform-provisioning
+      '@apzhub/platform-quality-intelligence':
+        specifier: workspace:*
+        version: link:../../packages/platform-quality-intelligence
       '@apzhub/platform-runtime':
         specifier: workspace:*
         version: link:../../packages/platform-runtime
@@ -344,6 +347,9 @@ importers:
       '@apzhub/qep-execution-workspace':
         specifier: workspace:*
         version: link:../../packages/qep-execution-workspace
+      '@apzhub/qep-quality-intelligence':
+        specifier: workspace:*
+        version: link:../../packages/qep-quality-intelligence
       '@apzhub/qep-reporting':
         specifier: workspace:*
         version: link:../../packages/qep-reporting
@@ -980,6 +986,8 @@ importers:
         specifier: workspace:*
         version: link:../platform-outbox
 
+  packages/platform-quality-intelligence: {}
+
   packages/platform-runtime:
     dependencies:
       yaml:
@@ -1317,6 +1325,12 @@ importers:
       '@apzhub/qep-evidence':
         specifier: workspace:*
         version: link:../qep-evidence
+
+  packages/qep-quality-intelligence:
+    dependencies:
+      '@apzhub/platform-quality-intelligence':
+        specifier: workspace:*
+        version: link:../platform-quality-intelligence
 
   packages/qep-reporting:
     dependencies:

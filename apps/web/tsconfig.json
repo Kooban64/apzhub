@@ -109,6 +109,16 @@
       "@apzhub/qep-scm/presentation": [
         "../../packages/qep-scm/src/presentation/index.ts"
       ],
+      "@apzhub/platform-quality-intelligence": [
+        "../../packages/platform-quality-intelligence/src/index.ts"
+      ],
+      "@apzhub/qep-quality-intelligence": [
+        "../../packages/qep-quality-intelligence/src/index.ts"
+      ],
+      "@apzhub/qep-quality-intelligence/presentation": [
+        "../../packages/qep-quality-intelligence/src/presentation/index.ts"
+      ],
+
       "@apzhub/law-platform/api": ["../law-platform/lib/api/index.ts"]
     }
   },

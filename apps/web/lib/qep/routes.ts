@@ -166,3 +166,10 @@ export {
   isQepScmRoute,
   parseQepScmRepositoryId,
 } from "@apzhub/qep-scm/presentation";
+
+export {
+  QEP_QI_BASE_PATH,
+  QEP_QI_ROUTES,
+  isQepQiRoute,
+  parseQepQiRecommendationId,
+} from "@apzhub/qep-quality-intelligence/presentation";

@@ -1,0 +1,346 @@
+{
+  "numTotalTestSuites": 12,
+  "numPassedTestSuites": 12,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 29,
+  "numPassedTests": 29,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1785782482065,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["APZQEP-161 platform-automation"],
+          "fullName": "APZQEP-161 platform-automation registers Playwright as active and others as placeholders",
+          "status": "passed",
+          "title": "registers Playwright as active and others as placeholders",
+          "duration": 3.0450539999999364,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-161 platform-automation"],
+          "fullName": "APZQEP-161 platform-automation runs Playwright dry-run through full lifecycle with evidence",
+          "status": "passed",
+          "title": "runs Playwright dry-run through full lifecycle with evidence",
+          "duration": 5.0714550000000145,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-161 platform-automation"],
+          "fullName": "APZQEP-161 platform-automation rejects placeholder provider execution",
+          "status": "passed",
+          "title": "rejects placeholder provider execution",
+          "duration": 2.151636000000053,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-161 platform-automation"],
+          "fullName": "APZQEP-161 platform-automation retries then fails when provider keeps failing",
+          "status": "passed",
+          "title": "retries then fails when provider keeps failing",
+          "duration": 0.9191129999999248,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-161 platform-automation"],
+          "fullName": "APZQEP-161 platform-automation enforces lifecycle transition rules",
+          "status": "passed",
+          "title": "enforces lifecycle transition rules",
+          "duration": 0.26638600000001134,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-161 platform-automation"],
+          "fullName": "APZQEP-161 platform-automation never exposes playwright types on public record",
+          "status": "passed",
+          "title": "never exposes playwright types on public record",
+          "duration": 1.4174599999998918,
+          "failureMessages": [],
+          "meta": {}
+        }
+      ],
+      "startTime": 1785782484232,
+      "endTime": 1785782484245.4175,
+      "status": "passed",
+      "message": "",
+      "name": "/home/ubuntu/apz-portal/packages/platform-automation/src/automation-engine.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["APZQEP-163 platform-quality-intelligence"],
+          "fullName": "APZQEP-163 platform-quality-intelligence registers active providers and placeholders",
+          "status": "passed",
+          "title": "registers active providers and placeholders",
+          "duration": 4.2044630000000325,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-163 platform-quality-intelligence"],
+          "fullName": "APZQEP-163 platform-quality-intelligence records observations immutably",
+          "status": "passed",
+          "title": "records observations immutably",
+          "duration": 3.831469999999854,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-163 platform-quality-intelligence"],
+          "fullName": "APZQEP-163 platform-quality-intelligence calculates signals from observations",
+          "status": "passed",
+          "title": "calculates signals from observations",
+          "duration": 2.1860209999999825,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-163 platform-quality-intelligence"],
+          "fullName": "APZQEP-163 platform-quality-intelligence produces recommendations with mandatory explanations",
+          "status": "passed",
+          "title": "produces recommendations with mandatory explanations",
+          "duration": 2.8654690000000755,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-163 platform-quality-intelligence"],
+          "fullName": "APZQEP-163 platform-quality-intelligence applies confidence scoring with evidence and provider weighting",
+          "status": "passed",
+          "title": "applies confidence scoring with evidence and provider weighting",
+          "duration": 1.324288999999908,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-163 platform-quality-intelligence"],
+          "fullName": "APZQEP-163 platform-quality-intelligence derives quality scores (not manually editable)",
+          "status": "passed",
+          "title": "derives quality scores (not manually editable)",
+          "duration": 2.426592000000028,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-163 platform-quality-intelligence"],
+          "fullName": "APZQEP-163 platform-quality-intelligence supports accept and reject recommendation lifecycle",
+          "status": "passed",
+          "title": "supports accept and reject recommendation lifecycle",
+          "duration": 2.0939730000000054,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-163 platform-quality-intelligence"],
+          "fullName": "APZQEP-163 platform-quality-intelligence dummy_ai never calls network and exposes no openai types on public records",
+          "status": "passed",
+          "title": "dummy_ai never calls network and exposes no openai types on public records",
+          "duration": 2.911335000000008,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-163 platform-quality-intelligence"],
+          "fullName": "APZQEP-163 platform-quality-intelligence placeholder providers refuse evaluation",
+          "status": "passed",
+          "title": "placeholder providers refuse evaluation",
+          "duration": 2.230286999999862,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-163 platform-quality-intelligence"],
+          "fullName": "APZQEP-163 platform-quality-intelligence publishes platform quality intelligence events",
+          "status": "passed",
+          "title": "publishes platform quality intelligence events",
+          "duration": 1.406186999999818,
+          "failureMessages": [],
+          "meta": {}
+        }
+      ],
+      "startTime": 1785782484242,
+      "endTime": 1785782484268.4062,
+      "status": "passed",
+      "message": "",
+      "name": "/home/ubuntu/apz-portal/packages/platform-quality-intelligence/src/qi-engine.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm registers GitHub as active and others as placeholders",
+          "status": "passed",
+          "title": "registers GitHub as active and others as placeholders",
+          "duration": 2.643931000000066,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm registers a repository through GitHub offline provider",
+          "status": "passed",
+          "title": "registers a repository through GitHub offline provider",
+          "duration": 3.020909999999958,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm rejects placeholder provider repository registration",
+          "status": "passed",
+          "title": "rejects placeholder provider repository registration",
+          "duration": 2.1504589999999553,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm verifies GitHub webhook signatures and publishes neutral events",
+          "status": "passed",
+          "title": "verifies GitHub webhook signatures and publishes neutral events",
+          "duration": 2.572537999999895,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm is idempotent for duplicate webhook deliveries",
+          "status": "passed",
+          "title": "is idempotent for duplicate webhook deliveries",
+          "duration": 0.90658499999995,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm never exposes github types on public repository records",
+          "status": "passed",
+          "title": "never exposes github types on public repository records",
+          "duration": 0.6622979999999643,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm records traceability links without AI analysis",
+          "status": "passed",
+          "title": "records traceability links without AI analysis",
+          "duration": 0.8983160000000225,
+          "failureMessages": [],
+          "meta": {}
+        }
+      ],
+      "startTime": 1785782484198,
+      "endTime": 1785782484210.8984,
+      "status": "passed",
+      "message": "",
+      "name": "/home/ubuntu/apz-portal/packages/platform-scm/src/scm-engine.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["APZQEP-161 qep-automation"],
+          "fullName": "APZQEP-161 qep-automation exposes workspace routes under /workspace/qep/automation",
+          "status": "passed",
+          "title": "exposes workspace routes under /workspace/qep/automation",
+          "duration": 1.9133770000000823,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-161 qep-automation"],
+          "fullName": "APZQEP-161 qep-automation integrates platform automation for Playwright dry-run",
+          "status": "passed",
+          "title": "integrates platform automation for Playwright dry-run",
+          "duration": 4.519722999999885,
+          "failureMessages": [],
+          "meta": {}
+        }
+      ],
+      "startTime": 1785782484240,
+      "endTime": 1785782484246.5198,
+      "status": "passed",
+      "message": "",
+      "name": "/home/ubuntu/apz-portal/packages/qep-automation/src/qep-automation.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["APZQEP-163 qep-quality-intelligence"],
+          "fullName": "APZQEP-163 qep-quality-intelligence exposes workspace routes under /workspace/qep/quality-intelligence",
+          "status": "passed",
+          "title": "exposes workspace routes under /workspace/qep/quality-intelligence",
+          "duration": 2.1208480000000236,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-163 qep-quality-intelligence"],
+          "fullName": "APZQEP-163 qep-quality-intelligence runs analysis through rules/statistical/historical/dummy_ai providers",
+          "status": "passed",
+          "title": "runs analysis through rules/statistical/historical/dummy_ai providers",
+          "duration": 5.942843999999923,
+          "failureMessages": [],
+          "meta": {}
+        }
+      ],
+      "startTime": 1785782484276,
+      "endTime": 1785782484283.9429,
+      "status": "passed",
+      "message": "",
+      "name": "/home/ubuntu/apz-portal/packages/qep-quality-intelligence/src/qep-qi.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["APZQEP-162 qep-scm"],
+          "fullName": "APZQEP-162 qep-scm exposes workspace routes under /workspace/qep/scm",
+          "status": "passed",
+          "title": "exposes workspace routes under /workspace/qep/scm",
+          "duration": 1.760663999999906,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 qep-scm"],
+          "fullName": "APZQEP-162 qep-scm integrates platform scm for GitHub offline registration",
+          "status": "passed",
+          "title": "integrates platform scm for GitHub offline registration",
+          "duration": 2.901219000000083,
+          "failureMessages": [],
+          "meta": {}
+        }
+      ],
+      "startTime": 1785782484219,
+      "endTime": 1785782484223.9011,
+      "status": "passed",
+      "message": "",
+      "name": "/home/ubuntu/apz-portal/packages/qep-scm/src/qep-scm.test.ts"
+    }
+  ]
+}

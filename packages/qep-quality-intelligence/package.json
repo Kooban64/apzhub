@@ -1,0 +1,19 @@
+{
+  "name": "@apzhub/qep-quality-intelligence",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZQEP Enterprise Quality Intelligence Workspace — consumes @apzhub/platform-quality-intelligence (APZQEP-163)",
+  "exports": {
+    ".": "./src/index.ts",
+    "./presentation": "./src/presentation/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-quality-intelligence"
+  },
+  "dependencies": {
+    "@apzhub/platform-quality-intelligence": "workspace:*"
+  }
+}

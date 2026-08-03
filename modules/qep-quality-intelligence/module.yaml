@@ -1,15 +1,18 @@
 manifestSchemaVersion: "1.0"
 id: qep-quality-intelligence
-name: Quality Intelligence
+name: Enterprise Quality Intelligence
 version: 0.1.0
 kind: module
 
 metadata:
   category: quality-engineering
-  description: "Quality Intelligence (M14) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  description: >
+    Enterprise Quality Intelligence Platform workspace (APZQEP-163).
+    Provider-neutral intelligence with rules, statistical, historical and
+    offline dummy AI providers. No external AI APIs.
   product: apzqep
-  moduleCatalogueId: M14
   slug: quality-intelligence
+  programme: APZQEP-163
 
 dependencies:
   platform: []
@@ -18,7 +21,7 @@ dependencies:
 
 module:
   category: quality-engineering
-  status: stub
+  status: active
 
 workbench:
   navigation:
@@ -26,12 +29,12 @@ workbench:
     workspace: qep
     parent: qep
     label: Quality Intelligence
-    icon: flask-conical
+    icon: brain
     route: /workspace/qep/quality-intelligence
-    order: 140
-    permission: qep.quality-intelligence.read
+    order: 72
+    permission: qep.qi.read
   view:
-    title: Quality Intelligence
+    title: Enterprise Quality Intelligence
     workspace: qep
     route: /workspace/qep/quality-intelligence
-    permission: qep.quality-intelligence.read
+    permission: qep.qi.read

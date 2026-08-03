@@ -1,0 +1,16 @@
+{
+  "name": "@apzhub/platform-quality-intelligence",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Enterprise Quality Intelligence Platform — provider-neutral Quality Intelligence Engine (APZQEP-163). Rules, statistical, and historical providers are active; engine never depends on external AI SDKs.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./contracts": "./src/contracts/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/platform-quality-intelligence"
+  }
+}

@@ -23,7 +23,8 @@
 > **APZQEP-162 (20260803T172037Z / commit `9fb22b0e`):** Enterprise Source Control Integration Platform **COMPLETE** — [apzqep-162/](./v1.1/apzqep-162/) · `@apzhub/platform-scm` 0.1.0  
 > **PBR-APZQEP-162 (20260803T174024Z):** Wave 2 **CERTIFIED** — **APZQEP-163 AUTHORISED TO OPEN** (gated) — [pbr-apzqep-162/](./v1.1/pbr-apzqep-162/) · [WAVE-PROGRESS-REGISTER](./v1.1/WAVE-PROGRESS-REGISTER.md)  
 > **APZQEP-163-000 (20260803T175516Z):** Enterprise Quality Intelligence Platform Architecture **COMPLETE** (docs only; eng NONE) — [apzqep-163-000/](./v1.1/apzqep-163-000/)  
-> **PBR-APZQEP-163-000 (20260803T181255Z):** Wave 3 architecture **APPROVED** — authoritative title **Enterprise Quality Intelligence Platform** — APZQEP-163 **AUTHORISED TO OPEN** (not started) — [pbr-apzqep-163-000/](./v1.1/pbr-apzqep-163-000/) · APZQEP-160 historical “AI Quality Intelligence” wording **preserved**
+> **PBR-APZQEP-163-000 (20260803T181255Z):** Wave 3 architecture **APPROVED** — authoritative title **Enterprise Quality Intelligence Platform** — [pbr-apzqep-163-000/](./v1.1/pbr-apzqep-163-000/) · APZQEP-160 historical wording **preserved**  
+> **APZQEP-163 (20260803T184007Z):** Enterprise Quality Intelligence Platform **ENGINEERING COMPLETE** — `@apzhub/platform-quality-intelligence` 0.1.0 (no external AI) — [apzqep-163/](./v1.1/apzqep-163/) — await PBR-APZQEP-163
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

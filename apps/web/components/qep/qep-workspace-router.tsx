@@ -17,10 +17,12 @@ import {
   isQepVerificationRoute,
   isQepAutomationRoute,
   isQepScmRoute,
+  isQepQiRoute,
   isQepWorkspaceRoute,
 } from "@/lib/qep/routes";
 
 import { QepAutomationRouterView } from "./qep-automation-views";
+import { QepQualityIntelligenceRouterView } from "./qep-quality-intelligence-views";
 import { QepScmRouterView } from "./qep-scm-views";
 
 import { QepDefectsRouterView } from "./qep-defects-views";
@@ -53,6 +55,10 @@ export function QepWorkspaceRouter() {
 
   if (isQepScmRoute(pathname)) {
     return <QepScmRouterView />;
+  }
+
+  if (isQepQiRoute(pathname)) {
+    return <QepQualityIntelligenceRouterView />;
   }
 
   if (isQepSuitesRoute(pathname)) {

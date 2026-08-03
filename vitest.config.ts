@@ -538,7 +538,15 @@ const packageAliases = {
     "packages/qep-automation/src/index.ts",
   ),
   "@apzhub/platform-scm": path.resolve(__dirname, "packages/platform-scm/src/index.ts"),
+  "@apzhub/platform-quality-intelligence": path.resolve(
+    __dirname,
+    "packages/platform-quality-intelligence/src/index.ts",
+  ),
   "@apzhub/qep-scm": path.resolve(__dirname, "packages/qep-scm/src/index.ts"),
+  "@apzhub/qep-quality-intelligence": path.resolve(
+    __dirname,
+    "packages/qep-quality-intelligence/src/index.ts",
+  ),
 
   "@apzhub/qep-requirements-traceability": path.resolve(
     __dirname,
