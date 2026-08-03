@@ -1,18 +1,19 @@
 # APZ Law Platform — Product Status (Authoritative)
 
-| Field           | Value                                      |
-| --------------- | ------------------------------------------ |
-| Document        | **PRODUCT-STATUS**                         |
-| Product         | **APZ Law Platform**                       |
-| Authority       | Product Board — **STANDING**               |
-| Rule            | **Read this document before any Law work** |
-| Last updated    | 20260803T135932Z                           |
-| Established by  | **APZHUB-LAW-ADOPT-002**                   |
-| Governance cert | **PBR-APZHUB-LAW-002 CERTIFIED**           |
-| Eng alignment   | **APZHUB-LAW-ADOPT-003 COMPLETE**          |
-| Eng cert        | **PBR-APZHUB-LAW-003 CERTIFIED**           |
-| Ops alignment   | **APZHUB-LAW-ADOPT-004 COMPLETE**          |
-| Ops cert        | **PBR-APZHUB-LAW-004 CERTIFIED**           |
+| Field           | Value                                                              |
+| --------------- | ------------------------------------------------------------------ |
+| Document        | **PRODUCT-STATUS**                                                 |
+| Product         | **APZ Law Platform**                                               |
+| Authority       | Product Board — **STANDING**                                       |
+| Rule            | **Read this document before any Law work**                         |
+| Last updated    | 20260803T140413Z                                                   |
+| Standing state  | [LAW-ADOPTION-STANDING-STATE.md](./LAW-ADOPTION-STANDING-STATE.md) |
+| Established by  | **APZHUB-LAW-ADOPT-002**                                           |
+| Governance cert | **PBR-APZHUB-LAW-002 CERTIFIED**                                   |
+| Eng alignment   | **APZHUB-LAW-ADOPT-003 COMPLETE**                                  |
+| Eng cert        | **PBR-APZHUB-LAW-003 CERTIFIED**                                   |
+| Ops alignment   | **APZHUB-LAW-ADOPT-004 COMPLETE**                                  |
+| Ops cert        | **PBR-APZHUB-LAW-004 CERTIFIED**                                   |
 
 ---
 
@@ -44,6 +45,7 @@ STANDING
 
 Next authorised programme:
 APZHUB-LAW-ADOPT-005 (Enterprise Product Readiness Alignment) — await Owner Auth
+(PAUSED — portfolio pivot to APZQEP; do not start without Owner Auth)
 
 APZQEP relationship:
 APZQEP is Enterprise Reference Implementation — not this product

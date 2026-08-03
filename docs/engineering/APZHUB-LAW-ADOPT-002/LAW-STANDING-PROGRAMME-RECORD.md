@@ -9,22 +9,23 @@
 
 > Authoritative product posture: [PRODUCT-STATUS.md](../../products/law/PRODUCT-STATUS.md)
 
-| Programme / Resolution   | Status                                    |
-| ------------------------ | ----------------------------------------- |
-| APZ-LAW-001              | ACCEPTED / CLOSED (commercial planning)   |
-| APZ-LAW-002              | ACCEPTED / CLOSED (packaging 1.0.0 PRWL)  |
-| LAW-001…015              | Historical engineering corpus (immutable) |
-| APZHUB-ADOPT-001         | COMPLETE (portfolio assessment)           |
-| APZHUB-LAW-ADOPT-001     | COMPLETE (alignment assessment)           |
-| PBR-APZHUB-001           | COMPLETE (Law selected first)             |
-| PBR-APZHUB-LAW-001       | COMPLETE (Governance Alignment APPROVED)  |
-| **APZHUB-LAW-ADOPT-002** | **COMPLETE**                              |
-| PBR-APZHUB-LAW-002       | **COMPLETE — CERTIFIED**                  |
-| APZHUB-LAW-ADOPT-003     | **COMPLETE** (engineering alignment)      |
-| PBR-APZHUB-LAW-003       | **COMPLETE — CERTIFIED**                  |
-| APZHUB-LAW-ADOPT-004     | **COMPLETE** (operations alignment)       |
-| PBR-APZHUB-LAW-004       | **COMPLETE — CERTIFIED**                  |
-| APZHUB-LAW-ADOPT-005     | **AUTHORISED** — not started              |
-| PBR-APZHUB-LAW-005       | **NOT AUTHORISED**                        |
+| Programme / Resolution   | Status                                     |
+| ------------------------ | ------------------------------------------ |
+| APZ-LAW-001              | ACCEPTED / CLOSED (commercial planning)    |
+| APZ-LAW-002              | ACCEPTED / CLOSED (packaging 1.0.0 PRWL)   |
+| LAW-001…015              | Historical engineering corpus (immutable)  |
+| APZHUB-ADOPT-001         | COMPLETE (portfolio assessment)            |
+| APZHUB-LAW-ADOPT-001     | COMPLETE (alignment assessment)            |
+| PBR-APZHUB-001           | COMPLETE (Law selected first)              |
+| PBR-APZHUB-LAW-001       | COMPLETE (Governance Alignment APPROVED)   |
+| **APZHUB-LAW-ADOPT-002** | **COMPLETE**                               |
+| PBR-APZHUB-LAW-002       | **COMPLETE — CERTIFIED**                   |
+| APZHUB-LAW-ADOPT-003     | **COMPLETE** (engineering alignment)       |
+| PBR-APZHUB-LAW-003       | **COMPLETE — CERTIFIED**                   |
+| APZHUB-LAW-ADOPT-004     | **COMPLETE** (operations alignment)        |
+| PBR-APZHUB-LAW-004       | **COMPLETE — CERTIFIED**                   |
+| APZHUB-LAW-ADOPT-005     | **AUTHORISED** — paused (await Owner Auth) |
+| PBR-APZHUB-LAW-005       | **NOT AUTHORISED**                         |
 
-Engineering authority: **CLOSED**. Lifecycle: **FROZEN**.
+Engineering authority: **CLOSED**. Lifecycle: **FROZEN**.  
+Portfolio: **PAUSED** at Ops CERTIFIED (20260803T140413Z) — focus → APZQEP. Standing state: [LAW-ADOPTION-STANDING-STATE.md](../../products/law/LAW-ADOPTION-STANDING-STATE.md).
