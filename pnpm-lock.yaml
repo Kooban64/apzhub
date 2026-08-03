@@ -314,6 +314,9 @@ importers:
       '@apzhub/platform-runtime':
         specifier: workspace:*
         version: link:../../packages/platform-runtime
+      '@apzhub/platform-scm':
+        specifier: workspace:*
+        version: link:../../packages/platform-scm
       '@apzhub/platform-security':
         specifier: workspace:*
         version: link:../../packages/platform-security
@@ -350,6 +353,9 @@ importers:
       '@apzhub/qep-requirements-traceability':
         specifier: workspace:*
         version: link:../../packages/qep-requirements-traceability
+      '@apzhub/qep-scm':
+        specifier: workspace:*
+        version: link:../../packages/qep-scm
       '@apzhub/qep-suites':
         specifier: workspace:*
         version: link:../../packages/qep-suites
@@ -983,6 +989,8 @@ importers:
         specifier: ^3.25.67
         version: 3.25.76
 
+  packages/platform-scm: {}
+
   packages/platform-security:
     dependencies:
       '@apzhub/auth':
@@ -1369,6 +1377,12 @@ importers:
       drizzle-orm:
         specifier: '>=0.45.2'
         version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/qep-scm:
+    dependencies:
+      '@apzhub/platform-scm':
+        specifier: workspace:*
+        version: link:../platform-scm
 
   packages/qep-suites:
     dependencies:

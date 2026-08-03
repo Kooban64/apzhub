@@ -159,3 +159,10 @@ export {
   isQepAutomationRoute,
   parseQepAutomationExecutionId,
 } from "@apzhub/qep-automation/presentation";
+
+export {
+  QEP_SCM_BASE_PATH,
+  QEP_SCM_ROUTES,
+  isQepScmRoute,
+  parseQepScmRepositoryId,
+} from "@apzhub/qep-scm/presentation";

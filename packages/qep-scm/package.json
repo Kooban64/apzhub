@@ -1,0 +1,19 @@
+{
+  "name": "@apzhub/qep-scm",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZQEP Enterprise Source Control Workspace — consumes @apzhub/platform-scm (APZQEP-162)",
+  "exports": {
+    ".": "./src/index.ts",
+    "./presentation": "./src/presentation/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-scm"
+  },
+  "dependencies": {
+    "@apzhub/platform-scm": "workspace:*"
+  }
+}

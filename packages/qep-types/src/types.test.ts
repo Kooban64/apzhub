@@ -20,9 +20,12 @@ describe("@apzhub/qep-types", () => {
     const automation = QEP_MODULES.find((m) => m.id === "M07");
     expect(automation?.status).toBe("enabled");
     expect(automation?.title).toBe("Enterprise Automation");
+    const scm = QEP_MODULES.find((m) => m.id === "M19");
+    expect(scm?.status).toBe("enabled");
+    expect(scm?.title).toBe("Enterprise Source Control");
     expect(
       QEP_MODULES.every((m) =>
-        m.id === "M07" ? m.status === "enabled" : m.status === "stub",
+        m.id === "M07" || m.id === "M19" ? m.status === "enabled" : m.status === "stub",
       ),
     ).toBe(true);
   });

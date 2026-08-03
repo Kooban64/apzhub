@@ -167,11 +167,12 @@ export const QEP_MODULES: readonly QepModuleDescriptor[] = [
   },
   {
     id: "M19",
-    slug: "integrations",
-    packageName: "qep-integrations",
-    title: "Integration Centre",
-    status: "stub",
+    slug: "scm",
+    packageName: "qep-scm",
+    title: "Enterprise Source Control",
+    status: "enabled",
   },
+
   {
     id: "M20",
     slug: "administration",

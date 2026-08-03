@@ -104,6 +104,11 @@
       "@apzhub/qep-traceability/presentation": [
         "../../packages/qep-traceability/src/presentation/index.ts"
       ],
+      "@apzhub/platform-scm": ["../../packages/platform-scm/src/index.ts"],
+      "@apzhub/qep-scm": ["../../packages/qep-scm/src/index.ts"],
+      "@apzhub/qep-scm/presentation": [
+        "../../packages/qep-scm/src/presentation/index.ts"
+      ],
       "@apzhub/law-platform/api": ["../law-platform/lib/api/index.ts"]
     }
   },

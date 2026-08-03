@@ -1,0 +1,17 @@
+{
+  "name": "@apzhub/platform-scm",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZHUB Enterprise Source Control Platform — provider-neutral SCM Engine (APZQEP-162). GitHub is the first provider; engine never depends on GitHub directly.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./contracts": "./src/contracts/index.ts",
+    "./providers/github": "./src/providers/github/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/platform-scm"
+  }
+}

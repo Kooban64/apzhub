@@ -1,18 +1,18 @@
 # APZQEP — Product Status (Authoritative)
 
-| Field              | Value                                          |
-| ------------------ | ---------------------------------------------- |
-| Document           | **PRODUCT-STATUS**                             |
-| Authority          | Product Board — **STANDING**                   |
-| Audience           | Engineers, architects, auditors, AI assistants |
-| Rule               | **Read this document before any APZQEP work**  |
-| Last updated       | 20260803T164801Z                               |
-| Engineering thread | **FORMALLY COMPLETE** (V1.0)                   |
-| Product posture    | **GENERAL AVAILABILITY**                       |
-| Management posture | **Operations-led** (APZQEP-OPS-001)            |
-| V1.1 definition    | **APZQEP-160 APPROVED** (PBR-APZQEP-160)       |
-| V1.1 Wave 1        | **CERTIFIED** (PBR-APZQEP-161)                 |
-| V1.1 Wave 2        | **APZQEP-162 AUTHORISED** — not started        |
+| Field              | Value                                                             |
+| ------------------ | ----------------------------------------------------------------- |
+| Document           | **PRODUCT-STATUS**                                                |
+| Authority          | Product Board — **STANDING**                                      |
+| Audience           | Engineers, architects, auditors, AI assistants                    |
+| Rule               | **Read this document before any APZQEP work**                     |
+| Last updated       | 20260803T172037Z                                                  |
+| Engineering thread | **FORMALLY COMPLETE** (V1.0)                                      |
+| Product posture    | **GENERAL AVAILABILITY**                                          |
+| Management posture | **Operations-led** (APZQEP-OPS-001)                               |
+| V1.1 definition    | **APZQEP-160 APPROVED** (PBR-APZQEP-160)                          |
+| V1.1 Wave 1        | **CERTIFIED** (PBR-APZQEP-161)                                    |
+| V1.1 Wave 2        | **APZQEP-162 ENGINEERING COMPLETE** — Board certification pending |
 
 ---
 
@@ -88,7 +88,7 @@ Management posture:
 OPERATIONS-LED
 
 Next Authorised Programme:
-APZQEP-162 — Enterprise Integrations (AUTHORISED; not started; awaits Owner Auth + OE Board review)
+Await PBR-APZQEP-162 (Wave 2 Board certification). APZQEP-163…166 NOT AUTHORISED.
 
 Version 1.1 definition programme:
 APZQEP-160 COMPLETE — Product Board **APPROVED** (PBR-APZQEP-160)
@@ -98,14 +98,17 @@ APZQEP-161 COMPLETE · APZQEP-161R COMPLETE · **PBR-APZQEP-161 CERTIFIED**
 APZQEP-161-OE COMPLETE — internal adoption / dogfooding (LIMITED eng)
 Platform package: @apzhub/platform-automation 0.1.0 (Playwright first provider; engine provider-neutral)
 
-Version 1.1 Wave 2+:
-APZQEP-162 AUTHORISED — engineering NOT STARTED
+Version 1.1 Wave 2:
+APZQEP-162 ENGINEERING COMPLETE — Enterprise Source Control Integration Platform
+Platform package: @apzhub/platform-scm 0.1.0 (GitHub first provider; engine provider-neutral)
+Board certification: PENDING (PBR-APZQEP-162)
+
+Version 1.1 Wave 3+:
 APZQEP-163…166 NOT AUTHORISED
 
 Next Action:
-Continue internal use of Wave 1 on https://apzhub.apzportal.apzor.com.
-Product Board review APZQEP-161-OE findings before APZQEP-162 Owner Auth.
-Do NOT begin APZQEP-162 engineering without Owner Auth.
+Product Board certify Wave 2 (PBR-APZQEP-162).
+Do NOT begin APZQEP-163 without Board certification + Owner Auth.
 ```
 
 ---
@@ -126,23 +129,24 @@ Do NOT begin APZQEP-162 engineering without Owner Auth.
 
 ## Governance & baseline
 
-| Item                            | Value                                                                              |
-| ------------------------------- | ---------------------------------------------------------------------------------- |
-| Governance version              | **1.0 STABLE**                                                                     |
-| Enterprise Engineering Baseline | **1.x STABLE (1.2)**                                                               |
-| Enterprise Standards            | ES-001, ES-002, ES-003 **IN FORCE**                                                |
-| ES-004                          | **NOT AUTHORISED**                                                                 |
-| Operating mode                  | Evolve the Enterprise · **operations-led**                                         |
-| Product Board authority         | **STANDING**                                                                       |
-| Engineering authority           | **CLOSED**                                                                         |
-| Version 1.1                     | Definition **APPROVED**; Wave 1 **CERTIFIED**; Wave 2 **AUTHORISED** (not started) |
-| V1.1 definition pack            | [v1.1/apzqep-160/](./v1.1/apzqep-160/)                                             |
-| V1.1 Board approval             | [v1.1/pbr-apzqep-160/](./v1.1/pbr-apzqep-160/)                                     |
-| V1.1 Wave 1 certification       | [v1.1/pbr-apzqep-161/](./v1.1/pbr-apzqep-161/)                                     |
-| V1.1 Wave progress              | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                 |
-| V1.1 Wave 1 eng pack            | [v1.1/apzqep-161/](./v1.1/apzqep-161/)                                             |
-| V1.1 Wave 1 readiness pack      | [v1.1/apzqep-161r/](./v1.1/apzqep-161r/)                                           |
-| Product Board Register          | [PRODUCT-BOARD-REGISTER.md](./PRODUCT-BOARD-REGISTER.md)                           |
+| Item                            | Value                                                                                  |
+| ------------------------------- | -------------------------------------------------------------------------------------- |
+| Governance version              | **1.0 STABLE**                                                                         |
+| Enterprise Engineering Baseline | **1.x STABLE (1.2)**                                                                   |
+| Enterprise Standards            | ES-001, ES-002, ES-003 **IN FORCE**                                                    |
+| ES-004                          | **NOT AUTHORISED**                                                                     |
+| Operating mode                  | Evolve the Enterprise · **operations-led**                                             |
+| Product Board authority         | **STANDING**                                                                           |
+| Engineering authority           | **CLOSED**                                                                             |
+| Version 1.1                     | Definition **APPROVED**; Wave 1 **CERTIFIED**; Wave 2 eng **COMPLETE** (Board pending) |
+| V1.1 definition pack            | [v1.1/apzqep-160/](./v1.1/apzqep-160/)                                                 |
+| V1.1 Board approval             | [v1.1/pbr-apzqep-160/](./v1.1/pbr-apzqep-160/)                                         |
+| V1.1 Wave 1 certification       | [v1.1/pbr-apzqep-161/](./v1.1/pbr-apzqep-161/)                                         |
+| V1.1 Wave progress              | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                     |
+| V1.1 Wave 1 eng pack            | [v1.1/apzqep-161/](./v1.1/apzqep-161/)                                                 |
+| V1.1 Wave 1 readiness pack      | [v1.1/apzqep-161r/](./v1.1/apzqep-161r/)                                               |
+| V1.1 Wave 2 eng pack            | [v1.1/apzqep-162/](./v1.1/apzqep-162/)                                                 |
+| Product Board Register          | [PRODUCT-BOARD-REGISTER.md](./PRODUCT-BOARD-REGISTER.md)                               |
 
 ---
 
@@ -162,8 +166,9 @@ Do NOT begin APZQEP-162 engineering without Owner Auth.
 | **PBR-APZQEP-160**     | V1.1 Definition **APPROVED** — Wave 1 (**APZQEP-161**) authorised to open |
 | **APZQEP-161**         | Enterprise Automation Foundation **COMPLETE**                             |
 | **APZQEP-161R**        | Wave 1 Operational Readiness & Usability **COMPLETE**                     |
-| **PBR-APZQEP-161**     | Wave 1 **CERTIFIED** — APZQEP-162 **AUTHORISED** (not started)            |
+| **PBR-APZQEP-161**     | Wave 1 **CERTIFIED** — APZQEP-162 **AUTHORISED**                          |
 | **APZQEP-161-OE**      | Operational Enablement & Internal Adoption **COMPLETE**                   |
+| **APZQEP-162**         | Enterprise Source Control Integration Platform **ENGINEERING COMPLETE**   |
 
 ---
 
@@ -236,9 +241,8 @@ Board / audit / ops:
 ## Path remaining
 
 1. Operate Version 1.0 under APZQEP-OPS-001.
-2. Hands-on Wave 1 validation (Quick Start / Demo Script) on the APZHUB host.
-3. Open APZQEP-162 only with Owner Auth (Board has authorised the programme).
-4. Do not open APZQEP-163…166 without Board certification and Owner Auth.
+2. Product Board certify Wave 2 (PBR-APZQEP-162).
+3. Do not open APZQEP-163…166 without Board certification and Owner Auth.
 
 ---
 
@@ -248,7 +252,7 @@ Version 1.0 engineering lifecycle is formally complete. Product Board authorised
 
 Authoritative state:
 
-> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. V1.0 engineering CLOSED. APZQEP-OPS-001 COMPLETE. Wave 1 CERTIFIED (PBR-APZQEP-161). APZQEP-161-OE COMPLETE. APZQEP-162 AUTHORISED — not started. Waves 163–166 NOT AUTHORISED.**
+> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. V1.0 engineering CLOSED. APZQEP-OPS-001 COMPLETE. Wave 1 CERTIFIED (PBR-APZQEP-161). APZQEP-162 ENGINEERING COMPLETE — Board certification pending. Waves 163–166 NOT AUTHORISED.**
 
 ---
 

@@ -1,0 +1,40 @@
+APZQEP-162 Evidence — 20260803T172037Z
+
+## Packages
+modules/qep-scm:
+total 12
+drwxrwxr-x  2 ubuntu ubuntu 4096 Aug  3 17:18 .
+drwxrwxr-x 34 ubuntu ubuntu 4096 Aug  3 17:18 ..
+-rw-rw-r--  1 ubuntu ubuntu  843 Aug  3 17:18 module.yaml
+
+packages/platform-scm:
+total 20
+drwxrwxr-x   3 ubuntu ubuntu 4096 Aug  3 17:13 .
+drwxrwxr-x 106 ubuntu ubuntu 4096 Aug  3 17:15 ..
+-rw-rw-r--   1 ubuntu ubuntu  613 Aug  3 17:13 package.json
+drwxrwxr-x   7 ubuntu ubuntu 4096 Aug  3 17:15 src
+-rw-rw-r--   1 ubuntu ubuntu  107 Aug  3 17:13 tsconfig.json
+
+packages/qep-scm:
+total 24
+drwxrwxr-x   4 ubuntu ubuntu 4096 Aug  3 17:20 .
+drwxrwxr-x 106 ubuntu ubuntu 4096 Aug  3 17:15 ..
+drwxrwxr-x   3 ubuntu ubuntu 4096 Aug  3 17:20 node_modules
+-rw-rw-r--   1 ubuntu ubuntu  546 Aug  3 17:15 package.json
+drwxrwxr-x   3 ubuntu ubuntu 4096 Aug  3 17:15 src
+-rw-rw-r--   1 ubuntu ubuntu  107 Aug  3 17:15 tsconfig.json
+
+## API routes
+apps/web/app/api/v1/qep/scm/providers/connect/route.ts
+apps/web/app/api/v1/qep/scm/providers/route.ts
+apps/web/app/api/v1/qep/scm/repositories/[repositoryId]/route.ts
+apps/web/app/api/v1/qep/scm/repositories/[repositoryId]/state/route.ts
+apps/web/app/api/v1/qep/scm/repositories/[repositoryId]/sync/route.ts
+apps/web/app/api/v1/qep/scm/repositories/route.ts
+apps/web/app/api/v1/qep/scm/traceability/route.ts
+apps/web/app/api/v1/qep/scm/webhooks/[providerId]/route.ts
+apps/web/app/api/v1/qep/scm/webhooks/route.ts
+
+## Workspace UI
+-rw-rw-r-- 1 ubuntu ubuntu 13244 Aug  3 17:19 apps/web/components/qep/qep-scm-views.tsx
+-rw-rw-r-- 1 ubuntu ubuntu  1214 Aug  3 17:15 apps/web/lib/qep/scm-runtime.ts

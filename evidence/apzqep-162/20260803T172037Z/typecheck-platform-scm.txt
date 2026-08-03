@@ -1,0 +1,4 @@
+
+> @apzhub/platform-scm@0.1.0 typecheck /home/ubuntu/apz-portal/packages/platform-scm
+> tsc --noEmit -p tsconfig.json
+

@@ -1,0 +1,157 @@
+{
+  "numTotalTestSuites": 6,
+  "numPassedTestSuites": 6,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 11,
+  "numPassedTests": 11,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1785777638174,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm registers GitHub as active and others as placeholders",
+          "status": "passed",
+          "title": "registers GitHub as active and others as placeholders",
+          "duration": 3.1542230000000018,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm registers a repository through GitHub offline provider",
+          "status": "passed",
+          "title": "registers a repository through GitHub offline provider",
+          "duration": 3.7822369999998955,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm rejects placeholder provider repository registration",
+          "status": "passed",
+          "title": "rejects placeholder provider repository registration",
+          "duration": 2.474736000000121,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm verifies GitHub webhook signatures and publishes neutral events",
+          "status": "passed",
+          "title": "verifies GitHub webhook signatures and publishes neutral events",
+          "duration": 2.70025899999996,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm is idempotent for duplicate webhook deliveries",
+          "status": "passed",
+          "title": "is idempotent for duplicate webhook deliveries",
+          "duration": 0.971225000000004,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm never exposes github types on public repository records",
+          "status": "passed",
+          "title": "never exposes github types on public repository records",
+          "duration": 0.8183570000001055,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm records traceability links without AI analysis",
+          "status": "passed",
+          "title": "records traceability links without AI analysis",
+          "duration": 1.2622449999998935,
+          "failureMessages": [],
+          "meta": {}
+        }
+      ],
+      "startTime": 1785777639728,
+      "endTime": 1785777639744.2622,
+      "status": "passed",
+      "message": "",
+      "name": "/home/ubuntu/apz-portal/packages/platform-scm/src/scm-engine.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["APZQEP-162 qep-scm"],
+          "fullName": "APZQEP-162 qep-scm exposes workspace routes under /workspace/qep/scm",
+          "status": "passed",
+          "title": "exposes workspace routes under /workspace/qep/scm",
+          "duration": 1.546233999999913,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 qep-scm"],
+          "fullName": "APZQEP-162 qep-scm integrates platform scm for GitHub offline registration",
+          "status": "passed",
+          "title": "integrates platform scm for GitHub offline registration",
+          "duration": 2.064329999999927,
+          "failureMessages": [],
+          "meta": {}
+        }
+      ],
+      "startTime": 1785777639734,
+      "endTime": 1785777639738.0642,
+      "status": "passed",
+      "message": "",
+      "name": "/home/ubuntu/apz-portal/packages/qep-scm/src/qep-scm.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["@apzhub/qep-types"],
+          "fullName": "@apzhub/qep-types exports foundation version and product identity",
+          "status": "passed",
+          "title": "exports foundation version and product identity",
+          "duration": 1.9255829999999605,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["@apzhub/qep-types"],
+          "fullName": "@apzhub/qep-types registers all 22 product modules with catalogue statuses",
+          "status": "passed",
+          "title": "registers all 22 product modules with catalogue statuses",
+          "duration": 1.8353159999999207,
+          "failureMessages": [],
+          "meta": {}
+        }
+      ],
+      "startTime": 1785777639623,
+      "endTime": 1785777639626.8352,
+      "status": "passed",
+      "message": "",
+      "name": "/home/ubuntu/apz-portal/packages/qep-types/src/types.test.ts"
+    }
+  ]
+}
