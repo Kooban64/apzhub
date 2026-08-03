@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-03  
-> **Current status:** **PBR-APZHUB-001 COMPLETE** — first adoption product **APZ Law Platform APPROVED** · Next: Owner Auth for **APZHUB-LAW-ADOPT-001** (not started; no engineering) · APZQEP V1.0 **GA** (ops-led) · Governance **1.0 STABLE** · Baseline **1.2** · Board: [PBR-APZHUB-001/](../engineering/PBR-APZHUB-001/) · ADOPT-001: [APZHUB-ADOPT-001/](../engineering/APZHUB-ADOPT-001/) · APZQEP: [PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md).
+> **Current status:** **APZHUB-LAW-ADOPT-001 COMPLETE** — Law alignment assessment **PARTIALLY READY** · Await Board review before **LAW-ADOPT-002** · No Law engineering · APZQEP V1.0 **GA** (ops-led) · Governance **1.0 STABLE** · Baseline **1.2** · Law pack: [APZHUB-LAW-ADOPT-001/](../engineering/APZHUB-LAW-ADOPT-001/) · Board: [PBR-APZHUB-001/](../engineering/PBR-APZHUB-001/) · APZQEP: [PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md).
 
 ---
 

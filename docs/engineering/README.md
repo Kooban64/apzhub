@@ -68,7 +68,8 @@ Assessment-only programme. Measures products against ENG-003. No engineering.
 | [APZHUB-ADOPT-001/PRODUCT-BOARD-ADOPTION-REVIEW.md](./APZHUB-ADOPT-001/PRODUCT-BOARD-ADOPTION-REVIEW.md) | Board pack           |
 | [APZHUB-ADOPT-001/APZHUB-ADOPT-001-COMPLETION.md](./APZHUB-ADOPT-001/APZHUB-ADOPT-001-COMPLETION.md)     | Completion           |
 
-**Board decision:** [PBR-APZHUB-001](./PBR-APZHUB-001/) — **APZ Law Platform** selected. Next: **APZHUB-LAW-ADOPT-001** (authorised; not started).
+**Board decision:** [PBR-APZHUB-001](./PBR-APZHUB-001/) — **APZ Law Platform** selected.  
+**Law alignment:** [APZHUB-LAW-ADOPT-001](./APZHUB-LAW-ADOPT-001/) **COMPLETE** — PARTIALLY READY — await Board before LAW-ADOPT-002. No engineering.
 
 ---
 

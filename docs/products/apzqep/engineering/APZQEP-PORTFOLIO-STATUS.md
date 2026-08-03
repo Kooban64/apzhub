@@ -30,7 +30,8 @@
 | APZHUB-ENG-003           | ✅ Enterprise Engineering Adoption **COMPLETE** (portfolio model)   |
 | APZHUB-ADOPT-001         | ✅ Enterprise Product Adoption Assessment **COMPLETE**              |
 | PBR-APZHUB-001           | ✅ First adoption product **APZ Law Platform APPROVED**             |
-| APZHUB-LAW-ADOPT-001     | ⏳ **AUTHORISED** — not started (await Owner Auth execution)        |
+| APZHUB-LAW-ADOPT-001     | ✅ Alignment Assessment **COMPLETE** — **PARTIALLY READY**          |
+| APZHUB-LAW-ADOPT-002     | ⏸ Recommended next (Governance Alignment) — **not authorised**      |
 
 ---
 
