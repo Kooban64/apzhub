@@ -133,24 +133,25 @@ Ops: push local main to origin when remote credentials available.
 
 ## Governance & baseline
 
-| Item                            | Value                                                                                  |
-| ------------------------------- | -------------------------------------------------------------------------------------- |
-| Governance version              | **1.0 STABLE**                                                                         |
-| Enterprise Engineering Baseline | **1.x STABLE (1.2)**                                                                   |
-| Enterprise Standards            | ES-001, ES-002, ES-003 **IN FORCE**                                                    |
-| ES-004                          | **NOT AUTHORISED**                                                                     |
-| Operating mode                  | Evolve the Enterprise · **operations-led**                                             |
-| Product Board authority         | **STANDING**                                                                           |
-| Engineering authority           | **CLOSED**                                                                             |
-| Version 1.1                     | Definition **APPROVED**; Wave 1 **CERTIFIED**; Wave 2 eng **COMPLETE** (Board pending) |
-| V1.1 definition pack            | [v1.1/apzqep-160/](./v1.1/apzqep-160/)                                                 |
-| V1.1 Board approval             | [v1.1/pbr-apzqep-160/](./v1.1/pbr-apzqep-160/)                                         |
-| V1.1 Wave 1 certification       | [v1.1/pbr-apzqep-161/](./v1.1/pbr-apzqep-161/)                                         |
-| V1.1 Wave progress              | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                     |
-| V1.1 Wave 1 eng pack            | [v1.1/apzqep-161/](./v1.1/apzqep-161/)                                                 |
-| V1.1 Wave 1 readiness pack      | [v1.1/apzqep-161r/](./v1.1/apzqep-161r/)                                               |
-| V1.1 Wave 2 eng pack            | [v1.1/apzqep-162/](./v1.1/apzqep-162/)                                                 |
-| Product Board Register          | [PRODUCT-BOARD-REGISTER.md](./PRODUCT-BOARD-REGISTER.md)                               |
+| Item                            | Value                                                               |
+| ------------------------------- | ------------------------------------------------------------------- |
+| Governance version              | **1.0 STABLE**                                                      |
+| Enterprise Engineering Baseline | **1.x STABLE (1.2)**                                                |
+| Enterprise Standards            | ES-001, ES-002, ES-003 **IN FORCE**                                 |
+| ES-004                          | **NOT AUTHORISED**                                                  |
+| Operating mode                  | Evolve the Enterprise · **operations-led**                          |
+| Product Board authority         | **STANDING**                                                        |
+| Engineering authority           | **CLOSED**                                                          |
+| Version 1.1                     | Definition **APPROVED**; Wave 1 **CERTIFIED**; Wave 2 **CERTIFIED** |
+| V1.1 definition pack            | [v1.1/apzqep-160/](./v1.1/apzqep-160/)                              |
+| V1.1 Board approval             | [v1.1/pbr-apzqep-160/](./v1.1/pbr-apzqep-160/)                      |
+| V1.1 Wave 1 certification       | [v1.1/pbr-apzqep-161/](./v1.1/pbr-apzqep-161/)                      |
+| V1.1 Wave 2 certification       | [v1.1/pbr-apzqep-162/](./v1.1/pbr-apzqep-162/)                      |
+| V1.1 Wave progress              | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)  |
+| V1.1 Wave 1 eng pack            | [v1.1/apzqep-161/](./v1.1/apzqep-161/)                              |
+| V1.1 Wave 1 readiness pack      | [v1.1/apzqep-161r/](./v1.1/apzqep-161r/)                            |
+| V1.1 Wave 2 eng pack            | [v1.1/apzqep-162/](./v1.1/apzqep-162/)                              |
+| Product Board Register          | [PRODUCT-BOARD-REGISTER.md](./PRODUCT-BOARD-REGISTER.md)            |
 
 ---
 
