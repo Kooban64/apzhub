@@ -25,7 +25,7 @@ Dashboards are the presentation face of governed quality — not a new SoR, not 
 
 1. Executives see release readiness and risk with confidence and evidence trails.
 2. Engineering and QA see live execution, coverage, defects and recommendations in one workspace.
-3. Developers and release managers navigate from signal → recommendation → evidence without leaving APZHEP.
+3. Developers and release managers navigate from signal → recommendation → evidence without leaving APZQEP.
 4. Operations see automation health, provider status and operational readiness.
 5. Product Board surfaces remain permission-gated and audit-aware.
 
