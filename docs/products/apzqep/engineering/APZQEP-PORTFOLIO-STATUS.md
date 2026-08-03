@@ -46,7 +46,9 @@
 | APZQEP-161R                | ✅ Wave 1 Operational Readiness & Usability **COMPLETE**            |
 | PBR-APZQEP-161             | ✅ Wave 1 **CERTIFIED** — APZQEP-162 **AUTHORISED** (not started)   |
 | APZQEP-161-OE              | ✅ Operational Enablement & Internal Adoption **COMPLETE**          |
-| APZQEP-162                 | ✅ Engineering **COMPLETE** — await PBR-APZQEP-162 (Board)          |
+| APZQEP-162                 | ✅ **COMPLETE** — Wave 2 eng delivered                              |
+| PBR-APZQEP-162             | ✅ Wave 2 **CERTIFIED** — APZQEP-163 **AUTHORISED TO OPEN**         |
+| APZQEP-163                 | ⏳ **AUTHORISED TO OPEN** — not started (Owner Auth required)       |
 | APZQEP-163…166             | ⛔ Planned — **NOT AUTHORISED**                                     |
 
 ---

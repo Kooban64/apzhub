@@ -1,0 +1,6 @@
+PBR-APZQEP-162 evidence — 20260803T174024Z
+Engineering commit: 9fb22b0ee661cce9b9f8da4c825769d043faa691
+Push attempt: FAILED — git@github.com:kooban-apzor/apz-portal.git returns Repository not found with host SSH key (authenticated, no repo access / GH_TOKEN unset)
+Branch: main ahead of origin/main
+Packages: @apzhub/platform-scm 0.1.0, @apzhub/qep-scm 0.1.0
+Providers: github=active; gitlab,azure_devops,bitbucket,gitea,forgejo=placeholder

@@ -19,7 +19,9 @@
 > **APZQEP-161 (20260803T143922Z):** Enterprise Automation Foundation **COMPLETE** — [apzqep-161/](./v1.1/apzqep-161/) · `@apzhub/platform-automation` 0.1.0  
 > **APZQEP-161R (20260803T152830Z):** Wave 1 Operational Readiness & Usability **COMPLETE** (eng UNCHANGED) — [apzqep-161r/](./v1.1/apzqep-161r/)  
 > **PBR-APZQEP-161 (20260803T160614Z):** Wave 1 **CERTIFIED** — **APZQEP-162 AUTHORISED** (not started) — [pbr-apzqep-161/](./v1.1/pbr-apzqep-161/) · [WAVE-PROGRESS-REGISTER](./v1.1/WAVE-PROGRESS-REGISTER.md)  
-> **APZQEP-161-OE (20260803T164801Z):** Operational Enablement & Internal Adoption **COMPLETE** — dogfooding evidence + feedback register — [apzqep-161-oe/](./v1.1/apzqep-161-oe/)
+> **APZQEP-161-OE (20260803T164801Z):** Operational Enablement & Internal Adoption **COMPLETE** — dogfooding evidence + feedback register — [apzqep-161-oe/](./v1.1/apzqep-161-oe/)  
+> **APZQEP-162 (20260803T172037Z / commit `9fb22b0e`):** Enterprise Source Control Integration Platform **COMPLETE** — [apzqep-162/](./v1.1/apzqep-162/) · `@apzhub/platform-scm` 0.1.0  
+> **PBR-APZQEP-162 (20260803T174024Z):** Wave 2 **CERTIFIED** — **APZQEP-163 AUTHORISED TO OPEN** (not started; recommended title Quality Intelligence Platform) — [pbr-apzqep-162/](./v1.1/pbr-apzqep-162/) · [WAVE-PROGRESS-REGISTER](./v1.1/WAVE-PROGRESS-REGISTER.md)
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

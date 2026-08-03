@@ -1,0 +1,2 @@
+packages/platform-scm/src/engine/scm-engine.ts:303:        deliveryId: input.headers["x-github-delivery"] ?? randomUUID(),
+--- engine github header refs (reject path) ---

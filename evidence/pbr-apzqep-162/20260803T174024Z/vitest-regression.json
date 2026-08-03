@@ -1,0 +1,247 @@
+{
+  "numTotalTestSuites": 10,
+  "numPassedTestSuites": 10,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 19,
+  "numPassedTests": 19,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1785778825438,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["APZQEP-161 platform-automation"],
+          "fullName": "APZQEP-161 platform-automation registers Playwright as active and others as placeholders",
+          "status": "passed",
+          "title": "registers Playwright as active and others as placeholders",
+          "duration": 3.8233130000000983,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-161 platform-automation"],
+          "fullName": "APZQEP-161 platform-automation runs Playwright dry-run through full lifecycle with evidence",
+          "status": "passed",
+          "title": "runs Playwright dry-run through full lifecycle with evidence",
+          "duration": 5.989041000000043,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-161 platform-automation"],
+          "fullName": "APZQEP-161 platform-automation rejects placeholder provider execution",
+          "status": "passed",
+          "title": "rejects placeholder provider execution",
+          "duration": 2.79142499999989,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-161 platform-automation"],
+          "fullName": "APZQEP-161 platform-automation retries then fails when provider keeps failing",
+          "status": "passed",
+          "title": "retries then fails when provider keeps failing",
+          "duration": 1.3202260000000479,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-161 platform-automation"],
+          "fullName": "APZQEP-161 platform-automation enforces lifecycle transition rules",
+          "status": "passed",
+          "title": "enforces lifecycle transition rules",
+          "duration": 0.35416299999997136,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-161 platform-automation"],
+          "fullName": "APZQEP-161 platform-automation never exposes playwright types on public record",
+          "status": "passed",
+          "title": "never exposes playwright types on public record",
+          "duration": 1.54410299999995,
+          "failureMessages": [],
+          "meta": {}
+        }
+      ],
+      "startTime": 1785778827253,
+      "endTime": 1785778827268.5442,
+      "status": "passed",
+      "message": "",
+      "name": "/home/ubuntu/apz-portal/packages/platform-automation/src/automation-engine.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm registers GitHub as active and others as placeholders",
+          "status": "passed",
+          "title": "registers GitHub as active and others as placeholders",
+          "duration": 2.9161770000000615,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm registers a repository through GitHub offline provider",
+          "status": "passed",
+          "title": "registers a repository through GitHub offline provider",
+          "duration": 3.0402939999999035,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm rejects placeholder provider repository registration",
+          "status": "passed",
+          "title": "rejects placeholder provider repository registration",
+          "duration": 2.0325129999998808,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm verifies GitHub webhook signatures and publishes neutral events",
+          "status": "passed",
+          "title": "verifies GitHub webhook signatures and publishes neutral events",
+          "duration": 2.304827999999816,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm is idempotent for duplicate webhook deliveries",
+          "status": "passed",
+          "title": "is idempotent for duplicate webhook deliveries",
+          "duration": 0.9324149999999918,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm never exposes github types on public repository records",
+          "status": "passed",
+          "title": "never exposes github types on public repository records",
+          "duration": 0.7321910000000571,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 platform-scm"],
+          "fullName": "APZQEP-162 platform-scm records traceability links without AI analysis",
+          "status": "passed",
+          "title": "records traceability links without AI analysis",
+          "duration": 0.916101000000026,
+          "failureMessages": [],
+          "meta": {}
+        }
+      ],
+      "startTime": 1785778827223,
+      "endTime": 1785778827235.916,
+      "status": "passed",
+      "message": "",
+      "name": "/home/ubuntu/apz-portal/packages/platform-scm/src/scm-engine.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["APZQEP-161 qep-automation"],
+          "fullName": "APZQEP-161 qep-automation exposes workspace routes under /workspace/qep/automation",
+          "status": "passed",
+          "title": "exposes workspace routes under /workspace/qep/automation",
+          "duration": 1.8571039999999357,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-161 qep-automation"],
+          "fullName": "APZQEP-161 qep-automation integrates platform automation for Playwright dry-run",
+          "status": "passed",
+          "title": "integrates platform automation for Playwright dry-run",
+          "duration": 4.414138000000094,
+          "failureMessages": [],
+          "meta": {}
+        }
+      ],
+      "startTime": 1785778827259,
+      "endTime": 1785778827265.414,
+      "status": "passed",
+      "message": "",
+      "name": "/home/ubuntu/apz-portal/packages/qep-automation/src/qep-automation.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["APZQEP-162 qep-scm"],
+          "fullName": "APZQEP-162 qep-scm exposes workspace routes under /workspace/qep/scm",
+          "status": "passed",
+          "title": "exposes workspace routes under /workspace/qep/scm",
+          "duration": 2.4215590000001157,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["APZQEP-162 qep-scm"],
+          "fullName": "APZQEP-162 qep-scm integrates platform scm for GitHub offline registration",
+          "status": "passed",
+          "title": "integrates platform scm for GitHub offline registration",
+          "duration": 3.139927999999827,
+          "failureMessages": [],
+          "meta": {}
+        }
+      ],
+      "startTime": 1785778827232,
+      "endTime": 1785778827238.14,
+      "status": "passed",
+      "message": "",
+      "name": "/home/ubuntu/apz-portal/packages/qep-scm/src/qep-scm.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["@apzhub/qep-types"],
+          "fullName": "@apzhub/qep-types exports foundation version and product identity",
+          "status": "passed",
+          "title": "exports foundation version and product identity",
+          "duration": 2.235678000000007,
+          "failureMessages": [],
+          "meta": {}
+        },
+        {
+          "ancestorTitles": ["@apzhub/qep-types"],
+          "fullName": "@apzhub/qep-types registers all 22 product modules with catalogue statuses",
+          "status": "passed",
+          "title": "registers all 22 product modules with catalogue statuses",
+          "duration": 2.099762999999939,
+          "failureMessages": [],
+          "meta": {}
+        }
+      ],
+      "startTime": 1785778827106,
+      "endTime": 1785778827110.0999,
+      "status": "passed",
+      "message": "",
+      "name": "/home/ubuntu/apz-portal/packages/qep-types/src/types.test.ts"
+    }
+  ]
+}
