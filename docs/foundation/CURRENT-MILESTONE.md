@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 2026-08-03  
-> **Current status:** **APZQEP-150R COMPLETE** — audit **PASS** — **GO recommended** · RB-001 & RB-002 **CLEARED** · Engineering authority **CLOSED** · Product Board authority **STANDING** · Next: Product Board Version 1.0 Release Decision · Authoritative status: [PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md) · Feature freeze **ACTIVE** · Release/Deployment **NOT AUTHORISED** until Board · Governance **1.0 STABLE** · Baseline **1.2** · ES-004 **NOT AUTHORISED**.
+> **Current status:** **PBR-APZQEP-1.0-001 COMPLETE** — Product Board **GO** — APZQEP Version 1.0 **GENERAL AVAILABILITY** · Production Certification **COMPLETE** · Engineering authority **CLOSED** · Product Board authority **STANDING** · Version 1.1 **NOT OPENED** · Authoritative status: [PRODUCT-STATUS.md](../products/apzqep/PRODUCT-STATUS.md) · Board pack: [pbr-apzqep-1.0-001/](../products/apzqep/v1.1/pbr-apzqep-1.0-001/) · Governance **1.0 STABLE** · Baseline **1.2** · ES-004 **NOT AUTHORISED**.
 
 ---
 

@@ -1,15 +1,16 @@
 # Standing Programme Record — APZQEP
 
 > **Version 1.0 current product status (authoritative):** [PRODUCT-STATUS.md](./PRODUCT-STATUS.md)  
-> This Standing Programme Record remains the historical programme baseline. For engineering / release posture, **PRODUCT-STATUS.md wins**.
+> This Standing Programme Record remains the historical programme baseline. For engineering / release posture, **PRODUCT-STATUS.md wins**.  
+> **PBR-APZQEP-1.0-001 (20260803T071607Z):** Product Board **GO** — Version 1.0 **GENERAL AVAILABILITY** — [pbr-apzqep-1.0-001/](./v1.1/pbr-apzqep-1.0-001/)
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Document       | Standing Programme Record                                                                                                                                                                                                    |
-| Date           | 2026-08-02                                                                                                                                                                                                                   |
-| Status         | **IN FORCE — HISTORICAL PROGRAMME BASELINE** (current Version 1.0 posture → [PRODUCT-STATUS.md](./PRODUCT-STATUS.md))                                                                                                        |
+| Date           | 2026-08-03                                                                                                                                                                                                                   |
+| Status         | **IN FORCE — HISTORICAL PROGRAMME BASELINE** (current Version 1.0 posture → [PRODUCT-STATUS.md](./PRODUCT-STATUS.md) — **GENERAL AVAILABILITY**)                                                                             |
 | APZQEP-ENG-001 | **CLOSED** — Engineering Framework v1.0 BASELINED · MAINTENANCE ACTIVE · [completion](./engineering/APZQEP-ENG-001-COMPLETION.md) · Successor **APZHUB-ENG-002** (Foundation COMPLETE · Phase 1 CLOSED · promotions ON HOLD) |
-| Product state  | **APZQEP v1.0 — ENGINEERING COMPLETE · PRODUCT COMPLETE · PRODUCTION CERTIFICATION PENDING** · production release **NO-GO** · see [PRODUCT-STATUS.md](./PRODUCT-STATUS.md)                                                   |
+| Product state  | **APZQEP v1.0 — GENERAL AVAILABILITY** · Production Certification **COMPLETE** · Engineering **CLOSED** · see [PRODUCT-STATUS.md](./PRODUCT-STATUS.md) · Board [PBR-APZQEP-1.0-001](./v1.1/pbr-apzqep-1.0-001/)              |
 | Test Execution | `@apzhub/qep-test-execution` **1.0.1**                                                                                                                                                                                       |
 | Evidence Mgmt  | `@apzhub/qep-evidence` **1.0.0** · tag `apzqep-evidence-v1.0.0` → `79d9851f`                                                                                                                                                 |
 | REM-002        | **APPROVED AND CLOSED**                                                                                                                                                                                                      |
@@ -23,8 +24,12 @@
 | APZQEP-111     | **APPROVED** — [v1.1 Solution Architecture](./v1.1/EXECUTIVE-ARCHITECTURE-SUMMARY.md)                                                                                                                                        |
 | APZQEP-120     | ✅ **CERTIFIED · PROGRAMME COMPLETE · CLOSED** — [Board](./v1.1/apzqep-120/APZQEP-120-PRODUCT-BOARD-CERTIFICATION.md) · [close-out](./v1.1/apzqep-120/APZQEP-120-PLATFORM-FOUNDATION-COMPLETE.md)                            |
 | APZQEP-140     | ✅ **CERTIFIED / CLOSED** — Core QE Caps A–F COMPLETE — [close-out](./v1.1/apzqep-140/APZQEP-140-CORE-QUALITY-ENGINEERING-COMPLETE.md) · [Progress](./v1.1/apzqep-140/CAPABILITY-PROGRESS.md)                                |
-| APZQEP-150     | ✅ **CERTIFIED** — readiness audit PASSED · production release **NO-GO** (RB-001, RB-002) — [Board](./v1.1/apzqep-150/APZQEP-150-PRODUCT-BOARD-CERTIFICATION.md)                                                             |
-| APZQEP-151/152 | **RECOMMENDED · NOT AUTHORISED** — next authorised programme: **NONE**                                                                                                                                                       |
+| APZQEP-150     | ✅ **CERTIFIED** — historical readiness **NO-GO** (RB-001, RB-002) — **IMMUTABLE** — [Board](./v1.1/apzqep-150/APZQEP-150-PRODUCT-BOARD-CERTIFICATION.md)                                                                    |
+| APZQEP-151     | ✅ **CERTIFIED / CLOSED** — RB-001 cleared — [Board](./v1.1/apzqep-151/APZQEP-151-PRODUCT-BOARD-CERTIFICATION.md)                                                                                                            |
+| APZQEP-152     | ✅ **CERTIFIED / CLOSED** — RB-002 cleared — [Board](./v1.1/apzqep-152/APZQEP-152-PRODUCT-BOARD-CERTIFICATION.md)                                                                                                            |
+| APZQEP-150R    | ✅ **COMPLETE** — re-certification **GO recommended** — [GO-NO-GO](./v1.1/apzqep-150r/GO-NO-GO-REPORT.md)                                                                                                                    |
+| PBR-1.0-001    | ✅ **COMPLETE** — Product Board **GO** — GA **AUTHORISED** — [resolution pack](./v1.1/pbr-apzqep-1.0-001/)                                                                                                                   |
+| Version 1.1    | ⏸ **NOT OPENED** — operate 1.0; evidence-driven planning next                                                                                                                                                                |
 | APZHUB-ENG-002 | **ACTIVE** · Governance Foundation **COMPLETE** · Phase 1 **CLOSED** · ES promotions **ON HOLD** — [PHASE-1-CLOSED.md](../../engineering/APZHUB-ENG-002/PHASE-1-CLOSED.md)                                                   |
 
 ### Default premise

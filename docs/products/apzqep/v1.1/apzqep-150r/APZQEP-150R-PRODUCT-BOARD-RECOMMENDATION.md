@@ -1,24 +1,12 @@
-# Product Board Recommendation — APZQEP-150R (post-audit)
+# Product Board Recommendation — APZQEP-150R (superseded by Board decision)
 
-| Field                | Value                                          |
-| -------------------- | ---------------------------------------------- |
-| Programme            | APZQEP-150R                                    |
-| Status               | **COMPLETE** — awaiting Board release decision |
-| Audit recommendation | **GO**                                         |
-| Timestamp            | 20260803T065345Z                               |
+| Field                | Value                                           |
+| -------------------- | ----------------------------------------------- |
+| Programme            | APZQEP-150R                                     |
+| Status               | **SUPERSEDED** — Product Board has decided      |
+| Audit recommendation | **GO**                                          |
+| Board resolution     | **PBR-APZQEP-1.0-001** — **GO** — GA AUTHORISED |
+| Timestamp (audit)    | 20260803T065345Z                                |
+| Timestamp (Board)    | 20260803T071607Z                                |
 
-## Requested Board decision
-
-```text
-Accept APZQEP-150R GO recommendation
-→ Authorise APZQEP Version 1.0 General Production Release
-
-OR
-
-Reject
-→ Commission new remediation programme before another audit
-```
-
-Release and Deployment remain **NOT AUTHORISED** until the Board decides.
-
-See [GO-NO-GO-REPORT.md](./GO-NO-GO-REPORT.md).
+See [../pbr-apzqep-1.0-001/PRODUCT-BOARD-RELEASE-DECISION.md](../pbr-apzqep-1.0-001/PRODUCT-BOARD-RELEASE-DECISION.md).
