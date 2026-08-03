@@ -3,9 +3,9 @@
 | Field       | Value                                                                                          |
 | ----------- | ---------------------------------------------------------------------------------------------- |
 | Programme   | APZQEP-160                                                                                     |
-| Timestamp   | 20260803T192906Z (progress update)                                                             |
+| Timestamp   | 20260803T195639Z (progress update)                                                             |
 | Board       | **APPROVED** — PBR-APZQEP-160; Waves 1–3 **CERTIFIED**; Wave 4 arch **APPROVED** (PBR-164-000) |
-| Engineering | Waves 1–3 closed; Wave 4 (**APZQEP-164**) **AUTHORISED TO OPEN** — not started                 |
+| Engineering | Waves 1–3 closed; Wave 4 eng (**APZQEP-164**) **COMPLETE** — await Board certification         |
 
 > **Historical naming (immutable):** Wave summary table preserves APZQEP-160 wording for Wave 3 (“AI Quality Intelligence”) and Wave 4 (“Enterprise Dashboards”).  
 > **Authoritative Wave 3 title:** **Enterprise Quality Intelligence Platform** ([pbr-apzqep-163-000](../pbr-apzqep-163-000/HISTORICAL-NAMING-RESOLUTION.md)).  
