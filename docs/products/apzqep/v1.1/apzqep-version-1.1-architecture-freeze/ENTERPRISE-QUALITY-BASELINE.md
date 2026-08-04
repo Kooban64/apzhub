@@ -36,11 +36,14 @@ release readiness, and operational certification.
 
 ## Mode of work
 
-| Mode                                                        | Status                      |
-| ----------------------------------------------------------- | --------------------------- |
-| Foundational architecture / Wave 5 engineering              | **CLOSED**                  |
-| Internal production adoption / dogfooding                   | **AUTHORISED**              |
-| Provider / integration / operational improvement programmes | Require separate Owner Auth |
+| Mode                                                        | Status                                           |
+| ----------------------------------------------------------- | ------------------------------------------------ |
+| Foundational architecture / Wave 5 engineering              | **CLOSED** — Version 1.1 **officially complete** |
+| Internal production adoption / dogfooding                   | **AUTHORISED** — enterprise infrastructure mode  |
+| Provider / integration / operational improvement programmes | Require separate Owner Auth                      |
+
+Adoption sequence and success metrics:
+[ADOPTION-AND-OPERATIONS.md](./ADOPTION-AND-OPERATIONS.md).
 
 ## Provider programme families (illustrative — not authorised)
 
