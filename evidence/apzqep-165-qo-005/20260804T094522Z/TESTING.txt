@@ -1,0 +1,18 @@
+
+> @apzhub/platform-orchestration@0.1.4 test /home/ubuntu/apz-portal/packages/platform-orchestration
+> cd ../.. && vitest run --config vitest.config.ts packages/platform-orchestration
+
+
+ RUN  v3.2.6 /home/ubuntu/apz-portal
+
+ ✓ packages/platform-orchestration/src/capability-registry.test.ts (7 tests) 13ms
+ ✓ packages/platform-orchestration/src/platform-orchestration.test.ts (9 tests) 11ms
+ ✓ packages/platform-orchestration/src/trigger-engine.test.ts (8 tests) 15ms
+ ✓ packages/platform-orchestration/src/impact-correlation.test.ts (7 tests) 37ms
+ ✓ packages/platform-orchestration/src/quality-flow-engine.test.ts (11 tests) 41ms
+
+ Test Files  5 passed (5)
+      Tests  42 passed (42)
+   Start at  09:48:24
+   Duration  1.95s (transform 521ms, setup 1.71s, collect 1.68s, tests 118ms, environment 3.13s, prepare 677ms)
+

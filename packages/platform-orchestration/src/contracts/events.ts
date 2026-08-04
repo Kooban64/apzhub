@@ -26,6 +26,10 @@ export const QUALITY_FLOW_EVENT_TYPES = {
   instanceResumed: "orchestration.quality_flow.instance_resumed",
 } as const;
 
+export const IMPACT_CORRELATION_EVENT_TYPES = {
+  created: "orchestration.impact_correlation.created",
+} as const;
+
 export type OrchestrationKernelEventType =
   (typeof ORCHESTRATION_KERNEL_EVENT_TYPES)[keyof typeof ORCHESTRATION_KERNEL_EVENT_TYPES];
 
@@ -35,8 +39,14 @@ export type TriggerEventType =
 export type QualityFlowEventType =
   (typeof QUALITY_FLOW_EVENT_TYPES)[keyof typeof QUALITY_FLOW_EVENT_TYPES];
 
+export type ImpactCorrelationEventType =
+  (typeof IMPACT_CORRELATION_EVENT_TYPES)[keyof typeof IMPACT_CORRELATION_EVENT_TYPES];
+
 export type OrchestrationEventType =
-  OrchestrationKernelEventType | TriggerEventType | QualityFlowEventType;
+  | OrchestrationKernelEventType
+  | TriggerEventType
+  | QualityFlowEventType
+  | ImpactCorrelationEventType;
 
 export interface OrchestrationKernelEvent {
   readonly type: OrchestrationEventType;

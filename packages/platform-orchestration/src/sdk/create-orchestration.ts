@@ -2,6 +2,7 @@ import type { OrchestrationKernelConfig } from "../contracts/configuration";
 import type { OrchestrationEventPublisher } from "../contracts/events";
 import { OrchestrationContainer, ORCHESTRATION_DI_TOKENS } from "../di/container";
 import { QualityFlowEngine } from "../flows/quality-flow-engine";
+import { ImpactCorrelationEngine } from "../impact/impact-correlation-engine";
 import { OrchestrationKernel } from "../kernel/orchestration-kernel";
 import type { OrchestrationLogger } from "../kernel/logger";
 import { CapabilityRegistry } from "../registry/capability-registry";
@@ -26,12 +27,13 @@ export interface PlatformOrchestration {
   readonly triggers: TriggerEngine;
   readonly triggerBindings: TriggerBindingRegistry;
   readonly qualityFlows: QualityFlowEngine;
+  readonly impact: ImpactCorrelationEngine;
   readonly container: OrchestrationContainer;
 }
 
 /**
- * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-004).
- * Quality Flow Engine manages lifecycle state only — no capability execution.
+ * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-005).
+ * Impact Correlation builds explainable graphs — never selects execution.
  */
 export async function createPlatformOrchestration(
   options: CreatePlatformOrchestrationOptions = {},
@@ -64,6 +66,15 @@ export async function createPlatformOrchestration(
       "Immutable definitions, mutable instances, table-driven state machine — no capability execution",
   });
 
+  kernel.contracts.register({
+    contractId: "orchestration.impact_correlation.v1",
+    kind: "correlation",
+    version: PLATFORM_ORCHESTRATION_VERSION,
+    name: "Impact Correlation",
+    description:
+      "Explainable impact graph, confidence, risk, and advisory quality scope — no execution selection",
+  });
+
   const triggerBindings = new TriggerBindingRegistry();
   const triggers = new TriggerEngine({
     bindings: triggerBindings,
@@ -72,6 +83,12 @@ export async function createPlatformOrchestration(
   });
 
   const qualityFlows = new QualityFlowEngine({
+    capabilities: kernel.capabilities,
+    publishEvent: options.publishEvent,
+    orchestrationId: kernel.orchestrationId,
+  });
+
+  const impact = new ImpactCorrelationEngine({
     capabilities: kernel.capabilities,
     publishEvent: options.publishEvent,
     orchestrationId: kernel.orchestrationId,
@@ -92,6 +109,15 @@ export async function createPlatformOrchestration(
       qualityFlows.definitions,
     );
   }
+  if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.impactCorrelation)) {
+    kernel.container.register(ORCHESTRATION_DI_TOKENS.impactCorrelation, impact);
+  }
+  if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.impactKnowledge)) {
+    kernel.container.register(
+      ORCHESTRATION_DI_TOKENS.impactKnowledge,
+      impact.knowledge,
+    );
+  }
 
   return {
     kernel,
@@ -101,6 +127,7 @@ export async function createPlatformOrchestration(
     triggers,
     triggerBindings,
     qualityFlows,
+    impact,
     container: kernel.container,
   };
 }

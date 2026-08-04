@@ -36,7 +36,8 @@
 > **APZQEP-165-QO-001 (20260804T061114Z):** Platform Orchestration Kernel **COMPLETE** — `@apzhub/platform-orchestration` 0.1.0 — [apzqep-165-qo-001/](./v1.1/apzqep-165-qo-001/)
 > **APZQEP-165-QO-002 (20260804T064555Z):** Capability Registry **COMPLETE** (catalogue-only) — `@apzhub/platform-orchestration` 0.1.1 — [apzqep-165-qo-002/](./v1.1/apzqep-165-qo-002/)
 > **APZQEP-165-QO-003 (20260804T070126Z):** Trigger Engine **COMPLETE** (provider-neutral routing) — `@apzhub/platform-orchestration` 0.1.2 — [apzqep-165-qo-003/](./v1.1/apzqep-165-qo-003/)
-> **APZQEP-165-QO-004 (20260804T085113Z):** Quality Flow Engine **COMPLETE** (immutable definitions, table-driven lifecycle) — `@apzhub/platform-orchestration` 0.1.3 — [apzqep-165-qo-004/](./v1.1/apzqep-165-qo-004/) — next **QO-005**
+> **APZQEP-165-QO-004 (20260804T085113Z):** Quality Flow Engine **COMPLETE** (immutable definitions, table-driven lifecycle) — `@apzhub/platform-orchestration` 0.1.3 — [apzqep-165-qo-004/](./v1.1/apzqep-165-qo-004/)
+> **APZQEP-165-QO-005 (20260804T094522Z):** Impact Correlation **COMPLETE** (explainable impact graph, confidence, risk, advisory scope) — `@apzhub/platform-orchestration` 0.1.4 — [apzqep-165-qo-005/](./v1.1/apzqep-165-qo-005/) — next **QO-006**
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -6,7 +6,13 @@
 import type { ContractId } from "./identifiers";
 
 export type OrchestrationContractKind =
-  "capability" | "lifecycle" | "kernel" | "diagnostics" | "catalogue" | "trigger";
+  | "capability"
+  | "lifecycle"
+  | "kernel"
+  | "diagnostics"
+  | "catalogue"
+  | "trigger"
+  | "correlation";
 
 /** Descriptor only — no invoke/execute behaviour. */
 export interface OrchestrationContractDescriptor {

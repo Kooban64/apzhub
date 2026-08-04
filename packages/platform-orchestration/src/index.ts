@@ -44,6 +44,24 @@ export {
   type QualityFlowTransitionRule,
   type QualityFlowTransitionKind,
 } from "./flows/state-machine";
+export { ImpactKnowledgeBase } from "./impact/knowledge-base";
+export {
+  ImpactCorrelationEngine,
+  type ImpactCorrelationEngineOptions,
+  type ImpactCorrelationSecurityContext,
+} from "./impact/impact-correlation-engine";
+export {
+  assessNodeConfidence,
+  aggregateGraphConfidence,
+  distanceScore,
+} from "./impact/confidence";
+export {
+  assessNodeRisk,
+  assessGraphRisk,
+  levelFromScore,
+  maxRisk,
+} from "./impact/risk";
+export { buildImpactGraph } from "./impact/graph-builder";
 export {
   createPlatformOrchestration,
   type CreatePlatformOrchestrationOptions,

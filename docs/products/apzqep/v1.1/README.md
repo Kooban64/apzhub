@@ -6,7 +6,7 @@
 | Solution architecture | **APZQEP-111** — COMPLETE / **APPROVED**                                                                                                              |
 | Execution planning    | **APZQEP-120** — **CERTIFIED / PROGRAMME COMPLETE / CLOSED**                                                                                          |
 | Product status        | **[PRODUCT-STATUS.md](../PRODUCT-STATUS.md)** — authoritative Version 1.0 standing resolution                                                         |
-| Next programme        | **QO-004 COMPLETE** · next **QO-005** Owner Auth · [apzqep-165-qo-004/](./apzqep-165-qo-004/) · [WAVE-PROGRESS-REGISTER](./WAVE-PROGRESS-REGISTER.md) |
+| Next programme        | **QO-005 COMPLETE** · next **QO-006** Owner Auth · [apzqep-165-qo-005/](./apzqep-165-qo-005/) · [WAVE-PROGRESS-REGISTER](./WAVE-PROGRESS-REGISTER.md) |
 | Positioning           | [PRODUCT-POSITIONING.md](./PRODUCT-POSITIONING.md) — Enterprise QEP                                                                                   |
 | Engineering           | Per-slice Owner directive (APZHUB-ENG-001 / ADR-0092)                                                                                                 |
 | Date                  | 2026-08-02                                                                                                                                            |

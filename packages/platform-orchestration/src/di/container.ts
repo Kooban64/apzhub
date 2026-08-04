@@ -57,6 +57,8 @@ export const ORCHESTRATION_DI_TOKENS = {
   triggerBindings: "orchestration.trigger.bindings",
   qualityFlowEngine: "orchestration.quality_flow.engine",
   qualityFlowDefinitions: "orchestration.quality_flow.definitions",
+  impactCorrelation: "orchestration.impact_correlation.engine",
+  impactKnowledge: "orchestration.impact_correlation.knowledge",
   logger: "orchestration.logger",
   config: "orchestration.config",
 } as const;
