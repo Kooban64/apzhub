@@ -5,6 +5,31 @@
 | Programme | APZQEP-165-PLAN  |
 | Timestamp | 20260804T060307Z |
 
+## Permanent Slice IDs (QO-xxx)
+
+| Legacy | Permanent ID | Name                             |
+| ------ | ------------ | -------------------------------- |
+| S01    | **QO-001**   | Platform Orchestration Kernel    |
+| S02    | **QO-002**   | Capability Registry              |
+| S03    | **QO-003**   | Trigger Engine                   |
+| S04    | **QO-004**   | Quality Flow Engine              |
+| S05    | **QO-005**   | Impact Correlation               |
+| S06    | **QO-006**   | Policy & Test Selection          |
+| S07    | **QO-007**   | Quality Gate Engine              |
+| S08    | **QO-008**   | Human Approval Engine            |
+| S09    | **QO-009**   | Release Recommendation Engine    |
+| S10    | **QO-010**   | Event Integration                |
+| S11    | **QO-011**   | Automation Integration           |
+| S12    | **QO-012**   | SCM Integration                  |
+| S13    | **QO-013**   | Quality Intelligence Integration |
+| S14    | **QO-014**   | Evidence Integration             |
+| S15    | **QO-015**   | Dashboard Integration            |
+| S16    | **QO-016**   | API Platform                     |
+| S17    | **QO-017**   | Workspace Experience             |
+| S18    | **QO-018**   | Certification & Hardening        |
+
+Engineering identities use **QO-xxx**. Legacy S01–S18 remain aliases from APZQEP-165-PLAN.
+
 ## Slice index
 
 | Slice       | Name                             | Single objective                                                                               |

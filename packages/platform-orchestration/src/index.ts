@@ -1,0 +1,31 @@
+export {
+  PLATFORM_ORCHESTRATION_VERSION,
+  PLATFORM_ORCHESTRATION_PROGRAMME,
+  PLATFORM_ORCHESTRATION_SLICE,
+  PLATFORM_ORCHESTRATION_LEGACY_SLICE,
+} from "./version";
+export * from "./contracts/index";
+export { canTransition, assertTransition } from "./lifecycle/transitions";
+export { CapabilityRegistry } from "./registry/capability-registry";
+export { ContractRegistry } from "./registry/contract-registry";
+export {
+  LifecycleRegistry,
+  type LifecycleRegistration,
+} from "./registry/lifecycle-registry";
+export { OrchestrationContainer, ORCHESTRATION_DI_TOKENS } from "./di/container";
+export {
+  createConsoleOrchestrationLogger,
+  createSilentOrchestrationLogger,
+  type OrchestrationLogger,
+  type OrchestrationLogLevel,
+  type OrchestrationLogRecord,
+} from "./kernel/logger";
+export {
+  OrchestrationKernel,
+  type OrchestrationKernelOptions,
+} from "./kernel/orchestration-kernel";
+export {
+  createPlatformOrchestration,
+  type CreatePlatformOrchestrationOptions,
+  type PlatformOrchestration,
+} from "./sdk/create-orchestration";

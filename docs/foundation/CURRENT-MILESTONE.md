@@ -1,8 +1,8 @@
 # APZHUB Current Milestone
 
 > **Purpose:** Where development currently stops and what requires owner approval  
-> **Last updated:** 20260804T060307Z  
-> **Current status:** **APZQEP flagship** — V1.0 **GA** · Waves 1–4 **CERTIFIED** · Wave 5 architecture **APPROVED** · **APZQEP-165-PLAN COMPLETE** (S01–S18) · V1.1 foundational architecture **CLOSED** · last V1.1 planning programme complete · **APZQEP-165 AUTHORISED TO OPEN** (eng NOT STARTED; next Owner Auth **APZQEP-165-S01**) · Live: `https://apzhub.apzportal.apzor.com` · Law **PAUSED** · [PRODUCT-STATUS](../products/apzqep/PRODUCT-STATUS.md) · [apzqep-165-plan/](../products/apzqep/v1.1/apzqep-165-plan/).
+> **Last updated:** 20260804T061114Z  
+> **Current status:** **APZQEP flagship** — V1.0 **GA** · Waves 1–4 **CERTIFIED** · Wave 5 arch **APPROVED** · **165-PLAN COMPLETE** · **QO-001 COMPLETE** (`@apzhub/platform-orchestration` 0.1.0) · next Owner Auth **QO-002** · Live: `https://apzhub.apzportal.apzor.com` · Law **PAUSED** · [PRODUCT-STATUS](../products/apzqep/PRODUCT-STATUS.md) · [apzqep-165-qo-001/](../products/apzqep/v1.1/apzqep-165-qo-001/).
 
 ---
 
