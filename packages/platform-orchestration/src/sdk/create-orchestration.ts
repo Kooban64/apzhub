@@ -10,6 +10,7 @@ import { ExecutiveExperienceEngine } from "../executive/executive-experience-eng
 import { QualityEventBackbone } from "../events/event-backbone";
 import { OperationalPlatformEngine } from "../operational/operational-platform-engine";
 import { QualityFlowEngine } from "../flows/quality-flow-engine";
+import { WorkspaceExperienceEngine } from "../workspace/workspace-experience-engine";
 import { GovernanceEngine } from "../governance/governance-engine";
 import { ImpactCorrelationEngine } from "../impact/impact-correlation-engine";
 import { OrchestrationKernel } from "../kernel/orchestration-kernel";
@@ -57,11 +58,13 @@ export interface PlatformOrchestration {
   readonly executiveExperience: ExecutiveExperienceEngine;
   /** Enterprise Operational Platform — descriptive readiness only. */
   readonly operational: OperationalPlatformEngine;
+  /** Enterprise Workspace & Operations Experience — composition only. */
+  readonly workspaceExperience: WorkspaceExperienceEngine;
   readonly container: OrchestrationContainer;
 }
 
 /**
- * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-016).
+ * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-017).
  * All publications route through the Event Backbone (transport only).
  */
 export async function createPlatformOrchestration(
@@ -209,6 +212,15 @@ export async function createPlatformOrchestration(
       "Operational Readiness Packages — descriptive health/readiness/liveness; never deploy or mutate",
   });
 
+  kernel.contracts.register({
+    contractId: "orchestration.workspace_experience.v1",
+    kind: "workspace_experience",
+    version: PLATFORM_ORCHESTRATION_VERSION,
+    name: "Workspace & Operations Experience",
+    description:
+      "Workspace Experience Packages — compose operator experiences; never own business state",
+  });
+
   const triggerBindings = new TriggerBindingRegistry();
   const triggers = new TriggerEngine({
     bindings: triggerBindings,
@@ -280,6 +292,11 @@ export async function createPlatformOrchestration(
     orchestrationId: kernel.orchestrationId,
   });
 
+  const workspaceExperience = new WorkspaceExperienceEngine({
+    events,
+    orchestrationId: kernel.orchestrationId,
+  });
+
   if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.triggerEngine)) {
     kernel.container.register(ORCHESTRATION_DI_TOKENS.triggerEngine, triggers);
   }
@@ -346,6 +363,12 @@ export async function createPlatformOrchestration(
   if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.operational)) {
     kernel.container.register(ORCHESTRATION_DI_TOKENS.operational, operational);
   }
+  if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.workspaceExperience)) {
+    kernel.container.register(
+      ORCHESTRATION_DI_TOKENS.workspaceExperience,
+      workspaceExperience,
+    );
+  }
 
   return {
     kernel,
@@ -367,6 +390,7 @@ export async function createPlatformOrchestration(
     evidenceIntegration,
     executiveExperience,
     operational,
+    workspaceExperience,
     container: kernel.container,
   };
 }

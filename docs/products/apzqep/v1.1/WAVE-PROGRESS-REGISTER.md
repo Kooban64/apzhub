@@ -3,7 +3,7 @@
 | Field     | Value                    |
 | --------- | ------------------------ |
 | Document  | WAVE-PROGRESS-REGISTER   |
-| Timestamp | 20260804T182106Z         |
+| Timestamp | 20260804T182640Z         |
 | Authority | Product Board — STANDING |
 
 | Wave | Programme         | Name                                              | Engineering  | Architecture / Readiness | Board                             | Next eligibility               |
@@ -31,8 +31,9 @@
 | 5    | APZQEP-165-QO-013 | Enterprise Quality Intelligence Enrichment        | **COMPLETE** | —                        | Slice complete                    | Closed                         |
 | 5    | APZQEP-165-QO-014 | Enterprise Evidence & Reporting Integration       | **COMPLETE** | —                        | Slice complete                    | Closed                         |
 | 5    | APZQEP-165-QO-015 | Enterprise Executive Experience Integration       | **COMPLETE** | —                        | Slice complete                    | Closed                         |
-| 5    | APZQEP-165-QO-016 | Enterprise Operational Platform                   | **COMPLETE** | —                        | Slice complete                    | Next QO-017 Owner Auth         |
-| 5    | APZQEP-165        | Enterprise Continuous Quality Orchestration       | IN PROGRESS  | —                        | **AUTHORISED TO OPEN**            | Micro-slices QO-017…QO-018     |
+| 5    | APZQEP-165-QO-016 | Enterprise Operational Platform                   | **COMPLETE** | —                        | Slice complete                    | Closed                         |
+| 5    | APZQEP-165-QO-017 | Enterprise Workspace & Operations Experience      | **COMPLETE** | —                        | Slice complete                    | Next QO-018 Owner Auth         |
+| 5    | APZQEP-165        | Enterprise Continuous Quality Orchestration       | IN PROGRESS  | —                        | **AUTHORISED TO OPEN**            | Final slice QO-018             |
 | 6    | APZQEP-166        | Enterprise Ecosystem                              | NOT STARTED  | —                        | NOT AUTHORISED                    | After prior gates              |
 
-Packs: [apzqep-165-qo-016/](./apzqep-165-qo-016/) · [apzqep-165-qo-015/](./apzqep-165-qo-015/) · [apzqep-165-qo-014/](./apzqep-165-qo-014/) · [apzqep-165-qo-013/](./apzqep-165-qo-013/) · [apzqep-165-qo-012/](./apzqep-165-qo-012/) · [apzqep-165-qo-011/](./apzqep-165-qo-011/) · [apzqep-165-qo-010/](./apzqep-165-qo-010/) · [apzqep-165-qo-009/](./apzqep-165-qo-009/) · [apzqep-165-qo-008/](./apzqep-165-qo-008/) · [apzqep-165-qo-007/](./apzqep-165-qo-007/) · [apzqep-165-qo-006/](./apzqep-165-qo-006/) · [apzqep-165-qo-005/](./apzqep-165-qo-005/) · [apzqep-165-qo-004/](./apzqep-165-qo-004/) · [apzqep-165-qo-003/](./apzqep-165-qo-003/) · [apzqep-165-qo-002/](./apzqep-165-qo-002/) · [apzqep-165-qo-001/](./apzqep-165-qo-001/) · [apzqep-165-plan/](./apzqep-165-plan/) · [pbr-apzqep-165-000/](./pbr-apzqep-165-000/) · [apzqep-165-000/](./apzqep-165-000/)
+Packs: [apzqep-165-qo-017/](./apzqep-165-qo-017/) · [apzqep-165-qo-016/](./apzqep-165-qo-016/) · [apzqep-165-qo-015/](./apzqep-165-qo-015/) · [apzqep-165-qo-014/](./apzqep-165-qo-014/) · [apzqep-165-qo-013/](./apzqep-165-qo-013/) · [apzqep-165-qo-012/](./apzqep-165-qo-012/) · [apzqep-165-qo-011/](./apzqep-165-qo-011/) · [apzqep-165-qo-010/](./apzqep-165-qo-010/) · [apzqep-165-qo-009/](./apzqep-165-qo-009/) · [apzqep-165-qo-008/](./apzqep-165-qo-008/) · [apzqep-165-qo-007/](./apzqep-165-qo-007/) · [apzqep-165-qo-006/](./apzqep-165-qo-006/) · [apzqep-165-qo-005/](./apzqep-165-qo-005/) · [apzqep-165-qo-004/](./apzqep-165-qo-004/) · [apzqep-165-qo-003/](./apzqep-165-qo-003/) · [apzqep-165-qo-002/](./apzqep-165-qo-002/) · [apzqep-165-qo-001/](./apzqep-165-qo-001/) · [apzqep-165-plan/](./apzqep-165-plan/) · [pbr-apzqep-165-000/](./pbr-apzqep-165-000/) · [apzqep-165-000/](./apzqep-165-000/)

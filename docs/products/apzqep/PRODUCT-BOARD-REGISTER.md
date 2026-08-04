@@ -41,7 +41,8 @@
 | APZQEP-165-QO-014   | **COMPLETE** — [v1.1/apzqep-165-qo-014/](./v1.1/apzqep-165-qo-014/) — Evidence & Reporting       |
 | APZQEP-165-QO-015   | **COMPLETE** — [v1.1/apzqep-165-qo-015/](./v1.1/apzqep-165-qo-015/) — Executive Experience       |
 | APZQEP-165-QO-016   | **COMPLETE** — [v1.1/apzqep-165-qo-016/](./v1.1/apzqep-165-qo-016/) — Operational Platform       |
-| APZQEP-165 / QO-017 | **NOT STARTED** — next Owner Auth **QO-017** Workspace & Operations Experience                   |
+| APZQEP-165-QO-017   | **COMPLETE** — [v1.1/apzqep-165-qo-017/](./v1.1/apzqep-165-qo-017/) — Workspace Experience       |
+| APZQEP-165 / QO-018 | **NOT STARTED** — next Owner Auth **QO-018** Production Certification & Release Readiness        |
 | APZQEP-166          | Planned — **not authorised**                                                                     |
 | APZQEP-163A         | External AI providers — **not authorised**                                                       |
 | APZHUB-ADR-0100     | Future portfolio recommendation only — **not created**                                           |

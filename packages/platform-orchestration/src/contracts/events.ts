@@ -95,6 +95,14 @@ export const OPERATIONAL_EVENT_TYPES = {
   packageCompleted: "operational.package.completed",
 } as const;
 
+/** Past-tense workspace experience facts (QO-017) — never commands. */
+export const WORKSPACE_EVENT_TYPES = {
+  experienceCreated: "workspace.experience.created",
+  packageCompleted: "workspace.package.completed",
+  layoutUpdated: "workspace.layout.updated",
+  navigationComposed: "workspace.navigation.composed",
+} as const;
+
 export type OrchestrationKernelEventType =
   (typeof ORCHESTRATION_KERNEL_EVENT_TYPES)[keyof typeof ORCHESTRATION_KERNEL_EVENT_TYPES];
 
@@ -137,6 +145,9 @@ export type ExecutiveExperienceEventType =
 export type OperationalEventType =
   (typeof OPERATIONAL_EVENT_TYPES)[keyof typeof OPERATIONAL_EVENT_TYPES];
 
+export type WorkspaceEventType =
+  (typeof WORKSPACE_EVENT_TYPES)[keyof typeof WORKSPACE_EVENT_TYPES];
+
 export type OrchestrationEventType =
   | OrchestrationKernelEventType
   | TriggerEventType
@@ -151,7 +162,8 @@ export type OrchestrationEventType =
   | EnrichmentEventType
   | EvidenceIntegrationEventType
   | ExecutiveExperienceEventType
-  | OperationalEventType;
+  | OperationalEventType
+  | WorkspaceEventType;
 
 export interface OrchestrationKernelEvent {
   readonly type: OrchestrationEventType;

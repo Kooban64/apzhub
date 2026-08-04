@@ -72,7 +72,8 @@
 | APZQEP-165-QO-014          | ✅ Evidence & Reporting Integration **COMPLETE** 0.1.13                  |
 | APZQEP-165-QO-015          | ✅ Executive Experience Integration **COMPLETE** 0.1.14                  |
 | APZQEP-165-QO-016          | ✅ Enterprise Operational Platform **COMPLETE** 0.1.15                   |
-| APZQEP-165                 | ⏳ **IN PROGRESS** — next **QO-017** Owner Auth                          |
+| APZQEP-165-QO-017          | ✅ Workspace & Operations Experience **COMPLETE** 0.1.16                 |
+| APZQEP-165                 | ⏳ **IN PROGRESS** — next **QO-018** Owner Auth                          |
 | APZQEP-163A…166            | ⛔ Planned — **NOT AUTHORISED**                                          |
 
 ---

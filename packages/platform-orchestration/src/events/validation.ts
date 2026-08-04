@@ -13,7 +13,7 @@ const COMMAND_PREFIX =
 
 /** Accepted fact suffixes (past tense or completed-state adjectives used by platform events). */
 const PAST_TENSE_TOKEN =
-  /(created|completed|started|stopped|paused|resumed|received|ignored|routed|rejected|produced|submitted|registered|versioned|transitioned|failed|cancelled|superseded|deferred|emitted|published|recorded|ready|updated|identified|associated|normalized|attached|generated|applied)$/i;
+  /(created|completed|started|stopped|paused|resumed|received|ignored|routed|rejected|produced|submitted|registered|versioned|transitioned|failed|cancelled|superseded|deferred|emitted|published|recorded|ready|updated|identified|associated|normalized|attached|generated|applied|composed)$/i;
 
 export type ValidationRejectReason =
   "command_style" | "unregistered" | "envelope" | "schema";

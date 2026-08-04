@@ -42,7 +42,7 @@ describe("APZQEP-165 QO-016 Enterprise Operational Platform", () => {
     expect(pkg.readinessContract.state).toBe("ready");
     expect(pkg.livenessContract.state).toBe("live");
     expect(pkg.operationalEndpoints.length).toBeGreaterThan(0);
-    expect(pkg.operationalMetadata.version.slice).toBe("QO-016");
+    expect(pkg.operationalMetadata.version.slice).toBe("QO-017");
 
     expect(
       platform.events.queryEvents({
@@ -80,7 +80,7 @@ describe("APZQEP-165 QO-016 Enterprise Operational Platform", () => {
       platform.operational.getDiagnosticsSnapshot(pkg.operationalReadinessPackageId)
         .ready,
     ).toBe(true);
-    expect(platform.operational.getVersionMetadata().version).toBe("0.1.15");
+    expect(platform.operational.getVersionMetadata().version).toBe("0.1.16");
     expect(platform.operational.getOperationalMetadata().descriptive).toBe(true);
 
     for (const kind of OPERATIONAL_CONTRACT_KINDS) {

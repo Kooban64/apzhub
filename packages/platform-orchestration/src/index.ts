@@ -169,6 +169,16 @@ export {
   listBuiltinOperationalEndpoints,
 } from "./operational/operational-contracts";
 export {
+  WorkspaceExperienceEngine,
+  type WorkspaceExperienceEngineOptions,
+} from "./workspace/workspace-experience-engine";
+export {
+  buildNavigationPreferences,
+  buildWorkspaceLayout,
+  buildWorkspacePreferences,
+  isWorkspaceLayoutKind,
+} from "./workspace/workspace-composition";
+export {
   createPlatformOrchestration,
   type CreatePlatformOrchestrationOptions,
   type PlatformOrchestration,

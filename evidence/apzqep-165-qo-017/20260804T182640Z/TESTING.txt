@@ -1,0 +1,30 @@
+
+> @apzhub/platform-orchestration@0.1.16 test /home/ubuntu/apz-portal/packages/platform-orchestration
+> cd ../.. && vitest run --config vitest.config.ts packages/platform-orchestration
+
+
+ RUN  v3.2.6 /home/ubuntu/apz-portal
+
+ ✓ packages/platform-orchestration/src/approval.test.ts (6 tests) 30ms
+ ✓ packages/platform-orchestration/src/operational.test.ts (5 tests) 30ms
+ ✓ packages/platform-orchestration/src/event-backbone.test.ts (7 tests) 50ms
+ ✓ packages/platform-orchestration/src/governance.test.ts (5 tests) 68ms
+ ✓ packages/platform-orchestration/src/impact-correlation.test.ts (7 tests) 63ms
+ ✓ packages/platform-orchestration/src/policy-selection.test.ts (6 tests) 66ms
+ ✓ packages/platform-orchestration/src/quality-flow-engine.test.ts (11 tests) 67ms
+ ✓ packages/platform-orchestration/src/platform-orchestration.test.ts (9 tests) 34ms
+ ✓ packages/platform-orchestration/src/workspace-experience.test.ts (5 tests) 29ms
+ ✓ packages/platform-orchestration/src/decision.test.ts (7 tests) 33ms
+ ✓ packages/platform-orchestration/src/trigger-engine.test.ts (8 tests) 30ms
+ ✓ packages/platform-orchestration/src/automation-coordination.test.ts (6 tests) 31ms
+ ✓ packages/platform-orchestration/src/evidence-integration.test.ts (5 tests) 28ms
+ ✓ packages/platform-orchestration/src/enrichment.test.ts (5 tests) 31ms
+ ✓ packages/platform-orchestration/src/executive-experience.test.ts (5 tests) 20ms
+ ✓ packages/platform-orchestration/src/source-change.test.ts (5 tests) 20ms
+ ✓ packages/platform-orchestration/src/capability-registry.test.ts (7 tests) 16ms
+
+ Test Files  17 passed (17)
+      Tests  109 passed (109)
+   Start at  18:28:28
+   Duration  5.93s (transform 1.10s, setup 6.38s, collect 7.40s, tests 644ms, environment 12.92s, prepare 3.15s)
+

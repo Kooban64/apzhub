@@ -1,9 +1,9 @@
 {
   "name": "@apzhub/platform-orchestration",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "private": true,
   "type": "module",
-  "description": "APZHUB Enterprise Continuous Quality Orchestration — kernel through Enterprise Operational Platform (APZQEP-165 QO-001…QO-016).",
+  "description": "APZHUB Enterprise Continuous Quality Orchestration — kernel through Workspace & Operations Experience (APZQEP-165 QO-001…QO-017).",
   "exports": {
     ".": "./src/index.ts",
     "./contracts": "./src/contracts/index.ts"

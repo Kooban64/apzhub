@@ -70,6 +70,7 @@ function producerFromLegacyType(type: string): string {
     type.startsWith("readiness.contract.")
   )
     return "orchestration.operational";
+  if (type.startsWith("workspace.")) return "orchestration.workspace_experience";
   if (type.startsWith("orchestration.capability.")) return "orchestration.kernel";
   if (type.startsWith("orchestration.contract.")) return "orchestration.kernel";
   return "orchestration.kernel";
