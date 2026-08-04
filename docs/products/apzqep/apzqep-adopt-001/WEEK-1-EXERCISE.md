@@ -1,20 +1,19 @@
 # Week 1 Exercise — APZQEP-ADOPT-001
 
-| Field     | Value                                        |
-| --------- | -------------------------------------------- |
-| Programme | APZQEP-ADOPT-001                             |
-| Status    | **PENDING**                                  |
-| Timestamp | 20260804T185900Z                             |
-| Label     | **APZQEP Release 0001** (first real dogfood) |
+| Field     | Value                                                                                                |
+| --------- | ---------------------------------------------------------------------------------------------------- |
+| Programme | APZQEP-ADOPT-001                                                                                     |
+| Status    | **SUPERSEDED AS SOLE OBJECTIVE** — still valid when a real change ships                              |
+| Timestamp | 20260804T191500Z                                                                                     |
+| Label     | **APZQEP Release 0001** (when a real change occurs)                                                  |
+| Phase 1   | Daily production use + APZ Time — [PHASE-1-PRODUCTION-ADOPTION.md](./PHASE-1-PRODUCTION-ADOPTION.md) |
 
-## Intent
+## Intent (updated)
 
-Do **not** invent an artificial exercise.
+Phase 1 primary objective is **daily APZQEP use**, not a proof-of-pipeline toy.
 
-Choose something that would have happened anyway. When someone says
-“Can we fix this button?”, answer: **this becomes APZQEP Release 0001.**
-
-Treat it as a real release — tiny, real, full pipeline.
+When a real change occurs anyway, label it **APZQEP Release 0001** and run the
+full pipeline. Do **not** invent artificial exercises just to create 0001.
 
 Examples of suitable first work (only if they arise naturally):
 

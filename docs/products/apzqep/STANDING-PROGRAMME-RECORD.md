@@ -59,6 +59,7 @@
 > **APZQEP-ADOPT-001 refinement (20260804T185600Z):** Operational Learning Register + Week 1 tiny exercise + after-five-releases prompts — lessons from releases, not design meetings
 > **APZQEP-ADOPT-001 ready-to-use (20260804T185900Z):** Use not improve — Release 0001 = next real change; primary metric Engineering Friction; timings captured; TOP-20-FRICTIONS emergent only; no APZQEP-170 rush
 > **APZQEP V1.1 Chapter Close (20260804T190300Z):** Engineering chapter closed — [CHAPTER-CLOSE.md](./v1.1/apzqep-version-1.1-architecture-freeze/CHAPTER-CLOSE.md) — architecture frozen · governance established · ready to learn · next chapter written by real releases; four milestones: Engineering · Certification · Freeze · Learning Enabled
+> **APZQEP-ADOPT-001 Phase 1 (20260804T191500Z):** Production Adoption & APZ Time Integration **AUTHORISED / IN PROGRESS** — [OWNER-AUTHORISATION-PHASE-1.md](./apzqep-adopt-001/OWNER-AUTHORISATION-PHASE-1.md) · [APZHUB-TIME-NATIVE-001](../time/APZHUB-TIME-NATIVE-001/) **STARTED**
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

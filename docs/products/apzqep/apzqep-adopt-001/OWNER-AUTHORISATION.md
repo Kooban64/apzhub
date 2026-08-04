@@ -39,3 +39,9 @@ APZHUB work — not by building more platform capability.
 
 Any such work requires a separate Owner Authorisation under
 [APZQEP-CHANGE-CONTROL.md](../v1.1/apzqep-version-1.1-architecture-freeze/APZQEP-CHANGE-CONTROL.md).
+
+## Active phase
+
+**Phase 1** authorised separately:
+[OWNER-AUTHORISATION-PHASE-1.md](./OWNER-AUTHORISATION-PHASE-1.md) —
+Production Adoption & APZ Time Integration.

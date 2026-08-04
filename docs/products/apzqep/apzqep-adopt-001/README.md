@@ -1,15 +1,16 @@
 # APZQEP-ADOPT-001 — Enterprise Internal Adoption Programme
 
-| Field        | Value                                                 |
-| ------------ | ----------------------------------------------------- |
-| Programme    | **APZQEP-ADOPT-001**                                  |
-| Title        | Enterprise Internal Adoption Programme                |
-| Status       | **OPEN**                                              |
-| Timestamp    | 20260804T185200Z                                      |
-| Baseline     | APZQEP Version 1.1 — Enterprise Quality Baseline      |
-| Engineering  | **UNCHANGED** (packages frozen; operational use only) |
-| Authority    | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md)    |
-| Change class | Operational improvement / Documentation               |
+| Field        | Value                                                                                                 |
+| ------------ | ----------------------------------------------------------------------------------------------------- |
+| Programme    | **APZQEP-ADOPT-001**                                                                                  |
+| Title        | Enterprise Internal Adoption Programme                                                                |
+| Status       | **OPEN** — Phase 1 **IN PROGRESS**                                                                    |
+| Phase        | [Phase 1 – Production Adoption & APZ Time Integration](./PHASE-1-PRODUCTION-ADOPTION.md)              |
+| Timestamp    | 20260804T191500Z                                                                                      |
+| Baseline     | APZQEP Version 1.1 — Enterprise Quality Baseline                                                      |
+| Engineering  | APZQEP packages **frozen**; APZ Time product track **STARTED**                                        |
+| Authority    | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md) · [Phase 1 Auth](./OWNER-AUTHORISATION-PHASE-1.md) |
+| Change class | Operational improvement / Documentation / Product (Time native)                                       |
 
 ## Premise
 
@@ -42,17 +43,21 @@ Pattern Recognition
 Authorised Programme
 ```
 
-We are ready to **use** APZQEP — not improve it. The engineering chapter is
-**closed** — [CHAPTER-CLOSE.md](../v1.1/apzqep-version-1.1-architecture-freeze/CHAPTER-CLOSE.md):
-_The platform is ready to learn._
+APZQEP architecture remains frozen. Phase 1 puts APZQEP into **daily production
+use** and starts **APZ Time** as a native APZHUB product (Kimai invisible).
 
-The next meaningful APZQEP conversation starts with: _“We put our first real
-APZHUB change through APZQEP. Here’s what happened…”_
+| Track             | Face                                                               |
+| ----------------- | ------------------------------------------------------------------ |
+| Phase 1 plan      | [PHASE-1-PRODUCTION-ADOPTION.md](./PHASE-1-PRODUCTION-ADOPTION.md) |
+| Phase 1 Auth      | [OWNER-AUTHORISATION-PHASE-1.md](./OWNER-AUTHORISATION-PHASE-1.md) |
+| APZ Time native   | [APZHUB-TIME-NATIVE-001](../../time/APZHUB-TIME-NATIVE-001/)       |
+| Working agreement | [WORKING-AGREEMENT.md](./WORKING-AGREEMENT.md)                     |
 
 ## Deliverables
 
 | #   | Deliverable                        | Artefact                                                               | Status   |
 | --- | ---------------------------------- | ---------------------------------------------------------------------- | -------- |
+| 0   | Phase 1 Production Adoption Auth   | [OWNER-AUTHORISATION-PHASE-1.md](./OWNER-AUTHORISATION-PHASE-1.md)     | **DONE** |
 | 1   | Programme charter & authority      | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md)                     | **DONE** |
 | 2   | Product onboarding order           | [PRODUCT-ONBOARDING-ORDER.md](./PRODUCT-ONBOARDING-ORDER.md)           | **DONE** |
 | 3   | Three-month adoption roadmap       | [ADOPTION-ROADMAP.md](./ADOPTION-ROADMAP.md)                           | **DONE** |

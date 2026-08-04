@@ -76,7 +76,8 @@
 | APZQEP-165-QO-018          | ✅ Release Certification **CERTIFIED** (engineering unchanged)           |
 | APZQEP-165                 | ✅ **COMPLETE** — Wave 5 closed                                          |
 | APZQEP V1.1                | ✅ **ENTERPRISE QUALITY BASELINE** (frozen · officially complete)        |
-| APZQEP-ADOPT-001           | ▶️ **OPEN / AUTHORISED** — Enterprise Internal Adoption                  |
+| APZQEP-ADOPT-001           | ▶️ **Phase 1 IN PROGRESS** — Production Adoption & APZ Time              |
+| APZHUB-TIME-NATIVE-001     | ▶️ **STARTED** — native APZ Time (Kimai invisible)                       |
 | APZQEP-163A…166 / 170+     | ⛔ Planned — **NOT AUTHORISED** until ADOPT-001 lessons                  |
 
 ---

@@ -3,6 +3,7 @@
 > **Portfolio:** time  
 > **Release:** **1.0.0** Phase 1 — **ACCEPTED / CLOSED**  
 > **Maturity:** **Production** (documented limitations)  
+> **Active programme:** [APZHUB-TIME-NATIVE-001](./APZHUB-TIME-NATIVE-001/) **STARTED** (native APZHUB experience · APZQEP-ADOPT-001 Phase 1)  
 > **Evidence:** [docs/releases/time/1.0.0/](../../releases/time/1.0.0/README.md)  
 > **Releases:** [RELEASES.md](./RELEASES.md) · [docs/releases/time/](../../releases/time/README.md)
 

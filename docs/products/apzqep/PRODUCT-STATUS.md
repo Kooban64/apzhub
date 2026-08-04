@@ -136,17 +136,16 @@ APZQEP-165: **COMPLETE** (QO-001…QO-018); package baseline 0.1.16 (QO-017)
 V1.1 foundational architecture: **FROZEN** — [Architecture Freeze](./v1.1/apzqep-version-1.1-architecture-freeze/)
 Designation: [Enterprise Quality Baseline](./v1.1/apzqep-version-1.1-architecture-freeze/ENTERPRISE-QUALITY-BASELINE.md)
 APZQEP-166 / APZQEP-170/180/190/200 provider families: NOT AUTHORISED until separate Owner Auth
-APZQEP-ADOPT-001: **OPEN / AUTHORISED** — Enterprise Internal Adoption Programme
-Face: [apzqep-adopt-001/](./apzqep-adopt-001/)
+APZQEP-ADOPT-001: **OPEN** — Phase 1 **IN PROGRESS** (Production Adoption & APZ Time Integration)
+Face: [apzqep-adopt-001/](./apzqep-adopt-001/) · Auth: [OWNER-AUTHORISATION-PHASE-1.md](./apzqep-adopt-001/OWNER-AUTHORISATION-PHASE-1.md)
+APZHUB-TIME-NATIVE-001: **STARTED** — [../time/APZHUB-TIME-NATIVE-001/](../time/APZHUB-TIME-NATIVE-001/)
 
 Engineering chapter: **CLOSED** — [CHAPTER-CLOSE.md](./v1.1/apzqep-version-1.1-architecture-freeze/CHAPTER-CLOSE.md)
-Final sentence: **The architecture is frozen. The governance is established. The platform is ready to learn. The next chapter will be written by real releases.**
-Philosophy: **Design deliberately. Build carefully. Certify completely. Freeze confidently. Learn continuously.**
-Default on APZQEP mention: **Show me the release.**
+Default on APZQEP architecture: frozen. Default on APZQEP ops: **daily use + evidence**.
 
 Next Action:
-**Use APZQEP** — wait for a real APZHUB change that would happen anyway; label it **APZQEP Release 0001**; run full pipeline ([WEEK-1-EXERCISE.md](./apzqep-adopt-001/WEEK-1-EXERCISE.md)); capture timings; measure Engineering Friction first. Next APZQEP conversation starts with what that release taught us — not architecture.
-Do NOT invent artificial exercises. Do NOT start APZQEP-170. Do NOT reopen V1.1 foundations. Every future enhancement: operational evidence or deliberate strategic decision only.
+Execute ADOPT-001 Phase 1 — put APZQEP into daily internal use; progress APZ Time native experience (Kimai never user-visible); record friction/learnings. When a real change ships, run full APZQEP path (Release 0001+).
+Do NOT start APZQEP-170. Do NOT reopen V1.1 foundations. Do NOT expose Kimai.
 ```
 
 ---

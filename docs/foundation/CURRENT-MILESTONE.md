@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 20260804T070126Z  
-> **Current status:** **APZQEP flagship** — V1.1 chapter **CLOSED** · architecture frozen · governance established · ready to learn · next chapter = real releases · **ADOPT-001 OPEN** · awaiting **Release 0001** · [Chapter Close](../products/apzqep/v1.1/apzqep-version-1.1-architecture-freeze/CHAPTER-CLOSE.md) · [ADOPT-001](../products/apzqep/apzqep-adopt-001/).
+> **Current status:** **APZQEP V1.1 frozen** · **ADOPT-001 Phase 1 IN PROGRESS** (daily APZQEP use + **APZ Time** native) · [ADOPT-001 Phase 1](../products/apzqep/apzqep-adopt-001/PHASE-1-PRODUCTION-ADOPTION.md) · [APZHUB-TIME-NATIVE-001](../products/time/APZHUB-TIME-NATIVE-001/) · [Chapter Close](../products/apzqep/v1.1/apzqep-version-1.1-architecture-freeze/CHAPTER-CLOSE.md).
 
 ---
 
