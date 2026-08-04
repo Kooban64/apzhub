@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   ORCHESTRATION_KERNEL_EVENT_TYPES,
   ORCHESTRATION_KERNEL_STATES,
+  PLATFORM_ORCHESTRATION_KERNEL_SLICE,
   PLATFORM_ORCHESTRATION_LEGACY_SLICE,
   PLATFORM_ORCHESTRATION_PROGRAMME,
   PLATFORM_ORCHESTRATION_SLICE,
@@ -13,12 +14,13 @@ import {
   isOrchestrationError,
 } from "./index";
 
-describe("APZQEP-165 QO-001 platform-orchestration kernel", () => {
+describe("APZQEP-165 platform-orchestration kernel (QO-001 foundation)", () => {
   it("exports stable programme and slice identity", () => {
-    expect(PLATFORM_ORCHESTRATION_VERSION).toBe("0.1.0");
+    expect(PLATFORM_ORCHESTRATION_VERSION).toBe("0.1.1");
     expect(PLATFORM_ORCHESTRATION_PROGRAMME).toBe("APZQEP-165");
-    expect(PLATFORM_ORCHESTRATION_SLICE).toBe("QO-001");
-    expect(PLATFORM_ORCHESTRATION_LEGACY_SLICE).toBe("S01");
+    expect(PLATFORM_ORCHESTRATION_KERNEL_SLICE).toBe("QO-001");
+    expect(PLATFORM_ORCHESTRATION_SLICE).toBe("QO-002");
+    expect(PLATFORM_ORCHESTRATION_LEGACY_SLICE).toBe("S02");
   });
 
   it("initialises kernel lifecycle to ready", async () => {
@@ -35,9 +37,9 @@ describe("APZQEP-165 QO-001 platform-orchestration kernel", () => {
     expect(platform.kernel.health().ready).toBe(true);
     expect(platform.kernel.readiness().ready).toBe(true);
     expect(platform.kernel.version()).toEqual({
-      version: "0.1.0",
+      version: "0.1.1",
       programme: "APZQEP-165",
-      slice: "QO-001",
+      slice: "QO-002",
     });
     expect(events).toContain(ORCHESTRATION_KERNEL_EVENT_TYPES.kernelCreated);
     expect(events).toContain(ORCHESTRATION_KERNEL_EVENT_TYPES.kernelReady);
@@ -55,39 +57,22 @@ describe("APZQEP-165 QO-001 platform-orchestration kernel", () => {
     expect(platform.kernel.health().ready).toBe(false);
   });
 
-  it("registers kernel contracts and empty capability framework", async () => {
-    const events: string[] = [];
-    const platform = await createPlatformOrchestration({
-      publishEvent: (e) => {
-        events.push(e.type);
-      },
-    });
-
-    expect(platform.contracts.count()).toBeGreaterThanOrEqual(2);
+  it("registers kernel and catalogue contracts", async () => {
+    const platform = await createPlatformOrchestration();
     expect(platform.contracts.get("orchestration.kernel.v1")).toBeDefined();
+    expect(
+      platform.contracts.get("orchestration.capability-catalogue.v1"),
+    ).toBeDefined();
     expect(platform.lifecycles.get("orchestration.kernel.lifecycle")).toBeDefined();
     expect(platform.capabilities.count()).toBe(0);
-
-    platform.kernel.registerCapability({
-      capabilityId: "future.example",
-      name: "Example Future Capability",
-      version: "0.0.0",
-      lifecycle: "declared",
-      contractIds: [],
-      registeredAt: new Date().toISOString(),
-      metadata: { note: "framework-only" },
-    });
-
-    expect(platform.capabilities.count()).toBe(1);
-    expect(platform.capabilities.get("future.example")?.lifecycle).toBe("declared");
-    expect(events).toContain(ORCHESTRATION_KERNEL_EVENT_TYPES.capabilityRegistered);
   });
 
-  it("wires DI container tokens", async () => {
+  it("wires DI container tokens separately from capability catalogue", async () => {
     const platform = await createPlatformOrchestration();
     expect(platform.container.has("orchestration.kernel")).toBe(true);
     expect(platform.container.resolve("orchestration.kernel")).toBe(platform.kernel);
     expect(platform.container.listTokens()).toContain("orchestration.config");
+    expect(platform.capabilities.catalogueMode).toBe("catalogue-only");
   });
 
   it("defines execution context structures without evaluating permissions", () => {
@@ -119,9 +104,9 @@ describe("APZQEP-165 QO-001 platform-orchestration kernel", () => {
         capabilityId: "x",
         name: "x",
         version: "0",
-        lifecycle: "declared",
-        contractIds: [],
-        registeredAt: new Date().toISOString(),
+        provider: "test",
+        supportedContractVersions: ["1.0.0"],
+        documentationRef: "docs/x.md",
       });
       expect.fail("expected registry mutation to fail");
     } catch (error) {
@@ -137,6 +122,6 @@ describe("APZQEP-165 QO-001 platform-orchestration kernel", () => {
     expect(diag.configValid).toBe(true);
     expect(diag.state).toBe("ready");
     expect(diag.capabilityCount).toBe(0);
-    expect(diag.contractCount).toBeGreaterThanOrEqual(2);
+    expect(diag.contractCount).toBeGreaterThanOrEqual(3);
   });
 });

@@ -33,7 +33,8 @@
 > **APZQEP-165-000 (20260804T054651Z):** Enterprise Continuous Quality Orchestration Architecture **COMPLETE** (docs/evidence only; eng NONE) — [apzqep-165-000/](./v1.1/apzqep-165-000/)  
 > **PBR-APZQEP-165-000 (20260804T055621Z):** Wave 5 architecture **APPROVED** — living title **Enterprise Continuous Quality Orchestration** — V1.1 foundational architecture **CLOSED** — APZQEP-165 **AUTHORISED TO OPEN** (eng NOT STARTED) — [pbr-apzqep-165-000/](./v1.1/pbr-apzqep-165-000/)  
 > **APZQEP-165-PLAN (20260804T060307Z):** Engineering Execution Plan **COMPLETE** (S01–S18 / QO-001–018; last V1.1 planning programme) — [apzqep-165-plan/](./v1.1/apzqep-165-plan/)
-> **APZQEP-165-QO-001 (20260804T061114Z):** Platform Orchestration Kernel **COMPLETE** — `@apzhub/platform-orchestration` 0.1.0 — [apzqep-165-qo-001/](./v1.1/apzqep-165-qo-001/) — next **QO-002**
+> **APZQEP-165-QO-001 (20260804T061114Z):** Platform Orchestration Kernel **COMPLETE** — `@apzhub/platform-orchestration` 0.1.0 — [apzqep-165-qo-001/](./v1.1/apzqep-165-qo-001/)
+> **APZQEP-165-QO-002 (20260804T064555Z):** Capability Registry **COMPLETE** (catalogue-only) — `@apzhub/platform-orchestration` 0.1.1 — [apzqep-165-qo-002/](./v1.1/apzqep-165-qo-002/) — next **QO-003**
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

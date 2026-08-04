@@ -57,7 +57,8 @@
 | PBR-APZQEP-165-000         | ✅ Architecture **APPROVED** — V1.1 foundational architecture **CLOSED** |
 | APZQEP-165-PLAN            | ✅ Engineering Execution Plan **COMPLETE** (S01–S18; last V1.1 planning) |
 | APZQEP-165-QO-001          | ✅ Kernel **COMPLETE** — `@apzhub/platform-orchestration` 0.1.0          |
-| APZQEP-165                 | ⏳ **IN PROGRESS** — next **QO-002** Owner Auth                          |
+| APZQEP-165-QO-002          | ✅ Capability Registry **COMPLETE** (catalogue-only) 0.1.1               |
+| APZQEP-165                 | ⏳ **IN PROGRESS** — next **QO-003** Owner Auth                          |
 | APZQEP-163A…166            | ⛔ Planned — **NOT AUTHORISED**                                          |
 
 ---

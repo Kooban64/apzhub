@@ -6,7 +6,7 @@
 | Authority          | Product Board — **STANDING**                   |
 | Audience           | Engineers, architects, auditors, AI assistants |
 | Rule               | **Read this document before any APZQEP work**  |
-| Last updated       | 20260804T061114Z                               |
+| Last updated       | 20260804T064555Z                               |
 | Engineering thread | **FORMALLY COMPLETE** (V1.0)                   |
 | Product posture    | **GENERAL AVAILABILITY**                       |
 | Management posture | **Operations-led** (APZQEP-OPS-001)            |
@@ -91,8 +91,8 @@ OPERATIONS-LED
 
 Next Authorised Programme:
 APZQEP-165-PLAN — Engineering Execution Plan **COMPLETE**
-APZQEP-165-QO-001 — Platform Orchestration Kernel **COMPLETE** (`@apzhub/platform-orchestration` 0.1.0)
-APZQEP-165 — in progress via micro-certified slices; next **QO-002** Owner Auth
+APZQEP-165-QO-001 COMPLETE · **APZQEP-165-QO-002 COMPLETE** (`@apzhub/platform-orchestration` 0.1.1)
+APZQEP-165 — in progress via micro-certified slices; next **QO-003** Owner Auth
 PBR-APZQEP-165-000 **APPROVED** — V1.1 foundational architecture **CLOSED**
 APZQEP-166 NOT AUTHORISED
 APZQEP-163A (external AI providers) NOT AUTHORISED
@@ -129,14 +129,14 @@ Durability: process-local layout store — not production-durable until persiste
 Version 1.1 Wave 5:
 APZQEP-165-000 ARCHITECTURE COMPLETE · **PBR-APZQEP-165-000 APPROVED**
 APZQEP-165-PLAN COMPLETE (S01–S18 / QO-001–QO-018)
-APZQEP-165-QO-001 COMPLETE — `@apzhub/platform-orchestration` 0.1.0 (kernel)
+APZQEP-165-QO-001 COMPLETE (kernel) · **QO-002 COMPLETE** (capability catalogue) — package 0.1.1
 Living title: **Enterprise Continuous Quality Orchestration**
-APZQEP-165 engineering: **IN PROGRESS** (micro-slices); QO-002 NOT STARTED
+APZQEP-165 engineering: **IN PROGRESS** (micro-slices); QO-003 NOT STARTED
 V1.1 foundational architecture: **CLOSED**
 APZQEP-166 NOT AUTHORISED
 
 Next Action:
-Owner Auth for **QO-002** (Capability Registry) only.
+Owner Auth for **QO-003** (Trigger Engine) only.
 Do NOT open monolithic APZQEP-165 engineering in one pass.
 Do NOT open further V1.1 foundational architecture or planning programmes.
 Do NOT authorise external AI without a dedicated programme.
@@ -215,6 +215,7 @@ Ops: push local main to origin when remote credentials available.
 | **PBR-APZQEP-165-000** | Wave 5 architecture **APPROVED** — V1.1 foundational architecture CLOSED            |
 | **APZQEP-165-PLAN**    | Wave 5 Engineering Execution Plan **COMPLETE** (S01–S18 / QO-001–018)               |
 | **APZQEP-165-QO-001**  | Platform Orchestration Kernel **COMPLETE** — `@apzhub/platform-orchestration` 0.1.0 |
+| **APZQEP-165-QO-002**  | Capability Registry **COMPLETE** — catalogue-only (`platform-orchestration` 0.1.1)  |
 
 ---
 
@@ -287,7 +288,7 @@ Board / audit / ops:
 ## Path remaining
 
 1. Operate Version 1.0 under APZQEP-OPS-001.
-2. Owner Auth for QO-002 (then subsequent QO slices per 165-PLAN).
+2. Owner Auth for QO-003 (then subsequent QO slices per 165-PLAN).
 3. Do not authorise APZQEP-166 or external AI providers yet.
 4. V1.1 foundational architecture CLOSED; last V1.1 planning programme (165-PLAN) COMPLETE.
 
@@ -299,7 +300,7 @@ Version 1.0 engineering lifecycle is formally complete. Product Board authorised
 
 Authoritative state:
 
-> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. V1.0 engineering CLOSED. APZQEP-OPS-001 COMPLETE. Waves 1–4 CERTIFIED. PBR-APZQEP-165-000 APPROVED — Enterprise Continuous Quality Orchestration. V1.1 foundational architecture CLOSED. APZQEP-165-PLAN COMPLETE. APZQEP-165 IN PROGRESS — QO-001 COMPLETE; next QO-002 Owner Auth. Wave 166 and external AI providers NOT AUTHORISED.**
+> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. V1.0 engineering CLOSED. APZQEP-OPS-001 COMPLETE. Waves 1–4 CERTIFIED. PBR-APZQEP-165-000 APPROVED — Enterprise Continuous Quality Orchestration. V1.1 foundational architecture CLOSED. APZQEP-165-PLAN COMPLETE. APZQEP-165 IN PROGRESS — QO-001/QO-002 COMPLETE; next QO-003 Owner Auth. Wave 166 and external AI providers NOT AUTHORISED.**
 
 ---
 

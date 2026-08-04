@@ -1,6 +1,6 @@
 {
   "name": "@apzhub/platform-orchestration",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "description": "APZHUB Enterprise Continuous Quality Orchestration — reusable orchestration kernel (APZQEP-165 QO-001). Coordinates registered capabilities; does not own peer business logic.",

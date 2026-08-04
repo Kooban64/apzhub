@@ -1,6 +1,7 @@
 export * from "./identifiers";
 export * from "./state";
 export * from "./context";
+export * from "./capability-catalogue";
 export * from "./contracts";
 export * from "./errors";
 export * from "./configuration";

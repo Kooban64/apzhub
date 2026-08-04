@@ -3,7 +3,10 @@ import {
   type OrchestrationKernelConfig,
   type ValidatedOrchestrationKernelConfig,
 } from "../contracts/configuration";
-import type { CapabilityRegistrationRecord } from "../contracts/contracts";
+import type {
+  CapabilityCatalogueRecord,
+  CapabilityRegistrationInput,
+} from "../contracts/capability-catalogue";
 import type { OrchestrationContractDescriptor } from "../contracts/contracts";
 import type {
   OrchestrationDiagnosticsReport,
@@ -174,11 +177,11 @@ export class OrchestrationKernel {
   }
 
   registerCapability(
-    record: CapabilityRegistrationRecord,
+    input: CapabilityRegistrationInput,
     correlationId = "capability-register",
-  ): void {
+  ): CapabilityCatalogueRecord {
     this.requireMutableRegistry();
-    this.capabilities.register(record);
+    const record = this.capabilities.register(input);
     void this.publishEvent({
       type: ORCHESTRATION_KERNEL_EVENT_TYPES.capabilityRegistered,
       occurredAt: new Date().toISOString(),
@@ -187,8 +190,10 @@ export class OrchestrationKernel {
       payload: {
         capabilityId: record.capabilityId,
         lifecycle: record.lifecycle,
+        provider: record.provider,
       },
     });
+    return record;
   }
 
   registerContract(
@@ -287,6 +292,14 @@ export class OrchestrationKernel {
       kind: "diagnostics",
       version: PLATFORM_ORCHESTRATION_VERSION,
       name: "Orchestration Diagnostics",
+    });
+    this.contracts.register({
+      contractId: "orchestration.capability-catalogue.v1",
+      kind: "catalogue",
+      version: PLATFORM_ORCHESTRATION_VERSION,
+      name: "Capability Catalogue",
+      description:
+        "Catalogue-only capability discovery — not a service locator or executor",
     });
   }
 
