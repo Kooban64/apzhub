@@ -31,7 +31,8 @@
 > **APZQEP-164 (20260803T195639Z):** Enterprise Dashboard & Quality Experience **ENGINEERING COMPLETE** — `@apzhub/platform-dashboard` + `@apzhub/platform-visualization` — [apzqep-164/](./v1.1/apzqep-164/)  
 > **PBR-APZQEP-164 (20260804T051443Z):** Wave 4 **CERTIFIED** — APZQEP-165 **AUTHORISED TO OPEN** (NOT STARTED) — [pbr-apzqep-164/](./v1.1/pbr-apzqep-164/)  
 > **APZQEP-165-000 (20260804T054651Z):** Enterprise Continuous Quality Orchestration Architecture **COMPLETE** (docs/evidence only; eng NONE) — [apzqep-165-000/](./v1.1/apzqep-165-000/)  
-> **PBR-APZQEP-165-000 (20260804T055621Z):** Wave 5 architecture **APPROVED** — living title **Enterprise Continuous Quality Orchestration** — V1.1 foundational architecture **CLOSED** — APZQEP-165 **AUTHORISED TO OPEN** (eng NOT STARTED) — [pbr-apzqep-165-000/](./v1.1/pbr-apzqep-165-000/)
+> **PBR-APZQEP-165-000 (20260804T055621Z):** Wave 5 architecture **APPROVED** — living title **Enterprise Continuous Quality Orchestration** — V1.1 foundational architecture **CLOSED** — APZQEP-165 **AUTHORISED TO OPEN** (eng NOT STARTED) — [pbr-apzqep-165-000/](./v1.1/pbr-apzqep-165-000/)  
+> **APZQEP-165-PLAN (20260804T060307Z):** Engineering Execution Plan **COMPLETE** (S01–S18; last V1.1 planning programme; eng NONE) — [apzqep-165-plan/](./v1.1/apzqep-165-plan/) — next Owner Auth **APZQEP-165-S01**
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

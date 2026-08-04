@@ -56,7 +56,8 @@
 | Capabilities           | Change detection, impact analysis, auto-selection, gates, scoring (orchestrated; not absorbed)                                      |
 | Dependencies           | Waves 1–4 capability platforms                                                                                                      |
 | Architecture programme | **APZQEP-165-000** — **COMPLETE** · **PBR-APZQEP-165-000 APPROVED** (20260804T055621Z)                                              |
-| Engineering programme  | **APZQEP-165** — **AUTHORISED TO OPEN** — **NOT STARTED** — awaits Owner Auth                                                       |
+| Execution plan         | **APZQEP-165-PLAN** — **COMPLETE** (20260804T060307Z) — slices S01–S18                                                              |
+| Engineering programme  | **APZQEP-165** — **AUTHORISED TO OPEN** — **NOT STARTED** — next Owner Auth **APZQEP-165-S01**                                      |
 | Success                | Policy-driven continuous certification signals via `@apzhub/platform-orchestration` (design)                                        |
 
 ## Wave 6 — Enterprise Ecosystem (**APZQEP-166**)

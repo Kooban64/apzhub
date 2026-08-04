@@ -1,8 +1,8 @@
 # APZHUB Current Milestone
 
 > **Purpose:** Where development currently stops and what requires owner approval  
-> **Last updated:** 20260804T055621Z  
-> **Current status:** **APZQEP flagship** — V1.0 **GA** · Waves 1–4 **CERTIFIED** · Wave 5 architecture **APPROVED** (PBR-APZQEP-165-000) — Enterprise Continuous Quality Orchestration · V1.1 foundational architecture **CLOSED** · **APZQEP-165 AUTHORISED TO OPEN** (eng NOT STARTED; awaits Owner Auth) · Live: `https://apzhub.apzportal.apzor.com` · Law **PAUSED** · [PRODUCT-STATUS](../products/apzqep/PRODUCT-STATUS.md) · [pbr-apzqep-165-000/](../products/apzqep/v1.1/pbr-apzqep-165-000/).
+> **Last updated:** 20260804T060307Z  
+> **Current status:** **APZQEP flagship** — V1.0 **GA** · Waves 1–4 **CERTIFIED** · Wave 5 architecture **APPROVED** · **APZQEP-165-PLAN COMPLETE** (S01–S18) · V1.1 foundational architecture **CLOSED** · last V1.1 planning programme complete · **APZQEP-165 AUTHORISED TO OPEN** (eng NOT STARTED; next Owner Auth **APZQEP-165-S01**) · Live: `https://apzhub.apzportal.apzor.com` · Law **PAUSED** · [PRODUCT-STATUS](../products/apzqep/PRODUCT-STATUS.md) · [apzqep-165-plan/](../products/apzqep/v1.1/apzqep-165-plan/).
 
 ---
 

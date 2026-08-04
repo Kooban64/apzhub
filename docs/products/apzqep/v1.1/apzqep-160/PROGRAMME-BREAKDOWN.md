@@ -3,7 +3,7 @@
 | Field     | Value                                                |
 | --------- | ---------------------------------------------------- |
 | Programme | APZQEP-160                                           |
-| Updated   | 20260804T055621Z (PBR-APZQEP-165-000 approval)       |
+| Updated   | 20260804T060307Z (APZQEP-165-PLAN complete)          |
 | Note      | Wave-aligned IDs **161–166** are Board-authoritative |
 
 ## Definition

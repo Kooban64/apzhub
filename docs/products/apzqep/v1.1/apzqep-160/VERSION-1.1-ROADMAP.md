@@ -3,9 +3,9 @@
 | Field       | Value                                                                                                 |
 | ----------- | ----------------------------------------------------------------------------------------------------- |
 | Programme   | APZQEP-160                                                                                            |
-| Timestamp   | 20260804T055621Z (progress update)                                                                    |
+| Timestamp   | 20260804T060307Z (progress update)                                                                    |
 | Board       | **APPROVED** — PBR-APZQEP-160; Waves 1–4 **CERTIFIED**; Wave 5 arch **APPROVED** (PBR-APZQEP-165-000) |
-| Engineering | Waves 1–4 closed; Wave 5 eng (**APZQEP-165**) **AUTHORISED TO OPEN** — not started                    |
+| Engineering | Waves 1–4 closed; **APZQEP-165-PLAN COMPLETE**; Wave 5 eng **NOT STARTED** (next S01)                 |
 
 > **Historical naming (immutable):** Wave summary table preserves APZQEP-160 wording for Wave 3 (“AI Quality Intelligence”), Wave 4 (“Enterprise Dashboards”), and Wave 5 (“Continuous Quality”).  
 > **Authoritative Wave 3 title:** **Enterprise Quality Intelligence Platform** ([pbr-apzqep-163-000](../pbr-apzqep-163-000/HISTORICAL-NAMING-RESOLUTION.md)).  
@@ -33,14 +33,14 @@ Ship Version 1.1 as the Enterprise Quality Platform in six waves, preserving Ver
 
 See [../WAVE-PROGRESS-REGISTER.md](../WAVE-PROGRESS-REGISTER.md).
 
-| Wave | State                                                                                                                                                                            |
-| ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1    | **CERTIFIED** (APZQEP-161 + 161R + PBR-APZQEP-161)                                                                                                                               |
-| 2    | **CERTIFIED** (APZQEP-162 + PBR-APZQEP-162) — title: Enterprise Source Control Integration Platform                                                                              |
-| 3    | **CERTIFIED** (APZQEP-163 + PBR-APZQEP-163) — title: **Enterprise Quality Intelligence Platform** (AI is a provider)                                                             |
-| 4    | **CERTIFIED** (APZQEP-164 + PBR-APZQEP-164) — title: **Enterprise Dashboard & Quality Experience**                                                                               |
-| 5    | **PBR-APZQEP-165-000 APPROVED** — living title Enterprise Continuous Quality Orchestration — eng **AUTHORISED TO OPEN** / NOT STARTED; V1.1 foundational architecture **CLOSED** |
-| 6    | NOT AUTHORISED                                                                                                                                                                   |
+| Wave | State                                                                                                                                                                                |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1    | **CERTIFIED** (APZQEP-161 + 161R + PBR-APZQEP-161)                                                                                                                                   |
+| 2    | **CERTIFIED** (APZQEP-162 + PBR-APZQEP-162) — title: Enterprise Source Control Integration Platform                                                                                  |
+| 3    | **CERTIFIED** (APZQEP-163 + PBR-APZQEP-163) — title: **Enterprise Quality Intelligence Platform** (AI is a provider)                                                                 |
+| 4    | **CERTIFIED** (APZQEP-164 + PBR-APZQEP-164) — title: **Enterprise Dashboard & Quality Experience**                                                                                   |
+| 5    | **PBR-APZQEP-165-000 APPROVED** · **APZQEP-165-PLAN COMPLETE** (S01–S18) — eng **AUTHORISED TO OPEN** / NOT STARTED (next S01 Owner Auth); V1.1 foundational architecture **CLOSED** |
+| 6    | NOT AUTHORISED                                                                                                                                                                       |
 
 ## Gates
 
