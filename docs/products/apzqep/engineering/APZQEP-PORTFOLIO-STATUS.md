@@ -74,7 +74,8 @@
 | APZQEP-165-QO-016          | ✅ Enterprise Operational Platform **COMPLETE** 0.1.15                   |
 | APZQEP-165-QO-017          | ✅ Workspace & Operations Experience **COMPLETE** 0.1.16                 |
 | APZQEP-165-QO-018          | ✅ Release Certification **CERTIFIED** (engineering unchanged)           |
-| APZQEP-165                 | ✅ **COMPLETE** — Wave 5 closed; V1.1 **FEATURE COMPLETE**               |
+| APZQEP-165                 | ✅ **COMPLETE** — Wave 5 closed                                          |
+| APZQEP V1.1                | ✅ **FEATURE COMPLETE · ARCHITECTURE FROZEN · INTERNAL ADOPTION**        |
 | APZQEP-163A…166            | ⛔ Planned — **NOT AUTHORISED**                                          |
 
 ---
