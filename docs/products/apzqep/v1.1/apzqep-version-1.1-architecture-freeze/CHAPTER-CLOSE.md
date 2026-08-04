@@ -17,6 +17,8 @@
 
 > **Design deliberately. Build carefully. Certify completely. Freeze confidently. Learn continuously.**
 
+> **A platform proves its architecture not when it is built, but when it survives real use without needing to reinvent itself.**
+
 Earlier form (retained): _The platform is ready to learn._
 
 Architecture has earned the right to remain stable — comfortable not revisiting it for quite a while.
