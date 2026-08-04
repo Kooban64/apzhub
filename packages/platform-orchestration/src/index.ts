@@ -63,6 +63,16 @@ export {
 } from "./impact/risk";
 export { buildImpactGraph } from "./impact/graph-builder";
 export {
+  QualityPolicyRegistry,
+  QualityRuleRegistry,
+  PolicyProfileRegistry,
+} from "./policy/registries";
+export {
+  PolicySelectionEngine,
+  type PolicySelectionEngineOptions,
+} from "./policy/policy-selection-engine";
+export { evaluateCondition } from "./policy/rule-evaluator";
+export {
   createPlatformOrchestration,
   type CreatePlatformOrchestrationOptions,
   type PlatformOrchestration,

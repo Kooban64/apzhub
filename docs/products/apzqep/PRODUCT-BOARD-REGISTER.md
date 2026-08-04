@@ -3,7 +3,7 @@
 | Field     | Value                    |
 | --------- | ------------------------ |
 | Document  | PRODUCT-BOARD-REGISTER   |
-| Timestamp | 20260804T094522Z         |
+| Timestamp | 20260804T102458Z         |
 | Authority | Product Board — STANDING |
 
 ## Resolutions
@@ -22,17 +22,18 @@
 
 ## Pending / next
 
-| Item                | State                                                                                          |
-| ------------------- | ---------------------------------------------------------------------------------------------- |
-| APZQEP-165-PLAN     | **COMPLETE** — [v1.1/apzqep-165-plan/](./v1.1/apzqep-165-plan/) — last V1.1 planning programme |
-| APZQEP-165-QO-001   | **COMPLETE** — [v1.1/apzqep-165-qo-001/](./v1.1/apzqep-165-qo-001/) — orchestration kernel     |
-| APZQEP-165-QO-002   | **COMPLETE** — [v1.1/apzqep-165-qo-002/](./v1.1/apzqep-165-qo-002/) — capability catalogue     |
-| APZQEP-165-QO-003   | **COMPLETE** — [v1.1/apzqep-165-qo-003/](./v1.1/apzqep-165-qo-003/) — trigger routing          |
-| APZQEP-165-QO-004   | **COMPLETE** — [v1.1/apzqep-165-qo-004/](./v1.1/apzqep-165-qo-004/) — Quality Flow Engine      |
-| APZQEP-165-QO-005   | **COMPLETE** — [v1.1/apzqep-165-qo-005/](./v1.1/apzqep-165-qo-005/) — Impact Correlation       |
-| APZQEP-165 / QO-006 | **NOT STARTED** — next Owner Auth **QO-006** Policy & Test Selection                           |
-| APZQEP-166          | Planned — **not authorised**                                                                   |
-| APZQEP-163A         | External AI providers — **not authorised**                                                     |
-| APZHUB-ADR-0100     | Future portfolio recommendation only — **not created**                                         |
-| Remote push (ops)   | Local `main` ahead of `origin/main` — Owner/ops push when credentials available                |
-| Wave progress       | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                             |
+| Item                | State                                                                                            |
+| ------------------- | ------------------------------------------------------------------------------------------------ |
+| APZQEP-165-PLAN     | **COMPLETE** — [v1.1/apzqep-165-plan/](./v1.1/apzqep-165-plan/) — last V1.1 planning programme   |
+| APZQEP-165-QO-001   | **COMPLETE** — [v1.1/apzqep-165-qo-001/](./v1.1/apzqep-165-qo-001/) — orchestration kernel       |
+| APZQEP-165-QO-002   | **COMPLETE** — [v1.1/apzqep-165-qo-002/](./v1.1/apzqep-165-qo-002/) — capability catalogue       |
+| APZQEP-165-QO-003   | **COMPLETE** — [v1.1/apzqep-165-qo-003/](./v1.1/apzqep-165-qo-003/) — trigger routing            |
+| APZQEP-165-QO-004   | **COMPLETE** — [v1.1/apzqep-165-qo-004/](./v1.1/apzqep-165-qo-004/) — Quality Flow Engine        |
+| APZQEP-165-QO-005   | **COMPLETE** — [v1.1/apzqep-165-qo-005/](./v1.1/apzqep-165-qo-005/) — Impact Correlation         |
+| APZQEP-165-QO-006   | **COMPLETE** — [v1.1/apzqep-165-qo-006/](./v1.1/apzqep-165-qo-006/) — Policy & Quality Selection |
+| APZQEP-165 / QO-007 | **NOT STARTED** — next Owner Auth **QO-007** Quality Gate Engine                                 |
+| APZQEP-166          | Planned — **not authorised**                                                                     |
+| APZQEP-163A         | External AI providers — **not authorised**                                                       |
+| APZHUB-ADR-0100     | Future portfolio recommendation only — **not created**                                           |
+| Remote push (ops)   | Local `main` ahead of `origin/main` — Owner/ops push when credentials available                  |
+| Wave progress       | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                               |

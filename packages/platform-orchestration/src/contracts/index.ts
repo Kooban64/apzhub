@@ -6,6 +6,7 @@ export * from "./contracts";
 export * from "./trigger";
 export * from "./quality-flow";
 export * from "./impact-correlation";
+export * from "./policy-selection";
 export * from "./errors";
 export * from "./configuration";
 export * from "./diagnostics";

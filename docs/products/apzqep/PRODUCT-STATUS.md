@@ -6,7 +6,7 @@
 | Authority          | Product Board — **STANDING**                   |
 | Audience           | Engineers, architects, auditors, AI assistants |
 | Rule               | **Read this document before any APZQEP work**  |
-| Last updated       | 20260804T094522Z                               |
+| Last updated       | 20260804T102458Z                               |
 | Engineering thread | **FORMALLY COMPLETE** (V1.0)                   |
 | Product posture    | **GENERAL AVAILABILITY**                       |
 | Management posture | **Operations-led** (APZQEP-OPS-001)            |
@@ -91,8 +91,8 @@ OPERATIONS-LED
 
 Next Authorised Programme:
 APZQEP-165-PLAN — Engineering Execution Plan **COMPLETE**
-APZQEP-165-QO-001…**QO-005 COMPLETE** (`@apzhub/platform-orchestration` 0.1.4)
-APZQEP-165 — in progress via micro-certified slices; next **QO-006** Owner Auth
+APZQEP-165-QO-001…**QO-006 COMPLETE** (`@apzhub/platform-orchestration` 0.1.5)
+APZQEP-165 — in progress via micro-certified slices; next **QO-007** Owner Auth
 PBR-APZQEP-165-000 **APPROVED** — V1.1 foundational architecture **CLOSED**
 APZQEP-166 NOT AUTHORISED
 APZQEP-163A (external AI providers) NOT AUTHORISED
@@ -129,14 +129,14 @@ Durability: process-local layout store — not production-durable until persiste
 Version 1.1 Wave 5:
 APZQEP-165-000 ARCHITECTURE COMPLETE · **PBR-APZQEP-165-000 APPROVED**
 APZQEP-165-PLAN COMPLETE (S01–S18 / QO-001–QO-018)
-APZQEP-165-QO-001…**QO-005 COMPLETE** (kernel…Impact Correlation) — package 0.1.4
+APZQEP-165-QO-001…**QO-006 COMPLETE** (kernel…Policy & Quality Selection) — package 0.1.5
 Living title: **Enterprise Continuous Quality Orchestration**
-APZQEP-165 engineering: **IN PROGRESS** (micro-slices); QO-006 NOT STARTED
+APZQEP-165 engineering: **IN PROGRESS** (micro-slices); QO-007 NOT STARTED
 V1.1 foundational architecture: **CLOSED**
 APZQEP-166 NOT AUTHORISED
 
 Next Action:
-Owner Auth for **QO-006** (Policy & Test Selection) only.
+Owner Auth for **QO-007** (Quality Gate Engine) only.
 Do NOT open monolithic APZQEP-165 engineering in one pass.
 Do NOT open further V1.1 foundational architecture or planning programmes.
 Do NOT authorise external AI without a dedicated programme.
@@ -219,6 +219,7 @@ Ops: push local main to origin when remote credentials available.
 | **APZQEP-165-QO-003**  | Trigger Engine **COMPLETE** — provider-neutral routing (`platform-orchestration` 0.1.2)     |
 | **APZQEP-165-QO-004**  | Quality Flow Engine **COMPLETE** — lifecycle state machine (`platform-orchestration` 0.1.3) |
 | **APZQEP-165-QO-005**  | Impact Correlation **COMPLETE** — explainable impact graph (`platform-orchestration` 0.1.4) |
+| **APZQEP-165-QO-006**  | Policy & Quality Selection **COMPLETE** — declarative PDP (`platform-orchestration` 0.1.5)  |
 
 ---
 
@@ -291,7 +292,7 @@ Board / audit / ops:
 ## Path remaining
 
 1. Operate Version 1.0 under APZQEP-OPS-001.
-2. Owner Auth for QO-006 (then subsequent QO slices per 165-PLAN).
+2. Owner Auth for QO-007 (then subsequent QO slices per 165-PLAN).
 3. Do not authorise APZQEP-166 or external AI providers yet.
 4. V1.1 foundational architecture CLOSED; last V1.1 planning programme (165-PLAN) COMPLETE.
 

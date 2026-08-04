@@ -5,6 +5,7 @@ import { QualityFlowEngine } from "../flows/quality-flow-engine";
 import { ImpactCorrelationEngine } from "../impact/impact-correlation-engine";
 import { OrchestrationKernel } from "../kernel/orchestration-kernel";
 import type { OrchestrationLogger } from "../kernel/logger";
+import { PolicySelectionEngine } from "../policy/policy-selection-engine";
 import { CapabilityRegistry } from "../registry/capability-registry";
 import { ContractRegistry } from "../registry/contract-registry";
 import { LifecycleRegistry } from "../registry/lifecycle-registry";
@@ -28,12 +29,13 @@ export interface PlatformOrchestration {
   readonly triggerBindings: TriggerBindingRegistry;
   readonly qualityFlows: QualityFlowEngine;
   readonly impact: ImpactCorrelationEngine;
+  readonly policySelection: PolicySelectionEngine;
   readonly container: OrchestrationContainer;
 }
 
 /**
- * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-005).
- * Impact Correlation builds explainable graphs — never selects execution.
+ * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-006).
+ * Policy Selection produces advisory quality decisions — never executes activities.
  */
 export async function createPlatformOrchestration(
   options: CreatePlatformOrchestrationOptions = {},
@@ -75,6 +77,15 @@ export async function createPlatformOrchestration(
       "Explainable impact graph, confidence, risk, and advisory quality scope — no execution selection",
   });
 
+  kernel.contracts.register({
+    contractId: "orchestration.policy_selection.v1",
+    kind: "policy",
+    version: PLATFORM_ORCHESTRATION_VERSION,
+    name: "Policy & Quality Selection",
+    description:
+      "Declarative PDP for governed quality activity selection — never executes activities",
+  });
+
   const triggerBindings = new TriggerBindingRegistry();
   const triggers = new TriggerEngine({
     bindings: triggerBindings,
@@ -89,6 +100,12 @@ export async function createPlatformOrchestration(
   });
 
   const impact = new ImpactCorrelationEngine({
+    capabilities: kernel.capabilities,
+    publishEvent: options.publishEvent,
+    orchestrationId: kernel.orchestrationId,
+  });
+
+  const policySelection = new PolicySelectionEngine({
     capabilities: kernel.capabilities,
     publishEvent: options.publishEvent,
     orchestrationId: kernel.orchestrationId,
@@ -118,6 +135,9 @@ export async function createPlatformOrchestration(
       impact.knowledge,
     );
   }
+  if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.policySelection)) {
+    kernel.container.register(ORCHESTRATION_DI_TOKENS.policySelection, policySelection);
+  }
 
   return {
     kernel,
@@ -128,6 +148,7 @@ export async function createPlatformOrchestration(
     triggerBindings,
     qualityFlows,
     impact,
+    policySelection,
     container: kernel.container,
   };
 }

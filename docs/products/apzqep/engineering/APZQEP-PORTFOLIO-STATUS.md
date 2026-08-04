@@ -61,7 +61,8 @@
 | APZQEP-165-QO-003          | ✅ Trigger Engine **COMPLETE** (provider-neutral) 0.1.2                  |
 | APZQEP-165-QO-004          | ✅ Quality Flow Engine **COMPLETE** (lifecycle state machine) 0.1.3      |
 | APZQEP-165-QO-005          | ✅ Impact Correlation **COMPLETE** (explainable graph) 0.1.4             |
-| APZQEP-165                 | ⏳ **IN PROGRESS** — next **QO-006** Owner Auth                          |
+| APZQEP-165-QO-006          | ✅ Policy & Quality Selection **COMPLETE** (declarative PDP) 0.1.5       |
+| APZQEP-165                 | ⏳ **IN PROGRESS** — next **QO-007** Owner Auth                          |
 | APZQEP-163A…166            | ⛔ Planned — **NOT AUTHORISED**                                          |
 
 ---
