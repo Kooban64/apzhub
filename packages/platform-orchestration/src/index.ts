@@ -27,6 +27,23 @@ export {
 } from "./kernel/orchestration-kernel";
 export { TriggerBindingRegistry } from "./triggers/trigger-binding-registry";
 export { TriggerEngine, type TriggerEngineOptions } from "./triggers/trigger-engine";
+export { QualityFlowDefinitionRegistry } from "./flows/quality-flow-definition-registry";
+export {
+  QualityFlowEngine,
+  type QualityFlowEngineOptions,
+  type QualityFlowDiagnostics,
+  type QualityFlowSecurityContext,
+} from "./flows/quality-flow-engine";
+export {
+  QUALITY_FLOW_TRANSITION_RULES,
+  canTransitionQualityFlow,
+  assertQualityFlowTransition,
+  listAllowedTransitions,
+  listProgressionEdges,
+  listActiveQualityFlowStates,
+  type QualityFlowTransitionRule,
+  type QualityFlowTransitionKind,
+} from "./flows/state-machine";
 export {
   createPlatformOrchestration,
   type CreatePlatformOrchestrationOptions,

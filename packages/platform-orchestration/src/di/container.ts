@@ -55,6 +55,8 @@ export const ORCHESTRATION_DI_TOKENS = {
   lifecycleRegistry: "orchestration.registry.lifecycle",
   triggerEngine: "orchestration.trigger.engine",
   triggerBindings: "orchestration.trigger.bindings",
+  qualityFlowEngine: "orchestration.quality_flow.engine",
+  qualityFlowDefinitions: "orchestration.quality_flow.definitions",
   logger: "orchestration.logger",
   config: "orchestration.config",
 } as const;

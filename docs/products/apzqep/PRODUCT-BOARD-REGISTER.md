@@ -3,7 +3,7 @@
 | Field     | Value                    |
 | --------- | ------------------------ |
 | Document  | PRODUCT-BOARD-REGISTER   |
-| Timestamp | 20260804T070126Z         |
+| Timestamp | 20260804T085113Z         |
 | Authority | Product Board — STANDING |
 
 ## Resolutions
@@ -28,7 +28,8 @@
 | APZQEP-165-QO-001   | **COMPLETE** — [v1.1/apzqep-165-qo-001/](./v1.1/apzqep-165-qo-001/) — orchestration kernel     |
 | APZQEP-165-QO-002   | **COMPLETE** — [v1.1/apzqep-165-qo-002/](./v1.1/apzqep-165-qo-002/) — capability catalogue     |
 | APZQEP-165-QO-003   | **COMPLETE** — [v1.1/apzqep-165-qo-003/](./v1.1/apzqep-165-qo-003/) — trigger routing          |
-| APZQEP-165 / QO-004 | **NOT STARTED** — next Owner Auth **QO-004** Quality Flow Engine                               |
+| APZQEP-165-QO-004   | **COMPLETE** — [v1.1/apzqep-165-qo-004/](./v1.1/apzqep-165-qo-004/) — Quality Flow Engine      |
+| APZQEP-165 / QO-005 | **NOT STARTED** — next Owner Auth **QO-005** Impact Correlation                                |
 | APZQEP-166          | Planned — **not authorised**                                                                   |
 | APZQEP-163A         | External AI providers — **not authorised**                                                     |
 | APZHUB-ADR-0100     | Future portfolio recommendation only — **not created**                                         |

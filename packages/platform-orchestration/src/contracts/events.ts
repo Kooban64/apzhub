@@ -1,4 +1,4 @@
-/** Kernel + trigger events — Quality Flow execution events arrive later. */
+/** Kernel + trigger + Quality Flow lifecycle events (no capability execution). */
 
 export const ORCHESTRATION_KERNEL_EVENT_TYPES = {
   kernelCreated: "orchestration.kernel.created",
@@ -17,13 +17,26 @@ export const TRIGGER_EVENT_TYPES = {
   rejected: "orchestration.trigger.rejected",
 } as const;
 
+export const QUALITY_FLOW_EVENT_TYPES = {
+  definitionRegistered: "orchestration.quality_flow.definition_registered",
+  definitionVersioned: "orchestration.quality_flow.definition_versioned",
+  instanceCreated: "orchestration.quality_flow.instance_created",
+  stateTransitioned: "orchestration.quality_flow.state_transitioned",
+  instancePaused: "orchestration.quality_flow.instance_paused",
+  instanceResumed: "orchestration.quality_flow.instance_resumed",
+} as const;
+
 export type OrchestrationKernelEventType =
   (typeof ORCHESTRATION_KERNEL_EVENT_TYPES)[keyof typeof ORCHESTRATION_KERNEL_EVENT_TYPES];
 
 export type TriggerEventType =
   (typeof TRIGGER_EVENT_TYPES)[keyof typeof TRIGGER_EVENT_TYPES];
 
-export type OrchestrationEventType = OrchestrationKernelEventType | TriggerEventType;
+export type QualityFlowEventType =
+  (typeof QUALITY_FLOW_EVENT_TYPES)[keyof typeof QUALITY_FLOW_EVENT_TYPES];
+
+export type OrchestrationEventType =
+  OrchestrationKernelEventType | TriggerEventType | QualityFlowEventType;
 
 export interface OrchestrationKernelEvent {
   readonly type: OrchestrationEventType;

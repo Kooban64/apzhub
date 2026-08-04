@@ -1,8 +1,8 @@
 /** APZQEP-165 — Enterprise Continuous Quality Orchestration */
-export const PLATFORM_ORCHESTRATION_VERSION = "0.1.2" as const;
+export const PLATFORM_ORCHESTRATION_VERSION = "0.1.3" as const;
 export const PLATFORM_ORCHESTRATION_PROGRAMME = "APZQEP-165" as const;
 /** First delivered slice (kernel). */
 export const PLATFORM_ORCHESTRATION_KERNEL_SLICE = "QO-001" as const;
 /** Current package engineering slice. */
-export const PLATFORM_ORCHESTRATION_SLICE = "QO-003" as const;
-export const PLATFORM_ORCHESTRATION_LEGACY_SLICE = "S03" as const;
+export const PLATFORM_ORCHESTRATION_SLICE = "QO-004" as const;
+export const PLATFORM_ORCHESTRATION_LEGACY_SLICE = "S04" as const;

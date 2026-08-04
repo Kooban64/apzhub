@@ -1,6 +1,7 @@
 import type { OrchestrationKernelConfig } from "../contracts/configuration";
 import type { OrchestrationEventPublisher } from "../contracts/events";
 import { OrchestrationContainer, ORCHESTRATION_DI_TOKENS } from "../di/container";
+import { QualityFlowEngine } from "../flows/quality-flow-engine";
 import { OrchestrationKernel } from "../kernel/orchestration-kernel";
 import type { OrchestrationLogger } from "../kernel/logger";
 import { CapabilityRegistry } from "../registry/capability-registry";
@@ -24,12 +25,13 @@ export interface PlatformOrchestration {
   readonly lifecycles: LifecycleRegistry;
   readonly triggers: TriggerEngine;
   readonly triggerBindings: TriggerBindingRegistry;
+  readonly qualityFlows: QualityFlowEngine;
   readonly container: OrchestrationContainer;
 }
 
 /**
- * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-003).
- * Trigger Engine routes normalized triggers only — no Quality Flow execution.
+ * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-004).
+ * Quality Flow Engine manages lifecycle state only — no capability execution.
  */
 export async function createPlatformOrchestration(
   options: CreatePlatformOrchestrationOptions = {},
@@ -53,9 +55,24 @@ export async function createPlatformOrchestration(
       "Provider-neutral trigger ingest/route — no provider adapters, no flow execution",
   });
 
+  kernel.contracts.register({
+    contractId: "orchestration.quality_flow.v1",
+    kind: "lifecycle",
+    version: PLATFORM_ORCHESTRATION_VERSION,
+    name: "Quality Flow Lifecycle",
+    description:
+      "Immutable definitions, mutable instances, table-driven state machine — no capability execution",
+  });
+
   const triggerBindings = new TriggerBindingRegistry();
   const triggers = new TriggerEngine({
     bindings: triggerBindings,
+    publishEvent: options.publishEvent,
+    orchestrationId: kernel.orchestrationId,
+  });
+
+  const qualityFlows = new QualityFlowEngine({
+    capabilities: kernel.capabilities,
     publishEvent: options.publishEvent,
     orchestrationId: kernel.orchestrationId,
   });
@@ -66,6 +83,15 @@ export async function createPlatformOrchestration(
   if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.triggerBindings)) {
     kernel.container.register(ORCHESTRATION_DI_TOKENS.triggerBindings, triggerBindings);
   }
+  if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.qualityFlowEngine)) {
+    kernel.container.register(ORCHESTRATION_DI_TOKENS.qualityFlowEngine, qualityFlows);
+  }
+  if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.qualityFlowDefinitions)) {
+    kernel.container.register(
+      ORCHESTRATION_DI_TOKENS.qualityFlowDefinitions,
+      qualityFlows.definitions,
+    );
+  }
 
   return {
     kernel,
@@ -74,6 +100,7 @@ export async function createPlatformOrchestration(
     lifecycles: kernel.lifecycles,
     triggers,
     triggerBindings,
+    qualityFlows,
     container: kernel.container,
   };
 }
