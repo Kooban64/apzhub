@@ -31,10 +31,12 @@ import type {
   TimelineRegistryHydrationDiagnostics,
 } from "@apzhub/activity-timeline-framework/server";
 import { WorkbenchProvider } from "@apzhub/workbench-framework/react";
+import type { AuthSessionPermissionInput } from "@apzhub/workbench-framework";
 import type { WorkbenchRegistryDto } from "@apzhub/workbench-framework/server";
 import { useCallback, useMemo, useState, type ReactNode } from "react";
 
 import { PersonalisationThemeBridge } from "@/components/platform-personalisation/personalisation-theme-bridge";
+import { SessionAuthorizationProvider } from "@/components/session-authorization-provider";
 import { createPlatformPersonalisationSessionStore } from "@/lib/platform-personalisation/session-store";
 
 import { ActionFrameworkDiagnostics } from "@/components/action-framework-diagnostics";
@@ -60,6 +62,8 @@ export interface ActionWorkbenchShellProviderProps {
   readonly activityDiagnostics: ActivityRegistryHydrationDiagnostics;
   readonly timelineDiagnostics: TimelineRegistryHydrationDiagnostics;
   readonly initialTheme?: "light" | "dark" | "system";
+  /** APZHUB session authorization — products consume; never own identity. */
+  readonly authPermissionContext?: AuthSessionPermissionInput | null;
   readonly children: ReactNode;
 }
 
@@ -159,6 +163,7 @@ function EventNotificationShell({
   commandDiagnostics,
   userId,
   initialTheme,
+  authPermissionContext,
   children,
 }: {
   readonly notificationDto: NotificationRegistryDto;
@@ -173,6 +178,7 @@ function EventNotificationShell({
   readonly commandDiagnostics: ActionRegistryHydrationDiagnostics;
   readonly userId?: string;
   readonly initialTheme?: "light" | "dark" | "system";
+  readonly authPermissionContext?: AuthSessionPermissionInput | null;
   readonly children: ReactNode;
 }) {
   const eventNotificationContext = useAppEventNotificationContext();
@@ -213,54 +219,57 @@ function EventNotificationShell({
   );
 
   return (
-    <NotificationRegistryProvider dto={notificationDto}>
-      <NotificationServiceProvider
-        service={eventNotificationContext.notificationService}
-      >
-        <WorkbenchProvider
-          initialRegistry={registry}
-          userId={userId}
-          sessionStore={sessionStore}
-          sessionStorageBackend={sessionStore ? "memory" : "localStorage"}
-          resolveActionExecutor={resolveActionExecutor}
+    <SessionAuthorizationProvider value={authPermissionContext ?? null}>
+      <NotificationRegistryProvider dto={notificationDto}>
+        <NotificationServiceProvider
+          service={eventNotificationContext.notificationService}
         >
-          <PersonalisationThemeBridge userId={userId} initialTheme={initialTheme} />
-          <ActivityTimelineProvider bundle={activityTimelineBundle}>
-            {actionExecutor ? (
-              <ActivityTimelineServiceShell
-                runtimeService={activityTimelineContext.service}
-                activityDiagnostics={activityDiagnostics}
-                timelineDiagnostics={timelineDiagnostics}
-              >
-                <CommandRegistryProvider dto={commandDto} executor={actionExecutor}>
-                  <E2eTestHookBridge
-                    context={eventNotificationContext}
-                    actionExecutor={actionExecutor}
-                    userId={userId}
-                  />
-                  <KnowledgeDiscoveryShell
-                    knowledgeDto={knowledgeDto}
-                    actionDto={commandDto}
-                    workbenchDto={registry}
-                  >
-                    {children}
-                    <ActionFrameworkDiagnostics
-                      diagnostics={commandDiagnostics}
+          <WorkbenchProvider
+            initialRegistry={registry}
+            userId={userId}
+            authPermissionContext={authPermissionContext}
+            sessionStore={sessionStore}
+            sessionStorageBackend={sessionStore ? "memory" : "localStorage"}
+            resolveActionExecutor={resolveActionExecutor}
+          >
+            <PersonalisationThemeBridge userId={userId} initialTheme={initialTheme} />
+            <ActivityTimelineProvider bundle={activityTimelineBundle}>
+              {actionExecutor ? (
+                <ActivityTimelineServiceShell
+                  runtimeService={activityTimelineContext.service}
+                  activityDiagnostics={activityDiagnostics}
+                  timelineDiagnostics={timelineDiagnostics}
+                >
+                  <CommandRegistryProvider dto={commandDto} executor={actionExecutor}>
+                    <E2eTestHookBridge
+                      context={eventNotificationContext}
+                      actionExecutor={actionExecutor}
                       userId={userId}
                     />
-                    <KnowledgeDiscoveryDiagnostics />
-                    <EventNotificationDiagnostics
-                      eventDiagnostics={eventDiagnostics}
-                      notificationDiagnostics={notificationDiagnostics}
-                    />
-                  </KnowledgeDiscoveryShell>
-                </CommandRegistryProvider>
-              </ActivityTimelineServiceShell>
-            ) : null}
-          </ActivityTimelineProvider>
-        </WorkbenchProvider>
-      </NotificationServiceProvider>
-    </NotificationRegistryProvider>
+                    <KnowledgeDiscoveryShell
+                      knowledgeDto={knowledgeDto}
+                      actionDto={commandDto}
+                      workbenchDto={registry}
+                    >
+                      {children}
+                      <ActionFrameworkDiagnostics
+                        diagnostics={commandDiagnostics}
+                        userId={userId}
+                      />
+                      <KnowledgeDiscoveryDiagnostics />
+                      <EventNotificationDiagnostics
+                        eventDiagnostics={eventDiagnostics}
+                        notificationDiagnostics={notificationDiagnostics}
+                      />
+                    </KnowledgeDiscoveryShell>
+                  </CommandRegistryProvider>
+                </ActivityTimelineServiceShell>
+              ) : null}
+            </ActivityTimelineProvider>
+          </WorkbenchProvider>
+        </NotificationServiceProvider>
+      </NotificationRegistryProvider>
+    </SessionAuthorizationProvider>
   );
 }
 
@@ -276,6 +285,7 @@ export function ActionWorkbenchShellProvider({
   activityDiagnostics,
   timelineDiagnostics,
   initialTheme,
+  authPermissionContext = null,
   children,
 }: ActionWorkbenchShellProviderProps) {
   const { data: session } = useSession();
@@ -294,6 +304,7 @@ export function ActionWorkbenchShellProvider({
       commandDiagnostics={commandDiagnostics}
       userId={session?.user.id}
       initialTheme={initialTheme}
+      authPermissionContext={authPermissionContext}
     >
       {children}
     </EventNotificationShell>

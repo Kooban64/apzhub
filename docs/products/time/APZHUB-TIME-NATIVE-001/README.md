@@ -36,8 +36,8 @@ Right metric: “Does APZ Time provide the experience our users need?”
 ## Priority order (Phase A slices)
 
 1. **A01 Native UX Audit** — **COMPLETE** — [TIME-NATIVE-001-A01](./TIME-NATIVE-001-A01/)
-2. A02 Identity Integration — pending Owner Auth
-3. A03 Workspace Integration — pending
+2. **A02 Identity Convergence** — **COMPLETE** — [TIME-NATIVE-001-A02](./TIME-NATIVE-001-A02/)
+3. A03 Workspace Integration — pending Owner Auth
 4. A04 APZQEP Operational Adoption — pending
 5. Daily-use Phase 1 gaps only (not Kimai parity)
 

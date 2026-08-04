@@ -60,7 +60,7 @@ describe("TimeWorkspaceRouter", () => {
       page: { limit: 10, hasMore: false },
     });
 
-    render(wrap(<TimeWorkspaceRouter />));
+    render(wrap(<TimeWorkspaceRouter permissions={["time.*"]} />));
     expect(screen.getByTestId("time-page")).toBeTruthy();
     await waitFor(() => {
       expect(screen.getByText("Morning work")).toBeTruthy();
@@ -69,8 +69,14 @@ describe("TimeWorkspaceRouter", () => {
 
   it("renders unknown route empty state", () => {
     pathnameMock.mockReturnValue("/workspace/time/not-a-real-section");
-    render(wrap(<TimeWorkspaceRouter />));
+    render(wrap(<TimeWorkspaceRouter permissions={["time.*"]} />));
     expect(screen.getByTestId("time-page")).toBeTruthy();
     expect(screen.getByText("Unknown Time route")).toBeTruthy();
+  });
+
+  it("denies create route without APZHUB Time permissions", () => {
+    pathnameMock.mockReturnValue("/workspace/time/timesheets/new");
+    render(wrap(<TimeWorkspaceRouter permissions={["time.view"]} />));
+    expect(screen.getByText("Permission required")).toBeTruthy();
   });
 });

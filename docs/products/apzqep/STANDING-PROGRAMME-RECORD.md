@@ -61,7 +61,8 @@
 > **APZQEP V1.1 Chapter Close (20260804T190300Z):** Engineering chapter closed — [CHAPTER-CLOSE.md](./v1.1/apzqep-version-1.1-architecture-freeze/CHAPTER-CLOSE.md) — architecture frozen · governance established · ready to learn · next chapter written by real releases; four milestones: Engineering · Certification · Freeze · Learning Enabled
 > **APZQEP-ADOPT-001 Phase 1 (20260804T191500Z):** Production Adoption & APZ Time Integration **AUTHORISED / IN PROGRESS** — [OWNER-AUTHORISATION-PHASE-1.md](./apzqep-adopt-001/OWNER-AUTHORISATION-PHASE-1.md) · [APZHUB-TIME-NATIVE-001](../time/APZHUB-TIME-NATIVE-001/) **STARTED**
 > **APZHUB-TIME-NATIVE-001 correction (20260804T193500Z):** Maturation not creation — Time 1.0.0 exists; priorities Native UX → Identity → Workspace → APZQEP → daily-use gaps; no Kimai parity chase
-> **TIME-NATIVE-001-A01 (20260804T194000Z):** Native UX Audit **COMPLETE** (no eng) — [APZ-TIME-NATIVE-UX-AUDIT.md](../time/APZHUB-TIME-NATIVE-001/TIME-NATIVE-001-A01/APZ-TIME-NATIVE-UX-AUDIT.md) — next: A02 Identity when authorised
+> **TIME-NATIVE-001-A01 (20260804T194000Z):** Native UX Audit **COMPLETE** (no eng) — [APZ-TIME-NATIVE-UX-AUDIT.md](../time/APZHUB-TIME-NATIVE-001/TIME-NATIVE-001-A01/APZ-TIME-NATIVE-UX-AUDIT.md)
+> **TIME-NATIVE-001-A02 (20260804T194500Z):** APZHUB Identity Convergence **COMPLETE** — G-21/G-22 CLOSED — [TIME-NATIVE-001-A02](../time/APZHUB-TIME-NATIVE-001/TIME-NATIVE-001-A02/) — next: A03 Workspace when authorised
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

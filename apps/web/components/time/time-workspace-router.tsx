@@ -2,8 +2,15 @@
 
 import { usePathname } from "next/navigation";
 
-import type { TimePermissionSource } from "@/lib/time/permissions";
+import {
+  canCreateActivities,
+  canCreateCustomers,
+  canCreateTags,
+  canCreateTimesheets,
+  type TimePermissionSource,
+} from "@/lib/time/permissions";
 import { resolveTimeRoute } from "@/lib/time/routes";
+import { useTimePermissions } from "@/lib/time/use-time-permissions";
 
 import { TimeActivitiesView } from "./time-activities-view";
 import { TimeActivityCreateView } from "./time-activity-create-view";
@@ -20,15 +27,29 @@ import { TimeTimesheetDetailView } from "./time-timesheet-detail-view";
 import { TimeTimesheetsView } from "./time-timesheets-view";
 import { EmptyState, PageShell } from "./time-ui";
 
-const DEFAULT_UI_PERMISSIONS: readonly string[] = ["time.*"];
+function PermissionDenied({ action }: { readonly action: string }) {
+  return (
+    <PageShell title="Time">
+      <EmptyState
+        title="Permission required"
+        description={`You do not have permission to ${action}. Contact your APZHUB administrator if you need access.`}
+      />
+    </PageShell>
+  );
+}
 
+/**
+ * Time workspace router — consumes APZHUB session permissions.
+ * Never defaults to `time.*`. Never exposes engine identity/roles.
+ */
 export function TimeWorkspaceRouter({
-  permissions = DEFAULT_UI_PERMISSIONS,
+  permissions: permissionsOverride,
 }: {
   readonly permissions?: TimePermissionSource;
-}) {
+} = {}) {
   const pathname = usePathname();
   const route = resolveTimeRoute(pathname);
+  const permissions = useTimePermissions(permissionsOverride);
 
   switch (route.kind) {
     case "dashboard":
@@ -36,6 +57,9 @@ export function TimeWorkspaceRouter({
     case "timesheets":
       return <TimeTimesheetsView permissions={permissions} />;
     case "timesheet-create":
+      if (!canCreateTimesheets(permissions)) {
+        return <PermissionDenied action="create timesheets" />;
+      }
       return <TimeTimesheetCreateView />;
     case "timesheet-detail":
       return (
@@ -48,14 +72,23 @@ export function TimeWorkspaceRouter({
     case "activities":
       return <TimeActivitiesView permissions={permissions} />;
     case "activity-create":
+      if (!canCreateActivities(permissions)) {
+        return <PermissionDenied action="create activities" />;
+      }
       return <TimeActivityCreateView />;
     case "customers":
       return <TimeCustomersView permissions={permissions} />;
     case "customer-create":
+      if (!canCreateCustomers(permissions)) {
+        return <PermissionDenied action="create customers" />;
+      }
       return <TimeCustomerCreateView />;
     case "tags":
       return <TimeTagsView permissions={permissions} />;
     case "tag-create":
+      if (!canCreateTags(permissions)) {
+        return <PermissionDenied action="create tags" />;
+      }
       return <TimeTagCreateView />;
     case "search":
       return <TimeSearchView />;

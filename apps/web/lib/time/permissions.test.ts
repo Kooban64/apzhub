@@ -20,4 +20,10 @@ describe("time permissions", () => {
     expect(canCreateTimesheets(["time.timesheet.create"])).toBe(true);
     expect(canCreateTimesheets(["time.view"])).toBe(false);
   });
+
+  it("denies when permission source is empty (no time.* default)", () => {
+    expect(canViewTime([])).toBe(false);
+    expect(canCreateTimesheets([])).toBe(false);
+    expect(canListTimesheets(undefined)).toBe(false);
+  });
 });

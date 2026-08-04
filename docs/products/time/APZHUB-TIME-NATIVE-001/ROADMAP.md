@@ -8,12 +8,13 @@
 
 ## Phase A — Native Experience (ordered slices)
 
-| Slice   | Title                       | Status       | Intent                                                                    |
-| ------- | --------------------------- | ------------ | ------------------------------------------------------------------------- |
-| **A01** | Native UX Audit             | **COMPLETE** | Define what the user sees — [TIME-NATIVE-001-A01](./TIME-NATIVE-001-A01/) |
-| **A02** | Identity Integration        | Pending      | APZHUB auth / RBAC / sessions / provisioning only                         |
-| **A03** | Workspace Integration       | Pending      | Nav, panels, actions, context, breadcrumbs                                |
-| **A04** | APZQEP Operational Adoption | Pending      | Every Time enhancement through Quality Flow                               |
+| Slice   | Title                | Status       | Intent                                                                           |
+| ------- | -------------------- | ------------ | -------------------------------------------------------------------------------- |
+| **A01** | Native UX Audit      | **COMPLETE** | Define what the user sees — [TIME-NATIVE-001-A01](./TIME-NATIVE-001-A01/)        |
+| **A02** | Identity Convergence | **COMPLETE** | APZHUB session/RBAC into Time UI — [TIME-NATIVE-001-A02](./TIME-NATIVE-001-A02/) |
+
+| **A03** | Workspace Integration | Pending | Nav, panels, actions, context, breadcrumbs |
+| **A04** | APZQEP Operational Adoption | Pending | Every Time enhancement through Quality Flow |
 
 Order is deliberate: UX audit drives identity and workspace — not the reverse.
 

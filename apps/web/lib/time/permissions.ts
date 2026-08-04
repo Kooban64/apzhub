@@ -1,6 +1,9 @@
 /**
  * UI-only Time permission helpers.
  * Server remains authoritative — these only hide/disable controls.
+ *
+ * TIME-NATIVE-001-A02: consume APZHUB PermissionService grants via session
+ * hydration. Never hardcode `time.*` as a UI default. Never map engine roles.
  */
 
 export type TimePermissionSource =
