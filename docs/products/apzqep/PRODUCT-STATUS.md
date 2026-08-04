@@ -136,13 +136,14 @@ APZQEP-165: **COMPLETE** (QO-001…QO-018); package baseline 0.1.16 (QO-017)
 V1.1 foundational architecture: **FROZEN** — [Architecture Freeze](./v1.1/apzqep-version-1.1-architecture-freeze/)
 Designation: [Enterprise Quality Baseline](./v1.1/apzqep-version-1.1-architecture-freeze/ENTERPRISE-QUALITY-BASELINE.md)
 APZQEP-166 / APZQEP-170/180/190/200 provider families: NOT AUTHORISED until separate Owner Auth
+APZQEP-ADOPT-001: **OPEN / AUTHORISED** — Enterprise Internal Adoption Programme
+Face: [apzqep-adopt-001/](./apzqep-adopt-001/)
 
 Next Action:
-Execute adoption phase per [ADOPTION-AND-OPERATIONS.md](./v1.1/apzqep-version-1.1-architecture-freeze/ADOPTION-AND-OPERATIONS.md). Classify every enhancement under [APZQEP-CHANGE-CONTROL.md](./v1.1/apzqep-version-1.1-architecture-freeze/APZQEP-CHANGE-CONTROL.md). Do not reopen V1.1 foundations; do not start APZQEP-170 until operational lessons exist.
-Do NOT open monolithic APZQEP-165 engineering in one pass.
+Execute [APZQEP-ADOPT-001](./apzqep-adopt-001/) — dogfood APZHUB through APZQEP daily; onboard products per PRODUCT-ONBOARDING-ORDER; log friction; raise evidence-based backlog. Classify enhancements under [APZQEP-CHANGE-CONTROL.md](./v1.1/apzqep-version-1.1-architecture-freeze/APZQEP-CHANGE-CONTROL.md).
+Do NOT start APZQEP-170 until ADOPT-001 produces operational lessons (earliest after Month 2 checkpoint).
 Do NOT open further V1.1 foundational architecture or planning programmes.
 Do NOT authorise external AI without a dedicated programme.
-Ops: push local main to origin when remote credentials available.
 ```
 
 ---

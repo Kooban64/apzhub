@@ -46,6 +46,7 @@
 | APZQEP-165           | **COMPLETE** — Wave 5 closed                                                                                                                                 |
 | APZQEP V1.1 Freeze   | **RECORDED** — [Architecture Freeze](./v1.1/apzqep-version-1.1-architecture-freeze/) — FEATURE COMPLETE · ARCHITECTURE FROZEN · INTERNAL ADOPTION            |
 | APZQEP V1.1 Baseline | **DESIGNATED** — [Enterprise Quality Baseline](./v1.1/apzqep-version-1.1-architecture-freeze/ENTERPRISE-QUALITY-BASELINE.md) — mandatory for APZHUB products |
+| APZQEP-ADOPT-001     | **OPEN / AUTHORISED** — [apzqep-adopt-001/](./apzqep-adopt-001/) — Enterprise Internal Adoption (no engines; no 170)                                         |
 | APZQEP-166           | Planned — **not authorised**                                                                                                                                 |
 | APZQEP-163A          | External AI providers — **not authorised**                                                                                                                   |
 | APZHUB-ADR-0100      | Future portfolio recommendation only — **not created**                                                                                                       |

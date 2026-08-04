@@ -75,8 +75,9 @@
 | APZQEP-165-QO-017          | ✅ Workspace & Operations Experience **COMPLETE** 0.1.16                 |
 | APZQEP-165-QO-018          | ✅ Release Certification **CERTIFIED** (engineering unchanged)           |
 | APZQEP-165                 | ✅ **COMPLETE** — Wave 5 closed                                          |
-| APZQEP V1.1                | ✅ **ENTERPRISE QUALITY BASELINE** (frozen · adoption authorised)        |
-| APZQEP-163A…166            | ⛔ Planned — **NOT AUTHORISED**                                          |
+| APZQEP V1.1                | ✅ **ENTERPRISE QUALITY BASELINE** (frozen · officially complete)        |
+| APZQEP-ADOPT-001           | ▶️ **OPEN / AUTHORISED** — Enterprise Internal Adoption                  |
+| APZQEP-163A…166 / 170+     | ⛔ Planned — **NOT AUTHORISED** until ADOPT-001 lessons                  |
 
 ---
 
@@ -91,7 +92,7 @@
 | **Engineering authority** | **CLOSED**                                     |
 | **Management**            | **Operations-led** (APZQEP-OPS-001)            |
 | **Portfolio adoption**    | **APZ Law Platform** selected (PBR-APZHUB-001) |
-| **Version 1.1**           | Not opened — measured evidence + Board auth    |
+| **Version 1.1**           | **COMPLETE** — baseline frozen; ADOPT-001 open |
 
 ---
 

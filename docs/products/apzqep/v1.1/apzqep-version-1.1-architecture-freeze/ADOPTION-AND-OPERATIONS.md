@@ -47,6 +47,11 @@ Success is measured by adoption and operational outcomes — not commits or feat
 Before any enhancement request proceeds to engineering, classify it under
 [APZQEP-CHANGE-CONTROL.md](./APZQEP-CHANGE-CONTROL.md).
 
+## Active programme
+
+**[APZQEP-ADOPT-001](../../apzqep-adopt-001/)** — Enterprise Internal Adoption
+Programme — **OPEN / AUTHORISED**.
+
 ## Next chapter
 
 Adoption, operational learning, and carefully governed provider expansion.

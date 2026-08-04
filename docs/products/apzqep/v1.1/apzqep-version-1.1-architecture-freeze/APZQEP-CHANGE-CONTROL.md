@@ -60,6 +60,12 @@ Companion operating model: [ADOPTION-AND-OPERATIONS.md](./ADOPTION-AND-OPERATION
 - Governance precedes engineering.
 - Certification precedes release.
 
+## Active programme
+
+**[APZQEP-ADOPT-001](../../apzqep-adopt-001/)** is the authorised vehicle for
+Stage 5 (Operations). It is classified as Operational improvement /
+Documentation. It does **not** authorise providers or architecture change.
+
 ## Default posture
 
 APZQEP Version 1.1 is the **reference implementation** for engineering quality across APZHUB.
