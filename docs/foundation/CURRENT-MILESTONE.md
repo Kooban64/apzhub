@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 20260804T070126Z  
-> **Current status:** **APZQEP flagship** — V1.0 **GA** · Waves 1–5 **CERTIFIED** · **Version 1.1 ENTERPRISE QUALITY BASELINE** (FEATURE COMPLETE · ARCHITECTURE FROZEN · INTERNAL ADOPTION) · baseline `@apzhub/platform-orchestration` **0.1.16** · [PRODUCT-STATUS](../products/apzqep/PRODUCT-STATUS.md) · [Enterprise Quality Baseline](../products/apzqep/v1.1/apzqep-version-1.1-architecture-freeze/ENTERPRISE-QUALITY-BASELINE.md) · [Architecture Freeze](../products/apzqep/v1.1/apzqep-version-1.1-architecture-freeze/).
+> **Current status:** **APZQEP flagship** — V1.0 **GA** · **Version 1.1 OFFICIALLY COMPLETE** · ENTERPRISE QUALITY BASELINE · ARCHITECTURE FROZEN · adoption mode · baseline `@apzhub/platform-orchestration` **0.1.16** · [PRODUCT-STATUS](../products/apzqep/PRODUCT-STATUS.md) · [Adoption & Operations](../products/apzqep/v1.1/apzqep-version-1.1-architecture-freeze/ADOPTION-AND-OPERATIONS.md) · [Enterprise Quality Baseline](../products/apzqep/v1.1/apzqep-version-1.1-architecture-freeze/ENTERPRISE-QUALITY-BASELINE.md).
 
 ---
 

@@ -52,7 +52,8 @@
 > **APZQEP-165-QO-017 (20260804T182640Z):** Workspace & Operations Experience **COMPLETE** (composition packages) — `@apzhub/platform-orchestration` 0.1.16 — [apzqep-165-qo-017/](./v1.1/apzqep-165-qo-017/)
 > **APZQEP-165-QO-018 (20260804T183155Z):** Enterprise Release Certification **CERTIFIED** — engineering unchanged (0.1.16) — [apzqep-165-qo-018/](./v1.1/apzqep-165-qo-018/)
 > **APZQEP Version 1.1 Architecture Freeze (20260804T183531Z):** **FEATURE COMPLETE · ARCHITECTURE FROZEN · CERTIFIED FOR INTERNAL PRODUCTION ADOPTION** — [apzqep-version-1.1-architecture-freeze/](./v1.1/apzqep-version-1.1-architecture-freeze/)
-> **APZQEP Version 1.1 Enterprise Quality Baseline (20260804T183844Z):** Designated mandatory quality platform for APZHUB — [ENTERPRISE-QUALITY-BASELINE.md](./v1.1/apzqep-version-1.1-architecture-freeze/ENTERPRISE-QUALITY-BASELINE.md) — next: adoption + APZQEP-170/180/190/200 provider families only
+> **APZQEP Version 1.1 Enterprise Quality Baseline (20260804T183844Z):** Designated mandatory quality platform for APZHUB — [ENTERPRISE-QUALITY-BASELINE.md](./v1.1/apzqep-version-1.1-architecture-freeze/ENTERPRISE-QUALITY-BASELINE.md)
+> **APZQEP Version 1.1 Officially Complete (20260804T184100Z):** Enterprise infrastructure mode — [ADOPTION-AND-OPERATIONS.md](./v1.1/apzqep-version-1.1-architecture-freeze/ADOPTION-AND-OPERATIONS.md) — adoption waves + operational metrics; provider families only after operational learning
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

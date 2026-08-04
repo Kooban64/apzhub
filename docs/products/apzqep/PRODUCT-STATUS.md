@@ -138,7 +138,7 @@ Designation: [Enterprise Quality Baseline](./v1.1/apzqep-version-1.1-architectur
 APZQEP-166 / APZQEP-170/180/190/200 provider families: NOT AUTHORISED until separate Owner Auth
 
 Next Action:
-Adopt APZQEP as the mandatory quality platform across APZHUB products; authorise provider/integration programmes separately. Do not reopen V1.1 foundations.
+Execute adoption phase per [ADOPTION-AND-OPERATIONS.md](./v1.1/apzqep-version-1.1-architecture-freeze/ADOPTION-AND-OPERATIONS.md) (engineering teams → APZHUB products → major programmes → providers). Do not reopen V1.1 foundations.
 Do NOT open monolithic APZQEP-165 engineering in one pass.
 Do NOT open further V1.1 foundational architecture or planning programmes.
 Do NOT authorise external AI without a dedicated programme.
