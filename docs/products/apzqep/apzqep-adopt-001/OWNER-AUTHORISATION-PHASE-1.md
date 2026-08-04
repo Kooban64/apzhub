@@ -72,7 +72,7 @@ Users interact only with APZHUB products. Never with third-party engines.
 ## Success criteria
 
 - APZQEP actively used internally as standard quality platform
-- APZ Time development / native platform track started
+- APZ Time maturation track started (not greenfield build)
 - APZ Time presented as completely native APZHUB product
 - No user-facing references to Kimai
 - Operational learning captured throughout
