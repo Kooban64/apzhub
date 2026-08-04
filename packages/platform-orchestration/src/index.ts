@@ -87,6 +87,13 @@ export {
   assertGateStatusTransition,
   listAllowedGateStatusTransitions,
 } from "./governance/status-transitions";
+export { AuthorityRegistry, ApprovalTemplateRegistry } from "./approval/registries";
+export { ApprovalEngine, type ApprovalEngineOptions } from "./approval/approval-engine";
+export {
+  evaluateSod,
+  twoPersonSatisfied,
+  mandatoryAuthoritiesSatisfied,
+} from "./approval/sod";
 export {
   createPlatformOrchestration,
   type CreatePlatformOrchestrationOptions,

@@ -1,3 +1,4 @@
+import { ApprovalEngine } from "../approval/approval-engine";
 import type { OrchestrationKernelConfig } from "../contracts/configuration";
 import type { OrchestrationEventPublisher } from "../contracts/events";
 import { OrchestrationContainer, ORCHESTRATION_DI_TOKENS } from "../di/container";
@@ -32,12 +33,13 @@ export interface PlatformOrchestration {
   readonly impact: ImpactCorrelationEngine;
   readonly policySelection: PolicySelectionEngine;
   readonly governance: GovernanceEngine;
+  readonly approvals: ApprovalEngine;
   readonly container: OrchestrationContainer;
 }
 
 /**
- * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-007).
- * Governance evaluates requirements — never executes or generates evidence.
+ * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-008).
+ * Approvals record authority decisions — never re-evaluate governance.
  */
 export async function createPlatformOrchestration(
   options: CreatePlatformOrchestrationOptions = {},
@@ -97,6 +99,15 @@ export async function createPlatformOrchestration(
       "Gate evaluation and governance decisions — never executes, generates evidence, or approves releases",
   });
 
+  kernel.contracts.register({
+    contractId: "orchestration.approval.v1",
+    kind: "approval",
+    version: PLATFORM_ORCHESTRATION_VERSION,
+    name: "Approval Decision Platform",
+    description:
+      "Authority decisions and immutable approval bundles — never re-evaluates governance or manages identity",
+  });
+
   const triggerBindings = new TriggerBindingRegistry();
   const triggers = new TriggerEngine({
     bindings: triggerBindings,
@@ -123,6 +134,11 @@ export async function createPlatformOrchestration(
   });
 
   const governance = new GovernanceEngine({
+    publishEvent: options.publishEvent,
+    orchestrationId: kernel.orchestrationId,
+  });
+
+  const approvals = new ApprovalEngine({
     publishEvent: options.publishEvent,
     orchestrationId: kernel.orchestrationId,
   });
@@ -157,6 +173,9 @@ export async function createPlatformOrchestration(
   if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.governance)) {
     kernel.container.register(ORCHESTRATION_DI_TOKENS.governance, governance);
   }
+  if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.approval)) {
+    kernel.container.register(ORCHESTRATION_DI_TOKENS.approval, approvals);
+  }
 
   return {
     kernel,
@@ -169,6 +188,7 @@ export async function createPlatformOrchestration(
     impact,
     policySelection,
     governance,
+    approvals,
     container: kernel.container,
   };
 }

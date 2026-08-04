@@ -32,7 +32,8 @@
 | APZQEP-165-QO-005   | **COMPLETE** — [v1.1/apzqep-165-qo-005/](./v1.1/apzqep-165-qo-005/) — Impact Correlation         |
 | APZQEP-165-QO-006   | **COMPLETE** — [v1.1/apzqep-165-qo-006/](./v1.1/apzqep-165-qo-006/) — Policy & Quality Selection |
 | APZQEP-165-QO-007   | **COMPLETE** — [v1.1/apzqep-165-qo-007/](./v1.1/apzqep-165-qo-007/) — Quality Governance Engine  |
-| APZQEP-165 / QO-008 | **NOT STARTED** — next Owner Auth **QO-008** Human Approval Engine                               |
+| APZQEP-165-QO-008   | **COMPLETE** — [v1.1/apzqep-165-qo-008/](./v1.1/apzqep-165-qo-008/) — Approval Decision Platform |
+| APZQEP-165 / QO-009 | **NOT STARTED** — next Owner Auth **QO-009** Release Recommendation Engine                       |
 | APZQEP-166          | Planned — **not authorised**                                                                     |
 | APZQEP-163A         | External AI providers — **not authorised**                                                       |
 | APZHUB-ADR-0100     | Future portfolio recommendation only — **not created**                                           |

@@ -11,7 +11,7 @@
 | Package           | `@apzhub/platform-orchestration` **0.1.6**                                                               |
 | Timestamp         | 20260804T113513Z                                                                                         |
 | Evidence          | [evidence/apzqep-165-qo-007/20260804T113513Z/](../../../../evidence/apzqep-165-qo-007/20260804T113513Z/) |
-| Next              | **QO-008** — Human Approval Engine (separate Owner Auth)                                                 |
+| Next              | **QO-008** — Enterprise Approval Decision Platform (**COMPLETE**)                                        |
 
 ## Mission
 
