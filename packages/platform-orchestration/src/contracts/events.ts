@@ -1,4 +1,4 @@
-/** Kernel events only — Quality Flow / peer events arrive later. */
+/** Kernel + trigger events — Quality Flow execution events arrive later. */
 
 export const ORCHESTRATION_KERNEL_EVENT_TYPES = {
   kernelCreated: "orchestration.kernel.created",
@@ -10,11 +10,23 @@ export const ORCHESTRATION_KERNEL_EVENT_TYPES = {
   contractRegistered: "orchestration.contract.registered",
 } as const;
 
+export const TRIGGER_EVENT_TYPES = {
+  received: "orchestration.trigger.received",
+  ignored: "orchestration.trigger.ignored",
+  routed: "orchestration.trigger.routed",
+  rejected: "orchestration.trigger.rejected",
+} as const;
+
 export type OrchestrationKernelEventType =
   (typeof ORCHESTRATION_KERNEL_EVENT_TYPES)[keyof typeof ORCHESTRATION_KERNEL_EVENT_TYPES];
 
+export type TriggerEventType =
+  (typeof TRIGGER_EVENT_TYPES)[keyof typeof TRIGGER_EVENT_TYPES];
+
+export type OrchestrationEventType = OrchestrationKernelEventType | TriggerEventType;
+
 export interface OrchestrationKernelEvent {
-  readonly type: OrchestrationKernelEventType;
+  readonly type: OrchestrationEventType;
   readonly occurredAt: string;
   readonly orchestrationId: string;
   readonly correlationId: string;

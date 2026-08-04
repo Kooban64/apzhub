@@ -3,6 +3,7 @@ export * from "./state";
 export * from "./context";
 export * from "./capability-catalogue";
 export * from "./contracts";
+export * from "./trigger";
 export * from "./errors";
 export * from "./configuration";
 export * from "./diagnostics";

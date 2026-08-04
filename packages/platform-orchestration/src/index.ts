@@ -25,6 +25,8 @@ export {
   OrchestrationKernel,
   type OrchestrationKernelOptions,
 } from "./kernel/orchestration-kernel";
+export { TriggerBindingRegistry } from "./triggers/trigger-binding-registry";
+export { TriggerEngine, type TriggerEngineOptions } from "./triggers/trigger-engine";
 export {
   createPlatformOrchestration,
   type CreatePlatformOrchestrationOptions,

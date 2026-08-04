@@ -53,6 +53,8 @@ export const ORCHESTRATION_DI_TOKENS = {
   capabilityRegistry: "orchestration.registry.capability",
   contractRegistry: "orchestration.registry.contract",
   lifecycleRegistry: "orchestration.registry.lifecycle",
+  triggerEngine: "orchestration.trigger.engine",
+  triggerBindings: "orchestration.trigger.bindings",
   logger: "orchestration.logger",
   config: "orchestration.config",
 } as const;
