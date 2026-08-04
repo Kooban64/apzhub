@@ -49,13 +49,13 @@
 
 ## Wave 5 — Continuous Quality (**APZQEP-165**)
 
-| Item                  | Content                                                           |
-| --------------------- | ----------------------------------------------------------------- |
-| Objectives            | Autonomous change→score loop                                      |
-| Capabilities          | Change detection, impact analysis, auto-selection, gates, scoring |
-| Dependencies          | Waves 1–2 (+ AI optional)                                         |
-| Engineering programme | **APZQEP-165** — NOT AUTHORISED                                   |
-| Success               | Policy-driven continuous certification signals                    |
+| Item                  | Content                                                                                            |
+| --------------------- | -------------------------------------------------------------------------------------------------- |
+| Objectives            | Autonomous change→score loop                                                                       |
+| Capabilities          | Change detection, impact analysis, auto-selection, gates, scoring                                  |
+| Dependencies          | Waves 1–2 (+ AI optional)                                                                          |
+| Engineering programme | **APZQEP-165** — **AUTHORISED TO OPEN** — NOT STARTED; shape continuous quality architecture first |
+| Success               | Policy-driven continuous certification signals                                                     |
 
 ## Wave 6 — Enterprise Ecosystem (**APZQEP-166**)
 
