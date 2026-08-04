@@ -139,9 +139,12 @@ APZQEP-166 / APZQEP-170/180/190/200 provider families: NOT AUTHORISED until sepa
 APZQEP-ADOPT-001: **OPEN / AUTHORISED** — Enterprise Internal Adoption Programme
 Face: [apzqep-adopt-001/](./apzqep-adopt-001/)
 
+Engineering chapter: **CLOSED** — [CHAPTER-CLOSE.md](./v1.1/apzqep-version-1.1-architecture-freeze/CHAPTER-CLOSE.md)
+Final sentence: **The platform is ready to learn.**
+
 Next Action:
-**Use APZQEP** — wait for a real APZHUB change that would happen anyway; label it **APZQEP Release 0001**; run full pipeline ([WEEK-1-EXERCISE.md](./apzqep-adopt-001/WEEK-1-EXERCISE.md)); capture timings; measure Engineering Friction first. Next APZQEP conversation should start with what happened on that release — not architecture.
-Do NOT invent artificial exercises. Do NOT start APZQEP-170. Do NOT create TOP-20-FRICTIONS up-front (emergent). Do NOT reopen V1.1 foundations.
+**Use APZQEP** — wait for a real APZHUB change that would happen anyway; label it **APZQEP Release 0001**; run full pipeline ([WEEK-1-EXERCISE.md](./apzqep-adopt-001/WEEK-1-EXERCISE.md)); capture timings; measure Engineering Friction first. Next APZQEP conversation starts with what that release taught us — not architecture.
+Do NOT invent artificial exercises. Do NOT start APZQEP-170. Do NOT reopen V1.1 foundations. Every future enhancement: operational evidence or deliberate strategic decision only.
 ```
 
 ---

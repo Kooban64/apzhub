@@ -16,7 +16,12 @@ APZQEP Version 1.1 is designated the Enterprise Quality Baseline for APZHUB.
 All future enhancements shall be delivered as separately authorised
 provider, integration, or operational improvement programmes against
 this frozen architecture.
+
+Final sentence for Version 1.1:
+The platform is ready to learn.
 ```
+
+Chapter close: [CHAPTER-CLOSE.md](./CHAPTER-CLOSE.md).
 
 ## Mandatory quality platform
 

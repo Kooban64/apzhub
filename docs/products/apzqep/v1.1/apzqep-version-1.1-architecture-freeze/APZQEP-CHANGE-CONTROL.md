@@ -16,6 +16,13 @@ This document sits **above all future APZQEP programmes**. It answers one questi
 Source of this classification: closing programme assessment (ChatGPT coaching close,
 2026-08-04) — recorded as governance, not as engineering instruction.
 
+## Forever principle
+
+> **Every enhancement must trace back to operational evidence or a deliberate strategic decision.**
+
+Those are the only two acceptable reasons to evolve the platform.
+See [CHAPTER-CLOSE.md](./CHAPTER-CLOSE.md).
+
 ## Portfolio lifecycle (current stage)
 
 | Stage            | Meaning                                                | Status      |

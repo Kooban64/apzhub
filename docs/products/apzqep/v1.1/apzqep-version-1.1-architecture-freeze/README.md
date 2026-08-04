@@ -31,6 +31,7 @@ See [PORTFOLIO-MILESTONE.md](./PORTFOLIO-MILESTONE.md) and
 | [ENTERPRISE-QUALITY-BASELINE.md](./ENTERPRISE-QUALITY-BASELINE.md)       | APZHUB mandatory quality baseline designation          |
 | [ADOPTION-AND-OPERATIONS.md](./ADOPTION-AND-OPERATIONS.md)               | Adoption waves, evaluation rules, success metrics      |
 | [APZQEP-CHANGE-CONTROL.md](./APZQEP-CHANGE-CONTROL.md)                   | Allowed change types against the frozen baseline       |
+| [CHAPTER-CLOSE.md](./CHAPTER-CLOSE.md)                                   | Engineering chapter closed — platform ready to learn   |
 
 ## Rule
 
