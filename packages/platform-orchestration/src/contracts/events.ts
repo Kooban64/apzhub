@@ -79,6 +79,14 @@ export const EVIDENCE_INTEGRATION_EVENT_TYPES = {
   profileApplied: "report.profile.applied",
 } as const;
 
+/** Past-tense executive experience facts (QO-015) — never commands. */
+export const EXECUTIVE_EXPERIENCE_EVENT_TYPES = {
+  experienceCreated: "executive.experience.created",
+  packageCompleted: "executive.package.completed",
+  personaApplied: "executive.persona.applied",
+  projectionUpdated: "executive.projection.updated",
+} as const;
+
 export type OrchestrationKernelEventType =
   (typeof ORCHESTRATION_KERNEL_EVENT_TYPES)[keyof typeof ORCHESTRATION_KERNEL_EVENT_TYPES];
 
@@ -115,6 +123,9 @@ export type EnrichmentEventType =
 export type EvidenceIntegrationEventType =
   (typeof EVIDENCE_INTEGRATION_EVENT_TYPES)[keyof typeof EVIDENCE_INTEGRATION_EVENT_TYPES];
 
+export type ExecutiveExperienceEventType =
+  (typeof EXECUTIVE_EXPERIENCE_EVENT_TYPES)[keyof typeof EXECUTIVE_EXPERIENCE_EVENT_TYPES];
+
 export type OrchestrationEventType =
   | OrchestrationKernelEventType
   | TriggerEventType
@@ -127,7 +138,8 @@ export type OrchestrationEventType =
   | AutomationCoordinationEventType
   | SourceChangeEventType
   | EnrichmentEventType
-  | EvidenceIntegrationEventType;
+  | EvidenceIntegrationEventType
+  | ExecutiveExperienceEventType;
 
 export interface OrchestrationKernelEvent {
   readonly type: OrchestrationEventType;

@@ -147,6 +147,18 @@ export {
   resolveReportProfile,
 } from "./evidence/report-profiles";
 export {
+  ExecutiveExperienceEngine,
+  type ExecutiveExperienceEngineOptions,
+} from "./executive/executive-experience-engine";
+export {
+  BUILTIN_EXECUTIVE_PERSONAS,
+  getBuiltinExecutivePersona,
+  isExecutiveArtefactSlot,
+  isExecutivePersonaKind,
+  listBuiltinExecutivePersonas,
+  resolveExecutivePersona,
+} from "./executive/executive-personas";
+export {
   createPlatformOrchestration,
   type CreatePlatformOrchestrationOptions,
   type PlatformOrchestration,

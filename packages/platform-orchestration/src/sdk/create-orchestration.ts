@@ -6,6 +6,7 @@ import { DecisionEngine } from "../decision/decision-engine";
 import { OrchestrationContainer, ORCHESTRATION_DI_TOKENS } from "../di/container";
 import { EnrichmentEngine } from "../enrichment/enrichment-engine";
 import { EvidenceIntegrationEngine } from "../evidence/evidence-integration-engine";
+import { ExecutiveExperienceEngine } from "../executive/executive-experience-engine";
 import { QualityEventBackbone } from "../events/event-backbone";
 import { QualityFlowEngine } from "../flows/quality-flow-engine";
 import { GovernanceEngine } from "../governance/governance-engine";
@@ -51,11 +52,13 @@ export interface PlatformOrchestration {
   readonly enrichment: EnrichmentEngine;
   /** Enterprise Evidence & Reporting Integration — refs only; reports are views. */
   readonly evidenceIntegration: EvidenceIntegrationEngine;
+  /** Enterprise Executive Experience — projection only; never presentation. */
+  readonly executiveExperience: ExecutiveExperienceEngine;
   readonly container: OrchestrationContainer;
 }
 
 /**
- * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-014).
+ * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-015).
  * All publications route through the Event Backbone (transport only).
  */
 export async function createPlatformOrchestration(
@@ -185,6 +188,15 @@ export async function createPlatformOrchestration(
       "Evidence Integration Packages by reference — reports are derived views, never evidence",
   });
 
+  kernel.contracts.register({
+    contractId: "orchestration.executive_experience.v1",
+    kind: "executive_experience",
+    version: PLATFORM_ORCHESTRATION_VERSION,
+    name: "Executive Experience Integration",
+    description:
+      "Executive Experience Packages as projections — never presentation, never decision influence",
+  });
+
   const triggerBindings = new TriggerBindingRegistry();
   const triggers = new TriggerEngine({
     bindings: triggerBindings,
@@ -246,6 +258,11 @@ export async function createPlatformOrchestration(
     orchestrationId: kernel.orchestrationId,
   });
 
+  const executiveExperience = new ExecutiveExperienceEngine({
+    events,
+    orchestrationId: kernel.orchestrationId,
+  });
+
   if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.triggerEngine)) {
     kernel.container.register(ORCHESTRATION_DI_TOKENS.triggerEngine, triggers);
   }
@@ -303,6 +320,12 @@ export async function createPlatformOrchestration(
       evidenceIntegration,
     );
   }
+  if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.executiveExperience)) {
+    kernel.container.register(
+      ORCHESTRATION_DI_TOKENS.executiveExperience,
+      executiveExperience,
+    );
+  }
 
   return {
     kernel,
@@ -322,6 +345,7 @@ export async function createPlatformOrchestration(
     sourceChange,
     enrichment,
     evidenceIntegration,
+    executiveExperience,
     container: kernel.container,
   };
 }

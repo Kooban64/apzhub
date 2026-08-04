@@ -46,7 +46,8 @@
 > **APZQEP-165-QO-011 (20260804T170349Z):** Automation Coordination **COMPLETE** (Coordination Package, intents, events) — `@apzhub/platform-orchestration` 0.1.10 — [apzqep-165-qo-011/](./v1.1/apzqep-165-qo-011/)
 > **APZQEP-165-QO-012 (20260804T172556Z):** Source Change Coordination **COMPLETE** (Source Change Package, identities) — `@apzhub/platform-orchestration` 0.1.11 — [apzqep-165-qo-012/](./v1.1/apzqep-165-qo-012/)
 > **APZQEP-165-QO-013 (20260804T175605Z):** Quality Intelligence Enrichment **COMPLETE** (advisory Enrichment Package) — `@apzhub/platform-orchestration` 0.1.12 — [apzqep-165-qo-013/](./v1.1/apzqep-165-qo-013/)
-> **APZQEP-165-QO-014 (20260804T180050Z):** Evidence & Reporting Integration **COMPLETE** (Evidence Integration Package) — `@apzhub/platform-orchestration` 0.1.13 — [apzqep-165-qo-014/](./v1.1/apzqep-165-qo-014/) — next **QO-015**
+> **APZQEP-165-QO-014 (20260804T180050Z):** Evidence & Reporting Integration **COMPLETE** (Evidence Integration Package) — `@apzhub/platform-orchestration` 0.1.13 — [apzqep-165-qo-014/](./v1.1/apzqep-165-qo-014/)
+> **APZQEP-165-QO-015 (20260804T181205Z):** Executive Experience Integration **COMPLETE** (projection packages) — `@apzhub/platform-orchestration` 0.1.14 — [apzqep-165-qo-015/](./v1.1/apzqep-165-qo-015/) — next **QO-016**
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
