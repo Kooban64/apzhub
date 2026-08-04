@@ -18,7 +18,8 @@ provider, integration, or operational improvement programmes against
 this frozen architecture.
 
 Final sentence for Version 1.1:
-The platform is ready to learn.
+The architecture is frozen. The governance is established.
+The platform is ready to learn. The next chapter will be written by real releases.
 ```
 
 Chapter close: [CHAPTER-CLOSE.md](./CHAPTER-CLOSE.md).
