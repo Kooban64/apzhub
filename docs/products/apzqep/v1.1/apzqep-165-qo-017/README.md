@@ -11,7 +11,7 @@
 | Package           | `@apzhub/platform-orchestration` **0.1.16**                                                              |
 | Timestamp         | 20260804T182640Z                                                                                         |
 | Evidence          | [evidence/apzqep-165-qo-017/20260804T182640Z/](../../../../evidence/apzqep-165-qo-017/20260804T182640Z/) |
-| Next              | **QO-018** — Enterprise Production Certification & Release Readiness (separate Owner Auth)               |
+| Next              | **QO-018** — Enterprise Release Certification Programme (**CERTIFIED**)                                  |
 
 ## Mission
 

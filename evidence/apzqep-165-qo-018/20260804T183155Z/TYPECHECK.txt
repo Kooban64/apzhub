@@ -1,0 +1,4 @@
+
+> @apzhub/platform-orchestration@0.1.16 typecheck /home/ubuntu/apz-portal/packages/platform-orchestration
+> tsc --noEmit -p tsconfig.json
+

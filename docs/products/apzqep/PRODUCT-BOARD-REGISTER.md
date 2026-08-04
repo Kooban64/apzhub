@@ -22,29 +22,30 @@
 
 ## Pending / next
 
-| Item                | State                                                                                            |
-| ------------------- | ------------------------------------------------------------------------------------------------ |
-| APZQEP-165-PLAN     | **COMPLETE** — [v1.1/apzqep-165-plan/](./v1.1/apzqep-165-plan/) — last V1.1 planning programme   |
-| APZQEP-165-QO-001   | **COMPLETE** — [v1.1/apzqep-165-qo-001/](./v1.1/apzqep-165-qo-001/) — orchestration kernel       |
-| APZQEP-165-QO-002   | **COMPLETE** — [v1.1/apzqep-165-qo-002/](./v1.1/apzqep-165-qo-002/) — capability catalogue       |
-| APZQEP-165-QO-003   | **COMPLETE** — [v1.1/apzqep-165-qo-003/](./v1.1/apzqep-165-qo-003/) — trigger routing            |
-| APZQEP-165-QO-004   | **COMPLETE** — [v1.1/apzqep-165-qo-004/](./v1.1/apzqep-165-qo-004/) — Quality Flow Engine        |
-| APZQEP-165-QO-005   | **COMPLETE** — [v1.1/apzqep-165-qo-005/](./v1.1/apzqep-165-qo-005/) — Impact Correlation         |
-| APZQEP-165-QO-006   | **COMPLETE** — [v1.1/apzqep-165-qo-006/](./v1.1/apzqep-165-qo-006/) — Policy & Quality Selection |
-| APZQEP-165-QO-007   | **COMPLETE** — [v1.1/apzqep-165-qo-007/](./v1.1/apzqep-165-qo-007/) — Quality Governance Engine  |
-| APZQEP-165-QO-008   | **COMPLETE** — [v1.1/apzqep-165-qo-008/](./v1.1/apzqep-165-qo-008/) — Approval Decision Platform |
-| APZQEP-165-QO-009   | **COMPLETE** — [v1.1/apzqep-165-qo-009/](./v1.1/apzqep-165-qo-009/) — Quality Decision Engine    |
-| APZQEP-165-QO-010   | **COMPLETE** — [v1.1/apzqep-165-qo-010/](./v1.1/apzqep-165-qo-010/) — Quality Event Backbone     |
-| APZQEP-165-QO-011   | **COMPLETE** — [v1.1/apzqep-165-qo-011/](./v1.1/apzqep-165-qo-011/) — Automation Coordination    |
-| APZQEP-165-QO-012   | **COMPLETE** — [v1.1/apzqep-165-qo-012/](./v1.1/apzqep-165-qo-012/) — Source Change Coordination |
-| APZQEP-165-QO-013   | **COMPLETE** — [v1.1/apzqep-165-qo-013/](./v1.1/apzqep-165-qo-013/) — QI Enrichment              |
-| APZQEP-165-QO-014   | **COMPLETE** — [v1.1/apzqep-165-qo-014/](./v1.1/apzqep-165-qo-014/) — Evidence & Reporting       |
-| APZQEP-165-QO-015   | **COMPLETE** — [v1.1/apzqep-165-qo-015/](./v1.1/apzqep-165-qo-015/) — Executive Experience       |
-| APZQEP-165-QO-016   | **COMPLETE** — [v1.1/apzqep-165-qo-016/](./v1.1/apzqep-165-qo-016/) — Operational Platform       |
-| APZQEP-165-QO-017   | **COMPLETE** — [v1.1/apzqep-165-qo-017/](./v1.1/apzqep-165-qo-017/) — Workspace Experience       |
-| APZQEP-165 / QO-018 | **NOT STARTED** — next Owner Auth **QO-018** Production Certification & Release Readiness        |
-| APZQEP-166          | Planned — **not authorised**                                                                     |
-| APZQEP-163A         | External AI providers — **not authorised**                                                       |
-| APZHUB-ADR-0100     | Future portfolio recommendation only — **not created**                                           |
-| Remote push (ops)   | Local `main` ahead of `origin/main` — Owner/ops push when credentials available                  |
-| Wave progress       | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                               |
+| Item              | State                                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------------------ |
+| APZQEP-165-PLAN   | **COMPLETE** — [v1.1/apzqep-165-plan/](./v1.1/apzqep-165-plan/) — last V1.1 planning programme   |
+| APZQEP-165-QO-001 | **COMPLETE** — [v1.1/apzqep-165-qo-001/](./v1.1/apzqep-165-qo-001/) — orchestration kernel       |
+| APZQEP-165-QO-002 | **COMPLETE** — [v1.1/apzqep-165-qo-002/](./v1.1/apzqep-165-qo-002/) — capability catalogue       |
+| APZQEP-165-QO-003 | **COMPLETE** — [v1.1/apzqep-165-qo-003/](./v1.1/apzqep-165-qo-003/) — trigger routing            |
+| APZQEP-165-QO-004 | **COMPLETE** — [v1.1/apzqep-165-qo-004/](./v1.1/apzqep-165-qo-004/) — Quality Flow Engine        |
+| APZQEP-165-QO-005 | **COMPLETE** — [v1.1/apzqep-165-qo-005/](./v1.1/apzqep-165-qo-005/) — Impact Correlation         |
+| APZQEP-165-QO-006 | **COMPLETE** — [v1.1/apzqep-165-qo-006/](./v1.1/apzqep-165-qo-006/) — Policy & Quality Selection |
+| APZQEP-165-QO-007 | **COMPLETE** — [v1.1/apzqep-165-qo-007/](./v1.1/apzqep-165-qo-007/) — Quality Governance Engine  |
+| APZQEP-165-QO-008 | **COMPLETE** — [v1.1/apzqep-165-qo-008/](./v1.1/apzqep-165-qo-008/) — Approval Decision Platform |
+| APZQEP-165-QO-009 | **COMPLETE** — [v1.1/apzqep-165-qo-009/](./v1.1/apzqep-165-qo-009/) — Quality Decision Engine    |
+| APZQEP-165-QO-010 | **COMPLETE** — [v1.1/apzqep-165-qo-010/](./v1.1/apzqep-165-qo-010/) — Quality Event Backbone     |
+| APZQEP-165-QO-011 | **COMPLETE** — [v1.1/apzqep-165-qo-011/](./v1.1/apzqep-165-qo-011/) — Automation Coordination    |
+| APZQEP-165-QO-012 | **COMPLETE** — [v1.1/apzqep-165-qo-012/](./v1.1/apzqep-165-qo-012/) — Source Change Coordination |
+| APZQEP-165-QO-013 | **COMPLETE** — [v1.1/apzqep-165-qo-013/](./v1.1/apzqep-165-qo-013/) — QI Enrichment              |
+| APZQEP-165-QO-014 | **COMPLETE** — [v1.1/apzqep-165-qo-014/](./v1.1/apzqep-165-qo-014/) — Evidence & Reporting       |
+| APZQEP-165-QO-015 | **COMPLETE** — [v1.1/apzqep-165-qo-015/](./v1.1/apzqep-165-qo-015/) — Executive Experience       |
+| APZQEP-165-QO-016 | **COMPLETE** — [v1.1/apzqep-165-qo-016/](./v1.1/apzqep-165-qo-016/) — Operational Platform       |
+| APZQEP-165-QO-017 | **COMPLETE** — [v1.1/apzqep-165-qo-017/](./v1.1/apzqep-165-qo-017/) — Workspace Experience       |
+| APZQEP-165-QO-018 | **CERTIFIED** — [v1.1/apzqep-165-qo-018/](./v1.1/apzqep-165-qo-018/) — Release Certification     |
+| APZQEP-165        | **COMPLETE** — Wave 5 closed; V1.1 **FEATURE COMPLETE**                                          |
+| APZQEP-166        | Planned — **not authorised**                                                                     |
+| APZQEP-163A       | External AI providers — **not authorised**                                                       |
+| APZHUB-ADR-0100   | Future portfolio recommendation only — **not created**                                           |
+| Remote push (ops) | Local `main` ahead of `origin/main` — Owner/ops push when credentials available                  |
+| Wave progress     | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                               |
