@@ -14,6 +14,7 @@ export * from "./event-backbone";
 export * from "./automation-coordination";
 export * from "./source-change";
 export * from "./enrichment";
+export * from "./evidence-integration";
 export * from "./errors";
 export * from "./configuration";
 export * from "./diagnostics";

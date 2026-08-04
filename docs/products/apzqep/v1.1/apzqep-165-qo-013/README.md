@@ -11,7 +11,7 @@
 | Package           | `@apzhub/platform-orchestration` **0.1.12**                                                              |
 | Timestamp         | 20260804T175605Z                                                                                         |
 | Evidence          | [evidence/apzqep-165-qo-013/20260804T175605Z/](../../../../evidence/apzqep-165-qo-013/20260804T175605Z/) |
-| Next              | **QO-014** — Enterprise Evidence & Reporting Integration (separate Owner Auth)                           |
+| Next              | **QO-014** — Enterprise Evidence & Reporting Integration (**COMPLETE**)                                  |
 
 ## Mission
 

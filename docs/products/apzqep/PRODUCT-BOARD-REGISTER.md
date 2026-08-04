@@ -38,7 +38,8 @@
 | APZQEP-165-QO-011   | **COMPLETE** — [v1.1/apzqep-165-qo-011/](./v1.1/apzqep-165-qo-011/) — Automation Coordination    |
 | APZQEP-165-QO-012   | **COMPLETE** — [v1.1/apzqep-165-qo-012/](./v1.1/apzqep-165-qo-012/) — Source Change Coordination |
 | APZQEP-165-QO-013   | **COMPLETE** — [v1.1/apzqep-165-qo-013/](./v1.1/apzqep-165-qo-013/) — QI Enrichment              |
-| APZQEP-165 / QO-014 | **NOT STARTED** — next Owner Auth **QO-014** Evidence & Reporting Integration                    |
+| APZQEP-165-QO-014   | **COMPLETE** — [v1.1/apzqep-165-qo-014/](./v1.1/apzqep-165-qo-014/) — Evidence & Reporting       |
+| APZQEP-165 / QO-015 | **NOT STARTED** — next Owner Auth **QO-015** Executive Experience Integration                    |
 | APZQEP-166          | Planned — **not authorised**                                                                     |
 | APZQEP-163A         | External AI providers — **not authorised**                                                       |
 | APZHUB-ADR-0100     | Future portfolio recommendation only — **not created**                                           |

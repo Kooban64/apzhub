@@ -135,6 +135,18 @@ export {
   isAdvisoryInsightCategory,
 } from "./enrichment/insight-builder";
 export {
+  EvidenceIntegrationEngine,
+  type EvidenceIntegrationEngineOptions,
+} from "./evidence/evidence-integration-engine";
+export {
+  BUILTIN_REPORT_PROFILES,
+  getBuiltinReportProfile,
+  isEvidenceReferenceSlot,
+  isReportProfileKind,
+  listBuiltinReportProfiles,
+  resolveReportProfile,
+} from "./evidence/report-profiles";
+export {
   createPlatformOrchestration,
   type CreatePlatformOrchestrationOptions,
   type PlatformOrchestration,

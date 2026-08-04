@@ -5,6 +5,7 @@ import type { OrchestrationEventPublisher } from "../contracts/events";
 import { DecisionEngine } from "../decision/decision-engine";
 import { OrchestrationContainer, ORCHESTRATION_DI_TOKENS } from "../di/container";
 import { EnrichmentEngine } from "../enrichment/enrichment-engine";
+import { EvidenceIntegrationEngine } from "../evidence/evidence-integration-engine";
 import { QualityEventBackbone } from "../events/event-backbone";
 import { QualityFlowEngine } from "../flows/quality-flow-engine";
 import { GovernanceEngine } from "../governance/governance-engine";
@@ -48,11 +49,13 @@ export interface PlatformOrchestration {
   readonly sourceChange: SourceChangeCoordinator;
   /** Enterprise Quality Intelligence Enrichment — additive advisory only. */
   readonly enrichment: EnrichmentEngine;
+  /** Enterprise Evidence & Reporting Integration — refs only; reports are views. */
+  readonly evidenceIntegration: EvidenceIntegrationEngine;
   readonly container: OrchestrationContainer;
 }
 
 /**
- * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-013).
+ * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-014).
  * All publications route through the Event Backbone (transport only).
  */
 export async function createPlatformOrchestration(
@@ -173,6 +176,15 @@ export async function createPlatformOrchestration(
       "Additive advisory Enrichment Packages — never modifies or re-evaluates authoritative artefacts",
   });
 
+  kernel.contracts.register({
+    contractId: "orchestration.evidence_integration.v1",
+    kind: "evidence_integration",
+    version: PLATFORM_ORCHESTRATION_VERSION,
+    name: "Evidence & Reporting Integration",
+    description:
+      "Evidence Integration Packages by reference — reports are derived views, never evidence",
+  });
+
   const triggerBindings = new TriggerBindingRegistry();
   const triggers = new TriggerEngine({
     bindings: triggerBindings,
@@ -229,6 +241,11 @@ export async function createPlatformOrchestration(
     orchestrationId: kernel.orchestrationId,
   });
 
+  const evidenceIntegration = new EvidenceIntegrationEngine({
+    events,
+    orchestrationId: kernel.orchestrationId,
+  });
+
   if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.triggerEngine)) {
     kernel.container.register(ORCHESTRATION_DI_TOKENS.triggerEngine, triggers);
   }
@@ -280,6 +297,12 @@ export async function createPlatformOrchestration(
   if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.enrichment)) {
     kernel.container.register(ORCHESTRATION_DI_TOKENS.enrichment, enrichment);
   }
+  if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.evidenceIntegration)) {
+    kernel.container.register(
+      ORCHESTRATION_DI_TOKENS.evidenceIntegration,
+      evidenceIntegration,
+    );
+  }
 
   return {
     kernel,
@@ -298,6 +321,7 @@ export async function createPlatformOrchestration(
     automationCoordination,
     sourceChange,
     enrichment,
+    evidenceIntegration,
     container: kernel.container,
   };
 }

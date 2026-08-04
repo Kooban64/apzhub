@@ -71,6 +71,14 @@ export const ENRICHMENT_EVENT_TYPES = {
   packageCreated: "enrichment.package.created",
 } as const;
 
+/** Past-tense evidence & reporting integration facts (QO-014) — never commands. */
+export const EVIDENCE_INTEGRATION_EVENT_TYPES = {
+  integrationCreated: "evidence.integration.created",
+  packageCompleted: "evidence.package.completed",
+  reportGenerated: "report.generated",
+  profileApplied: "report.profile.applied",
+} as const;
+
 export type OrchestrationKernelEventType =
   (typeof ORCHESTRATION_KERNEL_EVENT_TYPES)[keyof typeof ORCHESTRATION_KERNEL_EVENT_TYPES];
 
@@ -104,6 +112,9 @@ export type SourceChangeEventType =
 export type EnrichmentEventType =
   (typeof ENRICHMENT_EVENT_TYPES)[keyof typeof ENRICHMENT_EVENT_TYPES];
 
+export type EvidenceIntegrationEventType =
+  (typeof EVIDENCE_INTEGRATION_EVENT_TYPES)[keyof typeof EVIDENCE_INTEGRATION_EVENT_TYPES];
+
 export type OrchestrationEventType =
   | OrchestrationKernelEventType
   | TriggerEventType
@@ -115,7 +126,8 @@ export type OrchestrationEventType =
   | DecisionEventType
   | AutomationCoordinationEventType
   | SourceChangeEventType
-  | EnrichmentEventType;
+  | EnrichmentEventType
+  | EvidenceIntegrationEventType;
 
 export interface OrchestrationKernelEvent {
   readonly type: OrchestrationEventType;

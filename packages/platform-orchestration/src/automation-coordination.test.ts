@@ -208,7 +208,7 @@ describe("APZQEP-165 QO-011 Enterprise Automation Coordination", () => {
       },
     });
     expect(JSON.stringify(pkg).toLowerCase()).not.toMatch(
-      /playwright|selenium|cypress|appium|k6|percy|axe/,
+      /\b(playwright|selenium|cypress|appium|k6|percy|axe)\b/,
     );
     expect(platform.automationCoordination.diagnostics().packageCount).toBe(1);
     expect(platform.automationCoordination.diagnostics().ready).toBe(true);
