@@ -35,11 +35,13 @@ Record friction in [FRICTION-LOG.md](./FRICTION-LOG.md) and learnings in
 [OPERATIONAL-LEARNING-REGISTER.md](./OPERATIONAL-LEARNING-REGISTER.md).
 Do **not** redesign APZQEP.
 
-## Track B — APZ Time
+## Track B — APZ Time (maturation, not creation)
 
 Programme face: [APZHUB-TIME-NATIVE-001](../../time/APZHUB-TIME-NATIVE-001/)
 
-Baseline: APZ Time Production **1.0.0** (ACCEPTED/CLOSED).
+Baseline: APZ Time Production **1.0.0** (ACCEPTED/CLOSED) — already exists.
+Objective: first-class APZHUB experience; Kimai invisible. See
+[ROADMAP.md](../../time/APZHUB-TIME-NATIVE-001/ROADMAP.md) Phases A → B → C.
 
 ## Quality path (every APZ Time change)
 

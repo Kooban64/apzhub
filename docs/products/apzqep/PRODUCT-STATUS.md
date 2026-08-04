@@ -138,7 +138,7 @@ Designation: [Enterprise Quality Baseline](./v1.1/apzqep-version-1.1-architectur
 APZQEP-166 / APZQEP-170/180/190/200 provider families: NOT AUTHORISED until separate Owner Auth
 APZQEP-ADOPT-001: **OPEN** — Phase 1 **IN PROGRESS** (Production Adoption & APZ Time Integration)
 Face: [apzqep-adopt-001/](./apzqep-adopt-001/) · Auth: [OWNER-AUTHORISATION-PHASE-1.md](./apzqep-adopt-001/OWNER-AUTHORISATION-PHASE-1.md)
-APZHUB-TIME-NATIVE-001: **STARTED** — [../time/APZHUB-TIME-NATIVE-001/](../time/APZHUB-TIME-NATIVE-001/)
+APZHUB-TIME-NATIVE-001: **STARTED** — maturation of Time 1.0.0 (native UX/identity/workspace/APZQEP) — [../time/APZHUB-TIME-NATIVE-001/](../time/APZHUB-TIME-NATIVE-001/) — not greenfield
 
 Engineering chapter: **CLOSED** — [CHAPTER-CLOSE.md](./v1.1/apzqep-version-1.1-architecture-freeze/CHAPTER-CLOSE.md)
 Default on APZQEP architecture: frozen. Default on APZQEP ops: **daily use + evidence**.

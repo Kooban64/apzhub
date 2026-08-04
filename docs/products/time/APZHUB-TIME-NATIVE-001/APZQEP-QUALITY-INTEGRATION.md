@@ -4,8 +4,9 @@
 | --------- | ---------------------- |
 | Programme | APZHUB-TIME-NATIVE-001 |
 | Status    | **STARTED**            |
-| Timestamp | 20260804T191500Z       |
+| Timestamp | 20260804T193500Z       |
 | Baseline  | APZQEP Version 1.1     |
+| Priority  | **4 — APZQEP binding** |
 
 ## Rule
 

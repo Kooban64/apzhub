@@ -4,7 +4,8 @@
 | --------- | ---------------------- |
 | Programme | APZHUB-TIME-NATIVE-001 |
 | Status    | **STARTED**            |
-| Timestamp | 20260804T191500Z       |
+| Timestamp | 20260804T193500Z       |
+| Priority  | **1 — Native UX**      |
 
 ## Hard rules
 

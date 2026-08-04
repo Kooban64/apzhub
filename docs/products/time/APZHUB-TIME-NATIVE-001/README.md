@@ -1,45 +1,62 @@
 # APZHUB-TIME-NATIVE-001 — APZ Time Native Platform Experience
 
-| Field     | Value                                              |
-| --------- | -------------------------------------------------- |
-| Programme | **APZHUB-TIME-NATIVE-001**                         |
-| Product   | **APZ Time**                                       |
-| Status    | **STARTED**                                        |
-| Timestamp | 20260804T191500Z                                   |
-| Parent    | APZQEP-ADOPT-001 Phase 1                           |
-| Baseline  | [docs/products/time/](../) · Production **1.0.0**  |
-| Authority | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md) |
+| Field          | Value                                              |
+| -------------- | -------------------------------------------------- |
+| Programme      | **APZHUB-TIME-NATIVE-001**                         |
+| Product        | **APZ Time**                                       |
+| Classification | **Adoption & Product Evolution**                   |
+| Status         | **STARTED**                                        |
+| Timestamp      | 20260804T193500Z                                   |
+| Parent         | APZQEP-ADOPT-001 Phase 1                           |
+| Baseline       | Production **1.0.0** ACCEPTED/CLOSED — [../](../)  |
+| Authority      | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md) |
+| Roadmap        | [ROADMAP.md](./ROADMAP.md)                         |
 
-## Premise
+## Reality check
 
-APZ Time already ships as Production **1.0.0** with a certified Kimai adapter.
-This programme advances the **native APZHUB experience**: one platform, one
-identity, one UX — engine invisible.
+| Fact           | Value                                                     |
+| -------------- | --------------------------------------------------------- |
+| APZ Time 1.0.0 | Exists — production accepted                              |
+| Kimai adapter  | Certified (`@apzhub/integration-kimai` 0.2.0)             |
+| This programme | Maturation / native experience — **not** product creation |
 
-## Platform principle
+## Objective
 
-| User sees | Must never see                                       |
-| --------- | ---------------------------------------------------- |
-| APZ Time  | Kimai branding, URLs, terminology, docs, auth, roles |
+> Make APZ Time feel like a first-class APZHUB product while preserving the existing production capability.
+
+Success metric for Phase A: an APZHUB employee spends a day in APZ Time and **never once thinks about Kimai**.
+
+Wrong metric: “Does APZ Time expose every Kimai feature?”  
+Right metric: “Does APZ Time provide the experience our users need?”
+
+## Contract principle
+
+> The product contract is APZ Time. The implementation contract is the Kimai adapter. These evolve independently.
+
+## Priority order
+
+1. Native UX
+2. Identity
+3. Workspace
+4. APZQEP binding
+5. Daily-use Phase 1 gaps only
+
+See [ROADMAP.md](./ROADMAP.md) (Phases A → B → C).
 
 ## Deliverable register
 
-| #   | Deliverable                | Artefact                                                         | Status      |
-| --- | -------------------------- | ---------------------------------------------------------------- | ----------- |
-| 1   | Owner Auth                 | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md)               | **DONE**    |
-| 2   | Vision (native refresh)    | [VISION.md](./VISION.md)                                         | **STARTED** |
-| 3   | Functional specification   | [FUNCTIONAL-SPECIFICATION.md](./FUNCTIONAL-SPECIFICATION.md)     | Pending     |
-| 4   | Integration architecture   | [INTEGRATION-ARCHITECTURE.md](./INTEGRATION-ARCHITECTURE.md)     | Pending     |
-| 5   | Identity & permissions     | [IDENTITY-AND-PERMISSIONS.md](./IDENTITY-AND-PERMISSIONS.md)     | Pending     |
-| 6   | Workspace & navigation     | [WORKSPACE-AND-NAVIGATION.md](./WORKSPACE-AND-NAVIGATION.md)     | Pending     |
-| 7   | Notifications & ops model  | [OPERATIONAL-MODEL.md](./OPERATIONAL-MODEL.md)                   | Pending     |
-| 8   | APZQEP quality integration | [APZQEP-QUALITY-INTEGRATION.md](./APZQEP-QUALITY-INTEGRATION.md) | Pending     |
-| 9   | UX principles (native)     | [UX-NATIVE-PRINCIPLES.md](./UX-NATIVE-PRINCIPLES.md)             | Pending     |
+| #   | Deliverable              | Artefact                                                         | Status      |
+| --- | ------------------------ | ---------------------------------------------------------------- | ----------- |
+| 1   | Owner Auth (maturation)  | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md)               | **DONE**    |
+| 2   | Roadmap A/B/C            | [ROADMAP.md](./ROADMAP.md)                                       | **DONE**    |
+| 3   | Vision (native refresh)  | [VISION.md](./VISION.md)                                         | **STARTED** |
+| 4   | UX native principles     | [UX-NATIVE-PRINCIPLES.md](./UX-NATIVE-PRINCIPLES.md)             | **STARTED** |
+| 5   | Functional specification | [FUNCTIONAL-SPECIFICATION.md](./FUNCTIONAL-SPECIFICATION.md)     | Pending     |
+| 6   | Integration architecture | [INTEGRATION-ARCHITECTURE.md](./INTEGRATION-ARCHITECTURE.md)     | Pending     |
+| 7   | Identity & permissions   | [IDENTITY-AND-PERMISSIONS.md](./IDENTITY-AND-PERMISSIONS.md)     | Pending     |
+| 8   | Workspace & navigation   | [WORKSPACE-AND-NAVIGATION.md](./WORKSPACE-AND-NAVIGATION.md)     | Pending     |
+| 9   | Operational model        | [OPERATIONAL-MODEL.md](./OPERATIONAL-MODEL.md)                   | Pending     |
+| 10  | APZQEP quality binding   | [APZQEP-QUALITY-INTEGRATION.md](./APZQEP-QUALITY-INTEGRATION.md) | **STARTED** |
 
-Existing product pack (do not duplicate blindly): [../VISION.md](../VISION.md),
-[../ARCHITECTURE.md](../ARCHITECTURE.md), [../KNOWN-LIMITATIONS.md](../KNOWN-LIMITATIONS.md).
-
-## Quality
-
-Every APZ Time change: Source → Quality Flow → Decision → Evidence → Release
-via APZQEP. Friction → [ADOPT-001](../../apzqep/apzqep-adopt-001/).
+Existing product pack: [../VISION.md](../VISION.md) · [../KNOWN-LIMITATIONS.md](../KNOWN-LIMITATIONS.md).
+Friction → [ADOPT-001](../../apzqep/apzqep-adopt-001/).

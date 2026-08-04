@@ -1,37 +1,38 @@
-# Vision — APZ Time (Native Platform Refresh)
+# Vision — APZ Time (Native Maturation)
 
 | Field     | Value                  |
 | --------- | ---------------------- |
 | Programme | APZHUB-TIME-NATIVE-001 |
 | Status    | **STARTED**            |
-| Timestamp | 20260804T191500Z       |
+| Timestamp | 20260804T193500Z       |
 
 ## Product statement
 
-**APZ Time** is APZHUB’s time-tracking product. It is experienced as a native
-workspace capability alongside Projects, Support, Documents, Analytics,
-Workflow, and Law.
+**APZ Time** is APZHUB’s time-tracking product — already in Production **1.0.0**.
+This programme makes it feel first-class inside the APZHUB workbench while
+preserving that capability.
 
-How the capability is implemented (Kimai CE behind a Service Connector) is an
-internal detail. It is never part of the user’s mental model.
+Users think: “I’m using APZ Time.”  
+Never: “I’m using Kimai.”
 
 ## Outcomes
 
-1. Users track time, approve entries, and report effort entirely inside APZHUB.
-2. One login — APZHUB Identity — no secondary engine session.
-3. Roles and permissions are APZHUB roles; backend role names never appear.
-4. Navigation, notifications, search, and quality/release flows feel identical
-   in pattern to other APZHUB products.
-5. Every product change is certified through APZQEP.
+1. Native UX — APZHUB navigation, terminology, branding, help, notifications.
+2. One identity — APZHUB login / session / RBAC only.
+3. One workbench — Time as a workspace alongside Projects, Support, Documents, Analytics, Workflow, QEP.
+4. Quality — every enhancement through APZQEP.
+5. Evolution — Phase 1 daily-use gaps first; larger capabilities only from operational evidence.
 
-## Non-goals (this programme)
+## Non-goals
 
-- Exposing or documenting Kimai to end users
-- Rebuilding time-tracking business logic outside the adapter pattern
+- Rebuilding Time from scratch
+- Kimai feature parity as a success metric
+- Exposing the engine to users
 - Reopening APZQEP foundations
 
-## Relationship to 1.0.0
+## Contracts
 
-Production **1.0.0** remains the current release baseline. This programme
-closes native-experience and governance gaps and binds Time development to
-APZQEP daily use under ADOPT-001 Phase 1.
+| Contract                       | Owner             | Evolves                             |
+| ------------------------------ | ----------------- | ----------------------------------- |
+| Product (APZ Time)             | APZHUB            | UX, permissions, workspace, quality |
+| Implementation (Kimai adapter) | Integration layer | Independently; invisible to users   |

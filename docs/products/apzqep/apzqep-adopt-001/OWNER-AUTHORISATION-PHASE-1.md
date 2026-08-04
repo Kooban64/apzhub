@@ -38,14 +38,13 @@ The goal is to **use** APZQEP and present APZ Time as a native APZHUB product.
 - Record operational friction (do not redesign APZQEP)
 - Train developers, testers, managers for daily use
 
-### Track B — APZ Time
+### Track B — APZ Time (maturation)
 
-- Product vision / functional specification refresh for native platform experience
-- APZHUB UX, navigation, workspace integration
-- Identity: APZHUB Identity / Roles / Sessions only — no secondary login
-- Permission model, notifications, operational model
-- Integration architecture (Kimai remains internal adapter only)
-- APZQEP quality integration for every APZ Time change
+- Priority order: Native UX → Identity → Workspace → APZQEP binding → daily-use gaps
+- Not: build Time; Not: Kimai feature parity
+- Preserve Production 1.0.0 capability
+- Product contract (APZ Time) vs implementation contract (Kimai adapter) evolve independently
+- Larger capabilities (approvals, reporting, AI, …) only after operational evidence + named release Auth
 
 ## Explicit exclusions
 
