@@ -3,7 +3,7 @@
 | Field     | Value                                                |
 | --------- | ---------------------------------------------------- |
 | Programme | APZQEP-160                                           |
-| Updated   | 20260804T054651Z (APZQEP-165-000 architecture)       |
+| Updated   | 20260804T055621Z (PBR-APZQEP-165-000 approval)       |
 | Note      | Wave-aligned IDs **161–166** are Board-authoritative |
 
 ## Definition
@@ -14,17 +14,17 @@
 
 ## Version 1.1 engineering programmes (wave-aligned)
 
-| ID                 | Wave | Title                                               | Engineering authority                                                           |
-| ------------------ | ---- | --------------------------------------------------- | ------------------------------------------------------------------------------- |
-| **APZQEP-161**     | 1    | Enterprise Automation Foundation (Playwright-first) | **CERTIFIED** (PBR-APZQEP-161)                                                  |
-| **APZQEP-162**     | 2    | Enterprise Integrations                             | **CERTIFIED** (PBR-APZQEP-162) — living: SCM Integration                        |
-| **APZQEP-163**     | 3    | AI Quality Intelligence                             | **CERTIFIED** (PBR-APZQEP-163) — living: Enterprise QI                          |
-| **APZQEP-164**     | 4    | Enterprise Dashboards                               | **CERTIFIED** (PBR-APZQEP-164) — living: Dashboard & Quality Experience         |
-| **APZQEP-165-000** | 5    | Continuous Quality (arch)                           | **ARCHITECTURE COMPLETE** — living: Enterprise Continuous Quality Orchestration |
-| **APZQEP-165**     | 5    | Continuous Quality                                  | **NOT STARTED** — awaits PBR-APZQEP-165-000 + Owner Auth                        |
-| **APZQEP-166**     | 6    | Enterprise Ecosystem                                | NOT AUTHORISED                                                                  |
+| ID                 | Wave | Title                                               | Engineering authority                                                                                |
+| ------------------ | ---- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| **APZQEP-161**     | 1    | Enterprise Automation Foundation (Playwright-first) | **CERTIFIED** (PBR-APZQEP-161)                                                                       |
+| **APZQEP-162**     | 2    | Enterprise Integrations                             | **CERTIFIED** (PBR-APZQEP-162) — living: SCM Integration                                             |
+| **APZQEP-163**     | 3    | AI Quality Intelligence                             | **CERTIFIED** (PBR-APZQEP-163) — living: Enterprise QI                                               |
+| **APZQEP-164**     | 4    | Enterprise Dashboards                               | **CERTIFIED** (PBR-APZQEP-164) — living: Dashboard & Quality Experience                              |
+| **APZQEP-165-000** | 5    | Continuous Quality (arch)                           | **COMPLETE** · **PBR-APZQEP-165-000 APPROVED** — living: Enterprise Continuous Quality Orchestration |
+| **APZQEP-165**     | 5    | Continuous Quality                                  | **AUTHORISED TO OPEN** — eng **NOT STARTED** — awaits Owner Auth                                     |
+| **APZQEP-166**     | 6    | Enterprise Ecosystem                                | NOT AUTHORISED                                                                                       |
 
-> Wave 3–5 APZQEP-160 historical titles preserved; living titles are **Enterprise Quality Intelligence Platform**, **Enterprise Dashboard & Quality Experience**, and **Enterprise Continuous Quality Orchestration** (Wave 5 living title pending Board via PBR-APZQEP-165-000).
+> Wave 3–5 APZQEP-160 historical titles preserved; living titles are **Enterprise Quality Intelligence Platform**, **Enterprise Dashboard & Quality Experience**, and **Enterprise Continuous Quality Orchestration** (Board-adopted via PBR-APZQEP-165-000). V1.1 foundational architecture **CLOSED**.
 
 ## Superseded draft numbering
 

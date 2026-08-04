@@ -6,7 +6,7 @@
 | Authority          | Product Board — **STANDING**                   |
 | Audience           | Engineers, architects, auditors, AI assistants |
 | Rule               | **Read this document before any APZQEP work**  |
-| Last updated       | 20260804T054651Z                               |
+| Last updated       | 20260804T055621Z                               |
 | Engineering thread | **FORMALLY COMPLETE** (V1.0)                   |
 | Product posture    | **GENERAL AVAILABILITY**                       |
 | Management posture | **Operations-led** (APZQEP-OPS-001)            |
@@ -90,10 +90,11 @@ Management posture:
 OPERATIONS-LED
 
 Next Authorised Programme:
-APZQEP-165-000 — Enterprise Continuous Quality Orchestration Architecture **COMPLETE** (docs/evidence only)
-APZQEP-165 engineering — **NOT STARTED** — awaits **PBR-APZQEP-165-000** then separate Owner Auth
+APZQEP-165 — Enterprise Continuous Quality Orchestration (**AUTHORISED TO OPEN**; eng **NOT STARTED**; awaits Owner Auth)
+PBR-APZQEP-165-000 **APPROVED** — V1.1 foundational architecture **CLOSED**
 APZQEP-166 NOT AUTHORISED
 APZQEP-163A (external AI providers) NOT AUTHORISED
+Future portfolio recommendation (non-binding): APZHUB-ADR-0100 — not created under this resolution
 
 Version 1.1 definition programme:
 APZQEP-160 COMPLETE — Product Board **APPROVED** (PBR-APZQEP-160)
@@ -124,16 +125,17 @@ Board certification: **CERTIFIED** (PBR-APZQEP-164) · eng commit `0432d2af5a6ef
 Durability: process-local layout store — not production-durable until persistence certified
 
 Version 1.1 Wave 5:
-APZQEP-165-000 ARCHITECTURE COMPLETE — living title **Enterprise Continuous Quality Orchestration**
+APZQEP-165-000 ARCHITECTURE COMPLETE · **PBR-APZQEP-165-000 APPROVED**
+Living title: **Enterprise Continuous Quality Orchestration**
 Intended package: @apzhub/platform-orchestration (design only; not implemented)
-APZQEP-165 engineering NOT STARTED
-Declared: last V1.1 foundational architecture programme
+APZQEP-165 AUTHORISED TO OPEN — engineering NOT STARTED
+V1.1 foundational architecture: **CLOSED**
 APZQEP-166 NOT AUTHORISED
 
 Next Action:
-PBR-APZQEP-165-000 — Product Board Architecture Approval.
-Do NOT begin APZQEP-165 engineering until Board-approved and separately Owner-authorised.
-Do NOT open further V1.1 foundational architecture programmes after 165-000.
+Owner Auth for APZQEP-165 engineering (separate programme).
+Do NOT begin APZQEP-165 without Owner Auth.
+Do NOT open further V1.1 foundational architecture programmes.
 Do NOT authorise external AI without a dedicated programme.
 Ops: push local main to origin when remote credentials available.
 ```
@@ -207,6 +209,7 @@ Ops: push local main to origin when remote credentials available.
 | **APZQEP-164**         | Enterprise Dashboard & Quality Experience **COMPLETE**                    |
 | **PBR-APZQEP-164**     | Wave 4 **CERTIFIED** — APZQEP-165 **AUTHORISED TO OPEN**                  |
 | **APZQEP-165-000**     | Enterprise Continuous Quality Orchestration Architecture **COMPLETE**     |
+| **PBR-APZQEP-165-000** | Wave 5 architecture **APPROVED** — V1.1 foundational architecture CLOSED  |
 
 ---
 
@@ -279,9 +282,9 @@ Board / audit / ops:
 ## Path remaining
 
 1. Operate Version 1.0 under APZQEP-OPS-001.
-2. PBR-APZQEP-165-000 architecture approval; then Owner Auth for APZQEP-165 engineering.
+2. Owner Auth for APZQEP-165 engineering (architecture Board-approved).
 3. Do not authorise APZQEP-166 or external AI providers yet.
-4. Do not open further V1.1 foundational architecture programmes after 165-000.
+4. V1.1 foundational architecture CLOSED — no further foundational architecture programmes.
 
 ---
 
@@ -291,7 +294,7 @@ Version 1.0 engineering lifecycle is formally complete. Product Board authorised
 
 Authoritative state:
 
-> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. V1.0 engineering CLOSED. APZQEP-OPS-001 COMPLETE. Waves 1–4 CERTIFIED. APZQEP-165-000 ARCHITECTURE COMPLETE (Enterprise Continuous Quality Orchestration). APZQEP-165 engineering NOT STARTED — next PBR-APZQEP-165-000. Wave 166 and external AI providers NOT AUTHORISED.**
+> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. V1.0 engineering CLOSED. APZQEP-OPS-001 COMPLETE. Waves 1–4 CERTIFIED. PBR-APZQEP-165-000 APPROVED — Enterprise Continuous Quality Orchestration. V1.1 foundational architecture CLOSED. APZQEP-165 AUTHORISED TO OPEN — engineering NOT STARTED. Wave 166 and external AI providers NOT AUTHORISED.**
 
 ---
 

@@ -30,7 +30,8 @@
 > **PBR-APZQEP-164-000 (20260803T192906Z):** Wave 4 architecture **APPROVED** — [pbr-apzqep-164-000/](./v1.1/pbr-apzqep-164-000/)  
 > **APZQEP-164 (20260803T195639Z):** Enterprise Dashboard & Quality Experience **ENGINEERING COMPLETE** — `@apzhub/platform-dashboard` + `@apzhub/platform-visualization` — [apzqep-164/](./v1.1/apzqep-164/)  
 > **PBR-APZQEP-164 (20260804T051443Z):** Wave 4 **CERTIFIED** — APZQEP-165 **AUTHORISED TO OPEN** (NOT STARTED) — [pbr-apzqep-164/](./v1.1/pbr-apzqep-164/)  
-> **APZQEP-165-000 (20260804T054651Z):** Enterprise Continuous Quality Orchestration Architecture **COMPLETE** (docs/evidence only; eng NONE) — [apzqep-165-000/](./v1.1/apzqep-165-000/) — next **PBR-APZQEP-165-000**; APZQEP-165 eng **NOT STARTED**
+> **APZQEP-165-000 (20260804T054651Z):** Enterprise Continuous Quality Orchestration Architecture **COMPLETE** (docs/evidence only; eng NONE) — [apzqep-165-000/](./v1.1/apzqep-165-000/)  
+> **PBR-APZQEP-165-000 (20260804T055621Z):** Wave 5 architecture **APPROVED** — living title **Enterprise Continuous Quality Orchestration** — V1.1 foundational architecture **CLOSED** — APZQEP-165 **AUTHORISED TO OPEN** (eng NOT STARTED) — [pbr-apzqep-165-000/](./v1.1/pbr-apzqep-165-000/)
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
