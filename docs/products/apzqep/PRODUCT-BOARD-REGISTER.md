@@ -3,7 +3,7 @@
 | Field     | Value                    |
 | --------- | ------------------------ |
 | Document  | PRODUCT-BOARD-REGISTER   |
-| Timestamp | 20260804T051443Z         |
+| Timestamp | 20260804T054651Z         |
 | Authority | Product Board — STANDING |
 
 ## Resolutions
@@ -21,10 +21,12 @@
 
 ## Pending / next
 
-| Item              | State                                                                                                    |
-| ----------------- | -------------------------------------------------------------------------------------------------------- |
-| APZQEP-165        | **AUTHORISED TO OPEN** — **NOT STARTED** — awaits Owner Auth + architecture shaping — Continuous Quality |
-| APZQEP-166        | Planned — **not authorised**                                                                             |
-| APZQEP-163A       | External AI providers — **not authorised**                                                               |
-| Remote push (ops) | Local `main` ahead of `origin/main` — Owner/ops push when credentials available (OI-164-05)              |
-| Wave progress     | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                                       |
+| Item               | State                                                                                                      |
+| ------------------ | ---------------------------------------------------------------------------------------------------------- |
+| APZQEP-165-000     | **ARCHITECTURE COMPLETE** — [v1.1/apzqep-165-000/](./v1.1/apzqep-165-000/) — awaits **PBR-APZQEP-165-000** |
+| APZQEP-165 eng     | **NOT STARTED** — gated on architecture Board approval + separate Owner Auth                               |
+| PBR-APZQEP-165-000 | **PENDING** — Product Board Architecture Approval                                                          |
+| APZQEP-166         | Planned — **not authorised**                                                                               |
+| APZQEP-163A        | External AI providers — **not authorised**                                                                 |
+| Remote push (ops)  | Local `main` ahead of `origin/main` — Owner/ops push when credentials available                            |
+| Wave progress      | [v1.1/WAVE-PROGRESS-REGISTER.md](./v1.1/WAVE-PROGRESS-REGISTER.md)                                         |

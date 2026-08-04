@@ -3,7 +3,7 @@
 | Field     | Value                                                |
 | --------- | ---------------------------------------------------- |
 | Programme | APZQEP-160                                           |
-| Updated   | 20260804T051443Z (PBR-APZQEP-164 progress)           |
+| Updated   | 20260804T054651Z (APZQEP-165-000 architecture)       |
 | Note      | Wave-aligned IDs **161–166** are Board-authoritative |
 
 ## Definition
@@ -14,16 +14,17 @@
 
 ## Version 1.1 engineering programmes (wave-aligned)
 
-| ID             | Wave | Title                                               | Engineering authority                                                   |
-| -------------- | ---- | --------------------------------------------------- | ----------------------------------------------------------------------- |
-| **APZQEP-161** | 1    | Enterprise Automation Foundation (Playwright-first) | **CERTIFIED** (PBR-APZQEP-161)                                          |
-| **APZQEP-162** | 2    | Enterprise Integrations                             | **CERTIFIED** (PBR-APZQEP-162) — living: SCM Integration                |
-| **APZQEP-163** | 3    | AI Quality Intelligence                             | **CERTIFIED** (PBR-APZQEP-163) — living: Enterprise QI                  |
-| **APZQEP-164** | 4    | Enterprise Dashboards                               | **CERTIFIED** (PBR-APZQEP-164) — living: Dashboard & Quality Experience |
-| **APZQEP-165** | 5    | Continuous Quality                                  | **AUTHORISED TO OPEN** — NOT STARTED — shape architecture first         |
-| **APZQEP-166** | 6    | Enterprise Ecosystem                                | NOT AUTHORISED                                                          |
+| ID                 | Wave | Title                                               | Engineering authority                                                           |
+| ------------------ | ---- | --------------------------------------------------- | ------------------------------------------------------------------------------- |
+| **APZQEP-161**     | 1    | Enterprise Automation Foundation (Playwright-first) | **CERTIFIED** (PBR-APZQEP-161)                                                  |
+| **APZQEP-162**     | 2    | Enterprise Integrations                             | **CERTIFIED** (PBR-APZQEP-162) — living: SCM Integration                        |
+| **APZQEP-163**     | 3    | AI Quality Intelligence                             | **CERTIFIED** (PBR-APZQEP-163) — living: Enterprise QI                          |
+| **APZQEP-164**     | 4    | Enterprise Dashboards                               | **CERTIFIED** (PBR-APZQEP-164) — living: Dashboard & Quality Experience         |
+| **APZQEP-165-000** | 5    | Continuous Quality (arch)                           | **ARCHITECTURE COMPLETE** — living: Enterprise Continuous Quality Orchestration |
+| **APZQEP-165**     | 5    | Continuous Quality                                  | **NOT STARTED** — awaits PBR-APZQEP-165-000 + Owner Auth                        |
+| **APZQEP-166**     | 6    | Enterprise Ecosystem                                | NOT AUTHORISED                                                                  |
 
-> Wave 3–4 APZQEP-160 historical titles preserved; living titles are **Enterprise Quality Intelligence Platform** and **Enterprise Dashboard & Quality Experience**.
+> Wave 3–5 APZQEP-160 historical titles preserved; living titles are **Enterprise Quality Intelligence Platform**, **Enterprise Dashboard & Quality Experience**, and **Enterprise Continuous Quality Orchestration** (Wave 5 living title pending Board via PBR-APZQEP-165-000).
 
 ## Superseded draft numbering
 

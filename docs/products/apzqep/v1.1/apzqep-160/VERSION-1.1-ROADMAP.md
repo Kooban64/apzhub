@@ -3,14 +3,15 @@
 | Field       | Value                                                                          |
 | ----------- | ------------------------------------------------------------------------------ |
 | Programme   | APZQEP-160                                                                     |
-| Timestamp   | 20260804T051443Z (progress update)                                             |
+| Timestamp   | 20260804T054651Z (progress update)                                             |
 | Board       | **APPROVED** — PBR-APZQEP-160; Waves 1–4 **CERTIFIED** (PBR-APZQEP-164)        |
-| Engineering | Waves 1–4 closed; Wave 5 (**APZQEP-165**) **AUTHORISED TO OPEN** — not started |
+| Engineering | Waves 1–4 closed; Wave 5 arch **APZQEP-165-000 COMPLETE**; eng **NOT STARTED** |
 
-> **Historical naming (immutable):** Wave summary table preserves APZQEP-160 wording for Wave 3 (“AI Quality Intelligence”) and Wave 4 (“Enterprise Dashboards”).  
+> **Historical naming (immutable):** Wave summary table preserves APZQEP-160 wording for Wave 3 (“AI Quality Intelligence”), Wave 4 (“Enterprise Dashboards”), and Wave 5 (“Continuous Quality”).  
 > **Authoritative Wave 3 title:** **Enterprise Quality Intelligence Platform** ([pbr-apzqep-163-000](../pbr-apzqep-163-000/HISTORICAL-NAMING-RESOLUTION.md)).  
 > **Authoritative Wave 4 title:** **Enterprise Dashboard & Quality Experience** ([pbr-apzqep-164-000](../pbr-apzqep-164-000/HISTORICAL-NAMING-DECISION.md)).  
-> APZQEP-160 is **not rewritten**.
+> **Authoritative Wave 5 living title (pending Board):** **Enterprise Continuous Quality Orchestration** ([apzqep-165-000](../apzqep-165-000/)).  
+> APZQEP-160 historical body text is **not rewritten**.
 
 ## North star
 
@@ -31,14 +32,14 @@ Ship Version 1.1 as the Enterprise Quality Platform in six waves, preserving Ver
 
 See [../WAVE-PROGRESS-REGISTER.md](../WAVE-PROGRESS-REGISTER.md).
 
-| Wave | State                                                                                                                |
-| ---- | -------------------------------------------------------------------------------------------------------------------- |
-| 1    | **CERTIFIED** (APZQEP-161 + 161R + PBR-APZQEP-161)                                                                   |
-| 2    | **CERTIFIED** (APZQEP-162 + PBR-APZQEP-162) — title: Enterprise Source Control Integration Platform                  |
-| 3    | **CERTIFIED** (APZQEP-163 + PBR-APZQEP-163) — title: **Enterprise Quality Intelligence Platform** (AI is a provider) |
-| 4    | **CERTIFIED** (APZQEP-164 + PBR-APZQEP-164) — title: **Enterprise Dashboard & Quality Experience**                   |
-| 5    | **AUTHORISED TO OPEN** (APZQEP-165) — eng NOT STARTED — shape continuous quality architecture first                  |
-| 6    | NOT AUTHORISED                                                                                                       |
+| Wave | State                                                                                                                                              |
+| ---- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | **CERTIFIED** (APZQEP-161 + 161R + PBR-APZQEP-161)                                                                                                 |
+| 2    | **CERTIFIED** (APZQEP-162 + PBR-APZQEP-162) — title: Enterprise Source Control Integration Platform                                                |
+| 3    | **CERTIFIED** (APZQEP-163 + PBR-APZQEP-163) — title: **Enterprise Quality Intelligence Platform** (AI is a provider)                               |
+| 4    | **CERTIFIED** (APZQEP-164 + PBR-APZQEP-164) — title: **Enterprise Dashboard & Quality Experience**                                                 |
+| 5    | **APZQEP-165-000 ARCHITECTURE COMPLETE** — eng NOT STARTED — next **PBR-APZQEP-165-000**; living title Enterprise Continuous Quality Orchestration |
+| 6    | NOT AUTHORISED                                                                                                                                     |
 
 ## Gates
 

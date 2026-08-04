@@ -49,13 +49,15 @@
 
 ## Wave 5 — Continuous Quality (**APZQEP-165**)
 
-| Item                  | Content                                                                                            |
-| --------------------- | -------------------------------------------------------------------------------------------------- |
-| Objectives            | Autonomous change→score loop                                                                       |
-| Capabilities          | Change detection, impact analysis, auto-selection, gates, scoring                                  |
-| Dependencies          | Waves 1–2 (+ AI optional)                                                                          |
-| Engineering programme | **APZQEP-165** — **AUTHORISED TO OPEN** — NOT STARTED; shape continuous quality architecture first |
-| Success               | Policy-driven continuous certification signals                                                     |
+| Item                   | Content                                                                                                                             |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Objectives             | Autonomous change→score loop (historical APZQEP-160 wording)                                                                        |
+| Living architecture    | **Enterprise Continuous Quality Orchestration** — coordinate registered quality capabilities ([apzqep-165-000](../apzqep-165-000/)) |
+| Capabilities           | Change detection, impact analysis, auto-selection, gates, scoring (orchestrated; not absorbed)                                      |
+| Dependencies           | Waves 1–4 capability platforms                                                                                                      |
+| Architecture programme | **APZQEP-165-000** — **COMPLETE** (20260804T054651Z)                                                                                |
+| Engineering programme  | **APZQEP-165** — **NOT STARTED** — awaits PBR-APZQEP-165-000 + Owner Auth                                                           |
+| Success                | Policy-driven continuous certification signals via `@apzhub/platform-orchestration` (design)                                        |
 
 ## Wave 6 — Enterprise Ecosystem (**APZQEP-166**)
 
