@@ -34,6 +34,10 @@ export const POLICY_SELECTION_EVENT_TYPES = {
   decisionProduced: "orchestration.policy_selection.decision_produced",
 } as const;
 
+export const GOVERNANCE_EVENT_TYPES = {
+  decisionProduced: "orchestration.governance.decision_produced",
+} as const;
+
 export type OrchestrationKernelEventType =
   (typeof ORCHESTRATION_KERNEL_EVENT_TYPES)[keyof typeof ORCHESTRATION_KERNEL_EVENT_TYPES];
 
@@ -49,12 +53,16 @@ export type ImpactCorrelationEventType =
 export type PolicySelectionEventType =
   (typeof POLICY_SELECTION_EVENT_TYPES)[keyof typeof POLICY_SELECTION_EVENT_TYPES];
 
+export type GovernanceEventType =
+  (typeof GOVERNANCE_EVENT_TYPES)[keyof typeof GOVERNANCE_EVENT_TYPES];
+
 export type OrchestrationEventType =
   | OrchestrationKernelEventType
   | TriggerEventType
   | QualityFlowEventType
   | ImpactCorrelationEventType
-  | PolicySelectionEventType;
+  | PolicySelectionEventType
+  | GovernanceEventType;
 
 export interface OrchestrationKernelEvent {
   readonly type: OrchestrationEventType;

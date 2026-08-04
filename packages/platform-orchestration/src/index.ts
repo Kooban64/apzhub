@@ -72,6 +72,21 @@ export {
   type PolicySelectionEngineOptions,
 } from "./policy/policy-selection-engine";
 export { evaluateCondition } from "./policy/rule-evaluator";
+export { GateDefinitionRegistry, GateTemplateRegistry } from "./governance/registries";
+export {
+  GovernanceEngine,
+  type GovernanceEngineOptions,
+} from "./governance/governance-engine";
+export {
+  evaluateComposition,
+  collectCompositionGateIds,
+} from "./governance/composition";
+export { evaluateCriterion } from "./governance/criterion-evaluator";
+export {
+  canTransitionGateStatus,
+  assertGateStatusTransition,
+  listAllowedGateStatusTransitions,
+} from "./governance/status-transitions";
 export {
   createPlatformOrchestration,
   type CreatePlatformOrchestrationOptions,

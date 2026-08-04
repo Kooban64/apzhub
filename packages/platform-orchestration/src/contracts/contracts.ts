@@ -13,7 +13,8 @@ export type OrchestrationContractKind =
   | "catalogue"
   | "trigger"
   | "correlation"
-  | "policy";
+  | "policy"
+  | "governance";
 
 /** Descriptor only — no invoke/execute behaviour. */
 export interface OrchestrationContractDescriptor {

@@ -60,6 +60,7 @@ export const ORCHESTRATION_DI_TOKENS = {
   impactCorrelation: "orchestration.impact_correlation.engine",
   impactKnowledge: "orchestration.impact_correlation.knowledge",
   policySelection: "orchestration.policy_selection.engine",
+  governance: "orchestration.governance.engine",
   logger: "orchestration.logger",
   config: "orchestration.config",
 } as const;
