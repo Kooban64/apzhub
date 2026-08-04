@@ -33,30 +33,31 @@ Right metric: “Does APZ Time provide the experience our users need?”
 
 > The product contract is APZ Time. The implementation contract is the Kimai adapter. These evolve independently.
 
-## Priority order
+## Priority order (Phase A slices)
 
-1. Native UX
-2. Identity
-3. Workspace
-4. APZQEP binding
-5. Daily-use Phase 1 gaps only
+1. **A01 Native UX Audit** — **COMPLETE** — [TIME-NATIVE-001-A01](./TIME-NATIVE-001-A01/)
+2. A02 Identity Integration — pending Owner Auth
+3. A03 Workspace Integration — pending
+4. A04 APZQEP Operational Adoption — pending
+5. Daily-use Phase 1 gaps only (not Kimai parity)
 
 See [ROADMAP.md](./ROADMAP.md) (Phases A → B → C).
 
 ## Deliverable register
 
-| #   | Deliverable              | Artefact                                                         | Status      |
-| --- | ------------------------ | ---------------------------------------------------------------- | ----------- |
-| 1   | Owner Auth (maturation)  | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md)               | **DONE**    |
-| 2   | Roadmap A/B/C            | [ROADMAP.md](./ROADMAP.md)                                       | **DONE**    |
-| 3   | Vision (native refresh)  | [VISION.md](./VISION.md)                                         | **STARTED** |
-| 4   | UX native principles     | [UX-NATIVE-PRINCIPLES.md](./UX-NATIVE-PRINCIPLES.md)             | **STARTED** |
-| 5   | Functional specification | [FUNCTIONAL-SPECIFICATION.md](./FUNCTIONAL-SPECIFICATION.md)     | Pending     |
-| 6   | Integration architecture | [INTEGRATION-ARCHITECTURE.md](./INTEGRATION-ARCHITECTURE.md)     | Pending     |
-| 7   | Identity & permissions   | [IDENTITY-AND-PERMISSIONS.md](./IDENTITY-AND-PERMISSIONS.md)     | Pending     |
-| 8   | Workspace & navigation   | [WORKSPACE-AND-NAVIGATION.md](./WORKSPACE-AND-NAVIGATION.md)     | Pending     |
-| 9   | Operational model        | [OPERATIONAL-MODEL.md](./OPERATIONAL-MODEL.md)                   | Pending     |
-| 10  | APZQEP quality binding   | [APZQEP-QUALITY-INTEGRATION.md](./APZQEP-QUALITY-INTEGRATION.md) | **STARTED** |
+| #   | Deliverable              | Artefact                                                                                             | Status      |
+| --- | ------------------------ | ---------------------------------------------------------------------------------------------------- | ----------- |
+| 1   | Owner Auth (maturation)  | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md)                                                   | **DONE**    |
+| 1a  | A01 Native UX Audit      | [TIME-NATIVE-001-A01/APZ-TIME-NATIVE-UX-AUDIT.md](./TIME-NATIVE-001-A01/APZ-TIME-NATIVE-UX-AUDIT.md) | **DONE**    |
+| 2   | Roadmap A/B/C            | [ROADMAP.md](./ROADMAP.md)                                                                           | **DONE**    |
+| 3   | Vision (native refresh)  | [VISION.md](./VISION.md)                                                                             | **STARTED** |
+| 4   | UX native principles     | [UX-NATIVE-PRINCIPLES.md](./UX-NATIVE-PRINCIPLES.md)                                                 | **STARTED** |
+| 5   | Functional specification | [FUNCTIONAL-SPECIFICATION.md](./FUNCTIONAL-SPECIFICATION.md)                                         | Pending     |
+| 6   | Integration architecture | [INTEGRATION-ARCHITECTURE.md](./INTEGRATION-ARCHITECTURE.md)                                         | Pending     |
+| 7   | Identity & permissions   | [IDENTITY-AND-PERMISSIONS.md](./IDENTITY-AND-PERMISSIONS.md)                                         | Pending     |
+| 8   | Workspace & navigation   | [WORKSPACE-AND-NAVIGATION.md](./WORKSPACE-AND-NAVIGATION.md)                                         | Pending     |
+| 9   | Operational model        | [OPERATIONAL-MODEL.md](./OPERATIONAL-MODEL.md)                                                       | Pending     |
+| 10  | APZQEP quality binding   | [APZQEP-QUALITY-INTEGRATION.md](./APZQEP-QUALITY-INTEGRATION.md)                                     | **STARTED** |
 
 Existing product pack: [../VISION.md](../VISION.md) · [../KNOWN-LIMITATIONS.md](../KNOWN-LIMITATIONS.md).
 Friction → [ADOPT-001](../../apzqep/apzqep-adopt-001/).

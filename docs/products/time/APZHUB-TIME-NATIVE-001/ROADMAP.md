@@ -6,17 +6,18 @@
 | Status    | **GOVERNING**          |
 | Timestamp | 20260804T193500Z       |
 
-## Phase A — Native Experience (now)
+## Phase A — Native Experience (ordered slices)
 
-| Work                          | Intent                                           |
-| ----------------------------- | ------------------------------------------------ |
-| Identity                      | One login, session, identity, RBAC — APZHUB only |
-| Navigation                    | APZHUB shell; Time as a peer workspace           |
-| Workspace                     | Switch workspaces, not applications              |
-| Branding / terminology / help | APZ Time only — never Kimai                      |
-| APZQEP integration            | Every Time enhancement through APZQEP            |
+| Slice   | Title                       | Status       | Intent                                                                    |
+| ------- | --------------------------- | ------------ | ------------------------------------------------------------------------- |
+| **A01** | Native UX Audit             | **COMPLETE** | Define what the user sees — [TIME-NATIVE-001-A01](./TIME-NATIVE-001-A01/) |
+| **A02** | Identity Integration        | Pending      | APZHUB auth / RBAC / sessions / provisioning only                         |
+| **A03** | Workspace Integration       | Pending      | Nav, panels, actions, context, breadcrumbs                                |
+| **A04** | APZQEP Operational Adoption | Pending      | Every Time enhancement through Quality Flow                               |
 
-**Exit:** Users experience APZ Time as native APZHUB; Kimai invisible.
+Order is deliberate: UX audit drives identity and workspace — not the reverse.
+
+**Exit (Phase A):** Users experience APZ Time as native APZHUB; Kimai invisible.
 
 ## Phase B — Daily Operations
 
