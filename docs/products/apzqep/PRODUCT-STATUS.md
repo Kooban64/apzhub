@@ -141,6 +141,8 @@ Face: [apzqep-adopt-001/](./apzqep-adopt-001/)
 
 Engineering chapter: **CLOSED** — [CHAPTER-CLOSE.md](./v1.1/apzqep-version-1.1-architecture-freeze/CHAPTER-CLOSE.md)
 Final sentence: **The architecture is frozen. The governance is established. The platform is ready to learn. The next chapter will be written by real releases.**
+Philosophy: **Design deliberately. Build carefully. Certify completely. Freeze confidently. Learn continuously.**
+Default on APZQEP mention: **Show me the release.**
 
 Next Action:
 **Use APZQEP** — wait for a real APZHUB change that would happen anyway; label it **APZQEP Release 0001**; run full pipeline ([WEEK-1-EXERCISE.md](./apzqep-adopt-001/WEEK-1-EXERCISE.md)); capture timings; measure Engineering Friction first. Next APZQEP conversation starts with what that release taught us — not architecture.
