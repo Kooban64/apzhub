@@ -1,0 +1,49 @@
+Scope: 6 of 119 workspace projects
+packages/platform-dashboard test$ cd ../.. && vitest run --config vitest.config.ts packages/platform-dashboard
+packages/platform-visualization test$ cd ../.. && vitest run --config vitest.config.ts packages/platform-visualization
+packages/platform-automation test$ cd ../.. && vitest run --config vitest.config.ts packages/platform-automation
+packages/platform-scm test$ cd ../.. && vitest run --config vitest.config.ts packages/platform-scm
+packages/platform-visualization test:  RUN  v3.2.6 /home/ubuntu/apz-portal
+packages/platform-dashboard test:  RUN  v3.2.6 /home/ubuntu/apz-portal
+packages/platform-automation test:  RUN  v3.2.6 /home/ubuntu/apz-portal
+packages/platform-scm test:  RUN  v3.2.6 /home/ubuntu/apz-portal
+packages/platform-dashboard test:  ✓ packages/platform-dashboard/src/platform-dashboard.test.ts (4 tests) 13ms
+packages/platform-dashboard test:  Test Files  1 passed (1)
+packages/platform-dashboard test:       Tests  4 passed (4)
+packages/platform-dashboard test:    Start at  05:14:44
+packages/platform-dashboard test:    Duration  2.45s (transform 171ms, setup 296ms, collect 146ms, tests 13ms, environment 522ms, prepare 136ms)
+packages/platform-visualization test:  ✓ packages/platform-visualization/src/platform-visualization.test.ts (3 tests) 9ms
+packages/platform-automation test:  ✓ packages/platform-automation/src/automation-engine.test.ts (6 tests) 18ms
+packages/platform-visualization test:  Test Files  1 passed (1)
+packages/platform-visualization test:       Tests  3 passed (3)
+packages/platform-visualization test:    Start at  05:14:44
+packages/platform-visualization test:    Duration  2.52s (transform 138ms, setup 348ms, collect 100ms, tests 9ms, environment 593ms, prepare 195ms)
+packages/platform-automation test:  Test Files  1 passed (1)
+packages/platform-automation test:       Tests  6 passed (6)
+packages/platform-automation test:    Start at  05:14:44
+packages/platform-automation test:    Duration  2.51s (transform 279ms, setup 301ms, collect 222ms, tests 18ms, environment 653ms, prepare 534ms)
+packages/platform-scm test:  ✓ packages/platform-scm/src/scm-engine.test.ts (7 tests) 13ms
+packages/platform-scm test:  Test Files  1 passed (1)
+packages/platform-scm test:       Tests  7 passed (7)
+packages/platform-scm test:    Start at  05:14:44
+packages/platform-scm test:    Duration  2.56s (transform 258ms, setup 331ms, collect 224ms, tests 13ms, environment 549ms, prepare 203ms)
+packages/platform-dashboard test: Done
+packages/platform-quality-intelligence test$ cd ../.. && vitest run --config vitest.config.ts packages/platform-quality-intelligence
+packages/platform-automation test: Done
+packages/platform-visualization test: Done
+packages/platform-scm test: Done
+packages/platform-quality-intelligence test:  RUN  v3.2.6 /home/ubuntu/apz-portal
+packages/platform-quality-intelligence test:  ✓ packages/platform-quality-intelligence/src/qi-engine.test.ts (10 tests) 23ms
+packages/platform-quality-intelligence test:  Test Files  1 passed (1)
+packages/platform-quality-intelligence test:       Tests  10 passed (10)
+packages/platform-quality-intelligence test:    Start at  05:14:47
+packages/platform-quality-intelligence test:    Duration  1.37s (transform 198ms, setup 198ms, collect 185ms, tests 23ms, environment 458ms, prepare 104ms)
+packages/platform-quality-intelligence test: Done
+packages/qep-dashboards test$ cd ../.. && vitest run --config vitest.config.ts packages/qep-dashboards
+packages/qep-dashboards test:  RUN  v3.2.6 /home/ubuntu/apz-portal
+packages/qep-dashboards test:  ✓ packages/qep-dashboards/src/qep-dashboards.test.ts (3 tests) 8ms
+packages/qep-dashboards test:  Test Files  1 passed (1)
+packages/qep-dashboards test:       Tests  3 passed (3)
+packages/qep-dashboards test:    Start at  05:14:49
+packages/qep-dashboards test:    Duration  1.40s (transform 196ms, setup 211ms, collect 204ms, tests 8ms, environment 455ms, prepare 107ms)
+packages/qep-dashboards test: Done

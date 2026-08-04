@@ -52,7 +52,8 @@
 | PBR-APZQEP-163-000         | ✅ Architecture **APPROVED** — Wave 3 title adopted                 |
 | APZQEP-163                 | ✅ **CERTIFIED** (PBR-APZQEP-163)                                   |
 | APZQEP-164-000             | ✅ Architecture **COMPLETE** · **PBR-APZQEP-164-000 APPROVED**      |
-| APZQEP-164                 | ✅ Engineering **COMPLETE** — await PBR-APZQEP-164                  |
+| APZQEP-164                 | ✅ **CERTIFIED** (PBR-APZQEP-164)                                   |
+| APZQEP-165                 | ⏳ **AUTHORISED TO OPEN** — eng **NOT STARTED** (shape arch first)  |
 | APZQEP-163…166             | ⛔ Planned — **NOT AUTHORISED**                                     |
 
 ---

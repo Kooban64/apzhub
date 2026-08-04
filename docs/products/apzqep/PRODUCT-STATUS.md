@@ -6,7 +6,7 @@
 | Authority          | Product Board — **STANDING**                   |
 | Audience           | Engineers, architects, auditors, AI assistants |
 | Rule               | **Read this document before any APZQEP work**  |
-| Last updated       | 20260803T195639Z                               |
+| Last updated       | 20260804T051443Z                               |
 | Engineering thread | **FORMALLY COMPLETE** (V1.0)                   |
 | Product posture    | **GENERAL AVAILABILITY**                       |
 | Management posture | **Operations-led** (APZQEP-OPS-001)            |
@@ -14,8 +14,7 @@
 | V1.1 Wave 1        | **CERTIFIED** (PBR-APZQEP-161)                 |
 | V1.1 Wave 2        | **CERTIFIED** (PBR-APZQEP-162)                 |
 | V1.1 Wave 3        | **CERTIFIED** (PBR-APZQEP-163)                 |
-| V1.1 Wave 4 arch   | **APPROVED** (PBR-APZQEP-164-000)              |
-| V1.1 Wave 4 eng    | **APZQEP-164 ENGINEERING COMPLETE**            |
+| V1.1 Wave 4        | **CERTIFIED** (PBR-APZQEP-164)                 |
 
 ---
 
@@ -91,8 +90,8 @@ Management posture:
 OPERATIONS-LED
 
 Next Authorised Programme:
-Await PBR-APZQEP-164 (Wave 4 Engineering Certification).
-APZQEP-165…166 NOT AUTHORISED
+APZQEP-165 — Enterprise Continuous Quality & Intelligent Orchestration (AUTHORISED TO OPEN; NOT STARTED; awaits Owner Auth + architecture shaping)
+APZQEP-166 NOT AUTHORISED
 APZQEP-163A (external AI providers) NOT AUTHORISED
 
 Version 1.1 definition programme:
@@ -118,17 +117,19 @@ Durability: process-local intelligence store — not production-durable until pe
 
 Version 1.1 Wave 4:
 APZQEP-164-000 COMPLETE · **PBR-APZQEP-164-000 APPROVED**
-APZQEP-164 ENGINEERING COMPLETE — Enterprise Dashboard & Quality Experience
+APZQEP-164 COMPLETE — Enterprise Dashboard & Quality Experience
 Packages: @apzhub/platform-dashboard 0.1.0 · @apzhub/platform-visualization 0.1.0 · @apzhub/qep-dashboards 0.1.0
-Board certification: PENDING (PBR-APZQEP-164)
+Board certification: **CERTIFIED** (PBR-APZQEP-164) · eng commit `0432d2af5a6efd0a51273fa5d60beef367533927`
 Durability: process-local layout store — not production-durable until persistence certified
 
 Version 1.1 Wave 5+:
-APZQEP-165…166 NOT AUTHORISED
+APZQEP-165 AUTHORISED TO OPEN — NOT STARTED (shape architecture before Owner Auth)
+APZQEP-166 NOT AUTHORISED
 
 Next Action:
-Product Board certify Wave 4 (PBR-APZQEP-164).
-Do NOT open APZQEP-165 or external AI without Auth.
+Shape APZQEP-165 architecture (continuous quality operations) then Owner Auth for engineering.
+Do NOT begin APZQEP-165 without Owner Auth.
+Do NOT authorise external AI without a dedicated programme.
 Ops: push local main to origin when remote credentials available.
 ```
 
@@ -198,7 +199,8 @@ Ops: push local main to origin when remote credentials available.
 | **PBR-APZQEP-163**     | Wave 3 **CERTIFIED**                                                      |
 | **APZQEP-164-000**     | Enterprise Dashboard & Quality Experience Architecture **COMPLETE**       |
 | **PBR-APZQEP-164-000** | Wave 4 architecture **APPROVED**                                          |
-| **APZQEP-164**         | Enterprise Dashboard & Quality Experience **ENGINEERING COMPLETE**        |
+| **APZQEP-164**         | Enterprise Dashboard & Quality Experience **COMPLETE**                    |
+| **PBR-APZQEP-164**     | Wave 4 **CERTIFIED** — APZQEP-165 **AUTHORISED TO OPEN**                  |
 
 ---
 
@@ -271,8 +273,8 @@ Board / audit / ops:
 ## Path remaining
 
 1. Operate Version 1.0 under APZQEP-OPS-001.
-2. Product Board certify Wave 4 (PBR-APZQEP-164).
-3. Do not authorise APZQEP-165…166 or external AI providers yet.
+2. Shape APZQEP-165 architecture; open engineering only with separate Owner Auth.
+3. Do not authorise APZQEP-166 or external AI providers yet.
 
 ---
 
@@ -282,7 +284,7 @@ Version 1.0 engineering lifecycle is formally complete. Product Board authorised
 
 Authoritative state:
 
-> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. V1.0 engineering CLOSED. APZQEP-OPS-001 COMPLETE. Waves 1–3 CERTIFIED. Wave 4 architecture APPROVED. APZQEP-164 ENGINEERING COMPLETE — Board certification pending. Waves 165–166 and external AI providers NOT AUTHORISED.**
+> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. V1.0 engineering CLOSED. APZQEP-OPS-001 COMPLETE. Waves 1–4 CERTIFIED. APZQEP-165 AUTHORISED TO OPEN — engineering NOT STARTED (architecture shaping recommended). Wave 166 and external AI providers NOT AUTHORISED.**
 
 ---
 
