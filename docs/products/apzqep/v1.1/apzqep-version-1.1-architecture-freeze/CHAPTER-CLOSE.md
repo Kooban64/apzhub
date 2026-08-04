@@ -5,19 +5,28 @@
 | Product   | APZQEP                                                              |
 | Version   | **1.1**                                                             |
 | Status    | **CHAPTER CLOSED**                                                  |
-| Timestamp | 20260804T190000Z                                                    |
+| Timestamp | 20260804T190300Z                                                    |
 | Authority | Product Board / Owner                                               |
 | Source    | Closing ChatGPT assessment (2026-08-04) — engineering chapter close |
 
 ## Final sentence for Version 1.1
 
-Not:
+> **The architecture is frozen. The governance is established. The platform is ready to learn. The next chapter will be written by real releases.**
 
-> Engineering complete.
+Earlier form (retained): _The platform is ready to learn._
 
-This:
+Architecture has earned the right to remain stable — comfortable not revisiting it for quite a while.
 
-> **The platform is ready to learn.**
+## Four milestones that make Version 1.1 complete
+
+| #   | Milestone                  | Meaning                                                           |
+| --- | -------------------------- | ----------------------------------------------------------------- |
+| 1   | **Engineering Complete**   | Every planned capability delivered                                |
+| 2   | **Certification Complete** | Engineering, operations, governance, release readiness verified   |
+| 3   | **Architecture Frozen**    | Baseline protected rather than continuously evolving              |
+| 4   | **Learning Enabled**       | ADOPT-001 shifts improvement from opinion to operational evidence |
+
+The fourth is the one many programmes never reach.
 
 ## The transition
 
@@ -35,6 +44,22 @@ Those are the only two acceptable reasons to evolve the platform.
 
 Not because it is interesting. Not because AI suggested it. Not because another tool has it.
 
+## Expected shape of the next APZQEP conversation
+
+Not “Can you design…” or “Can you improve…”
+
+```text
+Release 0001
+Product: APZHUB
+Change: ...
+Duration: ...
+Engineering Friction: ...
+Operational Learning: ...
+```
+
+One release is an anecdote. Five reveal patterns. Twenty reveal engineering reality.
+Do not redesign from Release 0001 alone.
+
 ## Release 0001 expectation
 
 Mundane is ideal: validation message, button, API response, permissions check.
@@ -49,11 +74,10 @@ surprises, what got easier, what got harder — not pass counts alone.
 - Architecture reopens only if evidence shows the baseline itself is insufficient.
 - Recommendations start from operational experience first, strategic objectives second.
 - New engineering channels through change control: provider / integration / operational improvement.
+- No further engines, architecture refinements, or programmes to open until real releases teach us.
 
 ## Next conversation
 
-Not about architecture, engines, or governance design.
-
-About **[APZQEP Release 0001](../../apzqep-adopt-001/WEEK-1-EXERCISE.md)** and what it taught us.
+About **[APZQEP Release 0001](../../apzqep-adopt-001/WEEK-1-EXERCISE.md)** and what it taught us — not to redesign APZQEP, but to let operational evidence guide evolution.
 
 Companion: [APZQEP-ADOPT-001](../../apzqep-adopt-001/) · [APZQEP-CHANGE-CONTROL.md](./APZQEP-CHANGE-CONTROL.md)
