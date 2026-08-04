@@ -117,6 +117,15 @@ export {
   isAutomationIntentType,
 } from "./automation/intent-mapper";
 export {
+  SourceChangeCoordinator,
+  type SourceChangeCoordinatorOptions,
+} from "./source/source-change-coordinator";
+export {
+  normalizeSourceIdentities,
+  derivePrimaryRefs,
+  isSourceIdentityKind,
+} from "./source/identity-normalizer";
+export {
   createPlatformOrchestration,
   type CreatePlatformOrchestrationOptions,
   type PlatformOrchestration,

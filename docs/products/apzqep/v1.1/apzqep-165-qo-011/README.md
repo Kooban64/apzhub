@@ -11,7 +11,7 @@
 | Package           | `@apzhub/platform-orchestration` **0.1.10**                                                              |
 | Timestamp         | 20260804T170349Z                                                                                         |
 | Evidence          | [evidence/apzqep-165-qo-011/20260804T170349Z/](../../../../evidence/apzqep-165-qo-011/20260804T170349Z/) |
-| Next              | **QO-012** — Enterprise SCM Coordination (separate Owner Auth)                                           |
+| Next              | **QO-012** — Enterprise Source Change Coordination (**COMPLETE**)                                        |
 
 ## Mission
 

@@ -18,7 +18,8 @@ export type OrchestrationContractKind =
   | "approval"
   | "decision"
   | "event"
-  | "automation_coordination";
+  | "automation_coordination"
+  | "source_change";
 
 /** Descriptor only — no invoke/execute behaviour. */
 export interface OrchestrationContractDescriptor {

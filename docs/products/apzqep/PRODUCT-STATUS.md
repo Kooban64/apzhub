@@ -91,8 +91,8 @@ OPERATIONS-LED
 
 Next Authorised Programme:
 APZQEP-165-PLAN — Engineering Execution Plan **COMPLETE**
-APZQEP-165-QO-001…**QO-011 COMPLETE** (`@apzhub/platform-orchestration` 0.1.10)
-APZQEP-165 — in progress via micro-certified slices; next **QO-012** Owner Auth
+APZQEP-165-QO-001…**QO-012 COMPLETE** (`@apzhub/platform-orchestration` 0.1.11)
+APZQEP-165 — in progress via micro-certified slices; next **QO-013** Owner Auth
 PBR-APZQEP-165-000 **APPROVED** — V1.1 foundational architecture **CLOSED**
 APZQEP-166 NOT AUTHORISED
 APZQEP-163A (external AI providers) NOT AUTHORISED
@@ -129,14 +129,14 @@ Durability: process-local layout store — not production-durable until persiste
 Version 1.1 Wave 5:
 APZQEP-165-000 ARCHITECTURE COMPLETE · **PBR-APZQEP-165-000 APPROVED**
 APZQEP-165-PLAN COMPLETE (S01–S18 / QO-001–QO-018)
-APZQEP-165-QO-001…**QO-011 COMPLETE** (kernel…Automation Coordination) — package 0.1.10
+APZQEP-165-QO-001…**QO-012 COMPLETE** (kernel…Source Change Coordination) — package 0.1.11
 Living title: **Enterprise Continuous Quality Orchestration**
-APZQEP-165 engineering: **IN PROGRESS** (micro-slices); QO-012 NOT STARTED
+APZQEP-165 engineering: **IN PROGRESS** (micro-slices); QO-013 NOT STARTED
 V1.1 foundational architecture: **CLOSED**
 APZQEP-166 NOT AUTHORISED
 
 Next Action:
-Owner Auth for **QO-012** (Enterprise SCM Coordination) only.
+Owner Auth for **QO-013** (Enterprise Quality Intelligence Enrichment) only.
 Do NOT open monolithic APZQEP-165 engineering in one pass.
 Do NOT open further V1.1 foundational architecture or planning programmes.
 Do NOT authorise external AI without a dedicated programme.
@@ -225,6 +225,7 @@ Ops: push local main to origin when remote credentials available.
 | **APZQEP-165-QO-009**  | Quality Decision Engine **COMPLETE** — Decision Package (`platform-orchestration` 0.1.8)    |
 | **APZQEP-165-QO-010**  | Quality Event Backbone **COMPLETE** (`platform-orchestration` 0.1.9)                        |
 | **APZQEP-165-QO-011**  | Automation Coordination **COMPLETE** (`platform-orchestration` 0.1.10)                      |
+| **APZQEP-165-QO-012**  | Source Change Coordination **COMPLETE** (`platform-orchestration` 0.1.11)                   |
 
 ---
 
@@ -297,7 +298,7 @@ Board / audit / ops:
 ## Path remaining
 
 1. Operate Version 1.0 under APZQEP-OPS-001.
-2. Owner Auth for QO-012 (then subsequent QO slices per 165-PLAN).
+2. Owner Auth for QO-013 (then subsequent QO slices per 165-PLAN).
 3. Do not authorise APZQEP-166 or external AI providers yet.
 4. V1.1 foundational architecture CLOSED; last V1.1 planning programme (165-PLAN) COMPLETE.
 

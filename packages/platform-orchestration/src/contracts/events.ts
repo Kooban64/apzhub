@@ -55,6 +55,14 @@ export const AUTOMATION_COORDINATION_EVENT_TYPES = {
   intentIdentified: "automation.intent.identified",
 } as const;
 
+/** Past-tense source change coordination facts (QO-012) — never commands. */
+export const SOURCE_CHANGE_EVENT_TYPES = {
+  changeAssociated: "source.change.associated",
+  packageCreated: "source.package.created",
+  packageUpdated: "source.package.updated",
+  identityNormalized: "source.identity.normalized",
+} as const;
+
 export type OrchestrationKernelEventType =
   (typeof ORCHESTRATION_KERNEL_EVENT_TYPES)[keyof typeof ORCHESTRATION_KERNEL_EVENT_TYPES];
 
@@ -82,6 +90,9 @@ export type DecisionEventType =
 export type AutomationCoordinationEventType =
   (typeof AUTOMATION_COORDINATION_EVENT_TYPES)[keyof typeof AUTOMATION_COORDINATION_EVENT_TYPES];
 
+export type SourceChangeEventType =
+  (typeof SOURCE_CHANGE_EVENT_TYPES)[keyof typeof SOURCE_CHANGE_EVENT_TYPES];
+
 export type OrchestrationEventType =
   | OrchestrationKernelEventType
   | TriggerEventType
@@ -91,7 +102,8 @@ export type OrchestrationEventType =
   | GovernanceEventType
   | ApprovalEventType
   | DecisionEventType
-  | AutomationCoordinationEventType;
+  | AutomationCoordinationEventType
+  | SourceChangeEventType;
 
 export interface OrchestrationKernelEvent {
   readonly type: OrchestrationEventType;

@@ -14,6 +14,7 @@ import { PolicySelectionEngine } from "../policy/policy-selection-engine";
 import { CapabilityRegistry } from "../registry/capability-registry";
 import { ContractRegistry } from "../registry/contract-registry";
 import { LifecycleRegistry } from "../registry/lifecycle-registry";
+import { SourceChangeCoordinator } from "../source/source-change-coordinator";
 import { TriggerBindingRegistry } from "../triggers/trigger-binding-registry";
 import { TriggerEngine } from "../triggers/trigger-engine";
 import { PLATFORM_ORCHESTRATION_VERSION } from "../version";
@@ -42,11 +43,13 @@ export interface PlatformOrchestration {
   readonly events: QualityEventBackbone;
   /** Enterprise Automation Coordination — never executes providers. */
   readonly automationCoordination: AutomationCoordinator;
+  /** Enterprise Source Change Coordination — never inspects repos or calls SCM. */
+  readonly sourceChange: SourceChangeCoordinator;
   readonly container: OrchestrationContainer;
 }
 
 /**
- * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-011).
+ * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-012).
  * All publications route through the Event Backbone (transport only).
  */
 export async function createPlatformOrchestration(
@@ -149,6 +152,15 @@ export async function createPlatformOrchestration(
       "Provider-neutral Automation Coordination Packages from Decision Packages — never executes automation",
   });
 
+  kernel.contracts.register({
+    contractId: "orchestration.source_change.v1",
+    kind: "source_change",
+    version: PLATFORM_ORCHESTRATION_VERSION,
+    name: "Source Change Coordination",
+    description:
+      "Provider-neutral Source Change Packages associating normalized identities — never SCM operations",
+  });
+
   const triggerBindings = new TriggerBindingRegistry();
   const triggers = new TriggerEngine({
     bindings: triggerBindings,
@@ -191,6 +203,11 @@ export async function createPlatformOrchestration(
 
   const automationCoordination = new AutomationCoordinator({
     capabilities: kernel.capabilities,
+    events,
+    orchestrationId: kernel.orchestrationId,
+  });
+
+  const sourceChange = new SourceChangeCoordinator({
     events,
     orchestrationId: kernel.orchestrationId,
   });
@@ -240,6 +257,9 @@ export async function createPlatformOrchestration(
       automationCoordination,
     );
   }
+  if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.sourceChange)) {
+    kernel.container.register(ORCHESTRATION_DI_TOKENS.sourceChange, sourceChange);
+  }
 
   return {
     kernel,
@@ -256,6 +276,7 @@ export async function createPlatformOrchestration(
     decisions,
     events,
     automationCoordination,
+    sourceChange,
     container: kernel.container,
   };
 }

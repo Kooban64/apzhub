@@ -54,6 +54,7 @@ function producerFromLegacyType(type: string): string {
   if (type.startsWith("orchestration.approval.")) return "orchestration.approval";
   if (type.startsWith("orchestration.decision.")) return "orchestration.decision";
   if (type.startsWith("automation.")) return "orchestration.automation_coordination";
+  if (type.startsWith("source.")) return "orchestration.source_change";
   if (type.startsWith("orchestration.capability.")) return "orchestration.kernel";
   if (type.startsWith("orchestration.contract.")) return "orchestration.kernel";
   return "orchestration.kernel";

@@ -36,7 +36,8 @@
 | APZQEP-165-QO-009   | **COMPLETE** — [v1.1/apzqep-165-qo-009/](./v1.1/apzqep-165-qo-009/) — Quality Decision Engine    |
 | APZQEP-165-QO-010   | **COMPLETE** — [v1.1/apzqep-165-qo-010/](./v1.1/apzqep-165-qo-010/) — Quality Event Backbone     |
 | APZQEP-165-QO-011   | **COMPLETE** — [v1.1/apzqep-165-qo-011/](./v1.1/apzqep-165-qo-011/) — Automation Coordination    |
-| APZQEP-165 / QO-012 | **NOT STARTED** — next Owner Auth **QO-012** SCM Coordination                                    |
+| APZQEP-165-QO-012   | **COMPLETE** — [v1.1/apzqep-165-qo-012/](./v1.1/apzqep-165-qo-012/) — Source Change Coordination |
+| APZQEP-165 / QO-013 | **NOT STARTED** — next Owner Auth **QO-013** Quality Intelligence Enrichment                     |
 | APZQEP-166          | Planned — **not authorised**                                                                     |
 | APZQEP-163A         | External AI providers — **not authorised**                                                       |
 | APZHUB-ADR-0100     | Future portfolio recommendation only — **not created**                                           |

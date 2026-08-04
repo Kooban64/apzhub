@@ -16,11 +16,11 @@ import {
 
 describe("APZQEP-165 platform-orchestration kernel (QO-001 foundation)", () => {
   it("exports stable programme and slice identity", () => {
-    expect(PLATFORM_ORCHESTRATION_VERSION).toBe("0.1.10");
+    expect(PLATFORM_ORCHESTRATION_VERSION).toBe("0.1.11");
     expect(PLATFORM_ORCHESTRATION_PROGRAMME).toBe("APZQEP-165");
     expect(PLATFORM_ORCHESTRATION_KERNEL_SLICE).toBe("QO-001");
-    expect(PLATFORM_ORCHESTRATION_SLICE).toBe("QO-011");
-    expect(PLATFORM_ORCHESTRATION_LEGACY_SLICE).toBe("S11");
+    expect(PLATFORM_ORCHESTRATION_SLICE).toBe("QO-012");
+    expect(PLATFORM_ORCHESTRATION_LEGACY_SLICE).toBe("S12");
   });
 
   it("initialises kernel lifecycle to ready", async () => {
@@ -37,9 +37,9 @@ describe("APZQEP-165 platform-orchestration kernel (QO-001 foundation)", () => {
     expect(platform.kernel.health().ready).toBe(true);
     expect(platform.kernel.readiness().ready).toBe(true);
     expect(platform.kernel.version()).toEqual({
-      version: "0.1.10",
+      version: "0.1.11",
       programme: "APZQEP-165",
-      slice: "QO-011",
+      slice: "QO-012",
     });
     expect(events).toContain(ORCHESTRATION_KERNEL_EVENT_TYPES.kernelCreated);
     expect(events).toContain(ORCHESTRATION_KERNEL_EVENT_TYPES.kernelReady);
