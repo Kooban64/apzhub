@@ -69,6 +69,7 @@ export const ORCHESTRATION_DI_TOKENS = {
   enrichment: "orchestration.enrichment.engine",
   evidenceIntegration: "orchestration.evidence_integration.engine",
   executiveExperience: "orchestration.executive_experience.engine",
+  operational: "orchestration.operational.engine",
   logger: "orchestration.logger",
   config: "orchestration.config",
 } as const;

@@ -40,7 +40,8 @@
 | APZQEP-165-QO-013   | **COMPLETE** — [v1.1/apzqep-165-qo-013/](./v1.1/apzqep-165-qo-013/) — QI Enrichment              |
 | APZQEP-165-QO-014   | **COMPLETE** — [v1.1/apzqep-165-qo-014/](./v1.1/apzqep-165-qo-014/) — Evidence & Reporting       |
 | APZQEP-165-QO-015   | **COMPLETE** — [v1.1/apzqep-165-qo-015/](./v1.1/apzqep-165-qo-015/) — Executive Experience       |
-| APZQEP-165 / QO-016 | **NOT STARTED** — next Owner Auth **QO-016** Operational APIs & Production Hardening             |
+| APZQEP-165-QO-016   | **COMPLETE** — [v1.1/apzqep-165-qo-016/](./v1.1/apzqep-165-qo-016/) — Operational Platform       |
+| APZQEP-165 / QO-017 | **NOT STARTED** — next Owner Auth **QO-017** Workspace & Operations Experience                   |
 | APZQEP-166          | Planned — **not authorised**                                                                     |
 | APZQEP-163A         | External AI providers — **not authorised**                                                       |
 | APZHUB-ADR-0100     | Future portfolio recommendation only — **not created**                                           |

@@ -87,6 +87,14 @@ export const EXECUTIVE_EXPERIENCE_EVENT_TYPES = {
   projectionUpdated: "executive.projection.updated",
 } as const;
 
+/** Past-tense operational platform facts (QO-016) — never commands. */
+export const OPERATIONAL_EVENT_TYPES = {
+  readinessCreated: "operational.readiness.created",
+  healthContractUpdated: "health.contract.updated",
+  readinessContractPublished: "readiness.contract.published",
+  packageCompleted: "operational.package.completed",
+} as const;
+
 export type OrchestrationKernelEventType =
   (typeof ORCHESTRATION_KERNEL_EVENT_TYPES)[keyof typeof ORCHESTRATION_KERNEL_EVENT_TYPES];
 
@@ -126,6 +134,9 @@ export type EvidenceIntegrationEventType =
 export type ExecutiveExperienceEventType =
   (typeof EXECUTIVE_EXPERIENCE_EVENT_TYPES)[keyof typeof EXECUTIVE_EXPERIENCE_EVENT_TYPES];
 
+export type OperationalEventType =
+  (typeof OPERATIONAL_EVENT_TYPES)[keyof typeof OPERATIONAL_EVENT_TYPES];
+
 export type OrchestrationEventType =
   | OrchestrationKernelEventType
   | TriggerEventType
@@ -139,7 +150,8 @@ export type OrchestrationEventType =
   | SourceChangeEventType
   | EnrichmentEventType
   | EvidenceIntegrationEventType
-  | ExecutiveExperienceEventType;
+  | ExecutiveExperienceEventType
+  | OperationalEventType;
 
 export interface OrchestrationKernelEvent {
   readonly type: OrchestrationEventType;

@@ -16,6 +16,7 @@ export * from "./source-change";
 export * from "./enrichment";
 export * from "./evidence-integration";
 export * from "./executive-experience";
+export * from "./operational";
 export * from "./errors";
 export * from "./configuration";
 export * from "./diagnostics";

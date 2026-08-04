@@ -64,6 +64,12 @@ function producerFromLegacyType(type: string): string {
   if (type.startsWith("evidence.") || type.startsWith("report."))
     return "orchestration.evidence_integration";
   if (type.startsWith("executive.")) return "orchestration.executive_experience";
+  if (
+    type.startsWith("operational.") ||
+    type.startsWith("health.contract.") ||
+    type.startsWith("readiness.contract.")
+  )
+    return "orchestration.operational";
   if (type.startsWith("orchestration.capability.")) return "orchestration.kernel";
   if (type.startsWith("orchestration.contract.")) return "orchestration.kernel";
   return "orchestration.kernel";

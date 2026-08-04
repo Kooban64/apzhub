@@ -159,6 +159,16 @@ export {
   resolveExecutivePersona,
 } from "./executive/executive-personas";
 export {
+  OperationalPlatformEngine,
+  type OperationalPlatformEngineOptions,
+} from "./operational/operational-platform-engine";
+export {
+  BUILTIN_OPERATIONAL_ENDPOINTS,
+  buildOperationalContract,
+  isOperationalContractKind,
+  listBuiltinOperationalEndpoints,
+} from "./operational/operational-contracts";
+export {
   createPlatformOrchestration,
   type CreatePlatformOrchestrationOptions,
   type PlatformOrchestration,

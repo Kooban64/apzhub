@@ -22,7 +22,8 @@ export type OrchestrationContractKind =
   | "source_change"
   | "enrichment"
   | "evidence_integration"
-  | "executive_experience";
+  | "executive_experience"
+  | "operational";
 
 /** Descriptor only — no invoke/execute behaviour. */
 export interface OrchestrationContractDescriptor {

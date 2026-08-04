@@ -8,6 +8,7 @@ import { EnrichmentEngine } from "../enrichment/enrichment-engine";
 import { EvidenceIntegrationEngine } from "../evidence/evidence-integration-engine";
 import { ExecutiveExperienceEngine } from "../executive/executive-experience-engine";
 import { QualityEventBackbone } from "../events/event-backbone";
+import { OperationalPlatformEngine } from "../operational/operational-platform-engine";
 import { QualityFlowEngine } from "../flows/quality-flow-engine";
 import { GovernanceEngine } from "../governance/governance-engine";
 import { ImpactCorrelationEngine } from "../impact/impact-correlation-engine";
@@ -54,11 +55,13 @@ export interface PlatformOrchestration {
   readonly evidenceIntegration: EvidenceIntegrationEngine;
   /** Enterprise Executive Experience — projection only; never presentation. */
   readonly executiveExperience: ExecutiveExperienceEngine;
+  /** Enterprise Operational Platform — descriptive readiness only. */
+  readonly operational: OperationalPlatformEngine;
   readonly container: OrchestrationContainer;
 }
 
 /**
- * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-015).
+ * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-016).
  * All publications route through the Event Backbone (transport only).
  */
 export async function createPlatformOrchestration(
@@ -197,6 +200,15 @@ export async function createPlatformOrchestration(
       "Executive Experience Packages as projections — never presentation, never decision influence",
   });
 
+  kernel.contracts.register({
+    contractId: "orchestration.operational.v1",
+    kind: "operational",
+    version: PLATFORM_ORCHESTRATION_VERSION,
+    name: "Enterprise Operational Platform",
+    description:
+      "Operational Readiness Packages — descriptive health/readiness/liveness; never deploy or mutate",
+  });
+
   const triggerBindings = new TriggerBindingRegistry();
   const triggers = new TriggerEngine({
     bindings: triggerBindings,
@@ -259,6 +271,11 @@ export async function createPlatformOrchestration(
   });
 
   const executiveExperience = new ExecutiveExperienceEngine({
+    events,
+    orchestrationId: kernel.orchestrationId,
+  });
+
+  const operational = new OperationalPlatformEngine({
     events,
     orchestrationId: kernel.orchestrationId,
   });
@@ -326,6 +343,9 @@ export async function createPlatformOrchestration(
       executiveExperience,
     );
   }
+  if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.operational)) {
+    kernel.container.register(ORCHESTRATION_DI_TOKENS.operational, operational);
+  }
 
   return {
     kernel,
@@ -346,6 +366,7 @@ export async function createPlatformOrchestration(
     enrichment,
     evidenceIntegration,
     executiveExperience,
+    operational,
     container: kernel.container,
   };
 }
