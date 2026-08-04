@@ -29,13 +29,15 @@ APZ Time already exists. Integration is certified. Work is **maturation**, not c
 - APZHUB owns the product experience
 - Kimai remains an implementation detail
 
-## Authorised priorities (order)
+## Authorised priorities (Phase A slice order)
 
-1. Native User Experience (navigation, terminology, branding, help, notifications)
-2. Identity (one login, session, identity, RBAC — APZHUB only)
-3. Workspace (Time as a workbench workspace, not a standalone app)
-4. APZQEP binding (every enhancement through APZQEP)
+1. **A01 Native UX Audit** (analysis only) — drives all later decisions
+2. **A02 Identity** — APZHUB auth / RBAC / sessions / provisioning only
+3. **A03 Workspace** — nav, panels, actions, context, breadcrumbs
+4. **A04 APZQEP binding** — every enhancement through Quality Flow
 5. Close Phase 1 gaps that block **daily use** — not feature parity with Kimai
+
+A01 authorised and executed: [TIME-NATIVE-001-A01](./TIME-NATIVE-001-A01/).
 
 ## Explicit exclusions
 

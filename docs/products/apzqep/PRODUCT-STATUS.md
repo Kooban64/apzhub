@@ -144,7 +144,7 @@ Engineering chapter: **CLOSED** — [CHAPTER-CLOSE.md](./v1.1/apzqep-version-1.1
 Default on APZQEP architecture: frozen. Default on APZQEP ops: **daily use + evidence**.
 
 Next Action:
-Execute ADOPT-001 Phase 1 — put APZQEP into daily internal use; progress APZ Time native experience (Kimai never user-visible); record friction/learnings. When a real change ships, run full APZQEP path (Release 0001+).
+ADOPT-001 Phase 1 + TIME-NATIVE-001: **A01 Native UX Audit COMPLETE** — [APZ-TIME-NATIVE-UX-AUDIT.md](../time/APZHUB-TIME-NATIVE-001/TIME-NATIVE-001-A01/APZ-TIME-NATIVE-UX-AUDIT.md). Next Time slice when authorised: **A02 Identity**. Continue APZQEP daily use; do not implement from A01 without Auth.
 Do NOT start APZQEP-170. Do NOT reopen V1.1 foundations. Do NOT expose Kimai.
 ```
 
