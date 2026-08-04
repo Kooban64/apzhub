@@ -42,9 +42,12 @@ Pattern Recognition
 Authorised Programme
 ```
 
-We are ready to **use** APZQEP — not improve it. The next meaningful APZQEP
-conversation starts with: _“We put our first real APZHUB change through APZQEP.
-Here’s what happened…”_
+We are ready to **use** APZQEP — not improve it. The engineering chapter is
+**closed** — [CHAPTER-CLOSE.md](../v1.1/apzqep-version-1.1-architecture-freeze/CHAPTER-CLOSE.md):
+_The platform is ready to learn._
+
+The next meaningful APZQEP conversation starts with: _“We put our first real
+APZHUB change through APZQEP. Here’s what happened…”_
 
 ## Deliverables
 
