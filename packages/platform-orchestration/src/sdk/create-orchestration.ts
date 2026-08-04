@@ -3,6 +3,7 @@ import type { OrchestrationKernelConfig } from "../contracts/configuration";
 import type { OrchestrationEventPublisher } from "../contracts/events";
 import { DecisionEngine } from "../decision/decision-engine";
 import { OrchestrationContainer, ORCHESTRATION_DI_TOKENS } from "../di/container";
+import { QualityEventBackbone } from "../events/event-backbone";
 import { QualityFlowEngine } from "../flows/quality-flow-engine";
 import { GovernanceEngine } from "../governance/governance-engine";
 import { ImpactCorrelationEngine } from "../impact/impact-correlation-engine";
@@ -36,19 +37,27 @@ export interface PlatformOrchestration {
   readonly governance: GovernanceEngine;
   readonly approvals: ApprovalEngine;
   readonly decisions: DecisionEngine;
+  /** Enterprise Quality Event Backbone — transport only. */
+  readonly events: QualityEventBackbone;
   readonly container: OrchestrationContainer;
 }
 
 /**
- * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-009).
- * Decisions compose completed governance outputs — never re-evaluate upstream engines.
+ * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-010).
+ * All engine publications route through the Event Backbone (transport only).
  */
 export async function createPlatformOrchestration(
   options: CreatePlatformOrchestrationOptions = {},
 ): Promise<PlatformOrchestration> {
+  const events = new QualityEventBackbone({
+    legacyPublishEvent: options.publishEvent,
+    orchestrationId: options.config?.orchestrationId ?? "orch_default",
+  });
+  const publishViaBackbone = events.createLegacyPublisher();
+
   const kernel = new OrchestrationKernel({
     config: options.config,
-    publishEvent: options.publishEvent,
+    publishEvent: publishViaBackbone,
     logger: options.logger,
   });
 
@@ -119,43 +128,52 @@ export async function createPlatformOrchestration(
       "Immutable Decision Packages composing completed governance outcomes — never re-evaluates or deploys",
   });
 
+  kernel.contracts.register({
+    contractId: "orchestration.event.backbone.v1",
+    kind: "event",
+    version: PLATFORM_ORCHESTRATION_VERSION,
+    name: "Quality Event Backbone",
+    description:
+      "Provider-neutral transport for immutable past-tense quality events — never evaluates or executes",
+  });
+
   const triggerBindings = new TriggerBindingRegistry();
   const triggers = new TriggerEngine({
     bindings: triggerBindings,
-    publishEvent: options.publishEvent,
+    publishEvent: publishViaBackbone,
     orchestrationId: kernel.orchestrationId,
   });
 
   const qualityFlows = new QualityFlowEngine({
     capabilities: kernel.capabilities,
-    publishEvent: options.publishEvent,
+    publishEvent: publishViaBackbone,
     orchestrationId: kernel.orchestrationId,
   });
 
   const impact = new ImpactCorrelationEngine({
     capabilities: kernel.capabilities,
-    publishEvent: options.publishEvent,
+    publishEvent: publishViaBackbone,
     orchestrationId: kernel.orchestrationId,
   });
 
   const policySelection = new PolicySelectionEngine({
     capabilities: kernel.capabilities,
-    publishEvent: options.publishEvent,
+    publishEvent: publishViaBackbone,
     orchestrationId: kernel.orchestrationId,
   });
 
   const governance = new GovernanceEngine({
-    publishEvent: options.publishEvent,
+    publishEvent: publishViaBackbone,
     orchestrationId: kernel.orchestrationId,
   });
 
   const approvals = new ApprovalEngine({
-    publishEvent: options.publishEvent,
+    publishEvent: publishViaBackbone,
     orchestrationId: kernel.orchestrationId,
   });
 
   const decisions = new DecisionEngine({
-    publishEvent: options.publishEvent,
+    publishEvent: publishViaBackbone,
     orchestrationId: kernel.orchestrationId,
   });
 
@@ -195,6 +213,9 @@ export async function createPlatformOrchestration(
   if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.decision)) {
     kernel.container.register(ORCHESTRATION_DI_TOKENS.decision, decisions);
   }
+  if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.eventBackbone)) {
+    kernel.container.register(ORCHESTRATION_DI_TOKENS.eventBackbone, events);
+  }
 
   return {
     kernel,
@@ -209,6 +230,7 @@ export async function createPlatformOrchestration(
     governance,
     approvals,
     decisions,
+    events,
     container: kernel.container,
   };
 }

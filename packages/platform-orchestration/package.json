@@ -1,9 +1,9 @@
 {
   "name": "@apzhub/platform-orchestration",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "private": true,
   "type": "module",
-  "description": "APZHUB Enterprise Continuous Quality Orchestration — kernel through Quality Decision Engine (APZQEP-165 QO-001…QO-009).",
+  "description": "APZHUB Enterprise Continuous Quality Orchestration — kernel through Quality Event Backbone (APZQEP-165 QO-001…QO-010).",
   "exports": {
     ".": "./src/index.ts",
     "./contracts": "./src/contracts/index.ts"

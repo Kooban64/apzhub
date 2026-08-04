@@ -10,6 +10,7 @@ export * from "./policy-selection";
 export * from "./governance";
 export * from "./approval";
 export * from "./decision";
+export * from "./event-backbone";
 export * from "./errors";
 export * from "./configuration";
 export * from "./diagnostics";

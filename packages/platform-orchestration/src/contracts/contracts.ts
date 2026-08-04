@@ -16,7 +16,8 @@ export type OrchestrationContractKind =
   | "policy"
   | "governance"
   | "approval"
-  | "decision";
+  | "decision"
+  | "event";
 
 /** Descriptor only — no invoke/execute behaviour. */
 export interface OrchestrationContractDescriptor {

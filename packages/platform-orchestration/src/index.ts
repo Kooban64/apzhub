@@ -96,6 +96,17 @@ export {
 } from "./approval/sod";
 export { DecisionProfileRegistry, maxRiskLevel, riskRank } from "./decision/registries";
 export { DecisionEngine, type DecisionEngineOptions } from "./decision/decision-engine";
+export { EventTypeRegistry } from "./events/registry";
+export {
+  QualityEventBackbone,
+  type QualityEventBackboneOptions,
+} from "./events/event-backbone";
+export {
+  validatePublishInput,
+  assertValidPublish,
+  isCommandStyleEventType,
+  looksPastTense,
+} from "./events/validation";
 export {
   createPlatformOrchestration,
   type CreatePlatformOrchestrationOptions,

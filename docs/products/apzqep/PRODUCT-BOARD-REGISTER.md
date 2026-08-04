@@ -34,7 +34,8 @@
 | APZQEP-165-QO-007   | **COMPLETE** — [v1.1/apzqep-165-qo-007/](./v1.1/apzqep-165-qo-007/) — Quality Governance Engine  |
 | APZQEP-165-QO-008   | **COMPLETE** — [v1.1/apzqep-165-qo-008/](./v1.1/apzqep-165-qo-008/) — Approval Decision Platform |
 | APZQEP-165-QO-009   | **COMPLETE** — [v1.1/apzqep-165-qo-009/](./v1.1/apzqep-165-qo-009/) — Quality Decision Engine    |
-| APZQEP-165 / QO-010 | **NOT STARTED** — next Owner Auth **QO-010** Event Integration Platform                          |
+| APZQEP-165-QO-010   | **COMPLETE** — [v1.1/apzqep-165-qo-010/](./v1.1/apzqep-165-qo-010/) — Quality Event Backbone     |
+| APZQEP-165 / QO-011 | **NOT STARTED** — next Owner Auth **QO-011** Automation Coordination                             |
 | APZQEP-166          | Planned — **not authorised**                                                                     |
 | APZQEP-163A         | External AI providers — **not authorised**                                                       |
 | APZHUB-ADR-0100     | Future portfolio recommendation only — **not created**                                           |

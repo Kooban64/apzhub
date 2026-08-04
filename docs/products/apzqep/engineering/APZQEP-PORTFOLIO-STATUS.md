@@ -65,7 +65,8 @@
 | APZQEP-165-QO-007          | ✅ Quality Governance **COMPLETE** (gate engine) 0.1.6                   |
 | APZQEP-165-QO-008          | ✅ Approval Decision Platform **COMPLETE** 0.1.7                         |
 | APZQEP-165-QO-009          | ✅ Quality Decision Engine **COMPLETE** 0.1.8                            |
-| APZQEP-165                 | ⏳ **IN PROGRESS** — next **QO-010** Owner Auth                          |
+| APZQEP-165-QO-010          | ✅ Quality Event Backbone **COMPLETE** 0.1.9                             |
+| APZQEP-165                 | ⏳ **IN PROGRESS** — next **QO-011** Owner Auth                          |
 | APZQEP-163A…166            | ⛔ Planned — **NOT AUTHORISED**                                          |
 
 ---
