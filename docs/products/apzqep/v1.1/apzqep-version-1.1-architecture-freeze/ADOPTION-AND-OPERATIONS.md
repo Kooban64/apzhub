@@ -42,7 +42,13 @@ Success is measured by adoption and operational outcomes — not commits or feat
 | Release confidence                | Increasing over time           |
 | Post-release defects              | Trending downward              |
 
+## Change control
+
+Before any enhancement request proceeds to engineering, classify it under
+[APZQEP-CHANGE-CONTROL.md](./APZQEP-CHANGE-CONTROL.md).
+
 ## Next chapter
 
 Adoption, operational learning, and carefully governed provider expansion.
-Not further foundational engineering.
+Not further foundational engineering. Resist starting APZQEP-170 until real
+internal use has produced operational friction and lessons.

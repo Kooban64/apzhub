@@ -30,6 +30,7 @@ See [PORTFOLIO-MILESTONE.md](./PORTFOLIO-MILESTONE.md) and
 | [ENGINEERING-STANDARDS-BASELINE.md](./ENGINEERING-STANDARDS-BASELINE.md) | Standing engineering discipline                        |
 | [ENTERPRISE-QUALITY-BASELINE.md](./ENTERPRISE-QUALITY-BASELINE.md)       | APZHUB mandatory quality baseline designation          |
 | [ADOPTION-AND-OPERATIONS.md](./ADOPTION-AND-OPERATIONS.md)               | Adoption waves, evaluation rules, success metrics      |
+| [APZQEP-CHANGE-CONTROL.md](./APZQEP-CHANGE-CONTROL.md)                   | Allowed change types against the frozen baseline       |
 
 ## Rule
 
@@ -39,4 +40,5 @@ Enhancement programmes may add providers and experiences **on top of** these bas
 They must not reopen Wave 5 foundations.
 
 APZQEP Version 1.1 is **officially complete** and operates as enterprise infrastructure.
-See [ADOPTION-AND-OPERATIONS.md](./ADOPTION-AND-OPERATIONS.md).
+See [ADOPTION-AND-OPERATIONS.md](./ADOPTION-AND-OPERATIONS.md) and
+[APZQEP-CHANGE-CONTROL.md](./APZQEP-CHANGE-CONTROL.md).

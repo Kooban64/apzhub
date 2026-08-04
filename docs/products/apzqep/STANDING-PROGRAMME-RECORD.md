@@ -54,6 +54,7 @@
 > **APZQEP Version 1.1 Architecture Freeze (20260804T183531Z):** **FEATURE COMPLETE · ARCHITECTURE FROZEN · CERTIFIED FOR INTERNAL PRODUCTION ADOPTION** — [apzqep-version-1.1-architecture-freeze/](./v1.1/apzqep-version-1.1-architecture-freeze/)
 > **APZQEP Version 1.1 Enterprise Quality Baseline (20260804T183844Z):** Designated mandatory quality platform for APZHUB — [ENTERPRISE-QUALITY-BASELINE.md](./v1.1/apzqep-version-1.1-architecture-freeze/ENTERPRISE-QUALITY-BASELINE.md)
 > **APZQEP Version 1.1 Officially Complete (20260804T184100Z):** Enterprise infrastructure mode — [ADOPTION-AND-OPERATIONS.md](./v1.1/apzqep-version-1.1-architecture-freeze/ADOPTION-AND-OPERATIONS.md) — adoption waves + operational metrics; provider families only after operational learning
+> **APZQEP Change Control (20260804T184800Z):** Frozen-baseline change taxonomy — [APZQEP-CHANGE-CONTROL.md](./v1.1/apzqep-version-1.1-architecture-freeze/APZQEP-CHANGE-CONTROL.md) — cites closing ChatGPT programme assessment; Operations stage current
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -45,6 +45,9 @@ release readiness, and operational certification.
 Adoption sequence and success metrics:
 [ADOPTION-AND-OPERATIONS.md](./ADOPTION-AND-OPERATIONS.md).
 
+Allowed change types against this baseline:
+[APZQEP-CHANGE-CONTROL.md](./APZQEP-CHANGE-CONTROL.md).
+
 ## Provider programme families (illustrative — not authorised)
 
 | Family                   | Series     | Examples                                                                                           |
