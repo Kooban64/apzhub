@@ -5,15 +5,16 @@
 | Product            | APZQEP                                                                                                        |
 | Version            | **1.1**                                                                                                       |
 | Status             | **ARCHITECTURE FROZEN**                                                                                       |
-| Portfolio status   | **FEATURE COMPLETE · CERTIFIED FOR INTERNAL PRODUCTION ADOPTION**                                             |
-| Timestamp          | 20260804T183531Z                                                                                              |
+| Portfolio status   | **FEATURE COMPLETE · INTERNAL ADOPTION · ENTERPRISE QUALITY BASELINE**                                        |
+| Timestamp          | 20260804T183844Z                                                                                              |
 | Certification      | [apzqep-165-qo-018/](../apzqep-165-qo-018/)                                                                   |
-| Evidence           | [evidence/…/20260804T183531Z/](../../../../evidence/apzqep-version-1.1-architecture-freeze/20260804T183531Z/) |
+| Evidence           | [evidence/…/20260804T183844Z/](../../../../evidence/apzqep-version-1.1-architecture-freeze/20260804T183844Z/) |
 | Authoritative face | [PRODUCT-STATUS.md](../../PRODUCT-STATUS.md)                                                                  |
 
 ## Formal milestone
 
-See [PORTFOLIO-MILESTONE.md](./PORTFOLIO-MILESTONE.md).
+See [PORTFOLIO-MILESTONE.md](./PORTFOLIO-MILESTONE.md) and
+[ENTERPRISE-QUALITY-BASELINE.md](./ENTERPRISE-QUALITY-BASELINE.md).
 
 ## Freeze pack contents
 
@@ -27,6 +28,7 @@ See [PORTFOLIO-MILESTONE.md](./PORTFOLIO-MILESTONE.md).
 | [CONTRACTS-BASELINE.md](./CONTRACTS-BASELINE.md)                         | Orchestration contract kinds                           |
 | [PROVIDER-CONTRACTS-BASELINE.md](./PROVIDER-CONTRACTS-BASELINE.md)       | Provider-neutral integration rules                     |
 | [ENGINEERING-STANDARDS-BASELINE.md](./ENGINEERING-STANDARDS-BASELINE.md) | Standing engineering discipline                        |
+| [ENTERPRISE-QUALITY-BASELINE.md](./ENTERPRISE-QUALITY-BASELINE.md)       | APZHUB mandatory quality baseline designation          |
 
 ## Rule
 

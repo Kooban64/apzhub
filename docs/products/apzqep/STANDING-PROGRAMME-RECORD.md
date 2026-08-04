@@ -51,7 +51,8 @@
 > **APZQEP-165-QO-016 (20260804T182106Z):** Enterprise Operational Platform **COMPLETE** (Operational Readiness Package) — `@apzhub/platform-orchestration` 0.1.15 — [apzqep-165-qo-016/](./v1.1/apzqep-165-qo-016/)
 > **APZQEP-165-QO-017 (20260804T182640Z):** Workspace & Operations Experience **COMPLETE** (composition packages) — `@apzhub/platform-orchestration` 0.1.16 — [apzqep-165-qo-017/](./v1.1/apzqep-165-qo-017/)
 > **APZQEP-165-QO-018 (20260804T183155Z):** Enterprise Release Certification **CERTIFIED** — engineering unchanged (0.1.16) — [apzqep-165-qo-018/](./v1.1/apzqep-165-qo-018/)
-> **APZQEP Version 1.1 Architecture Freeze (20260804T183531Z):** **FEATURE COMPLETE · ARCHITECTURE FROZEN · CERTIFIED FOR INTERNAL PRODUCTION ADOPTION** — [apzqep-version-1.1-architecture-freeze/](./v1.1/apzqep-version-1.1-architecture-freeze/) — next: adoption + separately authorised provider programmes only
+> **APZQEP Version 1.1 Architecture Freeze (20260804T183531Z):** **FEATURE COMPLETE · ARCHITECTURE FROZEN · CERTIFIED FOR INTERNAL PRODUCTION ADOPTION** — [apzqep-version-1.1-architecture-freeze/](./v1.1/apzqep-version-1.1-architecture-freeze/)
+> **APZQEP Version 1.1 Enterprise Quality Baseline (20260804T183844Z):** Designated mandatory quality platform for APZHUB — [ENTERPRISE-QUALITY-BASELINE.md](./v1.1/apzqep-version-1.1-architecture-freeze/ENTERPRISE-QUALITY-BASELINE.md) — next: adoption + APZQEP-170/180/190/200 provider families only
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

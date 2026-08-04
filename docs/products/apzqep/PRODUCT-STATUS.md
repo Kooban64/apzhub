@@ -91,7 +91,8 @@ OPERATIONS-LED
 
 Next Authorised Programme:
 APZQEP-165-PLAN — Engineering Execution Plan **COMPLETE**
-APZQEP Version 1.1 — **FEATURE COMPLETE · ARCHITECTURE FROZEN · CERTIFIED FOR INTERNAL PRODUCTION ADOPTION**
+APZQEP Version 1.1 — **ENTERPRISE QUALITY BASELINE FOR APZHUB**
+(FEATURE COMPLETE · ARCHITECTURE FROZEN · CERTIFIED FOR INTERNAL PRODUCTION ADOPTION)
 Engineering baseline: `@apzhub/platform-orchestration` 0.1.16 (QO-017); Wave 5 QO-001…QO-018 closed
 PBR-APZQEP-165-000 **APPROVED** — V1.1 foundational architecture **CLOSED**
 APZQEP-166 NOT AUTHORISED
@@ -129,14 +130,15 @@ Durability: process-local layout store — not production-durable until persiste
 Version 1.1 Wave 5:
 APZQEP-165-000 ARCHITECTURE COMPLETE · **PBR-APZQEP-165-000 APPROVED**
 APZQEP-165-PLAN COMPLETE (S01–S18 / QO-001–QO-018)
-APZQEP Version 1.1 — **FEATURE COMPLETE · ARCHITECTURE FROZEN · CERTIFIED FOR INTERNAL PRODUCTION ADOPTION**
+APZQEP Version 1.1 — **ENTERPRISE QUALITY BASELINE FOR APZHUB**
 Living title: **Enterprise Continuous Quality Orchestration**
 APZQEP-165: **COMPLETE** (QO-001…QO-018); package baseline 0.1.16 (QO-017)
 V1.1 foundational architecture: **FROZEN** — [Architecture Freeze](./v1.1/apzqep-version-1.1-architecture-freeze/)
-APZQEP-166 / APZQEP-170+ provider programmes: NOT AUTHORISED until separate Owner Auth
+Designation: [Enterprise Quality Baseline](./v1.1/apzqep-version-1.1-architecture-freeze/ENTERPRISE-QUALITY-BASELINE.md)
+APZQEP-166 / APZQEP-170/180/190/200 provider families: NOT AUTHORISED until separate Owner Auth
 
 Next Action:
-Internal production adoption (dogfooding) and separately authorised provider/enhancement programmes only. Do not reopen V1.1 foundations.
+Adopt APZQEP as the mandatory quality platform across APZHUB products; authorise provider/integration programmes separately. Do not reopen V1.1 foundations.
 Do NOT open monolithic APZQEP-165 engineering in one pass.
 Do NOT open further V1.1 foundational architecture or planning programmes.
 Do NOT authorise external AI without a dedicated programme.
@@ -185,55 +187,56 @@ Ops: push local main to origin when remote credentials available.
 
 ## Programme History (Version 1.0)
 
-| Programme              | Outcome                                                                                                                        |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| APZQEP-120             | Platform Foundation Complete                                                                                                   |
-| APZQEP-140             | Core Quality Engineering Complete                                                                                              |
-| APZQEP-150             | Product Readiness Audit Complete (**NO-GO** — historical / immutable)                                                          |
-| APZQEP-151             | Durable Product Persistence **CERTIFIED / CLOSED** (RB-001)                                                                    |
-| APZQEP-152             | Enterprise Production RBAC & Security **CERTIFIED / CLOSED** (RB-002)                                                          |
-| APZQEP-150R            | Product Readiness Re-certification **COMPLETE** — **GO recommended**                                                           |
-| **PBR-APZQEP-1.0-001** | Product Board **GO** — General Production Release **AUTHORISED**                                                               |
-| **APZQEP-OPS-001**     | GA Operations & Product Intelligence **COMPLETE** (non-engineering)                                                            |
-| **APZQEP-160**         | Enterprise Quality Platform Definition & Roadmap **COMPLETE**                                                                  |
-| **PBR-APZQEP-160**     | V1.1 Definition **APPROVED** — Wave 1 (**APZQEP-161**) authorised to open                                                      |
-| **APZQEP-161**         | Enterprise Automation Foundation **COMPLETE**                                                                                  |
-| **APZQEP-161R**        | Wave 1 Operational Readiness & Usability **COMPLETE**                                                                          |
-| **PBR-APZQEP-161**     | Wave 1 **CERTIFIED** — APZQEP-162 **AUTHORISED**                                                                               |
-| **APZQEP-161-OE**      | Operational Enablement & Internal Adoption **COMPLETE**                                                                        |
-| **APZQEP-162**         | Enterprise Source Control Integration Platform **COMPLETE**                                                                    |
-| **PBR-APZQEP-162**     | Wave 2 **CERTIFIED**                                                                                                           |
-| **APZQEP-163-000**     | Enterprise Quality Intelligence Platform Architecture **COMPLETE**                                                             |
-| **PBR-APZQEP-163-000** | Wave 3 architecture **APPROVED**                                                                                               |
-| **APZQEP-163**         | Enterprise Quality Intelligence Platform **COMPLETE**                                                                          |
-| **PBR-APZQEP-163**     | Wave 3 **CERTIFIED**                                                                                                           |
-| **APZQEP-164-000**     | Enterprise Dashboard & Quality Experience Architecture **COMPLETE**                                                            |
-| **PBR-APZQEP-164-000** | Wave 4 architecture **APPROVED**                                                                                               |
-| **APZQEP-164**         | Enterprise Dashboard & Quality Experience **COMPLETE**                                                                         |
-| **PBR-APZQEP-164**     | Wave 4 **CERTIFIED** — APZQEP-165 **AUTHORISED TO OPEN**                                                                       |
-| **APZQEP-165-000**     | Enterprise Continuous Quality Orchestration Architecture **COMPLETE**                                                          |
-| **PBR-APZQEP-165-000** | Wave 5 architecture **APPROVED** — V1.1 foundational architecture CLOSED                                                       |
-| **APZQEP-165-PLAN**    | Wave 5 Engineering Execution Plan **COMPLETE** (S01–S18 / QO-001–018)                                                          |
-| **APZQEP-165-QO-001**  | Platform Orchestration Kernel **COMPLETE** — `@apzhub/platform-orchestration` 0.1.0                                            |
-| **APZQEP-165-QO-002**  | Capability Registry **COMPLETE** — catalogue-only (`platform-orchestration` 0.1.1)                                             |
-| **APZQEP-165-QO-003**  | Trigger Engine **COMPLETE** — provider-neutral routing (`platform-orchestration` 0.1.2)                                        |
-| **APZQEP-165-QO-004**  | Quality Flow Engine **COMPLETE** — lifecycle state machine (`platform-orchestration` 0.1.3)                                    |
-| **APZQEP-165-QO-005**  | Impact Correlation **COMPLETE** — explainable impact graph (`platform-orchestration` 0.1.4)                                    |
-| **APZQEP-165-QO-006**  | Policy & Quality Selection **COMPLETE** — declarative PDP (`platform-orchestration` 0.1.5)                                     |
-| **APZQEP-165-QO-007**  | Quality Governance **COMPLETE** — gate engine (`platform-orchestration` 0.1.6)                                                 |
-| **APZQEP-165-QO-008**  | Approval Decision Platform **COMPLETE** (`platform-orchestration` 0.1.7)                                                       |
-| **APZQEP-165-QO-009**  | Quality Decision Engine **COMPLETE** — Decision Package (`platform-orchestration` 0.1.8)                                       |
-| **APZQEP-165-QO-010**  | Quality Event Backbone **COMPLETE** (`platform-orchestration` 0.1.9)                                                           |
-| **APZQEP-165-QO-011**  | Automation Coordination **COMPLETE** (`platform-orchestration` 0.1.10)                                                         |
-| **APZQEP-165-QO-012**  | Source Change Coordination **COMPLETE** (`platform-orchestration` 0.1.11)                                                      |
-| **APZQEP-165-QO-013**  | Quality Intelligence Enrichment **COMPLETE** (`platform-orchestration` 0.1.12)                                                 |
-| **APZQEP-165-QO-014**  | Evidence & Reporting Integration **COMPLETE** (`platform-orchestration` 0.1.13)                                                |
-| **APZQEP-165-QO-015**  | Executive Experience Integration **COMPLETE** (`platform-orchestration` 0.1.14)                                                |
-| **APZQEP-165-QO-016**  | Enterprise Operational Platform **COMPLETE** (`platform-orchestration` 0.1.15)                                                 |
-| **APZQEP-165-QO-017**  | Workspace & Operations Experience **COMPLETE** (`platform-orchestration` 0.1.16)                                               |
-| **APZQEP-165-QO-018**  | Enterprise Release Certification **CERTIFIED** (engineering unchanged)                                                         |
-| **APZQEP-165**         | Wave 5 **COMPLETE**                                                                                                            |
-| **APZQEP V1.1 Freeze** | **FEATURE COMPLETE · ARCHITECTURE FROZEN · INTERNAL ADOPTION** — [freeze pack](./v1.1/apzqep-version-1.1-architecture-freeze/) |
+| Programme                | Outcome                                                                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| APZQEP-120               | Platform Foundation Complete                                                                                                                     |
+| APZQEP-140               | Core Quality Engineering Complete                                                                                                                |
+| APZQEP-150               | Product Readiness Audit Complete (**NO-GO** — historical / immutable)                                                                            |
+| APZQEP-151               | Durable Product Persistence **CERTIFIED / CLOSED** (RB-001)                                                                                      |
+| APZQEP-152               | Enterprise Production RBAC & Security **CERTIFIED / CLOSED** (RB-002)                                                                            |
+| APZQEP-150R              | Product Readiness Re-certification **COMPLETE** — **GO recommended**                                                                             |
+| **PBR-APZQEP-1.0-001**   | Product Board **GO** — General Production Release **AUTHORISED**                                                                                 |
+| **APZQEP-OPS-001**       | GA Operations & Product Intelligence **COMPLETE** (non-engineering)                                                                              |
+| **APZQEP-160**           | Enterprise Quality Platform Definition & Roadmap **COMPLETE**                                                                                    |
+| **PBR-APZQEP-160**       | V1.1 Definition **APPROVED** — Wave 1 (**APZQEP-161**) authorised to open                                                                        |
+| **APZQEP-161**           | Enterprise Automation Foundation **COMPLETE**                                                                                                    |
+| **APZQEP-161R**          | Wave 1 Operational Readiness & Usability **COMPLETE**                                                                                            |
+| **PBR-APZQEP-161**       | Wave 1 **CERTIFIED** — APZQEP-162 **AUTHORISED**                                                                                                 |
+| **APZQEP-161-OE**        | Operational Enablement & Internal Adoption **COMPLETE**                                                                                          |
+| **APZQEP-162**           | Enterprise Source Control Integration Platform **COMPLETE**                                                                                      |
+| **PBR-APZQEP-162**       | Wave 2 **CERTIFIED**                                                                                                                             |
+| **APZQEP-163-000**       | Enterprise Quality Intelligence Platform Architecture **COMPLETE**                                                                               |
+| **PBR-APZQEP-163-000**   | Wave 3 architecture **APPROVED**                                                                                                                 |
+| **APZQEP-163**           | Enterprise Quality Intelligence Platform **COMPLETE**                                                                                            |
+| **PBR-APZQEP-163**       | Wave 3 **CERTIFIED**                                                                                                                             |
+| **APZQEP-164-000**       | Enterprise Dashboard & Quality Experience Architecture **COMPLETE**                                                                              |
+| **PBR-APZQEP-164-000**   | Wave 4 architecture **APPROVED**                                                                                                                 |
+| **APZQEP-164**           | Enterprise Dashboard & Quality Experience **COMPLETE**                                                                                           |
+| **PBR-APZQEP-164**       | Wave 4 **CERTIFIED** — APZQEP-165 **AUTHORISED TO OPEN**                                                                                         |
+| **APZQEP-165-000**       | Enterprise Continuous Quality Orchestration Architecture **COMPLETE**                                                                            |
+| **PBR-APZQEP-165-000**   | Wave 5 architecture **APPROVED** — V1.1 foundational architecture CLOSED                                                                         |
+| **APZQEP-165-PLAN**      | Wave 5 Engineering Execution Plan **COMPLETE** (S01–S18 / QO-001–018)                                                                            |
+| **APZQEP-165-QO-001**    | Platform Orchestration Kernel **COMPLETE** — `@apzhub/platform-orchestration` 0.1.0                                                              |
+| **APZQEP-165-QO-002**    | Capability Registry **COMPLETE** — catalogue-only (`platform-orchestration` 0.1.1)                                                               |
+| **APZQEP-165-QO-003**    | Trigger Engine **COMPLETE** — provider-neutral routing (`platform-orchestration` 0.1.2)                                                          |
+| **APZQEP-165-QO-004**    | Quality Flow Engine **COMPLETE** — lifecycle state machine (`platform-orchestration` 0.1.3)                                                      |
+| **APZQEP-165-QO-005**    | Impact Correlation **COMPLETE** — explainable impact graph (`platform-orchestration` 0.1.4)                                                      |
+| **APZQEP-165-QO-006**    | Policy & Quality Selection **COMPLETE** — declarative PDP (`platform-orchestration` 0.1.5)                                                       |
+| **APZQEP-165-QO-007**    | Quality Governance **COMPLETE** — gate engine (`platform-orchestration` 0.1.6)                                                                   |
+| **APZQEP-165-QO-008**    | Approval Decision Platform **COMPLETE** (`platform-orchestration` 0.1.7)                                                                         |
+| **APZQEP-165-QO-009**    | Quality Decision Engine **COMPLETE** — Decision Package (`platform-orchestration` 0.1.8)                                                         |
+| **APZQEP-165-QO-010**    | Quality Event Backbone **COMPLETE** (`platform-orchestration` 0.1.9)                                                                             |
+| **APZQEP-165-QO-011**    | Automation Coordination **COMPLETE** (`platform-orchestration` 0.1.10)                                                                           |
+| **APZQEP-165-QO-012**    | Source Change Coordination **COMPLETE** (`platform-orchestration` 0.1.11)                                                                        |
+| **APZQEP-165-QO-013**    | Quality Intelligence Enrichment **COMPLETE** (`platform-orchestration` 0.1.12)                                                                   |
+| **APZQEP-165-QO-014**    | Evidence & Reporting Integration **COMPLETE** (`platform-orchestration` 0.1.13)                                                                  |
+| **APZQEP-165-QO-015**    | Executive Experience Integration **COMPLETE** (`platform-orchestration` 0.1.14)                                                                  |
+| **APZQEP-165-QO-016**    | Enterprise Operational Platform **COMPLETE** (`platform-orchestration` 0.1.15)                                                                   |
+| **APZQEP-165-QO-017**    | Workspace & Operations Experience **COMPLETE** (`platform-orchestration` 0.1.16)                                                                 |
+| **APZQEP-165-QO-018**    | Enterprise Release Certification **CERTIFIED** (engineering unchanged)                                                                           |
+| **APZQEP-165**           | Wave 5 **COMPLETE**                                                                                                                              |
+| **APZQEP V1.1 Freeze**   | **FEATURE COMPLETE · ARCHITECTURE FROZEN · INTERNAL ADOPTION** — [freeze pack](./v1.1/apzqep-version-1.1-architecture-freeze/)                   |
+| **APZQEP V1.1 Baseline** | **DESIGNATED** Enterprise Quality Baseline for APZHUB — [baseline](./v1.1/apzqep-version-1.1-architecture-freeze/ENTERPRISE-QUALITY-BASELINE.md) |
 
 ---
 
@@ -306,7 +309,7 @@ Board / audit / ops:
 ## Path remaining
 
 1. Operate Version 1.0 under APZQEP-OPS-001.
-2. Dogfood APZQEP on APZHUB / APZ product surfaces; authorise provider programmes separately (e.g. APZQEP-170+).
+2. Mandate APZQEP for APZHUB product quality; authorise 170/180/190/200 provider families separately.
 3. Do not authorise APZQEP-166 or external AI providers yet.
 4. V1.1 foundational architecture CLOSED; last V1.1 planning programme (165-PLAN) COMPLETE.
 
@@ -318,7 +321,7 @@ Version 1.0 engineering lifecycle is formally complete. Product Board authorised
 
 Authoritative state:
 
-> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. V1.0 engineering CLOSED. APZQEP-OPS-001 COMPLETE. Waves 1–5 CERTIFIED. PBR-APZQEP-165-000 APPROVED. APZQEP-165 COMPLETE (QO-001…QO-018). Version 1.1 — FEATURE COMPLETE · ARCHITECTURE FROZEN · CERTIFIED FOR INTERNAL PRODUCTION ADOPTION (baseline platform-orchestration 0.1.16). Future work via adoption and separately authorised provider/enhancement programmes only. Wave 166 and external AI providers NOT AUTHORISED.**
+> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. V1.0 engineering CLOSED. APZQEP-OPS-001 COMPLETE. Waves 1–5 CERTIFIED. PBR-APZQEP-165-000 APPROVED. APZQEP-165 COMPLETE (QO-001…QO-018). Version 1.1 — ENTERPRISE QUALITY BASELINE FOR APZHUB (FEATURE COMPLETE · ARCHITECTURE FROZEN · CERTIFIED FOR INTERNAL PRODUCTION ADOPTION; baseline platform-orchestration 0.1.16). Future work via adoption and separately authorised provider/integration/operational programmes (170/180/190/200 families) only. Wave 166 and external AI providers NOT AUTHORISED.**
 
 ---
 

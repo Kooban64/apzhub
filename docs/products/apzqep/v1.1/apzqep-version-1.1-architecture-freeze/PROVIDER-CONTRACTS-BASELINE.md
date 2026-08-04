@@ -12,21 +12,15 @@
    common enrichment contract when separately authorised.
 6. **Dashboards / presentation** — Wave 4 owns rendering; Executive Experience is projection.
 
-## Future provider programmes (illustrative — not authorised)
+## Future provider programme families (illustrative — not authorised)
 
-| Programme  | Purpose                              |
-| ---------- | ------------------------------------ |
-| APZQEP-170 | OpenAI Quality Intelligence Provider |
-| APZQEP-171 | Selenium Provider                    |
-| APZQEP-172 | Cypress Provider                     |
-| APZQEP-173 | Appium Provider                      |
-| APZQEP-174 | REST/API Provider                    |
-| APZQEP-175 | k6 Performance Provider              |
-| APZQEP-176 | Accessibility Provider               |
-| APZQEP-177 | Visual Regression Provider           |
-| APZQEP-178 | GitLab Provider                      |
-| APZQEP-179 | Azure DevOps Provider                |
-| APZQEP-180 | Enterprise Analytics Expansion       |
+| Family                   | Series     | Examples                                                                                           |
+| ------------------------ | ---------- | -------------------------------------------------------------------------------------------------- |
+| Automation Providers     | APZQEP-170 | Playwright enhancements, Selenium, Cypress, Appium, REST/API, k6, accessibility, visual regression |
+| Source Control Providers | APZQEP-180 | GitLab, Azure DevOps, Bitbucket, Gitea, Forgejo                                                    |
+| Intelligence Providers   | APZQEP-190 | OpenAI, local LLMs, rule packs, statistical models, historical prediction                          |
+| Enterprise Integrations  | APZQEP-200 | Jira, Plane, Zammad, Slack, Teams, Google Workspace, email, CI/CD                                  |
 
-These are **provider / enhancement programmes**, not architecture programmes.
-Each requires independent Owner Authorisation.
+These are **provider / integration programmes**, not architecture programmes.
+Each requires independent Owner Authorisation. See also
+[ENTERPRISE-QUALITY-BASELINE.md](./ENTERPRISE-QUALITY-BASELINE.md).
