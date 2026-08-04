@@ -9,6 +9,7 @@ export * from "./impact-correlation";
 export * from "./policy-selection";
 export * from "./governance";
 export * from "./approval";
+export * from "./decision";
 export * from "./errors";
 export * from "./configuration";
 export * from "./diagnostics";

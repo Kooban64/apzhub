@@ -94,6 +94,8 @@ export {
   twoPersonSatisfied,
   mandatoryAuthoritiesSatisfied,
 } from "./approval/sod";
+export { DecisionProfileRegistry, maxRiskLevel, riskRank } from "./decision/registries";
+export { DecisionEngine, type DecisionEngineOptions } from "./decision/decision-engine";
 export {
   createPlatformOrchestration,
   type CreatePlatformOrchestrationOptions,

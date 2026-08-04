@@ -62,6 +62,7 @@ export const ORCHESTRATION_DI_TOKENS = {
   policySelection: "orchestration.policy_selection.engine",
   governance: "orchestration.governance.engine",
   approval: "orchestration.approval.engine",
+  decision: "orchestration.decision.engine",
   logger: "orchestration.logger",
   config: "orchestration.config",
 } as const;

@@ -11,7 +11,7 @@
 | Package           | `@apzhub/platform-orchestration` **0.1.7**                                                               |
 | Timestamp         | 20260804T142105Z                                                                                         |
 | Evidence          | [evidence/apzqep-165-qo-008/20260804T142105Z/](../../../../evidence/apzqep-165-qo-008/20260804T142105Z/) |
-| Next              | **QO-009** — Enterprise Release Recommendation Engine (separate Owner Auth)                              |
+| Next              | **QO-009** — Enterprise Quality Decision Engine (**COMPLETE**)                                           |
 
 ## Mission
 

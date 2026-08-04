@@ -40,7 +40,8 @@
 > **APZQEP-165-QO-005 (20260804T094522Z):** Impact Correlation **COMPLETE** (explainable impact graph, confidence, risk, advisory scope) — `@apzhub/platform-orchestration` 0.1.4 — [apzqep-165-qo-005/](./v1.1/apzqep-165-qo-005/)
 > **APZQEP-165-QO-006 (20260804T102458Z):** Policy & Quality Selection **COMPLETE** (declarative PDP, advisory activities) — `@apzhub/platform-orchestration` 0.1.5 — [apzqep-165-qo-006/](./v1.1/apzqep-165-qo-006/)
 > **APZQEP-165-QO-007 (20260804T113513Z):** Quality Governance **COMPLETE** (gate evaluation, composition, advisory decision) — `@apzhub/platform-orchestration` 0.1.6 — [apzqep-165-qo-007/](./v1.1/apzqep-165-qo-007/)
-> **APZQEP-165-QO-008 (20260804T142105Z):** Approval Decision Platform **COMPLETE** (authorities, bundles, SoD, delegation) — `@apzhub/platform-orchestration` 0.1.7 — [apzqep-165-qo-008/](./v1.1/apzqep-165-qo-008/) — next **QO-009**
+> **APZQEP-165-QO-008 (20260804T142105Z):** Approval Decision Platform **COMPLETE** (authorities, bundles, SoD, delegation) — `@apzhub/platform-orchestration` 0.1.7 — [apzqep-165-qo-008/](./v1.1/apzqep-165-qo-008/)
+> **APZQEP-165-QO-009 (20260804T143849Z):** Quality Decision Engine **COMPLETE** (Decision Package, profiles, residual risk) — `@apzhub/platform-orchestration` 0.1.8 — [apzqep-165-qo-009/](./v1.1/apzqep-165-qo-009/) — next **QO-010**
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

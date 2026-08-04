@@ -1,6 +1,7 @@
 import { ApprovalEngine } from "../approval/approval-engine";
 import type { OrchestrationKernelConfig } from "../contracts/configuration";
 import type { OrchestrationEventPublisher } from "../contracts/events";
+import { DecisionEngine } from "../decision/decision-engine";
 import { OrchestrationContainer, ORCHESTRATION_DI_TOKENS } from "../di/container";
 import { QualityFlowEngine } from "../flows/quality-flow-engine";
 import { GovernanceEngine } from "../governance/governance-engine";
@@ -34,12 +35,13 @@ export interface PlatformOrchestration {
   readonly policySelection: PolicySelectionEngine;
   readonly governance: GovernanceEngine;
   readonly approvals: ApprovalEngine;
+  readonly decisions: DecisionEngine;
   readonly container: OrchestrationContainer;
 }
 
 /**
- * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-008).
- * Approvals record authority decisions — never re-evaluate governance.
+ * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-009).
+ * Decisions compose completed governance outputs — never re-evaluate upstream engines.
  */
 export async function createPlatformOrchestration(
   options: CreatePlatformOrchestrationOptions = {},
@@ -108,6 +110,15 @@ export async function createPlatformOrchestration(
       "Authority decisions and immutable approval bundles — never re-evaluates governance or manages identity",
   });
 
+  kernel.contracts.register({
+    contractId: "orchestration.decision.v1",
+    kind: "decision",
+    version: PLATFORM_ORCHESTRATION_VERSION,
+    name: "Quality Decision Engine",
+    description:
+      "Immutable Decision Packages composing completed governance outcomes — never re-evaluates or deploys",
+  });
+
   const triggerBindings = new TriggerBindingRegistry();
   const triggers = new TriggerEngine({
     bindings: triggerBindings,
@@ -139,6 +150,11 @@ export async function createPlatformOrchestration(
   });
 
   const approvals = new ApprovalEngine({
+    publishEvent: options.publishEvent,
+    orchestrationId: kernel.orchestrationId,
+  });
+
+  const decisions = new DecisionEngine({
     publishEvent: options.publishEvent,
     orchestrationId: kernel.orchestrationId,
   });
@@ -176,6 +192,9 @@ export async function createPlatformOrchestration(
   if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.approval)) {
     kernel.container.register(ORCHESTRATION_DI_TOKENS.approval, approvals);
   }
+  if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.decision)) {
+    kernel.container.register(ORCHESTRATION_DI_TOKENS.decision, decisions);
+  }
 
   return {
     kernel,
@@ -189,6 +208,7 @@ export async function createPlatformOrchestration(
     policySelection,
     governance,
     approvals,
+    decisions,
     container: kernel.container,
   };
 }

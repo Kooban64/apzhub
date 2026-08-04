@@ -91,8 +91,8 @@ OPERATIONS-LED
 
 Next Authorised Programme:
 APZQEP-165-PLAN — Engineering Execution Plan **COMPLETE**
-APZQEP-165-QO-001…**QO-008 COMPLETE** (`@apzhub/platform-orchestration` 0.1.7)
-APZQEP-165 — in progress via micro-certified slices; next **QO-009** Owner Auth
+APZQEP-165-QO-001…**QO-009 COMPLETE** (`@apzhub/platform-orchestration` 0.1.8)
+APZQEP-165 — in progress via micro-certified slices; next **QO-010** Owner Auth
 PBR-APZQEP-165-000 **APPROVED** — V1.1 foundational architecture **CLOSED**
 APZQEP-166 NOT AUTHORISED
 APZQEP-163A (external AI providers) NOT AUTHORISED
@@ -129,14 +129,14 @@ Durability: process-local layout store — not production-durable until persiste
 Version 1.1 Wave 5:
 APZQEP-165-000 ARCHITECTURE COMPLETE · **PBR-APZQEP-165-000 APPROVED**
 APZQEP-165-PLAN COMPLETE (S01–S18 / QO-001–QO-018)
-APZQEP-165-QO-001…**QO-008 COMPLETE** (kernel…Approval Decision Platform) — package 0.1.7
+APZQEP-165-QO-001…**QO-009 COMPLETE** (kernel…Quality Decision Engine) — package 0.1.8
 Living title: **Enterprise Continuous Quality Orchestration**
-APZQEP-165 engineering: **IN PROGRESS** (micro-slices); QO-009 NOT STARTED
+APZQEP-165 engineering: **IN PROGRESS** (micro-slices); QO-010 NOT STARTED
 V1.1 foundational architecture: **CLOSED**
 APZQEP-166 NOT AUTHORISED
 
 Next Action:
-Owner Auth for **QO-009** (Enterprise Release Recommendation Engine) only.
+Owner Auth for **QO-010** (Enterprise Event Integration Platform) only.
 Do NOT open monolithic APZQEP-165 engineering in one pass.
 Do NOT open further V1.1 foundational architecture or planning programmes.
 Do NOT authorise external AI without a dedicated programme.
@@ -222,6 +222,7 @@ Ops: push local main to origin when remote credentials available.
 | **APZQEP-165-QO-006**  | Policy & Quality Selection **COMPLETE** — declarative PDP (`platform-orchestration` 0.1.5)  |
 | **APZQEP-165-QO-007**  | Quality Governance **COMPLETE** — gate engine (`platform-orchestration` 0.1.6)              |
 | **APZQEP-165-QO-008**  | Approval Decision Platform **COMPLETE** (`platform-orchestration` 0.1.7)                    |
+| **APZQEP-165-QO-009**  | Quality Decision Engine **COMPLETE** — Decision Package (`platform-orchestration` 0.1.8)    |
 
 ---
 
@@ -294,7 +295,7 @@ Board / audit / ops:
 ## Path remaining
 
 1. Operate Version 1.0 under APZQEP-OPS-001.
-2. Owner Auth for QO-009 (then subsequent QO slices per 165-PLAN).
+2. Owner Auth for QO-010 (then subsequent QO slices per 165-PLAN).
 3. Do not authorise APZQEP-166 or external AI providers yet.
 4. V1.1 foundational architecture CLOSED; last V1.1 planning programme (165-PLAN) COMPLETE.
 
@@ -306,7 +307,7 @@ Version 1.0 engineering lifecycle is formally complete. Product Board authorised
 
 Authoritative state:
 
-> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. V1.0 engineering CLOSED. APZQEP-OPS-001 COMPLETE. Waves 1–4 CERTIFIED. PBR-APZQEP-165-000 APPROVED — Enterprise Continuous Quality Orchestration. V1.1 foundational architecture CLOSED. APZQEP-165-PLAN COMPLETE. APZQEP-165 IN PROGRESS — QO-001…QO-008 COMPLETE; next QO-009 Owner Auth. Wave 166 and external AI providers NOT AUTHORISED.**
+> **APZQEP Version 1.0 — GENERAL AVAILABILITY. Operations-led. V1.0 engineering CLOSED. APZQEP-OPS-001 COMPLETE. Waves 1–4 CERTIFIED. PBR-APZQEP-165-000 APPROVED — Enterprise Continuous Quality Orchestration. V1.1 foundational architecture CLOSED. APZQEP-165-PLAN COMPLETE. APZQEP-165 IN PROGRESS — QO-001…QO-009 COMPLETE; next QO-010 Owner Auth. Wave 166 and external AI providers NOT AUTHORISED.**
 
 ---
 
