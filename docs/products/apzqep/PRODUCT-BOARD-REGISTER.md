@@ -27,7 +27,8 @@
 | APZQEP-165-PLAN     | **COMPLETE** — [v1.1/apzqep-165-plan/](./v1.1/apzqep-165-plan/) — last V1.1 planning programme |
 | APZQEP-165-QO-001   | **COMPLETE** — [v1.1/apzqep-165-qo-001/](./v1.1/apzqep-165-qo-001/) — orchestration kernel     |
 | APZQEP-165-QO-002   | **COMPLETE** — [v1.1/apzqep-165-qo-002/](./v1.1/apzqep-165-qo-002/) — capability catalogue     |
-| APZQEP-165 / QO-003 | **NOT STARTED** — next Owner Auth **QO-003** Trigger Engine                                    |
+| APZQEP-165-QO-003   | **COMPLETE** — [v1.1/apzqep-165-qo-003/](./v1.1/apzqep-165-qo-003/) — trigger routing          |
+| APZQEP-165 / QO-004 | **NOT STARTED** — next Owner Auth **QO-004** Quality Flow Engine                               |
 | APZQEP-166          | Planned — **not authorised**                                                                   |
 | APZQEP-163A         | External AI providers — **not authorised**                                                     |
 | APZHUB-ADR-0100     | Future portfolio recommendation only — **not created**                                         |
