@@ -8,6 +8,10 @@
 
 Evidence-based backlog for future programmes. Items here are **not authorised**.
 
+Prefer promoting from [OPERATIONAL-LEARNING-REGISTER.md](./OPERATIONAL-LEARNING-REGISTER.md)
+patterns — not from a single annoyance. A backlog says “build X”; the Learning
+Register says “reality taught us Y.”
+
 | ID    | Source friction                                      | Proposed work                              | Suggested programme           | Change class                | Priority      | Ready for Owner Auth?  |
 | ----- | ---------------------------------------------------- | ------------------------------------------ | ----------------------------- | --------------------------- | ------------- | ---------------------- |
 | B-001 | _(seed)_ Operational use of Playwright not yet daily | Playwright Production Provider             | APZQEP-170 (narrow)           | Provider                    | High after C3 | **No** — await dogfood |

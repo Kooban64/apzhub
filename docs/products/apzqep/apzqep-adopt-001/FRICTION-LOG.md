@@ -6,9 +6,12 @@
 | Status    | **LIVING**       |
 | Timestamp | 20260804T185200Z |
 
-Record what hurts when using APZQEP on real work. Do not invent architecture
-fixes here — promote to [IMPROVEMENT-BACKLOG.md](./IMPROVEMENT-BACKLOG.md)
-with a change-control class.
+Record what hurts when using APZQEP on real work.
+
+Promotion path: durable insight →
+[OPERATIONAL-LEARNING-REGISTER.md](./OPERATIONAL-LEARNING-REGISTER.md) →
+(only after patterns) [IMPROVEMENT-BACKLOG.md](./IMPROVEMENT-BACKLOG.md).
+Do not invent architecture fixes from a single friction row.
 
 | ID  | Date | Product | Context | Friction                                 | Severity | Candidate class | Promoted? |
 | --- | ---- | ------- | ------- | ---------------------------------------- | -------- | --------------- | --------- |

@@ -26,18 +26,31 @@ it is simply how engineering quality and release work.
 
 ## Deliverables
 
-| #   | Deliverable                    | Artefact                                                     | Status   |
-| --- | ------------------------------ | ------------------------------------------------------------ | -------- |
-| 1   | Programme charter & authority  | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md)           | **DONE** |
-| 2   | Product onboarding order       | [PRODUCT-ONBOARDING-ORDER.md](./PRODUCT-ONBOARDING-ORDER.md) | **DONE** |
-| 3   | Three-month adoption roadmap   | [ADOPTION-ROADMAP.md](./ADOPTION-ROADMAP.md)                 | **DONE** |
-| 4   | End-to-end workflow target     | [E2E-WORKFLOW-TARGET.md](./E2E-WORKFLOW-TARGET.md)           | **DONE** |
-| 5   | Quality Story concept          | [QUALITY-STORY-CONCEPT.md](./QUALITY-STORY-CONCEPT.md)       | **DONE** |
-| 6   | Friction log (living)          | [FRICTION-LOG.md](./FRICTION-LOG.md)                         | **OPEN** |
-| 7   | Improvement backlog (living)   | [IMPROVEMENT-BACKLOG.md](./IMPROVEMENT-BACKLOG.md)           | **OPEN** |
-| 8   | Adoption metrics               | [METRICS.md](./METRICS.md)                                   | **OPEN** |
-| 9   | Training notes                 | [TRAINING-NOTES.md](./TRAINING-NOTES.md)                     | **OPEN** |
-| 10  | First E2E dogfood run (APZHUB) | evidence under `evidence/apzqep-adopt-001/`                  | Pending  |
+| #   | Deliverable                        | Artefact                                                               | Status   |
+| --- | ---------------------------------- | ---------------------------------------------------------------------- | -------- |
+| 1   | Programme charter & authority      | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md)                     | **DONE** |
+| 2   | Product onboarding order           | [PRODUCT-ONBOARDING-ORDER.md](./PRODUCT-ONBOARDING-ORDER.md)           | **DONE** |
+| 3   | Three-month adoption roadmap       | [ADOPTION-ROADMAP.md](./ADOPTION-ROADMAP.md)                           | **DONE** |
+| 4   | End-to-end workflow target         | [E2E-WORKFLOW-TARGET.md](./E2E-WORKFLOW-TARGET.md)                     | **DONE** |
+| 5   | Quality Story concept              | [QUALITY-STORY-CONCEPT.md](./QUALITY-STORY-CONCEPT.md)                 | **DONE** |
+| 6   | Friction log (living)              | [FRICTION-LOG.md](./FRICTION-LOG.md)                                   | **OPEN** |
+| 7   | **Operational Learning Register**  | [OPERATIONAL-LEARNING-REGISTER.md](./OPERATIONAL-LEARNING-REGISTER.md) | **OPEN** |
+| 8   | Improvement backlog (living)       | [IMPROVEMENT-BACKLOG.md](./IMPROVEMENT-BACKLOG.md)                     | **OPEN** |
+| 9   | Adoption metrics                   | [METRICS.md](./METRICS.md)                                             | **OPEN** |
+| 10  | Training notes                     | [TRAINING-NOTES.md](./TRAINING-NOTES.md)                               | **OPEN** |
+| 11  | Week 1 tiny-change exercise        | [WEEK-1-EXERCISE.md](./WEEK-1-EXERCISE.md)                             | Pending  |
+| 12  | After-five-releases review prompts | [AFTER-FIVE-RELEASES.md](./AFTER-FIVE-RELEASES.md)                     | **DONE** |
+| 13  | First E2E dogfood run (APZHUB)     | evidence under `evidence/apzqep-adopt-001/`                            | Pending  |
+
+## How learning artefacts relate
+
+```text
+Pain in the moment     → Friction Log
+Reality taught us Y    → Operational Learning Register
+Candidate: build X     → Improvement Backlog (not authorised)
+```
+
+Closing question after every run: **Would I release this again the same way?**
 
 ## Explicit exclusions
 

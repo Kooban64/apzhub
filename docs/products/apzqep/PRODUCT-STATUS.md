@@ -140,8 +140,8 @@ APZQEP-ADOPT-001: **OPEN / AUTHORISED** — Enterprise Internal Adoption Program
 Face: [apzqep-adopt-001/](./apzqep-adopt-001/)
 
 Next Action:
-Execute [APZQEP-ADOPT-001](./apzqep-adopt-001/) — dogfood APZHUB through APZQEP daily; onboard products per PRODUCT-ONBOARDING-ORDER; log friction; raise evidence-based backlog. Classify enhancements under [APZQEP-CHANGE-CONTROL.md](./v1.1/apzqep-version-1.1-architecture-freeze/APZQEP-CHANGE-CONTROL.md).
-Do NOT start APZQEP-170 until ADOPT-001 produces operational lessons (earliest after Month 2 checkpoint).
+Execute [APZQEP-ADOPT-001](./apzqep-adopt-001/) Week 1 tiny-change exercise ([WEEK-1-EXERCISE.md](./apzqep-adopt-001/WEEK-1-EXERCISE.md)) — full pipeline, no shortcuts; log friction; record Operational Learnings; backlog only from patterns. Classify enhancements under [APZQEP-CHANGE-CONTROL.md](./v1.1/apzqep-version-1.1-architecture-freeze/APZQEP-CHANGE-CONTROL.md).
+Do NOT start APZQEP-170 until ADOPT-001 produces operational lessons (earliest after Month 2 / after-five-releases review).
 Do NOT open further V1.1 foundational architecture or planning programmes.
 Do NOT authorise external AI without a dedicated programme.
 ```

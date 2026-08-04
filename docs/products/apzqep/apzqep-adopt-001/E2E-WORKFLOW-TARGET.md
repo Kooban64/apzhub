@@ -6,41 +6,37 @@
 | Status    | **TARGET**       |
 | Timestamp | 20260804T185200Z |
 
-## Pipeline (dogfood every change)
+## Pipeline (dogfood every change — full path, no shortcuts)
 
 ```text
-Developer
-      │
-      ▼
 Source Change
-      │
-      ▼
-Automation
-      │
-      ▼
+      ↓
+Trigger
+      ↓
 Quality Flow
-      │
-      ▼
+      ↓
 Impact
-      │
-      ▼
+      ↓
 Policy
-      │
-      ▼
+      ↓
 Governance
-      │
-      ▼
+      ↓
 Approval
-      │
-      ▼
+      ↓
 Decision
-      │
-      ▼
+      ↓
 Evidence
-      │
-      ▼
-Executive View
+      ↓
+Executive Projection
+      ↓
+Operational Package
+      ↓
+Workspace
+      ↓
+Release
 ```
+
+Start with a **tiny** change — see [WEEK-1-EXERCISE.md](./WEEK-1-EXERCISE.md).
 
 ## Automated target (once, for real)
 
@@ -80,5 +76,8 @@ architecture reopenings.
 | Docs-only change — skip automation?                   | Operational use         |
 | Two PRs touch same service — how does impact combine? | Operational use         |
 
-Answers feed [FRICTION-LOG.md](./FRICTION-LOG.md) and
-[IMPROVEMENT-BACKLOG.md](./IMPROVEMENT-BACKLOG.md).
+Answers feed [FRICTION-LOG.md](./FRICTION-LOG.md),
+[OPERATIONAL-LEARNING-REGISTER.md](./OPERATIONAL-LEARNING-REGISTER.md), and
+(only after patterns emerge) [IMPROVEMENT-BACKLOG.md](./IMPROVEMENT-BACKLOG.md).
+
+Every run ends with: **Would I release this again the same way?**

@@ -56,6 +56,7 @@
 > **APZQEP Version 1.1 Officially Complete (20260804T184100Z):** Enterprise infrastructure mode — [ADOPTION-AND-OPERATIONS.md](./v1.1/apzqep-version-1.1-architecture-freeze/ADOPTION-AND-OPERATIONS.md) — adoption waves + operational metrics; provider families only after operational learning
 > **APZQEP Change Control (20260804T184800Z):** Frozen-baseline change taxonomy — [APZQEP-CHANGE-CONTROL.md](./v1.1/apzqep-version-1.1-architecture-freeze/APZQEP-CHANGE-CONTROL.md) — cites closing ChatGPT programme assessment; Operations stage current
 > **APZQEP-ADOPT-001 (20260804T185200Z):** Enterprise Internal Adoption Programme **OPEN / AUTHORISED** — [apzqep-adopt-001/](./apzqep-adopt-001/) — dogfood APZHUB first; no engines; no APZQEP-170 until operational lessons
+> **APZQEP-ADOPT-001 refinement (20260804T185600Z):** Operational Learning Register + Week 1 tiny exercise + after-five-releases prompts — lessons from releases, not design meetings
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
