@@ -64,6 +64,7 @@ export const ORCHESTRATION_DI_TOKENS = {
   approval: "orchestration.approval.engine",
   decision: "orchestration.decision.engine",
   eventBackbone: "orchestration.event.backbone",
+  automationCoordination: "orchestration.automation.coordination",
   logger: "orchestration.logger",
   config: "orchestration.config",
 } as const;

@@ -42,7 +42,8 @@
 > **APZQEP-165-QO-007 (20260804T113513Z):** Quality Governance **COMPLETE** (gate evaluation, composition, advisory decision) — `@apzhub/platform-orchestration` 0.1.6 — [apzqep-165-qo-007/](./v1.1/apzqep-165-qo-007/)
 > **APZQEP-165-QO-008 (20260804T142105Z):** Approval Decision Platform **COMPLETE** (authorities, bundles, SoD, delegation) — `@apzhub/platform-orchestration` 0.1.7 — [apzqep-165-qo-008/](./v1.1/apzqep-165-qo-008/)
 > **APZQEP-165-QO-009 (20260804T143849Z):** Quality Decision Engine **COMPLETE** (Decision Package, profiles, residual risk) — `@apzhub/platform-orchestration` 0.1.8 — [apzqep-165-qo-009/](./v1.1/apzqep-165-qo-009/)
-> **APZQEP-165-QO-010 (20260804T161410Z):** Quality Event Backbone **COMPLETE** (envelope, registry, routing, history) — `@apzhub/platform-orchestration` 0.1.9 — [apzqep-165-qo-010/](./v1.1/apzqep-165-qo-010/) — next **QO-011**
+> **APZQEP-165-QO-010 (20260804T161410Z):** Quality Event Backbone **COMPLETE** (envelope, registry, routing, history) — `@apzhub/platform-orchestration` 0.1.9 — [apzqep-165-qo-010/](./v1.1/apzqep-165-qo-010/)
+> **APZQEP-165-QO-011 (20260804T170349Z):** Automation Coordination **COMPLETE** (Coordination Package, intents, events) — `@apzhub/platform-orchestration` 0.1.10 — [apzqep-165-qo-011/](./v1.1/apzqep-165-qo-011/) — next **QO-012**
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

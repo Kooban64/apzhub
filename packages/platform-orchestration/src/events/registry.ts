@@ -9,6 +9,7 @@ import type {
 } from "../contracts/event-backbone";
 import {
   APPROVAL_EVENT_TYPES,
+  AUTOMATION_COORDINATION_EVENT_TYPES,
   DECISION_EVENT_TYPES,
   GOVERNANCE_EVENT_TYPES,
   IMPACT_CORRELATION_EVENT_TYPES,
@@ -241,6 +242,42 @@ const PLATFORM_BUILTIN_EVENTS: readonly EventTypeDefinitionInput[] = [
     ],
     schemaRef: "schema://orchestration.decision.package_created/1.0.0",
     documentationRef: "docs://events/decision.package.created",
+  },
+  {
+    eventType: AUTOMATION_COORDINATION_EVENT_TYPES.coordinationCreated,
+    version: "1.0.0",
+    description: "Automation coordination package created",
+    producer: "orchestration.automation_coordination",
+    consumers: ["event.backbone", "automation.platform.future"],
+    schemaRef: "schema://automation.coordination.created/1.0.0",
+    documentationRef: "docs://events/automation.coordination.created",
+  },
+  {
+    eventType: AUTOMATION_COORDINATION_EVENT_TYPES.coordinationUpdated,
+    version: "1.0.0",
+    description: "Automation coordination superseded by a new package",
+    producer: "orchestration.automation_coordination",
+    consumers: ["event.backbone", "automation.platform.future"],
+    schemaRef: "schema://automation.coordination.updated/1.0.0",
+    documentationRef: "docs://events/automation.coordination.updated",
+  },
+  {
+    eventType: AUTOMATION_COORDINATION_EVENT_TYPES.coordinationCompleted,
+    version: "1.0.0",
+    description: "Automation coordination completed (not execution)",
+    producer: "orchestration.automation_coordination",
+    consumers: ["event.backbone", "automation.platform.future"],
+    schemaRef: "schema://automation.coordination.completed/1.0.0",
+    documentationRef: "docs://events/automation.coordination.completed",
+  },
+  {
+    eventType: AUTOMATION_COORDINATION_EVENT_TYPES.intentIdentified,
+    version: "1.0.0",
+    description: "Automation intent identified",
+    producer: "orchestration.automation_coordination",
+    consumers: ["event.backbone", "automation.platform.future"],
+    schemaRef: "schema://automation.intent.identified/1.0.0",
+    documentationRef: "docs://events/automation.intent.identified",
   },
 ];
 

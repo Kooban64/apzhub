@@ -108,6 +108,15 @@ export {
   looksPastTense,
 } from "./events/validation";
 export {
+  AutomationCoordinator,
+  type AutomationCoordinatorOptions,
+} from "./automation/automation-coordinator";
+export {
+  mapOutstandingToIntents,
+  defaultIntentsForProfile,
+  isAutomationIntentType,
+} from "./automation/intent-mapper";
+export {
   createPlatformOrchestration,
   type CreatePlatformOrchestrationOptions,
   type PlatformOrchestration,

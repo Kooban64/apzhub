@@ -47,6 +47,14 @@ export const DECISION_EVENT_TYPES = {
   packageCreated: "orchestration.decision.package_created",
 } as const;
 
+/** Past-tense automation coordination facts (QO-011) — never commands. */
+export const AUTOMATION_COORDINATION_EVENT_TYPES = {
+  coordinationCreated: "automation.coordination.created",
+  coordinationUpdated: "automation.coordination.updated",
+  coordinationCompleted: "automation.coordination.completed",
+  intentIdentified: "automation.intent.identified",
+} as const;
+
 export type OrchestrationKernelEventType =
   (typeof ORCHESTRATION_KERNEL_EVENT_TYPES)[keyof typeof ORCHESTRATION_KERNEL_EVENT_TYPES];
 
@@ -71,6 +79,9 @@ export type ApprovalEventType =
 export type DecisionEventType =
   (typeof DECISION_EVENT_TYPES)[keyof typeof DECISION_EVENT_TYPES];
 
+export type AutomationCoordinationEventType =
+  (typeof AUTOMATION_COORDINATION_EVENT_TYPES)[keyof typeof AUTOMATION_COORDINATION_EVENT_TYPES];
+
 export type OrchestrationEventType =
   | OrchestrationKernelEventType
   | TriggerEventType
@@ -79,7 +90,8 @@ export type OrchestrationEventType =
   | PolicySelectionEventType
   | GovernanceEventType
   | ApprovalEventType
-  | DecisionEventType;
+  | DecisionEventType
+  | AutomationCoordinationEventType;
 
 export interface OrchestrationKernelEvent {
   readonly type: OrchestrationEventType;

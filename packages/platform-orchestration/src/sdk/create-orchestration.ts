@@ -1,4 +1,5 @@
 import { ApprovalEngine } from "../approval/approval-engine";
+import { AutomationCoordinator } from "../automation/automation-coordinator";
 import type { OrchestrationKernelConfig } from "../contracts/configuration";
 import type { OrchestrationEventPublisher } from "../contracts/events";
 import { DecisionEngine } from "../decision/decision-engine";
@@ -39,12 +40,14 @@ export interface PlatformOrchestration {
   readonly decisions: DecisionEngine;
   /** Enterprise Quality Event Backbone — transport only. */
   readonly events: QualityEventBackbone;
+  /** Enterprise Automation Coordination — never executes providers. */
+  readonly automationCoordination: AutomationCoordinator;
   readonly container: OrchestrationContainer;
 }
 
 /**
- * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-010).
- * All engine publications route through the Event Backbone (transport only).
+ * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-011).
+ * All publications route through the Event Backbone (transport only).
  */
 export async function createPlatformOrchestration(
   options: CreatePlatformOrchestrationOptions = {},
@@ -137,6 +140,15 @@ export async function createPlatformOrchestration(
       "Provider-neutral transport for immutable past-tense quality events — never evaluates or executes",
   });
 
+  kernel.contracts.register({
+    contractId: "orchestration.automation_coordination.v1",
+    kind: "automation_coordination",
+    version: PLATFORM_ORCHESTRATION_VERSION,
+    name: "Automation Coordination",
+    description:
+      "Provider-neutral Automation Coordination Packages from Decision Packages — never executes automation",
+  });
+
   const triggerBindings = new TriggerBindingRegistry();
   const triggers = new TriggerEngine({
     bindings: triggerBindings,
@@ -174,6 +186,12 @@ export async function createPlatformOrchestration(
 
   const decisions = new DecisionEngine({
     publishEvent: publishViaBackbone,
+    orchestrationId: kernel.orchestrationId,
+  });
+
+  const automationCoordination = new AutomationCoordinator({
+    capabilities: kernel.capabilities,
+    events,
     orchestrationId: kernel.orchestrationId,
   });
 
@@ -216,6 +234,12 @@ export async function createPlatformOrchestration(
   if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.eventBackbone)) {
     kernel.container.register(ORCHESTRATION_DI_TOKENS.eventBackbone, events);
   }
+  if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.automationCoordination)) {
+    kernel.container.register(
+      ORCHESTRATION_DI_TOKENS.automationCoordination,
+      automationCoordination,
+    );
+  }
 
   return {
     kernel,
@@ -231,6 +255,7 @@ export async function createPlatformOrchestration(
     approvals,
     decisions,
     events,
+    automationCoordination,
     container: kernel.container,
   };
 }
