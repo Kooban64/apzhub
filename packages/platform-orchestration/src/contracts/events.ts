@@ -63,6 +63,14 @@ export const SOURCE_CHANGE_EVENT_TYPES = {
   identityNormalized: "source.identity.normalized",
 } as const;
 
+/** Past-tense quality intelligence enrichment facts (QO-013) — never commands. */
+export const ENRICHMENT_EVENT_TYPES = {
+  enrichmentCreated: "quality.enrichment.created",
+  enrichmentCompleted: "quality.enrichment.completed",
+  insightAttached: "advisory.insight.attached",
+  packageCreated: "enrichment.package.created",
+} as const;
+
 export type OrchestrationKernelEventType =
   (typeof ORCHESTRATION_KERNEL_EVENT_TYPES)[keyof typeof ORCHESTRATION_KERNEL_EVENT_TYPES];
 
@@ -93,6 +101,9 @@ export type AutomationCoordinationEventType =
 export type SourceChangeEventType =
   (typeof SOURCE_CHANGE_EVENT_TYPES)[keyof typeof SOURCE_CHANGE_EVENT_TYPES];
 
+export type EnrichmentEventType =
+  (typeof ENRICHMENT_EVENT_TYPES)[keyof typeof ENRICHMENT_EVENT_TYPES];
+
 export type OrchestrationEventType =
   | OrchestrationKernelEventType
   | TriggerEventType
@@ -103,7 +114,8 @@ export type OrchestrationEventType =
   | ApprovalEventType
   | DecisionEventType
   | AutomationCoordinationEventType
-  | SourceChangeEventType;
+  | SourceChangeEventType
+  | EnrichmentEventType;
 
 export interface OrchestrationKernelEvent {
   readonly type: OrchestrationEventType;

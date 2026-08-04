@@ -126,6 +126,15 @@ export {
   isSourceIdentityKind,
 } from "./source/identity-normalizer";
 export {
+  EnrichmentEngine,
+  type EnrichmentEngineOptions,
+} from "./enrichment/enrichment-engine";
+export {
+  buildAdvisoryInsight,
+  buildObservedCommentary,
+  isAdvisoryInsightCategory,
+} from "./enrichment/insight-builder";
+export {
   createPlatformOrchestration,
   type CreatePlatformOrchestrationOptions,
   type PlatformOrchestration,

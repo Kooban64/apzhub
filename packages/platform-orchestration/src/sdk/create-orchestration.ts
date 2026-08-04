@@ -4,6 +4,7 @@ import type { OrchestrationKernelConfig } from "../contracts/configuration";
 import type { OrchestrationEventPublisher } from "../contracts/events";
 import { DecisionEngine } from "../decision/decision-engine";
 import { OrchestrationContainer, ORCHESTRATION_DI_TOKENS } from "../di/container";
+import { EnrichmentEngine } from "../enrichment/enrichment-engine";
 import { QualityEventBackbone } from "../events/event-backbone";
 import { QualityFlowEngine } from "../flows/quality-flow-engine";
 import { GovernanceEngine } from "../governance/governance-engine";
@@ -45,11 +46,13 @@ export interface PlatformOrchestration {
   readonly automationCoordination: AutomationCoordinator;
   /** Enterprise Source Change Coordination — never inspects repos or calls SCM. */
   readonly sourceChange: SourceChangeCoordinator;
+  /** Enterprise Quality Intelligence Enrichment — additive advisory only. */
+  readonly enrichment: EnrichmentEngine;
   readonly container: OrchestrationContainer;
 }
 
 /**
- * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-012).
+ * Bootstrap the reusable APZHUB Orchestration Platform (QO-001…QO-013).
  * All publications route through the Event Backbone (transport only).
  */
 export async function createPlatformOrchestration(
@@ -161,6 +164,15 @@ export async function createPlatformOrchestration(
       "Provider-neutral Source Change Packages associating normalized identities — never SCM operations",
   });
 
+  kernel.contracts.register({
+    contractId: "orchestration.enrichment.v1",
+    kind: "enrichment",
+    version: PLATFORM_ORCHESTRATION_VERSION,
+    name: "Quality Intelligence Enrichment",
+    description:
+      "Additive advisory Enrichment Packages — never modifies or re-evaluates authoritative artefacts",
+  });
+
   const triggerBindings = new TriggerBindingRegistry();
   const triggers = new TriggerEngine({
     bindings: triggerBindings,
@@ -208,6 +220,11 @@ export async function createPlatformOrchestration(
   });
 
   const sourceChange = new SourceChangeCoordinator({
+    events,
+    orchestrationId: kernel.orchestrationId,
+  });
+
+  const enrichment = new EnrichmentEngine({
     events,
     orchestrationId: kernel.orchestrationId,
   });
@@ -260,6 +277,9 @@ export async function createPlatformOrchestration(
   if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.sourceChange)) {
     kernel.container.register(ORCHESTRATION_DI_TOKENS.sourceChange, sourceChange);
   }
+  if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.enrichment)) {
+    kernel.container.register(ORCHESTRATION_DI_TOKENS.enrichment, enrichment);
+  }
 
   return {
     kernel,
@@ -277,6 +297,7 @@ export async function createPlatformOrchestration(
     events,
     automationCoordination,
     sourceChange,
+    enrichment,
     container: kernel.container,
   };
 }

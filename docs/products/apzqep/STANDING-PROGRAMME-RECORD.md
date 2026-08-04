@@ -44,7 +44,8 @@
 > **APZQEP-165-QO-009 (20260804T143849Z):** Quality Decision Engine **COMPLETE** (Decision Package, profiles, residual risk) — `@apzhub/platform-orchestration` 0.1.8 — [apzqep-165-qo-009/](./v1.1/apzqep-165-qo-009/)
 > **APZQEP-165-QO-010 (20260804T161410Z):** Quality Event Backbone **COMPLETE** (envelope, registry, routing, history) — `@apzhub/platform-orchestration` 0.1.9 — [apzqep-165-qo-010/](./v1.1/apzqep-165-qo-010/)
 > **APZQEP-165-QO-011 (20260804T170349Z):** Automation Coordination **COMPLETE** (Coordination Package, intents, events) — `@apzhub/platform-orchestration` 0.1.10 — [apzqep-165-qo-011/](./v1.1/apzqep-165-qo-011/)
-> **APZQEP-165-QO-012 (20260804T172556Z):** Source Change Coordination **COMPLETE** (Source Change Package, identities) — `@apzhub/platform-orchestration` 0.1.11 — [apzqep-165-qo-012/](./v1.1/apzqep-165-qo-012/) — next **QO-013**
+> **APZQEP-165-QO-012 (20260804T172556Z):** Source Change Coordination **COMPLETE** (Source Change Package, identities) — `@apzhub/platform-orchestration` 0.1.11 — [apzqep-165-qo-012/](./v1.1/apzqep-165-qo-012/)
+> **APZQEP-165-QO-013 (20260804T175605Z):** Quality Intelligence Enrichment **COMPLETE** (advisory Enrichment Package) — `@apzhub/platform-orchestration` 0.1.12 — [apzqep-165-qo-013/](./v1.1/apzqep-165-qo-013/) — next **QO-014**
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

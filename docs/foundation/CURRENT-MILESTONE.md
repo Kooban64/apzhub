@@ -2,7 +2,7 @@
 
 > **Purpose:** Where development currently stops and what requires owner approval  
 > **Last updated:** 20260804T070126Z  
-> **Current status:** **APZQEP flagship** — V1.0 **GA** · Waves 1–4 **CERTIFIED** · Wave 5 arch **APPROVED** · **QO-001…QO-012 COMPLETE** (`@apzhub/platform-orchestration` 0.1.11) · next Owner Auth **QO-013** · [PRODUCT-STATUS](../products/apzqep/PRODUCT-STATUS.md) · [apzqep-165-qo-012/](../products/apzqep/v1.1/apzqep-165-qo-012/).
+> **Current status:** **APZQEP flagship** — V1.0 **GA** · Waves 1–4 **CERTIFIED** · Wave 5 arch **APPROVED** · **QO-001…QO-013 COMPLETE** (`@apzhub/platform-orchestration` 0.1.12) · next Owner Auth **QO-014** · [PRODUCT-STATUS](../products/apzqep/PRODUCT-STATUS.md) · [apzqep-165-qo-013/](../products/apzqep/v1.1/apzqep-165-qo-013/).
 
 ---
 

@@ -13,6 +13,7 @@ export * from "./decision";
 export * from "./event-backbone";
 export * from "./automation-coordination";
 export * from "./source-change";
+export * from "./enrichment";
 export * from "./errors";
 export * from "./configuration";
 export * from "./diagnostics";
