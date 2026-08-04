@@ -24,6 +24,28 @@ Those are two different projects. This programme is the second.
 APZQEP becomes like Git inside APZHUB: nobody asks whether to use it —
 it is simply how engineering quality and release work.
 
+### Institutionalised learning loop
+
+```text
+Engineering
+      │
+      ▼
+Release
+      │
+      ▼
+Operational Learning
+      │
+      ▼
+Pattern Recognition
+      │
+      ▼
+Authorised Programme
+```
+
+We are ready to **use** APZQEP — not improve it. The next meaningful APZQEP
+conversation starts with: _“We put our first real APZHUB change through APZQEP.
+Here’s what happened…”_
+
 ## Deliverables
 
 | #   | Deliverable                        | Artefact                                                               | Status   |

@@ -140,10 +140,8 @@ APZQEP-ADOPT-001: **OPEN / AUTHORISED** — Enterprise Internal Adoption Program
 Face: [apzqep-adopt-001/](./apzqep-adopt-001/)
 
 Next Action:
-Execute [APZQEP-ADOPT-001](./apzqep-adopt-001/) Week 1 tiny-change exercise ([WEEK-1-EXERCISE.md](./apzqep-adopt-001/WEEK-1-EXERCISE.md)) — full pipeline, no shortcuts; log friction; record Operational Learnings; backlog only from patterns. Classify enhancements under [APZQEP-CHANGE-CONTROL.md](./v1.1/apzqep-version-1.1-architecture-freeze/APZQEP-CHANGE-CONTROL.md).
-Do NOT start APZQEP-170 until ADOPT-001 produces operational lessons (earliest after Month 2 / after-five-releases review).
-Do NOT open further V1.1 foundational architecture or planning programmes.
-Do NOT authorise external AI without a dedicated programme.
+**Use APZQEP** — wait for a real APZHUB change that would happen anyway; label it **APZQEP Release 0001**; run full pipeline ([WEEK-1-EXERCISE.md](./apzqep-adopt-001/WEEK-1-EXERCISE.md)); capture timings; measure Engineering Friction first. Next APZQEP conversation should start with what happened on that release — not architecture.
+Do NOT invent artificial exercises. Do NOT start APZQEP-170. Do NOT create TOP-20-FRICTIONS up-front (emergent). Do NOT reopen V1.1 foundations.
 ```
 
 ---
