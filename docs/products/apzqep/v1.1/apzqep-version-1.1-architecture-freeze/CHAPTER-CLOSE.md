@@ -13,9 +13,26 @@
 
 > **The architecture is frozen. The governance is established. The platform is ready to learn. The next chapter will be written by real releases.**
 
+## Philosophy (protect)
+
+> **Design deliberately. Build carefully. Certify completely. Freeze confidently. Learn continuously.**
+
 Earlier form (retained): _The platform is ready to learn._
 
 Architecture has earned the right to remain stable — comfortable not revisiting it for quite a while.
+
+## Standing assumptions (locked)
+
+| Assumption                                                                                                     | Status     |
+| -------------------------------------------------------------------------------------------------------------- | ---------- |
+| Version 1.1 is the enterprise quality baseline                                                                 | **LOCKED** |
+| The architecture is frozen                                                                                     | **LOCKED** |
+| The governance model is established                                                                            | **LOCKED** |
+| The engineering is complete                                                                                    | **LOCKED** |
+| Operational learning is the primary source of evolution                                                        | **LOCKED** |
+| Future work enters via provider / integration / operational improvement programmes — not by expanding the core | **LOCKED** |
+
+Default next question on any APZQEP mention: **Show me the release.**
 
 ## Four milestones that make Version 1.1 complete
 
