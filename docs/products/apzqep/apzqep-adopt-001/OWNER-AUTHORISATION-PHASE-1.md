@@ -24,10 +24,10 @@ The goal is to **use** APZQEP and present APZ Time as a native APZHUB product.
 
 ## Parallel tracks
 
-| Track                              | Objective                                                                               |
-| ---------------------------------- | --------------------------------------------------------------------------------------- |
-| **A — APZQEP Production Adoption** | Developers/QA use APZQEP as primary testing and release platform                        |
-| **B — APZ Time**                   | Advance APZ Time as fully native APZHUB product (baseline: Production **1.0.0** exists) |
+| Track                              | Objective                                                                                                                          |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **A — APZQEP Production Adoption** | Developers/QA use APZQEP as primary testing and release platform                                                                   |
+| **B — APZ Time**                   | **Maturation** of Production **1.0.0** — native experience; not greenfield ([TIME-NATIVE-001](../../time/APZHUB-TIME-NATIVE-001/)) |
 
 ## Authorised
 
