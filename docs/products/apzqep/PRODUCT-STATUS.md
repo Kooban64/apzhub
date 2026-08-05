@@ -151,7 +151,7 @@ Engineering chapter: **CLOSED** — [CHAPTER-CLOSE.md](./v1.1/apzqep-version-1.1
 Default on APZQEP: silent daily use + evidence. Talk APZQEP only on release learning / justified provider work.
 
 Next Action:
-**Playbook proven twice.** Next product Native Adoption only by portfolio priority (Projects / Documents). Do NOT redesign Playbook. Do NOT promote EPP-001 to platform work. Do NOT start APZQEP-170. Do NOT expose engines.
+**Methodology mature.** Next product = business value decision (3–6 months operational improvement) — not auto-Projects. Do NOT redesign Playbook. Do NOT promote EPP-001 (Observation · Action: None). Do NOT start APZQEP-170. Do NOT expose engines. See [METHODOLOGY-MATURITY](../framework/APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md).
 ```
 
 ---

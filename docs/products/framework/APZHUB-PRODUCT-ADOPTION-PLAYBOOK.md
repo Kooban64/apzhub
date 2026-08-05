@@ -1,11 +1,14 @@
 # APZHUB Product Adoption Playbook
 
-| Field     | Value                                                                                      |
-| --------- | ------------------------------------------------------------------------------------------ |
-| Status    | **GOVERNING**                                                                              |
-| Timestamp | 20260805T034500Z                                                                           |
-| Reference | APZ Time — **RI #001** · APZ Support — **RI #002** (Playbook proven twice)                 |
-| Companion | [APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md](./APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md) |
+| Field     | Value                                                                                              |
+| --------- | -------------------------------------------------------------------------------------------------- |
+| Status    | **GOVERNING — ENGINEERING STANDARD**                                                               |
+| Timestamp | 20260805T051000Z                                                                                   |
+| Maturity  | Operationally validated — [METHODOLOGY-MATURITY](./APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md) |
+| Reference | APZ Time — **RI #001** · APZ Support — **RI #002**                                                 |
+| Companion | [APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md](./APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md)         |
+
+> **The Playbook changes only when operational evidence demonstrates that it should.**
 
 ## Purpose
 
@@ -93,8 +96,11 @@ A product may be declared **APZHUB Native** when:
 
 Stop designing. Operate.
 
-Next milestone is not “Product X Phase A” by default — it is:
+1. Complete the [RI Retrospective](./APZHUB-RI-RETROSPECTIVE.md).
+2. Next milestone for that product is not more methodology — it is:
 
 > We fixed a defect / shipped a change using APZQEP.
 
-Promote patterns from Learning Registers before inventing new standards.
+3. Next product programme opens only when **business priority** says so.
+
+Promote patterns from Learning Registers / Emerging Portfolio Patterns before inventing new standards. Do not change this Playbook from preference.

@@ -3,7 +3,7 @@
 | Field     | Value                                                  |
 | --------- | ------------------------------------------------------ |
 | Status    | **LIVING**                                             |
-| Timestamp | 20260805T044500Z                                       |
+| Timestamp | 20260805T051000Z                                       |
 | Kind      | Governance register — **not** an engineering programme |
 
 ## Purpose
@@ -45,10 +45,10 @@ Two products = enough to **note** a pattern. Not enough to **build** a platform 
 
 ## Register
 
-| ID      | Pattern                                                                                                                  | Status           | Evidence              | Action              | Promotion threshold                  |
-| ------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------- | --------------------- | ------------------- | ------------------------------------ |
-| EPP-001 | Permission abstraction and session propagation consistently arise during Native Adoption as product integration concerns | Pattern emerging | APZ Time; APZ Support | Continue monitoring | ≥3 products + effort reduction shown |
-| —       | —                                                                                                                        | —                | —                     | —                   | —                                    |
+| ID      | Pattern                                                                                                                  | Status          | Evidence              | Action   | Promotion threshold                                                 |
+| ------- | ------------------------------------------------------------------------------------------------------------------------ | --------------- | --------------------- | -------- | ------------------------------------------------------------------- |
+| EPP-001 | Permission abstraction and session propagation consistently arise during Native Adoption as product integration concerns | **Observation** | APZ Time; APZ Support | **None** | ≥3 products + measurable reduction in duplicated engineering effort |
+| —       | —                                                                                                                        | —               | —                     | —        | —                                                                   |
 
 ## Relationship to other registers
 

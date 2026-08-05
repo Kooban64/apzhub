@@ -76,6 +76,7 @@
 > **REFERENCE IMPLEMENTATION #002 (20260805T045000Z):** APZ Support **DECLARED** — [REFERENCE-IMPLEMENTATION-002.md](../apzsupport/REFERENCE-IMPLEMENTATION-002.md)
 > **SUPPORT-NATIVE-001 FREEZE (20260805T045000Z):** Programme **FROZEN** — [PROGRAMME-FREEZE.md](../apz-support-native-001/PROGRAMME-FREEZE.md)
 > **EPP REGISTER (20260805T044500Z):** Emerging Portfolio Patterns opened — [APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](../framework/APZHUB-EMERGING-PORTFOLIO-PATTERNS.md) — EPP-001 observation only
+> **METHODOLOGY MATURITY (20260805T051000Z):** Native Adoption **operationally validated** — [APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md](../framework/APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md) · RI retrospectives #001/#002 complete · next product = business priority
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

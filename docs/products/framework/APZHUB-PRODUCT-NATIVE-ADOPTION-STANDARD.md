@@ -1,13 +1,13 @@
 # APZHUB Product Native Adoption Standard
 
-| Field     | Value                                                                        |
-| --------- | ---------------------------------------------------------------------------- |
-| Standard  | **APZHUB Product Native Adoption Standard**                                  |
-| Status    | **GOVERNING** (Owner-directed from TIME-NATIVE-001)                          |
-| Timestamp | 20260805T034500Z                                                             |
-| Reference | TIME-NATIVE-001 Phase A (APZ Time) — **COMPLETE**                            |
-| Quality   | APZQEP Version 1.1 (mandatory)                                               |
-| Playbook  | [APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](./APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md) |
+| Field     | Value                                                                                              |
+| --------- | -------------------------------------------------------------------------------------------------- |
+| Standard  | **APZHUB Product Native Adoption Standard**                                                        |
+| Status    | **GOVERNING — OPERATIONALLY VALIDATED**                                                            |
+| Timestamp | 20260805T051000Z                                                                                   |
+| Maturity  | [APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md](./APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md) |
+| Quality   | APZQEP Version 1.1 (mandatory)                                                                     |
+| Playbook  | [APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](./APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)                       |
 
 ## Purpose
 
@@ -15,6 +15,8 @@ Define the repeatable path from **wrapped / integrated application** to
 **mature native APZHUB product experience**.
 
 This standard copies the **maturation process**, not product code.
+
+It has been validated across **two independent products** (APZ Time, APZ Support) without requiring redesign. It is the authoritative portfolio adoption methodology. Future changes require operational evidence — not preference.
 
 ## Mandatory phases
 
@@ -55,35 +57,33 @@ Every integrated product must complete the following before it is considered a
 - Every change: Quality Flow → Impact → Policy → Decision → Evidence → Learning
 - No dual quality process; no engine-native APZHUB release path
 - Publish product ops pack (lifecycle, release process, checklists, metrics, learning, roles)
-- Reference ops pack: [../apztime/](../apztime/) (APZ Time)
+- Reference ops packs: [../apztime/](../apztime/) · [../apzsupport/](../apzsupport/)
 
-## Reference implementation
+## Reference implementations
 
-**APZ Time** is **REFERENCE IMPLEMENTATION #001** — reference completion of N-01…N-04:
+| RI   | Product     | Path                                                                                           |
+| ---- | ----------- | ---------------------------------------------------------------------------------------------- |
+| #001 | APZ Time    | [../apztime/REFERENCE-IMPLEMENTATION-001.md](../apztime/REFERENCE-IMPLEMENTATION-001.md)       |
+| #002 | APZ Support | [../apzsupport/REFERENCE-IMPLEMENTATION-002.md](../apzsupport/REFERENCE-IMPLEMENTATION-002.md) |
 
-| Artefact         | Path                                                                                     |
-| ---------------- | ---------------------------------------------------------------------------------------- |
-| Designation      | [../apztime/REFERENCE-IMPLEMENTATION-001.md](../apztime/REFERENCE-IMPLEMENTATION-001.md) |
-| Native programme | [../time/APZHUB-TIME-NATIVE-001/](../time/APZHUB-TIME-NATIVE-001/)                       |
-| Operational pack | [../apztime/](../apztime/)                                                               |
-| Playbook         | [APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](./APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)             |
+Subsequent products follow the same sequence under separate Owner Authorisation. Sequencing is a **business priority** decision — not a methodology experiment.
 
-Subsequent products (Projects, Support, Documents, Analytics, Workflow, Law, …)
-should follow the same sequence under separate Owner Authorisation — and only after
-real APZQEP releases have exercised these standards.
+After each RI: complete [APZHUB-RI-RETROSPECTIVE.md](./APZHUB-RI-RETROSPECTIVE.md).
 
 ## Explicit non-goals
 
-- Kimai / Plane / Zammad / etc. feature parity as a maturity metric
-- Copying Time UI code into other products
+- Engine feature parity as a maturity metric
+- Copying Time/Support UI code into other products
 - Expanding APZQEP architecture as part of product adoption
-- Pulling Phase C capabilities forward without operational evidence
+- Pulling capability expansion forward without operational evidence
+- Changing this standard without multi-product operational evidence
 
 ## Relationship
 
-| Framework doc                                                        | Role                                                 |
-| -------------------------------------------------------------------- | ---------------------------------------------------- |
-| [PRODUCT-ENGINEERING-STANDARD.md](./PRODUCT-ENGINEERING-STANDARD.md) | How products are engineered                          |
-| [PRODUCT-QUALITY-STANDARD.md](./PRODUCT-QUALITY-STANDARD.md)         | Quality expectations                                 |
-| **This standard**                                                    | Path from integrated engine to native APZHUB product |
-| APZQEP-ADOPT-001                                                     | Ongoing operational quality practice                 |
+| Framework doc                                                        | Role                                                                                               |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| [PRODUCT-ENGINEERING-STANDARD.md](./PRODUCT-ENGINEERING-STANDARD.md) | How products are engineered                                                                        |
+| [PRODUCT-QUALITY-STANDARD.md](./PRODUCT-QUALITY-STANDARD.md)         | Quality expectations                                                                               |
+| **This standard**                                                    | Path from integrated engine to native APZHUB product                                               |
+| Methodology maturity                                                 | [APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md](./APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md) |
+| APZQEP-ADOPT-001                                                     | Ongoing operational quality practice                                                               |

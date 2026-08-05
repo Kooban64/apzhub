@@ -41,6 +41,7 @@
 | Learning              | [OPERATIONAL-LEARNING.md](./OPERATIONAL-LEARNING.md)                         |
 | N-04 completion       | [COMPLETION-N04.md](./COMPLETION-N04.md)                                     |
 | Reference designation | [REFERENCE-IMPLEMENTATION-002.md](./REFERENCE-IMPLEMENTATION-002.md)         |
+| RI retrospective      | [RI-RETROSPECTIVE-002.md](./RI-RETROSPECTIVE-002.md)                         |
 
 **REFERENCE IMPLEMENTATION #002** — fully adopted under APZQEP; second independent validation of the Playbook.
 

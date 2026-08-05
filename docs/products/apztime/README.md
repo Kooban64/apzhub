@@ -24,8 +24,9 @@ Canonical operational governance for APZ Time under APZQEP.
 | Learning              | [OPERATIONAL-LEARNING.md](./OPERATIONAL-LEARNING.md)                   |
 | Completion            | [COMPLETION.md](./COMPLETION.md)                                       |
 | Reference designation | [REFERENCE-IMPLEMENTATION-001.md](./REFERENCE-IMPLEMENTATION-001.md)   |
+| RI retrospective      | [RI-RETROSPECTIVE-001.md](./RI-RETROSPECTIVE-001.md)                   |
 
-**REFERENCE IMPLEMENTATION #001** — fully adopted under APZQEP; template for future products.
+**REFERENCE IMPLEMENTATION #001** — fully adopted under APZQEP; founding proof of path.
 
 Native programme: [../time/APZHUB-TIME-NATIVE-001/](../time/APZHUB-TIME-NATIVE-001/)  
 Playbook: [../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)

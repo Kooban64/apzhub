@@ -3,7 +3,7 @@
 | Field     | Value            |
 | --------- | ---------------- |
 | Status    | **IN FORCE**     |
-| Timestamp | 20260805T040200Z |
+| Timestamp | 20260805T051000Z |
 
 ## Advisor / strategy role
 
@@ -21,6 +21,25 @@ Engineering architecture for Layer 1 evolves only through governance. Day-to-day
 | 2 — APZHUB Products     | Where we spend time            | Mission → Playbook adoption          |
 | 3 — Business Outcomes   | Why products exist             | Measured improvement or no promotion |
 
+## Methodology posture
+
+Native Adoption is **operationally validated** (RI #001 + RI #002).
+
+| Focus before                      | Focus now                                         |
+| --------------------------------- | ------------------------------------------------- |
+| Proving **how** to adopt products | Deciding **which** product deserves adoption next |
+| Methodological refinement         | Business value over the next 3–6 months           |
+
+Declaration: [APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md](./APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md)
+
+## Portfolio categories
+
+| Category                      | Products (current)                                          |
+| ----------------------------- | ----------------------------------------------------------- |
+| **Reference Implementations** | APZ Time · APZ Support                                      |
+| **Portfolio Candidates**      | APZ Projects · APZ Documents · APZ Workflow · APZ Analytics |
+| **Future Products**           | APZ Law Platform and others                                 |
+
 ## Every product must answer
 
 1. Does it solve a real operational problem?
@@ -37,14 +56,17 @@ Mission & Business Outcomes
 OWNER APPROVAL
         ↓
 PRODUCT-NATIVE-001
-(N-01…N-04 Playbook — unchanged; proven by RI #001 and RI #002)
-
-Emerging Portfolio Patterns (observation only): [APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](./APZHUB-EMERGING-PORTFOLIO-PATTERNS.md)
+(N-01…N-04 Playbook — engineering standard)
         ↓
 Reference Implementation (optional — earned)
         ↓
+RI Retrospective
+        ↓
 Operational Learning
 ```
+
+Emerging Portfolio Patterns (observation only): [APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](./APZHUB-EMERGING-PORTFOLIO-PATTERNS.md)  
+RI retrospectives: [APZHUB-RI-RETROSPECTIVE.md](./APZHUB-RI-RETROSPECTIVE.md)
 
 ## Every product starts with a Mission
 
@@ -61,3 +83,11 @@ Owner APPROVED mission is the prerequisite for Native Adoption. Then apply the P
 Delivery speed · Service quality · Operational visibility · Compliance · Productivity · Customer satisfaction · Decision-making.
 
 If a product does not improve one of these, it should not move up the portfolio.
+
+## Selecting the next candidate
+
+Do not auto-sequence from the last RI.
+
+Ask:
+
+> **Which product will create the greatest operational improvement for APZHUB over the next 3–6 months?**
