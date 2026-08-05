@@ -42,6 +42,10 @@ Latest milestone: [../framework/APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](.
 
 No further strategic design initiative is required to “finish” the platform. APZHUB itself teaches what to build next.
 
+Foreword / current state: [../framework/APZHUB-CURRENT-OPERATING-STATE.md](../framework/APZHUB-CURRENT-OPERATING-STATE.md).
+
+Institutional cycle: **Design deliberately. Build carefully. Certify completely. Freeze confidently. Learn continuously.**
+
 | APZHUB is                                  | APZHUB is not                                |
 | ------------------------------------------ | -------------------------------------------- |
 | An enterprise productivity platform        | A portal, launcher, or app switcher          |

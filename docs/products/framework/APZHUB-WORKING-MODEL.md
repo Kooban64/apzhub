@@ -3,7 +3,9 @@
 | Field     | Value            |
 | --------- | ---------------- |
 | Status    | **IN FORCE**     |
-| Timestamp | 20260805T081000Z |
+| Timestamp | 20260805T111500Z |
+
+**Current operating state (foreword):** [APZHUB-CURRENT-OPERATING-STATE.md](./APZHUB-CURRENT-OPERATING-STATE.md)
 
 ## Advisor / strategy role
 
