@@ -1,6 +1,7 @@
 # APZ Support (Product Portfolio)
 
-> **Mission (draft):** [PRODUCT-MISSION.md](./PRODUCT-MISSION.md) — agree before Native Adoption.  
+> **Mission programme:** [APZ-SUPPORT-000](../apzsupport/) — [PRODUCT-MISSION.md](../apzsupport/PRODUCT-MISSION.md) — agree before Native Adoption.
+
 > **Portfolio:** support  
 > **Framework:** [APZHUB-PRODUCTS-000](../README.md)  
 > **Definition Pack:** APZHUB-PRODUCTS-002  
