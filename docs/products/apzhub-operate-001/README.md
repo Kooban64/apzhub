@@ -21,6 +21,7 @@
 | 30-day adoption      | [30-DAY-ADOPTION-PLAN.md](./30-DAY-ADOPTION-PLAN.md)                 |
 | 90-day learning      | [90-DAY-LEARNING-PLAN.md](./90-DAY-LEARNING-PLAN.md)                 |
 | Production readiness | [PRODUCTION-READINESS-REPORT.md](./PRODUCTION-READINESS-REPORT.md)   |
+| Go-live assessment   | [GO-LIVE-READINESS-ASSESSMENT.md](./GO-LIVE-READINESS-ASSESSMENT.md) |
 | Completion           | [COMPLETION.md](./COMPLETION.md)                                     |
 
 ## Operating model
