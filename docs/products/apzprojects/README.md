@@ -1,17 +1,18 @@
 # APZ-PROJECTS-000 — Product Mission & Business Outcomes
 
-| Field           | Value                                                                                                              |
-| --------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Programme       | APZ-PROJECTS-000                                                                                                   |
-| Status          | **AUTHORISED — AWAITING OWNER APPROVAL**                                                                           |
-| Engineering     | **PROHIBITED**                                                                                                     |
-| Native Adoption | **NOT STARTED**                                                                                                    |
-| Timestamp       | 20260805T052000Z                                                                                                   |
-| Portfolio       | [../framework/APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md](../framework/APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md) |
+| Field           | Value                                                             |
+| --------------- | ----------------------------------------------------------------- |
+| Programme       | APZ-PROJECTS-000                                                  |
+| Status          | **CLOSED** (Owner APPROVED)                                       |
+| Engineering     | **NOT STARTED**                                                   |
+| Native Adoption | **OPEN** — [APZ-PROJECTS-NATIVE-001](../apz-projects-native-001/) |
+| Timestamp       | 20260805T064800Z                                                  |
+| Approval        | [OWNER-APPROVAL.md](./OWNER-APPROVAL.md)                          |
 
 | Deliverable  | Path                                               |
 | ------------ | -------------------------------------------------- |
 | Auth         | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md) |
+| Approval     | [OWNER-APPROVAL.md](./OWNER-APPROVAL.md)           |
 | Mission      | [PRODUCT-MISSION.md](./PRODUCT-MISSION.md)         |
 | Outcomes     | [BUSINESS-OUTCOMES.md](./BUSINESS-OUTCOMES.md)     |
 | Metrics      | [SUCCESS-METRICS.md](./SUCCESS-METRICS.md)         |
@@ -22,6 +23,4 @@
 | Vision       | [PRODUCT-VISION.md](./PRODUCT-VISION.md)           |
 | Completion   | [COMPLETION.md](./COMPLETION.md)                   |
 
-Mission-pure pack: no technology, no architecture, no adapters, no engine names.
-
-**Next:** Owner APPROVAL closes this programme. Only then may **APZ-PROJECTS-NATIVE-001** be authorised.
+Authoritative mission for all future APZ Projects decisions. Native Adoption applies the Playbook unchanged.

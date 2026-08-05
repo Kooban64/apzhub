@@ -1,18 +1,19 @@
 # APZ Projects — Product Mission
 
-| Field     | Value            |
-| --------- | ---------------- |
-| Programme | APZ-PROJECTS-000 |
-| Status    | **COMPLETE**     |
-| Timestamp | 20260805T052000Z |
+| Field     | Value                                    |
+| --------- | ---------------------------------------- |
+| Programme | APZ-PROJECTS-000                         |
+| Status    | **APPROVED**                             |
+| Timestamp | 20260805T064800Z                         |
+| Approval  | [OWNER-APPROVAL.md](./OWNER-APPROVAL.md) |
 
 ## Mission statement
 
-> **APZ Projects gives every team one clear place inside APZHUB to plan work, coordinate delivery, track progress, and know what matters now — so the organisation moves together with clarity and accountability.**
+> **APZ Projects provides every team with a single, trusted place inside APZHUB to plan, coordinate, execute, and deliver work. It connects people, priorities, quality, time, support, documents, and operational insight so that every project progresses with clarity, accountability, and measurable outcomes.**
 
 ## Product purpose
 
-APZ Projects exists so that coordinating work is a first-class APZHUB experience: shared plans, visible ownership, honest progress, and a natural centre that other APZHUB products can relate to — without forcing people into fragmented tools or informal status rituals.
+APZ Projects exists as the **operational coordination hub** of APZHUB — not merely a standalone project tool. It is where planning and delivery live, and where related APZHUB products connect around shared work: people, priorities, quality, time, support, documents, and operational insight.
 
 ## Primary users
 
@@ -26,24 +27,24 @@ APZ Projects exists so that coordinating work is a first-class APZHUB experience
 
 ## Primary business problem
 
-Work coordination often fragments across spreadsheets, chat, side tools, and tribal knowledge. That hides risk, weakens ownership, slows decisions, and makes it hard to see how time, support, documents, and quality relate to the same delivery. APZ Projects exists to eliminate that fragmentation inside APZHUB.
+Work coordination often fragments across spreadsheets, chat, side tools, and tribal knowledge. That hides risk, weakens ownership, slows decisions, and makes it hard to see how time, support, documents, and quality relate to the same delivery. APZ Projects exists to eliminate that fragmentation and become the trusted centre of daily coordinated work inside APZHUB.
 
 ## Product principles
 
-1. **One product experience** — users work in APZ Projects; they do not navigate a separate project world.
-2. **Clarity over clutter** — every piece of work has an owner, a status, and a reason it matters.
-3. **Coordination over control theatre** — plans help people deliver; they do not exist to impress.
-4. **Visible progress** — leaders and teams see truth early enough to act.
-5. **Strong product boundaries** — APZ Projects coordinates delivery; it does not absorb Support, Time, Documents, or Analytics.
-6. **Business language** — outcomes and metrics executives and teams understand.
-7. **Portfolio backbone** — Projects is the natural place other APZHUB products connect when authorised.
+1. **Projects coordinate work; they do not own every business capability.**
+2. **Every project artefact has one authoritative source.**
+3. **APZ Projects is the operational hub, not the destination for every function.**
+4. **Users experience APZ Projects as a native APZHUB product.**
+5. **Quality, time, support, and documents integrate naturally without exposing implementation details.**
+6. **Clarity over clutter** — every piece of work has an owner, a status, and a reason it matters.
+7. **Business language** — outcomes and metrics executives and teams understand.
 
 ## Product promise
 
-If work is planned in APZ Projects, people will know what is being delivered, who owns it, where it stands, and what is at risk — and the organisation will be able to coordinate Time, Support, quality, and related work around that shared centre.
+If work is planned in APZ Projects, people will know what is being delivered, who owns it, where it stands, and what is at risk — and related APZHUB products can attach to that shared centre without forcing users into a fragmented tool landscape.
 
 ## Long-term vision
 
-APZ Projects becomes the trusted coordination hub of APZHUB: the place teams prefer for planning and delivery because it is clearer and more reliable than informal workarounds — and the place leaders trust for delivery visibility and portfolio decisions.
+APZ Projects becomes the trusted operational backbone of APZHUB: the place teams prefer for planning and delivery because it is clearer and more reliable than informal workarounds — and the place where Time, Support, Documents, quality, and later products naturally connect.
 
 See also: [PRODUCT-VISION.md](./PRODUCT-VISION.md) · [VALUE-PROPOSITION.md](./VALUE-PROPOSITION.md)

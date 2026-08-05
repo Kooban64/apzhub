@@ -3,39 +3,39 @@
 | Field      | Value                      |
 | ---------- | -------------------------- |
 | Resolution | **OWNER-APZ-PROJECTS-000** |
-| Decision   | **PENDING**                |
-| Timestamp  | —                          |
+| Decision   | **APPROVED**               |
+| Timestamp  | 20260805T064800Z           |
 
 ```text
 Resolution:
 OWNER-APZ-PROJECTS-000
 
 Decision:
-PENDING
+APPROVED
 
 Product Mission:
-PENDING
+APPROVED (with refined wording)
 
 Business Outcomes:
-PENDING
+APPROVED
 
 Product Vision:
-PENDING
+APPROVED
 
 Product Boundaries:
-PENDING
+APPROVED
 
 Status:
-OPEN — awaiting Owner decision
+CLOSED
 
-When APPROVED, recommend:
+Recommendation:
 
 Proceed to APZ-PROJECTS-NATIVE-001
-following the APZHUB Product Native Adoption Standard.
+using the APZHUB Product Native Adoption Standard.
+
+Apply the Playbook unchanged.
 
 No redesign of the methodology.
-Apply the Playbook unchanged.
-Do not start parallel product Native Adoption programmes.
 ```
 
-This face is updated only when the Owner records APPROVED or REJECTED.
+Programme APZ-PROJECTS-000 is **CLOSED**. Mission pack remains authoritative for all future APZ Projects decisions.

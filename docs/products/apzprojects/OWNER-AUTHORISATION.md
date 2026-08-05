@@ -10,7 +10,7 @@
 | Native Adoption | **NOT STARTED**                                                                                                    |
 | Repository      | **DOCUMENTATION ONLY**                                                                                             |
 | Status          | **AUTHORISED**                                                                                                     |
-| Timestamp       | 20260805T052000Z                                                                                                   |
+| Timestamp       | 20260805T064800Z                                                                                                   |
 | Portfolio basis | [../framework/APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md](../framework/APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md) |
 
 ## Purpose

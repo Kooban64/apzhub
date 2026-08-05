@@ -95,20 +95,21 @@ Ask each quarter:
 
 > **Which product will create the greatest operational improvement for APZHUB over the next 3–6 months?**
 
-**QPR-001 decision:** next investment is **APZ Projects**, starting with mission only.
+**QPR-001 decision:** next investment is **APZ Projects**. Mission APPROVED; Native Adoption in progress.
 
 | Artefact          | Path                                                                                       |
 | ----------------- | ------------------------------------------------------------------------------------------ |
 | Decision          | [APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md](./APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md) |
 | Quarterly review  | [APZHUB-QUARTERLY-PORTFOLIO-REVIEW.md](./APZHUB-QUARTERLY-PORTFOLIO-REVIEW.md)             |
-| Mission programme | [../apzprojects/](../apzprojects/) — **APZ-PROJECTS-000** (awaiting Owner APPROVAL)        |
+| Mission programme | [../apzprojects/](../apzprojects/) — **APZ-PROJECTS-000 CLOSED**                           |
+| Native Adoption   | [../apz-projects-native-001/](../apz-projects-native-001/) — N-01 COMPLETE                 |
 
 | Milestone               | Status                                   |
 | ----------------------- | ---------------------------------------- |
 | APZ Time (RI #001)      | ✅ Complete                              |
 | APZ Support (RI #002)   | ✅ Complete                              |
-| APZ-PROJECTS-000        | 🎯 Authorised — awaiting Owner APPROVAL  |
-| APZ-PROJECTS-NATIVE-001 | ⛔ Not authorised until mission APPROVED |
+| APZ-PROJECTS-000        | ✅ CLOSED (Owner APPROVED)               |
+| APZ-PROJECTS-NATIVE-001 | 🎯 STARTED — N-01 COMPLETE; N-02 pending |
 
 Prerequisite remains: APPROVED Product Mission (**PRODUCT-000**) before Native Adoption opens. No parallel Native Adoption programmes.
 
@@ -120,7 +121,7 @@ APZQEP does not appear on product roadmaps — it is infrastructure.
 | ------------- | ------- | :---: | :------: | :-------: | :----: | :-: |
 | APZ Time      | ✅      |  ✅   |    ✅    |    ✅     |   ✅   | ✅  |
 | APZ Support   | ✅      |  ✅   |    ✅    |    ✅     |   ✅   | ✅  |
-| APZ Projects  | ⏳      |   –   |    –     |     –     |   –    |  –  |
+| APZ Projects  | ✅      |  ✅   |    ⏳    |    ⏳     |   ⏳   | ⏳  |
 | APZ Documents | –       |   –   |    –     |     –     |   –    |  –  |
 
 ## Standing constraints

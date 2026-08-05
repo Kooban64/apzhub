@@ -3,12 +3,12 @@
 | Field     | Value            |
 | --------- | ---------------- |
 | Programme | APZ-PROJECTS-000 |
-| Status    | **COMPLETE**     |
-| Timestamp | 20260805T052000Z |
+| Status    | **APPROVED**     |
+| Timestamp | 20260805T064800Z |
 
 ## Why organisations should use APZ Projects
 
-APZ Projects is the APZHUB way to coordinate delivery: one product experience for planning, owning, and seeing progress — with a natural centre that the rest of the portfolio can relate to.
+APZ Projects is the APZHUB operational coordination hub: one trusted place to plan, coordinate, execute, and deliver work — connecting people, priorities, quality, time, support, documents, and operational insight.
 
 ## Value pillars
 

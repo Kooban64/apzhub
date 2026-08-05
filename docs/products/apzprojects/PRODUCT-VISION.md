@@ -3,8 +3,8 @@
 | Field     | Value            |
 | --------- | ---------------- |
 | Programme | APZ-PROJECTS-000 |
-| Status    | **COMPLETE**     |
-| Timestamp | 20260805T052000Z |
+| Status    | **APPROVED**     |
+| Timestamp | 20260805T064800Z |
 
 ## Near term (post mission agreement)
 
@@ -16,7 +16,7 @@ Delivery coordination becomes a managed organisational capability: dependencies 
 
 ## Longer term
 
-APZ Projects is the operational backbone of APZHUB daily work: teams prefer it over informal workarounds; Time, Support, Documents, quality, Workflow, and Analytics enrich a shared centre; continuous improvement of delivery is routine.
+Together with APZ Time and APZ Support, APZ Projects forms the operational core of APZHUB — where effort is recorded, issues are managed, and planning/coordination/delivery happen. Later products (Documents, Workflow, Analytics, and others) integrate around that core. Continuous improvement of delivery is routine.
 
 ## Vision constraints
 

@@ -151,7 +151,7 @@ Engineering chapter: **CLOSED** — [CHAPTER-CLOSE.md](./v1.1/apzqep-version-1.1
 Default on APZQEP: silent daily use + evidence. Talk APZQEP only on release learning / justified provider work.
 
 Next Action:
-**QPR-001:** Next investment = **APZ Projects** via [APZ-PROJECTS-000](../apzprojects/) (mission only — awaiting Owner APPROVAL). Do NOT open NATIVE-001 yet. Do NOT start parallel products. Do NOT redesign Playbook. Do NOT promote EPP-001. Do NOT start APZQEP-170.
+**APZ-PROJECTS-000 CLOSED.** **APZ-PROJECTS-NATIVE-001 STARTED** — N-01 Native UX Audit **COMPLETE** — [apz-projects-native-001](../apz-projects-native-001/). Next when authorised: **N-02 Identity**. EPP-001 now observed on three products — still Observation · Action: None. Do NOT redesign Playbook. Do NOT start APZQEP-170.
 ```
 
 ---

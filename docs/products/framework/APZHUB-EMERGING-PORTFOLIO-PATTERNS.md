@@ -45,10 +45,12 @@ Two products = enough to **note** a pattern. Not enough to **build** a platform 
 
 ## Register
 
-| ID      | Pattern                                                                                                                  | Status          | Evidence              | Action   | Promotion threshold                                                 |
-| ------- | ------------------------------------------------------------------------------------------------------------------------ | --------------- | --------------------- | -------- | ------------------------------------------------------------------- |
-| EPP-001 | Permission abstraction and session propagation consistently arise during Native Adoption as product integration concerns | **Observation** | APZ Time; APZ Support | **None** | ≥3 products + measurable reduction in duplicated engineering effort |
-| —       | —                                                                                                                        | —               | —                     | —        | —                                                                   |
+| ID      | Pattern                                                                                                                  | Status          | Evidence                                             | Action   | Promotion threshold                                                 |
+| ------- | ------------------------------------------------------------------------------------------------------------------------ | --------------- | ---------------------------------------------------- | -------- | ------------------------------------------------------------------- |
+| EPP-001 | Permission abstraction and session propagation consistently arise during Native Adoption as product integration concerns | **Observation** | APZ Time; APZ Support; APZ Projects N-01 (G-20/G-21) | **None** | ≥3 products + measurable reduction in duplicated engineering effort |
+
+> Note: Projects N-01 is the **third** observational hit for EPP-001. Promotion still requires measurable reduction in duplicated engineering effort **and** Owner Auth — not automatic after three sightings.
+> | — | — | — | — | — | — |
 
 ## Relationship to other registers
 

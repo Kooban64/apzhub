@@ -4,8 +4,9 @@
 | --------- | -------------------------------------------------- |
 | Programme | APZ-PROJECTS-000                                   |
 | Title     | APZ Projects – Product Mission & Business Outcomes |
-| Status    | **COMPLETE — AWAITING OWNER APPROVAL**             |
-| Timestamp | 20260805T052000Z                                   |
+| Status    | **CLOSED** (Owner APPROVED)                        |
+| Timestamp | 20260805T064800Z                                   |
+| Approval  | [OWNER-APPROVAL.md](./OWNER-APPROVAL.md)           |
 
 ## Completion criteria
 
@@ -18,10 +19,9 @@
 | Engineering decisions made?      | **No**                                                         |
 | Implementation assumptions?      | **None**                                                       |
 | Engine / architecture discussed? | **No**                                                         |
-| Owner approval                   | **PENDING**                                                    |
+| Owner approval                   | **APPROVED** — [OWNER-APPROVAL.md](./OWNER-APPROVAL.md)        |
 
-## Recommendation to Owner
+## Next programme (opened)
 
-If the mission is compelling, APPROVE and CLOSE APZ-PROJECTS-000, then authorise **APZ-PROJECTS-NATIVE-001** following the Playbook unchanged.
-
-Do **not** open Native Adoption before Owner APPROVAL.
+**APZ-PROJECTS-NATIVE-001** — [../apz-projects-native-001/](../apz-projects-native-001/)  
+Playbook unchanged. No methodology redesign.

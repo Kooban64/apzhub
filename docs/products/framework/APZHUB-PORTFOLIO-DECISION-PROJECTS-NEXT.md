@@ -49,14 +49,11 @@ APZ Projects
 - ✅ APZ Support — Reference Implementation #002
 - ✅ Native Adoption methodology — operationally validated
 
-### Next (authorised now)
+### Next (in progress)
 
-- 🎯 **APZ-PROJECTS-000** — Product Mission & Business Outcomes — [../apzprojects/](../apzprojects/)
-
-### After Owner APPROVES mission (not yet authorised)
-
-- APZ-PROJECTS-NATIVE-001 (N-01…N-04)
-- Reference Implementation #003 — **if earned**
+- ✅ **APZ-PROJECTS-000** — Owner APPROVED / CLOSED — [../apzprojects/](../apzprojects/)
+- 🎯 **APZ-PROJECTS-NATIVE-001** — N-01 COMPLETE; N-02+ pending — [../apz-projects-native-001/](../apz-projects-native-001/)
+- Reference Implementation #003 — **if earned** after N-04
 
 ### After RI #003 (reassess)
 

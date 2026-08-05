@@ -3,8 +3,8 @@
 | Field     | Value            |
 | --------- | ---------------- |
 | Programme | APZ-PROJECTS-000 |
-| Status    | **COMPLETE**     |
-| Timestamp | 20260805T052000Z |
+| Status    | **APPROVED**     |
+| Timestamp | 20260805T064800Z |
 
 APZ Projects will **not** become these products. Strong boundaries protect focus and portfolio clarity.
 
