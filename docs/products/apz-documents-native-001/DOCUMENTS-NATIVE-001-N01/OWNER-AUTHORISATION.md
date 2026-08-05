@@ -1,19 +1,33 @@
 # Owner Authorisation — DOCUMENTS-NATIVE-001-N01
 
-| Field        | Value                            |
-| ------------ | -------------------------------- |
-| Slice        | **APZ-DOCUMENTS-NATIVE-001-N01** |
-| Title        | Native UX Audit                  |
-| Engineering  | **PROHIBITED** (analysis only)   |
-| Architecture | **PROHIBITED**                   |
-| Status       | **AUTHORISED**                   |
-| Timestamp    | 20260805T140500Z                 |
+| Field          | Value                            |
+| -------------- | -------------------------------- |
+| Slice          | **APZ-DOCUMENTS-NATIVE-001-N01** |
+| Title          | Native APZHUB UX Audit           |
+| Classification | **Analysis Only**                |
+| Engineering    | **PROHIBITED**                   |
+| Architecture   | **FROZEN**                       |
+| Repository     | **DOCUMENTATION ONLY**           |
+| Status         | **AUTHORISED / COMPLETE**        |
+| Timestamp      | 20260805T141500Z                 |
 
-Establish what the user sees today for APZ Documents. No product code changes in this slice.
+## Strategic objective
 
-Audit must explicitly check:
+Determine whether APZ Documents delivers a native APZHUB experience while preserving document ownership boundaries and supporting the enterprise work model.
 
-- Engine / repository brand leakage
-- Isolated documents vs document context
-- SoR boundary leakage into Projects / Support / APZQEP metadata
-- Whether UX feels “upload to repository” vs “attach to work”
+Identify gaps only. Do not implement solutions.
+
+## Audit areas (mandatory)
+
+1. Native Experience
+2. Engine Leakage
+3. Document Context
+4. System of Record Boundaries
+5. Attach-to-Work Philosophy
+6. Enterprise Capability Alignment
+
+## Central question
+
+> When a user wants a document, do they start with the work, or do they start with the repository?
+
+Expected long-term answer: **work-first**.
