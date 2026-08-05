@@ -7,13 +7,24 @@
 | Audience  | Product Board / Owner          |
 | Rule      | Concise — no feature proposals |
 
+## Latest Product Board decision
+
+| Item     | Value                                                                      |
+| -------- | -------------------------------------------------------------------------- |
+| Date     | 2026-08-05                                                                 |
+| Decision | [PRODUCT-BOARD-DECISION-20260805.md](./PRODUCT-BOARD-DECISION-20260805.md) |
+| Motion   | Accept current state. Continue pilot unchanged.                            |
+| Outcome  | **Carried — Continue Observation. No further action.**                     |
+
+Standing question for every status: **Has anything happened that changes an investment decision?**
+
 ## Meeting
 
-| Item        | Value (update each week) |
-| ----------- | ------------------------ |
-| Pilot week  | Pre-pilot                |
-| Brief date  | —                        |
-| Prepared by | —                        |
+| Item        | Value (update each week)             |
+| ----------- | ------------------------------------ |
+| Pilot week  | Pre-pilot / awaiting Week 1 evidence |
+| Brief date  | 2026-08-05 (decision recorded)       |
+| Prepared by | Product Board / Owner                |
 
 ## Top five observations
 

@@ -1,13 +1,14 @@
 # Status — APZHUB-OBSERVE-001
 
-| Field       | Value                                      |
-| ----------- | ------------------------------------------ |
-| Programme   | APZHUB-OBSERVE-001                         |
-| Title       | Operational Learning Support               |
-| Status      | **ACTIVE / CONTINUE**                      |
-| Timestamp   | 20260805T133500Z                           |
-| Engineering | **FROZEN**                                 |
-| Direction   | [OWNER-DIRECTION.md](./OWNER-DIRECTION.md) |
+| Field       | Value                                                                                                 |
+| ----------- | ----------------------------------------------------------------------------------------------------- |
+| Programme   | APZHUB-OBSERVE-001                                                                                    |
+| Title       | Operational Learning Support                                                                          |
+| Status      | **ACTIVE / CONTINUE**                                                                                 |
+| Timestamp   | 20260805T134000Z                                                                                      |
+| Engineering | **FROZEN**                                                                                            |
+| Direction   | [OWNER-DIRECTION.md](./OWNER-DIRECTION.md)                                                            |
+| Board       | [PRODUCT-BOARD-DECISION-20260805.md](./PRODUCT-BOARD-DECISION-20260805.md) — **Continue Observation** |
 
 ## Outcomes (activation)
 
