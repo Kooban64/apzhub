@@ -57,6 +57,25 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
     "time.customer.create",
     "time.tag.list",
     "time.tag.create",
+    "support.*",
+    "support.requests.list",
+    "support.requests.create",
+    "support.requests.update",
+    "support.requests.assign",
+    "support.requests.transition",
+    "support.articles.list",
+    "support.articles.create",
+    "support.articles.read",
+    "support.organizations.list",
+    "support.organizations.create",
+    "support.organizations.update",
+    "support.organizations.archive",
+    "support.groups.list",
+    "support.groups.create",
+    "support.groups.update",
+    "support.users.list",
+    "support.search.execute",
+    "support.analytics.read",
     ...QEP_CORE_QE_PERMISSIONS,
   ];
 
@@ -169,6 +188,11 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
     {
       roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
       permissionKey: "time.*",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "support.*",
       grantType: "allow",
     },
     ...QEP_OPERATOR_PERMISSIONS.map((permissionKey) => ({

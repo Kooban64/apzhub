@@ -3,8 +3,15 @@
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
-import type { SupportPermissionSource } from "@/lib/support/permissions";
+import {
+  canCreateSupportRequest,
+  canExecuteSupportSearch,
+  canListSupportUsers,
+  canReadSupportAnalytics,
+  type SupportPermissionSource,
+} from "@/lib/support/permissions";
 import { resolveSupportRoute } from "@/lib/support/routes";
+import { useSupportPermissions } from "@/lib/support/use-support-permissions";
 
 import { SupportAnalyticsView } from "./support-analytics-view";
 import { SupportGroupsView } from "./support-groups-view";
@@ -17,16 +24,29 @@ import { SupportSearchView } from "./support-search-view";
 import { SupportUsersView } from "./support-users-view";
 import { EmptyState, PageShell } from "./support-ui";
 
-/** Wildcard permissions so authenticated Support nav users can act; API remains authoritative. */
-const DEFAULT_UI_PERMISSIONS: readonly string[] = ["support.*"];
+function PermissionDenied({ action }: { readonly action: string }) {
+  return (
+    <PageShell title="APZ Support">
+      <EmptyState
+        title="Permission required"
+        description={`You do not have permission to ${action}. Contact your APZHUB administrator if you need access.`}
+      />
+    </PageShell>
+  );
+}
 
+/**
+ * Support workspace router — consumes APZHUB session permissions.
+ * Never defaults to `support.*`. Never exposes engine identity/roles.
+ */
 export function SupportWorkspaceRouter({
-  permissions = DEFAULT_UI_PERMISSIONS,
+  permissions: permissionsOverride,
 }: {
   readonly permissions?: SupportPermissionSource;
-}) {
+} = {}) {
   const pathname = usePathname();
   const route = resolveSupportRoute(pathname);
+  const permissions = useSupportPermissions(permissionsOverride);
 
   let content: ReactNode;
   switch (route.kind) {
@@ -34,6 +54,10 @@ export function SupportWorkspaceRouter({
       content = <SupportInboxView permissions={permissions} />;
       break;
     case "create":
+      if (!canCreateSupportRequest(permissions)) {
+        content = <PermissionDenied action="create support requests" />;
+        break;
+      }
       content = <SupportRequestCreateView />;
       break;
     case "detail":
@@ -62,23 +86,39 @@ export function SupportWorkspaceRouter({
       content = <SupportGroupsView groupId={route.groupId} permissions={permissions} />;
       break;
     case "users":
+      if (!canListSupportUsers(permissions)) {
+        content = <PermissionDenied action="view support users" />;
+        break;
+      }
       content = <SupportUsersView />;
       break;
     case "user-detail":
+      if (!canListSupportUsers(permissions)) {
+        content = <PermissionDenied action="view support users" />;
+        break;
+      }
       content = <SupportUsersView userId={route.userId} />;
       break;
     case "search":
+      if (!canExecuteSupportSearch(permissions)) {
+        content = <PermissionDenied action="search APZ Support" />;
+        break;
+      }
       content = <SupportSearchView />;
       break;
     case "analytics":
+      if (!canReadSupportAnalytics(permissions)) {
+        content = <PermissionDenied action="view support analytics" />;
+        break;
+      }
       content = <SupportAnalyticsView />;
       break;
     default:
       content = (
-        <PageShell title="Support">
+        <PageShell title="APZ Support">
           <EmptyState
-            title="Unknown Support route"
-            description="Select a Support sidebar item to continue."
+            title="Unknown APZ Support route"
+            description="Select an APZ Support sidebar item to continue."
           />
         </PageShell>
       );

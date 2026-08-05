@@ -43,7 +43,7 @@ export function SupportRequestDetailView({
     queryKey: supportQueryKeys.requests.articles(supportRequestId),
     queryFn: ({ signal }) =>
       listSupportArticles(supportRequestId, undefined, { signal }),
-    enabled: canListSupportArticles(permissions) || permissions === undefined,
+    enabled: canListSupportArticles(permissions),
     retry: shouldRetrySupportQuery,
   });
 
@@ -94,7 +94,7 @@ export function SupportRequestDetailView({
   if (!requestQuery.data) return <LoadingState />;
 
   const request = requestQuery.data.data;
-  const canCompose = canCreateSupportArticle(permissions) || permissions === undefined;
+  const canCompose = canCreateSupportArticle(permissions);
 
   return (
     <PageShell

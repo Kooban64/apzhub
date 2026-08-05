@@ -58,7 +58,9 @@ vi.mock("./support-realtime-provider", () => ({
 
 import { SupportWorkspaceRouter } from "./support-workspace-router";
 
-function renderRouter(pathname: string, permissions?: readonly string[]) {
+const FULL = ["support.*"] as const;
+
+function renderRouter(pathname: string, permissions: readonly string[] = FULL) {
   pathnameState.value = pathname;
   return render(<SupportWorkspaceRouter permissions={permissions} />);
 }
@@ -71,56 +73,76 @@ describe("SupportWorkspaceRouter", () => {
   it("routes inbox, create, detail, and directory kinds", () => {
     const { rerender } = renderRouter("/workspace/support/requests");
     expect(screen.getByTestId("route-inbox")).toBeTruthy();
+    expect(screen.getByTestId("route-inbox").textContent).toBe("support.*");
 
     pathnameState.value = "/workspace/support/requests/new";
-    rerender(<SupportWorkspaceRouter />);
+    rerender(<SupportWorkspaceRouter permissions={FULL} />);
     expect(screen.getByTestId("route-create")).toBeTruthy();
 
     pathnameState.value =
       "/workspace/support/requests/sreq_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-    rerender(<SupportWorkspaceRouter />);
+    rerender(<SupportWorkspaceRouter permissions={FULL} />);
     expect(screen.getByTestId("route-detail").textContent).toBe(
       "sreq_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     );
 
     pathnameState.value = "/workspace/support/organizations";
-    rerender(<SupportWorkspaceRouter />);
+    rerender(<SupportWorkspaceRouter permissions={FULL} />);
     expect(screen.getByTestId("route-organizations")).toBeTruthy();
 
     pathnameState.value =
       "/workspace/support/organizations/sorg_eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
-    rerender(<SupportWorkspaceRouter />);
+    rerender(<SupportWorkspaceRouter permissions={FULL} />);
     expect(screen.getByTestId("route-organization-detail")).toBeTruthy();
 
     pathnameState.value = "/workspace/support/groups";
-    rerender(<SupportWorkspaceRouter />);
+    rerender(<SupportWorkspaceRouter permissions={FULL} />);
     expect(screen.getByTestId("route-groups")).toBeTruthy();
 
     pathnameState.value =
       "/workspace/support/groups/sgrp_ffffffffffffffffffffffffffffffff";
-    rerender(<SupportWorkspaceRouter />);
+    rerender(<SupportWorkspaceRouter permissions={FULL} />);
     expect(screen.getByTestId("route-group-detail")).toBeTruthy();
 
     pathnameState.value = "/workspace/support/users";
-    rerender(<SupportWorkspaceRouter />);
+    rerender(<SupportWorkspaceRouter permissions={FULL} />);
     expect(screen.getByTestId("route-users")).toBeTruthy();
 
     pathnameState.value =
       "/workspace/support/users/suser_11111111111111111111111111111111";
-    rerender(<SupportWorkspaceRouter />);
+    rerender(<SupportWorkspaceRouter permissions={FULL} />);
     expect(screen.getByTestId("route-user-detail")).toBeTruthy();
 
     pathnameState.value = "/workspace/support/search";
-    rerender(<SupportWorkspaceRouter />);
+    rerender(<SupportWorkspaceRouter permissions={FULL} />);
     expect(screen.getByTestId("route-search")).toBeTruthy();
 
     pathnameState.value = "/workspace/support/analytics";
-    rerender(<SupportWorkspaceRouter />);
+    rerender(<SupportWorkspaceRouter permissions={FULL} />);
     expect(screen.getByTestId("route-analytics")).toBeTruthy();
+  });
+
+  it("denies create/users/search/analytics without grants (no support.* default)", () => {
+    renderRouter("/workspace/support/requests/new", []);
+    expect(screen.getByText("Permission required")).toBeTruthy();
+    expect(screen.queryByTestId("route-create")).toBeNull();
+
+    pathnameState.value = "/workspace/support/users";
+    render(<SupportWorkspaceRouter permissions={[]} />);
+    expect(screen.getAllByText("Permission required").length).toBeGreaterThan(0);
+    expect(screen.queryByTestId("route-users")).toBeNull();
+
+    pathnameState.value = "/workspace/support/search";
+    render(<SupportWorkspaceRouter permissions={[]} />);
+    expect(screen.queryByTestId("route-search")).toBeNull();
+
+    pathnameState.value = "/workspace/support/analytics";
+    render(<SupportWorkspaceRouter permissions={[]} />);
+    expect(screen.queryByTestId("route-analytics")).toBeNull();
   });
 
   it("renders unknown route empty state", () => {
     renderRouter("/workspace/support/not-a-section");
-    expect(screen.getByText("Unknown Support route")).toBeTruthy();
+    expect(screen.getByText("Unknown APZ Support route")).toBeTruthy();
   });
 });
