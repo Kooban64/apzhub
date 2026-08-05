@@ -118,6 +118,7 @@ Ask each quarter:
 | CAPABILITY-001-ENG-001    | ✅ COMPLETE — My Work composition live        |
 | Platform Phase 2          | ✅ DECLARED — Unified Experience Enabled      |
 | My Work operational pause | ✅ IN FORCE — no new Horizon 3 capability yet |
+| My Work Review            | ✅ IN FORCE — standing product review         |
 | APZ-PROJECTS-000          | ✅ CLOSED (Owner APPROVED)                    |
 | APZ-PROJECTS-NATIVE-001   | ✅ COMPLETE / FROZEN                          |
 
