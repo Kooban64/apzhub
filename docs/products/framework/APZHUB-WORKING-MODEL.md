@@ -78,7 +78,7 @@ Unified Work (composition): [../apzhub-capability-001-eng-001/](../apzhub-capabi
 Operational pause: [OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md](./OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md)  
 Internal readiness: [../apzhub-operate-001/](../apzhub-operate-001/) — **COMPLETE**  
 Operational observation: [../apzhub-observe-001/](../apzhub-observe-001/) — **ACTIVE** (Lane 1)  
-Documents: [../apzdocuments/](../apzdocuments/) **CLOSED** · Native [../apz-documents-native-001/](../apz-documents-native-001/) **STARTED** (Lane 2)
+Documents: [../apzdocuments/](../apzdocuments/) **RI #004** · Native [../apz-documents-native-001/](../apz-documents-native-001/) **FROZEN** (Lane 2)
 
 ## Layers
 
@@ -131,11 +131,11 @@ Declaration: [APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md](./APZHUB-NATIVE-AD
 
 ## Portfolio categories
 
-| Category                      | Products (current)                           |
-| ----------------------------- | -------------------------------------------- |
-| **Reference Implementations** | APZ Time · APZ Support · APZ Projects        |
-| **Portfolio Candidates**      | APZ Documents · APZ Workflow · APZ Analytics |
-| **Future Products**           | APZ Law Platform and others                  |
+| Category                      | Products (current)                                    |
+| ----------------------------- | ----------------------------------------------------- |
+| **Reference Implementations** | APZ Time · APZ Support · APZ Projects · APZ Documents |
+| **Portfolio Candidates**      | APZ Workflow · APZ Analytics                          |
+| **Future Products**           | APZ Law Platform and others                           |
 
 ## Every product must answer
 

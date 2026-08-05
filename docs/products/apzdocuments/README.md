@@ -1,15 +1,14 @@
-# APZ Documents — Mission Pack (APZ-DOCUMENTS-000)
+# APZ Documents — Mission & Operational Pack
 
-| Field     | Value                                                        |
-| --------- | ------------------------------------------------------------ |
-| Product   | **APZ Documents**                                            |
-| Programme | APZ-DOCUMENTS-000                                            |
-| Status    | **CLOSED** (Owner APPROVED)                                  |
-| Timestamp | 20260805T140500Z                                             |
-| Lane      | **2 — Portfolio Delivery**                                   |
-| Next      | [../apz-documents-native-001/](../apz-documents-native-001/) |
+| Field           | Value                                          |
+| --------------- | ---------------------------------------------- |
+| Product         | **APZ Documents**                              |
+| Mission         | APZ-DOCUMENTS-000 **CLOSED** (Owner APPROVED)  |
+| Native Adoption | APZ-DOCUMENTS-NATIVE-001 **COMPLETE / FROZEN** |
+| Designation     | **REFERENCE IMPLEMENTATION #004**              |
+| Timestamp       | 20260805T151500Z                               |
 
-## Mission pack
+## Mission pack (DOCUMENTS-000)
 
 | Deliverable           | Path                                                   |
 | --------------------- | ------------------------------------------------------ |
@@ -28,12 +27,26 @@
 | Enterprise capability | [ENTERPRISE-CAPABILITY.md](./ENTERPRISE-CAPABILITY.md) |
 | Completion            | [COMPLETION.md](./COMPLETION.md)                       |
 
-## Lifecycle
+## Operational pack (N-04 — IN FORCE)
 
-```text
-APZ-DOCUMENTS-000 — CLOSED / APPROVED
-        ↓
-APZ-DOCUMENTS-NATIVE-001 — AUTHORISED
-        ↓
-N-01…N-04 (Playbook unchanged)
-```
+| Deliverable           | Path                                                                             |
+| --------------------- | -------------------------------------------------------------------------------- |
+| Quality lifecycle     | [APZDOCUMENTS-QUALITY-LIFECYCLE.md](./APZDOCUMENTS-QUALITY-LIFECYCLE.md)         |
+| Release process       | [APZDOCUMENTS-RELEASE-PROCESS.md](./APZDOCUMENTS-RELEASE-PROCESS.md)             |
+| Operational readiness | [APZDOCUMENTS-OPERATIONAL-READINESS.md](./APZDOCUMENTS-OPERATIONAL-READINESS.md) |
+| Engineering checklist | [APZDOCUMENTS-ENGINEERING-CHECKLIST.md](./APZDOCUMENTS-ENGINEERING-CHECKLIST.md) |
+| Quality checklist     | [APZDOCUMENTS-QUALITY-CHECKLIST.md](./APZDOCUMENTS-QUALITY-CHECKLIST.md)         |
+| Release checklist     | [APZDOCUMENTS-RELEASE-CHECKLIST.md](./APZDOCUMENTS-RELEASE-CHECKLIST.md)         |
+| Product status        | [PRODUCT-STATUS.md](./PRODUCT-STATUS.md)                                         |
+| Product operations    | [PRODUCT-OPERATIONS.md](./PRODUCT-OPERATIONS.md)                                 |
+| Roles                 | [OPERATIONAL-ROLES.md](./OPERATIONAL-ROLES.md)                                   |
+| Metrics               | [OPERATIONAL-METRICS.md](./OPERATIONAL-METRICS.md)                               |
+| Learning              | [OPERATIONAL-LEARNING.md](./OPERATIONAL-LEARNING.md)                             |
+| N-04 completion       | [COMPLETION-N04.md](./COMPLETION-N04.md)                                         |
+| Reference designation | [REFERENCE-IMPLEMENTATION-004.md](./REFERENCE-IMPLEMENTATION-004.md)             |
+| RI retrospective      | [RI-RETROSPECTIVE-004.md](./RI-RETROSPECTIVE-004.md)                             |
+
+**REFERENCE IMPLEMENTATION #004** — fully adopted under APZQEP; fourth independent validation of the Playbook.
+
+Native programme: [../apz-documents-native-001/](../apz-documents-native-001/)  
+Playbook: [../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)

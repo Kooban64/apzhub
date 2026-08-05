@@ -4,7 +4,7 @@
 | --------- | -------------------------- |
 | Programme | APZHUB-PORTFOLIO-001       |
 | Status    | **IN FORCE**               |
-| Timestamp | 20260805T081000Z           |
+| Timestamp | 20260805T151500Z           |
 | Audience  | Executives / Product Board |
 
 ## What is APZHUB?
@@ -18,15 +18,15 @@
 | Project Delivery            | APZ Projects      | Mature (RI) |
 | Service Management          | APZ Support       | Mature (RI) |
 | Workforce Productivity      | APZ Time          | Mature (RI) |
+| Document Management         | APZ Documents     | Mature (RI) |
 | Quality & Release Assurance | APZQEP            | Baseline    |
 
 ## What APZHUB will deliver next (business roadmap)
 
-| Capability          | Delivered through | Status                            |
-| ------------------- | ----------------- | --------------------------------- |
-| Document Management | APZ Documents     | Native Adoption — N-01 authorised |
-| Workflow Automation | APZ Workflow      | After Documents                   |
-| Analytics & Insight | APZ Analytics     | After Workflow                    |
+| Capability          | Delivered through | Status         |
+| ------------------- | ----------------- | -------------- |
+| Workflow Automation | APZ Workflow      | Next candidate |
+| Analytics & Insight | APZ Analytics     | After Workflow |
 
 ## How to choose the next investment
 

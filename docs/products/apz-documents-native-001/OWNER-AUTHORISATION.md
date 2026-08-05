@@ -12,8 +12,9 @@
 | Engineering    | **AUTHORISED** per N-0x slice rules                                      |
 | Architecture   | **UNCHANGED**                                                            |
 | Platform       | **Lane 1 unchanged** — no platform evolution from this programme         |
-| Status         | **AUTHORISED / STARTED**                                                 |
-| Timestamp      | 20260805T140500Z                                                         |
+| Status         | **COMPLETE / FROZEN**                                                    |
+| Timestamp      | 20260805T151500Z                                                         |
+| Designation    | **REFERENCE IMPLEMENTATION #004**                                        |
 
 ## Slice order (Playbook)
 
@@ -22,7 +23,7 @@
 | **N-01** | Native UX Audit              | Analysis only     | **COMPLETE** |
 | **N-02** | Identity Convergence         | Identity only     | **COMPLETE** |
 | **N-03** | Work Companion Experience    | Presentation only | **COMPLETE** |
-| **N-04** | Operational Quality Adoption | Process/docs only | Pending      |
+| **N-04** | Operational Quality Adoption | Process/docs only | **COMPLETE** |
 
 ## Rules
 

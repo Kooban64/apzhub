@@ -14,7 +14,7 @@ Companion maturity declaration: [APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md]
 
 Founding statement (still true):
 
-> **APZHUB is an Enterprise Productivity Platform. APZ Time, APZ Support, and APZ Projects are REFERENCE IMPLEMENTATIONS #001–#003. Future products shall follow the Native Adoption Standard and APZQEP Enterprise Quality Baseline, with sequencing determined by portfolio priority, the Enterprise Capability Model, and operational evidence.**
+> **APZHUB is an Enterprise Productivity Platform. APZ Time, APZ Support, APZ Projects, and APZ Documents are REFERENCE IMPLEMENTATIONS #001–#004. Future products shall follow the Native Adoption Standard and APZQEP Enterprise Quality Baseline, with sequencing determined by portfolio priority, the Enterprise Capability Model, and operational evidence.**
 
 ## Gear change (in force)
 
@@ -37,11 +37,11 @@ APZQEP is **infrastructure**. Discuss it only on release learning, justified pro
 
 ## Portfolio operating categories
 
-| Category                      | Meaning                                                         | Products (current)                           |
-| ----------------------------- | --------------------------------------------------------------- | -------------------------------------------- |
-| **Reference Implementations** | Native + APZQEP complete; Playbook validated                    | APZ Time · APZ Support · APZ Projects        |
-| **Portfolio Candidates**      | Production capability exists; next adoption is a value decision | APZ Documents · APZ Workflow · APZ Analytics |
-| **Future Products**           | Not next Native Adoption by default                             | APZ Law Platform and others                  |
+| Category                      | Meaning                                                         | Products (current)                                    |
+| ----------------------------- | --------------------------------------------------------------- | ----------------------------------------------------- |
+| **Reference Implementations** | Native + APZQEP complete; Playbook validated                    | APZ Time · APZ Support · APZ Projects · APZ Documents |
+| **Portfolio Candidates**      | Production capability exists; next adoption is a value decision | APZ Workflow · APZ Analytics                          |
+| **Future Products**           | Not next Native Adoption by default                             | APZ Law Platform and others                           |
 
 ## Product maturity lifecycle
 
