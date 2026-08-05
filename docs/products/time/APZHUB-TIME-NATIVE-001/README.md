@@ -5,8 +5,8 @@
 | Programme      | **APZHUB-TIME-NATIVE-001**                         |
 | Product        | **APZ Time**                                       |
 | Classification | **Adoption & Product Evolution**                   |
-| Status         | **PHASE A COMPLETE**                               |
-| Timestamp      | 20260805T033900Z                                   |
+| Status         | **FROZEN** (Phase A complete; purpose achieved)    |
+| Timestamp      | 20260805T035500Z                                   |
 | Parent         | APZQEP-ADOPT-001 Phase 1                           |
 | Baseline       | Production **1.0.0** ACCEPTED/CLOSED — [../](../)  |
 | Authority      | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md) |
@@ -43,7 +43,9 @@ Right metric: “Does APZ Time provide the experience our users need?”
 **Phase A:** [PHASE-A-COMPLETION.md](./PHASE-A-COMPLETION.md) — **COMPLETE** (design complete).  
 Standards: [Native Adoption](../../framework/APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md) · [Playbook](../../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md).
 
-See [ROADMAP.md](./ROADMAP.md). Next: a real APZ Time change through APZQEP — not new programmes.
+See [ROADMAP.md](./ROADMAP.md) · [PROGRAMME-FREEZE.md](./PROGRAMME-FREEZE.md).  
+Portfolio: [APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md](../../framework/APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md).  
+Next: real APZ Time change through APZQEP, or portfolio-selected next product — not A05.
 
 ## Deliverable register
 

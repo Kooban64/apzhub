@@ -138,16 +138,17 @@ Designation: [Enterprise Quality Baseline](./v1.1/apzqep-version-1.1-architectur
 APZQEP-166 / APZQEP-170/180/190/200 provider families: NOT AUTHORISED until separate Owner Auth
 APZQEP-ADOPT-001: **OPEN** — Phase 1 **IN PROGRESS** (Production Adoption & APZ Time Integration)
 Face: [apzqep-adopt-001/](./apzqep-adopt-001/) · Auth: [OWNER-AUTHORISATION-PHASE-1.md](./apzqep-adopt-001/OWNER-AUTHORISATION-PHASE-1.md)
-APZHUB-TIME-NATIVE-001: **PHASE A COMPLETE** — [PHASE-A-COMPLETION](../time/APZHUB-TIME-NATIVE-001/PHASE-A-COMPLETION.md)
-APZ Time: **REFERENCE IMPLEMENTATION #001** — [REFERENCE-IMPLEMENTATION-001.md](../apztime/REFERENCE-IMPLEMENTATION-001.md) · ops [../apztime/](../apztime/)
+APZHUB-TIME-NATIVE-001: **FROZEN** — [PROGRAMME-FREEZE](../time/APZHUB-TIME-NATIVE-001/PROGRAMME-FREEZE.md) · Phase A complete · no A05 / no Phase B eng under this programme
+APZ Time: **REFERENCE IMPLEMENTATION #001** — [REFERENCE-IMPLEMENTATION-001.md](../apztime/REFERENCE-IMPLEMENTATION-001.md)
+Portfolio statement: [APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md](../framework/APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md)
 Native Adoption + Playbook: [STANDARD](../framework/APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md) · [PLAYBOOK](../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)
-**Design complete.** Methodology proven. Portfolio priority drives the next product — not methodology refinement.
+**Portfolio engineering mode.** Methodology proven. RIs are earned. Sequencing = business priority + evidence.
 
 Engineering chapter: **CLOSED** — [CHAPTER-CLOSE.md](./v1.1/apzqep-version-1.1-architecture-freeze/CHAPTER-CLOSE.md)
 Default on APZQEP architecture: frozen. Default on APZQEP ops: **daily use + evidence**.
 
 Next Action:
-**Execute / learn.** Real APZ Time changes through APZQEP. Do NOT open new product programmes by default. Do NOT invent standards. Do NOT start APZQEP-170. Do NOT reopen V1.1. Do NOT expose Kimai. Portfolio dashboard (docs) when Owner requests.
+(1) Real APZ Time change through APZQEP / ADOPT-001, or (2) Portfolio selects next product for Native Adoption. Do NOT open A05 / TIME Phase B. Do NOT invent standards. Do NOT start APZQEP-170. Do NOT reopen V1.1. Do NOT expose Kimai.
 ```
 
 ---

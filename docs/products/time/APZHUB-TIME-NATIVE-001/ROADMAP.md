@@ -1,10 +1,10 @@
 # Roadmap — APZHUB-TIME-NATIVE-001
 
-| Field     | Value                  |
-| --------- | ---------------------- |
-| Programme | APZHUB-TIME-NATIVE-001 |
-| Status    | **GOVERNING**          |
-| Timestamp | 20260805T033900Z       |
+| Field     | Value                                      |
+| --------- | ------------------------------------------ |
+| Programme | APZHUB-TIME-NATIVE-001                     |
+| Status    | **FROZEN** (programme complete for intent) |
+| Timestamp | 20260805T035500Z                           |
 
 ## Phase A — Native Experience (ordered slices)
 
@@ -18,24 +18,9 @@
 Order is deliberate: UX audit drives identity and workspace — not the reverse.
 
 **Exit (Phase A):** Users experience APZ Time as native APZHUB; Kimai invisible.  
-**Phase A close:** [PHASE-A-COMPLETION.md](./PHASE-A-COMPLETION.md) — **COMPLETE**.
+**Phase A close:** [PHASE-A-COMPLETION.md](./PHASE-A-COMPLETION.md) — **COMPLETE**.  
+**Programme freeze:** [PROGRAMME-FREEZE.md](./PROGRAMME-FREEZE.md) — **FROZEN** (no A05; no Phase B/C engineering under this programme).
 
-## Phase B — Daily Operations
+## Phase B / C (not authorised under TIME-NATIVE-001)
 
-| Work                   | Intent                                              |
-| ---------------------- | --------------------------------------------------- |
-| Operator workflows     | Improve day-to-day use of existing 1.0.0 capability |
-| Permissions refinement | APZHUB roles clarity                                |
-| Simplify common tasks  | Reduce friction                                     |
-| Operational learning   | ADOPT-001 registers                                 |
-
-**Exit:** Steady daily use; patterns in Learning Register.
-
-## Phase C — Capability Expansion
-
-Only after observing real usage (operational evidence), consider:
-
-- Approvals · Reporting · Dashboards · Notifications · Exports
-- Billing · Leave · Scheduling · Workflow · AI
-
-Each requires separate Owner Authorisation for a named release (e.g. 1.1 / 2.0).
+Daily operations refinement and capability expansion remain **portfolio / Owner Auth** topics outside this frozen programme. Operational learning continues under ADOPT-001 + the [apztime](../../apztime/) ops pack when real changes occur.

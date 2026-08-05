@@ -28,12 +28,19 @@ This designation is not a claim of product superiority. It records that APZ Time
 | Next engineering | Driven by **portfolio priority**, not by methodology refinement                                                |
 | APZ Time next    | Operational learning from real changes under APZQEP                                                            |
 
+## Earned designation (governance)
+
+> **Reference Implementations are earned, not designated.**
+
+#001 is the founding proof of path. Future Reference Implementations require Native + APZQEP adoption, demonstrated operational use, operational learning, stable production, and portfolio approval — see [APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md](../framework/APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md).
+
 ## What this does not mean
 
 - Do not open APZ Projects / Support / Documents programmes solely because the pattern exists
 - Do not invent new standards before several real releases exercise the current ones
 - Do not treat Kimai feature parity as a maturity metric
 - Do not reopen APZQEP V1.1 architecture from product adoption work
+- Do not continue TIME-NATIVE-001 (programme **FROZEN**)
 
 ## Evidence anchors
 
