@@ -149,7 +149,7 @@ Engineering chapter: **CLOSED** — [CHAPTER-CLOSE.md](./v1.1/apzqep-version-1.1
 Default on APZQEP: silent daily use + evidence. Talk APZQEP only on release learning / justified provider work.
 
 Next Action:
-Await Owner Auth for **APZ Support** Native Adoption (Playbook as-is), or process a real APZ Time change under ADOPT-001. Do NOT invent standards. Do NOT open A05 / TIME Phase B. Do NOT start APZQEP-170. Do NOT reopen V1.1. Do NOT expose engines.
+**APZ Support — Product Mission** (draft): [../support/PRODUCT-MISSION.md](../support/PRODUCT-MISSION.md) — agree mission before any Support Native Adoption. Working model: [APZHUB-WORKING-MODEL.md](../framework/APZHUB-WORKING-MODEL.md). Or process a real APZ Time change under ADOPT-001. Do NOT invent standards. Do NOT open Support engineering until mission AGREED + Owner Auth. Do NOT start APZQEP-170. Do NOT expose engines.
 ```
 
 ---

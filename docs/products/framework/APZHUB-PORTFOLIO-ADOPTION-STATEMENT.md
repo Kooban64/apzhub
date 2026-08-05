@@ -104,7 +104,9 @@ Owner-directed scoring for daily operational payoff (not technical completeness)
 
 APZQEP does not appear on that roadmap — it is infrastructure.
 
-**No SUPPORT-NATIVE (or equivalent) programme is open until separate Owner Authorisation.** Apply the Playbook as-is — no redesign.
+**No SUPPORT-NATIVE (or equivalent) programme is open until separate Owner Authorisation.**  
+**Next face for Support:** [../support/PRODUCT-MISSION.md](../support/PRODUCT-MISSION.md) (mission first — agree before adoption).  
+Apply the Playbook as-is — no redesign.
 
 ## Standing constraints
 

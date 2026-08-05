@@ -28,6 +28,7 @@ Establish the **official Product Engineering Framework** that every APZHUB produ
 | Native adoption      | [APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md](./APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md) |
 | Adoption playbook    | [APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](./APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)               |
 | Portfolio adoption   | [APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md](./APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md)         |
+| Working model        | [APZHUB-WORKING-MODEL.md](./APZHUB-WORKING-MODEL.md)                                       |
 | Completion           | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md)                                             |
 | Owner acceptance     | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md)                                               |
 

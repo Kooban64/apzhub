@@ -67,7 +67,8 @@
 > **TIME-NATIVE-001-A04 (20260805T034500Z):** APZQEP Operational Adoption **COMPLETE** — ops pack [apztime/](../apztime/) · Playbook [APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)
 > **REFERENCE IMPLEMENTATION #001 (20260805T035000Z):** APZ Time **DECLARED** — [REFERENCE-IMPLEMENTATION-001.md](../apztime/REFERENCE-IMPLEMENTATION-001.md)
 > **TIME-NATIVE-001 FREEZE (20260805T035500Z):** Programme **FROZEN** — [PROGRAMME-FREEZE.md](../time/APZHUB-TIME-NATIVE-001/PROGRAMME-FREEZE.md)
-> **PORTFOLIO MODE (20260805T035900Z):** APZHUB is the project; APZQEP is infrastructure — [APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md](../framework/APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md) — recommended next product **APZ Support** (not authorised); apply Playbook as-is
+> **PORTFOLIO MODE (20260805T035900Z):** APZHUB is the project; APZQEP is infrastructure — [APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md](../framework/APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md)
+> **WORKING MODEL (20260805T040200Z):** Portfolio Architect / Product Strategist era — [APZHUB-WORKING-MODEL.md](../framework/APZHUB-WORKING-MODEL.md) · Support **PRODUCT-MISSION** draft [PRODUCT-MISSION.md](../support/PRODUCT-MISSION.md) — agree mission before Native Adoption
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
