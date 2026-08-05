@@ -107,16 +107,18 @@ Ask each quarter:
 | Mission / ops       | [../apzprojects/](../apzprojects/) — **RI #003**                                                                 |
 | Native Adoption     | [../apz-projects-native-001/](../apz-projects-native-001/) — **COMPLETE / FROZEN**                               |
 
-| Milestone               | Status                     |
-| ----------------------- | -------------------------- |
-| APZ Time (RI #001)      | ✅ Complete                |
-| APZ Support (RI #002)   | ✅ Complete                |
-| APZ Projects (RI #003)  | ✅ Complete                |
-| APZHUB-PORTFOLIO-001    | ✅ COMPLETE                |
-| APZ-PROJECTS-000        | ✅ CLOSED (Owner APPROVED) |
-| APZ-PROJECTS-NATIVE-001 | ✅ COMPLETE / FROZEN       |
+| Milestone               | Status                                           |
+| ----------------------- | ------------------------------------------------ |
+| APZ Time (RI #001)      | ✅ Complete                                      |
+| APZ Support (RI #002)   | ✅ Complete                                      |
+| APZ Projects (RI #003)  | ✅ Complete                                      |
+| APZHUB-PORTFOLIO-001    | ✅ COMPLETE                                      |
+| Platform Phase 1        | ✅ DECLARED                                      |
+| APZHUB-CAPABILITY-001   | ✅ Definition COMPLETE (engineering not started) |
+| APZ-PROJECTS-000        | ✅ CLOSED (Owner APPROVED)                       |
+| APZ-PROJECTS-NATIVE-001 | ✅ COMPLETE / FROZEN                             |
 
-**Portfolio pause:** use the Enterprise Operating Model and Enterprise Capability Model before selecting the fourth product. Prerequisite remains: APPROVED Product Mission (**PRODUCT-000**) before Native Adoption opens. No parallel Native Adoption programmes.
+**Post Phase 1:** methodology paused. Investment via Product Board / QPR and Horizon 3 capabilities (e.g. Unified Work Experience) before opening another product Native Adoption by default. Prerequisite remains: APPROVED Product Mission (**PRODUCT-000**) before Native Adoption opens.
 
 APZQEP does not appear on product roadmaps — it is infrastructure.
 

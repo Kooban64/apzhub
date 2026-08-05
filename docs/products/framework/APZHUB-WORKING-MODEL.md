@@ -15,9 +15,11 @@ Engineering architecture for Layer 1 evolves only through governance. Day-to-day
 
 ## Commercial identity
 
-> **APZHUB is an Enterprise Productivity Platform that delivers integrated business capabilities through a portfolio of native products operating under a common identity, quality, and operational model.**
+> **APZHUB is an Enterprise Productivity Platform that delivers integrated business capabilities through a portfolio of native products governed by a common quality, identity, operational, and engineering model.**
 
-Programme: [../apzhub-portfolio-001/](../apzhub-portfolio-001/)
+Phase 1: [APZHUB-PLATFORM-PHASE-1-COMPLETE.md](./APZHUB-PLATFORM-PHASE-1-COMPLETE.md) — **DECLARED**  
+Operating model: [../apzhub-portfolio-001/](../apzhub-portfolio-001/)  
+First Horizon 3 capability (definition): [../apzhub-capability-001/](../apzhub-capability-001/)
 
 ## Layers
 
