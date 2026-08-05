@@ -59,10 +59,11 @@ Standing Product Board posture: interpret evidence, prioritise investments, chal
 
 ## Related
 
-| Artefact                     | Path                                                                                                           |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| Enterprise Operating Model   | [../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md) |
-| Phase 2 — Unified Experience | [APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](./APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md)               |
-| My Work Review               | [APZHUB-MY-WORK-REVIEW.md](./APZHUB-MY-WORK-REVIEW.md)                                                         |
-| Operational pause            | [OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md](./OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md)                   |
-| Working Model                | [APZHUB-WORKING-MODEL.md](./APZHUB-WORKING-MODEL.md)                                                           |
+| Artefact                       | Path                                                                                                           |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| Enterprise Operating Model     | [../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md) |
+| Phase 2 — Unified Experience   | [APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](./APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md)               |
+| Internal operational readiness | [../apzhub-operate-001/](../apzhub-operate-001/) — **COMPLETE**                                                |
+| My Work Review                 | [APZHUB-MY-WORK-REVIEW.md](./APZHUB-MY-WORK-REVIEW.md)                                                         |
+| Operational pause              | [OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md](./OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md)                   |
+| Working Model                  | [APZHUB-WORKING-MODEL.md](./APZHUB-WORKING-MODEL.md)                                                           |

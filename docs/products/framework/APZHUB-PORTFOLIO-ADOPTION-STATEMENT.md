@@ -149,24 +149,25 @@ Emerging Portfolio Patterns: [APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](./APZHUB-EM
 
 ## Related
 
-| Artefact                      | Path                                                                                                             |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Platform Phase 2 (latest)     | [APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](./APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md)                 |
-| Platform Phase 1 Complete     | [APZHUB-PLATFORM-PHASE-1-COMPLETE.md](./APZHUB-PLATFORM-PHASE-1-COMPLETE.md)                                     |
-| My Work operational pause     | [OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md](./OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md)                     |
-| My Work Review                | [APZHUB-MY-WORK-REVIEW.md](./APZHUB-MY-WORK-REVIEW.md)                                                           |
-| Work Completion Journey       | [APZHUB-WORK-COMPLETION-JOURNEY.md](./APZHUB-WORK-COMPLETION-JOURNEY.md)                                         |
-| Unified Work Experience       | [../apzhub-capability-001/](../apzhub-capability-001/)                                                           |
-| Composition ENG-001           | [../apzhub-capability-001-eng-001/](../apzhub-capability-001-eng-001/)                                           |
-| Portfolio programme           | [../apzhub-portfolio-001/](../apzhub-portfolio-001/)                                                             |
-| Enterprise Capability Model   | [../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md) |
-| Enterprise Operating Model    | [../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md)   |
-| Methodology maturity          | [APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md](./APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md)               |
-| Native Adoption Standard      | [APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md](./APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md)                       |
-| Adoption Playbook             | [APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](./APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)                                     |
-| RI retrospective practice     | [APZHUB-RI-RETROSPECTIVE.md](./APZHUB-RI-RETROSPECTIVE.md)                                                       |
-| RI #001                       | [../apztime/REFERENCE-IMPLEMENTATION-001.md](../apztime/REFERENCE-IMPLEMENTATION-001.md)                         |
-| RI #002                       | [../apzsupport/REFERENCE-IMPLEMENTATION-002.md](../apzsupport/REFERENCE-IMPLEMENTATION-002.md)                   |
-| RI #003                       | [../apzprojects/REFERENCE-IMPLEMENTATION-003.md](../apzprojects/REFERENCE-IMPLEMENTATION-003.md)                 |
-| Working model                 | [APZHUB-WORKING-MODEL.md](./APZHUB-WORKING-MODEL.md)                                                             |
-| Existing portfolio governance | [../../governance/PORTFOLIO-GOVERNANCE.md](../../governance/PORTFOLIO-GOVERNANCE.md)                             |
+| Artefact                       | Path                                                                                                             |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| Platform Phase 2 (latest)      | [APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](./APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md)                 |
+| Platform Phase 1 Complete      | [APZHUB-PLATFORM-PHASE-1-COMPLETE.md](./APZHUB-PLATFORM-PHASE-1-COMPLETE.md)                                     |
+| My Work operational pause      | [OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md](./OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md)                     |
+| My Work Review                 | [APZHUB-MY-WORK-REVIEW.md](./APZHUB-MY-WORK-REVIEW.md)                                                           |
+| Internal operational readiness | [../apzhub-operate-001/](../apzhub-operate-001/)                                                                 |
+| Work Completion Journey        | [APZHUB-WORK-COMPLETION-JOURNEY.md](./APZHUB-WORK-COMPLETION-JOURNEY.md)                                         |
+| Unified Work Experience        | [../apzhub-capability-001/](../apzhub-capability-001/)                                                           |
+| Composition ENG-001            | [../apzhub-capability-001-eng-001/](../apzhub-capability-001-eng-001/)                                           |
+| Portfolio programme            | [../apzhub-portfolio-001/](../apzhub-portfolio-001/)                                                             |
+| Enterprise Capability Model    | [../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md) |
+| Enterprise Operating Model     | [../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md)   |
+| Methodology maturity           | [APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md](./APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md)               |
+| Native Adoption Standard       | [APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md](./APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md)                       |
+| Adoption Playbook              | [APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](./APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)                                     |
+| RI retrospective practice      | [APZHUB-RI-RETROSPECTIVE.md](./APZHUB-RI-RETROSPECTIVE.md)                                                       |
+| RI #001                        | [../apztime/REFERENCE-IMPLEMENTATION-001.md](../apztime/REFERENCE-IMPLEMENTATION-001.md)                         |
+| RI #002                        | [../apzsupport/REFERENCE-IMPLEMENTATION-002.md](../apzsupport/REFERENCE-IMPLEMENTATION-002.md)                   |
+| RI #003                        | [../apzprojects/REFERENCE-IMPLEMENTATION-003.md](../apzprojects/REFERENCE-IMPLEMENTATION-003.md)                 |
+| Working model                  | [APZHUB-WORKING-MODEL.md](./APZHUB-WORKING-MODEL.md)                                                             |
+| Existing portfolio governance  | [../../governance/PORTFOLIO-GOVERNANCE.md](../../governance/PORTFOLIO-GOVERNANCE.md)                             |
