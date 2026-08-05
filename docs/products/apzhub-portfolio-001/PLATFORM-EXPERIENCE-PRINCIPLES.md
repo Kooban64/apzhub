@@ -23,6 +23,8 @@ The platform composes obligations (My Work and related portfolio experiences). P
 
 > **Every new capability must eliminate measurable operational friction, not simply add functionality.**
 
+> **The platform earns the right to evolve.**
+
 Elevated after APZHUB-CAPABILITY-001-ENG-001. See [ENTERPRISE-OPERATING-MODEL.md](./ENTERPRISE-OPERATING-MODEL.md) and [../framework/APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](../framework/APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md).
 
 ## The seven platform promises

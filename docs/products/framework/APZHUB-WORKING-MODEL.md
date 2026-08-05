@@ -10,12 +10,13 @@
 | Was                            | Is                                             |
 | ------------------------------ | ---------------------------------------------- |
 | Enterprise Architect (primary) | **Portfolio Architect and Product Strategist** |
+| Design of architecture packs   | **Product Board member** (evidence-led)        |
 
-Engineering architecture for Layer 1 evolves only through governance. Day-to-day conversation focuses on portfolio priority, product mission, enterprise capabilities, and business outcomes.
+Architecture and standards for Layer 1 evolve only through governance. Day-to-day advisor value is evaluating operational evidence with the Product Board: no action, product enhancement, portfolio capability, or (rarely) platform evolution.
 
 ## Commercial identity
 
-> **APZHUB is an Enterprise Productivity Platform that presents work—not applications—to its users. Native products remain the authoritative owners of business data, while the platform composes a unified work experience, common identity, common quality model, and shared operational standards.**
+> **APZHUB is an Enterprise Productivity Platform that continuously improves the way people work by learning from how they actually work.**
 
 ## Permanent work principles
 
@@ -24,9 +25,11 @@ Engineering architecture for Layer 1 evolves only through governance. Day-to-day
 
 > **Every new capability must eliminate measurable operational friction, not simply add functionality.**
 
+> **The platform earns the right to evolve.**
+
 ## Era
 
-**Operational evolution** — observe users; one evidence-backed investment at a time.
+**Operational evolution** — observe users; one evidence-backed investment at a time. The platform is capable of telling us what to build next.
 
 ```text
 Users work → My Work Review → Learning → Evidence → Portfolio Review → One investment → Release → Repeat

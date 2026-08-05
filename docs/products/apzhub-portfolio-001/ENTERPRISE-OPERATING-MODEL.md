@@ -4,13 +4,15 @@
 | --------- | ------------------------- |
 | Programme | APZHUB-PORTFOLIO-001      |
 | Status    | **IN FORCE**              |
-| Timestamp | 20260805T105500Z          |
+| Timestamp | 20260805T110000Z          |
 | Kind      | Portfolio governance      |
 | Era       | **Operational evolution** |
 
 ## Platform identity (commercial)
 
-> **APZHUB is an Enterprise Productivity Platform that presents work—not applications—to its users. Native products remain the authoritative owners of business data, while the platform composes a unified work experience, common identity, common quality model, and shared operational standards.**
+> **APZHUB is an Enterprise Productivity Platform that continuously improves the way people work by learning from how they actually work.**
+
+Supporting description: native products remain authoritative owners of business data; the platform composes a unified work experience, common identity, common quality model, and shared operational standards.
 
 ## Frozen investment principles
 
@@ -19,9 +21,26 @@
 
 > **Every new capability must eliminate measurable operational friction, not simply add functionality.**
 
+> **The platform earns the right to evolve.**
+
+A capability is not added because it is interesting, competitive, suggested, or convenient. It earns its place when users experienced measurable friction, operational evidence demonstrated the need, and Portfolio Review selected it as the highest-value investment.
+
 Together these filter every future investment. Functionality without friction reduction is not authorised as a portfolio capability.
 
 Latest milestone: [../framework/APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](../framework/APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md).
+
+## Eras completed (institutional path)
+
+| Era           | Outcome                                               |
+| ------------- | ----------------------------------------------------- |
+| Foundation    | Engineering standards, governance, identity           |
+| Quality       | APZQEP Enterprise Quality Baseline                    |
+| Product       | Native product adoption and Reference Implementations |
+| Portfolio     | Enterprise Operating Model and Capability Model       |
+| Experience    | Unified Work Experience (My Work)                     |
+| **Evolution** | Operational learning drives investment — **current**  |
+
+No further strategic design initiative is required to “finish” the platform. APZHUB itself teaches what to build next.
 
 | APZHUB is                                  | APZHUB is not                                |
 | ------------------------------------------ | -------------------------------------------- |
