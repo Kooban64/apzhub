@@ -20,13 +20,13 @@
 | Workforce Productivity      | APZ Time          | Mature (RI) |
 | Quality & Release Assurance | APZQEP            | Baseline    |
 
-## What APZHUB will deliver next (priority TBD)
+## What APZHUB will deliver next (business roadmap)
 
-| Capability          | Delivered through | Status                      |
-| ------------------- | ----------------- | --------------------------- |
-| Document Management | APZ Documents     | Awaiting portfolio priority |
-| Workflow Automation | APZ Workflow      | Awaiting portfolio priority |
-| Analytics & Insight | APZ Analytics     | Awaiting portfolio priority |
+| Capability          | Delivered through | Status                                      |
+| ------------------- | ----------------- | ------------------------------------------- |
+| Document Management | APZ Documents     | **Next** — APZ-DOCUMENTS-000 (mission open) |
+| Workflow Automation | APZ Workflow      | After Documents                             |
+| Analytics & Insight | APZ Analytics     | After Workflow                              |
 
 ## How to choose the next investment
 

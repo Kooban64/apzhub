@@ -32,7 +32,7 @@ Describe what **APZHUB delivers as an enterprise** — in business language.
 | Service Management          | APZ Support             | APZ Projects                    | **RI #002**                  |
 | Workforce Productivity      | APZ Time                | APZ Projects                    | **RI #001**                  |
 | Quality & Release Assurance | APZQEP                  | All products                    | Enterprise baseline (frozen) |
-| Document Management         | APZ Documents           | APZ Projects, APZ Support       | Awaiting portfolio priority  |
+| Document Management         | APZ Documents           | APZ Projects, APZ Support       | **APZ-DOCUMENTS-000 open**   |
 | Workflow Automation         | APZ Workflow            | All products                    | Awaiting portfolio priority  |
 | Analytics & Insight         | APZ Analytics           | All products                    | Awaiting portfolio priority  |
 
@@ -44,7 +44,7 @@ Describe what **APZHUB delivers as an enterprise** — in business language.
 | Service Management          | APZHUB delivers organisational service management through APZ Support.           |
 | Workforce Productivity      | APZHUB delivers workforce productivity and time accountability through APZ Time. |
 | Quality & Release Assurance | APZHUB assures every product change through APZQEP.                              |
-| Document Management         | APZHUB will deliver document management through APZ Documents (when adopted).    |
+| Document Management         | APZHUB delivers document management through APZ Documents (mission in progress). |
 | Workflow Automation         | APZHUB will deliver workflow automation through APZ Workflow (when adopted).     |
 | Analytics & Insight         | APZHUB will deliver analytics and insight through APZ Analytics (when adopted).  |
 
@@ -65,8 +65,8 @@ Describe what **APZHUB delivers as an enterprise** — in business language.
 | Engineering   | Do **not** invent programmes from this table alone              |
 | Portfolio ops | Align Mission → Native Adoption → APZQEP → RI to capabilities   |
 
-## Portfolio pause
+## Portfolio sequencing (PB-002)
 
-After RI #003 and this model, pause further Native Adoption briefly. Select the fourth product by **enterprise capability priority**, not engineering momentum.
+Lane 2 resumes with **Document Management** via [APZ-DOCUMENTS-000](../apzdocuments/). Platform evolution (Lane 1) remains evidence-driven. See [Portfolio Business Roadmap](../framework/APZHUB-PORTFOLIO-BUSINESS-ROADMAP.md).
 
 Executive one-page view: [EXECUTIVE-CAPABILITY-MAP.md](./EXECUTIVE-CAPABILITY-MAP.md)

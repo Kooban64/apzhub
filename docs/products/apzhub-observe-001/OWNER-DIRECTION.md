@@ -15,9 +15,11 @@ Engineering remains **frozen** unless one of the following occurs:
 2. An Owner-approved operational blocker.
 3. A Product Board decision based on collected operational evidence.
 
-No new programmes shall be opened.  
-No new capabilities shall be proposed.  
-No speculative backlog shall be created.
+No new **speculative platform** programmes shall be opened.  
+No new **platform** capabilities shall be proposed without evidence.  
+No speculative **platform** backlog shall be created.
+
+**Clarified by PB-002:** approved **portfolio delivery** (Lane 2 — e.g. APZ-DOCUMENTS-000) may proceed in parallel. See [../framework/APZHUB-TWO-LANE-OPERATING-MODEL.md](../framework/APZHUB-TWO-LANE-OPERATING-MODEL.md).
 
 ## Daily responsibilities
 

@@ -55,9 +55,13 @@ APZ Projects
 - 🎯 **APZ-PROJECTS-NATIVE-001** — N-01 COMPLETE; N-02+ pending — [../apz-projects-native-001/](../apz-projects-native-001/)
 - Reference Implementation #003 — **if earned** after N-04
 
-### After RI #003 (reassess)
+### After RI #003 (updated PB-002)
 
-Choose among Documents / Workflow / Analytics based on operational evidence — not a fixed queue.
+- ✅ APZ Projects — RI #003 complete
+- 🎯 **APZ-DOCUMENTS-000** — Mission open — [../apzdocuments/](../apzdocuments/)
+- Then Workflow → Analytics → Law per [APZHUB-PORTFOLIO-BUSINESS-ROADMAP.md](./APZHUB-PORTFOLIO-BUSINESS-ROADMAP.md)
+
+> Portfolio delivery does **not** wait for pilot friction. Platform evolution still does.
 
 ## Explicit non-actions
 

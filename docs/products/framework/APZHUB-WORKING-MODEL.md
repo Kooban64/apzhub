@@ -3,9 +3,11 @@
 | Field     | Value            |
 | --------- | ---------------- |
 | Status    | **IN FORCE**     |
-| Timestamp | 20260805T133000Z |
+| Timestamp | 20260805T140000Z |
 
-**Current operating state (foreword):** [APZHUB-CURRENT-OPERATING-STATE.md](./APZHUB-CURRENT-OPERATING-STATE.md)
+**Current operating state (foreword):** [APZHUB-CURRENT-OPERATING-STATE.md](./APZHUB-CURRENT-OPERATING-STATE.md)  
+**Two-lane model (PB-002):** [APZHUB-TWO-LANE-OPERATING-MODEL.md](./APZHUB-TWO-LANE-OPERATING-MODEL.md)  
+**Portfolio business roadmap:** [APZHUB-PORTFOLIO-BUSINESS-ROADMAP.md](./APZHUB-PORTFOLIO-BUSINESS-ROADMAP.md)
 
 ## Working agreement (post-construction)
 
@@ -31,11 +33,13 @@ There should not always be a next Cursor instruction. **Wait** is a valid outcom
 5. **Executive Decision Support** — highest business value next quarter
 6. **Architecture (rare)** — only when evidence shows the platform itself is the bottleneck
 
-Do **not** ask the advisor for “the next Cursor instruction” by default. Ask: _Has the platform earned the right to change?_ If no → build nothing. If yes → choose the single highest-value investment.
+Do **not** ask the advisor for “the next Cursor instruction” by default for **platform evolution**. Ask: _Has the platform earned the right to change?_ If no → do not change the platform. If yes → choose the single highest-value platform investment.
 
-Bring [PRODUCT-BOARD-BRIEF.md](../apzhub-observe-001/PRODUCT-BOARD-BRIEF.md) or [WEEKLY-LEARNING-SUMMARY.md](../apzhub-observe-001/WEEKLY-LEARNING-SUMMARY.md) when seeking investment advice.
+**Portfolio delivery is separate:** executing the next approved product on the [business roadmap](./APZHUB-PORTFOLIO-BUSINESS-ROADMAP.md) does not require pilot friction. It still requires Mission → Owner Approval → Native Adoption.
 
-Architecture and standards for Layer 1 evolve only through governance.
+Bring [PRODUCT-BOARD-BRIEF.md](../apzhub-observe-001/PRODUCT-BOARD-BRIEF.md) or [WEEKLY-LEARNING-SUMMARY.md](../apzhub-observe-001/WEEKLY-LEARNING-SUMMARY.md) when seeking **platform** investment advice.
+
+Architecture and standards for Layer 1 evolve only through governance (Lane 1).
 
 ## Commercial identity
 
@@ -52,13 +56,19 @@ Architecture and standards for Layer 1 evolve only through governance.
 
 ## Era
 
-**Operational evolution** — observe users; one evidence-backed investment at a time. The platform is capable of telling us what to build next.
+**Two lanes in parallel** (PB-002):
+
+| Lane  | Name               | Driver                                                        |
+| ----- | ------------------ | ------------------------------------------------------------- |
+| **1** | Platform evolution | Evidence (OBSERVE-001) — **frozen** unless thresholds / Owner |
+| **2** | Portfolio delivery | Business roadmap — **APZ-DOCUMENTS-000 open**                 |
 
 ```text
-Users work → My Work Review → Learning → Evidence → Portfolio Review → One investment → Release → Repeat
+Lane 1: Users work → Learning → Evidence → Board → One platform investment → Release
+Lane 2: Business roadmap → PRODUCT-000 → Owner Approval → Native Adoption → (RI)
 ```
 
-Avoid: engineering because idle; governance because it feels like progress.
+Avoid: platform engineering because idle; blocking portfolio completion with the platform freeze.
 
 Phase 2: [APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](./APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md) — **DECLARED** (latest)  
 Phase 1: [APZHUB-PLATFORM-PHASE-1-COMPLETE.md](./APZHUB-PLATFORM-PHASE-1-COMPLETE.md) — **DECLARED**  
@@ -67,7 +77,8 @@ My Work Review: [APZHUB-MY-WORK-REVIEW.md](./APZHUB-MY-WORK-REVIEW.md)
 Unified Work (composition): [../apzhub-capability-001-eng-001/](../apzhub-capability-001-eng-001/)  
 Operational pause: [OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md](./OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md)  
 Internal readiness: [../apzhub-operate-001/](../apzhub-operate-001/) — **COMPLETE**  
-Operational observation: [../apzhub-observe-001/](../apzhub-observe-001/) — **ACTIVE** (no engineering)
+Operational observation: [../apzhub-observe-001/](../apzhub-observe-001/) — **ACTIVE** (Lane 1)  
+Documents mission: [../apzdocuments/](../apzdocuments/) — **OPEN** (Lane 2)
 
 ## Layers
 
@@ -172,11 +183,13 @@ If a product does not improve one of these, it should not move up the portfolio.
 
 ## Selecting the next candidate
 
-Do not auto-sequence from the last RI.
+Prefer the [Portfolio Business Roadmap](./APZHUB-PORTFOLIO-BUSINESS-ROADMAP.md) for Lane 2 sequencing.
 
-Ask (Quarterly Portfolio Review):
+Ask (Quarterly Portfolio Review) when reordering:
 
 > **Which enterprise capability will create the greatest operational improvement for APZHUB over the next 3–6 months?**
+
+Current answer (PB-002): **Document Management via APZ Documents** — start with APZ-DOCUMENTS-000.
 
 Practice: [APZHUB-QUARTERLY-PORTFOLIO-REVIEW.md](./APZHUB-QUARTERLY-PORTFOLIO-REVIEW.md)  
 Capability model: [../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md)  

@@ -7,17 +7,17 @@
 | Audience  | Product Board / Owner          |
 | Rule      | Concise — no feature proposals |
 
-## Latest Product Board decision
+## Latest Product Board decisions
 
-| Item     | Value                                                                      |
-| -------- | -------------------------------------------------------------------------- |
-| Meeting  | **PB-001**                                                                 |
-| Date     | 2026-08-05                                                                 |
-| Minutes  | [PRODUCT-BOARD-DECISION-20260805.md](./PRODUCT-BOARD-DECISION-20260805.md) |
-| Decision | **No investment authorised.** Continue Observation.                        |
-| Outcome  | **Motion carried unanimously.**                                            |
+| Meeting    | Decision                                                      | Minutes                                                                    |
+| ---------- | ------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| **PB-002** | Two-lane model; open APZ-DOCUMENTS-000; Lane 1 remains frozen | [PRODUCT-BOARD-DECISION-PB-002.md](./PRODUCT-BOARD-DECISION-PB-002.md)     |
+| **PB-001** | No **platform** investment; Continue Observation              | [PRODUCT-BOARD-DECISION-20260805.md](./PRODUCT-BOARD-DECISION-20260805.md) |
 
-Standing question for every status: **Has anything happened that changes an investment decision?**
+Standing questions:
+
+- Lane 1: **Has anything happened that changes a platform investment decision?**
+- Lane 2: **What is the next approved portfolio product?** → Documents (mission open)
 
 ## Meeting
 
