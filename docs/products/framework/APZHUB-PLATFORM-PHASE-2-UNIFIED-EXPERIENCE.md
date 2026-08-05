@@ -91,7 +91,7 @@ Success is:
 
 They start in My Work and complete work that may span Projects, Support, Time, and APZQEP without consciously switching mental context. Measured via the [Work Completion Journey](./APZHUB-WORK-COMPLETION-JOURNEY.md); reviewed in the [My Work Review](./APZHUB-MY-WORK-REVIEW.md).
 
-## Current mode
+## Current mode — operational evolution era
 
 | Era (narrative)                      | Meaning                           |
 | ------------------------------------ | --------------------------------- |
@@ -101,6 +101,10 @@ They start in My Work and complete work that may span Projects, Support, Time, a
 | **Learn from operational behaviour** | **Now** — users are the evidence  |
 
 No further strategic design initiative is required to “finish” the platform. The platform needs users.
+
+Frozen filter: **every new capability must eliminate measurable operational friction, not simply add functionality.**
+
+Operating loop: Users work → My Work Review → Learning → Evidence → Portfolio Review → One approved investment → Release → Repeat.
 
 ## Related
 
