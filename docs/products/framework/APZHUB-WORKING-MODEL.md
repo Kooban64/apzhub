@@ -56,7 +56,8 @@ Operating model: [../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md](../apzh
 My Work Review: [APZHUB-MY-WORK-REVIEW.md](./APZHUB-MY-WORK-REVIEW.md)  
 Unified Work (composition): [../apzhub-capability-001-eng-001/](../apzhub-capability-001-eng-001/)  
 Operational pause: [OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md](./OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md)  
-Internal readiness: [../apzhub-operate-001/](../apzhub-operate-001/) — **COMPLETE**
+Internal readiness: [../apzhub-operate-001/](../apzhub-operate-001/) — **COMPLETE**  
+Operational observation: [../apzhub-observe-001/](../apzhub-observe-001/) — **ACTIVE** (no engineering)
 
 ## Layers
 

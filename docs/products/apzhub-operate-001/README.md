@@ -28,4 +28,5 @@
 ## Operating model
 
 Observe → Learn → Review → Invest.  
-My Work Review: [../framework/APZHUB-MY-WORK-REVIEW.md](../framework/APZHUB-MY-WORK-REVIEW.md).
+My Work Review: [../framework/APZHUB-MY-WORK-REVIEW.md](../framework/APZHUB-MY-WORK-REVIEW.md).  
+Pilot observation (active): [../apzhub-observe-001/](../apzhub-observe-001/) — **documentation only**.
