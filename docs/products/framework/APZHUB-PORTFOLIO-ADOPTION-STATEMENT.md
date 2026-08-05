@@ -3,20 +3,39 @@
 | Field     | Value                                              |
 | --------- | -------------------------------------------------- |
 | Status    | **GOVERNING**                                      |
-| Timestamp | 20260805T035500Z                                   |
+| Timestamp | 20260805T035900Z                                   |
 | Authority | Owner direction post REFERENCE IMPLEMENTATION #001 |
 
 ## Formal portfolio statement
 
 > **APZ Time is the first APZHUB Reference Implementation. Future products shall follow the APZHUB Product Native Adoption Standard and APZQEP Enterprise Quality Baseline, with sequencing determined by portfolio priority and operational evidence.**
 
+## Gear change (in force)
+
+| Was                                        | Is                                                   |
+| ------------------------------------------ | ---------------------------------------------------- |
+| APZQEP is the project                      | **APZHUB is the project**                            |
+| Programme → Slice → Certification → Freeze | **Portfolio → Product → Business Value**             |
+| Create standards                           | **Stop** — reuse Native Adoption + Playbook + APZQEP |
+| Build products                             | **Mature the APZHUB portfolio**                      |
+
+APZQEP is **infrastructure**. Discuss it only on release learning, justified provider work, or operational evidence.
+
+### Three layers
+
+| Layer                   | Focus                                                       | Status             |
+| ----------------------- | ----------------------------------------------------------- | ------------------ |
+| 1 — Platform Foundation | Identity, SDK, standards, APZQEP, Native Adoption, Playbook | **Mature**         |
+| 2 — Product Experience  | Indistinguishable APZHUB products (not wrappers)            | **Active focus**   |
+| 3 — Business Capability | What users buy into                                         | **Value delivery** |
+
 ## Shift in programme thinking
 
-| Was                                            | Is                                                   |
-| ---------------------------------------------- | ---------------------------------------------------- |
-| Product engineering (“What do we build next?”) | **Portfolio engineering**                            |
-| Invent methodology per product                 | **Reuse** Native Adoption + APZQEP                   |
-| Next programme because previous finished       | Next programme because **business value** demands it |
+| Was                                            | Is                                                           |
+| ---------------------------------------------- | ------------------------------------------------------------ |
+| Product engineering (“What do we build next?”) | **Portfolio engineering**                                    |
+| Invent methodology per product                 | **Reuse** Native Adoption + APZQEP (no TIME-NATIVE redesign) |
+| Next programme because previous finished       | Next programme because **business value** demands it         |
 
 ## Product maturity lifecycle
 
