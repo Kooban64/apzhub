@@ -19,7 +19,11 @@ These principles are **portfolio promises**. They do not authorise new programme
 
 The platform composes obligations (My Work and related portfolio experiences). Products remain Systems of Record and the place of deep work. Composition never becomes a second SoR.
 
-Elevated after APZHUB-CAPABILITY-001-ENG-001. See [../framework/APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](../framework/APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md).
+## Capability investment filter (frozen)
+
+> **Every new capability must eliminate measurable operational friction, not simply add functionality.**
+
+Elevated after APZHUB-CAPABILITY-001-ENG-001. See [ENTERPRISE-OPERATING-MODEL.md](./ENTERPRISE-OPERATING-MODEL.md) and [../framework/APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](../framework/APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md).
 
 ## The seven platform promises
 

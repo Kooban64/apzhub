@@ -1,17 +1,26 @@
 # APZHUB Enterprise Operating Model
 
-| Field     | Value                |
-| --------- | -------------------- |
-| Programme | APZHUB-PORTFOLIO-001 |
-| Status    | **IN FORCE**         |
-| Timestamp | 20260805T081000Z     |
-| Kind      | Portfolio governance |
+| Field     | Value                     |
+| --------- | ------------------------- |
+| Programme | APZHUB-PORTFOLIO-001      |
+| Status    | **IN FORCE**              |
+| Timestamp | 20260805T105500Z          |
+| Kind      | Portfolio governance      |
+| Era       | **Operational evolution** |
 
 ## Platform identity (commercial)
 
 > **APZHUB is an Enterprise Productivity Platform that presents work—not applications—to its users. Native products remain the authoritative owners of business data, while the platform composes a unified work experience, common identity, common quality model, and shared operational standards.**
 
-Permanent work principle: **APZHUB answers “What do I need to do?” Products answer “How do I do it?”**  
+## Frozen investment principles
+
+> **APZHUB answers “What do I need to do?”**  
+> **Products answer “How do I do it?”**
+
+> **Every new capability must eliminate measurable operational friction, not simply add functionality.**
+
+Together these filter every future investment. Functionality without friction reduction is not authorised as a portfolio capability.
+
 Latest milestone: [../framework/APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](../framework/APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md).
 
 | APZHUB is                                  | APZHUB is not                                |
@@ -47,6 +56,46 @@ This replaces the earlier mental model of Portal → Integrations → Products.
 | Enterprise Capabilities   | What the business buys into                               |
 | Native Products           | How users experience capabilities day to day              |
 | Implementation Engines    | Behind adapters — never user-facing                       |
+
+## Operational evolution loop (competitive advantage)
+
+APZHUB is in its **operational evolution era**. The platform evolves like a controlled experiment—not by idle engineering or governance theatre.
+
+```text
+Users work
+        │
+        ▼
+My Work Review
+        │
+        ▼
+Operational Learning
+        │
+        ▼
+Evidence
+        │
+        ▼
+Portfolio Review
+        │
+        ▼
+One approved investment
+        │
+        ▼
+Release
+        │
+        ▼
+Repeat
+```
+
+| Avoid                                     | Why                                |
+| ----------------------------------------- | ---------------------------------- |
+| Engineering because the team is idle      | Complexity without evidence        |
+| Governance because it feels like progress | Documents without decision quality |
+
+Team filter:
+
+> **Don’t ask “What can we build?” Ask “What made someone’s work harder today?”**
+
+Standing review: [../framework/APZHUB-MY-WORK-REVIEW.md](../framework/APZHUB-MY-WORK-REVIEW.md).
 
 ## Product relationships (operational)
 

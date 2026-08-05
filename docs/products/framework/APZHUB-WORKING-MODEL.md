@@ -17,14 +17,27 @@ Engineering architecture for Layer 1 evolves only through governance. Day-to-day
 
 > **APZHUB is an Enterprise Productivity Platform that presents work—not applications—to its users. Native products remain the authoritative owners of business data, while the platform composes a unified work experience, common identity, common quality model, and shared operational standards.**
 
-## Permanent work principle
+## Permanent work principles
 
 > **APZHUB answers “What do I need to do?”**  
 > **Products answer “How do I do it?”**
 
+> **Every new capability must eliminate measurable operational friction, not simply add functionality.**
+
+## Era
+
+**Operational evolution** — observe users; one evidence-backed investment at a time.
+
+```text
+Users work → My Work Review → Learning → Evidence → Portfolio Review → One investment → Release → Repeat
+```
+
+Avoid: engineering because idle; governance because it feels like progress.
+
 Phase 2: [APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](./APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md) — **DECLARED** (latest)  
 Phase 1: [APZHUB-PLATFORM-PHASE-1-COMPLETE.md](./APZHUB-PLATFORM-PHASE-1-COMPLETE.md) — **DECLARED**  
-Operating model: [../apzhub-portfolio-001/](../apzhub-portfolio-001/)  
+Operating model: [../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md)  
+My Work Review: [APZHUB-MY-WORK-REVIEW.md](./APZHUB-MY-WORK-REVIEW.md)  
 Unified Work (composition): [../apzhub-capability-001-eng-001/](../apzhub-capability-001-eng-001/)  
 Operational pause: [OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md](./OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md)
 
