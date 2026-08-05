@@ -1,6 +1,9 @@
 /**
  * UI-only Projects permission helpers.
  * Server remains authoritative — these only hide/disable controls.
+ *
+ * APZ-PROJECTS-NATIVE-001-N02: consume APZHUB session grants via hydration.
+ * Never hardcode `projects.*` as a UI default. Never map engine roles.
  */
 
 export type ProjectsPermissionSource =

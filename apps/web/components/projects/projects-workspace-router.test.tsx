@@ -3,8 +3,10 @@ import { render, screen, waitFor } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+const pathnameState = vi.hoisted(() => ({ value: "/workspace/projects/list" }));
+
 vi.mock("next/navigation", () => ({
-  usePathname: () => "/workspace/projects/list",
+  usePathname: () => pathnameState.value,
   useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
   useSearchParams: () => new URLSearchParams(),
 }));
@@ -13,9 +15,21 @@ vi.mock("@/lib/projects/projects-api", () => ({
   listProjects: vi.fn(),
 }));
 
+vi.mock("./project-create-view", () => ({
+  ProjectCreateView: () => <div data-testid="route-create" />,
+}));
+vi.mock("./projects-search-view", () => ({
+  ProjectsSearchView: () => <div data-testid="route-search" />,
+}));
+vi.mock("./projects-health-view", () => ({
+  ProjectsHealthView: () => <div data-testid="route-health" />,
+}));
+
 import { listProjects } from "@/lib/projects/projects-api";
 
 import { ProjectsWorkspaceRouter } from "./projects-workspace-router";
+
+const FULL = ["projects.*"] as const;
 
 function wrap(children: ReactNode) {
   const client = new QueryClient({
@@ -26,6 +40,7 @@ function wrap(children: ReactNode) {
 
 describe("ProjectsWorkspaceRouter", () => {
   beforeEach(() => {
+    pathnameState.value = "/workspace/projects/list";
     vi.mocked(listProjects).mockReset();
   });
 
@@ -46,10 +61,39 @@ describe("ProjectsWorkspaceRouter", () => {
       page: { limit: 20, hasMore: false },
     });
 
-    render(wrap(<ProjectsWorkspaceRouter />));
+    render(wrap(<ProjectsWorkspaceRouter permissions={FULL} />));
     expect(screen.getByTestId("projects-page")).toBeTruthy();
     await waitFor(() => {
       expect(screen.getByText("Alpha")).toBeTruthy();
     });
+  });
+
+  it("denies create/search/health without grants (no projects.* default)", () => {
+    pathnameState.value = "/workspace/projects/new";
+    render(wrap(<ProjectsWorkspaceRouter permissions={[]} />));
+    expect(screen.getAllByText("Permission required").length).toBeGreaterThan(0);
+    expect(screen.queryByTestId("route-create")).toBeNull();
+
+    pathnameState.value = "/workspace/projects/search";
+    render(wrap(<ProjectsWorkspaceRouter permissions={[]} />));
+    expect(screen.queryByTestId("route-search")).toBeNull();
+
+    pathnameState.value = "/workspace/projects/health";
+    render(wrap(<ProjectsWorkspaceRouter permissions={[]} />));
+    expect(screen.queryByTestId("route-health")).toBeNull();
+  });
+
+  it("allows create/search/health with projects.*", () => {
+    pathnameState.value = "/workspace/projects/new";
+    render(wrap(<ProjectsWorkspaceRouter permissions={FULL} />));
+    expect(screen.getByTestId("route-create")).toBeTruthy();
+
+    pathnameState.value = "/workspace/projects/search";
+    render(wrap(<ProjectsWorkspaceRouter permissions={FULL} />));
+    expect(screen.getByTestId("route-search")).toBeTruthy();
+
+    pathnameState.value = "/workspace/projects/health";
+    render(wrap(<ProjectsWorkspaceRouter permissions={FULL} />));
+    expect(screen.getByTestId("route-health")).toBeTruthy();
   });
 });

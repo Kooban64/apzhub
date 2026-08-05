@@ -2,8 +2,14 @@
 
 import { usePathname } from "next/navigation";
 
-import type { ProjectsPermissionSource } from "@/lib/projects/permissions";
+import {
+  canAdminProjects,
+  canManageProjects,
+  canViewProjects,
+  type ProjectsPermissionSource,
+} from "@/lib/projects/permissions";
 import { resolveProjectsRoute } from "@/lib/projects/routes";
+import { useProjectsPermissions } from "@/lib/projects/use-projects-permissions";
 
 import { ProjectCreateView } from "./project-create-view";
 import { ProjectDetailView } from "./project-detail-view";
@@ -18,15 +24,29 @@ import { ProjectsSprintsView } from "./projects-sprints-view";
 import { ProjectsTasksView } from "./projects-tasks-view";
 import { EmptyState, PageShell } from "./projects-ui";
 
-const DEFAULT_UI_PERMISSIONS: readonly string[] = ["projects.*"];
+function PermissionDenied({ action }: { readonly action: string }) {
+  return (
+    <PageShell title="APZ Projects">
+      <EmptyState
+        title="Permission required"
+        description={`You do not have permission to ${action}. Contact your APZHUB administrator if you need access.`}
+      />
+    </PageShell>
+  );
+}
 
+/**
+ * Projects workspace router — consumes APZHUB session permissions.
+ * Never defaults to `projects.*`. Never exposes engine identity/roles.
+ */
 export function ProjectsWorkspaceRouter({
-  permissions = DEFAULT_UI_PERMISSIONS,
+  permissions: permissionsOverride,
 }: {
   readonly permissions?: ProjectsPermissionSource;
-}) {
+} = {}) {
   const pathname = usePathname();
   const route = resolveProjectsRoute(pathname);
+  const permissions = useProjectsPermissions(permissionsOverride);
 
   switch (route.kind) {
     case "dashboard":
@@ -34,6 +54,9 @@ export function ProjectsWorkspaceRouter({
     case "list":
       return <ProjectsListView permissions={permissions} />;
     case "create":
+      if (!canManageProjects(permissions)) {
+        return <PermissionDenied action="create projects" />;
+      }
       return <ProjectCreateView />;
     case "detail":
       return (
@@ -54,15 +77,21 @@ export function ProjectsWorkspaceRouter({
     case "roadmap":
       return <ProjectsRoadmapView permissions={permissions} />;
     case "search":
+      if (!canViewProjects(permissions)) {
+        return <PermissionDenied action="search APZ Projects" />;
+      }
       return <ProjectsSearchView />;
     case "health":
+      if (!canAdminProjects(permissions)) {
+        return <PermissionDenied action="view APZ Projects health" />;
+      }
       return <ProjectsHealthView />;
     default:
       return (
-        <PageShell title="Projects">
+        <PageShell title="APZ Projects">
           <EmptyState
-            title="Unknown Projects route"
-            description="Select a Projects sidebar item to continue."
+            title="Unknown APZ Projects route"
+            description="Select an APZ Projects sidebar item to continue."
           />
         </PageShell>
       );

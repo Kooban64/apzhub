@@ -45,11 +45,11 @@ Two products = enough to **note** a pattern. Not enough to **build** a platform 
 
 ## Register
 
-| ID      | Pattern                                                                                                                  | Status          | Evidence                                             | Action   | Promotion threshold                                                 |
-| ------- | ------------------------------------------------------------------------------------------------------------------------ | --------------- | ---------------------------------------------------- | -------- | ------------------------------------------------------------------- |
-| EPP-001 | Permission abstraction and session propagation consistently arise during Native Adoption as product integration concerns | **Observation** | APZ Time; APZ Support; APZ Projects N-01 (G-20/G-21) | **None** | ≥3 products + measurable reduction in duplicated engineering effort |
+| ID      | Pattern                                                                                                                  | Status          | Evidence                                                                                             | Action   | Promotion threshold                                                                                                              |
+| ------- | ------------------------------------------------------------------------------------------------------------------------ | --------------- | ---------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| EPP-001 | Permission abstraction and session propagation consistently arise during Native Adoption as product integration concerns | **Observation** | APZ Time; APZ Support; APZ Projects N-01→N-02 (G-20/G-21 closed via Playbook; no shared abstraction) | **None** | ≥3 products + measurable reduction in duplicated engineering effort; hold for one more product (e.g. Documents) before promotion |
 
-> Note: Projects N-01 is the **third** observational hit for EPP-001. Promotion still requires measurable reduction in duplicated engineering effort **and** Owner Auth — not automatic after three sightings.
+> Note: Projects N-02 is the **third consecutive product** confirming EPP-001 with the Playbook unchanged. Status remains **Observation · Action: None**. Do not promote until another product reinforces or challenges the pattern **and** Owner Auth authorises abstraction.
 > | — | — | — | — | — | — |
 
 ## Relationship to other registers
