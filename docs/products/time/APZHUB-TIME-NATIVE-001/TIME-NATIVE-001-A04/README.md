@@ -1,18 +1,16 @@
-# TIME-NATIVE-001-A04 — Operational Quality Adoption
+# TIME-NATIVE-001-A04 — APZQEP Operational Adoption
 
-| Field     | Value                         |
-| --------- | ----------------------------- |
-| Status    | **COMPLETE** (model in force) |
-| Timestamp | 20260805T033900Z              |
+| Field     | Value            |
+| --------- | ---------------- |
+| Status    | **COMPLETE**     |
+| Timestamp | 20260805T034500Z |
 
-> Do not build anything. Operate APZ Time through APZQEP.
+**Canonical operational pack:** [../../../apztime/](../../../apztime/)
 
-| Deliverable     | Path                                               |
-| --------------- | -------------------------------------------------- |
-| Auth            | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md) |
-| Operating model | [OPERATING-MODEL.md](./OPERATING-MODEL.md)         |
-| Measures        | [BEHAVIOUR-MEASURES.md](./BEHAVIOUR-MEASURES.md)   |
-| Checklist       | [CHANGE-CHECKLIST.md](./CHANGE-CHECKLIST.md)       |
-| Completion      | [COMPLETION.md](./COMPLETION.md)                   |
+| Local face                | Path                                               |
+| ------------------------- | -------------------------------------------------- |
+| Auth                      | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md) |
+| Operating model (summary) | [OPERATING-MODEL.md](./OPERATING-MODEL.md)         |
+| Completion                | [COMPLETION.md](./COMPLETION.md)                   |
 
-Phase A close: [../PHASE-A-COMPLETION.md](../PHASE-A-COMPLETION.md)
+Playbook: [../../../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](../../../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)

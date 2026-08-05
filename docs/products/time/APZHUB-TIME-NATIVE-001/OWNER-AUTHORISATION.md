@@ -34,9 +34,9 @@ APZ Time already exists. Integration is certified. Work is **maturation**, not c
 1. **A01 Native UX Audit** — **COMPLETE** — [TIME-NATIVE-001-A01](./TIME-NATIVE-001-A01/)
 2. **A02 Identity** — **COMPLETE** — [TIME-NATIVE-001-A02](./TIME-NATIVE-001-A02/)
 3. **A03 Workspace** — **COMPLETE** — [TIME-NATIVE-001-A03](./TIME-NATIVE-001-A03/)
-4. **A04 Operational Quality Adoption** — **COMPLETE** (in force) — [TIME-NATIVE-001-A04](./TIME-NATIVE-001-A04/)
+4. **A04 APZQEP Operational Adoption** — **COMPLETE** — [TIME-NATIVE-001-A04](./TIME-NATIVE-001-A04/) · [../../apztime/](../../apztime/)
 
-**Phase A COMPLETE** — [PHASE-A-COMPLETION.md](./PHASE-A-COMPLETION.md).
+**Phase A COMPLETE** — [PHASE-A-COMPLETION.md](./PHASE-A-COMPLETION.md). Design complete; operate next.
 
 ## Explicit exclusions
 

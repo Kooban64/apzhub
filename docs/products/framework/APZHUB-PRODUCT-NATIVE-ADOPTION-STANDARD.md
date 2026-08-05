@@ -1,12 +1,13 @@
 # APZHUB Product Native Adoption Standard
 
-| Field     | Value                                               |
-| --------- | --------------------------------------------------- |
-| Standard  | **APZHUB Product Native Adoption Standard**         |
-| Status    | **GOVERNING** (Owner-directed from TIME-NATIVE-001) |
-| Timestamp | 20260805T033900Z                                    |
-| Reference | TIME-NATIVE-001 Phase A (APZ Time)                  |
-| Quality   | APZQEP Version 1.1 (mandatory)                      |
+| Field     | Value                                                                        |
+| --------- | ---------------------------------------------------------------------------- |
+| Standard  | **APZHUB Product Native Adoption Standard**                                  |
+| Status    | **GOVERNING** (Owner-directed from TIME-NATIVE-001)                          |
+| Timestamp | 20260805T034500Z                                                             |
+| Reference | TIME-NATIVE-001 Phase A (APZ Time) — **COMPLETE**                            |
+| Quality   | APZQEP Version 1.1 (mandatory)                                               |
+| Playbook  | [APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](./APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md) |
 
 ## Purpose
 
@@ -53,14 +54,22 @@ Every integrated product must complete the following before it is considered a
 - Do not measure features; measure behaviour
 - Every change: Quality Flow → Impact → Policy → Decision → Evidence → Learning
 - No dual quality process; no engine-native APZHUB release path
+- Publish product ops pack (lifecycle, release process, checklists, metrics, learning, roles)
+- Reference ops pack: [../apztime/](../apztime/) (APZ Time)
 
 ## Reference implementation
 
-**APZ Time** via [APZHUB-TIME-NATIVE-001](../time/APZHUB-TIME-NATIVE-001/) is the
-reference completion of N-01…N-04.
+**APZ Time** is the reference completion of N-01…N-04:
+
+| Artefact         | Path                                                                         |
+| ---------------- | ---------------------------------------------------------------------------- |
+| Native programme | [../time/APZHUB-TIME-NATIVE-001/](../time/APZHUB-TIME-NATIVE-001/)           |
+| Operational pack | [../apztime/](../apztime/)                                                   |
+| Playbook         | [APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](./APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md) |
 
 Subsequent products (Projects, Support, Documents, Analytics, Workflow, Law, …)
-should follow the same sequence under separate Owner Authorisation.
+should follow the same sequence under separate Owner Authorisation — and only after
+real APZQEP releases have exercised these standards.
 
 ## Explicit non-goals
 

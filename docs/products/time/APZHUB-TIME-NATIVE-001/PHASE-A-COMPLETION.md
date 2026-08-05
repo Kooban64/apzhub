@@ -5,7 +5,7 @@
 | Programme | APZHUB-TIME-NATIVE-001    |
 | Phase     | **A — Native Experience** |
 | Status    | **COMPLETE**              |
-| Timestamp | 20260805T033900Z          |
+| Timestamp | 20260805T034500Z          |
 
 ## Slices
 
@@ -14,6 +14,9 @@
 | A01   | Native UX Audit                    | **COMPLETE** |
 | A02   | Identity Convergence               | **COMPLETE** |
 | A03   | Native APZHUB Workspace Experience | **COMPLETE** |
+| A04   | APZQEP Operational Adoption        | **COMPLETE** |
+
+A01–A03 remain **unchanged** as the native experience baseline. A04 adds operational governance only.
 
 ## Strategic outcomes
 
@@ -24,21 +27,24 @@
 | No engine leakage               | **PASS**       |
 | No adapter leakage              | **PASS**       |
 | Single APZHUB identity          | **PASS** (A02) |
+| Operates under APZQEP           | **PASS** (A04) |
 | Phase 1 feature exclusions held | **PASS**       |
 
-## Assessment
+## Operational pack
 
-Phase A achieved the primary TIME-NATIVE-001 objective for native experience:
+Canonical APZ Time ops governance: [../../apztime/](../../apztime/)
 
-> An APZHUB employee can spend a day in APZ Time and never once think about Kimai.
+## Design posture
 
-Outstanding items (notifications, approvals, reporting, dashboards, analytics, billing, leave, scheduling, AI, workflow, time-domain projects UI, Preference Service) remain **deliberate deferrals** — not Phase A defects.
+**Design complete** for TIME-NATIVE-001 Phase A and APZQEP V1.1 Enterprise Quality Baseline.
 
-## Transition
+Do not invent new standards or start the next product programme by default.  
+Next milestone: a **real APZ Time change** completed through APZQEP.
 
-| Then                       | Now                                  |
-| -------------------------- | ------------------------------------ |
-| Mature the product surface | **Operate the product under APZQEP** |
-| A01–A03                    | **A04 Operational Quality Adoption** |
+## Reference nomination
 
-APZ Time is the first real APZHUB product to complete the native maturation path under APZQEP V1.1.
+APZ Time is the **reference implementation** for:
+
+- APZQEP operational adoption
+- APZHUB Product Native Adoption (N-01…N-04)
+- [APZHUB Product Adoption Playbook](../../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)

@@ -1,42 +1,25 @@
 # Owner Authorisation — TIME-NATIVE-001-A04
 
-| Field          | Value                              |
-| -------------- | ---------------------------------- |
-| Slice          | **TIME-NATIVE-001-A04**            |
-| Title          | Operational Quality Adoption       |
-| Classification | Operational Quality                |
-| Engineering    | **AUTHORISED** (process only)      |
-| Architecture   | **UNCHANGED** (APZQEP V1.1 frozen) |
-| Product builds | **NONE**                           |
-| Repository     | Documentation / operating model    |
-| Release        | **NONE** (until a real change)     |
-| Deployment     | **NONE**                           |
-| Timestamp      | 20260805T033900Z                   |
+| Field          | Value                           |
+| -------------- | ------------------------------- |
+| Slice          | **TIME-NATIVE-001-A04**         |
+| Title          | APZQEP Operational Adoption     |
+| Classification | Operational Adoption            |
+| Engineering    | **AUTHORISED** (process / docs) |
+| Architecture   | **FROZEN**                      |
+| Product builds | **NONE**                        |
+| Release        | **NONE**                        |
+| Deployment     | **NONE**                        |
+| Timestamp      | 20260805T034500Z                |
 
-## Objective (refined)
+## Purpose
 
-Not: “Integrate APZQEP.”
+Transition APZ Time from a completed Native Experience into the first APZHUB product operated under the APZQEP Enterprise Quality Baseline.
 
-> **Run APZ Time as a real APZHUB product through APZQEP for every engineering change.**
+## Canonical deliverables
 
-Do **not** build product features in this slice.
+Operational pack: [../../../apztime/](../../../apztime/)
 
-## Success measure (behaviour)
+## Baseline (unchanged)
 
-For every APZ Time change:
-
-1. Was a Quality Flow opened?
-2. Was Impact evaluated?
-3. Were policies applied?
-4. Was a Decision Package produced?
-5. Was evidence captured?
-6. Was operational learning recorded?
-
-If yes → mission accomplished.
-
-## Explicit exclusions
-
-- Feature development (notifications, reporting, dashboards, etc.)
-- Reopening APZQEP architecture
-- APZQEP-170 / provider programmes
-- Artificial “toy” releases solely to exercise the pipeline
+A01 · A02 · A03 remain complete and shall not be revisited in this slice.

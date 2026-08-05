@@ -8,12 +8,12 @@
 
 ## Phase A — Native Experience (ordered slices)
 
-| Slice   | Title                              | Status       | Intent                                                                                              |
-| ------- | ---------------------------------- | ------------ | --------------------------------------------------------------------------------------------------- |
-| **A01** | Native UX Audit                    | **COMPLETE** | Define what the user sees — [TIME-NATIVE-001-A01](./TIME-NATIVE-001-A01/)                           |
-| **A02** | Identity Convergence               | **COMPLETE** | APZHUB session/RBAC into Time UI — [TIME-NATIVE-001-A02](./TIME-NATIVE-001-A02/)                    |
-| **A03** | Native APZHUB Workspace Experience | **COMPLETE** | Product chrome, nav, help, settings, ops separation — [TIME-NATIVE-001-A03](./TIME-NATIVE-001-A03/) |
-| **A04** | Operational Quality Adoption       | **COMPLETE** | Operate APZ Time through APZQEP — [TIME-NATIVE-001-A04](./TIME-NATIVE-001-A04/)                     |
+| Slice   | Title                              | Status       | Intent                                                                                                       |
+| ------- | ---------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------ |
+| **A01** | Native UX Audit                    | **COMPLETE** | Define what the user sees — [TIME-NATIVE-001-A01](./TIME-NATIVE-001-A01/)                                    |
+| **A02** | Identity Convergence               | **COMPLETE** | APZHUB session/RBAC into Time UI — [TIME-NATIVE-001-A02](./TIME-NATIVE-001-A02/)                             |
+| **A03** | Native APZHUB Workspace Experience | **COMPLETE** | Product chrome, nav, help, settings, ops separation — [TIME-NATIVE-001-A03](./TIME-NATIVE-001-A03/)          |
+| **A04** | APZQEP Operational Adoption        | **COMPLETE** | Operate APZ Time through APZQEP — [TIME-NATIVE-001-A04](./TIME-NATIVE-001-A04/) · [apztime/](../../apztime/) |
 
 Order is deliberate: UX audit drives identity and workspace — not the reverse.
 

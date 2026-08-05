@@ -38,12 +38,12 @@ Right metric: “Does APZ Time provide the experience our users need?”
 1. **A01 Native UX Audit** — **COMPLETE** — [TIME-NATIVE-001-A01](./TIME-NATIVE-001-A01/)
 2. **A02 Identity Convergence** — **COMPLETE** — [TIME-NATIVE-001-A02](./TIME-NATIVE-001-A02/)
 3. **A03 Native APZHUB Workspace Experience** — **COMPLETE** — [TIME-NATIVE-001-A03](./TIME-NATIVE-001-A03/)
-4. **A04 Operational Quality Adoption** — **COMPLETE** (in force) — [TIME-NATIVE-001-A04](./TIME-NATIVE-001-A04/)
+4. **A04 APZQEP Operational Adoption** — **COMPLETE** — [TIME-NATIVE-001-A04](./TIME-NATIVE-001-A04/) · [apztime/](../../apztime/)
 
-**Phase A:** [PHASE-A-COMPLETION.md](./PHASE-A-COMPLETION.md) — **COMPLETE**.  
-Reference pattern: [APZHUB Product Native Adoption Standard](../../framework/APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md).
+**Phase A:** [PHASE-A-COMPLETION.md](./PHASE-A-COMPLETION.md) — **COMPLETE** (design complete).  
+Standards: [Native Adoption](../../framework/APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md) · [Playbook](../../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md).
 
-See [ROADMAP.md](./ROADMAP.md) (Phases A → B → C). Next: operate real Time changes through APZQEP.
+See [ROADMAP.md](./ROADMAP.md). Next: a real APZ Time change through APZQEP — not new programmes.
 
 ## Deliverable register
 
