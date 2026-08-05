@@ -16,9 +16,17 @@ This is a **user metric**, not an engineering or quality metric.
 
 ## Success criterion
 
-My Work helps users answer:
+Not “users opened My Work.”
+
+Success is:
+
+> **Users stopped thinking about which product to open.**
+
+Operationally, My Work helps them answer:
 
 > **What do I need to do next?**
+
+Reviewed in [APZHUB-MY-WORK-REVIEW.md](./APZHUB-MY-WORK-REVIEW.md).
 
 ## Measures
 

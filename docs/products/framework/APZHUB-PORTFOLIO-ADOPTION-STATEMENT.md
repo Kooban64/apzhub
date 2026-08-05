@@ -152,6 +152,7 @@ Emerging Portfolio Patterns: [APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](./APZHUB-EM
 | Platform Phase 2 (latest)     | [APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](./APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md)                 |
 | Platform Phase 1 Complete     | [APZHUB-PLATFORM-PHASE-1-COMPLETE.md](./APZHUB-PLATFORM-PHASE-1-COMPLETE.md)                                     |
 | My Work operational pause     | [OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md](./OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md)                     |
+| My Work Review                | [APZHUB-MY-WORK-REVIEW.md](./APZHUB-MY-WORK-REVIEW.md)                                                           |
 | Work Completion Journey       | [APZHUB-WORK-COMPLETION-JOURNEY.md](./APZHUB-WORK-COMPLETION-JOURNEY.md)                                         |
 | Unified Work Experience       | [../apzhub-capability-001/](../apzhub-capability-001/)                                                           |
 | Composition ENG-001           | [../apzhub-capability-001-eng-001/](../apzhub-capability-001-eng-001/)                                           |

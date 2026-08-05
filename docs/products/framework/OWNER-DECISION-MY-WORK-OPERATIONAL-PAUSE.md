@@ -35,13 +35,25 @@ Explicitly deferred (no programme):
 Primary activity:
 Observe My Work in production
 
+Standing review:
+My Work Review (product review — five questions)
+
 Success criterion:
-Work Completion Journey — not code volume
+Users stop thinking about which product to open
+(Work Completion Journey — not code volume)
 
 Governing question for next investment:
 "What did My Work fail to answer?"
+
+Companion question:
+"What caused a user to leave My Work?"
+(missing capability = evidence; deep product work = healthy)
 ```
 
 ## Rationale
 
 ENG-001 preserved product SoRs, ownership, and architecture while introducing the first native portfolio capability. Immediate construction of adjacent capabilities would be engineering-led speculation. Operational evidence must decide the next composition investment.
+
+## Standing review
+
+[APZHUB-MY-WORK-REVIEW.md](./APZHUB-MY-WORK-REVIEW.md) — after every meaningful period of use.

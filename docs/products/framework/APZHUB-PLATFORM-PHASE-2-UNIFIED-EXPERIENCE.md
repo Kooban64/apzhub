@@ -68,6 +68,12 @@ It is:
 
 > **What did My Work fail to answer?**
 
+Companion:
+
+> **What caused a user to leave My Work?**
+
+Leaving for detailed work in an owning product is healthy. Leaving because a portfolio capability is missing is evidence.
+
 | Observed failure                      | Candidate response (only if evidenced) |
 | ------------------------------------- | -------------------------------------- |
 | Users missed important items          | Notifications                          |
@@ -77,13 +83,24 @@ It is:
 
 ## Success criterion
 
-Not lines of code.
+Not “users opened My Work.”
 
-Whether My Work consistently helps users answer:
+Success is:
 
-> **What do I need to do next?**
+> **Users stopped thinking about which product to open.**
 
-Measured via the [Work Completion Journey](./APZHUB-WORK-COMPLETION-JOURNEY.md) operational metric.
+They start in My Work and complete work that may span Projects, Support, Time, and APZQEP without consciously switching mental context. Measured via the [Work Completion Journey](./APZHUB-WORK-COMPLETION-JOURNEY.md); reviewed in the [My Work Review](./APZHUB-MY-WORK-REVIEW.md).
+
+## Current mode
+
+| Era (narrative)                      | Meaning                           |
+| ------------------------------------ | --------------------------------- |
+| Build platform & quality             | Done (Platform Phase 1)           |
+| Native products                      | Done (RI #001–#003)               |
+| Unified work experience              | Done (ENG-001 / Platform Phase 2) |
+| **Learn from operational behaviour** | **Now** — users are the evidence  |
+
+No further strategic design initiative is required to “finish” the platform. The platform needs users.
 
 ## Related
 
@@ -92,4 +109,5 @@ Measured via the [Work Completion Journey](./APZHUB-WORK-COMPLETION-JOURNEY.md) 
 | Phase 1                 | [APZHUB-PLATFORM-PHASE-1-COMPLETE.md](./APZHUB-PLATFORM-PHASE-1-COMPLETE.md)                     |
 | ENG-001 completion      | [../apzhub-capability-001-eng-001/COMPLETION.md](../apzhub-capability-001-eng-001/COMPLETION.md) |
 | Work Completion Journey | [APZHUB-WORK-COMPLETION-JOURNEY.md](./APZHUB-WORK-COMPLETION-JOURNEY.md)                         |
+| My Work Review          | [APZHUB-MY-WORK-REVIEW.md](./APZHUB-MY-WORK-REVIEW.md)                                           |
 | Owner pause decision    | [OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md](./OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md)     |
