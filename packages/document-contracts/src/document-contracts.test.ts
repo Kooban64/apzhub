@@ -29,6 +29,7 @@ describe("document-contracts", () => {
     expect(PLATFORM_DOCUMENT_PERMISSIONS).toContain("document.read");
     expect(PLATFORM_DOCUMENT_PERMISSIONS).toContain("document.write");
     expect(PLATFORM_DOCUMENT_PERMISSIONS).toContain("document.manage");
+    expect(PLATFORM_DOCUMENT_PERMISSIONS).toContain("document.admin");
     expect(PLATFORM_DOCUMENT_PERMISSIONS).toContain("document.classify");
     expect(PLATFORM_DOCUMENT_PERMISSIONS).toContain("document.retention");
     expect(PLATFORM_DOCUMENT_PERMISSIONS).toContain("document.audit");

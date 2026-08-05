@@ -9,6 +9,7 @@
 | `document.read`      | Read / find / summarize                                |
 | `document.write`     | Create / update metadata / tag / relate                |
 | `document.manage`    | Archive / restore                                      |
+| `document.admin`     | Diagnostics / operator surfaces                        |
 | `document.classify`  | Change classification                                  |
 | `document.retention` | Retention operations (future-ready)                    |
 | `document.audit`     | Read audit trail                                       |

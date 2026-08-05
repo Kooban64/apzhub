@@ -29,7 +29,8 @@ Additive keys (stable; do not rename):
 
 | Permission                                                        | Typical use                                           |
 | ----------------------------------------------------------------- | ----------------------------------------------------- |
-| `document.read`                                                   | Get / summarize / metadata find / diagnostics         |
+| `document.read`                                                   | Get / summarize / metadata find                       |
+| `document.admin`                                                  | Diagnostics / operator surfaces                       |
 | `document.write` / `document.manage`                              | Broad write/manage (catalogue; prefer specific ops)   |
 | `document.create`                                                 | Create document                                       |
 | `document.archive` / `document.restore`                           | Lifecycle                                             |
@@ -68,7 +69,7 @@ Additive keys (stable; do not rename):
 | `documentMetadata`       | `update`                | `document.metadata.write`      |
 | `documentClassification` | `classify`              | `document.classify`            |
 | `documentSearchMetadata` | `find`                  | `document.read`                |
-| `documentDiagnostics`    | `getDiagnostics`        | `document.read`                |
+| `documentDiagnostics`    | `getDiagnostics`        | `document.admin`               |
 
 Lookup:
 

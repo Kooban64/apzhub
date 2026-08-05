@@ -43,6 +43,10 @@ describe("APZDOCS-003 document platform services", () => {
     expect(
       resolveOperationAuthorization("documentFolder", "assign")?.requiredPermission,
     ).toBe("document.folder.write");
+    expect(
+      resolveOperationAuthorization("documentDiagnostics", "getDiagnostics")
+        ?.requiredPermission,
+    ).toBe("document.admin");
   });
 
   it("wires gateway facets through RequestPipeline without storage provider leakage", async () => {

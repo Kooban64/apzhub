@@ -83,6 +83,15 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
     "projects.task.manage",
     "projects.sprint.view",
     "projects.admin",
+    "document.*",
+    "document.read",
+    "document.write",
+    "document.manage",
+    "document.admin",
+    "document.version.read",
+    "document.metadata.read",
+    "document.audit",
+    "document.retention",
     ...QEP_CORE_QE_PERMISSIONS,
   ];
 
@@ -205,6 +214,11 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
     {
       roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
       permissionKey: "projects.*",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "document.*",
       grantType: "allow",
     },
     ...QEP_OPERATOR_PERMISSIONS.map((permissionKey) => ({

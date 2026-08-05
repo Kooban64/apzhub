@@ -19,7 +19,7 @@
 | Relationships | `/workspace/documents/relationships` | `document.relationship.read` |
 | Retention     | `/workspace/documents/retention`     | `document.retention`         |
 | Audit         | `/workspace/documents/audit`         | `document.audit`             |
-| Diagnostics   | `/workspace/documents/diagnostics`   | `document.read`              |
+| Diagnostics   | `/workspace/documents/diagnostics`   | `document.admin`             |
 | Metadata      | `/workspace/documents/metadata`      | `document.metadata.read`     |
 
 Navigation is manifest-driven and filtered by the shell permission adapter. Server remains authoritative for API calls.

@@ -6,6 +6,7 @@ export const PLATFORM_DOCUMENT_PERMISSIONS = [
   "document.read",
   "document.write",
   "document.manage",
+  "document.admin",
   "document.classify",
   "document.retention",
   "document.audit",

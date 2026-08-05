@@ -2794,7 +2794,7 @@ const documentPlatformOps: OperationAuthorizationMapping[] = [
     "getDiagnostics",
     "document_diagnostics",
     "read",
-    "document.read",
+    "document.admin",
   ),
 ];
 

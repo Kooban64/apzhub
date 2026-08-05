@@ -23,9 +23,9 @@ workbench:
     icon: activity
     route: /workspace/documents/diagnostics
     order: 100
-    permission: document.read
+    permission: document.admin
   view:
     title: Diagnostics
     workspace: documents
     route: /workspace/documents/diagnostics
-    permission: document.read
+    permission: document.admin

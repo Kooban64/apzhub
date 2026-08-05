@@ -9,7 +9,7 @@
 | Slice    | Title                                             | Status       | Path                                                    |
 | -------- | ------------------------------------------------- | ------------ | ------------------------------------------------------- |
 | **N-01** | Native UX Audit                                   | **COMPLETE** | [DOCUMENTS-NATIVE-001-N01](./DOCUMENTS-NATIVE-001-N01/) |
-| **N-02** | Identity Convergence                              | Pending      | —                                                       |
+| **N-02** | Identity Convergence                              | **COMPLETE** | [DOCUMENTS-NATIVE-001-N02](./DOCUMENTS-NATIVE-001-N02/) |
 | **N-03** | Product Experience Convergence (Native Workspace) | Pending      | —                                                       |
 | **N-04** | Operational Quality Adoption                      | Pending      | —                                                       |
 
