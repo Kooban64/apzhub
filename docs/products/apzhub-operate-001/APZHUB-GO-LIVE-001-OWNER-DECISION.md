@@ -161,3 +161,5 @@ ____________
 Cursor / engineering: **stand by** for true defects under APZQEP only.  
 Product Board: **What did we learn?**  
 Organisation: **live inside APZHUB.**
+
+> **The platform has stopped asking for engineering. It has started asking for evidence.**
