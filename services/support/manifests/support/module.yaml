@@ -1,12 +1,12 @@
 manifestSchemaVersion: "1.0"
 id: support
-name: Support
+name: APZ Support
 version: 0.1.0
 kind: module
 
 metadata:
   category: support
-  description: APZHUB Support workbench — support requests, organizations, groups, users, search, and analytics.
+  description: APZ Support — ask for help, follow progress, communicate, and reach resolution inside APZHUB.
   owner: APZHUB
   icon: life-buoy
   tags:
@@ -25,7 +25,7 @@ compatibility:
 module:
   category: support
   status: enabled
-  description: Support capability module (OSS-110-13).
+  description: APZ Support native workspace module.
 
 workbench:
   navigation:
@@ -37,7 +37,7 @@ workbench:
     order: 30
     permission: support.requests.list
   view:
-    title: Support
+    title: APZ Support
     workspace: support
     route: /workspace/support
     default: true

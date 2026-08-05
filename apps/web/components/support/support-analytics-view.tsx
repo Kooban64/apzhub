@@ -18,19 +18,27 @@ export function SupportAnalyticsView() {
 
   if (query.isPending) {
     return (
-      <PageShell title="Analytics" description="Support intelligence snapshot">
+      <PageShell
+        title="Analytics"
+        description="Request activity snapshot for APZ Support."
+        breadcrumbs={["APZ Support", "Analytics"]}
+      >
         <LoadingState />
       </PageShell>
     );
   }
   if (query.isError || !query.data) {
     return (
-      <PageShell title="Analytics" description="Support intelligence snapshot">
+      <PageShell
+        title="Analytics"
+        description="Request activity snapshot for APZ Support."
+        breadcrumbs={["APZ Support", "Analytics"]}
+      >
         <ErrorState
           message={
             isSupportApiError(query.error)
               ? query.error.message
-              : "Failed to load Support analytics."
+              : "Failed to load APZ Support analytics."
           }
           onRetry={() => void query.refetch()}
         />
@@ -43,7 +51,8 @@ export function SupportAnalyticsView() {
   return (
     <PageShell
       title="Analytics"
-      description={`Support intelligence snapshot · captured ${formatSupportDate(snapshot.capturedAt)}`}
+      description={`Request activity snapshot · captured ${formatSupportDate(snapshot.capturedAt)}`}
+      breadcrumbs={["APZ Support", "Analytics"]}
     >
       <div
         className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4"

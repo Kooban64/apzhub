@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: support-settings
+name: Settings
+version: 0.1.0
+kind: module
+
+metadata:
+  category: support
+  description: APZ Support — product preferences only.
+
+dependencies:
+  platform: []
+  services:
+    - support-service
+
+module:
+  category: support
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: support
+    parent: support
+    label: Settings
+    icon: settings
+    route: /workspace/support/settings
+    order: 90
+    permission: support.requests.list
+  view:
+    title: Settings
+    workspace: support
+    route: /workspace/support/settings
+    permission: support.requests.list

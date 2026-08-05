@@ -52,19 +52,20 @@ export function SupportUsersView({ userId }: { readonly userId?: string }) {
     }
     const user = detailQuery.data.data;
     return (
-      <PageShell title={user.displayName} description="Support-domain user (read-only)">
+      <PageShell
+        title={user.displayName}
+        description="Person recorded in APZ Support (read-only)."
+        breadcrumbs={["APZ Support", "People", user.displayName]}
+      >
         <div
           className="rounded-lg border border-[var(--color-border)] bg-[var(--color-muted)]/20 px-3 py-2 text-sm"
           role="note"
           data-testid="support-users-identity-banner"
         >
-          These are Support-domain users (agents/customers), not platform identity
-          accounts.
+          People listed here are customers and agents in APZ Support — not APZHUB
+          platform accounts.
         </div>
         <div className="space-y-2 text-sm" data-testid="support-user-detail">
-          <p>
-            <span className="font-medium">ID:</span> {user.id}
-          </p>
           <p>
             <span className="font-medium">Email:</span> {user.email ?? "—"}
           </p>
@@ -88,15 +89,16 @@ export function SupportUsersView({ userId }: { readonly userId?: string }) {
 
   return (
     <PageShell
-      title="Users"
-      description="Read-only Support-domain users. Distinct from platform identity."
+      title="People"
+      description="Customers and agents recorded in APZ Support. Distinct from APZHUB platform accounts."
+      breadcrumbs={["APZ Support", "People"]}
     >
       <div
         className="rounded-lg border border-[var(--color-border)] bg-[var(--color-muted)]/20 px-3 py-2 text-sm"
         role="note"
         data-testid="support-users-identity-banner"
       >
-        These are Support-domain users (agents/customers), not platform identity
+        People listed here are customers and agents in APZ Support — not APZHUB platform
         accounts.
       </div>
       <Input

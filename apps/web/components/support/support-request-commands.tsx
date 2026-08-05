@@ -179,7 +179,7 @@ export function SupportRequestCommands({
         <div className="flex flex-wrap items-end gap-2">
           <div className="min-w-[220px] flex-1">
             <Input
-              label="Owner ID"
+              label="Owner"
               value={ownerId}
               onChange={(event) => setOwnerId(event.target.value)}
               disabled={busy}
@@ -215,7 +215,7 @@ export function SupportRequestCommands({
         <div className="flex flex-wrap items-end gap-2">
           <div className="min-w-[220px] flex-1">
             <Input
-              label="Customer ID"
+              label="Customer"
               value={customerId}
               onChange={(event) => setCustomerId(event.target.value)}
               disabled={busy}

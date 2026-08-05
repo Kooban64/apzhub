@@ -1,4 +1,4 @@
-/** Support workspace route helpers (OSS-110-13). */
+/** Support workspace route helpers (APZ Support Native Adoption). */
 
 export const SUPPORT_BASE = "/workspace/support";
 
@@ -9,6 +9,8 @@ export const SUPPORT_SECTIONS = [
   "users",
   "search",
   "analytics",
+  "help",
+  "settings",
 ] as const;
 
 export type SupportSection = (typeof SUPPORT_SECTIONS)[number];
@@ -25,6 +27,8 @@ export type SupportRouteResolution =
   | { readonly kind: "user-detail"; readonly userId: string }
   | { readonly kind: "search" }
   | { readonly kind: "analytics" }
+  | { readonly kind: "help" }
+  | { readonly kind: "settings" }
   | { readonly kind: "unknown" };
 
 function normalizePath(pathname: string): string {
@@ -127,6 +131,14 @@ export function resolveSupportRoute(pathname: string): SupportRouteResolution {
     return { kind: "analytics" };
   }
 
+  if (normalized === `${SUPPORT_BASE}/help`) {
+    return { kind: "help" };
+  }
+
+  if (normalized === `${SUPPORT_BASE}/settings`) {
+    return { kind: "settings" };
+  }
+
   return { kind: "unknown" };
 }
 
@@ -136,4 +148,24 @@ export function supportRequestDetailPath(supportRequestId: string): string {
 
 export function supportRequestCreatePath(): string {
   return `${SUPPORT_BASE}/requests/new`;
+}
+
+export function supportInboxPath(): string {
+  return `${SUPPORT_BASE}/requests`;
+}
+
+export function supportHelpPath(): string {
+  return `${SUPPORT_BASE}/help`;
+}
+
+export function supportSettingsPath(): string {
+  return `${SUPPORT_BASE}/settings`;
+}
+
+export function supportSearchPath(): string {
+  return `${SUPPORT_BASE}/search`;
+}
+
+export function supportAnalyticsPath(): string {
+  return `${SUPPORT_BASE}/analytics`;
 }

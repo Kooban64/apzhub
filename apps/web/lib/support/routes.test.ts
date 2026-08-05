@@ -79,6 +79,10 @@ describe("support routes", () => {
     expect(resolveSupportRoute(`${SUPPORT_BASE}/analytics`)).toEqual({
       kind: "analytics",
     });
+    expect(resolveSupportRoute(`${SUPPORT_BASE}/help`)).toEqual({ kind: "help" });
+    expect(resolveSupportRoute(`${SUPPORT_BASE}/settings`)).toEqual({
+      kind: "settings",
+    });
     expect(resolveSupportRoute(`${SUPPORT_BASE}/not-a-real-route`)).toEqual({
       kind: "unknown",
     });

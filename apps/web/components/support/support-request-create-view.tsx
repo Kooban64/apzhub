@@ -51,8 +51,9 @@ export function SupportRequestCreateView() {
 
   return (
     <PageShell
-      title="New support request"
-      description="Create a support request using Support-domain global IDs."
+      title="New request"
+      description="Create a request so someone can ask for help and follow progress in APZ Support."
+      breadcrumbs={["APZ Support", "Requests", "New"]}
     >
       <form
         className="flex max-w-xl flex-col gap-4"

@@ -34,14 +34,14 @@
 
 ## APZ Support
 
-| Field                 | Detail                                                                               |
-| --------------------- | ------------------------------------------------------------------------------------ |
-| **Purpose**           | Support requests, knowledge, organisations inside APZHUB                             |
-| **Platform services** | Workbench · IAM/Authz · Search · Notifications · Gateway · Events                    |
-| **External engine**   | Zammad (hidden) — `@apzhub/integration-zammad`                                       |
-| **Ownership**         | Product Owner: Support                                                               |
-| **Maturity**          | **Production** — **1.0.0** PRWL; Playwright residuals on product backlog (OQ-PW-001) |
-| **Future roadmap**    | Packaging polish · Support 2.0 planning Owner-gated                                  |
+| Field                 | Detail                                                                            |
+| --------------------- | --------------------------------------------------------------------------------- |
+| **Purpose**           | Support requests, knowledge, organisations inside APZHUB                          |
+| **Platform services** | Workbench · IAM/Authz · Search · Notifications · Gateway · Events                 |
+| **External engine**   | Zammad (hidden) — `@apzhub/integration-zammad`                                    |
+| **Ownership**         | Product Owner: Support                                                            |
+| **Maturity**          | **Production** — **1.0.0** PRWL; Native Adoption N-01…N-03 complete; N-04 pending |
+| **Future roadmap**    | N-04 APZQEP Adoption → optional RI candidacy · Support 2.0 planning Owner-gated   |
 
 ## APZ Time
 

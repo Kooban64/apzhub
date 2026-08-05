@@ -100,11 +100,12 @@ export function SupportGroupsView({
     }
     const group = detailQuery.data.data;
     return (
-      <PageShell title={group.name} description="Support group detail">
+      <PageShell
+        title={group.name}
+        description="Group that handles requests in APZ Support."
+        breadcrumbs={["APZ Support", "Groups", group.name]}
+      >
         <div className="space-y-2 text-sm" data-testid="support-group-detail">
-          <p>
-            <span className="font-medium">ID:</span> {group.id}
-          </p>
           <p>
             <span className="font-medium">Active:</span> {group.active ? "Yes" : "No"}
           </p>
@@ -143,7 +144,8 @@ export function SupportGroupsView({
   return (
     <PageShell
       title="Groups"
-      description="Support groups (queues). No delete — update only."
+      description="Groups that handle requests in APZ Support."
+      breadcrumbs={["APZ Support", "Groups"]}
     >
       {canCreateGroup(permissions) ? (
         <form

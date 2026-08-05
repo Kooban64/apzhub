@@ -74,7 +74,7 @@ describe("SupportLookupSelect", () => {
     });
 
     await user.type(
-      screen.getByLabelText("Customer ID"),
+      screen.getByLabelText("Selected Customer"),
       "suser_11111111111111111111111111111111",
     );
     expect(onChange).toHaveBeenCalled();

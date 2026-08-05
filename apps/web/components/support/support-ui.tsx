@@ -14,25 +14,49 @@ import type {
   SupportRequestStatus,
 } from "@/lib/support/types";
 
+export const SUPPORT_PRODUCT_NAME = "APZ Support";
+
 export function PageShell({
   title,
   description,
   actions,
+  breadcrumbs,
   children,
 }: {
   readonly title: string;
   readonly description?: string;
   readonly actions?: ReactNode;
+  readonly breadcrumbs?: readonly string[];
   readonly children: ReactNode;
 }) {
+  const crumbs =
+    breadcrumbs && breadcrumbs.length > 0 ? breadcrumbs : [SUPPORT_PRODUCT_NAME, title];
+
   return (
     <div className="flex flex-col gap-6 p-1" data-testid="support-page">
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-muted-foreground)]">
-            Support
+            {SUPPORT_PRODUCT_NAME}
           </p>
-          <h1 className="text-2xl font-semibold text-[var(--color-foreground)]">
+          <nav
+            aria-label="Breadcrumb"
+            className="mt-1 text-xs text-[var(--color-muted-foreground)]"
+            data-testid="support-breadcrumbs"
+          >
+            <ol className="flex flex-wrap gap-1">
+              {crumbs.map((crumb, index) => (
+                <li
+                  key={`${crumb}-${index}`}
+                  className="inline-flex items-center gap-1"
+                >
+                  {index > 0 ? <span aria-hidden="true">/</span> : null}
+                  <span>{crumb}</span>
+                </li>
+              ))}
+            </ol>
+          </nav>
+          <h1 className="mt-1 text-2xl font-semibold text-[var(--color-foreground)]">
             {title}
           </h1>
           {description ? (
@@ -50,8 +74,52 @@ export function PageShell({
   );
 }
 
+/** Primary workspace + optional context panel (native APZHUB composition). */
+export function SupportWorkspaceFrame({
+  children,
+  context,
+}: {
+  readonly children: ReactNode;
+  readonly context?: ReactNode;
+}) {
+  return (
+    <div
+      className="flex flex-col gap-6 lg:flex-row lg:items-start"
+      data-testid="support-workspace-frame"
+    >
+      <div className="min-w-0 flex-1 space-y-6">{children}</div>
+      {context ? (
+        <aside
+          className="w-full shrink-0 space-y-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-muted)]/10 p-4 lg:sticky lg:top-2 lg:w-72"
+          data-testid="support-context-panel"
+          aria-label="APZ Support context"
+        >
+          {context}
+        </aside>
+      ) : null}
+    </div>
+  );
+}
+
+export function ContextSection({
+  title,
+  children,
+}: {
+  readonly title: string;
+  readonly children: ReactNode;
+}) {
+  return (
+    <section className="space-y-2">
+      <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--color-muted-foreground)]">
+        {title}
+      </h2>
+      <div className="space-y-2 text-sm text-[var(--color-foreground)]">{children}</div>
+    </section>
+  );
+}
+
 export function LoadingState({
-  label = "Loading Support…",
+  label = "Loading APZ Support…",
 }: {
   readonly label?: string;
 }) {
@@ -105,7 +173,7 @@ export function ErrorState({
       role="alert"
     >
       <p className="font-medium text-[var(--color-foreground)]">
-        Unable to load Support
+        Unable to load APZ Support
       </p>
       <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">{message}</p>
       {onRetry ? (

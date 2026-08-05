@@ -105,8 +105,17 @@ Owner-directed scoring for daily operational payoff (not technical completeness)
 APZQEP does not appear on that roadmap — it is infrastructure.
 
 **APZ-SUPPORT-000** — Owner **APPROVED / CLOSED** — [../apzsupport/](../apzsupport/).  
-**APZ-SUPPORT-NATIVE-001** — **STARTED** (N-01 complete) — [../apz-support-native-001/](../apz-support-native-001/).  
+**APZ-SUPPORT-NATIVE-001** — **IN PROGRESS** (N-01…N-03 complete; N-04 pending) — [../apz-support-native-001/](../apz-support-native-001/).  
 Playbook as-is — no redesign.
+
+### Native Adoption progress (portfolio view)
+
+| Product       | Mission | Audit | Identity | Workspace | APZQEP | RI  |
+| ------------- | ------- | :---: | :------: | :-------: | :----: | :-: |
+| APZ Time      | ✅      |  ✅   |    ✅    |    ✅     |   ✅   | ✅  |
+| APZ Support   | ✅      |  ✅   |    ✅    |    ✅     |   ⏳   | ⏳  |
+| APZ Projects  | –       |   –   |    –     |     –     |   –    |  –  |
+| APZ Documents | –       |   –   |    –     |     –     |   –    |  –  |
 
 ## Standing constraints
 

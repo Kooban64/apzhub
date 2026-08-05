@@ -82,7 +82,8 @@ export function SupportSearchView() {
   return (
     <PageShell
       title="Search"
-      description="Search across Support requests, orgs, groups, users, and articles."
+      description="Find requests, organisations, groups, people, and conversation articles in APZ Support."
+      breadcrumbs={["APZ Support", "Search"]}
     >
       <form
         className="flex flex-col gap-3"

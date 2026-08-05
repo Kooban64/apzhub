@@ -4,6 +4,13 @@ import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
+  usePathname: () =>
+    "/workspace/support/requests/sreq_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  useSearchParams: () => new URLSearchParams(),
+}));
+
 vi.mock("@/lib/support/support-api", () => ({
   getSupportRequest: vi.fn(),
   listSupportArticles: vi.fn(),
@@ -17,6 +24,15 @@ vi.mock("@/lib/support/support-api", () => ({
   changeSupportRequestCustomer: vi.fn(),
   createInternalNote: vi.fn(),
   createCustomerReply: vi.fn(),
+  getSupportUser: vi.fn(async () => ({
+    data: { displayName: "Pat User", email: "pat@example.com" },
+  })),
+  getSupportGroup: vi.fn(async () => ({
+    data: { name: "Support Desk" },
+  })),
+  getSupportOrganization: vi.fn(async () => ({
+    data: { name: "Acme Corp" },
+  })),
 }));
 
 import { SupportApiError } from "@/lib/support/errors";

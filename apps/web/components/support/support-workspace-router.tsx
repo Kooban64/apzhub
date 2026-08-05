@@ -15,18 +15,20 @@ import { useSupportPermissions } from "@/lib/support/use-support-permissions";
 
 import { SupportAnalyticsView } from "./support-analytics-view";
 import { SupportGroupsView } from "./support-groups-view";
+import { SupportHelpView } from "./support-help-view";
 import { SupportInboxView } from "./support-inbox-view";
 import { SupportOrganizationsView } from "./support-organizations-view";
 import { SupportRealtimeProvider } from "./support-realtime-provider";
 import { SupportRequestCreateView } from "./support-request-create-view";
 import { SupportRequestDetailView } from "./support-request-detail-view";
 import { SupportSearchView } from "./support-search-view";
+import { SupportSettingsView } from "./support-settings-view";
 import { SupportUsersView } from "./support-users-view";
 import { EmptyState, PageShell } from "./support-ui";
 
 function PermissionDenied({ action }: { readonly action: string }) {
   return (
-    <PageShell title="APZ Support">
+    <PageShell title="APZ Support" breadcrumbs={["APZ Support", "Permission required"]}>
       <EmptyState
         title="Permission required"
         description={`You do not have permission to ${action}. Contact your APZHUB administrator if you need access.`}
@@ -113,9 +115,15 @@ export function SupportWorkspaceRouter({
       }
       content = <SupportAnalyticsView />;
       break;
+    case "help":
+      content = <SupportHelpView />;
+      break;
+    case "settings":
+      content = <SupportSettingsView />;
+      break;
     default:
       content = (
-        <PageShell title="APZ Support">
+        <PageShell title="APZ Support" breadcrumbs={["APZ Support", "Unknown"]}>
           <EmptyState
             title="Unknown APZ Support route"
             description="Select an APZ Support sidebar item to continue."

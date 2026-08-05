@@ -121,11 +121,12 @@ export function SupportOrganizationsView({
     }
     const org = detailQuery.data.data;
     return (
-      <PageShell title={org.name} description="Support organization detail">
+      <PageShell
+        title={org.name}
+        description="Organisation in APZ Support."
+        breadcrumbs={["APZ Support", "Organisations", org.name]}
+      >
         <div className="space-y-2 text-sm" data-testid="support-organization-detail">
-          <p>
-            <span className="font-medium">ID:</span> {org.id}
-          </p>
           <p>
             <span className="font-medium">Domain:</span> {org.domain ?? "—"}
           </p>
@@ -174,7 +175,7 @@ export function SupportOrganizationsView({
         <ConfirmDialog
           open={archiveOpen}
           title="Archive organization?"
-          description="Archiving deactivates this Support organization."
+          description="Archiving deactivates this organisation in APZ Support."
           confirmLabel="Archive"
           busy={archiveMutation.isPending}
           onCancel={() => setArchiveOpen(false)}
@@ -185,7 +186,11 @@ export function SupportOrganizationsView({
   }
 
   return (
-    <PageShell title="Organizations" description="Support organizations.">
+    <PageShell
+      title="Organisations"
+      description="Organisations linked to requests in APZ Support."
+      breadcrumbs={["APZ Support", "Organisations"]}
+    >
       {canCreateOrganization(permissions) ? (
         <form
           className="grid max-w-xl gap-2 md:grid-cols-2"

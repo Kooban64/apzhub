@@ -52,6 +52,12 @@ vi.mock("./support-search-view", () => ({
 vi.mock("./support-analytics-view", () => ({
   SupportAnalyticsView: () => <div data-testid="route-analytics" />,
 }));
+vi.mock("./support-help-view", () => ({
+  SupportHelpView: () => <div data-testid="route-help" />,
+}));
+vi.mock("./support-settings-view", () => ({
+  SupportSettingsView: () => <div data-testid="route-settings" />,
+}));
 vi.mock("./support-realtime-provider", () => ({
   SupportRealtimeProvider: ({ children }: { children: ReactNode }) => <>{children}</>,
 }));
@@ -120,16 +126,23 @@ describe("SupportWorkspaceRouter", () => {
     pathnameState.value = "/workspace/support/analytics";
     rerender(<SupportWorkspaceRouter permissions={FULL} />);
     expect(screen.getByTestId("route-analytics")).toBeTruthy();
+
+    pathnameState.value = "/workspace/support/help";
+    rerender(<SupportWorkspaceRouter permissions={FULL} />);
+    expect(screen.getByTestId("route-help")).toBeTruthy();
+
+    pathnameState.value = "/workspace/support/settings";
+    rerender(<SupportWorkspaceRouter permissions={FULL} />);
+    expect(screen.getByTestId("route-settings")).toBeTruthy();
   });
 
   it("denies create/users/search/analytics without grants (no support.* default)", () => {
     renderRouter("/workspace/support/requests/new", []);
-    expect(screen.getByText("Permission required")).toBeTruthy();
+    expect(screen.getAllByText("Permission required").length).toBeGreaterThan(0);
     expect(screen.queryByTestId("route-create")).toBeNull();
 
     pathnameState.value = "/workspace/support/users";
     render(<SupportWorkspaceRouter permissions={[]} />);
-    expect(screen.getAllByText("Permission required").length).toBeGreaterThan(0);
     expect(screen.queryByTestId("route-users")).toBeNull();
 
     pathnameState.value = "/workspace/support/search";

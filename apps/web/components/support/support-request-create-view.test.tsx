@@ -81,11 +81,11 @@ describe("SupportRequestCreateView", () => {
 
     await user.type(screen.getByTestId("support-create-title"), "VPN down");
     await user.type(
-      screen.getByLabelText("Customer ID"),
+      screen.getByLabelText("Selected Customer"),
       "suser_11111111111111111111111111111111",
     );
     await user.type(
-      screen.getByLabelText("Group ID"),
+      screen.getByLabelText("Selected Group"),
       "sgrp_ffffffffffffffffffffffffffffffff",
     );
     await user.click(screen.getByTestId("support-create-submit"));
@@ -119,11 +119,11 @@ describe("SupportRequestCreateView", () => {
     render(wrap(<SupportRequestCreateView />));
     await user.type(screen.getByTestId("support-create-title"), "VPN down");
     await user.type(
-      screen.getByLabelText("Customer ID"),
+      screen.getByLabelText("Selected Customer"),
       "suser_11111111111111111111111111111111",
     );
     await user.type(
-      screen.getByLabelText("Group ID"),
+      screen.getByLabelText("Selected Group"),
       "sgrp_ffffffffffffffffffffffffffffffff",
     );
     await user.click(screen.getByTestId("support-create-submit"));

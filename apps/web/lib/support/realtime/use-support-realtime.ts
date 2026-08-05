@@ -144,7 +144,7 @@ export function useSupportRealtimeSubscription(options?: {
         sourceRef.current = null;
         if (cancelled) return;
         setState("error");
-        setLastError("SSE connection error — reconnecting");
+        setLastError("Live updates interrupted — reconnecting");
         const attempt = attemptRef.current + 1;
         attemptRef.current = attempt;
         const delay = Math.min(30_000, 500 * 2 ** Math.min(attempt, 6));

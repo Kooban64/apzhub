@@ -90,10 +90,10 @@ export function SupportLookupSelect({
         ))}
       </datalist>
       <Input
-        aria-label={`${label} ID`}
+        aria-label={`Selected ${label}`}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        placeholder="Global ID"
+        placeholder="Selected person or record"
         disabled={disabled}
         required={required}
       />
