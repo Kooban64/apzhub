@@ -2,15 +2,17 @@
 
 | Field       | Value                                                                                                                    |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Status      | **ACTIVE**                                                                                                               |
-| Timestamp   | 20260805T124500Z                                                                                                         |
+| Status      | **ACTIVE / CONTINUE**                                                                                                    |
+| Timestamp   | 20260805T133500Z                                                                                                         |
 | Kind        | Operational observation only                                                                                             |
-| Engineering | **NONE**                                                                                                                 |
+| Engineering | **FROZEN** (unless thresholds / confirmed defect / Board)                                                                |
 | Pilot       | [../apzhub-operate-001/APZHUB-GO-LIVE-001-OWNER-DECISION.md](../apzhub-operate-001/APZHUB-GO-LIVE-001-OWNER-DECISION.md) |
+| Direction   | [OWNER-DIRECTION.md](./OWNER-DIRECTION.md)                                                                               |
 
 | Deliverable           | Path                                                       |
 | --------------------- | ---------------------------------------------------------- |
 | Owner Auth            | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md)         |
+| Owner Direction       | [OWNER-DIRECTION.md](./OWNER-DIRECTION.md)                 |
 | Daily observation log | [DAILY-OBSERVATION-LOG.md](./DAILY-OBSERVATION-LOG.md)     |
 | Friction register     | [FRICTION-REGISTER.md](./FRICTION-REGISTER.md)             |
 | Product Board brief   | [PRODUCT-BOARD-BRIEF.md](./PRODUCT-BOARD-BRIEF.md)         |
