@@ -88,6 +88,9 @@ If a product does not improve one of these, it should not move up the portfolio.
 
 Do not auto-sequence from the last RI.
 
-Ask:
+Ask (Quarterly Portfolio Review):
 
 > **Which product will create the greatest operational improvement for APZHUB over the next 3–6 months?**
+
+Practice: [APZHUB-QUARTERLY-PORTFOLIO-REVIEW.md](./APZHUB-QUARTERLY-PORTFOLIO-REVIEW.md)  
+Current decision (QPR-001): [APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md](./APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md) → **APZ-PROJECTS-000**

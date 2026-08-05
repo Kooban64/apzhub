@@ -89,29 +89,28 @@ Capability Expansion (separate Owner Auth)
 
 Retrospectives: [APZHUB-RI-RETROSPECTIVE.md](./APZHUB-RI-RETROSPECTIVE.md)
 
-## Next product — business decision only
+## Next product — business decision (QPR-001)
 
-Do **not** automatically choose APZ Projects (or any candidate).
-
-Ask:
+Ask each quarter:
 
 > **Which product will create the greatest operational improvement for APZHUB over the next 3–6 months?**
 
-| If the biggest daily challenge is… | Consider (not authorised) |
-| ---------------------------------- | ------------------------- |
-| Project coordination               | APZ Projects              |
-| Documentation / compliance effort  | APZ Documents             |
-| Automation unlocking efficiency    | APZ Workflow              |
+**QPR-001 decision:** next investment is **APZ Projects**, starting with mission only.
 
-Prerequisite remains: APPROVED Product Mission (**PRODUCT-000**) before Native Adoption opens.
+| Artefact          | Path                                                                                       |
+| ----------------- | ------------------------------------------------------------------------------------------ |
+| Decision          | [APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md](./APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md) |
+| Quarterly review  | [APZHUB-QUARTERLY-PORTFOLIO-REVIEW.md](./APZHUB-QUARTERLY-PORTFOLIO-REVIEW.md)             |
+| Mission programme | [../apzprojects/](../apzprojects/) — **APZ-PROJECTS-000** (awaiting Owner APPROVAL)        |
 
-Illustrative history (not a binding queue):
+| Milestone               | Status                                   |
+| ----------------------- | ---------------------------------------- |
+| APZ Time (RI #001)      | ✅ Complete                              |
+| APZ Support (RI #002)   | ✅ Complete                              |
+| APZ-PROJECTS-000        | 🎯 Authorised — awaiting Owner APPROVAL  |
+| APZ-PROJECTS-NATIVE-001 | ⛔ Not authorised until mission APPROVED |
 
-| Milestone             | Status                                    |
-| --------------------- | ----------------------------------------- |
-| APZ Time (RI #001)    | ✅ Complete                               |
-| APZ Support (RI #002) | ✅ Complete                               |
-| Next candidate        | **Unselected** — Owner portfolio decision |
+Prerequisite remains: APPROVED Product Mission (**PRODUCT-000**) before Native Adoption opens. No parallel Native Adoption programmes.
 
 APZQEP does not appear on product roadmaps — it is infrastructure.
 
@@ -121,7 +120,7 @@ APZQEP does not appear on product roadmaps — it is infrastructure.
 | ------------- | ------- | :---: | :------: | :-------: | :----: | :-: |
 | APZ Time      | ✅      |  ✅   |    ✅    |    ✅     |   ✅   | ✅  |
 | APZ Support   | ✅      |  ✅   |    ✅    |    ✅     |   ✅   | ✅  |
-| APZ Projects  | –       |   –   |    –     |     –     |   –    |  –  |
+| APZ Projects  | ⏳      |   –   |    –     |     –     |   –    |  –  |
 | APZ Documents | –       |   –   |    –     |     –     |   –    |  –  |
 
 ## Standing constraints

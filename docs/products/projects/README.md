@@ -1,5 +1,6 @@
 # APZ Projects (Product Portfolio)
 
+> **Mission programme:** [APZ-PROJECTS-000](../apzprojects/) — awaiting Owner APPROVAL  
 > **Portfolio:** projects  
 > **Framework:** [APZHUB-PRODUCTS-000](../README.md) **COMPLETE**  
 > **Definition Pack:** APZHUB-PRODUCTS-002 (**ACCEPTED**)  

@@ -29,8 +29,8 @@
 | **Platform services** | Workbench · IAM/Authz · Search · Notifications · Activity · Events · Gateway · Provisioning |
 | **External engine**   | Plane (hidden) — `@apzhub/integration-plane`                                                |
 | **Ownership**         | Product Owner: Projects · Integration Owner: Plane adapter                                  |
-| **Maturity**          | **Production** — SemVer **1.1.0** ACCEPTED / CLOSED                                         |
-| **Future roadmap**    | Patch 1.1.x / Minor 1.2.0 / Major 2.0.0 only under Owner Approval                           |
+| **Maturity**          | **Production** — SemVer **1.1.0**; next portfolio investment via **APZ-PROJECTS-000**       |
+| **Future roadmap**    | Mission APPROVAL → Native Adoption (Playbook) · RI #003 if earned · Owner-gated only        |
 
 ## APZ Support
 

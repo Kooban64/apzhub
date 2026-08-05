@@ -30,6 +30,8 @@ Establish the **official Product Engineering Framework** that every APZHUB produ
 | Methodology maturity | [APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md](./APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md) |
 | RI retrospective     | [APZHUB-RI-RETROSPECTIVE.md](./APZHUB-RI-RETROSPECTIVE.md)                                         |
 | Portfolio adoption   | [APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md](./APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md)                 |
+| Quarterly review     | [APZHUB-QUARTERLY-PORTFOLIO-REVIEW.md](./APZHUB-QUARTERLY-PORTFOLIO-REVIEW.md)                     |
+| Next investment      | [APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md](./APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md)         |
 | Emerging patterns    | [APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](./APZHUB-EMERGING-PORTFOLIO-PATTERNS.md)                   |
 | Working model        | [APZHUB-WORKING-MODEL.md](./APZHUB-WORKING-MODEL.md)                                               |
 | Completion           | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md)                                                     |
