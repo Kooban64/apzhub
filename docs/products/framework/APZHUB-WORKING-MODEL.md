@@ -3,7 +3,7 @@
 | Field     | Value            |
 | --------- | ---------------- |
 | Status    | **IN FORCE**     |
-| Timestamp | 20260805T074500Z |
+| Timestamp | 20260805T081000Z |
 
 ## Advisor / strategy role
 
@@ -11,7 +11,13 @@
 | ------------------------------ | ---------------------------------------------- |
 | Enterprise Architect (primary) | **Portfolio Architect and Product Strategist** |
 
-Engineering architecture for Layer 1 evolves only through governance. Day-to-day conversation focuses on portfolio priority, product mission, and business outcomes.
+Engineering architecture for Layer 1 evolves only through governance. Day-to-day conversation focuses on portfolio priority, product mission, enterprise capabilities, and business outcomes.
+
+## Commercial identity
+
+> **APZHUB is an Enterprise Productivity Platform that delivers integrated business capabilities through a portfolio of native products operating under a common identity, quality, and operational model.**
+
+Programme: [../apzhub-portfolio-001/](../apzhub-portfolio-001/)
 
 ## Layers
 
@@ -20,6 +26,36 @@ Engineering architecture for Layer 1 evolves only through governance. Day-to-day
 | 1 — Enterprise Platform | Frozen / mature infrastructure | Governance only                      |
 | 2 — APZHUB Products     | Where we spend time            | Mission → Playbook adoption          |
 | 3 — Business Outcomes   | Why products exist             | Measured improvement or no promotion |
+
+## Portfolio evolution
+
+```text
+Enterprise Standards
+        │
+        ▼
+Product Mission
+        │
+        ▼
+Native Adoption
+        │
+        ▼
+Operational Adoption
+        │
+        ▼
+Reference Implementation
+        │
+        ▼
+Portfolio Operating Model
+        │
+        ▼
+Enterprise Capability Model
+        │
+        ▼
+Operational Learning
+        │
+        ▼
+Business Value
+```
 
 ## Methodology posture
 
@@ -90,7 +126,8 @@ Do not auto-sequence from the last RI.
 
 Ask (Quarterly Portfolio Review):
 
-> **Which product will create the greatest operational improvement for APZHUB over the next 3–6 months?**
+> **Which enterprise capability will create the greatest operational improvement for APZHUB over the next 3–6 months?**
 
 Practice: [APZHUB-QUARTERLY-PORTFOLIO-REVIEW.md](./APZHUB-QUARTERLY-PORTFOLIO-REVIEW.md)  
-Current decision (QPR-001): [APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md](./APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md) → **APZ-PROJECTS-000**
+Capability model: [../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md)  
+Historical decision (QPR-001): [APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md](./APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md) → APZ Projects (**RI #003**)

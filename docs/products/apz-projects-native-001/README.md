@@ -29,4 +29,4 @@
 | APZ Documents | –       |   –   |    –     |     –     |   –    |  –  |
 
 Ops pack / RI: [../apzprojects/](../apzprojects/)  
-Capability map: [../framework/APZHUB-PORTFOLIO-CAPABILITY-MAP.md](../framework/APZHUB-PORTFOLIO-CAPABILITY-MAP.md)
+Capability model: [../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md)

@@ -70,7 +70,7 @@ Purpose: converge **product experience** — every APZHUB product feels the same
 | #002 | APZ Support  | [../apzsupport/REFERENCE-IMPLEMENTATION-002.md](../apzsupport/REFERENCE-IMPLEMENTATION-002.md)   |
 | #003 | APZ Projects | [../apzprojects/REFERENCE-IMPLEMENTATION-003.md](../apzprojects/REFERENCE-IMPLEMENTATION-003.md) |
 
-Subsequent products follow the same sequence under separate Owner Authorisation. Sequencing is a **business priority** decision guided by the [Portfolio Capability Map](./APZHUB-PORTFOLIO-CAPABILITY-MAP.md) — not a methodology experiment.
+Subsequent products follow the same sequence under separate Owner Authorisation. Sequencing is a **business priority** decision guided by the [Enterprise Capability Model](../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md) — not a methodology experiment.
 
 After each RI: complete [APZHUB-RI-RETROSPECTIVE.md](./APZHUB-RI-RETROSPECTIVE.md).
 

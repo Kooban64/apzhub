@@ -35,4 +35,4 @@ The underlying engine is an implementation detail behind a certified adapter. It
 
 Do not redesign the Playbook.  
 Next APZ Projects milestone: **operational learning from a real change through APZQEP**.  
-Portfolio: introduce / maintain the [Portfolio Capability Map](../framework/APZHUB-PORTFOLIO-CAPABILITY-MAP.md) before selecting the fourth product.
+Portfolio: [Enterprise Capability Model](../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md) before selecting the fourth product.

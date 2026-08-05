@@ -27,4 +27,4 @@
 - Shared identity / permission platform abstraction
 - EPP-001 promotion beyond Validated Pattern
 - N-04 APZQEP adoption
-- Portfolio Capability Map (later governance concept)
+- Portfolio Operating Model / Enterprise Capability Model (later — now APZHUB-PORTFOLIO-001)

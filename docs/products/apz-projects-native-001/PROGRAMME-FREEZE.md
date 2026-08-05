@@ -26,7 +26,7 @@ The programme achieved its purpose: APZ Projects is a native APZHUB product, ope
 | Real APZ Projects changes through APZQEP | ADOPT-001 + [apzprojects/](../apzprojects/) ops pack                                        |
 | Operational learning                     | ADOPT-001 registers + apzprojects learning face                                             |
 | Emerging Portfolio Patterns              | [APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](../framework/APZHUB-EMERGING-PORTFOLIO-PATTERNS.md) |
-| Portfolio capability framing             | [APZHUB-PORTFOLIO-CAPABILITY-MAP.md](../framework/APZHUB-PORTFOLIO-CAPABILITY-MAP.md)       |
+| Portfolio operating / capability model   | [../apzhub-portfolio-001/](../apzhub-portfolio-001/)                                        |
 | Future capability expansion              | Separate Owner Authorisation — not APZ-PROJECTS-NATIVE-001                                  |
 
 ## Closed faces

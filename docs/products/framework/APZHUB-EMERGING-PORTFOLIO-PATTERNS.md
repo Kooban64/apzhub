@@ -76,9 +76,9 @@ Three products validate recurrence. They do **not** by themselves justify centra
 | [IMPROVEMENT-BACKLOG](../apzqep/apzqep-adopt-001/IMPROVEMENT-BACKLOG.md)                     | Candidates after promotion authorisation |
 | This register                                                                                | Cross-product pattern evidence only      |
 
-## Portfolio Capability Map
+## Enterprise Capability Model
 
-Introduced after RI #003: [APZHUB-PORTFOLIO-CAPABILITY-MAP.md](./APZHUB-PORTFOLIO-CAPABILITY-MAP.md) — executive planning artefact; governance only; not an engineering programme.
+Introduced after RI #003 via [APZHUB-PORTFOLIO-001](../apzhub-portfolio-001/): [ENTERPRISE-CAPABILITY-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md) — executive planning artefact under the Portfolio Operating Model; governance only; not an engineering programme.
 
 ## Discipline
 

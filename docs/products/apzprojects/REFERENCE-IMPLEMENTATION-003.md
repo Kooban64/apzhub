@@ -23,13 +23,13 @@ Together with **REFERENCE IMPLEMENTATION #001 (APZ Time)** and **#002 (APZ Suppo
 
 ## What this means
 
-| Use               | Do                                                                                                                   |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------- |
-| Future products   | Follow the same adoption journey via the [Adoption Playbook](../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)       |
-| Methodology       | **Trust and reuse** — do not reinvent unless operational evidence requires evolution                                 |
-| Next engineering  | Driven by **portfolio priority** and the [Capability Map](../framework/APZHUB-PORTFOLIO-CAPABILITY-MAP.md)           |
-| APZ Projects next | Operational learning from real changes under APZQEP                                                                  |
-| Patterns          | Observe via [Emerging Portfolio Patterns](../framework/APZHUB-EMERGING-PORTFOLIO-PATTERNS.md) — do not promote early |
+| Use               | Do                                                                                                                             |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Future products   | Follow the same adoption journey via the [Adoption Playbook](../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)                 |
+| Methodology       | **Trust and reuse** — do not reinvent unless operational evidence requires evolution                                           |
+| Next engineering  | Driven by **portfolio priority** and the [Enterprise Capability Model](../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md) |
+| APZ Projects next | Operational learning from real changes under APZQEP                                                                            |
+| Patterns          | Observe via [Emerging Portfolio Patterns](../framework/APZHUB-EMERGING-PORTFOLIO-PATTERNS.md) — do not promote early           |
 
 ## Earned designation (governance)
 
@@ -59,4 +59,4 @@ Together with **REFERENCE IMPLEMENTATION #001 (APZ Time)** and **#002 (APZ Suppo
 
 ## Portfolio posture
 
-Three Reference Implementations validate the lifecycle. Pause further product adoption briefly to maintain the [Portfolio Capability Map](../framework/APZHUB-PORTFOLIO-CAPABILITY-MAP.md) before selecting the fourth product.
+Three Reference Implementations validate the lifecycle. Pause further product adoption briefly; use the [Enterprise Operating Model](../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md) and [Enterprise Capability Model](../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md) before selecting the fourth product.

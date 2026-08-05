@@ -47,5 +47,6 @@
 
 Native programme: [../apz-projects-native-001/](../apz-projects-native-001/)  
 Playbook: [../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)  
-Capability map: [../framework/APZHUB-PORTFOLIO-CAPABILITY-MAP.md](../framework/APZHUB-PORTFOLIO-CAPABILITY-MAP.md)  
+Capability model: [../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md)
+
 Emerging patterns: [../framework/APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](../framework/APZHUB-EMERGING-PORTFOLIO-PATTERNS.md)

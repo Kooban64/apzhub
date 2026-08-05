@@ -77,18 +77,18 @@ Governing artefacts (unchanged unless evidence demands):
 
 Do **not** automatically open the next Native Adoption programme.
 
-Ask (Quarterly Portfolio Review + Capability Map):
+Ask (Quarterly Portfolio Review + Enterprise Capability Model):
 
-> **Which business capability will create the greatest operational improvement for APZHUB over the next 3–6 months?**
+> **Which enterprise capability will create the greatest operational improvement for APZHUB over the next 3–6 months?**
 
 **QPR-001:** APZ Projects — **COMPLETE** as RI #003.
 
-| Step                  | Path / status                                                                              |
-| --------------------- | ------------------------------------------------------------------------------------------ |
-| Capability map        | [APZHUB-PORTFOLIO-CAPABILITY-MAP.md](./APZHUB-PORTFOLIO-CAPABILITY-MAP.md)                 |
-| Decision (historical) | [APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md](./APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md) |
-| APZ Projects ops / RI | [../apzprojects/](../apzprojects/) — **RI #003**                                           |
-| Native programme      | [../apz-projects-native-001/](../apz-projects-native-001/) — **COMPLETE / FROZEN**         |
+| Step                  | Path / status                                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Capability model      | [../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md) |
+| Decision (historical) | [APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md](./APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md)                       |
+| APZ Projects ops / RI | [../apzprojects/](../apzprojects/) — **RI #003**                                                                 |
+| Native programme      | [../apz-projects-native-001/](../apz-projects-native-001/) — **COMPLETE / FROZEN**                               |
 
 **Portfolio pause:** maintain the Capability Map before selecting the fourth product.
 

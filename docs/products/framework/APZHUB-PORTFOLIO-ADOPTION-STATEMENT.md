@@ -1,10 +1,10 @@
 # APZHUB Portfolio Adoption Statement
 
-| Field     | Value                                                          |
-| --------- | -------------------------------------------------------------- |
-| Status    | **GOVERNING**                                                  |
-| Timestamp | 20260805T074500Z                                               |
-| Authority | Owner direction post REFERENCE IMPLEMENTATION #001, #002, #003 |
+| Field     | Value                                                      |
+| --------- | ---------------------------------------------------------- |
+| Status    | **GOVERNING**                                              |
+| Timestamp | 20260805T081000Z                                           |
+| Authority | Owner direction post RI #001–#003 and APZHUB-PORTFOLIO-001 |
 
 ## Formal portfolio statement
 
@@ -14,7 +14,7 @@ Companion maturity declaration: [APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md]
 
 Founding statement (still true):
 
-> **APZ Time is REFERENCE IMPLEMENTATION #001. APZ Support is REFERENCE IMPLEMENTATION #002. APZ Projects is REFERENCE IMPLEMENTATION #003. Future products shall follow the Native Adoption Standard and APZQEP Enterprise Quality Baseline, with sequencing determined by portfolio priority, the Portfolio Capability Map, and operational evidence.**
+> **APZHUB is an Enterprise Productivity Platform. APZ Time, APZ Support, and APZ Projects are REFERENCE IMPLEMENTATIONS #001–#003. Future products shall follow the Native Adoption Standard and APZQEP Enterprise Quality Baseline, with sequencing determined by portfolio priority, the Enterprise Capability Model, and operational evidence.**
 
 ## Gear change (in force)
 
@@ -93,27 +93,30 @@ Retrospectives: [APZHUB-RI-RETROSPECTIVE.md](./APZHUB-RI-RETROSPECTIVE.md)
 
 Ask each quarter:
 
-> **Which product will create the greatest operational improvement for APZHUB over the next 3–6 months?**
+> **Which enterprise capability will create the greatest operational improvement for APZHUB over the next 3–6 months?**
 
-**QPR-001 decision:** APZ Projects — **COMPLETE** as **REFERENCE IMPLEMENTATION #003**.
+**QPR-001 decision:** APZ Projects — **COMPLETE** as **REFERENCE IMPLEMENTATION #003**.  
+**APZHUB-PORTFOLIO-001:** Enterprise Operating Model & Capability Model — **COMPLETE**.
 
-| Artefact         | Path                                                                                       |
-| ---------------- | ------------------------------------------------------------------------------------------ |
-| Decision         | [APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md](./APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md) |
-| Quarterly review | [APZHUB-QUARTERLY-PORTFOLIO-REVIEW.md](./APZHUB-QUARTERLY-PORTFOLIO-REVIEW.md)             |
-| Capability map   | [APZHUB-PORTFOLIO-CAPABILITY-MAP.md](./APZHUB-PORTFOLIO-CAPABILITY-MAP.md)                 |
-| Mission / ops    | [../apzprojects/](../apzprojects/) — **RI #003**                                           |
-| Native Adoption  | [../apz-projects-native-001/](../apz-projects-native-001/) — **COMPLETE / FROZEN**         |
+| Artefact            | Path                                                                                                             |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Decision            | [APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md](./APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md)                       |
+| Quarterly review    | [APZHUB-QUARTERLY-PORTFOLIO-REVIEW.md](./APZHUB-QUARTERLY-PORTFOLIO-REVIEW.md)                                   |
+| Portfolio programme | [../apzhub-portfolio-001/](../apzhub-portfolio-001/) — **COMPLETE**                                              |
+| Capability model    | [../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md) |
+| Mission / ops       | [../apzprojects/](../apzprojects/) — **RI #003**                                                                 |
+| Native Adoption     | [../apz-projects-native-001/](../apz-projects-native-001/) — **COMPLETE / FROZEN**                               |
 
 | Milestone               | Status                     |
 | ----------------------- | -------------------------- |
 | APZ Time (RI #001)      | ✅ Complete                |
 | APZ Support (RI #002)   | ✅ Complete                |
 | APZ Projects (RI #003)  | ✅ Complete                |
+| APZHUB-PORTFOLIO-001    | ✅ COMPLETE                |
 | APZ-PROJECTS-000        | ✅ CLOSED (Owner APPROVED) |
 | APZ-PROJECTS-NATIVE-001 | ✅ COMPLETE / FROZEN       |
 
-**Portfolio pause:** maintain the Capability Map before selecting the fourth product. Prerequisite remains: APPROVED Product Mission (**PRODUCT-000**) before Native Adoption opens. No parallel Native Adoption programmes.
+**Portfolio pause:** use the Enterprise Operating Model and Enterprise Capability Model before selecting the fourth product. Prerequisite remains: APPROVED Product Mission (**PRODUCT-000**) before Native Adoption opens. No parallel Native Adoption programmes.
 
 APZQEP does not appear on product roadmaps — it is infrastructure.
 
@@ -133,21 +136,23 @@ APZQEP does not appear on product roadmaps — it is infrastructure.
 - Do not designate the next Reference Implementation by default
 - Do not promote EPP entries to platform work before the promotion threshold
 - Do not build shared identity abstractions from Validated Pattern evidence alone (EPP-001 Action: None)
-- Select the fourth product via the Capability Map + portfolio priority — not engineering momentum
+- Select the fourth product via the Enterprise Capability Model + portfolio priority — not engineering momentum
 
 Emerging Portfolio Patterns: [APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](./APZHUB-EMERGING-PORTFOLIO-PATTERNS.md) — **EPP-001 Validated Pattern · Action: None**
 
 ## Related
 
-| Artefact                      | Path                                                                                               |
-| ----------------------------- | -------------------------------------------------------------------------------------------------- |
-| Portfolio Capability Map      | [APZHUB-PORTFOLIO-CAPABILITY-MAP.md](./APZHUB-PORTFOLIO-CAPABILITY-MAP.md)                         |
-| Methodology maturity          | [APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md](./APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md) |
-| Native Adoption Standard      | [APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md](./APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md)         |
-| Adoption Playbook             | [APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](./APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)                       |
-| RI retrospective practice     | [APZHUB-RI-RETROSPECTIVE.md](./APZHUB-RI-RETROSPECTIVE.md)                                         |
-| RI #001                       | [../apztime/REFERENCE-IMPLEMENTATION-001.md](../apztime/REFERENCE-IMPLEMENTATION-001.md)           |
-| RI #002                       | [../apzsupport/REFERENCE-IMPLEMENTATION-002.md](../apzsupport/REFERENCE-IMPLEMENTATION-002.md)     |
-| RI #003                       | [../apzprojects/REFERENCE-IMPLEMENTATION-003.md](../apzprojects/REFERENCE-IMPLEMENTATION-003.md)   |
-| Working model                 | [APZHUB-WORKING-MODEL.md](./APZHUB-WORKING-MODEL.md)                                               |
-| Existing portfolio governance | [../../governance/PORTFOLIO-GOVERNANCE.md](../../governance/PORTFOLIO-GOVERNANCE.md)               |
+| Artefact                      | Path                                                                                                             |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Portfolio programme           | [../apzhub-portfolio-001/](../apzhub-portfolio-001/)                                                             |
+| Enterprise Capability Model   | [../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md) |
+| Enterprise Operating Model    | [../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md)   |
+| Methodology maturity          | [APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md](./APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md)               |
+| Native Adoption Standard      | [APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md](./APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md)                       |
+| Adoption Playbook             | [APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](./APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)                                     |
+| RI retrospective practice     | [APZHUB-RI-RETROSPECTIVE.md](./APZHUB-RI-RETROSPECTIVE.md)                                                       |
+| RI #001                       | [../apztime/REFERENCE-IMPLEMENTATION-001.md](../apztime/REFERENCE-IMPLEMENTATION-001.md)                         |
+| RI #002                       | [../apzsupport/REFERENCE-IMPLEMENTATION-002.md](../apzsupport/REFERENCE-IMPLEMENTATION-002.md)                   |
+| RI #003                       | [../apzprojects/REFERENCE-IMPLEMENTATION-003.md](../apzprojects/REFERENCE-IMPLEMENTATION-003.md)                 |
+| Working model                 | [APZHUB-WORKING-MODEL.md](./APZHUB-WORKING-MODEL.md)                                                             |
+| Existing portfolio governance | [../../governance/PORTFOLIO-GOVERNANCE.md](../../governance/PORTFOLIO-GOVERNANCE.md)                             |
