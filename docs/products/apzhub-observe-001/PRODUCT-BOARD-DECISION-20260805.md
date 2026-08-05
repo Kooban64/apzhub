@@ -1,48 +1,55 @@
-# Product Board Decision — 2026-08-05
+# Product Board Decision
 
-| Field     | Value               |
-| --------- | ------------------- |
-| Programme | APZHUB-OBSERVE-001  |
-| Kind      | Management decision |
-| Date      | 2026-08-05          |
+**Meeting:** PB-001  
+**Platform:** APZHUB  
+**Date:** 2026-08-05  
+**Programme:** APZHUB-OBSERVE-001
 
-## Facts considered
+### Evidence Reviewed
 
-| Fact        | Value       |
-| ----------- | ----------- |
-| Engineering | Frozen      |
-| Pilot       | In progress |
-| Defects     | 0           |
-| Thresholds  | Not met     |
-| Evidence    | Collecting  |
+- APZHUB-OBSERVE-001 Status
+- Pilot Progress
+- Operational Learning Status
+- Defect Status
+- Product Board Thresholds
 
-## Question
+### Findings
 
-Has anything happened that changes an investment decision?
+- Pilot is progressing.
+- No confirmed engineering defects.
+- No operational thresholds exceeded.
+- No strategic thresholds exceeded.
+- Operational evidence is still being collected.
 
-**Answer: No.**
+### Decision
 
-## Motion
+**No investment authorised.**
 
-> Accept the current state. Continue the pilot unchanged.
+### Rationale
 
-## Vote
+The platform has not yet produced sufficient operational evidence to justify:
 
-**Carried.** Continue Observation. No further action.
+- product enhancement,
+- portfolio capability,
+- platform evolution,
+- engineering programme.
 
-## Explicit non-actions
+The current recommendation remains:
 
-- No engineering
-- No new capability
-- No architecture programme
-- No product programme
-- No portfolio initiative
+> **Continue Observation.**
 
-## Next Board conversation expected
+### Actions
 
-Not “What’s next?” — **“Here’s Week 1.”** with operational evidence (users, My Work sessions, completed items, friction, positives, defects, one Product Board question).
+- Continue pilot unchanged.
+- Continue collecting operational evidence.
+- Maintain engineering freeze except for confirmed production defects.
+- Reconvene when the first Weekly Learning Summary is available or a Product Board threshold is reached.
 
-## Standing Board question (for future status)
+### Status
+
+**Motion carried unanimously.**
+
+### Standing Board question (future status)
 
 > Has anything happened that changes an investment decision?
 
