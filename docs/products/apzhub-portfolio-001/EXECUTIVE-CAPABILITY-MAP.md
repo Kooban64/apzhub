@@ -22,11 +22,11 @@
 
 ## What APZHUB will deliver next (business roadmap)
 
-| Capability          | Delivered through | Status                                      |
-| ------------------- | ----------------- | ------------------------------------------- |
-| Document Management | APZ Documents     | **Next** — APZ-DOCUMENTS-000 (mission open) |
-| Workflow Automation | APZ Workflow      | After Documents                             |
-| Analytics & Insight | APZ Analytics     | After Workflow                              |
+| Capability          | Delivered through | Status                            |
+| ------------------- | ----------------- | --------------------------------- |
+| Document Management | APZ Documents     | Native Adoption — N-01 authorised |
+| Workflow Automation | APZ Workflow      | After Documents                   |
+| Analytics & Insight | APZ Analytics     | After Workflow                    |
 
 ## How to choose the next investment
 

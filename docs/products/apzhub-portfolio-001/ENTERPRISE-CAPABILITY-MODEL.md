@@ -32,7 +32,7 @@ Describe what **APZHUB delivers as an enterprise** — in business language.
 | Service Management          | APZ Support             | APZ Projects                    | **RI #002**                  |
 | Workforce Productivity      | APZ Time                | APZ Projects                    | **RI #001**                  |
 | Quality & Release Assurance | APZQEP                  | All products                    | Enterprise baseline (frozen) |
-| Document Management         | APZ Documents           | APZ Projects, APZ Support       | **APZ-DOCUMENTS-000 open**   |
+| Document Management         | APZ Documents           | APZ Projects, APZ Support       | **Native Adoption started**  |
 | Workflow Automation         | APZ Workflow            | All products                    | Awaiting portfolio priority  |
 | Analytics & Insight         | APZ Analytics           | All products                    | Awaiting portfolio priority  |
 

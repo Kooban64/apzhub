@@ -1,30 +1,20 @@
 # Status — APZ-DOCUMENTS-000
 
-| Field       | Value                               |
-| ----------- | ----------------------------------- |
-| Programme   | APZ-DOCUMENTS-000                   |
-| Title       | Product Mission & Business Outcomes |
-| Status      | **OPEN — AWAITING OWNER APPROVAL**  |
-| Timestamp   | 20260805T140000Z                    |
-| Engineering | **PROHIBITED**                      |
-| Board       | PB-002                              |
+| Field       | Value                                    |
+| ----------- | ---------------------------------------- |
+| Programme   | APZ-DOCUMENTS-000                        |
+| Title       | Product Mission & Business Outcomes      |
+| Status      | **CLOSED**                               |
+| Timestamp   | 20260805T140500Z                         |
+| Decision    | [OWNER-APPROVAL.md](./OWNER-APPROVAL.md) |
+| Engineering | **PROHIBITED** (mission closed)          |
 
-## Deliverables produced
+## Outcomes
 
-- Owner Authorisation
-- Product Mission
-- Business Outcomes
-- Success Metrics
-- Stakeholders
-- Product Scope / Out of Scope
-- Value Proposition
-- Product Vision
-- Enterprise Capability relationship
-
-## Explicitly not produced
-
-- Architecture · adapters · engine names · Native Adoption · engineering · platform programmes
+- Mission APPROVED (four Owner tests satisfied)
+- Business Outcomes · Boundaries · Enterprise Capability · SoR · Document Context APPROVED
+- **APZ-DOCUMENTS-NATIVE-001 authorised**
 
 ## Recommendation
 
-Owner reviews mission pack. On **APPROVED**, proceed to APZ-DOCUMENTS-NATIVE-001 using the APZHUB Product Native Adoption Standard unchanged. Until then: **no engineering**.
+Proceed to Native Adoption using the Playbook unchanged. No architecture, methodology, or Lane 1 platform changes from this programme.

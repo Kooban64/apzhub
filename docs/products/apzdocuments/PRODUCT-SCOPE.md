@@ -1,22 +1,25 @@
 # APZ Documents — Product Scope
 
-| Field     | Value                               |
-| --------- | ----------------------------------- |
-| Programme | APZ-DOCUMENTS-000                   |
-| Status    | **DRAFT — AWAITING OWNER APPROVAL** |
-| Timestamp | 20260805T140000Z                    |
+| Field     | Value             |
+| --------- | ----------------- |
+| Programme | APZ-DOCUMENTS-000 |
+| Status    | **APPROVED**      |
+| Timestamp | 20260805T140500Z  |
 
 APZ Documents **owns** the following business capabilities (product sense — not implementation):
 
-| Capability                       | Meaning                                                               |
-| -------------------------------- | --------------------------------------------------------------------- |
-| Document lifecycle               | Create, update, retire, and supersede documents                       |
-| Version authority                | Know which version is current and how versions relate                 |
-| Ownership & accountability       | Named owners for documents and document classes                       |
-| Access & sharing (product sense) | Who may see and act on a document within organisational rules         |
-| Organisation & classification    | Structure and label documents so they are operable                    |
-| Discovery                        | Find the right document for the task at hand                          |
-| Governance & retention (product) | Apply retention and records expectations for governed classes         |
-| Context for related products     | Provide documents other APZHUB products may relate to when authorised |
+| Capability                        | Meaning                                                            |
+| --------------------------------- | ------------------------------------------------------------------ |
+| Document capture                  | Bring documents into the managed APZHUB document capability        |
+| Organisation & classification     | Structure and label documents so they are operable                 |
+| Discovery                         | Find the right document for the task at hand                       |
+| Document lifecycle                | Create, update, retire, and supersede documents                    |
+| Version authority                 | Know which version is current and how versions relate              |
+| Governance & compliance (product) | Ownership, access expectations, retention for governed classes     |
+| Collaboration (document sense)    | Share and work on documents within permissioned APZHUB experience  |
+| Ownership & accountability        | Named owners for documents and document classes                    |
+| Context for related products      | Provide documents other APZHUB products may relate to by reference |
 
 Scope is expressed as **what the product is responsible for**, not how it is built.
+
+Cross-cutting support (by reference): APZ Projects · APZ Support · APZ Time · APZQEP · APZ Law Platform · future products.

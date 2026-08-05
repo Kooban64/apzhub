@@ -58,7 +58,8 @@ APZ Projects
 ### After RI #003 (updated PB-002)
 
 - ✅ APZ Projects — RI #003 complete
-- 🎯 **APZ-DOCUMENTS-000** — Mission open — [../apzdocuments/](../apzdocuments/)
+- ✅ **APZ-DOCUMENTS-000** — Owner APPROVED / CLOSED — [../apzdocuments/](../apzdocuments/)
+- 🎯 **APZ-DOCUMENTS-NATIVE-001** — AUTHORISED (N-01) — [../apz-documents-native-001/](../apz-documents-native-001/)
 - Then Workflow → Analytics → Law per [APZHUB-PORTFOLIO-BUSINESS-ROADMAP.md](./APZHUB-PORTFOLIO-BUSINESS-ROADMAP.md)
 
 > Portfolio delivery does **not** wait for pilot friction. Platform evolution still does.

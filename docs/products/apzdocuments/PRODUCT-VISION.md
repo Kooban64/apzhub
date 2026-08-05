@@ -1,14 +1,14 @@
 # APZ Documents — Product Vision
 
-| Field     | Value                               |
-| --------- | ----------------------------------- |
-| Programme | APZ-DOCUMENTS-000                   |
-| Status    | **DRAFT — AWAITING OWNER APPROVAL** |
-| Timestamp | 20260805T140000Z                    |
+| Field     | Value             |
+| --------- | ----------------- |
+| Programme | APZ-DOCUMENTS-000 |
+| Status    | **APPROVED**      |
+| Timestamp | 20260805T140500Z  |
 
-## Near term (post mission agreement)
+## Near term (Native Adoption)
 
-APZ Documents is the unmistakable APZHUB place for work documents: clear ownership, current versions, permissioned access, and mission-aligned metrics guiding improvement.
+APZ Documents is the unmistakable APZHUB document capability: clear ownership, current versions, permissioned access, document context attached to work, and mission-aligned metrics guiding improvement — never an exposed repository brand.
 
 ## Medium term
 

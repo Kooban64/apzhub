@@ -78,7 +78,7 @@ Unified Work (composition): [../apzhub-capability-001-eng-001/](../apzhub-capabi
 Operational pause: [OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md](./OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md)  
 Internal readiness: [../apzhub-operate-001/](../apzhub-operate-001/) — **COMPLETE**  
 Operational observation: [../apzhub-observe-001/](../apzhub-observe-001/) — **ACTIVE** (Lane 1)  
-Documents mission: [../apzdocuments/](../apzdocuments/) — **OPEN** (Lane 2)
+Documents: [../apzdocuments/](../apzdocuments/) **CLOSED** · Native [../apz-documents-native-001/](../apz-documents-native-001/) **STARTED** (Lane 2)
 
 ## Layers
 

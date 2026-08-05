@@ -3,7 +3,7 @@
 | Field     | Value                                             |
 | --------- | ------------------------------------------------- |
 | Status    | **IN FORCE**                                      |
-| Timestamp | 20260805T140000Z                                  |
+| Timestamp | 20260805T140500Z                                  |
 | Kind      | Business roadmap — **not** an engineering roadmap |
 | Authority | Product Board PB-002                              |
 
@@ -14,24 +14,25 @@ None of these entries are reactions to pilot feedback. Completing them is portfo
 
 ## Portfolio status
 
-| Status             | Portfolio item               | Notes                                                         |
-| ------------------ | ---------------------------- | ------------------------------------------------------------- |
-| ✅ Complete        | Foundation                   | Platform construction era closed                              |
-| ✅ Complete        | Quality Platform (APZQEP)    | Enterprise baseline                                           |
-| ✅ Complete        | Product Adoption Methodology | RI #001–#003 validated Playbook                               |
-| ✅ Mature          | APZ Time                     | Reference Implementation #001                                 |
-| ✅ Mature          | APZ Support                  | Reference Implementation #002                                 |
-| ✅ Mature          | APZ Projects                 | Reference Implementation #003                                 |
-| 🔜 **Next**        | **APZ Documents**            | **APZ-DOCUMENTS-000** — Mission & Business Outcomes           |
-| 🔜 After Documents | APZ Workflow                 | PRODUCT-000 when Documents mission closed / adoption path set |
-| 🔜 After Workflow  | APZ Analytics                | PRODUCT-000 in sequence                                       |
-| 🔜 Later           | APZ Law Platform             | Future enterprise vertical                                    |
+| Status             | Portfolio item               | Notes                                                        |
+| ------------------ | ---------------------------- | ------------------------------------------------------------ |
+| ✅ Complete        | Foundation                   | Platform construction era closed                             |
+| ✅ Complete        | Quality Platform (APZQEP)    | Enterprise baseline                                          |
+| ✅ Complete        | Product Adoption Methodology | RI #001–#003 validated Playbook                              |
+| ✅ Mature          | APZ Time                     | Reference Implementation #001                                |
+| ✅ Mature          | APZ Support                  | Reference Implementation #002                                |
+| ✅ Mature          | APZ Projects                 | Reference Implementation #003                                |
+| 🎯 **In progress** | **APZ Documents**            | Mission CLOSED; **NATIVE-001** authorised (N-01)             |
+| 🔜 After Documents | APZ Workflow                 | PRODUCT-000 when Documents Native path complete / Owner sets |
+| 🔜 After Workflow  | APZ Analytics                | PRODUCT-000 in sequence                                      |
+| 🔜 Later           | APZ Law Platform             | Future enterprise vertical                                   |
 
 ## Current programme
 
-| Programme             | Status                             | Path                                 |
-| --------------------- | ---------------------------------- | ------------------------------------ |
-| **APZ-DOCUMENTS-000** | **OPEN — AWAITING OWNER APPROVAL** | [../apzdocuments/](../apzdocuments/) |
+| Programme                    | Status                          | Path                                                         |
+| ---------------------------- | ------------------------------- | ------------------------------------------------------------ |
+| **APZ-DOCUMENTS-000**        | **CLOSED / APPROVED**           | [../apzdocuments/](../apzdocuments/)                         |
+| **APZ-DOCUMENTS-NATIVE-001** | **AUTHORISED / STARTED** (N-01) | [../apz-documents-native-001/](../apz-documents-native-001/) |
 
 ## Rules
 

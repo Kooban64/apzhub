@@ -1,10 +1,10 @@
 # APZ Documents — Stakeholders
 
-| Field     | Value                               |
-| --------- | ----------------------------------- |
-| Programme | APZ-DOCUMENTS-000                   |
-| Status    | **DRAFT — AWAITING OWNER APPROVAL** |
-| Timestamp | 20260805T140000Z                    |
+| Field     | Value             |
+| --------- | ----------------- |
+| Programme | APZ-DOCUMENTS-000 |
+| Status    | **APPROVED**      |
+| Timestamp | 20260805T140500Z  |
 
 | Stakeholder                | Interest                                                  |
 | -------------------------- | --------------------------------------------------------- |

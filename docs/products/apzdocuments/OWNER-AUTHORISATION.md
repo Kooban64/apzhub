@@ -7,10 +7,10 @@
 | Classification  | Product Definition                                                                                              |
 | Engineering     | **PROHIBITED**                                                                                                  |
 | Architecture    | **PROHIBITED**                                                                                                  |
-| Native Adoption | **NOT STARTED**                                                                                                 |
-| Repository      | **DOCUMENTATION ONLY**                                                                                          |
-| Status          | **OPEN — AWAITING OWNER APPROVAL**                                                                              |
-| Timestamp       | 20260805T140000Z                                                                                                |
+| Native Adoption | **AUTHORISED** — [../apz-documents-native-001/](../apz-documents-native-001/)                                   |
+| Repository      | **DOCUMENTATION ONLY** (this programme)                                                                         |
+| Status          | **CLOSED** (superseded by Owner Approval)                                                                       |
+| Timestamp       | 20260805T140500Z                                                                                                |
 | Portfolio basis | [../framework/APZHUB-PORTFOLIO-BUSINESS-ROADMAP.md](../framework/APZHUB-PORTFOLIO-BUSINESS-ROADMAP.md) · PB-002 |
 
 ## Purpose

@@ -63,15 +63,15 @@ Standing Product Board posture: interpret evidence for platform change; keep por
 
 ## Related
 
-| Artefact                       | Path                                                                                                           |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| Two-lane model                 | [APZHUB-TWO-LANE-OPERATING-MODEL.md](./APZHUB-TWO-LANE-OPERATING-MODEL.md)                                     |
-| Portfolio business roadmap     | [APZHUB-PORTFOLIO-BUSINESS-ROADMAP.md](./APZHUB-PORTFOLIO-BUSINESS-ROADMAP.md)                                 |
-| APZ-DOCUMENTS-000              | [../apzdocuments/](../apzdocuments/) — **OPEN**                                                                |
-| Enterprise Operating Model     | [../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md) |
-| Phase 2 — Unified Experience   | [APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](./APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md)               |
-| Internal operational readiness | [../apzhub-operate-001/](../apzhub-operate-001/) — **COMPLETE**                                                |
-| Operational learning support   | [../apzhub-observe-001/](../apzhub-observe-001/) — **ACTIVE** (Lane 1)                                         |
-| My Work Review                 | [APZHUB-MY-WORK-REVIEW.md](./APZHUB-MY-WORK-REVIEW.md)                                                         |
-| Operational pause              | [OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md](./OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md)                   |
-| Working Model                  | [APZHUB-WORKING-MODEL.md](./APZHUB-WORKING-MODEL.md)                                                           |
+| Artefact                       | Path                                                                                                                                      |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Two-lane model                 | [APZHUB-TWO-LANE-OPERATING-MODEL.md](./APZHUB-TWO-LANE-OPERATING-MODEL.md)                                                                |
+| Portfolio business roadmap     | [APZHUB-PORTFOLIO-BUSINESS-ROADMAP.md](./APZHUB-PORTFOLIO-BUSINESS-ROADMAP.md)                                                            |
+| APZ Documents                  | Mission [../apzdocuments/](../apzdocuments/) **CLOSED** · Native [../apz-documents-native-001/](../apz-documents-native-001/) **STARTED** |
+| Enterprise Operating Model     | [../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md)                            |
+| Phase 2 — Unified Experience   | [APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](./APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md)                                          |
+| Internal operational readiness | [../apzhub-operate-001/](../apzhub-operate-001/) — **COMPLETE**                                                                           |
+| Operational learning support   | [../apzhub-observe-001/](../apzhub-observe-001/) — **ACTIVE** (Lane 1)                                                                    |
+| My Work Review                 | [APZHUB-MY-WORK-REVIEW.md](./APZHUB-MY-WORK-REVIEW.md)                                                                                    |
+| Operational pause              | [OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md](./OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md)                                              |
+| Working Model                  | [APZHUB-WORKING-MODEL.md](./APZHUB-WORKING-MODEL.md)                                                                                      |
