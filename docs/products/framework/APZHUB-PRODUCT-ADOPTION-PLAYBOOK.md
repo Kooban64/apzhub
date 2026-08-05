@@ -4,7 +4,7 @@
 | --------- | ------------------------------------------------------------------------------------------ |
 | Status    | **GOVERNING**                                                                              |
 | Timestamp | 20260805T034500Z                                                                           |
-| Reference | APZ Time / TIME-NATIVE-001 (first completion)                                              |
+| Reference | APZ Time — **REFERENCE IMPLEMENTATION #001**                                               |
 | Companion | [APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md](./APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md) |
 
 ## Purpose

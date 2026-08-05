@@ -59,13 +59,14 @@ Every integrated product must complete the following before it is considered a
 
 ## Reference implementation
 
-**APZ Time** is the reference completion of N-01…N-04:
+**APZ Time** is **REFERENCE IMPLEMENTATION #001** — reference completion of N-01…N-04:
 
-| Artefact         | Path                                                                         |
-| ---------------- | ---------------------------------------------------------------------------- |
-| Native programme | [../time/APZHUB-TIME-NATIVE-001/](../time/APZHUB-TIME-NATIVE-001/)           |
-| Operational pack | [../apztime/](../apztime/)                                                   |
-| Playbook         | [APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](./APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md) |
+| Artefact         | Path                                                                                     |
+| ---------------- | ---------------------------------------------------------------------------------------- |
+| Designation      | [../apztime/REFERENCE-IMPLEMENTATION-001.md](../apztime/REFERENCE-IMPLEMENTATION-001.md) |
+| Native programme | [../time/APZHUB-TIME-NATIVE-001/](../time/APZHUB-TIME-NATIVE-001/)                       |
+| Operational pack | [../apztime/](../apztime/)                                                               |
+| Playbook         | [APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](./APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)             |
 
 Subsequent products (Projects, Support, Documents, Analytics, Workflow, Law, …)
 should follow the same sequence under separate Owner Authorisation — and only after

@@ -3,7 +3,8 @@
 > **Portfolio:** time  
 > **Release:** **1.0.0** Phase 1 — **ACCEPTED / CLOSED**  
 > **Maturity:** **Production** (documented limitations)  
-> **Active programme:** [APZHUB-TIME-NATIVE-001](./APZHUB-TIME-NATIVE-001/) **PHASE A COMPLETE** · Ops: [../apztime/](../apztime/)
+> **Designation:** **REFERENCE IMPLEMENTATION #001** — [../apztime/REFERENCE-IMPLEMENTATION-001.md](../apztime/REFERENCE-IMPLEMENTATION-001.md)  
+> **Programme:** [APZHUB-TIME-NATIVE-001](./APZHUB-TIME-NATIVE-001/) **PHASE A COMPLETE** · Ops: [../apztime/](../apztime/)
 
 > **Evidence:** [docs/releases/time/1.0.0/](../../releases/time/1.0.0/README.md)  
 > **Releases:** [RELEASES.md](./RELEASES.md) · [docs/releases/time/](../../releases/time/README.md)

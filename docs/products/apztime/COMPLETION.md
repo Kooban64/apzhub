@@ -19,8 +19,10 @@
 - **No architecture changes**
 - APZ Time nominated as reference implementation for APZQEP + Native Adoption
 
-## Recommendation
+## Declaration (accepted)
 
-Declare APZ Time fully adopted under the APZQEP Enterprise Quality Baseline and nominate it as the reference implementation for future APZHUB product adoption.
+> APZ Time is fully adopted under the APZQEP Enterprise Quality Baseline and is nominated as the reference implementation for future APZHUB product adoption.
+
+Formal record: [REFERENCE-IMPLEMENTATION-001.md](./REFERENCE-IMPLEMENTATION-001.md)
 
 See also: [APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)

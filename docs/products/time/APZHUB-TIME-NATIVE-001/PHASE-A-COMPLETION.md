@@ -41,10 +41,14 @@ Canonical APZ Time ops governance: [../../apztime/](../../apztime/)
 Do not invent new standards or start the next product programme by default.  
 Next milestone: a **real APZ Time change** completed through APZQEP.
 
-## Reference nomination
+## Reference designation (accepted)
 
-APZ Time is the **reference implementation** for:
+**REFERENCE IMPLEMENTATION #001** — [../../apztime/REFERENCE-IMPLEMENTATION-001.md](../../apztime/REFERENCE-IMPLEMENTATION-001.md)
+
+APZ Time is the reference implementation for:
 
 - APZQEP operational adoption
 - APZHUB Product Native Adoption (N-01…N-04)
 - [APZHUB Product Adoption Playbook](../../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)
+
+No further TIME-NATIVE engineering programmes by default. Next: real changes + operational learning; next product only by portfolio priority.
