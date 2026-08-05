@@ -11,10 +11,11 @@
 
 | Item     | Value                                                                      |
 | -------- | -------------------------------------------------------------------------- |
+| Meeting  | **PB-001**                                                                 |
 | Date     | 2026-08-05                                                                 |
-| Decision | [PRODUCT-BOARD-DECISION-20260805.md](./PRODUCT-BOARD-DECISION-20260805.md) |
-| Motion   | Accept current state. Continue pilot unchanged.                            |
-| Outcome  | **Carried — Continue Observation. No further action.**                     |
+| Minutes  | [PRODUCT-BOARD-DECISION-20260805.md](./PRODUCT-BOARD-DECISION-20260805.md) |
+| Decision | **No investment authorised.** Continue Observation.                        |
+| Outcome  | **Motion carried unanimously.**                                            |
 
 Standing question for every status: **Has anything happened that changes an investment decision?**
 
