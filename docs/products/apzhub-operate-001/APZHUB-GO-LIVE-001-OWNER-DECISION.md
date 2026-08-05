@@ -30,11 +30,54 @@
 
 There are **no engineering actions** left for go-live.
 
+## Signing guidance
+
+Sign when operational readiness is **comfortable**—not when looking for one more improvement.
+
+There is always one more document, feature, or refinement. Waiting for perfection delays the evidence the operating model depends on.
+
+## Pilot scope (recommended conditions)
+
+- Internal users only
+- 5–8 representative users
+- Clearly communicated as a **controlled pilot**
+
 ## Pilot objective
 
 > **Does APZHUB become the place people naturally start their workday?**
 
 Not “find bugs.” Not “ship features.”
+
+## Success criteria
+
+The pilot succeeds if:
+
+- Users begin their day in **My Work**
+- They complete meaningful work using APZHUB
+- No critical operational blockers emerge
+- Feedback produces **evidence** rather than opinions
+
+## Exit criteria (Product Board — end of pilot)
+
+Answer only three questions:
+
+1. Is APZHUB usable as the organisation’s daily workspace?
+2. What measurable operational friction did we observe?
+3. What single investment would create the greatest improvement?
+
+Only then decide whether to invest again.
+
+## Questions to ask users (behaviour, not features)
+
+Do **not** lead with “What features would you like?”
+
+Ask:
+
+- What were you trying to accomplish?
+- What slowed you down?
+- Where did you expect something different?
+- What made you leave My Work?
+- What felt natural?
 
 ## Recommended pilot size
 
