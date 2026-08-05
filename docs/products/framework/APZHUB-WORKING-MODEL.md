@@ -3,27 +3,37 @@
 | Field     | Value            |
 | --------- | ---------------- |
 | Status    | **IN FORCE**     |
-| Timestamp | 20260805T111500Z |
+| Timestamp | 20260805T133000Z |
 
 **Current operating state (foreword):** [APZHUB-CURRENT-OPERATING-STATE.md](./APZHUB-CURRENT-OPERATING-STATE.md)
 
-## Dual partnership (declared)
+## Working agreement (post-construction)
 
-The construction-era pattern of slice-complete → paste → agree → next slice is **retired**.
+The construction-era pattern of invent-instruction → paste into Cursor → agree → next slice is **retired**.
 
-| Role                                    | Actor                       | Answers                   | Owns                                                                                                                             |
-| --------------------------------------- | --------------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| **Chief Engineer**                      | Cursor                      | **How?**                  | Production code, slices, docs packs, programmes, certification, evidence, repo standards — **exactly what is authorised**        |
-| **Portfolio Architect & Product Board** | Strategic advisor (ChatGPT) | **Why?** · **Should we?** | Strategy, investment priority, trade-offs, commercialisation, UX value, operational learning interpretation, long-term direction |
+There should not always be a next Cursor instruction. **Wait** is a valid outcome.
 
-| Cursor does                      | Strategic advisor does                                |
-| -------------------------------- | ----------------------------------------------------- |
-| Implement authorised engineering | Challenge assumptions                                 |
-| Produce evidence packs           | Prioritise investments                                |
-| Maintain standards               | Spot architectural / commercial risk                  |
-| Certify and freeze               | Evaluate “no action / product / portfolio / platform” |
+| Role                                      | Actor                       | Owns                                                                                                                                                                                                     |
+| ----------------------------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Chief Engineer & Operational Observer** | Cursor                      | Engineering; documentation updates; operational observation ([OBSERVE-001](../apzhub-observe-001/)); defect correction (when authorised); repository maintenance                                         |
+| **Product Board / Portfolio Advisor**     | Strategic advisor (ChatGPT) | Product Board reviews; portfolio investment decisions; commercial strategy; product strategy; UX direction; operational evidence interpretation; long-term architecture **only if evidence requires it** |
 
-Unless explicitly asked to review engineering, the strategic advisor does **not** re-litigate completed slices. Conversations start from **evidence and decisions**, not proposals for the next build.
+| Cursor answers                  | Strategic advisor answers                             |
+| ------------------------------- | ----------------------------------------------------- |
+| **How?** (authorised work only) | **Why?** · **Should we?** · **Which one investment?** |
+
+### When to convene the strategic advisor (six conversation types)
+
+1. **Product Board Review** — bring weekly observations / Product Board Brief
+2. **Commercial Strategy** — e.g. SaaS packaging, pricing
+3. **Enterprise Capability Planning** — product vs portfolio vs platform for a friction theme
+4. **AI Strategy** — where AI adds measurable value
+5. **Executive Decision Support** — highest business value next quarter
+6. **Architecture (rare)** — only when evidence shows the platform itself is the bottleneck
+
+Do **not** ask the advisor for “the next Cursor instruction” by default. Ask: _Has the platform earned the right to change?_ If no → build nothing. If yes → choose the single highest-value investment.
+
+Bring [PRODUCT-BOARD-BRIEF.md](../apzhub-observe-001/PRODUCT-BOARD-BRIEF.md) or [WEEKLY-LEARNING-SUMMARY.md](../apzhub-observe-001/WEEKLY-LEARNING-SUMMARY.md) when seeking investment advice.
 
 Architecture and standards for Layer 1 evolve only through governance.
 
