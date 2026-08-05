@@ -75,17 +75,17 @@ Governing artefacts (unchanged unless evidence demands):
 
 Do **not** automatically open the next Native Adoption programme.
 
-Ask:
+Ask (Quarterly Portfolio Review):
 
 > **Which product will create the greatest operational improvement for APZHUB over the next 3–6 months?**
 
-Examples (illustrative only — not authorised):
+**QPR-001:** APZ Projects selected — mission first.
 
-| If the biggest daily challenge is… | Consider      |
-| ---------------------------------- | ------------- |
-| Project coordination               | APZ Projects  |
-| Documentation / compliance effort  | APZ Documents |
-| Automation unlocking efficiency    | APZ Workflow  |
+| Step                    | Path / status                                                                              |
+| ----------------------- | ------------------------------------------------------------------------------------------ |
+| Decision                | [APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md](./APZHUB-PORTFOLIO-DECISION-PROJECTS-NEXT.md) |
+| APZ-PROJECTS-000        | [../apzprojects/](../apzprojects/) — awaiting Owner APPROVAL                               |
+| APZ-PROJECTS-NATIVE-001 | Not authorised until mission APPROVED                                                      |
 
 Authorisation remains Owner Auth + APPROVED Product Mission before any Native Adoption programme opens.
 
