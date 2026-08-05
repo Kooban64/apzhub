@@ -1,12 +1,12 @@
 manifestSchemaVersion: "1.0"
 id: projects
-name: Projects
+name: APZ Projects
 version: 0.1.0
 kind: module
 
 metadata:
   category: productivity
-  description: APZHUB Projects workbench — project, task, sprint, backlog, and roadmap management.
+  description: APZ Projects — plan, coordinate, execute, and deliver work inside APZHUB.
   owner: APZHUB
   icon: folder-kanban
   tags:
@@ -27,7 +27,7 @@ compatibility:
 module:
   category: productivity
   status: enabled
-  description: Projects capability module (APZHUB-PROJECTS-001 Workbench Phase 1).
+  description: APZ Projects native workspace module.
 
 permissions:
   - id: projects.view
@@ -93,11 +93,21 @@ navigation:
       route: /workspace/projects/search
       icon: search
       permission: projects.view
+    - id: projects.help
+      label: Help
+      route: /workspace/projects/help
+      icon: circle-help
+      permission: projects.view
+    - id: projects.settings
+      label: Settings
+      route: /workspace/projects/settings
+      icon: settings
+      permission: projects.view
     - id: projects.health
-      label: Health
+      label: Readiness
       route: /workspace/projects/health
       icon: activity
-      permission: projects.view
+      permission: projects.admin
 
 commands:
   - id: project.open
@@ -151,7 +161,7 @@ workbench:
     order: 20
     permission: projects.view
   view:
-    title: Projects
+    title: APZ Projects
     workspace: projects
     route: /workspace/projects
     default: true
@@ -165,7 +175,7 @@ workbench:
       group: Projects
       icon: folder
       order: 10
-      description: Open a project in the Projects workspace (APZHUB-PROJECTS-001).
+      description: Open a project in APZ Projects.
     - id: project.create
       label: Create Project
       handler: service:project-service:workbench.create
@@ -174,7 +184,7 @@ workbench:
       group: Projects
       icon: plus
       order: 20
-      description: Create a new project (APZHUB-PROJECTS-001).
+      description: Create a new project in APZ Projects.
     - id: project.update
       label: Update Project
       handler: service:project-service:workbench.update
@@ -183,7 +193,7 @@ workbench:
       group: Projects
       icon: pencil
       order: 30
-      description: Update project settings (APZHUB-PROJECTS-001).
+      description: Update project settings in APZ Projects.
     - id: task.open
       label: Open Task
       handler: service:project-service:workbench.task.open
@@ -192,7 +202,7 @@ workbench:
       group: Projects
       icon: check-square
       order: 40
-      description: Open a task (APZHUB-PROJECTS-001).
+      description: Open a task in APZ Projects.
     - id: task.create
       label: Create Task
       handler: service:project-service:workbench.task.create
@@ -201,7 +211,7 @@ workbench:
       group: Projects
       icon: plus-square
       order: 50
-      description: Create a task (APZHUB-PROJECTS-001).
+      description: Create a task in APZ Projects.
     - id: task.update
       label: Update Task
       handler: service:project-service:workbench.task.update
@@ -210,7 +220,7 @@ workbench:
       group: Projects
       icon: pencil-line
       order: 60
-      description: Update a task (APZHUB-PROJECTS-001).
+      description: Update a task in APZ Projects.
     - id: task.assign
       label: Assign Task
       handler: service:project-service:workbench.task.assign
@@ -219,7 +229,7 @@ workbench:
       group: Projects
       icon: user-plus
       order: 70
-      description: Assign a task (APZHUB-PROJECTS-001).
+      description: Assign a task in APZ Projects.
     - id: sprint.open
       label: Open Sprint
       handler: service:project-service:workbench.sprint.open
@@ -228,7 +238,7 @@ workbench:
       group: Projects
       icon: calendar
       order: 80
-      description: Open sprint view (APZHUB-PROJECTS-001).
+      description: Open sprint view in APZ Projects.
     - id: sprint.create
       label: Create Sprint
       handler: service:project-service:workbench.sprint.create
@@ -237,7 +247,7 @@ workbench:
       group: Projects
       icon: calendar-plus
       order: 90
-      description: Create a sprint (APZHUB-PROJECTS-001).
+      description: Create a sprint in APZ Projects.
     - id: sprint.complete
       label: Complete Sprint
       handler: service:project-service:workbench.sprint.complete
@@ -246,7 +256,7 @@ workbench:
       group: Projects
       icon: calendar-check
       order: 100
-      description: Complete active sprint (APZHUB-PROJECTS-001).
+      description: Complete active sprint in APZ Projects.
 
 documentation:
   plannedRouteProjectDetail: "/workspace/projects/{projectId}"

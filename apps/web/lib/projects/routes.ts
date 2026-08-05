@@ -1,4 +1,4 @@
-/** Projects workspace route helpers (APZHUB-PROJECTS-001). */
+/** Projects workspace route helpers (APZ Projects Native Adoption). */
 
 export const PROJECTS_BASE = "/workspace/projects";
 
@@ -11,6 +11,8 @@ export const PROJECTS_SECTIONS = [
   "roadmap",
   "search",
   "health",
+  "help",
+  "settings",
   "new",
 ] as const;
 
@@ -28,6 +30,8 @@ export type ProjectsRouteResolution =
   | { readonly kind: "roadmap" }
   | { readonly kind: "search" }
   | { readonly kind: "health" }
+  | { readonly kind: "help" }
+  | { readonly kind: "settings" }
   | { readonly kind: "unknown" };
 
 function normalizePath(pathname: string): string {
@@ -91,6 +95,14 @@ export function resolveProjectsRoute(pathname: string): ProjectsRouteResolution 
     return { kind: "health" };
   }
 
+  if (normalized === `${PROJECTS_BASE}/help`) {
+    return { kind: "help" };
+  }
+
+  if (normalized === `${PROJECTS_BASE}/settings`) {
+    return { kind: "settings" };
+  }
+
   const prefix = `${PROJECTS_BASE}/`;
   if (normalized.startsWith(prefix)) {
     const rest = normalized.slice(prefix.length);
@@ -121,4 +133,20 @@ export function projectCreatePath(): string {
 
 export function projectsListPath(): string {
   return `${PROJECTS_BASE}/list`;
+}
+
+export function projectsHelpPath(): string {
+  return `${PROJECTS_BASE}/help`;
+}
+
+export function projectsSettingsPath(): string {
+  return `${PROJECTS_BASE}/settings`;
+}
+
+export function projectsDashboardPath(): string {
+  return PROJECTS_BASE;
+}
+
+export function projectsSearchPath(): string {
+  return `${PROJECTS_BASE}/search`;
 }

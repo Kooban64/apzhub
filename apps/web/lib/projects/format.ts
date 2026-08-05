@@ -61,3 +61,21 @@ export function formatProjectsDate(value: string | undefined): string {
     day: "numeric",
   });
 }
+
+/**
+ * Human label for opaque platform identifiers.
+ * Never lead UI with raw IDs; return "Unavailable" when empty.
+ */
+export function formatProjectsEntityLabel(
+  value: string | null | undefined,
+  fallbackLabel = "Assigned",
+): string {
+  if (!value?.trim()) return "Unavailable";
+  return fallbackLabel;
+}
+
+/** Stable display labels for sprint groups without exposing raw sprint IDs. */
+export function formatSprintGroupLabel(sprintId: string, index: number): string {
+  if (!sprintId.trim()) return "Unavailable";
+  return `Sprint ${index + 1}`;
+}

@@ -11,9 +11,16 @@ import { ErrorState, LoadingState, PageShell } from "./projects-ui";
 
 const searchClient = createHttpSearchClient();
 
+function statusLabel(value: unknown): string {
+  if (typeof value === "string" && value.trim()) return value;
+  if (typeof value === "boolean") return value ? "Healthy" : "Unavailable";
+  if (value == null) return "Unavailable";
+  return "Available";
+}
+
 /**
- * Product health / diagnostics / audit surface.
- * Consumes existing Platform health + Search diagnostics — no platform redesign.
+ * Operator readiness surface for APZ Projects — human summary only.
+ * Never dumps raw diagnostics JSON into the product UI.
  */
 export function ProjectsHealthView() {
   const healthQuery = useQuery({
@@ -36,23 +43,31 @@ export function ProjectsHealthView() {
     queryFn: ({ signal }) => searchClient.listAudit({ signal }),
   });
 
+  const searchStatus = statusLabel(
+    (searchHealthQuery.data as { status?: string } | undefined)?.status ??
+      searchHealthQuery.data,
+  );
+  const diagnosticsReady = Boolean(searchDiagnosticsQuery.data);
+  const recentAuditCount = searchAuditQuery.data?.items?.length ?? 0;
+
   return (
     <PageShell
-      title="Health & diagnostics"
-      description="Platform health, search diagnostics, and audit for the Projects product."
+      title="Readiness"
+      description="Operator summary of APZ Projects availability inside APZHUB."
+      breadcrumbs={["APZ Projects", "Readiness"]}
     >
       <section
         className="rounded-lg border border-[var(--color-border)] p-4"
         data-testid="projects-health-platform"
       >
-        <h2 className="text-sm font-semibold">Platform API health</h2>
+        <h2 className="text-sm font-semibold">Product availability</h2>
         {healthQuery.isLoading ? <LoadingState /> : null}
         {healthQuery.isError ? (
           <ErrorState
             message={
               isProjectsApiError(healthQuery.error)
                 ? healthQuery.error.message
-                : "Unable to load platform health."
+                : "Unable to load product readiness."
             }
             onRetry={() => void healthQuery.refetch()}
           />
@@ -61,7 +76,9 @@ export function ProjectsHealthView() {
           <dl className="mt-3 grid gap-2 text-sm md:grid-cols-2">
             <div>
               <dt className="text-[var(--color-muted-foreground)]">Status</dt>
-              <dd data-testid="projects-health-status">{healthQuery.data.status}</dd>
+              <dd data-testid="projects-health-status">
+                {statusLabel(healthQuery.data.status)}
+              </dd>
             </div>
             <div>
               <dt className="text-[var(--color-muted-foreground)]">Version</dt>
@@ -71,7 +88,7 @@ export function ProjectsHealthView() {
               ? Object.entries(healthQuery.data.checks).map(([key, value]) => (
                   <div key={key}>
                     <dt className="text-[var(--color-muted-foreground)]">{key}</dt>
-                    <dd>{value}</dd>
+                    <dd>{statusLabel(value)}</dd>
                   </div>
                 ))
               : null}
@@ -83,42 +100,34 @@ export function ProjectsHealthView() {
         className="rounded-lg border border-[var(--color-border)] p-4"
         data-testid="projects-health-search"
       >
-        <h2 className="text-sm font-semibold">Search health</h2>
+        <h2 className="text-sm font-semibold">Search readiness</h2>
         {searchHealthQuery.isLoading ? (
-          <LoadingState label="Loading search health…" />
+          <LoadingState label="Loading search readiness…" />
         ) : null}
-        {searchHealthQuery.data ? (
-          <pre className="mt-3 overflow-x-auto text-xs">
-            {JSON.stringify(searchHealthQuery.data, null, 2)}
-          </pre>
+        {searchHealthQuery.isSuccess ? (
+          <dl className="mt-3 grid gap-2 text-sm md:grid-cols-2">
+            <div>
+              <dt className="text-[var(--color-muted-foreground)]">Search status</dt>
+              <dd>{searchStatus}</dd>
+            </div>
+            <div>
+              <dt className="text-[var(--color-muted-foreground)]">Diagnostics</dt>
+              <dd>{diagnosticsReady ? "Available" : "Unavailable"}</dd>
+            </div>
+            <div>
+              <dt className="text-[var(--color-muted-foreground)]">Recent activity</dt>
+              <dd>
+                {searchAuditQuery.isLoading
+                  ? "Loading…"
+                  : `${Math.min(recentAuditCount, 10)} recent entries`}
+              </dd>
+            </div>
+          </dl>
         ) : null}
-      </section>
-
-      <section
-        className="rounded-lg border border-[var(--color-border)] p-4"
-        data-testid="projects-diagnostics"
-      >
-        <h2 className="text-sm font-semibold">Search diagnostics</h2>
-        {searchDiagnosticsQuery.isLoading ? (
-          <LoadingState label="Loading diagnostics…" />
-        ) : null}
-        {searchDiagnosticsQuery.data ? (
-          <pre className="mt-3 overflow-x-auto text-xs">
-            {JSON.stringify(searchDiagnosticsQuery.data, null, 2)}
-          </pre>
-        ) : null}
-      </section>
-
-      <section
-        className="rounded-lg border border-[var(--color-border)] p-4"
-        data-testid="projects-audit"
-      >
-        <h2 className="text-sm font-semibold">Search audit (recent)</h2>
-        {searchAuditQuery.isLoading ? <LoadingState label="Loading audit…" /> : null}
-        {searchAuditQuery.data ? (
-          <pre className="mt-3 overflow-x-auto text-xs">
-            {JSON.stringify(searchAuditQuery.data.items.slice(0, 10), null, 2)}
-          </pre>
+        {searchHealthQuery.isError ? (
+          <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
+            Search readiness is temporarily unavailable.
+          </p>
         ) : null}
       </section>
     </PageShell>

@@ -33,7 +33,7 @@ Native UX Audit
         ↓
 Identity Convergence
         ↓
-Native Workspace
+Native Workspace (Product Experience Convergence)
         ↓
 APZQEP Operational Adoption
         ↓

@@ -132,7 +132,7 @@ APZQEP does not appear on product roadmaps — it is infrastructure.
 - Do not promote EPP entries to platform work before the promotion threshold
 - Do not build shared identity abstractions from two-product evidence alone
 
-Emerging Portfolio Patterns: [APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](./APZHUB-EMERGING-PORTFOLIO-PATTERNS.md) — **EPP-001 Observation · Action: None**
+Emerging Portfolio Patterns: [APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](./APZHUB-EMERGING-PORTFOLIO-PATTERNS.md) — **EPP-001 Validated Pattern · Action: None**
 
 ## Related
 

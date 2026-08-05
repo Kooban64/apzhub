@@ -24,6 +24,12 @@ vi.mock("./projects-search-view", () => ({
 vi.mock("./projects-health-view", () => ({
   ProjectsHealthView: () => <div data-testid="route-health" />,
 }));
+vi.mock("./projects-help-view", () => ({
+  ProjectsHelpView: () => <div data-testid="route-help" />,
+}));
+vi.mock("./projects-settings-view", () => ({
+  ProjectsSettingsView: () => <div data-testid="route-settings" />,
+}));
 
 import { listProjects } from "@/lib/projects/projects-api";
 
@@ -95,5 +101,15 @@ describe("ProjectsWorkspaceRouter", () => {
     pathnameState.value = "/workspace/projects/health";
     render(wrap(<ProjectsWorkspaceRouter permissions={FULL} />));
     expect(screen.getByTestId("route-health")).toBeTruthy();
+  });
+
+  it("routes help and settings", () => {
+    pathnameState.value = "/workspace/projects/help";
+    render(wrap(<ProjectsWorkspaceRouter permissions={FULL} />));
+    expect(screen.getByTestId("route-help")).toBeTruthy();
+
+    pathnameState.value = "/workspace/projects/settings";
+    render(wrap(<ProjectsWorkspaceRouter permissions={FULL} />));
+    expect(screen.getByTestId("route-settings")).toBeTruthy();
   });
 });

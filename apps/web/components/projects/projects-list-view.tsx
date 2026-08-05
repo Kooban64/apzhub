@@ -77,7 +77,8 @@ export function ProjectsListView({
   return (
     <PageShell
       title="All projects"
-      description="Searchable directory of projects."
+      description="Searchable directory of projects in APZ Projects."
+      breadcrumbs={["APZ Projects", "All projects"]}
       actions={
         canCreate ? (
           <Button
@@ -130,7 +131,18 @@ export function ProjectsListView({
       {query.isSuccess && items.length === 0 ? (
         <EmptyState
           title="No projects found"
-          description="Adjust filters or create a new project."
+          description="Adjust filters or create a new project in APZ Projects."
+          action={
+            canCreate ? (
+              <Button
+                type="button"
+                size="sm"
+                onClick={() => router.push(projectCreatePath())}
+              >
+                New project
+              </Button>
+            ) : null
+          }
         />
       ) : null}
       {query.isSuccess && items.length > 0 ? (

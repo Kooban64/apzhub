@@ -5,7 +5,11 @@ import { useQuery } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 
-import { projectDetailPath, PROJECTS_BASE } from "@/lib/projects/routes";
+import {
+  projectDetailPath,
+  PROJECTS_BASE,
+  projectsHelpPath,
+} from "@/lib/projects/routes";
 import { projectsQueryKeys } from "@/lib/projects/query-keys";
 import { createHttpSearchClient } from "@/lib/search/search-client";
 import { SearchClientError } from "@/lib/search/search-errors";
@@ -44,7 +48,8 @@ export function ProjectsSearchView() {
   return (
     <PageShell
       title="Search"
-      description="Unified Platform Search scoped to the Projects product."
+      description="Find projects and related work inside APZ Projects."
+      breadcrumbs={["APZ Projects", "Search"]}
     >
       <form
         className="flex flex-col gap-3"
@@ -70,16 +75,16 @@ export function ProjectsSearchView() {
       {!params ? (
         <EmptyState
           title="Enter a query"
-          description="Search uses Platform Search scoped to the Projects product. Results depend on search index population."
+          description="Search across APZ Projects for projects and related work."
           action={
             <Button
               type="button"
               size="sm"
               variant="outline"
-              onClick={() => router.push(`${PROJECTS_BASE}/health`)}
-              data-testid="projects-search-health-link"
+              onClick={() => router.push(projectsHelpPath())}
+              data-testid="projects-search-help-link"
             >
-              Open Projects health
+              Open help
             </Button>
           }
         />
@@ -98,16 +103,16 @@ export function ProjectsSearchView() {
       {params && query.isSuccess && query.data.hits.length === 0 ? (
         <EmptyState
           title="No results"
-          description="No indexed Projects hits matched this query. If you expected results, confirm the Search index is populated via Projects health."
+          description="No APZ Projects results matched this query."
           action={
             <Button
               type="button"
               size="sm"
               variant="outline"
-              onClick={() => router.push(`${PROJECTS_BASE}/health`)}
-              data-testid="projects-search-empty-health-link"
+              onClick={() => router.push(projectsHelpPath())}
+              data-testid="projects-search-empty-help-link"
             >
-              Open Projects health
+              Open help
             </Button>
           }
         />
@@ -129,9 +134,9 @@ export function ProjectsSearchView() {
                   }
                 }}
               >
-                <p className="font-medium">{hit.title || hit.entityId}</p>
+                <p className="font-medium">{hit.title || "Untitled result"}</p>
                 <p className="text-xs text-[var(--color-muted-foreground)]">
-                  {hit.entityType} · {hit.productId}
+                  {hit.entityType === "project" ? "Project" : "Result"}
                 </p>
               </button>
             </li>

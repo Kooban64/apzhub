@@ -26,12 +26,14 @@ import type { ProjectStatus, Task } from "@/lib/projects/types";
 
 import { ProjectsTaskActions } from "./projects-task-actions";
 import {
+  ContextSection,
   EmptyState,
   ErrorState,
   LoadingState,
   PageShell,
   PriorityBadge,
   ProjectsTable,
+  ProjectsWorkspaceFrame,
   StatusBadge,
 } from "./projects-ui";
 
@@ -153,6 +155,14 @@ export function ProjectDetailView({
           ? `${project.identifier} · Updated ${formatProjectsDate(project.updatedAt)}`
           : "Project details"
       }
+      breadcrumbs={[
+        "APZ Projects",
+        "All projects",
+        project?.name ?? "Project",
+        activeTab === "overview"
+          ? "Overview"
+          : `${activeTab[0]?.toUpperCase() ?? ""}${activeTab.slice(1)}`,
+      ]}
       actions={
         <Button
           type="button"
@@ -165,232 +175,258 @@ export function ProjectDetailView({
         </Button>
       }
     >
-      {projectQuery.isLoading ? <LoadingState /> : null}
-      {projectQuery.isError ? (
-        <ErrorState
-          message={
-            isProjectsApiError(projectQuery.error)
-              ? projectQuery.error.message
-              : "Unable to load project."
-          }
-          onRetry={() => void projectQuery.refetch()}
-        />
-      ) : null}
-
-      {project ? (
-        <>
-          <div className="flex flex-wrap gap-2" data-testid="projects-detail-tabs">
-            {TABS.map((entry) => (
-              <Button
-                key={entry}
-                type="button"
-                size="sm"
-                variant={activeTab === entry ? "default" : "outline"}
-                onClick={() =>
-                  router.push(
-                    entry === "overview"
-                      ? projectDetailPath(projectId)
-                      : projectDetailPath(projectId, entry),
-                  )
-                }
-                data-testid={`projects-tab-${entry}`}
-              >
-                {entry[0]?.toUpperCase()}
-                {entry.slice(1)}
-              </Button>
-            ))}
-          </div>
-
-          {activeTab === "overview" ? (
-            <div className="flex flex-col gap-4" data-testid="projects-detail-overview">
-              <div className="grid gap-4 rounded-lg border border-[var(--color-border)] p-4 md:grid-cols-2">
-                <div>
-                  <p className="text-xs uppercase text-[var(--color-muted-foreground)]">
-                    Status
-                  </p>
-                  <StatusBadge status={project.status} />
-                </div>
-                <div>
-                  <p className="text-xs uppercase text-[var(--color-muted-foreground)]">
-                    Workspace
-                  </p>
-                  <p className="text-sm">{project.workspaceId}</p>
-                </div>
-                <div className="md:col-span-2">
-                  <p className="text-xs uppercase text-[var(--color-muted-foreground)]">
-                    Description
-                  </p>
-                  <p className="text-sm">
-                    {project.description?.trim() || "No description provided."}
-                  </p>
-                </div>
-              </div>
-
-              {canManageProjects(permissions) ? (
-                <form
-                  className="flex flex-col gap-3 rounded-lg border border-[var(--color-border)] p-4"
-                  data-testid="projects-detail-edit"
-                  onSubmit={(event) => {
-                    event.preventDefault();
-                    if (editName.trim()) updateMutation.mutate();
-                  }}
+      <ProjectsWorkspaceFrame
+        context={
+          project ? (
+            <>
+              <ContextSection title="Project">
+                <p className="font-medium">{project.name}</p>
+                <p className="text-[var(--color-muted-foreground)]">
+                  {project.identifier}
+                </p>
+                <StatusBadge status={project.status} />
+              </ContextSection>
+              <ContextSection title="Quick actions">
+                <div
+                  className="flex flex-col gap-2"
+                  data-testid="projects-detail-quick-actions"
                 >
-                  <h2 className="text-sm font-semibold">Edit project</h2>
-                  <Input
-                    label="Name"
-                    value={editName}
-                    onChange={(event) => setEditName(event.target.value)}
-                    data-testid="projects-detail-edit-name"
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    onClick={() => router.push(projectDetailPath(projectId, "tasks"))}
+                  >
+                    Open tasks
+                  </Button>
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    onClick={() => router.push(projectsListPath())}
+                  >
+                    All projects
+                  </Button>
+                </div>
+              </ContextSection>
+            </>
+          ) : undefined
+        }
+      >
+        {projectQuery.isLoading ? <LoadingState /> : null}
+        {projectQuery.isError ? (
+          <ErrorState
+            message={
+              isProjectsApiError(projectQuery.error)
+                ? projectQuery.error.message
+                : "Unable to load project."
+            }
+            onRetry={() => void projectQuery.refetch()}
+          />
+        ) : null}
+
+        {project ? (
+          <>
+            <div className="flex flex-wrap gap-2" data-testid="projects-detail-tabs">
+              {TABS.map((entry) => (
+                <Button
+                  key={entry}
+                  type="button"
+                  size="sm"
+                  variant={activeTab === entry ? "default" : "outline"}
+                  onClick={() =>
+                    router.push(
+                      entry === "overview"
+                        ? projectDetailPath(projectId)
+                        : projectDetailPath(projectId, entry),
+                    )
+                  }
+                  data-testid={`projects-tab-${entry}`}
+                >
+                  {entry[0]?.toUpperCase()}
+                  {entry.slice(1)}
+                </Button>
+              ))}
+            </div>
+
+            {activeTab === "overview" ? (
+              <div
+                className="flex flex-col gap-4"
+                data-testid="projects-detail-overview"
+              >
+                <div className="grid gap-4 rounded-lg border border-[var(--color-border)] p-4 md:grid-cols-2">
+                  <div>
+                    <p className="text-xs uppercase text-[var(--color-muted-foreground)]">
+                      Status
+                    </p>
+                    <StatusBadge status={project.status} />
+                  </div>
+                  <div>
+                    <p className="text-xs uppercase text-[var(--color-muted-foreground)]">
+                      Identifier
+                    </p>
+                    <p className="text-sm">{project.identifier}</p>
+                  </div>
+                  <div className="md:col-span-2">
+                    <p className="text-xs uppercase text-[var(--color-muted-foreground)]">
+                      Description
+                    </p>
+                    <p className="text-sm">
+                      {project.description?.trim() || "No description provided."}
+                    </p>
+                  </div>
+                </div>
+
+                {canManageProjects(permissions) ? (
+                  <form
+                    className="flex flex-col gap-3 rounded-lg border border-[var(--color-border)] p-4"
+                    data-testid="projects-detail-edit"
+                    onSubmit={(event) => {
+                      event.preventDefault();
+                      if (editName.trim()) updateMutation.mutate();
+                    }}
+                  >
+                    <h2 className="text-sm font-semibold">Edit project</h2>
+                    <Input
+                      label="Name"
+                      value={editName}
+                      onChange={(event) => setEditName(event.target.value)}
+                      data-testid="projects-detail-edit-name"
+                    />
+                    <Input
+                      label="Description"
+                      value={editDescription}
+                      onChange={(event) => setEditDescription(event.target.value)}
+                      data-testid="projects-detail-edit-description"
+                    />
+                    <label className="flex flex-col gap-1 text-sm">
+                      <span className="font-medium">Status</span>
+                      <select
+                        className="h-9 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2"
+                        value={editStatus}
+                        onChange={(event) =>
+                          setEditStatus(event.target.value as ProjectStatus)
+                        }
+                        data-testid="projects-detail-edit-status"
+                      >
+                        {PROJECT_STATUSES.map((status) => (
+                          <option key={status} value={status}>
+                            {status}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      <Button
+                        type="submit"
+                        size="sm"
+                        disabled={updateMutation.isPending || !editName.trim()}
+                        data-testid="projects-detail-edit-save"
+                      >
+                        Save changes
+                      </Button>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="outline"
+                        disabled={archiveMutation.isPending}
+                        onClick={() => {
+                          if (
+                            window.confirm(
+                              "Archive this project? It will leave the active project list.",
+                            )
+                          ) {
+                            archiveMutation.mutate();
+                          }
+                        }}
+                        data-testid="projects-detail-archive"
+                      >
+                        Archive project
+                      </Button>
+                    </div>
+                    {actionError ? (
+                      <p
+                        className="text-xs text-[var(--color-destructive)]"
+                        role="alert"
+                      >
+                        {actionError}
+                      </p>
+                    ) : null}
+                  </form>
+                ) : null}
+              </div>
+            ) : null}
+
+            {activeTab !== "overview" ? (
+              <>
+                {tasksQuery.isLoading ? <LoadingState label="Loading tasks…" /> : null}
+                {tasksQuery.isError ? (
+                  <ErrorState
+                    message={
+                      isProjectsApiError(tasksQuery.error)
+                        ? tasksQuery.error.message
+                        : "Unable to load tasks."
+                    }
+                    onRetry={() => void tasksQuery.refetch()}
                   />
-                  <Input
-                    label="Description"
-                    value={editDescription}
-                    onChange={(event) => setEditDescription(event.target.value)}
-                    data-testid="projects-detail-edit-description"
-                  />
-                  <label className="flex flex-col gap-1 text-sm">
-                    <span className="font-medium">Status</span>
-                    <select
-                      className="h-9 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2"
-                      value={editStatus}
-                      onChange={(event) =>
-                        setEditStatus(event.target.value as ProjectStatus)
-                      }
-                      data-testid="projects-detail-edit-status"
-                    >
-                      {PROJECT_STATUSES.map((status) => (
-                        <option key={status} value={status}>
-                          {status}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                  <div className="flex flex-wrap gap-2">
+                ) : null}
+
+                {activeTab === "tasks" && canManageTasks(permissions) ? (
+                  <form
+                    className="flex flex-wrap items-end gap-2"
+                    data-testid="projects-detail-task-create"
+                    onSubmit={(event) => {
+                      event.preventDefault();
+                      if (taskTitle.trim()) createMutation.mutate();
+                    }}
+                  >
+                    <Input
+                      label="New task"
+                      value={taskTitle}
+                      onChange={(event) => setTaskTitle(event.target.value)}
+                      data-testid="projects-detail-task-title"
+                    />
                     <Button
                       type="submit"
                       size="sm"
-                      disabled={updateMutation.isPending || !editName.trim()}
-                      data-testid="projects-detail-edit-save"
+                      disabled={createMutation.isPending || !taskTitle.trim()}
+                      data-testid="projects-detail-task-submit"
                     >
-                      Save changes
+                      Add task
                     </Button>
-                    <Button
-                      type="button"
-                      size="sm"
-                      variant="outline"
-                      disabled={archiveMutation.isPending}
-                      onClick={() => {
-                        if (
-                          window.confirm(
-                            "Archive this project? It will leave the active project list.",
-                          )
-                        ) {
-                          archiveMutation.mutate();
-                        }
-                      }}
-                      data-testid="projects-detail-archive"
-                    >
-                      Archive project
-                    </Button>
-                  </div>
-                  {actionError ? (
-                    <p className="text-xs text-[var(--color-destructive)]" role="alert">
-                      {actionError}
-                    </p>
-                  ) : null}
-                </form>
-              ) : null}
-            </div>
-          ) : null}
+                  </form>
+                ) : null}
 
-          {activeTab !== "overview" ? (
-            <>
-              {activeTab === "sprints" ? (
-                <p
-                  className="text-sm text-[var(--color-muted-foreground)]"
-                  data-testid="projects-detail-sprints-honesty"
-                >
-                  Sprint grouping is derived from each task&apos;s sprint field.
-                  Dedicated sprint list/CRUD HTTP is not part of this release.
-                </p>
-              ) : null}
-              {activeTab === "roadmap" ? (
-                <p
-                  className="text-sm text-[var(--color-muted-foreground)]"
-                  data-testid="projects-detail-roadmap-honesty"
-                >
-                  Roadmap lists Platform tasks that have due dates, ordered by due date
-                  — not a separate roadmap engine API.
-                </p>
-              ) : null}
-
-              {tasksQuery.isLoading ? <LoadingState label="Loading tasks…" /> : null}
-              {tasksQuery.isError ? (
-                <ErrorState
-                  message={
-                    isProjectsApiError(tasksQuery.error)
-                      ? tasksQuery.error.message
-                      : "Unable to load tasks."
-                  }
-                  onRetry={() => void tasksQuery.refetch()}
-                />
-              ) : null}
-
-              {activeTab === "tasks" && canManageTasks(permissions) ? (
-                <form
-                  className="flex flex-wrap items-end gap-2"
-                  data-testid="projects-detail-task-create"
-                  onSubmit={(event) => {
-                    event.preventDefault();
-                    if (taskTitle.trim()) createMutation.mutate();
-                  }}
-                >
-                  <Input
-                    label="New task"
-                    value={taskTitle}
-                    onChange={(event) => setTaskTitle(event.target.value)}
-                    data-testid="projects-detail-task-title"
+                {tasksQuery.isSuccess ? (
+                  <TaskTable
+                    tasks={
+                      activeTab === "backlog"
+                        ? backlog
+                        : activeTab === "sprints"
+                          ? sprintTasks
+                          : activeTab === "roadmap"
+                            ? roadmap
+                            : tasks
+                    }
+                    statusOptions={statusOptions}
+                    permissions={permissions}
+                    showActions={activeTab === "tasks"}
+                    emptyTitle={
+                      activeTab === "backlog"
+                        ? "Backlog is empty"
+                        : activeTab === "sprints"
+                          ? "No sprint-assigned tasks"
+                          : activeTab === "roadmap"
+                            ? "No tasks with due dates"
+                            : "No tasks yet"
+                    }
                   />
-                  <Button
-                    type="submit"
-                    size="sm"
-                    disabled={createMutation.isPending || !taskTitle.trim()}
-                    data-testid="projects-detail-task-submit"
-                  >
-                    Add task
-                  </Button>
-                </form>
-              ) : null}
-
-              {tasksQuery.isSuccess ? (
-                <TaskTable
-                  tasks={
-                    activeTab === "backlog"
-                      ? backlog
-                      : activeTab === "sprints"
-                        ? sprintTasks
-                        : activeTab === "roadmap"
-                          ? roadmap
-                          : tasks
-                  }
-                  statusOptions={statusOptions}
-                  permissions={permissions}
-                  showActions={activeTab === "tasks"}
-                  emptyTitle={
-                    activeTab === "backlog"
-                      ? "Backlog is empty"
-                      : activeTab === "sprints"
-                        ? "No sprint-assigned tasks"
-                        : activeTab === "roadmap"
-                          ? "No tasks with due dates"
-                          : "No tasks yet"
-                  }
-                />
-              ) : null}
-            </>
-          ) : null}
-        </>
-      ) : null}
+                ) : null}
+              </>
+            ) : null}
+          </>
+        ) : null}
+      </ProjectsWorkspaceFrame>
     </PageShell>
   );
 }

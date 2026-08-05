@@ -193,7 +193,7 @@ export function ProjectsTaskActions({
 
       <div className="flex flex-wrap items-end gap-2">
         <Input
-          label="Assignee ID"
+          label="Assignee"
           value={assigneeDraft}
           onChange={(event) => setAssigneeDraft(event.target.value)}
           data-testid={`projects-task-assignee-${task.id}`}
@@ -226,8 +226,8 @@ export function ProjectsTaskActions({
           className="text-xs text-[var(--color-muted-foreground)]"
           data-testid="projects-task-status-hint"
         >
-          Status choices are limited to workflow states already present on project tasks
-          (Wave 1 HTTP has no status catalogue).
+          Status choices reflect workflow states already used on this project&apos;s
+          tasks.
         </p>
       ) : null}
 

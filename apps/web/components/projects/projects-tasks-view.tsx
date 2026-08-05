@@ -62,7 +62,11 @@ export function ProjectsTasksView({
   const statusOptions = useMemo(() => statusOptionsFromTasks(tasks), [tasks]);
 
   return (
-    <PageShell title="Tasks" description="Project-scoped task list via Platform API.">
+    <PageShell
+      title="Tasks"
+      description="Tasks for the selected project in APZ Projects."
+      breadcrumbs={["APZ Projects", "Tasks"]}
+    >
       <ProjectPicker
         projects={projects}
         value={projectId}

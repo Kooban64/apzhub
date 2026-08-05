@@ -1,9 +1,17 @@
 import { afterEach, describe, expect, it } from "vitest";
 
-import { readLastProjectId, writeLastProjectId } from "./preferences";
+import {
+  readCompactLists,
+  readLastProjectId,
+  readOnboardingDismissed,
+  writeCompactLists,
+  writeLastProjectId,
+  writeOnboardingDismissed,
+} from "./preferences";
 
 afterEach(() => {
   window.sessionStorage.clear();
+  window.localStorage.clear();
 });
 
 describe("projects preferences", () => {
@@ -13,5 +21,14 @@ describe("projects preferences", () => {
     expect(readLastProjectId()).toBe("proj_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     writeLastProjectId("");
     expect(readLastProjectId()).toBe("");
+  });
+
+  it("reads and writes onboarding and compact prefs", () => {
+    expect(readOnboardingDismissed()).toBe(false);
+    writeOnboardingDismissed(true);
+    expect(readOnboardingDismissed()).toBe(true);
+    expect(readCompactLists()).toBe(false);
+    writeCompactLists(true);
+    expect(readCompactLists()).toBe(true);
   });
 });

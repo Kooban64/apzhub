@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: projects-my-work
+name: My Work
+version: 0.1.0
+kind: module
+
+metadata:
+  category: productivity
+  description: APZ Projects — My Work.
+
+dependencies:
+  platform: []
+  services:
+    - project-service
+
+module:
+  category: productivity
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: projects
+    parent: projects
+    label: My Work
+    icon: user
+    route: /workspace/projects/my-work
+    order: 30
+    permission: projects.task.view
+  view:
+    title: My Work
+    workspace: projects
+    route: /workspace/projects/my-work
+    permission: projects.task.view

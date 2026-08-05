@@ -33,12 +33,12 @@ Lifecycle: see [APZHUB-WORKING-MODEL.md](./APZHUB-WORKING-MODEL.md).
 
 ## Adoption sequence (N-01…N-04)
 
-| Phase    | Title                        | Engineering?            | Exit                                         |
-| -------- | ---------------------------- | ----------------------- | -------------------------------------------- |
-| **N-01** | Native UX Audit              | Analysis only           | Gap register; Critical leaks identified      |
-| **N-02** | Identity Convergence         | Yes (identity only)     | Single APZHUB identity; no engine auth/roles |
-| **N-03** | Native Workspace Experience  | Yes (presentation only) | Native chrome/nav; no engine/adapter leakage |
-| **N-04** | Operational Quality Adoption | Process/docs only       | Every change via APZQEP; checklists in force |
+| Phase    | Title                                                        | Engineering?            | Exit                                                                                 |
+| -------- | ------------------------------------------------------------ | ----------------------- | ------------------------------------------------------------------------------------ |
+| **N-01** | Native UX Audit                                              | Analysis only           | Gap register; Critical leaks identified                                              |
+| **N-02** | Identity Convergence                                         | Yes (identity only)     | Single APZHUB identity; no engine auth/roles                                         |
+| **N-03** | Native Workspace Experience (Product Experience Convergence) | Yes (presentation only) | Native chrome/nav; product feels/behaves/speaks as APZHUB; no engine/adapter leakage |
+| **N-04** | Operational Quality Adoption                                 | Process/docs only       | Every change via APZQEP; checklists in force                                         |
 
 Do not reorder. Do not skip. Do not pull Phase C features forward without evidence.
 
@@ -71,15 +71,15 @@ Emerging Portfolio Patterns: [APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](./APZHUB-EM
 
 A product may be declared **APZHUB Native** when:
 
-| Criterion                                        | Met? |
-| ------------------------------------------------ | ---- |
-| N-01 gap register complete                       |      |
-| N-02 single platform identity                    |      |
-| N-03 native workspace; no engine/adapter leakage |      |
-| N-04 operational pack in force                   |      |
-| APZQEP is the only quality/release path          |      |
-| Known Limitations remain honest                  |      |
-| Reference evidence committed                     |      |
+| Criterion                                                      | Met? |
+| -------------------------------------------------------------- | ---- |
+| N-01 gap register complete                                     |      |
+| N-02 single platform identity                                  |      |
+| N-03 product experience convergence; no engine/adapter leakage |      |
+| N-04 operational pack in force                                 |      |
+| APZQEP is the only quality/release path                        |      |
+| Known Limitations remain honest                                |      |
+| Reference evidence committed                                   |      |
 
 ## Common pitfalls (from APZ Time)
 

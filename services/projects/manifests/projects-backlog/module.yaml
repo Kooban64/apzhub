@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: projects-backlog
+name: Backlog
+version: 0.1.0
+kind: module
+
+metadata:
+  category: productivity
+  description: APZ Projects — Backlog.
+
+dependencies:
+  platform: []
+  services:
+    - project-service
+
+module:
+  category: productivity
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: projects
+    parent: projects
+    label: Backlog
+    icon: list
+    route: /workspace/projects/backlog
+    order: 50
+    permission: projects.task.view
+  view:
+    title: Backlog
+    workspace: projects
+    route: /workspace/projects/backlog
+    permission: projects.task.view

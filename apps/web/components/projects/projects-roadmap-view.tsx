@@ -19,7 +19,7 @@ import {
   StatusBadge,
 } from "./projects-ui";
 
-/** Phase 1 roadmap: due-date ordered tasks from Platform Task API (Wave 1 HTTP surface). */
+/** Roadmap: due-date ordered tasks for the selected project. */
 export function ProjectsRoadmapView({
   permissions: _permissions,
 }: {
@@ -52,22 +52,21 @@ export function ProjectsRoadmapView({
   return (
     <PageShell
       title="Roadmap"
-      description="Due-date ordered Platform tasks — not a separate roadmap engine API."
+      description="Tasks with due dates, ordered for planning."
+      breadcrumbs={["APZ Projects", "Roadmap"]}
     >
-      <p
-        className="rounded-md border border-[var(--color-border)] bg-[var(--color-muted)]/20 px-3 py-2 text-sm text-[var(--color-muted-foreground)]"
-        data-testid="projects-roadmap-honesty"
-      >
-        Honesty: this view lists tasks that have a due date, sorted by due date. It does
-        not call a dedicated roadmap HTTP surface.
-      </p>
       <ProjectPicker
         projects={projects}
         value={projectId}
         onChange={setProjectId}
         testId="projects-roadmap-picker"
       />
-      {!projectId ? <EmptyState title="Select a project" /> : null}
+      {!projectId ? (
+        <EmptyState
+          title="Select a project"
+          description="Choose a project to review dated work."
+        />
+      ) : null}
       {projectId && tasksQuery.isLoading ? <LoadingState /> : null}
       {projectId && tasksQuery.isError ? (
         <ErrorState

@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: projects-list
+name: All Projects
+version: 0.1.0
+kind: module
+
+metadata:
+  category: productivity
+  description: APZ Projects — All Projects.
+
+dependencies:
+  platform: []
+  services:
+    - project-service
+
+module:
+  category: productivity
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: projects
+    parent: projects
+    label: All Projects
+    icon: folder
+    route: /workspace/projects/list
+    order: 20
+    permission: projects.view
+  view:
+    title: All Projects
+    workspace: projects
+    route: /workspace/projects/list
+    permission: projects.view

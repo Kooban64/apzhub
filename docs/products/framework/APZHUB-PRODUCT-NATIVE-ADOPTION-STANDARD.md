@@ -23,12 +23,12 @@ It has been validated across **two independent products** (APZ Time, APZ Support
 Every integrated product must complete the following before it is considered a
 **mature APZHUB product**:
 
-| Phase    | Title                        | Intent                                       |
-| -------- | ---------------------------- | -------------------------------------------- |
-| **N-01** | Native UX Audit              | Establish facts without changing the product |
-| **N-02** | Identity Convergence         | Consume APZHUB identity, session, RBAC only  |
-| **N-03** | Native Workspace Experience  | Indistinguishable APZHUB product chrome      |
-| **N-04** | Operational Quality Adoption | Every change runs through APZQEP             |
+| Phase    | Title                                                        | Intent                                       |
+| -------- | ------------------------------------------------------------ | -------------------------------------------- |
+| **N-01** | Native UX Audit                                              | Establish facts without changing the product |
+| **N-02** | Identity Convergence                                         | Consume APZHUB identity, session, RBAC only  |
+| **N-03** | Native Workspace Experience (Product Experience Convergence) | Indistinguishable APZHUB product experience  |
+| **N-04** | Operational Quality Adoption                                 | Every change runs through APZQEP             |
 
 ## Phase rules
 
@@ -44,12 +44,15 @@ Every integrated product must complete the following before it is considered a
 - No engine identities, roles, or permissions exposed
 - Product consumes platform identity; never owns it
 
-### N-03 — Native Workspace Experience
+### N-03 — Native Workspace Experience (Product Experience Convergence)
+
+Purpose: converge **product experience** — every APZHUB product feels the same, behaves the same, speaks the same language, and presents the same quality. Workspace chrome is one part of that outcome; the product experience is the real exit.
 
 - Native layout, navigation, breadcrumbs, empty/loading/error states
 - APZHUB terminology and icons only
 - No engine terminology, adapter console feeling, or raw JSON for end users
 - Help and product settings are APZHUB-owned when introduced
+- No Playbook redesign — clarification of intent only
 
 ### N-04 — Operational Quality Adoption
 

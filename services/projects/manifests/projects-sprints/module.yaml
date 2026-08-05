@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: projects-sprints
+name: Sprints
+version: 0.1.0
+kind: module
+
+metadata:
+  category: productivity
+  description: APZ Projects — Sprints.
+
+dependencies:
+  platform: []
+  services:
+    - project-service
+
+module:
+  category: productivity
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: projects
+    parent: projects
+    label: Sprints
+    icon: calendar
+    route: /workspace/projects/sprints
+    order: 60
+    permission: projects.sprint.view
+  view:
+    title: Sprints
+    workspace: projects
+    route: /workspace/projects/sprints
+    permission: projects.sprint.view

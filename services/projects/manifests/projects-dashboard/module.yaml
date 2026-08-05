@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: projects-dashboard
+name: Dashboard
+version: 0.1.0
+kind: module
+
+metadata:
+  category: productivity
+  description: APZ Projects — Dashboard.
+
+dependencies:
+  platform: []
+  services:
+    - project-service
+
+module:
+  category: productivity
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: projects
+    parent: projects
+    label: Dashboard
+    icon: layout-dashboard
+    route: /workspace/projects
+    order: 10
+    permission: projects.view
+  view:
+    title: Dashboard
+    workspace: projects
+    route: /workspace/projects
+    permission: projects.view

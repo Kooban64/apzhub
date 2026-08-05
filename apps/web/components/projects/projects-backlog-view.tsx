@@ -45,7 +45,8 @@ export function ProjectsBacklogView({
   return (
     <PageShell
       title="Backlog"
-      description="Tasks not assigned to a sprint (derived from Platform task data)."
+      description="Tasks not yet assigned to a sprint."
+      breadcrumbs={["APZ Projects", "Backlog"]}
     >
       <ProjectPicker
         projects={projects}

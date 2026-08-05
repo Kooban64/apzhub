@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 
 import { isProjectsApiError } from "@/lib/projects/errors";
+import { formatSprintGroupLabel } from "@/lib/projects/format";
 import type { ProjectsPermissionSource } from "@/lib/projects/permissions";
 import { listProjects, listTasks } from "@/lib/projects/projects-api";
 import { projectsQueryKeys } from "@/lib/projects/query-keys";
@@ -19,9 +20,8 @@ import {
 } from "./projects-ui";
 
 /**
- * Sprint board (Phase 1): groups Platform tasks by sprintId.
- * Dedicated sprint CRUD HTTP is out of scope unless added over existing ProjectService
- * without adapter changes — Wave 1 sprint entities remain available via task.sprintId.
+ * Sprint board: groups tasks that already belong to a sprint.
+ * Product-safe labels only — no engine/API honesty chrome.
  */
 export function ProjectsSprintsView({
   permissions: _permissions,
@@ -50,8 +50,20 @@ export function ProjectsSprintsView({
       if (!task.sprintId) continue;
       map.set(task.sprintId, (map.get(task.sprintId) ?? 0) + 1);
     }
-    return [...map.entries()].map(([sprintId, count]) => ({ sprintId, count }));
+    return [...map.entries()].map(([sprintId, count], index) => ({
+      sprintId,
+      count,
+      label: formatSprintGroupLabel(sprintId, index),
+    }));
   }, [tasksQuery.data]);
+
+  const sprintLabelById = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const group of sprintGroups) {
+      map.set(group.sprintId, group.label);
+    }
+    return map;
+  }, [sprintGroups]);
 
   const sprintTasks = (tasksQuery.data?.items ?? []).filter((task) =>
     Boolean(task.sprintId),
@@ -60,22 +72,21 @@ export function ProjectsSprintsView({
   return (
     <PageShell
       title="Sprints"
-      description="Groups Platform tasks by their sprint field. This is not a dedicated sprint board API — sprint list/CRUD HTTP is out of scope for Release 1.1."
+      description="Tasks grouped by sprint for the selected project."
+      breadcrumbs={["APZ Projects", "Sprints"]}
     >
-      <p
-        className="rounded-md border border-[var(--color-border)] bg-[var(--color-muted)]/20 px-3 py-2 text-sm text-[var(--color-muted-foreground)]"
-        data-testid="projects-sprints-honesty"
-      >
-        Honesty: sprint names/entities are not listed via HTTP. Counts below come from{" "}
-        <code className="text-xs">task.sprintId</code> on loaded project tasks.
-      </p>
       <ProjectPicker
         projects={projects}
         value={projectId}
         onChange={setProjectId}
         testId="projects-sprints-picker"
       />
-      {!projectId ? <EmptyState title="Select a project" /> : null}
+      {!projectId ? (
+        <EmptyState
+          title="Select a project"
+          description="Choose a project to review sprint groupings."
+        />
+      ) : null}
       {projectId && tasksQuery.isLoading ? <LoadingState /> : null}
       {projectId && tasksQuery.isError ? (
         <ErrorState
@@ -90,19 +101,19 @@ export function ProjectsSprintsView({
       {projectId && tasksQuery.isSuccess && sprintGroups.length === 0 ? (
         <EmptyState
           title="No sprint assignments"
-          description="Tasks with sprint IDs will appear here."
+          description="Tasks assigned to a sprint will appear here."
         />
       ) : null}
       {projectId && sprintGroups.length > 0 ? (
         <>
-          <ProjectsTable headers={["Sprint ID", "Tasks"]}>
+          <ProjectsTable headers={["Sprint", "Tasks"]}>
             {sprintGroups.map((group) => (
               <tr
                 key={group.sprintId}
                 className="border-b border-[var(--color-border)] last:border-0"
                 data-testid={`projects-sprint-group-${group.sprintId}`}
               >
-                <td className="px-3 py-2 font-mono text-xs">{group.sprintId}</td>
+                <td className="px-3 py-2 font-medium">{group.label}</td>
                 <td className="px-3 py-2">{group.count}</td>
               </tr>
             ))}
@@ -117,7 +128,11 @@ export function ProjectsSprintsView({
                 <td className="px-3 py-2">
                   <StatusBadge status={task.status} />
                 </td>
-                <td className="px-3 py-2 font-mono text-xs">{task.sprintId}</td>
+                <td className="px-3 py-2">
+                  {task.sprintId
+                    ? (sprintLabelById.get(task.sprintId) ?? "Sprint")
+                    : "Unavailable"}
+                </td>
               </tr>
             ))}
           </ProjectsTable>

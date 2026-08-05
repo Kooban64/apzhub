@@ -80,7 +80,8 @@ export function ProjectsMyWorkView({
   return (
     <PageShell
       title="My work"
-      description="Project-scoped tasks for an assignee. Cross-project aggregation is not available on Wave 1 HTTP."
+      description="Tasks assigned to you within a selected project."
+      breadcrumbs={["APZ Projects", "My work"]}
     >
       <div className="grid gap-3 md:grid-cols-2">
         <ProjectPicker
@@ -93,7 +94,7 @@ export function ProjectsMyWorkView({
           testId="projects-mywork-picker"
         />
         <Input
-          label="Assignee ID"
+          label="Assignee"
           value={assigneeId}
           onChange={(event) => setAssigneeId(event.target.value)}
           data-testid="projects-mywork-assignee"
@@ -104,14 +105,14 @@ export function ProjectsMyWorkView({
           className="text-xs text-[var(--color-muted-foreground)]"
           data-testid="projects-mywork-session-hint"
         >
-          Assignee defaults to your signed-in user id. Last selected project is restored
-          for this browser session.
+          Assignee defaults to you. Your last selected project is restored for this
+          browser session.
         </p>
       ) : null}
       {!projectId ? (
         <EmptyState
           title="Select a project"
-          description="Choose a project, then optionally adjust the assignee filter."
+          description="Choose a project to see your assigned work."
         />
       ) : null}
       {projectId && tasksQuery.isLoading ? <LoadingState /> : null}

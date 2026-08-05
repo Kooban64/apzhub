@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: projects-tasks
+name: Tasks
+version: 0.1.0
+kind: module
+
+metadata:
+  category: productivity
+  description: APZ Projects — Tasks.
+
+dependencies:
+  platform: []
+  services:
+    - project-service
+
+module:
+  category: productivity
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: projects
+    parent: projects
+    label: Tasks
+    icon: check-square
+    route: /workspace/projects/tasks
+    order: 40
+    permission: projects.task.view
+  view:
+    title: Tasks
+    workspace: projects
+    route: /workspace/projects/tasks
+    permission: projects.task.view

@@ -42,7 +42,8 @@ export function ProjectCreateView() {
   return (
     <PageShell
       title="Create project"
-      description="Create a project through the Platform Projects API."
+      description="Create a new project in APZ Projects."
+      breadcrumbs={["APZ Projects", "Create project"]}
       actions={
         <Button
           type="button"

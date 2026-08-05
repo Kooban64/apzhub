@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: projects-roadmap
+name: Roadmap
+version: 0.1.0
+kind: module
+
+metadata:
+  category: productivity
+  description: APZ Projects — Roadmap.
+
+dependencies:
+  platform: []
+  services:
+    - project-service
+
+module:
+  category: productivity
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: projects
+    parent: projects
+    label: Roadmap
+    icon: map
+    route: /workspace/projects/roadmap
+    order: 70
+    permission: projects.view
+  view:
+    title: Roadmap
+    workspace: projects
+    route: /workspace/projects/roadmap
+    permission: projects.view

@@ -9,11 +9,15 @@ describe("projects routes", () => {
     expect(isProjectsRoute("/workspace/support")).toBe(false);
   });
 
-  it("resolves list, detail, and search routes", () => {
+  it("resolves list, detail, search, help, and settings routes", () => {
     expect(resolveProjectsRoute("/workspace/projects")).toEqual({ kind: "dashboard" });
     expect(resolveProjectsRoute("/workspace/projects/list")).toEqual({ kind: "list" });
     expect(resolveProjectsRoute("/workspace/projects/search")).toEqual({
       kind: "search",
+    });
+    expect(resolveProjectsRoute("/workspace/projects/help")).toEqual({ kind: "help" });
+    expect(resolveProjectsRoute("/workspace/projects/settings")).toEqual({
+      kind: "settings",
     });
     expect(
       resolveProjectsRoute("/workspace/projects/proj_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),

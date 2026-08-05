@@ -1,0 +1,34 @@
+manifestSchemaVersion: "1.0"
+id: projects-settings
+name: Settings
+version: 0.1.0
+kind: module
+
+metadata:
+  category: productivity
+  description: APZ Projects — Settings.
+
+dependencies:
+  platform: []
+  services:
+    - project-service
+
+module:
+  category: productivity
+  status: enabled
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: projects
+    parent: projects
+    label: Settings
+    icon: settings
+    route: /workspace/projects/settings
+    order: 100
+    permission: projects.view
+  view:
+    title: Settings
+    workspace: projects
+    route: /workspace/projects/settings
+    permission: projects.view
