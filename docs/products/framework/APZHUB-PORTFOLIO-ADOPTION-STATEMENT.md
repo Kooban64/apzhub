@@ -146,6 +146,8 @@ Emerging Portfolio Patterns: [APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](./APZHUB-EM
 
 | Artefact                      | Path                                                                                                             |
 | ----------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Platform Phase 1 Complete     | [APZHUB-PLATFORM-PHASE-1-COMPLETE.md](./APZHUB-PLATFORM-PHASE-1-COMPLETE.md)                                     |
+| Unified Work Experience       | [../apzhub-capability-001/](../apzhub-capability-001/)                                                           |
 | Portfolio programme           | [../apzhub-portfolio-001/](../apzhub-portfolio-001/)                                                             |
 | Enterprise Capability Model   | [../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md) |
 | Enterprise Operating Model    | [../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md)   |
