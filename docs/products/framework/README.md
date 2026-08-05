@@ -27,6 +27,7 @@ Establish the **official Product Engineering Framework** that every APZHUB produ
 | Repository structure | [PRODUCT-REPOSITORY-STANDARD.md](./PRODUCT-REPOSITORY-STANDARD.md)                         |
 | Native adoption      | [APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md](./APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md) |
 | Adoption playbook    | [APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](./APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)               |
+| Portfolio adoption   | [APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md](./APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md)         |
 | Completion           | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md)                                             |
 | Owner acceptance     | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md)                                               |
 
