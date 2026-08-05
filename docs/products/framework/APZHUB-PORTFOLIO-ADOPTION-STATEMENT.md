@@ -61,22 +61,39 @@ A product may be nominated as a Reference Implementation only when **all** apply
 
 **REFERENCE IMPLEMENTATION #001 (APZ Time)** is the founding designation that proved the path. Later designations must meet the earned criteria above — including demonstrated operational learning — so the title remains meaningful.
 
-## Sequencing rule
+## Recommended portfolio priority (business value)
 
-Candidates for the next Native Adoption programme (illustrative, not authorised):
+Owner-directed scoring for daily operational payoff (not technical completeness):
 
-1. APZ Projects — if project management is the highest daily operational need
-2. APZ Support — if support operations drive the business
-3. APZ Documents — if document management becomes the integration focus
+| Priority | Product          | Business value | Current maturity | Notes                                                        |
+| -------: | ---------------- | -------------: | ---------------: | ------------------------------------------------------------ |
+|    **1** | **APZ Support**  |     ⭐⭐⭐⭐⭐ |          Partial | Highest day-to-day ticket interaction — **recommended next** |
+|    **2** | APZ Projects     |     ⭐⭐⭐⭐⭐ |          Partial | After Support unless portfolio reverses                      |
+|    **3** | APZ Documents    |       ⭐⭐⭐⭐ |          Partial |                                                              |
+|    **4** | APZ Workflow     |       ⭐⭐⭐⭐ |          Partial |                                                              |
+|    **5** | APZ Analytics    |         ⭐⭐⭐ |          Partial |                                                              |
+|    Later | APZ Law Platform |      Strategic |          Planned | Product development, not next native adoption by default     |
 
-**Choice is driven by business usage, not engineering completeness.**
+**Illustrative quarterly sketch (not authorised programmes):**
+
+| Quarter | Objective                                    |
+| ------- | -------------------------------------------- |
+| Q1      | APZ Time (Reference) ✅                      |
+| Q2      | APZ Support (Native) — when Owner Auth opens |
+| Q3      | APZ Projects (Native)                        |
+| Q4      | APZ Documents (Native)                       |
+
+APZQEP does not appear on that roadmap — it is infrastructure.
+
+**No SUPPORT-NATIVE (or equivalent) programme is open until separate Owner Authorisation.** Apply the Playbook as-is — no redesign.
 
 ## Standing constraints
 
 - Do not open the next product programme solely because TIME-NATIVE-001 finished
 - Do not invent new standards before real releases exercise the current ones
 - Do not designate the next Reference Implementation by default
-- Portfolio dashboard (documentation) may follow when Owner requests — not required to freeze TIME-NATIVE-001
+- Do not repeat TIME-NATIVE-001 methodology design for the next product
+- Portfolio dashboard (documentation) may follow when Owner requests
 
 ## Related
 

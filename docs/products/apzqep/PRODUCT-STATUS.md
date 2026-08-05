@@ -142,13 +142,14 @@ APZHUB-TIME-NATIVE-001: **FROZEN** — [PROGRAMME-FREEZE](../time/APZHUB-TIME-NA
 APZ Time: **REFERENCE IMPLEMENTATION #001** — [REFERENCE-IMPLEMENTATION-001.md](../apztime/REFERENCE-IMPLEMENTATION-001.md)
 Portfolio statement: [APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md](../framework/APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md)
 Native Adoption + Playbook: [STANDARD](../framework/APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md) · [PLAYBOOK](../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)
-**Portfolio engineering mode.** Methodology proven. RIs are earned. Sequencing = business priority + evidence.
+**APZHUB is the project.** APZQEP is infrastructure. Mode: Portfolio → Product → Business Value.
+Recommended next product (not authorised): **APZ Support** — [PORTFOLIO-ADOPTION-STATEMENT](../framework/APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md)
 
 Engineering chapter: **CLOSED** — [CHAPTER-CLOSE.md](./v1.1/apzqep-version-1.1-architecture-freeze/CHAPTER-CLOSE.md)
-Default on APZQEP architecture: frozen. Default on APZQEP ops: **daily use + evidence**.
+Default on APZQEP: silent daily use + evidence. Talk APZQEP only on release learning / justified provider work.
 
 Next Action:
-(1) Real APZ Time change through APZQEP / ADOPT-001, or (2) Portfolio selects next product for Native Adoption. Do NOT open A05 / TIME Phase B. Do NOT invent standards. Do NOT start APZQEP-170. Do NOT reopen V1.1. Do NOT expose Kimai.
+Await Owner Auth for **APZ Support** Native Adoption (Playbook as-is), or process a real APZ Time change under ADOPT-001. Do NOT invent standards. Do NOT open A05 / TIME Phase B. Do NOT start APZQEP-170. Do NOT reopen V1.1. Do NOT expose engines.
 ```
 
 ---

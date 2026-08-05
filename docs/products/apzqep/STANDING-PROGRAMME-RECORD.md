@@ -66,7 +66,8 @@
 > **TIME-NATIVE-001-A03 (20260804T200500Z):** Native APZHUB Workspace Experience **COMPLETE** — G-05/G-06 + workspace/nav closed — [TIME-NATIVE-001-A03](../time/APZHUB-TIME-NATIVE-001/TIME-NATIVE-001-A03/)
 > **TIME-NATIVE-001-A04 (20260805T034500Z):** APZQEP Operational Adoption **COMPLETE** — ops pack [apztime/](../apztime/) · Playbook [APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md](../framework/APZHUB-PRODUCT-ADOPTION-PLAYBOOK.md)
 > **REFERENCE IMPLEMENTATION #001 (20260805T035000Z):** APZ Time **DECLARED** — [REFERENCE-IMPLEMENTATION-001.md](../apztime/REFERENCE-IMPLEMENTATION-001.md)
-> **TIME-NATIVE-001 FREEZE (20260805T035500Z):** Programme **FROZEN** — [PROGRAMME-FREEZE.md](../time/APZHUB-TIME-NATIVE-001/PROGRAMME-FREEZE.md) · Portfolio statement [APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md](../framework/APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md) — RIs earned not designated; next = APZQEP learning or portfolio-selected product
+> **TIME-NATIVE-001 FREEZE (20260805T035500Z):** Programme **FROZEN** — [PROGRAMME-FREEZE.md](../time/APZHUB-TIME-NATIVE-001/PROGRAMME-FREEZE.md)
+> **PORTFOLIO MODE (20260805T035900Z):** APZHUB is the project; APZQEP is infrastructure — [APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md](../framework/APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md) — recommended next product **APZ Support** (not authorised); apply Playbook as-is
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
