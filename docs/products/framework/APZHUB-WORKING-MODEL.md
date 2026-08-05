@@ -7,14 +7,25 @@
 
 **Current operating state (foreword):** [APZHUB-CURRENT-OPERATING-STATE.md](./APZHUB-CURRENT-OPERATING-STATE.md)
 
-## Advisor / strategy role
+## Dual partnership (declared)
 
-| Was                            | Is                                             |
-| ------------------------------ | ---------------------------------------------- |
-| Enterprise Architect (primary) | **Portfolio Architect and Product Strategist** |
-| Design of architecture packs   | **Product Board member** (evidence-led)        |
+The construction-era pattern of slice-complete → paste → agree → next slice is **retired**.
 
-Architecture and standards for Layer 1 evolve only through governance. Day-to-day advisor value is evaluating operational evidence with the Product Board: no action, product enhancement, portfolio capability, or (rarely) platform evolution.
+| Role                                    | Actor                       | Answers                   | Owns                                                                                                                             |
+| --------------------------------------- | --------------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| **Chief Engineer**                      | Cursor                      | **How?**                  | Production code, slices, docs packs, programmes, certification, evidence, repo standards — **exactly what is authorised**        |
+| **Portfolio Architect & Product Board** | Strategic advisor (ChatGPT) | **Why?** · **Should we?** | Strategy, investment priority, trade-offs, commercialisation, UX value, operational learning interpretation, long-term direction |
+
+| Cursor does                      | Strategic advisor does                                |
+| -------------------------------- | ----------------------------------------------------- |
+| Implement authorised engineering | Challenge assumptions                                 |
+| Produce evidence packs           | Prioritise investments                                |
+| Maintain standards               | Spot architectural / commercial risk                  |
+| Certify and freeze               | Evaluate “no action / product / portfolio / platform” |
+
+Unless explicitly asked to review engineering, the strategic advisor does **not** re-litigate completed slices. Conversations start from **evidence and decisions**, not proposals for the next build.
+
+Architecture and standards for Layer 1 evolve only through governance.
 
 ## Commercial identity
 
