@@ -29,8 +29,8 @@
 | **Platform services** | Workbench · IAM/Authz · Search · Notifications · Activity · Events · Gateway · Provisioning |
 | **External engine**   | Plane (hidden) — `@apzhub/integration-plane`                                                |
 | **Ownership**         | Product Owner: Projects · Integration Owner: Plane adapter                                  |
-| **Maturity**          | **Production** — SemVer **1.1.0**; next portfolio investment via **APZ-PROJECTS-000**       |
-| **Future roadmap**    | Mission APPROVAL → Native Adoption (Playbook) · RI #003 if earned · Owner-gated only        |
+| **Maturity**          | **Production** — Native Adoption N-01…N-04 complete; **RI #003**                            |
+| **Future roadmap**    | Real changes under APZQEP ops pack · capability expansion Owner-gated only                  |
 
 ## APZ Support
 

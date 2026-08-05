@@ -16,7 +16,7 @@ Define the repeatable path from **wrapped / integrated application** to
 
 This standard copies the **maturation process**, not product code.
 
-It has been validated across **two independent products** (APZ Time, APZ Support) without requiring redesign. It is the authoritative portfolio adoption methodology. Future changes require operational evidence — not preference.
+It has been validated across **three independent products** (APZ Time, APZ Support, APZ Projects) without requiring redesign. It is the authoritative portfolio adoption methodology. Future changes require operational evidence — not preference.
 
 ## Mandatory phases
 
@@ -60,16 +60,17 @@ Purpose: converge **product experience** — every APZHUB product feels the same
 - Every change: Quality Flow → Impact → Policy → Decision → Evidence → Learning
 - No dual quality process; no engine-native APZHUB release path
 - Publish product ops pack (lifecycle, release process, checklists, metrics, learning, roles)
-- Reference ops packs: [../apztime/](../apztime/) · [../apzsupport/](../apzsupport/)
+- Reference ops packs: [../apztime/](../apztime/) · [../apzsupport/](../apzsupport/) · [../apzprojects/](../apzprojects/)
 
 ## Reference implementations
 
-| RI   | Product     | Path                                                                                           |
-| ---- | ----------- | ---------------------------------------------------------------------------------------------- |
-| #001 | APZ Time    | [../apztime/REFERENCE-IMPLEMENTATION-001.md](../apztime/REFERENCE-IMPLEMENTATION-001.md)       |
-| #002 | APZ Support | [../apzsupport/REFERENCE-IMPLEMENTATION-002.md](../apzsupport/REFERENCE-IMPLEMENTATION-002.md) |
+| RI   | Product      | Path                                                                                             |
+| ---- | ------------ | ------------------------------------------------------------------------------------------------ |
+| #001 | APZ Time     | [../apztime/REFERENCE-IMPLEMENTATION-001.md](../apztime/REFERENCE-IMPLEMENTATION-001.md)         |
+| #002 | APZ Support  | [../apzsupport/REFERENCE-IMPLEMENTATION-002.md](../apzsupport/REFERENCE-IMPLEMENTATION-002.md)   |
+| #003 | APZ Projects | [../apzprojects/REFERENCE-IMPLEMENTATION-003.md](../apzprojects/REFERENCE-IMPLEMENTATION-003.md) |
 
-Subsequent products follow the same sequence under separate Owner Authorisation. Sequencing is a **business priority** decision — not a methodology experiment.
+Subsequent products follow the same sequence under separate Owner Authorisation. Sequencing is a **business priority** decision guided by the [Portfolio Capability Map](./APZHUB-PORTFOLIO-CAPABILITY-MAP.md) — not a methodology experiment.
 
 After each RI: complete [APZHUB-RI-RETROSPECTIVE.md](./APZHUB-RI-RETROSPECTIVE.md).
 

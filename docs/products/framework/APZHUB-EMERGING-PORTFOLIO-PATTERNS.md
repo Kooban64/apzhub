@@ -76,9 +76,9 @@ Three products validate recurrence. They do **not** by themselves justify centra
 | [IMPROVEMENT-BACKLOG](../apzqep/apzqep-adopt-001/IMPROVEMENT-BACKLOG.md)                     | Candidates after promotion authorisation |
 | This register                                                                                | Cross-product pattern evidence only      |
 
-## Later (not authorised)
+## Portfolio Capability Map
 
-When a third Reference Implementation lands, consider introducing a **Portfolio Capability Map** (business capabilities → contributing products) as an executive planning artefact — governance only; not an engineering programme.
+Introduced after RI #003: [APZHUB-PORTFOLIO-CAPABILITY-MAP.md](./APZHUB-PORTFOLIO-CAPABILITY-MAP.md) — executive planning artefact; governance only; not an engineering programme.
 
 ## Discipline
 

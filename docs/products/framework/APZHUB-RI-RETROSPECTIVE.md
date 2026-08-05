@@ -49,7 +49,8 @@ Outcome recorded in:
 
 ## Completed retrospectives
 
-| RI   | Product     | Path                                                                           | Playbook worked? |
-| ---- | ----------- | ------------------------------------------------------------------------------ | ---------------- |
-| #001 | APZ Time    | [../apztime/RI-RETROSPECTIVE-001.md](../apztime/RI-RETROSPECTIVE-001.md)       | **Yes**          |
-| #002 | APZ Support | [../apzsupport/RI-RETROSPECTIVE-002.md](../apzsupport/RI-RETROSPECTIVE-002.md) | **Yes**          |
+| RI   | Product      | Path                                                                             | Playbook worked? |
+| ---- | ------------ | -------------------------------------------------------------------------------- | ---------------- |
+| #001 | APZ Time     | [../apztime/RI-RETROSPECTIVE-001.md](../apztime/RI-RETROSPECTIVE-001.md)         | **Yes**          |
+| #002 | APZ Support  | [../apzsupport/RI-RETROSPECTIVE-002.md](../apzsupport/RI-RETROSPECTIVE-002.md)   | **Yes**          |
+| #003 | APZ Projects | [../apzprojects/RI-RETROSPECTIVE-003.md](../apzprojects/RI-RETROSPECTIVE-003.md) | **Yes**          |

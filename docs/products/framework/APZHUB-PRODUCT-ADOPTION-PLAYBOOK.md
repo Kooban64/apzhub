@@ -5,7 +5,7 @@
 | Status    | **GOVERNING — ENGINEERING STANDARD**                                                               |
 | Timestamp | 20260805T051000Z                                                                                   |
 | Maturity  | Operationally validated — [METHODOLOGY-MATURITY](./APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md) |
-| Reference | APZ Time — **RI #001** · APZ Support — **RI #002**                                                 |
+| Reference | APZ Time — **RI #001** · APZ Support — **RI #002** · APZ Projects — **RI #003**                    |
 | Companion | [APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md](./APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md)         |
 
 > **The Playbook changes only when operational evidence demonstrates that it should.**

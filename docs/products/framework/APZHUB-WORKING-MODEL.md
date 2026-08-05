@@ -3,7 +3,7 @@
 | Field     | Value            |
 | --------- | ---------------- |
 | Status    | **IN FORCE**     |
-| Timestamp | 20260805T051000Z |
+| Timestamp | 20260805T074500Z |
 
 ## Advisor / strategy role
 
@@ -23,7 +23,7 @@ Engineering architecture for Layer 1 evolves only through governance. Day-to-day
 
 ## Methodology posture
 
-Native Adoption is **operationally validated** (RI #001 + RI #002).
+Native Adoption is **operationally validated** (RI #001 + RI #002 + RI #003).
 
 | Focus before                      | Focus now                                         |
 | --------------------------------- | ------------------------------------------------- |
@@ -34,11 +34,11 @@ Declaration: [APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md](./APZHUB-NATIVE-AD
 
 ## Portfolio categories
 
-| Category                      | Products (current)                                          |
-| ----------------------------- | ----------------------------------------------------------- |
-| **Reference Implementations** | APZ Time · APZ Support                                      |
-| **Portfolio Candidates**      | APZ Projects · APZ Documents · APZ Workflow · APZ Analytics |
-| **Future Products**           | APZ Law Platform and others                                 |
+| Category                      | Products (current)                           |
+| ----------------------------- | -------------------------------------------- |
+| **Reference Implementations** | APZ Time · APZ Support · APZ Projects        |
+| **Portfolio Candidates**      | APZ Documents · APZ Workflow · APZ Analytics |
+| **Future Products**           | APZ Law Platform and others                  |
 
 ## Every product must answer
 
