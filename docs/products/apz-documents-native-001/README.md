@@ -9,14 +9,14 @@
 | Lane      | **2 — Portfolio Delivery**                                   |
 | Platform  | Lane 1 remains frozen                                        |
 
-| Deliverable          | Path                                                     | Status         |
-| -------------------- | -------------------------------------------------------- | -------------- |
-| Auth                 | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md)       | DONE           |
-| Roadmap              | [ROADMAP.md](./ROADMAP.md)                               | IN FORCE       |
-| N-01 Native UX Audit | [DOCUMENTS-NATIVE-001-N01/](./DOCUMENTS-NATIVE-001-N01/) | **AUTHORISED** |
-| N-02 Identity        | —                                                        | Pending        |
-| N-03 Experience      | —                                                        | Pending        |
-| N-04 APZQEP Adoption | —                                                        | Pending        |
+| Deliverable          | Path                                                     | Status       |
+| -------------------- | -------------------------------------------------------- | ------------ |
+| Auth                 | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md)       | DONE         |
+| Roadmap              | [ROADMAP.md](./ROADMAP.md)                               | IN FORCE     |
+| N-01 Native UX Audit | [DOCUMENTS-NATIVE-001-N01/](./DOCUMENTS-NATIVE-001-N01/) | **COMPLETE** |
+| N-02 Identity        | —                                                        | Pending      |
+| N-03 Experience      | —                                                        | Pending      |
+| N-04 APZQEP Adoption | —                                                        | Pending      |
 
 ## Mission constraints (carry into every slice)
 
