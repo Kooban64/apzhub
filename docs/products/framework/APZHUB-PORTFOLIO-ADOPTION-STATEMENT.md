@@ -119,6 +119,7 @@ Ask each quarter:
 | Platform Phase 2          | ✅ DECLARED — Unified Experience Enabled      |
 | My Work operational pause | ✅ IN FORCE — no new Horizon 3 capability yet |
 | My Work Review            | ✅ IN FORCE — standing product review         |
+| APZHUB-OPERATE-001        | ✅ COMPLETE — internal operational readiness  |
 | APZ-PROJECTS-000          | ✅ CLOSED (Owner APPROVED)                    |
 | APZ-PROJECTS-NATIVE-001   | ✅ COMPLETE / FROZEN                          |
 

@@ -55,7 +55,8 @@ Phase 1: [APZHUB-PLATFORM-PHASE-1-COMPLETE.md](./APZHUB-PLATFORM-PHASE-1-COMPLET
 Operating model: [../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md)  
 My Work Review: [APZHUB-MY-WORK-REVIEW.md](./APZHUB-MY-WORK-REVIEW.md)  
 Unified Work (composition): [../apzhub-capability-001-eng-001/](../apzhub-capability-001-eng-001/)  
-Operational pause: [OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md](./OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md)
+Operational pause: [OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md](./OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md)  
+Internal readiness: [../apzhub-operate-001/](../apzhub-operate-001/) — **COMPLETE**
 
 ## Layers
 
