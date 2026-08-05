@@ -71,16 +71,27 @@ Every future investment discussion starts with:
 
 The methodology executes. It does not reinvent itself.
 
-## Commercial identity
+## Commercial identity (Phase 1 wording)
 
 > **APZHUB is an Enterprise Productivity Platform that delivers integrated business capabilities through a portfolio of native products governed by a common quality, identity, operational, and engineering model.**
 
+Phase 2 updates the identity statement to emphasise work-first composition — see [APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](./APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md).
+
 Implementation engines remain invisible infrastructure.
+
+## Superseded as latest milestone
+
+Phase 1 remains true and in force as the foundation milestone.
+
+The **latest** platform milestone is:
+
+**[APZHUB Platform Phase 2 — Unified Experience Enabled](./APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md)**
 
 ## Related
 
 | Artefact                  | Path                                                                                                             |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Phase 2 (latest)          | [APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](./APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md)                 |
 | Operating Model           | [../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md)   |
 | Capability Model          | [../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md) |
 | Portfolio statement       | [APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md](./APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md)                               |

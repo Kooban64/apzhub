@@ -107,18 +107,21 @@ Ask each quarter:
 | Mission / ops       | [../apzprojects/](../apzprojects/) — **RI #003**                                                                 |
 | Native Adoption     | [../apz-projects-native-001/](../apz-projects-native-001/) — **COMPLETE / FROZEN**                               |
 
-| Milestone               | Status                                           |
-| ----------------------- | ------------------------------------------------ |
-| APZ Time (RI #001)      | ✅ Complete                                      |
-| APZ Support (RI #002)   | ✅ Complete                                      |
-| APZ Projects (RI #003)  | ✅ Complete                                      |
-| APZHUB-PORTFOLIO-001    | ✅ COMPLETE                                      |
-| Platform Phase 1        | ✅ DECLARED                                      |
-| APZHUB-CAPABILITY-001   | ✅ Definition COMPLETE (engineering not started) |
-| APZ-PROJECTS-000        | ✅ CLOSED (Owner APPROVED)                       |
-| APZ-PROJECTS-NATIVE-001 | ✅ COMPLETE / FROZEN                             |
+| Milestone                 | Status                                        |
+| ------------------------- | --------------------------------------------- |
+| APZ Time (RI #001)        | ✅ Complete                                   |
+| APZ Support (RI #002)     | ✅ Complete                                   |
+| APZ Projects (RI #003)    | ✅ Complete                                   |
+| APZHUB-PORTFOLIO-001      | ✅ COMPLETE                                   |
+| Platform Phase 1          | ✅ DECLARED                                   |
+| APZHUB-CAPABILITY-001     | ✅ Definition COMPLETE                        |
+| CAPABILITY-001-ENG-001    | ✅ COMPLETE — My Work composition live        |
+| Platform Phase 2          | ✅ DECLARED — Unified Experience Enabled      |
+| My Work operational pause | ✅ IN FORCE — no new Horizon 3 capability yet |
+| APZ-PROJECTS-000          | ✅ CLOSED (Owner APPROVED)                    |
+| APZ-PROJECTS-NATIVE-001   | ✅ COMPLETE / FROZEN                          |
 
-**Post Phase 1:** methodology paused. Investment via Product Board / QPR and Horizon 3 capabilities (e.g. Unified Work Experience) before opening another product Native Adoption by default. Prerequisite remains: APPROVED Product Mission (**PRODUCT-000**) before Native Adoption opens.
+**Post Phase 2:** observe My Work in production. No new Horizon 3 capability programme until [Work Completion Journey](./APZHUB-WORK-COMPLETION-JOURNEY.md) evidence exists. Product Native Adoption still requires APPROVED Product Mission (**PRODUCT-000**) and portfolio priority — not engineering momentum.
 
 APZQEP does not appear on product roadmaps — it is infrastructure.
 
@@ -146,8 +149,12 @@ Emerging Portfolio Patterns: [APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](./APZHUB-EM
 
 | Artefact                      | Path                                                                                                             |
 | ----------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Platform Phase 2 (latest)     | [APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](./APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md)                 |
 | Platform Phase 1 Complete     | [APZHUB-PLATFORM-PHASE-1-COMPLETE.md](./APZHUB-PLATFORM-PHASE-1-COMPLETE.md)                                     |
+| My Work operational pause     | [OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md](./OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md)                     |
+| Work Completion Journey       | [APZHUB-WORK-COMPLETION-JOURNEY.md](./APZHUB-WORK-COMPLETION-JOURNEY.md)                                         |
 | Unified Work Experience       | [../apzhub-capability-001/](../apzhub-capability-001/)                                                           |
+| Composition ENG-001           | [../apzhub-capability-001-eng-001/](../apzhub-capability-001-eng-001/)                                           |
 | Portfolio programme           | [../apzhub-portfolio-001/](../apzhub-portfolio-001/)                                                             |
 | Enterprise Capability Model   | [../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-CAPABILITY-MODEL.md) |
 | Enterprise Operating Model    | [../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md](../apzhub-portfolio-001/ENTERPRISE-OPERATING-MODEL.md)   |

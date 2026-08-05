@@ -9,7 +9,10 @@
 
 ## Platform identity (commercial)
 
-> **APZHUB is an Enterprise Productivity Platform that delivers integrated business capabilities through a portfolio of native products operating under a common identity, quality, and operational model.**
+> **APZHUB is an Enterprise Productivity Platform that presents work—not applications—to its users. Native products remain the authoritative owners of business data, while the platform composes a unified work experience, common identity, common quality model, and shared operational standards.**
+
+Permanent work principle: **APZHUB answers “What do I need to do?” Products answer “How do I do it?”**  
+Latest milestone: [../framework/APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md](../framework/APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md).
 
 | APZHUB is                                  | APZHUB is not                                |
 | ------------------------------------------ | -------------------------------------------- |

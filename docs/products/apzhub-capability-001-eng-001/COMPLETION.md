@@ -43,4 +43,10 @@
 
 ## Strategic pause
 
+**IN FORCE** — [OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md](../framework/OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md).
+
 Do **not** auto-start Unified Notifications, Unified Search, or Executive Workspace. Gather operational learning on My Work first.
+
+Platform milestone: [Phase 2 — Unified Experience Enabled](../framework/APZHUB-PLATFORM-PHASE-2-UNIFIED-EXPERIENCE.md).
+
+Operational metric: [Work Completion Journey](../framework/APZHUB-WORK-COMPLETION-JOURNEY.md).
