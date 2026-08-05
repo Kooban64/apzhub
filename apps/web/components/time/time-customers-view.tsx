@@ -62,7 +62,8 @@ export function TimeCustomersView({
   return (
     <PageShell
       title="Customers"
-      description="List of time customers."
+      description="Customers used to classify time in APZ Time."
+      breadcrumbs={["APZ Time", "Customers"]}
       actions={
         canCreate ? (
           <Button

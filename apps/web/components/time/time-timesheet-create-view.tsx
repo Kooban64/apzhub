@@ -1,48 +1,85 @@
 "use client";
 
 import { Button, Input } from "@apzhub/ui";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { isTimeApiError } from "@/lib/time/errors";
 import { writeLastCustomerId, writeLastTimesheetId } from "@/lib/time/preferences";
+import { timeQueryKeys } from "@/lib/time/query-keys";
 import { timesheetDetailPath, timesheetsPath } from "@/lib/time/routes";
-import { createTimesheet } from "@/lib/time/time-api";
+import {
+  createTimesheet,
+  listActivities,
+  listCustomers,
+  listTags,
+} from "@/lib/time/time-api";
 
-import { ErrorState, PageShell } from "./time-ui";
+import { ErrorState, PageShell, SelectField } from "./time-ui";
 
-function parseOptionalId(value: string): string | undefined {
-  const trimmed = value.trim();
-  return trimmed.length > 0 ? trimmed : undefined;
-}
-
-function parseTagIds(value: string): readonly string[] | undefined {
-  const parts = value
-    .split(",")
-    .map((part) => part.trim())
-    .filter(Boolean);
-  return parts.length > 0 ? parts : undefined;
-}
-
+/**
+ * Create timesheet — product pickers only. Time-domain project IDs are deferred
+ * (G-09) to avoid confusion with APZ Projects.
+ */
 export function TimeTimesheetCreateView() {
   const router = useRouter();
   const [description, setDescription] = useState("");
   const [billable, setBillable] = useState(true);
   const [activityId, setActivityId] = useState("");
   const [customerId, setCustomerId] = useState("");
-  const [projectId, setProjectId] = useState("");
-  const [tagIds, setTagIds] = useState("");
+  const [tagId, setTagId] = useState("");
+
+  const activitiesQuery = useQuery({
+    queryKey: timeQueryKeys.activities({ perPage: 100 }),
+    queryFn: ({ signal }) => listActivities({ perPage: 100 }, { signal }),
+  });
+
+  const customersQuery = useQuery({
+    queryKey: timeQueryKeys.customers({ perPage: 100 }),
+    queryFn: ({ signal }) => listCustomers({ perPage: 100 }, { signal }),
+  });
+
+  const tagsQuery = useQuery({
+    queryKey: timeQueryKeys.tags({ perPage: 100 }),
+    queryFn: ({ signal }) => listTags({ perPage: 100 }, { signal }),
+  });
+
+  const activityOptions = useMemo(
+    () =>
+      (activitiesQuery.data?.items ?? []).map((item) => ({
+        value: item.id,
+        label: item.name,
+      })),
+    [activitiesQuery.data?.items],
+  );
+
+  const customerOptions = useMemo(
+    () =>
+      (customersQuery.data?.items ?? []).map((item) => ({
+        value: item.id,
+        label: item.name,
+      })),
+    [customersQuery.data?.items],
+  );
+
+  const tagOptions = useMemo(
+    () =>
+      (tagsQuery.data?.items ?? []).map((item) => ({
+        value: item.id,
+        label: item.name,
+      })),
+    [tagsQuery.data?.items],
+  );
 
   const mutation = useMutation({
     mutationFn: () =>
       createTimesheet({
         description: description.trim() || undefined,
         billable,
-        activityId: parseOptionalId(activityId),
-        customerId: parseOptionalId(customerId),
-        projectId: parseOptionalId(projectId),
-        tagIds: parseTagIds(tagIds),
+        activityId: activityId || undefined,
+        customerId: customerId || undefined,
+        tagIds: tagId ? [tagId] : undefined,
       }),
     onSuccess: (timesheet) => {
       writeLastTimesheetId(timesheet.id);
@@ -56,7 +93,8 @@ export function TimeTimesheetCreateView() {
   return (
     <PageShell
       title="Create timesheet"
-      description="Create a timesheet through the Platform Time API."
+      description="Start tracking time in APZ Time."
+      breadcrumbs={["APZ Time", "Timesheets", "Create"]}
       actions={
         <Button
           type="button"
@@ -91,29 +129,29 @@ export function TimeTimesheetCreateView() {
           />
           <span className="font-medium">Billable</span>
         </label>
-        <Input
-          label="Activity ID (optional)"
+        <SelectField
+          label="Activity (optional)"
           value={activityId}
-          onChange={(event) => setActivityId(event.target.value)}
-          data-testid="time-timesheet-create-activity"
+          onChange={setActivityId}
+          options={activityOptions}
+          emptyLabel="No activity"
+          testId="time-timesheet-create-activity"
         />
-        <Input
-          label="Customer ID (optional)"
+        <SelectField
+          label="Customer (optional)"
           value={customerId}
-          onChange={(event) => setCustomerId(event.target.value)}
-          data-testid="time-timesheet-create-customer"
+          onChange={setCustomerId}
+          options={customerOptions}
+          emptyLabel="No customer"
+          testId="time-timesheet-create-customer"
         />
-        <Input
-          label="Project ID (optional)"
-          value={projectId}
-          onChange={(event) => setProjectId(event.target.value)}
-          data-testid="time-timesheet-create-project"
-        />
-        <Input
-          label="Tag IDs (optional, comma-separated)"
-          value={tagIds}
-          onChange={(event) => setTagIds(event.target.value)}
-          data-testid="time-timesheet-create-tags"
+        <SelectField
+          label="Tag (optional)"
+          value={tagId}
+          onChange={setTagId}
+          options={tagOptions}
+          emptyLabel="No tag"
+          testId="time-timesheet-create-tags"
         />
         {mutation.isError ? (
           <ErrorState

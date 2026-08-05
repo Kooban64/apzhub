@@ -58,7 +58,8 @@ export function TimeTagsView({
   return (
     <PageShell
       title="Tags"
-      description="List of time tags."
+      description="Tags used to organise timesheets in APZ Time."
+      breadcrumbs={["APZ Time", "Tags"]}
       actions={
         canCreate ? (
           <Button

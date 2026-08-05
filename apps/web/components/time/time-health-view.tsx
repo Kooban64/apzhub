@@ -3,18 +3,16 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { isTimeApiError } from "@/lib/time/errors";
-import { formatSafeDiagnosticsJson } from "@/lib/time/format";
 import { timeQueryKeys } from "@/lib/time/query-keys";
 import { createHttpSearchClient } from "@/lib/search/search-client";
 import { getTimeDiagnostics, getTimeHealth } from "@/lib/time/time-api";
 
-import { ErrorState, LoadingState, PageShell } from "./time-ui";
+import { DeveloperDetails, ErrorState, LoadingState, PageShell } from "./time-ui";
 
 const searchClient = createHttpSearchClient();
 
 /**
- * Product health / diagnostics / audit surface.
- * Consumes Time health + optional Search diagnostics — no platform redesign.
+ * Operator health surface — user-friendly status first; JSON behind disclosure.
  */
 export function TimeHealthView() {
   const healthQuery = useQuery({
@@ -45,20 +43,21 @@ export function TimeHealthView() {
   return (
     <PageShell
       title="Health"
-      description="Time platform health, diagnostics, and optional search audit."
+      description="Operator health for APZ Time. End-user work continues from Overview and Timesheets."
+      breadcrumbs={["APZ Time", "Health"]}
     >
       <section
         className="rounded-lg border border-[var(--color-border)] p-4"
         data-testid="time-health-platform"
       >
-        <h2 className="text-sm font-semibold">Time API health</h2>
+        <h2 className="text-sm font-semibold">APZ Time status</h2>
         {healthQuery.isLoading ? <LoadingState /> : null}
         {healthQuery.isError ? (
           <ErrorState
             message={
               isTimeApiError(healthQuery.error)
                 ? healthQuery.error.message
-                : "Unable to load Time health."
+                : "Unable to load APZ Time health."
             }
             onRetry={() => void healthQuery.refetch()}
           />
@@ -99,10 +98,13 @@ export function TimeHealthView() {
       </section>
 
       <section
-        className="rounded-lg border border-[var(--color-border)] p-4"
+        className="space-y-3 rounded-lg border border-[var(--color-border)] p-4"
         data-testid="time-health-diagnostics"
       >
-        <h2 className="text-sm font-semibold">Time diagnostics</h2>
+        <h2 className="text-sm font-semibold">Support details</h2>
+        <p className="text-sm text-[var(--color-muted-foreground)]">
+          Expand only for support investigations. Values are redacted for safe display.
+        </p>
         {diagnosticsQuery.isLoading ? (
           <LoadingState label="Loading diagnostics…" />
         ) : null}
@@ -111,58 +113,40 @@ export function TimeHealthView() {
             message={
               isTimeApiError(diagnosticsQuery.error)
                 ? diagnosticsQuery.error.message
-                : "Unable to load Time diagnostics."
+                : "Unable to load APZ Time diagnostics."
             }
             onRetry={() => void diagnosticsQuery.refetch()}
           />
         ) : null}
         {diagnosticsQuery.data ? (
-          <pre className="mt-3 overflow-x-auto text-xs">
-            {formatSafeDiagnosticsJson(diagnosticsQuery.data)}
-          </pre>
+          <DeveloperDetails
+            title="Platform diagnostics"
+            value={diagnosticsQuery.data}
+          />
         ) : null}
-      </section>
-
-      <section
-        className="rounded-lg border border-[var(--color-border)] p-4"
-        data-testid="time-health-search"
-      >
-        <h2 className="text-sm font-semibold">Search health</h2>
         {searchHealthQuery.isLoading ? (
           <LoadingState label="Loading search health…" />
         ) : null}
         {searchHealthQuery.data ? (
-          <pre className="mt-3 overflow-x-auto text-xs">
-            {JSON.stringify(searchHealthQuery.data, null, 2)}
-          </pre>
-        ) : null}
-      </section>
-
-      <section
-        className="rounded-lg border border-[var(--color-border)] p-4"
-        data-testid="time-health-search-diagnostics"
-      >
-        <h2 className="text-sm font-semibold">Search diagnostics</h2>
-        {searchDiagnosticsQuery.isLoading ? (
-          <LoadingState label="Loading search diagnostics…" />
+          <DeveloperDetails
+            title="Search health detail"
+            value={searchHealthQuery.data}
+            testId="time-health-search"
+          />
         ) : null}
         {searchDiagnosticsQuery.data ? (
-          <pre className="mt-3 overflow-x-auto text-xs">
-            {JSON.stringify(searchDiagnosticsQuery.data, null, 2)}
-          </pre>
+          <DeveloperDetails
+            title="Search diagnostics detail"
+            value={searchDiagnosticsQuery.data}
+            testId="time-health-search-diagnostics"
+          />
         ) : null}
-      </section>
-
-      <section
-        className="rounded-lg border border-[var(--color-border)] p-4"
-        data-testid="time-health-audit"
-      >
-        <h2 className="text-sm font-semibold">Search audit (recent)</h2>
-        {searchAuditQuery.isLoading ? <LoadingState label="Loading audit…" /> : null}
         {searchAuditQuery.data ? (
-          <pre className="mt-3 overflow-x-auto text-xs">
-            {JSON.stringify(searchAuditQuery.data.items.slice(0, 10), null, 2)}
-          </pre>
+          <DeveloperDetails
+            title="Recent search audit"
+            value={searchAuditQuery.data.items.slice(0, 10)}
+            testId="time-health-audit"
+          />
         ) : null}
       </section>
     </PageShell>

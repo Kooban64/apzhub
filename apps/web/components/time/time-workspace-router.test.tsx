@@ -63,20 +63,33 @@ describe("TimeWorkspaceRouter", () => {
     render(wrap(<TimeWorkspaceRouter permissions={["time.*"]} />));
     expect(screen.getByTestId("time-page")).toBeTruthy();
     await waitFor(() => {
-      expect(screen.getByText("Morning work")).toBeTruthy();
+      expect(screen.getAllByText("Morning work").length).toBeGreaterThan(0);
     });
+    expect(screen.getByTestId("time-context-panel")).toBeTruthy();
   });
 
   it("renders unknown route empty state", () => {
     pathnameMock.mockReturnValue("/workspace/time/not-a-real-section");
     render(wrap(<TimeWorkspaceRouter permissions={["time.*"]} />));
     expect(screen.getByTestId("time-page")).toBeTruthy();
-    expect(screen.getByText("Unknown Time route")).toBeTruthy();
+    expect(screen.getByText("Unknown APZ Time route")).toBeTruthy();
   });
 
   it("denies create route without APZHUB Time permissions", () => {
     pathnameMock.mockReturnValue("/workspace/time/timesheets/new");
     render(wrap(<TimeWorkspaceRouter permissions={["time.view"]} />));
-    expect(screen.getByText("Permission required")).toBeTruthy();
+    expect(screen.getByTestId("time-empty")).toHaveTextContent("Permission required");
+  });
+
+  it("denies operator surfaces without time.admin", () => {
+    pathnameMock.mockReturnValue("/workspace/time/diagnostics");
+    render(wrap(<TimeWorkspaceRouter permissions={["time.view"]} />));
+    expect(screen.getByTestId("time-empty")).toHaveTextContent("Permission required");
+  });
+
+  it("renders help for viewers", () => {
+    pathnameMock.mockReturnValue("/workspace/time/help");
+    render(wrap(<TimeWorkspaceRouter permissions={["time.view"]} />));
+    expect(screen.getByTestId("time-help")).toBeTruthy();
   });
 });

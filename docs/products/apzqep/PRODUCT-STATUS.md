@@ -144,7 +144,7 @@ Engineering chapter: **CLOSED** — [CHAPTER-CLOSE.md](./v1.1/apzqep-version-1.1
 Default on APZQEP architecture: frozen. Default on APZQEP ops: **daily use + evidence**.
 
 Next Action:
-ADOPT-001 Phase 1 + TIME-NATIVE-001: **A01 COMPLETE** · **A02 Identity Convergence COMPLETE** (G-21/G-22 closed). Next Time slice when authorised: **A03 Workspace Integration**. Continue APZQEP daily use.
+ADOPT-001 Phase 1 + TIME-NATIVE-001: **A01–A03 COMPLETE** (identity + native workspace). Next Time slice when authorised: **A04 APZQEP Operational Adoption**. Continue APZQEP daily use.
 Do NOT start APZQEP-170. Do NOT reopen V1.1 foundations. Do NOT expose Kimai.
 ```
 

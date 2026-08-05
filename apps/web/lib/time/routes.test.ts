@@ -47,6 +47,10 @@ describe("time routes", () => {
       kind: "tag-create",
     });
     expect(resolveTimeRoute("/workspace/time/search")).toEqual({ kind: "search" });
+    expect(resolveTimeRoute("/workspace/time/help")).toEqual({ kind: "help" });
+    expect(resolveTimeRoute("/workspace/time/settings")).toEqual({
+      kind: "settings",
+    });
     expect(resolveTimeRoute("/workspace/time/health")).toEqual({ kind: "health" });
     expect(resolveTimeRoute("/workspace/time/diagnostics")).toEqual({
       kind: "diagnostics",

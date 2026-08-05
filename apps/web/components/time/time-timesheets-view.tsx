@@ -71,7 +71,8 @@ export function TimeTimesheetsView({
   return (
     <PageShell
       title="Timesheets"
-      description="List and open timesheets in the Time workspace."
+      description="Track and open your timesheets in APZ Time."
+      breadcrumbs={["APZ Time", "Timesheets"]}
       actions={
         canCreate ? (
           <Button

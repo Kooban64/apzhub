@@ -56,7 +56,8 @@ export function TimeSearchView() {
   return (
     <PageShell
       title="Search"
-      description="Foundation Time search across timesheets, activities, customers, projects, and tags."
+      description="Find timesheets, activities, customers, and tags in APZ Time."
+      breadcrumbs={["APZ Time", "Search"]}
     >
       <form
         className="flex flex-col gap-3"

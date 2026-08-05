@@ -62,7 +62,8 @@
 > **APZQEP-ADOPT-001 Phase 1 (20260804T191500Z):** Production Adoption & APZ Time Integration **AUTHORISED / IN PROGRESS** — [OWNER-AUTHORISATION-PHASE-1.md](./apzqep-adopt-001/OWNER-AUTHORISATION-PHASE-1.md) · [APZHUB-TIME-NATIVE-001](../time/APZHUB-TIME-NATIVE-001/) **STARTED**
 > **APZHUB-TIME-NATIVE-001 correction (20260804T193500Z):** Maturation not creation — Time 1.0.0 exists; priorities Native UX → Identity → Workspace → APZQEP → daily-use gaps; no Kimai parity chase
 > **TIME-NATIVE-001-A01 (20260804T194000Z):** Native UX Audit **COMPLETE** (no eng) — [APZ-TIME-NATIVE-UX-AUDIT.md](../time/APZHUB-TIME-NATIVE-001/TIME-NATIVE-001-A01/APZ-TIME-NATIVE-UX-AUDIT.md)
-> **TIME-NATIVE-001-A02 (20260804T194500Z):** APZHUB Identity Convergence **COMPLETE** — G-21/G-22 CLOSED — [TIME-NATIVE-001-A02](../time/APZHUB-TIME-NATIVE-001/TIME-NATIVE-001-A02/) — next: A03 Workspace when authorised
+> **TIME-NATIVE-001-A02 (20260804T194500Z):** APZHUB Identity Convergence **COMPLETE** — G-21/G-22 CLOSED — [TIME-NATIVE-001-A02](../time/APZHUB-TIME-NATIVE-001/TIME-NATIVE-001-A02/)
+> **TIME-NATIVE-001-A03 (20260804T200500Z):** Native APZHUB Workspace Experience **COMPLETE** — G-05/G-06 + workspace/nav closed — [TIME-NATIVE-001-A03](../time/APZHUB-TIME-NATIVE-001/TIME-NATIVE-001-A03/) — next: A04 APZQEP when authorised
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

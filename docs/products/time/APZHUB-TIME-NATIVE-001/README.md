@@ -37,8 +37,8 @@ Right metric: “Does APZ Time provide the experience our users need?”
 
 1. **A01 Native UX Audit** — **COMPLETE** — [TIME-NATIVE-001-A01](./TIME-NATIVE-001-A01/)
 2. **A02 Identity Convergence** — **COMPLETE** — [TIME-NATIVE-001-A02](./TIME-NATIVE-001-A02/)
-3. A03 Workspace Integration — pending Owner Auth
-4. A04 APZQEP Operational Adoption — pending
+3. **A03 Native APZHUB Workspace Experience** — **COMPLETE** — [TIME-NATIVE-001-A03](./TIME-NATIVE-001-A03/)
+4. A04 APZQEP Operational Adoption — pending Owner Auth
 5. Daily-use Phase 1 gaps only (not Kimai parity)
 
 See [ROADMAP.md](./ROADMAP.md) (Phases A → B → C).

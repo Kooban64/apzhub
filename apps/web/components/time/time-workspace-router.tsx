@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 
 import {
+  canAdminTime,
   canCreateActivities,
   canCreateCustomers,
   canCreateTags,
@@ -19,7 +20,9 @@ import { TimeCustomersView } from "./time-customers-view";
 import { TimeDashboardView } from "./time-dashboard-view";
 import { TimeDiagnosticsView } from "./time-diagnostics-view";
 import { TimeHealthView } from "./time-health-view";
+import { TimeHelpView } from "./time-help-view";
 import { TimeSearchView } from "./time-search-view";
+import { TimeSettingsView } from "./time-settings-view";
 import { TimeTagCreateView } from "./time-tag-create-view";
 import { TimeTagsView } from "./time-tags-view";
 import { TimeTimesheetCreateView } from "./time-timesheet-create-view";
@@ -29,7 +32,7 @@ import { EmptyState, PageShell } from "./time-ui";
 
 function PermissionDenied({ action }: { readonly action: string }) {
   return (
-    <PageShell title="Time">
+    <PageShell title="APZ Time" breadcrumbs={["APZ Time", "Permission required"]}>
       <EmptyState
         title="Permission required"
         description={`You do not have permission to ${action}. Contact your APZHUB administrator if you need access.`}
@@ -92,16 +95,29 @@ export function TimeWorkspaceRouter({
       return <TimeTagCreateView />;
     case "search":
       return <TimeSearchView />;
+    case "help":
+      return <TimeHelpView />;
+    case "settings":
+      if (!canAdminTime(permissions)) {
+        return <PermissionDenied action="manage APZ Time settings" />;
+      }
+      return <TimeSettingsView />;
     case "health":
+      if (!canAdminTime(permissions)) {
+        return <PermissionDenied action="view APZ Time health" />;
+      }
       return <TimeHealthView />;
     case "diagnostics":
+      if (!canAdminTime(permissions)) {
+        return <PermissionDenied action="view APZ Time platform readiness" />;
+      }
       return <TimeDiagnosticsView />;
     default:
       return (
-        <PageShell title="Time">
+        <PageShell title="APZ Time" breadcrumbs={["APZ Time", "Unknown"]}>
           <EmptyState
-            title="Unknown Time route"
-            description="Select a Time sidebar item to continue."
+            title="Unknown APZ Time route"
+            description="Select an APZ Time sidebar item to continue."
           />
         </PageShell>
       );

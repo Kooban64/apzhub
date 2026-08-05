@@ -38,6 +38,10 @@ export function canManageTime(source: TimePermissionSource): boolean {
   return hasTimePermission(source, "time.manage");
 }
 
+export function canAdminTime(source: TimePermissionSource): boolean {
+  return hasTimePermission(source, "time.admin");
+}
+
 export function canListTimesheets(source: TimePermissionSource): boolean {
   return (
     hasTimePermission(source, "time.timesheet.list") ||

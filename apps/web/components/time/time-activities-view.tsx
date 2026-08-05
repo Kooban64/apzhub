@@ -61,7 +61,8 @@ export function TimeActivitiesView({
   return (
     <PageShell
       title="Activities"
-      description="List of time activities."
+      description="Classify work with activities in APZ Time."
+      breadcrumbs={["APZ Time", "Activities"]}
       actions={
         canCreate ? (
           <Button

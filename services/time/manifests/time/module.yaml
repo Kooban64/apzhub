@@ -6,7 +6,7 @@ kind: module
 
 metadata:
   category: productivity
-  description: APZHUB Time workbench — timesheets, activities, customers, tags (Release 1.0.0 Phase 1).
+  description: APZ Time — native APZHUB time tracking (timesheets, activities, customers, tags).
   owner: APZHUB
   icon: clock
   tags:
@@ -27,7 +27,7 @@ compatibility:
 module:
   category: productivity
   status: enabled
-  description: Time capability module (APZ Time Release 1.0.0 Phase 1 Workbench).
+  description: APZ Time native workspace module.
 
 permissions:
   - id: time.view
@@ -119,16 +119,26 @@ navigation:
       route: /workspace/time/search
       icon: search
       permission: time.view
+    - id: time.help
+      label: Help
+      route: /workspace/time/help
+      icon: circle-help
+      permission: time.view
+    - id: time.settings
+      label: Settings
+      route: /workspace/time/settings
+      icon: settings
+      permission: time.admin
     - id: time.health
       label: Health
       route: /workspace/time/health
       icon: activity
-      permission: time.view
+      permission: time.admin
     - id: time.diagnostics
-      label: Diagnostics
+      label: Platform readiness
       route: /workspace/time/diagnostics
       icon: stethoscope
-      permission: time.view
+      permission: time.admin
 
 commands:
   - id: time.timesheet.open
@@ -162,7 +172,7 @@ workbench:
     order: 25
     permission: time.view
   view:
-    title: Time
+    title: APZ Time
     workspace: time
     route: /workspace/time
     default: true

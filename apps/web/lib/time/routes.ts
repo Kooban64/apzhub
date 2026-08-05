@@ -8,6 +8,8 @@ export const TIME_SECTIONS = [
   "customers",
   "tags",
   "search",
+  "help",
+  "settings",
   "health",
   "diagnostics",
   "new",
@@ -27,6 +29,8 @@ export type TimeRouteResolution =
   | { readonly kind: "tags" }
   | { readonly kind: "tag-create" }
   | { readonly kind: "search" }
+  | { readonly kind: "help" }
+  | { readonly kind: "settings" }
   | { readonly kind: "health" }
   | { readonly kind: "diagnostics" }
   | { readonly kind: "unknown" };
@@ -91,6 +95,14 @@ export function resolveTimeRoute(pathname: string): TimeRouteResolution {
 
   if (normalized === `${TIME_BASE}/search`) {
     return { kind: "search" };
+  }
+
+  if (normalized === `${TIME_BASE}/help`) {
+    return { kind: "help" };
+  }
+
+  if (normalized === `${TIME_BASE}/settings`) {
+    return { kind: "settings" };
   }
 
   if (normalized === `${TIME_BASE}/health`) {
@@ -162,4 +174,12 @@ export function timeHealthPath(): string {
 
 export function timeDiagnosticsPath(): string {
   return `${TIME_BASE}/diagnostics`;
+}
+
+export function timeHelpPath(): string {
+  return `${TIME_BASE}/help`;
+}
+
+export function timeSettingsPath(): string {
+  return `${TIME_BASE}/settings`;
 }
