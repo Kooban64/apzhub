@@ -105,15 +105,18 @@ Owner-directed scoring for daily operational payoff (not technical completeness)
 APZQEP does not appear on that roadmap — it is infrastructure.
 
 **APZ-SUPPORT-000** — Owner **APPROVED / CLOSED** — [../apzsupport/](../apzsupport/).  
-**APZ-SUPPORT-NATIVE-001** — **IN PROGRESS** (N-01…N-03 complete; N-04 pending) — [../apz-support-native-001/](../apz-support-native-001/).  
-Playbook as-is — no redesign.
+**APZ-SUPPORT-NATIVE-001** — **COMPLETE / FROZEN** — [../apz-support-native-001/](../apz-support-native-001/).  
+**REFERENCE IMPLEMENTATION #002 (APZ Support)** — [../apzsupport/REFERENCE-IMPLEMENTATION-002.md](../apzsupport/REFERENCE-IMPLEMENTATION-002.md).  
+Playbook as-is — no redesign. Native Adoption Standard is **stable** (two independent products).
+
+Emerging Portfolio Patterns (observation only): [APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](./APZHUB-EMERGING-PORTFOLIO-PATTERNS.md)
 
 ### Native Adoption progress (portfolio view)
 
 | Product       | Mission | Audit | Identity | Workspace | APZQEP | RI  |
 | ------------- | ------- | :---: | :------: | :-------: | :----: | :-: |
 | APZ Time      | ✅      |  ✅   |    ✅    |    ✅     |   ✅   | ✅  |
-| APZ Support   | ✅      |  ✅   |    ✅    |    ✅     |   ⏳   | ⏳  |
+| APZ Support   | ✅      |  ✅   |    ✅    |    ✅     |   ✅   | ✅  |
 | APZ Projects  | –       |   –   |    –     |     –     |   –    |  –  |
 | APZ Documents | –       |   –   |    –     |     –     |   –    |  –  |
 

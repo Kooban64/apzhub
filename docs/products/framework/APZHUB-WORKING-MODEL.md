@@ -37,7 +37,9 @@ Mission & Business Outcomes
 OWNER APPROVAL
         ↓
 PRODUCT-NATIVE-001
-(N-01…N-04 Playbook — unchanged)
+(N-01…N-04 Playbook — unchanged; proven by RI #001 and RI #002)
+
+Emerging Portfolio Patterns (observation only): [APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](./APZHUB-EMERGING-PORTFOLIO-PATTERNS.md)
         ↓
 Reference Implementation (optional — earned)
         ↓

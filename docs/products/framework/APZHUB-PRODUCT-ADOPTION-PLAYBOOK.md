@@ -4,7 +4,7 @@
 | --------- | ------------------------------------------------------------------------------------------ |
 | Status    | **GOVERNING**                                                                              |
 | Timestamp | 20260805T034500Z                                                                           |
-| Reference | APZ Time — **REFERENCE IMPLEMENTATION #001**                                               |
+| Reference | APZ Time — **RI #001** · APZ Support — **RI #002** (Playbook proven twice)                 |
 | Companion | [APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md](./APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md) |
 
 ## Purpose
@@ -61,7 +61,8 @@ Every post-adoption change must:
 6. Complete Engineering / Quality / Release checklists
 7. Record Operational Learning on completed releases
 
-Reference ops pack (Time): [../apztime/](../apztime/)
+Reference ops packs: Time [../apztime/](../apztime/) · Support [../apzsupport/](../apzsupport/)  
+Emerging Portfolio Patterns: [APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](./APZHUB-EMERGING-PORTFOLIO-PATTERNS.md)
 
 ## Exit criteria — “APZHUB Native”
 

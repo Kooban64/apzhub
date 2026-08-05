@@ -70,7 +70,12 @@
 > **PORTFOLIO MODE (20260805T035900Z):** APZHUB is the project; APZQEP is infrastructure — [APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md](../framework/APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md)
 > **WORKING MODEL (20260805T040200Z):** Portfolio Architect / Product Strategist era — [APZHUB-WORKING-MODEL.md](../framework/APZHUB-WORKING-MODEL.md)
 > **APZ-SUPPORT-000 (20260805T041100Z):** Owner **APPROVED / CLOSED** — [OWNER-APPROVAL.md](../apzsupport/OWNER-APPROVAL.md)
-> **APZ-SUPPORT-NATIVE-001 (20260805T041100Z):** Native Adoption **STARTED** — N-01 UX Audit **COMPLETE** — [APZ-SUPPORT-NATIVE-UX-AUDIT.md](../apz-support-native-001/SUPPORT-NATIVE-001-N01/APZ-SUPPORT-NATIVE-UX-AUDIT.md) — next: N-02 Identity when authorised (Playbook unchanged)
+> **APZ-SUPPORT-NATIVE-001 (20260805T041100Z):** Native Adoption **STARTED** — N-01 UX Audit **COMPLETE** — [APZ-SUPPORT-NATIVE-UX-AUDIT.md](../apz-support-native-001/SUPPORT-NATIVE-001-N01/APZ-SUPPORT-NATIVE-UX-AUDIT.md)
+> **SUPPORT-NATIVE-001-N02…N03 (20260805T043000Z–T042500Z):** Identity + Workspace **COMPLETE** — Playbook reused without redesign
+> **SUPPORT-NATIVE-001-N04 (20260805T044500Z):** APZQEP Operational Adoption **COMPLETE** — ops pack [apzsupport/](../apzsupport/)
+> **REFERENCE IMPLEMENTATION #002 (20260805T045000Z):** APZ Support **DECLARED** — [REFERENCE-IMPLEMENTATION-002.md](../apzsupport/REFERENCE-IMPLEMENTATION-002.md)
+> **SUPPORT-NATIVE-001 FREEZE (20260805T045000Z):** Programme **FROZEN** — [PROGRAMME-FREEZE.md](../apz-support-native-001/PROGRAMME-FREEZE.md)
+> **EPP REGISTER (20260805T044500Z):** Emerging Portfolio Patterns opened — [APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](../framework/APZHUB-EMERGING-PORTFOLIO-PATTERNS.md) — EPP-001 observation only
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
