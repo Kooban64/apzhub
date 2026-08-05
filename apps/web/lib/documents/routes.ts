@@ -1,4 +1,4 @@
-/** Platform Documents workspace route helpers (APZDOCS-005). */
+/** Platform Documents workspace route helpers (APZDOCS-005 / N-03). */
 
 export const DOCUMENTS_BASE = "/workspace/documents";
 
@@ -14,6 +14,8 @@ export const DOCUMENTS_SECTIONS = [
   "audit",
   "diagnostics",
   "metadata",
+  "help",
+  "settings",
 ] as const;
 
 export type DocumentsSection = (typeof DOCUMENTS_SECTIONS)[number];
@@ -46,4 +48,12 @@ export function documentsSectionPath(section?: DocumentsSection): string {
     return `${DOCUMENTS_BASE}/overview`;
   }
   return `${DOCUMENTS_BASE}/${section}`;
+}
+
+export function documentsHelpPath(): string {
+  return documentsSectionPath("help");
+}
+
+export function documentsSettingsPath(): string {
+  return documentsSectionPath("settings");
 }

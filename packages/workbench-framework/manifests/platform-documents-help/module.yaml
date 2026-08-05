@@ -1,12 +1,12 @@
 manifestSchemaVersion: "1.0"
-id: platform-documents-library
-name: Library
+id: platform-documents-help
+name: Help
 version: 0.1.0
 kind: module
 
 metadata:
   category: platform
-  description: APZ Documents — Enterprise Document Library (governed browse).
+  description: APZ Documents — Help (work companion).
 
 dependencies:
   platform: []
@@ -19,13 +19,13 @@ workbench:
     level: sidebar
     workspace: documents
     parent: platform-documents
-    label: Library
-    icon: files
-    route: /workspace/documents/documents
-    order: 20
+    label: Help
+    icon: circle-help
+    route: /workspace/documents/help
+    order: 120
     permission: document.read
   view:
-    title: Library
+    title: Help
     workspace: documents
-    route: /workspace/documents/documents
+    route: /workspace/documents/help
     permission: document.read

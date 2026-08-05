@@ -1,9 +1,13 @@
-/** Platform Document typed client view models (APZDOCS-004). */
+/** Platform Document typed client view models (APZDOCS-004 / N-03). */
+
+import type { DocumentWorkReference } from "./work-context";
 
 export type DocumentClientRequestOptions = {
   readonly signal?: AbortSignal;
   readonly headers?: HeadersInit;
 };
+
+export type { DocumentWorkReference };
 
 export type DocumentCollectionResult<T> = {
   readonly items: readonly T[];
@@ -37,6 +41,8 @@ export type DocumentViewModel = {
   readonly retentionId?: string;
   readonly ownerUserId?: string;
   readonly tagNames?: readonly string[];
+  /** Presentation references only (N-03) — not a foreign SoR. */
+  readonly workReferences?: readonly DocumentWorkReference[];
 };
 
 export type DocumentMetadataViewModel = {

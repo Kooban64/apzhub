@@ -24,6 +24,14 @@ export const MOCK_DOCUMENT: DocumentViewModel = {
   retentionId: "ret_standard",
   ownerUserId: "user_1",
   tagNames: ["policy", "compliance"],
+  workReferences: [
+    {
+      kind: "project",
+      product: "projects",
+      externalId: "proj_demo_1",
+      label: "Policy rollout",
+    },
+  ],
 };
 
 export const MOCK_DOCUMENT_VERSION: DocumentVersionViewModel = {

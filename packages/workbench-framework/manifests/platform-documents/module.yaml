@@ -6,7 +6,7 @@ kind: module
 
 metadata:
   category: platform
-  description: Platform Documents workspace — metadata workbench (APZDOCS-005).
+  description: APZ Documents — work companion for enterprise documents.
 
 dependencies:
   platform: []
@@ -23,18 +23,18 @@ workbench:
     order: 50
     permission: document.read
   view:
-    title: Documents
+    title: APZ Documents
     workspace: documents
     route: /workspace/documents
     default: true
     permission: document.read
   actions:
     - id: platform.documents.navigate
-      label: Go to Documents
+      label: Go to APZ Documents
       handler: workbench-bridge:workbench.navigation.reveal
       permission: document.read
       palette: true
       group: Navigation
       icon: file-text
       order: 50
-      description: Reveal the Documents navigation item in the workbench shell.
+      description: Reveal APZ Documents in the workbench shell.

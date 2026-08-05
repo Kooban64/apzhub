@@ -2,7 +2,8 @@
 
 import { Button, Input } from "@apzhub/ui";
 import { useQuery } from "@tanstack/react-query";
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
+import Link from "next/link";
 
 import {
   getDiagnostics,
@@ -17,93 +18,22 @@ import type {
   DocumentSummaryViewModel,
   DocumentVersionViewModel,
 } from "@/lib/documents/document-types";
+import {
+  readOnboardingDismissed,
+  writeOnboardingDismissed,
+} from "@/lib/documents/preferences";
 import type { DocumentsSection } from "@/lib/documents/routes";
 
-function PageShell({
-  title,
-  description,
-  actions,
-  children,
-}: {
-  readonly title: string;
-  readonly description?: string;
-  readonly actions?: ReactNode;
-  readonly children: ReactNode;
-}) {
-  return (
-    <div className="flex flex-col gap-6 p-1" data-testid="documents-page">
-      <header className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-muted-foreground)]">
-            Documents
-          </p>
-          <h1 className="text-2xl font-semibold text-[var(--color-foreground)]">
-            {title}
-          </h1>
-          {description ? (
-            <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
-              {description}
-            </p>
-          ) : null}
-        </div>
-        {actions ? (
-          <div className="flex flex-wrap items-center gap-2">{actions}</div>
-        ) : null}
-      </header>
-      {children}
-    </div>
-  );
-}
-
-function EmptyState({
-  title,
-  description,
-}: {
-  readonly title: string;
-  readonly description?: string;
-}) {
-  return (
-    <div
-      className="rounded-lg border border-dashed border-[var(--color-border)] px-4 py-10 text-center"
-      data-testid="documents-empty"
-    >
-      <p className="font-medium text-[var(--color-foreground)]">{title}</p>
-      {description ? (
-        <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
-          {description}
-        </p>
-      ) : null}
-    </div>
-  );
-}
-
-function ErrorState({
-  message,
-  onRetry,
-}: {
-  readonly message: string;
-  readonly onRetry?: () => void;
-}) {
-  return (
-    <div
-      className="rounded-lg border border-[var(--color-border)] bg-[var(--color-muted)]/30 px-4 py-6"
-      data-testid="documents-error"
-      role="alert"
-    >
-      <p className="font-medium text-[var(--color-foreground)]">
-        Unable to load documents
-      </p>
-      <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">{message}</p>
-      {onRetry ? (
-        <div className="mt-3">
-          <Button type="button" variant="outline" size="sm" onClick={onRetry}>
-            Retry
-          </Button>
-        </div>
-      ) : null}
-    </div>
-  );
-}
+import {
+  AdminReadinessSummary,
+  DOCUMENTS_PRODUCT_NAME,
+  DocumentsWorkspaceFrame,
+  EmptyState,
+  ErrorState,
+  LoadingState,
+  PageShell,
+  WorkContextPanel,
+} from "./documents-ui";
 
 function DocumentsTable({
   columns,
@@ -212,9 +142,9 @@ async function copyText(value: string): Promise<void> {
   throw new Error("Clipboard is unavailable.");
 }
 
-const SECTION_TITLES: Record<DocumentsSection, string> = {
+const SECTION_TITLES: Record<Exclude<DocumentsSection, "help" | "settings">, string> = {
   overview: "Overview",
-  documents: "Documents",
+  documents: "Library",
   versions: "Versions",
   collections: "Collections",
   folders: "Folders",
@@ -229,8 +159,13 @@ const SECTION_TITLES: Record<DocumentsSection, string> = {
 export function PlatformDocumentsView({
   section = "overview",
 }: {
-  readonly section?: DocumentsSection;
+  readonly section?: Exclude<DocumentsSection, "help" | "settings">;
 }) {
+  const [onboardingDismissed, setOnboardingDismissed] = useState(true);
+  useEffect(() => {
+    setOnboardingDismissed(readOnboardingDismissed());
+  }, []);
+
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [classificationFilter, setClassificationFilter] = useState("");
@@ -418,7 +353,7 @@ export function PlatformDocumentsView({
     <div
       className="flex flex-wrap items-center gap-2"
       role="toolbar"
-      aria-label="Documents commands"
+      aria-label="APZ Documents commands"
     >
       <Button
         type="button"
@@ -490,14 +425,6 @@ export function PlatformDocumentsView({
         onClick={() => setDetailPanel("collection")}
       >
         Open Collection
-      </Button>
-      <Button
-        type="button"
-        variant="outline"
-        size="sm"
-        onClick={() => setDetailPanel("diagnostics")}
-      >
-        Inspect Diagnostics
       </Button>
       <Button
         type="button"
@@ -641,7 +568,7 @@ export function PlatformDocumentsView({
 
   function renderDocumentList(caption: string) {
     if (documentsQuery.isLoading) {
-      return <p role="status">Loading documents…</p>;
+      return <p role="status">Loading APZ Documents…</p>;
     }
     if (documentsQuery.isError) {
       return (
@@ -654,8 +581,8 @@ export function PlatformDocumentsView({
     if (pagedDocuments.length === 0) {
       return (
         <EmptyState
-          title="No documents found"
-          description="Adjust filters or refresh the list."
+          title="No documents in this view"
+          description="Attach documents from Projects or Support, or adjust filters."
         />
       );
     }
@@ -749,20 +676,16 @@ export function PlatformDocumentsView({
         </div>
         {detailPanel === "diagnostics" ? (
           diagnosticsQuery.isLoading ? (
-            <p role="status">Loading diagnostics…</p>
+            <LoadingState label="Loading readiness…" />
           ) : diagnosticsQuery.isError ? (
             <ErrorState message={toDocumentUserMessage(diagnosticsQuery.error)} />
           ) : (
-            <dl className="grid gap-2 text-sm sm:grid-cols-2">
-              {Object.entries(diagnosticsQuery.data ?? {}).map(([key, value]) => (
-                <div key={key}>
-                  <dt className="text-[var(--color-muted-foreground)]">{key}</dt>
-                  <dd className="font-medium text-[var(--color-foreground)]">
-                    {String(value)}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            <AdminReadinessSummary
+              serviceReady={Boolean(diagnosticsQuery.data?.repositoryReady)}
+              storageReady={Boolean(diagnosticsQuery.data?.storageReady)}
+              integrityReady={Boolean(diagnosticsQuery.data?.checksumReady)}
+              issueCount={Number(diagnosticsQuery.data?.reconciliationIssueCount ?? 0)}
+            />
           )
         ) : !selectedId ? (
           <EmptyState title="Select a document" />
@@ -804,14 +727,15 @@ export function PlatformDocumentsView({
             </dl>
             {storageQuery.data ? (
               <div data-testid="documents-storage-metadata">
-                <h3 className="mb-1 font-medium">Storage / checksum metadata</h3>
-                <p>Status: {storageQuery.data.version.storageStatus}</p>
-                <p>Checksum: {storageQuery.data.version.checksumHex || "—"}</p>
-                <p>Bytes: {storageQuery.data.version.byteLength}</p>
+                <h3 className="mb-1 font-medium">File integrity</h3>
                 <p>
-                  Storage key present:{" "}
-                  {storageQuery.data.version.storageKeyPresent ? "yes" : "no"}
+                  Status:{" "}
+                  {storageQuery.data.version.storageStatus === "verified"
+                    ? "Verified"
+                    : storageQuery.data.version.storageStatus}
                 </p>
+                <p>Size: {storageQuery.data.version.byteLength} bytes</p>
+                <p>Type: {storageQuery.data.version.mimeType}</p>
               </div>
             ) : null}
           </div>
@@ -839,11 +763,22 @@ export function PlatformDocumentsView({
             />
           )
         ) : detailPanel === "relationships" ? (
-          <p className="text-sm text-[var(--color-muted-foreground)]">
-            Relationship metadata is read-only in this milestone. Use product services
-            to create relationships; this panel confirms selection of{" "}
-            <strong>{detail?.title}</strong> ({detail?.id}).
-          </p>
+          <div
+            className="space-y-3 text-sm"
+            data-testid="documents-relationships-panel"
+          >
+            <p className="text-[var(--color-muted-foreground)]">
+              Work references for <strong>{detail?.title}</strong>. Relationships are by
+              reference only — APZ Documents does not own project, ticket, or evidence
+              metadata.
+            </p>
+            <WorkContextPanel
+              title={detail?.title}
+              ownerUserId={detail?.ownerUserId}
+              lifecycleStatus={detail?.status}
+              references={detail?.workReferences}
+            />
+          </div>
         ) : detailPanel === "retention" ? (
           <p className="text-sm">
             Retention ID: <strong>{detail?.retentionId ?? "(none)"}</strong>
@@ -875,7 +810,8 @@ export function PlatformDocumentsView({
   return (
     <PageShell
       title={SECTION_TITLES[section]}
-      description="Product-neutral Document Platform workbench — metadata only; no uploads, downloads, or previews."
+      description="Documents support work across APZHUB — attach from projects, support, and quality; the library governs what you keep."
+      breadcrumbs={[DOCUMENTS_PRODUCT_NAME, SECTION_TITLES[section]]}
       actions={commands}
     >
       {actionError ? (
@@ -888,35 +824,86 @@ export function PlatformDocumentsView({
       ) : null}
 
       {section === "overview" ? (
-        <div className="space-y-4">
-          <p className="text-sm text-[var(--color-muted-foreground)]">
-            Shared Document Platform metadata surface. Navigate sidebar sections for
-            list, versions, organisation structures, tags, retention, audit, and safe
-            diagnostics.
-          </p>
-          {filters}
-          {renderDocumentList("Overview document list")}
-          {selectedId && detailQuery.data ? (
-            <section
-              className="rounded-lg border border-[var(--color-border)] p-4"
-              aria-label="Selected document summary"
-            >
-              <h2 className="text-lg font-semibold">{detailQuery.data.title}</h2>
-              <p className="text-sm text-[var(--color-muted-foreground)]">
-                {detailQuery.data.id} · {detailQuery.data.status} ·{" "}
-                {detailQuery.data.classification}
-              </p>
-            </section>
-          ) : null}
-        </div>
+        <DocumentsWorkspaceFrame
+          context={
+            selectedId && detailQuery.data ? (
+              <WorkContextPanel
+                title={detailQuery.data.title}
+                ownerUserId={detailQuery.data.ownerUserId}
+                lifecycleStatus={detailQuery.data.status}
+                references={detailQuery.data.workReferences}
+              />
+            ) : (
+              <WorkContextPanel />
+            )
+          }
+        >
+          <div className="space-y-4">
+            {!onboardingDismissed ? (
+              <div
+                className="rounded-lg border border-[var(--color-border)] bg-[var(--color-muted)]/20 p-4"
+                data-testid="documents-onboarding"
+              >
+                <p className="text-sm font-medium text-[var(--color-foreground)]">
+                  Start from work, not from a repository
+                </p>
+                <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
+                  Attach documents from Projects, Support, or Quality Evidence. APZ
+                  Documents protects and governs them — it is not your daily starting
+                  point.
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <Link
+                    href="/workspace/projects"
+                    className="inline-flex h-8 items-center rounded-md bg-[var(--color-primary)] px-3 text-sm font-medium text-[var(--color-primary-foreground)]"
+                  >
+                    Open Projects
+                  </Link>
+                  <Link
+                    href="/workspace/support"
+                    className="inline-flex h-8 items-center rounded-md border border-[var(--color-border)] px-3 text-sm font-medium"
+                  >
+                    Open Support
+                  </Link>
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => {
+                      writeOnboardingDismissed(true);
+                      setOnboardingDismissed(true);
+                    }}
+                  >
+                    Dismiss
+                  </Button>
+                </div>
+              </div>
+            ) : null}
+            <p className="text-sm text-[var(--color-muted-foreground)]">
+              Work companion overview. Select a document to see related work context.
+              Use <strong>Library</strong> for the Enterprise Document Library when you
+              need governed browse.
+            </p>
+            {filters}
+            {renderDocumentList("Overview document list")}
+          </div>
+        </DocumentsWorkspaceFrame>
       ) : null}
 
       {section === "documents" || section === "metadata" ? (
         <div className="space-y-4">
           {filters}
           {renderDocumentList(
-            section === "metadata" ? "Document metadata list" : "Documents list",
+            section === "metadata"
+              ? "Document metadata list"
+              : "Enterprise Document Library",
           )}
+          {section === "documents" ? (
+            <p className="text-sm text-[var(--color-muted-foreground)]">
+              Enterprise Document Library — governed browse. Prefer attaching from work
+              surfaces when adding documents to projects or requests.
+            </p>
+          ) : null}
         </div>
       ) : null}
 
@@ -954,14 +941,15 @@ export function PlatformDocumentsView({
               className="rounded-lg border border-[var(--color-border)] p-4 text-sm"
               data-testid="documents-checksum-metadata"
             >
-              <h2 className="mb-2 font-semibold">Checksum / storage metadata</h2>
-              <p>Checksum: {storageQuery.data.version.checksumHex || "—"}</p>
-              <p>Bytes: {storageQuery.data.version.byteLength}</p>
-              <p>MIME: {storageQuery.data.version.mimeType}</p>
+              <h2 className="mb-2 font-semibold">File integrity</h2>
               <p>
-                Storage key present:{" "}
-                {storageQuery.data.version.storageKeyPresent ? "yes" : "no"}
+                Status:{" "}
+                {storageQuery.data.version.storageStatus === "verified"
+                  ? "Verified"
+                  : storageQuery.data.version.storageStatus}
               </p>
+              <p>Size: {storageQuery.data.version.byteLength} bytes</p>
+              <p>Type: {storageQuery.data.version.mimeType}</p>
             </div>
           ) : null}
         </div>
@@ -1029,14 +1017,30 @@ export function PlatformDocumentsView({
       ) : null}
 
       {section === "relationships" ? (
-        <div className="space-y-4">
-          {filters}
-          {renderDocumentList("Documents for relationship context")}
-          <p className="text-sm text-[var(--color-muted-foreground)]">
-            Relationship creation is excluded from this workbench. Use View
-            Relationships on a selected document for read-only context.
-          </p>
-        </div>
+        <DocumentsWorkspaceFrame
+          context={
+            <WorkContextPanel
+              title={detailQuery.data?.title}
+              ownerUserId={detailQuery.data?.ownerUserId}
+              lifecycleStatus={detailQuery.data?.status}
+              references={detailQuery.data?.workReferences}
+            />
+          }
+        >
+          <div className="space-y-4">
+            {filters}
+            {renderDocumentList("Documents for work relationships")}
+            <div className="rounded-lg border border-[var(--color-border)] p-4 text-sm">
+              <h2 className="font-semibold">How relationships work</h2>
+              <p className="mt-2 text-[var(--color-muted-foreground)]">
+                Documents link to work by reference (project, support request, quality
+                evidence, matter). Select a document to inspect its work context.
+                Creating attachments happens from those products — not by browsing a
+                repository first.
+              </p>
+            </div>
+          </div>
+        </DocumentsWorkspaceFrame>
       ) : null}
 
       {section === "retention" ? (
@@ -1090,32 +1094,25 @@ export function PlatformDocumentsView({
 
       {section === "diagnostics" ? (
         <div className="space-y-4">
+          <p className="text-sm text-[var(--color-muted-foreground)]">
+            Administrator readiness for APZ Documents. Implementation provider identity
+            is not shown. Contact platform operations for deeper infrastructure checks.
+          </p>
           {diagnosticsQuery.isLoading ? (
-            <p role="status">Loading diagnostics…</p>
+            <LoadingState label="Loading readiness…" />
           ) : diagnosticsQuery.isError ? (
             <ErrorState
               message={toDocumentUserMessage(diagnosticsQuery.error)}
               onRetry={() => void diagnosticsQuery.refetch()}
             />
           ) : (
-            <dl
-              className="grid gap-3 rounded-lg border border-[var(--color-border)] p-4 text-sm sm:grid-cols-2"
-              data-testid="documents-diagnostics"
-            >
-              {Object.entries(diagnosticsQuery.data ?? {}).map(([key, value]) => (
-                <div key={key}>
-                  <dt className="text-[var(--color-muted-foreground)]">{key}</dt>
-                  <dd className="font-medium text-[var(--color-foreground)]">
-                    {String(value)}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            <AdminReadinessSummary
+              serviceReady={Boolean(diagnosticsQuery.data?.repositoryReady)}
+              storageReady={Boolean(diagnosticsQuery.data?.storageReady)}
+              integrityReady={Boolean(diagnosticsQuery.data?.checksumReady)}
+              issueCount={Number(diagnosticsQuery.data?.reconciliationIssueCount ?? 0)}
+            />
           )}
-          <p className="text-sm text-[var(--color-muted-foreground)]">
-            Diagnostics show safe readiness metadata only — no paths, buckets, keys,
-            credentials, or binary content.
-          </p>
         </div>
       ) : null}
 

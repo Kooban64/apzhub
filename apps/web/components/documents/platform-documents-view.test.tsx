@@ -44,16 +44,21 @@ describe("PlatformDocumentsView", () => {
       expect(screen.getByText(MOCK_DOCUMENT.title)).toBeTruthy();
     });
 
-    expect(screen.getByRole("toolbar", { name: /Documents commands/i })).toBeTruthy();
+    expect(
+      screen.getByRole("toolbar", { name: /APZ Documents commands/i }),
+    ).toBeTruthy();
     expect(screen.getByTestId("documents-page")).toBeTruthy();
+    expect(screen.getByTestId("documents-breadcrumbs")).toBeTruthy();
+    expect(screen.getByTestId("documents-work-context")).toBeTruthy();
   });
 
-  it("filters documents and opens metadata / diagnostics commands", async () => {
+  it("filters documents and opens metadata commands", async () => {
     const user = userEvent.setup();
     render(wrap(<PlatformDocumentsView section="documents" />));
 
     await waitFor(() => {
       expect(screen.getByText(MOCK_DOCUMENT.title)).toBeTruthy();
+      expect(screen.getByRole("heading", { level: 1, name: "Library" })).toBeTruthy();
     });
 
     const search = screen.getByLabelText(/Filter documents by metadata/i);
@@ -61,7 +66,7 @@ describe("PlatformDocumentsView", () => {
     await user.type(search, "zzz-no-match");
     await waitFor(() => {
       expect(screen.queryByText(MOCK_DOCUMENT.title)).toBeNull();
-      expect(screen.getByText(/No documents found/i)).toBeTruthy();
+      expect(screen.getByText(/No documents in this view/i)).toBeTruthy();
     });
 
     await user.clear(search);
@@ -73,11 +78,6 @@ describe("PlatformDocumentsView", () => {
     await waitFor(() => {
       expect(screen.getByTestId("documents-detail-panel")).toBeTruthy();
       expect(screen.getByText(MOCK_DOCUMENT.id)).toBeTruthy();
-    });
-
-    await user.click(screen.getByRole("button", { name: /Inspect Diagnostics/i }));
-    await waitFor(() => {
-      expect(screen.getByText(/providerReady/i)).toBeTruthy();
     });
 
     await user.click(screen.getByRole("button", { name: /Copy Document ID/i }));
@@ -119,7 +119,9 @@ describe("PlatformDocumentsView", () => {
     rerender(wrap(<PlatformDocumentsView section="diagnostics" />));
     await waitFor(() => {
       expect(screen.getByTestId("documents-diagnostics")).toBeTruthy();
-      expect(screen.getAllByText("memory").length).toBeGreaterThan(0);
+      expect(screen.getByText("Document service")).toBeTruthy();
+      expect(screen.queryByText(/providerId/i)).toBeNull();
+      expect(screen.queryByText("memory")).toBeNull();
     });
   });
 
@@ -154,7 +156,8 @@ describe("PlatformDocumentsView", () => {
 
     await user.click(screen.getByRole("button", { name: /View Relationships/i }));
     await waitFor(() => {
-      expect(screen.getByText(/Relationship metadata is read-only/i)).toBeTruthy();
+      expect(screen.getByTestId("documents-relationships-panel")).toBeTruthy();
+      expect(screen.getByText(/Work references/i)).toBeTruthy();
     });
     await user.click(screen.getByRole("button", { name: /^Close$/i }));
 
@@ -317,7 +320,7 @@ describe("PlatformDocumentsView", () => {
   });
 
   it("router resolves overview section", async () => {
-    render(wrap(<DocumentsWorkspaceRouter />));
+    render(wrap(<DocumentsWorkspaceRouter permissions={["document.*"]} />));
     await waitFor(() => {
       expect(screen.getByRole("heading", { level: 1, name: "Overview" })).toBeTruthy();
     });
