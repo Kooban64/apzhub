@@ -31,13 +31,12 @@ APZ Time already exists. Integration is certified. Work is **maturation**, not c
 
 ## Authorised priorities (Phase A slice order)
 
-1. **A01 Native UX Audit** (analysis only) — drives all later decisions
-2. **A02 Identity** — APZHUB auth / RBAC / sessions / provisioning only
-3. **A03 Workspace** — nav, panels, actions, context, breadcrumbs
-4. **A04 APZQEP binding** — every enhancement through Quality Flow
-5. Close Phase 1 gaps that block **daily use** — not feature parity with Kimai
+1. **A01 Native UX Audit** — **COMPLETE** — [TIME-NATIVE-001-A01](./TIME-NATIVE-001-A01/)
+2. **A02 Identity** — **COMPLETE** — [TIME-NATIVE-001-A02](./TIME-NATIVE-001-A02/)
+3. **A03 Workspace** — **COMPLETE** — [TIME-NATIVE-001-A03](./TIME-NATIVE-001-A03/)
+4. **A04 Operational Quality Adoption** — **COMPLETE** (in force) — [TIME-NATIVE-001-A04](./TIME-NATIVE-001-A04/)
 
-A01 authorised and executed: [TIME-NATIVE-001-A01](./TIME-NATIVE-001-A01/).
+**Phase A COMPLETE** — [PHASE-A-COMPLETION.md](./PHASE-A-COMPLETION.md).
 
 ## Explicit exclusions
 

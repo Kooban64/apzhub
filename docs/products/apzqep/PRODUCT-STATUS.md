@@ -138,13 +138,14 @@ Designation: [Enterprise Quality Baseline](./v1.1/apzqep-version-1.1-architectur
 APZQEP-166 / APZQEP-170/180/190/200 provider families: NOT AUTHORISED until separate Owner Auth
 APZQEP-ADOPT-001: **OPEN** — Phase 1 **IN PROGRESS** (Production Adoption & APZ Time Integration)
 Face: [apzqep-adopt-001/](./apzqep-adopt-001/) · Auth: [OWNER-AUTHORISATION-PHASE-1.md](./apzqep-adopt-001/OWNER-AUTHORISATION-PHASE-1.md)
-APZHUB-TIME-NATIVE-001: **STARTED** — maturation of Time 1.0.0 (native UX/identity/workspace/APZQEP) — [../time/APZHUB-TIME-NATIVE-001/](../time/APZHUB-TIME-NATIVE-001/) — not greenfield
+APZHUB-TIME-NATIVE-001: **PHASE A COMPLETE** — A01–A04 done; operate Time through APZQEP — [../time/APZHUB-TIME-NATIVE-001/](../time/APZHUB-TIME-NATIVE-001/) · [PHASE-A-COMPLETION](../time/APZHUB-TIME-NATIVE-001/PHASE-A-COMPLETION.md)
+Native Adoption Standard: [APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md](../framework/APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md)
 
 Engineering chapter: **CLOSED** — [CHAPTER-CLOSE.md](./v1.1/apzqep-version-1.1-architecture-freeze/CHAPTER-CLOSE.md)
 Default on APZQEP architecture: frozen. Default on APZQEP ops: **daily use + evidence**.
 
 Next Action:
-ADOPT-001 Phase 1 + TIME-NATIVE-001: **A01–A03 COMPLETE** (identity + native workspace). Next Time slice when authorised: **A04 APZQEP Operational Adoption**. Continue APZQEP daily use.
+ADOPT-001 Phase 1 + TIME-NATIVE-001 Phase A **COMPLETE**. Next meaningful Time work: a **real change** through APZQEP (Release 0001 when it arises). Continue APZQEP daily use. Apply Native Adoption Standard to next products when authorised.
 Do NOT start APZQEP-170. Do NOT reopen V1.1 foundations. Do NOT expose Kimai.
 ```
 

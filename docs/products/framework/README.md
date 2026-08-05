@@ -14,19 +14,20 @@ Establish the **official Product Engineering Framework** that every APZHUB produ
 
 ## Pack
 
-| Document             | Path                                                                     |
-| -------------------- | ------------------------------------------------------------------------ |
-| Engineering standard | [PRODUCT-ENGINEERING-STANDARD.md](./PRODUCT-ENGINEERING-STANDARD.md)     |
-| Lifecycle            | [PRODUCT-LIFECYCLE.md](./PRODUCT-LIFECYCLE.md)                           |
-| Architecture         | [PRODUCT-ARCHITECTURE-STANDARD.md](./PRODUCT-ARCHITECTURE-STANDARD.md)   |
-| Quality              | [PRODUCT-QUALITY-STANDARD.md](./PRODUCT-QUALITY-STANDARD.md)             |
-| Certification        | [PRODUCT-CERTIFICATION-STANDARD.md](./PRODUCT-CERTIFICATION-STANDARD.md) |
-| Portfolio            | [PRODUCT-PORTFOLIO.md](./PRODUCT-PORTFOLIO.md)                           |
-| Roadmap              | [PRODUCT-ROADMAP.md](./PRODUCT-ROADMAP.md)                               |
-| Governance           | [PRODUCT-GOVERNANCE.md](./PRODUCT-GOVERNANCE.md)                         |
-| Repository structure | [PRODUCT-REPOSITORY-STANDARD.md](./PRODUCT-REPOSITORY-STANDARD.md)       |
-| Completion           | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md)                           |
-| Owner acceptance     | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md)                             |
+| Document             | Path                                                                                       |
+| -------------------- | ------------------------------------------------------------------------------------------ |
+| Engineering standard | [PRODUCT-ENGINEERING-STANDARD.md](./PRODUCT-ENGINEERING-STANDARD.md)                       |
+| Lifecycle            | [PRODUCT-LIFECYCLE.md](./PRODUCT-LIFECYCLE.md)                                             |
+| Architecture         | [PRODUCT-ARCHITECTURE-STANDARD.md](./PRODUCT-ARCHITECTURE-STANDARD.md)                     |
+| Quality              | [PRODUCT-QUALITY-STANDARD.md](./PRODUCT-QUALITY-STANDARD.md)                               |
+| Certification        | [PRODUCT-CERTIFICATION-STANDARD.md](./PRODUCT-CERTIFICATION-STANDARD.md)                   |
+| Portfolio            | [PRODUCT-PORTFOLIO.md](./PRODUCT-PORTFOLIO.md)                                             |
+| Roadmap              | [PRODUCT-ROADMAP.md](./PRODUCT-ROADMAP.md)                                                 |
+| Governance           | [PRODUCT-GOVERNANCE.md](./PRODUCT-GOVERNANCE.md)                                           |
+| Repository structure | [PRODUCT-REPOSITORY-STANDARD.md](./PRODUCT-REPOSITORY-STANDARD.md)                         |
+| Native adoption      | [APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md](./APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md) |
+| Completion           | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md)                                             |
+| Owner acceptance     | [OWNER-ACCEPTANCE.md](./OWNER-ACCEPTANCE.md)                                               |
 
 ## Relationship to prior programmes
 
