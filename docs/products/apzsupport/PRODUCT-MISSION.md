@@ -1,10 +1,11 @@
 # APZ Support — Product Mission
 
-| Field     | Value                               |
-| --------- | ----------------------------------- |
-| Programme | APZ-SUPPORT-000                     |
-| Status    | **COMPLETE** (await Owner approval) |
-| Timestamp | 20260805T040600Z                    |
+| Field     | Value                                    |
+| --------- | ---------------------------------------- |
+| Programme | APZ-SUPPORT-000                          |
+| Status    | **APPROVED**                             |
+| Timestamp | 20260805T041100Z                         |
+| Approval  | [OWNER-APPROVAL.md](./OWNER-APPROVAL.md) |
 
 ## Mission statement
 

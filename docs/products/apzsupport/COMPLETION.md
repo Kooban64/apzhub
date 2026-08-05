@@ -4,8 +4,9 @@
 | --------- | ------------------------------------------------- |
 | Programme | APZ-SUPPORT-000                                   |
 | Title     | APZ Support – Product Mission & Business Outcomes |
-| Status    | **COMPLETE**                                      |
-| Timestamp | 20260805T040600Z                                  |
+| Status    | **CLOSED** (Owner APPROVED)                       |
+| Timestamp | 20260805T041100Z                                  |
+| Approval  | [OWNER-APPROVAL.md](./OWNER-APPROVAL.md)          |
 
 ## Completion criteria
 
@@ -17,12 +18,9 @@
 | How will success be measured? | Yes — [SUCCESS-METRICS.md](./SUCCESS-METRICS.md)               |
 | Engineering decisions made?   | **No**                                                         |
 | Implementation assumptions?   | **None**                                                       |
+| Owner approval                | **APPROVED** — [OWNER-APPROVAL.md](./OWNER-APPROVAL.md)        |
 
-## Recommendation
+## Next programme (opened)
 
-Await Owner review and approval of the Product Mission.
-
-Do not begin Native Adoption until the Product Mission is formally agreed.
-
-**Next authorised programme (after Owner approval only):**  
-APZ-SUPPORT-NATIVE-001 – Native UX Audit (N-01)
+**APZ-SUPPORT-NATIVE-001** — [../apz-support-native-001/](../apz-support-native-001/)  
+Playbook unchanged. No methodology redesign.

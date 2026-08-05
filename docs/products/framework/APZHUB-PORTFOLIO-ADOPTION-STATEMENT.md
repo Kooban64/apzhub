@@ -104,9 +104,9 @@ Owner-directed scoring for daily operational payoff (not technical completeness)
 
 APZQEP does not appear on that roadmap — it is infrastructure.
 
-**APZ-SUPPORT-000** mission pack: [../apzsupport/](../apzsupport/) — **COMPLETE**, awaiting Owner approval.  
-**No SUPPORT-NATIVE programme** until the mission is formally agreed + separate Owner Auth.  
-Apply the Playbook as-is — no redesign.
+**APZ-SUPPORT-000** — Owner **APPROVED / CLOSED** — [../apzsupport/](../apzsupport/).  
+**APZ-SUPPORT-NATIVE-001** — **STARTED** (N-01 complete) — [../apz-support-native-001/](../apz-support-native-001/).  
+Playbook as-is — no redesign.
 
 ## Standing constraints
 

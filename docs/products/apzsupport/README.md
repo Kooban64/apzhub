@@ -1,16 +1,18 @@
 # APZ-SUPPORT-000 — Product Mission & Business Outcomes
 
-| Field           | Value                                          |
-| --------------- | ---------------------------------------------- |
-| Programme       | APZ-SUPPORT-000                                |
-| Status          | **COMPLETE** (await Owner approval of mission) |
-| Engineering     | **NOT STARTED**                                |
-| Native Adoption | **NOT STARTED**                                |
-| Timestamp       | 20260805T040600Z                               |
+| Field           | Value                                                           |
+| --------------- | --------------------------------------------------------------- |
+| Programme       | APZ-SUPPORT-000                                                 |
+| Status          | **CLOSED** (Owner APPROVED)                                     |
+| Engineering     | **NOT STARTED**                                                 |
+| Native Adoption | **OPEN** — [APZ-SUPPORT-NATIVE-001](../apz-support-native-001/) |
+| Timestamp       | 20260805T041100Z                                                |
+| Approval        | [OWNER-APPROVAL.md](./OWNER-APPROVAL.md)                        |
 
 | Deliverable  | Path                                               |
 | ------------ | -------------------------------------------------- |
 | Auth         | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md) |
+| Approval     | [OWNER-APPROVAL.md](./OWNER-APPROVAL.md)           |
 | Mission      | [PRODUCT-MISSION.md](./PRODUCT-MISSION.md)         |
 | Outcomes     | [BUSINESS-OUTCOMES.md](./BUSINESS-OUTCOMES.md)     |
 | Metrics      | [SUCCESS-METRICS.md](./SUCCESS-METRICS.md)         |
@@ -21,4 +23,4 @@
 | Vision       | [PRODUCT-VISION.md](./PRODUCT-VISION.md)           |
 | Completion   | [COMPLETION.md](./COMPLETION.md)                   |
 
-Business language only. No architecture. No engineering. No Native Adoption planning in this programme.
+Authoritative mission for all future APZ Support decisions. Native Adoption applies the Playbook unchanged.

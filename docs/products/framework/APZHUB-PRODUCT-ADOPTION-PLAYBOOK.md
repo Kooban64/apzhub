@@ -19,11 +19,14 @@ Applies to: APZ Projects · APZ Support · APZ Documents · APZ Analytics · APZ
 
 | Prerequisite                                                               | Why                                      |
 | -------------------------------------------------------------------------- | ---------------------------------------- |
+| **PRODUCT-000 Mission Owner-APPROVED**                                     | Purpose before engineering               |
 | Product exists in production (or accepted baseline) with known limitations | Adoption ≠ greenfield creation           |
 | Certified / accepted adapter (or equivalent integration contract)          | Implementation detail must be governable |
 | APZQEP Enterprise Quality Baseline in force                                | Quality path already exists              |
 | Owner Authorisation for a named Native Adoption programme                  | No silent product programmes             |
 | Honest Known Limitations documented                                        | Prevent feature-parity chasing           |
+
+Lifecycle: see [APZHUB-WORKING-MODEL.md](./APZHUB-WORKING-MODEL.md).
 
 ## Adoption sequence (N-01…N-04)
 

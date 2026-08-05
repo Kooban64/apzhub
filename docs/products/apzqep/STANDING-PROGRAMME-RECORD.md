@@ -69,7 +69,8 @@
 > **TIME-NATIVE-001 FREEZE (20260805T035500Z):** Programme **FROZEN** — [PROGRAMME-FREEZE.md](../time/APZHUB-TIME-NATIVE-001/PROGRAMME-FREEZE.md)
 > **PORTFOLIO MODE (20260805T035900Z):** APZHUB is the project; APZQEP is infrastructure — [APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md](../framework/APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md)
 > **WORKING MODEL (20260805T040200Z):** Portfolio Architect / Product Strategist era — [APZHUB-WORKING-MODEL.md](../framework/APZHUB-WORKING-MODEL.md)
-> **APZ-SUPPORT-000 (20260805T040600Z):** Product Mission & Business Outcomes **COMPLETE** — [apzsupport/](../apzsupport/) — await Owner approval; next after approval only: APZ-SUPPORT-NATIVE-001 (N-01)
+> **APZ-SUPPORT-000 (20260805T041100Z):** Owner **APPROVED / CLOSED** — [OWNER-APPROVAL.md](../apzsupport/OWNER-APPROVAL.md)
+> **APZ-SUPPORT-NATIVE-001 (20260805T041100Z):** Native Adoption **STARTED** — N-01 UX Audit **COMPLETE** — [APZ-SUPPORT-NATIVE-UX-AUDIT.md](../apz-support-native-001/SUPPORT-NATIVE-001-N01/APZ-SUPPORT-NATIVE-UX-AUDIT.md) — next: N-02 Identity when authorised (Playbook unchanged)
 
 | Field          | Value                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

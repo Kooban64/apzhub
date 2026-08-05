@@ -28,15 +28,31 @@ Engineering architecture for Layer 1 evolves only through governance. Day-to-day
 3. Does it operate through APZQEP?
 4. Does it improve the daily lives of users?
 
+## Standard product lifecycle (every future product)
+
+```text
+PRODUCT-000
+Mission & Business Outcomes
+        ↓
+OWNER APPROVAL
+        ↓
+PRODUCT-NATIVE-001
+(N-01…N-04 Playbook — unchanged)
+        ↓
+Reference Implementation (optional — earned)
+        ↓
+Operational Learning
+```
+
 ## Every product starts with a Mission
 
 Before Native Adoption engineering:
 
 > **Why does this product exist, and what measurable improvement will it make to the organisation?**
 
-One concise **Product Mission & Business Outcomes** document. No technology. No architecture. No adapters. No engine names.
+One concise **Product Mission & Business Outcomes** programme (**PRODUCT-000**). No technology. No architecture. No adapters. No engine names.
 
-Then: Mission → Native UX Audit → Identity → Workspace → APZQEP Adoption → Operational Learning → Capability Expansion.
+Owner APPROVED mission is the prerequisite for Native Adoption. Then apply the Playbook unchanged — no redesign.
 
 ## Business outcomes portfolio cares about
 

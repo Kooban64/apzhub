@@ -1,0 +1,5 @@
+# Evidence — OWNER-APZ-SUPPORT-000 APPROVED
+
+Timestamp: 20260805T041100Z  
+Decision: APPROVED / CLOSED  
+Next: APZ-SUPPORT-NATIVE-001 (Playbook unchanged)

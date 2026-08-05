@@ -149,7 +149,7 @@ Engineering chapter: **CLOSED** — [CHAPTER-CLOSE.md](./v1.1/apzqep-version-1.1
 Default on APZQEP: silent daily use + evidence. Talk APZQEP only on release learning / justified provider work.
 
 Next Action:
-**APZ-SUPPORT-000 COMPLETE** — mission pack [../apzsupport/](../apzsupport/) awaiting **Owner approval**. Do NOT open APZ-SUPPORT-NATIVE-001 until mission AGREED. Working model: [APZHUB-WORKING-MODEL.md](../framework/APZHUB-WORKING-MODEL.md). Or process a real APZ Time change under ADOPT-001. Do NOT invent standards. Do NOT start APZQEP-170. Do NOT expose engines.
+**APZ-SUPPORT-000 CLOSED** (Owner APPROVED). **APZ-SUPPORT-NATIVE-001 STARTED** — N-01 Native UX Audit **COMPLETE** — [apz-support-native-001](../apz-support-native-001/). Next when authorised: **N-02 Identity**. Playbook unchanged. Do NOT invent methodology. Do NOT start APZQEP-170. Do NOT expose engines.
 ```
 
 ---
