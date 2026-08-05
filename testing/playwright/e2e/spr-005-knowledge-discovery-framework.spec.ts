@@ -111,7 +111,7 @@ test.describe("SPR-005 Knowledge & Discovery Framework integration", () => {
       timeout: 15_000,
     });
     if (!/\/workspace\/home\/overview/.test(page.url())) {
-      await page.getByRole("button", { name: "Home workspace" }).click();
+      await page.getByRole("button", { name: /^(Home|My Work) workspace$/ }).click();
       await page.getByRole("button", { name: "Overview" }).click();
     }
     await expect(page).toHaveURL(/\/workspace\/home\/overview/, { timeout: 15_000 });

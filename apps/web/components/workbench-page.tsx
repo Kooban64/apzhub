@@ -32,6 +32,7 @@ import { IdentityWorkspaceRouter } from "@/components/identity/identity-workspac
 import { ObserveWorkspaceRouter } from "@/components/observe/observe-workspace-router";
 import { MetricsWorkspaceRouter } from "@/components/metrics/metrics-workspace-router";
 import { QepWorkspaceRouter } from "@/components/qep/qep-workspace-router";
+import { MyWorkView } from "@/components/my-work/my-work-view";
 import { useE2eActivityTimelinePresentationRefresh } from "@/lib/e2e-activity-timeline-presentation-refresh";
 import {
   isPlatformOperationsRoute,
@@ -172,6 +173,9 @@ export function WorkbenchPage() {
   const administrationActive = isAdministrationRoute(pathname);
   const searchActive = isSearchRoute(pathname);
   const qepActive = isQepWorkspaceRoute(pathname);
+  // Exact home landing only — /workspace/home/overview remains a separate view.
+  const myWorkActive =
+    pathname === "/workspace/home" || pathname === "/workspace/home/";
 
   return (
     <DesktopShell
@@ -234,6 +238,8 @@ export function WorkbenchPage() {
         <SearchWorkspaceRouter />
       ) : qepActive ? (
         <QepWorkspaceRouter />
+      ) : myWorkActive ? (
+        <MyWorkView />
       ) : (
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-semibold">{activeView?.title ?? "Workspace"}</h1>

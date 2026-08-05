@@ -6,7 +6,9 @@ test.describe("SPR-003 workbench navigation", () => {
   test("activity bar renders manifest-driven workspaces", async ({ page }) => {
     await signInDevUser(page);
 
-    await expect(page.getByRole("button", { name: "Home workspace" })).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: /^(Home|My Work) workspace$/ }),
+    ).toBeVisible();
     await expect(
       page.getByRole("button", { name: "Administration workspace" }),
     ).toBeVisible();

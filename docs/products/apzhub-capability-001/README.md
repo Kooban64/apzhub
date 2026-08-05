@@ -15,18 +15,19 @@ Define the first Horizon 3 capability that makes APZHUB feel like one platform: 
 
 ## Deliverables
 
-| Doc                  | Path                                                                                      |
-| -------------------- | ----------------------------------------------------------------------------------------- |
-| Owner Auth           | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md)                                        |
-| Work definition      | [WORK-DEFINITION.md](./WORK-DEFINITION.md)                                                |
-| My Work              | [MY-WORK.md](./MY-WORK.md)                                                                |
-| Work context         | [WORK-CONTEXT.md](./WORK-CONTEXT.md)                                                      |
-| Unified navigation   | [UNIFIED-NAVIGATION.md](./UNIFIED-NAVIGATION.md)                                          |
-| Executive work views | [EXECUTIVE-WORK-VIEWS.md](./EXECUTIVE-WORK-VIEWS.md)                                      |
-| Work lifecycle       | [WORK-LIFECYCLE.md](./WORK-LIFECYCLE.md)                                                  |
-| Portfolio capability | [PORTFOLIO-CAPABILITY.md](./PORTFOLIO-CAPABILITY.md)                                      |
-| Completion           | [COMPLETION.md](./COMPLETION.md)                                                          |
-| Portfolio validation | [../apzhub-capability-001-validation/](../apzhub-capability-001-validation/) **COMPLETE** |
+| Doc                   | Path                                                                                      |
+| --------------------- | ----------------------------------------------------------------------------------------- |
+| Owner Auth            | [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md)                                        |
+| Work definition       | [WORK-DEFINITION.md](./WORK-DEFINITION.md)                                                |
+| My Work               | [MY-WORK.md](./MY-WORK.md)                                                                |
+| Work context          | [WORK-CONTEXT.md](./WORK-CONTEXT.md)                                                      |
+| Unified navigation    | [UNIFIED-NAVIGATION.md](./UNIFIED-NAVIGATION.md)                                          |
+| Executive work views  | [EXECUTIVE-WORK-VIEWS.md](./EXECUTIVE-WORK-VIEWS.md)                                      |
+| Work lifecycle        | [WORK-LIFECYCLE.md](./WORK-LIFECYCLE.md)                                                  |
+| Portfolio capability  | [PORTFOLIO-CAPABILITY.md](./PORTFOLIO-CAPABILITY.md)                                      |
+| Completion            | [COMPLETION.md](./COMPLETION.md)                                                          |
+| Portfolio validation  | [../apzhub-capability-001-validation/](../apzhub-capability-001-validation/) **COMPLETE** |
+| Composition (ENG-001) | [../apzhub-capability-001-eng-001/](../apzhub-capability-001-eng-001/)                    |
 
 ## Success criterion
 

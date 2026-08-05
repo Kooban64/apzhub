@@ -123,6 +123,22 @@ export type {
   UpdateTimeTagInput,
   TimeReportingCapabilities,
   TimeReportingHealth,
+  WorkLifecycleState,
+  MyWorkQueueId,
+  MyWorkProduct,
+  MyWorkKind,
+  WorkCard,
+  MyWorkProviderResult,
+  MyWorkComposition,
+  ComposeMyWorkInput,
+  MyWorkCompositionService,
+} from "./services";
+
+export {
+  WORK_LIFECYCLE_STATES,
+  MY_WORK_QUEUE_IDS,
+  MY_WORK_PRODUCTS,
+  MY_WORK_KINDS,
 } from "./services";
 
 /** Canonical APZ TCMS domain models — re-exported for HTTP/fixture consumers (APZTCMS-011/012/013/014). */

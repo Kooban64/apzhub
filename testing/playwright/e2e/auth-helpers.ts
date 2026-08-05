@@ -32,7 +32,8 @@ export async function ensureHomeWorkspace(page: Page): Promise<void> {
   await expect(page.getByText("APZHUB", { exact: true })).toBeVisible({
     timeout: 20_000,
   });
-  await expect(page.getByLabel("Home workspace")).toBeVisible({
+  // ENG-001: platform-home Activity Bar label is "My Work"; accept legacy "Home".
+  await expect(page.getByLabel(/^(Home|My Work) workspace$/)).toBeVisible({
     timeout: 20_000,
   });
 }

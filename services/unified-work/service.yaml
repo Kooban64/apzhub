@@ -1,0 +1,42 @@
+manifestSchemaVersion: "1.0"
+id: unified-work-composition-service
+name: Unified Work Composition Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: platform
+  description: >
+    Portfolio My Work composition layer (APZHUB-CAPABILITY-001-ENG-001).
+    Projects work cards from existing product Platform Services.
+    Never owns business state. Never becomes a System of Record.
+  contractPackage: "@apzhub/platform-service-contracts"
+  implementationPackage: "@apzhub/platform-services"
+  owner: APZHUB
+  programme: APZHUB-CAPABILITY-001-ENG-001
+  tags:
+    - unified-work
+    - my-work
+    - composition
+    - portfolio-capability
+  ownsBusinessState: false
+  compositionOnly: true
+
+dependencies:
+  platform:
+    - projects
+    - support
+    - time
+    - qep
+    - workflow
+
+service:
+  category: platform
+  compositionOnly: true
+
+permissions:
+  - platform.nav.home.view
+  - platform.my-work.view
+
+health:
+  selfReport: true

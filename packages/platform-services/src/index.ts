@@ -90,6 +90,14 @@ export {
   type PlatformTimePermission,
 } from "./services/time";
 export {
+  composeMyWorkQueues,
+  composeMyWorkFromGateway,
+  createMyWorkCompositionService,
+  projectLifecycle,
+  type MyWorkGatewaySlice,
+  type MyWorkProviderDeps,
+} from "./services/my-work";
+export {
   createAnalyticsPlatformServicesForTest,
   createAnalyticsPlatformServicesWithMetabase,
   wrapAnalyticsPlatformGatewayWithPipeline,

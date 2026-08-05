@@ -38,9 +38,9 @@ test.describe("SPR-001 acceptance", () => {
 
   test("registration and desktop shell", async ({ page }) => {
     await signInDevUser(page);
-    await expect(page.getByRole("heading", { name: "Home" })).toBeVisible();
+    await expect(page.getByTestId("my-work-view")).toBeVisible();
     await expect(page.getByText("APZHUB", { exact: true })).toBeVisible();
-    await expect(page.getByLabel("Home workspace")).toBeVisible();
+    await expect(page.getByLabel(/^(Home|My Work) workspace$/)).toBeVisible();
     await expect(page.getByText("Environment:")).toBeVisible();
   });
 

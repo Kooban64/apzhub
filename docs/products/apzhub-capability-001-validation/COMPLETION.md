@@ -5,8 +5,9 @@
 | Programme | APZHUB-CAPABILITY-001-VALIDATION               |
 | Title     | Unified Work Experience – Portfolio Validation |
 | Status    | **COMPLETE**                                   |
-| Timestamp | 20260805T101500Z                               |
+| Timestamp | 20260805T103000Z                               |
 | Kind      | Documentation only                             |
+| Owner     | [OWNER-RESOLUTION.md](./OWNER-RESOLUTION.md)   |
 
 ## Outcomes
 
@@ -16,18 +17,20 @@
 - Capability coverage assessed; gaps classified, not solved
 - Boundaries validated (capabilities coordinate; products own)
 - Enterprise alignment confirmed
-- **No engineering**
+- **No engineering** (during validation)
 - **No architecture changes**
 - **No product redesign**
 
-## Outstanding validation gaps
+## Owner decision
 
-See [GAP-REGISTER.md](./GAP-REGISTER.md): G-UW-01 … G-UW-11 (aggregation, lifecycle projection, Documents/Risk/Decision coverage, attention feed, etc.).
+**OWNER-APZHUB-CAPABILITY-001** — APPROVED / CLOSED.
 
-## Recommendation
+See [OWNER-RESOLUTION.md](./OWNER-RESOLUTION.md).
 
-Owner decision required.
+## Gap disposition
 
-If approved, authorise **APZHUB-CAPABILITY-001-ENG-001**.
+See [GAP-REGISTER.md](./GAP-REGISTER.md): portfolio gaps promoted to **APZHUB-CAPABILITY-001-ENG-001**; future-programme gaps remain record-only.
 
-Engineering shall implement the Unified Work Experience without changing product ownership or introducing new Systems of Record.
+## Next
+
+Authorised: [../apzhub-capability-001-eng-001/](../apzhub-capability-001-eng-001/) — Unified Work Experience Composition Layer.

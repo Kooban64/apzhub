@@ -86,3 +86,4 @@ Implementation engines remain invisible infrastructure.
 | Portfolio statement       | [APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md](./APZHUB-PORTFOLIO-ADOPTION-STATEMENT.md)                               |
 | First Horizon 3 programme | [../apzhub-capability-001/](../apzhub-capability-001/)                                                           |
 | Capability validation     | [../apzhub-capability-001-validation/](../apzhub-capability-001-validation/)                                     |
+| Composition ENG-001       | [../apzhub-capability-001-eng-001/](../apzhub-capability-001-eng-001/)                                           |

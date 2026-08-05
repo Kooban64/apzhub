@@ -15,3 +15,20 @@ export type { SupportAnalyticsService } from "./support-analytics-service";
 export type * from "./testing";
 export type * from "./platform-quality";
 export type * from "./time";
+export type {
+  WorkLifecycleState,
+  MyWorkQueueId,
+  MyWorkProduct,
+  MyWorkKind,
+  WorkCard,
+  MyWorkProviderResult,
+  MyWorkComposition,
+  ComposeMyWorkInput,
+  MyWorkCompositionService,
+} from "./my-work-composition-service";
+export {
+  WORK_LIFECYCLE_STATES,
+  MY_WORK_QUEUE_IDS,
+  MY_WORK_PRODUCTS,
+  MY_WORK_KINDS,
+} from "./my-work-composition-service";

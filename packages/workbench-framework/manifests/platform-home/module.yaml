@@ -1,12 +1,14 @@
 manifestSchemaVersion: "1.0"
 id: platform-home
-name: Home
-version: 0.1.0
+name: My Work
+version: 0.2.0
 kind: module
 
 metadata:
   category: platform
-  description: Home workspace scaffold for the APZHUB workbench.
+  description: >
+    Unified Work Experience Composition Layer landing surface
+    (APZHUB-CAPABILITY-001-ENG-001). Route remains /workspace/home.
 
 dependencies:
   platform: []
@@ -23,14 +25,14 @@ workbench:
     order: 10
     permission: platform.nav.home.view
   view:
-    title: Home
+    title: My Work
     workspace: home
     route: /workspace/home
     default: true
     permission: platform.nav.home.view
   actions:
     - id: platform.home.navigate
-      label: Go to Home
+      label: Go to My Work
       handler: workbench-bridge:workbench.navigation.reveal
       permission: platform.nav.home.view
       shortcut: Ctrl+Shift+H
@@ -38,4 +40,4 @@ workbench:
       group: Navigation
       icon: home
       order: 5
-      description: Reveal the Home navigation item in the workbench shell.
+      description: Reveal My Work — the portfolio work queue — in the workbench shell.
