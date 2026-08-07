@@ -40,6 +40,18 @@ function operationalService() {
   }
 }
 
+function deliveryRegisters() {
+  const d = deliveryService();
+  return {
+    listRisks: (ctx: PlatformApiRequestContext["serviceContext"], projectId: string) =>
+      d.listRisks(ctx, projectId),
+    listMilestones: (
+      ctx: PlatformApiRequestContext["serviceContext"],
+      projectId: string,
+    ) => d.listMilestones(ctx, projectId),
+  };
+}
+
 function mapHealth(
   status: "green" | "amber" | "red" | undefined,
 ): "Healthy" | "Watch" | "Critical" {
@@ -61,6 +73,46 @@ function confidenceFromHealth(
   score = Math.max(0, Math.min(100, score));
   const band = score >= 75 ? "High" : score >= 45 ? "Medium" : "Low";
   return { score, band };
+}
+
+/** Prefer ops Delivery Confidence engine; fall back to health heuristic. */
+async function resolveConfidence(
+  context: PlatformApiRequestContext,
+  projectId: string,
+  status: "green" | "amber" | "red" | undefined,
+  dashboard?: ProjectDeliveryDashboard | null,
+): Promise<{ score: number; band: "High" | "Medium" | "Low" }> {
+  try {
+    const result = await operationalService().getConfidence(
+      context.serviceContext,
+      projectId,
+      deliveryRegisters(),
+    );
+    return { score: result.score, band: result.band };
+  } catch {
+    return confidenceFromHealth(status, dashboard ?? undefined);
+  }
+}
+
+/** W002 D4 ranking within a queue group. */
+function queueRank(item: Record<string, unknown>): number {
+  let score = 0;
+  const impact = String(item.impact);
+  if (impact === "High") score += 100;
+  else if (impact === "Medium") score += 40;
+  if (item.kind === "Blocked") score += 80;
+  if (item.kind === "Waiting" && item.aged) score += 70;
+  if (item.kind === "Commitment" && item.dueAt) {
+    const d = daysUntil(String(item.dueAt));
+    if (d !== undefined && d <= 0) score += 60;
+    else if (d !== undefined && d === 0) score += 55;
+  }
+  if (item.kind === "Approval" || item.kind === "Decision") score += 30;
+  if (item.dueAt) {
+    const d = daysUntil(String(item.dueAt));
+    if (d !== undefined && d > 0 && d <= 3) score += 15;
+  }
+  return score;
 }
 
 function attentionScore(
@@ -179,7 +231,12 @@ export async function handleWorkspaceOverview(
     else if (label === "Watch") watch += 1;
     else healthy += 1;
 
-    const conf = confidenceFromHealth(status, row.dashboard ?? undefined);
+    const conf = await resolveConfidence(
+      context,
+      row.project.id,
+      status,
+      row.dashboard,
+    );
     confidenceSum += conf.score;
     if (conf.band === "Low") lowCount += 1;
 
@@ -282,16 +339,45 @@ export async function handleWorkspaceQueue(
 
   const operational = operationalService();
 
+  const bridge = createProjectsWorkflowBridge();
+
   for (const row of loaded) {
     const d = row.dashboard;
     if (!d) continue;
     const basePath = `/workspace/projects/${row.project.id}`;
 
-    const [waits, opsDecisions, commitments] = await Promise.all([
+    const [waits, opsDecisions, commitments, bindings] = await Promise.all([
       operational.listWaiting(context.serviceContext, row.project.id),
       operational.listOpsDecisions(context.serviceContext, row.project.id),
       operational.listCommitments(context.serviceContext, row.project.id),
+      bridge.listBindings(context.serviceContext, row.project.id),
     ]);
+
+    for (const binding of bindings) {
+      if (binding.status !== "pending") continue;
+      // Sync-before-queue so Workflow decisions surface promptly.
+      await bridge.syncFromWorkflow(context.serviceContext, binding.id);
+      const synced = await bridge.getBinding(context.serviceContext, binding.id);
+      if (!synced || synced.status !== "pending") continue;
+      const objType =
+        synced.subjectType === "checkpoint"
+          ? "checkpoint"
+          : synced.subjectType === "exception"
+            ? "exception"
+            : "decision";
+      decision.push({
+        id: `approval-${synced.id}`,
+        group: "decision",
+        kind: "Approval",
+        impact: "High",
+        statement: synced.title,
+        projectId: row.project.id,
+        projectName: row.project.name,
+        bindingId: synced.id,
+        inlineAct: "approve_reject",
+        targetPath: `${basePath}/control?obj=${objType}:${synced.subjectId}`,
+      });
+    }
 
     for (const wait of waits) {
       if (wait.status !== "active") continue;
@@ -432,20 +518,14 @@ export async function handleWorkspaceQueue(
     }
   }
 
-  const byImpact = (a: Record<string, unknown>, b: Record<string, unknown>) => {
-    const order = { High: 0, Medium: 1, Low: 2 } as const;
-    const ai = order[String(a.impact) as keyof typeof order] ?? 9;
-    const bi = order[String(b.impact) as keyof typeof order] ?? 9;
-    return ai - bi;
-  };
+  const byRank = (a: Record<string, unknown>, b: Record<string, unknown>) =>
+    queueRank(b) - queueRank(a);
 
-  decision.sort(byImpact);
-  attention.sort(byImpact);
-  waitingOnOthers.sort(byImpact);
+  decision.sort(byRank);
+  attention.sort(byRank);
+  waitingOnOthers.sort(byRank);
 
-  const bridgeHealth = await createProjectsWorkflowBridge().health(
-    context.serviceContext,
-  );
+  const bridgeHealth = await bridge.health(context.serviceContext);
 
   return jsonDataResponse(
     {
@@ -475,7 +555,12 @@ export async function handleWorkspacePortfolio(
       loaded.map(async (row) => {
         const d = row.dashboard;
         const health = mapHealth(d?.health.status);
-        const conf = confidenceFromHealth(d?.health.status, d ?? undefined);
+        const conf = await resolveConfidence(
+          context,
+          row.project.id,
+          d?.health.status,
+          d,
+        );
         const completed = d?.milestoneCompleted ?? 0;
         const total = d?.milestoneTotal ?? 0;
         const progressPercent = total > 0 ? Math.round((completed / total) * 100) : 0;
@@ -564,52 +649,68 @@ export async function handleWorkspacePortfolio(
   return jsonDataResponse({ items, sort }, context.tracing);
 }
 
-export async function handleWorkspaceChanges(
-  _request: NextRequest,
+async function collectOperationalChanges(
   context: PlatformApiRequestContext,
-) {
+  projectFilter?: string,
+): Promise<readonly Record<string, unknown>[]> {
   const loaded = await loadActiveProjects(context);
   const items: Array<Record<string, unknown>> = [];
+  const operational = operationalService();
 
   for (const row of loaded) {
+    if (projectFilter && row.project.id !== projectFilter) continue;
     const d = row.dashboard;
     if (!d) continue;
     const basePath = `/workspace/projects/${row.project.id}`;
 
-    for (const risk of d.topRisks.slice(0, 2)) {
-      if (risk.probability === "critical" || risk.impact === "critical") {
+    for (const risk of d.topRisks.slice(0, 3)) {
+      if (
+        risk.probability === "critical" ||
+        risk.impact === "critical" ||
+        risk.probability === "high" ||
+        risk.impact === "high"
+      ) {
         items.push({
           id: `chg-risk-${risk.id}`,
           headline: `Risk elevated — ${risk.title}`,
           whyCare: "Exposure may affect delivery confidence and go-live readiness.",
+          area: "Control",
+          importance:
+            risk.probability === "critical" || risk.impact === "critical"
+              ? "High"
+              : "Normal",
           projectId: row.project.id,
           projectName: row.project.name,
           at: risk.updatedAt,
-          targetPath: `${basePath}/risks`,
+          targetPath: `${basePath}/control?surface=risks`,
         });
       }
     }
 
-    for (const m of d.upcomingMilestones.slice(0, 2)) {
-      if (m.status === "missed") {
+    for (const m of d.upcomingMilestones.slice(0, 4)) {
+      if (m.status === "missed" || m.status === "slipped") {
         items.push({
           id: `chg-ms-${m.id}`,
           headline: `Milestone slipped — ${m.name}`,
           whyCare: "Trajectory changed; baseline variance and forecast may move.",
+          area: "Planning",
+          importance: "High",
           projectId: row.project.id,
           projectName: row.project.name,
           at: m.updatedAt,
-          targetPath: `${basePath}/milestones`,
+          targetPath: `${basePath}/planning`,
         });
-      } else if (m.status === "completed") {
+      } else if (m.status === "completed" || m.status === "achieved") {
         items.push({
           id: `chg-ms-done-${m.id}`,
           headline: `Milestone completed — ${m.name}`,
           whyCare: "Delivery progress advanced; dependent work may unblock.",
+          area: "Delivery",
+          importance: "Normal",
           projectId: row.project.id,
           projectName: row.project.name,
           at: m.updatedAt,
-          targetPath: `${basePath}/milestones`,
+          targetPath: `${basePath}/planning`,
         });
       }
     }
@@ -619,15 +720,134 @@ export async function handleWorkspaceChanges(
         id: `chg-health-${row.project.id}`,
         headline: `Delivery health Critical — ${row.project.name}`,
         whyCare: "Immediate operational intervention may be required.",
+        area: "Delivery",
+        importance: "High",
         projectId: row.project.id,
         projectName: row.project.name,
         at: d.health.computedAt,
         targetPath: `${basePath}/delivery`,
       });
     }
+
+    try {
+      const [waits, commitments, decisions, exceptions] = await Promise.all([
+        operational.listWaiting(context.serviceContext, row.project.id),
+        operational.listCommitments(context.serviceContext, row.project.id),
+        operational.listOpsDecisions(context.serviceContext, row.project.id),
+        operational.listExceptions(context.serviceContext, row.project.id),
+      ]);
+      for (const w of waits) {
+        if (w.status === "active") {
+          items.push({
+            id: `chg-wait-${w.id}`,
+            headline: `Waiting started — ${w.subject}`,
+            whyCare: "External dependency may age and block delivery.",
+            area: "Waiting",
+            importance: "Normal",
+            projectId: row.project.id,
+            projectName: row.project.name,
+            at: w.since,
+            targetPath: `${basePath}/delivery`,
+          });
+        } else if (w.status === "resolved") {
+          items.push({
+            id: `chg-wait-res-${w.id}`,
+            headline: `Waiting resolved — ${w.subject}`,
+            whyCare: "Blocked work may resume; re-check commitments.",
+            area: "Waiting",
+            importance: "Normal",
+            projectId: row.project.id,
+            projectName: row.project.name,
+            at: w.resolvedAt ?? w.updatedAt,
+            targetPath: `${basePath}/delivery`,
+          });
+        }
+      }
+      for (const c of commitments) {
+        if (c.status === "done") {
+          items.push({
+            id: `chg-cmt-done-${c.id}`,
+            headline: `Commitment completed — ${c.statement}`,
+            whyCare: "Delivery pressure reduced; dependents may unblock.",
+            area: "Delivery",
+            importance: "Normal",
+            projectId: row.project.id,
+            projectName: row.project.name,
+            at: c.updatedAt,
+            targetPath: `${basePath}/delivery`,
+          });
+        } else if (c.status === "waiting" || c.blockedByDependencyIds.length > 0) {
+          items.push({
+            id: `chg-cmt-block-${c.id}`,
+            headline: `Commitment blocked — ${c.statement}`,
+            whyCare: "Execution stalled; clear wait or dependency.",
+            area: "Delivery",
+            importance: "High",
+            projectId: row.project.id,
+            projectName: row.project.name,
+            at: c.updatedAt,
+            targetPath: `${basePath}/delivery`,
+          });
+        }
+      }
+      for (const dec of decisions) {
+        if (dec.status === "decided") {
+          items.push({
+            id: `chg-dec-${dec.id}`,
+            headline: `Decision recorded — ${dec.title}`,
+            whyCare: "Steering choice now binds delivery and governance.",
+            area: "Control",
+            importance: "Normal",
+            projectId: row.project.id,
+            projectName: row.project.name,
+            at: dec.updatedAt ?? dec.createdAt,
+            targetPath: `${basePath}/control?surface=decisions`,
+          });
+        }
+      }
+      for (const ex of exceptions) {
+        if (ex.status === "open" || ex.status === "acknowledged") {
+          items.push({
+            id: `chg-ex-${ex.id}`,
+            headline: `Exception open — ${ex.type}`,
+            whyCare: ex.impactSummary || "Operational exception requires attention.",
+            area: "Control",
+            importance:
+              ex.severity === "critical" || ex.severity === "major" ? "High" : "Normal",
+            projectId: row.project.id,
+            projectName: row.project.name,
+            at: ex.detectedAt,
+            targetPath: `${basePath}/control`,
+          });
+        }
+      }
+    } catch {
+      /* operational store optional */
+    }
   }
 
   items.sort((a, b) => String(b.at).localeCompare(String(a.at)));
+  return items.slice(0, 40);
+}
 
-  return jsonDataResponse({ items: items.slice(0, 40) }, context.tracing);
+export async function handleWorkspaceChanges(
+  _request: NextRequest,
+  context: PlatformApiRequestContext,
+) {
+  const items = await collectOperationalChanges(context);
+  return jsonDataResponse({ items }, context.tracing);
+}
+
+export async function handleProjectChanges(
+  _request: NextRequest,
+  context: PlatformApiRequestContext,
+  routeContext?: { params: Promise<Record<string, string>> },
+) {
+  const params = routeContext ? await routeContext.params : {};
+  const projectId = params.projectId;
+  if (!projectId) {
+    return jsonDataResponse({ items: [] }, context.tracing);
+  }
+  const items = await collectOperationalChanges(context, projectId);
+  return jsonDataResponse({ items, projectId }, context.tracing);
 }

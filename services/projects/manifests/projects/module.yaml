@@ -52,26 +52,58 @@ navigation:
     icon: folder-kanban
     order: 20
     permission: projects.view
+  # Primary (W002 D18): Operational Workspace + Search; All Projects secondary.
+  # Entity tools (tasks/backlog/sprints/roadmap/my-work) are demoted — use Cockpit More….
   sidebar:
     - id: projects.dashboard
       label: Operational Workspace
       route: /workspace/projects
       icon: layout-dashboard
       permission: projects.view
-    - id: projects.list
-      label: All Projects
-      route: /workspace/projects/list
-      icon: folder
+    - id: projects.portfolio
+      label: Portfolio
+      route: /workspace/projects/portfolio
+      icon: layers
       permission: projects.view
-    - id: projects.my-work
-      label: My Work
-      route: /workspace/projects/my-work
-      icon: user
-      permission: projects.task.view
+    - id: projects.reviews
+      label: Reviews
+      route: /workspace/projects/reviews
+      icon: clipboard-check
+      permission: projects.view
+    - id: projects.reports
+      label: Reports
+      route: /workspace/projects/reports
+      icon: file-bar-chart
+      permission: projects.view
+    - id: projects.portfolio-admin
+      label: Portfolio Admin
+      route: /workspace/projects/portfolio/admin
+      icon: settings-2
+      permission: projects.manage
+    - id: projects.teams
+      label: Teams
+      route: /workspace/projects/teams
+      icon: users
+      permission: projects.view
+    - id: projects.admin
+      label: Administration
+      route: /workspace/projects/admin
+      icon: shield
+      permission: projects.admin
     - id: projects.search
       label: Search
       route: /workspace/projects/search
       icon: search
+      permission: projects.view
+    - id: projects.productivity
+      label: Productivity
+      route: /workspace/projects/productivity
+      icon: zap
+      permission: projects.view
+    - id: projects.list
+      label: All Projects
+      route: /workspace/projects/list
+      icon: folder
       permission: projects.view
     - id: projects.help
       label: Help
@@ -83,6 +115,11 @@ navigation:
       route: /workspace/projects/settings
       icon: settings
       permission: projects.view
+    - id: projects.my-work
+      label: My Work
+      route: /workspace/projects/my-work
+      icon: user
+      permission: projects.task.view
     - id: projects.tasks
       label: Tasks
       route: /workspace/projects/tasks
@@ -110,6 +147,70 @@ navigation:
       permission: projects.admin
 
 commands:
+  - id: projects.goto.workspace
+    label: Go to Operational Workspace
+    category: Projects
+    permission: projects.view
+  - id: projects.goto.portfolio
+    label: Open Portfolio Scorecard
+    category: Projects
+    permission: projects.view
+  - id: projects.goto.queue
+    label: Open Focus Queue
+    category: Projects
+    permission: projects.view
+  - id: projects.goto.search
+    label: Open Search
+    category: Projects
+    permission: projects.view
+  - id: projects.goto.reviews
+    label: Open Review Calendar
+    category: Projects
+    permission: projects.view
+  - id: projects.goto.reports
+    label: Open Reports Catalogue
+    category: Projects
+    permission: projects.view
+  - id: projects.goto.productivity
+    label: Open Productivity
+    category: Projects
+    permission: projects.view
+  - id: projects.quick-action
+    label: Quick Action…
+    category: Projects
+    permission: projects.view
+  - id: projects.create.commitment
+    label: New commitment (current project)
+    category: Projects
+    permission: projects.manage
+  - id: projects.create.wait
+    label: Log wait
+    category: Projects
+    permission: projects.manage
+  - id: projects.create.exception
+    label: Raise exception
+    category: Projects
+    permission: projects.manage
+  - id: projects.create.decision
+    label: Record decision
+    category: Projects
+    permission: projects.manage
+  - id: projects.create.review
+    label: Start Project Review
+    category: Projects
+    permission: projects.manage
+  - id: projects.open.raci
+    label: Open Responsibility Matrix
+    category: Projects
+    permission: projects.view
+  - id: projects.cross.workflow
+    label: Jump to APZ Workflow
+    category: Projects
+    permission: projects.view
+  - id: projects.cross.documents
+    label: Jump to APZ Documents
+    category: Projects
+    permission: projects.view
   - id: project.open
     label: Open Project
     category: Projects
@@ -167,6 +268,150 @@ workbench:
     default: true
     permission: projects.view
   actions:
+    - id: projects.goto.workspace
+      label: Go to Operational Workspace
+      handler: route:/workspace/projects
+      permission: projects.view
+      palette: true
+      group: Projects
+      icon: layout-dashboard
+      order: 1
+      description: Navigate to the Operational Workspace.
+    - id: projects.goto.portfolio
+      label: Open Portfolio Scorecard
+      handler: route:/workspace/projects/portfolio
+      permission: projects.view
+      palette: true
+      group: Projects
+      icon: layers
+      order: 2
+      description: Open the executive Portfolio Scorecard.
+    - id: projects.goto.queue
+      label: Open Focus Queue
+      handler: route:/workspace/projects?focus=queue
+      permission: projects.view
+      palette: true
+      group: Projects
+      icon: list-checks
+      order: 3
+      description: Jump to the Focus Queue on Operational Workspace.
+    - id: projects.goto.search
+      label: Open Search
+      handler: route:/workspace/projects/search
+      permission: projects.view
+      palette: true
+      group: Projects
+      icon: search
+      order: 4
+      description: Open enterprise search in APZ Projects.
+    - id: projects.goto.reviews
+      label: Open Review Calendar
+      handler: route:/workspace/projects/reviews
+      permission: projects.view
+      palette: true
+      group: Projects
+      icon: clipboard-check
+      order: 5
+      description: Open the Operational Review calendar.
+    - id: projects.goto.reports
+      label: Open Reports Catalogue
+      handler: route:/workspace/projects/reports
+      permission: projects.view
+      palette: true
+      group: Projects
+      icon: file-bar-chart
+      order: 6
+      description: Open the operational report catalogue.
+    - id: projects.goto.productivity
+      label: Open Productivity
+      handler: route:/workspace/projects/productivity
+      permission: projects.view
+      palette: true
+      group: Projects
+      icon: zap
+      order: 7
+      description: Open Favourites, Recents, Saved searches, and Sessions.
+    - id: projects.quick-action
+      label: Quick Action…
+      handler: service:projects-productivity:quick-action
+      permission: projects.view
+      palette: true
+      group: Projects
+      icon: plus-circle
+      order: 8
+      description: Create Project, Commitment, Milestone, Decision, Risk, Exception, Review, or Note.
+    - id: projects.create.commitment
+      label: New commitment (current project)
+      handler: service:projects-productivity:create.commitment
+      permission: projects.manage
+      palette: true
+      group: Projects
+      icon: check-circle
+      order: 9
+      description: Create a commitment in the current project context.
+    - id: projects.create.wait
+      label: Log wait
+      handler: service:projects-productivity:create.wait
+      permission: projects.manage
+      palette: true
+      group: Projects
+      icon: clock
+      order: 10
+      description: Log a wait against the current operational context.
+    - id: projects.create.exception
+      label: Raise exception
+      handler: service:projects-productivity:create.exception
+      permission: projects.manage
+      palette: true
+      group: Projects
+      icon: alert-triangle
+      order: 11
+      description: Raise an exception in the current project.
+    - id: projects.create.decision
+      label: Record decision
+      handler: service:projects-productivity:create.decision
+      permission: projects.manage
+      palette: true
+      group: Projects
+      icon: gavel
+      order: 12
+      description: Record a decision in the current project.
+    - id: projects.create.review
+      label: Start Project Review
+      handler: route:/workspace/projects/reviews
+      permission: projects.manage
+      palette: true
+      group: Projects
+      icon: clipboard-list
+      order: 13
+      description: Start or schedule a Project Review.
+    - id: projects.open.raci
+      label: Open Responsibility Matrix
+      handler: service:projects-productivity:open.raci
+      permission: projects.view
+      palette: true
+      group: Projects
+      icon: users
+      order: 14
+      description: Open the Responsibility Matrix for the current project.
+    - id: projects.cross.workflow
+      label: Jump to APZ Workflow
+      handler: route:/workspace/workflow
+      permission: projects.view
+      palette: true
+      group: Cross-product
+      icon: git-branch
+      order: 15
+      description: Navigate to APZ Workflow with enterprise context.
+    - id: projects.cross.documents
+      label: Jump to APZ Documents
+      handler: route:/workspace/documents
+      permission: projects.view
+      palette: true
+      group: Cross-product
+      icon: file-text
+      order: 16
+      description: Navigate to APZ Documents with enterprise context.
     - id: project.open
       label: Open Project
       handler: service:project-service:workbench.open
@@ -174,7 +419,7 @@ workbench:
       palette: true
       group: Projects
       icon: folder
-      order: 10
+      order: 20
       description: Open a project in APZ Projects.
     - id: project.create
       label: Create Project
@@ -183,7 +428,7 @@ workbench:
       palette: true
       group: Projects
       icon: plus
-      order: 20
+      order: 30
       description: Create a new project in APZ Projects.
     - id: project.update
       label: Update Project

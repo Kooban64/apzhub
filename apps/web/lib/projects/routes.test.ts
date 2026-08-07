@@ -43,4 +43,41 @@ describe("projects routes", () => {
       "/workspace/projects/proj_1/tasks",
     );
   });
+
+  it("resolves portfolio surfaces (W005)", () => {
+    expect(resolveProjectsRoute("/workspace/projects/portfolio")).toEqual({
+      kind: "portfolio-scorecard",
+    });
+    expect(resolveProjectsRoute("/workspace/projects/portfolio/workspace")).toEqual({
+      kind: "portfolio-workspace",
+    });
+    expect(resolveProjectsRoute("/workspace/projects/portfolio/timeline")).toEqual({
+      kind: "portfolio-timeline",
+    });
+    expect(
+      resolveProjectsRoute("/workspace/projects/portfolio/programmes/prg_1"),
+    ).toEqual({ kind: "portfolio-programme", programmeId: "prg_1" });
+    expect(
+      resolveProjectsRoute("/workspace/projects/portfolio/initiatives/ini_1"),
+    ).toEqual({ kind: "portfolio-initiative", initiativeId: "ini_1" });
+  });
+
+  it("resolves teams and administration surfaces (W006 / W010)", () => {
+    expect(resolveProjectsRoute("/workspace/projects/teams")).toEqual({
+      kind: "teams-directory",
+    });
+    expect(resolveProjectsRoute("/workspace/projects/teams/edt_1")).toEqual({
+      kind: "teams-detail",
+      teamId: "edt_1",
+    });
+    expect(resolveProjectsRoute("/workspace/projects/admin")).toEqual({
+      kind: "admin-dashboard",
+    });
+    expect(resolveProjectsRoute("/workspace/projects/admin/governance")).toEqual({
+      kind: "admin-governance",
+    });
+    expect(resolveProjectsRoute("/workspace/projects/admin/policies")).toEqual({
+      kind: "admin-policies",
+    });
+  });
 });

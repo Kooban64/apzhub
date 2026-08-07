@@ -43,7 +43,10 @@ export function resolvePageLimit(query: PaginationQuery): number {
   return query.limit ?? query.perPage ?? PLATFORM_API_DEFAULT_PAGE_LIMIT;
 }
 
-export function parseQuery<T>(schema: z.ZodType<T>, searchParams: URLSearchParams): T {
+export function parseQuery<T extends z.ZodTypeAny>(
+  schema: T,
+  searchParams: URLSearchParams,
+): z.infer<T> {
   const raw: Record<string, string> = {};
   for (const [key, value] of searchParams.entries()) {
     raw[key] = value;

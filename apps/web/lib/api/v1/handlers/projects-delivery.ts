@@ -21,9 +21,23 @@ import {
 } from "@apzhub/platform-services";
 
 import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
+import {
+  assertValidUserPrincipal,
+  InvalidPrincipalError,
+} from "../identity/validate-principal";
 import { jsonDataResponse, jsonErrorResponse } from "../response";
 import { parsePathParam } from "../schemas/common";
 import { projectIdParamSchema } from "../schemas/project";
+
+async function assertOwnerPrincipal(
+  context: PlatformApiRequestContext,
+  owner?: string,
+  ownerUserId?: string,
+) {
+  const principal = ownerUserId?.trim() || owner?.trim();
+  if (!principal) return;
+  await assertValidUserPrincipal(context, principal, { required: true });
+}
 
 function service() {
   try {
@@ -62,6 +76,13 @@ const RISK_STATUS = ["open", "mitigating", "closed", "accepted"] as const;
 const ACTION_STATUS = ["open", "done", "cancelled"] as const;
 
 function mapError(error: unknown) {
+  if (error instanceof InvalidPrincipalError) {
+    return {
+      status: 400,
+      code: "INVALID_PRINCIPAL",
+      message: `Unknown identity principal: ${error.principalId}`,
+    };
+  }
   const message = error instanceof Error ? error.message : "Request failed.";
   const notFound = message.includes("_not_found") || message.includes("not_found");
   return {
@@ -124,6 +145,7 @@ export async function handleCreateMilestone(
     sortKey: typeof body.sortKey === "number" ? body.sortKey : undefined,
   };
   try {
+    await assertOwnerPrincipal(context, input.owner, input.ownerUserId);
     const created = await service().createMilestone(
       context.serviceContext,
       projectId,
@@ -197,6 +219,7 @@ export async function handleUpdateMilestone(
       : undefined,
   };
   try {
+    await assertOwnerPrincipal(context, input.owner, input.ownerUserId);
     const updated = await service().updateMilestone(
       context.serviceContext,
       projectId,
@@ -271,6 +294,7 @@ export async function handleCreateRisk(
         : undefined,
   };
   try {
+    await assertOwnerPrincipal(context, input.owner);
     const created = await service().createRisk(
       context.serviceContext,
       projectId,
@@ -332,6 +356,7 @@ export async function handleUpdateRisk(
         : undefined,
   };
   try {
+    await assertOwnerPrincipal(context, input.owner);
     const updated = await service().updateRisk(
       context.serviceContext,
       projectId,
@@ -384,6 +409,7 @@ export async function handleCreateDecision(
     relatedWork: typeof body.relatedWork === "string" ? body.relatedWork : undefined,
   };
   try {
+    await assertOwnerPrincipal(context, input.owner);
     const created = await service().createDecision(
       context.serviceContext,
       projectId,
@@ -431,6 +457,7 @@ export async function handleUpdateDecision(
     relatedWork: typeof body.relatedWork === "string" ? body.relatedWork : undefined,
   };
   try {
+    await assertOwnerPrincipal(context, input.owner);
     const updated = await service().updateDecision(
       context.serviceContext,
       projectId,
@@ -485,6 +512,7 @@ export async function handleCreateAction(
         : undefined,
   };
   try {
+    await assertOwnerPrincipal(context, input.owner);
     const created = await service().createAction(
       context.serviceContext,
       projectId,
@@ -534,6 +562,7 @@ export async function handleUpdateAction(
         : undefined,
   };
   try {
+    await assertOwnerPrincipal(context, input.owner);
     const updated = await service().updateAction(
       context.serviceContext,
       projectId,

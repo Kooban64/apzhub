@@ -24,6 +24,11 @@ import {
 
 import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
 import { getPlatformServiceGateway } from "../gateway/bootstrap";
+import {
+  assertValidDeliveryTeamPrincipal,
+  assertValidUserPrincipal,
+  InvalidPrincipalError,
+} from "../identity/validate-principal";
 import { jsonDataResponse, jsonErrorResponse } from "../response";
 import { parsePathParam } from "../schemas/common";
 import { projectIdParamSchema } from "../schemas/project";
@@ -240,6 +245,10 @@ export async function handleInitiateProject(
     identifier,
     description: typeof body.description === "string" ? body.description : undefined,
     ownerUserId: typeof body.ownerUserId === "string" ? body.ownerUserId : undefined,
+    operationalRoleId:
+      typeof body.operationalRoleId === "string" ? body.operationalRoleId : undefined,
+    deliveryTeamId:
+      typeof body.deliveryTeamId === "string" ? body.deliveryTeamId : undefined,
     classification: body.classification as InitiateProjectInput["classification"],
     deliveryModel: body.deliveryModel as InitiateProjectInput["deliveryModel"],
     executionCharacteristic:
@@ -282,6 +291,30 @@ export async function handleInitiateProject(
         context.tracing,
       );
     }
+  }
+
+  try {
+    await assertValidUserPrincipal(context, input.ownerUserId, {
+      required: startMode === "initiating",
+    });
+    for (const memberId of input.coreTeamUserIds ?? []) {
+      await assertValidUserPrincipal(context, memberId, { required: true });
+    }
+    await assertValidDeliveryTeamPrincipal(context, input.deliveryTeamId, {
+      required: false,
+    });
+  } catch (error) {
+    if (error instanceof InvalidPrincipalError) {
+      return jsonErrorResponse(
+        400,
+        {
+          code: "INVALID_PRINCIPAL",
+          message: `Unknown identity principal: ${error.principalId}`,
+        },
+        context.tracing,
+      );
+    }
+    throw error;
   }
 
   const gateway = await getPlatformServiceGateway();

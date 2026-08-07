@@ -5,6 +5,7 @@ import type { ServiceRequestContext } from "@apzhub/platform-service-contracts";
 import {
   createProjectsWorkflowBridge,
   resetProjectsWorkflowBridgeStoreForTests,
+  setProjectsWorkflowBridgeRuntimeExecutor,
 } from "./create-projects-workflow-bridge";
 
 function ctx(): ServiceRequestContext {
@@ -20,10 +21,11 @@ function ctx(): ServiceRequestContext {
 describe("Projects Workflow Bridge (P1)", () => {
   beforeEach(() => {
     resetProjectsWorkflowBridgeStoreForTests();
+    setProjectsWorkflowBridgeRuntimeExecutor(undefined);
   });
 
   it("requests hold approval via Workflow and consumes approve outcome", async () => {
-    const bridge = createProjectsWorkflowBridge();
+    const bridge = createProjectsWorkflowBridge({ useInProcessWorkflow: true });
     const binding = await bridge.requestApproval(ctx(), {
       kind: "hold_approval",
       projectId: "prj_1",
@@ -53,7 +55,7 @@ describe("Projects Workflow Bridge (P1)", () => {
   });
 
   it("idempotently returns open binding for same subject", async () => {
-    const bridge = createProjectsWorkflowBridge();
+    const bridge = createProjectsWorkflowBridge({ useInProcessWorkflow: true });
     const a = await bridge.requestApproval(ctx(), {
       kind: "closure_approval",
       projectId: "prj_1",
@@ -72,7 +74,7 @@ describe("Projects Workflow Bridge (P1)", () => {
   });
 
   it("supports checkpoint and exception approval kinds", async () => {
-    const bridge = createProjectsWorkflowBridge();
+    const bridge = createProjectsWorkflowBridge({ useInProcessWorkflow: true });
     const checkpoint = await bridge.requestApproval(ctx(), {
       kind: "checkpoint_approval",
       projectId: "prj_1",

@@ -6,6 +6,22 @@ import { buildPlaywrightWebServerEnv } from "./web-server-env";
 
 loadEnv({ path: path.resolve(__dirname, "../../.env") });
 
+const playwrightPort = process.env.PLAYWRIGHT_WEB_PORT ?? "3300";
+const playwrightOrigin =
+  process.env.PLAYWRIGHT_BASE_URL ?? `http://localhost:${playwrightPort}`;
+/**
+ * Prefer standalone production server when host `next dev` is already bound
+ * (coexistence with long-lived :3300) — `next start` is incompatible with
+ * `output: "standalone"`.
+ */
+const useProdServer = process.env.PLAYWRIGHT_USE_PROD_SERVER === "true";
+const repoRoot = path.resolve(__dirname, "../..");
+const standaloneRoot = path.resolve(repoRoot, "apps/web/.next/standalone");
+const webServerCommand = useProdServer
+  ? `bash -lc 'mkdir -p apps/web/.next && rm -rf apps/web/.next/static && cp -a "${repoRoot}/apps/web/.next/static" apps/web/.next/static && cp -a "${repoRoot}/apps/web/public" apps/web/public && node apps/web/server.js'`
+  : `pnpm --filter @apzhub/web exec next dev -p ${playwrightPort} -H 127.0.0.1`;
+const webServerCwd = useProdServer ? standaloneRoot : repoRoot;
+
 export default defineConfig({
   testDir: "./e2e",
   /**
@@ -21,20 +37,37 @@ export default defineConfig({
   reporter: "list",
   globalSetup: path.resolve(__dirname, "./global-setup.ts"),
   use: {
-    baseURL: process.env.PLAYWRIGHT_BASE_URL ?? "http://localhost:3300",
+    baseURL: playwrightOrigin,
     trace: "on-first-retry",
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   webServer: {
-    command: "pnpm --filter @apzhub/web dev",
-    url: "http://localhost:3300/login",
+    command: webServerCommand,
+    url: `${playwrightOrigin}/login`,
     reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
-    cwd: path.resolve(__dirname, "../.."),
+    timeout: 180_000,
+    cwd: webServerCwd,
     env: buildPlaywrightWebServerEnv({
+      PORT: playwrightPort,
+      HOSTNAME: "127.0.0.1",
+      APP_URL: playwrightOrigin,
+      NEXT_PUBLIC_APP_URL: playwrightOrigin,
+      BETTER_AUTH_URL: playwrightOrigin,
       NEXT_PUBLIC_E2E_TEST_HOOKS: "true",
-      ALLOW_DEV_REGISTRATION: "true",
-      NEXT_PUBLIC_ALLOW_DEV_REGISTRATION: "true",
+      ...(useProdServer
+        ? {
+            NODE_ENV: "production",
+            ALLOW_DEV_REGISTRATION: "false",
+            NEXT_PUBLIC_ALLOW_DEV_REGISTRATION: "false",
+            APZHUB_WORKSPACE_ROOT: path.resolve(__dirname, "../.."),
+            // Standalone host coexistence: discovery diagnostics are non-fatal in
+            // the long-lived next-dev profile; keep E2E prod server aligned.
+            APZHUB_RUNTIME_FAIL_FAST: "false",
+          }
+        : {
+            ALLOW_DEV_REGISTRATION: "true",
+            NEXT_PUBLIC_ALLOW_DEV_REGISTRATION: "true",
+          }),
     }),
   },
 });

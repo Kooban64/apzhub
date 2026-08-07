@@ -7,9 +7,20 @@ import { isProjectsApiError } from "@/lib/projects/errors";
 import { getControlSurface, scanProjectExceptions } from "@/lib/projects/projects-api";
 import { projectsQueryKeys } from "@/lib/projects/query-keys";
 
+import {
+  ContinuityPanel,
+  ResponsibilityMatrixPanel,
+  StakeholdersPanel,
+} from "./project-accountability-panels";
 import { ErrorState, LoadingState } from "./projects-ui";
 
-export function ProjectControlSurface({ projectId }: { readonly projectId: string }) {
+export function ProjectControlSurface({
+  projectId,
+  canManage = false,
+}: {
+  readonly projectId: string;
+  readonly canManage?: boolean;
+}) {
   const queryClient = useQueryClient();
   const control = useQuery({
     queryKey: [...projectsQueryKeys.all, "control", projectId],
@@ -122,6 +133,10 @@ export function ProjectControlSurface({ projectId }: { readonly projectId: strin
               (d) => `${String(d.status)} · ${String(d.name)}`,
             )}
           />
+
+          <ResponsibilityMatrixPanel projectId={projectId} />
+          <ContinuityPanel projectId={projectId} canManage={canManage} />
+          <StakeholdersPanel projectId={projectId} canManage={canManage} />
         </>
       ) : null}
 

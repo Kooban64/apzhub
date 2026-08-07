@@ -1,0 +1,14 @@
+id: projects-productivity
+name: Projects Productivity
+version: 1.0.0
+layer: platform-service
+domain: projects
+description: >
+  Personal productivity aids for APZ Projects (W009 / PX-06): saved searches,
+  bulk operations with confirm+audit, productivity sessions. Favourites and
+  recents compose platform personalisation. No consumer personalisation.
+permissions:
+  - projects.view
+  - projects.manage
+storage: platform-postgres
+status: active

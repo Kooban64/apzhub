@@ -121,7 +121,7 @@ function SliceSection({
   return (
     <ContextSection title={title}>
       <div ref={ref} data-testid={`context-slice-${slice.sectionId}`}>
-        {slice.fragments.length === 0 ? (
+        {(slice.fragments ?? []).length === 0 ? (
           <p
             className="text-xs text-[var(--color-muted-foreground)]"
             data-testid={`context-slice-${slice.sectionId}-empty`}
@@ -130,7 +130,7 @@ function SliceSection({
           </p>
         ) : (
           <ul className="space-y-2">
-            {slice.fragments.map((fragment) => (
+            {(slice.fragments ?? []).map((fragment) => (
               <FragmentRow
                 key={fragment.id}
                 fragment={fragment}
@@ -307,7 +307,7 @@ export function EnterpriseContextPanel({
           ) : null}
 
           {composition
-            ? composition.slices.map((slice) => (
+            ? (composition.slices ?? []).map((slice) => (
                 <SliceSection
                   key={slice.sectionId}
                   slice={slice}

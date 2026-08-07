@@ -44,6 +44,8 @@ function mapLifecycle(
     continuousDeliveryWaiver: row.continuousDeliveryWaiver,
     milestoneFreeWaiver: row.milestoneFreeWaiver,
     coreTeamUserIds: Object.freeze([...(row.coreTeamUserIds ?? [])]),
+    operationalRoleId: row.operationalRoleId ?? undefined,
+    deliveryTeamId: row.deliveryTeamId ?? undefined,
     closureOutcome: (row.closureOutcome ??
       undefined) as ProjectLifecycleRecord["closureOutcome"],
     closureSummary: row.closureSummary ?? undefined,
@@ -94,6 +96,8 @@ export function createPostgresProjectsLifecycleStore(): ProjectsLifecycleStore {
         continuousDeliveryWaiver: record.continuousDeliveryWaiver,
         milestoneFreeWaiver: record.milestoneFreeWaiver,
         coreTeamUserIds: [...record.coreTeamUserIds],
+        operationalRoleId: record.operationalRoleId ?? null,
+        deliveryTeamId: record.deliveryTeamId ?? null,
         closureOutcome: record.closureOutcome ?? null,
         closureSummary: record.closureSummary ?? null,
         holdReason: record.holdReason ?? null,

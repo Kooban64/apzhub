@@ -38,6 +38,8 @@ export const platformProjectLifecycle = pgTable(
       .$type<string[]>()
       .notNull()
       .default([]),
+    operationalRoleId: text("operational_role_id"),
+    deliveryTeamId: text("delivery_team_id"),
     closureOutcome: text("closure_outcome"),
     closureSummary: text("closure_summary"),
     holdReason: text("hold_reason"),

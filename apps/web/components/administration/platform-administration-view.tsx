@@ -430,6 +430,14 @@ const SECTION_META: Record<
     title: "Diagnostics",
     description: "Management-plane health and capabilities — live probes unavailable.",
   },
+  "product-learning": {
+    title: "Product learning",
+    description: "Context-learning summaries and product improvement signals.",
+  },
+  "friction-register": {
+    title: "Friction register",
+    description: "Tracked friction items for product and operational improvement.",
+  },
 };
 
 export function PlatformAdministrationView({

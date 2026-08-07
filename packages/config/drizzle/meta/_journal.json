@@ -764,6 +764,160 @@
       "when": 1786200000023,
       "tag": "0108_apz_platform_knowledge_memory_rls",
       "breakpoints": true
+    },
+    {
+      "idx": 109,
+      "version": "7",
+      "when": 1786200000024,
+      "tag": "0109_apz_platform_projects_lifecycle",
+      "breakpoints": true
+    },
+    {
+      "idx": 110,
+      "version": "7",
+      "when": 1786200000025,
+      "tag": "0110_apz_platform_projects_lifecycle_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 111,
+      "version": "7",
+      "when": 1786200000026,
+      "tag": "0111_apz_platform_projects_operational",
+      "breakpoints": true
+    },
+    {
+      "idx": 112,
+      "version": "7",
+      "when": 1786200000027,
+      "tag": "0112_apz_platform_projects_operational_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 113,
+      "version": "7",
+      "when": 1786200000028,
+      "tag": "0113_apz_platform_milestones_w004",
+      "breakpoints": true
+    },
+    {
+      "idx": 114,
+      "version": "7",
+      "when": 1786200000029,
+      "tag": "0114_apz_platform_projects_workflow_bridge",
+      "breakpoints": true
+    },
+    {
+      "idx": 115,
+      "version": "7",
+      "when": 1786200000030,
+      "tag": "0115_apz_platform_projects_portfolio",
+      "breakpoints": true
+    },
+    {
+      "idx": 116,
+      "version": "7",
+      "when": 1786200000031,
+      "tag": "0116_apz_platform_projects_portfolio_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 117,
+      "version": "7",
+      "when": 1786200000032,
+      "tag": "0117_apz_platform_projects_team_directory",
+      "breakpoints": true
+    },
+    {
+      "idx": 118,
+      "version": "7",
+      "when": 1786200000033,
+      "tag": "0118_apz_platform_projects_team_directory_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 119,
+      "version": "7",
+      "when": 1786200000034,
+      "tag": "0119_apz_platform_projects_resource_governance",
+      "breakpoints": true
+    },
+    {
+      "idx": 120,
+      "version": "7",
+      "when": 1786200000035,
+      "tag": "0120_apz_platform_projects_resource_governance_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 121,
+      "version": "7",
+      "when": 1786200000036,
+      "tag": "0121_apz_platform_projects_w006_accountability",
+      "breakpoints": true
+    },
+    {
+      "idx": 122,
+      "version": "7",
+      "when": 1786200000037,
+      "tag": "0122_apz_platform_projects_w006_accountability_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 123,
+      "version": "7",
+      "when": 1786200000038,
+      "tag": "0123_apz_platform_projects_w007_collaboration",
+      "breakpoints": true
+    },
+    {
+      "idx": 124,
+      "version": "7",
+      "when": 1786200000039,
+      "tag": "0124_apz_platform_projects_w007_collaboration_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 125,
+      "version": "7",
+      "when": 1786200000040,
+      "tag": "0125_apz_platform_projects_w008_reporting",
+      "breakpoints": true
+    },
+    {
+      "idx": 126,
+      "version": "7",
+      "when": 1786200000041,
+      "tag": "0126_apz_platform_projects_w008_reporting_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 127,
+      "version": "7",
+      "when": 1786200000042,
+      "tag": "0127_apz_platform_projects_w009_productivity",
+      "breakpoints": true
+    },
+    {
+      "idx": 128,
+      "version": "7",
+      "when": 1786200000043,
+      "tag": "0128_apz_platform_projects_w009_productivity_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 129,
+      "version": "7",
+      "when": 1786200000044,
+      "tag": "0129_apz_platform_projects_w010_administration",
+      "breakpoints": true
+    },
+    {
+      "idx": 130,
+      "version": "7",
+      "when": 1786200000045,
+      "tag": "0130_apz_platform_projects_w010_administration_rls",
+      "breakpoints": true
     }
   ]
 }

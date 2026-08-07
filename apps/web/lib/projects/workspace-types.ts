@@ -67,6 +67,8 @@ export interface WorkspaceQueueItem {
   readonly targetPath: string;
   /** Present for Decision / Approval rows — enables inline act (W002 §6.4). */
   readonly inlineAct?: "approve_reject" | "open";
+  /** Workflow Bridge binding id when kind is Approval. */
+  readonly bindingId?: string;
 }
 
 export interface WorkspaceQueue {

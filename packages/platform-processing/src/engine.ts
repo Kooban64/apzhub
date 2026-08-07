@@ -184,7 +184,6 @@ export function createProcessingEngine(
 
     if (
       poison ||
-      result.outcome === "dead_letter" ||
       result.outcome === "terminal_failure" ||
       !shouldRetry(item.attemptCount, permanent, retryPolicy)
     ) {

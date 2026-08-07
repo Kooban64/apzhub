@@ -1,0 +1,14 @@
+id: projects-reporting
+name: Projects Operational Reporting
+version: 1.0.0
+layer: platform-service
+domain: projects
+description: >
+  Operational reviews, executive summaries, review calendar, report catalogue,
+  immutable pack snapshots, and metric drill-through (W008 / PX-05).
+  Permanent boundary with APZ Analytics — operational delivery reporting only.
+permissions:
+  - projects.view
+  - projects.manage
+storage: platform-postgres
+status: active

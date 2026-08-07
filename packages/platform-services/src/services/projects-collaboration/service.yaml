@@ -1,0 +1,15 @@
+id: projects-collaboration
+name: Projects Collaboration
+version: 1.0.0
+layer: platform-service
+domain: projects
+description: >
+  Object-anchored operational conversations, meeting outcomes, notices,
+  unified communication timeline, digests, and contextual search (W007 / PX-04).
+  Publishes events only — Attention Engine delivers notifications.
+permissions:
+  - projects.view
+  - projects.manage
+  - projects.conversation.write
+storage: platform-postgres
+status: active

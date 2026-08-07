@@ -1,0 +1,36 @@
+manifestSchemaVersion: "1.0"
+id: projects-portfolio
+name: Projects Portfolio
+version: 0.1.0
+kind: service
+
+metadata:
+  category: productivity
+  description: >
+    Portfolio hierarchy SoR for Enterprise Portfolio, Strategic Initiatives,
+    Programmes, and Strategic Objectives (W005 / PX-02). Persisted in platform
+    PostgreSQL. Weighted confidence and evidence-derived objective progress live here.
+  contractPackage: "@apzhub/platform-service-contracts"
+  implementationPackage: "@apzhub/platform-services"
+  owner: APZHUB
+  tags:
+    - projects
+    - portfolio
+    - programme
+    - initiative
+    - objectives
+
+dependencies:
+  platform: []
+  integrations: []
+
+service:
+  category: productivity
+
+permissions:
+  - projects.view
+  - projects.manage
+  - projects.admin
+
+health:
+  enabled: true

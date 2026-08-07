@@ -139,6 +139,10 @@ export interface ProjectLifecycleRecord {
   readonly templateId?: string;
   readonly templateVersion?: number;
   readonly ownerUserId?: string;
+  /** Platform Identity role used as operational accountable role (P2). */
+  readonly operationalRoleId?: string;
+  /** Enterprise Delivery Team Directory id (P2 / W006). */
+  readonly deliveryTeamId?: string;
   readonly programmeId?: string;
   readonly customerLabel?: string;
   readonly targetEndAt?: string;
@@ -162,6 +166,8 @@ export interface InitiateProjectInput {
   readonly identifier: string;
   readonly description?: string;
   readonly ownerUserId?: string;
+  readonly operationalRoleId?: string;
+  readonly deliveryTeamId?: string;
   readonly classification?: ProjectClassification;
   readonly deliveryModel?: ProjectDeliveryModel;
   readonly executionCharacteristic?: ProjectExecutionCharacteristic;

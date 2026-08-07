@@ -1,0 +1,18 @@
+id: projects-team-directory
+name: Projects Team Directory Service
+version: 1.0.0
+layer: platform-service
+domain: projects
+description: >
+  Enterprise Delivery Team Directory (W006 / P2). Projects-owned SoR for reusable
+  delivery teams and dated membership. Consumed by Projects ownership pickers;
+  replaces Identity Groups as the delivery-team catalogue.
+capabilities:
+  - list-delivery-teams
+  - create-update-delivery-teams
+  - team-membership
+permissions:
+  - projects.view
+  - projects.manage
+storage: platform-postgres
+status: active

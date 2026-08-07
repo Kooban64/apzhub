@@ -901,8 +901,8 @@ export function createProjectsOperationalService(
     async waiveCheckpoint(ctx, projectId, checkpointId, reason) {
       const current = await store.getCheckpoint(tenant(ctx), projectId, checkpointId);
       if (!current) throw new Error("ops_checkpoint_not_found");
-      // Required checkpoints must execute via Workflow — no permanent waiver path.
-      if (current.requiredByProfile && bridge) {
+      // Required checkpoints must execute via Workflow — no waiver / fallback path.
+      if (current.requiredByProfile) {
         throw new Error("checkpoint_waiver_forbidden_use_workflow");
       }
       const now = new Date().toISOString();

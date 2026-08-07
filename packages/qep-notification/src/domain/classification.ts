@@ -22,7 +22,9 @@ export const NOTIFICATION_CATEGORIES = [
   "security",
   "platform",
   "execution",
+  "execution_plan",
   "requirement",
+  "reporting",
   "audit",
   "other",
 ] as const;

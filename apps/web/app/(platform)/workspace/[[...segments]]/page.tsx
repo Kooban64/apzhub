@@ -1,10 +1,11 @@
 import { Suspense } from "react";
 
 import { WorkbenchPage } from "@/components/workbench-page";
+import { WorkspaceSuspenseFallback } from "@/components/workspace-suspense-fallback";
 
 export default function WorkspacePage() {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<WorkspaceSuspenseFallback />}>
       <WorkbenchPage />
     </Suspense>
   );

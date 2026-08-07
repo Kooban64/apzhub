@@ -9,22 +9,33 @@ import {
   formatTaskStatus,
 } from "@/lib/projects/format";
 import type { ProjectStatus, TaskPriority, TaskStatus } from "@/lib/projects/types";
+import { useProjectsDocumentTitle } from "@/lib/projects/use-projects-document-title";
+
+import { ProjectsProductivityChrome } from "./projects-productivity-chrome";
 
 export const PROJECTS_PRODUCT_NAME = "APZ Projects";
 
 export function PageShell({
   title,
+  documentTitle,
   description,
   actions,
   breadcrumbs,
+  enableProductivityChrome = true,
   children,
 }: {
   readonly title: string;
+  /** Overrides visible `title` for `document.title` when more specific (HD-H2-01). */
+  readonly documentTitle?: string;
   readonly description?: string;
   readonly actions?: ReactNode;
   readonly breadcrumbs?: readonly string[];
+  /** Disable on error fallbacks so chrome cannot re-throw into the boundary. */
+  readonly enableProductivityChrome?: boolean;
   readonly children: ReactNode;
 }) {
+  useProjectsDocumentTitle(documentTitle ?? title);
+
   const crumbs =
     breadcrumbs && breadcrumbs.length > 0
       ? breadcrumbs
@@ -68,6 +79,7 @@ export function PageShell({
         ) : null}
       </header>
       {children}
+      {enableProductivityChrome ? <ProjectsProductivityChrome /> : null}
     </div>
   );
 }
@@ -173,7 +185,7 @@ export function ErrorState({
       <p className="font-medium text-[var(--color-foreground)]">
         Unable to load APZ Projects
       </p>
-      <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">{message}</p>
+      <p className="mt-1 text-sm text-[var(--color-foreground)]/80">{message}</p>
       {onRetry ? (
         <div className="mt-3">
           <Button type="button" variant="outline" size="sm" onClick={onRetry}>

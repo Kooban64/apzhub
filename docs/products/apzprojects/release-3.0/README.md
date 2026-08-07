@@ -5,8 +5,8 @@
 | Product         | **APZ Projects**                                                                                                           |
 | Release         | **3.0**                                                                                                                    |
 | Kind            | Product Bible + Engineering Execution                                                                                      |
-| Status          | **ENGINEERING** — W002–W011 accepted                                                                                       |
-| Engineering     | **AUTHORISED** — see [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md) · [ENGINEERING-STATUS.md](./ENGINEERING-STATUS.md) |
+| Status          | **CLOSED — PRODUCTION READY** · Product phase **OPERATIONAL**                                                              |
+| Engineering     | **COMPLETE** — [OWNER-RELEASE-DECISION.md](./OWNER-RELEASE-DECISION.md) · [ENGINEERING-STATUS.md](./ENGINEERING-STATUS.md) |
 | Operating model | [../../framework/APZHUB-RELEASE-OPERATING-MODEL.md](../../framework/APZHUB-RELEASE-OPERATING-MODEL.md) **IN FORCE**        |
 | Benchmark       | Leapfrog — not catch-up to Plane / Jira / Monday                                                                           |
 
@@ -30,9 +30,18 @@ Design the world's best enterprise project platform — as if Atlassian, Microso
 | [design/W010-SECURITY-GOVERNANCE-AND-ADMINISTRATION.md](./design/W010-SECURITY-GOVERNANCE-AND-ADMINISTRATION.md) | **APPROVED WITH AMENDMENTS**                |
 | [design/W011-UI-SYSTEM-AND-SCREEN-CATALOGUE.md](./design/W011-UI-SYSTEM-AND-SCREEN-CATALOGUE.md)                 | **APPROVED WITH AMENDMENTS** — UI authority |
 
-**Engineering objective:** **Close APZ Projects Release 3.0** — [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md) · [RELEASE-3.0-CLOSEOUT.md](./RELEASE-3.0-CLOSEOUT.md) · [ENGINEERING-STATUS.md](./ENGINEERING-STATUS.md).
+**Mode:** **CLOSED** — [OWNER-RELEASE-DECISION.md](./OWNER-RELEASE-DECISION.md) · [RELEASE-NOTES.md](./RELEASE-NOTES.md) · [RELEASE-CANDIDATE-1.md](./RELEASE-CANDIDATE-1.md).
 
-Four phases only: Product Experience → Production Readiness → Hardening → Release. No product context switch until **Production Ready**.
+Objective: **Production Ready — achieved.** PE · PR · Hardening complete. Release 3.0 behaviour is baseline. 3.1 backlog: [RELEASE-3.1-OPERATIONAL-IMPROVEMENT-BACKLOG.md](./RELEASE-3.1-OPERATIONAL-IMPROVEMENT-BACKLOG.md).
+
+### Guides
+
+| Guide         | Path                                                             |
+| ------------- | ---------------------------------------------------------------- |
+| Release Notes | [RELEASE-NOTES.md](./RELEASE-NOTES.md)                           |
+| Administrator | [guides/ADMINISTRATOR-GUIDE.md](./guides/ADMINISTRATOR-GUIDE.md) |
+| User          | [guides/USER-GUIDE.md](./guides/USER-GUIDE.md)                   |
+| Operations    | [guides/OPERATIONS-GUIDE.md](./guides/OPERATIONS-GUIDE.md)       |
 
 ## Product Bible
 

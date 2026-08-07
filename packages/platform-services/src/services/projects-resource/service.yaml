@@ -1,0 +1,12 @@
+id: projects-resource
+name: Projects Resource & Assignment
+version: 1.0.0
+layer: platform-service
+domain: projects
+description: >
+  Delivery assignments and indicative Team Health / Capacity / Resource Forecast (W006 / PX-03).
+permissions:
+  - projects.view
+  - projects.manage
+storage: platform-postgres
+status: active

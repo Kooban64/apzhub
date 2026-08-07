@@ -13,6 +13,8 @@ vi.mock("next/navigation", () => ({
 
 vi.mock("@/lib/projects/projects-api", () => ({
   listProjects: vi.fn(),
+  listProductivityShortcuts: vi.fn(async () => []),
+  listRecentProjects: vi.fn(async () => []),
 }));
 
 vi.mock("./project-create-view", () => ({

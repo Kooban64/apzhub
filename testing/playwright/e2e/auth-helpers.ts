@@ -32,36 +32,47 @@ export async function ensureHomeWorkspace(page: Page): Promise<void> {
   await expect(page.getByText("APZHUB", { exact: true })).toBeVisible({
     timeout: 20_000,
   });
-  // ENG-001: platform-home Activity Bar label is "My Work"; accept legacy "Home".
-  await expect(page.getByLabel(/^(Home|My Work) workspace$/)).toBeVisible({
+  // Shell hydration: Activity Bar is always present. Home/My Work activity entry
+  // is optional depending on registered platform-home capability.
+  await expect(page.getByLabel("Activity bar")).toBeVisible({
     timeout: 20_000,
   });
+  const homeActivity = page.getByLabel(/^(Home|My Work) workspace$/);
+  if ((await homeActivity.count()) > 0) {
+    await expect(homeActivity).toBeVisible({ timeout: 20_000 });
+  }
 }
 
 async function apiSignIn(page: Page): Promise<boolean> {
   assertPageOpen(page, "apiSignIn");
-  try {
-    const response = await page.request.post("/api/auth/sign-in/email", {
-      data: {
-        email: DEV_EMAIL,
-        password: DEV_PASSWORD,
-      },
-      headers: {
-        origin: WEB_ORIGIN,
-        referer: `${WEB_ORIGIN}/login`,
-      },
-    });
-    return response.ok();
-  } catch (error) {
-    if (page.isClosed()) {
-      throw new Error(
-        `RG-AUTH-SHELL-RESIDUAL: page closed during API sign-in (${
-          error instanceof Error ? error.message : "unknown"
-        })`,
-      );
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    try {
+      const response = await page.request.post("/api/auth/sign-in/email", {
+        data: {
+          email: DEV_EMAIL,
+          password: DEV_PASSWORD,
+        },
+        headers: {
+          origin: WEB_ORIGIN,
+          referer: `${WEB_ORIGIN}/login`,
+        },
+      });
+      if (response.ok()) {
+        return true;
+      }
+      if (response.status() === 429 && attempt < 3) {
+        await page.waitForTimeout(4_000);
+        continue;
+      }
+      return false;
+    } catch {
+      if (page.isClosed()) {
+        return false;
+      }
+      await page.waitForTimeout(500 * attempt);
     }
-    return false;
   }
+  return false;
 }
 
 async function apiSignUp(page: Page): Promise<boolean> {

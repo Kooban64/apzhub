@@ -30,6 +30,10 @@ import {
 } from "@apzhub/platform-services";
 
 import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
+import {
+  assertValidUserPrincipal,
+  InvalidPrincipalError,
+} from "../identity/validate-principal";
 import { jsonDataResponse, jsonErrorResponse } from "../response";
 import { parsePathParam } from "../schemas/common";
 import { projectIdParamSchema } from "../schemas/project";
@@ -89,6 +93,13 @@ async function readBody(request: NextRequest): Promise<Record<string, unknown> |
 }
 
 function mapError(error: unknown) {
+  if (error instanceof InvalidPrincipalError) {
+    return {
+      status: 400,
+      code: "INVALID_PRINCIPAL",
+      message: `Unknown identity principal: ${error.principalId}`,
+    };
+  }
   const message = error instanceof Error ? error.message : "Request failed.";
   if (message.includes("not_found")) {
     return { status: 404, code: "NOT_FOUND", message };
@@ -123,9 +134,11 @@ export async function handleCreateCommitment(
     );
   }
   try {
+    const ownerUserId = String(body.ownerUserId ?? "");
+    await assertValidUserPrincipal(context, ownerUserId, { required: true });
     const input: CreateCommitmentInput = {
       statement: String(body.statement ?? ""),
-      ownerUserId: String(body.ownerUserId ?? ""),
+      ownerUserId,
       dueAt: typeof body.dueAt === "string" ? body.dueAt : undefined,
       waiters: Array.isArray(body.waiters)
         ? body.waiters.filter((x): x is string => typeof x === "string")
@@ -190,6 +203,11 @@ export async function handleTransitionCommitment(
             }
           : undefined,
     };
+    if (input.waiting?.chaseOwnerUserId) {
+      await assertValidUserPrincipal(context, input.waiting.chaseOwnerUserId, {
+        required: true,
+      });
+    }
     const item = await ops().transitionCommitment(
       context.serviceContext,
       projectId,
@@ -249,6 +267,9 @@ export async function handleCreateWaiting(
       linkedMilestoneId:
         typeof body.linkedMilestoneId === "string" ? body.linkedMilestoneId : undefined,
     };
+    await assertValidUserPrincipal(context, input.chaseOwnerUserId, {
+      required: true,
+    });
     const item = await ops().createWaiting(context.serviceContext, projectId, input);
     return jsonDataResponse(item, context.tracing, { status: 201 });
   } catch (error) {
@@ -321,6 +342,9 @@ export async function handleCreateDependency(
           : undefined,
       ownerUserId: typeof body.ownerUserId === "string" ? body.ownerUserId : undefined,
     };
+    if (input.ownerUserId) {
+      await assertValidUserPrincipal(context, input.ownerUserId, { required: true });
+    }
     const item = await ops().createDependency(context.serviceContext, projectId, input);
     return jsonDataResponse(item, context.tracing, { status: 201 });
   } catch (error) {

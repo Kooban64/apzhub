@@ -1,0 +1,14 @@
+id: projects-administration
+name: Projects Operational Administration
+version: 1.0.0
+layer: platform-service
+domain: projects
+description: >
+  W010 / PX-07 operational administration beyond P3 profile/policy spine:
+  delegation, retention/legal hold, governed searches, admin audit,
+  operational role catalogue, governance maturity. Complements
+  projects-governance — never duplicates platform IAM/identity admin.
+permissions:
+  - projects.admin
+storage: platform-postgres
+status: active

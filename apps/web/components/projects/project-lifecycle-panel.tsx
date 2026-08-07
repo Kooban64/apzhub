@@ -18,28 +18,19 @@ import { projectsQueryKeys } from "@/lib/projects/query-keys";
 import { projectCreatePath } from "@/lib/projects/routes";
 import type { ProjectStatus } from "@/lib/projects/types";
 
+import { ProjectCloseWizard } from "./project-close-wizard";
 import { ErrorState, LoadingState, StatusBadge } from "./projects-ui";
 
-const CLOSURE_OUTCOMES = [
-  { value: "delivered", label: "Delivered" },
-  { value: "delivered_with_variance", label: "Delivered with variance" },
-  { value: "stopped", label: "Stopped" },
-  { value: "superseded", label: "Superseded" },
-] as const;
-
+/** Non-closure transitions only — closing/closed go through Close Wizard (S-10). */
 const TRANSITIONS: Record<string, readonly string[]> = {
   draft: ["initiating"],
   initiating: ["active"],
-  active: ["on_hold", "closing"],
-  on_hold: ["active", "closing"],
-  closing: ["closed"],
+  active: ["on_hold"],
+  on_hold: ["active"],
+  closing: [],
   closed: ["archived", "active"],
   archived: ["closed"],
 };
-
-function fieldClass() {
-  return "h-9 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2";
-}
 
 export function ProjectLifecyclePanel({
   projectId,
@@ -50,13 +41,12 @@ export function ProjectLifecyclePanel({
 }) {
   const queryClient = useQueryClient();
   const [reason, setReason] = useState("");
-  const [outcome, setOutcome] = useState("");
-  const [closureSummary, setClosureSummary] = useState("");
   const [waiverKeys, setWaiverKeys] = useState("");
   const [waiverReason, setWaiverReason] = useState("");
   const [rebaselineReason, setRebaselineReason] = useState("");
   const [rebaselineEnd, setRebaselineEnd] = useState("");
   const [actionError, setActionError] = useState<string | null>(null);
+  const [closeWizardOpen, setCloseWizardOpen] = useState(false);
 
   const lifecycle = useQuery({
     queryKey: projectsQueryKeys.lifecycle(projectId),
@@ -66,6 +56,7 @@ export function ProjectLifecyclePanel({
   const stage = String(lifecycle.data?.stage ?? projectStatus);
   const showInitiation = stage === "initiating" || stage === "draft";
   const showClosure = stage === "closing" || stage === "active" || stage === "on_hold";
+  const canClose = stage === "active" || stage === "on_hold" || stage === "closing";
 
   const initiation = useQuery({
     queryKey: projectsQueryKeys.initiationReadiness(projectId),
@@ -90,6 +81,9 @@ export function ProjectLifecyclePanel({
 
   const transition = useMutation({
     mutationFn: (to: string) => {
+      if (to === "closing" || to === "closed") {
+        throw new Error("use_close_wizard");
+      }
       const waivers =
         waiverKeys.trim() && waiverReason.trim()
           ? waiverKeys
@@ -104,8 +98,6 @@ export function ProjectLifecyclePanel({
       return transitionProjectLifecycle(projectId, {
         to,
         reason: reason.trim() || undefined,
-        outcome: outcome || undefined,
-        closureSummary: closureSummary.trim() || undefined,
         waivers,
       });
     },
@@ -224,31 +216,51 @@ export function ProjectLifecyclePanel({
             Initiation gate — {initiation.data.ready ? "Ready" : "Blocked"}
           </p>
           <ul className="mt-1 list-disc pl-5 text-sm">
-            {initiation.data.gaps.map((g) => (
+            {(initiation.data.gaps ?? []).map((g) => (
               <li key={g.code}>
                 {g.message}
                 {g.waivable ? " (waivable)" : ""}
               </li>
             ))}
-            {initiation.data.gaps.length === 0 ? <li>All criteria met.</li> : null}
+            {(initiation.data.gaps ?? []).length === 0 ? (
+              <li>All criteria met.</li>
+            ) : null}
           </ul>
         </div>
       ) : null}
 
-      {(stage === "closing" || stage === "active" || stage === "on_hold") &&
-      closure.data ? (
+      {showClosure && closure.data ? (
         <div data-testid="projects-closure-readiness">
           <p className="text-xs font-medium uppercase text-[var(--color-muted-foreground)]">
             Closure readiness — {closure.data.ready ? "Ready" : "Blocked"}
           </p>
           <ul className="mt-1 list-disc pl-5 text-sm">
-            {closure.data.gaps.map((g) => (
+            {(closure.data.gaps ?? []).map((g) => (
               <li key={g.code}>
                 {g.message}
                 {g.waivable ? ` — waive with key "${g.code}"` : ""}
               </li>
             ))}
+            {(closure.data.gaps ?? []).length === 0 ? (
+              <li>No open closure gaps.</li>
+            ) : null}
           </ul>
+        </div>
+      ) : null}
+
+      {canClose ? (
+        <div className="border-t border-[var(--color-border)] pt-3">
+          <Button
+            type="button"
+            size="sm"
+            onClick={() => setCloseWizardOpen(true)}
+            data-testid="projects-open-close-wizard"
+          >
+            Close project…
+          </Button>
+          <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">
+            Closure uses the Close Wizard only — no direct close action.
+          </p>
         </div>
       ) : null}
 
@@ -256,32 +268,6 @@ export function ProjectLifecyclePanel({
         <p className="text-xs font-medium uppercase text-[var(--color-muted-foreground)]">
           Explicit transitions only
         </p>
-        {(stage === "closing" || allowed.includes("closing")) && (
-          <>
-            <label className="flex flex-col gap-1 text-sm">
-              <span className="font-medium">Closure outcome</span>
-              <select
-                className={fieldClass()}
-                value={outcome}
-                onChange={(e) => setOutcome(e.target.value)}
-                data-testid="projects-lifecycle-outcome"
-              >
-                <option value="">Select outcome</option>
-                {CLOSURE_OUTCOMES.map((o) => (
-                  <option key={o.value} value={o.value}>
-                    {o.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <Input
-              label="Closure summary / evidence"
-              value={closureSummary}
-              onChange={(e) => setClosureSummary(e.target.value)}
-              data-testid="projects-lifecycle-closure-summary"
-            />
-          </>
-        )}
         <Input
           label="Transition reason (required for Hold / Restore / Reopen)"
           value={reason}
@@ -367,8 +353,15 @@ export function ProjectLifecyclePanel({
       {actionError ? <ErrorState message={actionError} /> : null}
       <p className="text-xs text-[var(--color-muted-foreground)]">
         Status cannot be edited directly. Archive is only available from Closed; restore
-        returns only to Closed.
+        returns only to Closed. Project closure is only via the Close Wizard.
       </p>
+
+      {closeWizardOpen ? (
+        <ProjectCloseWizard
+          projectId={projectId}
+          onClose={() => setCloseWizardOpen(false)}
+        />
+      ) : null}
     </div>
   );
 }

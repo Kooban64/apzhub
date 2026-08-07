@@ -20,6 +20,10 @@ import {
 import { projectsQueryKeys } from "@/lib/projects/query-keys";
 import { projectDetailPath, projectsListPath } from "@/lib/projects/routes";
 
+import {
+  EnterpriseIdentityMultiPicker,
+  EnterpriseIdentityPicker,
+} from "./enterprise-identity-picker";
 import { ErrorState, LoadingState, PageShell } from "./projects-ui";
 
 const STAGES = [
@@ -75,6 +79,8 @@ type WizardState = {
   continuousDeliveryWaiver: boolean;
   milestoneFreeWaiver: boolean;
   ownerUserId: string;
+  operationalRoleId: string;
+  deliveryTeamId: string;
   coreTeamUserIds: string;
   customerLabel: string;
   programmeId: string;
@@ -96,6 +102,8 @@ const EMPTY: WizardState = {
   continuousDeliveryWaiver: false,
   milestoneFreeWaiver: false,
   ownerUserId: "",
+  operationalRoleId: "",
+  deliveryTeamId: "",
   coreTeamUserIds: "",
   customerLabel: "",
   programmeId: "",
@@ -172,6 +180,8 @@ function lifecyclePayload(state: WizardState, wizardStep: number) {
     continuousDeliveryWaiver: state.continuousDeliveryWaiver,
     milestoneFreeWaiver: state.milestoneFreeWaiver,
     ownerUserId: state.ownerUserId.trim() || undefined,
+    operationalRoleId: state.operationalRoleId.trim() || undefined,
+    deliveryTeamId: state.deliveryTeamId.trim() || undefined,
     coreTeamUserIds: state.coreTeamUserIds
       .split(/[,\s]+/)
       .map((s) => s.trim())
@@ -248,6 +258,12 @@ export function ProjectInitiateWizard() {
       continuousDeliveryWaiver: Boolean(life.continuousDeliveryWaiver),
       milestoneFreeWaiver: Boolean(life.milestoneFreeWaiver),
       ownerUserId: String(life.ownerUserId ?? project.leadId ?? ""),
+      operationalRoleId: String(
+        (life as { operationalRoleId?: string }).operationalRoleId ?? "",
+      ),
+      deliveryTeamId: String(
+        (life as { deliveryTeamId?: string }).deliveryTeamId ?? "",
+      ),
       coreTeamUserIds: Array.isArray(life.coreTeamUserIds)
         ? life.coreTeamUserIds.join(", ")
         : "",
@@ -442,6 +458,7 @@ export function ProjectInitiateWizard() {
                 if (s.id < step) setStep(s.id);
               }}
               data-testid={`projects-initiate-step-${s.id}`}
+              aria-current={step === s.id ? "step" : undefined}
             >
               {s.id}. {s.label}
             </button>
@@ -657,18 +674,32 @@ export function ProjectInitiateWizard() {
 
         {step === 7 ? (
           <>
-            <Input
-              label="Owner user ID"
+            <EnterpriseIdentityPicker
+              label="Project owner"
               value={state.ownerUserId}
-              onChange={(e) => setField("ownerUserId", e.target.value)}
+              onChange={(next) => setField("ownerUserId", next)}
               required
-              data-testid="projects-initiate-owner"
+              testId="projects-initiate-owner"
             />
-            <Input
-              label="Core team user IDs (comma-separated)"
+            <EnterpriseIdentityPicker
+              kind="role"
+              label="Operational role"
+              value={state.operationalRoleId}
+              onChange={(next) => setField("operationalRoleId", next)}
+              testId="projects-initiate-role"
+            />
+            <EnterpriseIdentityPicker
+              kind="team"
+              label="Primary delivery team"
+              value={state.deliveryTeamId}
+              onChange={(next) => setField("deliveryTeamId", next)}
+              testId="projects-initiate-delivery-team"
+            />
+            <EnterpriseIdentityMultiPicker
+              label="Core team members"
               value={state.coreTeamUserIds}
-              onChange={(e) => setField("coreTeamUserIds", e.target.value)}
-              data-testid="projects-initiate-team"
+              onChange={(next) => setField("coreTeamUserIds", next)}
+              testId="projects-initiate-team"
             />
             <Input
               label="Customer label (optional)"

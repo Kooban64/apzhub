@@ -506,7 +506,7 @@ export function createExecutionSessionApplicationService(deps: {
         ...(input.note ? { note: input.note } : {}),
       };
 
-      let steps = agg.session.steps;
+      const steps: StepResult[] = [...agg.session.steps];
       if (input.stepId) {
         const idx = steps.findIndex((s) => s.stepId === input.stepId);
         if (idx < 0) {
@@ -516,12 +516,10 @@ export function createExecutionSessionApplicationService(deps: {
           // Allow evidence attach on completed as reference-only (does not mutate outcomes)
         } else {
           const step = steps[idx]!;
-          const nextStep: StepResult = {
+          steps[idx] = {
             ...step,
             evidenceIds: [...new Set([...step.evidenceIds, ref.evidenceId])],
           };
-          steps = [...steps];
-          steps[idx] = nextStep;
         }
       }
 

@@ -81,5 +81,20 @@ export function setProjectsWorkflowBridgeStoreForTests(
 export function resolveProjectsWorkflowBridgeStore(
   preferred?: ProjectsWorkflowBridgeStore,
 ): ProjectsWorkflowBridgeStore {
-  return preferred ?? testOverride ?? getMemoryProjectsWorkflowBridgeStore();
+  if (preferred) return preferred;
+  if (testOverride) return testOverride;
+  if (process.env.APZHUB_PROJECTS_WORKFLOW_BRIDGE_STORE === "memory") {
+    return getMemoryProjectsWorkflowBridgeStore();
+  }
+  try {
+    // Lazy require postgres to avoid hard fail when DB unavailable
+    const { createPostgresProjectsWorkflowBridgeStore } =
+      // eslint-disable-next-line @typescript-eslint/no-require-imports -- lazy postgres load
+      require("./postgres-store") as {
+        createPostgresProjectsWorkflowBridgeStore: () => ProjectsWorkflowBridgeStore;
+      };
+    return createPostgresProjectsWorkflowBridgeStore();
+  } catch {
+    return getMemoryProjectsWorkflowBridgeStore();
+  }
 }

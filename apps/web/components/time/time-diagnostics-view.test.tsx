@@ -29,10 +29,20 @@ function wrap(children: ReactNode) {
 
 describe("TimeDiagnosticsView", () => {
   beforeEach(() => {
-    vi.mocked(getTimeDiagnostics).mockResolvedValue({ status: "ok" });
+    vi.mocked(getTimeDiagnostics).mockResolvedValue({
+      healthStatus: "ok",
+      warnings: [],
+      recommendations: [],
+      foundationOnly: true,
+    });
     vi.mocked(getTimeCapabilities).mockResolvedValue({ status: "ready" });
-    vi.mocked(getTimeReadiness).mockResolvedValue({ status: "ready" });
-    vi.mocked(getTimeCompatibility).mockResolvedValue({ status: "compatible" });
+    vi.mocked(getTimeReadiness).mockResolvedValue({
+      ready: true,
+      classification: "ready",
+    });
+    vi.mocked(getTimeCompatibility).mockResolvedValue({
+      compatibilityStatus: "compatible",
+    });
   });
 
   it("presents operator summaries and safe developer disclosure", async () => {

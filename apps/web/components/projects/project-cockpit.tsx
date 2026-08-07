@@ -25,6 +25,7 @@ import {
   getDeliveryConfidence,
   getOperationalHealth,
   getProject,
+  getProjectChanges,
   getProjectPulse,
   listCommitments,
   listTasks,
@@ -43,8 +44,15 @@ import {
   ProjectMilestonesPanel,
   ProjectRisksPanel,
 } from "./project-delivery-panels";
+import { DeliveryTimeline } from "./delivery-timeline";
 import { ProjectControlSurface } from "./project-control-surface";
 import { ProjectLifecyclePanel } from "./project-lifecycle-panel";
+import { ProjectTeamRoster } from "./project-team-roster";
+import { ProjectCollaborationPanels } from "./project-collaboration-panels";
+import {
+  parseObjectSurfaceParam,
+  ProjectObjectSurface,
+} from "./project-object-surface";
 import { ProjectOperationalPanel } from "./project-operational-panel";
 import { ProjectsTaskActions } from "./projects-task-actions";
 import {
@@ -74,6 +82,7 @@ function ProjectCockpitInner({
   const resolution = resolveCockpitRoute(pathSegment, searchParams.get("surface"));
   const intent = resolution.intent;
   const surface = resolution.surface;
+  const objectRef = parseObjectSurfaceParam(searchParams.get("obj"));
 
   const [moreOpen, setMoreOpen] = useState(
     Boolean(
@@ -109,8 +118,13 @@ function ProjectCockpitInner({
     queryFn: ({ signal }) => getDeliveryConfidence(projectId, { signal }),
   });
   const commitmentsQuery = useQuery({
-    queryKey: [...projectsQueryKeys.all, "commitments", projectId],
+    queryKey: projectsQueryKeys.commitments(projectId),
     queryFn: ({ signal }) => listCommitments(projectId, { signal }),
+  });
+  const changesQuery = useQuery({
+    queryKey: projectsQueryKeys.projectChanges(projectId),
+    queryFn: ({ signal }) => getProjectChanges(projectId, { signal }),
+    enabled: intent === "history",
   });
 
   const needsTasks =
@@ -130,7 +144,7 @@ function ProjectCockpitInner({
         { projectId, perPage: 50, page: 1, sort: "updatedAt", order: "desc" },
         { signal },
       ),
-    enabled: needsTasks || (intent === "planning" && surface === "roadmap"),
+    enabled: needsTasks || surface === "roadmap",
   });
 
   const createMutation = useMutation({
@@ -193,9 +207,20 @@ function ProjectCockpitInner({
     router.push(cockpitPath(projectId, next, nextSurface));
   };
 
+  const closeObjectSurface = () => {
+    router.replace(cockpitPath(projectId, intent, surface));
+  };
+
   return (
     <PageShell
       title={project?.name ?? "Project"}
+      documentTitle={
+        projectQuery.isLoading
+          ? "Loading project"
+          : projectQuery.isError
+            ? "Project unavailable"
+            : (project?.name ?? "Project")
+      }
       description={
         project
           ? `${project.identifier} · Updated ${formatProjectsDate(project.updatedAt)}`
@@ -479,6 +504,10 @@ function ProjectCockpitInner({
 
               {intent === "delivery" ? (
                 <div className="flex flex-col gap-4" data-testid="cockpit-delivery">
+                  <ProjectTeamRoster
+                    projectId={projectId}
+                    canManage={canManageProjects(permissions)}
+                  />
                   <ProjectOperationalPanel projectId={projectId} />
                   <ProjectDeliveryDashboardPanel projectId={projectId} />
                   {needsTasks ? (
@@ -503,40 +532,46 @@ function ProjectCockpitInner({
 
               {intent === "planning" ? (
                 <div className="flex flex-col gap-4" data-testid="cockpit-planning">
-                  <p className="text-sm text-[var(--color-muted-foreground)]">
-                    Planning trajectory — milestones and due-date roadmap. Advanced
-                    Gantt remains under More when schedule mechanics are required.
-                  </p>
+                  <DeliveryTimeline projectId={projectId} />
                   <ProjectMilestonesPanel
                     projectId={projectId}
                     permissions={permissions}
                   />
-                  {surface === "roadmap" || !surface ? (
-                    tasksQuery.isSuccess ? (
-                      <TaskSurface
-                        surface="roadmap"
-                        tasks={roadmap}
-                        backlog={backlog}
-                        sprintTasks={sprintTasks}
-                        statusOptions={statusOptions}
-                        permissions={permissions}
-                        taskTitle={taskTitle}
-                        setTaskTitle={setTaskTitle}
-                        onCreate={() => undefined}
-                        createPending={false}
-                        loading={tasksQuery.isLoading}
-                        error={tasksQuery.error}
-                        onRetry={() => void tasksQuery.refetch()}
-                        hideCreate
-                      />
-                    ) : null
+                  {surface === "roadmap" ? (
+                    <div className="space-y-2">
+                      <p className="text-xs text-[var(--color-muted-foreground)]">
+                        Execution tools — task due dates are secondary. Commitments
+                        remain the operational SoR.
+                      </p>
+                      {tasksQuery.isSuccess ? (
+                        <TaskSurface
+                          surface="roadmap"
+                          tasks={roadmap}
+                          backlog={backlog}
+                          sprintTasks={sprintTasks}
+                          statusOptions={statusOptions}
+                          permissions={permissions}
+                          taskTitle={taskTitle}
+                          setTaskTitle={setTaskTitle}
+                          onCreate={() => undefined}
+                          createPending={false}
+                          loading={tasksQuery.isLoading}
+                          error={tasksQuery.error}
+                          onRetry={() => void tasksQuery.refetch()}
+                          hideCreate
+                        />
+                      ) : null}
+                    </div>
                   ) : null}
                 </div>
               ) : null}
 
               {intent === "control" ? (
                 <div className="flex flex-col gap-4" data-testid="cockpit-control">
-                  <ProjectControlSurface projectId={projectId} />
+                  <ProjectControlSurface
+                    projectId={projectId}
+                    canManage={canManageProjects(permissions)}
+                  />
                   {surface === "risks" || !surface ? (
                     <ProjectRisksPanel
                       projectId={projectId}
@@ -560,15 +595,72 @@ function ProjectCockpitInner({
 
               {intent === "history" ? (
                 <div className="flex flex-col gap-4" data-testid="cockpit-history">
+                  <h3 className="text-sm font-semibold text-[var(--color-foreground)]">
+                    Operational Changes
+                  </h3>
                   <p className="text-sm text-[var(--color-muted-foreground)]">
-                    Operational changes that matter for this project — exceptions,
-                    lifecycle transitions, and delivery mutations. Object-level history
-                    remains available on each register surface.
+                    Meaningful operational events for this project — not activity or
+                    audit chatter.
                   </p>
-                  <ProjectControlSurface projectId={projectId} />
-                  <ProjectLifecyclePanel
+                  {changesQuery.isLoading ? (
+                    <LoadingState label="Loading operational changes…" />
+                  ) : null}
+                  {changesQuery.isError ? (
+                    <ErrorState
+                      message={
+                        isProjectsApiError(changesQuery.error)
+                          ? changesQuery.error.message
+                          : "Unable to load operational changes."
+                      }
+                      onRetry={() => void changesQuery.refetch()}
+                    />
+                  ) : null}
+                  {changesQuery.data && changesQuery.data.items.length === 0 ? (
+                    <EmptyState
+                      title="No operational changes"
+                      description="When milestones slip, waits resolve, or decisions are recorded, they appear here."
+                    />
+                  ) : null}
+                  {changesQuery.data && changesQuery.data.items.length > 0 ? (
+                    <ul className="space-y-2" data-testid="project-changes-feed">
+                      {changesQuery.data.items.map((item) => (
+                        <li key={item.id}>
+                          <button
+                            type="button"
+                            className="w-full border border-[var(--color-border)] px-3 py-2 text-left text-sm hover:bg-[var(--color-muted)]/30"
+                            onClick={() => {
+                              if (item.targetPath) router.push(item.targetPath);
+                            }}
+                            data-testid={`project-change-${item.id}`}
+                          >
+                            <p className="font-medium text-[var(--color-foreground)]">
+                              {item.headline}
+                            </p>
+                            <p className="text-[var(--color-muted-foreground)]">
+                              {item.whyCare}
+                            </p>
+                            <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">
+                              {formatProjectsDate(item.at)}
+                            </p>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                  <details className="border border-[var(--color-border)] p-3">
+                    <summary className="cursor-pointer text-sm font-medium">
+                      Lifecycle transitions (supporting)
+                    </summary>
+                    <div className="mt-3">
+                      <ProjectLifecyclePanel
+                        projectId={projectId}
+                        projectStatus={project.status}
+                      />
+                    </div>
+                  </details>
+                  <ProjectCollaborationPanels
                     projectId={projectId}
-                    projectStatus={project.status}
+                    canManage={canManageProjects(permissions)}
                   />
                 </div>
               ) : null}
@@ -576,6 +668,14 @@ function ProjectCockpitInner({
           </div>
         ) : null}
       </ProjectsWorkspaceFrame>
+      {objectRef ? (
+        <ProjectObjectSurface
+          projectId={projectId}
+          objectRef={objectRef}
+          onClose={closeObjectSurface}
+          canWrite={canManageProjects(permissions)}
+        />
+      ) : null}
     </PageShell>
   );
 }

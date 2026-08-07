@@ -265,6 +265,16 @@ export async function listCommitments(
   return envelope.data.items;
 }
 
+export async function listProjectDependencies(
+  projectId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >(`/projects/${projectId}/dependencies`, { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
 export async function createCommitment(
   projectId: string,
   input: Record<string, unknown>,
@@ -298,6 +308,85 @@ export async function listWaiting(
     DataEnvelope<{ items: readonly Record<string, unknown>[] }>
   >(`/projects/${projectId}/waiting`, { ...options, method: "GET" });
   return envelope.data.items;
+}
+
+export async function listOpsDecisions(
+  projectId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >(`/projects/${projectId}/ops-decisions`, { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function listProjectExceptions(
+  projectId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >(`/projects/${projectId}/exceptions`, { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function getOperationalHistory(
+  projectId: string,
+  objectType: string,
+  objectId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >(
+    `/projects/${projectId}/history/${encodeURIComponent(objectType)}/${encodeURIComponent(objectId)}`,
+    {
+      ...options,
+      method: "GET",
+    },
+  );
+  return envelope.data.items;
+}
+
+export async function listProjectApprovals(
+  projectId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<{
+  readonly items: readonly Record<string, unknown>[];
+  readonly approvalsUnavailable: boolean;
+}> {
+  const envelope = await requestJson<
+    DataEnvelope<{
+      items: readonly Record<string, unknown>[];
+      approvalsUnavailable: boolean;
+    }>
+  >(`/projects/${projectId}/approvals`, { ...options, method: "GET" });
+  return envelope.data;
+}
+
+export async function applyProjectApproval(
+  projectId: string,
+  bindingId: string,
+  input: { outcome: "approved" | "rejected" | "cancelled"; comment?: string },
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/${projectId}/approvals/${bindingId}/apply`,
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function syncProjectApproval(
+  projectId: string,
+  bindingId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown> | null> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown> | null>>(
+    `/projects/${projectId}/approvals/${bindingId}/sync`,
+    { ...options, method: "POST", body: JSON.stringify({}) },
+  );
+  return envelope.data;
 }
 
 export async function getOperationalHealth(
@@ -376,6 +465,1119 @@ export async function getPortfolioProjection(
   const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
     `/projects/portfolio?level=${level}`,
     { ...options, method: "GET" },
+  );
+  return envelope.data;
+}
+
+export async function listDeliveryTeams(
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >("/projects/delivery-teams", { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function createDeliveryTeam(
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/delivery-teams",
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function getDeliveryTeam(
+  teamId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/delivery-teams/${encodeURIComponent(teamId)}`,
+    { ...options, method: "GET" },
+  );
+  return envelope.data;
+}
+
+export async function listDeliveryTeamMemberships(
+  teamId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >(`/projects/delivery-teams/${encodeURIComponent(teamId)}/memberships`, {
+    ...options,
+    method: "GET",
+  });
+  return envelope.data.items;
+}
+
+export async function addDeliveryTeamMembership(
+  teamId: string,
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/delivery-teams/${encodeURIComponent(teamId)}/memberships`,
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function getDeliveryTeamHealth(
+  teamId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/delivery-teams/${encodeURIComponent(teamId)}/health`,
+    { ...options, method: "GET" },
+  );
+  return envelope.data;
+}
+
+export async function getDeliveryTeamCapacity(
+  teamId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/delivery-teams/${encodeURIComponent(teamId)}/capacity`,
+    { ...options, method: "GET" },
+  );
+  return envelope.data;
+}
+
+export async function getDeliveryTeamForecast(
+  teamId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/delivery-teams/${encodeURIComponent(teamId)}/resource-forecast`,
+    { ...options, method: "GET" },
+  );
+  return envelope.data;
+}
+
+export async function listProjectAssignments(
+  projectId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >(`/projects/${encodeURIComponent(projectId)}/assignments`, {
+    ...options,
+    method: "GET",
+  });
+  return envelope.data.items;
+}
+
+export async function createProjectAssignment(
+  projectId: string,
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/${encodeURIComponent(projectId)}/assignments`,
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function reassignProjectAssignment(
+  projectId: string,
+  assignmentId: string,
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/${encodeURIComponent(projectId)}/assignments/${encodeURIComponent(assignmentId)}/reassign`,
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function getAssignmentHistory(
+  projectId: string,
+  assignmentId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >(
+    `/projects/${encodeURIComponent(projectId)}/assignments/${encodeURIComponent(assignmentId)}/history`,
+    { ...options, method: "GET" },
+  );
+  return envelope.data.items;
+}
+
+export async function getResponsibilityMatrix(
+  projectId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/${encodeURIComponent(projectId)}/responsibility-matrix`,
+    { ...options, method: "GET" },
+  );
+  return envelope.data;
+}
+
+export async function listContinuityCases(
+  projectId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >(`/projects/${encodeURIComponent(projectId)}/continuity-cases`, {
+    ...options,
+    method: "GET",
+  });
+  return envelope.data.items;
+}
+
+export async function openContinuityCase(
+  projectId: string,
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/${encodeURIComponent(projectId)}/continuity-cases`,
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function updateContinuityCase(
+  projectId: string,
+  caseId: string,
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/${encodeURIComponent(projectId)}/continuity-cases/${encodeURIComponent(caseId)}`,
+    { ...options, method: "PATCH", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function listStakeholders(
+  projectId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >(`/projects/${encodeURIComponent(projectId)}/stakeholders`, {
+    ...options,
+    method: "GET",
+  });
+  return envelope.data.items;
+}
+
+export async function createStakeholder(
+  projectId: string,
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/${encodeURIComponent(projectId)}/stakeholders`,
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function createExternalParticipant(
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/external-participants",
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function listConversations(
+  projectId: string,
+  query?: {
+    anchorType?: string;
+    anchorId?: string;
+    conversationType?: string;
+    status?: string;
+  },
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const params = new URLSearchParams();
+  if (query?.anchorType) params.set("anchorType", query.anchorType);
+  if (query?.anchorId) params.set("anchorId", query.anchorId);
+  if (query?.conversationType) params.set("conversationType", query.conversationType);
+  if (query?.status) params.set("status", query.status);
+  const qs = params.toString();
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >(`/projects/${encodeURIComponent(projectId)}/conversations${qs ? `?${qs}` : ""}`, {
+    ...options,
+    method: "GET",
+  });
+  return envelope.data.items;
+}
+
+export async function createConversation(
+  projectId: string,
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/${encodeURIComponent(projectId)}/conversations`,
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function listConversationMessages(
+  projectId: string,
+  conversationId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >(
+    `/projects/${encodeURIComponent(projectId)}/conversations/${encodeURIComponent(conversationId)}/messages`,
+    { ...options, method: "GET" },
+  );
+  return envelope.data.items;
+}
+
+export async function postConversationMessage(
+  projectId: string,
+  conversationId: string,
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/${encodeURIComponent(projectId)}/conversations/${encodeURIComponent(conversationId)}/messages`,
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function resolveConversation(
+  projectId: string,
+  conversationId: string,
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/${encodeURIComponent(projectId)}/conversations/${encodeURIComponent(conversationId)}/resolve`,
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function listMeetingOutcomes(
+  projectId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >(`/projects/${encodeURIComponent(projectId)}/meeting-outcomes`, {
+    ...options,
+    method: "GET",
+  });
+  return envelope.data.items;
+}
+
+export async function createMeetingOutcome(
+  projectId: string,
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/${encodeURIComponent(projectId)}/meeting-outcomes`,
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function getCommunicationTimeline(
+  projectId: string,
+  query?: {
+    objectType?: string;
+    objectId?: string;
+    unresolvedOnly?: boolean;
+  },
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const params = new URLSearchParams();
+  if (query?.objectType) params.set("objectType", query.objectType);
+  if (query?.objectId) params.set("objectId", query.objectId);
+  if (query?.unresolvedOnly) params.set("unresolvedOnly", "true");
+  const qs = params.toString();
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >(
+    `/projects/${encodeURIComponent(projectId)}/communication-timeline${qs ? `?${qs}` : ""}`,
+    { ...options, method: "GET" },
+  );
+  return envelope.data.items;
+}
+
+export async function buildOperationalDigest(
+  projectId: string,
+  input: { kind: string },
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/${encodeURIComponent(projectId)}/digests`,
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function contextualCollaborationSearch(
+  projectId: string,
+  q: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const params = new URLSearchParams({ q });
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >(
+    `/projects/${encodeURIComponent(projectId)}/contextual-search?${params.toString()}`,
+    { ...options, method: "GET" },
+  );
+  return envelope.data.items;
+}
+
+export async function listReportCatalogue(
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >("/projects/reports/catalogue", { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function runOperationalReport(
+  reportKey: string,
+  query: { scopeType: string; scopeId: string },
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const params = new URLSearchParams({
+    scopeType: query.scopeType,
+    scopeId: query.scopeId,
+  });
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/reports/${encodeURIComponent(reportKey)}?${params.toString()}`,
+    { ...options, method: "GET" },
+  );
+  return envelope.data;
+}
+
+export async function listOperationalReviews(
+  query?: { scopeType?: string; scopeId?: string; status?: string },
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const params = new URLSearchParams();
+  if (query?.scopeType) params.set("scopeType", query.scopeType);
+  if (query?.scopeId) params.set("scopeId", query.scopeId);
+  if (query?.status) params.set("status", query.status);
+  const qs = params.toString();
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >(`/projects/reviews${qs ? `?${qs}` : ""}`, { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function createOperationalReview(
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/reviews",
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function getOperationalReview(
+  reviewId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/reviews/${encodeURIComponent(reviewId)}`,
+    { ...options, method: "GET" },
+  );
+  return envelope.data;
+}
+
+export async function startOperationalReview(
+  reviewId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/reviews/${encodeURIComponent(reviewId)}/start`,
+    { ...options, method: "POST", body: JSON.stringify({}) },
+  );
+  return envelope.data;
+}
+
+export async function getReviewSnapshot(
+  reviewId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/reviews/${encodeURIComponent(reviewId)}/snapshot`,
+    { ...options, method: "GET" },
+  );
+  return envelope.data;
+}
+
+export async function getReviewExecutiveSummary(
+  reviewId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/reviews/${encodeURIComponent(reviewId)}/executive-summary`,
+    { ...options, method: "GET" },
+  );
+  return envelope.data;
+}
+
+export async function updateReviewExecutiveSummary(
+  reviewId: string,
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/reviews/${encodeURIComponent(reviewId)}/executive-summary`,
+    { ...options, method: "PATCH", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function completeOperationalReview(
+  reviewId: string,
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/reviews/${encodeURIComponent(reviewId)}/complete`,
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function listReviewSchedules(
+  query?: { scopeType?: string; scopeId?: string },
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const params = new URLSearchParams();
+  if (query?.scopeType) params.set("scopeType", query.scopeType);
+  if (query?.scopeId) params.set("scopeId", query.scopeId);
+  const qs = params.toString();
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >(`/projects/review-schedules${qs ? `?${qs}` : ""}`, {
+    ...options,
+    method: "GET",
+  });
+  return envelope.data.items;
+}
+
+export async function listAdminDelegations(
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >("/projects/admin/delegations", { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function createAdminDelegation(
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/admin/delegations",
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function revokeAdminDelegation(
+  delegationId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/admin/delegations/${encodeURIComponent(delegationId)}/revoke`,
+    { ...options, method: "POST", body: JSON.stringify({}) },
+  );
+  return envelope.data;
+}
+
+export async function listRetentionPolicies(
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >("/projects/admin/retention", { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function createRetentionPolicy(
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/admin/retention",
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function publishRetentionPolicy(
+  policyId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/admin/retention/${encodeURIComponent(policyId)}/publish`,
+    { ...options, method: "POST", body: JSON.stringify({}) },
+  );
+  return envelope.data;
+}
+
+export async function listLegalHolds(
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >("/projects/admin/legal-holds", { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function placeLegalHold(
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/admin/legal-holds",
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function releaseLegalHold(
+  holdId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/admin/legal-holds/${encodeURIComponent(holdId)}/release`,
+    { ...options, method: "POST", body: JSON.stringify({}) },
+  );
+  return envelope.data;
+}
+
+export async function listGovernedSearches(
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >("/projects/admin/governed-searches", { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function createGovernedSearch(
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/admin/governed-searches",
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function publishGovernedSearch(
+  searchId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/admin/governed-searches/${encodeURIComponent(searchId)}/publish`,
+    { ...options, method: "POST", body: JSON.stringify({}) },
+  );
+  return envelope.data;
+}
+
+export async function listOperationalRoles(
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >("/projects/admin/roles", { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function createOperationalRole(
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/admin/roles",
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function listGovernanceAdminAudit(
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >("/projects/admin/audit", { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function assessGovernanceMaturity(
+  query?: Record<string, string | number | boolean>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const params = new URLSearchParams();
+  for (const [key, value] of Object.entries(query ?? {})) {
+    params.set(key, String(value));
+  }
+  const qs = params.toString();
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/admin/maturity${qs ? `?${qs}` : ""}`,
+    { ...options, method: "GET" },
+  );
+  return envelope.data;
+}
+
+export async function getConfigurationHierarchy(
+  query: { scopeType: string; scopeId: string },
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const params = new URLSearchParams({
+    scopeType: query.scopeType,
+    scopeId: query.scopeId,
+  });
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >(`/projects/admin/hierarchy?${params.toString()}`, {
+    ...options,
+    method: "GET",
+  });
+  return envelope.data.items;
+}
+
+export async function listSavedSearches(
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >("/projects/saved-searches", { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function createSavedSearch(
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/saved-searches",
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function deleteSavedSearch(
+  searchId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<void> {
+  await requestJson<DataEnvelope<{ deleted: boolean }>>(
+    `/projects/saved-searches/${encodeURIComponent(searchId)}`,
+    { ...options, method: "DELETE" },
+  );
+}
+
+export async function createBulkOperation(
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/bulk-operations",
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function confirmBulkOperation(
+  operationId: string,
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/bulk-operations/${encodeURIComponent(operationId)}/confirm`,
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function listProductivitySessions(
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >("/projects/productivity-sessions", { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function createProductivitySession(
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/productivity-sessions",
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function resumeProductivitySession(
+  sessionId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/productivity-sessions/${encodeURIComponent(sessionId)}/resume`,
+    { ...options, method: "POST", body: JSON.stringify({}) },
+  );
+  return envelope.data;
+}
+
+export async function listProductivityShortcuts(
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >("/projects/productivity/shortcuts", { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function listCrossProductTargets(
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >("/projects/productivity/cross-product", { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function createReviewSchedule(
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/review-schedules",
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function getGovernanceCompliance(
+  query: {
+    scopeType: string;
+    scopeId: string;
+    openCriticalExceptions?: number;
+    openMajorExceptions?: number;
+    overdueCheckpoints?: number;
+    missingEvidence?: number;
+    unauthorisedOverrides?: number;
+  },
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const params = new URLSearchParams({
+    scopeType: query.scopeType,
+    scopeId: query.scopeId,
+  });
+  if (query.openCriticalExceptions != null) {
+    params.set("openCriticalExceptions", String(query.openCriticalExceptions));
+  }
+  if (query.openMajorExceptions != null) {
+    params.set("openMajorExceptions", String(query.openMajorExceptions));
+  }
+  if (query.overdueCheckpoints != null) {
+    params.set("overdueCheckpoints", String(query.overdueCheckpoints));
+  }
+  if (query.missingEvidence != null) {
+    params.set("missingEvidence", String(query.missingEvidence));
+  }
+  if (query.unauthorisedOverrides != null) {
+    params.set("unauthorisedOverrides", String(query.unauthorisedOverrides));
+  }
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/governance/compliance?${params.toString()}`,
+    { ...options, method: "GET" },
+  );
+  return envelope.data;
+}
+
+export async function getGovernanceAdminSummary(
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/governance/admin-summary",
+    { ...options, method: "GET" },
+  );
+  return envelope.data;
+}
+
+export async function listOrgGovernanceProfiles(
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >("/projects/governance/profiles", { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function createOrgGovernanceProfile(
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/governance/profiles",
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function simulateOrgGovernanceProfilePublish(
+  profileId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/governance/profiles/${encodeURIComponent(profileId)}/simulate`,
+    { ...options, method: "POST", body: JSON.stringify({}) },
+  );
+  return envelope.data;
+}
+
+export async function publishOrgGovernanceProfile(
+  profileId: string,
+  input: { confirmSimulation: boolean },
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/governance/profiles/${encodeURIComponent(profileId)}/publish`,
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function listOperationalPolicies(
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >("/projects/governance/policies", { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function createOperationalPolicy(
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/governance/policies",
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function simulateOperationalPolicyPublish(
+  policyId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/governance/policies/${encodeURIComponent(policyId)}/simulate`,
+    { ...options, method: "POST", body: JSON.stringify({}) },
+  );
+  return envelope.data;
+}
+
+export async function publishOperationalPolicy(
+  policyId: string,
+  input: { confirmSimulation: boolean },
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/governance/policies/${encodeURIComponent(policyId)}/publish`,
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function getEffectiveGovernanceConfig(
+  query: {
+    scopeType: string;
+    scopeId: string;
+    boundProfileId?: string;
+    parentProfileId?: string;
+  },
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const params = new URLSearchParams({
+    scopeType: query.scopeType,
+    scopeId: query.scopeId,
+  });
+  if (query.boundProfileId) params.set("boundProfileId", query.boundProfileId);
+  if (query.parentProfileId) params.set("parentProfileId", query.parentProfileId);
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/governance/effective?${params.toString()}`,
+    { ...options, method: "GET" },
+  );
+  return envelope.data;
+}
+
+export async function listPortfolioInitiatives(
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >("/projects/portfolio/initiatives", { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function createPortfolioInitiative(
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/portfolio/initiatives",
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function updatePortfolioInitiative(
+  initiativeId: string,
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/portfolio/initiatives/${encodeURIComponent(initiativeId)}`,
+    { ...options, method: "PATCH", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function archivePortfolioInitiative(
+  initiativeId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/portfolio/initiatives/${encodeURIComponent(initiativeId)}`,
+    { ...options, method: "DELETE" },
+  );
+  return envelope.data;
+}
+
+export async function listPortfolioProgrammes(
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >("/projects/portfolio/programmes", { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function createPortfolioProgramme(
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/portfolio/programmes",
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function updatePortfolioProgramme(
+  programmeId: string,
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/portfolio/programmes/${encodeURIComponent(programmeId)}`,
+    { ...options, method: "PATCH", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function archivePortfolioProgramme(
+  programmeId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/portfolio/programmes/${encodeURIComponent(programmeId)}`,
+    { ...options, method: "DELETE" },
+  );
+  return envelope.data;
+}
+
+export async function listPortfolioObjectives(
+  options?: ProjectsApiRequestOptions,
+): Promise<readonly Record<string, unknown>[]> {
+  const envelope = await requestJson<
+    DataEnvelope<{ items: readonly Record<string, unknown>[] }>
+  >("/projects/portfolio/objectives", { ...options, method: "GET" });
+  return envelope.data.items;
+}
+
+export async function createPortfolioObjective(
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/portfolio/objectives",
+    { ...options, method: "POST", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function updatePortfolioObjective(
+  objectiveId: string,
+  input: Record<string, unknown>,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/portfolio/objectives/${encodeURIComponent(objectiveId)}`,
+    { ...options, method: "PATCH", body: JSON.stringify(input) },
+  );
+  return envelope.data;
+}
+
+export async function archivePortfolioObjective(
+  objectiveId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    `/projects/portfolio/objectives/${encodeURIComponent(objectiveId)}`,
+    { ...options, method: "DELETE" },
+  );
+  return envelope.data;
+}
+
+export async function movePortfolioProjectMembership(
+  input: {
+    projectId: string;
+    toProgrammeId: string | null;
+    toInitiativeId?: string | null;
+  },
+  options?: ProjectsApiRequestOptions,
+): Promise<Record<string, unknown>> {
+  const envelope = await requestJson<DataEnvelope<Record<string, unknown>>>(
+    "/projects/portfolio/membership/move",
+    { ...options, method: "POST", body: JSON.stringify(input) },
   );
   return envelope.data;
 }
@@ -655,6 +1857,17 @@ export async function getWorkspaceChanges(
 ): Promise<WorkspaceChanges> {
   const envelope = await requestJson<DataEnvelope<WorkspaceChanges>>(
     "/projects/workspace/changes",
+    { ...options, method: "GET" },
+  );
+  return envelope.data;
+}
+
+export async function getProjectChanges(
+  projectId: string,
+  options?: ProjectsApiRequestOptions,
+): Promise<WorkspaceChanges> {
+  const envelope = await requestJson<DataEnvelope<WorkspaceChanges>>(
+    `/projects/${projectId}/changes`,
     { ...options, method: "GET" },
   );
   return envelope.data;

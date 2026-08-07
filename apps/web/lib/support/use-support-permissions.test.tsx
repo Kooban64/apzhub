@@ -10,7 +10,7 @@ function wrap(permissions: readonly string[] | null) {
   return function Wrapper({ children }: { children: ReactNode }) {
     return (
       <SessionAuthorizationProvider
-        value={permissions ? { permissions, roles: [], tenantId: "tenant_test" } : null}
+        value={permissions ? { userId: "user_test", permissions, roles: [] } : null}
       >
         {children}
       </SessionAuthorizationProvider>

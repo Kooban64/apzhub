@@ -73,7 +73,7 @@ function parseCreate(body: Record<string, unknown>): CreateOperationalFrictionIn
 }
 
 function parseUpdate(body: Record<string, unknown>): UpdateOperationalFrictionInput {
-  const out: UpdateOperationalFrictionInput = {};
+  const out: Record<string, unknown> = {};
   for (const key of [
     "title",
     "reporter",
@@ -86,7 +86,7 @@ function parseUpdate(body: Record<string, unknown>): UpdateOperationalFrictionIn
     "outcomeNotes",
   ] as const) {
     if (typeof body[key] === "string") {
-      (out as Record<string, unknown>)[key] = body[key];
+      out[key] = body[key];
     }
   }
   if (Array.isArray(body.productsAffected)) {
@@ -116,7 +116,7 @@ function parseUpdate(body: Record<string, unknown>): UpdateOperationalFrictionIn
       out[key] = body[key] as boolean | null;
     }
   }
-  return out;
+  return out as UpdateOperationalFrictionInput;
 }
 
 export async function handleListOperationalFriction(

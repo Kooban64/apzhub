@@ -1,57 +1,26 @@
 # APZ Projects Release 3.0 — Engineering Status
 
-| Field        | Value                                          |
-| ------------ | ---------------------------------------------- |
-| Objective    | **Close APZ Projects Release 3.0**             |
-| Authority    | W002–W011                                      |
-| Success      | Production Ready · certified · tagged · frozen |
-| Next product | **Blocked** until Release 3.0 closed           |
+| Field                   | Value                                                                                  |
+| ----------------------- | -------------------------------------------------------------------------------------- |
+| Mode                    | **CLOSED — PRODUCTION READY**                                                          |
+| Product phase           | **OPERATIONAL** (Operational Learning)                                                 |
+| Engineering phase       | **COMPLETE**                                                                           |
+| Release Candidate 1     | **APPROVED** (Owner 2026-08-07)                                                        |
+| Further 3.0 engineering | Production defects · security vulnerabilities · critical operational hotfixes **only** |
 
-Inventory: [RELEASE-3.0-CLOSEOUT.md](./RELEASE-3.0-CLOSEOUT.md) · Directive: [OWNER-AUTHORISATION.md](./OWNER-AUTHORISATION.md)
+## Acceptance (Owner)
 
----
+| Track                          | Status       |
+| ------------------------------ | ------------ |
+| Product Design W002–W011       | **COMPLETE** |
+| Product Experience PX-01–PX-07 | **COMPLETE** |
+| Production Readiness P1–P5     | **COMPLETE** |
+| Hardening H1–H6                | **COMPLETE** |
 
-## Phase 1 – Product Experience Completion
+## Post-release
 
-|                 |                                                                                                                                                                        |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Completed**   | Workspace shell · Cockpit FocusNav · Initiate Wizard · Lifecycle/Control/Operational panels · List/Search/Settings/Help secondary                                      |
-| **In Progress** | Workspace refinement (PX-01–PX-03)                                                                                                                                     |
-| **Remaining**   | History/Timeline · Mobile shell · Object Surface · Portfolio S-02–S-06 · Teams · Collaboration · Reporting · Productivity overlays · Admin S-17–S-19 · UI-D compliance |
+- Remaining Medium/Low → [RELEASE-3.1-OPERATIONAL-IMPROVEMENT-BACKLOG.md](./RELEASE-3.1-OPERATIONAL-IMPROVEMENT-BACKLOG.md)
+- RC record → [RELEASE-CANDIDATE-1.md](./RELEASE-CANDIDATE-1.md)
+- Owner decision → [OWNER-RELEASE-DECISION.md](./OWNER-RELEASE-DECISION.md)
 
----
-
-## Phase 2 – Production Readiness
-
-|               |                                                                                             |
-| ------------- | ------------------------------------------------------------------------------------------- |
-| **Completed** | —                                                                                           |
-| **Blocking**  | **P1 Workflow Bridge** (PR-01) — service partial; HTTP/Postgres/queue rows remain           |
-| **Remaining** | P2 Identity · P3 Org Governance Admin · P4 Migration verify · P5 Full certification harness |
-
-Detail: [PRODUCTION-READINESS.md](./PRODUCTION-READINESS.md)
-
----
-
-## Phase 3 – Hardening & Certification
-
-|                 |                                                                    |
-| --------------- | ------------------------------------------------------------------ |
-| **Completed**   | —                                                                  |
-| **In Progress** | —                                                                  |
-| **Remaining**   | E2E · Performance · A11y · Security review · Defect burn-down → RC |
-
----
-
-## Phase 4 – Release
-
-|               |                                                                                          |
-| ------------- | ---------------------------------------------------------------------------------------- |
-| **Completed** | —                                                                                        |
-| **Remaining** | Release Notes · Ops/Admin/User/Deployment guides · Certification evidence · Tag · freeze |
-
----
-
-## Rule
-
-Finish this product. No engineering context switch to another APZHUB product until Phase 4 exit.
+Next APZHUB engineering priority per Owner: **APZ Workflow** (Product Era roadmap).

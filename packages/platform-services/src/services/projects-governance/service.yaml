@@ -1,0 +1,13 @@
+id: projects-governance
+name: Projects Organisation Governance
+version: 1.0.0
+layer: platform-service
+domain: projects
+description: >
+  Organisation Governance Profile and Operational Policy administration (W010 / P3).
+  Draft → simulate → publish; hierarchy effective config; non-retroactive policy changes.
+permissions:
+  - projects.admin
+  - projects.view
+storage: platform-postgres
+status: active

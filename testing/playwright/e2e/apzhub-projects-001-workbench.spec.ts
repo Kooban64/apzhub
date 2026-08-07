@@ -1,66 +1,61 @@
 import { expect, test } from "@playwright/test";
+import path from "node:path";
 
-import {
-  CREATED_PROJECT_ID,
-  PROJECT_ID,
-  WORKSPACE_ID,
-  mockProjectsApi,
-  signIn,
-} from "./projects-ui-cert-helpers";
+import { PROJECT_ID, WORKSPACE_ID, mockProjectsApi } from "./projects-ui-cert-helpers";
+
+const authFile = path.resolve(__dirname, "../.auth/projects-user.json");
 
 test.describe("APZHUB-PROJECTS-001 Workbench", () => {
-  test("open Projects list and project detail", async ({ page }) => {
-    await signIn(page);
+  test.use({ storageState: authFile });
+
+  test("open Projects list and project cockpit", async ({ page }) => {
+    test.setTimeout(90_000);
     await mockProjectsApi(page);
 
     await page.goto("/workspace/projects");
-    await expect(page.getByTestId("projects-page")).toBeVisible();
+    await expect(page.getByTestId("projects-page")).toBeVisible({
+      timeout: 20_000,
+    });
+    await expect(
+      page.getByTestId("projects-breadcrumbs").getByText("Operational Workspace"),
+    ).toBeVisible({
+      timeout: 15_000,
+    });
     await page.goto("/workspace/projects/list");
     await expect(page.getByTestId("projects-page")).toBeVisible();
-    await expect(page.getByText("Delivery Alpha")).toBeVisible();
+    await expect(page.getByText("Delivery Alpha").first()).toBeVisible();
 
     await page.getByTestId(`projects-list-row-${PROJECT_ID}`).click();
     await expect(page).toHaveURL(new RegExp(`/workspace/projects/${PROJECT_ID}`), {
       timeout: 15_000,
     });
-    await expect(page.getByTestId("projects-detail-overview")).toBeVisible();
-    await expect(page.getByText(/ALPHA · Updated/)).toBeVisible();
+    await expect(page.getByTestId("projects-cockpit")).toBeVisible({
+      timeout: 20_000,
+    });
+    await expect(page.getByTestId("projects-intent-overview")).toBeVisible({
+      timeout: 20_000,
+    });
   });
 
-  test("create project", async ({ page }) => {
+  test("open initiate project wizard", async ({ page }) => {
     test.setTimeout(60_000);
-    await signIn(page);
     await mockProjectsApi(page);
 
-    await page.goto("/workspace/projects");
     await page.goto("/workspace/projects/new");
-    await expect(page.getByTestId("projects-create-form")).toBeVisible();
+    await expect(page.getByTestId("projects-initiate-wizard")).toBeVisible();
     await expect(
       page.getByTestId("projects-create-workspace").locator("option"),
     ).toHaveCount(2, { timeout: 15_000 });
     await page.getByTestId("projects-create-workspace").selectOption(WORKSPACE_ID);
-    await page.getByTestId("projects-create-name").click();
     await page.getByTestId("projects-create-name").fill("Printer Ops");
     await page.getByTestId("projects-create-identifier").fill("PRINT");
-
-    await Promise.all([
-      page.waitForResponse(
-        (response) =>
-          response.url().includes("/api/v1/projects") &&
-          response.request().method() === "POST" &&
-          response.ok(),
-      ),
-      page.getByTestId("projects-create-submit").click(),
-    ]);
-
-    await expect(page).toHaveURL(
-      new RegExp(`/workspace/projects/${CREATED_PROJECT_ID}`),
-      { timeout: 15_000 },
-    );
+    await page.getByTestId("projects-create-submit").click();
+    // Multi-stage initiation wizard advances past Stage 1 (Release 3.0).
+    await expect(page.getByText(/Stage 2/i)).toBeVisible({ timeout: 15_000 });
   });
 
   test("search and health surfaces", async ({ page }) => {
-    await signIn(page);
+    test.setTimeout(60_000);
     await mockProjectsApi(page);
 
     await page.goto("/workspace/projects/search");

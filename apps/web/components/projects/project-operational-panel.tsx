@@ -17,6 +17,7 @@ import {
 } from "@/lib/projects/projects-api";
 import { projectsQueryKeys } from "@/lib/projects/query-keys";
 
+import { EnterpriseIdentityPicker } from "./enterprise-identity-picker";
 import { ErrorState, LoadingState } from "./projects-ui";
 
 export function ProjectOperationalPanel({ projectId }: { readonly projectId: string }) {
@@ -250,10 +251,12 @@ export function ProjectOperationalPanel({ projectId }: { readonly projectId: str
             value={statement}
             onChange={(e) => setStatement(e.target.value)}
           />
-          <Input
-            label="Owner user ID"
+          <EnterpriseIdentityPicker
+            label="Owner"
             value={ownerUserId}
-            onChange={(e) => setOwnerUserId(e.target.value)}
+            onChange={setOwnerUserId}
+            required
+            testId="ops-commitment-owner"
           />
           <Input
             label="Due"

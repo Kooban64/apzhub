@@ -17,6 +17,12 @@ export const projectsQueryKeys = {
     [...projectsQueryKeys.all, "delivery-health", projectId] as const,
   milestones: (projectId: string) =>
     [...projectsQueryKeys.all, "milestones", projectId] as const,
+  commitments: (projectId: string) =>
+    [...projectsQueryKeys.all, "commitments", projectId] as const,
+  dependencies: (projectId: string) =>
+    [...projectsQueryKeys.all, "dependencies", projectId] as const,
+  projectChanges: (projectId: string) =>
+    [...projectsQueryKeys.all, "changes", projectId] as const,
   risks: (projectId: string) => [...projectsQueryKeys.all, "risks", projectId] as const,
   decisions: (projectId: string) =>
     [...projectsQueryKeys.all, "decisions", projectId] as const,

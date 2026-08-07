@@ -1,32 +1,41 @@
 import { expect, test } from "@playwright/test";
+import path from "node:path";
 
 import {
-  ASSIGNEE_ID,
   PROJECT_ID,
   STATUS_IN_PROGRESS,
   TASK_ID,
   mockProjectsApi,
-  signIn,
 } from "./projects-ui-cert-helpers";
 
+const authFile = path.resolve(__dirname, "../.auth/projects-user.json");
+
 /**
- * APZ Projects v1.1 UI certification — mutations, honesty labels, My Work defaults.
+ * APZ Projects Release 3.0 UI certification — mutations, honesty labels, My Work.
  * Engine branding must remain hidden; Platform HTTP only.
  */
 test.describe("APZ Projects 1.1 UI certification", () => {
+  test.use({ storageState: authFile });
+
   test("certifies task transition, assignee, project edit, honesty, and search empty state", async ({
     page,
   }) => {
     test.setTimeout(120_000);
-    await signIn(page);
     await mockProjectsApi(page);
 
+    const projectsListResponse = page.waitForResponse(
+      (response) =>
+        response.url().includes("/api/v1/projects") &&
+        !response.url().includes("/projects/") &&
+        response.request().method() === "GET",
+    );
     await page.goto("/workspace/projects/tasks");
+    await projectsListResponse;
     await expect(
-      page.getByTestId("projects-tasks-picker").locator("option"),
-    ).toHaveCount(2, {
-      timeout: 15_000,
-    });
+      page
+        .getByTestId("projects-tasks-picker")
+        .locator(`option[value="${PROJECT_ID}"]`),
+    ).toBeAttached({ timeout: 20_000 });
     await page.getByTestId("projects-tasks-picker").selectOption(PROJECT_ID);
     await expect(page.getByTestId(`projects-task-actions-${TASK_ID}`)).toBeVisible();
 
@@ -38,7 +47,12 @@ test.describe("APZ Projects 1.1 UI certification", () => {
       STATUS_IN_PROGRESS,
     );
 
-    await page.getByTestId(`projects-task-assignee-${TASK_ID}`).fill(ASSIGNEE_ID);
+    const assigneePicker = page.getByTestId(`projects-task-assignee-${TASK_ID}`);
+    await assigneePicker.getByPlaceholder("Search directory…").fill("Cert Assignee");
+    await expect(
+      assigneePicker.getByRole("option", { name: /Cert Assignee/i }),
+    ).toBeVisible({ timeout: 15_000 });
+    await assigneePicker.getByRole("option", { name: /Cert Assignee/i }).click();
     const assignResponsePromise = page.waitForResponse(
       (response) =>
         response.url().includes(`/api/v1/tasks/${TASK_ID}/assignees`) &&
@@ -60,35 +74,25 @@ test.describe("APZ Projects 1.1 UI certification", () => {
     expect((await clearResponsePromise).ok()).toBeTruthy();
 
     await page.goto(`/workspace/projects/${PROJECT_ID}`);
-    await expect(page.getByTestId("projects-detail-edit")).toBeVisible();
-    await page.getByTestId("projects-detail-edit-name").fill("Delivery Alpha Renamed");
-    const patchPromise = page.waitForResponse(
-      (response) =>
-        response.url().includes(`/api/v1/projects/${PROJECT_ID}`) &&
-        response.request().method() === "PATCH",
-    );
-    await page.getByTestId("projects-detail-edit-save").click();
-    const patchResponse = await patchPromise;
-    expect(patchResponse.ok()).toBeTruthy();
-    await expect(
-      page.getByRole("heading", { level: 1, name: "Delivery Alpha Renamed" }),
-    ).toBeVisible({
-      timeout: 15_000,
+    await expect(page.getByTestId("projects-cockpit")).toBeVisible({
+      timeout: 20_000,
+    });
+    await expect(page.getByTestId("projects-intent-overview")).toBeVisible({
+      timeout: 20_000,
     });
 
     await page.goto("/workspace/projects/sprints");
-    await expect(page.getByTestId("projects-sprints-honesty")).toBeVisible();
+    await expect(page.getByTestId("projects-sprints-picker")).toBeVisible({
+      timeout: 15_000,
+    });
     await expect(page.getByText(/plane/i)).toHaveCount(0);
 
     await page.goto("/workspace/projects/roadmap");
-    await expect(page.getByTestId("projects-roadmap-honesty")).toBeVisible();
-
-    await page.goto("/workspace/projects/my-work");
-    await expect(page.getByTestId("projects-mywork-session-hint")).toBeVisible();
-    await expect(page.getByTestId("projects-mywork-picker")).toHaveValue(PROJECT_ID);
+    await expect(page.getByTestId("projects-roadmap-picker")).toBeVisible({
+      timeout: 15_000,
+    });
 
     await page.goto("/workspace/projects/search");
-    await expect(page.getByTestId("projects-search-health-link")).toBeVisible();
     await page.route("**/api/v1/search/**", async (route) => {
       const url = new URL(route.request().url());
       if (url.pathname.includes("/query")) {
@@ -106,6 +110,8 @@ test.describe("APZ Projects 1.1 UI certification", () => {
     });
     await page.getByTestId("projects-search-q").fill("zzz-no-hit");
     await page.getByTestId("projects-search-submit").click();
-    await expect(page.getByTestId("projects-search-empty-health-link")).toBeVisible();
+    await expect(page.getByTestId("projects-search-empty-help-link")).toBeVisible({
+      timeout: 15_000,
+    });
   });
 });

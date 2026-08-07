@@ -102,14 +102,17 @@ export function cockpitPath(
   projectId: string,
   intent: CockpitIntent = "overview",
   surface?: CockpitSurface,
+  objectRef?: string,
 ): string {
   const base =
     intent === "overview"
       ? `/workspace/projects/${projectId}`
       : `/workspace/projects/${projectId}/${intent}`;
-  if (!surface) return base;
-  const sep = base.includes("?") ? "&" : "?";
-  return `${base}${sep}surface=${encodeURIComponent(surface)}`;
+  const params = new URLSearchParams();
+  if (surface) params.set("surface", surface);
+  if (objectRef) params.set("obj", objectRef);
+  const qs = params.toString();
+  return qs ? `${base}?${qs}` : base;
 }
 
 export function intentLabel(intent: CockpitIntent): string {

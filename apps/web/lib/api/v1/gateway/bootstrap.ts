@@ -12,6 +12,8 @@ import {
   createSearchPlatformServicesForProduction,
   createWorkflowPlatformServicesForProduction,
   createWorkflowEngineServicesForProduction,
+  createGatewayWorkflowApprovalExecutor,
+  setProjectsWorkflowBridgeRuntimeExecutor,
   createNotificationPlatformServicesForProduction,
   createConfigurationPlatformServicesForProduction,
   PlatformAuthorizationAccessResolver,
@@ -660,6 +662,14 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
   const searchPlatform = searchEnabled ? createSearchServicesBundle() : undefined;
   const searchExecution = await createSearchExecutionServicesBundle();
   const workflow = workflowEnabled ? await createWorkflowServicesBundle() : undefined;
+  // P1: Workflow Bridge production executor — Projects consumes Workflow HITL only.
+  if (workflow) {
+    setProjectsWorkflowBridgeRuntimeExecutor(
+      createGatewayWorkflowApprovalExecutor(workflow),
+    );
+  } else {
+    setProjectsWorkflowBridgeRuntimeExecutor(undefined);
+  }
   const notification = notificationEnabled
     ? createNotificationServicesBundle()
     : undefined;

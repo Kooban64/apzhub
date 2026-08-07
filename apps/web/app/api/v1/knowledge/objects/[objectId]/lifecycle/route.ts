@@ -16,10 +16,10 @@ export const POST = withPlatformApiAuth(
   async (
     request: NextRequest,
     context: PlatformApiRequestContext,
-    routeContext?: { params: Promise<{ objectId: string }> },
+    routeContext?: { params: Promise<Record<string, string>> },
   ) => {
-    const { objectId } = await (routeContext?.params ??
-      Promise.resolve({ objectId: "" }));
+    const params = (await routeContext?.params) ?? ({} as Record<string, string>);
+    const objectId = String(params["objectId"] ?? "");
     return handleTransitionKnowledgeLifecycle(request, context, objectId);
   },
   { operation: "knowledge.objects.lifecycle" },

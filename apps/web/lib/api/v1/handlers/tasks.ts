@@ -11,7 +11,15 @@ import type {
 import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
 import { PLATFORM_API_MAX_BODY_BYTES } from "../constants";
 import { getPlatformServiceGateway } from "../gateway/bootstrap";
-import { jsonCollectionResponse, jsonDataResponse } from "../response";
+import {
+  assertValidUserPrincipal,
+  InvalidPrincipalError,
+} from "../identity/validate-principal";
+import {
+  jsonCollectionResponse,
+  jsonDataResponse,
+  jsonErrorResponse,
+} from "../response";
 import { parseJsonBody, parsePathParam, parseQuery } from "../schemas/common";
 import {
   addLabelsBodySchema,
@@ -225,20 +233,38 @@ export async function handleAssignTask(
   );
   const gateway = await getPlatformServiceGateway();
 
-  if (body.assigneeIds && body.assigneeIds.length > 0) {
-    const assigneeIds = uniqueIds(body.assigneeIds);
+  try {
+    if (body.assigneeIds && body.assigneeIds.length > 0) {
+      const assigneeIds = uniqueIds(body.assigneeIds);
+      for (const assigneeId of assigneeIds) {
+        await assertValidUserPrincipal(context, assigneeId, { required: true });
+      }
+      const task = await gateway.tasks.assignTask(context.serviceContext, taskId, {
+        assigneeId: assigneeIds[0]!,
+        assigneeIds,
+      });
+      return jsonDataResponse(task, context.tracing);
+    }
+
+    await assertValidUserPrincipal(context, body.assigneeId, { required: true });
     const task = await gateway.tasks.assignTask(context.serviceContext, taskId, {
-      assigneeId: assigneeIds[0]!,
-      assigneeIds,
+      assigneeId: body.assigneeId!,
+      assigneeIds: [body.assigneeId!],
     });
     return jsonDataResponse(task, context.tracing);
+  } catch (error) {
+    if (error instanceof InvalidPrincipalError) {
+      return jsonErrorResponse(
+        400,
+        {
+          code: "INVALID_PRINCIPAL",
+          message: `Unknown identity principal: ${error.principalId}`,
+        },
+        context.tracing,
+      );
+    }
+    throw error;
   }
-
-  const task = await gateway.tasks.assignTask(context.serviceContext, taskId, {
-    assigneeId: body.assigneeId!,
-    assigneeIds: [body.assigneeId!],
-  });
-  return jsonDataResponse(task, context.tracing);
 }
 
 /**

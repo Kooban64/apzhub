@@ -30,6 +30,7 @@ import type {
   ProjectRiskLevel,
 } from "@/lib/projects/types";
 
+import { EnterpriseIdentityPicker } from "./enterprise-identity-picker";
 import { EmptyState, ErrorState, LoadingState, ProjectsTable } from "./projects-ui";
 
 const LEVELS: readonly ProjectRiskLevel[] = ["low", "medium", "high", "critical"];
@@ -264,11 +265,11 @@ export function ProjectMilestonesPanel({
             onChange={(e) => setName(e.target.value)}
             data-testid="projects-milestone-name"
           />
-          <Input
+          <EnterpriseIdentityPicker
             label="Owner"
             value={owner}
-            onChange={(e) => setOwner(e.target.value)}
-            data-testid="projects-milestone-owner"
+            onChange={setOwner}
+            testId="projects-milestone-owner"
           />
           <Input
             label="Target date"
@@ -408,11 +409,11 @@ export function ProjectRisksPanel({
             onChange={(e) => setTitle(e.target.value)}
             data-testid="projects-risk-title"
           />
-          <Input
+          <EnterpriseIdentityPicker
             label="Owner"
             value={owner}
-            onChange={(e) => setOwner(e.target.value)}
-            data-testid="projects-risk-owner"
+            onChange={setOwner}
+            testId="projects-risk-owner"
           />
           <Input
             label="Description"
@@ -576,11 +577,11 @@ export function ProjectDecisionsPanel({
             onChange={(e) => setDecision(e.target.value)}
             data-testid="projects-decision-text"
           />
-          <Input
+          <EnterpriseIdentityPicker
             label="Owner"
             value={owner}
-            onChange={(e) => setOwner(e.target.value)}
-            data-testid="projects-decision-owner"
+            onChange={setOwner}
+            testId="projects-decision-owner"
           />
           <Input
             label="Rationale"
@@ -706,11 +707,11 @@ export function ProjectActionsPanel({
             onChange={(e) => setTitle(e.target.value)}
             data-testid="projects-action-title"
           />
-          <Input
+          <EnterpriseIdentityPicker
             label="Owner"
             value={owner}
-            onChange={(e) => setOwner(e.target.value)}
-            data-testid="projects-action-owner"
+            onChange={setOwner}
+            testId="projects-action-owner"
           />
           <Input
             label="Due date"

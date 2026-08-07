@@ -210,6 +210,8 @@ export function createProjectsLifecycleService(
         templateId: template?.id,
         templateVersion: template?.version,
         ownerUserId: input.ownerUserId,
+        operationalRoleId: input.operationalRoleId,
+        deliveryTeamId: input.deliveryTeamId,
         programmeId: input.programmeId,
         customerLabel: input.customerLabel,
         targetEndAt: input.targetEndAt,
@@ -253,6 +255,8 @@ export function createProjectsLifecycleService(
         templateId: patch.templateId ?? current.templateId,
         templateVersion: template?.version ?? current.templateVersion,
         ownerUserId: patch.ownerUserId ?? current.ownerUserId,
+        operationalRoleId: patch.operationalRoleId ?? current.operationalRoleId,
+        deliveryTeamId: patch.deliveryTeamId ?? current.deliveryTeamId,
         programmeId: patch.programmeId ?? current.programmeId,
         customerLabel: patch.customerLabel ?? current.customerLabel,
         targetEndAt: patch.targetEndAt ?? current.targetEndAt,
@@ -434,8 +438,8 @@ export function createProjectsLifecycleService(
             bridge
               ? "Closure approval required via APZ Workflow (Projects consumes Workflow outcome)."
               : "Closure approval required — APZ Workflow Bridge not configured.",
-            // Temporary waiver retained only as emergency escape; not the production path.
-            !bridge,
+            // Waiver lockdown: required Workflow approvals are never waivable.
+            false,
           );
         }
       }
@@ -451,9 +455,19 @@ export function createProjectsLifecycleService(
         throw new Error(`lifecycle_transition_illegal:${from}->${to}`);
       }
 
-      // Apply waivers first
+      // Apply waivers first — Workflow approval keys are never waivable (lockdown).
+      const lockedWaiverKeys = new Set([
+        "closure_approval",
+        "hold_approval",
+        "governance_approval",
+        "checkpoint_approval",
+        "exception_approval",
+      ]);
       for (const w of input.waivers ?? []) {
         if (!w.reason?.trim()) throw new Error("waiver_reason_required");
+        if (lockedWaiverKeys.has(w.policyKey)) {
+          throw new Error(`waiver_forbidden_use_workflow:${w.policyKey}`);
+        }
         await store.addWaiver(tenant(ctx), {
           id: id("waiver"),
           projectId,

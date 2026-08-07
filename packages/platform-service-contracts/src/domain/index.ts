@@ -76,6 +76,67 @@ export {
 export type * from "./project-lifecycle";
 export type * from "./project-operational-delivery";
 export type * from "./project-workflow-bridge";
+export type * from "./project-portfolio";
+export {
+  PORTFOLIO_NODE_STATUSES,
+  STRATEGIC_OBJECTIVE_STATUSES,
+  STRATEGIC_IMPORTANCE,
+} from "./project-portfolio";
+export type * from "./project-enterprise-team";
+export {
+  ENTERPRISE_TEAM_STATUSES,
+  TEAM_MEMBERSHIP_ROLES,
+} from "./project-enterprise-team";
+export type * from "./project-resource";
+export {
+  TEAM_HEALTH_BANDS,
+  DELIVERY_CAPACITY_BANDS,
+  ASSIGNMENT_TYPES,
+  ASSIGNMENT_SCOPE_TYPES,
+  ASSIGNMENT_PRINCIPAL_TYPES,
+  ASSIGNMENT_EVENT_KINDS,
+  RACI_DIMENSIONS,
+  RESPONSIBILITY_OBJECT_TYPES,
+  CONTINUITY_STATUSES,
+  STAKEHOLDER_INTERESTS,
+  STAKEHOLDER_INFLUENCE,
+  EXTERNAL_PARTICIPANT_STATUSES,
+} from "./project-resource";
+export type * from "./project-governance";
+export {
+  GOVERNANCE_PUBLISH_STATUSES,
+  OPERATIONAL_POLICY_AREAS,
+  GOVERNANCE_COMPLIANCE_BANDS,
+  GOVERNANCE_SCOPE_TYPES,
+  DELEGATION_STATUSES,
+  GOVERNANCE_MATURITY_BANDS,
+} from "./project-governance";
+export type * from "./project-collaboration";
+export {
+  CONVERSATION_ANCHOR_TYPES,
+  CONVERSATION_TYPES,
+  CONVERSATION_STATUSES,
+  DECISION_CONVERSATION_OUTCOMES,
+  MESSAGE_TYPES,
+  ANNOUNCEMENT_PRIORITIES,
+  DIGEST_KINDS,
+} from "./project-collaboration";
+export type * from "./project-reporting";
+export {
+  OPERATIONAL_REVIEW_TYPES,
+  REVIEW_SCOPE_TYPES,
+  REVIEW_STATUSES,
+  REVIEW_CADENCES,
+  REPORT_CATALOGUE_KEYS,
+} from "./project-reporting";
+export type * from "./project-productivity";
+export {
+  SAVED_SEARCH_SCOPE_MODES,
+  BULK_OPERATION_KINDS,
+  BULK_OPERATION_STATUSES,
+  PROJECTS_SHORTCUT_CATALOGUE,
+  CROSS_PRODUCT_TARGETS,
+} from "./project-productivity";
 export {
   PROJECTS_APPROVAL_KINDS,
   PROJECTS_APPROVAL_BINDING_STATUSES,

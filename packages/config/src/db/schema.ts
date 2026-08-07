@@ -290,6 +290,36 @@ export {
   platformProjectException,
   platformProjectOperationalHistory,
 } from "./platform-projects-operational-schema";
+export { platformProjectsApprovalBinding } from "./platform-projects-workflow-bridge-schema";
+export {
+  platformProjectsPortfolioSchema,
+  platformPortfolioEnterprise,
+  platformStrategicInitiative,
+  platformProgramme,
+  platformStrategicObjective,
+} from "./platform-projects-portfolio-schema";
+export {
+  platformProjectsTeamDirectorySchema,
+  platformEnterpriseDeliveryTeam,
+  platformEnterpriseTeamMembership,
+} from "./platform-projects-team-directory-schema";
+export {
+  platformProjectsResourceSchema,
+  platformDeliveryAssignment,
+} from "./platform-projects-resource-schema";
+export {
+  platformProjectsAccountabilitySchema,
+  platformDeliveryAssignmentEvent,
+  platformResponsibility,
+  platformContinuityCase,
+  platformStakeholder,
+  platformExternalParticipant,
+} from "./platform-projects-accountability-schema";
+export {
+  platformProjectsGovernanceSchema,
+  platformOrgGovernanceProfile,
+  platformOperationalPolicy,
+} from "./platform-projects-governance-schema";
 export {
   platformBusinessProcessSchema,
   platformBusinessJourney,

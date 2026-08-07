@@ -1,7 +1,6 @@
 "use client";
 
 import { useSession } from "@apzhub/auth";
-import { Input } from "@apzhub/ui";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
 
@@ -12,6 +11,7 @@ import type { ProjectsPermissionSource } from "@/lib/projects/permissions";
 import { listProjects, listTasks } from "@/lib/projects/projects-api";
 import { projectsQueryKeys } from "@/lib/projects/query-keys";
 
+import { EnterpriseIdentityPicker } from "./enterprise-identity-picker";
 import {
   EmptyState,
   ErrorState,
@@ -93,11 +93,11 @@ export function ProjectsMyWorkView({
           }}
           testId="projects-mywork-picker"
         />
-        <Input
+        <EnterpriseIdentityPicker
           label="Assignee"
           value={assigneeId}
-          onChange={(event) => setAssigneeId(event.target.value)}
-          data-testid="projects-mywork-assignee"
+          onChange={setAssigneeId}
+          testId="projects-mywork-assignee"
         />
       </div>
       {sessionUserId ? (

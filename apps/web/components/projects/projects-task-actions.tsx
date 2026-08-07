@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Input } from "@apzhub/ui";
+import { Button } from "@apzhub/ui";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
@@ -19,6 +19,8 @@ import {
 import { projectsQueryKeys } from "@/lib/projects/query-keys";
 import type { TaskStatusOption } from "@/lib/projects/status-options";
 import type { Task, TaskPriority } from "@/lib/projects/types";
+
+import { EnterpriseIdentityPicker } from "./enterprise-identity-picker";
 
 const PRIORITIES: readonly TaskPriority[] = ["none", "low", "medium", "high", "urgent"];
 
@@ -192,11 +194,11 @@ export function ProjectsTaskActions({
       </div>
 
       <div className="flex flex-wrap items-end gap-2">
-        <Input
+        <EnterpriseIdentityPicker
           label="Assignee"
           value={assigneeDraft}
-          onChange={(event) => setAssigneeDraft(event.target.value)}
-          data-testid={`projects-task-assignee-${task.id}`}
+          onChange={setAssigneeDraft}
+          testId={`projects-task-assignee-${task.id}`}
         />
         <Button
           type="button"

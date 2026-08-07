@@ -159,3 +159,13 @@ export function createUnavailableWorkflowApprovalExecutor(
     },
   };
 }
+
+/**
+ * Production / gateway-backed executor — Workflow owns HITL execution.
+ * Same surface as the in-process executor, wired to a production bundle.
+ */
+export function createGatewayWorkflowApprovalExecutor(
+  bundle: WorkflowPlatformServicesBundle,
+): WorkflowApprovalExecutor {
+  return createInProcessWorkflowApprovalExecutor(bundle);
+}
