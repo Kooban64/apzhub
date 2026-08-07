@@ -1,6 +1,12 @@
 /**
  * UI-only Workflow permission helpers.
  * Server remains authoritative — these only hide/disable controls.
+ *
+ * APZ-WORKFLOW-NATIVE-001-N02: consume APZHUB session grants via hydration.
+ * Never hardcode `workflow.*` as a UI default. Never map engine roles.
+ *
+ * Identity: business-process language for the product surface.
+ * Execution / engine vocabulary stays below the product boundary (`workflow.admin`).
  */
 
 export type WorkflowPermissionSource =
@@ -15,15 +21,10 @@ function asSet(source: WorkflowPermissionSource): ReadonlySet<string> {
 function matches(granted: ReadonlySet<string>, required: string): boolean {
   if (granted.has("*") || granted.has("workflow.*")) return true;
   if (granted.has(required)) return true;
-  if (granted.has("workflow.view")) {
-    return (
-      required === "workflow.view" ||
-      required === "workflow.runs.view" ||
-      required === "workflow.schedules.view" ||
-      required === "workflow.tasks.view" ||
-      required === "workflow.engine.health" ||
-      required === "workflow.engine.capabilities"
-    );
+  const parts = required.split(".");
+  if (parts.length >= 3) {
+    const midWildcard = `${parts[0]}.${parts[1]}.*`;
+    if (granted.has(midWildcard)) return true;
   }
   return false;
 }
@@ -35,40 +36,62 @@ export function hasWorkflowPermission(
   return matches(asSet(source), permission);
 }
 
+/** Default product identity — view business processes. */
+export function canViewWorkflow(source: WorkflowPermissionSource): boolean {
+  return (
+    hasWorkflowPermission(source, "workflow.view") ||
+    hasWorkflowPermission(source, "workflow.admin")
+  );
+}
+
 export function canViewWorkflowDefinitions(source: WorkflowPermissionSource): boolean {
-  return hasWorkflowPermission(source, "workflow.view");
+  return canViewWorkflow(source);
+}
+
+/** Operator identity — execution / engine surfaces below product boundary. */
+export function canAdminWorkflow(source: WorkflowPermissionSource): boolean {
+  return hasWorkflowPermission(source, "workflow.admin");
+}
+
+/** Design / govern business journeys (Wave A). */
+export function canManageBusinessProcesses(source: WorkflowPermissionSource): boolean {
+  return canAdminWorkflow(source) || hasWorkflowPermission(source, "workflow.manage");
 }
 
 export function canViewWorkflowRuns(source: WorkflowPermissionSource): boolean {
   return (
-    hasWorkflowPermission(source, "workflow.runs.view") ||
-    hasWorkflowPermission(source, "workflow.view")
+    canAdminWorkflow(source) || hasWorkflowPermission(source, "workflow.runs.view")
   );
 }
 
 export function canStartWorkflowRuns(source: WorkflowPermissionSource): boolean {
-  return hasWorkflowPermission(source, "workflow.runs.start");
+  return (
+    canAdminWorkflow(source) || hasWorkflowPermission(source, "workflow.runs.start")
+  );
 }
 
 export function canCancelWorkflowRuns(source: WorkflowPermissionSource): boolean {
-  return hasWorkflowPermission(source, "workflow.runs.cancel");
+  return (
+    canAdminWorkflow(source) || hasWorkflowPermission(source, "workflow.runs.cancel")
+  );
 }
 
 export function canViewWorkflowSchedules(source: WorkflowPermissionSource): boolean {
   return (
-    hasWorkflowPermission(source, "workflow.schedules.view") ||
-    hasWorkflowPermission(source, "workflow.view")
+    canAdminWorkflow(source) || hasWorkflowPermission(source, "workflow.schedules.view")
   );
 }
 
 export function canManageWorkflowSchedules(source: WorkflowPermissionSource): boolean {
-  return hasWorkflowPermission(source, "workflow.schedules.manage");
+  return (
+    canAdminWorkflow(source) ||
+    hasWorkflowPermission(source, "workflow.schedules.manage")
+  );
 }
 
 export function canViewWorkflowTasks(source: WorkflowPermissionSource): boolean {
   return (
-    hasWorkflowPermission(source, "workflow.tasks.view") ||
-    hasWorkflowPermission(source, "workflow.view")
+    hasWorkflowPermission(source, "workflow.tasks.view") || canViewWorkflow(source)
   );
 }
 
@@ -84,16 +107,22 @@ export function canApproveWorkflowTasks(source: WorkflowPermissionSource): boole
   return hasWorkflowPermission(source, "workflow.tasks.approve");
 }
 
+/** Health / capabilities / diagnostics — operator only (not default product identity). */
 export function canViewWorkflowHealth(source: WorkflowPermissionSource): boolean {
   return (
-    hasWorkflowPermission(source, "workflow.engine.health") ||
-    hasWorkflowPermission(source, "workflow.view")
+    canAdminWorkflow(source) || hasWorkflowPermission(source, "workflow.engine.health")
   );
 }
 
 export function canViewWorkflowCapabilities(source: WorkflowPermissionSource): boolean {
   return (
-    hasWorkflowPermission(source, "workflow.engine.capabilities") ||
-    hasWorkflowPermission(source, "workflow.view")
+    canAdminWorkflow(source) ||
+    hasWorkflowPermission(source, "workflow.engine.capabilities")
+  );
+}
+
+export function canViewWorkflowEngine(source: WorkflowPermissionSource): boolean {
+  return (
+    canAdminWorkflow(source) || hasWorkflowPermission(source, "workflow.engine.read")
   );
 }

@@ -187,6 +187,94 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [OPERATIONAL-TRANSITION](./foundation/OPERATIONAL-TRANSITION.md)       | Operational Delivery lifecycle |
 | [OWNER-ACCEPTANCE-REGISTER](./foundation/OWNER-ACCEPTANCE-REGISTER.md) | Owner Acceptance register      |
 
+## Enterprise Portfolio Baseline (APZHUB-PORTFOLIO-BASELINE-001 — COMPLETE)
+
+| Document                                                                                      | Description                                                         |
+| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| [Programme](./products/apzhub-portfolio-baseline-001/README.md)                               | Documentation-only consolidation — **COMPLETE** · Lane 2 **PAUSED** |
+| [Enterprise Portfolio Baseline](./products/framework/APZHUB-ENTERPRISE-PORTFOLIO-BASELINE.md) | Definitive “What is APZHUB today?”                                  |
+| [Architecture Atlas](./products/framework/APZHUB-ARCHITECTURE-ATLAS.md)                       | Architectural table of contents                                     |
+| [Product Catalogue](./products/framework/APZHUB-PRODUCT-CATALOGUE.md)                         | Identity · SoR · RI · maturity per product                          |
+| [Layer Model](./products/framework/APZHUB-ENTERPRISE-LAYER-MODEL.md)                          | Permanent enterprise layers                                         |
+| [Portfolio Roadmap](./products/framework/APZHUB-PORTFOLIO-ROADMAP.md)                         | Frozen · Evidence-driven · Planned expansion                        |
+
+## Enterprise Domain Strategy (APZHUB-DOMAIN-STRATEGY-001 — COMPLETE)
+
+| Document                                                                                         | Description                                                              |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| [Programme](./products/apzhub-domain-strategy-001/README.md)                                     | Domain-first portfolio strategy — **COMPLETE** · Lane 2 still **PAUSED** |
+| [Enterprise Domain Strategy](./products/framework/APZHUB-ENTERPRISE-DOMAIN-STRATEGY.md)          | 3–5 year business domains (not products)                                 |
+| [Domain Catalogue](./products/apzhub-domain-strategy-001/DOMAIN-CATALOGUE.md)                    | Per-domain why / capabilities / products / out of scope                  |
+| [Product Board decision](./products/apzhub-domain-strategy-001/PRODUCT-BOARD-DOMAIN-STRATEGY.md) | Baseline accepted · invest at domain level                               |
+
+## Domain Selection Method (APZHUB-DOMAIN-SELECTION-001 — COMPLETE)
+
+| Document                                                                                           | Description                                                     |
+| -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [Programme](./products/apzhub-domain-selection-001/README.md)                                      | How to choose the next domain — **COMPLETE** · Lane 2 **READY** |
+| [Selection Method](./products/framework/APZHUB-DOMAIN-SELECTION-METHOD.md)                         | Evaluation Matrix · selection gate                              |
+| [Scorecard template](./products/apzhub-domain-selection-001/EVALUATION-SCORECARD.md)               | Recorded scores + rationale                                     |
+| [Candidate ranking](./products/apzhub-domain-selection-001/DOMAIN-CANDIDATE-RANKING.md)            | Advisory order (Knowledge first) — not authorisation            |
+| [Product Board decision](./products/apzhub-domain-selection-001/PRODUCT-BOARD-DOMAIN-SELECTION.md) | Deliberate selection before expansion                           |
+
+## Domain Evaluation — Knowledge (APZHUB-DOMAIN-EVALUATION-001 — COMPLETE)
+
+| Document                                                                                  | Description                                       |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| [Programme](./products/apzhub-domain-evaluation-001/README.md)                            | PB-003 Knowledge evaluation — **COMPLETE**        |
+| [Evaluation](./products/apzhub-domain-evaluation-001/KNOWLEDGE-DOMAIN-EVALUATION.md)      | Business case · beneficiaries · boundaries        |
+| [Scorecard](./products/apzhub-domain-evaluation-001/KNOWLEDGE-DOMAIN-SCORECARD.md)        | Matrix scores · **4.60 / 5.00**                   |
+| [Recommendation](./products/apzhub-domain-evaluation-001/PRODUCT-BOARD-RECOMMENDATION.md) | **RECOMMEND AUTHORISATION** · evaluation accepted |
+
+## Knowledge Domain Definition (APZHUB-KNOWLEDGE-DOMAIN-001 — COMPLETE)
+
+| Document                                                                             | Description                                          |
+| ------------------------------------------------------------------------------------ | ---------------------------------------------------- |
+| [Programme](./products/apzhub-knowledge-domain-001/README.md)                        | Domain definition — **COMPLETE** · **no Mission**    |
+| [Definition](./products/apzhub-knowledge-domain-001/KNOWLEDGE-DOMAIN-DEFINITION.md)  | Purpose · role · SoR · relationships                 |
+| [Capability Map](./products/apzhub-knowledge-domain-001/KNOWLEDGE-CAPABILITY-MAP.md) | Candidates — not commitments                         |
+| [Boundaries](./products/apzhub-knowledge-domain-001/KNOWLEDGE-BOUNDARIES.md)         | Documents · Law · Core · AI                          |
+| [Roadmap](./products/apzhub-knowledge-domain-001/KNOWLEDGE-ROADMAP.md)               | Foundation · Operational · AI · Future (no priority) |
+
+## Knowledge Domain Architecture (APZHUB-KNOWLEDGE-ARCHITECTURE-001 — COMPLETE)
+
+| Document                                                                                                                                                        | Description                                                        |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| [Programme](./products/apzhub-knowledge-architecture-001/README.md)                                                                                             | Organisational Memory architecture — **COMPLETE** · **no Mission** |
+| [Context Model](./products/apzhub-knowledge-architecture-001/KNOWLEDGE-CONTEXT-MODEL.md)                                                                        | Right knowledge · right place · right time                         |
+| [Lifecycle](./products/apzhub-knowledge-architecture-001/KNOWLEDGE-LIFECYCLE.md)                                                                                | Born → approve → retire                                            |
+| [Sources](./products/apzhub-knowledge-architecture-001/KNOWLEDGE-SOURCES.md) · [Consumers](./products/apzhub-knowledge-architecture-001/KNOWLEDGE-CONSUMERS.md) | Feed vs consume                                                    |
+| [Governance](./products/apzhub-knowledge-architecture-001/KNOWLEDGE-GOVERNANCE.md)                                                                              | Who owns / approves / retires memory                               |
+| [Identity](./products/apzhub-knowledge-architecture-001/PRODUCT-BOARD-IDENTITY.md)                                                                              | Memory only — not AI / wiki / search                               |
+| Owner Approval                                                                                                                                                  | Definition + Architecture **CLOSED / APPROVED**                    |
+
+## APZ Knowledge Mission (APZ-KNOWLEDGE-000 — AUTHORISED)
+
+| Document                                                                                            | Description                                                              |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| [Mission pack](./products/apzknowledge/README.md)                                                   | Organisational Memory — Mission **CLOSED / APPROVED**                    |
+| [Owner Approval](./products/apzknowledge/OWNER-APPROVAL.md)                                         | APZ-KNOWLEDGE-000 **CLOSED**                                             |
+| [Board principles](./products/apzknowledge/PRODUCT-BOARD-ORGANISATIONAL-MEMORY.md)                  | Derivation + Context principles **IN FORCE**                             |
+| [APZ Knowledge RI #008](./products/apzknowledge/REFERENCE-IMPLEMENTATION-008.md)                    | Organisational Memory **OPERATIONAL**                                    |
+| [Product Era](./products/apzhub-platform-era-003/OWNER-DECISION.md)                                 | Enterprise Product Realisation **ACTIVE**                                |
+| [Architecture closure](./products/apzhub-architecture-closure-001/OWNER-DECISION.md)                | Foundation complete — architecture is a governed asset **APPROVED**      |
+| [Capability Evolution Roadmap](./products/framework/APZHUB-CAPABILITY-EVOLUTION-ROADMAP.md)         | RI #001–#008 planning face                                               |
+| [Enterprise Capability First](./products/framework/APZHUB-ENTERPRISE-CAPABILITY-FIRST.md)           | No new domain while capabilities incomplete                              |
+| [Constitutional principles](./products/framework/APZHUB-CONSTITUTIONAL-ARCHITECTURAL-PRINCIPLES.md) | SoR · Context composition · Technology independence                      |
+| [Context Composition Contract](./products/apzhub-context-000/README.md)                             | APZHUB-CONTEXT-000                                                       |
+| [Enterprise Context MVP](./products/apzhub-context-001/README.md)                                   | APZHUB-CONTEXT-001 — Project Composition **COMPLETE**                    |
+| [Enterprise Context Expansion](./products/apzhub-context-002/README.md)                             | APZHUB-CONTEXT-002 — Wave B consumers **COMPLETE**                       |
+| [Context Product Learning](./products/apzhub-context-learning-001/README.md)                        | APZHUB-CONTEXT-LEARNING-001 — instrumentation **COMPLETE**               |
+| [Enterprise Context Validation](./products/apzhub-context-review-001/README.md)                     | APZHUB-CONTEXT-REVIEW-001 — **ACCEPTED** · AI still deferred             |
+| [Release Operating Model](./products/framework/APZHUB-RELEASE-OPERATING-MODEL.md)                   | Product Release Delivery **IN FORCE** — supersedes capability-drip       |
+| [Cursor Dual Mode](./products/framework/APZHUB-CURSOR-DUAL-MODE.md)                                 | Design Support + Engineering **IN FORCE**                                |
+| [APZ Projects Release 3.0](./products/apzprojects/release-3.0/README.md)                            | **Product Bible AUTHORING** · Design Support baseline live               |
+| [Friction Register](./products/apzhub-product-board-001/README.md)                                  | APZHUB-PRODUCT-BOARD-001 — mandatory Product Era intake **COMPLETE**     |
+| [Projects Delivery Excellence](./products/apz-projects-capability-001/README.md)                    | APZ-PROJECTS-CAPABILITY-001 — Wave A operational depth **COMPLETE**      |
+| [Workflow Business Process Excellence](./products/apz-workflow-capability-001/README.md)            | APZ-WORKFLOW-CAPABILITY-001 — Wave A process excellence **COMPLETE**     |
+| [Analytics Decision Intelligence](./products/apz-analytics-capability-001/README.md)                | APZ-ANALYTICS-CAPABILITY-001 — Wave A decision intelligence **COMPLETE** |
+| [Knowledge Operational Excellence](./products/apz-knowledge-capability-001/README.md)               | APZ-KNOWLEDGE-CAPABILITY-001 — Wave A organisational memory **COMPLETE** |
+
 ## Continuous Product Lifecycle (APZHUB-PRODUCT-LIFECYCLE-001)
 
 | Document                                                                                                                  | Description                                                                                                        |

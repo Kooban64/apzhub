@@ -58,7 +58,9 @@ describe("PlatformWorkflowsView", () => {
     expect(screen.getByTestId("card-execution-status").textContent).toContain(
       "Workflow Execution Not Available",
     );
-    expect(screen.getByRole("toolbar", { name: /Workflows commands/i })).toBeTruthy();
+    expect(
+      screen.getByRole("toolbar", { name: /Process library commands/i }),
+    ).toBeTruthy();
     expect(screen.getByTestId("workflows-page")).toBeTruthy();
   });
 

@@ -32,10 +32,14 @@ It did **not** mean: stop delivering planned products.
 | --------- | ------------------------------------------------------------------------------------------------------------------- |
 | Driver    | Approved portfolio / business roadmap                                                                               |
 | Pace      | Steady · planned                                                                                                    |
-| Examples  | APZ Documents · APZ Workflow · APZ Analytics · APZ Law Platform                                                     |
+| Examples  | APZ Documents · APZ Workflow · APZ Analytics · APZ Law                                                              |
 | Rule      | Execute Product Mission → Owner Approval → Native Adoption → (optional) RI — **without waiting for pilot friction** |
+| Posture   | **READY** after Domain Selection Method — Mission only after scored selection + Owner Auth                          |
 
-These lanes run **in parallel**. Portfolio delivery does not unfreeze platform evolution.
+These lanes run **in parallel** when Lane 2 is open. Portfolio delivery does not unfreeze platform evolution.
+
+Baseline: [APZHUB-ENTERPRISE-PORTFOLIO-BASELINE.md](./APZHUB-ENTERPRISE-PORTFOLIO-BASELINE.md)  
+Selection: [APZHUB-DOMAIN-SELECTION-METHOD.md](./APZHUB-DOMAIN-SELECTION-METHOD.md)
 
 ## What Cursor may do
 
@@ -47,10 +51,11 @@ These lanes run **in parallel**. Portfolio delivery does not unfreeze platform e
 
 ## Standing question (split)
 
-| Lane               | Question                                                            |
-| ------------------ | ------------------------------------------------------------------- |
-| Platform Evolution | Has anything happened that changes an **investment** decision?      |
-| Portfolio Delivery | What is the next **approved portfolio product** to mission / adopt? |
+| Lane               | Question                                                                |
+| ------------------ | ----------------------------------------------------------------------- |
+| Platform Evolution | Has anything happened that changes an **investment** decision?          |
+| Portfolio Delivery | What **business domain** should APZOR mature next — then which Mission? |
 
 Business roadmap: [APZHUB-PORTFOLIO-BUSINESS-ROADMAP.md](./APZHUB-PORTFOLIO-BUSINESS-ROADMAP.md)  
+Domain strategy: [APZHUB-ENTERPRISE-DOMAIN-STRATEGY.md](./APZHUB-ENTERPRISE-DOMAIN-STRATEGY.md)  
 Board minutes: [../apzhub-observe-001/PRODUCT-BOARD-DECISION-PB-002.md](../apzhub-observe-001/PRODUCT-BOARD-DECISION-PB-002.md)

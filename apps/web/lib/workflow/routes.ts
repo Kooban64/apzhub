@@ -1,9 +1,13 @@
-/** Workflow Platform Workbench route helpers (APZHUB-PLATFORM-WORKFLOW-006). */
+/** Workflow Platform Workbench route helpers (APZHUB-PLATFORM-WORKFLOW-006 / N-03). */
 
 export const WORKFLOW_BASE = "/workspace/workflow";
 
 export type WorkflowRouteResolution =
   | { readonly kind: "home" }
+  | { readonly kind: "journeys" }
+  | { readonly kind: "journey-detail"; readonly journeyId: string }
+  | { readonly kind: "templates" }
+  | { readonly kind: "monitoring" }
   | { readonly kind: "definitions" }
   | { readonly kind: "definition-detail"; readonly definitionId: string }
   | { readonly kind: "runs" }
@@ -19,6 +23,8 @@ export type WorkflowRouteResolution =
   | { readonly kind: "diagnostics" }
   | { readonly kind: "capabilities" }
   | { readonly kind: "search" }
+  | { readonly kind: "help" }
+  | { readonly kind: "settings" }
   | { readonly kind: "unknown" };
 
 function normalizePath(pathname: string): string {
@@ -49,6 +55,9 @@ export function resolveWorkflowRoute(pathname: string): WorkflowRouteResolution 
   if (normalized === WORKFLOW_BASE) return { kind: "home" };
 
   const map: Record<string, WorkflowRouteResolution["kind"]> = {
+    [`${WORKFLOW_BASE}/journeys`]: "journeys",
+    [`${WORKFLOW_BASE}/templates`]: "templates",
+    [`${WORKFLOW_BASE}/monitoring`]: "monitoring",
     [`${WORKFLOW_BASE}/definitions`]: "definitions",
     [`${WORKFLOW_BASE}/runs`]: "runs",
     [`${WORKFLOW_BASE}/schedules`]: "schedules",
@@ -59,10 +68,15 @@ export function resolveWorkflowRoute(pathname: string): WorkflowRouteResolution 
     [`${WORKFLOW_BASE}/diagnostics`]: "diagnostics",
     [`${WORKFLOW_BASE}/capabilities`]: "capabilities",
     [`${WORKFLOW_BASE}/search`]: "search",
+    [`${WORKFLOW_BASE}/help`]: "help",
+    [`${WORKFLOW_BASE}/settings`]: "settings",
   };
 
   const exact = map[normalized];
   if (exact) return { kind: exact } as WorkflowRouteResolution;
+
+  const journeyId = singleSegmentAfter(normalized, `${WORKFLOW_BASE}/journeys/`);
+  if (journeyId) return { kind: "journey-detail", journeyId };
 
   const definitionId = singleSegmentAfter(normalized, `${WORKFLOW_BASE}/definitions/`);
   if (definitionId) return { kind: "definition-detail", definitionId };
@@ -84,6 +98,22 @@ export function resolveWorkflowRoute(pathname: string): WorkflowRouteResolution 
 
 export function workflowHomePath(): string {
   return WORKFLOW_BASE;
+}
+
+export function workflowJourneysPath(): string {
+  return `${WORKFLOW_BASE}/journeys`;
+}
+
+export function workflowJourneyDetailPath(journeyId: string): string {
+  return `${WORKFLOW_BASE}/journeys/${journeyId}`;
+}
+
+export function workflowTemplatesPath(): string {
+  return `${WORKFLOW_BASE}/templates`;
+}
+
+export function workflowMonitoringPath(): string {
+  return `${WORKFLOW_BASE}/monitoring`;
 }
 
 export function workflowDefinitionsPath(): string {
@@ -144,4 +174,12 @@ export function workflowCapabilitiesPath(): string {
 
 export function workflowSearchPath(): string {
   return `${WORKFLOW_BASE}/search`;
+}
+
+export function workflowHelpPath(): string {
+  return `${WORKFLOW_BASE}/help`;
+}
+
+export function workflowSettingsPath(): string {
+  return `${WORKFLOW_BASE}/settings`;
 }

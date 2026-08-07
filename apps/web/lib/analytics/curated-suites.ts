@@ -8,54 +8,58 @@ export type AnalyticsCuratedSuite = {
   readonly categoryKey: string;
 };
 
-/** Release 1.0 curated dashboard suites (presentation labels only). */
+/**
+ * Insight answer surfaces (presentation). Not product identity.
+ * Labels describe the decision domain of the answer, not "dashboards".
+ */
 export const ANALYTICS_CURATED_SUITES: readonly AnalyticsCuratedSuite[] = [
   {
     key: "executive",
-    title: "Executive Dashboard",
-    description: "High-level suite KPIs for sponsors and leaders.",
+    title: "Enterprise health answers",
+    description:
+      "Insight answers for sponsors and leaders reviewing enterprise health.",
     tag: "executive",
     categoryKey: "executive",
   },
   {
     key: "operational",
-    title: "Operational Dashboard",
-    description: "Day-to-day operations scorecards.",
+    title: "Operational attention answers",
+    description: "Insight answers for day-to-day attention and intervention.",
     tag: "operational",
     categoryKey: "operational",
   },
   {
     key: "projects",
-    title: "Projects Dashboard",
-    description: "Delivery and workload analytics over Projects.",
+    title: "Project delivery answers",
+    description: "Insight answers about delivery health and project risk.",
     tag: "projects",
     categoryKey: "projects",
   },
   {
     key: "time",
-    title: "Time Dashboard",
-    description: "Utilisation and time-entry aggregates.",
+    title: "Effort answers",
+    description: "Insight answers about where effort is spent.",
     tag: "time",
     categoryKey: "time",
   },
   {
     key: "support",
-    title: "Support Dashboard",
-    description: "Ticket and SLA style analytics views.",
+    title: "Service answers",
+    description: "Insight answers about service health and SLAs.",
     tag: "support",
     categoryKey: "support",
   },
   {
     key: "platform-health",
-    title: "Platform Health",
-    description: "Hierarchical platform health summary (consume, not Observe SoR).",
+    title: "Capability health answers",
+    description: "Insight answers about platform and capability health.",
     tag: "platform-health",
     categoryKey: "platform-health",
   },
   {
     key: "repository-metrics",
-    title: "Repository Metrics",
-    description: "Selected engineering and quality indicators (metadata only).",
+    title: "Quality answers",
+    description: "Insight answers about selected quality indicators.",
     tag: "repository-metrics",
     categoryKey: "repository-metrics",
   },

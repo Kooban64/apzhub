@@ -23,6 +23,8 @@ export const ADMINISTRATION_SECTIONS = [
   "audit",
   "history",
   "diagnostics",
+  "product-learning",
+  "friction-register",
 ] as const;
 
 export type AdministrationSection = (typeof ADMINISTRATION_SECTIONS)[number];

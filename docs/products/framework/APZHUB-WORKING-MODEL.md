@@ -3,7 +3,7 @@
 | Field     | Value            |
 | --------- | ---------------- |
 | Status    | **IN FORCE**     |
-| Timestamp | 20260805T140000Z |
+| Timestamp | 20260805T174500Z |
 
 **Current operating state (foreword):** [APZHUB-CURRENT-OPERATING-STATE.md](./APZHUB-CURRENT-OPERATING-STATE.md)  
 **Two-lane model (PB-002):** [APZHUB-TWO-LANE-OPERATING-MODEL.md](./APZHUB-TWO-LANE-OPERATING-MODEL.md)  
@@ -58,10 +58,10 @@ Architecture and standards for Layer 1 evolve only through governance (Lane 1).
 
 **Two lanes in parallel** (PB-002):
 
-| Lane  | Name               | Driver                                                        |
-| ----- | ------------------ | ------------------------------------------------------------- |
-| **1** | Platform evolution | Evidence (OBSERVE-001) — **frozen** unless thresholds / Owner |
-| **2** | Portfolio delivery | Business roadmap — **APZ-DOCUMENTS-000 open**                 |
+| Lane  | Name               | Driver                                                                              |
+| ----- | ------------------ | ----------------------------------------------------------------------------------- |
+| **1** | Platform evolution | Evidence (OBSERVE-001) — **frozen** unless thresholds / Owner                       |
+| **2** | Portfolio delivery | **Product Era** — evolve RI #001–#008 · Capability First · no new domain by default |
 
 ```text
 Lane 1: Users work → Learning → Evidence → Board → One platform investment → Release
@@ -78,7 +78,16 @@ Unified Work (composition): [../apzhub-capability-001-eng-001/](../apzhub-capabi
 Operational pause: [OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md](./OWNER-DECISION-MY-WORK-OPERATIONAL-PAUSE.md)  
 Internal readiness: [../apzhub-operate-001/](../apzhub-operate-001/) — **COMPLETE**  
 Operational observation: [../apzhub-observe-001/](../apzhub-observe-001/) — **ACTIVE** (Lane 1)  
-Documents: [../apzdocuments/](../apzdocuments/) **RI #004** · Native [../apz-documents-native-001/](../apz-documents-native-001/) **FROZEN** (Lane 2)
+Enterprise Productivity Core: [APZHUB-ENTERPRISE-PRODUCTIVITY-CORE.md](./APZHUB-ENTERPRISE-PRODUCTIVITY-CORE.md) (RI #001–#006) · [APZHUB-OPERATIONAL-BACKBONE.md](./APZHUB-OPERATIONAL-BACKBONE.md)  
+**Enterprise Portfolio Baseline:** [APZHUB-ENTERPRISE-PORTFOLIO-BASELINE.md](./APZHUB-ENTERPRISE-PORTFOLIO-BASELINE.md) · Atlas [APZHUB-ARCHITECTURE-ATLAS.md](./APZHUB-ARCHITECTURE-ATLAS.md)  
+**Enterprise Domain Strategy:** [APZHUB-ENTERPRISE-DOMAIN-STRATEGY.md](./APZHUB-ENTERPRISE-DOMAIN-STRATEGY.md) · [../apzhub-domain-strategy-001/](../apzhub-domain-strategy-001/)  
+**Domain Selection Method:** [APZHUB-DOMAIN-SELECTION-METHOD.md](./APZHUB-DOMAIN-SELECTION-METHOD.md) · [../apzhub-domain-selection-001/](../apzhub-domain-selection-001/)  
+Reference Implementations map: [APZHUB-PORTFOLIO-REFERENCE-IMPLEMENTATIONS.md](./APZHUB-PORTFOLIO-REFERENCE-IMPLEMENTATIONS.md) (RI #001–#007)  
+Documents: [../apzdocuments/](../apzdocuments/) **RI #004** · Native **FROZEN**  
+Workflow: [../apzworkflow/](../apzworkflow/) **RI #005** · Native **FROZEN**  
+Analytics: [../apzanalytics/](../apzanalytics/) **RI #006** · Native **FROZEN**  
+Law: [../apzlaw/](../apzlaw/) **RI #007** · Native **FROZEN** · Governance Layer [APZHUB-ENTERPRISE-GOVERNANCE-LAYER.md](./APZHUB-ENTERPRISE-GOVERNANCE-LAYER.md)  
+Phase 2: [APZHUB-PORTFOLIO-PHASE-2-COMPLETE.md](./APZHUB-PORTFOLIO-PHASE-2-COMPLETE.md)
 
 ## Layers
 
@@ -146,20 +155,26 @@ Declaration: [APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md](./APZHUB-NATIVE-AD
 
 ## Standard product lifecycle (every future product)
 
+For **new domains** (Knowledge established the pattern — preserve unchanged):
+
 ```text
-PRODUCT-000
-Mission & Business Outcomes
+Domain → Domain Definition → Domain Architecture
+        ↓
+PRODUCT-000 (Mission & Business Outcomes)
         ↓
 OWNER APPROVAL
         ↓
-PRODUCT-NATIVE-001
-(N-01…N-04 Playbook — engineering standard)
+PRODUCT-NATIVE-001 (N-01…N-04 Playbook)
         ↓
 Reference Implementation (optional — earned)
         ↓
-RI Retrospective
-        ↓
-Operational Learning
+RI Retrospective → Operational Learning
+```
+
+For products in an **already approved domain**, Mission may open after Owner Auth without reopening Definition/Architecture:
+
+```text
+PRODUCT-000 → OWNER APPROVAL → PRODUCT-NATIVE-001 → RI (optional)
 ```
 
 Emerging Portfolio Patterns (observation only): [APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](./APZHUB-EMERGING-PORTFOLIO-PATTERNS.md)  

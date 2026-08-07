@@ -23,10 +23,13 @@ export const projectIdParamSchema = globalIdWithPrefix("proj");
 
 const projectStatusValues = [
   "draft",
+  "initiating",
   "active",
   "on_hold",
-  "completed",
+  "closing",
+  "closed",
   "archived",
+  "completed",
 ] as const;
 
 export const createProjectBodySchema = z
@@ -54,12 +57,13 @@ export const updateProjectBodySchema = z
       .optional(),
     description: z.string().max(4000).optional(),
     leadId: z.string().min(1).max(128).nullable().optional(),
-    status: z.enum(projectStatusValues).optional(),
   })
   .strict()
   .refine((value) => Object.keys(value).length > 0, {
     message: "At least one field is required for update.",
   });
+/** @deprecated Direct status edits prohibited — use lifecycle transitions. */
+void projectStatusValues;
 
 export type CreateProjectBody = z.infer<typeof createProjectBodySchema>;
 export type UpdateProjectBody = z.infer<typeof updateProjectBodySchema>;

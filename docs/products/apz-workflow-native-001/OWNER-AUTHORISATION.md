@@ -1,0 +1,37 @@
+# Owner Authorisation — APZ-WORKFLOW-NATIVE-001
+
+| Field          | Value                                                                                                                                                                 |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Programme      | **APZ-WORKFLOW-NATIVE-001**                                                                                                                                           |
+| Title          | APZ Workflow Native Platform Experience                                                                                                                               |
+| Classification | Native Adoption                                                                                                                                                       |
+| Prerequisite   | APZ-WORKFLOW-000 Owner APPROVED                                                                                                                                       |
+| Mission        | [../apzworkflow/PRODUCT-MISSION.md](../apzworkflow/PRODUCT-MISSION.md)                                                                                                |
+| Board          | [PRODUCT-BOARD-INTENT-PRINCIPLE.md](./PRODUCT-BOARD-INTENT-PRINCIPLE.md) · [PRODUCT-BOARD-BUSINESS-PROCESS-LANGUAGE.md](./PRODUCT-BOARD-BUSINESS-PROCESS-LANGUAGE.md) |
+| Methodology    | Playbook unchanged — no redesign                                                                                                                                      |
+| Reference      | RI #001 · #002 · #003 · #004                                                                                                                                          |
+| Engineering    | **AUTHORISED** per N-0x slice rules                                                                                                                                   |
+| Architecture   | **UNCHANGED**                                                                                                                                                         |
+| Platform       | **Lane 1 unchanged** — no platform evolution from this programme                                                                                                      |
+| Status         | **COMPLETE / FROZEN**                                                                                                                                                 |
+| Timestamp      | 20260805T171000Z                                                                                                                                                      |
+| Designation    | **REFERENCE IMPLEMENTATION #005**                                                                                                                                     |
+
+## Slice order (Playbook)
+
+| Slice    | Title                        | Engineering       | Status       |
+| -------- | ---------------------------- | ----------------- | ------------ |
+| **N-01** | Native UX Audit              | Analysis only     | **COMPLETE** |
+| **N-02** | Identity Convergence         | Identity only     | **COMPLETE** |
+| **N-03** | Business Process Experience  | Presentation only | **COMPLETE** |
+| **N-04** | Operational Quality Adoption | Process/docs only | **COMPLETE** |
+
+## Rules
+
+- Align every decision to the APPROVED Product Mission (models, governs, visualises **business processes**).
+- Honour the Product Board Intent Principle **before and throughout** every slice.
+- Apply the Workflow Test to all user-visible process vocabulary.
+- Do not redesign the adoption methodology.
+- Do not expose automation engines as product identity.
+- Do not pull Lane 1 platform capabilities forward without separate Owner Auth.
+- Workflow = business intent; Automation = execution.

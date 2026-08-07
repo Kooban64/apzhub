@@ -63,7 +63,7 @@ function PageShell({
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-muted-foreground)]">
-            Workflows
+            APZ Workflow · Process library
           </p>
           <h1 className="text-2xl font-semibold text-[var(--color-foreground)]">
             {title}
@@ -260,11 +260,11 @@ const SECTION_META: Record<
 > = {
   overview: {
     title: "Overview",
-    description: "Workflow metadata dashboard — execution is not available.",
+    description: "Process library overview — business process metadata.",
   },
   workflows: {
-    title: "Workflows",
-    description: "Workflow library and lifecycle metadata.",
+    title: "Processes",
+    description: "Governed business process library and lifecycle metadata.",
   },
   versions: {
     title: "Versions",
@@ -594,7 +594,7 @@ export function PlatformWorkflowsView({
     <div
       className="flex flex-wrap items-center gap-2"
       role="toolbar"
-      aria-label="Workflows commands"
+      aria-label="Process library commands"
     >
       <Button
         type="button"

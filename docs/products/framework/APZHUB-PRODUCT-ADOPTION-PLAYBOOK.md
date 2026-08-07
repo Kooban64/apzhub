@@ -1,12 +1,12 @@
 # APZHUB Product Adoption Playbook
 
-| Field     | Value                                                                                                         |
-| --------- | ------------------------------------------------------------------------------------------------------------- |
-| Status    | **GOVERNING — ENGINEERING STANDARD**                                                                          |
-| Timestamp | 20260805T051000Z                                                                                              |
-| Maturity  | Operationally validated — [METHODOLOGY-MATURITY](./APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md)            |
-| Reference | APZ Time — **RI #001** · APZ Support — **RI #002** · APZ Projects — **RI #003** · APZ Documents — **RI #004** |
-| Companion | [APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md](./APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md)                    |
+| Field     | Value                                                                                                                                                                                            |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Status    | **GOVERNING — ENGINEERING STANDARD**                                                                                                                                                             |
+| Timestamp | 20260805T051000Z                                                                                                                                                                                 |
+| Maturity  | Operationally validated — [METHODOLOGY-MATURITY](./APZHUB-NATIVE-ADOPTION-METHODOLOGY-MATURITY.md)                                                                                               |
+| Reference | APZ Time — **RI #001** · APZ Support — **RI #002** · APZ Projects — **RI #003** · APZ Documents — **RI #004** · APZ Workflow — **RI #005** · APZ Analytics — **RI #006** · APZ Law — **RI #007** |
+| Companion | [APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md](./APZHUB-PRODUCT-NATIVE-ADOPTION-STANDARD.md)                                                                                                       |
 
 > **The Playbook changes only when operational evidence demonstrates that it should.**
 
@@ -16,7 +16,9 @@ Reusable handbook for onboarding an integrated engine as a **native APZHUB produ
 
 Copy the **process**, not APZ Time code.
 
-Applies to: APZ Projects · APZ Support · APZ Documents · APZ Analytics · APZ Workflow · APZ Law Platform · future products.
+Applies to: APZ Projects · APZ Support · APZ Documents · APZ Analytics · APZ Workflow · APZ Law · future products.
+
+Canonical RI map: [APZHUB-PORTFOLIO-REFERENCE-IMPLEMENTATIONS.md](./APZHUB-PORTFOLIO-REFERENCE-IMPLEMENTATIONS.md)
 
 ## Prerequisites before adoption
 
