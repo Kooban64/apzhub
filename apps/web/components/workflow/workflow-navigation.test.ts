@@ -3,8 +3,8 @@ import { join } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
-describe("workflow navigation registration", () => {
-  it("registers workbench activity bar and sidebar routes in module.yaml", () => {
+describe("workflow navigation registration (N-03)", () => {
+  it("registers a single APZ Workflow activity bar product", () => {
     const manifest = readFileSync(
       join(process.cwd(), "services/workflow/manifests/workflow/module.yaml"),
       "utf8",
@@ -12,31 +12,45 @@ describe("workflow navigation registration", () => {
     expect(manifest).toContain("workspace: workflow");
     expect(manifest).toContain("route: /workspace/workflow");
     expect(manifest).toContain("level: activity-bar");
+    expect(manifest).toContain("label: APZ Workflow");
+    expect(manifest).toContain("title: APZ Workflow");
     expect(manifest).toContain("permission: workflow.view");
-    for (const path of [
-      "/workspace/workflow/definitions",
-      "/workspace/workflow/runs",
-      "/workspace/workflow/schedules",
-      "/workspace/workflow/tasks",
-      "/workspace/workflow/approvals",
-      "/workspace/workflow/notifications",
-      "/workspace/workflow/search",
-      "/workspace/workflow/health",
-      "/workspace/workflow/diagnostics",
-      "/workspace/workflow/capabilities",
-    ]) {
-      expect(manifest).toContain(path);
-    }
+    expect(manifest).toContain("/workspace/workflow/journeys");
+    expect(manifest).toContain("label: Processes");
+    expect(manifest).toContain("label: Participants");
+    expect(manifest).toContain("label: Journeys");
+    expect(manifest).toContain("label: Help");
+    expect(manifest).toContain("label: Settings");
+    expect(manifest).toContain("label: Operational history");
+    expect(manifest).not.toMatch(/^\s+label: Runs$/m);
+    expect(manifest).not.toMatch(/^\s+label: Schedules$/m);
   });
 
-  it("registers sidebar child manifests", () => {
-    const child = readFileSync(
-      join(process.cwd(), "services/workflow/manifests/workflow-runs/module.yaml"),
+  it("does not expose Workflows or Workflow Engine as activity-bar products", () => {
+    const workflows = readFileSync(
+      join(
+        process.cwd(),
+        "packages/workbench-framework/manifests/platform-workflows/module.yaml",
+      ),
       "utf8",
     );
-    expect(child).toContain("level: sidebar");
-    expect(child).toContain("parent: workflow");
-    expect(child).toContain("/workspace/workflow/runs");
+    const engine = readFileSync(
+      join(
+        process.cwd(),
+        "packages/workbench-framework/manifests/platform-workflow-engine/module.yaml",
+      ),
+      "utf8",
+    );
+    expect(workflows).toContain("level: sidebar");
+    expect(workflows).toContain("parent: workflow");
+    expect(workflows).toContain("label: Process library");
+    expect(workflows).not.toContain("level: activity-bar");
+    expect(engine).toContain("level: sidebar");
+    expect(engine).toContain("parent: workflow");
+    expect(engine).toContain("label: Operator tools");
+    expect(engine).toContain("permission: workflow.admin");
+    expect(engine).not.toContain("level: activity-bar");
+    expect(engine).not.toContain("name: Workflow Engine");
   });
 
   it("mounts WorkflowWorkspaceRouter from WorkbenchPage", () => {

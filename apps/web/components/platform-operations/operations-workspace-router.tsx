@@ -413,7 +413,7 @@ function HealthSection() {
   const frameworks = [
     ["Runtime", data.health.runtime?.status ?? "unknown"],
     ["Commands", data.health.commands?.status ?? "unknown"],
-    ["Knowledge", data.health.knowledge?.status ?? "unknown"],
+    ["Knowledge discovery", data.health.knowledge?.status ?? "unknown"],
     ["Events", data.health.events?.status ?? "unknown"],
     ["Notifications", data.health.notifications?.status ?? "unknown"],
     ["Activity", data.health.activities?.status ?? "unknown"],

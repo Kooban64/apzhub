@@ -44,7 +44,7 @@ function PageShell({
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-muted-foreground)]">
-            Workflow Engine
+            APZ Workflow · Operator tools
           </p>
           <h1 className="text-2xl font-semibold text-[var(--color-foreground)]">
             {title}
@@ -442,7 +442,7 @@ export function PlatformWorkflowEngineView({
     <div
       className="flex flex-wrap items-center gap-2"
       role="toolbar"
-      aria-label="Workflow Engine commands"
+      aria-label="Operator tools commands"
     >
       <Button
         type="button"

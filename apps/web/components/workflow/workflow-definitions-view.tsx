@@ -36,8 +36,9 @@ export function WorkflowDefinitionsView({
 
   return (
     <PageShell
-      title="Workflow Definitions"
-      description="Catalogue of provider-neutral workflow definitions."
+      title="Processes"
+      description="Business processes you can model and govern in APZ Workflow."
+      breadcrumbs={["APZ Workflow", "Processes"]}
     >
       {!canView ? (
         <EmptyState title="No access" description="Missing workflow.view permission." />
@@ -55,7 +56,10 @@ export function WorkflowDefinitionsView({
       ) : null}
       {canView && query.data ? (
         query.data.items.length === 0 ? (
-          <EmptyState title="No definitions" />
+          <EmptyState
+            title="No processes yet"
+            description="Published business processes will appear here."
+          />
         ) : (
           <WorkflowTable
             testId="workflow-definitions-table"

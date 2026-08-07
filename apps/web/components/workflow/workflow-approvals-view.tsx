@@ -35,7 +35,11 @@ export function WorkflowApprovalsView({
   });
 
   return (
-    <PageShell title="Approvals" description="Approval tasks awaiting a decision.">
+    <PageShell
+      title="Approvals"
+      description="Decisions awaiting an approver in a business process."
+      breadcrumbs={["APZ Workflow", "Approvals"]}
+    >
       {!canView ? <EmptyState title="No access" /> : null}
       {canView && query.isLoading ? <LoadingState /> : null}
       {canView && query.isError ? (

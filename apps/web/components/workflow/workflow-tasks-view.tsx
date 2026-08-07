@@ -35,7 +35,11 @@ export function WorkflowTasksView({
   });
 
   return (
-    <PageShell title="Workflow Tasks" description="Human and manual workflow tasks.">
+    <PageShell
+      title="Participants"
+      description="People and steps waiting for action in a business process."
+      breadcrumbs={["APZ Workflow", "Participants"]}
+    >
       {!canView ? <EmptyState title="No access" /> : null}
       {canView && query.isLoading ? <LoadingState /> : null}
       {canView && query.isError ? (

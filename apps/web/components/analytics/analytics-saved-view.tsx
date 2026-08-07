@@ -73,13 +73,14 @@ export function AnalyticsSavedView({
 
   return (
     <PageShell
-      title="Saved Dashboards"
-      description="Personal and org saved dashboard preferences."
+      title="Saved insights"
+      description="Personal and organisation saved insight preferences."
+      breadcrumbs={["APZ Analytics", "Saved insights"]}
     >
       {!canManage ? (
         <EmptyState
-          title="No saved-dashboard access"
-          description="You are not authorised to manage saved Analytics dashboards."
+          title="No saved-insight access"
+          description="You are not authorised to manage saved Analytics insights."
         />
       ) : null}
 
@@ -88,23 +89,23 @@ export function AnalyticsSavedView({
           className="rounded-lg border border-[var(--color-border)] p-4"
           data-testid="analytics-saved-create"
         >
-          <h2 className="text-sm font-semibold">Save a dashboard</h2>
+          <h2 className="text-sm font-semibold">Save an insight</h2>
           <div className="mt-3 flex flex-col gap-2 md:flex-row">
             <input
               className="rounded-md border border-[var(--color-border)] bg-transparent px-3 py-2 text-sm"
               value={name}
               onChange={(event) => setName(event.target.value)}
-              aria-label="Saved dashboard name"
+              aria-label="Saved insight name"
               data-testid="analytics-saved-name"
             />
             <select
               className="rounded-md border border-[var(--color-border)] bg-transparent px-3 py-2 text-sm"
               value={dashboardId}
               onChange={(event) => setDashboardId(event.target.value)}
-              aria-label="Dashboard to save"
+              aria-label="Insight to save"
               data-testid="analytics-saved-dashboard"
             >
-              <option value="">Select dashboard…</option>
+              <option value="">Select insight…</option>
               {dashboards.map((dashboard) => (
                 <option key={dashboard.id} value={dashboard.id}>
                   {dashboard.title}
@@ -125,7 +126,7 @@ export function AnalyticsSavedView({
             <p className="mt-2 text-sm text-[var(--color-destructive)]" role="alert">
               {isAnalyticsApiError(createMutation.error)
                 ? createMutation.error.message
-                : "Unable to save dashboard."}
+                : "Unable to save insight."}
             </p>
           ) : null}
         </section>
@@ -137,19 +138,19 @@ export function AnalyticsSavedView({
           message={
             isAnalyticsApiError(savedQuery.error)
               ? savedQuery.error.message
-              : "Unable to load saved dashboards."
+              : "Unable to load saved insights."
           }
           onRetry={() => void savedQuery.refetch()}
         />
       ) : null}
       {canManage && !savedQuery.isLoading && items.length === 0 ? (
         <EmptyState
-          title="No saved dashboards"
-          description="Save a catalogue dashboard to begin."
+          title="No saved insights"
+          description="Save an insight answer to begin."
         />
       ) : null}
       {items.length > 0 ? (
-        <AnalyticsTable headers={["Name", "Dashboard", "Status", "Actions"]}>
+        <AnalyticsTable headers={["Name", "Insight", "Status", "Actions"]}>
           {items.map((item) => (
             <tr key={item.id} data-testid={`analytics-saved-row-${item.id}`}>
               <td className="px-3 py-2">{item.name}</td>

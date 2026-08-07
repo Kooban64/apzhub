@@ -36,8 +36,9 @@ export function WorkflowSchedulesView({
 
   return (
     <PageShell
-      title="Workflow Schedules"
-      description="Armed, paused, and retired schedules."
+      title="Operational timing"
+      description="Operator-only timing controls. Not part of the primary business process experience."
+      breadcrumbs={["APZ Workflow", "Operator", "Operational timing"]}
     >
       {!canView ? <EmptyState title="No access" /> : null}
       {canView && query.isLoading ? <LoadingState /> : null}

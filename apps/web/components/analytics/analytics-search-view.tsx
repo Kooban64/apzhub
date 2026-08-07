@@ -51,13 +51,14 @@ export function AnalyticsSearchView({
 
   return (
     <PageShell
-      title="Search"
-      description="Find dashboards by title, description, or tag (catalogue filter)."
+      title="Find an insight"
+      description="Search insight answers by title, description, or tag. Prefer starting from a business question."
+      breadcrumbs={["APZ Analytics", "Search"]}
     >
       {!canView ? (
         <EmptyState
           title="No search access"
-          description="You are not authorised to search Analytics dashboards."
+          description="You are not authorised to search Analytics insights."
         />
       ) : (
         <>
@@ -73,8 +74,8 @@ export function AnalyticsSearchView({
               className="min-w-[16rem] flex-1 rounded-md border border-[var(--color-border)] bg-transparent px-3 py-2 text-sm"
               value={q}
               onChange={(event) => setQ(event.target.value)}
-              placeholder="Search dashboards…"
-              aria-label="Search dashboards"
+              placeholder="Find an insight…"
+              aria-label="Find an insight"
               data-testid="analytics-search-q"
             />
             <Button type="submit" size="sm" data-testid="analytics-search-submit">
@@ -88,7 +89,7 @@ export function AnalyticsSearchView({
               message={
                 isAnalyticsApiError(query.error)
                   ? query.error.message
-                  : "Unable to search dashboards."
+                  : "Unable to search insights."
               }
               onRetry={() => void query.refetch()}
             />
@@ -100,7 +101,7 @@ export function AnalyticsSearchView({
             >
               {results.length === 0 ? (
                 <li className="px-3 py-6 text-center text-sm text-[var(--color-muted-foreground)]">
-                  No matching dashboards.
+                  No matching insights.
                 </li>
               ) : (
                 results.map((item) => (

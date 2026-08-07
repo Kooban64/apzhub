@@ -41,8 +41,9 @@ export function AnalyticsDashboardDetailView({
 
   return (
     <PageShell
-      title={query.data?.title ?? "Dashboard Details"}
-      description="Dashboard registry metadata via Analytics HTTP API."
+      title={query.data?.title ?? "Insight answer"}
+      description="Supporting evidence for a business question. This visualisation is an answer — not the destination."
+      breadcrumbs={["APZ Analytics", "Insight answer"]}
       actions={
         <>
           <Button
@@ -61,7 +62,7 @@ export function AnalyticsDashboardDetailView({
               onClick={() => router.push(analyticsSavedPath())}
               data-testid="analytics-detail-saved"
             >
-              Saved Dashboards
+              Saved insights
             </Button>
           ) : null}
         </>
@@ -69,8 +70,8 @@ export function AnalyticsDashboardDetailView({
     >
       {!canView ? (
         <EmptyState
-          title="No dashboard access"
-          description="You are not authorised to view this dashboard."
+          title="No insight access"
+          description="You are not authorised to view this insight answer."
         />
       ) : null}
       {canView && query.isLoading ? <LoadingState /> : null}
@@ -79,7 +80,7 @@ export function AnalyticsDashboardDetailView({
           message={
             isAnalyticsApiError(query.error)
               ? query.error.message
-              : "Unable to load dashboard."
+              : "Unable to load insight answer."
           }
           onRetry={() => void query.refetch()}
         />
@@ -89,6 +90,7 @@ export function AnalyticsDashboardDetailView({
           className="rounded-lg border border-[var(--color-border)] p-4"
           data-testid="analytics-dashboard-detail"
         >
+          <h2 className="mb-3 text-sm font-semibold">Supporting evidence</h2>
           <dl className="grid gap-3 text-sm md:grid-cols-2">
             <div>
               <dt className="text-[var(--color-muted-foreground)]">Title</dt>
@@ -105,7 +107,7 @@ export function AnalyticsDashboardDetailView({
               <dd>{query.data.description ?? "—"}</dd>
             </div>
             <div>
-              <dt className="text-[var(--color-muted-foreground)]">Dashboard ID</dt>
+              <dt className="text-[var(--color-muted-foreground)]">Evidence ID</dt>
               <dd className="font-mono text-xs">{query.data.id}</dd>
             </div>
             <div>
@@ -119,7 +121,9 @@ export function AnalyticsDashboardDetailView({
           </dl>
           <p className="mt-4 text-sm text-[var(--color-muted-foreground)]">
             Live visual embed is not exposed by the Analytics HTTP API in this
-            programme. Metadata is served through APZHUB only — no engine branding.
+            programme. Evidence metadata is served through APZHUB only — no engine
+            branding. Return to a business question to complete Question → Insight →
+            Decision.
           </p>
         </section>
       ) : null}

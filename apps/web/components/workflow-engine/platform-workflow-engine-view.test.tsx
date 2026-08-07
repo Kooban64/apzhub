@@ -54,7 +54,7 @@ describe("PlatformWorkflowEngineView", () => {
 
     expect(screen.getByTestId("card-total-workflows").textContent).toContain("1");
     expect(
-      screen.getByRole("toolbar", { name: /Workflow Engine commands/i }),
+      screen.getByRole("toolbar", { name: /Operator tools commands/i }),
     ).toBeTruthy();
     expect(screen.getByTestId("workflow-engine-page")).toBeTruthy();
   });
@@ -705,9 +705,14 @@ describe("WorkflowEngineWorkspaceRouter", () => {
   });
 
   it("resolves overview from pathname", async () => {
-    render(wrap(<WorkflowEngineWorkspaceRouter />));
+    render(wrap(<WorkflowEngineWorkspaceRouter permissions={["workflow.admin"]} />));
     await waitFor(() => {
       expect(screen.getByRole("heading", { level: 1, name: "Overview" })).toBeTruthy();
     });
+  });
+
+  it("denies default identity without operator grants", () => {
+    render(wrap(<WorkflowEngineWorkspaceRouter permissions={["workflow.view"]} />));
+    expect(screen.getByTestId("workflow-engine-permission-denied")).toBeTruthy();
   });
 });

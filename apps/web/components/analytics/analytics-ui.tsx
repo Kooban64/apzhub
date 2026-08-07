@@ -3,25 +3,52 @@
 import { Button } from "@apzhub/ui";
 import type { ReactNode } from "react";
 
+/** Native product name — APZ-ANALYTICS-NATIVE-001-N02 identity */
+export const ANALYTICS_PRODUCT_NAME = "APZ Analytics";
+
 export function PageShell({
   title,
   description,
   actions,
+  breadcrumbs,
   children,
 }: {
   readonly title: string;
   readonly description?: string;
   readonly actions?: ReactNode;
+  readonly breadcrumbs?: readonly string[];
   readonly children: ReactNode;
 }) {
+  const crumbs =
+    breadcrumbs && breadcrumbs.length > 0
+      ? breadcrumbs
+      : [ANALYTICS_PRODUCT_NAME, title];
+
   return (
     <div className="flex flex-col gap-6 p-1" data-testid="analytics-page">
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-muted-foreground)]">
-            Analytics
+            {ANALYTICS_PRODUCT_NAME}
           </p>
-          <h1 className="text-2xl font-semibold text-[var(--color-foreground)]">
+          <nav
+            aria-label="Breadcrumb"
+            className="mt-1 text-xs text-[var(--color-muted-foreground)]"
+            data-testid="analytics-breadcrumbs"
+          >
+            <ol className="flex flex-wrap gap-1">
+              {crumbs.map((crumb, index) => (
+                <li
+                  key={`${crumb}-${index}`}
+                  className="inline-flex items-center gap-1"
+                >
+                  {index > 0 ? <span aria-hidden="true">/</span> : null}
+                  <span>{crumb}</span>
+                </li>
+              ))}
+            </ol>
+          </nav>
+          <h1 className="mt-1 text-2xl font-semibold text-[var(--color-foreground)]">
             {title}
           </h1>
           {description ? (
@@ -40,7 +67,7 @@ export function PageShell({
 }
 
 export function LoadingState({
-  label = "Loading Analytics…",
+  label = "Loading APZ Analytics…",
 }: {
   readonly label?: string;
 }) {

@@ -46,21 +46,28 @@ export function AnalyticsSuiteView({
 
   if (!suite) {
     return (
-      <PageShell title="Analytics">
+      <PageShell
+        title="Insight answer"
+        breadcrumbs={["APZ Analytics", "Insight answer"]}
+      >
         <EmptyState
-          title="Unknown suite"
-          description="Select a suite from Analytics Home."
+          title="Unknown insight answer"
+          description="Return to a business question to find the relevant insight."
         />
       </PageShell>
     );
   }
 
   return (
-    <PageShell title={suite.title} description={suite.description}>
+    <PageShell
+      title={suite.title}
+      description={`${suite.description} This is an answer surface — enter from a business question.`}
+      breadcrumbs={["APZ Analytics", "Insight answer", suite.title]}
+    >
       {!canView ? (
         <EmptyState
-          title="No dashboard access"
-          description="You are not authorised to view this Analytics suite."
+          title="No insight access"
+          description="You are not authorised to view this insight answer."
         />
       ) : null}
       {canView && query.isLoading ? <LoadingState /> : null}
@@ -69,15 +76,15 @@ export function AnalyticsSuiteView({
           message={
             isAnalyticsApiError(query.error)
               ? query.error.message
-              : "Unable to load suite dashboards."
+              : "Unable to load insight answers."
           }
           onRetry={() => void query.refetch()}
         />
       ) : null}
       {canView && !query.isLoading && !query.isError && items.length === 0 ? (
         <EmptyState
-          title="No authorised dashboards"
-          description="No dashboards in this suite are available for your account."
+          title="No authorised insights"
+          description="No insight answers in this area are available for your account."
         />
       ) : null}
       {items.length > 0 ? (

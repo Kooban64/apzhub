@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { AnalyticsHomeView } from "./analytics-home-view";
@@ -10,48 +9,32 @@ vi.mock("next/navigation", () => ({
   useRouter: () => ({ push }),
 }));
 
-vi.mock("@/lib/analytics/analytics-api", () => ({
-  listAnalyticsDashboards: vi.fn(async () => ({
-    items: [
-      {
-        id: "dash_exec_overview",
-        tenantId: "tenant-a",
-        title: "Executive Overview",
-        description: "Cross-product executive scorecards",
-        status: "published",
-        tags: ["executive"],
-        provider: { providerId: "platform", providerRef: "collection:1" },
-        updatedAt: "2026-07-19T00:00:00.000Z",
-      },
-    ],
-  })),
-}));
-
-function renderHome() {
-  const client = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={client}>
-      <AnalyticsHomeView permissions={["analytics.*"]} />
-    </QueryClientProvider>,
-  );
-}
-
-describe("AnalyticsHomeView", () => {
+describe("AnalyticsHomeView (N-03 Decision Companion)", () => {
   beforeEach(() => {
     push.mockReset();
   });
 
-  it("renders home suites and recent catalogue", async () => {
-    renderHome();
+  it("renders question-first home with horizons — not dashboard suites", () => {
+    render(<AnalyticsHomeView permissions={["analytics.view"]} />);
     expect(screen.getByTestId("analytics-page")).toBeInTheDocument();
-    expect(screen.getByTestId("analytics-home-suites")).toBeInTheDocument();
-    await waitFor(() => {
-      expect(
-        screen.getByTestId("analytics-dashboard-row-dash_exec_overview"),
-      ).toBeInTheDocument();
-    });
-    expect(screen.getByText("Executive Overview")).toBeInTheDocument();
+    expect(screen.getByTestId("analytics-home-onboarding")).toBeInTheDocument();
+    expect(screen.getByTestId("analytics-home-horizons")).toBeInTheDocument();
+    expect(screen.getByTestId("analytics-home-questions")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("analytics-home-horizon-operational"),
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("analytics-home-question-EQ-E01")).toBeInTheDocument();
+    expect(screen.queryByTestId("analytics-home-suites")).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Home" })).toBeInTheDocument();
+    expect(screen.getByText(/Start with a business question/i)).toBeInTheDocument();
+  });
+
+  it("shows operator note only for admin", () => {
+    const { rerender } = render(<AnalyticsHomeView permissions={["analytics.view"]} />);
+    expect(
+      screen.queryByTestId("analytics-home-operator-note"),
+    ).not.toBeInTheDocument();
+    rerender(<AnalyticsHomeView permissions={["analytics.admin"]} />);
+    expect(screen.getByTestId("analytics-home-operator-note")).toBeInTheDocument();
   });
 });

@@ -15,12 +15,15 @@ import { workflowQueryKeys } from "@/lib/workflow/query-keys";
 import { workflowTasksPath } from "@/lib/workflow/routes";
 import { getWorkflowTask, patchWorkflowTask } from "@/lib/workflow/workflow-api";
 
+import { EnterpriseContextPanel } from "@/components/context/enterprise-context-panel";
+
 import {
   DetailList,
   EmptyState,
   ErrorState,
   LoadingState,
   PageShell,
+  WorkflowWorkspaceFrame,
 } from "./workflow-ui";
 
 export function WorkflowTaskDetailView({
@@ -84,30 +87,42 @@ export function WorkflowTaskDetailView({
         </>
       }
     >
-      {!canView ? <EmptyState title="No access" /> : null}
-      {canView && query.isLoading ? <LoadingState /> : null}
-      {canView && query.isError ? (
-        <ErrorState
-          message={
-            isWorkflowApiError(query.error)
-              ? query.error.message
-              : "Unable to load task."
-          }
-          onRetry={() => void query.refetch()}
-        />
-      ) : null}
-      {canView && query.data ? (
-        <DetailList
-          testId="workflow-task-detail"
-          items={[
-            { label: "Task id", value: query.data.id },
-            { label: "Title", value: query.data.title ?? "—" },
-            { label: "Kind", value: String(query.data.kind) },
-            { label: "Status", value: String(query.data.status) },
-            { label: "Run", value: query.data.runId ?? "—" },
-          ]}
-        />
-      ) : null}
+      <WorkflowWorkspaceFrame
+        context={
+          canView && query.data ? (
+            <EnterpriseContextPanel
+              focusType="workflow"
+              focusId={taskId}
+              focusName={query.data.title}
+            />
+          ) : null
+        }
+      >
+        {!canView ? <EmptyState title="No access" /> : null}
+        {canView && query.isLoading ? <LoadingState /> : null}
+        {canView && query.isError ? (
+          <ErrorState
+            message={
+              isWorkflowApiError(query.error)
+                ? query.error.message
+                : "Unable to load task."
+            }
+            onRetry={() => void query.refetch()}
+          />
+        ) : null}
+        {canView && query.data ? (
+          <DetailList
+            testId="workflow-task-detail"
+            items={[
+              { label: "Task id", value: query.data.id },
+              { label: "Title", value: query.data.title ?? "—" },
+              { label: "Kind", value: String(query.data.kind) },
+              { label: "Status", value: String(query.data.status) },
+              { label: "Run", value: query.data.runId ?? "—" },
+            ]}
+          />
+        ) : null}
+      </WorkflowWorkspaceFrame>
     </PageShell>
   );
 }

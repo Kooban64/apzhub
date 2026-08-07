@@ -36,8 +36,9 @@ export function WorkflowRunsView({
 
   return (
     <PageShell
-      title="Workflow Runs"
-      description="Execution history for workflow definitions."
+      title="Operational history"
+      description="Operator-only history. Not part of the primary business process experience."
+      breadcrumbs={["APZ Workflow", "Operator", "Operational history"]}
     >
       {!canView ? (
         <EmptyState title="No access" description="Missing workflow.runs.view." />

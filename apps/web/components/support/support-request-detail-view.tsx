@@ -21,6 +21,8 @@ import {
   listSupportHistory,
 } from "@/lib/support/support-api";
 
+import { EnterpriseContextPanel } from "@/components/context/enterprise-context-panel";
+
 import { CustomerReplyComposer } from "./customer-reply-composer";
 import { InternalNoteComposer } from "./internal-note-composer";
 import { SupportConversation } from "./support-conversation";
@@ -160,6 +162,11 @@ export function SupportRequestDetailView({
                 </Button>
               </div>
             </ContextSection>
+            <EnterpriseContextPanel
+              focusType="support"
+              focusId={request.id}
+              focusName={request.title}
+            />
           </>
         }
       >

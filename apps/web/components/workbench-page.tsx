@@ -21,6 +21,7 @@ import { SearchWorkspaceRouter } from "@/components/search/search-workspace-rout
 import { SupportWorkspaceRouter } from "@/components/support/support-workspace-router";
 import { TestingWorkspaceRouter } from "@/components/testing/testing-workspace-router";
 import { AnalyticsWorkspaceRouter } from "@/components/analytics/analytics-workspace-router";
+import { KnowledgeWorkspaceRouter } from "@/components/knowledge/knowledge-workspace-router";
 import { TimeWorkspaceRouter } from "@/components/time/time-workspace-router";
 import { WorkflowWorkspaceRouter } from "@/components/workflow/workflow-workspace-router";
 import { WorkflowEngineWorkspaceRouter } from "@/components/workflow-engine/workflow-engine-workspace-router";
@@ -51,6 +52,7 @@ import { isProjectsRoute } from "@/lib/projects/routes";
 import { isSupportRoute } from "@/lib/support/routes";
 import { isTestingRoute } from "@/lib/testing/routes";
 import { isAnalyticsRoute } from "@/lib/analytics/routes";
+import { isKnowledgeRoute } from "@/lib/knowledge/routes";
 import { isTimeRoute } from "@/lib/time/routes";
 import { isWorkflowRoute } from "@/lib/workflow/routes";
 import { isWorkflowEngineRoute, isWorkflowsRoute } from "@/lib/workflows/routes";
@@ -158,6 +160,7 @@ export function WorkbenchPage() {
   const projectsActive = isProjectsRoute(pathname);
   const timeActive = isTimeRoute(pathname);
   const analyticsActive = isAnalyticsRoute(pathname);
+  const knowledgeActive = isKnowledgeRoute(pathname);
   const supportActive = isSupportRoute(pathname);
   const testingActive = isTestingRoute(pathname);
   const reportingActive = isReportingRoute(pathname);
@@ -208,6 +211,8 @@ export function WorkbenchPage() {
         <TimeWorkspaceRouter />
       ) : analyticsActive ? (
         <AnalyticsWorkspaceRouter />
+      ) : knowledgeActive ? (
+        <KnowledgeWorkspaceRouter />
       ) : supportActive ? (
         <SupportWorkspaceRouter />
       ) : testingActive ? (
