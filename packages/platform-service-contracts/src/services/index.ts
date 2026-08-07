@@ -32,3 +32,51 @@ export {
   MY_WORK_PRODUCTS,
   MY_WORK_KINDS,
 } from "./my-work-composition-service";
+export type {
+  ContextFocusType,
+  ContextProviderId,
+  ContextSectionId,
+  ContextAbsenceReason,
+  ContextFragmentClass,
+  ContextFragment,
+  ContextSlice,
+  ContextFocus,
+  EnterpriseContextComposition,
+  ContextProviderTiming,
+  ContextOperationalTiming,
+  ComposeEnterpriseContextInput,
+  EnterpriseContextCompositionService,
+} from "./enterprise-context-composition-service";
+export {
+  CONTEXT_FOCUS_TYPES,
+  CONTEXT_PROVIDER_IDS,
+  CONTEXT_SECTION_IDS,
+  CONTEXT_ABSENCE_REASONS,
+  CONTEXT_FRAGMENT_CLASSES,
+} from "./enterprise-context-composition-service";
+export type {
+  ProductLearningFeatureKey,
+  ContextLearningEventName,
+  ContextFeedbackRating,
+  ProductLearningEvent,
+  RecordProductLearningEventInput,
+  ContextLearningSummary,
+} from "./product-learning-service";
+export {
+  PRODUCT_LEARNING_FEATURE_KEYS,
+  CONTEXT_LEARNING_EVENT_NAMES,
+} from "./product-learning-service";
+export type {
+  FrictionBoardDecision,
+  FrictionEngineeringStatus,
+  FrictionSource,
+  OperationalFriction,
+  CreateOperationalFrictionInput,
+  UpdateOperationalFrictionInput,
+  OperationalFrictionAuditEntry,
+} from "./operational-friction-service";
+export {
+  FRICTION_BOARD_DECISIONS,
+  FRICTION_ENGINEERING_STATUSES,
+  FRICTION_SOURCES,
+} from "./operational-friction-service";

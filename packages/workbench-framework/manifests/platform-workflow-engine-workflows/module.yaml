@@ -23,9 +23,9 @@ workbench:
     icon: git-branch
     route: /workspace/workflow-engine/workflows
     order: 20
-    permission: workflow.engine.read
+    permission: workflow.admin
   view:
     title: Workflows
     workspace: workflow-engine
     route: /workspace/workflow-engine/workflows
-    permission: workflow.engine.read
+    permission: workflow.admin

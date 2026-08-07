@@ -1,0 +1,41 @@
+manifestSchemaVersion: "1.0"
+id: enterprise-context-composition-service
+name: Enterprise Context Composition Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: platform
+  description: >
+    Enterprise Context composition for Project focus (APZHUB-CONTEXT-001).
+    Composes attributed projections from Workflow, Support, Documents, Law, and Knowledge.
+    Never owns business state. Never becomes a System of Record.
+  contractPackage: "@apzhub/platform-service-contracts"
+  implementationPackage: "@apzhub/platform-services"
+  owner: APZHUB
+  programme: APZHUB-CONTEXT-001
+  tags:
+    - enterprise-context
+    - composition
+    - portfolio-capability
+  ownsBusinessState: false
+  compositionOnly: true
+
+dependencies:
+  platform:
+    - projects
+    - support
+    - workflow
+    - documents
+    - law
+    - knowledge
+
+service:
+  category: platform
+  compositionOnly: true
+
+permissions:
+  - projects.view
+
+health:
+  selfReport: true

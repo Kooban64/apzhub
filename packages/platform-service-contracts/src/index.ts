@@ -32,6 +32,13 @@ export type {
 export { PlatformServiceError, isPlatformServiceError } from "./common/errors";
 
 export type * from "./domain";
+export {
+  normalizeMilestoneStatus,
+  isOpenMilestoneStatus,
+  isAchievedMilestoneStatus,
+  PROJECT_MILESTONE_STATUSES,
+  MILESTONE_CONFIDENCE,
+} from "./domain";
 
 export type * from "./queries";
 
@@ -132,6 +139,32 @@ export type {
   MyWorkComposition,
   ComposeMyWorkInput,
   MyWorkCompositionService,
+  ContextFocusType,
+  ContextProviderId,
+  ContextSectionId,
+  ContextAbsenceReason,
+  ContextFragmentClass,
+  ContextFragment,
+  ContextSlice,
+  ContextFocus,
+  EnterpriseContextComposition,
+  ContextProviderTiming,
+  ContextOperationalTiming,
+  ComposeEnterpriseContextInput,
+  EnterpriseContextCompositionService,
+  ProductLearningFeatureKey,
+  ContextLearningEventName,
+  ContextFeedbackRating,
+  ProductLearningEvent,
+  RecordProductLearningEventInput,
+  ContextLearningSummary,
+  FrictionBoardDecision,
+  FrictionEngineeringStatus,
+  FrictionSource,
+  OperationalFriction,
+  CreateOperationalFrictionInput,
+  UpdateOperationalFrictionInput,
+  OperationalFrictionAuditEntry,
 } from "./services";
 
 export {
@@ -139,6 +172,16 @@ export {
   MY_WORK_QUEUE_IDS,
   MY_WORK_PRODUCTS,
   MY_WORK_KINDS,
+  CONTEXT_FOCUS_TYPES,
+  CONTEXT_PROVIDER_IDS,
+  CONTEXT_SECTION_IDS,
+  CONTEXT_ABSENCE_REASONS,
+  CONTEXT_FRAGMENT_CLASSES,
+  PRODUCT_LEARNING_FEATURE_KEYS,
+  CONTEXT_LEARNING_EVENT_NAMES,
+  FRICTION_BOARD_DECISIONS,
+  FRICTION_ENGINEERING_STATUSES,
+  FRICTION_SOURCES,
 } from "./services";
 
 /** Canonical APZ TCMS domain models — re-exported for HTTP/fixture consumers (APZTCMS-011/012/013/014). */

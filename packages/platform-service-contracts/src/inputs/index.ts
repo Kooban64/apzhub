@@ -91,13 +91,282 @@ export interface CreateMilestoneInput {
   readonly name: string;
   readonly description?: string;
   readonly targetDate?: string;
+  readonly owner?: string;
+  readonly ownerUserId?: string;
+  readonly dependencyIds?: readonly string[];
+  readonly progressPercent?: number;
+  readonly status?:
+    | "planned"
+    | "at_risk"
+    | "slipped"
+    | "achieved"
+    | "cancelled"
+    | "open"
+    | "completed"
+    | "missed";
+  readonly confidence?: "high" | "medium" | "low";
+  readonly failureConsequence?: string;
+  readonly exitCriteria?: string;
+  readonly baselineDueAt?: string;
+  readonly sortKey?: number;
 }
 
 export interface UpdateMilestoneInput {
   readonly name?: string;
   readonly description?: string;
   readonly targetDate?: string;
-  readonly status?: "open" | "completed";
+  /** Required when targetDate moves beyond governance tolerance. */
+  readonly dateChangeReason?: string;
+  readonly owner?: string;
+  readonly ownerUserId?: string;
+  readonly dependencyIds?: readonly string[];
+  readonly progressPercent?: number;
+  readonly status?:
+    | "planned"
+    | "at_risk"
+    | "slipped"
+    | "achieved"
+    | "cancelled"
+    | "open"
+    | "completed"
+    | "missed";
+  readonly confidence?: "high" | "medium" | "low";
+  readonly failureConsequence?: string;
+  readonly exitCriteria?: string;
+  readonly baselineDueAt?: string;
+  readonly sortKey?: number;
+  readonly achievementEvidence?: readonly {
+    readonly type:
+      | "document"
+      | "approval"
+      | "deliverable"
+      | "external_reference"
+      | "verification_note";
+    readonly label: string;
+    readonly uri?: string;
+    readonly documentId?: string;
+  }[];
+  readonly evidenceOptional?: boolean;
+}
+
+export interface CreateProjectRiskInput {
+  readonly title: string;
+  readonly description: string;
+  readonly probability: "low" | "medium" | "high" | "critical";
+  readonly impact: "low" | "medium" | "high" | "critical";
+  readonly mitigation: string;
+  readonly owner: string;
+  readonly reviewDate?: string;
+  readonly status?: "open" | "mitigating" | "closed" | "accepted";
+}
+
+export interface UpdateProjectRiskInput {
+  readonly title?: string;
+  readonly description?: string;
+  readonly probability?: "low" | "medium" | "high" | "critical";
+  readonly impact?: "low" | "medium" | "high" | "critical";
+  readonly mitigation?: string;
+  readonly owner?: string;
+  readonly reviewDate?: string;
+  readonly status?: "open" | "mitigating" | "closed" | "accepted";
+}
+
+export interface CreateProjectDecisionInput {
+  readonly decision: string;
+  readonly rationale: string;
+  readonly owner: string;
+  readonly decidedAt?: string;
+  readonly outcome: string;
+  readonly relatedWork?: string;
+}
+
+export interface UpdateProjectDecisionInput {
+  readonly decision?: string;
+  readonly rationale?: string;
+  readonly owner?: string;
+  readonly decidedAt?: string;
+  readonly outcome?: string;
+  readonly relatedWork?: string;
+}
+
+export interface CreateProjectActionInput {
+  readonly title: string;
+  readonly owner: string;
+  readonly dueDate?: string;
+  readonly status?: "open" | "done" | "cancelled";
+}
+
+export interface UpdateProjectActionInput {
+  readonly title?: string;
+  readonly owner?: string;
+  readonly dueDate?: string;
+  readonly status?: "open" | "done" | "cancelled";
+}
+
+export interface BusinessJourneyStageInput {
+  readonly id?: string;
+  readonly name: string;
+  readonly description?: string;
+  readonly order: number;
+  readonly responsibility?: string;
+  readonly entryCondition?: string;
+  readonly exitCondition?: string;
+}
+
+export interface BusinessJourneyTransitionInput {
+  readonly id?: string;
+  readonly fromStageId: string;
+  readonly toStageId: string;
+  readonly name: string;
+  readonly outcome?: string;
+}
+
+export interface CreateBusinessJourneyInput {
+  readonly name: string;
+  readonly summary: string;
+  readonly outcomes?: readonly string[];
+  readonly stages?: readonly BusinessJourneyStageInput[];
+  readonly transitions?: readonly BusinessJourneyTransitionInput[];
+  readonly processOwner: string;
+  readonly businessSteward: string;
+  readonly reviewCycleDays?: number;
+  readonly templateKey?: string;
+  readonly publicationStatus?: "draft" | "review" | "approved" | "retired";
+}
+
+export interface UpdateBusinessJourneyInput {
+  readonly name?: string;
+  readonly summary?: string;
+  readonly outcomes?: readonly string[];
+  readonly stages?: readonly BusinessJourneyStageInput[];
+  readonly transitions?: readonly BusinessJourneyTransitionInput[];
+  readonly processOwner?: string;
+  readonly businessSteward?: string;
+  readonly reviewCycleDays?: number | null;
+  readonly publicationStatus?: "draft" | "review" | "approved" | "retired";
+}
+
+export interface TransitionBusinessJourneyGovernanceInput {
+  readonly publicationStatus: "draft" | "review" | "approved" | "retired";
+  readonly notes?: string;
+}
+
+export interface CreateBusinessProcessInstanceInput {
+  readonly journeyId: string;
+  readonly title: string;
+  readonly currentStageId?: string;
+  readonly dueAt?: string;
+}
+
+export interface UpdateBusinessProcessInstanceInput {
+  readonly title?: string;
+  readonly currentStageId?: string;
+  readonly status?: "active" | "completed" | "cancelled";
+  readonly dueAt?: string | null;
+}
+
+export interface GenerateDecisionPackInput {
+  readonly questionId: string;
+  readonly audienceRole:
+    "executive" | "manager" | "project_manager" | "support_manager" | "team_member";
+}
+
+export interface CreateDecisionKpiInput {
+  readonly name: string;
+  readonly description: string;
+  readonly owner: string;
+  readonly targetValue: number;
+  readonly currentValue: number;
+  readonly unit: string;
+  readonly domain:
+    | "project_delivery"
+    | "support_performance"
+    | "workflow_throughput"
+    | "operational_quality";
+}
+
+export interface UpdateDecisionKpiInput {
+  readonly name?: string;
+  readonly description?: string;
+  readonly owner?: string;
+  readonly targetValue?: number;
+  readonly currentValue?: number;
+  readonly unit?: string;
+}
+
+export interface CreateDecisionTimelineEntryInput {
+  readonly title: string;
+  readonly decision: string;
+  readonly rationale: string;
+  readonly decidedBy: string;
+  readonly decidedAt?: string;
+  readonly evidenceRefs?: readonly string[];
+  readonly relatedQuestionId?: string;
+  readonly relatedProduct?: string;
+  readonly sourceRecordRef?: string;
+}
+
+export interface CreateKnowledgeLessonInput {
+  readonly title: string;
+  readonly summary: string;
+  readonly context: string;
+  readonly situation: string;
+  readonly resolution: string;
+  readonly recommendation: string;
+  readonly owner: string;
+  readonly relatedProducts?: readonly string[];
+  readonly relatedCapabilities?: readonly string[];
+  readonly tags?: readonly string[];
+  readonly reviewDate?: string;
+  readonly expiresAt?: string;
+}
+
+export interface CreateKnowledgeLibraryItemInput {
+  readonly title: string;
+  readonly summary: string;
+  readonly content: string;
+  readonly owner: string;
+  readonly libraryCategory:
+    | "standards"
+    | "procedures"
+    | "best_practices"
+    | "operational_guides"
+    | "reference_material";
+  readonly relatedProducts?: readonly string[];
+  readonly relatedCapabilities?: readonly string[];
+  readonly tags?: readonly string[];
+  readonly reviewDate?: string;
+  readonly expiresAt?: string;
+}
+
+export interface CreateDecisionKnowledgeInput {
+  readonly title: string;
+  readonly summary: string;
+  readonly rationale: string;
+  readonly owner: string;
+  readonly decisionRef: string;
+  readonly relatedQuestionId?: string;
+  readonly relatedProducts?: readonly string[];
+  readonly tags?: readonly string[];
+  readonly reviewDate?: string;
+}
+
+export interface UpdateKnowledgeObjectInput {
+  readonly title?: string;
+  readonly summary?: string;
+  readonly body?: Record<string, unknown>;
+  readonly owner?: string;
+  readonly tags?: readonly string[];
+  readonly relatedProducts?: readonly string[];
+  readonly relatedCapabilities?: readonly string[];
+  readonly reviewDate?: string | null;
+  readonly expiresAt?: string | null;
+  readonly decisionRef?: string;
+}
+
+export interface TransitionKnowledgeLifecycleInput {
+  readonly status: "draft" | "review" | "approved" | "archived";
+  readonly note?: string;
 }
 
 export interface CreateTaskInput {

@@ -335,7 +335,7 @@ test.describe("APZWORKFLOW-004 Platform Workflows workbench", () => {
       timeout: 20_000,
     });
     await expect(
-      page.getByRole("toolbar", { name: /Workflows commands/i }),
+      page.getByRole("toolbar", { name: /Process library commands/i }),
     ).toBeVisible();
 
     await page.goto(`${WORKFLOWS_HOME}/diagnostics`, {

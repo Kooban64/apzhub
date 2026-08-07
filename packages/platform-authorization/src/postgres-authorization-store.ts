@@ -38,7 +38,11 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
     "platform.*",
     "tenant.*",
     "law.*",
+    "law.view",
+    "law.admin",
     "legal.*",
+    "legal.admin",
+    "legal.nav.dashboard.view",
     "trust.*",
     "legal.client.view",
     "legal.client.manage",
@@ -92,6 +96,59 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
     "document.metadata.read",
     "document.audit",
     "document.retention",
+    "workflow.*",
+    "workflow.view",
+    "workflow.create",
+    "workflow.update",
+    "workflow.delete",
+    "workflow.publish",
+    "workflow.archive",
+    "workflow.restore",
+    "workflow.audit",
+    "workflow.validation",
+    "workflow.admin",
+    "workflow.template.*",
+    "workflow.template.view",
+    "workflow.template.create",
+    "workflow.template.update",
+    "workflow.template.delete",
+    "workflow.tasks.*",
+    "workflow.tasks.view",
+    "workflow.tasks.claim",
+    "workflow.tasks.complete",
+    "workflow.tasks.approve",
+    "workflow.engine.*",
+    "workflow.engine.read",
+    "workflow.engine.health",
+    "workflow.engine.diagnostics",
+    "workflow.engine.capabilities",
+    "workflow.runs.*",
+    "workflow.runs.view",
+    "workflow.runs.start",
+    "workflow.runs.cancel",
+    "workflow.schedules.*",
+    "workflow.schedules.view",
+    "workflow.schedules.manage",
+    "workflow.credentials.*",
+    "workflow.credentials.view",
+    "workflow.credentials.manage",
+    // APZ Analytics — decision-entry identity (N-02)
+    "analytics.*",
+    "analytics.view",
+    "analytics.manage",
+    "analytics.admin",
+    "analytics.compute",
+    "analytics.dashboard.view",
+    "analytics.dashboard.share",
+    "analytics.dashboard.embed",
+    "analytics.dataset.view",
+    "analytics.kpi.view",
+    "analytics.report.run",
+    "analytics.saved.manage",
+    // APZ Knowledge — organisational memory identity (N-02)
+    "knowledge.*",
+    "knowledge.view",
+    "knowledge.admin",
     ...QEP_CORE_QE_PERMISSIONS,
   ];
 
@@ -121,7 +178,7 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
     {
       roleId: DEFAULT_LAW_OPERATOR_ROLE_ID,
       slug: "law-operator",
-      name: "Law Platform Operator",
+      name: "Law Practice Operator",
       scope: "product",
       tenantId: null,
       productKey: "law-platform",
@@ -134,7 +191,8 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
       scope: "tenant",
       tenantId: DEFAULT_PLATFORM_TENANT_ID,
       productKey: null,
-      parentRoleId: DEFAULT_LAW_OPERATOR_ROLE_ID,
+      // N-02: do NOT inherit Law Practice Operator
+      parentRoleId: null,
     },
     {
       roleId: DEFAULT_QEP_OPERATOR_ROLE_ID,
@@ -169,6 +227,12 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
       .onConflictDoNothing({ target: platformAuthorizationRole.roleId });
   }
 
+  // N-02: break Tenant Member → Law Practice Operator inheritance on re-seed
+  await db
+    .update(platformAuthorizationRole)
+    .set({ parentRoleId: null, updatedAt: timestamp })
+    .where(eq(platformAuthorizationRole.roleId, DEFAULT_TENANT_MEMBER_ROLE_ID));
+
   const rolePermissions = [
     { roleId: DEFAULT_PLATFORM_ADMIN_ROLE_ID, permissionKey: "*", grantType: "allow" },
     {
@@ -183,6 +247,11 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
     },
     {
       roleId: DEFAULT_LAW_OPERATOR_ROLE_ID,
+      permissionKey: "law.admin",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_LAW_OPERATOR_ROLE_ID,
       permissionKey: "trust.*",
       grantType: "allow",
     },
@@ -193,12 +262,7 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
     },
     {
       roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
-      permissionKey: "legal.client.view",
-      grantType: "allow",
-    },
-    {
-      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
-      permissionKey: "legal.trust.view",
+      permissionKey: "law.view",
       grantType: "allow",
     },
     {
@@ -219,6 +283,76 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
     {
       roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
       permissionKey: "document.*",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "workflow.view",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "workflow.create",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "workflow.update",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "workflow.publish",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "workflow.archive",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "workflow.restore",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "workflow.audit",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "workflow.validation",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "workflow.template.*",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "workflow.tasks.*",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "analytics.view",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "analytics.kpi.view",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "analytics.saved.manage",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "knowledge.view",
       grantType: "allow",
     },
     ...QEP_OPERATOR_PERMISSIONS.map((permissionKey) => ({

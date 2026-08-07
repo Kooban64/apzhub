@@ -1,0 +1,44 @@
+manifestSchemaVersion: "1.0"
+id: legal-home
+name: Home
+version: 1.0.0
+kind: module
+
+metadata:
+  category: legal
+  description: >
+    Governance Companion home — enterprise governance questions and attention
+    prompts (APZ-LAW-NATIVE-001-N03).
+
+dependencies:
+  platform: []
+
+module:
+  category: legal
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: law
+    parent: legal-platform-root
+    label: Home
+    icon: home
+    route: /workspace/law/home
+    order: 10
+    permission: law.view
+  view:
+    title: Home
+    workspace: law
+    route: /workspace/law/home
+    default: true
+    permission: law.view
+  actions:
+    - id: legal.open.home
+      label: Open APZ Law
+      handler: workbench-bridge:workbench.view.open
+      permission: law.view
+      palette: true
+      group: APZ Law
+      icon: home
+      order: 10
+      description: Enter APZ Law — Governance Companion home.

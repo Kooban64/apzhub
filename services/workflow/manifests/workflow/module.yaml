@@ -59,7 +59,7 @@ permissions:
 navigation:
   activityBar:
     enabled: true
-    label: Workflow
+    label: APZ Workflow
     icon: workflow
     order: 29
     permission: workflow.view
@@ -69,23 +69,28 @@ navigation:
       route: /workspace/workflow
       icon: layout-dashboard
       permission: workflow.view
+    - id: workflow.journeys
+      label: Journeys
+      route: /workspace/workflow/journeys
+      icon: map
+      permission: workflow.view
     - id: workflow.definitions
-      label: Definitions
+      label: Processes
       route: /workspace/workflow/definitions
       icon: file-code
       permission: workflow.view
     - id: workflow.runs
-      label: Runs
+      label: Operational history
       route: /workspace/workflow/runs
       icon: play
-      permission: workflow.runs.view
+      permission: workflow.admin
     - id: workflow.schedules
-      label: Schedules
+      label: Operational timing
       route: /workspace/workflow/schedules
       icon: calendar-clock
-      permission: workflow.schedules.view
+      permission: workflow.admin
     - id: workflow.tasks
-      label: Tasks
+      label: Participants
       route: /workspace/workflow/tasks
       icon: list-todo
       permission: workflow.tasks.view
@@ -98,7 +103,7 @@ navigation:
       label: Notifications
       route: /workspace/workflow/notifications
       icon: bell
-      permission: workflow.runs.view
+      permission: workflow.admin
     - id: workflow.search
       label: Search
       route: /workspace/workflow/search
@@ -108,111 +113,121 @@ navigation:
       label: Health
       route: /workspace/workflow/health
       icon: activity
-      permission: workflow.engine.health
+      permission: workflow.admin
     - id: workflow.diagnostics
       label: Diagnostics
       route: /workspace/workflow/diagnostics
       icon: stethoscope
-      permission: workflow.view
+      permission: workflow.admin
     - id: workflow.capabilities
       label: Capabilities
       route: /workspace/workflow/capabilities
       icon: puzzle
-      permission: workflow.engine.capabilities
+      permission: workflow.admin
+    - id: workflow.help
+      label: Help
+      route: /workspace/workflow/help
+      icon: circle-help
+      permission: workflow.view
+    - id: workflow.settings
+      label: Settings
+      route: /workspace/workflow/settings
+      icon: settings
+      permission: workflow.view
 
 commands:
   - id: workflow.home.open
-    label: Open Workflow Home
+    label: Open APZ Workflow Home
     category: Workflow
     permission: workflow.view
   - id: workflow.definitions.open
-    label: Open Workflow Definitions
+    label: Open Processes
     category: Workflow
     permission: workflow.view
   - id: workflow.runs.open
-    label: Open Workflow Runs
+    label: Open Operational history
     category: Workflow
-    permission: workflow.runs.view
+    permission: workflow.admin
   - id: workflow.tasks.open
-    label: Open Workflow Tasks
+    label: Open Participants
     category: Workflow
     permission: workflow.tasks.view
   - id: workflow.search.open
-    label: Search Workflow Definitions
+    label: Search processes
     category: Workflow
     permission: workflow.view
   - id: workflow.health.open
-    label: Open Workflow Health
+    label: Open operator health
     category: Workflow
-    permission: workflow.engine.health
+    permission: workflow.admin
 
 workbench:
   navigation:
     level: activity-bar
     workspace: workflow
-    label: Workflow
+    label: APZ Workflow
     icon: workflow
     route: /workspace/workflow
     order: 29
     permission: workflow.view
   view:
-    title: Workflow
+    title: APZ Workflow
     workspace: workflow
     route: /workspace/workflow
     default: true
     permission: workflow.view
   actions:
     - id: workflow.home.open
-      label: Open Workflow Home
+      label: Open APZ Workflow Home
       handler: workbench-bridge:workbench.navigation.reveal
       permission: workflow.view
       palette: true
-      group: Workflow
+      group: APZ Workflow
       icon: layout-dashboard
       order: 10
-      description: Open Workflow Home in the Workbench.
+      description: Open APZ Workflow Home in the Workbench.
     - id: workflow.definitions.open
-      label: Open Workflow Definitions
+      label: Open Processes
       handler: workbench-bridge:workbench.navigation.reveal
       permission: workflow.view
       palette: true
-      group: Workflow
+      group: APZ Workflow
       icon: file-code
       order: 20
-      description: Open Workflow Definitions.
+      description: Open Processes.
     - id: workflow.runs.open
-      label: Open Workflow Runs
+      label: Open Operational history
       handler: workbench-bridge:workbench.navigation.reveal
-      permission: workflow.runs.view
+      permission: workflow.admin
       palette: true
-      group: Workflow
+      group: APZ Workflow
       icon: play
       order: 30
-      description: Open Workflow Runs.
+      description: Open Operational history.
     - id: workflow.tasks.open
-      label: Open Workflow Tasks
+      label: Open Participants
       handler: workbench-bridge:workbench.navigation.reveal
       permission: workflow.tasks.view
       palette: true
-      group: Workflow
+      group: APZ Workflow
       icon: list-todo
       order: 40
-      description: Open Workflow Tasks.
+      description: Open Participants.
     - id: workflow.search.open
-      label: Search Workflow Definitions
+      label: Search processes
       handler: workbench-bridge:workbench.navigation.reveal
       permission: workflow.view
       palette: true
-      group: Workflow
+      group: APZ Workflow
       icon: search
       order: 50
-      description: Search the Workflow definition catalogue.
+      description: Search business processes.
     - id: workflow.health.open
-      label: Open Workflow Health
+      label: Open operator health
       handler: workbench-bridge:workbench.navigation.reveal
-      permission: workflow.engine.health
+      permission: workflow.admin
       palette: true
-      group: Workflow
+      group: APZ Workflow
       icon: activity
       order: 60
-      description: Open Workflow health diagnostics.
+      description: Open operator health (secondary).

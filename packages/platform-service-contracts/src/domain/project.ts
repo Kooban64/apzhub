@@ -1,6 +1,15 @@
 import type { ProjectId, UserId, WorkspaceId } from "./identifiers";
 
-export type ProjectStatus = "draft" | "active" | "on_hold" | "completed" | "archived";
+/** Canonical lifecycle stages (W003). Legacy `completed` maps to `closed`. */
+export type ProjectStatus =
+  | "draft"
+  | "initiating"
+  | "active"
+  | "on_hold"
+  | "closing"
+  | "closed"
+  | "archived"
+  | "completed";
 
 export interface Project {
   readonly id: ProjectId;

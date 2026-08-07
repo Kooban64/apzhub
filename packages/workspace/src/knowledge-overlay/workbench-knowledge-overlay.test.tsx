@@ -126,7 +126,7 @@ describe("KnowledgeOverlayExperience", () => {
       </TestProviders>,
     );
 
-    const input = screen.getByRole("searchbox", { name: "Search knowledge" });
+    const input = screen.getByRole("searchbox", { name: "Discover" });
     await user.type(input, "theme");
 
     await waitFor(() => {
@@ -180,10 +180,7 @@ describe("KnowledgeOverlayExperience", () => {
       </TestProviders>,
     );
 
-    await user.type(
-      screen.getByRole("searchbox", { name: "Search knowledge" }),
-      "theme",
-    );
+    await user.type(screen.getByRole("searchbox", { name: "Discover" }), "theme");
 
     await waitFor(() => {
       expect(screen.getByRole("option", { name: /Toggle Theme/i })).toBeInTheDocument();
@@ -213,10 +210,7 @@ describe("KnowledgeOverlayExperience", () => {
       </TestProviders>,
     );
 
-    await user.type(
-      screen.getByRole("searchbox", { name: "Search knowledge" }),
-      "theme",
-    );
+    await user.type(screen.getByRole("searchbox", { name: "Discover" }), "theme");
 
     await waitFor(() => {
       expect(screen.getByTestId("knowledge-overlay-error")).toBeInTheDocument();

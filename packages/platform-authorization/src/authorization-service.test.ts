@@ -27,7 +27,7 @@ describe("AuthorizationService", () => {
     expect(result.outcome).toBe("allow");
   });
 
-  it("inherits permissions from parent roles", () => {
+  it("grants Tenant Member governance entry without practice inheritance (N-02)", () => {
     const { service } = createInMemoryAuthorizationService();
 
     service.assignRole({
@@ -44,13 +44,34 @@ describe("AuthorizationService", () => {
     });
 
     expect(effective.roleSlugs).toContain("tenant-member");
+    expect(effective.roleSlugs).not.toContain("law-operator");
+    const ctx = {
+      userId: "user-2",
+      tenantId: "t0000001-0000-4000-8000-000000000001",
+      productKey: "law-platform",
+    };
+    expect(service.can(ctx, "law.view")).toBe(true);
+    expect(service.can(ctx, "legal.client.view")).toBe(false);
+    expect(service.can(ctx, "legal.trust.view")).toBe(false);
+    expect(service.can(ctx, "law.admin")).toBe(false);
+  });
+
+  it("inherits permissions from parent roles when configured", () => {
+    const { service } = createInMemoryAuthorizationService();
+    service.createRole(
+      {
+        roleId: "role-child",
+        slug: "child-role",
+        name: "Child",
+        scope: "tenant",
+        parentRoleId: "role-law-operator",
+      },
+      ["workspace.read"],
+    );
+    service.assignRole({ userId: "user-child", roleId: "role-child" });
     expect(
       service.can(
-        {
-          userId: "user-2",
-          tenantId: "t0000001-0000-4000-8000-000000000001",
-          productKey: "law-platform",
-        },
+        { userId: "user-child", productKey: "law-platform" },
         "legal.client.view",
       ),
     ).toBe(true);

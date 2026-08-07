@@ -145,15 +145,15 @@ export function KnowledgeOverlay({
   onSelectDocument,
   diagnostics,
   emptyState = {
-    title: "No knowledge results",
+    title: "No discovery results",
     description: "Try a different search term.",
   },
   loadingState = {
-    message: "Searching knowledge…",
-    description: "Querying registered knowledge sources.",
+    message: "Searching…",
+    description: "Querying registered discovery sources.",
   },
   errorState,
-  title = "Knowledge",
+  title = "Knowledge Overlay",
 }: KnowledgeOverlayProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const showLoading =
@@ -164,8 +164,8 @@ export function KnowledgeOverlay({
   const documentCount = groups.reduce((total, group) => total + group.items.length, 0);
   const showEmpty = registryReady && !showLoading && !showError && documentCount === 0;
   const resolvedErrorState: KnowledgeOverlayErrorState = errorState ?? {
-    title: "Knowledge query failed",
-    description: errorMessage ?? "Unable to retrieve knowledge results.",
+    title: "Discovery query failed",
+    description: errorMessage ?? "Unable to retrieve discovery results.",
   };
 
   useEffect(() => {
@@ -210,8 +210,8 @@ export function KnowledgeOverlay({
           <input
             ref={inputRef}
             type="search"
-            aria-label="Search knowledge"
-            placeholder="Search knowledge…"
+            aria-label="Discover"
+            placeholder="Discover…"
             value={query}
             onChange={(event) => onQueryChange(event.target.value)}
             className="w-full bg-transparent text-sm text-[var(--color-foreground)] outline-none placeholder:text-[var(--color-muted-foreground)]"
@@ -220,7 +220,7 @@ export function KnowledgeOverlay({
 
         <ul
           role="listbox"
-          aria-label="Knowledge results"
+          aria-label="Discovery results"
           className="max-h-80 overflow-y-auto py-1"
           data-testid="knowledge-overlay-list"
         >

@@ -23,73 +23,73 @@ workbench:
     icon: vault
     route: /workspace/law/trust
     order: 75
-    permission: legal.trust.view
+    permission: law.admin
   view:
     title: Trust Accounting
     workspace: law
     route: /workspace/law/trust
-    permission: legal.trust.view
+    permission: law.admin
   actions:
     - id: legal.open.trust
       label: Open Trust Accounting
       handler: workbench-bridge:workbench.view.open
-      permission: legal.trust.view
+      permission: law.admin
       palette: true
-      group: Trust Accounting
+      group: APZ Law Practice
       icon: vault
       order: 75
       description: Navigate to the Trust Accounting dashboard.
     - id: legal.trust.open
       label: Open Trust Dashboard
       handler: service:legal-trust:open
-      permission: legal.trust.view
+      permission: law.admin
       palette: true
-      group: Trust Accounting
+      group: APZ Law Practice
       icon: vault
       order: 76
       description: Open the trust dashboard.
     - id: legal.trust.transactions.open
       label: Open Trust Transactions
       handler: service:legal-trust:open-transactions
-      permission: legal.trust.view
+      permission: law.admin
       palette: true
-      group: Trust Accounting
+      group: APZ Law Practice
       icon: list
       order: 77
       description: Open the trust transactions view.
     - id: legal.trust.reconciliation.open
       label: Open Trust Reconciliation
       handler: service:legal-trust:open-reconciliation
-      permission: legal.trust.reconcile
+      permission: law.admin
       palette: true
-      group: Trust Accounting
+      group: APZ Law Practice
       icon: scale
       order: 78
       description: Open the trust reconciliation view.
     - id: legal.trust.reports.open
       label: Open Trust Reports
       handler: service:legal-trust:open-reports
-      permission: legal.trust.report
+      permission: law.admin
       palette: true
-      group: Trust Accounting
+      group: APZ Law Practice
       icon: file-text
       order: 79
       description: Open the trust reports view.
     - id: legal.trust.transfer.create
       label: Create Trust Transfer
       handler: service:legal-trust:create-transfer
-      permission: legal.trust.transfer
+      permission: law.admin
       palette: true
-      group: Trust Accounting
+      group: APZ Law Practice
       icon: arrow-left-right
       order: 80
       description: Navigate to trust transfers to create a transfer draft.
     - id: legal.trust.interest.run
       label: Run Trust Interest
       handler: service:legal-trust:run-interest
-      permission: legal.trust.interest
+      permission: law.admin
       palette: true
-      group: Trust Accounting
+      group: APZ Law Practice
       icon: percent
       order: 81
       description: Navigate to trust interest accrual and posting.

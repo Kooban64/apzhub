@@ -26,9 +26,9 @@ workbench:
     icon: activity
     route: /workspace/workflow/health
     order: 80
-    permission: workflow.engine.health
+    permission: workflow.admin
   view:
     title: Health
     workspace: workflow
     route: /workspace/workflow/health
-    permission: workflow.engine.health
+    permission: workflow.admin

@@ -23,9 +23,9 @@ workbench:
     icon: shield-check
     route: /workspace/workflow-engine/compatibility
     order: 100
-    permission: workflow.engine.capabilities
+    permission: workflow.admin
   view:
     title: Compatibility
     workspace: workflow-engine
     route: /workspace/workflow-engine/compatibility
-    permission: workflow.engine.capabilities
+    permission: workflow.admin

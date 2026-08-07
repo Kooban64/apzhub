@@ -23,9 +23,9 @@ workbench:
     icon: heart-pulse
     route: /workspace/workflow-engine/health
     order: 80
-    permission: workflow.engine.health
+    permission: workflow.admin
   view:
     title: Health
     workspace: workflow-engine
     route: /workspace/workflow-engine/health
-    permission: workflow.engine.health
+    permission: workflow.admin

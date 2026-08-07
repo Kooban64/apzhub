@@ -6,7 +6,9 @@ kind: module
 
 metadata:
   category: legal
-  description: Unified Legal Search UX validation module for the APZHUB Law Platform.
+  description: >
+    Practice unified search across clients, matters, documents, and related
+    records — secondary, role-gated (N-03 administrative separation).
 
 dependencies:
   platform: []
@@ -22,38 +24,38 @@ workbench:
     label: Search
     icon: search
     route: /workspace/law/search
-    order: 15
-    permission: legal.nav.search.view
+    order: 110
+    permission: law.admin
   view:
     title: Search
     workspace: law
     route: /workspace/law/search
-    permission: legal.nav.search.view
+    permission: law.admin
   actions:
     - id: legal.open.search
       label: Open Search
       handler: workbench-bridge:workbench.view.open
-      permission: legal.nav.search.view
+      permission: law.admin
       palette: true
-      group: Legal Search
+      group: APZ Law Practice
       icon: search
-      order: 15
-      description: Navigate to unified Legal Search.
+      order: 110
+      description: Navigate to practice Legal Search.
     - id: legal.search.open
       label: Open Legal Search
       handler: service:legal-search:open
-      permission: legal.search.view
+      permission: law.admin
       palette: true
-      group: Legal Search
+      group: APZ Law Practice
       icon: search
-      order: 16
+      order: 111
       description: Open the unified Legal Search page.
     - id: legal.search.execute
       label: Execute Legal Search
       handler: service:legal-search:execute
-      permission: legal.search.view
+      permission: law.admin
       palette: true
-      group: Legal Search
+      group: APZ Law Practice
       icon: search
-      order: 17
+      order: 112
       description: Run unified search and navigate to results.

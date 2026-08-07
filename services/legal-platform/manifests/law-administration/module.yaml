@@ -23,19 +23,19 @@ workbench:
     icon: settings
     route: /workspace/law/administration
     order: 100
-    permission: legal.nav.administration.view
+    permission: law.admin
   view:
     title: Administration
     workspace: law
     route: /workspace/law/administration
-    permission: legal.nav.administration.view
+    permission: law.admin
   actions:
     - id: legal.open.administration
       label: Open Administration
       handler: workbench-bridge:workbench.view.open
-      permission: legal.nav.administration.view
+      permission: law.admin
       palette: true
-      group: Law Platform
+      group: APZ Law
       icon: settings
       order: 100
       description: Navigate to the Administration module.

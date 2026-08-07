@@ -1,12 +1,14 @@
 manifestSchemaVersion: "1.0"
 id: legal-dashboard
-name: Dashboard
+name: Firm overview
 version: 1.0.0
 kind: module
 
 metadata:
   category: legal
-  description: Executive dashboard and firm overview for the APZHUB Law Platform.
+  description: >
+    Practice firm overview — secondary, role-gated administration surface.
+    Does not define the Governance Companion experience (N-03).
 
 dependencies:
   platform: []
@@ -19,18 +21,23 @@ workbench:
     level: sidebar
     workspace: law
     parent: legal-platform-root
-    label: Dashboard
+    label: Firm overview
     icon: layout-dashboard
     route: /workspace/law/dashboard
-    order: 10
-    permission: legal.nav.dashboard.view
+    order: 100
+    permission: law.admin
+  view:
+    title: Firm overview
+    workspace: law
+    route: /workspace/law/dashboard
+    permission: law.admin
   actions:
     - id: legal.open.dashboard
-      label: Open Dashboard
+      label: Open firm overview
       handler: workbench-bridge:workbench.view.open
-      permission: legal.nav.dashboard.view
+      permission: law.admin
       palette: true
-      group: Law Platform
+      group: APZ Law Practice
       icon: layout-dashboard
-      order: 10
-      description: Navigate to the Dashboard module.
+      order: 100
+      description: Open practice firm overview (secondary administration).

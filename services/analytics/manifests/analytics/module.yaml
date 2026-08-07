@@ -1,20 +1,22 @@
 manifestSchemaVersion: "1.0"
 id: analytics
-name: Analytics
+name: APZ Analytics
 version: 0.1.0
 kind: module
 
 metadata:
   category: analytics
   description: >
-    APZHUB Analytics Workbench module (APZHUB-PLATFORM-ANALYTICS-006).
+    APZ Analytics — Decision Companion (APZ-ANALYTICS-NATIVE-001-N03).
+    Users enter through business questions and leave with decisions.
     Presentation over Analytics HTTP API `/api/v1/analytics/*` only.
-    Release 1.0 curated suites — no AI, predictive, or external BI.
   owner: APZHUB
   icon: chart-column
   tags:
     - analytics
-    - dashboards
+    - decisions
+    - insights
+    - questions
     - workbench
 
 dependencies:
@@ -28,189 +30,198 @@ compatibility:
 module:
   category: analytics
   status: enabled
-  description: Analytics Workbench module (APZHUB-PLATFORM-ANALYTICS-006).
+  description: >
+    APZ Analytics Decision Companion — Question → Insight → Decision.
 
 permissions:
   - id: analytics.view
-    description: View Analytics workspace and authorised catalogues.
+    description: Enter APZ Analytics — view authorised questions, insights, and decision surfaces.
   - id: analytics.manage
-    description: Manage Analytics saved dashboards and share/embed controls.
+    description: Manage saved insight views and share/embed controls.
   - id: analytics.admin
-    description: Administer Analytics workspace settings.
+    description: Administer Analytics operator surfaces and presentation assets.
   - id: analytics.dashboard.view
-    description: View Analytics dashboards.
+    description: View curated insight answers (presentation layer).
   - id: analytics.dataset.view
-    description: View Analytics datasets.
+    description: View presentation data assets (operator / elevated).
   - id: analytics.kpi.view
-    description: View Analytics KPIs.
+    description: View operational health indicators.
   - id: analytics.report.run
-    description: View Analytics report links.
+    description: View presentation report links (operator / elevated).
   - id: analytics.saved.manage
-    description: Manage saved Analytics dashboards.
+    description: Manage saved insight views.
   - id: analytics.dashboard.share
-    description: Share Analytics dashboards.
+    description: Share insight answers.
   - id: analytics.dashboard.embed
-    description: Embed Analytics dashboards.
+    description: Embed insight answers.
 
 navigation:
   activityBar:
     enabled: true
-    label: Analytics
+    label: APZ Analytics
     icon: chart-column
     order: 28
-    permission: analytics.dashboard.view
+    permission: analytics.view
   sidebar:
     - id: analytics.home
       label: Home
       route: /workspace/analytics
       icon: layout-dashboard
-      permission: analytics.dashboard.view
-    - id: analytics.executive
-      label: Executive
-      route: /workspace/analytics/executive
-      icon: gauge
-      permission: analytics.dashboard.view
-    - id: analytics.operational
+      permission: analytics.view
+    - id: analytics.questions
+      label: Questions
+      route: /workspace/analytics/questions
+      icon: circle-help
+      permission: analytics.view
+    - id: analytics.horizon.operational
       label: Operational
-      route: /workspace/analytics/operational
+      route: /workspace/analytics/horizons/operational
       icon: activity
-      permission: analytics.dashboard.view
-    - id: analytics.projects
-      label: Projects
-      route: /workspace/analytics/projects
-      icon: folder-kanban
-      permission: analytics.dashboard.view
-    - id: analytics.time
-      label: Time
-      route: /workspace/analytics/time
-      icon: clock
-      permission: analytics.dashboard.view
-    - id: analytics.support
-      label: Support
-      route: /workspace/analytics/support
-      icon: life-buoy
-      permission: analytics.dashboard.view
-    - id: analytics.platform-health
-      label: Platform Health
-      route: /workspace/analytics/platform-health
-      icon: heart-pulse
-      permission: analytics.dashboard.view
-    - id: analytics.repository-metrics
-      label: Repository Metrics
-      route: /workspace/analytics/repository-metrics
-      icon: chart-bar
-      permission: analytics.dashboard.view
+      permission: analytics.view
+    - id: analytics.horizon.tactical
+      label: Tactical
+      route: /workspace/analytics/horizons/tactical
+      icon: trending-up
+      permission: analytics.view
+    - id: analytics.horizon.strategic
+      label: Strategic
+      route: /workspace/analytics/horizons/strategic
+      icon: compass
+      permission: analytics.view
     - id: analytics.saved
-      label: Saved
+      label: Saved insights
       route: /workspace/analytics/saved
       icon: bookmark
       permission: analytics.saved.manage
+    - id: analytics.search
+      label: Find an insight
+      route: /workspace/analytics/search
+      icon: search
+      permission: analytics.view
+    - id: analytics.help
+      label: Help
+      route: /workspace/analytics/help
+      icon: life-buoy
+      permission: analytics.view
+    - id: analytics.settings
+      label: Settings
+      route: /workspace/analytics/settings
+      icon: settings
+      permission: analytics.view
     - id: analytics.datasets
       label: Datasets
       route: /workspace/analytics/datasets
       icon: database
-      permission: analytics.dataset.view
+      permission: analytics.admin
     - id: analytics.reports
       label: Reports
       route: /workspace/analytics/reports
       icon: file-bar-chart
-      permission: analytics.report.run
-    - id: analytics.search
-      label: Search
-      route: /workspace/analytics/search
-      icon: search
-      permission: analytics.dashboard.view
+      permission: analytics.admin
     - id: analytics.health
       label: Health
       route: /workspace/analytics/health
-      icon: activity
-      permission: analytics.dashboard.view
+      icon: heart-pulse
+      permission: analytics.admin
     - id: analytics.diagnostics
       label: Diagnostics
       route: /workspace/analytics/diagnostics
       icon: stethoscope
-      permission: analytics.dashboard.view
+      permission: analytics.admin
 
 commands:
   - id: analytics.home.open
-    label: Open Analytics Home
-    category: Analytics
-    permission: analytics.dashboard.view
-  - id: analytics.executive.open
-    label: Open Executive Dashboard
-    category: Analytics
-    permission: analytics.dashboard.view
+    label: Open APZ Analytics
+    category: APZ Analytics
+    permission: analytics.view
+  - id: analytics.questions.open
+    label: What should I know before I act?
+    category: APZ Analytics
+    permission: analytics.view
   - id: analytics.saved.open
-    label: Open Saved Dashboards
-    category: Analytics
+    label: Open Saved Insights
+    category: APZ Analytics
     permission: analytics.saved.manage
   - id: analytics.search.open
-    label: Search Analytics Dashboards
-    category: Analytics
-    permission: analytics.dashboard.view
+    label: Find an Insight
+    category: APZ Analytics
+    permission: analytics.view
+  - id: analytics.help.open
+    label: Open Analytics Help
+    category: APZ Analytics
+    permission: analytics.view
   - id: analytics.health.open
-    label: Open Analytics Health
-    category: Analytics
-    permission: analytics.dashboard.view
+    label: Open Analytics Operator Health
+    category: APZ Analytics
+    permission: analytics.admin
 
 workbench:
   navigation:
     level: activity-bar
     workspace: analytics
-    label: Analytics
+    label: APZ Analytics
     icon: chart-column
     route: /workspace/analytics
     order: 28
-    permission: analytics.dashboard.view
+    permission: analytics.view
   view:
-    title: Analytics
+    title: APZ Analytics
     workspace: analytics
     route: /workspace/analytics
     default: true
-    permission: analytics.dashboard.view
+    permission: analytics.view
   actions:
     - id: analytics.home.open
-      label: Open Analytics Home
+      label: Open APZ Analytics
       handler: workbench-bridge:workbench.navigation.reveal
-      permission: analytics.dashboard.view
+      permission: analytics.view
       palette: true
-      group: Analytics
+      group: APZ Analytics
       icon: layout-dashboard
       order: 10
-      description: Open Analytics Home in the Workbench.
-    - id: analytics.executive.open
-      label: Open Executive Dashboard
+      description: Enter the Decision Companion through questions and decisions.
+    - id: analytics.questions.open
+      label: What should I know before I act?
       handler: workbench-bridge:workbench.navigation.reveal
-      permission: analytics.dashboard.view
+      permission: analytics.view
       palette: true
-      group: Analytics
-      icon: gauge
+      group: APZ Analytics
+      icon: circle-help
       order: 20
-      description: Open the Executive Analytics suite.
+      description: Open the Enterprise Question Catalogue.
     - id: analytics.saved.open
-      label: Open Saved Dashboards
+      label: Open Saved Insights
       handler: workbench-bridge:workbench.navigation.reveal
       permission: analytics.saved.manage
       palette: true
-      group: Analytics
+      group: APZ Analytics
       icon: bookmark
       order: 30
-      description: Open Saved Analytics dashboards.
+      description: Open saved insight views.
     - id: analytics.search.open
-      label: Search Analytics Dashboards
+      label: Find an Insight
       handler: workbench-bridge:workbench.navigation.reveal
-      permission: analytics.dashboard.view
+      permission: analytics.view
       palette: true
-      group: Analytics
+      group: APZ Analytics
       icon: search
       order: 40
-      description: Search the Analytics dashboard catalogue.
-    - id: analytics.health.open
-      label: Open Analytics Health
+      description: Search curated insight answers.
+    - id: analytics.help.open
+      label: Open Analytics Help
       handler: workbench-bridge:workbench.navigation.reveal
-      permission: analytics.dashboard.view
+      permission: analytics.view
       palette: true
-      group: Analytics
+      group: APZ Analytics
+      icon: life-buoy
+      order: 45
+      description: Open Decision Companion help.
+    - id: analytics.health.open
+      label: Open Analytics Operator Health
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: analytics.admin
+      palette: true
+      group: APZ Analytics
       icon: activity
       order: 50
-      description: Open Analytics health diagnostics.
+      description: Open Analytics operator health (admin).

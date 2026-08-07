@@ -1,13 +1,14 @@
 manifestSchemaVersion: "1.0"
 id: legal-platform
-name: APZHUB Law Platform
+name: APZ Law
 version: 1.0.0
 kind: service
 
 metadata:
   category: legal
   description: >
-    Root Law Platform service for platform validation.
+    APZ Law — Enterprise Governance Companion (APZ-LAW-NATIVE-001).
+    Root service for platform validation.
     APZHUB-LAW-ADOPT-003 (EAB-02): orchestration remains app-local under
     apps/law-platform/lib/*-workflow-service.ts; full Platform Service SDK
     extraction is deferred (architecture redesign out of ADOPT-003 scope).

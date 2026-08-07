@@ -1,12 +1,12 @@
 manifestSchemaVersion: "1.0"
 id: platform-workflows
-name: Workflows
+name: Process library
 version: 0.1.0
 kind: module
 
 metadata:
   category: platform
-  description: Platform Workflows workspace — metadata workbench (APZWORKFLOW-004).
+  description: APZ Workflow process library (secondary SoR plane — N-03 converged under APZ Workflow).
 
 dependencies:
   platform: []
@@ -16,25 +16,27 @@ module:
 
 workbench:
   navigation:
-    level: activity-bar
-    workspace: workflows
+    level: sidebar
+    workspace: workflow
+    parent: workflow
+    label: Process library
     icon: git-branch
     route: /workspace/workflows
-    order: 52
+    order: 15
     permission: workflow.view
   view:
-    title: Workflows
+    title: Process library
     workspace: workflows
     route: /workspace/workflows
     default: true
     permission: workflow.view
   actions:
     - id: platform.workflows.navigate
-      label: Go to Workflows
+      label: Open Process library
       handler: workbench-bridge:workbench.navigation.reveal
       permission: workflow.view
       palette: true
-      group: Navigation
+      group: APZ Workflow
       icon: git-branch
       order: 52
-      description: Reveal the Workflows navigation item in the workbench shell.
+      description: Open the APZ Workflow process library.

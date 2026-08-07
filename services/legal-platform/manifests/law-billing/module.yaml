@@ -23,73 +23,73 @@ workbench:
     icon: receipt
     route: /workspace/law/billing
     order: 80
-    permission: legal.nav.billing.view
+    permission: law.admin
   view:
     title: Billing
     workspace: law
     route: /workspace/law/billing
-    permission: legal.nav.billing.view
+    permission: law.admin
   actions:
     - id: legal.open.billing
       label: Open Billing
       handler: workbench-bridge:workbench.view.open
-      permission: legal.nav.billing.view
+      permission: law.admin
       palette: true
-      group: Billing
+      group: APZ Law Practice
       icon: receipt
       order: 80
       description: Navigate to the Billing module.
     - id: legal.invoice.open
       label: Open Invoice
       handler: service:legal-billing:open
-      permission: legal.invoice.view
+      permission: law.admin
       palette: true
-      group: Billing
+      group: APZ Law Practice
       icon: receipt
       order: 81
       description: Open an invoice from the register.
     - id: legal.invoice.create
       label: Create Invoice
       handler: service:legal-billing:create
-      permission: legal.invoice.manage
+      permission: law.admin
       palette: true
-      group: Billing
+      group: APZ Law Practice
       icon: plus
       order: 82
       description: Open the create invoice form.
     - id: legal.invoice.edit
       label: Edit Invoice
       handler: service:legal-billing:edit
-      permission: legal.invoice.manage
+      permission: law.admin
       palette: true
-      group: Billing
+      group: APZ Law Practice
       icon: edit
       order: 83
       description: Open the edit invoice form.
     - id: legal.invoice.cancel
       label: Cancel Invoice
       handler: service:legal-billing:cancel
-      permission: legal.invoice.manage
+      permission: law.admin
       palette: true
-      group: Billing
+      group: APZ Law Practice
       icon: x
       order: 84
       description: Void an invoice in the in-memory repository.
     - id: legal.invoice.mark-paid
       label: Mark Invoice Paid
       handler: service:legal-billing:mark-paid
-      permission: legal.invoice.manage
+      permission: law.admin
       palette: true
-      group: Billing
+      group: APZ Law Practice
       icon: check
       order: 85
       description: Mark an invoice as paid in memory only.
     - id: legal.invoice.search
       label: Search Invoices
       handler: service:legal-billing:search
-      permission: legal.invoice.view
+      permission: law.admin
       palette: true
-      group: Billing
+      group: APZ Law Practice
       icon: search
       order: 86
       description: Focus invoice search in the list.

@@ -23,82 +23,82 @@ workbench:
     icon: briefcase
     route: /workspace/law/matters
     order: 30
-    permission: legal.nav.matters.view
+    permission: law.admin
   view:
     title: Matters
     workspace: law
     route: /workspace/law/matters
-    permission: legal.nav.matters.view
+    permission: law.admin
   actions:
     - id: legal.open.matters
       label: Open Matters
       handler: workbench-bridge:workbench.view.open
-      permission: legal.nav.matters.view
+      permission: law.admin
       palette: true
-      group: Matter Management
+      group: APZ Law Practice
       icon: briefcase
       order: 30
       description: Navigate to the Matters module.
     - id: legal.matter.open
       label: Open Matter
       handler: service:legal-matters:open
-      permission: legal.matter.view
+      permission: law.admin
       palette: true
-      group: Matter Management
+      group: APZ Law Practice
       icon: briefcase
       order: 31
       description: Open a matter record from the directory.
     - id: legal.matter.create
       label: Create Matter
       handler: service:legal-matters:create
-      permission: legal.matter.manage
+      permission: law.admin
       palette: true
-      group: Matter Management
+      group: APZ Law Practice
       icon: plus
       order: 32
       description: Open the create matter form.
     - id: legal.matter.edit
       label: Edit Matter
       handler: service:legal-matters:edit
-      permission: legal.matter.manage
+      permission: law.admin
       palette: true
-      group: Matter Management
+      group: APZ Law Practice
       icon: edit
       order: 33
       description: Open the edit matter form.
     - id: legal.matter.search
       label: Search Matters
       handler: service:legal-matters:search
-      permission: legal.matter.view
+      permission: law.admin
       palette: true
-      group: Matter Management
+      group: APZ Law Practice
       icon: search
       order: 34
       description: Focus matter search in the directory.
     - id: legal.matter.archive
       label: Archive Matter
       handler: service:legal-matters:archive
-      permission: legal.matter.manage
+      permission: law.admin
       palette: true
-      group: Matter Management
+      group: APZ Law Practice
       icon: archive
       order: 35
       description: Soft archive a matter in the in-memory repository.
     - id: legal.matter.workspace.open
       label: Open Matter Workspace
       handler: service:legal-matters:workspace-open
-      permission: legal.matter.view
+      permission: law.admin
       palette: true
-      group: Matter Management
+      group: APZ Law Practice
       icon: layout
       order: 36
       description: Open the primary operational matter workspace.
     - id: legal.matter.workspace.refresh
       label: Refresh Matter Workspace
       handler: service:legal-matters:workspace-refresh
-      permission: legal.matter.view
+      permission: law.admin
       palette: true
-      group: Matter Management
+      group: APZ Law Practice
       icon: refresh
       order: 37
       description: Refresh composed matter workspace data from in-memory repositories.

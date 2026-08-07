@@ -215,22 +215,22 @@ function WorkbenchCommandPaletteKnowledgeView({
   const resolvedEmptyState = useMemo((): CommandPaletteEmptyState | undefined => {
     if (knowledgeQuery.status === "error") {
       return {
-        title: "Knowledge query failed",
+        title: "Discovery query failed",
         description: knowledgeQuery.errorMessage,
       };
     }
 
     return (
       knowledgeEmptyState ?? {
-        title: "No knowledge results",
+        title: "No discovery results",
         description: "Try a different search term.",
       }
     );
   }, [knowledgeQuery.status, knowledgeQuery.errorMessage, knowledgeEmptyState]);
 
   const resolvedLoadingState = knowledgeLoadingState ?? {
-    message: "Searching knowledge…",
-    description: "Querying registered knowledge sources.",
+    message: "Searching…",
+    description: "Querying registered discovery sources.",
   };
 
   const handleSelect = useCallback(
@@ -300,7 +300,7 @@ function WorkbenchCommandPaletteKnowledgeView({
       onSelectedIndexChange={setSelectedIndex}
       emptyState={resolvedEmptyState}
       loadingState={resolvedLoadingState}
-      title={title ?? "Knowledge"}
+      title={title ?? "Knowledge Overlay"}
     />
   );
 }

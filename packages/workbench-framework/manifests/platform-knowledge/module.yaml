@@ -1,0 +1,170 @@
+manifestSchemaVersion: "1.0"
+id: platform-knowledge
+name: APZ Knowledge
+version: 0.1.0
+kind: module
+
+metadata:
+  category: knowledge
+  description: >
+    APZ Knowledge — Memory Companion (APZ-KNOWLEDGE-NATIVE-001-N03).
+    Work → Relevant Organisational Memory → Confident Action.
+    Not discovery, search, learning, documents, or AI.
+  owner: APZHUB
+  icon: book-marked
+  tags:
+    - knowledge
+    - organisational-memory
+    - memory-companion
+    - workbench
+
+dependencies:
+  platform: []
+
+module:
+  category: knowledge
+  status: enabled
+  description: >
+    APZ Knowledge Memory Companion — organisational memory in the context of work.
+
+permissions:
+  - id: knowledge.view
+    description: Enter APZ Knowledge — view organisational memory surfaces.
+  - id: knowledge.admin
+    description: Administer APZ Knowledge operator surfaces (elevated).
+
+navigation:
+  activityBar:
+    enabled: true
+    label: APZ Knowledge
+    icon: book-marked
+    order: 55
+    permission: knowledge.view
+  sidebar:
+    - id: knowledge.home
+      label: Home
+      route: /workspace/knowledge
+      icon: layout-dashboard
+      permission: knowledge.view
+    - id: knowledge.memory
+      label: Memory
+      route: /workspace/knowledge/memory
+      icon: book-marked
+      permission: knowledge.view
+    - id: knowledge.companion
+      label: Companion
+      route: /workspace/knowledge/companion
+      icon: panels-top-left
+      permission: knowledge.view
+    - id: knowledge.help
+      label: Help
+      route: /workspace/knowledge/help
+      icon: life-buoy
+      permission: knowledge.view
+    - id: knowledge.settings
+      label: Settings
+      route: /workspace/knowledge/settings
+      icon: settings
+      permission: knowledge.view
+    - id: knowledge.diagnostics
+      label: Diagnostics
+      route: /workspace/knowledge/diagnostics
+      icon: stethoscope
+      permission: knowledge.admin
+
+commands:
+  - id: knowledge.home.open
+    label: Open APZ Knowledge
+    category: APZ Knowledge
+    permission: knowledge.view
+  - id: knowledge.memory.open
+    label: Browse organisational memory
+    category: APZ Knowledge
+    permission: knowledge.view
+  - id: knowledge.companion.open
+    label: Open Memory Companion model
+    category: APZ Knowledge
+    permission: knowledge.view
+  - id: knowledge.help.open
+    label: Open Knowledge Help
+    category: APZ Knowledge
+    permission: knowledge.view
+  - id: knowledge.settings.open
+    label: Open Knowledge Settings
+    category: APZ Knowledge
+    permission: knowledge.view
+  - id: knowledge.diagnostics.open
+    label: Open Knowledge Diagnostics
+    category: APZ Knowledge
+    permission: knowledge.admin
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: knowledge
+    label: APZ Knowledge
+    icon: book-marked
+    route: /workspace/knowledge
+    order: 55
+    permission: knowledge.view
+  view:
+    title: APZ Knowledge
+    workspace: knowledge
+    route: /workspace/knowledge
+    default: true
+    permission: knowledge.view
+  actions:
+    - id: knowledge.home.open
+      label: Open APZ Knowledge
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: knowledge.view
+      palette: true
+      group: APZ Knowledge
+      icon: book-marked
+      order: 10
+      description: Enter the Memory Companion through organisational memory questions.
+    - id: knowledge.memory.open
+      label: Browse organisational memory
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: knowledge.view
+      palette: true
+      group: APZ Knowledge
+      icon: library
+      order: 20
+      description: Browse memory types — lessons, standards, procedures, and more.
+    - id: knowledge.companion.open
+      label: Open Memory Companion model
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: knowledge.view
+      palette: true
+      group: APZ Knowledge
+      icon: panels-top-left
+      order: 25
+      description: See how organisational memory accompanies work across products.
+    - id: knowledge.help.open
+      label: Open Knowledge Help
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: knowledge.view
+      palette: true
+      group: APZ Knowledge
+      icon: life-buoy
+      order: 30
+      description: Open Memory Companion help.
+    - id: knowledge.settings.open
+      label: Open Knowledge Settings
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: knowledge.view
+      palette: true
+      group: APZ Knowledge
+      icon: settings
+      order: 35
+      description: Open Knowledge settings.
+    - id: knowledge.diagnostics.open
+      label: Open Knowledge Diagnostics
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: knowledge.admin
+      palette: true
+      group: APZ Knowledge
+      icon: stethoscope
+      order: 50
+      description: Open Knowledge operator diagnostics (admin).

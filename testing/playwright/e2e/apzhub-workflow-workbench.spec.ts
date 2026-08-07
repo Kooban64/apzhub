@@ -83,7 +83,8 @@ test.describe("APZHUB Workflow Workbench (WORKFLOW-006)", () => {
     await mockWorkflowApi(page);
 
     await page.goto("/workspace/workflow");
-    await expect(page.getByRole("heading", { name: "Workflow Home" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Home" })).toBeVisible();
+    await expect(page.getByText("APZ Workflow").first()).toBeVisible();
     await expect(page.getByTestId("workflow-page")).toBeVisible();
 
     await page.goto("/workspace/workflow/health");

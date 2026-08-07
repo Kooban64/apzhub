@@ -1,0 +1,41 @@
+manifestSchemaVersion: "1.0"
+id: legal-help
+name: Help
+version: 1.0.0
+kind: module
+
+metadata:
+  category: legal
+  description: APZ Law Governance Companion help and onboarding.
+
+dependencies:
+  platform: []
+
+module:
+  category: legal
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: law
+    parent: legal-platform-root
+    label: Help
+    icon: life-buoy
+    route: /workspace/law/help
+    order: 50
+    permission: law.view
+  view:
+    title: Help
+    workspace: law
+    route: /workspace/law/help
+    permission: law.view
+  actions:
+    - id: legal.open.help
+      label: APZ Law help
+      handler: workbench-bridge:workbench.view.open
+      permission: law.view
+      palette: true
+      group: APZ Law
+      icon: life-buoy
+      order: 50
+      description: Open Governance Companion help.

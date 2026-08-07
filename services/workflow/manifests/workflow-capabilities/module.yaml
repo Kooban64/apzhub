@@ -26,9 +26,9 @@ workbench:
     icon: puzzle
     route: /workspace/workflow/capabilities
     order: 100
-    permission: workflow.engine.capabilities
+    permission: workflow.admin
   view:
     title: Capabilities
     workspace: workflow
     route: /workspace/workflow/capabilities
-    permission: workflow.engine.capabilities
+    permission: workflow.admin

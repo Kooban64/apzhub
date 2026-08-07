@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: workflow-journeys
+name: Journeys
+version: 0.1.0
+kind: module
+
+metadata:
+  category: workflow
+  description: APZ Workflow — Journeys (business process companion).
+
+dependencies:
+  platform: []
+
+module:
+  category: workflow
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: workflow
+    parent: workflow
+    label: Journeys
+    icon: map
+    route: /workspace/workflow/journeys
+    order: 5
+    permission: workflow.view
+  view:
+    title: Journeys
+    workspace: workflow
+    route: /workspace/workflow/journeys
+    permission: workflow.view

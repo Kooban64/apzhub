@@ -23,9 +23,9 @@ workbench:
     icon: boxes
     route: /workspace/workflow-engine/capabilities
     order: 70
-    permission: workflow.engine.capabilities
+    permission: workflow.admin
   view:
     title: Capabilities
     workspace: workflow-engine
     route: /workspace/workflow-engine/capabilities
-    permission: workflow.engine.capabilities
+    permission: workflow.admin

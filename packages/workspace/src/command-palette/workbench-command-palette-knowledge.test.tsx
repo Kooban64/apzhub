@@ -293,7 +293,7 @@ describe("WorkbenchCommandPalette knowledge mode", () => {
     await user.type(screen.getByRole("combobox", { name: "Filter commands" }), "theme");
 
     await waitFor(() => {
-      expect(screen.getByText("Knowledge query failed")).toBeInTheDocument();
+      expect(screen.getByText("Discovery query failed")).toBeInTheDocument();
     });
   });
 

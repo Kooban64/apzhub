@@ -258,6 +258,57 @@ export {
 } from "./qep-evidence-schema";
 export { platformOutboxSchema, platformOutboxEvent } from "./platform-outbox-schema";
 export {
+  platformProductLearningSchema,
+  platformProductLearningEvent,
+} from "./platform-product-learning-schema";
+export {
+  platformOperationalFrictionSchema,
+  platformOperationalFriction,
+  platformOperationalFrictionAudit,
+} from "./platform-operational-friction-schema";
+export {
+  platformProjectsDeliverySchema,
+  platformProjectMilestone,
+  platformProjectRisk,
+  platformProjectDecision,
+  platformProjectAction,
+} from "./platform-projects-delivery-schema";
+export {
+  platformProjectsLifecycleSchema,
+  platformProjectLifecycle,
+  platformProjectBaseline,
+  platformProjectLifecycleTransition,
+  platformProjectLifecycleWaiver,
+} from "./platform-projects-lifecycle-schema";
+export {
+  platformProjectsOperationalSchema,
+  platformProjectCommitment,
+  platformProjectWaiting,
+  platformProjectDependency,
+  platformProjectOpsDecision,
+  platformProjectCheckpoint,
+  platformProjectException,
+  platformProjectOperationalHistory,
+} from "./platform-projects-operational-schema";
+export {
+  platformBusinessProcessSchema,
+  platformBusinessJourney,
+  platformBusinessProcessTemplate,
+  platformBusinessProcessInstance,
+  platformBusinessProcessAudit,
+} from "./platform-business-process-schema";
+export {
+  platformAnalyticsDecisionSchema,
+  platformAnalyticsDecisionPack,
+  platformAnalyticsTrendPoint,
+  platformAnalyticsDecisionKpi,
+  platformAnalyticsDecisionTimeline,
+} from "./platform-analytics-decision-schema";
+export {
+  platformKnowledgeMemorySchema,
+  platformKnowledgeObject,
+} from "./platform-knowledge-memory-schema";
+export {
   qepCoreQeSchema,
   qepSuite,
   qepExecutionPlan,

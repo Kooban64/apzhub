@@ -26,9 +26,9 @@ workbench:
     icon: bell
     route: /workspace/workflow/notifications
     order: 60
-    permission: workflow.runs.view
+    permission: workflow.admin
   view:
     title: Notifications
     workspace: workflow
     route: /workspace/workflow/notifications
-    permission: workflow.runs.view
+    permission: workflow.admin

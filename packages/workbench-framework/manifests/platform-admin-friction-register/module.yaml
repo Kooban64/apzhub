@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: platform-admin-friction-register
+name: Friction Register
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Product Board Operational Friction Register (APZHUB-PRODUCT-BOARD-001).
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-admin
+    label: Friction Register
+    icon: clipboard-list
+    route: /workspace/administration/friction-register
+    order: 95
+    permission: admin.read
+  view:
+    title: Friction Register
+    workspace: administration
+    route: /workspace/administration/friction-register
+    permission: admin.read

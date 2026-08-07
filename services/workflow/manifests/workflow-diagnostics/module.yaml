@@ -26,9 +26,9 @@ workbench:
     icon: stethoscope
     route: /workspace/workflow/diagnostics
     order: 90
-    permission: workflow.view
+    permission: workflow.admin
   view:
     title: Diagnostics
     workspace: workflow
     route: /workspace/workflow/diagnostics
-    permission: workflow.view
+    permission: workflow.admin

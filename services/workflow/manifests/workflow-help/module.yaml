@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: workflow-help
+name: Help
+version: 0.1.0
+kind: module
+
+metadata:
+  category: workflow
+  description: APZ Workflow — Help (business process companion).
+
+dependencies:
+  platform: []
+
+module:
+  category: workflow
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: workflow
+    parent: workflow
+    label: Help
+    icon: circle-help
+    route: /workspace/workflow/help
+    order: 120
+    permission: workflow.view
+  view:
+    title: Help
+    workspace: workflow
+    route: /workspace/workflow/help
+    permission: workflow.view

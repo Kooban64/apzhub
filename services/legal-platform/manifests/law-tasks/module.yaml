@@ -23,73 +23,73 @@ workbench:
     icon: check-square
     route: /workspace/law/tasks
     order: 60
-    permission: legal.nav.tasks.view
+    permission: law.admin
   view:
     title: Tasks
     workspace: law
     route: /workspace/law/tasks
-    permission: legal.nav.tasks.view
+    permission: law.admin
   actions:
     - id: legal.open.tasks
       label: Open Tasks
       handler: workbench-bridge:workbench.view.open
-      permission: legal.nav.tasks.view
+      permission: law.admin
       palette: true
-      group: Task Management
+      group: APZ Law Practice
       icon: check-square
       order: 60
       description: Navigate to the Tasks module.
     - id: legal.task.open
       label: Open Task
       handler: service:legal-tasks:open
-      permission: legal.task.view
+      permission: law.admin
       palette: true
-      group: Task Management
+      group: APZ Law Practice
       icon: check-square
       order: 61
       description: Open a task record from the task list.
     - id: legal.task.create
       label: Create Task
       handler: service:legal-tasks:create
-      permission: legal.task.manage
+      permission: law.admin
       palette: true
-      group: Task Management
+      group: APZ Law Practice
       icon: plus
       order: 62
       description: Open the create task form.
     - id: legal.task.edit
       label: Edit Task
       handler: service:legal-tasks:edit
-      permission: legal.task.manage
+      permission: law.admin
       palette: true
-      group: Task Management
+      group: APZ Law Practice
       icon: edit
       order: 63
       description: Open the edit task form.
     - id: legal.task.search
       label: Search Tasks
       handler: service:legal-tasks:search
-      permission: legal.task.view
+      permission: law.admin
       palette: true
-      group: Task Management
+      group: APZ Law Practice
       icon: search
       order: 64
       description: Focus task search in the list.
     - id: legal.task.complete
       label: Complete Task
       handler: service:legal-tasks:complete
-      permission: legal.task.manage
+      permission: law.admin
       palette: true
-      group: Task Management
+      group: APZ Law Practice
       icon: check
       order: 65
       description: Mark a task complete in the in-memory repository.
     - id: legal.task.archive
       label: Archive Task
       handler: service:legal-tasks:archive
-      permission: legal.task.manage
+      permission: law.admin
       palette: true
-      group: Task Management
+      group: APZ Law Practice
       icon: archive
       order: 66
       description: Soft archive a task in the in-memory repository.

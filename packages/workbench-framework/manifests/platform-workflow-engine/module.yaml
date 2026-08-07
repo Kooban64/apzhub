@@ -1,12 +1,12 @@
 manifestSchemaVersion: "1.0"
 id: platform-workflow-engine
-name: Workflow Engine
+name: Operator tools
 version: 0.1.0
 kind: module
 
 metadata:
   category: platform
-  description: Workflow Engine Workbench — read-only engine metadata (APZWORKFLOW-009).
+  description: APZ Workflow operator tools (secondary — N-03; never primary product identity).
 
 dependencies:
   platform: []
@@ -16,43 +16,45 @@ module:
 
 workbench:
   navigation:
-    level: activity-bar
-    workspace: workflow-engine
+    level: sidebar
+    workspace: workflow
+    parent: workflow
+    label: Operator tools
     icon: circuit-board
     route: /workspace/workflow-engine
-    order: 53
-    permission: workflow.engine.read
+    order: 200
+    permission: workflow.admin
   view:
-    title: Workflow Engine
+    title: Operator tools
     workspace: workflow-engine
     route: /workspace/workflow-engine
     default: true
-    permission: workflow.engine.read
+    permission: workflow.admin
   actions:
     - id: platform.workflow-engine.navigate
-      label: Go to Workflow Engine
+      label: Open Operator tools
       handler: workbench-bridge:workbench.navigation.reveal
-      permission: workflow.engine.read
+      permission: workflow.admin
       palette: true
-      group: Navigation
+      group: APZ Workflow Operator
       icon: circuit-board
       order: 53
-      description: Reveal the Workflow Engine navigation item in the workbench shell.
+      description: Open APZ Workflow operator tools (authorised operators only).
     - id: platform.workflow-engine.refresh
-      label: Refresh Workflow Engine
+      label: Refresh Operator tools
       handler: workbench-bridge:workbench.view.refresh
-      permission: workflow.engine.read
+      permission: workflow.admin
       palette: true
-      group: Workflow Engine
+      group: APZ Workflow Operator
       icon: refresh-cw
       order: 10
-      description: Refresh Workflow Engine workbench data.
+      description: Refresh operator tools data.
     - id: platform.workflow-engine.validate
-      label: Validate Engine Connection
+      label: Validate operator connection
       handler: workbench-bridge:workbench.view.refresh
-      permission: workflow.engine.health
+      permission: workflow.admin
       palette: true
-      group: Workflow Engine
+      group: APZ Workflow Operator
       icon: shield-check
       order: 20
-      description: Validate the Workflow Engine connection (read-only).
+      description: Validate operator connection (read-only).

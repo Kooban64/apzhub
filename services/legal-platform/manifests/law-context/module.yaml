@@ -1,0 +1,43 @@
+manifestSchemaVersion: "1.0"
+id: legal-context
+name: Context
+version: 1.0.0
+kind: module
+
+metadata:
+  category: legal
+  description: >
+    Governance in Context experience model — how governance appears where work
+    is performed (consumer wiring is future work).
+
+dependencies:
+  platform: []
+
+module:
+  category: legal
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: law
+    parent: legal-platform-root
+    label: Context
+    icon: network
+    route: /workspace/law/context
+    order: 40
+    permission: law.view
+  view:
+    title: Governance in context
+    workspace: law
+    route: /workspace/law/context
+    permission: law.view
+  actions:
+    - id: legal.open.context
+      label: Governance in context
+      handler: workbench-bridge:workbench.view.open
+      permission: law.view
+      palette: true
+      group: APZ Law
+      icon: network
+      order: 40
+      description: View how governance accompanies enterprise work.

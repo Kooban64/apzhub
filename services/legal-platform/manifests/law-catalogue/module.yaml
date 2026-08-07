@@ -1,0 +1,43 @@
+manifestSchemaVersion: "1.0"
+id: legal-catalogue
+name: Catalogue
+version: 1.0.0
+kind: module
+
+metadata:
+  category: legal
+  description: >
+    Enterprise Governance Catalogue — policies, obligations, compliance,
+    approvals, regulatory duties, retention, and evidence.
+
+dependencies:
+  platform: []
+
+module:
+  category: legal
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: law
+    parent: legal-platform-root
+    label: Catalogue
+    icon: library
+    route: /workspace/law/catalogue
+    order: 30
+    permission: law.view
+  view:
+    title: Governance catalogue
+    workspace: law
+    route: /workspace/law/catalogue
+    permission: law.view
+  actions:
+    - id: legal.open.catalogue
+      label: Governance catalogue
+      handler: workbench-bridge:workbench.view.open
+      permission: law.view
+      palette: true
+      group: APZ Law
+      icon: library
+      order: 30
+      description: Browse governance capabilities by business need.

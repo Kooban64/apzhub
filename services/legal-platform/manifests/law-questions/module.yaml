@@ -1,0 +1,41 @@
+manifestSchemaVersion: "1.0"
+id: legal-questions
+name: Questions
+version: 1.0.0
+kind: module
+
+metadata:
+  category: legal
+  description: Enterprise Governance Question Catalogue (GQ-01 through GQ-05).
+
+dependencies:
+  platform: []
+
+module:
+  category: legal
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: law
+    parent: legal-platform-root
+    label: Questions
+    icon: circle-help
+    route: /workspace/law/questions
+    order: 20
+    permission: law.view
+  view:
+    title: Governance questions
+    workspace: law
+    route: /workspace/law/questions
+    permission: law.view
+  actions:
+    - id: legal.open.questions
+      label: Governance questions
+      handler: workbench-bridge:workbench.view.open
+      permission: law.view
+      palette: true
+      group: APZ Law
+      icon: circle-help
+      order: 20
+      description: Browse enterprise governance questions.

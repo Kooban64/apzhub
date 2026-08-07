@@ -258,7 +258,7 @@ test.describe("APZWORKFLOW-009 Workflow Engine Workbench", () => {
       { timeout: 30_000 },
     );
     await expect(
-      page.getByRole("toolbar", { name: /Workflow Engine commands/i }),
+      page.getByRole("toolbar", { name: /Operator tools commands/i }),
     ).toBeVisible();
 
     expect(seen.some((path) => path.includes("/workflows/engine"))).toBeTruthy();

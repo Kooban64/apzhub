@@ -23,19 +23,19 @@ workbench:
     icon: bar-chart
     route: /workspace/law/reports
     order: 90
-    permission: legal.nav.reports.view
+    permission: law.admin
   view:
     title: Reports
     workspace: law
     route: /workspace/law/reports
-    permission: legal.nav.reports.view
+    permission: law.admin
   actions:
     - id: legal.open.reports
       label: Open Reports
       handler: workbench-bridge:workbench.view.open
-      permission: legal.nav.reports.view
+      permission: law.admin
       palette: true
-      group: Law Platform
+      group: APZ Law
       icon: bar-chart
       order: 90
       description: Navigate to the Reports module.

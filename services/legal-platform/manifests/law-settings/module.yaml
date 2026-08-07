@@ -1,0 +1,41 @@
+manifestSchemaVersion: "1.0"
+id: legal-settings
+name: Settings
+version: 1.0.0
+kind: module
+
+metadata:
+  category: legal
+  description: APZ Law Governance Companion settings and administrative separation notes.
+
+dependencies:
+  platform: []
+
+module:
+  category: legal
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: law
+    parent: legal-platform-root
+    label: Settings
+    icon: settings
+    route: /workspace/law/settings
+    order: 60
+    permission: law.view
+  view:
+    title: Settings
+    workspace: law
+    route: /workspace/law/settings
+    permission: law.view
+  actions:
+    - id: legal.open.settings
+      label: APZ Law settings
+      handler: workbench-bridge:workbench.view.open
+      permission: law.view
+      palette: true
+      group: APZ Law
+      icon: settings
+      order: 60
+      description: Open Governance Companion settings.

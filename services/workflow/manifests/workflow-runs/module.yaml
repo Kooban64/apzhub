@@ -1,6 +1,6 @@
 manifestSchemaVersion: "1.0"
 id: workflow-runs
-name: Runs
+name: Operational history
 version: 0.1.0
 kind: module
 
@@ -22,13 +22,13 @@ workbench:
     level: sidebar
     workspace: workflow
     parent: workflow
-    label: Runs
+    label: Operational history
     icon: play
     route: /workspace/workflow/runs
     order: 20
-    permission: workflow.runs.view
+    permission: workflow.admin
   view:
-    title: Runs
+    title: Operational history
     workspace: workflow
     route: /workspace/workflow/runs
-    permission: workflow.runs.view
+    permission: workflow.admin

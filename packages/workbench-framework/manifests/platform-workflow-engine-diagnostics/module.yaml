@@ -23,9 +23,9 @@ workbench:
     icon: activity
     route: /workspace/workflow-engine/diagnostics
     order: 90
-    permission: workflow.engine.diagnostics
+    permission: workflow.admin
   view:
     title: Diagnostics
     workspace: workflow-engine
     route: /workspace/workflow-engine/diagnostics
-    permission: workflow.engine.diagnostics
+    permission: workflow.admin

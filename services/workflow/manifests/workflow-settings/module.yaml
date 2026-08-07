@@ -1,0 +1,31 @@
+manifestSchemaVersion: "1.0"
+id: workflow-settings
+name: Settings
+version: 0.1.0
+kind: module
+
+metadata:
+  category: workflow
+  description: APZ Workflow — Settings (business process companion).
+
+dependencies:
+  platform: []
+
+module:
+  category: workflow
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: workflow
+    parent: workflow
+    label: Settings
+    icon: settings
+    route: /workspace/workflow/settings
+    order: 130
+    permission: workflow.view
+  view:
+    title: Settings
+    workspace: workflow
+    route: /workspace/workflow/settings
+    permission: workflow.view

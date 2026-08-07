@@ -2,14 +2,27 @@ import { expect, test } from "@playwright/test";
 
 import { DASHBOARD_ID, mockAnalyticsApi, signIn } from "./analytics-workbench-helpers";
 
-test.describe("APZHUB Analytics Workbench (ANALYTICS-006)", () => {
-  test("open Analytics home, suite, and dashboard detail", async ({ page }) => {
+test.describe("APZHUB Analytics Workbench (Decision Companion)", () => {
+  test("open question-first home, question detail, and insight answer", async ({
+    page,
+  }) => {
     await signIn(page);
     await mockAnalyticsApi(page);
 
     await page.goto("/workspace/analytics");
     await expect(page.getByTestId("analytics-page")).toBeVisible();
-    await expect(page.getByTestId("analytics-home-suites")).toBeVisible();
+    await expect(page.getByTestId("analytics-home-horizons")).toBeVisible();
+    await expect(page.getByTestId("analytics-home-questions")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Home" })).toBeVisible();
+
+    await page.goto("/workspace/analytics/questions");
+    await expect(page.getByTestId("analytics-questions-catalogue")).toBeVisible();
+
+    await page.getByTestId("analytics-question-row-EQ-E01").click();
+    await expect(page).toHaveURL(/\/workspace\/analytics\/questions\/EQ-E01/, {
+      timeout: 15_000,
+    });
+    await expect(page.getByTestId("analytics-decision-context")).toBeVisible();
 
     await page.goto("/workspace/analytics/executive");
     await expect(page.getByTestId("analytics-suite-executive")).toBeVisible();
@@ -26,9 +39,18 @@ test.describe("APZHUB Analytics Workbench (ANALYTICS-006)", () => {
     );
   });
 
-  test("datasets, reports, saved, search, health, diagnostics", async ({ page }) => {
+  test("horizons, help, settings, and administrative surfaces", async ({ page }) => {
     await signIn(page);
     await mockAnalyticsApi(page);
+
+    await page.goto("/workspace/analytics/horizons/operational");
+    await expect(page.getByTestId("analytics-horizon-operational")).toBeVisible();
+
+    await page.goto("/workspace/analytics/help");
+    await expect(page.getByTestId("analytics-help")).toBeVisible();
+
+    await page.goto("/workspace/analytics/settings");
+    await expect(page.getByTestId("analytics-settings")).toBeVisible();
 
     await page.goto("/workspace/analytics/datasets");
     await expect(page.getByTestId("analytics-datasets-table")).toBeVisible();
@@ -59,7 +81,7 @@ test.describe("APZHUB Analytics Workbench (ANALYTICS-006)", () => {
     await mockAnalyticsApi(page);
 
     await page.goto("/workspace/analytics");
-    await expect(page.getByRole("heading", { name: "Analytics Home" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Home" })).toBeVisible();
     await expect(page.getByTestId("analytics-page")).toBeVisible();
 
     await page.goto("/workspace/analytics/health");
