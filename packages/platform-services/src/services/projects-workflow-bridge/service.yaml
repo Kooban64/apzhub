@@ -1,0 +1,37 @@
+manifestSchemaVersion: "1.0"
+id: projects-workflow-bridge
+name: Projects Workflow Bridge
+version: 0.1.0
+kind: service
+
+metadata:
+  category: productivity
+  description: >
+    Bridge between APZ Projects operational intent and APZ Workflow approval
+    execution (Release 3.0 Gate P1). Projects owns intent; Workflow owns
+    execution; Projects consumes outcomes. No duplicate approval engine.
+  contractPackage: "@apzhub/platform-service-contracts"
+  implementationPackage: "@apzhub/platform-services"
+  owner: APZHUB
+  tags:
+    - projects
+    - workflow
+    - approvals
+    - governance
+
+dependencies:
+  platform:
+    - workflow
+  integrations: []
+
+service:
+  category: productivity
+
+permissions:
+  - projects.view
+  - projects.manage
+  - workflow.runs.start
+  - workflow.tasks.approve
+
+health:
+  enabled: true

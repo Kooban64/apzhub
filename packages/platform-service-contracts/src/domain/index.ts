@@ -65,6 +65,25 @@ export type {
 export type { Sprint, SprintStatus } from "./sprint";
 
 export type { Milestone, Roadmap, RoadmapItem } from "./milestone";
+export type * from "./project-delivery";
+export {
+  normalizeMilestoneStatus,
+  isOpenMilestoneStatus,
+  isAchievedMilestoneStatus,
+  PROJECT_MILESTONE_STATUSES,
+  MILESTONE_CONFIDENCE,
+} from "./project-delivery";
+export type * from "./project-lifecycle";
+export type * from "./project-operational-delivery";
+export type * from "./project-workflow-bridge";
+export {
+  PROJECTS_APPROVAL_KINDS,
+  PROJECTS_APPROVAL_BINDING_STATUSES,
+} from "./project-workflow-bridge";
+
+export type * from "./business-process";
+export type * from "./decision-intelligence";
+export type * from "./organisational-memory";
 
 export type { ProjectModule, ProjectModuleStatus } from "./module";
 

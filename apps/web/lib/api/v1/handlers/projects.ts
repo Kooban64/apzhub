@@ -1,9 +1,19 @@
 import type { NextRequest } from "next/server";
 
+import {
+  createProjectsLifecycleService,
+  getMemoryProjectsLifecycleStore,
+  setProjectsLifecycleStoreForTests,
+} from "@apzhub/platform-services";
+
 import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
 import { PLATFORM_API_MAX_BODY_BYTES } from "../constants";
 import { getPlatformServiceGateway } from "../gateway/bootstrap";
-import { jsonCollectionResponse, jsonDataResponse } from "../response";
+import {
+  jsonCollectionResponse,
+  jsonDataResponse,
+  jsonErrorResponse,
+} from "../response";
 import { parseJsonBody, parsePathParam, parseQuery } from "../schemas/common";
 import {
   createProjectBodySchema,
@@ -12,6 +22,27 @@ import {
   updateProjectBodySchema,
 } from "../schemas/project";
 import { toListQuery, toPlatformApiPage } from "./paging";
+
+function lifecycleService() {
+  try {
+    return createProjectsLifecycleService();
+  } catch {
+    setProjectsLifecycleStoreForTests(getMemoryProjectsLifecycleStore());
+    return createProjectsLifecycleService(getMemoryProjectsLifecycleStore());
+  }
+}
+
+async function withLifecycleStatus<T extends { id: string; status: string }>(
+  context: PlatformApiRequestContext,
+  project: T,
+): Promise<T> {
+  const life = await lifecycleService().getLifecycle(
+    context.serviceContext,
+    project.id,
+  );
+  if (!life) return project;
+  return { ...project, status: life.stage };
+}
 
 export async function handleListProjects(
   request: NextRequest,
@@ -34,8 +65,12 @@ export async function handleListProjects(
     },
   });
 
+  const items = await Promise.all(
+    result.items.map((item) => withLifecycleStatus(context, item)),
+  );
+
   return jsonCollectionResponse(
-    result.items,
+    items,
     toPlatformApiPage(result, query),
     context.tracing,
   );
@@ -54,7 +89,7 @@ export async function handleGetProject(
   );
   const gateway = await getPlatformServiceGateway();
   const project = await gateway.projects.getProject(context.serviceContext, projectId);
-  return jsonDataResponse(project, context.tracing);
+  return jsonDataResponse(await withLifecycleStatus(context, project), context.tracing);
 }
 
 export async function handleCreateProject(
@@ -87,6 +122,17 @@ export async function handleUpdateProject(
     updateProjectBodySchema,
     PLATFORM_API_MAX_BODY_BYTES,
   );
+  if ("status" in body && body.status !== undefined) {
+    return jsonErrorResponse(
+      400,
+      {
+        code: "VALIDATION_ERROR",
+        message:
+          "Direct status edits are prohibited. Use POST /api/v1/projects/{id}/lifecycle/transitions.",
+      },
+      context.tracing,
+    );
+  }
   const gateway = await getPlatformServiceGateway();
   const project = await gateway.projects.updateProject(
     context.serviceContext,
@@ -97,8 +143,9 @@ export async function handleUpdateProject(
 }
 
 /**
- * DELETE maps to archiveProject — soft-retire semantics per platform contract.
- * Hard-delete is not exposed.
+ * DELETE archive is blocked when lifecycle metadata exists.
+ * Archive must use POST …/lifecycle/transitions with to=archived (from Closed only).
+ * Legacy projects without lifecycle still soft-archive via Plane.
  */
 export async function handleArchiveProject(
   _request: NextRequest,
@@ -111,6 +158,18 @@ export async function handleArchiveProject(
     params?.projectId ?? "",
     "projectId",
   );
+  const life = await lifecycleService().getLifecycle(context.serviceContext, projectId);
+  if (life) {
+    return jsonErrorResponse(
+      400,
+      {
+        code: "VALIDATION_ERROR",
+        message:
+          "Archive via lifecycle only: POST /api/v1/projects/{id}/lifecycle/transitions with to=archived (from Closed).",
+      },
+      context.tracing,
+    );
+  }
   const gateway = await getPlatformServiceGateway();
   const project = await gateway.projects.archiveProject(
     context.serviceContext,

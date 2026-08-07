@@ -192,8 +192,11 @@ export function StatusBadge({
 }) {
   const label =
     status === "draft" ||
+    status === "initiating" ||
     status === "active" ||
     status === "on_hold" ||
+    status === "closing" ||
+    status === "closed" ||
     status === "completed" ||
     status === "archived"
       ? formatProjectStatus(status)

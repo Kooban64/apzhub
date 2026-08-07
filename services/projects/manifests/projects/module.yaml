@@ -54,7 +54,7 @@ navigation:
     permission: projects.view
   sidebar:
     - id: projects.dashboard
-      label: Dashboard
+      label: Operational Workspace
       route: /workspace/projects
       icon: layout-dashboard
       permission: projects.view
@@ -68,6 +68,21 @@ navigation:
       route: /workspace/projects/my-work
       icon: user
       permission: projects.task.view
+    - id: projects.search
+      label: Search
+      route: /workspace/projects/search
+      icon: search
+      permission: projects.view
+    - id: projects.help
+      label: Help
+      route: /workspace/projects/help
+      icon: circle-help
+      permission: projects.view
+    - id: projects.settings
+      label: Settings
+      route: /workspace/projects/settings
+      icon: settings
+      permission: projects.view
     - id: projects.tasks
       label: Tasks
       route: /workspace/projects/tasks
@@ -87,21 +102,6 @@ navigation:
       label: Roadmap
       route: /workspace/projects/roadmap
       icon: map
-      permission: projects.view
-    - id: projects.search
-      label: Search
-      route: /workspace/projects/search
-      icon: search
-      permission: projects.view
-    - id: projects.help
-      label: Help
-      route: /workspace/projects/help
-      icon: circle-help
-      permission: projects.view
-    - id: projects.settings
-      label: Settings
-      route: /workspace/projects/settings
-      icon: settings
       permission: projects.view
     - id: projects.health
       label: Readiness

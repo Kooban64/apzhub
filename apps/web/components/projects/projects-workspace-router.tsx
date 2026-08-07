@@ -14,7 +14,7 @@ import { useProjectsPermissions } from "@/lib/projects/use-projects-permissions"
 import { ProjectCreateView } from "./project-create-view";
 import { ProjectDetailView } from "./project-detail-view";
 import { ProjectsBacklogView } from "./projects-backlog-view";
-import { ProjectsDashboardView } from "./projects-dashboard-view";
+import { OperationalWorkspaceView } from "./operational-workspace-view";
 import { ProjectsHealthView } from "./projects-health-view";
 import { ProjectsHelpView } from "./projects-help-view";
 import { ProjectsListView } from "./projects-list-view";
@@ -55,7 +55,7 @@ export function ProjectsWorkspaceRouter({
 
   switch (route.kind) {
     case "dashboard":
-      return <ProjectsDashboardView permissions={permissions} />;
+      return <OperationalWorkspaceView permissions={permissions} />;
     case "list":
       return <ProjectsListView permissions={permissions} />;
     case "create":

@@ -1,6 +1,14 @@
 /** Projects Workbench view models — Platform API shapes only. */
 
-export type ProjectStatus = "draft" | "active" | "on_hold" | "completed" | "archived";
+export type ProjectStatus =
+  | "draft"
+  | "initiating"
+  | "active"
+  | "on_hold"
+  | "closing"
+  | "closed"
+  | "archived"
+  | "completed";
 
 export type TaskStatus = "open" | "in_progress" | "blocked" | "done" | "cancelled";
 
@@ -105,7 +113,6 @@ export interface UpdateProjectInput {
   readonly name?: string;
   readonly identifier?: string;
   readonly description?: string;
-  readonly status?: ProjectStatus;
   readonly leadId?: string;
 }
 
@@ -131,4 +138,165 @@ export interface ProjectsHealthSnapshot {
 export interface ProjectsApiRequestOptions {
   readonly signal?: AbortSignal;
   readonly correlationId?: string;
+}
+
+/** APZ-PROJECTS-CAPABILITY-001 — delivery registers (Projects SoR metadata). */
+
+export type ProjectMilestoneStatus = "open" | "completed" | "missed";
+export type ProjectRiskLevel = "low" | "medium" | "high" | "critical";
+export type ProjectRiskStatus = "open" | "mitigating" | "closed" | "accepted";
+export type ProjectActionStatus = "open" | "done" | "cancelled";
+export type ProjectDeliveryHealthStatus = "green" | "amber" | "red";
+
+export interface ProjectMilestone {
+  readonly id: string;
+  readonly projectId: string;
+  readonly name: string;
+  readonly description?: string;
+  readonly targetDate?: string;
+  readonly owner?: string;
+  readonly status: ProjectMilestoneStatus;
+  readonly dependencyIds: readonly string[];
+  readonly progressPercent: number;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
+
+export interface ProjectRisk {
+  readonly id: string;
+  readonly projectId: string;
+  readonly title: string;
+  readonly description: string;
+  readonly probability: ProjectRiskLevel;
+  readonly impact: ProjectRiskLevel;
+  readonly mitigation: string;
+  readonly owner: string;
+  readonly reviewDate?: string;
+  readonly status: ProjectRiskStatus;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
+
+export interface ProjectDecision {
+  readonly id: string;
+  readonly projectId: string;
+  readonly decision: string;
+  readonly rationale: string;
+  readonly owner: string;
+  readonly decidedAt: string;
+  readonly outcome: string;
+  readonly relatedWork?: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
+
+export interface ProjectActionItem {
+  readonly id: string;
+  readonly projectId: string;
+  readonly title: string;
+  readonly owner: string;
+  readonly dueDate?: string;
+  readonly status: ProjectActionStatus;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
+
+export interface ProjectDeliveryHealth {
+  readonly projectId: string;
+  readonly status: ProjectDeliveryHealthStatus;
+  readonly scheduleScore: ProjectDeliveryHealthStatus;
+  readonly riskScore: ProjectDeliveryHealthStatus;
+  readonly milestoneScore: ProjectDeliveryHealthStatus;
+  readonly actionScore: ProjectDeliveryHealthStatus;
+  readonly reasons: readonly string[];
+  readonly computedAt: string;
+}
+
+export interface ProjectDeliveryDashboard {
+  readonly projectId: string;
+  readonly health: ProjectDeliveryHealth;
+  readonly milestoneTotal: number;
+  readonly milestoneCompleted: number;
+  readonly openRisks: number;
+  readonly criticalRisks: number;
+  readonly openActions: number;
+  readonly overdueActions: number;
+  readonly upcomingMilestones: readonly ProjectMilestone[];
+  readonly topRisks: readonly ProjectRisk[];
+  readonly recentDecisions: readonly ProjectDecision[];
+  readonly blockers: readonly string[];
+}
+
+export interface CreateProjectMilestoneInput {
+  readonly name: string;
+  readonly description?: string;
+  readonly targetDate?: string;
+  readonly owner?: string;
+  readonly dependencyIds?: readonly string[];
+  readonly progressPercent?: number;
+  readonly status?: ProjectMilestoneStatus;
+}
+
+export interface UpdateProjectMilestoneInput {
+  readonly name?: string;
+  readonly description?: string;
+  readonly targetDate?: string;
+  readonly owner?: string;
+  readonly dependencyIds?: readonly string[];
+  readonly progressPercent?: number;
+  readonly status?: ProjectMilestoneStatus;
+}
+
+export interface CreateProjectRiskInput {
+  readonly title: string;
+  readonly description: string;
+  readonly probability: ProjectRiskLevel;
+  readonly impact: ProjectRiskLevel;
+  readonly mitigation: string;
+  readonly owner: string;
+  readonly reviewDate?: string;
+  readonly status?: ProjectRiskStatus;
+}
+
+export interface UpdateProjectRiskInput {
+  readonly title?: string;
+  readonly description?: string;
+  readonly probability?: ProjectRiskLevel;
+  readonly impact?: ProjectRiskLevel;
+  readonly mitigation?: string;
+  readonly owner?: string;
+  readonly reviewDate?: string;
+  readonly status?: ProjectRiskStatus;
+}
+
+export interface CreateProjectDecisionInput {
+  readonly decision: string;
+  readonly rationale: string;
+  readonly owner: string;
+  readonly decidedAt?: string;
+  readonly outcome: string;
+  readonly relatedWork?: string;
+}
+
+export interface UpdateProjectDecisionInput {
+  readonly decision?: string;
+  readonly rationale?: string;
+  readonly owner?: string;
+  readonly decidedAt?: string;
+  readonly outcome?: string;
+  readonly relatedWork?: string;
+}
+
+export interface CreateProjectActionInput {
+  readonly title: string;
+  readonly owner: string;
+  readonly dueDate?: string;
+  readonly status?: ProjectActionStatus;
+}
+
+export interface UpdateProjectActionInput {
+  readonly title?: string;
+  readonly owner?: string;
+  readonly dueDate?: string;
+  readonly status?: ProjectActionStatus;
 }

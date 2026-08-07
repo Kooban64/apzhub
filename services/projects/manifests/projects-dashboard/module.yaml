@@ -1,12 +1,12 @@
 manifestSchemaVersion: "1.0"
 id: projects-dashboard
-name: Dashboard
+name: Operational Workspace
 version: 0.1.0
 kind: module
 
 metadata:
   category: productivity
-  description: APZ Projects — Dashboard.
+  description: APZ Projects — Operational Workspace (Release 3.0).
 
 dependencies:
   platform: []
@@ -22,13 +22,13 @@ workbench:
     level: sidebar
     workspace: projects
     parent: projects
-    label: Dashboard
+    label: Operational Workspace
     icon: layout-dashboard
     route: /workspace/projects
     order: 10
     permission: projects.view
   view:
-    title: Dashboard
+    title: Operational Workspace
     workspace: projects
     route: /workspace/projects
     permission: projects.view

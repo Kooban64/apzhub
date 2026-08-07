@@ -4,7 +4,11 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
 const ROOT = join(process.cwd(), "apps/web");
-const SCAN_DIRS = [join(ROOT, "components/projects"), join(ROOT, "lib/projects")];
+const SCAN_DIRS = [
+  join(ROOT, "components/projects"),
+  join(ROOT, "lib/projects"),
+  join(ROOT, "lib/context"),
+];
 
 const FORBIDDEN_IMPORT_PATTERNS = [
   /@apzhub\/integration-plane/,
@@ -60,6 +64,10 @@ describe("projects UI architecture boundary", () => {
     const apiSource = readFileSync(join(ROOT, "lib/projects/projects-api.ts"), "utf8");
     expect(apiSource.includes('const API_BASE = "/api/v1"')).toBe(true);
     expect(apiSource.includes("@apzhub/integration-plane")).toBe(false);
+
+    const contextApi = readFileSync(join(ROOT, "lib/context/context-api.ts"), "utf8");
+    expect(contextApi.includes("/api/v1/context")).toBe(true);
+    expect(contextApi.includes("getPlatformServiceGateway")).toBe(false);
 
     expect(violations, violations.join("\n")).toEqual([]);
   });

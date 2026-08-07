@@ -4,12 +4,18 @@ export function formatProjectStatus(status: ProjectStatus): string {
   switch (status) {
     case "draft":
       return "Draft";
+    case "initiating":
+      return "Initiating";
     case "active":
       return "Active";
     case "on_hold":
-      return "On hold";
+      return "On Hold";
+    case "closing":
+      return "Closing";
+    case "closed":
+      return "Closed";
     case "completed":
-      return "Completed";
+      return "Closed";
     case "archived":
       return "Archived";
     default:

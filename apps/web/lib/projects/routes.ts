@@ -22,7 +22,12 @@ export type ProjectsRouteResolution =
   | { readonly kind: "dashboard" }
   | { readonly kind: "list" }
   | { readonly kind: "create" }
-  | { readonly kind: "detail"; readonly projectId: string; readonly tab?: string }
+  | {
+      readonly kind: "detail";
+      readonly projectId: string;
+      /** Path segment after project id — cockpit intent or legacy tab. */
+      readonly tab?: string;
+    }
   | { readonly kind: "my-work" }
   | { readonly kind: "tasks" }
   | { readonly kind: "backlog" }
@@ -127,7 +132,24 @@ export function projectDetailPath(projectId: string, tab?: string): string {
   return tab ? `${PROJECTS_BASE}/${projectId}/${tab}` : `${PROJECTS_BASE}/${projectId}`;
 }
 
-export function projectCreatePath(): string {
+/** @deprecated Prefer cockpitPath from cockpit-intents for intent-aware URLs. */
+export function projectCockpitPath(
+  projectId: string,
+  intent?: string,
+  surface?: string,
+): string {
+  const base =
+    !intent || intent === "overview"
+      ? `${PROJECTS_BASE}/${projectId}`
+      : `${PROJECTS_BASE}/${projectId}/${intent}`;
+  if (!surface) return base;
+  return `${base}?surface=${encodeURIComponent(surface)}`;
+}
+
+export function projectCreatePath(resumeProjectId?: string): string {
+  if (resumeProjectId) {
+    return `${PROJECTS_BASE}/new?resume=${encodeURIComponent(resumeProjectId)}`;
+  }
   return `${PROJECTS_BASE}/new`;
 }
 
