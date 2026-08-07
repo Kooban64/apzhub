@@ -30,7 +30,9 @@ import { InvoiceManagementRouter } from "@/components/billing/invoice-management
 import { TrustManagementRouter } from "@/components/trust/trust-management-router";
 import { LegalSearchManagementRouter } from "@/components/search/legal-search-management-router";
 import { ExecutiveDashboardPage } from "@/components/dashboard/executive-dashboard-page";
+import { GovernanceWorkspaceRouter } from "@/components/governance/governance-workspace-router";
 import { isDashboardModuleRoute } from "@/lib/dashboard";
+import { isLawGovernanceRoute } from "@/lib/governance/routes";
 import {
   registerClientNavigationHandler,
   unregisterClientNavigationHandler,
@@ -198,6 +200,8 @@ export function WorkbenchPage() {
   const isTrustRoute = isTrustModuleRoute(pathname) || isTrustModuleRoute(activeRoute);
   const isLegalSearchRoute = isLegalSearchModuleRoute(activeRoute);
   const isDashboardRoute = isDashboardModuleRoute(activeRoute);
+  const isGovernanceRoute =
+    isLawGovernanceRoute(pathname) || isLawGovernanceRoute(activeRoute);
   const clientSearchQuery = searchParams.get("q") ?? undefined;
   const matterSearchQuery = searchParams.get("q") ?? undefined;
   const documentSearchQuery = searchParams.get("q") ?? undefined;
@@ -277,7 +281,9 @@ export function WorkbenchPage() {
     router.refresh();
   }
 
-  const moduleContent = isUxFoundationRoute ? (
+  const moduleContent = isGovernanceRoute ? (
+    <GovernanceWorkspaceRouter />
+  ) : isUxFoundationRoute ? (
     <LawUxFoundationGallery />
   ) : isClientRoute ? (
     <ClientManagementRouter

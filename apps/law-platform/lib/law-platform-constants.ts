@@ -1,5 +1,8 @@
 export const LAW_PLATFORM_VERSION = "1.0.0";
-export const LAW_PLATFORM_NAME = "APZHUB Law Platform";
+/** Native product name — APZ-LAW-NATIVE-001-N02 governance identity */
+export const LAW_PLATFORM_NAME = "APZ Law";
+/** @deprecated Prefer LAW_PLATFORM_NAME — practice packaging label */
+export const LAW_PLATFORM_LEGACY_NAME = "APZHUB Law Platform";
 export const LAW_WORKSPACE_ID = "law";
 
 export interface LawModuleDefinition {
@@ -9,14 +12,52 @@ export interface LawModuleDefinition {
   readonly description: string;
 }
 
-/** Placeholder Law Platform modules — navigation and help only (LAW-001-01). */
+/** Law Platform modules — governance companion first (N-03); practice secondary. */
 export const LAW_PLATFORM_MODULES: readonly LawModuleDefinition[] = [
   {
+    id: "legal-home",
+    title: "Home",
+    route: "/workspace/law/home",
+    description:
+      "Governance Companion home — obligations, approvals, and attention prompts.",
+  },
+  {
+    id: "legal-questions",
+    title: "Questions",
+    route: "/workspace/law/questions",
+    description: "Enterprise Governance Question Catalogue (GQ-01 through GQ-05).",
+  },
+  {
+    id: "legal-catalogue",
+    title: "Catalogue",
+    route: "/workspace/law/catalogue",
+    description:
+      "Policies, obligations, compliance, approvals, regulatory, retention, evidence.",
+  },
+  {
+    id: "legal-context",
+    title: "Context",
+    route: "/workspace/law/context",
+    description: "Governance in Context experience model for enterprise products.",
+  },
+  {
+    id: "legal-help",
+    title: "Help",
+    route: "/workspace/law/help",
+    description: "How APZ Law supports enterprise governance inside APZHUB.",
+  },
+  {
+    id: "legal-settings",
+    title: "Settings",
+    route: "/workspace/law/settings",
+    description: "Governance Companion preferences and administrative separation.",
+  },
+  {
     id: "legal-dashboard",
-    title: "Dashboard",
+    title: "Firm overview",
     route: "/workspace/law/dashboard",
     description:
-      "Executive overview — calendar, matters, tasks, billing, and firm activity.",
+      "Practice firm overview — secondary administration (not product identity).",
   },
   {
     id: "legal-clients",
@@ -89,6 +130,12 @@ export const LAW_PLATFORM_MODULES: readonly LawModuleDefinition[] = [
 ] as const;
 
 export const LAW_OPEN_COMMAND_IDS = [
+  "legal.open.home",
+  "legal.open.questions",
+  "legal.open.catalogue",
+  "legal.open.context",
+  "legal.open.help",
+  "legal.open.settings",
   "legal.open.dashboard",
   "legal.open.clients",
   "legal.open.matters",

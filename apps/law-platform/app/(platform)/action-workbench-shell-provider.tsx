@@ -37,6 +37,7 @@ import type { WorkbenchRegistryDto } from "@apzhub/workbench-framework/server";
 import { useCallback, useMemo, useState, type ReactNode } from "react";
 
 import { PersonalisationThemeBridge } from "@/components/platform-personalisation/personalisation-theme-bridge";
+import { SessionAuthorizationProvider } from "@/components/session-authorization-provider";
 import { createPlatformPersonalisationSessionStore } from "@/lib/platform-personalisation/session-store";
 
 import { ActionFrameworkDiagnostics } from "@/components/action-framework-diagnostics";
@@ -287,87 +288,91 @@ function EventNotificationShell({
   );
 
   return (
-    <NotificationRegistryProvider dto={notificationDto}>
-      <NotificationServiceProvider
-        service={eventNotificationContext.notificationService}
-      >
-        <WorkbenchProvider
-          initialRegistry={registry}
-          userId={userId}
-          authPermissionContext={authPermissionContext}
-          permissionMode="auth"
-          sessionStore={sessionStore}
-          sessionStorageBackend={sessionStore ? "memory" : "localStorage"}
-          resolveActionExecutor={resolveActionExecutor}
+    <SessionAuthorizationProvider value={authPermissionContext ?? null}>
+      <NotificationRegistryProvider dto={notificationDto}>
+        <NotificationServiceProvider
+          service={eventNotificationContext.notificationService}
         >
-          <PersonalisationThemeBridge userId={userId} initialTheme={initialTheme} />
-          <ActivityTimelineProvider bundle={activityTimelineBundle}>
-            {executorState ? (
-              <ActivityTimelineServiceShell
-                runtimeService={activityTimelineContext.service}
-                activityDiagnostics={activityDiagnostics}
-                timelineDiagnostics={timelineDiagnostics}
-              >
-                <CommandRegistryProvider
-                  dto={commandDto}
-                  executor={executorState.actionExecutor}
+          <WorkbenchProvider
+            initialRegistry={registry}
+            userId={userId}
+            authPermissionContext={authPermissionContext}
+            permissionMode="auth"
+            sessionStore={sessionStore}
+            sessionStorageBackend={sessionStore ? "memory" : "localStorage"}
+            resolveActionExecutor={resolveActionExecutor}
+          >
+            <PersonalisationThemeBridge userId={userId} initialTheme={initialTheme} />
+            <ActivityTimelineProvider bundle={activityTimelineBundle}>
+              {executorState ? (
+                <ActivityTimelineServiceShell
+                  runtimeService={activityTimelineContext.service}
+                  activityDiagnostics={activityDiagnostics}
+                  timelineDiagnostics={timelineDiagnostics}
                 >
-                  <E2eTestHookBridge
-                    context={eventNotificationContext}
-                    actionExecutor={executorState.actionExecutor}
-                    userId={userId}
-                  />
-                  <ClientWorkflowProvider service={executorState.clientWorkflow}>
-                    <MatterWorkflowProvider service={executorState.matterWorkflow}>
-                      <DocumentWorkflowProvider
-                        service={executorState.documentWorkflow}
-                      >
-                        <TaskWorkflowProvider service={executorState.taskWorkflow}>
-                          <CalendarEventWorkflowProvider
-                            service={executorState.calendarEventWorkflow}
-                          >
-                            <TimeEntryWorkflowProvider
-                              service={executorState.timeEntryWorkflow}
+                  <CommandRegistryProvider
+                    dto={commandDto}
+                    executor={executorState.actionExecutor}
+                  >
+                    <E2eTestHookBridge
+                      context={eventNotificationContext}
+                      actionExecutor={executorState.actionExecutor}
+                      userId={userId}
+                    />
+                    <ClientWorkflowProvider service={executorState.clientWorkflow}>
+                      <MatterWorkflowProvider service={executorState.matterWorkflow}>
+                        <DocumentWorkflowProvider
+                          service={executorState.documentWorkflow}
+                        >
+                          <TaskWorkflowProvider service={executorState.taskWorkflow}>
+                            <CalendarEventWorkflowProvider
+                              service={executorState.calendarEventWorkflow}
                             >
-                              <InvoiceWorkflowProvider
-                                service={executorState.invoiceWorkflow}
+                              <TimeEntryWorkflowProvider
+                                service={executorState.timeEntryWorkflow}
                               >
-                                <TrustWorkflowProvider
-                                  service={executorState.trustWorkflow}
+                                <InvoiceWorkflowProvider
+                                  service={executorState.invoiceWorkflow}
                                 >
-                                  <KnowledgeDiscoveryShell
-                                    knowledgeDto={knowledgeDto}
-                                    actionDto={commandDto}
-                                    workbenchDto={registry}
-                                    eventBus={eventNotificationContext.eventBus}
-                                    actorId={userId}
+                                  <TrustWorkflowProvider
+                                    service={executorState.trustWorkflow}
                                   >
-                                    {children}
-                                    <ActionFrameworkDiagnostics
-                                      diagnostics={commandDiagnostics}
-                                      userId={userId}
-                                    />
-                                    <KnowledgeDiscoveryDiagnostics />
-                                    <EventNotificationDiagnostics
-                                      eventDiagnostics={eventDiagnostics}
-                                      notificationDiagnostics={notificationDiagnostics}
-                                    />
-                                  </KnowledgeDiscoveryShell>
-                                </TrustWorkflowProvider>
-                              </InvoiceWorkflowProvider>
-                            </TimeEntryWorkflowProvider>
-                          </CalendarEventWorkflowProvider>
-                        </TaskWorkflowProvider>
-                      </DocumentWorkflowProvider>
-                    </MatterWorkflowProvider>
-                  </ClientWorkflowProvider>
-                </CommandRegistryProvider>
-              </ActivityTimelineServiceShell>
-            ) : null}
-          </ActivityTimelineProvider>
-        </WorkbenchProvider>
-      </NotificationServiceProvider>
-    </NotificationRegistryProvider>
+                                    <KnowledgeDiscoveryShell
+                                      knowledgeDto={knowledgeDto}
+                                      actionDto={commandDto}
+                                      workbenchDto={registry}
+                                      eventBus={eventNotificationContext.eventBus}
+                                      actorId={userId}
+                                    >
+                                      {children}
+                                      <ActionFrameworkDiagnostics
+                                        diagnostics={commandDiagnostics}
+                                        userId={userId}
+                                      />
+                                      <KnowledgeDiscoveryDiagnostics />
+                                      <EventNotificationDiagnostics
+                                        eventDiagnostics={eventDiagnostics}
+                                        notificationDiagnostics={
+                                          notificationDiagnostics
+                                        }
+                                      />
+                                    </KnowledgeDiscoveryShell>
+                                  </TrustWorkflowProvider>
+                                </InvoiceWorkflowProvider>
+                              </TimeEntryWorkflowProvider>
+                            </CalendarEventWorkflowProvider>
+                          </TaskWorkflowProvider>
+                        </DocumentWorkflowProvider>
+                      </MatterWorkflowProvider>
+                    </ClientWorkflowProvider>
+                  </CommandRegistryProvider>
+                </ActivityTimelineServiceShell>
+              ) : null}
+            </ActivityTimelineProvider>
+          </WorkbenchProvider>
+        </NotificationServiceProvider>
+      </NotificationRegistryProvider>
+    </SessionAuthorizationProvider>
   );
 }
 
