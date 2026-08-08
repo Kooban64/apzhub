@@ -57,16 +57,17 @@
 1. ✅ Original portfolio products — **COMPLETE** (7/7) · **FROZEN**
 2. ✅ **Portfolio Completion** (PORT-001…005) — **CLOSED** · freeze **IN FORCE**
 3. ✅ **Platform Evolution Programme 001** — Foundation v1.0 **CLOSED** (`apzhub-platform-engine-foundation-1.0`)
-4. ⏸ **Programme 002 — Platform Services** — [proposed](./platform-evolution/programme-002-platform-services/README.md) · **APS-001 Assessment first** (hypotheses ≠ inventory) · **not open** · AI deferred
-5. ⏸ **Programme 003 — Platform Intelligence** — deferred until Programme 002 context exists
+4. ✅ **Foundational era** — Chapters 1–3 [CLOSED](./APZHUB-FOUNDATIONAL-ERA-CLOSURE.md)
+5. ⏸ **Programme 002 — Platform Services** — **NOT OPEN** · next conversation: **APS-001 Assessment**
+6. ⏸ **Programme 003 — Platform Intelligence** — deferred
 
 ### Architecture (constitutional)
 
-[Architecture Constitution](./APZHUB-ARCHITECTURE-CONSTITUTION.md) — five laws · never duplicate · one platform · Delivery Standard governs.
-
-**Identity:** [APZHUB-PLATFORM-IDENTITY.md](./APZHUB-PLATFORM-IDENTITY.md)
+[Architecture Constitution](./APZHUB-ARCHITECTURE-CONSTITUTION.md) · [Identity](./APZHUB-PLATFORM-IDENTITY.md)
 
 **Guiding question:** Does this belong in the platform?
+
+**Next session:** APS-001 — four Owner questions. No service design first.
 
 ---
 

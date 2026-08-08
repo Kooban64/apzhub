@@ -1,17 +1,14 @@
 # Platform Evolution — Programme Status
 
-| Field         | Value                                                                                         |
-| ------------- | --------------------------------------------------------------------------------------------- |
-| Constitution  | [../APZHUB-ARCHITECTURE-CONSTITUTION.md](../APZHUB-ARCHITECTURE-CONSTITUTION.md) **IN FORCE** |
-| Programme 001 | **CLOSED** — Foundation v1.0                                                                  |
-| Programme 002 | **PROPOSED** — Platform Services · start with **APS-001 Assessment** (not a fixed APS list)   |
-| Programme 003 | **Deferred** — Platform Intelligence                                                          |
-| Timestamp     | 20260808T222500Z                                                                              |
+| Field            | Value                                                                                     |
+| ---------------- | ----------------------------------------------------------------------------------------- |
+| Foundational era | [../APZHUB-FOUNDATIONAL-ERA-CLOSURE.md](../APZHUB-FOUNDATIONAL-ERA-CLOSURE.md) **CLOSED** |
+| Programme 001    | **CLOSED** — Foundation v1.0                                                              |
+| Programme 002    | **NOT OPEN** — next: **APS-001 Assessment**                                               |
+| Programme 003    | **Deferred** — Intelligence                                                               |
+| Timestamp        | 20260808T223000Z                                                                          |
 
-## Platform lifecycle
+## Next session
 
-Assessment → Inventory → Foundation → Services → Intelligence → Operational Evolution
-
-## Programme 002 discipline
-
-Hypotheses ≠ inventory. Assess first. Accept finite inventory. Then engineer.
+Start with **APS-001 — Platform Services Assessment** (four Owner questions).  
+Do not design services first. Do not open engineering.

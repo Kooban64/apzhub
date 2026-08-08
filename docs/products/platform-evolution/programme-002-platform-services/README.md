@@ -1,64 +1,22 @@
-# Programme 002 — Platform Services (PROPOSED · NOT OPEN)
+# Programme 002 — Platform Services
 
 | Field        | Value                                                                                  |
 | ------------ | -------------------------------------------------------------------------------------- |
-| Programme    | **APZHUB Platform Evolution — Programme 002**                                          |
-| Status       | **PROPOSED** — not open · no Engineering Execution                                     |
-| Prerequisite | Programme 001 Foundation v1.0 **CLOSED**                                               |
+| Status       | **NOT OPEN** — awaiting next-session **APS-001 Assessment**                            |
+| Era          | After [Foundational Era Closure](../../APZHUB-FOUNDATIONAL-ERA-CLOSURE.md)             |
 | Constitution | [../../APZHUB-ARCHITECTURE-CONSTITUTION.md](../../APZHUB-ARCHITECTURE-CONSTITUTION.md) |
-| AI           | **Deferred** → Programme 003                                                           |
-| Timestamp    | 20260808T222500Z                                                                       |
+| Timestamp    | 20260808T223000Z                                                                       |
 
 ---
 
-## Single objective
+## Do not start here with solutions
 
-> **Make APZHUB feel like one application.**
+Next conversation entry point:
 
----
+> **APS-001 — Platform Services Assessment**
 
-## Delivery Standard first (mandatory)
+Four Owner questions → derive finite inventory → Owner Accept → only then Engineer.
 
-We **do not** start with a service list as contractual inventory.
+Hypotheses: [APS-HYPOTHESES.md](./APS-HYPOTHESES.md) — candidates only.
 
-| Step | Artefact                     | Status                                  |
-| ---- | ---------------------------- | --------------------------------------- |
-| 1    | **APS-001** Assessment       | **Not started**                         |
-| 2    | **APS-002** Finite Inventory | **Not started** — Owner Accept required |
-| 3    | Engineering                  | **Blocked** until Accept                |
-
-Earlier APS-001…010 service IDs are **hypotheses only** — candidates to test in assessment, not the inventory.
-
-See: [APS-HYPOTHESES.md](./APS-HYPOTHESES.md)
-
----
-
-## Why “Platform Services”
-
-Shared services every product consumes. Some visible; all shared. Not product features. Not a UI-only “experience” programme.
-
----
-
-## Relationship to APE
-
-```text
-Products (frozen) → APS Platform Services → APE Engines → Providers
-```
-
-Programme 002 composes APE capabilities into one-app cohesion. It does not relocate business logic into the platform (Law 1) and does not duplicate APE capabilities (Law 2).
-
----
-
-## Gates
-
-- Architecture Constitution + five laws
-- Delivery Standard cadence
-- No end-user retraining
-- No AI / RAG / agents
-- No Engineering until APS-002 Accepted
-
----
-
-## Supersedes
-
-[../programme-002-platform-experience/](../programme-002-platform-experience/) — naming only.
+Objective (when opened): **Make APZHUB feel like one application.**
