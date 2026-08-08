@@ -69,7 +69,7 @@
 
 **Guiding question:** Does this belong in the platform?
 
-**Next gate:** APS-002 — derive finite inventory from APS-001 classification. No engineering before Accept.
+**Next gate:** Owner Accept or Amend of APS-002 (7 proposed services). No engineering before Accept.
 
 ---
 
