@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "APZQEP Notification & Subscription Platform — event/projection subscribers only (APZQEP-120-S12).",
+  "description": "APZQEP product-local notification/subscription machinery (not APS-Notifications). Canonical platform owner: APS-Notifications / ENF. See APS-E-03.",
   "exports": {
     ".": "./src/index.ts"
   },

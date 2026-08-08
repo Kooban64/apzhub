@@ -3,7 +3,7 @@
   "version": "0.1.16",
   "private": true,
   "type": "module",
-  "description": "APZHUB Enterprise Continuous Quality Orchestration — kernel through Workspace & Operations Experience (APZQEP-165 QO-001…QO-017).",
+  "description": "QEP-elevated quality orchestration (APZQEP-165). Not an APS-002 Platform Service (fails Two-Consumer Rule). See APS-E-05.",
   "exports": {
     ".": "./src/index.ts",
     "./contracts": "./src/contracts/index.ts"

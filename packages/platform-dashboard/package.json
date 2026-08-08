@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "APZHUB reusable Dashboard Platform — dashboard engine, widget registry, layouts, saved views (APZQEP-164). Product-agnostic; no business logic.",
+  "description": "QEP-elevated dashboard engine (APZQEP-164). Not an APS-002 Platform Service until Two-Consumer Rule met. See APS-E-05.",
   "exports": {
     ".": "./src/index.ts",
     "./contracts": "./src/contracts/index.ts"

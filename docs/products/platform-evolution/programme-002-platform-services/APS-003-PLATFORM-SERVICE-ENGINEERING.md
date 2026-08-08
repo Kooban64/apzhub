@@ -1,54 +1,64 @@
 # APS-003 — Platform Service Engineering
 
-| Field          | Value                                                                  |
-| -------------- | ---------------------------------------------------------------------- |
-| Document       | **APS-003**                                                            |
-| Status         | **OPEN** — Engineering Execution authorised                            |
-| Timestamp      | 20260808T233000Z                                                       |
-| Inventory      | [APS-002](./APS-002-FINITE-PLATFORM-SERVICE-INVENTORY.md) **ACCEPTED** |
-| Owner Decision | [OWNER-DECISION-APS-002.md](./OWNER-DECISION-APS-002.md)               |
-| Target         | **Platform Services Foundation v1.0**                                  |
+| Field          | Value                                                                               |
+| -------------- | ----------------------------------------------------------------------------------- |
+| Document       | **APS-003**                                                                         |
+| Status         | **IN PROGRESS** — Stages 1–4 largely complete · RC1 awaited                         |
+| Timestamp      | 20260808T233500Z                                                                    |
+| Inventory      | [APS-002](./APS-002-FINITE-PLATFORM-SERVICE-INVENTORY.md) **ACCEPTED · FROZEN (7)** |
+| Philosophy     | [OWNER-ACK-APS-003-PHILOSOPHY.md](./OWNER-ACK-APS-003-PHILOSOPHY.md)                |
+| Owner Decision | [OWNER-DECISION-APS-002.md](./OWNER-DECISION-APS-002.md)                            |
+| Target         | **Platform Services Foundation v1.0**                                               |
 
 ---
 
-## Objective
+## Philosophy
 
-> Certify and rationalise the Platform Service Layer while preserving the immutable Architecture Constitution and maintaining complete backwards compatibility with all Production Ready products.
+> We are not building services. We are proving that the services deserve to exist.
+
+Per slice: correctly owned · bounded · consumed · production ready? → certify or rationalise (not rewrite).
+
+---
+
+## Stages
+
+| Stage           | Focus                                             | Status |
+| --------------- | ------------------------------------------------- | ------ |
+| 1 Visibility    | Catalogue · docs                                  | ✅     |
+| 2 Ownership     | QEP Notify/Command · single-consumer · boundaries | ✅     |
+| 3 Consolidation | Personalisation · contracts                       | ✅     |
+| 4 Hardening     | Tests · certification packs                       | ✅     |
+| 5 Release       | RC1 · PR · Operational Learning                   | ⏳     |
 
 ---
 
 ## Finite engineering closeout inventory
 
-| ID           | Slice                               | Scope                                                                      | Status       |
-| ------------ | ----------------------------------- | -------------------------------------------------------------------------- | ------------ |
-| **APS-E-01** | Service catalogue honesty face      | `GET /api/v1/platform/services` · seven APS rows · excludes AI/machinery   | **COMPLETE** |
-| **APS-E-02** | Certification packs                 | Per-service certify docs (contracts, consumers, ownership)                 | Pending      |
-| **APS-E-03** | Ownership hygiene — Notifications   | Document + plan align `qep-notification` → APS-Notifications (no UX break) | Pending      |
-| **APS-E-04** | Ownership hygiene — Command         | Document + plan align `qep-command` → APS-Command (no UX break)            | Pending      |
-| **APS-E-05** | Reclassify single-consumer packages | Record product/QEP ownership for non-inventory `platform-*`                | Pending      |
-| **APS-E-06** | Personalisation consolidate         | Clarify prefs/favorites/recent as APS-Personalisation surface              | Pending      |
-| **APS-E-07** | Hardening / Playwright              | Smoke that catalogue + existing service APIs remain healthy                | Pending      |
-| **APS-E-08** | RC1 / Release pack                  | Platform Services Foundation v1.0                                          | Pending      |
+| ID           | Slice                               | Status                                                                                                                    |
+| ------------ | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| **APS-E-01** | Service catalogue honesty face      | **COMPLETE**                                                                                                              |
+| **APS-E-02** | Certification packs (7)             | **COMPLETE** → [certification/](./certification/)                                                                         |
+| **APS-E-03** | Ownership hygiene — Notifications   | **COMPLETE** → [engineering/APS-E-03-OWNERSHIP-NOTIFICATIONS.md](./engineering/APS-E-03-OWNERSHIP-NOTIFICATIONS.md)       |
+| **APS-E-04** | Ownership hygiene — Command         | **COMPLETE** → [engineering/APS-E-04-OWNERSHIP-COMMAND.md](./engineering/APS-E-04-OWNERSHIP-COMMAND.md)                   |
+| **APS-E-05** | Reclassify single-consumer packages | **COMPLETE** → [engineering/APS-E-05-RECLASSIFY-SINGLE-CONSUMER.md](./engineering/APS-E-05-RECLASSIFY-SINGLE-CONSUMER.md) |
+| **APS-E-06** | Personalisation consolidate         | **COMPLETE** → [engineering/APS-E-06-PERSONALISATION.md](./engineering/APS-E-06-PERSONALISATION.md)                       |
+| **APS-E-07** | Hardening / Playwright              | **COMPLETE** → `testing/playwright/e2e/apz-platform-services-foundation-hardening.spec.ts`                                |
+| **APS-E-08** | RC1 / Release pack                  | **READY FOR OWNER APPROVE**                                                                                               |
+
+---
+
+## RC1 architecture proof (Owner)
+
+1. Clear owner per Platform Service
+2. Two-Consumer Rule or constitutional definition
+3. Backwards compatible products
+4. No product logic in platform
+5. No platform logic leaked into products as alternate platform services
+
+Candidate Law 7 (not ratified): one canonical contract per Platform Service — watch evidence in ownership docs.
 
 ---
 
 ## Hard constraints
 
-- No additional Platform Services
-- No product redesign / end-user retraining
-- No Platform Engine Foundation contract breakage
-- No AI / RAG / agents
-- No constitutional drift
-- Repository remains releasable at all times
-
----
-
-## Definition of Done (Programme 002)
-
-- Seven APS services listed and certified
-- Ownership anomalies addressed or explicitly deferred with Owner note
-- Single-consumer packages reclassified
-- Hardening tests pass
-- Release tag / freeze branch
-- Operational Learning opened
-- Programme 002 Closed
+No additional services · no product redesign · no Foundation breakage · no AI · no constitutional drift · releasable repo

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "APZHUB reusable Visualization Platform — charts, timelines, heatmaps, evidence viewers (APZQEP-164). Presentation-only; no business calculations.",
+  "description": "QEP-elevated visualization (APZQEP-164). Not an APS-002 Platform Service until Two-Consumer Rule met. See APS-E-05.",
   "exports": {
     ".": "./src/index.ts",
     "./contracts": "./src/contracts/index.ts"

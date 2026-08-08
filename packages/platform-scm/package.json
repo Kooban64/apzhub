@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "APZHUB Enterprise Source Control Platform — provider-neutral SCM Engine (APZQEP-162). GitHub is the first provider; engine never depends on GitHub directly.",
+  "description": "QEP-elevated SCM engine (APZQEP-162). Not an APS-002 Platform Service (fails Two-Consumer Rule). See APS-E-05.",
   "exports": {
     ".": "./src/index.ts",
     "./contracts": "./src/contracts/index.ts",

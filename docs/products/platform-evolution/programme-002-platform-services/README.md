@@ -1,20 +1,15 @@
 # Programme 002 — Platform Services
 
-| Field     | Value                                                                                                                                                                                                |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Status    | **ENGINEERING OPEN** — APS-002 Accepted · APS-003 authorised                                                                                                                                         |
-| Objective | **Certify and rationalise the Platform Service Layer while preserving the immutable Architecture Constitution and maintaining complete backwards compatibility with all Production Ready products.** |
-| Era       | [Evolution Era](../../APZHUB-EVOLUTION-ERA.md)                                                                                                                                                       |
-| Timestamp | 20260808T233000Z                                                                                                                                                                                     |
+| Field      | Value                                                                                       |
+| ---------- | ------------------------------------------------------------------------------------------- |
+| Status     | **RC1 READY** — APS-E-01…07 complete · awaiting Owner Approve                               |
+| Objective  | Certify and rationalise the Platform Service Layer (Constitution + backwards compatibility) |
+| Services   | **7 Frozen**                                                                                |
+| Philosophy | [OWNER-ACK-APS-003-PHILOSOPHY.md](./OWNER-ACK-APS-003-PHILOSOPHY.md)                        |
+| Timestamp  | 20260808T233500Z                                                                            |
 
----
-
-## Cadence
-
-| Gate                     | Status                                                  |
-| ------------------------ | ------------------------------------------------------- |
-| APS-001 Assessment       | ✅ Accepted                                             |
-| APS-002 Finite inventory | ✅ [Accepted](./OWNER-DECISION-APS-002.md) — 7 services |
-| APS-003 Engineering      | ▶ [OPEN](./APS-003-PLATFORM-SERVICE-ENGINEERING.md)     |
-
-Catalogue: [services/CATALOGUE.md](./services/CATALOGUE.md) · `GET /api/v1/platform/services`
+| Gate    | Status                                                               |
+| ------- | -------------------------------------------------------------------- |
+| APS-001 | ✅                                                                   |
+| APS-002 | ✅ Accepted · Frozen                                                 |
+| APS-003 | ▶ Stages 1–4 done · [RC1 Ready](./release-services-1.0/RC1-READY.md) |

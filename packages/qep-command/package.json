@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "APZQEP Enterprise Command Platform — UI-independent action/navigation execution (APZQEP-120-S13). Palette is the first client.",
+  "description": "APZQEP product-local command machinery (not APS-Command). Canonical platform owner: APS-Command / @apzhub/command-framework. See APS-E-04.",
   "exports": {
     ".": "./src/index.ts"
   },
