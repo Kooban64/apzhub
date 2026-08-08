@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 
 import { ShellLayout, type ActivityBarItem, type SidebarItem } from "@apzhub/ui";
 
@@ -21,6 +21,8 @@ import { WorkbenchNotifications } from "./notifications";
 import { WorkbenchContextPanel } from "./context-panel";
 import { useGlobalShortcuts } from "./desktop-shell/global-shortcuts";
 import { useCommandPaletteShortcut } from "./desktop-shell/palette-shortcut";
+import { GlobalSearchDialog } from "./global-search/global-search-dialog";
+import { useGlobalSearchShortcut } from "./global-search/global-search-shortcut";
 
 export interface DesktopShellProps {
   userName?: string;
@@ -31,6 +33,11 @@ export interface DesktopShellProps {
   onSidebarSelect?: (id: string) => void;
   onSignOut?: () => void;
   children: ReactNode;
+  /** Global Search (Ctrl+K) — APS-Search capability surface. */
+  enableGlobalSearch?: boolean;
+  globalSearchOpen?: boolean;
+  onGlobalSearchOpenChange?: (open: boolean) => void;
+  onGlobalSearchNavigate?: (href: string) => void;
   /** Renders Command Palette surface — requires CommandRegistryProvider ancestor (AF-011). */
   enableCommandPalette?: boolean;
   /** Palette mode — knowledge mode queries via Knowledge Service (DF-013). */
@@ -173,6 +180,10 @@ export function DesktopShell({
   onSidebarSelect,
   onSignOut,
   children,
+  enableGlobalSearch = false,
+  globalSearchOpen,
+  onGlobalSearchOpenChange,
+  onGlobalSearchNavigate,
   enableCommandPalette = false,
   commandPaletteMode = "commands",
   commandPaletteOpen,
@@ -204,10 +215,20 @@ export function DesktopShell({
     onOpenChange: onCommandPaletteOpenChange,
   });
 
+  const [internalGlobalSearchOpen, setInternalGlobalSearchOpen] = useState(false);
+  const globalSearchIsOpen = globalSearchOpen ?? internalGlobalSearchOpen;
+  const setGlobalSearchOpen = onGlobalSearchOpenChange ?? setInternalGlobalSearchOpen;
+
   useCommandPaletteShortcut({
     enabled: enableCommandPalette,
-    paletteOpen: paletteState.open,
+    paletteOpen: paletteState.open || globalSearchIsOpen,
     onOpen: paletteState.openPalette,
+  });
+
+  useGlobalSearchShortcut({
+    enabled: enableGlobalSearch,
+    open: globalSearchIsOpen,
+    onOpen: () => setGlobalSearchOpen(true),
   });
 
   const workspaceContent = enableToolbar ? (
@@ -248,15 +269,29 @@ export function DesktopShell({
       activityBarItems={activityBarItems}
       onActivityBarSelect={onActivityBarSelect}
       headerTrailing={
-        enableNotificationBadge || enableNotificationPanel ? (
-          <WorkbenchNotifications
-            enableBadge={enableNotificationBadge}
-            enablePanel={enableNotificationPanel}
-            panelOpen={notificationPanelOpen}
-            onPanelOpenChange={onNotificationPanelOpenChange}
-            onNotificationActionExecuted={onNotificationActionExecuted}
-          />
-        ) : undefined
+        <>
+          {enableGlobalSearch ? (
+            <button
+              type="button"
+              data-testid="global-search-trigger"
+              className="mr-2 rounded-md border border-[var(--color-border)] px-2 py-1 text-xs text-[var(--color-muted-foreground)] hover:bg-[var(--color-muted)]"
+              onClick={() => setGlobalSearchOpen(true)}
+              aria-label="Open global search"
+            >
+              Search
+              <kbd className="ml-2 hidden sm:inline">Ctrl+K</kbd>
+            </button>
+          ) : null}
+          {enableNotificationBadge || enableNotificationPanel ? (
+            <WorkbenchNotifications
+              enableBadge={enableNotificationBadge}
+              enablePanel={enableNotificationPanel}
+              panelOpen={notificationPanelOpen}
+              onPanelOpenChange={onNotificationPanelOpenChange}
+              onNotificationActionExecuted={onNotificationActionExecuted}
+            />
+          ) : null}
+        </>
       }
     >
       {workspaceWithContextPanel}
@@ -283,8 +318,18 @@ export function DesktopShell({
       {enableCommandPalette ? (
         <CommandPaletteSurface paletteState={paletteState} mode={commandPaletteMode} />
       ) : null}
+      {enableGlobalSearch ? (
+        <GlobalSearchDialog
+          open={globalSearchIsOpen}
+          onOpenChange={setGlobalSearchOpen}
+          onNavigate={onGlobalSearchNavigate}
+        />
+      ) : null}
       {enableGlobalShortcuts ? (
-        <GlobalShortcutsLayer modalOpen={modalOpen} onExecuted={onShortcutExecuted} />
+        <GlobalShortcutsLayer
+          modalOpen={modalOpen || globalSearchIsOpen}
+          onExecuted={onShortcutExecuted}
+        />
       ) : null}
     </>
   );

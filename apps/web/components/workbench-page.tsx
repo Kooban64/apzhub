@@ -191,6 +191,10 @@ export function WorkbenchPage() {
       onSidebarSelect={selectSidebarItem}
       enableCommandPalette
       commandPaletteMode={commandPaletteMode}
+      enableGlobalSearch
+      onGlobalSearchNavigate={(href) => {
+        router.push(href);
+      }}
       enableGlobalShortcuts
       enableContextMenu
       enableToolbar

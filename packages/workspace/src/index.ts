@@ -52,6 +52,15 @@ export {
   useCommandPaletteShortcut,
 } from "./desktop-shell/palette-shortcut";
 export {
+  GlobalSearchDialog,
+  type GlobalSearchDialogProps,
+} from "./global-search/global-search-dialog";
+export {
+  GLOBAL_SEARCH_SHORTCUT,
+  isGlobalSearchShortcut,
+  useGlobalSearchShortcut,
+} from "./global-search/global-search-shortcut";
+export {
   buildGlobalShortcutShellDiagnostics,
   GLOBAL_SHORTCUT_SURFACE,
   type GlobalShortcutShellDiagnostics,
