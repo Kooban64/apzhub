@@ -2,7 +2,7 @@
 
 | Field                | Value                                                                                                                                                                                                                                                  |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Timestamp            | 20260808T204500Z                                                                                                                                                                                                                                       |
+| Timestamp            | 20260808T220000Z                                                                                                                                                                                                                                       |
 | Authority            | Owner operating face — one-page dashboard                                                                                                                                                                                                              |
 | Complements          | [APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md](./APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md) · [APZHUB-PORTFOLIO-OPERATING-PRINCIPLE.md](./APZHUB-PORTFOLIO-OPERATING-PRINCIPLE.md) · [APZHUB-DELIVERY-STANDARD.md](./APZHUB-DELIVERY-STANDARD.md) |
 | Portfolio Completion | [PORTFOLIO-COMPLETION-PROGRAMME.md](./PORTFOLIO-COMPLETION-PROGRAMME.md) · [portfolio-completion/PORT-005-PORTFOLIO-FREEZE-NOTICE.md](./portfolio-completion/PORT-005-PORTFOLIO-FREEZE-NOTICE.md) **IN FORCE**                                         |
@@ -12,7 +12,7 @@
 | Delivery standard    | [v1.0 Reference Standard](./APZHUB-DELIVERY-STANDARD.md) (**IMMUTABLE**)                                                                                                                                                                               |
 | Programme measure    | **Portfolio COMPLETE** — 7 of 7 Production Ready · freeze **IN FORCE**                                                                                                                                                                                 |
 | Programme closure    | [APZHUB-ORIGINAL-PORTFOLIO-PROGRAMME-CLOSURE.md](./APZHUB-ORIGINAL-PORTFOLIO-PROGRAMME-CLOSURE.md) · tag `apzhub-original-portfolio-complete` · `backup/apzhub-original-portfolio-complete-20260808`                                                   |
-| Platform Evolution   | **RC1 READY** — [Foundation pack](./platform-evolution/release-foundation-1.0/README.md) · APE naming · products frozen · AI deferred · await Owner Approve                                                                                            |
+| Platform Evolution   | Programme 001 **CLOSED** — Foundation v1.0 (`apzhub-platform-engine-foundation-1.0`) · [APE naming](./platform-evolution/APE-NAMING.md) · Programme 002 Platform Experience **proposed** · AI deferred                                                 |
 
 ---
 

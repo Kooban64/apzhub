@@ -1,25 +1,20 @@
 # Platform Evolution — Programme Status
 
-| Field       | Value                                          |
-| ----------- | ---------------------------------------------- |
-| Programme   | **APZHUB Platform Evolution — Programme 001**  |
-| Target      | Platform Engine Foundation v1.0                |
-| Engineering | **RC1 READY** — awaiting Owner Release Approve |
-| Inventory   | APZPE-002 **ACCEPTED**                         |
-| Naming      | **APZ Platform Engines (APE)**                 |
-| ADR         | ADR-PE-0001 Accepted                           |
-| Products    | **FROZEN**                                     |
-| AI          | **Deferred** (Phase 3)                         |
-| Timestamp   | 20260808T214000Z                               |
+| Field         | Value                                     |
+| ------------- | ----------------------------------------- |
+| Programme 001 | **Platform Engine Foundation v1.0**       |
+| Status        | **COMPLETE** · **CLOSED**                 |
+| Release       | `apzhub-platform-engine-foundation-1.0`   |
+| Naming        | **APZ Platform Engines (APE)** — ratified |
+| ADR           | ADR-PE-0001 **Ratified**                  |
+| Products      | **FROZEN**                                |
+| AI            | **Deferred** (Phase 3)                    |
+| Timestamp     | 20260808T220000Z                          |
 
-## Gates
+## Defining model
 
-| Gate                         | Status       |
-| ---------------------------- | ------------ |
-| No end-user retraining       | **IN FORCE** |
-| Never duplicate a capability | **IN FORCE** |
-| Platform owns behaviour      | **IN FORCE** |
+> Products deliver business capabilities. Platform Engines deliver shared capabilities. Providers deliver implementation.
 
-## Next
+## Next (not opened)
 
-Owner Approve Foundation RC1 → tag `apzhub-platform-engine-foundation-1.0` → close Programme 001.
+**Programme 002 — Platform Experience** recommended (Search · Activity · Notify · Command · navigation · Workbench cohesion). AI remains deferred.

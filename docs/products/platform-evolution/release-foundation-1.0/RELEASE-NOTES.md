@@ -4,7 +4,7 @@
 | --------- | ----------------------------------------- |
 | Programme | APZHUB Platform Evolution — Programme 001 |
 | Version   | **1.0**                                   |
-| Status    | **Release Candidate RC1**                 |
+| Status    | **Production Ready** · CLOSED             |
 | Date      | 2026-08-08                                |
 
 ## What is delivered
