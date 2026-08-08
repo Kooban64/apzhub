@@ -1,11 +1,12 @@
 # APZHUB Portfolio Status
 
-| Field       | Value                                                                                            |
-| ----------- | ------------------------------------------------------------------------------------------------ |
-| Timestamp   | 20260808T080100Z                                                                                 |
-| Authority   | Owner operating face — one-page dashboard                                                        |
-| Complements | [APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md](./APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md) |
-| Rule        | Observation / planning only — does not authorise engineering                                     |
+| Field               | Value                                                                                                                                                                                   |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Timestamp           | 20260808T081000Z                                                                                                                                                                        |
+| Authority           | Owner operating face — one-page dashboard                                                                                                                                               |
+| Complements         | [APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md](./APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md) · [APZHUB-PORTFOLIO-OPERATING-PRINCIPLE.md](./APZHUB-PORTFOLIO-OPERATING-PRINCIPLE.md) |
+| Rule                | Observation / planning only — does not authorise engineering                                                                                                                            |
+| Operating principle | **No Engineering Execution without a finite closeout inventory**                                                                                                                        |
 
 ---
 
