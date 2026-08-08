@@ -11,6 +11,8 @@
 
 ## Status: CLOSED
 
+**Complete.** Not paused. Not archived.
+
 The Foundational Era has achieved its purpose.
 
 It established:
@@ -116,15 +118,17 @@ Milestone backup: tag `apzhub-original-portfolio-complete` · `backup/apzhub-ori
 
 **Programme 002 is not open in this era.**
 
-When **APS-001** begins:
+When **APS-001** begins — join as an established engineering organisation:
 
-- No preconceived service inventory
-- No AI because it is fashionable
-- No reopening settled architecture
+- No assumptions, proposed inventories, or predesigned solutions
+- No engineering before acceptance
+- No architecture drift
 
-Start with one question:
+First question:
 
-> **What capabilities already exist across the platform that genuinely belong in the platform layer?**
+> **APS-001 — What is the current state of Platform Services?**
+
+Everything else is derived from the assessment.
 
 Then, per Delivery Standard: Assess → derive finite inventory → Owner Accept → Engineer only what was accepted.
 
