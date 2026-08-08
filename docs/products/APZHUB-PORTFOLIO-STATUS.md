@@ -47,10 +47,15 @@
 
 ## Recommended execution order
 
-1. **Operate** APZ Projects + APZQEP (first-release pilot usage).
-2. **Assess APZ Workflow** — repository inventory · finite closeout list · greenfield / partial / operational classification (≤ 1 day). No redesign. No new framework. Product Bible only if genuinely missing.
-3. Execute Workflow closeout with the proven model: inventory → engineering → production readiness → hardening → RC → Production Ready.
-4. Reinvest in Operational / Intelligence platforms only on operational evidence + Product Board approval.
+1. ✅ **APZ Projects** — Production Ready (operate / learn)
+2. ✅ **APZQEP** — Production Ready (operate / learn)
+3. 🎯 **APZ Workflow** — next: assessment → finite inventory → then closeout method (not “build Workflow” yet)
+4. **APZ Support** — elevate Operational → Production Ready if evidence requires
+5. **APZ Analytics**
+6. **APZ Knowledge**
+7. **APZ Time**
+
+**Immediate next action:** Workflow assessment only — what exists, what is missing, what Production Ready means, shortest path. No Workflow Engineering Execution until inventory exists.
 
 ---
 
