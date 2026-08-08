@@ -1,19 +1,17 @@
 # Platform Evolution — Programme Status
 
-| Field         | Value                                                                                          |
-| ------------- | ---------------------------------------------------------------------------------------------- |
-| Programme 001 | **CLOSED** — Foundation v1.0 (`apzhub-platform-engine-foundation-1.0`)                         |
-| Programme 002 | **PROPOSED** — [Platform Services](./programme-002-platform-services/README.md) · **not open** |
-| Programme 003 | **Deferred** — Platform Intelligence (AI / RAG / agents)                                       |
-| Identity      | [../APZHUB-PLATFORM-IDENTITY.md](../APZHUB-PLATFORM-IDENTITY.md)                               |
-| Timestamp     | 20260808T221500Z                                                                               |
+| Field         | Value                                                                                         |
+| ------------- | --------------------------------------------------------------------------------------------- |
+| Constitution  | [../APZHUB-ARCHITECTURE-CONSTITUTION.md](../APZHUB-ARCHITECTURE-CONSTITUTION.md) **IN FORCE** |
+| Programme 001 | **CLOSED** — Foundation v1.0                                                                  |
+| Programme 002 | **PROPOSED** — Platform Services · start with **APS-001 Assessment** (not a fixed APS list)   |
+| Programme 003 | **Deferred** — Platform Intelligence                                                          |
+| Timestamp     | 20260808T222500Z                                                                              |
 
-## Defining model
+## Platform lifecycle
 
-> Products deliver business capabilities. Platform Engines deliver shared capabilities. Providers deliver implementation.
+Assessment → Inventory → Foundation → Services → Intelligence → Operational Evolution
 
-## Programme 002 objective (when opened)
+## Programme 002 discipline
 
-> Make APZHUB feel like one application.
-
-Inventory sketch: APS-001…010 — formal Accept required before Engineering. AI still waits.
+Hypotheses ≠ inventory. Assess first. Accept finite inventory. Then engineer.
