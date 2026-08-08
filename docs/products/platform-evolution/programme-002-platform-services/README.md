@@ -1,31 +1,20 @@
 # Programme 002 — Platform Services
 
-| Field        | Value                                                                                  |
-| ------------ | -------------------------------------------------------------------------------------- |
-| Status       | **INVENTORY PROPOSED** — APS-001 Accepted · APS-002 awaiting Owner Accept              |
-| Objective    | **Certify and rationalise the Platform Service Layer**                                 |
-| Era          | [Evolution Era](../../APZHUB-EVOLUTION-ERA.md)                                         |
-| Constitution | [../../APZHUB-ARCHITECTURE-CONSTITUTION.md](../../APZHUB-ARCHITECTURE-CONSTITUTION.md) |
-| Timestamp    | 20260808T232000Z                                                                       |
-
----
-
-## Objective (Owner-redirected)
-
-Not: _Build Platform Services._
-
-> **Certify and rationalise the Platform Service Layer.**
-
-Most services already exist. Defects are ownership defects, not capability defects.
+| Field     | Value                                                                                                                                                                                                |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Status    | **ENGINEERING OPEN** — APS-002 Accepted · APS-003 authorised                                                                                                                                         |
+| Objective | **Certify and rationalise the Platform Service Layer while preserving the immutable Architecture Constitution and maintaining complete backwards compatibility with all Production Ready products.** |
+| Era       | [Evolution Era](../../APZHUB-EVOLUTION-ERA.md)                                                                                                                                                       |
+| Timestamp | 20260808T233000Z                                                                                                                                                                                     |
 
 ---
 
 ## Cadence
 
-| Gate                     | Status                                                                                |
-| ------------------------ | ------------------------------------------------------------------------------------- |
-| APS-001 Assessment       | ✅ [COMPLETE · Accepted](./OWNER-ACCEPT-APS-001.md)                                   |
-| APS-002 Finite inventory | ⏳ [PROPOSED](./APS-002-FINITE-PLATFORM-SERVICE-INVENTORY.md) — awaiting Owner Accept |
-| Engineering              | 🚫 **Not authorised**                                                                 |
+| Gate                     | Status                                                  |
+| ------------------------ | ------------------------------------------------------- |
+| APS-001 Assessment       | ✅ Accepted                                             |
+| APS-002 Finite inventory | ✅ [Accepted](./OWNER-DECISION-APS-002.md) — 7 services |
+| APS-003 Engineering      | ▶ [OPEN](./APS-003-PLATFORM-SERVICE-ENGINEERING.md)     |
 
-Hypotheses (historical): [APS-HYPOTHESES.md](./APS-HYPOTHESES.md)
+Catalogue: [services/CATALOGUE.md](./services/CATALOGUE.md) · `GET /api/v1/platform/services`

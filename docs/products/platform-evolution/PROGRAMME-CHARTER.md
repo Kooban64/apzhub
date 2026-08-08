@@ -1,20 +1,15 @@
 # APZHUB Platform Evolution — Programme Charter
 
-| Field              | Value                                                                           |
-| ------------------ | ------------------------------------------------------------------------------- |
-| Programme          | **APZHUB Platform Evolution**                                                   |
-| Kind               | **New programme** — not a continuation of the Original Portfolio                |
-| Status             | **OPEN** — Assessment / Inventory (await Owner Accept of inventory)             |
-| Timestamp          | 20260808T211500Z                                                                |
-| Prerequisite       | Original Portfolio COMPLETE · PORT-005 **IN FORCE**                             |
-| Delivery Standard  | [APZHUB Delivery Standard v1.0](../APZHUB-DELIVERY-STANDARD.md) (**IMMUTABLE**) |
-| Portfolio products | **FROZEN** — Production Ready baselines unchanged                               |
-
----
-
-## Objective
-
-Transform APZHUB from a collection of Production Ready products into an **integrated Enterprise Work Platform** through shared Platform Engines, provider abstraction, and cross-product capabilities — **without requiring end-user retraining**.
+| Field              | Value                                                                             |
+| ------------------ | --------------------------------------------------------------------------------- |
+| Programme          | **APZHUB Platform Evolution**                                                     |
+| Kind               | **Evolution Era** programme                                                       |
+| Status             | **OPEN** — Programme 001 CLOSED · Programme 002 Engineering OPEN                  |
+| Timestamp          | 20260808T233000Z                                                                  |
+| Prerequisite       | Original Portfolio COMPLETE · PORT-005 **IN FORCE** · Foundational Era **CLOSED** |
+| Delivery Standard  | [APZHUB Delivery Standard v1.0](../APZHUB-DELIVERY-STANDARD.md) (**IMMUTABLE**)   |
+| Portfolio products | **FROZEN** — Production Ready baselines unchanged                                 |
+| Constitution       | [APZHUB-ARCHITECTURE-CONSTITUTION.md](../APZHUB-ARCHITECTURE-CONSTITUTION.md)     |
 
 ---
 
@@ -22,54 +17,41 @@ Transform APZHUB from a collection of Production Ready products into an **integr
 
 > **Platform Evolution must never require end-user retraining.**
 
-Users continue to use APZ Projects, Support, Analytics, Knowledge, Workflow, Time, and APZQEP. Improvements happen underneath the products.
+---
+
+## Programme 001 — Platform Engine Foundation
+
+**CLOSED** — APE Foundation v1.0 (`apzhub-platform-engine-foundation-1.0`).
 
 ---
 
-## Four architectural layers
+## Programme 002 — Platform Services
 
-```text
-Workbench
-    ↓
-Products          (frozen Production Ready faces)
-    ↓
-Platform Engines  (APZHUB-owned — this programme)
-    ↓
-Provider Layer    (Plane · Zammad · Kimai · Metabase · Paperless · n8n · …)
-```
+### Objective
 
-Products never call providers directly. Path remains Module → Platform Service → Connector → Provider (008 / Integration SDK).
+> **Certify and rationalise the Platform Service Layer while preserving the immutable Architecture Constitution and maintaining complete backwards compatibility with all Production Ready products.**
+
+### Authoritative faces
+
+| Face                | Path                                                                                                                                                                        |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| APS-001 Assessment  | [programme-002-platform-services/APS-001-PLATFORM-SERVICES-ASSESSMENT.md](./programme-002-platform-services/APS-001-PLATFORM-SERVICES-ASSESSMENT.md)                        |
+| APS-002 Inventory   | [programme-002-platform-services/APS-002-FINITE-PLATFORM-SERVICE-INVENTORY.md](./programme-002-platform-services/APS-002-FINITE-PLATFORM-SERVICE-INVENTORY.md) **ACCEPTED** |
+| Owner Decision      | [programme-002-platform-services/OWNER-DECISION-APS-002.md](./programme-002-platform-services/OWNER-DECISION-APS-002.md)                                                    |
+| APS-003 Engineering | [programme-002-platform-services/APS-003-PLATFORM-SERVICE-ENGINEERING.md](./programme-002-platform-services/APS-003-PLATFORM-SERVICE-ENGINEERING.md) **OPEN**               |
+
+### Finite services (7)
+
+APS-Search · APS-Notifications · APS-Command · APS-Activity · APS-Personalisation · APS-Realtime · APS-Audit
 
 ---
 
-## Programme phases (strategic)
+## Programme 003 — Platform Intelligence
 
-| Phase                              | Focus                                  | AI                              |
-| ---------------------------------- | -------------------------------------- | ------------------------------- |
-| **1 — Platform Engine Foundation** | Shared engines every product consumes  | **Out of scope**                |
-| **2 — Product Engines**            | Enrich each product via shared engines | Out of scope unless inventoried |
-| **3 — Intelligence Layer**         | AI Gateway · RAG · semantic · agents   | **Only after Phase 1–2**        |
-
-Phase 1 is the authorised opening focus. AI is explicitly **not** the first deliverable.
+**Deferred** — AI Gateway · RAG · Semantic Search · Knowledge Graph · Recommendations · Agents · Predictions.
 
 ---
 
 ## Delivery method
 
-Same immutable Delivery Standard, applied to **engines** (not product redesign):
-
-1. Assess the platform
-2. Derive the finite engine inventory
-3. Owner Accept
-4. Engineer one engine slice at a time
-5. Certify · Release · Learn · Close
-
----
-
-## Authoritative faces
-
-| Face                      | Path                                                                                                                               |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| Assessment                | [engineering/APZPE-001-PLATFORM-ENGINE-FOUNDATION-ASSESSMENT.md](./engineering/APZPE-001-PLATFORM-ENGINE-FOUNDATION-ASSESSMENT.md) |
-| Finite inventory          | [engineering/APZPE-002-FINITE-ENGINE-INVENTORY.md](./engineering/APZPE-002-FINITE-ENGINE-INVENTORY.md)                             |
-| Original portfolio freeze | [../portfolio-completion/PORT-005-PORTFOLIO-FREEZE-NOTICE.md](../portfolio-completion/PORT-005-PORTFOLIO-FREEZE-NOTICE.md)         |
+Assess → Accept → Engineer → Certify → Release → Learn → Close

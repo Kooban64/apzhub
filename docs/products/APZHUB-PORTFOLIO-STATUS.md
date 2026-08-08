@@ -1,18 +1,18 @@
 # APZHUB Portfolio Status
 
-| Field                | Value                                                                                                                                                                                                                                                                               |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Timestamp            | 20260808T232000Z                                                                                                                                                                                                                                                                    |
-| Authority            | Owner operating face — one-page dashboard                                                                                                                                                                                                                                           |
-| Complements          | [APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md](./APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md) · [APZHUB-PORTFOLIO-OPERATING-PRINCIPLE.md](./APZHUB-PORTFOLIO-OPERATING-PRINCIPLE.md) · [APZHUB-DELIVERY-STANDARD.md](./APZHUB-DELIVERY-STANDARD.md)                              |
-| Portfolio Completion | [PORTFOLIO-COMPLETION-PROGRAMME.md](./PORTFOLIO-COMPLETION-PROGRAMME.md) · [portfolio-completion/PORT-005-PORTFOLIO-FREEZE-NOTICE.md](./portfolio-completion/PORT-005-PORTFOLIO-FREEZE-NOTICE.md) **IN FORCE**                                                                      |
-| Rule                 | Observation / planning only — does not authorise engineering                                                                                                                                                                                                                        |
-| Operating model      | **We operate the APZHUB Delivery Standard** — not reinvent how to build each product                                                                                                                                                                                                |
-| Operating principle  | **No Engineering Execution without a finite closeout inventory**                                                                                                                                                                                                                    |
-| Delivery standard    | [v1.0 Reference Standard](./APZHUB-DELIVERY-STANDARD.md) (**IMMUTABLE**)                                                                                                                                                                                                            |
-| Programme measure    | **Portfolio COMPLETE** — 7 of 7 Production Ready · freeze **IN FORCE**                                                                                                                                                                                                              |
-| Programme closure    | [APZHUB-ORIGINAL-PORTFOLIO-PROGRAMME-CLOSURE.md](./APZHUB-ORIGINAL-PORTFOLIO-PROGRAMME-CLOSURE.md) · tag `apzhub-original-portfolio-complete` · `backup/apzhub-original-portfolio-complete-20260808`                                                                                |
-| Platform Evolution   | Evolution era [OPEN](./APZHUB-EVOLUTION-ERA.md) · APS-001 [Accepted](./platform-evolution/programme-002-platform-services/OWNER-ACCEPT-APS-001.md) · APS-002 [Proposed](./platform-evolution/programme-002-platform-services/APS-002-FINITE-PLATFORM-SERVICE-INVENTORY.md) · Eng 🚫 |
+| Field                | Value                                                                                                                                                                                                                                                                                       |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Timestamp            | 20260808T233000Z                                                                                                                                                                                                                                                                            |
+| Authority            | Owner operating face — one-page dashboard                                                                                                                                                                                                                                                   |
+| Complements          | [APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md](./APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md) · [APZHUB-PORTFOLIO-OPERATING-PRINCIPLE.md](./APZHUB-PORTFOLIO-OPERATING-PRINCIPLE.md) · [APZHUB-DELIVERY-STANDARD.md](./APZHUB-DELIVERY-STANDARD.md)                                      |
+| Portfolio Completion | [PORTFOLIO-COMPLETION-PROGRAMME.md](./PORTFOLIO-COMPLETION-PROGRAMME.md) · [portfolio-completion/PORT-005-PORTFOLIO-FREEZE-NOTICE.md](./portfolio-completion/PORT-005-PORTFOLIO-FREEZE-NOTICE.md) **IN FORCE**                                                                              |
+| Rule                 | Observation / planning only — does not authorise engineering                                                                                                                                                                                                                                |
+| Operating model      | **We operate the APZHUB Delivery Standard** — not reinvent how to build each product                                                                                                                                                                                                        |
+| Operating principle  | **No Engineering Execution without a finite closeout inventory**                                                                                                                                                                                                                            |
+| Delivery standard    | [v1.0 Reference Standard](./APZHUB-DELIVERY-STANDARD.md) (**IMMUTABLE**)                                                                                                                                                                                                                    |
+| Programme measure    | **Portfolio COMPLETE** — 7 of 7 Production Ready · freeze **IN FORCE**                                                                                                                                                                                                                      |
+| Programme closure    | [APZHUB-ORIGINAL-PORTFOLIO-PROGRAMME-CLOSURE.md](./APZHUB-ORIGINAL-PORTFOLIO-PROGRAMME-CLOSURE.md) · tag `apzhub-original-portfolio-complete` · `backup/apzhub-original-portfolio-complete-20260808`                                                                                        |
+| Platform Evolution   | Evolution era [OPEN](./APZHUB-EVOLUTION-ERA.md) · APS-002 [Accepted](./platform-evolution/programme-002-platform-services/OWNER-DECISION-APS-002.md) · APS-003 [Engineering](./platform-evolution/programme-002-platform-services/APS-003-PLATFORM-SERVICE-ENGINEERING.md) · Law 6 IN FORCE |
 
 ---
 
@@ -59,17 +59,18 @@
 3. ✅ **Platform Evolution Programme 001** — Foundation v1.0 **CLOSED** (`apzhub-platform-engine-foundation-1.0`)
 4. ✅ **Foundational era** — Chapters 1–3 [CLOSED](./APZHUB-FOUNDATIONAL-ERA-CLOSURE.md)
 5. ▶ **Evolution era** — [OPEN](./APZHUB-EVOLUTION-ERA.md)
-6. ✅ **APS-001** — [Accepted](./platform-evolution/programme-002-platform-services/OWNER-ACCEPT-APS-001.md) · programme redirected to **certify & rationalise**
-7. ⏳ **APS-002** — Finite inventory [Proposed](./platform-evolution/programme-002-platform-services/APS-002-FINITE-PLATFORM-SERVICE-INVENTORY.md) — awaiting Owner Accept · Eng 🚫
-8. ⏸ **Programme 003 — Platform Intelligence** — deferred
+6. ✅ **APS-001** — Accepted
+7. ✅ **APS-002** — Finite inventory [Accepted](./platform-evolution/programme-002-platform-services/OWNER-DECISION-APS-002.md) — **7 services**
+8. ▶ **APS-003** — [Engineering OPEN](./platform-evolution/programme-002-platform-services/APS-003-PLATFORM-SERVICE-ENGINEERING.md)
+9. ⏸ **Programme 003 — Platform Intelligence** — deferred
 
 ### Architecture (constitutional)
 
-[Architecture Constitution](./APZHUB-ARCHITECTURE-CONSTITUTION.md) · [Identity](./APZHUB-PLATFORM-IDENTITY.md) · **Two-Consumer Rule** IN FORCE
+[Architecture Constitution](./APZHUB-ARCHITECTURE-CONSTITUTION.md) · [Identity](./APZHUB-PLATFORM-IDENTITY.md) · **Two-Consumer Rule** · **Law 6 (smaller platform)** IN FORCE
 
 **Guiding question:** Does this belong in the platform?
 
-**Next gate:** Owner Accept or Amend of APS-002 (7 proposed services). No engineering before Accept.
+**Engineering:** Certify & rationalise only — no new services, no AI, no product redesign.
 
 ---
 

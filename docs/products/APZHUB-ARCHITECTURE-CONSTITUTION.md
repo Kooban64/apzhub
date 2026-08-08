@@ -5,8 +5,8 @@
 | Document    | **Architecture Constitution**                                                                                      |
 | Kind        | Constitutional — principles only · **not** an implementation guide                                                 |
 | Status      | **IN FORCE**                                                                                                       |
-| Timestamp   | 20260808T231500Z                                                                                                   |
-| Authority   | Owner direction after Platform Engine Foundation v1.0                                                              |
+| Timestamp   | 20260808T233000Z                                                                                                   |
+| Authority   | Owner direction after Platform Engine Foundation v1.0 · amended APS-002 (Law 6)                                    |
 | Complements | Document 000 · Delivery Standard v1.0 · ADR-PE-0001 · [APZHUB-PLATFORM-IDENTITY.md](./APZHUB-PLATFORM-IDENTITY.md) |
 
 ---
@@ -63,6 +63,14 @@ Users work in APZHUB and its products — not in Metabase, Zammad, Kimai, or Pla
 
 **Never** require end users to learn provider identity or leave the Workbench mental model for ordinary work.
 
+### Law 6 — The Platform shall be intentionally smaller than the Products
+
+Platforms accumulate responsibility over time. The Constitution actively resists that tendency.
+
+A smaller platform is easier to certify, evolves more safely, remains provider-neutral, stays understandable, and avoids becoming a monolith.
+
+**Never** grow the platform merely because a capability is useful. Prefer product ownership until the Two-Consumer Rule (or an explicit constitutional declaration) is met.
+
 ---
 
 ## Additional permanent truths
@@ -75,6 +83,7 @@ Users work in APZHUB and its products — not in Metabase, Zammad, Kimai, or Pla
 | **No “version 2” of the platform**           | The platform evolves through programmes — Foundation → Services → Intelligence → Operational Evolution                                                                                  |
 | **Ask “Does this belong in the platform?”**  | Prefer exclusion until shared need and ownership are clear                                                                                                                              |
 | **Two-Consumer Rule**                        | A capability belongs in the platform only if **at least two Production Ready products** genuinely consume it, **or** this Constitution explicitly declares it a platform responsibility |
+| **Smaller platform**                         | Law 6 — resist accumulation; certify a coherent small layer rather than an expanding monolith                                                                                           |
 
 ---
 
@@ -87,7 +96,7 @@ Inventory
     ↓
 Foundation          (Programme 001 — COMPLETE)
     ↓
-Services            (Programme 002 — certify & rationalise · APS-001 Accepted · APS-002 proposed)
+Services            (Programme 002 — APS-002 Accepted · APS-003 Engineering OPEN)
     ↓
 Intelligence        (Programme 003 — deferred)
     ↓
