@@ -61,6 +61,16 @@ export {
   useGlobalSearchShortcut,
 } from "./global-search/global-search-shortcut";
 export {
+  GlobalQuickActionsDialog,
+  type GlobalQuickActionItem,
+  type GlobalQuickActionsDialogProps,
+} from "./global-quick-actions/global-quick-actions-dialog";
+export {
+  GLOBAL_QUICK_ACTIONS_SHORTCUT,
+  isGlobalQuickActionsShortcut,
+  useGlobalQuickActionsShortcut,
+} from "./global-quick-actions/global-quick-actions-shortcut";
+export {
   buildGlobalShortcutShellDiagnostics,
   GLOBAL_SHORTCUT_SURFACE,
   type GlobalShortcutShellDiagnostics,

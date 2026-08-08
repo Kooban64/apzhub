@@ -203,6 +203,10 @@ export function WorkbenchPage() {
       onGlobalSearchNavigate={(href) => {
         router.push(href);
       }}
+      enableGlobalQuickActions
+      onGlobalQuickActionsNavigate={(href) => {
+        router.push(href);
+      }}
       enableNotificationCentreShortcut
       onOpenNotificationCentre={() => {
         router.push("/workspace/notifications/inbox");

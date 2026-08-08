@@ -23,6 +23,8 @@ import { useGlobalShortcuts } from "./desktop-shell/global-shortcuts";
 import { useCommandPaletteShortcut } from "./desktop-shell/palette-shortcut";
 import { GlobalSearchDialog } from "./global-search/global-search-dialog";
 import { useGlobalSearchShortcut } from "./global-search/global-search-shortcut";
+import { GlobalQuickActionsDialog } from "./global-quick-actions/global-quick-actions-dialog";
+import { useGlobalQuickActionsShortcut } from "./global-quick-actions/global-quick-actions-shortcut";
 import { useNotificationCentreShortcut } from "./notifications/notification-centre-shortcut";
 
 export interface DesktopShellProps {
@@ -39,6 +41,11 @@ export interface DesktopShellProps {
   globalSearchOpen?: boolean;
   onGlobalSearchOpenChange?: (open: boolean) => void;
   onGlobalSearchNavigate?: (href: string) => void;
+  /** Global Quick Actions (Ctrl+Shift+A) — APS-Command capability surface. */
+  enableGlobalQuickActions?: boolean;
+  globalQuickActionsOpen?: boolean;
+  onGlobalQuickActionsOpenChange?: (open: boolean) => void;
+  onGlobalQuickActionsNavigate?: (href: string) => void;
   /** Ctrl+Shift+N → Unified Notification Centre */
   enableNotificationCentreShortcut?: boolean;
   onOpenNotificationCentre?: () => void;
@@ -188,6 +195,10 @@ export function DesktopShell({
   globalSearchOpen,
   onGlobalSearchOpenChange,
   onGlobalSearchNavigate,
+  enableGlobalQuickActions = false,
+  globalQuickActionsOpen,
+  onGlobalQuickActionsOpenChange,
+  onGlobalQuickActionsNavigate,
   enableNotificationCentreShortcut = false,
   onOpenNotificationCentre,
   enableCommandPalette = false,
@@ -225,9 +236,14 @@ export function DesktopShell({
   const globalSearchIsOpen = globalSearchOpen ?? internalGlobalSearchOpen;
   const setGlobalSearchOpen = onGlobalSearchOpenChange ?? setInternalGlobalSearchOpen;
 
+  const [internalQuickActionsOpen, setInternalQuickActionsOpen] = useState(false);
+  const quickActionsIsOpen = globalQuickActionsOpen ?? internalQuickActionsOpen;
+  const setQuickActionsOpen =
+    onGlobalQuickActionsOpenChange ?? setInternalQuickActionsOpen;
+
   useCommandPaletteShortcut({
     enabled: enableCommandPalette,
-    paletteOpen: paletteState.open || globalSearchIsOpen,
+    paletteOpen: paletteState.open || globalSearchIsOpen || quickActionsIsOpen,
     onOpen: paletteState.openPalette,
   });
 
@@ -235,6 +251,12 @@ export function DesktopShell({
     enabled: enableGlobalSearch,
     open: globalSearchIsOpen,
     onOpen: () => setGlobalSearchOpen(true),
+  });
+
+  useGlobalQuickActionsShortcut({
+    enabled: enableGlobalQuickActions,
+    open: quickActionsIsOpen,
+    onOpen: () => setQuickActionsOpen(true),
   });
 
   useNotificationCentreShortcut({
@@ -293,6 +315,18 @@ export function DesktopShell({
               <kbd className="ml-2 hidden sm:inline">Ctrl+K</kbd>
             </button>
           ) : null}
+          {enableGlobalQuickActions ? (
+            <button
+              type="button"
+              data-testid="global-quick-actions-trigger"
+              className="mr-2 rounded-md border border-[var(--color-border)] px-2 py-1 text-xs text-[var(--color-muted-foreground)] hover:bg-[var(--color-muted)]"
+              onClick={() => setQuickActionsOpen(true)}
+              aria-label="Open quick actions"
+            >
+              Actions
+              <kbd className="ml-2 hidden sm:inline">Ctrl+Shift+A</kbd>
+            </button>
+          ) : null}
           {enableNotificationBadge || enableNotificationPanel ? (
             <WorkbenchNotifications
               enableBadge={enableNotificationBadge}
@@ -336,9 +370,16 @@ export function DesktopShell({
           onNavigate={onGlobalSearchNavigate}
         />
       ) : null}
+      {enableGlobalQuickActions ? (
+        <GlobalQuickActionsDialog
+          open={quickActionsIsOpen}
+          onOpenChange={setQuickActionsOpen}
+          onNavigate={(href) => onGlobalQuickActionsNavigate?.(href)}
+        />
+      ) : null}
       {enableGlobalShortcuts ? (
         <GlobalShortcutsLayer
-          modalOpen={modalOpen || globalSearchIsOpen}
+          modalOpen={modalOpen || globalSearchIsOpen || quickActionsIsOpen}
           onExecuted={onShortcutExecuted}
         />
       ) : null}

@@ -33,3 +33,7 @@
 - Clear owner: APS-Command
 - Multi-product + Constitution
 - Anomaly named; no second Platform Service invented
+
+## Capability note
+
+**Global Quick Actions v1.0** is an APS-Command surface (create/start launcher), not a new APS inventory row. See [GLOBAL-QUICK-ACTIONS-v1.md](../../../capabilities/GLOBAL-QUICK-ACTIONS-v1.md).

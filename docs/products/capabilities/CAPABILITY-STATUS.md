@@ -6,15 +6,15 @@
 | Unified Notifications v1.0   | Production Ready | `apzhub-unified-notifications-1.0` |
 | Unified Activity Stream v1.0 | Production Ready | `apzhub-unified-activity-1.0`      |
 | Personalisation v1.0         | Production Ready | `apzhub-personalisation-1.0`       |
+| Global Quick Actions v1.0    | Production Ready | `apzhub-global-quick-actions-1.0`  |
 
-## Core set complete
+## Core APZHUB Workbench
 
-Search · Notifications · Activity · Personalisation — shared experience above every product.
+**COMPLETE** — Find · See · Understand · Prefer · Start.  
+Face: [CORE-APZHUB-WORKBENCH.md](./CORE-APZHUB-WORKBENCH.md)
 
 ## Next
 
-**Paused for selection.** Choose by user friction:
+**Paused for observation.** No next capability selected.
 
-> What is the single biggest source of friction users still experience when working across APZHUB?
-
-Then: Constitution check → build → certify → ship.
+Use the platform; let measured friction choose the next ship. Every candidate must pass the [delivery filter](../APZHUB-EVOLUTION-OPERATING-RULE.md).

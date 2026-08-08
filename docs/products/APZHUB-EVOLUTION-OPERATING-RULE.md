@@ -1,11 +1,11 @@
 # Evolution Era — Operating Rule
 
-| Field     | Value                                                        |
-| --------- | ------------------------------------------------------------ |
-| Status    | **IN FORCE**                                                 |
-| Timestamp | 20260808T235500Z                                             |
-| Kind      | Operating rule — not a programme · not Engineering Execution |
-| Authority | Owner direction after Platform Services v1.0                 |
+| Field     | Value                                                                          |
+| --------- | ------------------------------------------------------------------------------ |
+| Status    | **IN FORCE**                                                                   |
+| Timestamp | 20260809T010000Z                                                               |
+| Kind      | Operating rule — not a programme · not Engineering Execution                   |
+| Authority | Owner direction after Platform Services v1.0 · amended Core Workbench complete |
 
 ---
 
@@ -46,6 +46,23 @@ Capability → Constitution Check → Inventory (1 page) → Build → Certify �
 
 Does it belong in **Product**, **Platform**, or **Provider**? If unclear or nowhere — **stop**.
 
+### Delivery filter (required before engineering)
+
+Every future capability must pass **all** of:
+
+1. Does it solve a **real daily friction**?
+2. Does it **reduce cognitive load**?
+3. Does it **leverage existing Platform Services**?
+4. Can it be **shipped independently**?
+
+If any answer is **no**, it does not enter the backlog yet.
+
+Underlying value test:
+
+> **Does this reduce the number of clicks, context switches, or decisions a user makes every day?**
+
+Friction evidence beats architectural elegance.
+
 ### Inventory
 
 Usually one page. Engineering slices Cursor can build. No essays.
@@ -68,17 +85,18 @@ Progress = valuable capabilities shipped — not documents written.
 
 ---
 
-## First-capability candidates (not opened)
+## Core APZHUB Workbench
 
-Prefer user-visible exercise of certified APS (not AI first):
+**COMPLETE** — Search · Notifications · Activity · Personalisation · Quick Actions.  
+Face: [CORE-APZHUB-WORKBENCH.md](./capabilities/CORE-APZHUB-WORKBENCH.md)
 
-- Unified Notifications
-- Unified Activity Stream
-- Global Search
+### Observation pause (in force)
 
-Owner names one → Constitution Check → Inventory → Build.
+Do **not** immediately select the next capability. Use the platform internally. Watch hesitation and excess clicks. Let evidence choose the next ship.
 
-AI / RAG / agents remain candidates only when shared context and value justify them.
+Cadence: **build → observe → improve** (not assume → build → hope).
+
+AI / RAG / agents remain candidates only when shared context and the delivery filter clear them.
 
 ---
 
