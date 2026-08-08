@@ -278,6 +278,9 @@ importers:
       '@apzhub/observe-contracts':
         specifier: workspace:*
         version: link:../../packages/observe-contracts
+      '@apzhub/platform-audit':
+        specifier: workspace:*
+        version: link:../../packages/platform-audit
       '@apzhub/platform-authorization':
         specifier: workspace:*
         version: link:../../packages/platform-authorization
@@ -868,6 +871,8 @@ importers:
       drizzle-orm:
         specifier: '>=0.45.2'
         version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/platform-audit: {}
 
   packages/platform-authorization:
     dependencies:

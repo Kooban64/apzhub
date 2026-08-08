@@ -1,0 +1,20 @@
+manifestSchemaVersion: "1.0"
+id: ape-audit-service
+name: APE-Audit Service
+version: 1.0.0
+kind: service
+metadata:
+  category: platform-engine
+  apeId: ape-audit
+  description: >
+    Unified Platform Audit Engine facade (APE-Audit). Domain audit tables remain
+    Systems of Record; this service exposes a stable cross-product query contract.
+  implementationPackage: "@apzhub/platform-audit"
+  owner: APZHUB
+  tags:
+    - ape
+    - ape-audit
+    - platform-engine
+dependencies:
+  platform: []
+  integrations: []

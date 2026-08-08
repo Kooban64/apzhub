@@ -29,6 +29,7 @@
     "@apzhub/metrics-contracts": "workspace:*",
     "@apzhub/notification-contracts": "workspace:*",
     "@apzhub/observe-contracts": "workspace:*",
+    "@apzhub/platform-audit": "workspace:*",
     "@apzhub/platform-authorization": "workspace:*",
     "@apzhub/platform-bootstrap": "workspace:*",
     "@apzhub/platform-event-bus": "workspace:*",

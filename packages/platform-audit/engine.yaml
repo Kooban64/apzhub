@@ -1,0 +1,26 @@
+# APE-Audit — APZ Platform Engine manifest (Programme 001)
+manifestSchemaVersion: "1.0"
+id: ape-audit
+name: APE-Audit
+shortName: APE-Audit
+kind: platform-engine
+version: "1.0.0"
+status: foundation
+programme: platform-evolution-001
+description: >
+  Unified Platform Audit Engine. Domain audit tables remain Systems of Record;
+  APE-Audit provides a stable cross-product query facade (no data migration).
+ownership:
+  behaviour: platform
+  businessCapability: none
+  providers: none
+principles:
+  - ADR-PE-0001
+  - never-duplicate-capability
+  - no-end-user-retraining
+contracts:
+  package: "@apzhub/platform-audit"
+outOfScope:
+  - ai
+  - rag
+  - product-redesign

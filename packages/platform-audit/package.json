@@ -1,0 +1,15 @@
+{
+  "name": "@apzhub/platform-audit",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "APE-Audit — Unified Platform Audit Engine (facade over domain audit SoRs)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "vitest run"
+  }
+}
