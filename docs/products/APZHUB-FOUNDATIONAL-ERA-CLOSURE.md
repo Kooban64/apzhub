@@ -4,7 +4,7 @@
 | --------- | --------------------------------------------------------------- |
 | Document  | **FOUNDATIONAL-ERA-CLOSURE**                                    |
 | Status    | **COMPLETE · CLOSED**                                           |
-| Timestamp | 20260808T223000Z                                                |
+| Timestamp | 20260808T224500Z                                                |
 | Kind      | Historical boundary — not a product · not Engineering Execution |
 
 ---
@@ -33,6 +33,20 @@ These chapters are **immutable reference points**. Future programmes extend capa
 
 ---
 
+## Owner final assessment — five defining achievements
+
+| #   | Achievement                                               | Why it lasts                                                                                                                       |
+| --- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | **Delivery separated from products**                      | Delivery Standard is independent of every product; future products inherit capability instead of recreating methodology            |
+| 2   | **Business capability separated from implementation**     | Users see APZ products, not Plane / Zammad / Metabase — long-term provider freedom                                                 |
+| 3   | **Platform capability separated from product capability** | Products own business domains; APE owns shared capabilities — clean boundary for years                                             |
+| 4   | **Engineering identity created**                          | Architecture Constitution answers “how do we build software here?” independently of who created it                                 |
+| 5   | **You finished**                                          | Seven products + Delivery Standard + Platform Foundation + Constitution + Portfolio Completion — stable base, not unfinished pivot |
+
+The process did not make every decision perfect. It gave a disciplined way to **discover** the right decisions without constantly reinventing them.
+
+---
+
 ## Reference faces
 
 | Chapter      | Primary faces                                                                                                                                                                                                                                   |
@@ -45,11 +59,32 @@ Milestone backup: tag `apzhub-original-portfolio-complete` · `backup/apzhub-ori
 
 ---
 
-## Guiding question going forward
+## Guiding questions going forward
 
 Not _“What should APZHUB become?”_
 
 > **Does this belong in the platform?**
+
+And for every future programme:
+
+> **Does this strengthen the platform without violating the Constitution?**
+
+If yes — it belongs. If not — it probably belongs in a product, or nowhere at all.
+
+---
+
+## Owner commitment — constitutional, not conversational
+
+The following are treated as **constitutional** in all future conversations. Casual change is out of scope. Any recommendation that touches them requires compelling architectural justification — amendment discipline, not chat preference.
+
+| Asset                       | Face                                                                          |
+| --------------------------- | ----------------------------------------------------------------------------- |
+| Delivery Standard           | [APZHUB-DELIVERY-STANDARD.md](./APZHUB-DELIVERY-STANDARD.md)                  |
+| Architecture Constitution   | [APZHUB-ARCHITECTURE-CONSTITUTION.md](./APZHUB-ARCHITECTURE-CONSTITUTION.md)  |
+| APE architecture            | [APE-NAMING.md](./platform-evolution/APE-NAMING.md) · Foundation release pack |
+| Provider model              | Constitution Law 3 · Integration / adapter layer                              |
+| Product ↔ Platform boundary | Constitution Laws 1–2                                                         |
+| Platform Identity           | [APZHUB-PLATFORM-IDENTITY.md](./APZHUB-PLATFORM-IDENTITY.md)                  |
 
 ---
 
@@ -61,12 +96,22 @@ Next session begins with:
 
 # APS-001 — Platform Services Assessment
 
+No preconceived service inventory. No ten service ideas as starting truth.
+
 ### Four Owner questions
 
 1. **Current state?** — What platform services already exist today (regardless of implementation)?
 2. **Source of truth?** — Repository only, or architecture documentation as assessment evidence?
 3. **Is the inventory already known?** — Expected: **No — derive finite inventory.**
 4. **Target?** — Platform Services Foundation v1.0 (not 2.0, not AI).
+
+Then, per Delivery Standard:
+
+1. Assess the platform as it exists
+2. Identify what truly belongs in the platform
+3. Derive a finite inventory
+4. Seek Owner acceptance
+5. Engineer only what has been accepted
 
 Hypotheses (H-Search … H-Nav) may inform assessment. They are **not** the inventory.
 
@@ -84,4 +129,4 @@ Prediction to test: Platform Services will be **smaller than imagined**, and **m
 
 ## Closing
 
-Chapter closed. Architecture protected. Next era starts with assessment — as always.
+Chapter closed. Architecture protected. Foundations constitutional. Next era starts with assessment — as always.
