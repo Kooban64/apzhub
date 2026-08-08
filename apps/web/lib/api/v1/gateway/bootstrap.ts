@@ -200,6 +200,12 @@ async function createAnalyticsServicesBundle(): Promise<AnalyticsPlatformService
 
 async function createTimeServicesBundle(): Promise<TimePlatformServicesBundle> {
   const domainMode = process.env.APZHUB_TIME_DOMAIN_MODE?.trim().toLowerCase();
+  // TIME-PR-01 — never allow in-memory Time domain in production.
+  if (domainMode === "in_memory" && process.env.NODE_ENV === "production") {
+    throw new Error(
+      "APZHUB_TIME_DOMAIN_MODE=in_memory is forbidden in production (fail-closed)",
+    );
+  }
   const allowInMemory =
     domainMode === "in_memory" && process.env.NODE_ENV !== "production";
 

@@ -193,7 +193,12 @@ export function TimeTable({
   readonly children: ReactNode;
 }) {
   return (
-    <div className="overflow-x-auto rounded-lg border border-[var(--color-border)]">
+    <div
+      className="overflow-x-auto rounded-lg border border-[var(--color-border)]"
+      tabIndex={0}
+      role="region"
+      aria-label="Scrollable time table"
+    >
       <table
         className="w-full min-w-[640px] text-left text-sm"
         data-testid="time-table"

@@ -69,7 +69,7 @@ function makeContext(): PlatformApiRequestContext {
       timestamp: "2026-07-19T00:00:00.000Z",
     },
     session: buildMockSession() as unknown as PlatformApiRequestContext["session"],
-    serviceContext: buildTestServiceContext(),
+    serviceContext: buildTestServiceContext({ permissions: ["time.*"] }),
   };
 }
 
@@ -176,7 +176,8 @@ describe("APZHUB-TIME-HTTP-001 Time HTTP API", () => {
     expect(caps.status).toBe(200);
     const capsBody = await caps.json();
     expect(capsBody.data.timeEnabled).toBe(true);
-    expect(capsBody.data.workbenchReady).toBe(false);
+    expect(capsBody.data.workbenchReady).toBe(true);
+    expect(capsBody.data.productReady).toBe(true);
     expect(capsBody.data.httpApiVersion).toBe("1.0.0");
   });
 

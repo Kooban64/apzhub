@@ -68,11 +68,49 @@ export function TimeHelpView() {
               <strong className="text-[var(--color-foreground)]">
                 Activities / Customers / Tags
               </strong>{" "}
-              — classify work for reporting later.
+              — classify work for timesheet context (not a reporting product).
             </li>
             <li>
               <strong className="text-[var(--color-foreground)]">Search</strong> — find
-              timesheets and related records inside APZ Time.
+              timesheets and related records inside APZ Time (foundation search; not
+              semantic AI search).
+            </li>
+          </ul>
+        </section>
+
+        <section
+          className="rounded-lg border border-[var(--color-border)] p-4 text-sm text-[var(--color-muted-foreground)] lg:col-span-2"
+          data-testid="time-help-limitations"
+        >
+          <h2 className="text-sm font-semibold text-[var(--color-foreground)]">
+            Current limitations
+          </h2>
+          <p className="mt-2">
+            APZ Time v1.0 is honest about what is not complete. These are product limits
+            — not temporary glitches.
+          </p>
+          <ul className="mt-3 list-disc space-y-2 pl-5">
+            <li>
+              <strong className="text-[var(--color-foreground)]">
+                Approvals, reporting UI, analytics, dashboards, leave, scheduling, and
+                AI
+              </strong>{" "}
+              are out of product identity for v1.0.
+            </li>
+            <li>
+              <strong className="text-[var(--color-foreground)]">Tags search</strong>{" "}
+              may be partial depending on the durable time store.
+            </li>
+            <li>
+              <strong className="text-[var(--color-foreground)]">Production</strong>{" "}
+              requires a durable time adapter — in-memory mode is forbidden in
+              production and unavailable storage fails closed.
+            </li>
+            <li>
+              <strong className="text-[var(--color-foreground)]">
+                Health and diagnostics
+              </strong>{" "}
+              are operator surfaces — not the default timesheet path.
             </li>
           </ul>
         </section>

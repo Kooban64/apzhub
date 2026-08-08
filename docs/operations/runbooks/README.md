@@ -17,6 +17,7 @@
 | [support-adapter-unhealthy.md](./support-adapter-unhealthy.md)               | `alert.support.adapter-unhealthy`        | P2       |
 | [analytics-adapter-unhealthy.md](./analytics-adapter-unhealthy.md)           | `alert.analytics.adapter-unhealthy`      | P2       |
 | [knowledge-memory-store-unhealthy.md](./knowledge-memory-store-unhealthy.md) | `alert.knowledge.memory-store-unhealthy` | P2       |
+| [time-adapter-unhealthy.md](./time-adapter-unhealthy.md)                     | `alert.time.adapter-unhealthy`           | P2       |
 | [law-authz-denials-spike.md](./law-authz-denials-spike.md)                   | `alert.law.authz-denials-spike`          | P2       |
 | [event-bus-publish-failures.md](./event-bus-publish-failures.md)             | `alert.event-bus.publish-failures`       | P2       |
 | [automation-deferred-flood.md](./automation-deferred-flood.md)               | `alert.automation.deferred-flood`        | INFO     |

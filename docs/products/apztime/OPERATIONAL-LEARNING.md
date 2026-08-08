@@ -1,60 +1,35 @@
 # APZ Time — Operational Learning
 
-| Field     | Value            |
-| --------- | ---------------- |
-| Status    | **MANDATORY**    |
-| Timestamp | 20260805T034500Z |
+| Field     | Value                        |
+| --------- | ---------------------------- |
+| Status    | **IN FORCE**                 |
+| Timestamp | 20260808T204500Z             |
+| Baseline  | Version 1.0 (`apz-time-1.0`) |
 
 ## Rule
 
-For every **completed APZ Time release**, capture Operational Learning.  
-Do **not** implement improvements from this document. Record observations only.
+Every completed APZ Time release records Operational Learning.  
+Friction is classified: Engineering · Operational · User · Training · Documentation · Product Enhancement · Portfolio Capability.
 
-## Required capture (per completed release)
+## Where to record
 
-| Field                | Content                                     |
-| -------------------- | ------------------------------------------- |
-| Engineering Friction | What slowed engineering under APZQEP / Time |
-| Operational Friction | What hurt operators / release mechanics     |
-| User Friction        | What hurt end users (if observed)           |
-| Lessons Learned      | What reality taught                         |
-| Recommendation       | Candidate only — not authorised work        |
+| Artefact          | Path                                                                                                                       |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Friction Log      | [../apzqep/apzqep-adopt-001/FRICTION-LOG.md](../apzqep/apzqep-adopt-001/FRICTION-LOG.md)                                   |
+| Learning Register | [../apzqep/apzqep-adopt-001/OPERATIONAL-LEARNING-REGISTER.md](../apzqep/apzqep-adopt-001/OPERATIONAL-LEARNING-REGISTER.md) |
+| Emerging Patterns | [../framework/APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](../framework/APZHUB-EMERGING-PORTFOLIO-PATTERNS.md)                   |
 
-## Entry template
+## Time-specific learning themes
 
-```text
-Release:
-Quality Flow:
-Date:
+- Did users stay on Overview → Timesheets, or drift into operator health/diagnostics?
+- Were approvals / reporting UI demands correctly classified as Time 2.0 / Product Board?
+- Did production in-memory attempts get blocked with honest failure?
+- Did engine/adapter branding leak into user-facing copy or support tickets?
+- Was partial tags search mis-reported as a platform outage?
 
-Engineering Friction
+## Anti-patterns
 
-
-Operational Friction
-
-
-User Friction
-
-
-Lessons Learned
-
-
-Recommendation
-
-
-Status: Open | Pattern emerging | Promoted to backlog | Closed
-```
-
-## Registers
-
-| Artefact                                                                                   | Role                             |
-| ------------------------------------------------------------------------------------------ | -------------------------------- |
-| This face                                                                                  | APZ Time-specific learning index |
-| [ADOPT-001 Learning Register](../apzqep/apzqep-adopt-001/OPERATIONAL-LEARNING-REGISTER.md) | Cross-product durable insight    |
-| [FRICTION-LOG](../apzqep/apzqep-adopt-001/FRICTION-LOG.md)                                 | In-the-moment pain               |
-
-## Index
-
-| ID  | Release | Date | Summary                                     | Status |
-| --- | ------- | ---- | ------------------------------------------- | ------ |
-| —   | —       | —    | _(none yet — first real release under A04)_ | —      |
+- Opening Time 2.0 from a single friction note
+- Enabling `APZHUB_TIME_DOMAIN_MODE=in_memory` in production
+- Treating missing reporting UI as Native Adoption failure
+- Jumping to Platform Evolution before Portfolio Completion freeze

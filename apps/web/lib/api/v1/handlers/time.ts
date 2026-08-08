@@ -35,6 +35,7 @@ import {
   updateTimesheetBodySchema,
 } from "../schemas/time";
 import { toListQuery, toPlatformApiPage } from "./paging";
+import { requireTimePermission } from "./require-time-permission";
 
 type RouteContext = { params: Promise<Record<string, string>> };
 
@@ -66,6 +67,7 @@ export async function handleGetTimeHealth(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.view", "time.admin");
   const gateway = await requireTimeGateway();
   const result = await gateway.time.tracking.getHealth(context.serviceContext);
   return jsonDataResponse(result, context.tracing);
@@ -75,6 +77,7 @@ export async function handleGetTimeDiagnostics(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.admin");
   const gateway = await requireTimeGateway();
   const result = await gateway.time.tracking.getDiagnostics(context.serviceContext);
   return jsonDataResponse(result, context.tracing);
@@ -84,6 +87,7 @@ export async function handleGetTimeCapabilities(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.view", "time.admin");
   const gateway = await requireTimeGateway();
   const bootstrap = await getPlatformApiGatewayBootstrap();
   const caps = await gateway.time.tracking.getFoundationCapabilities(
@@ -96,8 +100,8 @@ export async function handleGetTimeCapabilities(
       domainMode: bootstrap.timeReadiness?.domainMode ?? "unknown",
       opsMode: bootstrap.timeReadiness?.opsMode ?? "unknown",
       httpApiVersion: "1.0.0",
-      workbenchReady: false as const,
-      productReady: false as const,
+      workbenchReady: true as const,
+      productReady: true as const,
     },
     context.tracing,
   );
@@ -107,6 +111,7 @@ export async function handleGetTimeReadiness(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.view", "time.admin");
   const gateway = await requireTimeGateway();
   const result = await gateway.time.tracking.getReadiness(context.serviceContext);
   return jsonDataResponse(result, context.tracing);
@@ -116,6 +121,7 @@ export async function handleGetTimeCompatibility(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.view", "time.admin");
   const gateway = await requireTimeGateway();
   const result = await gateway.time.tracking.getCompatibility(context.serviceContext);
   return jsonDataResponse(result, context.tracing);
@@ -125,6 +131,7 @@ export async function handleTestTimeConnection(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.admin");
   const gateway = await requireTimeGateway();
   const result = await gateway.time.tracking.testConnection(context.serviceContext);
   return jsonDataResponse(result, context.tracing);
@@ -138,6 +145,7 @@ export async function handleListTimesheets(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.view", "time.admin");
   const query = parseQuery(timeListQuerySchema, request.nextUrl.searchParams);
   const gateway = await requireTimeGateway();
   const result = await gateway.time.timesheets.list(
@@ -158,6 +166,7 @@ export async function handleGetTimesheet(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireTimePermission(context, "time.view", "time.admin");
   const params = await routeContext?.params;
   const timesheetId = parsePathParam(
     timesheetIdParamSchema,
@@ -175,6 +184,7 @@ export async function handleCreateTimesheet(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.manage", "time.admin");
   const body = await parseJsonBody(
     request,
     createTimesheetBodySchema,
@@ -192,6 +202,7 @@ export async function handleUpdateTimesheet(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireTimePermission(context, "time.manage", "time.admin");
   const params = await routeContext?.params;
   const timesheetId = parsePathParam(
     timesheetIdParamSchema,
@@ -219,6 +230,7 @@ export async function handleArchiveTimesheet(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireTimePermission(context, "time.manage", "time.admin");
   const params = await routeContext?.params;
   const timesheetId = parsePathParam(
     timesheetIdParamSchema,
@@ -240,6 +252,7 @@ export async function handleStopTimesheet(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireTimePermission(context, "time.manage", "time.admin");
   const params = await routeContext?.params;
   const timesheetId = parsePathParam(
     timeEntryIdParamSchema,
@@ -264,6 +277,7 @@ export async function handleListTimeActivities(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.view", "time.admin");
   const query = parseQuery(timeListQuerySchema, request.nextUrl.searchParams);
   const gateway = await requireTimeGateway();
   const result = await gateway.time.activities.list(
@@ -282,6 +296,7 @@ export async function handleGetTimeActivity(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireTimePermission(context, "time.view", "time.admin");
   const params = await routeContext?.params;
   const activityId = parsePathParam(
     timeActivityIdParamSchema,
@@ -297,6 +312,7 @@ export async function handleCreateTimeActivity(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.manage", "time.admin");
   const body = await parseJsonBody(
     request,
     createTimeActivityBodySchema,
@@ -312,6 +328,7 @@ export async function handleUpdateTimeActivity(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireTimePermission(context, "time.manage", "time.admin");
   const params = await routeContext?.params;
   const activityId = parsePathParam(
     timeActivityIdParamSchema,
@@ -337,6 +354,7 @@ export async function handleArchiveTimeActivity(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireTimePermission(context, "time.manage", "time.admin");
   const params = await routeContext?.params;
   const activityId = parsePathParam(
     timeActivityIdParamSchema,
@@ -359,6 +377,7 @@ export async function handleListTimeCustomers(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.view", "time.admin");
   const query = parseQuery(timeListQuerySchema, request.nextUrl.searchParams);
   const gateway = await requireTimeGateway();
   const result = await gateway.time.customers.list(
@@ -377,6 +396,7 @@ export async function handleGetTimeCustomer(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireTimePermission(context, "time.view", "time.admin");
   const params = await routeContext?.params;
   const customerId = parsePathParam(
     timeCustomerIdParamSchema,
@@ -392,6 +412,7 @@ export async function handleCreateTimeCustomer(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.manage", "time.admin");
   const body = await parseJsonBody(
     request,
     createTimeCustomerBodySchema,
@@ -407,6 +428,7 @@ export async function handleUpdateTimeCustomer(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireTimePermission(context, "time.manage", "time.admin");
   const params = await routeContext?.params;
   const customerId = parsePathParam(
     timeCustomerIdParamSchema,
@@ -432,6 +454,7 @@ export async function handleArchiveTimeCustomer(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireTimePermission(context, "time.manage", "time.admin");
   const params = await routeContext?.params;
   const customerId = parsePathParam(
     timeCustomerIdParamSchema,
@@ -454,6 +477,7 @@ export async function handleListTimeProjects(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.view", "time.admin");
   const query = parseQuery(timeListQuerySchema, request.nextUrl.searchParams);
   const gateway = await requireTimeGateway();
   const result = await gateway.time.projects.list(
@@ -472,6 +496,7 @@ export async function handleGetTimeProject(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireTimePermission(context, "time.view", "time.admin");
   const params = await routeContext?.params;
   const projectId = parsePathParam(
     timeProjectIdParamSchema,
@@ -487,6 +512,7 @@ export async function handleCreateTimeProject(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.manage", "time.admin");
   const body = await parseJsonBody(
     request,
     createTimeProjectBodySchema,
@@ -502,6 +528,7 @@ export async function handleUpdateTimeProject(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireTimePermission(context, "time.manage", "time.admin");
   const params = await routeContext?.params;
   const projectId = parsePathParam(
     timeProjectIdParamSchema,
@@ -527,6 +554,7 @@ export async function handleArchiveTimeProject(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireTimePermission(context, "time.manage", "time.admin");
   const params = await routeContext?.params;
   const projectId = parsePathParam(
     timeProjectIdParamSchema,
@@ -546,6 +574,7 @@ export async function handleListTimeTags(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.view", "time.admin");
   const query = parseQuery(timeListQuerySchema, request.nextUrl.searchParams);
   const gateway = await requireTimeGateway();
   const result = await gateway.time.tags.list(
@@ -564,6 +593,7 @@ export async function handleGetTimeTag(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireTimePermission(context, "time.view", "time.admin");
   const params = await routeContext?.params;
   const tagId = parsePathParam(timeTagIdParamSchema, params?.tagId ?? "", "tagId");
   const gateway = await requireTimeGateway();
@@ -575,6 +605,7 @@ export async function handleCreateTimeTag(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.manage", "time.admin");
   const body = await parseJsonBody(
     request,
     createTimeTagBodySchema,
@@ -590,6 +621,7 @@ export async function handleUpdateTimeTag(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireTimePermission(context, "time.manage", "time.admin");
   const params = await routeContext?.params;
   const tagId = parsePathParam(timeTagIdParamSchema, params?.tagId ?? "", "tagId");
   const body = await parseJsonBody(
@@ -607,6 +639,7 @@ export async function handleArchiveTimeTag(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireTimePermission(context, "time.manage", "time.admin");
   const params = await routeContext?.params;
   const tagId = parsePathParam(timeTagIdParamSchema, params?.tagId ?? "", "tagId");
   const gateway = await requireTimeGateway();
@@ -622,6 +655,7 @@ export async function handleGetTimeReportingCapabilities(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.view", "time.admin");
   const gateway = await requireTimeGateway();
   const result = await gateway.time.reporting.getReportingCapabilities(
     context.serviceContext,
@@ -633,6 +667,7 @@ export async function handleGetTimeReportingHealth(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.view", "time.admin");
   const gateway = await requireTimeGateway();
   const result = await gateway.time.reporting.getReportingHealth(
     context.serviceContext,
@@ -648,6 +683,7 @@ export async function handleTimeSearch(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireTimePermission(context, "time.view", "time.admin");
   const query = parseQuery(timeSearchQuerySchema, request.nextUrl.searchParams);
   const needle = (query.q ?? query.query)!.trim();
   const limit = query.limit ?? 20;
