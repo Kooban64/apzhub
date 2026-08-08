@@ -21,11 +21,11 @@ workbench:
     parent: platform-notifications
     label: Notifications
     icon: inbox
-    route: /workspace/notifications/notifications
+    route: /workspace/notifications/inbox
     order: 20
     permission: notification.read
   view:
-    title: Notifications
+    title: Notification Centre
     workspace: notifications
-    route: /workspace/notifications/notifications
+    route: /workspace/notifications/inbox
     permission: notification.read

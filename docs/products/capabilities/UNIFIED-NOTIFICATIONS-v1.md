@@ -1,19 +1,15 @@
 # Capability: Unified Notifications v1.0
 
-| Field        | Value                                                              |
-| ------------ | ------------------------------------------------------------------ |
-| Status       | **ENGINEERING**                                                    |
-| Constitution | PASS — Platform · APS-Notifications · Two-Consumer · no retraining |
-| Engine       | APE-Notify / APS-Notifications                                     |
+| Field        | Value                                |
+| ------------ | ------------------------------------ |
+| Status       | **IMPLEMENTED — awaiting RC1**       |
+| Constitution | PASS — APS-Notifications             |
+| Centre       | `/workspace/notifications/inbox`     |
+| API          | `GET /api/v1/platform/notifications` |
+| Shortcut     | Ctrl+Shift+N                         |
 
-## Slices
+## Shipped
 
-1. Unified notification centre surface
-2. Cross-product aggregation
-3. Read/unread state
-4. Deep links (product paths only)
-5. User preferences (existing prefs where possible)
-6. Certify
-7. Ship
+Unified centre · product filter aggregation · read/unread · product deep links · preferences link · Playwright
 
-No new engine. No AI. No redesign.
+No new engine · no AI · no redesign

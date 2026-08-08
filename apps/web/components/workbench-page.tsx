@@ -195,6 +195,10 @@ export function WorkbenchPage() {
       onGlobalSearchNavigate={(href) => {
         router.push(href);
       }}
+      enableNotificationCentreShortcut
+      onOpenNotificationCentre={() => {
+        router.push("/workspace/notifications/inbox");
+      }}
       enableGlobalShortcuts
       enableContextMenu
       enableToolbar

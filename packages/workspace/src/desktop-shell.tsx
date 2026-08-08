@@ -23,6 +23,7 @@ import { useGlobalShortcuts } from "./desktop-shell/global-shortcuts";
 import { useCommandPaletteShortcut } from "./desktop-shell/palette-shortcut";
 import { GlobalSearchDialog } from "./global-search/global-search-dialog";
 import { useGlobalSearchShortcut } from "./global-search/global-search-shortcut";
+import { useNotificationCentreShortcut } from "./notifications/notification-centre-shortcut";
 
 export interface DesktopShellProps {
   userName?: string;
@@ -38,6 +39,9 @@ export interface DesktopShellProps {
   globalSearchOpen?: boolean;
   onGlobalSearchOpenChange?: (open: boolean) => void;
   onGlobalSearchNavigate?: (href: string) => void;
+  /** Ctrl+Shift+N → Unified Notification Centre */
+  enableNotificationCentreShortcut?: boolean;
+  onOpenNotificationCentre?: () => void;
   /** Renders Command Palette surface — requires CommandRegistryProvider ancestor (AF-011). */
   enableCommandPalette?: boolean;
   /** Palette mode — knowledge mode queries via Knowledge Service (DF-013). */
@@ -184,6 +188,8 @@ export function DesktopShell({
   globalSearchOpen,
   onGlobalSearchOpenChange,
   onGlobalSearchNavigate,
+  enableNotificationCentreShortcut = false,
+  onOpenNotificationCentre,
   enableCommandPalette = false,
   commandPaletteMode = "commands",
   commandPaletteOpen,
@@ -229,6 +235,11 @@ export function DesktopShell({
     enabled: enableGlobalSearch,
     open: globalSearchIsOpen,
     onOpen: () => setGlobalSearchOpen(true),
+  });
+
+  useNotificationCentreShortcut({
+    enabled: enableNotificationCentreShortcut && Boolean(onOpenNotificationCentre),
+    onOpen: () => onOpenNotificationCentre?.(),
   });
 
   const workspaceContent = enableToolbar ? (

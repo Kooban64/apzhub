@@ -1,12 +1,13 @@
 "use client";
 
 /**
- * Notification Delivery inbox (ENG-004 Phase A).
- * REST authoritative for mutations; optional SSE presentation via ADR-0072.
+ * Unified Notification Centre v1 — delivery inbox SoR + product grouping + deep links.
  */
 
 import { Button } from "@apzhub/ui";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 import {
@@ -18,6 +19,10 @@ import {
   notificationDeliveryQueryKeys,
   type InAppNotificationDto,
 } from "@/lib/notifications/notification-delivery-api";
+import {
+  productLabel,
+  resolveNotificationDeepLink,
+} from "@/lib/unified-notifications/deep-links";
 
 function formatWhen(value: string): string {
   try {
@@ -28,8 +33,10 @@ function formatWhen(value: string): string {
 }
 
 export function NotificationInboxView() {
+  const router = useRouter();
   const queryClient = useQueryClient();
   const [selectedId, setSelectedId] = useState<string | undefined>();
+  const [productFilter, setProductFilter] = useState<string>("all");
   const [liveState, setLiveState] = useState<"idle" | "live" | "unavailable">("idle");
 
   const inboxQuery = useQuery({
@@ -92,32 +99,69 @@ export function NotificationInboxView() {
   }, [queryClient]);
 
   const items = inboxQuery.data ?? [];
+  const products = useMemo(() => {
+    const set = new Set(items.map((item) => item.sourceProduct));
+    return [...set].sort();
+  }, [items]);
+
+  const filtered = useMemo(
+    () =>
+      productFilter === "all"
+        ? items
+        : items.filter((item) => item.sourceProduct === productFilter),
+    [items, productFilter],
+  );
+
   const unreadCount = useMemo(
     () => items.filter((item) => !item.readAt).length,
     [items],
   );
-  const selected = items.find((item) => item.id === selectedId);
+  const selected =
+    filtered.find((item) => item.id === selectedId) ??
+    items.find((item) => item.id === selectedId);
 
   const deliveryDisabled =
     healthQuery.isError || (healthQuery.data && healthQuery.data.enabled === false);
 
   return (
-    <div className="flex flex-col gap-6 p-1" data-testid="notification-inbox">
+    <div className="flex flex-col gap-6 p-1" data-testid="unified-notification-centre">
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-muted-foreground)]">
-            Notifications
+            APS-Notifications
           </p>
           <h1 className="text-2xl font-semibold text-[var(--color-foreground)]">
-            Inbox
+            Notification Centre
           </h1>
           <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
-            In-application delivery · unread {unreadCount}
+            Cross-product inbox · unread {unreadCount}
             {liveState === "live" ? " · live" : ""}
             {liveState === "unavailable" ? " · live unavailable" : ""}
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
+          <label className="text-xs text-[var(--color-muted-foreground)]">
+            Product
+            <select
+              className="ml-2 rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-sm"
+              value={productFilter}
+              onChange={(event) => setProductFilter(event.target.value)}
+              data-testid="notification-product-filter"
+            >
+              <option value="all">All</option>
+              {products.map((product) => (
+                <option key={product} value={product}>
+                  {productLabel(product)}
+                </option>
+              ))}
+            </select>
+          </label>
+          <Link
+            href="/workspace/notifications/preferences"
+            className="inline-flex h-8 items-center rounded-md border border-[var(--color-border)] px-3 text-sm hover:bg-[var(--color-muted)]"
+          >
+            Preferences
+          </Link>
           <Button
             type="button"
             variant="outline"
@@ -134,12 +178,12 @@ export function NotificationInboxView() {
           className="rounded-lg border border-[var(--color-border)] px-4 py-3 text-sm"
           data-testid="notification-inbox-disabled"
         >
-          Notification delivery is disabled or unavailable. SMTP delivery is deferred.
+          Notification delivery is disabled or unavailable.
         </div>
       ) : null}
 
       {inboxQuery.isLoading ? (
-        <p className="text-sm text-[var(--color-muted-foreground)]">Loading inbox…</p>
+        <p className="text-sm text-[var(--color-muted-foreground)]">Loading centre…</p>
       ) : null}
       {inboxQuery.isError ? (
         <p className="text-sm text-red-600" data-testid="notification-inbox-error">
@@ -147,21 +191,21 @@ export function NotificationInboxView() {
         </p>
       ) : null}
 
-      {!inboxQuery.isLoading && items.length === 0 ? (
+      {!inboxQuery.isLoading && filtered.length === 0 ? (
         <div
           className="rounded-lg border border-dashed border-[var(--color-border)] px-4 py-10 text-center"
           data-testid="notification-inbox-empty"
         >
           <p className="font-medium">No notifications</p>
           <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
-            In-app notifications will appear here when delivered.
+            Cross-product notifications appear here when delivered.
           </p>
         </div>
       ) : null}
 
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
         <ul className="flex flex-col gap-2" data-testid="notification-inbox-list">
-          {items.map((item: InAppNotificationDto) => (
+          {filtered.map((item: InAppNotificationDto) => (
             <li key={item.id}>
               <button
                 type="button"
@@ -173,11 +217,11 @@ export function NotificationInboxView() {
                 <div className="flex items-center justify-between gap-2">
                   <span className="font-medium">{item.title}</span>
                   <span className="text-xs uppercase text-[var(--color-muted-foreground)]">
-                    {item.priority}
+                    {productLabel(item.sourceProduct)}
                   </span>
                 </div>
                 <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">
-                  {item.category} · {item.sourceProduct} · {formatWhen(item.createdAt)}
+                  {item.category} · {formatWhen(item.createdAt)}
                   {!item.readAt ? " · unread" : ""}
                 </p>
               </button>
@@ -196,20 +240,14 @@ export function NotificationInboxView() {
           ) : (
             <div className="flex flex-col gap-3">
               <h2 className="text-lg font-semibold">{selected.title}</h2>
-              <p className="text-sm text-[var(--color-muted-foreground)]">
-                Delivery state is managed by Notification Delivery. Read state is
-                separate from provider delivery outcome.
+              <p className="text-xs uppercase text-[var(--color-muted-foreground)]">
+                {productLabel(selected.sourceProduct)}
               </p>
               {selected.summary ? <p className="text-sm">{selected.summary}</p> : null}
               {selected.body ? (
                 <pre className="overflow-auto rounded bg-[var(--color-muted)]/30 p-3 text-xs">
                   {selected.body}
                 </pre>
-              ) : null}
-              {selected.sourceObjectRef ? (
-                <p className="text-xs text-[var(--color-muted-foreground)]">
-                  Source ref: {selected.sourceObjectRef}
-                </p>
               ) : null}
               <div className="flex flex-wrap gap-2">
                 {selected.readAt ? (
@@ -225,6 +263,25 @@ export function NotificationInboxView() {
                     Mark read
                   </Button>
                 )}
+                <Button
+                  type="button"
+                  variant="outline"
+                  data-testid="notification-open-product"
+                  onClick={() => {
+                    const href = resolveNotificationDeepLink({
+                      sourceProduct: selected.sourceProduct,
+                      sourceObjectRef: selected.sourceObjectRef,
+                    });
+                    if (href) {
+                      if (!selected.readAt) {
+                        markRead.mutate(selected.id);
+                      }
+                      router.push(href);
+                    }
+                  }}
+                >
+                  Open in product
+                </Button>
               </div>
             </div>
           )}
