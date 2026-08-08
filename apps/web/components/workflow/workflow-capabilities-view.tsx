@@ -58,6 +58,14 @@ export function WorkflowCapabilitiesView({
               <dd>{String(query.data.workflowEnabled ?? false)}</dd>
             </div>
             <div>
+              <dt className="text-[var(--color-muted-foreground)]">Provider execute</dt>
+              <dd data-testid="workflow-capabilities-execute">
+                {query.data.providerExecuteSupported
+                  ? "Supported"
+                  : "Gated (foundation limitation)"}
+              </dd>
+            </div>
+            <div>
               <dt className="text-[var(--color-muted-foreground)]">Capabilities</dt>
               <dd data-testid="workflow-capabilities-count">
                 {Array.isArray(query.data.capabilities)

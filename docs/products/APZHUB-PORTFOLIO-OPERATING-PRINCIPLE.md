@@ -53,4 +53,5 @@ Finite inventory → Continuous engineering → Production readiness
 ## Related
 
 - Portfolio dashboard: [APZHUB-PORTFOLIO-STATUS.md](./APZHUB-PORTFOLIO-STATUS.md)
+- Delivery lifecycle: [APZHUB-DELIVERY-STANDARD.md](./APZHUB-DELIVERY-STANDARD.md)
 - Delivery reference: APZ Projects Release 3.0 · APZQEP Version 1.1

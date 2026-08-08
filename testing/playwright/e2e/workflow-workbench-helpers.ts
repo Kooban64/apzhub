@@ -96,9 +96,136 @@ export async function mockWorkflowApi(page: Page): Promise<void> {
             capabilities: [{ id: "cap_runs", support: "supported" }],
             providers: [{ id: "mock" }],
             workflowEnabled: true,
+            providerExecuteSupported: false,
             httpApiVersion: "1.0.0",
             workbenchReady: true,
             productReady: false,
+          },
+          meta: meta(),
+        }),
+      });
+    }
+
+    if (path.endsWith("/workflow/business-journeys") && method === "GET") {
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          data: {
+            items: [
+              {
+                id: "bj_e2e_1",
+                name: "E2E Project Approval",
+                summary: "Approve project proposals",
+                outcomes: ["Approved"],
+                stages: [
+                  { id: "st_1", name: "Submitted", order: 1 },
+                  { id: "st_2", name: "Decision", order: 2 },
+                ],
+                transitions: [],
+                processOwner: "PMO",
+                businessSteward: "Steward",
+                version: 1,
+                publicationStatus: "approved",
+                createdAt: "2026-08-01T00:00:00.000Z",
+                updatedAt: "2026-08-08T00:00:00.000Z",
+              },
+            ],
+          },
+          meta: meta(),
+        }),
+      });
+    }
+
+    if (
+      path.includes("/workflow/business-journeys/") &&
+      path.endsWith("/audit") &&
+      method === "GET"
+    ) {
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          data: { items: [] },
+          meta: meta(),
+        }),
+      });
+    }
+
+    if (path.includes("/workflow/business-journeys/") && method === "GET") {
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          data: {
+            id: "bj_e2e_1",
+            name: "E2E Project Approval",
+            summary: "Approve project proposals",
+            outcomes: ["Approved"],
+            stages: [
+              { id: "st_1", name: "Submitted", order: 1 },
+              { id: "st_2", name: "Decision", order: 2 },
+            ],
+            transitions: [],
+            processOwner: "PMO",
+            businessSteward: "Steward",
+            version: 1,
+            publicationStatus: "approved",
+            createdAt: "2026-08-01T00:00:00.000Z",
+            updatedAt: "2026-08-08T00:00:00.000Z",
+          },
+          meta: meta(),
+        }),
+      });
+    }
+
+    if (path.endsWith("/workflow/process-instances") && method === "GET") {
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          data: { items: [] },
+          meta: meta(),
+        }),
+      });
+    }
+
+    if (path.endsWith("/workflow/process-templates") && method === "GET") {
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          data: {
+            items: [
+              {
+                id: "bpt_e2e_1",
+                key: "project-approval",
+                name: "Project Approval",
+                summary: "Template",
+                defaultOutcomes: ["Approved"],
+                version: 1,
+                editable: true,
+              },
+            ],
+          },
+          meta: meta(),
+        }),
+      });
+    }
+
+    if (path.endsWith("/workflow/process-monitoring") && method === "GET") {
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          data: {
+            activeInstances: 0,
+            stalledStages: 0,
+            overdueTransitions: 0,
+            completedCount: 0,
+            completionRatePercent: 0,
+            byStage: [],
+            computedAt: "2026-08-08T00:00:00.000Z",
           },
           meta: meta(),
         }),
@@ -161,10 +288,17 @@ export async function mockWorkflowApi(page: Page): Promise<void> {
     }
 
     if (path.endsWith("/workflow/runs") && method === "POST") {
+      // V1.0 honesty — execute gated (matches production readiness default).
       return route.fulfill({
-        status: 201,
+        status: 409,
         contentType: "application/json",
-        body: JSON.stringify({ data: run({ id: "wrun_e2e_created" }), meta: meta() }),
+        body: JSON.stringify({
+          error: {
+            code: "PROVIDER_EXECUTE_NOT_SUPPORTED",
+            message: "Provider execute is not enabled for this deployment.",
+          },
+          meta: meta(),
+        }),
       });
     }
 

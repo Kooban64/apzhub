@@ -70,6 +70,23 @@ export function canStartWorkflowRuns(source: WorkflowPermissionSource): boolean 
   );
 }
 
+/**
+ * UI gate for start/execute controls — permission alone is insufficient.
+ * Provider execute remains Owner-gated for Version 1.0 (foundation limitation).
+ */
+export function canStartWorkflowRunsWhenReady(
+  source: WorkflowPermissionSource,
+  readiness:
+    | {
+        readonly providerExecuteSupported?: boolean;
+      }
+    | null
+    | undefined,
+): boolean {
+  if (!canStartWorkflowRuns(source)) return false;
+  return readiness?.providerExecuteSupported === true;
+}
+
 export function canCancelWorkflowRuns(source: WorkflowPermissionSource): boolean {
   return (
     canAdminWorkflow(source) || hasWorkflowPermission(source, "workflow.runs.cancel")

@@ -88,6 +88,7 @@ export interface WorkflowReadinessSnapshot {
   readonly readiness: string;
   readonly reasons?: readonly string[];
   readonly workflowEnabled?: boolean;
+  readonly executionEnabled?: boolean;
   readonly runtimePlaneEnabled?: boolean;
   readonly providerExecuteSupported?: boolean;
   readonly opsProviderId?: string;

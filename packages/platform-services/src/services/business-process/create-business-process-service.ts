@@ -141,20 +141,36 @@ export type BusinessProcessService = {
 
 let preferred: BusinessProcessStore | undefined;
 
-export function setBusinessProcessStoreForTests(store: BusinessProcessStore) {
+export function setBusinessProcessStoreForTests(
+  store: BusinessProcessStore | undefined,
+) {
   preferred = store;
 }
 
+/**
+ * Production defaults to Postgres. Memory is explicit (tests / local only).
+ * Silent degradation to memory is forbidden (WF-PR-02).
+ */
 export function resolveBusinessProcessStore(): BusinessProcessStore {
   if (preferred) return preferred;
-  if (process.env.APZHUB_BUSINESS_PROCESS_STORE === "memory") {
+  const mode = process.env.APZHUB_BUSINESS_PROCESS_STORE?.trim().toLowerCase();
+  if (mode === "memory") {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error(
+        "APZHUB_BUSINESS_PROCESS_STORE=memory is forbidden in production",
+      );
+    }
     return getMemoryBusinessProcessStore();
   }
-  try {
-    return createPostgresBusinessProcessStore();
-  } catch {
-    return getMemoryBusinessProcessStore();
+  if (!process.env.DATABASE_URL) {
+    if (process.env.NODE_ENV === "production" || mode === "postgres") {
+      throw new Error("DATABASE_URL is required for business process Postgres store");
+    }
+    throw new Error(
+      "Business process Postgres store unavailable (DATABASE_URL missing). Set APZHUB_BUSINESS_PROCESS_STORE=memory for local/test use only.",
+    );
   }
+  return createPostgresBusinessProcessStore();
 }
 
 export function createBusinessProcessService(

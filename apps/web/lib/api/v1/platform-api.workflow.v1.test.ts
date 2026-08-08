@@ -234,6 +234,23 @@ describe("APZHUB-PLATFORM-WORKFLOW-005 Workflow HTTP API", () => {
     expect(cancelledBody.data.status).toBe("cancelled");
   });
 
+  it("rejects create run when provider execute is not supported (WF-P1-02)", async () => {
+    installWorkflowGateway({ providerExecuteSupported: false });
+    const ctx = makeContext();
+    await expect(
+      handleCreateWorkflowRun(
+        makeRequest("/api/v1/workflow/runs", {
+          method: "POST",
+          body: JSON.stringify({ workflowId: "wf_gated" }),
+        }),
+        ctx,
+      ),
+    ).rejects.toMatchObject({
+      status: 409,
+      body: { code: "PROVIDER_EXECUTE_NOT_SUPPORTED" },
+    });
+  });
+
   it("manages schedules, tasks, approvals, and notifications", async () => {
     const { gateway, workflow } = installWorkflowGateway({
       providerExecuteSupported: true,
@@ -399,7 +416,8 @@ describe("APZHUB-PLATFORM-WORKFLOW-005 Workflow HTTP API", () => {
 
   it("registers Workflow routes with withPlatformApiAuth and OpenAPI paths", () => {
     const routes = walkRoutes(join(process.cwd(), "apps/web/app/api/v1/workflow"));
-    expect(routes.length).toBe(15);
+    // Includes commercial runtime routes + business-process excellence routes.
+    expect(routes.length).toBe(24);
     for (const route of routes) {
       const content = readFileSync(route, "utf8");
       expect(content).toContain("withPlatformApiAuth");

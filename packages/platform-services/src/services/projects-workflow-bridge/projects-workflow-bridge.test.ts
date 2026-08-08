@@ -7,6 +7,10 @@ import {
   resetProjectsWorkflowBridgeStoreForTests,
   setProjectsWorkflowBridgeRuntimeExecutor,
 } from "./create-projects-workflow-bridge";
+import {
+  getMemoryProjectsWorkflowBridgeStore,
+  setProjectsWorkflowBridgeStoreForTests,
+} from "./memory-store";
 
 function ctx(): ServiceRequestContext {
   return {
@@ -21,11 +25,15 @@ function ctx(): ServiceRequestContext {
 describe("Projects Workflow Bridge (P1)", () => {
   beforeEach(() => {
     resetProjectsWorkflowBridgeStoreForTests();
+    setProjectsWorkflowBridgeStoreForTests(getMemoryProjectsWorkflowBridgeStore());
     setProjectsWorkflowBridgeRuntimeExecutor(undefined);
   });
 
   it("requests hold approval via Workflow and consumes approve outcome", async () => {
-    const bridge = createProjectsWorkflowBridge({ useInProcessWorkflow: true });
+    const bridge = createProjectsWorkflowBridge({
+      useInProcessWorkflow: true,
+      store: getMemoryProjectsWorkflowBridgeStore(),
+    });
     const binding = await bridge.requestApproval(ctx(), {
       kind: "hold_approval",
       projectId: "prj_1",

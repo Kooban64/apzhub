@@ -6,13 +6,17 @@ import { useRouter } from "next/navigation";
 
 import { isWorkflowApiError } from "@/lib/workflow/errors";
 import {
-  canStartWorkflowRuns,
+  canStartWorkflowRunsWhenReady,
   canViewWorkflowDefinitions,
   type WorkflowPermissionSource,
 } from "@/lib/workflow/permissions";
 import { workflowQueryKeys } from "@/lib/workflow/query-keys";
 import { workflowDefinitionsPath, workflowRunDetailPath } from "@/lib/workflow/routes";
-import { createWorkflowRun, getWorkflowDefinition } from "@/lib/workflow/workflow-api";
+import {
+  createWorkflowRun,
+  getWorkflowDefinition,
+  getWorkflowReadiness,
+} from "@/lib/workflow/workflow-api";
 
 import {
   DetailList,
@@ -31,12 +35,21 @@ export function WorkflowDefinitionDetailView({
 }) {
   const router = useRouter();
   const canView = canViewWorkflowDefinitions(permissions);
-  const canStart = canStartWorkflowRuns(permissions);
-  const query = useQuery({
+  const definitionQuery = useQuery({
     queryKey: workflowQueryKeys.definition(definitionId),
     queryFn: ({ signal }) => getWorkflowDefinition(definitionId, { signal }),
     enabled: canView,
   });
+  const readinessQuery = useQuery({
+    queryKey: workflowQueryKeys.readiness(),
+    queryFn: ({ signal }) => getWorkflowReadiness({ signal }),
+    enabled: canView,
+  });
+  const canStart = canStartWorkflowRunsWhenReady(permissions, readinessQuery.data);
+  const executeGated =
+    canView &&
+    readinessQuery.isSuccess &&
+    readinessQuery.data.providerExecuteSupported !== true;
 
   return (
     <PageShell
@@ -52,7 +65,7 @@ export function WorkflowDefinitionDetailView({
           >
             Back
           </Button>
-          {canStart && query.data ? (
+          {canStart && definitionQuery.data ? (
             <Button
               type="button"
               size="sm"
@@ -70,28 +83,37 @@ export function WorkflowDefinitionDetailView({
       }
     >
       {!canView ? <EmptyState title="No access" /> : null}
-      {canView && query.isLoading ? <LoadingState /> : null}
-      {canView && query.isError ? (
+      {canView && definitionQuery.isLoading ? <LoadingState /> : null}
+      {canView && definitionQuery.isError ? (
         <ErrorState
           message={
-            isWorkflowApiError(query.error)
-              ? query.error.message
+            isWorkflowApiError(definitionQuery.error)
+              ? definitionQuery.error.message
               : "Unable to load definition."
           }
-          onRetry={() => void query.refetch()}
+          onRetry={() => void definitionQuery.refetch()}
         />
       ) : null}
-      {canView && query.data ? (
+      {canView && executeGated ? (
+        <p
+          className="mb-3 text-sm text-[var(--color-muted-foreground)]"
+          data-testid="workflow-definition-execute-gated"
+        >
+          Provider execute is not enabled for this deployment. APZ Workflow Version 1.0
+          keeps automation execution gated — start run is unavailable.
+        </p>
+      ) : null}
+      {canView && definitionQuery.data ? (
         <DetailList
           testId="workflow-definition-detail"
           items={[
-            { label: "Name", value: query.data.name },
-            { label: "Key", value: query.data.key },
-            { label: "Lifecycle", value: String(query.data.lifecycle) },
-            { label: "Id", value: query.data.id },
+            { label: "Name", value: definitionQuery.data.name },
+            { label: "Key", value: definitionQuery.data.key },
+            { label: "Lifecycle", value: String(definitionQuery.data.lifecycle) },
+            { label: "Id", value: definitionQuery.data.id },
             {
               label: "Current version",
-              value: query.data.currentVersionId ?? "—",
+              value: definitionQuery.data.currentVersionId ?? "—",
             },
           ]}
         />

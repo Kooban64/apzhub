@@ -83,18 +83,29 @@ export function resolveProjectsWorkflowBridgeStore(
 ): ProjectsWorkflowBridgeStore {
   if (preferred) return preferred;
   if (testOverride) return testOverride;
-  if (process.env.APZHUB_PROJECTS_WORKFLOW_BRIDGE_STORE === "memory") {
+  const mode = process.env.APZHUB_PROJECTS_WORKFLOW_BRIDGE_STORE?.trim().toLowerCase();
+  if (mode === "memory") {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error(
+        "APZHUB_PROJECTS_WORKFLOW_BRIDGE_STORE=memory is forbidden in production",
+      );
+    }
     return getMemoryProjectsWorkflowBridgeStore();
   }
-  try {
-    // Lazy require postgres to avoid hard fail when DB unavailable
-    const { createPostgresProjectsWorkflowBridgeStore } =
-      // eslint-disable-next-line @typescript-eslint/no-require-imports -- lazy postgres load
-      require("./postgres-store") as {
-        createPostgresProjectsWorkflowBridgeStore: () => ProjectsWorkflowBridgeStore;
-      };
-    return createPostgresProjectsWorkflowBridgeStore();
-  } catch {
-    return getMemoryProjectsWorkflowBridgeStore();
+  if (!process.env.DATABASE_URL) {
+    if (process.env.NODE_ENV === "production" || mode === "postgres") {
+      throw new Error(
+        "DATABASE_URL is required for Projects-Workflow bridge Postgres store",
+      );
+    }
+    throw new Error(
+      "Projects-Workflow bridge Postgres store unavailable (DATABASE_URL missing). Set APZHUB_PROJECTS_WORKFLOW_BRIDGE_STORE=memory for local/test use only.",
+    );
   }
+  const { createPostgresProjectsWorkflowBridgeStore } =
+    // eslint-disable-next-line @typescript-eslint/no-require-imports -- lazy postgres load
+    require("./postgres-store") as {
+      createPostgresProjectsWorkflowBridgeStore: () => ProjectsWorkflowBridgeStore;
+    };
+  return createPostgresProjectsWorkflowBridgeStore();
 }

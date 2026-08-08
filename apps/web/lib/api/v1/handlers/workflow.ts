@@ -94,11 +94,13 @@ export async function handleGetWorkflowReadiness(
         readiness?.providerExecuteSupported
           ? "provider execute supported"
           : "provider execute not supported (foundation limitation)",
+        `executionEnabled=${String(readiness?.executionEnabled ?? false)}`,
         `opsProviderId=${readiness?.opsProviderId ?? "unknown"}`,
         `runtimePlaneEnabled=${String(readiness?.runtimePlaneEnabled ?? false)}`,
         `persistenceMode=${readiness?.persistenceMode ?? "unknown"}`,
       ],
       workflowEnabled: bootstrap.workflowEnabled,
+      executionEnabled: readiness?.executionEnabled ?? false,
       runtimePlaneEnabled: readiness?.runtimePlaneEnabled ?? false,
       providerExecuteSupported: readiness?.providerExecuteSupported ?? false,
       opsProviderId: readiness?.opsProviderId ?? "unknown",
@@ -234,6 +236,15 @@ export async function handleCreateWorkflowRun(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  await assertWorkflowHttpEnabled();
+  const bootstrap = await getPlatformApiGatewayBootstrap();
+  if (!bootstrap.workflowReadiness?.providerExecuteSupported) {
+    throw new PlatformApiHttpError(409, {
+      code: "PROVIDER_EXECUTE_NOT_SUPPORTED",
+      message:
+        "Provider execute is not enabled for this deployment (foundation limitation). APZ Workflow Version 1.0 keeps execution gated.",
+    });
+  }
   const body = await parseJsonBody(
     request,
     createWorkflowRunBodySchema,

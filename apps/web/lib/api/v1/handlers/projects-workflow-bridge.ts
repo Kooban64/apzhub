@@ -13,12 +13,41 @@ import type {
 import { createProjectsWorkflowBridge } from "@apzhub/platform-services";
 
 import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
+import { PlatformApiHttpError } from "../errors";
 import { jsonDataResponse, jsonErrorResponse } from "../response";
 import { parsePathParam } from "../schemas/common";
 import { projectIdParamSchema } from "../schemas/project";
 
 function bridge() {
   return createProjectsWorkflowBridge();
+}
+
+function hasProjectsPermission(granted: readonly string[], required: string): boolean {
+  if (
+    granted.includes(required) ||
+    granted.includes("projects.*") ||
+    granted.includes("*")
+  ) {
+    return true;
+  }
+  const parts = required.split(".");
+  for (let i = parts.length - 1; i >= 1; i -= 1) {
+    if (granted.includes(`${parts.slice(0, i).join(".")}.*`)) return true;
+  }
+  return false;
+}
+
+function requireProjectsBridgePermission(
+  context: PlatformApiRequestContext,
+  ...requiredAnyOf: readonly string[]
+): void {
+  const granted = context.serviceContext.permissions ?? [];
+  if (!requiredAnyOf.some((perm) => hasProjectsPermission(granted, perm))) {
+    throw new PlatformApiHttpError(403, {
+      code: "FORBIDDEN",
+      message: `Missing permission: ${requiredAnyOf.join(" | ")}`,
+    });
+  }
 }
 
 async function projectIdFrom(routeContext?: {
@@ -61,6 +90,12 @@ export async function handleListProjectApprovals(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireProjectsBridgePermission(
+    context,
+    "projects.view",
+    "projects.manage",
+    "projects.admin",
+  );
   const projectId = await projectIdFrom(routeContext);
   const items = await bridge().listBindings(context.serviceContext, projectId);
   const health = await bridge().health(context.serviceContext);
@@ -75,6 +110,7 @@ export async function handleRequestProjectApproval(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireProjectsBridgePermission(context, "projects.manage", "projects.admin");
   const projectId = await projectIdFrom(routeContext);
   const body = await readBody(request);
   if (!body) {
@@ -110,6 +146,12 @@ export async function handleGetProjectApproval(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireProjectsBridgePermission(
+    context,
+    "projects.view",
+    "projects.manage",
+    "projects.admin",
+  );
   const projectId = await projectIdFrom(routeContext);
   try {
     const bindingId = await bindingIdFrom(routeContext);
@@ -133,6 +175,7 @@ export async function handleApplyProjectApproval(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireProjectsBridgePermission(context, "projects.manage", "projects.admin");
   const projectId = await projectIdFrom(routeContext);
   const body = await readBody(request);
   if (!body) {
@@ -171,6 +214,7 @@ export async function handleSyncProjectApproval(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireProjectsBridgePermission(context, "projects.manage", "projects.admin");
   const projectId = await projectIdFrom(routeContext);
   try {
     const bindingId = await bindingIdFrom(routeContext);

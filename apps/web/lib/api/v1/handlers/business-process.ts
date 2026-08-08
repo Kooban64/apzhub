@@ -12,21 +12,23 @@ import type {
   UpdateBusinessJourneyInput,
   UpdateBusinessProcessInstanceInput,
 } from "@apzhub/platform-service-contracts";
-import {
-  createBusinessProcessService,
-  getMemoryBusinessProcessStore,
-  setBusinessProcessStoreForTests,
-} from "@apzhub/platform-services";
+import { createBusinessProcessService } from "@apzhub/platform-services";
 
 import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
+import { PlatformApiHttpError } from "../errors";
+import { requireWorkflowPermission } from "./require-workflow-permission";
 import { jsonDataResponse, jsonErrorResponse } from "../response";
 
 function service() {
   try {
     return createBusinessProcessService();
-  } catch {
-    setBusinessProcessStoreForTests(getMemoryBusinessProcessStore());
-    return createBusinessProcessService(getMemoryBusinessProcessStore());
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Business process store unavailable";
+    throw new PlatformApiHttpError(503, {
+      code: "PERSISTENCE_UNAVAILABLE",
+      message,
+    });
   }
 }
 
@@ -98,6 +100,12 @@ export async function handleListBusinessJourneys(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireWorkflowPermission(
+    context,
+    "workflow.view",
+    "workflow.admin",
+    "workflow.manage",
+  );
   const items = await service().listJourneys(context.serviceContext);
   return jsonDataResponse({ items }, context.tracing);
 }
@@ -106,6 +114,13 @@ export async function handleCreateBusinessJourney(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireWorkflowPermission(
+    context,
+    "workflow.manage",
+    "workflow.admin",
+    "workflow.create",
+    "workflow.update",
+  );
   const body = await readBody(request);
   if (!body) {
     return jsonErrorResponse(
@@ -149,6 +164,12 @@ export async function handleGetBusinessJourney(
   context: PlatformApiRequestContext,
   journeyId: string,
 ) {
+  requireWorkflowPermission(
+    context,
+    "workflow.view",
+    "workflow.admin",
+    "workflow.manage",
+  );
   const item = await service().getJourney(context.serviceContext, journeyId);
   if (!item) {
     return jsonErrorResponse(
@@ -165,6 +186,13 @@ export async function handleUpdateBusinessJourney(
   context: PlatformApiRequestContext,
   journeyId: string,
 ) {
+  requireWorkflowPermission(
+    context,
+    "workflow.manage",
+    "workflow.admin",
+    "workflow.create",
+    "workflow.update",
+  );
   const body = await readBody(request);
   if (!body) {
     return jsonErrorResponse(
@@ -216,6 +244,13 @@ export async function handleTransitionBusinessJourneyGovernance(
   context: PlatformApiRequestContext,
   journeyId: string,
 ) {
+  requireWorkflowPermission(
+    context,
+    "workflow.manage",
+    "workflow.admin",
+    "workflow.create",
+    "workflow.update",
+  );
   const body = await readBody(request);
   if (!body) {
     return jsonErrorResponse(
@@ -262,6 +297,12 @@ export async function handleListBusinessJourneyAudit(
   context: PlatformApiRequestContext,
   journeyId: string,
 ) {
+  requireWorkflowPermission(
+    context,
+    "workflow.view",
+    "workflow.admin",
+    "workflow.manage",
+  );
   const items = await service().listAudit(context.serviceContext, journeyId);
   return jsonDataResponse({ items }, context.tracing);
 }
@@ -270,6 +311,12 @@ export async function handleListProcessTemplates(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireWorkflowPermission(
+    context,
+    "workflow.view",
+    "workflow.admin",
+    "workflow.manage",
+  );
   const items = await service().listTemplates(context.serviceContext);
   return jsonDataResponse({ items }, context.tracing);
 }
@@ -279,6 +326,13 @@ export async function handleInstantiateProcessTemplate(
   context: PlatformApiRequestContext,
   templateKey: string,
 ) {
+  requireWorkflowPermission(
+    context,
+    "workflow.manage",
+    "workflow.admin",
+    "workflow.create",
+    "workflow.update",
+  );
   const body = await readBody(request);
   if (!body) {
     return jsonErrorResponse(
@@ -312,6 +366,12 @@ export async function handleListProcessInstances(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireWorkflowPermission(
+    context,
+    "workflow.view",
+    "workflow.admin",
+    "workflow.manage",
+  );
   const journeyId = request.nextUrl.searchParams.get("journeyId") ?? undefined;
   const items = await service().listInstances(context.serviceContext, journeyId);
   return jsonDataResponse({ items }, context.tracing);
@@ -321,6 +381,13 @@ export async function handleCreateProcessInstance(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireWorkflowPermission(
+    context,
+    "workflow.manage",
+    "workflow.admin",
+    "workflow.create",
+    "workflow.update",
+  );
   const body = await readBody(request);
   if (!body) {
     return jsonErrorResponse(
@@ -354,6 +421,13 @@ export async function handleUpdateProcessInstance(
   context: PlatformApiRequestContext,
   instanceId: string,
 ) {
+  requireWorkflowPermission(
+    context,
+    "workflow.manage",
+    "workflow.admin",
+    "workflow.create",
+    "workflow.update",
+  );
   const body = await readBody(request);
   if (!body) {
     return jsonErrorResponse(
@@ -400,6 +474,12 @@ export async function handleGetProcessMonitoring(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireWorkflowPermission(
+    context,
+    "workflow.view",
+    "workflow.admin",
+    "workflow.manage",
+  );
   const journeyId = request.nextUrl.searchParams.get("journeyId") ?? undefined;
   const monitoring = await service().getMonitoring(context.serviceContext, journeyId);
   return jsonDataResponse(monitoring, context.tracing);
