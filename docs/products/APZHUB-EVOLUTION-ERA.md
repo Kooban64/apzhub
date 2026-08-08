@@ -22,11 +22,11 @@ Operating question for every programme:
 
 ## Programme posture
 
-| Programme                 | Status                        |
-| ------------------------- | ----------------------------- |
-| 001 Foundation            | CLOSED                        |
-| 002 Platform Services     | **Assessment open — APS-001** |
-| 003 Platform Intelligence | Deferred                      |
+| Programme                 | Status                                                       |
+| ------------------------- | ------------------------------------------------------------ |
+| 001 Foundation            | CLOSED                                                       |
+| 002 Platform Services     | **Certify & rationalise** · APS-001 ✅ · APS-002 ⏳ · Eng 🚫 |
+| 003 Platform Intelligence | Deferred                                                     |
 
 ---
 
