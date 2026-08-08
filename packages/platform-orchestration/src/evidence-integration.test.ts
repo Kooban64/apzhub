@@ -16,7 +16,7 @@ describe("APZQEP-165 QO-014 Enterprise Evidence & Reporting Integration", () => 
       true,
     );
 
-    const pkg = platform.evidenceIntegration.createEvidenceIntegrationPackage({
+    const pkg = await platform.evidenceIntegration.createEvidenceIntegrationPackage({
       qualityFlowRef: "qf_1",
       impactGraphRef: "imp_1",
       governanceDecisionRef: "gov_1",
@@ -65,7 +65,7 @@ describe("APZQEP-165 QO-014 Enterprise Evidence & Reporting Integration", () => 
     expect(profiles).toHaveLength(REPORT_PROFILE_KINDS.length);
     expect(profiles.every((p) => p.immutable && p.presentationExternal)).toBe(true);
 
-    const pkg = platform.evidenceIntegration.createEvidenceIntegrationPackage({
+    const pkg = await platform.evidenceIntegration.createEvidenceIntegrationPackage({
       qualityFlowRef: "qf_r",
       decisionPackageRef: "dp_r",
       impactGraphRef: "imp_r",
@@ -74,7 +74,7 @@ describe("APZQEP-165 QO-014 Enterprise Evidence & Reporting Integration", () => 
       tenantId: "t1",
     });
 
-    const view = platform.evidenceIntegration.generateReportView({
+    const view = await platform.evidenceIntegration.generateReportView({
       evidenceIntegrationPackageId: pkg.evidenceIntegrationPackageId,
       profileKind: "executive",
       tenantId: "t1",
@@ -104,7 +104,7 @@ describe("APZQEP-165 QO-014 Enterprise Evidence & Reporting Integration", () => 
 
   it("preserves end-to-end traceability from report to artefacts", async () => {
     const platform = await createPlatformOrchestration();
-    const pkg = platform.evidenceIntegration.createEvidenceIntegrationPackage({
+    const pkg = await platform.evidenceIntegration.createEvidenceIntegrationPackage({
       qualityFlowRef: "qf_t",
       governanceDecisionRef: "gov_t",
       approvalBundleRef: "apb_t",
@@ -117,7 +117,7 @@ describe("APZQEP-165 QO-014 Enterprise Evidence & Reporting Integration", () => 
       tenantId: "t1",
     });
 
-    const view = platform.evidenceIntegration.generateReportView({
+    const view = await platform.evidenceIntegration.generateReportView({
       evidenceIntegrationPackageId: pkg.evidenceIntegrationPackageId,
       profileKind: "audit",
       tenantId: "t1",
@@ -153,7 +153,7 @@ describe("APZQEP-165 QO-014 Enterprise Evidence & Reporting Integration", () => 
     expect(typeof eng.renderDashboard).toBe("undefined");
     expect(typeof eng.runAnalytics).toBe("undefined");
 
-    const pkg = platform.evidenceIntegration.createEvidenceIntegrationPackage({
+    const pkg = await platform.evidenceIntegration.createEvidenceIntegrationPackage({
       qualityFlowRef: "qf_arch",
       decisionPackageRef: "dp_arch",
       evidenceRefs: ["ev:arch"],
@@ -167,14 +167,14 @@ describe("APZQEP-165 QO-014 Enterprise Evidence & Reporting Integration", () => 
 
   it("supports custom profiles and reporting history without making reports evidence", async () => {
     const platform = await createPlatformOrchestration();
-    const pkg = platform.evidenceIntegration.createEvidenceIntegrationPackage({
+    const pkg = await platform.evidenceIntegration.createEvidenceIntegrationPackage({
       qualityFlowRef: "qf_c",
       decisionPackageRef: "dp_c",
       evidenceRefs: ["ev:c"],
       tenantId: "t1",
     });
 
-    const view = platform.evidenceIntegration.generateReportView({
+    const view = await platform.evidenceIntegration.generateReportView({
       evidenceIntegrationPackageId: pkg.evidenceIntegrationPackageId,
       profileKind: "custom",
       customInclusionSlots: ["quality_flow", "decision_package", "evidence"],

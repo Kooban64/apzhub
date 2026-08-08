@@ -2,7 +2,7 @@ export { PLATFORM_DASHBOARD_VERSION, PLATFORM_DASHBOARD_PROGRAMME } from "./vers
 export * from "./contracts/index";
 export { WidgetRegistry } from "./registry/widget-registry";
 export { DashboardRegistry } from "./registry/dashboard-registry";
-export { InMemoryLayoutStore } from "./store/layout-store";
+export { InMemoryLayoutStore, type LayoutStore } from "./store/layout-store";
 export {
   resolveColumns,
   orderWidgets,

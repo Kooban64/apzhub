@@ -60,7 +60,7 @@ describe("APZQEP-165 QO-009 Enterprise Quality Decision Engine", () => {
     expect(platform.contracts.get("orchestration.decision.v1")?.kind).toBe("decision");
     expect(platform.container.has("orchestration.decision.engine")).toBe(true);
 
-    const pkg = platform.decisions.createDecisionPackage(baseInput());
+    const pkg = await platform.decisions.createDecisionPackage(baseInput());
     expect(pkg.platformConclusion).toBe("GO");
     expect(pkg.advisory).toBe(true);
     expect(pkg.confidenceSummary.overallConfidence).toBe(0.8);
@@ -79,7 +79,7 @@ describe("APZQEP-165 QO-009 Enterprise Quality Decision Engine", () => {
 
   it("returns NO_GO when governance is unsatisfied on a strict profile", async () => {
     const platform = await createPlatformOrchestration();
-    const pkg = platform.decisions.createDecisionPackage(
+    const pkg = await platform.decisions.createDecisionPackage(
       baseInput({
         profileId: "production_release",
         governance: {
@@ -115,7 +115,7 @@ describe("APZQEP-165 QO-009 Enterprise Quality Decision Engine", () => {
 
   it("returns CONDITIONAL_GO when conditions exist and profile allows it", async () => {
     const platform = await createPlatformOrchestration();
-    const pkg = platform.decisions.createDecisionPackage(
+    const pkg = await platform.decisions.createDecisionPackage(
       baseInput({
         profileId: "release_candidate",
         approval: {
@@ -133,7 +133,7 @@ describe("APZQEP-165 QO-009 Enterprise Quality Decision Engine", () => {
 
   it("defers when approvals outstanding and profile requests deferral", async () => {
     const platform = await createPlatformOrchestration();
-    const pkg = platform.decisions.createDecisionPackage(
+    const pkg = await platform.decisions.createDecisionPackage(
       baseInput({
         profileId: "release_candidate",
         approval: {
@@ -150,12 +150,12 @@ describe("APZQEP-165 QO-009 Enterprise Quality Decision Engine", () => {
 
   it("honours lifecycle hints for SUPERSEDED and CANCELLED", async () => {
     const platform = await createPlatformOrchestration();
-    const superseded = platform.decisions.createDecisionPackage(
+    const superseded = await platform.decisions.createDecisionPackage(
       baseInput({ lifecycleHint: "superseded" }),
     );
     expect(superseded.platformConclusion).toBe("SUPERSEDED");
 
-    const cancelled = platform.decisions.createDecisionPackage(
+    const cancelled = await platform.decisions.createDecisionPackage(
       baseInput({ lifecycleHint: "cancelled" }),
     );
     expect(cancelled.platformConclusion).toBe("CANCELLED");
@@ -163,7 +163,7 @@ describe("APZQEP-165 QO-009 Enterprise Quality Decision Engine", () => {
 
   it("composes confidence and residual risk without re-evaluating upstream engines", async () => {
     const platform = await createPlatformOrchestration();
-    const pkg = platform.decisions.createDecisionPackage(
+    const pkg = await platform.decisions.createDecisionPackage(
       baseInput({
         impact: {
           impactCorrelationRef: "imp_x",
@@ -225,13 +225,13 @@ describe("APZQEP-165 QO-009 Enterprise Quality Decision Engine", () => {
       },
     });
 
-    expect(() =>
+    await expect(
       platform.decisions.createDecisionPackage(
         baseInput({ profileId: "custom_strict" }),
       ),
-    ).toThrow(/not active/);
+    ).rejects.toThrow(/not active/);
 
-    const pkg = platform.decisions.createDecisionPackage(
+    const pkg = await platform.decisions.createDecisionPackage(
       baseInput({ profileId: "nightly" }),
     );
     expect(

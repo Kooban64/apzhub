@@ -4,4 +4,12 @@ export {
   type QepAutomationFacade,
   type QepAutomationPorts,
 } from "./compose";
+export {
+  createAutomationPersistence,
+  type AutomationPersistenceMode,
+} from "./infrastructure/persistence";
+export {
+  createPostgresExecutionStore,
+  deleteAutomationExecutionsForTenant,
+} from "./infrastructure/postgres-execution-store";
 export * from "./presentation/index";

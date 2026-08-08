@@ -6,10 +6,13 @@ import { createPlaceholderIntelligenceProviders } from "../providers/placeholder
 import { createRulesProvider } from "../providers/rules-provider";
 import { createStatisticalProvider } from "../providers/statistical-provider";
 import { IntelligenceProviderRegistry } from "../registry/provider-registry";
+import type { IntelligenceStore } from "../store/intelligence-store";
 
 export interface CreatePlatformQualityIntelligenceOptions {
   readonly publishEvent?: QiEventPublisher;
   readonly includePlaceholders?: boolean;
+  /** Inject durable IntelligenceStore (QX-PR-03). Defaults to in-memory. */
+  readonly store?: IntelligenceStore;
 }
 
 export interface PlatformQualityIntelligence {
@@ -59,6 +62,7 @@ export function createPlatformQualityIntelligence(
   const engine = new QualityIntelligenceEngine({
     registry,
     publishEvent,
+    store: options.store,
   });
 
   return { engine, registry };

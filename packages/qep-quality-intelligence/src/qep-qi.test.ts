@@ -35,9 +35,13 @@ describe("APZQEP-163 qep-quality-intelligence", () => {
     expect(result.signals.length).toBeGreaterThan(0);
     expect(result.recommendations.length).toBeGreaterThan(0);
     expect(result.recommendations.every((r) => r.explanationId)).toBe(true);
-    expect(qep.listHistory("tenant-1").length).toBe(result.recommendations.length);
-    expect(qep.listAudits("tenant-1").some((a) => a.action === "created")).toBe(true);
-    expect(qep.listConfidence("tenant-1").length).toBeGreaterThan(0);
+    expect((await qep.listHistory("tenant-1")).length).toBe(
+      result.recommendations.length,
+    );
+    expect((await qep.listAudits("tenant-1")).some((a) => a.action === "created")).toBe(
+      true,
+    );
+    expect((await qep.listConfidence("tenant-1")).length).toBeGreaterThan(0);
     expect(qep.listProviders().some((p) => p.providerId === "dummy_ai")).toBe(true);
     expect(
       qep

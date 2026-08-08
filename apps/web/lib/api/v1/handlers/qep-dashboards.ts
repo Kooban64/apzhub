@@ -9,6 +9,7 @@ import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
 import { PlatformApiHttpError } from "../errors";
 import { jsonDataResponse } from "../response";
 import { getQepDashboardRuntime } from "@/lib/qep/dashboard-runtime";
+import { requireQepPermission, sessionTenantId } from "./require-qep-permission";
 
 type RouteContext = { params: Promise<Record<string, string>> };
 
@@ -30,6 +31,7 @@ export async function handleListDashboards(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireQepPermission(context, "qep.dashboards.read");
   const roles = request.nextUrl.searchParams.getAll("role");
   const runtime = getQepDashboardRuntime();
   const dashboards =
@@ -41,6 +43,7 @@ export async function handleListWidgets(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireQepPermission(context, "qep.dashboards.read");
   return jsonDataResponse(
     { widgets: getQepDashboardRuntime().listWidgets() },
     context.tracing,
@@ -51,6 +54,7 @@ export async function handleListVisualizationKinds(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireQepPermission(context, "qep.dashboards.read");
   return jsonDataResponse(
     { kinds: getQepDashboardRuntime().listVisualizationKinds() },
     context.tracing,
@@ -58,14 +62,14 @@ export async function handleListVisualizationKinds(
 }
 
 export async function handleGetDashboard(
-  request: NextRequest,
+  _request: NextRequest,
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireQepPermission(context, "qep.dashboards.read");
   const dashboardId = requireParam(await routeContext?.params, "dashboardId");
-  const permissions = request.nextUrl.searchParams.getAll("permission");
-  const effectivePermissions =
-    permissions.length > 0 ? permissions : ["qep.dashboards.read"];
+  // H4 — session grants only; never accept client-supplied permission elevation.
+  const effectivePermissions = context.serviceContext.permissions ?? [];
   try {
     const result = getQepDashboardRuntime().resolveWidgetProjections(
       dashboardId,
@@ -85,6 +89,7 @@ export async function handleGetProjection(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireQepPermission(context, "qep.dashboards.read");
   const queryId = requireParam(await routeContext?.params, "queryId");
   return jsonDataResponse(
     { projection: getQepDashboardRuntime().getProjection(queryId) },
@@ -93,17 +98,16 @@ export async function handleGetProjection(
 }
 
 export async function handleListSavedViews(
-  request: NextRequest,
+  _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const tenantId =
-    request.nextUrl.searchParams.get("tenantId") ?? context.serviceContext.tenantId;
-  const userId =
-    request.nextUrl.searchParams.get("userId") ?? context.serviceContext.userId;
+  requireQepPermission(context, "qep.dashboards.read");
+  const tenantId = sessionTenantId(context);
+  const userId = context.serviceContext.userId;
   return jsonDataResponse(
     {
-      views: getQepDashboardRuntime().listViews(tenantId, userId),
-      pinned: getQepDashboardRuntime().listPinned(tenantId, userId),
+      views: await getQepDashboardRuntime().listViews(tenantId, userId),
+      pinned: await getQepDashboardRuntime().listPinned(tenantId, userId),
     },
     context.tracing,
   );
@@ -113,6 +117,7 @@ export async function handleSaveView(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireQepPermission(context, "qep.dashboards.read");
   const body = (await request.json()) as {
     dashboardId?: string;
     name?: string;
@@ -129,7 +134,7 @@ export async function handleSaveView(
   }
   try {
     const view = await getQepDashboardRuntime().saveView({
-      tenantId: context.serviceContext.tenantId,
+      tenantId: sessionTenantId(context),
       userId: context.serviceContext.userId,
       dashboardId: body.dashboardId,
       name: body.name,
@@ -151,6 +156,7 @@ export async function handleSaveLayout(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireQepPermission(context, "qep.dashboards.read");
   const body = (await request.json()) as {
     dashboardId?: string;
     name?: string;
@@ -166,7 +172,7 @@ export async function handleSaveLayout(
   }
   try {
     const layout = await getQepDashboardRuntime().saveLayout({
-      tenantId: context.serviceContext.tenantId,
+      tenantId: sessionTenantId(context),
       userId: context.serviceContext.userId,
       dashboardId: body.dashboardId,
       name: body.name,

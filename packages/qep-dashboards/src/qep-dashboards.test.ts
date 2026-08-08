@@ -27,11 +27,12 @@ describe("APZQEP-164 qep-dashboards", () => {
     expect(resolved.dashboard.widgets.length).toBeGreaterThan(0);
     expect(Object.keys(resolved.projections).length).toBeGreaterThan(0);
 
-    // Projections are presentation placeholders — not computed quality scores
+    // Projections are honest-empty — not fabricated quality scores (QX-P1-02)
     const overall = qep.getProjection("qep.qi.scores.overall");
     expect(overall.kind).toBe("kpi");
     if (overall.kind === "kpi") {
-      expect(overall.descriptor.value).toBe("—");
+      expect(overall.descriptor.value).toBe("No data");
+      expect(overall.attribution).toBe("empty:no_system_of_record_binding");
     }
   });
 

@@ -5,7 +5,42 @@ import type { Recommendation } from "../contracts/recommendation";
 import type { QualityScore } from "../contracts/scoring";
 import type { QualitySignal } from "../contracts/signal";
 
-export class InMemoryIntelligenceStore {
+/**
+ * Quality Intelligence Source of Record port (QX-PR-03).
+ * Production implementations must survive process restart.
+ */
+export interface IntelligenceStore {
+  recordObservation(observation: QualityObservation): Promise<QualityObservation>;
+  listObservations(tenantId?: string): Promise<readonly QualityObservation[]>;
+  getObservation(observationId: string): Promise<QualityObservation | undefined>;
+
+  saveSignal(signal: QualitySignal): Promise<QualitySignal>;
+  listSignals(tenantId?: string): Promise<readonly QualitySignal[]>;
+  getSignal(signalId: string): Promise<QualitySignal | undefined>;
+
+  saveRecommendation(recommendation: Recommendation): Promise<Recommendation>;
+  updateRecommendation(recommendation: Recommendation): Promise<Recommendation>;
+  listRecommendations(tenantId?: string): Promise<readonly Recommendation[]>;
+  getRecommendation(recommendationId: string): Promise<Recommendation | undefined>;
+
+  saveExplanation(explanation: Explanation, tenantId: string): Promise<Explanation>;
+  listExplanations(tenantId?: string): Promise<readonly Explanation[]>;
+  getExplanation(explanationId: string): Promise<Explanation | undefined>;
+
+  saveScore(score: QualityScore): Promise<QualityScore>;
+  listScores(tenantId?: string): Promise<readonly QualityScore[]>;
+  getScore(scoreId: string): Promise<QualityScore | undefined>;
+  getLatestScoreByDimension(
+    tenantId: string,
+    dimension: QualityScore["dimension"],
+  ): Promise<QualityScore | undefined>;
+
+  recordAudit(audit: RecommendationAuditRecord): Promise<RecommendationAuditRecord>;
+  listAudits(tenantId?: string): Promise<readonly RecommendationAuditRecord[]>;
+}
+
+/** Process-local store — allowed in development/tests only. */
+export class InMemoryIntelligenceStore implements IntelligenceStore {
   private readonly observations = new Map<string, QualityObservation>();
   private readonly signals = new Map<string, QualitySignal>();
   private readonly recommendations = new Map<string, Recommendation>();
@@ -13,7 +48,9 @@ export class InMemoryIntelligenceStore {
   private readonly scores = new Map<string, QualityScore>();
   private readonly audits: RecommendationAuditRecord[] = [];
 
-  recordObservation(observation: QualityObservation): QualityObservation {
+  async recordObservation(
+    observation: QualityObservation,
+  ): Promise<QualityObservation> {
     if (this.observations.has(observation.observationId)) {
       throw new Error(
         `Observation already exists and is immutable: ${observation.observationId}`,
@@ -23,35 +60,35 @@ export class InMemoryIntelligenceStore {
     return observation;
   }
 
-  listObservations(tenantId?: string): readonly QualityObservation[] {
+  async listObservations(tenantId?: string): Promise<readonly QualityObservation[]> {
     const all = [...this.observations.values()];
     return tenantId ? all.filter((o) => o.tenantId === tenantId) : all;
   }
 
-  getObservation(observationId: string): QualityObservation | undefined {
+  async getObservation(observationId: string): Promise<QualityObservation | undefined> {
     return this.observations.get(observationId);
   }
 
-  saveSignal(signal: QualitySignal): QualitySignal {
+  async saveSignal(signal: QualitySignal): Promise<QualitySignal> {
     this.signals.set(signal.signalId, signal);
     return signal;
   }
 
-  listSignals(tenantId?: string): readonly QualitySignal[] {
+  async listSignals(tenantId?: string): Promise<readonly QualitySignal[]> {
     const all = [...this.signals.values()];
     return tenantId ? all.filter((s) => s.tenantId === tenantId) : all;
   }
 
-  getSignal(signalId: string): QualitySignal | undefined {
+  async getSignal(signalId: string): Promise<QualitySignal | undefined> {
     return this.signals.get(signalId);
   }
 
-  saveRecommendation(recommendation: Recommendation): Recommendation {
+  async saveRecommendation(recommendation: Recommendation): Promise<Recommendation> {
     this.recommendations.set(recommendation.recommendationId, recommendation);
     return recommendation;
   }
 
-  updateRecommendation(recommendation: Recommendation): Recommendation {
+  async updateRecommendation(recommendation: Recommendation): Promise<Recommendation> {
     if (!this.recommendations.has(recommendation.recommendationId)) {
       throw new Error(`Recommendation not found: ${recommendation.recommendationId}`);
     }
@@ -59,63 +96,73 @@ export class InMemoryIntelligenceStore {
     return recommendation;
   }
 
-  listRecommendations(tenantId?: string): readonly Recommendation[] {
+  async listRecommendations(tenantId?: string): Promise<readonly Recommendation[]> {
     const all = [...this.recommendations.values()];
     return tenantId ? all.filter((r) => r.tenantId === tenantId) : all;
   }
 
-  getRecommendation(recommendationId: string): Recommendation | undefined {
+  async getRecommendation(
+    recommendationId: string,
+  ): Promise<Recommendation | undefined> {
     return this.recommendations.get(recommendationId);
   }
 
-  saveExplanation(explanation: Explanation): Explanation {
+  async saveExplanation(
+    explanation: Explanation,
+    tenantId: string,
+  ): Promise<Explanation> {
     this.explanations.set(explanation.explanationId, explanation);
+    void tenantId;
     return explanation;
   }
 
-  listExplanations(tenantId?: string): readonly Explanation[] {
+  async listExplanations(tenantId?: string): Promise<readonly Explanation[]> {
     const all = [...this.explanations.values()];
     if (!tenantId) {
       return all;
     }
     const recommendationIds = new Set(
-      this.listRecommendations(tenantId).map((r) => r.explanationId),
+      (await this.listRecommendations(tenantId)).map((r) => r.explanationId),
     );
     return all.filter((e) => recommendationIds.has(e.explanationId));
   }
 
-  getExplanation(explanationId: string): Explanation | undefined {
+  async getExplanation(explanationId: string): Promise<Explanation | undefined> {
     return this.explanations.get(explanationId);
   }
 
-  saveScore(score: QualityScore): QualityScore {
+  async saveScore(score: QualityScore): Promise<QualityScore> {
     this.scores.set(score.scoreId, score);
     return score;
   }
 
-  listScores(tenantId?: string): readonly QualityScore[] {
+  async listScores(tenantId?: string): Promise<readonly QualityScore[]> {
     const all = [...this.scores.values()];
     return tenantId ? all.filter((s) => s.tenantId === tenantId) : all;
   }
 
-  getScore(scoreId: string): QualityScore | undefined {
+  async getScore(scoreId: string): Promise<QualityScore | undefined> {
     return this.scores.get(scoreId);
   }
 
-  getLatestScoreByDimension(
+  async getLatestScoreByDimension(
     tenantId: string,
     dimension: QualityScore["dimension"],
-  ): QualityScore | undefined {
-    const matches = this.listScores(tenantId).filter((s) => s.dimension === dimension);
+  ): Promise<QualityScore | undefined> {
+    const matches = (await this.listScores(tenantId)).filter(
+      (s) => s.dimension === dimension,
+    );
     return matches.sort((a, b) => b.calculatedAt.localeCompare(a.calculatedAt))[0];
   }
 
-  recordAudit(audit: RecommendationAuditRecord): RecommendationAuditRecord {
+  async recordAudit(
+    audit: RecommendationAuditRecord,
+  ): Promise<RecommendationAuditRecord> {
     this.audits.unshift(audit);
     return audit;
   }
 
-  listAudits(tenantId?: string): readonly RecommendationAuditRecord[] {
+  async listAudits(tenantId?: string): Promise<readonly RecommendationAuditRecord[]> {
     return tenantId
       ? this.audits.filter((audit) => audit.tenantId === tenantId)
       : [...this.audits];

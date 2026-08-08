@@ -4,3 +4,11 @@ export {
   type QepQualityIntelligenceFacade,
   type QepQualityIntelligencePorts,
 } from "./compose";
+export {
+  createQiPersistence,
+  type QiPersistenceMode,
+} from "./infrastructure/persistence";
+export {
+  createPostgresIntelligenceStore,
+  deleteQiDataForTenant,
+} from "./infrastructure/postgres-intelligence-store";

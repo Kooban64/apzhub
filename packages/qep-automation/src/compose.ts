@@ -3,6 +3,7 @@ import {
   type AutomationDomainEvent,
   type AutomationExecutionRecord,
   type AutomationExecutionRequest,
+  type ExecutionStore,
   type PlatformAutomation,
 } from "@apzhub/platform-automation";
 
@@ -13,13 +14,15 @@ export interface QepAutomationPorts {
     record: AutomationExecutionRecord,
   ) => void | Promise<void>;
   readonly playwrightDryRun?: boolean;
+  /** Inject durable ExecutionStore (QX-PR-01). Defaults to in-memory. */
+  readonly store?: ExecutionStore;
 }
 
 export interface QepAutomationFacade {
   readonly platform: PlatformAutomation;
   listProviders(): ReturnType<PlatformAutomation["registry"]["list"]>;
-  listExecutions(tenantId?: string): readonly AutomationExecutionRecord[];
-  getExecution(id: string): AutomationExecutionRecord | undefined;
+  listExecutions(tenantId?: string): Promise<readonly AutomationExecutionRecord[]>;
+  getExecution(id: string): Promise<AutomationExecutionRecord | undefined>;
   enqueue(request: AutomationExecutionRequest): Promise<AutomationExecutionRecord>;
   run(executionId: string): Promise<AutomationExecutionRecord>;
   enqueueAndRun(
@@ -34,10 +37,13 @@ export function createQepAutomation(
   const platformRef: { current?: PlatformAutomation } = {};
   const platform = createPlatformAutomation({
     playwrightDryRun: ports.playwrightDryRun ?? true,
+    store: ports.store,
     publishEvent: async (event) => {
       await ports.onEvent?.(event);
       if (event.type === "platform.automation.evidence.published") {
-        const record = platformRef.current?.engine.getExecution(event.executionId);
+        const record = await platformRef.current?.engine.getExecution(
+          event.executionId,
+        );
         if (record) {
           await ports.onEvidencePublished?.(record);
         }

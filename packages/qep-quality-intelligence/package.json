@@ -14,6 +14,8 @@
     "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-quality-intelligence"
   },
   "dependencies": {
-    "@apzhub/platform-quality-intelligence": "workspace:*"
+    "@apzhub/config": "workspace:*",
+    "@apzhub/platform-quality-intelligence": "workspace:*",
+    "drizzle-orm": "^0.45.2"
   }
 }

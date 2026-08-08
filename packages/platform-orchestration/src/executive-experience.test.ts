@@ -16,7 +16,7 @@ describe("APZQEP-165 QO-015 Enterprise Executive Experience Integration", () => 
       true,
     );
 
-    const pkg = platform.executiveExperience.createExecutiveExperiencePackage({
+    const pkg = await platform.executiveExperience.createExecutiveExperiencePackage({
       personaKind: "ceo",
       evidenceIntegrationPackageRef: "eip_1",
       decisionPackageRef: "dp_1",
@@ -71,7 +71,7 @@ describe("APZQEP-165 QO-015 Enterprise Executive Experience Integration", () => 
 
   it("builds projection models without rendering or metrics", async () => {
     const platform = await createPlatformOrchestration();
-    const pkg = platform.executiveExperience.createExecutiveExperiencePackage({
+    const pkg = await platform.executiveExperience.createExecutiveExperiencePackage({
       personaKind: "compliance_officer",
       decisionPackageRef: "dp_c",
       approvalBundleRef: "apb_c",
@@ -103,7 +103,7 @@ describe("APZQEP-165 QO-015 Enterprise Executive Experience Integration", () => 
     expect(typeof eng.evaluateDecision).toBe("undefined");
     expect(typeof eng.visualize).toBe("undefined");
 
-    const pkg = platform.executiveExperience.createExecutiveExperiencePackage({
+    const pkg = await platform.executiveExperience.createExecutiveExperiencePackage({
       personaKind: "qa_director",
       decisionPackageRef: "dp_q",
       evidenceIntegrationPackageRef: "eip_q",
@@ -115,13 +115,13 @@ describe("APZQEP-165 QO-015 Enterprise Executive Experience Integration", () => 
 
   it("supports custom personas and superseding projections via new packages", async () => {
     const platform = await createPlatformOrchestration();
-    const first = platform.executiveExperience.createExecutiveExperiencePackage({
+    const first = await platform.executiveExperience.createExecutiveExperiencePackage({
       personaKind: "programme_manager",
       decisionPackageRef: "dp_p",
       evidenceIntegrationPackageRef: "eip_p",
       tenantId: "t1",
     });
-    const second = platform.executiveExperience.createExecutiveExperiencePackage({
+    const second = await platform.executiveExperience.createExecutiveExperiencePackage({
       personaKind: "custom",
       customPersonaName: "Risk Board",
       customArtefactSlots: ["decision_package", "approval_bundle"],

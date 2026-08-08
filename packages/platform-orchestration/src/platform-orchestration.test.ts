@@ -15,7 +15,7 @@ import {
 } from "./index";
 
 describe("APZQEP-165 platform-orchestration kernel (QO-001 foundation)", () => {
-  it("exports stable programme and slice identity", () => {
+  it("exports stable programme and slice identity", async () => {
     expect(PLATFORM_ORCHESTRATION_VERSION).toBe("0.1.16");
     expect(PLATFORM_ORCHESTRATION_PROGRAMME).toBe("APZQEP-165");
     expect(PLATFORM_ORCHESTRATION_KERNEL_SLICE).toBe("QO-001");
@@ -75,7 +75,7 @@ describe("APZQEP-165 platform-orchestration kernel (QO-001 foundation)", () => {
     expect(platform.capabilities.catalogueMode).toBe("catalogue-only");
   });
 
-  it("defines execution context structures without evaluating permissions", () => {
+  it("defines execution context structures without evaluating permissions", async () => {
     const ctx = createExecutionContext({
       tenantId: "t1",
       projectId: "p1",
@@ -89,7 +89,7 @@ describe("APZQEP-165 platform-orchestration kernel (QO-001 foundation)", () => {
     expect(ctx.correlation.correlationId).toBe("c1");
   });
 
-  it("enforces lifecycle transition rules", () => {
+  it("enforces lifecycle transition rules", async () => {
     expect(canTransition("created", "initialising")).toBe(true);
     expect(canTransition("ready", "paused")).toBe(true);
     expect(canTransition("stopped", "ready")).toBe(false);

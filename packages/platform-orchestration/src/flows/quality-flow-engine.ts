@@ -29,6 +29,8 @@ import {
   canTransitionQualityFlow,
   listAllowedTransitions,
 } from "./state-machine";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 export interface QualityFlowSecurityContext {
   readonly tenantId?: string;
@@ -43,6 +45,7 @@ export interface QualityFlowEngineOptions {
   readonly capabilities?: CapabilityRegistry;
   readonly publishEvent?: OrchestrationEventPublisher;
   readonly orchestrationId?: string;
+  readonly documentStore?: OrchestrationDocumentStore;
 }
 
 export interface QualityFlowDiagnostics {
@@ -70,20 +73,44 @@ export class QualityFlowEngine {
   private readonly capabilities?: CapabilityRegistry;
   private readonly publishEvent: OrchestrationEventPublisher;
   private readonly orchestrationId: string;
-  private readonly instances = new Map<string, QualityFlowInstance>();
+  private readonly instances: DurableMap<QualityFlowInstance>;
   private transitionCount = 0;
 
   constructor(options: QualityFlowEngineOptions = {}) {
-    this.definitions = options.definitions ?? new QualityFlowDefinitionRegistry();
+    this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.definitions =
+      options.definitions ??
+      new QualityFlowDefinitionRegistry({
+        documentStore: options.documentStore,
+        orchestrationId: this.orchestrationId,
+      });
     this.capabilities = options.capabilities;
     this.publishEvent = options.publishEvent ?? (() => undefined);
-    this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.instances = new DurableMap<QualityFlowInstance>(
+      "flow_instance",
+      options.documentStore,
+      (inst) => ({
+        tenantId: inst.tenantId,
+        projectId: inst.projectId,
+        orchestrationId: this.orchestrationId,
+        correlationId: inst.correlationId,
+        status: inst.currentState,
+        actorId: inst.history.at(-1)?.actor,
+      }),
+    );
+  }
+
+  async hydrate(): Promise<void> {
+    await this.definitions.hydrate();
+    await this.instances.hydrate();
   }
 
   // —— Definitions (immutable) ——
 
-  registerDefinition(input: QualityFlowDefinitionInput): QualityFlowDefinition {
-    const def = this.definitions.register(input);
+  async registerDefinition(
+    input: QualityFlowDefinitionInput,
+  ): Promise<QualityFlowDefinition> {
+    const def = await this.definitions.register(input);
     this.emit(QUALITY_FLOW_EVENT_TYPES.definitionRegistered, def.flowId, {
       flowId: def.flowId,
       version: def.version,
@@ -91,11 +118,11 @@ export class QualityFlowEngine {
     return def;
   }
 
-  versionDefinition(
+  async versionDefinition(
     flowId: string,
     input: Omit<QualityFlowDefinitionInput, "flowId">,
-  ): QualityFlowDefinition {
-    const def = this.definitions.version(flowId, input);
+  ): Promise<QualityFlowDefinition> {
+    const def = await this.definitions.version(flowId, input);
     this.emit(QUALITY_FLOW_EVENT_TYPES.definitionVersioned, flowId, {
       flowId: def.flowId,
       version: def.version,
@@ -113,7 +140,9 @@ export class QualityFlowEngine {
 
   // —— Instances ——
 
-  createInstance(input: CreateQualityFlowInstanceInput): QualityFlowInstance {
+  async createInstance(
+    input: CreateQualityFlowInstanceInput,
+  ): Promise<QualityFlowInstance> {
     const flowId = input.flowId.trim();
     const triggerId = input.triggerId.trim();
     const correlationId = input.correlationId.trim();
@@ -179,7 +208,7 @@ export class QualityFlowEngine {
       history: Object.freeze([bootstrap]),
     };
 
-    this.instances.set(instanceId, instance);
+    await this.instances.set(instanceId, instance);
     this.transitionCount += 1;
     this.emit(
       QUALITY_FLOW_EVENT_TYPES.instanceCreated,
@@ -202,7 +231,7 @@ export class QualityFlowEngine {
    * Create an instance from a QO-003 routing result.
    * Accepts only routed disposition; stores Trigger ID — never provider payloads.
    */
-  createInstanceFromRouting(
+  async createInstanceFromRouting(
     routing: TriggerRoutingResult,
     context: {
       readonly tenantId: string;
@@ -211,7 +240,7 @@ export class QualityFlowEngine {
       readonly definitionVersion?: string;
       readonly metadata?: Readonly<Record<string, string>>;
     },
-  ): QualityFlowInstance {
+  ): Promise<QualityFlowInstance> {
     if (routing.disposition !== "routed") {
       throw new OrchestrationError(
         "lifecycle",
@@ -229,7 +258,7 @@ export class QualityFlowEngine {
       );
     }
 
-    return this.createInstance({
+    return await this.createInstance({
       flowId,
       definitionVersion: context.definitionVersion,
       triggerId: routing.triggerId,
@@ -290,10 +319,10 @@ export class QualityFlowEngine {
 
   // —— State transitions ——
 
-  transition(
+  async transition(
     instanceId: string,
     request: QualityFlowTransitionRequest,
-  ): QualityFlowInstance {
+  ): Promise<QualityFlowInstance> {
     const instance = this.getInstance(instanceId);
     if (instance.paused) {
       throw new OrchestrationError(
@@ -327,7 +356,7 @@ export class QualityFlowEngine {
     this.assertProviderNeutralMetadata(request.metadata);
     assertQualityFlowTransition(instance.currentState, toState);
 
-    return this.applyTransition(instance, {
+    return await this.applyTransition(instance, {
       toState,
       actor,
       reason,
@@ -355,13 +384,13 @@ export class QualityFlowEngine {
 
   // —— Recovery (state coordination only — no capability execution) ——
 
-  pause(
+  async pause(
     instanceId: string,
     actor: string,
     reason: string,
     correlationId: string,
     _security?: QualityFlowSecurityContext,
-  ): QualityFlowInstance {
+  ): Promise<QualityFlowInstance> {
     const instance = this.getInstance(instanceId);
     if (isTerminalQualityFlowState(instance.currentState)) {
       throw new OrchestrationError(
@@ -379,7 +408,7 @@ export class QualityFlowEngine {
         { instanceId },
       );
     }
-    return this.applyRecoveryRecord(instance, {
+    return await this.applyRecoveryRecord(instance, {
       actor,
       reason,
       correlationId,
@@ -389,13 +418,13 @@ export class QualityFlowEngine {
     });
   }
 
-  resume(
+  async resume(
     instanceId: string,
     actor: string,
     reason: string,
     correlationId: string,
     _security?: QualityFlowSecurityContext,
-  ): QualityFlowInstance {
+  ): Promise<QualityFlowInstance> {
     const instance = this.getInstance(instanceId);
     if (!instance.paused) {
       throw new OrchestrationError(
@@ -413,7 +442,7 @@ export class QualityFlowEngine {
         { instanceId, currentState: instance.currentState },
       );
     }
-    return this.applyRecoveryRecord(instance, {
+    return await this.applyRecoveryRecord(instance, {
       actor,
       reason,
       correlationId,
@@ -423,13 +452,13 @@ export class QualityFlowEngine {
     });
   }
 
-  cancel(
+  async cancel(
     instanceId: string,
     actor: string,
     reason: string,
     correlationId: string,
-  ): QualityFlowInstance {
-    return this.controlTransition(
+  ): Promise<QualityFlowInstance> {
+    return await this.controlTransition(
       instanceId,
       "cancelled",
       actor,
@@ -439,13 +468,13 @@ export class QualityFlowEngine {
     );
   }
 
-  fail(
+  async fail(
     instanceId: string,
     actor: string,
     reason: string,
     correlationId: string,
-  ): QualityFlowInstance {
-    return this.controlTransition(
+  ): Promise<QualityFlowInstance> {
+    return await this.controlTransition(
       instanceId,
       "failed",
       actor,
@@ -455,13 +484,13 @@ export class QualityFlowEngine {
     );
   }
 
-  timeout(
+  async timeout(
     instanceId: string,
     actor: string,
     reason: string,
     correlationId: string,
-  ): QualityFlowInstance {
-    return this.controlTransition(
+  ): Promise<QualityFlowInstance> {
+    return await this.controlTransition(
       instanceId,
       "timed_out",
       actor,
@@ -471,13 +500,13 @@ export class QualityFlowEngine {
     );
   }
 
-  reject(
+  async reject(
     instanceId: string,
     actor: string,
     reason: string,
     correlationId: string,
-  ): QualityFlowInstance {
-    return this.controlTransition(
+  ): Promise<QualityFlowInstance> {
+    return await this.controlTransition(
       instanceId,
       "rejected",
       actor,
@@ -487,13 +516,13 @@ export class QualityFlowEngine {
     );
   }
 
-  supersede(
+  async supersede(
     instanceId: string,
     actor: string,
     reason: string,
     correlationId: string,
-  ): QualityFlowInstance {
-    return this.controlTransition(
+  ): Promise<QualityFlowInstance> {
+    return await this.controlTransition(
       instanceId,
       "superseded",
       actor,
@@ -507,12 +536,12 @@ export class QualityFlowEngine {
    * Retry from failed → last recovery point.
    * Resumes lifecycle coordination only — does not re-execute capabilities.
    */
-  retry(
+  async retry(
     instanceId: string,
     actor: string,
     reason: string,
     correlationId: string,
-  ): QualityFlowInstance {
+  ): Promise<QualityFlowInstance> {
     const instance = this.getInstance(instanceId);
     if (instance.currentState !== "failed") {
       throw new OrchestrationError(
@@ -523,7 +552,7 @@ export class QualityFlowEngine {
       );
     }
     const target = instance.recoveryPoint ?? "ready";
-    return this.applyTransition(instance, {
+    return await this.applyTransition(instance, {
       toState: target,
       actor: actor.trim(),
       reason: reason.trim(),
@@ -537,14 +566,14 @@ export class QualityFlowEngine {
   /**
    * Restart from a recoverable terminal state back to ready.
    */
-  restart(
+  async restart(
     instanceId: string,
     actor: string,
     reason: string,
     correlationId: string,
-  ): QualityFlowInstance {
+  ): Promise<QualityFlowInstance> {
     const instance = this.getInstance(instanceId);
-    return this.applyTransition(instance, {
+    return await this.applyTransition(instance, {
       toState: "ready",
       actor: actor.trim(),
       reason: reason.trim(),
@@ -619,14 +648,14 @@ export class QualityFlowEngine {
 
   // —— Internals ——
 
-  private controlTransition(
+  private async controlTransition(
     instanceId: string,
     toState: QualityFlowState,
     actor: string,
     reason: string,
     correlationId: string,
     operation: string,
-  ): QualityFlowInstance {
+  ): Promise<QualityFlowInstance> {
     const instance = this.getInstance(instanceId);
     if (isTerminalQualityFlowState(instance.currentState)) {
       throw new OrchestrationError(
@@ -636,7 +665,7 @@ export class QualityFlowEngine {
         { instanceId, currentState: instance.currentState },
       );
     }
-    return this.applyTransition(instance, {
+    return await this.applyTransition(instance, {
       toState,
       actor: actor.trim(),
       reason: reason.trim(),
@@ -647,7 +676,7 @@ export class QualityFlowEngine {
     });
   }
 
-  private applyTransition(
+  private async applyTransition(
     instance: QualityFlowInstance,
     args: {
       readonly toState: QualityFlowState;
@@ -658,7 +687,7 @@ export class QualityFlowEngine {
       readonly paused: boolean;
       readonly allowFromTerminal?: boolean;
     },
-  ): QualityFlowInstance {
+  ): Promise<QualityFlowInstance> {
     if (!args.allowFromTerminal && isTerminalQualityFlowState(instance.currentState)) {
       throw new OrchestrationError(
         "lifecycle",
@@ -713,7 +742,7 @@ export class QualityFlowEngine {
       history,
     };
 
-    this.instances.set(instance.instanceId, next);
+    await this.instances.set(instance.instanceId, next);
     this.transitionCount += 1;
     this.emit(
       QUALITY_FLOW_EVENT_TYPES.stateTransitioned,
@@ -730,7 +759,7 @@ export class QualityFlowEngine {
     return next;
   }
 
-  private applyRecoveryRecord(
+  private async applyRecoveryRecord(
     instance: QualityFlowInstance,
     args: {
       readonly actor: string;
@@ -740,7 +769,7 @@ export class QualityFlowEngine {
       readonly paused: boolean;
       readonly recoveryPoint: QualityFlowState;
     },
-  ): QualityFlowInstance {
+  ): Promise<QualityFlowInstance> {
     const actor = args.actor.trim();
     const reason = args.reason.trim();
     const correlationId = args.correlationId.trim();
@@ -774,7 +803,7 @@ export class QualityFlowEngine {
       history: Object.freeze([...instance.history, record]),
     };
 
-    this.instances.set(instance.instanceId, next);
+    await this.instances.set(instance.instanceId, next);
     this.transitionCount += 1;
     this.emit(
       args.operation === "pause"

@@ -533,6 +533,10 @@ const packageAliases = {
     __dirname,
     "packages/platform-automation/src/index.ts",
   ),
+  "@apzhub/platform-orchestration": path.resolve(
+    __dirname,
+    "packages/platform-orchestration/src/index.ts",
+  ),
   "@apzhub/qep-automation": path.resolve(
     __dirname,
     "packages/qep-automation/src/index.ts",
@@ -786,6 +790,16 @@ export default defineConfig({
       "testing/apzqep-150/**/*.test.{ts,tsx}",
       "testing/apzqep-151/**/*.test.{ts,tsx}",
       "testing/apzqep-152/**/*.test.{ts,tsx}",
+      "testing/apzqep-qx-pr-01/**/*.test.{ts,tsx}",
+      "testing/apzqep-qx-p1-01/**/*.test.{ts,tsx}",
+      "testing/apzqep-v11-h4/**/*.test.{ts,tsx}",
+      "testing/apzqep-qx-pr-02/**/*.test.{ts,tsx}",
+      "testing/apzqep-qx-pr-03/**/*.test.{ts,tsx}",
+      "testing/apzqep-qx-pr-04/**/*.test.{ts,tsx}",
+      "testing/apzqep-qx-pr-05/**/*.test.{ts,tsx}",
+      "testing/apzqep-qx-pr-02/**/*.test.{ts,tsx}",
+      "testing/apzqep-qx-pr-03/**/*.test.{ts,tsx}",
+      "testing/apzqep-qx-pr-04/**/*.test.{ts,tsx}",
       "testing/apzqep-law-adopt-003/**/*.test.{ts,tsx}",
 
       "testing/wave1/**/*.test.{ts,tsx}",

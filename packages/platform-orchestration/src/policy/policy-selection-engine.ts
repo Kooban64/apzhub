@@ -33,6 +33,8 @@ import {
   QualityRuleRegistry,
 } from "./registries";
 import { evaluateCondition } from "./rule-evaluator";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 export interface PolicySelectionEngineOptions {
   readonly policies?: QualityPolicyRegistry;
@@ -41,6 +43,7 @@ export interface PolicySelectionEngineOptions {
   readonly capabilities?: CapabilityRegistry;
   readonly publishEvent?: OrchestrationEventPublisher;
   readonly orchestrationId?: string;
+  readonly documentStore?: OrchestrationDocumentStore;
 }
 
 function createId(prefix: string): string {
@@ -63,7 +66,7 @@ export class PolicySelectionEngine {
   private readonly capabilities?: CapabilityRegistry;
   private readonly publishEvent: OrchestrationEventPublisher;
   private readonly orchestrationId: string;
-  private readonly decisions = new Map<string, SelectionDecision>();
+  private readonly decisions: DurableMap<SelectionDecision>;
   private readonly explainability = new Map<string, SelectionExplainability>();
   private readonly history: SelectionHistoryRecord[] = [];
   private evaluationCount = 0;
@@ -75,19 +78,41 @@ export class PolicySelectionEngine {
   private readonly activityDistribution: Record<string, number> = {};
 
   constructor(options: PolicySelectionEngineOptions = {}) {
-    this.policies = options.policies ?? new QualityPolicyRegistry();
+    this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.policies =
+      options.policies ??
+      new QualityPolicyRegistry({
+        documentStore: options.documentStore,
+        orchestrationId: this.orchestrationId,
+      });
     this.rules = options.rules ?? new QualityRuleRegistry();
     this.profiles = options.profiles ?? new PolicyProfileRegistry();
     this.capabilities = options.capabilities;
     this.publishEvent = options.publishEvent ?? (() => undefined);
-    this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.decisions = new DurableMap<SelectionDecision>(
+      "selection_decision",
+      options.documentStore,
+      (decision) => ({
+        tenantId: decision.tenantId,
+        projectId: decision.projectId,
+        orchestrationId: this.orchestrationId,
+        correlationId: decision.impactCorrelationId,
+        status: decision.advisory ? "advisory" : undefined,
+        actorId: decision.actorId,
+      }),
+    );
+  }
+
+  async hydrate(): Promise<void> {
+    await this.policies.hydrate();
+    await this.decisions.hydrate();
   }
 
   registerRule(input: QualityRuleInput) {
     return this.rules.register(input);
   }
 
-  registerPolicy(input: QualityPolicyInput) {
+  async registerPolicy(input: QualityPolicyInput) {
     for (const ruleId of input.ruleIds) {
       if (!this.rules.tryGet(ruleId)) {
         throw new OrchestrationError(
@@ -98,7 +123,7 @@ export class PolicySelectionEngine {
         );
       }
     }
-    return this.policies.register(input);
+    return await this.policies.register(input);
   }
 
   registerProfile(input: PolicyProfileInput) {
@@ -201,7 +226,9 @@ export class PolicySelectionEngine {
    * Produce an advisory selection decision from a policy profile + impact result.
    * Never executes activities.
    */
-  produceSelectionDecision(input: EvaluateSelectionInput): SelectionDecision {
+  async produceSelectionDecision(
+    input: EvaluateSelectionInput,
+  ): Promise<SelectionDecision> {
     const profile = this.profiles.get(input.profileId);
     const impact = input.impact;
 
@@ -324,7 +351,7 @@ export class PolicySelectionEngine {
       reasons,
     };
 
-    this.decisions.set(decisionId, decision);
+    await this.decisions.set(decisionId, decision);
     this.explainability.set(decisionId, explain);
     this.history.push(
       Object.freeze({
@@ -362,7 +389,9 @@ export class PolicySelectionEngine {
   }
 
   /** Convenience: evaluate profile and produce decision. */
-  evaluatePolicyProfile(input: EvaluateSelectionInput): SelectionDecision {
+  async evaluatePolicyProfile(
+    input: EvaluateSelectionInput,
+  ): Promise<SelectionDecision> {
     return this.produceSelectionDecision(input);
   }
 

@@ -14,7 +14,9 @@
     "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-dashboards"
   },
   "dependencies": {
+    "@apzhub/config": "workspace:*",
     "@apzhub/platform-dashboard": "workspace:*",
-    "@apzhub/platform-visualization": "workspace:*"
+    "@apzhub/platform-visualization": "workspace:*",
+    "drizzle-orm": "^0.45.2"
   }
 }

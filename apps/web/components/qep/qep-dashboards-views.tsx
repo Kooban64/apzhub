@@ -215,10 +215,12 @@ function DashboardDetailView({ dashboardId }: { dashboardId: string }) {
           string,
           {
             kind: string;
+            attribution?: string;
             descriptor?: {
               title?: string;
               value?: string | number;
               a11ySummary?: string;
+              series?: readonly unknown[];
             };
             title?: string;
             status?: string;
@@ -288,32 +290,47 @@ function DashboardDetailView({ dashboardId }: { dashboardId: string }) {
                 {descriptor.kind}
               </p>
               {projection?.kind === "kpi" && projection.descriptor ? (
-                <p className="text-2xl font-semibold">
-                  {String(projection.descriptor.value)}
-                </p>
+                <div>
+                  <p className="text-2xl font-semibold">
+                    {String(projection.descriptor.value)}
+                  </p>
+                  {projection.attribution === "empty:no_system_of_record_binding" ? (
+                    <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">
+                      Honest empty — not bound to a System of Record.
+                    </p>
+                  ) : null}
+                </div>
               ) : null}
               {projection?.kind === "gauge" && projection.descriptor ? (
                 <p className="text-sm">{projection.descriptor.a11ySummary}</p>
               ) : null}
               {projection?.kind === "chart" && projection.descriptor ? (
-                <p className="text-sm">{projection.descriptor.a11ySummary}</p>
+                (projection.descriptor.series?.length ?? 0) === 0 ? (
+                  <QepEmptyState title="No chart data — projection not bound to a System of Record." />
+                ) : (
+                  <p className="text-sm">{projection.descriptor.a11ySummary}</p>
+                )
               ) : null}
               {projection?.kind === "list" ? (
-                <ul className="list-disc pl-5 text-sm">
-                  {(projection.items ?? []).map((item) => (
-                    <li key={item.id}>
-                      {item.href ? (
-                        <Link href={item.href}>{item.label}</Link>
-                      ) : (
-                        item.label
-                      )}
-                    </li>
-                  ))}
-                </ul>
+                (projection.items ?? []).length === 0 ? (
+                  <QepEmptyState title="No items — projection not bound to a System of Record." />
+                ) : (
+                  <ul className="list-disc pl-5 text-sm">
+                    {(projection.items ?? []).map((item) => (
+                      <li key={item.id}>
+                        {item.href ? (
+                          <Link href={item.href}>{item.label}</Link>
+                        ) : (
+                          item.label
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                )
               ) : null}
               {projection?.kind === "status" ? (
                 <p className="text-sm">
-                  <QepStatusBadge status={projection.status ?? "ready"} />{" "}
+                  <QepStatusBadge status={projection.status ?? "empty"} />{" "}
                   {projection.detail}
                 </p>
               ) : null}

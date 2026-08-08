@@ -8,62 +8,62 @@ import {
   type NormalizedChange,
 } from "./index";
 
-function seedKnowledge(
+async function seedKnowledge(
   impact: Awaited<ReturnType<typeof createPlatformOrchestration>>["impact"],
 ) {
-  impact.registerAsset({
+  await impact.registerAsset({
     assetId: "file_auth",
     assetType: "file",
     name: "auth.ts",
     evidenceQuality: 0.8,
   });
-  impact.registerAsset({
+  await impact.registerAsset({
     assetId: "cmp_auth",
     assetType: "component",
     name: "AuthComponent",
     evidenceQuality: 0.75,
   });
-  impact.registerAsset({
+  await impact.registerAsset({
     assetId: "svc_identity",
     assetType: "service",
     name: "IdentityService",
     evidenceQuality: 0.7,
   });
-  impact.registerAsset({
+  await impact.registerAsset({
     assetId: "req_login",
     assetType: "requirement",
     name: "Login requirement",
     evidenceQuality: 0.9,
   });
-  impact.registerAsset({
+  await impact.registerAsset({
     assetId: "suite_auth",
     assetType: "test_suite",
     name: "Auth suite",
     evidenceQuality: 0.85,
   });
-  impact.registerAsset({
+  await impact.registerAsset({
     assetId: "plan_smoke",
     assetType: "execution_plan",
     name: "Smoke plan",
   });
-  impact.registerAsset({
+  await impact.registerAsset({
     assetId: "auto_login",
     assetType: "automation_asset",
     name: "Login automation",
   });
-  impact.registerAsset({
+  await impact.registerAsset({
     assetId: "ev_last",
     assetType: "evidence",
     name: "Last run evidence",
     evidenceQuality: 0.6,
   });
-  impact.registerAsset({
+  await impact.registerAsset({
     assetId: "def_42",
     assetType: "defect",
     name: "Auth flake",
     knownRegression: true,
   });
-  impact.registerAsset({
+  await impact.registerAsset({
     assetId: "sig_flaky",
     assetType: "quality_signal",
     name: "Flaky signal",
@@ -160,7 +160,7 @@ function seedKnowledge(
   ];
 
   for (const e of edges) {
-    impact.registerRelationship({
+    await impact.registerRelationship({
       relationshipId: e.id,
       fromAssetId: e.from,
       toAssetId: e.to,
@@ -180,7 +180,7 @@ describe("APZQEP-165 QO-005 Impact Correlation Engine", () => {
         events.push(e.type);
       },
     });
-    seedKnowledge(platform.impact);
+    await seedKnowledge(platform.impact);
 
     const change: NormalizedChange = {
       changeId: "chg_1",
@@ -196,8 +196,8 @@ describe("APZQEP-165 QO-005 Impact Correlation Engine", () => {
       actorId: "actor_1",
     };
 
-    const first = platform.impact.createCorrelation({ change, maxDepth: 8 });
-    const second = platform.impact.createCorrelation({
+    const first = await platform.impact.createCorrelation({ change, maxDepth: 8 });
+    const second = await platform.impact.createCorrelation({
       change: { ...change, changeId: "chg_2", correlationId: "corr_2" },
       maxDepth: 8,
     });
@@ -212,8 +212,8 @@ describe("APZQEP-165 QO-005 Impact Correlation Engine", () => {
 
   it("computes explainable confidence and advisory risk", async () => {
     const platform = await createPlatformOrchestration();
-    seedKnowledge(platform.impact);
-    const result = platform.impact.createCorrelation({
+    await seedKnowledge(platform.impact);
+    const result = await platform.impact.createCorrelation({
       change: {
         changeId: "chg_risk",
         changeKind: "changed_files",
@@ -238,8 +238,8 @@ describe("APZQEP-165 QO-005 Impact Correlation Engine", () => {
 
   it("produces advisory recommended quality scope without execution selection", async () => {
     const platform = await createPlatformOrchestration();
-    seedKnowledge(platform.impact);
-    const result = platform.impact.createCorrelation({
+    await seedKnowledge(platform.impact);
+    const result = await platform.impact.createCorrelation({
       change: {
         changeId: "chg_scope",
         changeKind: "pull_request",
@@ -271,8 +271,8 @@ describe("APZQEP-165 QO-005 Impact Correlation Engine", () => {
 
   it("maintains append-only history and query APIs", async () => {
     const platform = await createPlatformOrchestration();
-    seedKnowledge(platform.impact);
-    const a = platform.impact.createCorrelation({
+    await seedKnowledge(platform.impact);
+    const a = await platform.impact.createCorrelation({
       change: {
         changeId: "chg_h1",
         changeKind: "commit",
@@ -285,7 +285,7 @@ describe("APZQEP-165 QO-005 Impact Correlation Engine", () => {
       },
     });
     const before = platform.impact.getHistory().length;
-    platform.impact.createCorrelation({
+    await platform.impact.createCorrelation({
       change: {
         changeId: "chg_h2",
         changeKind: "commit",
@@ -329,7 +329,7 @@ describe("APZQEP-165 QO-005 Impact Correlation Engine", () => {
         .some((c) => c.capabilityId === "cap_impact"),
     ).toBe(true);
 
-    platform.qualityFlows.registerDefinition({
+    await platform.qualityFlows.registerDefinition({
       flowId: "qf_impact",
       name: "Impact flow",
       version: "1.0.0",
@@ -338,7 +338,7 @@ describe("APZQEP-165 QO-005 Impact Correlation Engine", () => {
       supportedCapabilityStages: ["impact_correlation"],
     });
 
-    try {
+    await expect(
       platform.impact.createCorrelation({
         change: {
           changeId: "chg_bad",
@@ -348,14 +348,11 @@ describe("APZQEP-165 QO-005 Impact Correlation Engine", () => {
           occurredAt: new Date().toISOString(),
           metadata: { github_sha: "abc" },
         },
-      });
-      expect.fail("provider metadata should reject");
-    } catch (error) {
-      expect(isOrchestrationError(error)).toBe(true);
-    }
+      }),
+    ).rejects.toSatisfy((error: unknown) => isOrchestrationError(error));
 
-    seedKnowledge(platform.impact);
-    const result = platform.impact.createCorrelation({
+    await seedKnowledge(platform.impact);
+    const result = await platform.impact.createCorrelation({
       change: {
         changeId: "chg_ok",
         changeKind: "commit",
@@ -375,8 +372,8 @@ describe("APZQEP-165 QO-005 Impact Correlation Engine", () => {
 
   it("exposes diagnostics and covers confidence/risk helpers", async () => {
     const platform = await createPlatformOrchestration();
-    seedKnowledge(platform.impact);
-    platform.impact.createCorrelation({
+    await seedKnowledge(platform.impact);
+    await platform.impact.createCorrelation({
       change: {
         changeId: "chg_diag",
         changeKind: "manual_declaration",
@@ -404,8 +401,8 @@ describe("APZQEP-165 QO-005 Impact Correlation Engine", () => {
 
   it("covers graph traversal for every edge in the seeded knowledge path", async () => {
     const platform = await createPlatformOrchestration();
-    seedKnowledge(platform.impact);
-    const result = platform.impact.createCorrelation({
+    await seedKnowledge(platform.impact);
+    const result = await platform.impact.createCorrelation({
       change: {
         changeId: "chg_trav",
         changeKind: "commit",

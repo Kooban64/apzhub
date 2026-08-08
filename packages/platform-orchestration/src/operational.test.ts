@@ -14,7 +14,7 @@ describe("APZQEP-165 QO-016 Enterprise Operational Platform", () => {
     );
     expect(platform.container.has("orchestration.operational.engine")).toBe(true);
 
-    const pkg = platform.operational.createOperationalReadinessPackage({
+    const pkg = await platform.operational.createOperationalReadinessPackage({
       executiveExperiencePackageRef: "eep_1",
       evidenceIntegrationPackageRef: "eip_1",
       decisionPackageRef: "dp_1",
@@ -68,7 +68,7 @@ describe("APZQEP-165 QO-016 Enterprise Operational Platform", () => {
 
   it("exposes health, readiness, liveness, diagnostics, and version reads", async () => {
     const platform = await createPlatformOrchestration();
-    const pkg = platform.operational.createOperationalReadinessPackage({
+    const pkg = await platform.operational.createOperationalReadinessPackage({
       decisionPackageRef: "dp_r",
       tenantId: "t1",
     });
@@ -100,7 +100,7 @@ describe("APZQEP-165 QO-016 Enterprise Operational Platform", () => {
 
   it("marks degraded and maintenance statuses descriptively", async () => {
     const platform = await createPlatformOrchestration();
-    const degraded = platform.operational.createOperationalReadinessPackage({
+    const degraded = await platform.operational.createOperationalReadinessPackage({
       healthState: "degraded",
       readinessState: "degraded",
       tenantId: "t1",
@@ -108,7 +108,7 @@ describe("APZQEP-165 QO-016 Enterprise Operational Platform", () => {
     expect(degraded.readinessStatus).toBe("degraded");
     expect(degraded.prescriptive).toBe(false);
 
-    const maintenance = platform.operational.createOperationalReadinessPackage({
+    const maintenance = await platform.operational.createOperationalReadinessPackage({
       maintenanceState: "maintenance",
       tenantId: "t1",
     });
@@ -126,7 +126,7 @@ describe("APZQEP-165 QO-016 Enterprise Operational Platform", () => {
     expect(typeof eng.evaluateGovernance).toBe("undefined");
     expect(typeof eng.renderExecutive).toBe("undefined");
 
-    const pkg = platform.operational.createOperationalReadinessPackage({
+    const pkg = await platform.operational.createOperationalReadinessPackage({
       tenantId: "t1",
       configurationRefs: ["cfg:readonly"],
     });
@@ -137,11 +137,11 @@ describe("APZQEP-165 QO-016 Enterprise Operational Platform", () => {
 
   it("supports superseding readiness packages without mutating history", async () => {
     const platform = await createPlatformOrchestration();
-    const first = platform.operational.createOperationalReadinessPackage({
+    const first = await platform.operational.createOperationalReadinessPackage({
       decisionPackageRef: "dp_s",
       tenantId: "t1",
     });
-    const second = platform.operational.createOperationalReadinessPackage({
+    const second = await platform.operational.createOperationalReadinessPackage({
       decisionPackageRef: "dp_s",
       supersedesPackageId: first.operationalReadinessPackageId,
       tenantId: "t1",

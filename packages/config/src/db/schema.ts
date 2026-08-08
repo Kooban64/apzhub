@@ -349,6 +349,33 @@ export {
   qepReportingTrendSample,
   qepCoreQeIdempotency,
 } from "./qep-core-qe-schema";
+export { qepAutomationSchema, qepAutomationExecution } from "./qep-automation-schema";
+export {
+  qepOrchestrationSchema,
+  qepQoDocument,
+  qepQoTriggerIdempotency,
+} from "./qep-orchestration-schema";
+export {
+  qepScmSchema,
+  qepScmRepository,
+  qepScmWebhookAudit,
+  qepScmWebhookIdempotency,
+  qepScmTraceabilityLink,
+} from "./qep-scm-schema";
+export {
+  qepQualityIntelligenceSchema,
+  qepQiObservation,
+  qepQiSignal,
+  qepQiRecommendation,
+  qepQiExplanation,
+  qepQiScore,
+  qepQiAudit,
+} from "./qep-quality-intelligence-schema";
+export {
+  qepDashboardSchema,
+  qepDashboardLayout,
+  qepDashboardSavedView,
+} from "./qep-dashboard-schema";
 export {
   platformAdminSchema,
   platformAdminModule,

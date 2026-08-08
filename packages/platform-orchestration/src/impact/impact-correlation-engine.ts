@@ -31,6 +31,8 @@ import { aggregateGraphConfidence } from "./confidence";
 import { buildImpactGraph } from "./graph-builder";
 import { ImpactKnowledgeBase } from "./knowledge-base";
 import { assessGraphRisk } from "./risk";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 export interface ImpactCorrelationSecurityContext {
   readonly tenantId?: string;
@@ -44,6 +46,7 @@ export interface ImpactCorrelationEngineOptions {
   readonly capabilities?: CapabilityRegistry;
   readonly publishEvent?: OrchestrationEventPublisher;
   readonly orchestrationId?: string;
+  readonly documentStore?: OrchestrationDocumentStore;
 }
 
 const BANNED_PROVIDER_TOKENS = [
@@ -74,7 +77,7 @@ export class ImpactCorrelationEngine {
   private readonly capabilities?: CapabilityRegistry;
   private readonly publishEvent: OrchestrationEventPublisher;
   private readonly orchestrationId: string;
-  private readonly correlations = new Map<string, ImpactCorrelationResult>();
+  private readonly correlations: DurableMap<ImpactCorrelationResult>;
   private readonly history: CorrelationHistoryRecord[] = [];
   /** Pair key → co-occurrence count for historical correlation factor. */
   private readonly pairCounts = new Map<string, number>();
@@ -94,18 +97,42 @@ export class ImpactCorrelationEngine {
   };
 
   constructor(options: ImpactCorrelationEngineOptions = {}) {
-    this.knowledge = options.knowledge ?? new ImpactKnowledgeBase();
+    this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.knowledge =
+      options.knowledge ??
+      new ImpactKnowledgeBase({
+        documentStore: options.documentStore,
+        orchestrationId: this.orchestrationId,
+      });
     this.capabilities = options.capabilities;
     this.publishEvent = options.publishEvent ?? (() => undefined);
-    this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.correlations = new DurableMap<ImpactCorrelationResult>(
+      "impact_correlation",
+      options.documentStore,
+      (result) => ({
+        tenantId: result.tenantId,
+        projectId: result.projectId,
+        orchestrationId: this.orchestrationId,
+        correlationId: result.change.correlationId,
+        status: result.risk.level,
+        actorId: result.actorId,
+      }),
+    );
   }
 
-  registerAsset(asset: QualityAsset): QualityAsset {
+  async hydrate(): Promise<void> {
+    await this.knowledge.hydrate();
+    await this.correlations.hydrate();
+  }
+
+  async registerAsset(asset: QualityAsset): Promise<QualityAsset> {
     this.assertProviderNeutralMetadata(asset.metadata);
     return this.knowledge.registerAsset(asset);
   }
 
-  registerRelationship(relationship: AssetRelationship): AssetRelationship {
+  async registerRelationship(
+    relationship: AssetRelationship,
+  ): Promise<AssetRelationship> {
     this.assertProviderNeutralMetadata(relationship.metadata);
     return this.knowledge.registerRelationship(relationship);
   }
@@ -114,7 +141,9 @@ export class ImpactCorrelationEngine {
    * Create a correlation from a normalized change.
    * Advisory only — never selects execution targets.
    */
-  createCorrelation(input: CreateCorrelationInput): ImpactCorrelationResult {
+  async createCorrelation(
+    input: CreateCorrelationInput,
+  ): Promise<ImpactCorrelationResult> {
     const started = Date.now();
     const change = this.assertChange(input.change);
     const maxDepth = input.maxDepth ?? 4;
@@ -127,7 +156,7 @@ export class ImpactCorrelationEngine {
       );
     }
 
-    this.ensureSeedAssets(change);
+    await this.ensureSeedAssets(change);
     const seedAssetIds = this.resolveSeeds(change);
     const magnitude: ChangeMagnitude = change.magnitude ?? this.inferMagnitude(change);
     const graphId = createId("img");
@@ -194,7 +223,7 @@ export class ImpactCorrelationEngine {
       ]),
     };
 
-    this.correlations.set(correlationId, result);
+    await this.correlations.set(correlationId, result);
     this.appendHistory(result);
     this.updatePairCounts(built.graph);
     this.lastNodeCount = built.graph.nodes.length;
@@ -344,7 +373,7 @@ export class ImpactCorrelationEngine {
     };
   }
 
-  private ensureSeedAssets(change: NormalizedChange): void {
+  private async ensureSeedAssets(change: NormalizedChange): Promise<void> {
     const seeds = this.resolveSeeds(change);
     for (const seedId of seeds) {
       if (this.knowledge.tryGetAsset(seedId)) continue;
@@ -374,7 +403,7 @@ export class ImpactCorrelationEngine {
                               ? "repository"
                               : "component";
 
-      this.knowledge.registerAsset({
+      await this.knowledge.registerAsset({
         assetId: seedId,
         assetType,
         name: seedId,

@@ -32,10 +32,13 @@ import {
   buildOperationalContract,
   listBuiltinOperationalEndpoints,
 } from "./operational-contracts";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 export interface OperationalPlatformEngineOptions {
   readonly events: QualityEventBackbone;
   readonly orchestrationId?: string;
+  readonly documentStore?: OrchestrationDocumentStore;
 }
 
 function createId(prefix: string): string {
@@ -51,7 +54,7 @@ function bump(map: Record<string, number>, key: string): void {
 export class OperationalPlatformEngine {
   private readonly events: QualityEventBackbone;
   private readonly orchestrationId: string;
-  private readonly packages = new Map<string, OperationalReadinessPackage>();
+  private readonly packages: DurableMap<OperationalReadinessPackage>;
   private readonly healthStatistics: Record<string, number> = {};
   private readonly readinessStatistics: Record<string, number> = {};
   private readonly livenessStatistics: Record<string, number> = {};
@@ -62,15 +65,30 @@ export class OperationalPlatformEngine {
   constructor(options: OperationalPlatformEngineOptions) {
     this.events = options.events;
     this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.packages = new DurableMap<OperationalReadinessPackage>(
+      "operational_readiness_package",
+      options.documentStore,
+      (pkg) => ({
+        tenantId: pkg.tenantId,
+        projectId: pkg.projectId,
+        orchestrationId: this.orchestrationId,
+        status: pkg.readinessStatus,
+        actorId: pkg.actorId,
+      }),
+    );
+  }
+
+  async hydrate(): Promise<void> {
+    await this.packages.hydrate();
   }
 
   /**
    * Create an immutable Operational Readiness Package.
    * Descriptive snapshot only — never performs operational actions.
    */
-  createOperationalReadinessPackage(
+  async createOperationalReadinessPackage(
     input: CreateOperationalReadinessPackageInput,
-  ): OperationalReadinessPackage {
+  ): Promise<OperationalReadinessPackage> {
     const tenantId = input.tenantId.trim();
     if (!tenantId) {
       throw new OrchestrationError(
@@ -301,7 +319,7 @@ export class OperationalPlatformEngine {
       mutatesConfiguration: false as const,
     });
 
-    this.packages.set(operationalReadinessPackageId, pkg);
+    await this.packages.set(operationalReadinessPackageId, pkg);
     this.latestPackageId = operationalReadinessPackageId;
 
     const correlationId =

@@ -183,3 +183,12 @@ export {
   type CreatePlatformOrchestrationOptions,
   type PlatformOrchestration,
 } from "./sdk/create-orchestration";
+export {
+  type OrchestrationArtefactKind,
+  type OrchestrationDocument,
+  type OrchestrationDocumentStore,
+  type UpsertOrchestrationDocumentInput,
+  InMemoryOrchestrationDocumentStore,
+  DurableMap,
+  createPostgresOrchestrationDocumentStore,
+} from "./persistence/index";

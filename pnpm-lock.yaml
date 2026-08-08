@@ -305,6 +305,9 @@ importers:
       '@apzhub/platform-operations':
         specifier: workspace:*
         version: link:../../packages/platform-operations
+      '@apzhub/platform-orchestration':
+        specifier: workspace:*
+        version: link:../../packages/platform-orchestration
       '@apzhub/platform-outbox':
         specifier: workspace:*
         version: link:../../packages/platform-outbox
@@ -955,6 +958,15 @@ importers:
         specifier: workspace:*
         version: link:../types
 
+  packages/platform-orchestration:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
   packages/platform-outbox:
     dependencies:
       '@apzhub/config':
@@ -1203,9 +1215,15 @@ importers:
 
   packages/qep-automation:
     dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
       '@apzhub/platform-automation':
         specifier: workspace:*
         version: link:../platform-automation
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
 
   packages/qep-command:
     dependencies:
@@ -1221,12 +1239,18 @@ importers:
 
   packages/qep-dashboards:
     dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
       '@apzhub/platform-dashboard':
         specifier: workspace:*
         version: link:../platform-dashboard
       '@apzhub/platform-visualization':
         specifier: workspace:*
         version: link:../platform-visualization
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
 
   packages/qep-defects:
     dependencies:
@@ -1350,9 +1374,15 @@ importers:
 
   packages/qep-quality-intelligence:
     dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
       '@apzhub/platform-quality-intelligence':
         specifier: workspace:*
         version: link:../platform-quality-intelligence
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
 
   packages/qep-reporting:
     dependencies:
@@ -1416,9 +1446,15 @@ importers:
 
   packages/qep-scm:
     dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
       '@apzhub/platform-scm':
         specifier: workspace:*
         version: link:../platform-scm
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
 
   packages/qep-suites:
     dependencies:

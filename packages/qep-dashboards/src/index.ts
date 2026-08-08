@@ -5,6 +5,14 @@ export {
   type QepDashboardsPorts,
 } from "./compose";
 export {
+  createDashboardPersistence,
+  type DashboardPersistenceMode,
+} from "./infrastructure/persistence";
+export {
+  createPostgresLayoutStore,
+  deleteDashboardDataForTenant,
+} from "./infrastructure/postgres-layout-store";
+export {
   createQepDashboardDefinitions,
   createQepWidgetDescriptors,
 } from "./catalogue/persona-dashboards";

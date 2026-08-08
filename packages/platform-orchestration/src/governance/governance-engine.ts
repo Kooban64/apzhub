@@ -33,12 +33,15 @@ import {
   canTransitionGateStatus,
   listAllowedGateStatusTransitions,
 } from "./status-transitions";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 export interface GovernanceEngineOptions {
   readonly gates?: GateDefinitionRegistry;
   readonly templates?: GateTemplateRegistry;
   readonly publishEvent?: OrchestrationEventPublisher;
   readonly orchestrationId?: string;
+  readonly documentStore?: OrchestrationDocumentStore;
 }
 
 function createId(prefix: string): string {
@@ -79,7 +82,7 @@ export class GovernanceEngine {
 
   private readonly publishEvent: OrchestrationEventPublisher;
   private readonly orchestrationId: string;
-  private readonly decisions = new Map<string, GovernanceDecision>();
+  private readonly decisions: DurableMap<GovernanceDecision>;
   private readonly gateResults = new Map<string, readonly GateEvaluationResult[]>();
   private readonly explainability = new Map<
     string,
@@ -91,13 +94,35 @@ export class GovernanceEngine {
   private readonly statusDistribution: Record<string, number> = {};
 
   constructor(options: GovernanceEngineOptions = {}) {
-    this.gates = options.gates ?? new GateDefinitionRegistry();
+    this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.gates =
+      options.gates ??
+      new GateDefinitionRegistry({
+        documentStore: options.documentStore,
+        orchestrationId: this.orchestrationId,
+      });
     this.templates = options.templates ?? new GateTemplateRegistry();
     this.publishEvent = options.publishEvent ?? (() => undefined);
-    this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.decisions = new DurableMap<GovernanceDecision>(
+      "governance_decision",
+      options.documentStore,
+      (decision) => ({
+        tenantId: decision.tenantId,
+        projectId: decision.projectId,
+        orchestrationId: this.orchestrationId,
+        correlationId: decision.impactCorrelationId,
+        status: decision.compositionSatisfied ? "satisfied" : "outstanding",
+        actorId: decision.actorId,
+      }),
+    );
   }
 
-  registerGate(input: GateDefinitionInput) {
+  async hydrate(): Promise<void> {
+    await this.gates.hydrate();
+    await this.decisions.hydrate();
+  }
+
+  async registerGate(input: GateDefinitionInput) {
     return this.gates.register(input);
   }
 
@@ -186,10 +211,10 @@ export class GovernanceEngine {
   /**
    * Evaluate a template composition and produce an advisory governance decision.
    */
-  evaluateTemplate(
+  async evaluateTemplate(
     templateId: string,
     input: EvaluateGovernanceInput,
-  ): GovernanceDecision {
+  ): Promise<GovernanceDecision> {
     const template = this.templates.get(templateId);
     return this.evaluateComposition(template.composition, {
       ...input,
@@ -197,10 +222,10 @@ export class GovernanceEngine {
     });
   }
 
-  evaluateComposition(
+  async evaluateComposition(
     composition: GateComposition,
     input: EvaluateGovernanceInput & { readonly templateId?: GateTemplateId },
-  ): GovernanceDecision {
+  ): Promise<GovernanceDecision> {
     const tenantId = input.tenantId?.trim();
     if (!tenantId) {
       throw new OrchestrationError(
@@ -323,7 +348,7 @@ export class GovernanceEngine {
       residualRisk: g.residualRisk,
     }));
 
-    this.decisions.set(decisionId, decision);
+    await this.decisions.set(decisionId, decision);
     this.gateResults.set(decisionId, adjusted);
     this.explainability.set(decisionId, explainRecords);
     this.history.push(

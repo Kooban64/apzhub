@@ -10,7 +10,7 @@ describe("APZQEP-165 QO-012 Enterprise Source Change Coordination", () => {
     );
     expect(platform.container.has("orchestration.source.change")).toBe(true);
 
-    const pkg = platform.sourceChange.createSourceChangePackage({
+    const pkg = await platform.sourceChange.createSourceChangePackage({
       qualityFlowRef: "qf_1",
       decisionPackageRef: "dp_1",
       automationCoordinationPackageRef: "acp_1",
@@ -71,7 +71,7 @@ describe("APZQEP-165 QO-012 Enterprise Source Change Coordination", () => {
 
   it("supports manual and configuration change identities without SCM providers", async () => {
     const platform = await createPlatformOrchestration();
-    const pkg = platform.sourceChange.createSourceChangePackage({
+    const pkg = await platform.sourceChange.createSourceChangePackage({
       qualityFlowRef: "qf_manual",
       tenantId: "t1",
       sourceChanges: [
@@ -103,7 +103,7 @@ describe("APZQEP-165 QO-012 Enterprise Source Change Coordination", () => {
 
   it("supports superseding packages and publishes updated events", async () => {
     const platform = await createPlatformOrchestration();
-    const first = platform.sourceChange.createSourceChangePackage({
+    const first = await platform.sourceChange.createSourceChangePackage({
       qualityFlowRef: "qf_s",
       decisionPackageRef: "dp_s",
       tenantId: "t1",
@@ -114,7 +114,7 @@ describe("APZQEP-165 QO-012 Enterprise Source Change Coordination", () => {
         },
       ],
     });
-    const second = platform.sourceChange.createSourceChangePackage({
+    const second = await platform.sourceChange.createSourceChangePackage({
       qualityFlowRef: "qf_s",
       decisionPackageRef: "dp_s",
       tenantId: "t1",
@@ -141,15 +141,15 @@ describe("APZQEP-165 QO-012 Enterprise Source Change Coordination", () => {
 
   it("rejects empty changes and unknown identity kinds", async () => {
     const platform = await createPlatformOrchestration();
-    expect(() =>
+    await expect(
       platform.sourceChange.createSourceChangePackage({
         qualityFlowRef: "qf_x",
         tenantId: "t1",
         sourceChanges: [],
       }),
-    ).toThrow(/at least one/i);
+    ).rejects.toThrow(/at least one/i);
 
-    expect(() =>
+    await expect(
       platform.sourceChange.createSourceChangePackage({
         qualityFlowRef: "qf_x",
         tenantId: "t1",
@@ -165,7 +165,7 @@ describe("APZQEP-165 QO-012 Enterprise Source Change Coordination", () => {
           },
         ],
       }),
-    ).toThrow(/Unknown source identity kind/i);
+    ).rejects.toThrow(/Unknown source identity kind/i);
   });
 
   it("never exposes SCM execution APIs", async () => {
@@ -177,7 +177,7 @@ describe("APZQEP-165 QO-012 Enterprise Source Change Coordination", () => {
     expect(typeof sc.evaluatePolicy).toBe("undefined");
     expect(platform.sourceChange.diagnostics().ready).toBe(true);
 
-    const pkg = platform.sourceChange.createSourceChangePackage({
+    const pkg = await platform.sourceChange.createSourceChangePackage({
       qualityFlowRef: "qf_arch",
       tenantId: "t1",
       sourceChanges: [

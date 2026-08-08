@@ -33,7 +33,7 @@ describe("APZQEP-163 platform-quality-intelligence", () => {
     });
 
     expect(observation.observationId).toBeTruthy();
-    expect(qi.engine.listObservations("tenant-1")).toHaveLength(1);
+    expect(await qi.engine.listObservations("tenant-1")).toHaveLength(1);
 
     expect(() => {
       (observation as { summary: string }).summary = "mutated";
@@ -110,7 +110,7 @@ describe("APZQEP-163 platform-quality-intelligence", () => {
 
     expect(recommendations.length).toBeGreaterThan(0);
     for (const rec of recommendations) {
-      const explanation = qi.engine.getExplanation(rec.explanationId);
+      const explanation = await qi.engine.getExplanation(rec.explanationId);
       expect(explanation).toBeDefined();
       expect(explanation?.reason).toBeTruthy();
       expect(explanation?.decisionPath.length).toBeGreaterThan(0);
@@ -224,11 +224,11 @@ describe("APZQEP-163 platform-quality-intelligence", () => {
       expect(events).toContain(QI_EVENT_TYPES.recommendationRejected);
     }
 
-    const audits = qi.engine.listAudits("tenant-1");
+    const audits = await qi.engine.listAudits("tenant-1");
     expect(audits.some((a) => a.action === "created")).toBe(true);
     expect(audits.some((a) => a.action === "accepted")).toBe(true);
-    expect(qi.engine.listHistory("tenant-1").length).toBeGreaterThan(0);
-    expect(qi.engine.listConfidence("tenant-1").length).toBeGreaterThan(0);
+    expect((await qi.engine.listHistory("tenant-1")).length).toBeGreaterThan(0);
+    expect((await qi.engine.listConfidence("tenant-1")).length).toBeGreaterThan(0);
   });
 
   it("dummy_ai never calls network and exposes no openai types on public records", async () => {
@@ -257,7 +257,7 @@ describe("APZQEP-163 platform-quality-intelligence", () => {
 
     const serialized = JSON.stringify({
       recommendation: dummyRec,
-      explanation: qi.engine.getExplanation(dummyRec!.explanationId),
+      explanation: await qi.engine.getExplanation(dummyRec!.explanationId),
     });
     expect(serialized.toLowerCase()).not.toMatch(
       /openai|anthropic|google|gemini|azure/,

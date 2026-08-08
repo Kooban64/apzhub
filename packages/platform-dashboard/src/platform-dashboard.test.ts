@@ -96,8 +96,8 @@ describe("APZQEP-164 platform-dashboard", () => {
       layoutId: layout.layoutId,
       correlationId: "c2",
     });
-    expect(platform.engine.listPinned("t1", "u1")).toHaveLength(1);
-    expect(platform.engine.listFavourites("t1", "u1")).toHaveLength(1);
+    expect(await platform.engine.listPinned("t1", "u1")).toHaveLength(1);
+    expect(await platform.engine.listFavourites("t1", "u1")).toHaveLength(1);
     expect(view.pinned).toBe(true);
   });
 

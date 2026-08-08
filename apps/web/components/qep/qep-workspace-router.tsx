@@ -19,11 +19,13 @@ import {
   isQepScmRoute,
   isQepQiRoute,
   isQepDashboardsRoute,
+  isQepQualityFlowsRoute,
   isQepWorkspaceRoute,
 } from "@/lib/qep/routes";
 
 import { QepAutomationRouterView } from "./qep-automation-views";
 import { QepDashboardsRouterView } from "./qep-dashboards-views";
+import { QepQualityFlowRouterView } from "./qep-quality-flow-views";
 import { QepQualityIntelligenceRouterView } from "./qep-quality-intelligence-views";
 import { QepScmRouterView } from "./qep-scm-views";
 
@@ -42,13 +44,17 @@ import { QepTraceabilityRouterView } from "./qep-traceability-views";
 import { QepVerificationRouterView } from "./qep-verification-views";
 
 /**
- * QEP workspace router — Caps A–F product surfaces + legacy ENG modules.
+ * QEP workspace router — Quality Flow Workspace (flagship) + Caps A–F + ENG modules.
  */
 export function QepWorkspaceRouter() {
   const pathname = usePathname() ?? "";
 
   if (!isQepWorkspaceRoute(pathname)) {
     return null;
+  }
+
+  if (isQepQualityFlowsRoute(pathname)) {
+    return <QepQualityFlowRouterView />;
   }
 
   if (isQepAutomationRoute(pathname)) {

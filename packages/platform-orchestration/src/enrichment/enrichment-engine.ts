@@ -18,10 +18,13 @@ import { OrchestrationError } from "../contracts/errors";
 import { ENRICHMENT_EVENT_TYPES } from "../contracts/events";
 import type { QualityEventBackbone } from "../events/event-backbone";
 import { buildAdvisoryInsight, buildObservedCommentary } from "./insight-builder";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 export interface EnrichmentEngineOptions {
   readonly events: QualityEventBackbone;
   readonly orchestrationId?: string;
+  readonly documentStore?: OrchestrationDocumentStore;
 }
 
 function createId(prefix: string): string {
@@ -33,7 +36,7 @@ function createId(prefix: string): string {
 export class EnrichmentEngine {
   private readonly events: QualityEventBackbone;
   private readonly orchestrationId: string;
-  private readonly packages = new Map<string, QualityIntelligenceEnrichmentPackage>();
+  private readonly packages: DurableMap<QualityIntelligenceEnrichmentPackage>;
   private readonly insightDistribution: Record<string, number> = {};
   private insightCount = 0;
   private trendRefCount = 0;
@@ -43,15 +46,31 @@ export class EnrichmentEngine {
   constructor(options: EnrichmentEngineOptions) {
     this.events = options.events;
     this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.packages = new DurableMap<QualityIntelligenceEnrichmentPackage>(
+      "enrichment_package",
+      options.documentStore,
+      (pkg) => ({
+        tenantId: pkg.tenantId,
+        projectId: pkg.projectId,
+        orchestrationId: this.orchestrationId,
+        correlationId: pkg.qualityFlowRef,
+        status: pkg.enrichmentStatus,
+        actorId: pkg.actorId,
+      }),
+    );
+  }
+
+  async hydrate(): Promise<void> {
+    await this.packages.hydrate();
   }
 
   /**
    * Create an immutable Enrichment Package.
    * References upstream artefacts only — never loads them for re-evaluation.
    */
-  createEnrichmentPackage(
+  async createEnrichmentPackage(
     input: CreateEnrichmentPackageInput,
-  ): QualityIntelligenceEnrichmentPackage {
+  ): Promise<QualityIntelligenceEnrichmentPackage> {
     const qualityFlowRef = input.qualityFlowRef.trim();
     const tenantId = input.tenantId.trim();
     if (!qualityFlowRef || !tenantId) {
@@ -204,7 +223,7 @@ export class EnrichmentEngine {
       correctsUpstream: false as const,
     });
 
-    this.packages.set(enrichmentPackageId, pkg);
+    await this.packages.set(enrichmentPackageId, pkg);
 
     const correlationId = decisionPackageRef ?? qualityFlowRef;
 

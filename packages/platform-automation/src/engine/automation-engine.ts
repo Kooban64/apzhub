@@ -15,7 +15,7 @@ import type {
 import { TERMINAL_EXECUTION_STATES } from "../contracts/execution";
 import { assertTransition } from "../lifecycle/transitions";
 import type { ProviderRegistry } from "../registry/provider-registry";
-import { InMemoryExecutionStore } from "./execution-store";
+import { InMemoryExecutionStore, type ExecutionStore } from "./execution-store";
 
 function nowIso(): string {
   return new Date().toISOString();
@@ -50,7 +50,7 @@ function stateEventType(state: ExecutionLifecycleState): AutomationDomainEvent["
 
 export interface AutomationEngineOptions {
   readonly registry: ProviderRegistry;
-  readonly store?: InMemoryExecutionStore;
+  readonly store?: ExecutionStore;
   readonly publishEvent?: AutomationEventPublisher;
   readonly evidenceSink?: AutomationEvidenceSink;
 }
@@ -61,7 +61,7 @@ export interface AutomationEngineOptions {
  */
 export class AutomationEngine {
   private readonly registry: ProviderRegistry;
-  private readonly store: InMemoryExecutionStore;
+  private readonly store: ExecutionStore;
   private readonly publishEvent: AutomationEventPublisher;
   private readonly evidenceSink: AutomationEvidenceSink;
   private readonly abortControllers = new Map<string, AbortController>();
@@ -77,11 +77,15 @@ export class AutomationEngine {
     return this.registry.list();
   }
 
-  getExecution(executionId: string): AutomationExecutionRecord | undefined {
+  async getExecution(
+    executionId: string,
+  ): Promise<AutomationExecutionRecord | undefined> {
     return this.store.get(executionId);
   }
 
-  listExecutions(tenantId?: string): readonly AutomationExecutionRecord[] {
+  async listExecutions(
+    tenantId?: string,
+  ): Promise<readonly AutomationExecutionRecord[]> {
     return this.store.list(tenantId);
   }
 
@@ -132,13 +136,13 @@ export class AutomationEngine {
       evidenceRefs: [],
     };
 
-    this.store.save(record);
+    await this.store.save(record);
     await this.emit(record);
     return record;
   }
 
   async run(executionId: string): Promise<AutomationExecutionRecord> {
-    let record = this.require(executionId);
+    let record = await this.require(executionId);
     if (TERMINAL_EXECUTION_STATES.includes(record.state)) {
       return record;
     }
@@ -152,7 +156,9 @@ export class AutomationEngine {
 
     try {
       while (record.attempt < record.maxAttempts) {
-        record = this.transition(record, "preparing", { attempt: record.attempt + 1 });
+        record = await this.transition(record, "preparing", {
+          attempt: record.attempt + 1,
+        });
         const context = {
           executionId: record.executionId,
           tenantId: record.tenantId,
@@ -164,14 +170,14 @@ export class AutomationEngine {
         };
 
         await provider.prepare(context);
-        record = this.transition(record, "running");
+        record = await this.transition(record, "running");
 
         const startedAt = nowIso();
         const result = await provider.execute(context);
         const finishedAt = nowIso();
 
         if (controller.signal.aborted) {
-          record = this.transition(record, "timed_out", {
+          record = await this.transition(record, "timed_out", {
             errorMessage: "Execution timed out or aborted",
             timing: {
               ...record.timing,
@@ -202,7 +208,7 @@ export class AutomationEngine {
             },
           });
 
-          record = this.transition(record, "completed", {
+          record = await this.transition(record, "completed", {
             artifacts: result.artifacts,
             evidenceRefs,
             resultSummary: result.summary,
@@ -231,14 +237,14 @@ export class AutomationEngine {
 
         const canRetry = record.attempt < record.maxAttempts;
         if (canRetry) {
-          record = this.transition(record, "retrying", {
+          record = await this.transition(record, "retrying", {
             errorMessage: result.errorMessage ?? result.summary,
             artifacts: [...record.artifacts, ...result.artifacts],
           });
           continue;
         }
 
-        record = this.transition(record, "failed", {
+        record = await this.transition(record, "failed", {
           errorMessage: result.errorMessage ?? result.summary,
           artifacts: [...record.artifacts, ...result.artifacts],
           resultSummary: result.summary,
@@ -254,11 +260,11 @@ export class AutomationEngine {
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       if (controller.signal.aborted) {
-        record = this.transition(this.require(executionId), "timed_out", {
+        record = await this.transition(await this.require(executionId), "timed_out", {
           errorMessage: message,
         });
       } else {
-        record = this.transition(this.require(executionId), "failed", {
+        record = await this.transition(await this.require(executionId), "failed", {
           errorMessage: message,
         });
       }
@@ -278,7 +284,7 @@ export class AutomationEngine {
   }
 
   async cancel(executionId: string): Promise<AutomationExecutionRecord> {
-    const record = this.require(executionId);
+    const record = await this.require(executionId);
     if (TERMINAL_EXECUTION_STATES.includes(record.state)) {
       return record;
     }
@@ -297,19 +303,19 @@ export class AutomationEngine {
     });
   }
 
-  private require(executionId: string): AutomationExecutionRecord {
-    const record = this.store.get(executionId);
+  private async require(executionId: string): Promise<AutomationExecutionRecord> {
+    const record = await this.store.get(executionId);
     if (!record) {
       throw new Error(`Unknown execution: ${executionId}`);
     }
     return record;
   }
 
-  private transition(
+  private async transition(
     record: AutomationExecutionRecord,
     to: ExecutionLifecycleState,
     patch: Partial<AutomationExecutionRecord> = {},
-  ): AutomationExecutionRecord {
+  ): Promise<AutomationExecutionRecord> {
     assertTransition(record.state, to);
     const next: AutomationExecutionRecord = {
       ...record,
@@ -321,7 +327,7 @@ export class AutomationEngine {
       timing: patch.timing ?? record.timing,
       evidenceRefs: patch.evidenceRefs ?? record.evidenceRefs,
     };
-    this.store.save(next);
+    await this.store.save(next);
     void this.emit(next);
     return next;
   }

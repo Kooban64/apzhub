@@ -10,7 +10,7 @@ describe("APZQEP-165 QO-013 Enterprise Quality Intelligence Enrichment", () => {
     );
     expect(platform.container.has("orchestration.enrichment.engine")).toBe(true);
 
-    const pkg = platform.enrichment.createEnrichmentPackage({
+    const pkg = await platform.enrichment.createEnrichmentPackage({
       qualityFlowRef: "qf_1",
       decisionPackageRef: "dp_1",
       impactGraphRef: "imp_1",
@@ -93,7 +93,7 @@ describe("APZQEP-165 QO-013 Enterprise Quality Intelligence Enrichment", () => {
 
   it("marks empty enrichment when no insights or signals are provided", async () => {
     const platform = await createPlatformOrchestration();
-    const pkg = platform.enrichment.createEnrichmentPackage({
+    const pkg = await platform.enrichment.createEnrichmentPackage({
       qualityFlowRef: "qf_empty",
       tenantId: "t1",
     });
@@ -110,7 +110,7 @@ describe("APZQEP-165 QO-013 Enterprise Quality Intelligence Enrichment", () => {
     expect(typeof eng.invokeOpenAI).toBe("undefined");
     expect(typeof eng.correctUpstream).toBe("undefined");
 
-    const pkg = platform.enrichment.createEnrichmentPackage({
+    const pkg = await platform.enrichment.createEnrichmentPackage({
       qualityFlowRef: "qf_arch",
       decisionPackageRef: "dp_arch",
       tenantId: "t1",
@@ -128,13 +128,13 @@ describe("APZQEP-165 QO-013 Enterprise Quality Intelligence Enrichment", () => {
 
   it("supports superseding enrichment packages without correcting history", async () => {
     const platform = await createPlatformOrchestration();
-    const first = platform.enrichment.createEnrichmentPackage({
+    const first = await platform.enrichment.createEnrichmentPackage({
       qualityFlowRef: "qf_s",
       decisionPackageRef: "dp_s",
       tenantId: "t1",
       insights: [{ category: "trend", summary: "Initial trend commentary" }],
     });
-    const second = platform.enrichment.createEnrichmentPackage({
+    const second = await platform.enrichment.createEnrichmentPackage({
       qualityFlowRef: "qf_s",
       decisionPackageRef: "dp_s",
       tenantId: "t1",
@@ -152,7 +152,7 @@ describe("APZQEP-165 QO-013 Enterprise Quality Intelligence Enrichment", () => {
 
   it("attributes confidence without recalculating or overriding decisions", async () => {
     const platform = await createPlatformOrchestration();
-    const pkg = platform.enrichment.createEnrichmentPackage({
+    const pkg = await platform.enrichment.createEnrichmentPackage({
       qualityFlowRef: "qf_c",
       decisionPackageRef: "dp_c",
       confidenceSummaryRef: "conf_c",

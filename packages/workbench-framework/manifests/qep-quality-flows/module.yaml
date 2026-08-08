@@ -1,0 +1,58 @@
+manifestSchemaVersion: "1.0"
+id: qep-quality-flows
+name: Quality Flow Workspace
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: >
+    Primary operational command centre for APZQEP Version 1.1. Exposes the
+    Enterprise Continuous Quality Orchestration engine so Quality Leads can
+    operate active flows, waiting work, gates, approvals, decisions, and next
+    actions. No new orchestration behaviour — presentation over the existing engine.
+  product: apzqep
+  slug: quality-flows
+  programme: QX-P1-03
+  designation: flagship-operational-workspace
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: active
+
+permissions:
+  - id: qep.quality_flows.read
+    label: View Quality Flow Workspace
+  - id: qep.quality_flows.operate
+    label: Operate Quality Flows
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Quality Flows
+    icon: git-branch
+    route: /workspace/qep/quality-flows
+    order: 5
+    permission: qep.quality_flows.read
+  view:
+    title: Quality Flow Workspace
+    workspace: qep
+    route: /workspace/qep/quality-flows
+    permission: qep.quality_flows.read
+  actions:
+    - id: qep.quality_flows.navigate
+      label: Open Quality Flow Workspace
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: qep.quality_flows.read
+      palette: true
+      group: Quality
+      icon: git-branch
+      order: 5
+      description: Open the Quality Flow Workspace command centre.

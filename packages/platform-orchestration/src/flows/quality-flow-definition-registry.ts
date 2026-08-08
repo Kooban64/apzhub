@@ -1,6 +1,7 @@
 /**
  * Immutable Quality Flow Definition registry (QO-004).
  * Definitions are never mutated — versioning creates a new immutable record.
+ * Durable via OrchestrationDocumentStore when bound (QX-PR-05).
  */
 
 import { OrchestrationError } from "../contracts/errors";
@@ -9,15 +10,42 @@ import type {
   QualityFlowDefinition,
   QualityFlowDefinitionInput,
 } from "../contracts/quality-flow";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 function key(flowId: string, version: string): string {
   return `${flowId}@${version}`;
 }
 
-export class QualityFlowDefinitionRegistry {
-  private readonly definitions = new Map<string, QualityFlowDefinition>();
+export interface QualityFlowDefinitionRegistryOptions {
+  readonly documentStore?: OrchestrationDocumentStore;
+  readonly orchestrationId?: string;
+}
 
-  register(input: QualityFlowDefinitionInput): QualityFlowDefinition {
+export class QualityFlowDefinitionRegistry {
+  private readonly definitions: DurableMap<QualityFlowDefinition>;
+  private readonly orchestrationId: string;
+
+  constructor(options: QualityFlowDefinitionRegistryOptions = {}) {
+    this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.definitions = new DurableMap<QualityFlowDefinition>(
+      "flow_definition",
+      options.documentStore,
+      (def) => ({
+        tenantId: def.metadata.tenantId ?? "platform",
+        projectId: def.metadata.projectId,
+        orchestrationId: this.orchestrationId,
+        status: def.status,
+        actorId: def.owner,
+      }),
+    );
+  }
+
+  async hydrate(): Promise<void> {
+    await this.definitions.hydrate();
+  }
+
+  async register(input: QualityFlowDefinitionInput): Promise<QualityFlowDefinition> {
     const flowId = input.flowId.trim();
     const version = input.version.trim();
     const name = input.name.trim();
@@ -71,7 +99,7 @@ export class QualityFlowDefinitionRegistry {
       status: input.status ?? "active",
     });
 
-    this.definitions.set(k, definition);
+    await this.definitions.set(k, definition);
     return definition;
   }
 
@@ -79,16 +107,17 @@ export class QualityFlowDefinitionRegistry {
    * Register a new immutable version for an existing flowId.
    * Prior versions remain unchanged.
    */
-  version(
+  async version(
     flowId: string,
     input: Omit<QualityFlowDefinitionInput, "flowId">,
-  ): QualityFlowDefinition {
+  ): Promise<QualityFlowDefinition> {
     const id = flowId.trim();
-    if (!this.listVersions(id).length) {
+    const existing = this.listVersions(id);
+    if (existing.length === 0) {
       throw new OrchestrationError(
-        "validation",
-        "FLOW_DEFINITION_MISSING",
-        `Cannot version unknown Quality Flow: ${id}`,
+        "registry",
+        "FLOW_DEFINITION_NOT_FOUND",
+        `No Quality Flow definitions for flowId: ${id}`,
         { flowId: id },
       );
     }
@@ -96,11 +125,11 @@ export class QualityFlowDefinitionRegistry {
   }
 
   get(flowId: string, version: string): QualityFlowDefinition {
-    const def = this.definitions.get(key(flowId.trim(), version.trim()));
+    const def = this.tryGet(flowId, version);
     if (!def) {
       throw new OrchestrationError(
-        "validation",
-        "FLOW_DEFINITION_MISSING",
+        "registry",
+        "FLOW_DEFINITION_NOT_FOUND",
         `Quality Flow definition not found: ${flowId}@${version}`,
         { flowId, version },
       );
@@ -112,34 +141,32 @@ export class QualityFlowDefinitionRegistry {
     return this.definitions.get(key(flowId.trim(), version.trim()));
   }
 
-  /** Latest registered version for flowId (by createdAt). */
   getLatest(flowId: string): QualityFlowDefinition {
     const versions = this.listVersions(flowId);
     if (versions.length === 0) {
       throw new OrchestrationError(
-        "validation",
-        "FLOW_DEFINITION_MISSING",
-        `Quality Flow definition not found: ${flowId}`,
+        "registry",
+        "FLOW_DEFINITION_NOT_FOUND",
+        `No Quality Flow definitions for flowId: ${flowId}`,
         { flowId },
       );
     }
     return versions[versions.length - 1]!;
   }
 
-  listVersions(flowId: string): readonly QualityFlowDefinition[] {
-    const id = flowId.trim();
-    return [...this.definitions.values()]
-      .filter((d) => d.flowId === id)
-      .sort((a, b) => a.createdAt.localeCompare(b.createdAt));
-  }
-
   list(): readonly QualityFlowDefinition[] {
-    return [...this.definitions.values()].sort((a, b) =>
-      a.createdAt.localeCompare(b.createdAt),
-    );
+    return this.definitions.values();
   }
 
   count(): number {
     return this.definitions.size;
+  }
+
+  listVersions(flowId: string): readonly QualityFlowDefinition[] {
+    const id = flowId.trim();
+    return this.definitions
+      .values()
+      .filter((d) => d.flowId === id)
+      .sort((a, b) => a.createdAt.localeCompare(b.createdAt));
   }
 }

@@ -14,6 +14,8 @@ import {
   type QualityRuleInput,
   type RuleCondition,
 } from "../contracts/policy-selection";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 function clamp01(value: number): number {
   if (Number.isNaN(value)) return 0;
@@ -66,10 +68,34 @@ function assertCondition(condition: RuleCondition, path = "condition"): void {
   }
 }
 
-export class QualityPolicyRegistry {
-  private readonly policies = new Map<string, QualityPolicy>();
+export interface QualityPolicyRegistryOptions {
+  readonly documentStore?: OrchestrationDocumentStore;
+  readonly orchestrationId?: string;
+}
 
-  register(input: QualityPolicyInput): QualityPolicy {
+export class QualityPolicyRegistry {
+  private readonly policies: DurableMap<QualityPolicy>;
+  private readonly orchestrationId: string;
+
+  constructor(options: QualityPolicyRegistryOptions = {}) {
+    this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.policies = new DurableMap<QualityPolicy>(
+      "policy",
+      options.documentStore,
+      (policy) => ({
+        tenantId: "platform",
+        orchestrationId: this.orchestrationId,
+        status: policy.lifecycleState,
+        actorId: policy.owner,
+      }),
+    );
+  }
+
+  async hydrate(): Promise<void> {
+    await this.policies.hydrate();
+  }
+
+  async register(input: QualityPolicyInput): Promise<QualityPolicy> {
     const policyId = input.policyId.trim();
     const version = input.version.trim();
     const key = `${policyId}@${version}`;
@@ -101,7 +127,7 @@ export class QualityPolicyRegistry {
       metadata: Object.freeze({ ...(input.metadata ?? {}) }),
       createdAt: new Date().toISOString(),
     });
-    this.policies.set(key, policy);
+    await this.policies.set(key, policy);
     return policy;
   }
 
@@ -132,7 +158,8 @@ export class QualityPolicyRegistry {
 
   listVersions(policyId: string): readonly QualityPolicy[] {
     const id = policyId.trim();
-    return [...this.policies.values()]
+    return this.policies
+      .values()
       .filter((p) => p.policyId === id)
       .sort((a, b) => a.createdAt.localeCompare(b.createdAt));
   }

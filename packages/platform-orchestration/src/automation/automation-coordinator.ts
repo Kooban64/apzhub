@@ -22,11 +22,14 @@ import { AUTOMATION_COORDINATION_EVENT_TYPES } from "../contracts/events";
 import type { QualityEventBackbone } from "../events/event-backbone";
 import type { CapabilityRegistry } from "../registry/capability-registry";
 import { defaultIntentsForProfile, mapOutstandingToIntents } from "./intent-mapper";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 export interface AutomationCoordinatorOptions {
   readonly capabilities: CapabilityRegistry;
   readonly events: QualityEventBackbone;
   readonly orchestrationId?: string;
+  readonly documentStore?: OrchestrationDocumentStore;
 }
 
 function createId(prefix: string): string {
@@ -68,7 +71,7 @@ export class AutomationCoordinator {
   private readonly capabilities: CapabilityRegistry;
   private readonly events: QualityEventBackbone;
   private readonly orchestrationId: string;
-  private readonly packages = new Map<string, AutomationCoordinationPackage>();
+  private readonly packages: DurableMap<AutomationCoordinationPackage>;
   private readonly intentDistribution: Record<string, number> = {};
   private readonly statusDistribution: Record<string, number> = {};
   private eventPublishCount = 0;
@@ -78,15 +81,31 @@ export class AutomationCoordinator {
     this.capabilities = options.capabilities;
     this.events = options.events;
     this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.packages = new DurableMap<AutomationCoordinationPackage>(
+      "automation_coordination_package",
+      options.documentStore,
+      (pkg) => ({
+        tenantId: pkg.tenantId,
+        projectId: pkg.projectId,
+        orchestrationId: this.orchestrationId,
+        correlationId: pkg.decisionPackageRef,
+        status: pkg.coordinationStatus,
+        actorId: pkg.actorId,
+      }),
+    );
+  }
+
+  async hydrate(): Promise<void> {
+    await this.packages.hydrate();
   }
 
   /**
    * Create an immutable Automation Coordination Package from a Decision Package snapshot.
    * Publishes past-tense facts via the Event Backbone only.
    */
-  createCoordinationPackage(
+  async createCoordinationPackage(
     input: CreateAutomationCoordinationInput,
-  ): AutomationCoordinationPackage {
+  ): Promise<AutomationCoordinationPackage> {
     const dp = input.decisionPackage;
     const decisionPackageRef = dp.decisionPackageId.trim();
     const qualityFlowRef = dp.qualityFlowRef.trim();
@@ -217,7 +236,7 @@ export class AutomationCoordinator {
       execution: false as const,
     });
 
-    this.packages.set(coordinationPackageId, pkg);
+    await this.packages.set(coordinationPackageId, pkg);
     this.statusDistribution[status] = (this.statusDistribution[status] ?? 0) + 1;
 
     const correlationId = decisionPackageRef;

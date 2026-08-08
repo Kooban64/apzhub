@@ -11,18 +11,18 @@ import type {
 } from "../contracts/repository";
 import type { ScmWebhookDelivery, WebhookAuditRecord } from "../contracts/webhook";
 import type { ScmProviderRegistry } from "../registry/provider-registry";
-import { InMemoryRepositoryStore } from "./repository-store";
+import { InMemoryRepositoryStore, type RepositoryStore } from "./repository-store";
 
 export interface ScmEngineOptions {
   readonly registry: ScmProviderRegistry;
-  readonly store?: InMemoryRepositoryStore;
+  readonly store?: RepositoryStore;
   readonly publishEvent?: ScmEventPublisher;
   readonly webhookSecrets?: Readonly<Partial<Record<ScmProviderId, string>>>;
 }
 
 export class ScmEngine {
   private readonly registry: ScmProviderRegistry;
-  private readonly store: InMemoryRepositoryStore;
+  private readonly store: RepositoryStore;
   private readonly publishEvent: ScmEventPublisher;
   private readonly webhookSecrets: Readonly<Partial<Record<ScmProviderId, string>>>;
   private readonly credentials = new Map<string, ScmAuthCredentials>();
@@ -38,19 +38,19 @@ export class ScmEngine {
     return this.registry.list();
   }
 
-  listRepositories(tenantId?: string) {
+  async listRepositories(tenantId?: string) {
     return this.store.list(tenantId);
   }
 
-  getRepository(repositoryId: string) {
+  async getRepository(repositoryId: string) {
     return this.store.get(repositoryId);
   }
 
-  listWebhookAudits(tenantId?: string) {
+  async listWebhookAudits(tenantId?: string) {
     return this.store.listWebhooks(tenantId);
   }
 
-  listTraceabilityLinks(repositoryId?: string) {
+  async listTraceabilityLinks(repositoryId?: string) {
     return this.store.listLinks(repositoryId);
   }
 
@@ -102,7 +102,7 @@ export class ScmEngine {
       );
     }
 
-    const existing = this.store.findByFullName(
+    const existing = await this.store.findByFullName(
       request.tenantId,
       request.providerId,
       request.fullName,
@@ -133,7 +133,6 @@ export class ScmEngine {
     }
 
     if (!remote) {
-      // Dry / offline registration still allowed with supplied metadata.
       remote = {
         providerId: request.providerId,
         externalId: request.externalId ?? request.fullName,
@@ -162,7 +161,7 @@ export class ScmEngine {
       health: { ok: true, detail: "registered", checkedAt: now },
     };
 
-    this.store.upsert(repository);
+    await this.store.upsert(repository);
     await this.emit({
       type: existing
         ? SCM_EVENT_TYPES.repositoryUpdated
@@ -182,7 +181,7 @@ export class ScmEngine {
     state: RegisteredRepository["state"],
     actorId: string,
   ): Promise<RegisteredRepository> {
-    const current = this.store.get(repositoryId);
+    const current = await this.store.get(repositoryId);
     if (!current) {
       throw new Error(`Repository not found: ${repositoryId}`);
     }
@@ -192,7 +191,7 @@ export class ScmEngine {
       updatedAt: new Date().toISOString(),
       metadata: { ...(current.metadata ?? {}), lastStateChangeBy: actorId },
     };
-    this.store.upsert(updated);
+    await this.store.upsert(updated);
     await this.emit({
       type: SCM_EVENT_TYPES.repositoryUpdated,
       occurredAt: updated.updatedAt,
@@ -220,7 +219,7 @@ export class ScmEngine {
   }
 
   async syncRepository(repositoryId: string, correlationId: string) {
-    const current = this.store.get(repositoryId);
+    const current = await this.store.get(repositoryId);
     if (!current) {
       throw new Error(`Repository not found: ${repositoryId}`);
     }
@@ -260,7 +259,7 @@ export class ScmEngine {
         lastSyncOpenPrCount: String(pullRequests.length),
       },
     };
-    this.store.upsert(updated);
+    await this.store.upsert(updated);
     await this.emit({
       type: SCM_EVENT_TYPES.repositoryUpdated,
       occurredAt: now,
@@ -307,7 +306,7 @@ export class ScmEngine {
         detail: verification.reason ?? "signature invalid",
         occurredAt: now,
       };
-      this.store.recordWebhook(audit);
+      await this.store.recordWebhook(audit);
       await this.emit({
         type: SCM_EVENT_TYPES.webhookFailed,
         occurredAt: now,
@@ -332,11 +331,11 @@ export class ScmEngine {
         detail: "unsupported or empty webhook payload",
         occurredAt: now,
       };
-      this.store.recordWebhook(audit);
+      await this.store.recordWebhook(audit);
       return { audit };
     }
 
-    if (this.store.hasIdempotencyKey(delivery.idempotencyKey)) {
+    if (await this.store.hasIdempotencyKey(delivery.idempotencyKey)) {
       const audit: WebhookAuditRecord = {
         auditId: randomUUID(),
         tenantId: input.tenantId,
@@ -349,11 +348,11 @@ export class ScmEngine {
         detail: "duplicate delivery ignored",
         occurredAt: now,
       };
-      this.store.recordWebhook(audit);
+      await this.store.recordWebhook(audit);
       return { audit, delivery };
     }
 
-    this.store.rememberIdempotencyKey(delivery.idempotencyKey);
+    await this.store.rememberIdempotencyKey(delivery.idempotencyKey, input.tenantId);
     const audit: WebhookAuditRecord = {
       auditId: randomUUID(),
       tenantId: input.tenantId,
@@ -366,10 +365,10 @@ export class ScmEngine {
       detail: delivery.summary,
       occurredAt: now,
     };
-    this.store.recordWebhook(audit);
+    await this.store.recordWebhook(audit);
 
     const repository = delivery.repositoryFullName
-      ? this.store.findByFullName(
+      ? await this.store.findByFullName(
           input.tenantId,
           input.providerId,
           delivery.repositoryFullName,
@@ -400,12 +399,12 @@ export class ScmEngine {
     return { audit, delivery };
   }
 
-  addTraceabilityLink(
+  async addTraceabilityLink(
     input: Omit<ScmTraceabilityLink, "linkId" | "createdAt"> & {
       readonly createdAt?: string;
     },
-  ): ScmTraceabilityLink {
-    const repository = this.store.get(input.repositoryId);
+  ): Promise<ScmTraceabilityLink> {
+    const repository = await this.store.get(input.repositoryId);
     if (!repository) {
       throw new Error(`Repository not found: ${input.repositoryId}`);
     }

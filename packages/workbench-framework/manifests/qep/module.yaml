@@ -1,0 +1,35 @@
+manifestSchemaVersion: "1.0"
+id: qep
+name: Quality
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: >
+    APZQEP Quality activity-bar workspace root. Child modules register under
+    parent qep. Flagship operational surface is Quality Flow Workspace.
+  product: apzqep
+
+dependencies:
+  platform: []
+
+module:
+  category: quality-engineering
+  status: active
+
+workbench:
+  navigation:
+    level: activity-bar
+    workspace: qep
+    label: Quality
+    icon: flask-conical
+    route: /workspace/qep/quality-flows
+    order: 35
+    permission: qep.quality_flows.read
+  view:
+    title: Quality
+    workspace: qep
+    route: /workspace/qep/quality-flows
+    default: true
+    permission: qep.quality_flows.read

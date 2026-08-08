@@ -23,6 +23,12 @@ module:
   category: quality-engineering
   status: active
 
+permissions:
+  - id: qep.qi.read
+    label: View Quality Intelligence
+  - id: qep.qi.operate
+    label: Operate Quality Intelligence
+
 workbench:
   navigation:
     level: sidebar

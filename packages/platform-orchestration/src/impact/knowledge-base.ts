@@ -10,14 +10,51 @@ import {
   type QualityAsset,
   type QualityAssetType,
 } from "../contracts/impact-correlation";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
+
+export interface ImpactKnowledgeBaseOptions {
+  readonly documentStore?: OrchestrationDocumentStore;
+  readonly orchestrationId?: string;
+}
 
 export class ImpactKnowledgeBase {
-  private readonly assets = new Map<string, QualityAsset>();
-  private readonly relationships = new Map<string, AssetRelationship>();
+  private readonly assets: DurableMap<QualityAsset>;
+  private readonly relationships: DurableMap<AssetRelationship>;
   /** Adjacency: fromAssetId → relationshipIds */
   private readonly outgoing = new Map<string, string[]>();
+  private readonly orchestrationId: string;
 
-  registerAsset(input: QualityAsset): QualityAsset {
+  constructor(options: ImpactKnowledgeBaseOptions = {}) {
+    this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.assets = new DurableMap<QualityAsset>(
+      "impact_asset",
+      options.documentStore,
+      (asset) => ({
+        tenantId: asset.tenantId?.trim() || "platform",
+        projectId: asset.projectId,
+        orchestrationId: this.orchestrationId,
+        status: asset.assetType,
+      }),
+    );
+    this.relationships = new DurableMap<AssetRelationship>(
+      "impact_relationship",
+      options.documentStore,
+      (rel) => ({
+        tenantId: "platform",
+        orchestrationId: this.orchestrationId,
+        status: rel.kind,
+      }),
+    );
+  }
+
+  async hydrate(): Promise<void> {
+    await this.assets.hydrate();
+    await this.relationships.hydrate();
+    this.rebuildOutgoing();
+  }
+
+  async registerAsset(input: QualityAsset): Promise<QualityAsset> {
     const assetId = input.assetId.trim();
     const name = input.name.trim();
     if (!assetId || !name) {
@@ -55,11 +92,11 @@ export class ImpactKnowledgeBase {
       evidenceQuality: clamp01(input.evidenceQuality ?? 0.5),
       knownRegression: Boolean(input.knownRegression),
     });
-    this.assets.set(assetId, asset);
+    await this.assets.set(assetId, asset);
     return asset;
   }
 
-  registerRelationship(input: AssetRelationship): AssetRelationship {
+  async registerRelationship(input: AssetRelationship): Promise<AssetRelationship> {
     const relationshipId = input.relationshipId.trim();
     const fromAssetId = input.fromAssetId.trim();
     const toAssetId = input.toAssetId.trim();
@@ -99,7 +136,7 @@ export class ImpactKnowledgeBase {
       evidenceRefs: Object.freeze([...(input.evidenceRefs ?? [])]),
       metadata: Object.freeze({ ...(input.metadata ?? {}) }),
     });
-    this.relationships.set(relationshipId, rel);
+    await this.relationships.set(relationshipId, rel);
     const list = this.outgoing.get(fromAssetId) ?? [];
     list.push(relationshipId);
     this.outgoing.set(fromAssetId, list);
@@ -126,13 +163,13 @@ export class ImpactKnowledgeBase {
   listAssets(filter?: {
     readonly assetType?: QualityAssetType;
   }): readonly QualityAsset[] {
-    const all = [...this.assets.values()];
+    const all = this.assets.values();
     if (!filter?.assetType) return all;
     return all.filter((a) => a.assetType === filter.assetType);
   }
 
   listRelationships(): readonly AssetRelationship[] {
-    return [...this.relationships.values()];
+    return this.relationships.values();
   }
 
   outgoingRelationships(assetId: string): readonly AssetRelationship[] {
@@ -146,6 +183,15 @@ export class ImpactKnowledgeBase {
 
   edgeCount(): number {
     return this.relationships.size;
+  }
+
+  private rebuildOutgoing(): void {
+    this.outgoing.clear();
+    for (const rel of this.relationships.values()) {
+      const list = this.outgoing.get(rel.fromAssetId) ?? [];
+      list.push(rel.relationshipId);
+      this.outgoing.set(rel.fromAssetId, list);
+    }
   }
 }
 

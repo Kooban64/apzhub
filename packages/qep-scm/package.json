@@ -14,6 +14,8 @@
     "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-scm"
   },
   "dependencies": {
-    "@apzhub/platform-scm": "workspace:*"
+    "@apzhub/config": "workspace:*",
+    "@apzhub/platform-scm": "workspace:*",
+    "drizzle-orm": "^0.45.2"
   }
 }

@@ -1,24 +1,68 @@
 # APZQEP — Product Status (Authoritative)
 
-| Field              | Value                                          |
-| ------------------ | ---------------------------------------------- |
-| Document           | **PRODUCT-STATUS**                             |
-| Authority          | Product Board — **STANDING**                   |
-| Audience           | Engineers, architects, auditors, AI assistants |
-| Rule               | **Read this document before any APZQEP work**  |
-| Last updated       | 20260804T113513Z                               |
-| Engineering thread | **FORMALLY COMPLETE** (V1.0)                   |
-| Product posture    | **GENERAL AVAILABILITY**                       |
-| Management posture | **Operations-led** (APZQEP-OPS-001)            |
-| V1.1 definition    | **APZQEP-160 APPROVED** (PBR-APZQEP-160)       |
-| V1.1 Wave 1        | **CERTIFIED** (PBR-APZQEP-161)                 |
-| V1.1 Wave 2        | **CERTIFIED** (PBR-APZQEP-162)                 |
-| V1.1 Wave 3        | **CERTIFIED** (PBR-APZQEP-163)                 |
-| V1.1 Wave 4        | **CERTIFIED** (PBR-APZQEP-164)                 |
+| Field              | Value                                                                            |
+| ------------------ | -------------------------------------------------------------------------------- |
+| Document           | **PRODUCT-STATUS**                                                               |
+| Authority          | Owner · Product Board — **STANDING**                                             |
+| Audience           | Engineers, architects, auditors, AI assistants                                   |
+| Rule               | **Read this document before any APZQEP work**                                    |
+| Last updated       | 20260808T065300Z                                                                 |
+| Current baseline   | **Version 1.1 — PRODUCTION READY · CLOSED**                                      |
+| Engineering thread | **COMPLETE** (V1.1)                                                              |
+| Product posture    | **OPERATIONAL**                                                                  |
+| Management posture | **Operational Learning**                                                         |
+| Release pack       | [release-1.1/](./release-1.1/)                                                   |
+| Owner decision     | [release-1.1/OWNER-RELEASE-DECISION.md](./release-1.1/OWNER-RELEASE-DECISION.md) |
 
 ---
 
-## Final Standing Resolution
+## Final Standing Resolution — Version 1.1
+
+```text
+APZQEP Version 1.1 — Enterprise Quality Baseline
+
+RELEASE CANDIDATE 1:
+APPROVED
+
+Release status:
+PRODUCTION READY
+
+Status:
+CLOSED
+
+Engineering Phase:
+COMPLETE
+
+Product Phase:
+OPERATIONAL
+
+Product Functionality:
+COMPLETE
+
+Production Readiness:
+COMPLETE
+
+Hardening H1–H5:
+COMPLETE
+
+Defects Critical / High / Medium / Low:
+ZERO
+
+Freeze:
+Production defects · security vulnerabilities · critical operational hotfixes only
+
+Next engineering priority (portfolio):
+APZ Workflow
+
+Version 1.2:
+Future enhancements only — no redesign of V1.1 baseline
+```
+
+Authoritative release pack: [release-1.1/](./release-1.1/)
+
+---
+
+## Historical Standing — Version 1.0 GA
 
 ```text
 APZQEP Version 1.0
@@ -118,14 +162,14 @@ APZQEP-163 COMPLETE — Enterprise Quality Intelligence Platform foundation
 Platform package: @apzhub/platform-quality-intelligence 0.1.0
 Active providers: rules, statistical, historical, dummy_ai (offline) — no external AI
 Board certification: **CERTIFIED** (PBR-APZQEP-163) · eng commit `313a37d3eff8dcd20e3f03ce6ef729cd905645d4`
-Durability: process-local intelligence store — not production-durable until persistence certified
+Durability: PostgreSQL IntelligenceStore — production default via resolver (QX-PR-03)
 
 Version 1.1 Wave 4:
 APZQEP-164-000 COMPLETE · **PBR-APZQEP-164-000 APPROVED**
 APZQEP-164 COMPLETE — Enterprise Dashboard & Quality Experience
 Packages: @apzhub/platform-dashboard 0.1.0 · @apzhub/platform-visualization 0.1.0 · @apzhub/qep-dashboards 0.1.0
 Board certification: **CERTIFIED** (PBR-APZQEP-164) · eng commit `0432d2af5a6efd0a51273fa5d60beef367533927`
-Durability: process-local layout store — not production-durable until persistence certified
+Durability: PostgreSQL LayoutStore — production default via resolver (QX-PR-04)
 
 Version 1.1 Wave 5:
 APZQEP-165-000 ARCHITECTURE COMPLETE · **PBR-APZQEP-165-000 APPROVED**
@@ -307,11 +351,13 @@ Board / audit / ops:
 
 ## Accepted residuals (not release blockers)
 
-1. Shell Cap navigation visibility prior to API denial (UX).
-2. Project membership attribute refinement.
-3. Capability package versions remain 0.1.0 until promotion execution.
+1. Shell Cap navigation visibility prior to API denial (UX). — **Cleared in V1.1** (QX-P1-01 Closed).
+2. Project membership attribute refinement. — **Deferred to V1.2** (QX-P1-05); Cap RBAC remains V1.1 boundary.
+3. Capability package versions remain 0.1.0 until promotion execution. — **Cleared in V1.1** (QX-PR-06 → 1.0.0).
 4. Historical APZQEP-150 retained unchanged.
 5. Capability-specific accessibility coverage to evolve over future releases.
+
+V1.1 Production Ready status face: [engineering/APZQEP-V1.1-PRODUCTION-READY-STATUS.md](./engineering/APZQEP-V1.1-PRODUCTION-READY-STATUS.md).
 
 ---
 

@@ -23,12 +23,15 @@ import { SourceChangeCoordinator } from "../source/source-change-coordinator";
 import { TriggerBindingRegistry } from "../triggers/trigger-binding-registry";
 import { TriggerEngine } from "../triggers/trigger-engine";
 import { PLATFORM_ORCHESTRATION_VERSION } from "../version";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 export interface CreatePlatformOrchestrationOptions {
   readonly config?: OrchestrationKernelConfig;
   readonly publishEvent?: OrchestrationEventPublisher;
   readonly logger?: OrchestrationLogger;
   readonly autoInitialise?: boolean;
+  /** QX-PR-05 — durable SoR for orchestration artefacts (Postgres in production). */
+  readonly documentStore?: OrchestrationDocumentStore;
 }
 
 export interface PlatformOrchestration {
@@ -61,6 +64,7 @@ export interface PlatformOrchestration {
   /** Enterprise Workspace & Operations Experience — composition only. */
   readonly workspaceExperience: WorkspaceExperienceEngine;
   readonly container: OrchestrationContainer;
+  readonly documentStore?: OrchestrationDocumentStore;
 }
 
 /**
@@ -73,6 +77,7 @@ export async function createPlatformOrchestration(
   const events = new QualityEventBackbone({
     legacyPublishEvent: options.publishEvent,
     orchestrationId: options.config?.orchestrationId ?? "orch_default",
+    documentStore: options.documentStore,
   });
   const publishViaBackbone = events.createLegacyPublisher();
 
@@ -232,70 +237,99 @@ export async function createPlatformOrchestration(
     capabilities: kernel.capabilities,
     publishEvent: publishViaBackbone,
     orchestrationId: kernel.orchestrationId,
+    documentStore: options.documentStore,
   });
 
   const impact = new ImpactCorrelationEngine({
     capabilities: kernel.capabilities,
     publishEvent: publishViaBackbone,
     orchestrationId: kernel.orchestrationId,
+    documentStore: options.documentStore,
   });
 
   const policySelection = new PolicySelectionEngine({
     capabilities: kernel.capabilities,
     publishEvent: publishViaBackbone,
     orchestrationId: kernel.orchestrationId,
+    documentStore: options.documentStore,
   });
 
   const governance = new GovernanceEngine({
     publishEvent: publishViaBackbone,
     orchestrationId: kernel.orchestrationId,
+    documentStore: options.documentStore,
   });
 
   const approvals = new ApprovalEngine({
     publishEvent: publishViaBackbone,
     orchestrationId: kernel.orchestrationId,
+    documentStore: options.documentStore,
   });
 
   const decisions = new DecisionEngine({
     publishEvent: publishViaBackbone,
     orchestrationId: kernel.orchestrationId,
+    documentStore: options.documentStore,
   });
+
+  await events.hydrate();
+  await qualityFlows.hydrate();
+  await impact.hydrate();
+  await policySelection.hydrate();
+  await governance.hydrate();
+  await approvals.hydrate();
+  await decisions.hydrate();
 
   const automationCoordination = new AutomationCoordinator({
     capabilities: kernel.capabilities,
     events,
     orchestrationId: kernel.orchestrationId,
+    documentStore: options.documentStore,
   });
 
   const sourceChange = new SourceChangeCoordinator({
     events,
     orchestrationId: kernel.orchestrationId,
+    documentStore: options.documentStore,
   });
 
   const enrichment = new EnrichmentEngine({
     events,
     orchestrationId: kernel.orchestrationId,
+    documentStore: options.documentStore,
   });
 
   const evidenceIntegration = new EvidenceIntegrationEngine({
     events,
     orchestrationId: kernel.orchestrationId,
+    documentStore: options.documentStore,
   });
 
   const executiveExperience = new ExecutiveExperienceEngine({
     events,
     orchestrationId: kernel.orchestrationId,
+    documentStore: options.documentStore,
   });
 
   const operational = new OperationalPlatformEngine({
     events,
     orchestrationId: kernel.orchestrationId,
+    documentStore: options.documentStore,
   });
 
   const workspaceExperience = new WorkspaceExperienceEngine({
     events,
     orchestrationId: kernel.orchestrationId,
+    documentStore: options.documentStore,
   });
+
+  await automationCoordination.hydrate();
+  await sourceChange.hydrate();
+  await enrichment.hydrate();
+  await evidenceIntegration.hydrate();
+  await executiveExperience.hydrate();
+  await operational.hydrate();
+  await workspaceExperience.hydrate();
 
   if (!kernel.container.has(ORCHESTRATION_DI_TOKENS.triggerEngine)) {
     kernel.container.register(ORCHESTRATION_DI_TOKENS.triggerEngine, triggers);
@@ -392,5 +426,6 @@ export async function createPlatformOrchestration(
     operational,
     workspaceExperience,
     container: kernel.container,
+    documentStore: options.documentStore,
   };
 }

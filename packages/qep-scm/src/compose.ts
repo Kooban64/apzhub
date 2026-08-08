@@ -2,6 +2,7 @@ import {
   createPlatformScm,
   type PlatformScm,
   type RegisterRepositoryRequest,
+  type RepositoryStore,
   type ScmDomainEvent,
   type ScmProviderId,
   type ScmAuthCredentials,
@@ -13,6 +14,7 @@ export interface QepScmPorts {
   readonly onScmEvent?: (event: ScmDomainEvent) => void | Promise<void>;
   readonly githubOffline?: boolean;
   readonly webhookSecrets?: Readonly<Partial<Record<ScmProviderId, string>>>;
+  readonly store?: RepositoryStore;
 }
 
 export interface QepScmFacade {
@@ -64,6 +66,7 @@ export function createQepScm(ports: QepScmPorts = {}): QepScmFacade {
   const platform = createPlatformScm({
     githubOffline: ports.githubOffline ?? true,
     webhookSecrets: ports.webhookSecrets,
+    store: ports.store,
     publishEvent: async (event) => {
       await ports.onEvent?.(event);
       await ports.onScmEvent?.(event);

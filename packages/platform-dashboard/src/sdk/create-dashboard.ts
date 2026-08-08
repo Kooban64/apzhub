@@ -5,11 +5,13 @@ import {
 import { DashboardEngine } from "../engine/dashboard-engine";
 import { DashboardRegistry } from "../registry/dashboard-registry";
 import { WidgetRegistry } from "../registry/widget-registry";
+import type { LayoutStore } from "../store/layout-store";
 import { createBuiltinWidgetDescriptors } from "../widgets/builtin-widgets";
 
 export interface CreatePlatformDashboardOptions {
   readonly publishEvent?: DashboardEventPublisher;
   readonly includeBuiltinWidgets?: boolean;
+  readonly store?: LayoutStore;
 }
 
 export interface PlatformDashboard {
@@ -49,6 +51,7 @@ export function createPlatformDashboard(
     dashboards,
     widgets,
     publishEvent,
+    store: options.store,
   });
 
   return { engine, dashboards, widgets };

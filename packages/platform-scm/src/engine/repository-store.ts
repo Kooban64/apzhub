@@ -4,67 +4,90 @@ import type {
 } from "../contracts/repository";
 import type { WebhookAuditRecord } from "../contracts/webhook";
 
-export class InMemoryRepositoryStore {
+/**
+ * SCM Source of Record port (QX-PR-02).
+ * Production implementations must survive process restart.
+ */
+export interface RepositoryStore {
+  upsert(repository: RegisteredRepository): Promise<RegisteredRepository>;
+  get(repositoryId: string): Promise<RegisteredRepository | undefined>;
+  list(tenantId?: string): Promise<readonly RegisteredRepository[]>;
+  findByFullName(
+    tenantId: string,
+    providerId: string,
+    fullName: string,
+  ): Promise<RegisteredRepository | undefined>;
+  recordWebhook(audit: WebhookAuditRecord): Promise<void>;
+  listWebhooks(tenantId?: string): Promise<readonly WebhookAuditRecord[]>;
+  hasIdempotencyKey(key: string): Promise<boolean>;
+  rememberIdempotencyKey(key: string, tenantId: string): Promise<void>;
+  addLink(link: ScmTraceabilityLink): Promise<ScmTraceabilityLink>;
+  listLinks(repositoryId?: string): Promise<readonly ScmTraceabilityLink[]>;
+}
+
+/** Process-local store — allowed in development/tests only. */
+export class InMemoryRepositoryStore implements RepositoryStore {
   private readonly repositories = new Map<string, RegisteredRepository>();
   private readonly webhookAudits: WebhookAuditRecord[] = [];
   private readonly idempotencyKeys = new Set<string>();
   private readonly links: ScmTraceabilityLink[] = [];
 
-  upsert(repository: RegisteredRepository): RegisteredRepository {
+  async upsert(repository: RegisteredRepository): Promise<RegisteredRepository> {
     this.repositories.set(repository.repositoryId, repository);
     return repository;
   }
 
-  get(repositoryId: string): RegisteredRepository | undefined {
+  async get(repositoryId: string): Promise<RegisteredRepository | undefined> {
     return this.repositories.get(repositoryId);
   }
 
-  list(tenantId?: string): readonly RegisteredRepository[] {
+  async list(tenantId?: string): Promise<readonly RegisteredRepository[]> {
     const all = [...this.repositories.values()];
     return tenantId
       ? all.filter((repository) => repository.tenantId === tenantId)
       : all;
   }
 
-  findByFullName(
+  async findByFullName(
     tenantId: string,
     providerId: string,
     fullName: string,
-  ): RegisteredRepository | undefined {
-    return this.list(tenantId).find(
+  ): Promise<RegisteredRepository | undefined> {
+    const all = await this.list(tenantId);
+    return all.find(
       (repository) =>
         repository.providerId === providerId &&
         repository.fullName.toLowerCase() === fullName.toLowerCase(),
     );
   }
 
-  recordWebhook(audit: WebhookAuditRecord): void {
+  async recordWebhook(audit: WebhookAuditRecord): Promise<void> {
     this.webhookAudits.unshift(audit);
     if (this.webhookAudits.length > 500) {
       this.webhookAudits.length = 500;
     }
   }
 
-  listWebhooks(tenantId?: string): readonly WebhookAuditRecord[] {
+  async listWebhooks(tenantId?: string): Promise<readonly WebhookAuditRecord[]> {
     return tenantId
       ? this.webhookAudits.filter((audit) => audit.tenantId === tenantId)
       : this.webhookAudits;
   }
 
-  hasIdempotencyKey(key: string): boolean {
+  async hasIdempotencyKey(key: string): Promise<boolean> {
     return this.idempotencyKeys.has(key);
   }
 
-  rememberIdempotencyKey(key: string): void {
+  async rememberIdempotencyKey(key: string, _tenantId: string): Promise<void> {
     this.idempotencyKeys.add(key);
   }
 
-  addLink(link: ScmTraceabilityLink): ScmTraceabilityLink {
+  async addLink(link: ScmTraceabilityLink): Promise<ScmTraceabilityLink> {
     this.links.push(link);
     return link;
   }
 
-  listLinks(repositoryId?: string): readonly ScmTraceabilityLink[] {
+  async listLinks(repositoryId?: string): Promise<readonly ScmTraceabilityLink[]> {
     return repositoryId
       ? this.links.filter((link) => link.repositoryId === repositoryId)
       : this.links;

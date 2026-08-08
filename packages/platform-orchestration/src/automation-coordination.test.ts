@@ -27,7 +27,7 @@ describe("APZQEP-165 QO-011 Enterprise Automation Coordination", () => {
     ).toBe("automation_coordination");
     expect(platform.container.has("orchestration.automation.coordination")).toBe(true);
 
-    const pkg = platform.automationCoordination.createCoordinationPackage({
+    const pkg = await platform.automationCoordination.createCoordinationPackage({
       decisionPackage: {
         decisionPackageId: "dp_go_1",
         qualityFlowRef: "qf_1",
@@ -85,7 +85,7 @@ describe("APZQEP-165 QO-011 Enterprise Automation Coordination", () => {
   it("returns not_required for NO_GO and deferred for DEFERRED", async () => {
     const platform = await createPlatformOrchestration();
 
-    const noGo = platform.automationCoordination.createCoordinationPackage({
+    const noGo = await platform.automationCoordination.createCoordinationPackage({
       decisionPackage: {
         decisionPackageId: "dp_nogo",
         qualityFlowRef: "qf_n",
@@ -96,7 +96,7 @@ describe("APZQEP-165 QO-011 Enterprise Automation Coordination", () => {
     expect(noGo.coordinationStatus).toBe("not_required");
     expect(noGo.requiredActivities).toHaveLength(0);
 
-    const deferred = platform.automationCoordination.createCoordinationPackage({
+    const deferred = await platform.automationCoordination.createCoordinationPackage({
       decisionPackage: {
         decisionPackageId: "dp_def",
         qualityFlowRef: "qf_d",
@@ -113,7 +113,7 @@ describe("APZQEP-165 QO-011 Enterprise Automation Coordination", () => {
 
   it("defaults intents from profile when GO has no outstanding activities", async () => {
     const platform = await createPlatformOrchestration();
-    const pkg = platform.automationCoordination.createCoordinationPackage({
+    const pkg = await platform.automationCoordination.createCoordinationPackage({
       decisionPackage: {
         decisionPackageId: "dp_default",
         qualityFlowRef: "qf_d",
@@ -144,7 +144,7 @@ describe("APZQEP-165 QO-011 Enterprise Automation Coordination", () => {
       labels: { automationIntent: "api_automation" },
     });
 
-    const pkg = platform.automationCoordination.createCoordinationPackage({
+    const pkg = await platform.automationCoordination.createCoordinationPackage({
       decisionPackage: {
         decisionPackageId: "dp_elig",
         qualityFlowRef: "qf_e",
@@ -161,7 +161,7 @@ describe("APZQEP-165 QO-011 Enterprise Automation Coordination", () => {
 
   it("supports superseding packages and publishes updated events", async () => {
     const platform = await createPlatformOrchestration();
-    const first = platform.automationCoordination.createCoordinationPackage({
+    const first = await platform.automationCoordination.createCoordinationPackage({
       decisionPackage: {
         decisionPackageId: "dp_s1",
         qualityFlowRef: "qf_s",
@@ -170,7 +170,7 @@ describe("APZQEP-165 QO-011 Enterprise Automation Coordination", () => {
         tenantId: "t1",
       },
     });
-    const second = platform.automationCoordination.createCoordinationPackage({
+    const second = await platform.automationCoordination.createCoordinationPackage({
       decisionPackage: {
         decisionPackageId: "dp_s1",
         qualityFlowRef: "qf_s",
@@ -199,7 +199,7 @@ describe("APZQEP-165 QO-011 Enterprise Automation Coordination", () => {
     expect(typeof coord.evaluatePolicy).toBe("undefined");
     expect(typeof coord.evaluateGovernance).toBe("undefined");
 
-    const pkg = platform.automationCoordination.createCoordinationPackage({
+    const pkg = await platform.automationCoordination.createCoordinationPackage({
       decisionPackage: {
         decisionPackageId: "dp_arch",
         qualityFlowRef: "qf_a",

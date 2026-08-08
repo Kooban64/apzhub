@@ -14,10 +14,10 @@ import {
 const ACTOR = "actor_test";
 const CORR = "corr_qo004";
 
-function registerDefaultFlow(
+async function registerDefaultFlow(
   engine: Awaited<ReturnType<typeof createPlatformOrchestration>>["qualityFlows"],
 ) {
-  return engine.registerDefinition({
+  return await engine.registerDefinition({
     flowId: "qf_continuous_cert",
     name: "Continuous Certification",
     version: "1.0.0",
@@ -57,9 +57,9 @@ async function advanceTo(
     "completed",
   ] as const;
 
-  let current = engine.getInstance(instanceId).currentState;
+  let current = await engine.getInstance(instanceId).currentState;
   if (current === "registered" && target !== "registered") {
-    engine.transition(instanceId, {
+    await engine.transition(instanceId, {
       toState: "ready",
       actor: ACTOR,
       reason: "advance",
@@ -74,7 +74,7 @@ async function advanceTo(
     if (engine.getInstance(instanceId).currentState === target) return;
     const next = state;
     if (canTransitionQualityFlow(engine.getInstance(instanceId).currentState, next)) {
-      engine.transition(instanceId, {
+      await engine.transition(instanceId, {
         toState: next,
         actor: ACTOR,
         reason: `advance_to_${target}`,
@@ -89,11 +89,11 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
   it("exposes immutable definitions and versioning without mutation", async () => {
     const platform = await createPlatformOrchestration();
     const qf = platform.qualityFlows;
-    const v1 = registerDefaultFlow(qf);
+    const v1 = await registerDefaultFlow(qf);
     expect(v1.version).toBe("1.0.0");
     expect(Object.isFrozen(v1)).toBe(true);
 
-    const v2 = qf.versionDefinition("qf_continuous_cert", {
+    const v2 = await qf.versionDefinition("qf_continuous_cert", {
       name: "Continuous Certification",
       version: "1.1.0",
       owner: "apzqep",
@@ -108,8 +108,8 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
   it("creates instances pinned to a definition version", async () => {
     const platform = await createPlatformOrchestration();
     const qf = platform.qualityFlows;
-    registerDefaultFlow(qf);
-    const instance = qf.createInstance({
+    await registerDefaultFlow(qf);
+    const instance = await qf.createInstance({
       flowId: "qf_continuous_cert",
       triggerId: "trig_1",
       correlationId: "corr_1",
@@ -128,8 +128,8 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
   it("covers every progression edge in the happy path", async () => {
     const platform = await createPlatformOrchestration();
     const qf = platform.qualityFlows;
-    registerDefaultFlow(qf);
-    const instance = qf.createInstance({
+    await registerDefaultFlow(qf);
+    const instance = await qf.createInstance({
       flowId: "qf_continuous_cert",
       triggerId: "trig_prog",
       correlationId: CORR,
@@ -140,7 +140,7 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
     for (const [from, to] of listProgressionEdges()) {
       expect(qf.getInstance(instance.instanceId).currentState).toBe(from);
       expect(canTransitionQualityFlow(from, to)).toBe(true);
-      qf.transition(instance.instanceId, {
+      await qf.transition(instance.instanceId, {
         toState: to,
         actor: ACTOR,
         reason: `progress_${from}_${to}`,
@@ -153,7 +153,7 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
     expect(qf.getInstance(instance.instanceId).completedAt).toBeTruthy();
   });
 
-  it("covers every declared transition rule in the table", () => {
+  it("covers every declared transition rule in the table", async () => {
     for (const rule of QUALITY_FLOW_TRANSITION_RULES) {
       expect(canTransitionQualityFlow(rule.from, rule.to)).toBe(true);
       expect(assertQualityFlowTransition(rule.from, rule.to)).toBe(rule.kind);
@@ -166,17 +166,17 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
   it("rejects invalid transitions and preserves append-only history", async () => {
     const platform = await createPlatformOrchestration();
     const qf = platform.qualityFlows;
-    registerDefaultFlow(qf);
-    const instance = qf.createInstance({
+    await registerDefaultFlow(qf);
+    const instance = await qf.createInstance({
       flowId: "qf_continuous_cert",
       triggerId: "trig_inv",
       correlationId: CORR,
       tenantId: "tenant_a",
       actor: ACTOR,
     });
-    const before = qf.getHistory(instance.instanceId).length;
+    const before = await qf.getHistory(instance.instanceId).length;
     try {
-      qf.transition(instance.instanceId, {
+      await qf.transition(instance.instanceId, {
         toState: "completed",
         actor: ACTOR,
         reason: "skip",
@@ -193,8 +193,8 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
   it("supports pause/resume recovery without changing state", async () => {
     const platform = await createPlatformOrchestration();
     const qf = platform.qualityFlows;
-    registerDefaultFlow(qf);
-    const instance = qf.createInstance({
+    await registerDefaultFlow(qf);
+    const instance = await qf.createInstance({
       flowId: "qf_continuous_cert",
       triggerId: "trig_pause",
       correlationId: CORR,
@@ -202,11 +202,11 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
       actor: ACTOR,
     });
     await advanceTo(qf, instance.instanceId, "triggered");
-    qf.pause(instance.instanceId, ACTOR, "hold", CORR);
+    await qf.pause(instance.instanceId, ACTOR, "hold", CORR);
     expect(qf.getStatus(instance.instanceId).paused).toBe(true);
     expect(qf.getStatus(instance.instanceId).currentState).toBe("triggered");
     try {
-      qf.transition(instance.instanceId, {
+      await qf.transition(instance.instanceId, {
         toState: "impact_analysed",
         actor: ACTOR,
         reason: "blocked",
@@ -216,8 +216,8 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
     } catch (error) {
       expect(isOrchestrationError(error)).toBe(true);
     }
-    qf.resume(instance.instanceId, ACTOR, "continue", CORR);
-    qf.transition(instance.instanceId, {
+    await qf.resume(instance.instanceId, ACTOR, "continue", CORR);
+    await qf.transition(instance.instanceId, {
       toState: "impact_analysed",
       actor: ACTOR,
       reason: "resume_progress",
@@ -229,19 +229,19 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
   it("supports cancel, fail/retry, timeout, reject, supersede, restart", async () => {
     const platform = await createPlatformOrchestration();
     const qf = platform.qualityFlows;
-    registerDefaultFlow(qf);
+    await registerDefaultFlow(qf);
 
-    const cancelled = qf.createInstance({
+    const cancelled = await qf.createInstance({
       flowId: "qf_continuous_cert",
       triggerId: "trig_c",
       correlationId: CORR,
       tenantId: "tenant_a",
       actor: ACTOR,
     });
-    qf.cancel(cancelled.instanceId, ACTOR, "abort", CORR);
+    await qf.cancel(cancelled.instanceId, ACTOR, "abort", CORR);
     expect(qf.getInstance(cancelled.instanceId).currentState).toBe("cancelled");
 
-    const failed = qf.createInstance({
+    const failed = await qf.createInstance({
       flowId: "qf_continuous_cert",
       triggerId: "trig_f",
       correlationId: CORR,
@@ -249,13 +249,13 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
       actor: ACTOR,
     });
     await advanceTo(qf, failed.instanceId, "selection_complete");
-    qf.fail(failed.instanceId, ACTOR, "capability deferred", CORR);
+    await qf.fail(failed.instanceId, ACTOR, "capability deferred", CORR);
     expect(qf.getInstance(failed.instanceId).currentState).toBe("failed");
     expect(qf.getInstance(failed.instanceId).recoveryPoint).toBe("selection_complete");
-    qf.retry(failed.instanceId, ACTOR, "retry_from_recovery_point", CORR);
+    await qf.retry(failed.instanceId, ACTOR, "retry_from_recovery_point", CORR);
     expect(qf.getInstance(failed.instanceId).currentState).toBe("selection_complete");
 
-    const timed = qf.createInstance({
+    const timed = await qf.createInstance({
       flowId: "qf_continuous_cert",
       triggerId: "trig_t",
       correlationId: CORR,
@@ -263,12 +263,12 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
       actor: ACTOR,
     });
     await advanceTo(qf, timed.instanceId, "awaiting_gates");
-    qf.timeout(timed.instanceId, ACTOR, "sla", CORR);
+    await qf.timeout(timed.instanceId, ACTOR, "sla", CORR);
     expect(qf.getInstance(timed.instanceId).currentState).toBe("timed_out");
-    qf.restart(timed.instanceId, ACTOR, "restart", CORR);
+    await qf.restart(timed.instanceId, ACTOR, "restart", CORR);
     expect(qf.getInstance(timed.instanceId).currentState).toBe("ready");
 
-    const rejected = qf.createInstance({
+    const rejected = await qf.createInstance({
       flowId: "qf_continuous_cert",
       triggerId: "trig_r",
       correlationId: CORR,
@@ -276,10 +276,10 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
       actor: ACTOR,
     });
     await advanceTo(qf, rejected.instanceId, "awaiting_approval");
-    qf.reject(rejected.instanceId, ACTOR, "human_reject", CORR);
+    await qf.reject(rejected.instanceId, ACTOR, "human_reject", CORR);
     expect(qf.getInstance(rejected.instanceId).currentState).toBe("rejected");
 
-    const superseded = qf.createInstance({
+    const superseded = await qf.createInstance({
       flowId: "qf_continuous_cert",
       triggerId: "trig_s",
       correlationId: CORR,
@@ -287,13 +287,13 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
       actor: ACTOR,
     });
     await advanceTo(qf, superseded.instanceId, "ready");
-    qf.supersede(superseded.instanceId, ACTOR, "newer_instance", CORR);
+    await qf.supersede(superseded.instanceId, ACTOR, "newer_instance", CORR);
     expect(qf.getInstance(superseded.instanceId).currentState).toBe("superseded");
   });
 
   it("integrates with Trigger Engine routing without provider payloads", async () => {
     const platform = await createPlatformOrchestration();
-    registerDefaultFlow(platform.qualityFlows);
+    await registerDefaultFlow(platform.qualityFlows);
     platform.triggerBindings.register({
       bindingId: "bind_1",
       triggerType: "change.committed",
@@ -317,7 +317,7 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
     const routing = platform.triggers.ingest(trigger);
     expect(routing.disposition).toBe("routed");
 
-    const instance = platform.qualityFlows.createInstanceFromRouting(routing, {
+    const instance = await platform.qualityFlows.createInstanceFromRouting(routing, {
       tenantId: trigger.tenantId,
       projectId: trigger.projectId,
       actor: ACTOR,
@@ -330,7 +330,7 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
 
   it("rejects provider-specific metadata and discovers capabilities without invoke", async () => {
     const platform = await createPlatformOrchestration();
-    registerDefaultFlow(platform.qualityFlows);
+    await registerDefaultFlow(platform.qualityFlows);
     platform.capabilities.register({
       capabilityId: "cap_impact",
       name: "Impact",
@@ -343,7 +343,7 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
     });
 
     try {
-      platform.qualityFlows.createInstance({
+      await platform.qualityFlows.createInstance({
         flowId: "qf_continuous_cert",
         triggerId: "trig_prov",
         correlationId: CORR,
@@ -355,7 +355,8 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
       expect(isOrchestrationError(error)).toBe(true);
     }
 
-    const discovered = platform.qualityFlows.discoverCapabilities("qf_continuous_cert");
+    const discovered =
+      await platform.qualityFlows.discoverCapabilities("qf_continuous_cert");
     expect(discovered.some((c) => c.capabilityId === "cap_impact")).toBe(true);
     expect(
       typeof (platform.qualityFlows as unknown as { invoke?: unknown }).invoke,
@@ -364,15 +365,15 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
 
   it("exposes diagnostics and wires DI tokens", async () => {
     const platform = await createPlatformOrchestration();
-    registerDefaultFlow(platform.qualityFlows);
-    platform.qualityFlows.createInstance({
+    await registerDefaultFlow(platform.qualityFlows);
+    await platform.qualityFlows.createInstance({
       flowId: "qf_continuous_cert",
       triggerId: "trig_diag",
       correlationId: CORR,
       tenantId: "tenant_a",
       actor: ACTOR,
     });
-    const diag = platform.qualityFlows.diagnostics();
+    const diag = await platform.qualityFlows.diagnostics();
     expect(diag.definitionCount).toBe(1);
     expect(diag.instanceCount).toBe(1);
     expect(diag.lifecycleValidation).toBe("pass");
@@ -384,16 +385,21 @@ describe("APZQEP-165 QO-004 Quality Flow Engine", () => {
 
   it("allows cancel while paused", async () => {
     const platform = await createPlatformOrchestration();
-    registerDefaultFlow(platform.qualityFlows);
-    const instance = platform.qualityFlows.createInstance({
+    await registerDefaultFlow(platform.qualityFlows);
+    const instance = await platform.qualityFlows.createInstance({
       flowId: "qf_continuous_cert",
       triggerId: "trig_pc",
       correlationId: CORR,
       tenantId: "tenant_a",
       actor: ACTOR,
     });
-    platform.qualityFlows.pause(instance.instanceId, ACTOR, "hold", CORR);
-    platform.qualityFlows.cancel(instance.instanceId, ACTOR, "abort_paused", CORR);
+    await platform.qualityFlows.pause(instance.instanceId, ACTOR, "hold", CORR);
+    await platform.qualityFlows.cancel(
+      instance.instanceId,
+      ACTOR,
+      "abort_paused",
+      CORR,
+    );
     expect(platform.qualityFlows.getInstance(instance.instanceId).currentState).toBe(
       "cancelled",
     );

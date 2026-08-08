@@ -11,6 +11,7 @@ import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
 import { PlatformApiHttpError } from "../errors";
 import { jsonDataResponse } from "../response";
 import { getQepScmRuntime } from "@/lib/qep/scm-runtime";
+import { requireQepPermission, sessionTenantId } from "./require-qep-permission";
 
 type RouteContext = { params: Promise<Record<string, string>> };
 
@@ -32,6 +33,7 @@ export async function handleListScmProviders(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireQepPermission(context, "qep.scm.read");
   const runtime = getQepScmRuntime();
   return jsonDataResponse({ providers: runtime.listProviders() }, context.tracing);
 }
@@ -40,6 +42,7 @@ export async function handleConnectScmProvider(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireQepPermission(context, "qep.scm.operate");
   const body = (await request.json()) as {
     providerId?: ScmProviderId;
     correlationId?: string;
@@ -54,7 +57,7 @@ export async function handleConnectScmProvider(
   const runtime = getQepScmRuntime();
   try {
     const result = await runtime.connectProvider(
-      context.serviceContext.tenantId,
+      sessionTenantId(context),
       body.providerId,
       body.correlationId,
       body.token ? { kind: "pat", token: body.token } : { kind: "none" },
@@ -69,14 +72,14 @@ export async function handleConnectScmProvider(
 }
 
 export async function handleListScmRepositories(
-  request: NextRequest,
+  _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const tenantId =
-    request.nextUrl.searchParams.get("tenantId") ?? context.serviceContext.tenantId;
+  requireQepPermission(context, "qep.scm.read");
+  const tenantId = sessionTenantId(context);
   const runtime = getQepScmRuntime();
   return jsonDataResponse(
-    { repositories: runtime.listRepositories(tenantId) },
+    { repositories: await runtime.listRepositories(tenantId) },
     context.tracing,
   );
 }
@@ -85,9 +88,10 @@ export async function handleRegisterScmRepository(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireQepPermission(context, "qep.scm.operate");
   const body = (await request.json()) as Partial<RegisterRepositoryRequest>;
-  const tenantId = body.tenantId ?? context.serviceContext.tenantId;
-  const registeredBy = body.registeredBy ?? context.serviceContext.userId;
+  const tenantId = sessionTenantId(context);
+  const registeredBy = context.serviceContext.userId;
   if (!tenantId || !body.providerId || !body.fullName || !registeredBy) {
     throw new PlatformApiHttpError(400, {
       code: "VALIDATION_FAILED",
@@ -123,16 +127,17 @@ export async function handleGetScmRepository(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireQepPermission(context, "qep.scm.read");
   const repositoryId = requireParam(await routeContext?.params, "repositoryId");
   const runtime = getQepScmRuntime();
-  const repository = runtime.getRepository(repositoryId);
-  if (!repository) {
+  const repository = await runtime.getRepository(repositoryId);
+  if (!repository || repository.tenantId !== sessionTenantId(context)) {
     throw new PlatformApiHttpError(404, {
       code: "NOT_FOUND",
       message: "Repository not found",
     });
   }
-  const links = runtime.listTraceabilityLinks(repositoryId);
+  const links = await runtime.listTraceabilityLinks(repositoryId);
   return jsonDataResponse({ repository, links }, context.tracing);
 }
 
@@ -141,9 +146,17 @@ export async function handleSyncScmRepository(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireQepPermission(context, "qep.scm.operate");
   const repositoryId = requireParam(await routeContext?.params, "repositoryId");
   const body = (await request.json().catch(() => ({}))) as { correlationId?: string };
   const runtime = getQepScmRuntime();
+  const repository = await runtime.getRepository(repositoryId);
+  if (!repository || repository.tenantId !== sessionTenantId(context)) {
+    throw new PlatformApiHttpError(404, {
+      code: "NOT_FOUND",
+      message: "Repository not found",
+    });
+  }
   try {
     const result = await runtime.syncRepository(
       repositoryId,
@@ -159,14 +172,14 @@ export async function handleSyncScmRepository(
 }
 
 export async function handleListScmWebhooks(
-  request: NextRequest,
+  _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const tenantId =
-    request.nextUrl.searchParams.get("tenantId") ?? context.serviceContext.tenantId;
+  requireQepPermission(context, "qep.scm.read");
+  const tenantId = sessionTenantId(context);
   const runtime = getQepScmRuntime();
   return jsonDataResponse(
-    { webhooks: runtime.listWebhookAudits(tenantId) },
+    { webhooks: await runtime.listWebhookAudits(tenantId) },
     context.tracing,
   );
 }
@@ -176,6 +189,7 @@ export async function handleIngestScmWebhook(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  // Signature/provider verification is authoritative; require authenticated tenant context.
   const providerId = requireParam(
     await routeContext?.params,
     "providerId",
@@ -195,7 +209,7 @@ export async function handleIngestScmWebhook(
   const runtime = getQepScmRuntime();
   try {
     const result = await runtime.ingestWebhook({
-      tenantId: context.serviceContext.tenantId,
+      tenantId: sessionTenantId(context),
       providerId,
       headers,
       rawBody,
@@ -218,6 +232,7 @@ export async function handleSetScmRepositoryState(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireQepPermission(context, "qep.scm.operate");
   const repositoryId = requireParam(await routeContext?.params, "repositoryId");
   const body = (await request.json()) as { state?: "enabled" | "disabled" };
   if (body.state !== "enabled" && body.state !== "disabled") {
@@ -246,6 +261,7 @@ export async function handleCreateScmTraceabilityLink(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireQepPermission(context, "qep.scm.operate");
   const body = (await request.json()) as {
     repositoryId?: string;
     kind?: Parameters<
@@ -263,8 +279,8 @@ export async function handleCreateScmTraceabilityLink(
   }
   const runtime = getQepScmRuntime();
   try {
-    const link = runtime.addTraceabilityLink({
-      tenantId: context.serviceContext.tenantId,
+    const link = await runtime.addTraceabilityLink({
+      tenantId: sessionTenantId(context),
       repositoryId: body.repositoryId,
       kind: body.kind,
       externalRef: body.externalRef,

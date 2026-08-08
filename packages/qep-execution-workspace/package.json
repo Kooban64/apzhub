@@ -1,9 +1,9 @@
 {
   "name": "@apzhub/qep-execution-workspace",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "APZQEP Enterprise Test Execution Workspace \u2014 Capability C (APZQEP-140-C). Performs execution from Cap B handoffs; does not redesign planning.",
+  "description": "APZQEP Enterprise Test Execution Workspace — Capability C (APZQEP-140-C). Performs execution from Cap B handoffs; does not redesign planning.",
   "exports": {
     ".": "./src/index.ts",
     "./domain": "./src/domain/index.ts",

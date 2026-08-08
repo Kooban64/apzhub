@@ -22,12 +22,15 @@ import type { Recommendation } from "../contracts/recommendation";
 import type { QualityScore, QualityScoreDimension } from "../contracts/scoring";
 import type { QualitySignal, QualitySignalKind } from "../contracts/signal";
 import type { IntelligenceProviderRegistry } from "../registry/provider-registry";
-import { InMemoryIntelligenceStore } from "../store/intelligence-store";
+import {
+  InMemoryIntelligenceStore,
+  type IntelligenceStore,
+} from "../store/intelligence-store";
 import { assessConfidence } from "./confidence-engine";
 
 export interface QualityIntelligenceEngineOptions {
   readonly registry: IntelligenceProviderRegistry;
-  readonly store?: InMemoryIntelligenceStore;
+  readonly store?: IntelligenceStore;
   readonly publishEvent?: QiEventPublisher;
 }
 
@@ -40,7 +43,7 @@ const ACTIVE_PROVIDER_IDS: readonly IntelligenceProviderId[] = [
 
 export class QualityIntelligenceEngine {
   private readonly registry: IntelligenceProviderRegistry;
-  private readonly store: InMemoryIntelligenceStore;
+  private readonly store: IntelligenceStore;
   private readonly publishEvent: QiEventPublisher;
   private readonly acceptedCount = new Map<string, number>();
   private readonly rejectedCount = new Map<string, number>();
@@ -55,52 +58,52 @@ export class QualityIntelligenceEngine {
     return this.registry.list();
   }
 
-  listObservations(tenantId?: string) {
+  async listObservations(tenantId?: string) {
     return this.store.listObservations(tenantId);
   }
 
-  getObservation(observationId: string) {
+  async getObservation(observationId: string) {
     return this.store.getObservation(observationId);
   }
 
-  listSignals(tenantId?: string) {
+  async listSignals(tenantId?: string) {
     return this.store.listSignals(tenantId);
   }
 
-  getSignal(signalId: string) {
+  async getSignal(signalId: string) {
     return this.store.getSignal(signalId);
   }
 
-  listRecommendations(tenantId?: string) {
+  async listRecommendations(tenantId?: string) {
     return this.store.listRecommendations(tenantId);
   }
 
-  getRecommendation(recommendationId: string) {
+  async getRecommendation(recommendationId: string) {
     return this.store.getRecommendation(recommendationId);
   }
 
-  listExplanations(tenantId?: string) {
+  async listExplanations(tenantId?: string) {
     return this.store.listExplanations(tenantId);
   }
 
-  getExplanation(explanationId: string) {
+  async getExplanation(explanationId: string) {
     return this.store.getExplanation(explanationId);
   }
 
-  listScores(tenantId?: string) {
+  async listScores(tenantId?: string) {
     return this.store.listScores(tenantId);
   }
 
-  getScore(scoreId: string) {
+  async getScore(scoreId: string) {
     return this.store.getScore(scoreId);
   }
 
-  listAudits(tenantId?: string): readonly RecommendationAuditRecord[] {
+  async listAudits(tenantId?: string): Promise<readonly RecommendationAuditRecord[]> {
     return this.store.listAudits(tenantId);
   }
 
-  listHistory(tenantId?: string): readonly RecommendationHistoryEntry[] {
-    return this.store.listRecommendations(tenantId).map((recommendation) => ({
+  async listHistory(tenantId?: string): Promise<readonly RecommendationHistoryEntry[]> {
+    return (await this.store.listRecommendations(tenantId)).map((recommendation) => ({
       recommendationId: recommendation.recommendationId,
       tenantId: recommendation.tenantId,
       type: recommendation.type,
@@ -118,12 +121,14 @@ export class QualityIntelligenceEngine {
     }));
   }
 
-  listConfidence(tenantId?: string): readonly {
-    readonly recommendationId: string;
-    readonly providerId: IntelligenceProviderId;
-    readonly confidence: ConfidenceAssessment;
-  }[] {
-    return this.store.listRecommendations(tenantId).map((recommendation) => ({
+  async listConfidence(tenantId?: string): Promise<
+    readonly {
+      readonly recommendationId: string;
+      readonly providerId: IntelligenceProviderId;
+      readonly confidence: ConfidenceAssessment;
+    }[]
+  > {
+    return (await this.store.listRecommendations(tenantId)).map((recommendation) => ({
       recommendationId: recommendation.recommendationId,
       providerId: recommendation.providerId,
       confidence: recommendation.confidence,
@@ -148,7 +153,7 @@ export class QualityIntelligenceEngine {
       severity: request.severity,
     });
 
-    this.store.recordObservation(observation);
+    await this.store.recordObservation(observation);
     await this.emit({
       type: QI_EVENT_TYPES.observationCreated,
       occurredAt: observation.recordedAt,
@@ -164,7 +169,7 @@ export class QualityIntelligenceEngine {
     tenantId: string,
     correlationId: string,
   ): Promise<readonly QualitySignal[]> {
-    const observations = this.store.listObservations(tenantId);
+    const observations = await this.store.listObservations(tenantId);
     const context: IntelligenceEvaluationContext = {
       tenantId,
       correlationId,
@@ -209,7 +214,7 @@ export class QualityIntelligenceEngine {
 
     const signals = [...signalMap.values()];
     for (const signal of signals) {
-      this.store.saveSignal(signal);
+      await this.store.saveSignal(signal);
       await this.emit({
         type: QI_EVENT_TYPES.signalCalculated,
         occurredAt: signal.calculatedAt,
@@ -231,8 +236,8 @@ export class QualityIntelligenceEngine {
     readonly recommendations: readonly Recommendation[];
     readonly scores: readonly QualityScore[];
   }> {
-    const observations = this.store.listObservations(tenantId);
-    const signals = this.store.listSignals(tenantId);
+    const observations = await this.store.listObservations(tenantId);
+    const signals = await this.store.listSignals(tenantId);
     const context: IntelligenceEvaluationContext = {
       tenantId,
       correlationId,
@@ -314,7 +319,7 @@ export class QualityIntelligenceEngine {
     actorId: string,
     correlationId: string,
   ): Promise<Recommendation> {
-    const current = this.store.getRecommendation(recommendationId);
+    const current = await this.store.getRecommendation(recommendationId);
     if (!current) {
       throw new Error(`Recommendation not found: ${recommendationId}`);
     }
@@ -335,12 +340,12 @@ export class QualityIntelligenceEngine {
         actedBy: actorId,
       },
     };
-    this.store.updateRecommendation(updated);
+    await this.store.updateRecommendation(updated);
     this.acceptedCount.set(
       current.providerId,
       (this.acceptedCount.get(current.providerId) ?? 0) + 1,
     );
-    this.store.recordAudit({
+    await this.store.recordAudit({
       auditId: randomUUID(),
       tenantId: updated.tenantId,
       recommendationId: updated.recommendationId,
@@ -371,7 +376,7 @@ export class QualityIntelligenceEngine {
     actorId: string,
     correlationId: string,
   ): Promise<Recommendation> {
-    const current = this.store.getRecommendation(recommendationId);
+    const current = await this.store.getRecommendation(recommendationId);
     if (!current) {
       throw new Error(`Recommendation not found: ${recommendationId}`);
     }
@@ -392,12 +397,12 @@ export class QualityIntelligenceEngine {
         actedBy: actorId,
       },
     };
-    this.store.updateRecommendation(updated);
+    await this.store.updateRecommendation(updated);
     this.rejectedCount.set(
       current.providerId,
       (this.rejectedCount.get(current.providerId) ?? 0) + 1,
     );
-    this.store.recordAudit({
+    await this.store.recordAudit({
       auditId: randomUUID(),
       tenantId: updated.tenantId,
       recommendationId: updated.recommendationId,
@@ -437,8 +442,8 @@ export class QualityIntelligenceEngine {
     const context: IntelligenceEvaluationContext = {
       tenantId,
       correlationId,
-      observations: this.store.listObservations(tenantId),
-      signals: this.store.listSignals(tenantId),
+      observations: await this.store.listObservations(tenantId),
+      signals: await this.store.listSignals(tenantId),
     };
     const outcome = await provider.evaluate(context);
     for (const draft of outcome.recommendations) {
@@ -481,7 +486,7 @@ export class QualityIntelligenceEngine {
       providerId,
       timestamp: now,
     };
-    this.store.saveExplanation(explanation);
+    await this.store.saveExplanation(explanation, tenantId);
 
     const recommendation: Recommendation = {
       recommendationId: randomUUID(),
@@ -501,8 +506,8 @@ export class QualityIntelligenceEngine {
       explanationId,
       correlationId,
     };
-    this.store.saveRecommendation(recommendation);
-    this.store.recordAudit({
+    await this.store.saveRecommendation(recommendation);
+    await this.store.recordAudit({
       auditId: randomUUID(),
       tenantId,
       recommendationId: recommendation.recommendationId,
@@ -563,7 +568,7 @@ export class QualityIntelligenceEngine {
         derivedFrom: signals.map((s) => s.signalId),
         providerIds: [...bucket.providerIds],
       };
-      this.store.saveScore(score);
+      await this.store.saveScore(score);
       scores.push(score);
 
       await this.emit({
@@ -598,7 +603,7 @@ export class QualityIntelligenceEngine {
         derivedFrom: dimensionValues.map((s) => s.scoreId),
         providerIds: [...new Set(dimensionValues.flatMap((s) => s.providerIds))],
       };
-      this.store.saveScore(overall);
+      await this.store.saveScore(overall);
       scores.push(overall);
 
       await this.emit({

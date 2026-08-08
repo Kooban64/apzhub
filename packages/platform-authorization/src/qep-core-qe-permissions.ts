@@ -8,6 +8,15 @@ export const DEFAULT_QEP_READER_ROLE_ID = "role-qep-reader";
 
 /** Authoritative Cap A–F permission keys used by domain services. */
 export const QEP_CORE_QE_PERMISSIONS = [
+  "qep.quality_flows.read",
+  "qep.quality_flows.operate",
+  "qep.automation.read",
+  "qep.automation.operate",
+  "qep.scm.read",
+  "qep.scm.operate",
+  "qep.qi.read",
+  "qep.qi.operate",
+  "qep.dashboards.read",
   "qep.suites.read",
   "qep.suites.create",
   "qep.suites.update",
@@ -43,6 +52,15 @@ export const QEP_CORE_QE_PERMISSIONS = [
 ] as const;
 
 export const QEP_OPERATOR_PERMISSIONS = [
+  "qep.quality_flows.read",
+  "qep.quality_flows.operate",
+  "qep.automation.read",
+  "qep.automation.operate",
+  "qep.scm.read",
+  "qep.scm.operate",
+  "qep.qi.read",
+  "qep.qi.operate",
+  "qep.dashboards.read",
   "qep.suites.read",
   "qep.suites.create",
   "qep.suites.update",
@@ -71,6 +89,11 @@ export const QEP_OPERATOR_PERMISSIONS = [
 ] as const;
 
 export const QEP_READER_PERMISSIONS = [
+  "qep.quality_flows.read",
+  "qep.automation.read",
+  "qep.scm.read",
+  "qep.qi.read",
+  "qep.dashboards.read",
   "qep.suites.read",
   "qep.execution_plans.read",
   "qep.execution_workspace.read",

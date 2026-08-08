@@ -1,6 +1,7 @@
 import {
   createPlatformDashboard,
   type DashboardDefinition,
+  type LayoutStore,
   type PlatformDashboard,
   type ResolvedDashboard,
   type SavedDashboardView,
@@ -22,6 +23,7 @@ import {
 
 export interface QepDashboardsPorts {
   readonly resolveProjection?: (queryId: string) => ProjectionPayload;
+  readonly store?: LayoutStore;
 }
 
 export interface QepDashboardsFacade {
@@ -51,14 +53,14 @@ export interface QepDashboardsFacade {
   saveView(
     input: Parameters<PlatformDashboard["engine"]["saveView"]>[0],
   ): ReturnType<PlatformDashboard["engine"]["saveView"]>;
-  listViews(tenantId: string, userId?: string): readonly SavedDashboardView[];
-  listPinned(tenantId: string, userId: string): readonly SavedDashboardView[];
+  listViews(tenantId: string, userId?: string): Promise<readonly SavedDashboardView[]>;
+  listPinned(tenantId: string, userId: string): Promise<readonly SavedDashboardView[]>;
 }
 
 export function createQepDashboards(
   ports: QepDashboardsPorts = {},
 ): QepDashboardsFacade {
-  const platform = createPlatformDashboard();
+  const platform = createPlatformDashboard({ store: ports.store });
   const visualization = createPlatformVisualization();
 
   for (const descriptor of createQepWidgetDescriptors()) {

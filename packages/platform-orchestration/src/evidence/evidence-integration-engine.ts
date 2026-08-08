@@ -29,10 +29,13 @@ import {
   listBuiltinReportProfiles,
   resolveReportProfile,
 } from "./report-profiles";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 export interface EvidenceIntegrationEngineOptions {
   readonly events: QualityEventBackbone;
   readonly orchestrationId?: string;
+  readonly documentStore?: OrchestrationDocumentStore;
 }
 
 function createId(prefix: string): string {
@@ -52,8 +55,8 @@ function emptyIncludedRefs(): Record<EvidenceReferenceSlot, string[]> {
 export class EvidenceIntegrationEngine {
   private readonly events: QualityEventBackbone;
   private readonly orchestrationId: string;
-  private readonly packages = new Map<string, EvidenceIntegrationPackage>();
-  private readonly reportViews = new Map<string, ReportView>();
+  private readonly packages: DurableMap<EvidenceIntegrationPackage>;
+  private readonly reportViews: DurableMap<ReportView>;
   private readonly reportingHistory: EvidenceIntegrationAuditEntry[] = [];
   private readonly reportProfileStatistics: Record<string, number> = {};
   private readonly referenceSlotCoverage: Record<string, number> = {};
@@ -62,15 +65,44 @@ export class EvidenceIntegrationEngine {
   constructor(options: EvidenceIntegrationEngineOptions) {
     this.events = options.events;
     this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.packages = new DurableMap<EvidenceIntegrationPackage>(
+      "evidence_integration_package",
+      options.documentStore,
+      (pkg) => ({
+        tenantId: pkg.tenantId,
+        projectId: pkg.projectId,
+        orchestrationId: this.orchestrationId,
+        correlationId: pkg.qualityFlowRef,
+        status: pkg.integrationStatus,
+        actorId: pkg.actorId,
+      }),
+    );
+    this.reportViews = new DurableMap<ReportView>(
+      "report_view",
+      options.documentStore,
+      (view) => ({
+        tenantId: view.tenantId,
+        projectId: view.projectId,
+        orchestrationId: this.orchestrationId,
+        correlationId: view.evidenceIntegrationPackageId,
+        status: view.profile.kind,
+        actorId: view.actorId,
+      }),
+    );
+  }
+
+  async hydrate(): Promise<void> {
+    await this.packages.hydrate();
+    await this.reportViews.hydrate();
   }
 
   /**
    * Create an immutable Evidence Integration Package.
    * Stores opaque references only — never copies artefact content.
    */
-  createEvidenceIntegrationPackage(
+  async createEvidenceIntegrationPackage(
     input: CreateEvidenceIntegrationPackageInput,
-  ): EvidenceIntegrationPackage {
+  ): Promise<EvidenceIntegrationPackage> {
     const qualityFlowRef = input.qualityFlowRef.trim();
     const tenantId = input.tenantId.trim();
     if (!qualityFlowRef || !tenantId) {
@@ -206,7 +238,7 @@ export class EvidenceIntegrationEngine {
       reportIsEvidence: false as const,
     });
 
-    this.packages.set(evidenceIntegrationPackageId, pkg);
+    await this.packages.set(evidenceIntegrationPackageId, pkg);
     this.reportingHistory.push(...auditHistory);
 
     const correlationId = decisionPackageRef ?? qualityFlowRef;
@@ -278,7 +310,7 @@ export class EvidenceIntegrationEngine {
    * Assemble a derived report view over referenced evidence.
    * Presentation remains external — this returns inclusion refs only.
    */
-  generateReportView(input: GenerateReportViewInput): ReportView {
+  async generateReportView(input: GenerateReportViewInput): Promise<ReportView> {
     const pkg = this.getEvidenceIntegrationPackage(input.evidenceIntegrationPackageId);
     const tenantId = input.tenantId.trim() || pkg.tenantId;
     if (!tenantId) {
@@ -361,7 +393,7 @@ export class EvidenceIntegrationEngine {
       presentationExternal: true as const,
     });
 
-    this.reportViews.set(reportViewId, view);
+    await this.reportViews.set(reportViewId, view);
     this.reportProfileStatistics[profile.kind] =
       (this.reportProfileStatistics[profile.kind] ?? 0) + 1;
 

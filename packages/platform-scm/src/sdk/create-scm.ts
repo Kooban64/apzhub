@@ -1,6 +1,7 @@
 import { SCM_EVENT_TYPES, type ScmEventPublisher } from "../contracts/events";
 import type { ScmProviderId } from "../contracts/repository";
 import { ScmEngine } from "../engine/scm-engine";
+import type { RepositoryStore } from "../engine/repository-store";
 import { createGitHubProvider } from "../providers/github";
 import { createPlaceholderScmProviders } from "../providers/placeholders";
 import { ScmProviderRegistry } from "../registry/provider-registry";
@@ -11,6 +12,7 @@ export interface CreatePlatformScmOptions {
   readonly githubOffline?: boolean;
   readonly includePlaceholders?: boolean;
   readonly webhookSecrets?: Readonly<Partial<Record<ScmProviderId, string>>>;
+  readonly store?: RepositoryStore;
 }
 
 export interface PlatformScm {
@@ -54,6 +56,7 @@ export function createPlatformScm(options: CreatePlatformScmOptions = {}): Platf
     registry,
     publishEvent,
     webhookSecrets: options.webhookSecrets,
+    store: options.store,
   });
 
   return { engine, registry };

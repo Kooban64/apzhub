@@ -14,6 +14,8 @@ import {
   type GateTemplate,
   type GateTemplateInput,
 } from "../contracts/governance";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 function deepFreeze<T>(value: T): T {
   if (value && typeof value === "object") {
@@ -121,10 +123,33 @@ function assertComposition(composition: GateComposition): void {
   }
 }
 
-export class GateDefinitionRegistry {
-  private readonly gates = new Map<string, GateDefinition>();
+export interface GateDefinitionRegistryOptions {
+  readonly documentStore?: OrchestrationDocumentStore;
+  readonly orchestrationId?: string;
+}
 
-  register(input: GateDefinitionInput): GateDefinition {
+export class GateDefinitionRegistry {
+  private readonly gates: DurableMap<GateDefinition>;
+  private readonly orchestrationId: string;
+
+  constructor(options: GateDefinitionRegistryOptions = {}) {
+    this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.gates = new DurableMap<GateDefinition>(
+      "gate_definition",
+      options.documentStore,
+      (def) => ({
+        tenantId: "platform",
+        orchestrationId: this.orchestrationId,
+        status: def.lifecycleState,
+      }),
+    );
+  }
+
+  async hydrate(): Promise<void> {
+    await this.gates.hydrate();
+  }
+
+  async register(input: GateDefinitionInput): Promise<GateDefinition> {
     const gateId = input.gateId.trim();
     const version = input.version.trim();
     const key = `${gateId}@${version}`;
@@ -181,7 +206,7 @@ export class GateDefinitionRegistry {
       metadata: Object.freeze({ ...(input.metadata ?? {}) }),
       createdAt: new Date().toISOString(),
     });
-    this.gates.set(key, def);
+    await this.gates.set(key, def);
     return def;
   }
 
@@ -212,7 +237,8 @@ export class GateDefinitionRegistry {
 
   listVersions(gateId: string): readonly GateDefinition[] {
     const id = gateId.trim();
-    return [...this.gates.values()]
+    return this.gates
+      .values()
       .filter((g) => g.gateId === id)
       .sort((a, b) => a.createdAt.localeCompare(b.createdAt));
   }

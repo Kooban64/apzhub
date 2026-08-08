@@ -1,17 +1,28 @@
 import type { AutomationExecutionRecord } from "../contracts/execution";
 
-export class InMemoryExecutionStore {
+/**
+ * Execution Source of Record port (QX-PR-01).
+ * Production implementations must survive process restart.
+ */
+export interface ExecutionStore {
+  save(record: AutomationExecutionRecord): Promise<void>;
+  get(executionId: string): Promise<AutomationExecutionRecord | undefined>;
+  list(tenantId?: string): Promise<readonly AutomationExecutionRecord[]>;
+}
+
+/** Process-local store — allowed in development/tests only. */
+export class InMemoryExecutionStore implements ExecutionStore {
   private readonly records = new Map<string, AutomationExecutionRecord>();
 
-  save(record: AutomationExecutionRecord): void {
+  async save(record: AutomationExecutionRecord): Promise<void> {
     this.records.set(record.executionId, record);
   }
 
-  get(executionId: string): AutomationExecutionRecord | undefined {
+  async get(executionId: string): Promise<AutomationExecutionRecord | undefined> {
     return this.records.get(executionId);
   }
 
-  list(tenantId?: string): readonly AutomationExecutionRecord[] {
+  async list(tenantId?: string): Promise<readonly AutomationExecutionRecord[]> {
     const all = [...this.records.values()].sort((a, b) =>
       b.createdAt.localeCompare(a.createdAt),
     );

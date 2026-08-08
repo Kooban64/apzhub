@@ -24,6 +24,8 @@ import type {
 } from "../contracts/events";
 import { EventTypeRegistry } from "./registry";
 import { assertValidPublish } from "./validation";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 export interface QualityEventBackboneOptions {
   readonly registry?: EventTypeRegistry;
@@ -31,6 +33,7 @@ export interface QualityEventBackboneOptions {
   /** Optional side-channel for legacy OrchestrationKernelEvent listeners. */
   readonly legacyPublishEvent?: OrchestrationEventPublisher;
   readonly orchestrationId?: string;
+  readonly documentStore?: OrchestrationDocumentStore;
 }
 
 interface ActiveSubscription extends EventSubscription {
@@ -81,7 +84,7 @@ export class QualityEventBackbone {
 
   private readonly legacyPublishEvent?: OrchestrationEventPublisher;
   private readonly orchestrationId: string;
-  private readonly events = new Map<string, QualityEventEnvelope>();
+  private readonly events: DurableMap<QualityEventEnvelope>;
   private readonly history: EventHistoryRecord[] = [];
   private readonly subscriptions = new Map<string, ActiveSubscription>();
   private readonly correlationSequences = new Map<string, number>();
@@ -100,12 +103,28 @@ export class QualityEventBackbone {
   };
 
   constructor(options: QualityEventBackboneOptions = {}) {
+    this.orchestrationId = options.orchestrationId ?? "orch_default";
     this.registry = options.registry ?? new EventTypeRegistry();
     this.legacyPublishEvent = options.legacyPublishEvent;
-    this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.events = new DurableMap<QualityEventEnvelope>(
+      "quality_event",
+      options.documentStore,
+      (evt) => ({
+        tenantId: evt.tenantId,
+        projectId: evt.projectId,
+        orchestrationId: this.orchestrationId,
+        correlationId: evt.correlationId,
+        status: evt.eventType,
+        actorId: evt.metadata.actorId,
+      }),
+    );
     if (options.seedBuiltIns !== false) {
       this.registry.registerBuiltIns();
     }
+  }
+
+  async hydrate(): Promise<void> {
+    await this.events.hydrate();
   }
 
   registerEventType(input: EventTypeDefinitionInput) {
@@ -116,7 +135,7 @@ export class QualityEventBackbone {
    * Publish an immutable quality event fact.
    * Invalid / command-style / unregistered events are rejected.
    */
-  publish(input: PublishEventInput): QualityEventEnvelope {
+  async publish(input: PublishEventInput): Promise<QualityEventEnvelope> {
     try {
       const validated = assertValidPublish(input, this.registry);
       const def = this.registry.get(validated.eventType, validated.eventVersion);
@@ -162,7 +181,7 @@ export class QualityEventBackbone {
         advisory: true as const,
       });
 
-      this.events.set(envelope.eventId, envelope);
+      await this.events.set(envelope.eventId, envelope);
       this.history.push(
         Object.freeze({
           eventId: envelope.eventId,
@@ -217,40 +236,35 @@ export class QualityEventBackbone {
         ? event.payload.subjectRef
         : event.orchestrationId;
 
-    let envelope: QualityEventEnvelope | undefined;
-    try {
-      envelope = this.publish({
-        eventType: event.type,
-        correlationId: event.correlationId,
-        causationId:
-          typeof event.payload?.causationId === "string"
-            ? event.payload.causationId
-            : undefined,
-        tenantId,
-        projectId:
-          typeof event.payload?.projectId === "string"
-            ? event.payload.projectId
-            : undefined,
-        producer,
-        subjectRef,
-        payload: {
-          ...(event.payload ?? {}),
-          orchestrationId: event.orchestrationId,
-          occurredAt: event.occurredAt,
-          legacy: true,
-        },
-        metadata: { bridge: "orchestration.kernel.event" },
-      });
-    } catch {
-      // Unregistered legacy types should not break engines during transition —
-      // still forward legacy side-channel. Built-ins cover QO-001…009.
+    void this.publish({
+      eventType: event.type,
+      correlationId: event.correlationId,
+      causationId:
+        typeof event.payload?.causationId === "string"
+          ? event.payload.causationId
+          : undefined,
+      tenantId,
+      projectId:
+        typeof event.payload?.projectId === "string"
+          ? event.payload.projectId
+          : undefined,
+      producer,
+      subjectRef,
+      payload: {
+        ...(event.payload ?? {}),
+        orchestrationId: event.orchestrationId,
+        occurredAt: event.occurredAt,
+        legacy: true,
+      },
+      metadata: { bridge: "orchestration.kernel.event" },
+    }).catch(() => {
       this.rejectedCount += 1;
       this.validationStatistics.rejected += 1;
       this.validationStatistics.unregisteredRejected += 1;
-    }
+    });
 
     void this.legacyPublishEvent?.(event);
-    return envelope;
+    return undefined;
   }
 
   /** Adapter used as OrchestrationEventPublisher for engines. */

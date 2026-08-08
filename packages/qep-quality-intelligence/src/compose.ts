@@ -1,5 +1,6 @@
 import {
   createPlatformQualityIntelligence,
+  type IntelligenceStore,
   type PlatformQualityIntelligence,
   type QiDomainEvent,
   type RecordObservationRequest,
@@ -9,6 +10,8 @@ export interface QepQualityIntelligencePorts {
   readonly onEvent?: (event: QiDomainEvent) => void | Promise<void>;
   /** Hook for Automation / SCM / Evidence / QKI / Notifications — no duplication. */
   readonly onQiEvent?: (event: QiDomainEvent) => void | Promise<void>;
+  /** Inject durable IntelligenceStore (QX-PR-03). Defaults to in-memory. */
+  readonly store?: IntelligenceStore;
 }
 
 export interface QepQualityIntelligenceFacade {
@@ -87,6 +90,7 @@ export function createQepQualityIntelligence(
       await ports.onEvent?.(event);
       await ports.onQiEvent?.(event);
     },
+    store: ports.store,
   });
 
   return {

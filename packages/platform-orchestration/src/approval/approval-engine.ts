@@ -28,12 +28,15 @@ import type {
 } from "../contracts/approval";
 import { ApprovalTemplateRegistry, AuthorityRegistry } from "./registries";
 import { evaluateSod, mandatoryAuthoritiesSatisfied, twoPersonSatisfied } from "./sod";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 export interface ApprovalEngineOptions {
   readonly authorities?: AuthorityRegistry;
   readonly templates?: ApprovalTemplateRegistry;
   readonly publishEvent?: OrchestrationEventPublisher;
   readonly orchestrationId?: string;
+  readonly documentStore?: OrchestrationDocumentStore;
 }
 
 function createId(prefix: string): string {
@@ -50,24 +53,45 @@ export class ApprovalEngine {
 
   private readonly publishEvent: OrchestrationEventPublisher;
   private readonly orchestrationId: string;
-  private readonly bundles = new Map<string, ApprovalBundle>();
+  private readonly bundles: DurableMap<ApprovalBundle>;
   private readonly requests = new Map<string, ApprovalRequest>();
   private readonly explainability = new Map<string, ApprovalExplainability>();
   private delegationCount = 0;
   private readonly authorityDecisionCounts: Record<string, number> = {};
 
   constructor(options: ApprovalEngineOptions = {}) {
-    this.authorities = options.authorities ?? new AuthorityRegistry();
-    this.templates = options.templates ?? new ApprovalTemplateRegistry();
-    this.publishEvent = options.publishEvent ?? (() => undefined);
     this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.authorities = options.authorities ?? new AuthorityRegistry();
+    this.templates =
+      options.templates ??
+      new ApprovalTemplateRegistry({
+        documentStore: options.documentStore,
+        orchestrationId: this.orchestrationId,
+      });
+    this.publishEvent = options.publishEvent ?? (() => undefined);
+    this.bundles = new DurableMap<ApprovalBundle>(
+      "approval_bundle",
+      options.documentStore,
+      (bundle) => ({
+        tenantId: bundle.tenantId,
+        projectId: bundle.projectId,
+        orchestrationId: this.orchestrationId,
+        status: bundle.finalStatus,
+        actorId: bundle.changeOwnerActorId,
+      }),
+    );
+  }
+
+  async hydrate(): Promise<void> {
+    await this.templates.hydrate();
+    await this.bundles.hydrate();
   }
 
   registerAuthority(input: AuthorityInput) {
     return this.authorities.register(input);
   }
 
-  registerTemplate(input: ApprovalTemplateInput) {
+  async registerTemplate(input: ApprovalTemplateInput) {
     for (const authorityId of input.requiredAuthorities) {
       this.authorities.get(authorityId);
     }
@@ -80,14 +104,16 @@ export class ApprovalEngine {
       this.authorities.get(esc.fromAuthorityId);
       this.authorities.get(esc.toAuthorityId);
     }
-    return this.templates.register(input);
+    return await this.templates.register(input);
   }
 
   /**
    * Create an Approval Bundle from a template + opaque subject refs.
    * Consumes governanceDecisionRef only — never re-evaluates governance.
    */
-  createApprovalBundle(input: CreateApprovalBundleInput): ApprovalBundle {
+  async createApprovalBundle(
+    input: CreateApprovalBundleInput,
+  ): Promise<ApprovalBundle> {
     const tenantId = input.tenantId.trim();
     const governanceDecisionRef = input.subject.governanceDecisionRef.trim();
     if (!tenantId || !governanceDecisionRef) {
@@ -160,7 +186,7 @@ export class ApprovalEngine {
       metadata: Object.freeze({ ...(input.metadata ?? {}) }),
     });
 
-    this.bundles.set(bundleId, bundle);
+    await this.bundles.set(bundleId, bundle);
     this.requests.set(requestId, request);
     this.refreshExplainability(bundleId);
 
@@ -247,7 +273,10 @@ export class ApprovalEngine {
   /**
    * Submit an authority decision. Records only — no policy/gate evaluation.
    */
-  submitDecision(bundleId: string, input: SubmitDecisionInput): ApprovalBundle {
+  async submitDecision(
+    bundleId: string,
+    input: SubmitDecisionInput,
+  ): Promise<ApprovalBundle> {
     const bundle = this.getBundle(bundleId);
     if (
       bundle.finalStatus === "approved" ||
@@ -426,7 +455,7 @@ export class ApprovalEngine {
           : updated.auditHistory,
     };
 
-    this.bundles.set(bundleId, closed);
+    await this.bundles.set(bundleId, closed);
     this.authorityDecisionCounts[authorityId] =
       (this.authorityDecisionCounts[authorityId] ?? 0) + 1;
     this.refreshExplainability(bundleId);

@@ -4,8 +4,8 @@
 | --------- | ------------------------------------------------------------------ |
 | Programme | APZQEP-ADOPT-001                                                   |
 | Phase     | **1**                                                              |
-| Status    | **IN PROGRESS**                                                    |
-| Timestamp | 20260804T191500Z                                                   |
+| Status    | **TRACK A CLOSED** (QX-PR-08) · Track B continues separately       |
+| Timestamp | 20260807T213800Z                                                   |
 | Authority | [OWNER-AUTHORISATION-PHASE-1.md](./OWNER-AUTHORISATION-PHASE-1.md) |
 
 ## Strategy change
@@ -20,16 +20,16 @@ sole Phase 1 objective. Daily use is.
 
 ## Track A — APZQEP daily use checklist
 
-| Capability           | Status  | Friction notes |
-| -------------------- | ------- | -------------- |
-| Complete workspace   | Pending |                |
-| Quality Flows        | Pending |                |
-| Decision Packages    | Pending |                |
-| Evidence             | Pending |                |
-| Approvals            | Pending |                |
-| Executive Experience | Pending |                |
-| Operational Platform | Pending |                |
-| Workspace Experience | Pending |                |
+| Capability           | Status | Friction notes                   |
+| -------------------- | ------ | -------------------------------- |
+| Complete workspace   | Done   | None blocking — 20260807T213800Z |
+| Quality Flows        | Done   | None blocking — 20260807T213800Z |
+| Decision Packages    | Done   | None blocking — 20260807T213800Z |
+| Evidence             | Done   | None blocking — 20260807T213800Z |
+| Approvals            | Done   | None blocking — 20260807T213800Z |
+| Executive Experience | Done   | None blocking — 20260807T213800Z |
+| Operational Platform | Done   | None blocking — 20260807T213800Z |
+| Workspace Experience | Done   | None blocking — 20260807T213800Z |
 
 Record friction in [FRICTION-LOG.md](./FRICTION-LOG.md) and learnings in
 [OPERATIONAL-LEARNING-REGISTER.md](./OPERATIONAL-LEARNING-REGISTER.md).

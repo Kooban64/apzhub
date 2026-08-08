@@ -1,9 +1,9 @@
 {
   "name": "@apzhub/qep-suites",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "APZQEP Enterprise Test Suite Management \u2014 Capability A (APZQEP-140-A).",
+  "description": "APZQEP Enterprise Test Suite Management — Capability A (APZQEP-140-A).",
   "exports": {
     ".": "./src/index.ts",
     "./domain": "./src/domain/index.ts",

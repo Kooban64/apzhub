@@ -23,6 +23,12 @@ module:
   category: quality-engineering
   status: active
 
+permissions:
+  - id: qep.automation.read
+    label: View Enterprise Automation
+  - id: qep.automation.operate
+    label: Operate Enterprise Automation
+
 workbench:
   navigation:
     level: sidebar

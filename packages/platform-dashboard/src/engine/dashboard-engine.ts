@@ -12,7 +12,7 @@ import {
 import type { WidgetDescriptor } from "../contracts/widget";
 import type { DashboardRegistry } from "../registry/dashboard-registry";
 import type { WidgetRegistry } from "../registry/widget-registry";
-import { InMemoryLayoutStore } from "../store/layout-store";
+import { InMemoryLayoutStore, type LayoutStore } from "../store/layout-store";
 import {
   filterWidgetsByPermissions,
   orderWidgets,
@@ -23,7 +23,7 @@ import {
 export interface DashboardEngineOptions {
   readonly dashboards: DashboardRegistry;
   readonly widgets: WidgetRegistry;
-  readonly store?: InMemoryLayoutStore;
+  readonly store?: LayoutStore;
   readonly publishEvent?: DashboardEventPublisher;
 }
 
@@ -39,7 +39,7 @@ export interface ResolvedDashboard {
 export class DashboardEngine {
   private readonly dashboards: DashboardRegistry;
   private readonly widgets: WidgetRegistry;
-  private readonly store: InMemoryLayoutStore;
+  private readonly store: LayoutStore;
   private readonly publishEvent: DashboardEventPublisher;
 
   constructor(options: DashboardEngineOptions) {
@@ -119,7 +119,7 @@ export class DashboardEngine {
       timeRange: input.timeRange,
       updatedAt: now,
     };
-    this.store.saveLayout(layout);
+    await this.store.saveLayout(layout);
     await this.publishEvent({
       type: DASHBOARD_EVENT_TYPES.layoutSaved,
       occurredAt: now,
@@ -131,7 +131,7 @@ export class DashboardEngine {
     return layout;
   }
 
-  listLayouts(tenantId: string, userId?: string) {
+  async listLayouts(tenantId: string, userId?: string) {
     return this.store.listLayouts(tenantId, userId);
   }
 
@@ -159,7 +159,7 @@ export class DashboardEngine {
       createdAt: now,
       updatedAt: now,
     };
-    this.store.saveView(view);
+    await this.store.saveView(view);
     if (view.pinned) {
       await this.publishEvent({
         type: DASHBOARD_EVENT_TYPES.viewPinned,
@@ -183,15 +183,15 @@ export class DashboardEngine {
     return view;
   }
 
-  listViews(tenantId: string, userId?: string) {
+  async listViews(tenantId: string, userId?: string) {
     return this.store.listViews(tenantId, userId);
   }
 
-  listPinned(tenantId: string, userId: string) {
+  async listPinned(tenantId: string, userId: string) {
     return this.store.listPinned(tenantId, userId);
   }
 
-  listFavourites(tenantId: string, userId: string) {
+  async listFavourites(tenantId: string, userId: string) {
     return this.store.listFavourites(tenantId, userId);
   }
 
@@ -201,7 +201,7 @@ export class DashboardEngine {
     readonly favourite?: boolean;
     readonly correlationId: string;
   }): Promise<SavedDashboardView> {
-    const current = this.store.getView(input.viewId);
+    const current = await this.store.getView(input.viewId);
     if (!current) {
       throw new Error(`View not found: ${input.viewId}`);
     }
@@ -212,7 +212,7 @@ export class DashboardEngine {
       favourite: input.favourite ?? current.favourite,
       updatedAt: now,
     };
-    this.store.saveView(updated);
+    await this.store.saveView(updated);
     return updated;
   }
 }

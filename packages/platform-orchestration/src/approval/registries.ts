@@ -11,6 +11,8 @@ import type {
   AuthorityRecord,
   SodRule,
 } from "../contracts/approval";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 function deepFreeze<T>(value: T): T {
   if (value && typeof value === "object") {
@@ -124,10 +126,33 @@ export class AuthorityRegistry {
   }
 }
 
-export class ApprovalTemplateRegistry {
-  private readonly templates = new Map<string, ApprovalTemplate>();
+export interface ApprovalTemplateRegistryOptions {
+  readonly documentStore?: OrchestrationDocumentStore;
+  readonly orchestrationId?: string;
+}
 
-  register(input: ApprovalTemplateInput): ApprovalTemplate {
+export class ApprovalTemplateRegistry {
+  private readonly templates: DurableMap<ApprovalTemplate>;
+  private readonly orchestrationId: string;
+
+  constructor(options: ApprovalTemplateRegistryOptions = {}) {
+    this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.templates = new DurableMap<ApprovalTemplate>(
+      "approval_template",
+      options.documentStore,
+      (template) => ({
+        tenantId: "platform",
+        orchestrationId: this.orchestrationId,
+        status: template.lifecycleState,
+      }),
+    );
+  }
+
+  async hydrate(): Promise<void> {
+    await this.templates.hydrate();
+  }
+
+  async register(input: ApprovalTemplateInput): Promise<ApprovalTemplate> {
     const templateId = input.templateId.trim();
     const version = input.version.trim();
     const key = `${templateId}@${version}`;
@@ -181,7 +206,7 @@ export class ApprovalTemplateRegistry {
       metadata: Object.freeze({ ...(input.metadata ?? {}) }),
       createdAt: new Date().toISOString(),
     });
-    this.templates.set(key, template);
+    await this.templates.set(key, template);
     return template;
   }
 
@@ -212,7 +237,8 @@ export class ApprovalTemplateRegistry {
 
   listVersions(templateId: string): readonly ApprovalTemplate[] {
     const id = templateId.trim();
-    return [...this.templates.values()]
+    return this.templates
+      .values()
       .filter((t) => t.templateId === id)
       .sort((a, b) => a.createdAt.localeCompare(b.createdAt));
   }

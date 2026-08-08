@@ -2,7 +2,7 @@ export { PLATFORM_AUTOMATION_VERSION, PLATFORM_AUTOMATION_PROGRAMME } from "./ve
 export * from "./contracts/index";
 export { ProviderRegistry } from "./registry/provider-registry";
 export { AutomationEngine } from "./engine/automation-engine";
-export { InMemoryExecutionStore } from "./engine/execution-store";
+export { InMemoryExecutionStore, type ExecutionStore } from "./engine/execution-store";
 export { canTransition, assertTransition } from "./lifecycle/transitions";
 export { createPlaceholderProviders, PLACEHOLDER_IDS } from "./providers/placeholders";
 export {

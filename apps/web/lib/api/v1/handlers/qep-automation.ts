@@ -11,6 +11,7 @@ import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
 import { PlatformApiHttpError } from "../errors";
 import { jsonDataResponse } from "../response";
 import { getQepAutomationRuntime } from "@/lib/qep/automation-runtime";
+import { requireQepPermission, sessionTenantId } from "./require-qep-permission";
 
 type RouteContext = { params: Promise<Record<string, string>> };
 
@@ -18,19 +19,20 @@ export async function handleListAutomationProviders(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireQepPermission(context, "qep.automation.read");
   const runtime = getQepAutomationRuntime();
   return jsonDataResponse({ providers: runtime.listProviders() }, context.tracing);
 }
 
 export async function handleListAutomationExecutions(
-  request: NextRequest,
+  _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const tenantId =
-    request.nextUrl.searchParams.get("tenantId") ?? context.serviceContext.tenantId;
+  requireQepPermission(context, "qep.automation.read");
+  const tenantId = sessionTenantId(context);
   const runtime = getQepAutomationRuntime();
   return jsonDataResponse(
-    { executions: runtime.listExecutions(tenantId) },
+    { executions: await runtime.listExecutions(tenantId) },
     context.tracing,
   );
 }
@@ -39,19 +41,14 @@ export async function handleCreateAutomationExecution(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireQepPermission(context, "qep.automation.operate");
   const body = (await request.json()) as Partial<AutomationExecutionRequest> & {
     runImmediately?: boolean;
   };
 
-  const tenantId = body.tenantId ?? context.serviceContext.tenantId;
-  const requestedBy = body.requestedBy ?? context.serviceContext.userId;
-  if (
-    !tenantId ||
-    !body.providerId ||
-    !body.correlationId ||
-    !requestedBy ||
-    !body.target
-  ) {
+  const tenantId = sessionTenantId(context);
+  const requestedBy = context.serviceContext.userId;
+  if (!body.providerId || !body.correlationId || !requestedBy || !body.target) {
     throw new PlatformApiHttpError(400, {
       code: "VALIDATION_FAILED",
       message: "Missing required automation execution fields",
@@ -88,6 +85,7 @@ export async function handleGetAutomationExecution(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireQepPermission(context, "qep.automation.read");
   const params = await routeContext?.params;
   const executionId = params?.executionId;
   if (!executionId) {
@@ -96,8 +94,9 @@ export async function handleGetAutomationExecution(
       message: "Missing executionId",
     });
   }
-  const execution = getQepAutomationRuntime().getExecution(executionId);
-  if (!execution) {
+  const tenantId = sessionTenantId(context);
+  const execution = await getQepAutomationRuntime().getExecution(executionId);
+  if (!execution || execution.tenantId !== tenantId) {
     throw new PlatformApiHttpError(404, {
       code: "NOT_FOUND",
       message: "Execution not found",
@@ -111,6 +110,7 @@ export async function handleAutomationExecutionAction(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireQepPermission(context, "qep.automation.operate");
   const params = await routeContext?.params;
   const executionId = params?.executionId;
   if (!executionId) {
@@ -121,6 +121,14 @@ export async function handleAutomationExecutionAction(
   }
   const body = (await request.json()) as { action?: string };
   const runtime = getQepAutomationRuntime();
+  const tenantId = sessionTenantId(context);
+  const existing = await runtime.getExecution(executionId);
+  if (!existing || existing.tenantId !== tenantId) {
+    throw new PlatformApiHttpError(404, {
+      code: "NOT_FOUND",
+      message: "Execution not found",
+    });
+  }
   try {
     if (body.action === "run") {
       return jsonDataResponse(

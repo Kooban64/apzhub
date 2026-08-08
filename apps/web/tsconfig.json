@@ -104,6 +104,9 @@
       "@apzhub/qep-traceability/presentation": [
         "../../packages/qep-traceability/src/presentation/index.ts"
       ],
+      "@apzhub/platform-orchestration": [
+        "../../packages/platform-orchestration/src/index.ts"
+      ],
       "@apzhub/platform-scm": ["../../packages/platform-scm/src/index.ts"],
       "@apzhub/qep-scm": ["../../packages/qep-scm/src/index.ts"],
       "@apzhub/qep-scm/presentation": [

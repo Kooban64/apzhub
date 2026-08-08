@@ -18,10 +18,13 @@ import { OrchestrationError } from "../contracts/errors";
 import { SOURCE_CHANGE_EVENT_TYPES } from "../contracts/events";
 import type { QualityEventBackbone } from "../events/event-backbone";
 import { derivePrimaryRefs, normalizeSourceIdentities } from "./identity-normalizer";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 export interface SourceChangeCoordinatorOptions {
   readonly events: QualityEventBackbone;
   readonly orchestrationId?: string;
+  readonly documentStore?: OrchestrationDocumentStore;
 }
 
 function createId(prefix: string): string {
@@ -33,7 +36,7 @@ function createId(prefix: string): string {
 export class SourceChangeCoordinator {
   private readonly events: QualityEventBackbone;
   private readonly orchestrationId: string;
-  private readonly packages = new Map<string, SourceChangePackage>();
+  private readonly packages: DurableMap<SourceChangePackage>;
   private readonly changeTypeDistribution: Record<string, number> = {};
   private identityCount = 0;
   private associationCount = 0;
@@ -43,15 +46,31 @@ export class SourceChangeCoordinator {
   constructor(options: SourceChangeCoordinatorOptions) {
     this.events = options.events;
     this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.packages = new DurableMap<SourceChangePackage>(
+      "source_change_package",
+      options.documentStore,
+      (pkg) => ({
+        tenantId: pkg.tenantId,
+        projectId: pkg.projectId,
+        orchestrationId: this.orchestrationId,
+        correlationId: pkg.qualityFlowRef,
+        status: pkg.association.qualityFlowRef,
+        actorId: pkg.actorId,
+      }),
+    );
+  }
+
+  async hydrate(): Promise<void> {
+    await this.packages.hydrate();
   }
 
   /**
    * Create an immutable Source Change Package from normalized identities.
    * Publishes past-tense facts via the Event Backbone only.
    */
-  createSourceChangePackage(
+  async createSourceChangePackage(
     input: CreateSourceChangePackageInput,
-  ): SourceChangePackage {
+  ): Promise<SourceChangePackage> {
     const qualityFlowRef = input.qualityFlowRef.trim();
     const tenantId = input.tenantId.trim();
     if (!qualityFlowRef || !tenantId) {
@@ -166,7 +185,7 @@ export class SourceChangeCoordinator {
       scmOperations: false as const,
     });
 
-    this.packages.set(sourceChangePackageId, pkg);
+    await this.packages.set(sourceChangePackageId, pkg);
 
     const correlationId = decisionPackageRef ?? qualityFlowRef;
 

@@ -1,20 +1,41 @@
 import type { DashboardLayout, SavedDashboardView } from "../contracts/dashboard";
 
-/** Process-local layout / saved-view store — not production-durable. */
-export class InMemoryLayoutStore {
+/**
+ * Layout / saved-view Source of Record port (QX-PR-04).
+ * Production implementations must survive process restart.
+ */
+export interface LayoutStore {
+  saveLayout(layout: DashboardLayout): Promise<DashboardLayout>;
+  getLayout(layoutId: string): Promise<DashboardLayout | undefined>;
+  listLayouts(tenantId: string, userId?: string): Promise<readonly DashboardLayout[]>;
+  saveView(view: SavedDashboardView): Promise<SavedDashboardView>;
+  getView(viewId: string): Promise<SavedDashboardView | undefined>;
+  listViews(tenantId: string, userId?: string): Promise<readonly SavedDashboardView[]>;
+  listPinned(tenantId: string, userId: string): Promise<readonly SavedDashboardView[]>;
+  listFavourites(
+    tenantId: string,
+    userId: string,
+  ): Promise<readonly SavedDashboardView[]>;
+}
+
+/** Process-local store — allowed in development/tests only. */
+export class InMemoryLayoutStore implements LayoutStore {
   private readonly layouts = new Map<string, DashboardLayout>();
   private readonly views = new Map<string, SavedDashboardView>();
 
-  saveLayout(layout: DashboardLayout): DashboardLayout {
+  async saveLayout(layout: DashboardLayout): Promise<DashboardLayout> {
     this.layouts.set(layout.layoutId, layout);
     return layout;
   }
 
-  getLayout(layoutId: string): DashboardLayout | undefined {
+  async getLayout(layoutId: string): Promise<DashboardLayout | undefined> {
     return this.layouts.get(layoutId);
   }
 
-  listLayouts(tenantId: string, userId?: string): readonly DashboardLayout[] {
+  async listLayouts(
+    tenantId: string,
+    userId?: string,
+  ): Promise<readonly DashboardLayout[]> {
     return [...this.layouts.values()].filter(
       (layout) =>
         layout.tenantId === tenantId &&
@@ -22,27 +43,38 @@ export class InMemoryLayoutStore {
     );
   }
 
-  saveView(view: SavedDashboardView): SavedDashboardView {
+  async saveView(view: SavedDashboardView): Promise<SavedDashboardView> {
     this.views.set(view.viewId, view);
     return view;
   }
 
-  getView(viewId: string): SavedDashboardView | undefined {
+  async getView(viewId: string): Promise<SavedDashboardView | undefined> {
     return this.views.get(viewId);
   }
 
-  listViews(tenantId: string, userId?: string): readonly SavedDashboardView[] {
+  async listViews(
+    tenantId: string,
+    userId?: string,
+  ): Promise<readonly SavedDashboardView[]> {
     return [...this.views.values()].filter(
       (view) =>
         view.tenantId === tenantId && (userId === undefined || view.userId === userId),
     );
   }
 
-  listPinned(tenantId: string, userId: string): readonly SavedDashboardView[] {
-    return this.listViews(tenantId, userId).filter((view) => view.pinned);
+  async listPinned(
+    tenantId: string,
+    userId: string,
+  ): Promise<readonly SavedDashboardView[]> {
+    const views = await this.listViews(tenantId, userId);
+    return views.filter((view) => view.pinned);
   }
 
-  listFavourites(tenantId: string, userId: string): readonly SavedDashboardView[] {
-    return this.listViews(tenantId, userId).filter((view) => view.favourite);
+  async listFavourites(
+    tenantId: string,
+    userId: string,
+  ): Promise<readonly SavedDashboardView[]> {
+    const views = await this.listViews(tenantId, userId);
+    return views.filter((view) => view.favourite);
   }
 }

@@ -29,10 +29,13 @@ import {
   buildWorkspacePreferences,
   isWorkspaceLayoutKind,
 } from "./workspace-composition";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 export interface WorkspaceExperienceEngineOptions {
   readonly events: QualityEventBackbone;
   readonly orchestrationId?: string;
+  readonly documentStore?: OrchestrationDocumentStore;
 }
 
 function createId(prefix: string): string {
@@ -48,7 +51,7 @@ function bump(map: Record<string, number>, key: string): void {
 export class WorkspaceExperienceEngine {
   private readonly events: QualityEventBackbone;
   private readonly orchestrationId: string;
-  private readonly packages = new Map<string, WorkspaceExperiencePackage>();
+  private readonly packages: DurableMap<WorkspaceExperiencePackage>;
   private readonly workspaceStatistics: Record<string, number> = {};
   private readonly navigationStatistics: Record<string, number> = {};
   private readonly layoutStatistics: Record<string, number> = {};
@@ -59,15 +62,32 @@ export class WorkspaceExperienceEngine {
   constructor(options: WorkspaceExperienceEngineOptions) {
     this.events = options.events;
     this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.packages = new DurableMap<WorkspaceExperiencePackage>(
+      "workspace_experience_package",
+      options.documentStore,
+      (pkg) => ({
+        tenantId: pkg.tenantId,
+        projectId: pkg.projectId,
+        orchestrationId: this.orchestrationId,
+        correlationId:
+          pkg.executiveExperiencePackageRef ?? pkg.workspaceExperiencePackageId,
+        status: pkg.experienceStatus,
+        actorId: pkg.actorId,
+      }),
+    );
+  }
+
+  async hydrate(): Promise<void> {
+    await this.packages.hydrate();
   }
 
   /**
    * Create an immutable Workspace Experience Package.
    * Assembles references only — never business logic or business state.
    */
-  createWorkspaceExperiencePackage(
+  async createWorkspaceExperiencePackage(
     input: CreateWorkspaceExperiencePackageInput,
-  ): WorkspaceExperiencePackage {
+  ): Promise<WorkspaceExperiencePackage> {
     const tenantId = input.tenantId.trim();
     if (!tenantId) {
       throw new OrchestrationError(
@@ -269,7 +289,7 @@ export class WorkspaceExperienceEngine {
       influencesDecisions: false as const,
     });
 
-    this.packages.set(workspaceExperiencePackageId, pkg);
+    await this.packages.set(workspaceExperiencePackageId, pkg);
     this.latestPackageId = workspaceExperiencePackageId;
     bump(this.workspaceStatistics, experienceStatus);
     bump(this.layoutStatistics, layoutKind);

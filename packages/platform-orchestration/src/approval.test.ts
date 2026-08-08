@@ -5,7 +5,7 @@ import {
   isOrchestrationError,
 } from "./index";
 
-function seedAuthorities(
+async function seedAuthorities(
   approvals: Awaited<ReturnType<typeof createPlatformOrchestration>>["approvals"],
 ) {
   const doc = "docs/products/apzqep/v1.1/apzqep-165-qo-008/";
@@ -25,7 +25,7 @@ function seedAuthorities(
     });
   }
 
-  approvals.registerTemplate({
+  await approvals.registerTemplate({
     templateId: "tpl_production",
     name: "Production Approval",
     version: "1.0.0",
@@ -40,7 +40,7 @@ function seedAuthorities(
     documentationRef: doc,
   });
 
-  approvals.registerTemplate({
+  await approvals.registerTemplate({
     templateId: "tpl_emergency",
     name: "Emergency Approval",
     version: "1.0.0",
@@ -53,7 +53,7 @@ function seedAuthorities(
     documentationRef: doc,
   });
 
-  approvals.registerTemplate({
+  await approvals.registerTemplate({
     templateId: "tpl_board",
     name: "Board + CAB",
     version: "1.0.0",
@@ -67,7 +67,7 @@ function seedAuthorities(
     documentationRef: doc,
   });
 
-  approvals.registerTemplate({
+  await approvals.registerTemplate({
     templateId: "tpl_delegate",
     name: "Delegatable RM",
     version: "1.0.0",
@@ -94,9 +94,9 @@ describe("APZQEP-165 QO-008 Approval Decision Platform", () => {
         events.push(e.type);
       },
     });
-    seedAuthorities(platform.approvals);
+    await seedAuthorities(platform.approvals);
 
-    const bundle = platform.approvals.createApprovalBundle({
+    const bundle = await platform.approvals.createApprovalBundle({
       templateId: "tpl_production",
       tenantId: "tenant_a",
       projectId: "proj_a",
@@ -119,8 +119,8 @@ describe("APZQEP-165 QO-008 Approval Decision Platform", () => {
 
   it("records authority decisions and reaches approved with SoD", async () => {
     const platform = await createPlatformOrchestration();
-    seedAuthorities(platform.approvals);
-    const bundle = platform.approvals.createApprovalBundle({
+    await seedAuthorities(platform.approvals);
+    const bundle = await platform.approvals.createApprovalBundle({
       templateId: "tpl_production",
       tenantId: "tenant_a",
       subject: {
@@ -129,7 +129,7 @@ describe("APZQEP-165 QO-008 Approval Decision Platform", () => {
       },
     });
 
-    const afterRm = platform.approvals.submitDecision(bundle.bundleId, {
+    const afterRm = await platform.approvals.submitDecision(bundle.bundleId, {
       authorityId: "release_manager",
       state: "approved",
       actorId: "user_jane",
@@ -137,7 +137,7 @@ describe("APZQEP-165 QO-008 Approval Decision Platform", () => {
     });
     expect(afterRm.finalStatus).toBe("pending");
 
-    const afterPo = platform.approvals.submitDecision(bundle.bundleId, {
+    const afterPo = await platform.approvals.submitDecision(bundle.bundleId, {
       authorityId: "product_owner",
       state: "approved",
       actorId: "user_john",
@@ -156,8 +156,8 @@ describe("APZQEP-165 QO-008 Approval Decision Platform", () => {
 
   it("enforces no_self_approval and independent_approval", async () => {
     const platform = await createPlatformOrchestration();
-    seedAuthorities(platform.approvals);
-    const bundle = platform.approvals.createApprovalBundle({
+    await seedAuthorities(platform.approvals);
+    const bundle = await platform.approvals.createApprovalBundle({
       templateId: "tpl_production",
       tenantId: "tenant_a",
       subject: {
@@ -167,7 +167,7 @@ describe("APZQEP-165 QO-008 Approval Decision Platform", () => {
     });
 
     try {
-      platform.approvals.submitDecision(bundle.bundleId, {
+      await platform.approvals.submitDecision(bundle.bundleId, {
         authorityId: "release_manager",
         state: "approved",
         actorId: "dev_alice",
@@ -177,13 +177,13 @@ describe("APZQEP-165 QO-008 Approval Decision Platform", () => {
       expect(isOrchestrationError(error)).toBe(true);
     }
 
-    platform.approvals.submitDecision(bundle.bundleId, {
+    await platform.approvals.submitDecision(bundle.bundleId, {
       authorityId: "release_manager",
       state: "approved",
       actorId: "user_jane",
     });
     try {
-      platform.approvals.submitDecision(bundle.bundleId, {
+      await platform.approvals.submitDecision(bundle.bundleId, {
         authorityId: "product_owner",
         state: "approved",
         actorId: "user_jane",
@@ -196,9 +196,9 @@ describe("APZQEP-165 QO-008 Approval Decision Platform", () => {
 
   it("supports emergency authority override and rejection", async () => {
     const platform = await createPlatformOrchestration();
-    seedAuthorities(platform.approvals);
+    await seedAuthorities(platform.approvals);
 
-    const emergency = platform.approvals.createApprovalBundle({
+    const emergency = await platform.approvals.createApprovalBundle({
       templateId: "tpl_emergency",
       tenantId: "tenant_a",
       subject: {
@@ -206,7 +206,7 @@ describe("APZQEP-165 QO-008 Approval Decision Platform", () => {
         emergency: true,
       },
     });
-    const done = platform.approvals.submitDecision(emergency.bundleId, {
+    const done = await platform.approvals.submitDecision(emergency.bundleId, {
       authorityId: "release_manager",
       state: "approved",
       actorId: "user_oncall",
@@ -215,12 +215,12 @@ describe("APZQEP-165 QO-008 Approval Decision Platform", () => {
     expect(done.finalStatus).toBe("approved");
     expect(done.exceptions).toContain("hotfix window");
 
-    const rejectBundle = platform.approvals.createApprovalBundle({
+    const rejectBundle = await platform.approvals.createApprovalBundle({
       templateId: "tpl_board",
       tenantId: "tenant_a",
       subject: { governanceDecisionRef: "gov_r" },
     });
-    const rejected = platform.approvals.submitDecision(rejectBundle.bundleId, {
+    const rejected = await platform.approvals.submitDecision(rejectBundle.bundleId, {
       authorityId: "cab",
       state: "rejected",
       actorId: "user_cab",
@@ -231,15 +231,15 @@ describe("APZQEP-165 QO-008 Approval Decision Platform", () => {
 
   it("supports delegation without workflow logic", async () => {
     const platform = await createPlatformOrchestration();
-    seedAuthorities(platform.approvals);
+    await seedAuthorities(platform.approvals);
     // product_owner needed as delegation target — already registered
-    const bundle = platform.approvals.createApprovalBundle({
+    const bundle = await platform.approvals.createApprovalBundle({
       templateId: "tpl_delegate",
       tenantId: "tenant_a",
       subject: { governanceDecisionRef: "gov_d" },
     });
 
-    const delegated = platform.approvals.submitDecision(bundle.bundleId, {
+    const delegated = await platform.approvals.submitDecision(bundle.bundleId, {
       authorityId: "release_manager",
       state: "delegated",
       actorId: "user_jane",
@@ -249,7 +249,7 @@ describe("APZQEP-165 QO-008 Approval Decision Platform", () => {
     expect(delegated.requiredAuthorities).toContain("product_owner");
     expect(delegated.finalStatus).toBe("pending");
 
-    const approved = platform.approvals.submitDecision(bundle.bundleId, {
+    const approved = await platform.approvals.submitDecision(bundle.bundleId, {
       authorityId: "product_owner",
       state: "approved",
       actorId: "user_john",
@@ -260,10 +260,10 @@ describe("APZQEP-165 QO-008 Approval Decision Platform", () => {
 
   it("integrates with governance decision refs and exposes APIs", async () => {
     const platform = await createPlatformOrchestration();
-    seedAuthorities(platform.approvals);
+    await seedAuthorities(platform.approvals);
 
     // Create a real governance decision only to obtain an opaque ref — approvals must not call evaluate*
-    platform.governance.registerGate({
+    await platform.governance.registerGate({
       gateId: "gate_info",
       name: "Info",
       version: "1",
@@ -271,18 +271,18 @@ describe("APZQEP-165 QO-008 Approval Decision Platform", () => {
       criteria: { type: "always_satisfied" },
       documentationRef: "docs://g",
     });
-    platform.governance.registerTemplate({
+    await platform.governance.registerTemplate({
       templateId: "custom",
       name: "Custom",
       documentationRef: "docs://t",
       composition: { mode: "all", gateIds: ["gate_info"] },
     });
-    const gov = platform.governance.evaluateTemplate("custom", {
+    const gov = await platform.governance.evaluateTemplate("custom", {
       tenantId: "tenant_a",
       qualityFlowId: "qf_ref_1",
     });
 
-    const bundle = platform.approvals.createApprovalBundle({
+    const bundle = await platform.approvals.createApprovalBundle({
       templateId: "tpl_production",
       tenantId: "tenant_a",
       additionalAuthorities: gov.requiredHumanApprovals,

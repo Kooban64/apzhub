@@ -8,27 +8,27 @@ import {
   type PolicyProfileId,
 } from "./index";
 
-function seedImpactKnowledge(
+async function seedImpactKnowledge(
   impact: Awaited<ReturnType<typeof createPlatformOrchestration>>["impact"],
 ) {
-  impact.registerAsset({
+  await impact.registerAsset({
     assetId: "file_core",
     assetType: "file",
     name: "core.ts",
     evidenceQuality: 0.7,
   });
-  impact.registerAsset({
+  await impact.registerAsset({
     assetId: "req_billing",
     assetType: "requirement",
     name: "Billing",
     evidenceQuality: 0.8,
   });
-  impact.registerAsset({
+  await impact.registerAsset({
     assetId: "suite_billing",
     assetType: "test_suite",
     name: "Billing suite",
   });
-  impact.registerRelationship({
+  await impact.registerRelationship({
     relationshipId: "rel_file_req",
     fromAssetId: "file_core",
     toAssetId: "req_billing",
@@ -36,7 +36,7 @@ function seedImpactKnowledge(
     strength: 0.9,
     reason: "File implements billing requirement",
   });
-  impact.registerRelationship({
+  await impact.registerRelationship({
     relationshipId: "rel_req_suite",
     fromAssetId: "req_billing",
     toAssetId: "suite_billing",
@@ -46,10 +46,10 @@ function seedImpactKnowledge(
   });
 }
 
-function correlate(
+async function correlate(
   impact: Awaited<ReturnType<typeof createPlatformOrchestration>>["impact"],
-): ImpactCorrelationResult {
-  return impact.createCorrelation({
+): Promise<ImpactCorrelationResult> {
+  return await impact.createCorrelation({
     change: {
       changeId: "chg_pol",
       changeKind: "pull_request",
@@ -66,7 +66,7 @@ function correlate(
   });
 }
 
-function seedPolicies(
+async function seedPolicies(
   engine: Awaited<ReturnType<typeof createPlatformOrchestration>>["policySelection"],
 ) {
   engine.registerRule({
@@ -149,7 +149,7 @@ function seedPolicies(
     explanation: "Only when impact confidence is extremely low",
   });
 
-  engine.registerPolicy({
+  await engine.registerPolicy({
     policyId: "pol_pr_governance",
     name: "PR Governance",
     version: "1.0.0",
@@ -188,7 +188,7 @@ function seedPolicies(
 describe("APZQEP-165 QO-006 Policy & Quality Selection Engine", () => {
   it("registers immutable policies, independent rules, and profiles", async () => {
     const platform = await createPlatformOrchestration();
-    seedPolicies(platform.policySelection);
+    await seedPolicies(platform.policySelection);
     expect(platform.policySelection.policies.count()).toBe(1);
     expect(platform.policySelection.rules.count()).toBe(6);
     expect(platform.policySelection.profiles.count()).toBe(2);
@@ -198,8 +198,8 @@ describe("APZQEP-165 QO-006 Policy & Quality Selection Engine", () => {
 
   it("evaluates declarative conditions and covers all condition types", async () => {
     const platform = await createPlatformOrchestration();
-    seedImpactKnowledge(platform.impact);
-    const impact = correlate(platform.impact);
+    await seedImpactKnowledge(platform.impact);
+    const impact = await correlate(platform.impact);
     const ctx = { impact, profileId: "pull_request" as PolicyProfileId };
 
     expect(evaluateCondition({ type: "always" }, ctx).matched).toBe(true);
@@ -249,11 +249,11 @@ describe("APZQEP-165 QO-006 Policy & Quality Selection Engine", () => {
         events.push(e.type);
       },
     });
-    seedImpactKnowledge(platform.impact);
-    seedPolicies(platform.policySelection);
-    const impact = correlate(platform.impact);
+    await seedImpactKnowledge(platform.impact);
+    await seedPolicies(platform.policySelection);
+    const impact = await correlate(platform.impact);
 
-    const decision = platform.policySelection.evaluatePolicyProfile({
+    const decision = await platform.policySelection.evaluatePolicyProfile({
       profileId: "pull_request",
       impact,
       qualityFlowId: "qf_pol",
@@ -291,9 +291,9 @@ describe("APZQEP-165 QO-006 Policy & Quality Selection Engine", () => {
 
   it("covers policy evaluation APIs and append-only history", async () => {
     const platform = await createPlatformOrchestration();
-    seedImpactKnowledge(platform.impact);
-    seedPolicies(platform.policySelection);
-    const impact = correlate(platform.impact);
+    await seedImpactKnowledge(platform.impact);
+    await seedPolicies(platform.policySelection);
+    const impact = await correlate(platform.impact);
 
     const policyEval = platform.policySelection.evaluatePolicy(
       "pol_pr_governance",
@@ -309,12 +309,12 @@ describe("APZQEP-165 QO-006 Policy & Quality Selection Engine", () => {
     const target = platform.policySelection.getConfidenceTarget("pull_request");
     expect(target.requiredConfidence).toBe(0.7);
 
-    const d1 = platform.policySelection.produceSelectionDecision({
+    const d1 = await platform.policySelection.produceSelectionDecision({
       profileId: "pull_request",
       impact,
     });
     const before = platform.policySelection.getHistory().length;
-    platform.policySelection.produceSelectionDecision({
+    await platform.policySelection.produceSelectionDecision({
       profileId: "developer_commit",
       impact,
     });
@@ -326,8 +326,8 @@ describe("APZQEP-165 QO-006 Policy & Quality Selection Engine", () => {
 
   it("integrates with impact, quality flow context, and capability catalogue without execution", async () => {
     const platform = await createPlatformOrchestration();
-    seedImpactKnowledge(platform.impact);
-    seedPolicies(platform.policySelection);
+    await seedImpactKnowledge(platform.impact);
+    await seedPolicies(platform.policySelection);
     platform.capabilities.register({
       capabilityId: "cap_selection",
       name: "Selection helper",
@@ -338,7 +338,7 @@ describe("APZQEP-165 QO-006 Policy & Quality Selection Engine", () => {
       documentationRef: "docs://sel",
       contractIds: ["sel.v1"],
     });
-    platform.qualityFlows.registerDefinition({
+    await platform.qualityFlows.registerDefinition({
       flowId: "qf_pol",
       name: "Policy flow",
       version: "1.0.0",
@@ -347,8 +347,8 @@ describe("APZQEP-165 QO-006 Policy & Quality Selection Engine", () => {
       supportedCapabilityStages: ["test_selection"],
     });
 
-    const impact = correlate(platform.impact);
-    const decision = platform.policySelection.produceSelectionDecision({
+    const impact = await correlate(platform.impact);
+    const decision = await platform.policySelection.produceSelectionDecision({
       profileId: "pull_request",
       impact,
       qualityFlowId: "qf_pol",
@@ -369,7 +369,7 @@ describe("APZQEP-165 QO-006 Policy & Quality Selection Engine", () => {
   it("rejects unknown rule references and exposes diagnostics", async () => {
     const platform = await createPlatformOrchestration();
     try {
-      platform.policySelection.registerPolicy({
+      await platform.policySelection.registerPolicy({
         policyId: "pol_bad",
         name: "Bad",
         version: "1",
@@ -383,10 +383,10 @@ describe("APZQEP-165 QO-006 Policy & Quality Selection Engine", () => {
       expect(isOrchestrationError(error)).toBe(true);
     }
 
-    seedPolicies(platform.policySelection);
-    seedImpactKnowledge(platform.impact);
-    const impact = correlate(platform.impact);
-    platform.policySelection.produceSelectionDecision({
+    await seedPolicies(platform.policySelection);
+    await seedImpactKnowledge(platform.impact);
+    const impact = await correlate(platform.impact);
+    await platform.policySelection.produceSelectionDecision({
       profileId: "pull_request",
       impact,
     });

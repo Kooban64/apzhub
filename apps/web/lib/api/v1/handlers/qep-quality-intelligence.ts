@@ -11,6 +11,7 @@ import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
 import { PlatformApiHttpError } from "../errors";
 import { jsonDataResponse } from "../response";
 import { getQepQiRuntime } from "@/lib/qep/qi-runtime";
+import { requireQepPermission, sessionTenantId } from "./require-qep-permission";
 
 type RouteContext = { params: Promise<Record<string, string>> };
 
@@ -32,6 +33,7 @@ export async function handleListQiProviders(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireQepPermission(context, "qep.qi.read");
   return jsonDataResponse(
     { providers: getQepQiRuntime().listProviders() },
     context.tracing,
@@ -42,10 +44,10 @@ export async function handleListQiObservations(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const tenantId =
-    request.nextUrl.searchParams.get("tenantId") ?? context.serviceContext.tenantId;
+  requireQepPermission(context, "qep.qi.read");
+  const tenantId = sessionTenantId(context);
   return jsonDataResponse(
-    { observations: getQepQiRuntime().listObservations(tenantId) },
+    { observations: await getQepQiRuntime().listObservations(tenantId) },
     context.tracing,
   );
 }
@@ -54,8 +56,9 @@ export async function handleRecordQiObservation(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireQepPermission(context, "qep.qi.operate");
   const body = (await request.json()) as Partial<RecordObservationRequest>;
-  const tenantId = body.tenantId ?? context.serviceContext.tenantId;
+  const tenantId = sessionTenantId(context);
   if (!tenantId || !body.source || !body.kind || !body.summary) {
     throw new PlatformApiHttpError(400, {
       code: "VALIDATION_FAILED",
@@ -86,10 +89,10 @@ export async function handleListQiSignals(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const tenantId =
-    request.nextUrl.searchParams.get("tenantId") ?? context.serviceContext.tenantId;
+  requireQepPermission(context, "qep.qi.read");
+  const tenantId = sessionTenantId(context);
   return jsonDataResponse(
-    { signals: getQepQiRuntime().listSignals(tenantId) },
+    { signals: await getQepQiRuntime().listSignals(tenantId) },
     context.tracing,
   );
 }
@@ -98,10 +101,10 @@ export async function handleListQiRecommendations(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const tenantId =
-    request.nextUrl.searchParams.get("tenantId") ?? context.serviceContext.tenantId;
+  requireQepPermission(context, "qep.qi.read");
+  const tenantId = sessionTenantId(context);
   return jsonDataResponse(
-    { recommendations: getQepQiRuntime().listRecommendations(tenantId) },
+    { recommendations: await getQepQiRuntime().listRecommendations(tenantId) },
     context.tracing,
   );
 }
@@ -111,16 +114,17 @@ export async function handleGetQiRecommendation(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireQepPermission(context, "qep.qi.read");
   const recommendationId = requireParam(await routeContext?.params, "recommendationId");
   const runtime = getQepQiRuntime();
-  const recommendation = runtime.getRecommendation(recommendationId);
+  const recommendation = await runtime.getRecommendation(recommendationId);
   if (!recommendation) {
     throw new PlatformApiHttpError(404, {
       code: "NOT_FOUND",
       message: "Recommendation not found",
     });
   }
-  const explanation = runtime.getExplanation(recommendation.explanationId);
+  const explanation = await runtime.getExplanation(recommendation.explanationId);
   return jsonDataResponse({ recommendation, explanation }, context.tracing);
 }
 
@@ -129,6 +133,7 @@ export async function handleQiRecommendationAction(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireQepPermission(context, "qep.qi.operate");
   const recommendationId = requireParam(await routeContext?.params, "recommendationId");
   const body = (await request.json()) as {
     action?: "accept" | "reject";
@@ -161,10 +166,10 @@ export async function handleListQiScores(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const tenantId =
-    request.nextUrl.searchParams.get("tenantId") ?? context.serviceContext.tenantId;
+  requireQepPermission(context, "qep.qi.read");
+  const tenantId = sessionTenantId(context);
   return jsonDataResponse(
-    { scores: getQepQiRuntime().listScores(tenantId) },
+    { scores: await getQepQiRuntime().listScores(tenantId) },
     context.tracing,
   );
 }
@@ -173,10 +178,10 @@ export async function handleListQiHistory(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const tenantId =
-    request.nextUrl.searchParams.get("tenantId") ?? context.serviceContext.tenantId;
+  requireQepPermission(context, "qep.qi.read");
+  const tenantId = sessionTenantId(context);
   return jsonDataResponse(
-    { history: getQepQiRuntime().listHistory(tenantId) },
+    { history: await getQepQiRuntime().listHistory(tenantId) },
     context.tracing,
   );
 }
@@ -185,10 +190,10 @@ export async function handleListQiAudits(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const tenantId =
-    request.nextUrl.searchParams.get("tenantId") ?? context.serviceContext.tenantId;
+  requireQepPermission(context, "qep.qi.read");
+  const tenantId = sessionTenantId(context);
   return jsonDataResponse(
-    { audits: getQepQiRuntime().listAudits(tenantId) },
+    { audits: await getQepQiRuntime().listAudits(tenantId) },
     context.tracing,
   );
 }
@@ -197,10 +202,10 @@ export async function handleListQiConfidence(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const tenantId =
-    request.nextUrl.searchParams.get("tenantId") ?? context.serviceContext.tenantId;
+  requireQepPermission(context, "qep.qi.read");
+  const tenantId = sessionTenantId(context);
   return jsonDataResponse(
-    { confidence: getQepQiRuntime().listConfidence(tenantId) },
+    { confidence: await getQepQiRuntime().listConfidence(tenantId) },
     context.tracing,
   );
 }
@@ -210,8 +215,9 @@ export async function handleGetQiExplanation(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireQepPermission(context, "qep.qi.read");
   const explanationId = requireParam(await routeContext?.params, "explanationId");
-  const explanation = getQepQiRuntime().getExplanation(explanationId);
+  const explanation = await getQepQiRuntime().getExplanation(explanationId);
   if (!explanation) {
     throw new PlatformApiHttpError(404, {
       code: "NOT_FOUND",
@@ -225,11 +231,12 @@ export async function handleRunQiAnalysis(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireQepPermission(context, "qep.qi.operate");
   const body = (await request.json().catch(() => ({}))) as {
     tenantId?: string;
     correlationId?: string;
   };
-  const tenantId = body.tenantId ?? context.serviceContext.tenantId;
+  const tenantId = sessionTenantId(context);
   if (!tenantId) {
     throw new PlatformApiHttpError(400, {
       code: "VALIDATION_FAILED",

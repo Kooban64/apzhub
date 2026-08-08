@@ -1,11 +1,26 @@
-import { createQepDashboards, type QepDashboardsFacade } from "@apzhub/qep-dashboards";
+import {
+  createDashboardPersistence,
+  createQepDashboards,
+  type QepDashboardsFacade,
+} from "@apzhub/qep-dashboards";
+
+import { resolveDashboardPersistence } from "@/lib/qep/persistence/resolve-dashboard-persistence";
 
 let singleton: QepDashboardsFacade | undefined;
 
-/** Process-local Dashboard Experience runtime (APZQEP-164). */
+/**
+ * Dashboard Experience runtime (APZQEP-164 / QX-PR-04).
+ * Production defaults to PostgreSQL LayoutStore (fail-closed).
+ */
 export function getQepDashboardRuntime(): QepDashboardsFacade {
   if (!singleton) {
-    singleton = createQepDashboards();
+    const persistence = resolveDashboardPersistence();
+    const store = createDashboardPersistence({
+      mode: persistence.mode,
+      db: persistence.db,
+      allowInMemoryPersistence: persistence.mode === "memory",
+    });
+    singleton = createQepDashboards({ store });
   }
   return singleton;
 }

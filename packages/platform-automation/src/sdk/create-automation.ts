@@ -1,6 +1,7 @@
 import { AutomationEngine } from "../engine/automation-engine";
 import type { AutomationEventPublisher } from "../contracts/events";
 import type { AutomationEvidenceSink } from "../contracts/evidence";
+import type { ExecutionStore } from "../engine/execution-store";
 import { createPlaceholderProviders } from "../providers/placeholders";
 import { createPlaywrightProvider } from "../providers/playwright";
 import { ProviderRegistry } from "../registry/provider-registry";
@@ -12,6 +13,8 @@ export interface CreatePlatformAutomationOptions {
   /** Default true in tests — force Playwright dry-run. */
   readonly playwrightDryRun?: boolean;
   readonly includePlaceholders?: boolean;
+  /** Production SoR — inject Postgres-backed store (QX-PR-01). */
+  readonly store?: ExecutionStore;
 }
 
 export interface PlatformAutomation {
@@ -60,6 +63,7 @@ export function createPlatformAutomation(
     registry,
     publishEvent,
     evidenceSink: options.evidenceSink,
+    store: options.store,
   });
 
   return { engine, registry };

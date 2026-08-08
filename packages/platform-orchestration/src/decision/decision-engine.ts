@@ -25,6 +25,8 @@ import type {
   ResidualRiskSummary,
 } from "../contracts/decision";
 import { DecisionProfileRegistry, maxRiskLevel, riskRank } from "./registries";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 export interface DecisionEngineOptions {
   readonly profiles?: DecisionProfileRegistry;
@@ -32,6 +34,7 @@ export interface DecisionEngineOptions {
   readonly orchestrationId?: string;
   /** When true (default), register built-in decision profiles. */
   readonly seedBuiltIns?: boolean;
+  readonly documentStore?: OrchestrationDocumentStore;
 }
 
 function createId(prefix: string): string {
@@ -53,7 +56,7 @@ export class DecisionEngine {
 
   private readonly publishEvent: OrchestrationEventPublisher;
   private readonly orchestrationId: string;
-  private readonly packages = new Map<string, DecisionPackage>();
+  private readonly packages: DurableMap<DecisionPackage>;
   private readonly outcomeDistribution: Record<string, number> = {};
   private readonly profileDistribution: Record<string, number> = {};
   private readonly residualRiskDistribution: Record<string, number> = {};
@@ -63,9 +66,24 @@ export class DecisionEngine {
     this.profiles = options.profiles ?? new DecisionProfileRegistry();
     this.publishEvent = options.publishEvent ?? (() => undefined);
     this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.packages = new DurableMap<DecisionPackage>(
+      "decision_package",
+      options.documentStore,
+      (pkg) => ({
+        tenantId: pkg.tenantId,
+        projectId: pkg.projectId,
+        orchestrationId: this.orchestrationId,
+        status: pkg.platformConclusion,
+        actorId: pkg.actorId,
+      }),
+    );
     if (options.seedBuiltIns !== false) {
       this.profiles.registerBuiltIns();
     }
+  }
+
+  async hydrate(): Promise<void> {
+    await this.packages.hydrate();
   }
 
   registerProfile(input: DecisionProfileInput) {
@@ -76,7 +94,9 @@ export class DecisionEngine {
    * Compose completed upstream summaries into an immutable Decision Package.
    * Consumes refs + snapshots only — never invokes upstream engines.
    */
-  createDecisionPackage(input: CreateDecisionPackageInput): DecisionPackage {
+  async createDecisionPackage(
+    input: CreateDecisionPackageInput,
+  ): Promise<DecisionPackage> {
     const tenantId = input.tenantId.trim();
     const qualityFlowRef = input.qualityFlowRef.trim();
     const policySelectionRef = input.policySelectionRef.trim();
@@ -219,7 +239,7 @@ export class DecisionEngine {
       advisory: true as const,
     });
 
-    this.packages.set(decisionPackageId, pkg);
+    await this.packages.set(decisionPackageId, pkg);
     this.outcomeDistribution[outcome] = (this.outcomeDistribution[outcome] ?? 0) + 1;
     this.profileDistribution[profile.profileId] =
       (this.profileDistribution[profile.profileId] ?? 0) + 1;
@@ -278,7 +298,7 @@ export class DecisionEngine {
   }
 
   listDecisionPackages(): readonly DecisionPackage[] {
-    return [...this.packages.values()];
+    return this.packages.values();
   }
 
   diagnostics(): DecisionDiagnostics {

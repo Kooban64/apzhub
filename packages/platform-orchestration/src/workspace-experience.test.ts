@@ -12,7 +12,7 @@ describe("APZQEP-165 QO-017 Enterprise Workspace & Operations Experience", () =>
       true,
     );
 
-    const pkg = platform.workspaceExperience.createWorkspaceExperiencePackage({
+    const pkg = await platform.workspaceExperience.createWorkspaceExperiencePackage({
       executiveExperiencePackageRef: "eep_1",
       operationalReadinessPackageRef: "orp_1",
       evidenceIntegrationPackageRef: "eip_1",
@@ -55,7 +55,7 @@ describe("APZQEP-165 QO-017 Enterprise Workspace & Operations Experience", () =>
 
   it("exposes layout, navigation, context, and history reads", async () => {
     const platform = await createPlatformOrchestration();
-    const pkg = platform.workspaceExperience.createWorkspaceExperiencePackage({
+    const pkg = await platform.workspaceExperience.createWorkspaceExperiencePackage({
       operationalReadinessPackageRef: "orp_r",
       evidenceIntegrationPackageRef: "eip_r",
       layoutKind: "readiness_focus",
@@ -83,13 +83,15 @@ describe("APZQEP-165 QO-017 Enterprise Workspace & Operations Experience", () =>
 
   it("marks partial/empty composition when upstream refs are missing", async () => {
     const platform = await createPlatformOrchestration();
-    const partial = platform.workspaceExperience.createWorkspaceExperiencePackage({
-      operationalReadinessPackageRef: "orp_only",
-      tenantId: "t1",
-    });
+    const partial = await platform.workspaceExperience.createWorkspaceExperiencePackage(
+      {
+        operationalReadinessPackageRef: "orp_only",
+        tenantId: "t1",
+      },
+    );
     expect(partial.experienceStatus).toBe("partial");
 
-    const empty = platform.workspaceExperience.createWorkspaceExperiencePackage({
+    const empty = await platform.workspaceExperience.createWorkspaceExperiencePackage({
       tenantId: "t1",
     });
     expect(empty.experienceStatus).toBe("empty");
@@ -106,7 +108,7 @@ describe("APZQEP-165 QO-017 Enterprise Workspace & Operations Experience", () =>
     expect(typeof eng.generateReport).toBe("undefined");
     expect(typeof eng.createEvidence).toBe("undefined");
 
-    const pkg = platform.workspaceExperience.createWorkspaceExperiencePackage({
+    const pkg = await platform.workspaceExperience.createWorkspaceExperiencePackage({
       executiveExperiencePackageRef: "eep_a",
       operationalReadinessPackageRef: "orp_a",
       evidenceIntegrationPackageRef: "eip_a",
@@ -121,13 +123,13 @@ describe("APZQEP-165 QO-017 Enterprise Workspace & Operations Experience", () =>
 
   it("supports superseding layout composition via a new package", async () => {
     const platform = await createPlatformOrchestration();
-    const first = platform.workspaceExperience.createWorkspaceExperiencePackage({
+    const first = await platform.workspaceExperience.createWorkspaceExperiencePackage({
       executiveExperiencePackageRef: "eep_s",
       operationalReadinessPackageRef: "orp_s",
       layoutKind: "operator_home",
       tenantId: "t1",
     });
-    const second = platform.workspaceExperience.createWorkspaceExperiencePackage({
+    const second = await platform.workspaceExperience.createWorkspaceExperiencePackage({
       executiveExperiencePackageRef: "eep_s",
       operationalReadinessPackageRef: "orp_s",
       evidenceIntegrationPackageRef: "eip_s",

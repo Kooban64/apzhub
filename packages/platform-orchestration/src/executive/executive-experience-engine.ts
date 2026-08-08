@@ -29,10 +29,13 @@ import {
   listBuiltinExecutivePersonas,
   resolveExecutivePersona,
 } from "./executive-personas";
+import { DurableMap } from "../persistence/durable-map";
+import type { OrchestrationDocumentStore } from "../persistence/document-store";
 
 export interface ExecutiveExperienceEngineOptions {
   readonly events: QualityEventBackbone;
   readonly orchestrationId?: string;
+  readonly documentStore?: OrchestrationDocumentStore;
 }
 
 function createId(prefix: string): string {
@@ -52,7 +55,7 @@ function emptyIncludedArtefacts(): Record<ExecutiveArtefactSlot, string[]> {
 export class ExecutiveExperienceEngine {
   private readonly events: QualityEventBackbone;
   private readonly orchestrationId: string;
-  private readonly packages = new Map<string, ExecutiveExperiencePackage>();
+  private readonly packages: DurableMap<ExecutiveExperiencePackage>;
   private readonly personaStatistics: Record<string, number> = {};
   private projectionCount = 0;
   private navigationEntryPointCount = 0;
@@ -61,15 +64,31 @@ export class ExecutiveExperienceEngine {
   constructor(options: ExecutiveExperienceEngineOptions) {
     this.events = options.events;
     this.orchestrationId = options.orchestrationId ?? "orch_default";
+    this.packages = new DurableMap<ExecutiveExperiencePackage>(
+      "executive_experience_package",
+      options.documentStore,
+      (pkg) => ({
+        tenantId: pkg.tenantId,
+        projectId: pkg.projectId,
+        orchestrationId: this.orchestrationId,
+        correlationId: pkg.decisionPackageRef ?? pkg.executiveExperiencePackageId,
+        status: pkg.experienceStatus,
+        actorId: pkg.actorId,
+      }),
+    );
+  }
+
+  async hydrate(): Promise<void> {
+    await this.packages.hydrate();
   }
 
   /**
    * Create an immutable Executive Experience Package.
    * Defines projection only — never renders, never influences decisions.
    */
-  createExecutiveExperiencePackage(
+  async createExecutiveExperiencePackage(
     input: CreateExecutiveExperiencePackageInput,
-  ): ExecutiveExperiencePackage {
+  ): Promise<ExecutiveExperiencePackage> {
     const tenantId = input.tenantId.trim();
     if (!tenantId) {
       throw new OrchestrationError(
@@ -285,7 +304,7 @@ export class ExecutiveExperienceEngine {
       copiesEvidence: false as const,
     });
 
-    this.packages.set(executiveExperiencePackageId, pkg);
+    await this.packages.set(executiveExperiencePackageId, pkg);
     this.personaStatistics[persona.kind] =
       (this.personaStatistics[persona.kind] ?? 0) + 1;
     this.projectionCount += 1;

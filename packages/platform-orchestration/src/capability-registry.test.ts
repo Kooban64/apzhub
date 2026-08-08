@@ -48,7 +48,7 @@ function sampleCapability(
 }
 
 describe("APZQEP-165 QO-002 Capability Registry catalogue", () => {
-  it("registers full catalogue metadata", () => {
+  it("registers full catalogue metadata", async () => {
     const registry = new CapabilityRegistry();
     const record = registry.register(sampleCapability());
     expect(record.capabilityId).toBe("platform.automation");
@@ -62,7 +62,7 @@ describe("APZQEP-165 QO-002 Capability Registry catalogue", () => {
     expect(record.lifecycle).toBe("registered");
   });
 
-  it("queries by provider, trigger, stage, contract, and lifecycle", () => {
+  it("queries by provider, trigger, stage, contract, and lifecycle", async () => {
     const registry = new CapabilityRegistry();
     registry.register(sampleCapability());
     registry.register(
@@ -88,7 +88,7 @@ describe("APZQEP-165 QO-002 Capability Registry catalogue", () => {
     ).toHaveLength(1);
   });
 
-  it("updates stored health without probing or executing", () => {
+  it("updates stored health without probing or executing", async () => {
     const registry = new CapabilityRegistry();
     registry.register(sampleCapability());
     expect(registry.getHealthStatus("platform.automation")).toBe("healthy");
@@ -96,7 +96,7 @@ describe("APZQEP-165 QO-002 Capability Registry catalogue", () => {
     expect(registry.getHealthStatus("platform.automation")).toBe("degraded");
   });
 
-  it("transitions capability lifecycle states", () => {
+  it("transitions capability lifecycle states", async () => {
     const registry = new CapabilityRegistry();
     registry.register(sampleCapability({ capabilityId: "cap.a" }));
     expect(registry.transitionLifecycle("cap.a", "active").lifecycle).toBe("active");
@@ -105,7 +105,7 @@ describe("APZQEP-165 QO-002 Capability Registry catalogue", () => {
     );
   });
 
-  it("rejects incomplete catalogue metadata", () => {
+  it("rejects incomplete catalogue metadata", async () => {
     const registry = new CapabilityRegistry();
     try {
       registry.register({
@@ -122,7 +122,7 @@ describe("APZQEP-165 QO-002 Capability Registry catalogue", () => {
     }
   });
 
-  it("is catalogue-only — no executor / service-locator API surface", () => {
+  it("is catalogue-only — no executor / service-locator API surface", async () => {
     const registry = new CapabilityRegistry();
     const proto = Object.getOwnPropertyNames(Object.getPrototypeOf(registry));
     for (const forbidden of [

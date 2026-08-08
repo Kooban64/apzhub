@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@apzhub/ui";
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 export function QepPageShell({
@@ -137,7 +138,12 @@ export function QepTable({
   }[];
 }) {
   return (
-    <div className="overflow-x-auto rounded-lg border border-[var(--color-border)]">
+    <div
+      className="overflow-x-auto rounded-lg border border-[var(--color-border)]"
+      tabIndex={0}
+      role="region"
+      aria-label={caption}
+    >
       <table className="min-w-full text-sm" data-testid="qep-table">
         <caption className="sr-only">{caption}</caption>
         <thead className="bg-[var(--color-muted)]/40 text-left">
@@ -154,7 +160,16 @@ export function QepTable({
             <tr key={row.id} className="border-t border-[var(--color-border)]">
               {row.cells.map((cell, index) => (
                 <td key={`${row.id}-${index}`} className="px-3 py-2 align-top">
-                  {cell}
+                  {index === 0 && row.href ? (
+                    <Link
+                      href={row.href}
+                      className="text-[var(--color-primary)] underline-offset-2 hover:underline"
+                    >
+                      {cell}
+                    </Link>
+                  ) : (
+                    cell
+                  )}
                 </td>
               ))}
             </tr>
@@ -166,9 +181,14 @@ export function QepTable({
 }
 
 export function QepStatusBadge({ status }: { readonly status: string }) {
+  const label = status.replace(/_/g, " ");
   return (
-    <span className="inline-flex rounded-full border border-[var(--color-border)] px-2 py-0.5 text-xs capitalize">
-      {status.replace(/_/g, " ")}
+    <span
+      className="inline-flex rounded-full border border-[var(--color-border)] px-2 py-0.5 text-xs capitalize"
+      data-testid="qep-status-badge"
+      aria-label={`Status: ${label}`}
+    >
+      {label}
     </span>
   );
 }

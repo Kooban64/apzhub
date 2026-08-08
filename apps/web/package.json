@@ -44,6 +44,7 @@
     "@apzhub/platform-service-contracts": "workspace:*",
     "@apzhub/platform-services": "workspace:*",
     "@apzhub/platform-automation": "workspace:*",
+    "@apzhub/platform-orchestration": "workspace:*",
     "@apzhub/platform-scm": "workspace:*",
     "@apzhub/platform-quality-intelligence": "workspace:*",
     "@apzhub/platform-dashboard": "workspace:*",

@@ -266,6 +266,34 @@ export function seedDefaultAuthorizationCatalog(service: AuthorizationService): 
       [...QEP_READER_PERMISSIONS],
     );
   }
+
+  // H4 — sync catalogue growth onto existing Cap roles (idempotent grants).
+  ensureRolePermissionGrants(
+    service,
+    DEFAULT_QEP_OPERATOR_ROLE_ID,
+    QEP_OPERATOR_PERMISSIONS,
+  );
+  ensureRolePermissionGrants(
+    service,
+    DEFAULT_QEP_READER_ROLE_ID,
+    QEP_READER_PERMISSIONS,
+  );
+}
+
+function ensureRolePermissionGrants(
+  service: AuthorizationService,
+  roleId: string,
+  permissionKeys: readonly string[],
+): void {
+  if (!service.roleService.getRole(roleId)) return;
+  const existing = new Set(
+    service.roleService.listRolePermissions(roleId).map((grant) => grant.permissionKey),
+  );
+  for (const permissionKey of permissionKeys) {
+    if (!existing.has(permissionKey)) {
+      service.roleService.grantPermission(roleId, permissionKey);
+    }
+  }
 }
 
 export function provisionDefaultAuthorizationForUser(

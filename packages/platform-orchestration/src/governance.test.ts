@@ -10,11 +10,11 @@ import {
   type GateStatus,
 } from "./index";
 
-function seedGates(
+async function seedGates(
   gov: Awaited<ReturnType<typeof createPlatformOrchestration>>["governance"],
 ) {
   const doc = "docs/products/apzqep/v1.1/apzqep-165-qo-007/";
-  gov.registerGate({
+  await gov.registerGate({
     gateId: "gate_evidence",
     name: "Evidence Integrity",
     version: "1.0.0",
@@ -24,7 +24,7 @@ function seedGates(
     governingPolicyId: "pol_pr_governance",
     overrideEligible: false,
   });
-  gov.registerGate({
+  await gov.registerGate({
     gateId: "gate_security",
     name: "Security Requirement Satisfied",
     version: "1.0.0",
@@ -44,7 +44,7 @@ function seedGates(
     governingRuleId: "rule_security",
     dependencies: ["gate_evidence"],
   });
-  gov.registerGate({
+  await gov.registerGate({
     gateId: "gate_a11y",
     name: "Accessibility Requirement Satisfied",
     version: "1.0.0",
@@ -61,7 +61,7 @@ function seedGates(
     },
     documentationRef: doc,
   });
-  gov.registerGate({
+  await gov.registerGate({
     gateId: "gate_quality_score",
     name: "Quality Score Advisory",
     version: "1.0.0",
@@ -69,7 +69,7 @@ function seedGates(
     criteria: { type: "selection_expected_confidence_at_least", threshold: 0.5 },
     documentationRef: doc,
   });
-  gov.registerGate({
+  await gov.registerGate({
     gateId: "gate_duration",
     name: "Estimated Duration Info",
     version: "1.0.0",
@@ -77,7 +77,7 @@ function seedGates(
     criteria: { type: "always_satisfied" },
     documentationRef: doc,
   });
-  gov.registerGate({
+  await gov.registerGate({
     gateId: "gate_rm",
     name: "Release Manager Approval",
     version: "1.0.0",
@@ -90,7 +90,7 @@ function seedGates(
     requiredApprovers: ["release_manager"],
     overrideEligible: true,
   });
-  gov.registerGate({
+  await gov.registerGate({
     gateId: "gate_risk",
     name: "Risk Bound",
     version: "1.0.0",
@@ -119,7 +119,7 @@ function stubResult(gateId: string, status: GateStatus): GateEvaluationResult {
 }
 
 describe("APZQEP-165 QO-007 Quality Governance Engine", () => {
-  it("covers all composition modes", () => {
+  it("covers all composition modes", async () => {
     expect(COMPOSITION_MODES).toEqual([
       "all",
       "any",
@@ -213,14 +213,14 @@ describe("APZQEP-165 QO-007 Quality Governance Engine", () => {
         events.push(e.type);
       },
     });
-    seedGates(platform.governance);
+    await seedGates(platform.governance);
 
-    platform.impact.registerAsset({
+    await platform.impact.registerAsset({
       assetId: "file_x",
       assetType: "file",
       name: "x.ts",
     });
-    const impact = platform.impact.createCorrelation({
+    const impact = await platform.impact.createCorrelation({
       change: {
         changeId: "chg_g",
         changeKind: "pull_request",
@@ -255,7 +255,7 @@ describe("APZQEP-165 QO-007 Quality Governance Engine", () => {
       explanation: "smoke",
       expectedConfidenceContribution: 0.2,
     });
-    platform.policySelection.registerPolicy({
+    await platform.policySelection.registerPolicy({
       policyId: "pol_g",
       name: "Gov policy",
       version: "1",
@@ -271,12 +271,12 @@ describe("APZQEP-165 QO-007 Quality Governance Engine", () => {
       confidenceTarget: 0.6,
       documentationRef: "docs://pr",
     });
-    const selection = platform.policySelection.produceSelectionDecision({
+    const selection = await platform.policySelection.produceSelectionDecision({
       profileId: "pull_request",
       impact,
     });
 
-    platform.governance.registerTemplate({
+    await platform.governance.registerTemplate({
       templateId: "pull_request",
       name: "PR Governance",
       policyProfileId: "pull_request",
@@ -294,7 +294,7 @@ describe("APZQEP-165 QO-007 Quality Governance Engine", () => {
       },
     });
 
-    const decision = platform.governance.evaluateTemplate("pull_request", {
+    const decision = await platform.governance.evaluateTemplate("pull_request", {
       tenantId: "tenant_a",
       selection,
       impact,
@@ -332,8 +332,8 @@ describe("APZQEP-165 QO-007 Quality Governance Engine", () => {
 
   it("keeps human gates pending until approval records exist", async () => {
     const platform = await createPlatformOrchestration();
-    seedGates(platform.governance);
-    platform.governance.registerTemplate({
+    await seedGates(platform.governance);
+    await platform.governance.registerTemplate({
       templateId: "production_release",
       name: "Production",
       policyProfileId: "production_release",
@@ -344,14 +344,14 @@ describe("APZQEP-165 QO-007 Quality Governance Engine", () => {
       },
     });
 
-    const pending = platform.governance.evaluateTemplate("production_release", {
+    const pending = await platform.governance.evaluateTemplate("production_release", {
       tenantId: "tenant_a",
     });
     expect(pending.compositionSatisfied).toBe(false);
     expect(pending.requiredHumanApprovals).toContain("release_manager");
     expect(pending.outstandingGates).toContain("gate_rm");
 
-    const approved = platform.governance.evaluateTemplate("production_release", {
+    const approved = await platform.governance.evaluateTemplate("production_release", {
       tenantId: "tenant_a",
       humanApprovals: [
         {
@@ -369,15 +369,15 @@ describe("APZQEP-165 QO-007 Quality Governance Engine", () => {
 
   it("exposes APIs, history, residual risk, and status transitions", async () => {
     const platform = await createPlatformOrchestration();
-    seedGates(platform.governance);
-    platform.governance.registerTemplate({
+    await seedGates(platform.governance);
+    await platform.governance.registerTemplate({
       templateId: "custom",
       name: "Custom",
       documentationRef: "docs://c",
       composition: { mode: "any", gateIds: ["gate_duration", "gate_quality_score"] },
     });
 
-    const decision = platform.governance.evaluateTemplate("custom", {
+    const decision = await platform.governance.evaluateTemplate("custom", {
       tenantId: "tenant_a",
     });
     expect(
@@ -400,7 +400,7 @@ describe("APZQEP-165 QO-007 Quality Governance Engine", () => {
 
   it("supports remaining composition templates without provider logic", async () => {
     const platform = await createPlatformOrchestration();
-    seedGates(platform.governance);
+    await seedGates(platform.governance);
 
     const compositions: Array<{
       id: Parameters<typeof platform.governance.registerTemplate>[0]["templateId"];
@@ -452,13 +452,13 @@ describe("APZQEP-165 QO-007 Quality Governance Engine", () => {
     ];
 
     for (const item of compositions) {
-      platform.governance.registerTemplate({
+      await platform.governance.registerTemplate({
         templateId: item.id,
         name: item.id,
         documentationRef: "docs://t",
         composition: item.composition,
       });
-      const decision = platform.governance.evaluateTemplate(item.id, {
+      const decision = await platform.governance.evaluateTemplate(item.id, {
         tenantId: "tenant_a",
       });
       expect(decision.compositionMode).toBe(item.composition.mode);

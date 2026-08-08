@@ -152,7 +152,7 @@ describe("APZQEP-162 platform-scm", () => {
       fullName: "apzor/apzhub",
       registeredBy: "user-1",
     });
-    const link = scm.engine.addTraceabilityLink({
+    const link = await scm.engine.addTraceabilityLink({
       tenantId: "tenant-1",
       repositoryId: repository.repositoryId,
       kind: "evidence",
@@ -161,6 +161,8 @@ describe("APZQEP-162 platform-scm", () => {
       createdBy: "user-1",
     });
     expect(link.kind).toBe("evidence");
-    expect(scm.engine.listTraceabilityLinks(repository.repositoryId)).toHaveLength(1);
+    expect(
+      await scm.engine.listTraceabilityLinks(repository.repositoryId),
+    ).toHaveLength(1);
   });
 });

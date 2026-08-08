@@ -44,7 +44,7 @@ describe("APZQEP-165 QO-010 Enterprise Quality Event Backbone", () => {
       },
     });
 
-    const a = platform.events.publish({
+    const a = await platform.events.publish({
       eventType: DECISION_EVENT_TYPES.packageCreated,
       correlationId: "corr_1",
       causationId: "cause_0",
@@ -54,7 +54,7 @@ describe("APZQEP-165 QO-010 Enterprise Quality Event Backbone", () => {
       subjectRef: "dp_1",
       payload: { conclusion: "GO" },
     });
-    const b = platform.events.publish({
+    const b = await platform.events.publish({
       eventType: DECISION_EVENT_TYPES.packageCreated,
       correlationId: "corr_1",
       causationId: a.eventId,
@@ -81,7 +81,7 @@ describe("APZQEP-165 QO-010 Enterprise Quality Event Backbone", () => {
     expect(isCommandStyleEventType("approve-release")).toBe(true);
     expect(looksPastTense("decision.package.created")).toBe(true);
 
-    expect(() =>
+    await expect(
       platform.events.publish({
         eventType: "run-tests",
         correlationId: "c",
@@ -89,9 +89,9 @@ describe("APZQEP-165 QO-010 Enterprise Quality Event Backbone", () => {
         producer: "bad",
         subjectRef: "x",
       }),
-    ).toThrow(/Command-style|past-tense|forbidden/i);
+    ).rejects.toThrow(/Command-style|past-tense|forbidden/i);
 
-    expect(() =>
+    await expect(
       platform.events.publish({
         eventType: "approve-release",
         correlationId: "c",
@@ -99,9 +99,9 @@ describe("APZQEP-165 QO-010 Enterprise Quality Event Backbone", () => {
         producer: "bad",
         subjectRef: "x",
       }),
-    ).toThrow();
+    ).rejects.toThrow();
 
-    expect(() =>
+    await expect(
       platform.events.publish({
         eventType: "something.completed",
         correlationId: "c",
@@ -109,7 +109,7 @@ describe("APZQEP-165 QO-010 Enterprise Quality Event Backbone", () => {
         producer: "bad",
         subjectRef: "x",
       }),
-    ).toThrow(/not registered/i);
+    ).rejects.toThrow(/not registered/i);
 
     expect(platform.events.diagnostics().validationStatistics.rejected).toBeGreaterThan(
       0,
@@ -141,7 +141,7 @@ describe("APZQEP-165 QO-010 Enterprise Quality Event Backbone", () => {
       },
     });
 
-    platform.events.publish({
+    await platform.events.publish({
       eventType: DECISION_EVENT_TYPES.packageCreated,
       correlationId: "corr_dir",
       tenantId: "tenant_a",
@@ -153,7 +153,7 @@ describe("APZQEP-165 QO-010 Enterprise Quality Event Backbone", () => {
     expect(hits).toEqual(["beta"]);
 
     hits.length = 0;
-    platform.events.publish({
+    await platform.events.publish({
       eventType: DECISION_EVENT_TYPES.packageCreated,
       correlationId: "corr_ten",
       tenantId: "tenant_b",
@@ -186,7 +186,7 @@ describe("APZQEP-165 QO-010 Enterprise Quality Event Backbone", () => {
       documentationRef: "docs://events/quality.signal.emitted",
     });
 
-    const v1 = platform.events.publish({
+    const v1 = await platform.events.publish({
       eventType: "quality.signal.emitted",
       eventVersion: "1.0.0",
       correlationId: "corr_v",
@@ -194,7 +194,7 @@ describe("APZQEP-165 QO-010 Enterprise Quality Event Backbone", () => {
       producer: "future.qi",
       subjectRef: "sig_1",
     });
-    const v2 = platform.events.publish({
+    const v2 = await platform.events.publish({
       eventType: "quality.signal.emitted",
       eventVersion: "2.0.0",
       correlationId: "corr_v",
@@ -213,7 +213,7 @@ describe("APZQEP-165 QO-010 Enterprise Quality Event Backbone", () => {
 
   it("records replay metadata without executing replay", async () => {
     const platform = await createPlatformOrchestration();
-    const evt = platform.events.publish({
+    const evt = await platform.events.publish({
       eventType: DECISION_EVENT_TYPES.packageCreated,
       correlationId: "corr_replay",
       tenantId: "t",
@@ -245,7 +245,7 @@ describe("APZQEP-165 QO-010 Enterprise Quality Event Backbone", () => {
 
   it("exposes list/query/history APIs and diagnostics", async () => {
     const platform = await createPlatformOrchestration();
-    platform.events.publish({
+    await platform.events.publish({
       eventType: DECISION_EVENT_TYPES.packageCreated,
       correlationId: "corr_api",
       tenantId: "tenant_x",

@@ -23,6 +23,12 @@ module:
   category: quality-engineering
   status: active
 
+permissions:
+  - id: qep.scm.read
+    label: View Enterprise Source Control
+  - id: qep.scm.operate
+    label: Operate Enterprise Source Control
+
 workbench:
   navigation:
     level: sidebar

@@ -181,3 +181,10 @@ export {
   parseQepDashboardId,
   parseQepDashboardAudience,
 } from "@apzhub/qep-dashboards/presentation";
+
+export {
+  QEP_QUALITY_FLOWS_BASE_PATH,
+  QEP_QUALITY_FLOWS_ROUTES,
+  isQepQualityFlowsRoute,
+  parseQepQualityFlowInstanceId,
+} from "./quality-flow-routes";

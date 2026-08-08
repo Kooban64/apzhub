@@ -8,20 +8,20 @@
 
 ## Accepted residuals (Board — not release blockers)
 
-| ID     | Class                    | Description                                                    | Status            |
-| ------ | ------------------------ | -------------------------------------------------------------- | ----------------- |
-| KI-001 | Enhancement / UX         | Shell Cap navigation may show Cap routes until API 403         | Accepted residual |
-| KI-002 | Architecture Observation | Project membership attribute ACL refinement deferred           | Accepted residual |
-| KI-003 | Packaging                | Cap A–F packages remain 0.1.0 until promotion execution        | Accepted residual |
-| KI-004 | Documentation            | Historical APZQEP-150 artefacts retain immutable NO-GO wording | Accepted residual |
-| KI-005 | Future Capability        | Cap-specific accessibility coverage to evolve                  | Accepted residual |
+| ID     | Class                    | Description                                                    | Status                                                                                        |
+| ------ | ------------------------ | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| KI-001 | Enhancement / UX         | Shell Cap navigation may show Cap routes until API 403         | **CLOSED** — QX-P1-01 Cap nav permission filter evidenced (20260808T054600Z)                  |
+| KI-002 | Architecture Observation | Project membership attribute ACL refinement deferred           | **DEFERRED → V1.2** — QX-P1-05 disposition (20260808T054600Z); Cap RBAC remains V1.1 boundary |
+| KI-003 | Packaging                | Cap A–F packages remain 0.1.0 until promotion execution        | **CLOSED** — QX-PR-06 promoted Caps A–F to 1.0.0 (20260807T213600Z)                           |
+| KI-004 | Documentation            | Historical APZQEP-150 artefacts retain immutable NO-GO wording | Accepted residual                                                                             |
+| KI-005 | Future Capability        | Cap-specific accessibility coverage to evolve                  | Accepted residual                                                                             |
 
 ## Technical debt register (observation)
 
-| ID     | Description                              | Evidence                       | Status            |
-| ------ | ---------------------------------------- | ------------------------------ | ----------------- |
-| TD-001 | Cap shell permission-aware nav filtering | APZQEP-152 / 150R residuals    | Observed — no eng |
-| TD-002 | Project-scoped attribute ACL             | Board architectural refinement | Observed — no eng |
+| ID     | Description                              | Evidence                       | Status                         |
+| ------ | ---------------------------------------- | ------------------------------ | ------------------------------ |
+| TD-001 | Cap shell permission-aware nav filtering | APZQEP-152 / 150R residuals    | **CLOSED** — QX-P1-01          |
+| TD-002 | Project-scoped attribute ACL             | Board architectural refinement | **DEFERRED → V1.2** — QX-P1-05 |
 
 ## Open production defects
 
