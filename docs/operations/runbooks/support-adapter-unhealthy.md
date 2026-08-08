@@ -30,8 +30,9 @@ Support API errors; adapter health red; tickets not loading in Workbench.
 ## 6. Containment
 
 - Disable failing Support UI entry points if feature-flagged.
-- Fail soft with honest user messaging.
+- Fail closed: unavailable adapter → 503 / honest user messaging (never empty success).
 - Freeze Support connector Changes.
+- Confirm readiness: production + Zammad enabled must show providers registered.
 
 ## 7. Resolution / rollback
 

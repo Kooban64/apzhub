@@ -37,7 +37,9 @@ export const platformEntityMapping = pgTable(
       "platform_entity_mapping_entity_type_chk",
       sql`${table.entityType} in (
         'workspace','project','task','sprint','milestone','label',
-        'status','module','member','team','user'
+        'status','module','member','team','user',
+        'support_request','support_organization','support_group',
+        'support_user','support_article'
       )`,
     ),
     check(

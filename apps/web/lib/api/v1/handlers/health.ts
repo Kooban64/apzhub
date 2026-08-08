@@ -140,16 +140,28 @@ export async function handlePlatformApiHealth(): Promise<NextResponse> {
 export async function handlePlatformApiReadiness(): Promise<NextResponse> {
   const tracing = createPlatformApiTracing();
   const { checks, details, configurationValid } = await evaluateChecks();
+  /** SUP-PR-01 — production with Zammad enabled must have providers registered. */
+  const supportAdapterMissing =
+    process.env.NODE_ENV === "production" &&
+    details.zammadEnabled === "true" &&
+    checks.providers === "unregistered";
   const ready =
     checks.gateway === "ready" &&
     configurationValid &&
-    checks.mappingStore !== "unavailable";
+    checks.mappingStore !== "unavailable" &&
+    !supportAdapterMissing;
 
   const body: PlatformApiReadinessStatus = {
     ready,
     status: ready ? "ready" : "not_ready",
     checks,
-    details,
+    details: supportAdapterMissing
+      ? {
+          ...details,
+          supportAdapter:
+            "Zammad enabled but support providers unregistered — fail closed",
+        }
+      : details,
   };
 
   if (!ready) {

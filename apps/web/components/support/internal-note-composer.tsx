@@ -70,31 +70,41 @@ export function InternalNoteComposer({
         aria-label="Internal note body"
         data-testid="support-internal-note-body"
       />
-      <input
-        type="file"
-        multiple
-        disabled={submitting || disabled}
-        aria-label="Attach files to internal note"
-        data-testid="support-internal-note-attachments"
-        onChange={(event) => {
-          const files = event.target.files;
-          if (!files?.length) {
-            setAttachments([]);
-            return;
-          }
-          void readAttachmentFiles(files)
-            .then((next) => {
-              setAttachments(next);
-              setError(null);
-            })
-            .catch((cause: unknown) => {
+      <div className="flex flex-col gap-1">
+        <input
+          type="file"
+          multiple
+          disabled={submitting || disabled}
+          aria-label="Attach files to internal note"
+          aria-describedby="support-internal-note-attachment-limits"
+          data-testid="support-internal-note-attachments"
+          onChange={(event) => {
+            const files = event.target.files;
+            if (!files?.length) {
               setAttachments([]);
-              setError(
-                cause instanceof Error ? cause.message : "Unable to read files.",
-              );
-            });
-        }}
-      />
+              return;
+            }
+            void readAttachmentFiles(files)
+              .then((next) => {
+                setAttachments(next);
+                setError(null);
+              })
+              .catch((cause: unknown) => {
+                setAttachments([]);
+                setError(
+                  cause instanceof Error ? cause.message : "Unable to read files.",
+                );
+              });
+          }}
+        />
+        <p
+          id="support-internal-note-attachment-limits"
+          className="text-xs text-[var(--color-muted-foreground)]"
+          data-testid="support-attachment-limits"
+        >
+          Max 1 MiB per file. Attachment delete is not available.
+        </p>
+      </div>
       {attachments.length > 0 ? (
         <p className="text-xs text-[var(--color-muted-foreground)]">
           {attachments.length} file(s) ready to upload

@@ -82,6 +82,14 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [EXECUTIVE-SUMMARY](./releases/1.1-planning/EXECUTIVE-SUMMARY.md)     | Verdict · priorities                        |
 | [RELEASE-1.1-ROADMAP](./releases/1.1-planning/RELEASE-1.1-ROADMAP.md) | Scope themes                                |
 
+## APZHUB Delivery Standard v1.0 — Reference Standard (**IMMUTABLE**)
+
+| Document                                                                                               | Description                                                                                                       |
+| ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| [products/APZHUB-DELIVERY-STANDARD.md](./products/APZHUB-DELIVERY-STANDARD.md)                         | **Constitutional** product closeout lifecycle — proven by Projects · APZQEP · Workflow — **IN FORCE / IMMUTABLE** |
+| [products/APZHUB-PORTFOLIO-OPERATING-PRINCIPLE.md](./products/APZHUB-PORTFOLIO-OPERATING-PRINCIPLE.md) | Finite-inventory gate (four questions) before Engineering Execution                                               |
+| [products/APZHUB-PORTFOLIO-STATUS.md](./products/APZHUB-PORTFOLIO-STATUS.md)                           | One-page portfolio scoreboard                                                                                     |
+
 ## Platform Delivery Standard (APZHUB-ENGINEERING-001 — ACCEPTED)
 
 | Document                                                                                    | Description                                                                 |

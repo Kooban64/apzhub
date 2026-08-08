@@ -96,7 +96,11 @@ function makeContext(
   return {
     tracing,
     session,
-    serviceContext: buildTestServiceContext(overrides),
+    serviceContext: buildTestServiceContext({
+      // SUP-PR-05 — handler gate requires session grants; gateway still mocked separately.
+      permissions: ["support.*"],
+      ...overrides,
+    }),
   };
 }
 
@@ -753,6 +757,16 @@ describe("OSS-110-11 Support HTTP API", () => {
   // ---------------------------------------------------------------------------
 
   describe("Authorization and tenancy", () => {
+    it("SUP-PR-05 denies at handler gate when session permissions empty", async () => {
+      installMockGateway();
+      await expect(
+        handleListSupportRequests(
+          makeRequest("/api/v1/support-requests"),
+          makeContext({ permissions: [] }),
+        ),
+      ).rejects.toMatchObject({ status: 403, body: { code: "FORBIDDEN" } });
+    });
+
     it("surfaces permission denial from gateway", async () => {
       installMockGateway({
         support: {
@@ -917,9 +931,10 @@ describe("OSS-110-11 Support HTTP API", () => {
       );
       expect(handlerSource.includes("@apzhub/integration-zammad")).toBe(false);
       expect(handlerSource.includes("zammad-")).toBe(false);
+      expect(handlerSource.includes("requireSupportPermission")).toBe(true);
     });
 
-    it("route files do not import Zammad adapter", () => {
+    it("route files do not import Zammad adapter and use withPlatformApiAuth", () => {
       const routeFiles = [
         "apps/web/app/api/v1/support-requests/route.ts",
         "apps/web/app/api/v1/support-organizations/route.ts",
@@ -931,6 +946,7 @@ describe("OSS-110-11 Support HTTP API", () => {
       for (const routeFile of routeFiles) {
         const source = readFileSync(path.resolve(process.cwd(), routeFile), "utf8");
         expect(source.includes("@apzhub/integration-zammad")).toBe(false);
+        expect(source.includes("withPlatformApiAuth")).toBe(true);
       }
     });
 

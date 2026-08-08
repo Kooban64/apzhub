@@ -52,6 +52,7 @@ import {
   type UpdateSupportRequestBody,
 } from "../schemas/support";
 import { toListQuery, toPlatformApiPage } from "./paging";
+import { requireSupportPermission } from "./require-support-permission";
 
 // ---------------------------------------------------------------------------
 // Path param helpers
@@ -155,6 +156,7 @@ export async function handleListSupportRequests(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireSupportPermission(context, "support.requests.list");
   const query = parseQuery(supportRequestListQuerySchema, request.nextUrl.searchParams);
   const gateway = await getPlatformServiceGateway();
   const listQuery = toListQuery(query);
@@ -185,6 +187,7 @@ export async function handleGetSupportRequest(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.requests.read", "support.requests.list");
   const supportRequestId = await resolveSupportRequestId(routeContext);
   const gateway = await getPlatformServiceGateway();
   const ticket = await gateway.support.getSupportRequest(
@@ -198,6 +201,7 @@ export async function handleCreateSupportRequest(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireSupportPermission(context, "support.requests.create");
   const body = await parseJsonBody(
     request,
     createSupportRequestBodySchema,
@@ -216,6 +220,7 @@ export async function handleUpdateSupportRequest(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.requests.update");
   const supportRequestId = await resolveSupportRequestId(routeContext);
   const body = await parseJsonBody(
     request,
@@ -240,6 +245,7 @@ export async function handleCloseSupportRequest(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.requests.transition");
   const supportRequestId = await resolveSupportRequestId(routeContext);
   const gateway = await getPlatformServiceGateway();
   const ticket = await gateway.support.closeSupportRequest(
@@ -254,6 +260,7 @@ export async function handleReopenSupportRequest(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.requests.transition");
   const supportRequestId = await resolveSupportRequestId(routeContext);
   const gateway = await getPlatformServiceGateway();
   const ticket = await gateway.support.reopenSupportRequest(
@@ -268,6 +275,7 @@ export async function handleChangeSupportState(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.requests.transition");
   const supportRequestId = await resolveSupportRequestId(routeContext);
   const body = await parseJsonBody(
     request,
@@ -288,6 +296,7 @@ export async function handleChangeSupportPriority(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.requests.update");
   const supportRequestId = await resolveSupportRequestId(routeContext);
   const body = await parseJsonBody(
     request,
@@ -309,6 +318,7 @@ export async function handleAssignSupportOwner(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.requests.assign");
   const supportRequestId = await resolveSupportRequestId(routeContext);
   const body = await parseJsonBody(
     request,
@@ -330,6 +340,7 @@ export async function handleRemoveSupportOwner(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.requests.assign");
   const supportRequestId = await resolveSupportRequestId(routeContext);
   const gateway = await getPlatformServiceGateway();
   const ticket = await gateway.support.assignSupportRequest(
@@ -349,6 +360,7 @@ export async function handleAssignSupportCustomer(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.requests.update");
   const supportRequestId = await resolveSupportRequestId(routeContext);
   const body = await parseJsonBody(
     request,
@@ -374,6 +386,7 @@ export async function handleListSupportArticles(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.articles.list", "support.requests.read");
   const params = await routeContext?.params;
   const supportRequestId = parsePathParam(
     supportRequestIdParamSchema,
@@ -405,6 +418,7 @@ export async function handleGetSupportArticle(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.articles.read", "support.articles.list");
   const { supportRequestId, articleId } = await resolveArticleId(routeContext);
   const gateway = await getPlatformServiceGateway();
   const article = await gateway.supportArticles.get(
@@ -424,6 +438,7 @@ export async function handleCreateInternalNote(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.articles.create");
   const params = await routeContext?.params;
   const supportRequestId = parsePathParam(
     supportRequestIdParamSchema,
@@ -459,6 +474,7 @@ export async function handleCreateCustomerReply(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.articles.create");
   const params = await routeContext?.params;
   const supportRequestId = parsePathParam(
     supportRequestIdParamSchema,
@@ -494,6 +510,7 @@ export async function handleDownloadSupportAttachment(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.articles.read", "support.articles.list");
   const params = await routeContext?.params;
   const supportRequestId = parsePathParam(
     supportRequestIdParamSchema,
@@ -529,6 +546,7 @@ export async function handleGetSupportHistory(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.requests.read", "support.requests.list");
   const supportRequestId = await resolveSupportRequestId(routeContext);
   const query = parseQuery(historyListQuerySchema, request.nextUrl.searchParams);
   const gateway = await getPlatformServiceGateway();
@@ -562,6 +580,7 @@ export async function handleListOrganizations(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireSupportPermission(context, "support.organizations.list");
   const query = parseQuery(organizationListQuerySchema, request.nextUrl.searchParams);
   const gateway = await getPlatformServiceGateway();
   const listQuery = toListQuery(query);
@@ -590,6 +609,11 @@ export async function handleGetOrganization(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(
+    context,
+    "support.organizations.read",
+    "support.organizations.list",
+  );
   const organizationId = await resolveOrganizationId(routeContext);
   const gateway = await getPlatformServiceGateway();
   const org = await gateway.supportOrganizations.getOrganization(
@@ -603,6 +627,7 @@ export async function handleCreateOrganization(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireSupportPermission(context, "support.organizations.create");
   const body = await parseJsonBody(
     request,
     createOrganizationBodySchema,
@@ -627,6 +652,7 @@ export async function handleUpdateOrganization(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.organizations.update");
   const organizationId = await resolveOrganizationId(routeContext);
   const body = await parseJsonBody(
     request,
@@ -657,6 +683,11 @@ export async function handleArchiveOrganization(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(
+    context,
+    "support.organizations.archive",
+    "support.organizations.update",
+  );
   const organizationId = await resolveOrganizationId(routeContext);
   const gateway = await getPlatformServiceGateway();
   const org = await gateway.supportOrganizations.archiveOrganization(
@@ -674,6 +705,7 @@ export async function handleListGroups(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireSupportPermission(context, "support.groups.list");
   const query = parseQuery(groupListQuerySchema, request.nextUrl.searchParams);
   const gateway = await getPlatformServiceGateway();
   const listQuery = toListQuery(query);
@@ -699,6 +731,7 @@ export async function handleGetGroup(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.groups.read", "support.groups.list");
   const groupId = await resolveGroupId(routeContext);
   const gateway = await getPlatformServiceGateway();
   const group = await gateway.supportGroups.getGroup(context.serviceContext, groupId);
@@ -709,6 +742,7 @@ export async function handleCreateGroup(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireSupportPermission(context, "support.groups.create");
   const body = await parseJsonBody(
     request,
     createGroupBodySchema,
@@ -729,6 +763,7 @@ export async function handleUpdateGroup(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.groups.update");
   const groupId = await resolveGroupId(routeContext);
   const body = await parseJsonBody(
     request,
@@ -756,6 +791,7 @@ export async function handleListSupportUsers(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireSupportPermission(context, "support.users.list");
   const query = parseQuery(supportUserListQuerySchema, request.nextUrl.searchParams);
   const gateway = await getPlatformServiceGateway();
 
@@ -826,6 +862,7 @@ export async function handleGetSupportUser(
   context: PlatformApiRequestContext,
   routeContext?: { params: Promise<Record<string, string>> },
 ) {
+  requireSupportPermission(context, "support.users.read", "support.users.list");
   const userId = await resolveSupportUserId(routeContext);
   const gateway = await getPlatformServiceGateway();
   const user = await gateway.supportUsers.getUser(context.serviceContext, userId);
@@ -840,6 +877,7 @@ export async function handleSupportSearch(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireSupportPermission(context, "support.search.execute", "support.requests.list");
   const query = parseQuery(supportSearchQuerySchema, request.nextUrl.searchParams);
   const queryText = (query.q ?? query.query)!;
   const gateway = await getPlatformServiceGateway();
@@ -874,6 +912,7 @@ export async function handleSupportAnalytics(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireSupportPermission(context, "support.analytics.read");
   const gateway = await getPlatformServiceGateway();
   const snapshot = await gateway.supportAnalytics.getSupportIntelligence(
     context.serviceContext,

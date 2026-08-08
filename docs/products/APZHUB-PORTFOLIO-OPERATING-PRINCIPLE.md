@@ -1,11 +1,11 @@
 # APZHUB Portfolio Operating Principle
 
-| Field     | Value                                                        |
-| --------- | ------------------------------------------------------------ |
-| Timestamp | 20260808T081000Z                                             |
-| Kind      | Operating principle — **not** a programme                    |
-| Status    | **IN FORCE**                                                 |
-| Authority | Owner direction after APZ Projects + APZQEP Production Ready |
+| Field     | Value                                                                                       |
+| --------- | ------------------------------------------------------------------------------------------- |
+| Timestamp | 20260808T170500Z                                                                            |
+| Kind      | Operating principle — gate for the Delivery Standard                                        |
+| Status    | **IN FORCE**                                                                                |
+| Authority | Owner direction · part of [APZHUB-DELIVERY-STANDARD.md](./APZHUB-DELIVERY-STANDARD.md) v1.0 |
 
 ---
 
@@ -52,6 +52,6 @@ Finite inventory → Continuous engineering → Production readiness
 
 ## Related
 
+- **Reference Standard:** [APZHUB-DELIVERY-STANDARD.md](./APZHUB-DELIVERY-STANDARD.md) v1.0 (**IMMUTABLE**)
 - Portfolio dashboard: [APZHUB-PORTFOLIO-STATUS.md](./APZHUB-PORTFOLIO-STATUS.md)
-- Delivery lifecycle: [APZHUB-DELIVERY-STANDARD.md](./APZHUB-DELIVERY-STANDARD.md)
-- Delivery reference: APZ Projects Release 3.0 · APZQEP Version 1.1
+- Proven by: APZ Projects 3.0 · APZQEP 1.1 · APZ Workflow 1.0

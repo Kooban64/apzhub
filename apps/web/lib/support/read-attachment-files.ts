@@ -1,6 +1,7 @@
 import type { SupportArticleAttachmentUpload } from "./types";
 
-const MAX_ATTACHMENT_BYTES = 1_048_576;
+/** Support v1.0 attachment max — ENG-0004 / SUP-P1-04. */
+export const SUPPORT_MAX_ATTACHMENT_BYTES = 1_048_576;
 
 export async function readAttachmentFiles(
   files: FileList | readonly File[],
@@ -8,7 +9,7 @@ export async function readAttachmentFiles(
   const list = Array.from(files);
   const uploads: SupportArticleAttachmentUpload[] = [];
   for (const file of list) {
-    if (file.size > MAX_ATTACHMENT_BYTES) {
+    if (file.size > SUPPORT_MAX_ATTACHMENT_BYTES) {
       throw new Error(`Attachment "${file.name}" exceeds the 1 MiB limit.`);
     }
     const dataBase64 = await readFileAsBase64(file);

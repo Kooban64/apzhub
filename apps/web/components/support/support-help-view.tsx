@@ -79,6 +79,30 @@ export function SupportHelpView() {
           </ul>
         </section>
 
+        <section
+          className="rounded-lg border border-[var(--color-border)] p-4"
+          data-testid="support-help-limitations"
+        >
+          <h2 className="text-sm font-semibold">Current limitations</h2>
+          <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
+            APZ Support v1.0 is honest about what is not complete. These are product
+            limits — not temporary glitches.
+          </p>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--color-muted-foreground)]">
+            <li>
+              <strong className="text-[var(--color-foreground)]">Live updates</strong>{" "}
+              are not enabled in Support v1.0. Use Refresh or reopen the request; work
+              still saves through normal submit actions.
+            </li>
+            <li>
+              <strong className="text-[var(--color-foreground)]">Attachments</strong>{" "}
+              are limited to{" "}
+              <strong className="text-[var(--color-foreground)]">1 MiB</strong> per
+              file. Attachment delete is not available in APZ Support.
+            </li>
+          </ul>
+        </section>
+
         <section className="rounded-lg border border-[var(--color-border)] p-4">
           <h2 className="text-sm font-semibold">Documentation</h2>
           <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">

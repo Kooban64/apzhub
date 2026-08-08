@@ -15,7 +15,7 @@
 - API CERTIFIED_WITH_LIMITATIONS; UI PRODUCTION_READY_WITH_LIMITATIONS (OSS-110-14)
 - Zammad webhook HTTP ingress available via Platform `POST /api/v1/integrations/zammad/webhooks` (R12-SUP-01 / APZHUB-ENG-0003 **ACCEPTED**)
 - Binary attachment upload/download available via article create + `GET .../attachments/{attachmentId}` (R12-SUP-02 / APZHUB-ENG-0004 · Awaiting Acceptance); max **1 MiB**; attachment delete not exposed
-- No realtime WebSocket/SSE transport for Support (in-app ENF Attention notifications available — APZHUB-1.1-003)
+- Support v1.0 product realtime: **not enabled** (honest none). Platform SSE may exist behind `APZHUB_REALTIME_SSE_ENABLED` / `NEXT_PUBLIC_APZHUB_REALTIME_SSE_ENABLED`; Support UI does not connect unless both are explicitly enabled. In-app ENF Attention notifications remain available — APZHUB-1.1-003. Unlock is Owner/ops enablement, not a Support 2.0 programme.
 - Durable idempotency deferred (in-memory mapping in test envs)
 
 ## Resolved (Release 1.1 — APZHUB-1.1-003)

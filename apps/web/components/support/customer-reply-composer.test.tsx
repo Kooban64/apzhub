@@ -50,6 +50,12 @@ describe("CustomerReplyComposer", () => {
     expect(screen.getByTestId("support-customer-reply-warning").textContent).toMatch(
       /customer-visible/i,
     );
+    expect(screen.getByTestId("support-attachment-limits").textContent).toMatch(
+      /1 MiB/i,
+    );
+    expect(screen.getByTestId("support-attachment-limits").textContent).toMatch(
+      /delete is not available/i,
+    );
     const channel = screen.getByTestId(
       "support-customer-reply-channel",
     ) as HTMLSelectElement;
