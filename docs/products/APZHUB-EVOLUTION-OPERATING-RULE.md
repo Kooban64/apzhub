@@ -3,7 +3,7 @@
 | Field     | Value                                                        |
 | --------- | ------------------------------------------------------------ |
 | Status    | **IN FORCE**                                                 |
-| Timestamp | 20260808T235000Z                                             |
+| Timestamp | 20260808T235500Z                                             |
 | Kind      | Operating rule — not a programme · not Engineering Execution |
 | Authority | Owner direction after Platform Services v1.0                 |
 
