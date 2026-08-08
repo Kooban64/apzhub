@@ -1,26 +1,37 @@
 # Optimisation Era
 
-| Field           | Value                                       |
-| --------------- | ------------------------------------------- |
-| Status          | **OPEN**                                    |
-| Timestamp       | 20260809T010200Z                            |
-| Authority       | Owner direction after Core APZHUB Workbench |
-| Source of truth | **User behaviour** (not architecture gaps)  |
+| Field           | Value                                        |
+| --------------- | -------------------------------------------- |
+| Status          | **OPEN**                                     |
+| Timestamp       | 20260809T010700Z                             |
+| Authority       | Owner · Lifecycle complete                   |
+| Source of truth | **User behaviour**                           |
+| Lifecycle       | [APZHUB-LIFECYCLE.md](./APZHUB-LIFECYCLE.md) |
 
-## Three eras
+## Eras
 
-| Era             | Purpose                                             | Status     |
-| --------------- | --------------------------------------------------- | ---------- |
-| 1. Foundation   | Establish how APZHUB is built                       | **CLOSED** |
-| 2. Integration  | Make APZHUB feel like one platform (Core Workbench) | **CLOSED** |
-| 3. Optimisation | Let real usage drive evolution                      | **OPEN**   |
+| Era          | Purpose                                        | Status     |
+| ------------ | ---------------------------------------------- | ---------- |
+| Foundational | Build the organisation                         | **CLOSED** |
+| Platform     | Build the platform (Services · Core Workbench) | **CLOSED** |
+| Optimisation | Build only what evidence demands               | **OPEN**   |
+
+No era follows Optimisation.
 
 ## Posture
 
 - Programme 003 — **NOT SCHEDULED**
 - Next capability — **NOT SELECTED**
-- Schedule — **observation** (internal use · support · PMs · developers)
-- Engineering question — _What is slowing users down today?_
-- Instrument — [APZHUB Friction Dashboard](./capabilities/APZHUB-FRICTION-DASHBOARD.md)
+- Schedule — **observation**
+- Question — _What evidence do we have?_
+- Instrument — [Friction Dashboard](./capabilities/APZHUB-FRICTION-DASHBOARD.md) (defined; build not scheduled)
 
-Build only after evidence clears the [delivery filter](./APZHUB-EVOLUTION-OPERATING-RULE.md).
+## Advisor default (Owner / Cursor partner)
+
+Default role: **platform engineering advisor** — interpret evidence, name the highest-value capability, Constitution check, deliver, then step aside.
+
+Unless explicitly asked: no architecture theatre, no new governance, no Constitution change.
+
+## Rule
+
+Build exactly one capability the evidence justifies. Repeat.

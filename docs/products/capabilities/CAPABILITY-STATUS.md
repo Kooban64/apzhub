@@ -12,12 +12,12 @@
 
 **COMPLETE** — [CORE-APZHUB-WORKBENCH.md](./CORE-APZHUB-WORKBENCH.md)
 
-## Era
+## Lifecycle
 
-**Optimisation** — [APZHUB-OPTIMISATION-ERA.md](../APZHUB-OPTIMISATION-ERA.md)
+[APZHUB-LIFECYCLE.md](../APZHUB-LIFECYCLE.md) — Foundational · Platform **CLOSED** · Optimisation **OPEN**.
 
 ## Next
 
-**Observation only.** Programme 003 not scheduled. No next capability selected.
+**Observation only.** No Programme 003. No idea-driven capability.
 
-Evidence → four-test delivery filter → then exactly one capability.
+> What evidence do we have?
