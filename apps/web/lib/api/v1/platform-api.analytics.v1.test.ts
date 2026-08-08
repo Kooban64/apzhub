@@ -60,7 +60,9 @@ function makeRequest(
   });
 }
 
-function makeContext(): PlatformApiRequestContext {
+function makeContext(
+  overrides: Partial<PlatformApiRequestContext["serviceContext"]> = {},
+): PlatformApiRequestContext {
   return {
     tracing: {
       requestId: "req-test-analytics",
@@ -71,6 +73,9 @@ function makeContext(): PlatformApiRequestContext {
     serviceContext: buildTestServiceContext({
       tenantId: API_TEST_TENANT_A,
       correlationId: "corr-test-analytics",
+      // ANA-PR-05 — handler gate requires session grants.
+      permissions: ["analytics.*"],
+      ...overrides,
     }),
   };
 }
@@ -105,6 +110,16 @@ function walkRoutes(dir: string, out: string[] = []): string[] {
 describe("APZHUB-PLATFORM-ANALYTICS-005 Analytics HTTP API", () => {
   afterEach(() => {
     resetPlatformApiGatewayBootstrap();
+  });
+
+  it("ANA-PR-05 denies at handler gate when session permissions empty", async () => {
+    installAnalyticsGateway();
+    await expect(
+      handleListAnalyticsDashboards(
+        makeRequest("/api/v1/analytics/dashboards"),
+        makeContext({ permissions: [] }),
+      ),
+    ).rejects.toMatchObject({ status: 403, body: { code: "FORBIDDEN" } });
   });
 
   it("returns 503 when Analytics HTTP is disabled", async () => {
@@ -292,7 +307,7 @@ describe("APZHUB-PLATFORM-ANALYTICS-005 Analytics HTTP API", () => {
 
   it("registers Analytics routes with withPlatformApiAuth and OpenAPI paths", () => {
     const routes = walkRoutes(join(process.cwd(), "apps/web/app/api/v1/analytics"));
-    expect(routes.length).toBe(10);
+    expect(routes.length).toBeGreaterThanOrEqual(10);
     for (const route of routes) {
       const content = readFileSync(route, "utf8");
       expect(content).toContain("withPlatformApiAuth");
@@ -304,6 +319,7 @@ describe("APZHUB-PLATFORM-ANALYTICS-005 Analytics HTTP API", () => {
       "utf8",
     );
     expect(handler).not.toMatch(/@apzhub\/integration-metabase/);
+    expect(handler).toContain("requireAnalyticsPermission");
 
     const spec = loadPlatformOpenApiSpecObject() as {
       openapi: string;

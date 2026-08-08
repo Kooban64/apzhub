@@ -13,6 +13,7 @@ import {
 } from "@apzhub/analytics-contracts";
 
 import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
+import { requireAnalyticsPermission } from "./require-analytics-permission";
 import { PLATFORM_API_MAX_BODY_BYTES } from "../constants";
 import { PlatformApiHttpError } from "../errors";
 import {
@@ -59,6 +60,7 @@ export async function handleGetAnalyticsHealth(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.admin");
   const gateway = await requireAnalyticsGateway();
   const result = await gateway.analytics.analytics.getHealth(context.serviceContext);
   return jsonDataResponse(result, context.tracing);
@@ -68,6 +70,7 @@ export async function handleGetAnalyticsReadiness(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.admin");
   const gateway = await requireAnalyticsGateway();
   const result = await gateway.analytics.analytics.getReadiness(context.serviceContext);
   return jsonDataResponse(result, context.tracing);
@@ -77,6 +80,7 @@ export async function handleGetAnalyticsCapabilities(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.view", "analytics.dashboard.view");
   const gateway = await requireAnalyticsGateway();
   const bootstrap = await getPlatformApiGatewayBootstrap();
   const caps = await gateway.analytics.capabilities.listCapabilities(
@@ -105,6 +109,7 @@ export async function handleListAnalyticsDashboards(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.dashboard.view", "analytics.view");
   const query = parseQuery(
     analyticsDashboardListQuerySchema,
     request.nextUrl.searchParams,
@@ -140,6 +145,7 @@ export async function handleGetAnalyticsDashboard(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.dashboard.view", "analytics.view");
   const params = await routeContext?.params;
   const dashboardId = parsePathParam(
     analyticsDashboardIdParamSchema,
@@ -158,6 +164,7 @@ export async function handleListAnalyticsCategories(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.dashboard.view", "analytics.view");
   const gateway = await requireAnalyticsGateway();
   const result = await gateway.analytics.dashboards.listCategories(
     context.serviceContext,
@@ -173,6 +180,7 @@ export async function handleListAnalyticsDatasets(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.admin", "analytics.dataset.view");
   const gateway = await requireAnalyticsGateway();
   const result = await gateway.analytics.datasets.listDatasets(context.serviceContext);
   return jsonDataResponse({ items: result }, context.tracing);
@@ -182,6 +190,7 @@ export async function handleListAnalyticsReports(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.admin", "analytics.report.run");
   const gateway = await requireAnalyticsGateway();
   const result = await gateway.analytics.reports.listReportLinks(
     context.serviceContext,
@@ -197,6 +206,7 @@ export async function handleListAnalyticsSaved(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.saved.manage", "analytics.view");
   const gateway = await requireAnalyticsGateway();
   const result = await gateway.analytics.savedDashboards.listSaved(
     context.serviceContext,
@@ -208,6 +218,7 @@ export async function handleCreateAnalyticsSaved(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.saved.manage");
   const body = await parseJsonBody(
     request,
     createAnalyticsSavedBodySchema,
@@ -238,6 +249,7 @@ export async function handleUpdateAnalyticsSaved(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.saved.manage");
   const params = await routeContext?.params;
   const savedId = parsePathParam(
     analyticsSavedIdParamSchema,
@@ -289,6 +301,7 @@ export async function handleDeleteAnalyticsSaved(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.saved.manage");
   const params = await routeContext?.params;
   const savedId = parsePathParam(
     analyticsSavedIdParamSchema,

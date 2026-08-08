@@ -69,6 +69,45 @@ export function AnalyticsHelpView() {
             </Button>
           </div>
         </section>
+
+        <section
+          className="rounded-lg border border-[var(--color-border)] p-4 lg:col-span-2"
+          data-testid="analytics-help-limitations"
+        >
+          <h2 className="text-sm font-semibold">Current limitations</h2>
+          <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
+            APZ Analytics v1.0 is honest about what is not complete. These are product
+            limits — not temporary glitches.
+          </p>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--color-muted-foreground)]">
+            <li>
+              <strong className="text-[var(--color-foreground)]">
+                Live visual embed
+              </strong>{" "}
+              is not available. Insight answers show evidence metadata through APZHUB
+              only.
+            </li>
+            <li>
+              <strong className="text-[var(--color-foreground)]">
+                Catalogue search
+              </strong>{" "}
+              filters titles and descriptions in the Workbench — not a full semantic
+              search product.
+            </li>
+            <li>
+              <strong className="text-[var(--color-foreground)]">
+                Datasets, reports, health, and diagnostics
+              </strong>{" "}
+              are operator surfaces — not the default Decision Companion path.
+            </li>
+            <li>
+              <strong className="text-[var(--color-foreground)]">
+                AI / predictive
+              </strong>{" "}
+              analytics and product alerting are out of scope for v1.0.
+            </li>
+          </ul>
+        </section>
       </div>
     </PageShell>
   );

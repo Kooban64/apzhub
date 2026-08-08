@@ -119,11 +119,14 @@ export function AnalyticsDashboardDetailView({
               <dd>{query.data.tags?.join(", ") || "—"}</dd>
             </div>
           </dl>
-          <p className="mt-4 text-sm text-[var(--color-muted-foreground)]">
-            Live visual embed is not exposed by the Analytics HTTP API in this
-            programme. Evidence metadata is served through APZHUB only — no engine
-            branding. Return to a business question to complete Question → Insight →
-            Decision.
+          <p
+            className="mt-4 text-sm text-[var(--color-muted-foreground)]"
+            data-testid="analytics-embed-honesty"
+            role="note"
+          >
+            Live visual embed is not available in APZ Analytics v1.0. Evidence metadata
+            is served through APZHUB only — no engine branding. Return to a business
+            question to complete Question → Insight → Decision.
           </p>
         </section>
       ) : null}

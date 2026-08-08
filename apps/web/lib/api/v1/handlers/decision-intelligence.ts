@@ -19,12 +19,23 @@ import {
 } from "@apzhub/platform-services";
 
 import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
+import { PlatformApiHttpError } from "../errors";
 import { jsonDataResponse, jsonErrorResponse } from "../response";
+import { requireAnalyticsPermission } from "./require-analytics-permission";
 
+/**
+ * ANA-PR-01 — fail closed in production; memory fallback only for non-prod isolation.
+ */
 function service() {
   try {
     return createDecisionIntelligenceService();
   } catch {
+    if (process.env.NODE_ENV === "production") {
+      throw new PlatformApiHttpError(503, {
+        code: "SERVICE_UNAVAILABLE",
+        message: "Decision intelligence is unavailable.",
+      });
+    }
     setDecisionIntelligenceStoreForTests(getMemoryDecisionIntelligenceStore());
     return createDecisionIntelligenceService(getMemoryDecisionIntelligenceStore());
   }
@@ -69,6 +80,7 @@ export async function handleListDecisionQuestions(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.view");
   const roleParam = request.nextUrl.searchParams.get("role") ?? undefined;
   const role =
     roleParam && ROLES.includes(roleParam as DecisionAudienceRole)
@@ -83,6 +95,7 @@ export async function handleGetDecisionQuestion(
   context: PlatformApiRequestContext,
   questionId: string,
 ) {
+  requireAnalyticsPermission(context, "analytics.view");
   const item = await service().getQuestion(context.serviceContext, questionId);
   if (!item) {
     return jsonErrorResponse(
@@ -98,6 +111,7 @@ export async function handleListDecisionPacks(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.view");
   const items = await service().listPacks(context.serviceContext);
   return jsonDataResponse({ items }, context.tracing);
 }
@@ -106,6 +120,7 @@ export async function handleGenerateDecisionPack(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.manage", "analytics.admin");
   const body = await readBody(request);
   if (!body) {
     return jsonErrorResponse(
@@ -146,6 +161,7 @@ export async function handleListDecisionTrends(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.view");
   const domainParam = request.nextUrl.searchParams.get("domain") ?? undefined;
   const domain =
     domainParam && DOMAINS.includes(domainParam as DecisionTrendDomain)
@@ -159,6 +175,7 @@ export async function handleListDecisionKpis(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.view", "analytics.kpi.view");
   const items = await service().listKpis(context.serviceContext);
   return jsonDataResponse({ items }, context.tracing);
 }
@@ -167,6 +184,7 @@ export async function handleCreateDecisionKpi(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.manage", "analytics.admin");
   const body = await readBody(request);
   if (!body) {
     return jsonErrorResponse(
@@ -210,6 +228,7 @@ export async function handleUpdateDecisionKpi(
   context: PlatformApiRequestContext,
   kpiId: string,
 ) {
+  requireAnalyticsPermission(context, "analytics.manage", "analytics.admin");
   const body = await readBody(request);
   if (!body) {
     return jsonErrorResponse(
@@ -243,6 +262,7 @@ export async function handleListDecisionTimeline(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.view");
   const items = await service().listTimeline(context.serviceContext);
   return jsonDataResponse({ items }, context.tracing);
 }
@@ -251,6 +271,7 @@ export async function handleCreateDecisionTimelineEntry(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireAnalyticsPermission(context, "analytics.manage", "analytics.admin");
   const body = await readBody(request);
   if (!body) {
     return jsonErrorResponse(
