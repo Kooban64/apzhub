@@ -1,19 +1,20 @@
 # Global Search v1.0 — Release Notes
 
-| Field      | Value                   |
-| ---------- | ----------------------- |
-| Capability | Global Search v1.0      |
-| Status     | **Awaiting Owner RC1**  |
-| Engine     | APS-Search / APE-Search |
+| Field   | Value                              |
+| ------- | ---------------------------------- |
+| Status  | **Production Ready**               |
+| Tag     | `apzhub-global-search-1.0`         |
+| Branch  | `release/apzhub-global-search-1.0` |
+| Service | APS-Search                         |
 
 ## Shipped
 
-- Seven product providers (Projects, Support, Workflow, Knowledge, Time, Analytics, QEP)
-- `GET /api/v1/platform/search?q=` fan-out aggregator + permission filter + product deep links
-- Workbench Ctrl+K + header Search trigger
-- Grouped results; navigation stays on `/workspace/...` paths
-- Unit tests + Playwright `apz-global-search-v1.spec.ts` (1/1 PASS)
+Seven product providers · `GET /api/v1/platform/search?q=` · permission filter · product deep links · Ctrl+K + header Search · Playwright PASS.
 
-## Out of scope (later)
+## Constraints upheld
 
-Realtime indexing UX · saved searches · AI/semantic search · ranking ML
+No new engine · no Constitution change · no product redesign · no AI · no provider coupling.
+
+## Operational Learning
+
+Watch empty-index products, deep-link coverage, and hit-level permission metadata quality.
