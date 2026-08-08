@@ -1,19 +1,13 @@
 # Capability: Personalisation v1.0
 
-| Field        | Value                                                                                  |
-| ------------ | -------------------------------------------------------------------------------------- |
-| Status       | **ENGINEERING**                                                                        |
-| Constitution | PASS — Platform · APS-Personalisation · Two-Consumer · no permissions granted by prefs |
-| Engine       | APS-Personalisation (`@apzhub/platform-personalisation`)                               |
+| Field        | Value                          |
+| ------------ | ------------------------------ |
+| Status       | **IMPLEMENTED — awaiting RC1** |
+| Constitution | PASS — APS-Personalisation     |
+| Centre       | `/workspace/personalisation`   |
 
-## Slices
+## Shipped
 
-1. Preferences centre surface
-2. Favourites
-3. Recent items
-4. Default landing page
-5. Remembered filters
-6. Certify
-7. Ship
+Preferences (landing + theme) · Favourites · Recent tracking · Remembered filters · Landing redirect · Playwright
 
 No new service. No AI. No redesign.

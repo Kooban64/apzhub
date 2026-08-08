@@ -1,0 +1,30 @@
+manifestSchemaVersion: "1.0"
+id: platform-personalisation-centre
+name: Personalisation
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: APS-Personalisation centre — preferences, favourites, recent, filters.
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: home
+    label: Personalisation
+    icon: settings
+    route: /workspace/personalisation
+    order: 25
+    permission: platform.read
+  view:
+    title: Personalisation
+    workspace: home
+    route: /workspace/personalisation
+    permission: platform.read

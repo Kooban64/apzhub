@@ -10,11 +10,6 @@
 
              ▲
              │
-   Search �
-        APZHUB Workbench
-
-             ▲
-             │
    Search ◄──┼──► Notifications
              │
              ▼
@@ -26,5 +21,3 @@
 | Global Search           | Where is it?             | `apzhub-global-search-1.0`         |
 | Unified Notifications   | What needs my attention? | `apzhub-unified-notifications-1.0` |
 | Unified Activity Stream | What has happened?       | `apzhub-unified-activity-1.0`      |
-
-Shared operational experience above every product.
