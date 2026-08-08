@@ -53,9 +53,9 @@
 
 ## Programme status
 
-1. ✅ Original portfolio products — **COMPLETE** (7/7)
+1. ✅ Original portfolio products — **COMPLETE** (7/7) · **FROZEN**
 2. ✅ **Portfolio Completion** (PORT-001…005) — **CLOSED** · freeze **IN FORCE**
-3. ⏸ **APZHUB Platform Evolution** — **not open** (requires separate Owner authorisation after PORT-005)
+3. ▶ **APZHUB Platform Evolution** — **OPEN** ([charter](./platform-evolution/PROGRAMME-CHARTER.md)) · Programme 001 inventory **proposed** · **no coding until APZPE-002 Accept** · **no AI in Phase 1**
 
 ---
 

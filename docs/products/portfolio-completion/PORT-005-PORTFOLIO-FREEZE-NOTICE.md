@@ -29,9 +29,11 @@ The **original APZHUB product portfolio** is hereby **FROZEN as COMPLETE**.
 
 ## What is not opened by this freeze
 
-**APZHUB Platform Evolution** is **not** automatically authorised.
+**APZHUB Platform Evolution** is **not** automatically authorised by the freeze alone.
 
-Platform Evolution may open only as a **separate Owner-authorised programme** after this freeze notice.
+It may open only as a **separate Owner-authorised programme** after this freeze notice.
+
+**Update (20260808):** Owner opened Platform Evolution as a new programme — see [../../platform-evolution/PROGRAMME-CHARTER.md](../../platform-evolution/PROGRAMME-CHARTER.md). Original product baselines remain **FROZEN**.
 
 ## Historical boundary
 
