@@ -2,7 +2,7 @@
 
 | Field               | Value                                                                                                                                                                                                                                                  |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Timestamp           | 20260808T195000Z                                                                                                                                                                                                                                       |
+| Timestamp           | 20260808T195500Z                                                                                                                                                                                                                                       |
 | Authority           | Owner operating face — one-page dashboard                                                                                                                                                                                                              |
 | Complements         | [APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md](./APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md) · [APZHUB-PORTFOLIO-OPERATING-PRINCIPLE.md](./APZHUB-PORTFOLIO-OPERATING-PRINCIPLE.md) · [APZHUB-DELIVERY-STANDARD.md](./APZHUB-DELIVERY-STANDARD.md) |
 | Rule                | Observation / planning only — does not authorise engineering                                                                                                                                                                                           |
@@ -26,12 +26,12 @@
 
 ## Portfolio by maturity
 
-| Status               | Products                                                                               |
-| -------------------- | -------------------------------------------------------------------------------------- |
-| **Production Ready** | APZ Projects · APZQEP · APZ Workflow · APZ Support · APZ Analytics · **APZ Knowledge** |
-| **Operational**      | **APZ Time** (final Delivery-Standard closeout candidate)                              |
-| **In Engineering**   | _(none)_                                                                               |
-| **Assessment**       | _(none — APZ Time assessment opening)_                                                 |
+| Status               | Products                                                                           |
+| -------------------- | ---------------------------------------------------------------------------------- |
+| **Production Ready** | APZ Projects · APZQEP · APZ Workflow · APZ Support · APZ Analytics · APZ Knowledge |
+| **Operational**      | _(none — final candidate elevating under DS)_                                      |
+| **In Engineering**   | _(none)_                                                                           |
+| **Assessment**       | **APZ Time** (APZTIM-001 complete · APZTIM-002 proposed — await Accept)            |
 
 ### Scoreboard
 
@@ -43,7 +43,7 @@
 | APZ Support   | Production Ready |
 | APZ Analytics | Production Ready |
 | APZ Knowledge | Production Ready |
-| APZ Time      | Operational      |
+| APZ Time      | Assessment       |
 
 ---
 
@@ -69,10 +69,10 @@
 4. ✅ **APZ Support** — Production Ready
 5. ✅ **APZ Analytics** — Production Ready
 6. ✅ **APZ Knowledge** — Production Ready
-7. 🎯 **APZ Time** — Assess → finite inventory → Engineer → Production Ready v1.0
+7. 🎯 **APZ Time** — assessment complete; inventory **proposed** — Accept → Engineer → Production Ready v1.0
 8. **Portfolio Completion** close-out + freeze (before Platform Evolution)
 
-**Immediate next action:** Open APZ Time Product Assessment (APZTIM-001) → propose finite inventory (APZTIM-002) for Owner Accept. No Platform Evolution until Portfolio Completion freeze.
+**Immediate next action:** Owner **Accept** [APZTIM-002](./apztime/engineering/APZTIM-002-FINITE-PRODUCT-INVENTORY.md) → Begin Engineering. No Time coding until Accepted. No Platform Evolution until Portfolio Completion freeze.
 
 ---
 
