@@ -19,12 +19,23 @@ import {
 } from "@apzhub/platform-services";
 
 import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
+import { PlatformApiHttpError } from "../errors";
 import { jsonDataResponse, jsonErrorResponse } from "../response";
+import { requireKnowledgePermission } from "./require-knowledge-permission";
 
+/**
+ * KNW-PR-01 — fail closed in production; memory fallback only for non-prod isolation.
+ */
 function service() {
   try {
     return createOrganisationalMemoryService();
   } catch {
+    if (process.env.NODE_ENV === "production") {
+      throw new PlatformApiHttpError(503, {
+        code: "SERVICE_UNAVAILABLE",
+        message: "Organisational memory is unavailable.",
+      });
+    }
     setOrganisationalMemoryStoreForTests(getMemoryOrganisationalMemoryStore());
     return createOrganisationalMemoryService(getMemoryOrganisationalMemoryStore());
   }
@@ -71,6 +82,7 @@ export async function handleListKnowledgeObjects(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireKnowledgePermission(context, "knowledge.view", "knowledge.admin");
   const kindParam = request.nextUrl.searchParams.get("kind") ?? undefined;
   const kind =
     kindParam && KINDS.includes(kindParam as KnowledgeObjectKind)
@@ -85,6 +97,7 @@ export async function handleGetKnowledgeObject(
   context: PlatformApiRequestContext,
   objectId: string,
 ) {
+  requireKnowledgePermission(context, "knowledge.view", "knowledge.admin");
   const item = await service().get(context.serviceContext, objectId);
   if (!item) {
     return jsonErrorResponse(
@@ -100,6 +113,7 @@ export async function handleCreateKnowledgeLesson(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireKnowledgePermission(context, "knowledge.admin", "knowledge.manage");
   const body = await readBody(request);
   if (!body) {
     return jsonErrorResponse(
@@ -139,6 +153,7 @@ export async function handleCreateKnowledgeLibraryItem(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireKnowledgePermission(context, "knowledge.admin", "knowledge.manage");
   const body = await readBody(request);
   if (!body) {
     return jsonErrorResponse(
@@ -177,6 +192,7 @@ export async function handleCreateDecisionKnowledge(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireKnowledgePermission(context, "knowledge.admin", "knowledge.manage");
   const body = await readBody(request);
   if (!body) {
     return jsonErrorResponse(
@@ -218,6 +234,7 @@ export async function handleUpdateKnowledgeObject(
   context: PlatformApiRequestContext,
   objectId: string,
 ) {
+  requireKnowledgePermission(context, "knowledge.admin", "knowledge.manage");
   const body = await readBody(request);
   if (!body) {
     return jsonErrorResponse(
@@ -273,6 +290,7 @@ export async function handleTransitionKnowledgeLifecycle(
   context: PlatformApiRequestContext,
   objectId: string,
 ) {
+  requireKnowledgePermission(context, "knowledge.admin", "knowledge.manage");
   const body = await readBody(request);
   if (!body) {
     return jsonErrorResponse(
@@ -314,6 +332,7 @@ export async function handleGetKnowledgeQuality(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
+  requireKnowledgePermission(context, "knowledge.view", "knowledge.admin");
   const report = await service().getQuality(context.serviceContext);
   return jsonDataResponse(report, context.tracing);
 }

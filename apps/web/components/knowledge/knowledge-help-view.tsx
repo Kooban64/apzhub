@@ -66,6 +66,43 @@ export function KnowledgeHelpView({
           <li>Learning belongs to APZQEP. Search and AI may consume memory only.</li>
           <li>Documents remain the file SoR. Law remains the governance SoR.</li>
         </ul>
+        <section
+          className="rounded-lg border border-[var(--color-border)] p-4 text-[var(--color-muted-foreground)]"
+          data-testid="knowledge-help-limitations"
+        >
+          <h2 className="text-sm font-semibold text-[var(--color-foreground)]">
+            Current limitations
+          </h2>
+          <p className="mt-2">
+            APZ Knowledge v1.0 is honest about what is not complete. These are product
+            limits — not temporary glitches.
+          </p>
+          <ul className="mt-3 list-disc space-y-2 pl-5">
+            <li>
+              <strong className="text-[var(--color-foreground)]">
+                Consumer overlays
+              </strong>{" "}
+              in other products are deferred — not shipped in v1.0.
+            </li>
+            <li>
+              <strong className="text-[var(--color-foreground)]">
+                AI / RAG / chat
+              </strong>{" "}
+              are out of product identity for v1.0.
+            </li>
+            <li>
+              <strong className="text-[var(--color-foreground)]">
+                Organisational memory
+              </strong>{" "}
+              requires a durable platform store in production — unavailable storage
+              fails closed.
+            </li>
+            <li>
+              <strong className="text-[var(--color-foreground)]">Diagnostics</strong>{" "}
+              are operator surfaces — not the default Memory Companion path.
+            </li>
+          </ul>
+        </section>
         <Button
           type="button"
           size="sm"

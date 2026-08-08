@@ -3,37 +3,37 @@
 | Field             | Value                                                                                                    |
 | ----------------- | -------------------------------------------------------------------------------------------------------- |
 | Product           | **APZ Knowledge**                                                                                        |
+| Closeout target   | **Version 1.0 – Production Ready**                                                                       |
+| Classification    | **A – Mostly Complete**                                                                                  |
+| Engineering       | **COMPLETE**                                                                                             |
+| Release status    | **PRODUCTION READY** · **CLOSED**                                                                        |
+| Product phase     | **OPERATIONAL LEARNING**                                                                                 |
+| Product version   | **1.0** (`apz-knowledge-1.0`)                                                                            |
 | Mission           | APZ-KNOWLEDGE-000 **APPROVED / CLOSED**                                                                  |
-| Native programme  | APZ-KNOWLEDGE-NATIVE-001                                                                                 |
-| Native adoption   | N-01…N-04 **COMPLETE**                                                                                   |
+| Native programme  | APZ-KNOWLEDGE-NATIVE-001 **COMPLETE / FROZEN** (N-01…N-04)                                               |
 | Quality baseline  | APZQEP Version 1.1 — Enterprise Quality Baseline                                                         |
-| Operational model | **IN FORCE** — this pack                                                                                 |
 | Designation       | **REFERENCE IMPLEMENTATION #008** — [REFERENCE-IMPLEMENTATION-008.md](./REFERENCE-IMPLEMENTATION-008.md) |
-| Identity          | Memory Companion — Enterprise Organisational Memory                                                      |
-| Admin tooling     | Secondary / `knowledge.admin` — never product identity                                                   |
-| Layer             | Enterprise Organisational Memory — **OPERATIONAL**                                                       |
-| Timestamp         | 20260806T092000Z                                                                                         |
+| Identity          | Memory Companion — organisational memory                                                                 |
+| Engine (internal) | Platform-native Organisational Memory — **no third-party engine brand**                                  |
+| Timestamp         | 20260808T195000Z                                                                                         |
 
 ## Status statement
 
-APZ Knowledge is a **native APZHUB product** operated under the APZQEP Enterprise Quality Baseline.
+APZ Knowledge Version 1.0 is **PRODUCTION READY** and **CLOSED** under **APZHUB Delivery Standard v1.0**.
 
-It is **REFERENCE IMPLEMENTATION #008**.
+Owner RC1 **APPROVED**. Tag `apz-knowledge-1.0`. Freeze branch `release/apz-knowledge-1.0`.
 
-It is **not** a document library, wiki, search portal, learning system, or AI assistant. Deferred consumer overlays do not mean the product is incomplete — that work belongs to future enterprise investments under separate Owner Auth.
+The product is in **Operational Learning**. Knowledge 2.0, AI/RAG, and redesign remain out of scope unless separately authorised.
 
-## Faces
+## Authoritative closeout faces
 
-| Face                   | Path                                                                               |
-| ---------------------- | ---------------------------------------------------------------------------------- |
-| Reference designation  | [REFERENCE-IMPLEMENTATION-008.md](./REFERENCE-IMPLEMENTATION-008.md)               |
-| Mission                | [PRODUCT-MISSION.md](./PRODUCT-MISSION.md)                                         |
-| Native programme       | [../apz-knowledge-native-001/](../apz-knowledge-native-001/)                       |
-| Operations             | [PRODUCT-OPERATIONS.md](./PRODUCT-OPERATIONS.md)                                   |
-| Quality lifecycle      | [APZKNOWLEDGE-QUALITY-LIFECYCLE.md](./APZKNOWLEDGE-QUALITY-LIFECYCLE.md)           |
-| Operational principles | [APZKNOWLEDGE-OPERATIONAL-PRINCIPLES.md](./APZKNOWLEDGE-OPERATIONAL-PRINCIPLES.md) |
+| Face                       | Path                                                                                                       | Authority                 |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------- |
+| **Owner Release Decision** | [release-1.0/OWNER-RELEASE-DECISION.md](./release-1.0/OWNER-RELEASE-DECISION.md)                           | **RC1 APPROVED**          |
+| **Release pack**           | [release-1.0/README.md](./release-1.0/README.md)                                                           | Published                 |
+| **Closeout inventory**     | [engineering/APZKNW-002-FINITE-PRODUCT-INVENTORY.md](./engineering/APZKNW-002-FINITE-PRODUCT-INVENTORY.md) | **ACCEPTED** · all Closed |
+| Assessment                 | [engineering/APZKNW-001-PRODUCT-ASSESSMENT.md](./engineering/APZKNW-001-PRODUCT-ASSESSMENT.md)             | Complete                  |
 
 ## Next action
 
-Do not continue APZ-KNOWLEDGE-NATIVE-001.  
-Next: operational learning from real changes through APZQEP; future capability evolution only when Owner-authorised and evidence-driven.
+Operational Learning. Portfolio next: **APZ Time** → then formal **Portfolio Completion** (before Platform Evolution).

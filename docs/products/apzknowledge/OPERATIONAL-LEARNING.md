@@ -1,27 +1,35 @@
 # APZ Knowledge — Operational Learning
 
-| Field     | Value            |
-| --------- | ---------------- |
-| Status    | **IN FORCE**     |
-| Timestamp | 20260806T092000Z |
+| Field     | Value                             |
+| --------- | --------------------------------- |
+| Status    | **IN FORCE**                      |
+| Timestamp | 20260808T195000Z                  |
+| Baseline  | Version 1.0 (`apz-knowledge-1.0`) |
 
-## Contract
+## Rule
 
-When a Knowledge change hurts, teaches, or reveals identity drift, record it:
+Every completed APZ Knowledge release records Operational Learning.  
+Friction is classified: Engineering · Operational · User · Training · Documentation · Product Enhancement · Portfolio Capability.
 
-| Face                        | Use                           |
-| --------------------------- | ----------------------------- |
-| Friction Log                | Pain during change / release  |
-| Learning Register           | What the organisation learned |
-| Emerging Portfolio Patterns | Cross-product recurrence only |
+## Where to record
 
-Do not open platform programmes from a single friction entry. Prefer product-local fixes while patterns are Observed or Emerging.
+| Artefact          | Path                                                                                                                       |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Friction Log      | [../apzqep/apzqep-adopt-001/FRICTION-LOG.md](../apzqep/apzqep-adopt-001/FRICTION-LOG.md)                                   |
+| Learning Register | [../apzqep/apzqep-adopt-001/OPERATIONAL-LEARNING-REGISTER.md](../apzqep/apzqep-adopt-001/OPERATIONAL-LEARNING-REGISTER.md) |
+| Emerging Patterns | [../framework/APZHUB-EMERGING-PORTFOLIO-PATTERNS.md](../framework/APZHUB-EMERGING-PORTFOLIO-PATTERNS.md)                   |
 
-## Identity watch
+## Knowledge-specific learning themes
 
-Prioritise learning about:
+- Did users enter via Memory Companion Home or via operator/diagnostics paths?
+- Were deferred consumer overlays mis-reported as defects?
+- Was AI/RAG demand correctly classified as Knowledge 2.0 / Product Board (not v1.0 defect)?
+- Did production store unavailability fail closed with honest messaging?
+- Did engine/backend terminology leak into user-facing copy?
 
-- Destination-first drift (wiki / article dump)
-- Discovery/search/AI vocabulary collisions
-- SoR leakage (files, policies, tickets claimed as Knowledge)
-- Admin tooling becoming product identity
+## Anti-patterns
+
+- Opening Knowledge 2.0 from a single friction note
+- Treating missing overlays or AI as Native Adoption failure
+- Enabling `APZHUB_KNOWLEDGE_MEMORY_STORE=memory` in production
+- Redesigning Memory Companion identity without Product Board authorisation

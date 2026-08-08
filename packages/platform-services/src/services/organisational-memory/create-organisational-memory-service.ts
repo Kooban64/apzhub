@@ -99,14 +99,27 @@ export function setOrganisationalMemoryStoreForTests(store: OrganisationalMemory
   preferred = store;
 }
 
+/**
+ * KNW-PR-01 / KNW-PR-02 — production requires Postgres; memory only for explicit
+ * non-prod isolation. Never silently fall back to memory in production.
+ */
 export function resolveOrganisationalMemoryStore(): OrganisationalMemoryStore {
   if (preferred) return preferred;
-  if (process.env.APZHUB_KNOWLEDGE_MEMORY_STORE === "memory") {
+  const mode = process.env.APZHUB_KNOWLEDGE_MEMORY_STORE?.trim().toLowerCase();
+  if (mode === "memory") {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("organisational_memory_memory_forbidden_in_production");
+    }
     return getMemoryOrganisationalMemoryStore();
   }
   try {
     return createPostgresOrganisationalMemoryStore();
-  } catch {
+  } catch (error) {
+    if (process.env.NODE_ENV === "production") {
+      throw error instanceof Error
+        ? error
+        : new Error("organisational_memory_store_unavailable");
+    }
     return getMemoryOrganisationalMemoryStore();
   }
 }
