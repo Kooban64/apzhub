@@ -1,10 +1,10 @@
 # APZHUB Lifecycle
 
-| Field     | Value                                              |
-| --------- | -------------------------------------------------- |
-| Status    | **COMPLETE** · [Graduated](./APZHUB-GRADUATION.md) |
-| Timestamp | 20260809T010900Z                                   |
-| Authority | Owner direction                                    |
+| Field     | Value                                                            |
+| --------- | ---------------------------------------------------------------- |
+| Status    | **COMPLETE** · [Graduated · Stewardship](./APZHUB-GRADUATION.md) |
+| Timestamp | 20260809T011000Z                                                 |
+| Authority | Owner final entry                                                |
 
 ```text
 FOUNDATIONAL ERA — COMPLETE
