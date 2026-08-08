@@ -60,3 +60,23 @@ Take care of it.
 From today, the platform should be cared for more than it is constantly changed.
 
 When the platform itself brings the next problem worth solving — then we build. Until then, let it do its job.
+
+---
+
+## What it was really about
+
+APZHUB reduced uncertainty — how to deliver, what belongs where, which technology, which shared capabilities, and what to build next.
+
+Protect one thing above everything else:
+
+**The discipline to finish.**
+
+Codebases, providers, frameworks, and AI will change. That discipline is the asset that compounds.
+
+---
+
+## Next chapter
+
+Not goodbye. The next conversation starts as stewardship:
+
+> **What has APZHUB taught us?**
