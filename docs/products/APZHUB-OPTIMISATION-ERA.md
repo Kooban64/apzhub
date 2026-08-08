@@ -2,9 +2,9 @@
 
 | Field           | Value                                        |
 | --------------- | -------------------------------------------- |
-| Status          | **OPEN**                                     |
-| Timestamp       | 20260809T010700Z                             |
-| Authority       | Owner · Lifecycle complete                   |
+| Status          | **OPEN** · steady-state evolution            |
+| Timestamp       | 20260809T010900Z                             |
+| Authority       | Owner · [Graduated](./APZHUB-GRADUATION.md)  |
 | Source of truth | **User behaviour**                           |
 | Lifecycle       | [APZHUB-LIFECYCLE.md](./APZHUB-LIFECYCLE.md) |
 

@@ -1,12 +1,12 @@
 # Evolution Era — Operating Rule
 
-| Field     | Value                                          |
-| --------- | ---------------------------------------------- |
-| Status    | **IN FORCE**                                   |
-| Timestamp | 20260809T010700Z                               |
-| Kind      | Operating rule — not a programme               |
-| Authority | Owner · Lifecycle complete · Optimisation open |
-| Lifecycle | [APZHUB-LIFECYCLE.md](./APZHUB-LIFECYCLE.md)   |
+| Field     | Value                                                      |
+| --------- | ---------------------------------------------------------- |
+| Status    | **IN FORCE**                                               |
+| Timestamp | 20260809T010900Z                                           |
+| Kind      | Operating rule — not a programme                           |
+| Authority | Owner · [Graduated](./APZHUB-GRADUATION.md) · steady-state |
+| Lifecycle | [APZHUB-LIFECYCLE.md](./APZHUB-LIFECYCLE.md)               |
 
 ---
 
