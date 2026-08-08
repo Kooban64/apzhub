@@ -1,13 +1,11 @@
 # Capability: Personalisation v1.0
 
-| Field        | Value                          |
-| ------------ | ------------------------------ |
-| Status       | **IMPLEMENTED — awaiting RC1** |
-| Constitution | PASS — APS-Personalisation     |
-| Centre       | `/workspace/personalisation`   |
+| Field   | Value                                |
+| ------- | ------------------------------------ |
+| Status  | **PRODUCTION READY**                 |
+| Tag     | `apzhub-personalisation-1.0`         |
+| Branch  | `release/apzhub-personalisation-1.0` |
+| Service | APS-Personalisation                  |
+| Centre  | `/workspace/personalisation`         |
 
-## Shipped
-
-Preferences (landing + theme) · Favourites · Recent tracking · Remembered filters · Landing redirect · Playwright
-
-No new service. No AI. No redesign.
+RC1 **APPROVED**. Operational Learning open.
