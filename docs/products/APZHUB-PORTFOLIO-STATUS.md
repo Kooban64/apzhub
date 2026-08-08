@@ -10,8 +10,9 @@
 | Operating model      | **We operate the APZHUB Delivery Standard** — not reinvent how to build each product                                                                                                                                                                   |
 | Operating principle  | **No Engineering Execution without a finite closeout inventory**                                                                                                                                                                                       |
 | Delivery standard    | [v1.0 Reference Standard](./APZHUB-DELIVERY-STANDARD.md) (**IMMUTABLE**)                                                                                                                                                                               |
-| Programme measure    | **Portfolio COMPLETE** — 7 of 7 Production Ready · freeze **IN FORCE** · Platform Evolution **not open**                                                                                                                                               |
+| Programme measure    | **Portfolio COMPLETE** — 7 of 7 Production Ready · freeze **IN FORCE**                                                                                                                                                                                 |
 | Programme closure    | [APZHUB-ORIGINAL-PORTFOLIO-PROGRAMME-CLOSURE.md](./APZHUB-ORIGINAL-PORTFOLIO-PROGRAMME-CLOSURE.md) · tag `apzhub-original-portfolio-complete` · `backup/apzhub-original-portfolio-complete-20260808`                                                   |
+| Platform Evolution   | **OPEN** — [charter](./platform-evolution/PROGRAMME-CHARTER.md) · [APZPE-002 proposed](./platform-evolution/engineering/APZPE-002-FINITE-ENGINE-INVENTORY.md) · await Accept · products frozen · no AI in Phase 1                                      |
 
 ---
 
