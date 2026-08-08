@@ -1,14 +1,15 @@
 # APS-001 — Platform Services Assessment
 
-| Field       | Value                                                   |
-| ----------- | ------------------------------------------------------- |
-| Document    | **APS-001**                                             |
-| Status      | **COMPLETE** (Assessment only)                          |
-| Era         | [Evolution Era](../../APZHUB-EVOLUTION-ERA.md) **OPEN** |
-| Timestamp   | 20260808T231500Z                                        |
-| Authority   | Owner Question 1 — current state in the repository      |
-| Engineering | **Not authorised**                                      |
-| Inventory   | **Not derived** — deferred to APS-002                   |
+| Field        | Value                                                                                       |
+| ------------ | ------------------------------------------------------------------------------------------- |
+| Document     | **APS-001**                                                                                 |
+| Status       | **COMPLETE · OWNER ACCEPTED**                                                               |
+| Era          | [Evolution Era](../../APZHUB-EVOLUTION-ERA.md) **OPEN**                                     |
+| Timestamp    | 20260808T232000Z                                                                            |
+| Authority    | Owner Question 1 — current state in the repository                                          |
+| Owner Accept | [OWNER-ACCEPT-APS-001.md](./OWNER-ACCEPT-APS-001.md)                                        |
+| Engineering  | **Not authorised**                                                                          |
+| Inventory    | Proposed under [APS-002](./APS-002-FINITE-PLATFORM-SERVICE-INVENTORY.md) — **not accepted** |
 
 ---
 

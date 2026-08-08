@@ -87,7 +87,7 @@ Inventory
     ↓
 Foundation          (Programme 001 — COMPLETE)
     ↓
-Services            (Programme 002 — APS-001 Assessment COMPLETE · inventory not accepted)
+Services            (Programme 002 — certify & rationalise · APS-001 Accepted · APS-002 proposed)
     ↓
 Intelligence        (Programme 003 — deferred)
     ↓
