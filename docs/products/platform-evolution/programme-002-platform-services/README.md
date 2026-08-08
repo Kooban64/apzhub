@@ -2,21 +2,21 @@
 
 | Field        | Value                                                                                  |
 | ------------ | -------------------------------------------------------------------------------------- |
-| Status       | **NOT OPEN** — awaiting next-session **APS-001 Assessment**                            |
-| Era          | After [Foundational Era Closure](../../APZHUB-FOUNDATIONAL-ERA-CLOSURE.md)             |
+| Status       | **ASSESSMENT** — APS-001 **COMPLETE** · APS-002 inventory **not open**                 |
+| Era          | [Evolution Era](../../APZHUB-EVOLUTION-ERA.md)                                         |
 | Constitution | [../../APZHUB-ARCHITECTURE-CONSTITUTION.md](../../APZHUB-ARCHITECTURE-CONSTITUTION.md) |
-| Timestamp    | 20260808T223000Z                                                                       |
+| Timestamp    | 20260808T231500Z                                                                       |
 
 ---
 
-## Do not start here with solutions
+## Cadence
 
-Next conversation entry point:
+| Gate                     | Status                                                                                              |
+| ------------------------ | --------------------------------------------------------------------------------------------------- |
+| APS-001 Assessment       | **COMPLETE** — [APS-001-PLATFORM-SERVICES-ASSESSMENT.md](./APS-001-PLATFORM-SERVICES-ASSESSMENT.md) |
+| APS-002 Finite inventory | Not open — awaits Owner                                                                             |
+| Engineering              | **Not authorised**                                                                                  |
 
-> **APS-001 — Platform Services Assessment**
+Hypotheses (superseded as truth by assessment evidence): [APS-HYPOTHESES.md](./APS-HYPOTHESES.md)
 
-Four Owner questions → derive finite inventory → Owner Accept → only then Engineer.
-
-Hypotheses: [APS-HYPOTHESES.md](./APS-HYPOTHESES.md) — candidates only.
-
-Objective (when opened): **Make APZHUB feel like one application.**
+Objective when Engineering opens: **Make APZHUB feel like one application** — without platform creep.

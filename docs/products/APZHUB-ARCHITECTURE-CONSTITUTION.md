@@ -5,7 +5,7 @@
 | Document    | **Architecture Constitution**                                                                                      |
 | Kind        | Constitutional — principles only · **not** an implementation guide                                                 |
 | Status      | **IN FORCE**                                                                                                       |
-| Timestamp   | 20260808T222500Z                                                                                                   |
+| Timestamp   | 20260808T231500Z                                                                                                   |
 | Authority   | Owner direction after Platform Engine Foundation v1.0                                                              |
 | Complements | Document 000 · Delivery Standard v1.0 · ADR-PE-0001 · [APZHUB-PLATFORM-IDENTITY.md](./APZHUB-PLATFORM-IDENTITY.md) |
 
@@ -67,13 +67,14 @@ Users work in APZHUB and its products — not in Metabase, Zammad, Kimai, or Pla
 
 ## Additional permanent truths
 
-| Truth                                        | Meaning                                                                                                |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| **Never duplicate a capability**             | If two products need it, it is platform (APE / APS) — not forked per product                           |
-| **AI is never product-specific**             | Intelligence is a platform capability (Programme 003+), not a product-owned silo                       |
-| **Platform Evolution never breaks products** | Frozen Production Ready products remain usable without retraining                                      |
-| **No “version 2” of the platform**           | The platform evolves through programmes — Foundation → Services → Intelligence → Operational Evolution |
-| **Ask “Does this belong in the platform?”**  | Prefer exclusion until shared need and ownership are clear                                             |
+| Truth                                        | Meaning                                                                                                                                                                                 |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Never duplicate a capability**             | If two products need it, it is platform (APE / APS) — not forked per product                                                                                                            |
+| **AI is never product-specific**             | Intelligence is a platform capability (Programme 003+), not a product-owned silo                                                                                                        |
+| **Platform Evolution never breaks products** | Frozen Production Ready products remain usable without retraining                                                                                                                       |
+| **No “version 2” of the platform**           | The platform evolves through programmes — Foundation → Services → Intelligence → Operational Evolution                                                                                  |
+| **Ask “Does this belong in the platform?”**  | Prefer exclusion until shared need and ownership are clear                                                                                                                              |
+| **Two-Consumer Rule**                        | A capability belongs in the platform only if **at least two Production Ready products** genuinely consume it, **or** this Constitution explicitly declares it a platform responsibility |
 
 ---
 
@@ -86,7 +87,7 @@ Inventory
     ↓
 Foundation          (Programme 001 — COMPLETE)
     ↓
-Services            (Programme 002 — not open)
+Services            (Programme 002 — APS-001 Assessment COMPLETE · inventory not accepted)
     ↓
 Intelligence        (Programme 003 — deferred)
     ↓

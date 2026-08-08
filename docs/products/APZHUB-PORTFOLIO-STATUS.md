@@ -2,7 +2,7 @@
 
 | Field                | Value                                                                                                                                                                                                                                                  |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Timestamp            | 20260808T230000Z                                                                                                                                                                                                                                       |
+| Timestamp            | 20260808T231500Z                                                                                                                                                                                                                                       |
 | Authority            | Owner operating face — one-page dashboard                                                                                                                                                                                                              |
 | Complements          | [APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md](./APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md) · [APZHUB-PORTFOLIO-OPERATING-PRINCIPLE.md](./APZHUB-PORTFOLIO-OPERATING-PRINCIPLE.md) · [APZHUB-DELIVERY-STANDARD.md](./APZHUB-DELIVERY-STANDARD.md) |
 | Portfolio Completion | [PORTFOLIO-COMPLETION-PROGRAMME.md](./PORTFOLIO-COMPLETION-PROGRAMME.md) · [portfolio-completion/PORT-005-PORTFOLIO-FREEZE-NOTICE.md](./portfolio-completion/PORT-005-PORTFOLIO-FREEZE-NOTICE.md) **IN FORCE**                                         |
@@ -58,16 +58,18 @@
 2. ✅ **Portfolio Completion** (PORT-001…005) — **CLOSED** · freeze **IN FORCE**
 3. ✅ **Platform Evolution Programme 001** — Foundation v1.0 **CLOSED** (`apzhub-platform-engine-foundation-1.0`)
 4. ✅ **Foundational era** — Chapters 1–3 [CLOSED](./APZHUB-FOUNDATIONAL-ERA-CLOSURE.md)
-5. ⏸ **Programme 002 — Platform Services** — **NOT OPEN** · next conversation: **APS-001 Assessment**
-6. ⏸ **Programme 003 — Platform Intelligence** — deferred
+5. ▶ **Evolution era** — [OPEN](./APZHUB-EVOLUTION-ERA.md)
+6. ✅ **APS-001** — Platform Services Assessment [COMPLETE](./platform-evolution/programme-002-platform-services/APS-001-PLATFORM-SERVICES-ASSESSMENT.md) · Engineering **not** authorised
+7. ⏸ **APS-002** — Finite Platform Service inventory — not open
+8. ⏸ **Programme 003 — Platform Intelligence** — deferred
 
 ### Architecture (constitutional)
 
-[Architecture Constitution](./APZHUB-ARCHITECTURE-CONSTITUTION.md) · [Identity](./APZHUB-PLATFORM-IDENTITY.md)
+[Architecture Constitution](./APZHUB-ARCHITECTURE-CONSTITUTION.md) · [Identity](./APZHUB-PLATFORM-IDENTITY.md) · **Two-Consumer Rule** IN FORCE
 
 **Guiding question:** Does this belong in the platform?
 
-**Next session:** APS-001 — four Owner questions. No service design first.
+**Next gate:** APS-002 — derive finite inventory from APS-001 classification. No engineering before Accept.
 
 ---
 

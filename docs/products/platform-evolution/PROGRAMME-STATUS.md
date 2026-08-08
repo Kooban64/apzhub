@@ -1,14 +1,14 @@
 # Platform Evolution — Programme Status
 
-| Field            | Value                                                                                     |
-| ---------------- | ----------------------------------------------------------------------------------------- |
-| Foundational era | [../APZHUB-FOUNDATIONAL-ERA-CLOSURE.md](../APZHUB-FOUNDATIONAL-ERA-CLOSURE.md) **CLOSED** |
-| Programme 001    | **CLOSED** — Foundation v1.0                                                              |
-| Programme 002    | **NOT OPEN** — next: **APS-001 Assessment**                                               |
-| Programme 003    | **Deferred** — Intelligence                                                               |
-| Timestamp        | 20260808T223000Z                                                                          |
+| Field            | Value                                                                |
+| ---------------- | -------------------------------------------------------------------- |
+| Foundational era | [CLOSED](../../APZHUB-FOUNDATIONAL-ERA-CLOSURE.md)                   |
+| Evolution era    | [OPEN](../../APZHUB-EVOLUTION-ERA.md)                                |
+| Programme 001    | **CLOSED** — Foundation v1.0                                         |
+| Programme 002    | **APS-001 COMPLETE** · APS-002 not open · Engineering not authorised |
+| Programme 003    | **Deferred**                                                         |
+| Timestamp        | 20260808T231500Z                                                     |
 
-## Next session
+## Latest gate
 
-Start with **APS-001 — Platform Services Assessment** (four Owner questions).  
-Do not design services first. Do not open engineering.
+APS-001: Existing Platform Capabilities Identified → recommend derive finite inventory (APS-002).
