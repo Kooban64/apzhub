@@ -12,7 +12,7 @@
 | Delivery standard    | [v1.0 Reference Standard](./APZHUB-DELIVERY-STANDARD.md) (**IMMUTABLE**)                                                                                                                                                                               |
 | Programme measure    | **Portfolio COMPLETE** — 7 of 7 Production Ready · freeze **IN FORCE**                                                                                                                                                                                 |
 | Programme closure    | [APZHUB-ORIGINAL-PORTFOLIO-PROGRAMME-CLOSURE.md](./APZHUB-ORIGINAL-PORTFOLIO-PROGRAMME-CLOSURE.md) · tag `apzhub-original-portfolio-complete` · `backup/apzhub-original-portfolio-complete-20260808`                                                   |
-| Platform Evolution   | [Graduated](./APZHUB-GRADUATION.md) · Lifecycle COMPLETE · steady-state evolution · evidence selects next                                                                                                                                              |
+| Platform Evolution   | [GRADUATED · Stewardship](./APZHUB-GRADUATION.md) · Lifecycle COMPLETE · care over constant change                                                                                                                                                     |
 
 ---
 
