@@ -1,79 +1,65 @@
 # Evolution Era — Operating Rule
 
-| Field     | Value                                                                          |
-| --------- | ------------------------------------------------------------------------------ |
-| Status    | **IN FORCE**                                                                   |
-| Timestamp | 20260809T010000Z                                                               |
-| Kind      | Operating rule — not a programme · not Engineering Execution                   |
-| Authority | Owner direction after Platform Services v1.0 · amended Core Workbench complete |
+| Field     | Value                                                        |
+| --------- | ------------------------------------------------------------ |
+| Status    | **IN FORCE**                                                 |
+| Timestamp | 20260809T010200Z                                             |
+| Kind      | Operating rule — not a programme · not Engineering Execution |
+| Authority | Owner · Core Workbench complete · Optimisation Era open      |
 
 ---
 
-## What changed
+## Source of truth
 
-Foundational documentation **was** the deliverable. It now exists and is frozen:
+| Phase                                 | Source of truth    |
+| ------------------------------------- | ------------------ |
+| Foundation / Integration (historical) | Architecture       |
+| **Optimisation (now)**                | **User behaviour** |
 
-- Delivery Standard v1.0
-- Architecture Constitution (Laws 1–6)
-- APE Foundation
-- Platform Service Layer (7)
-- Platform Identity
-
-Future programmes produce **less documentation and more code**.
+Face: [APZHUB-OPTIMISATION-ERA.md](./APZHUB-OPTIMISATION-ERA.md)
 
 ---
 
-## Effort ratio (from now on)
+## Effort ratio
 
-| Era                       | Architecture | Engineering | Governance / docs           |
-| ------------------------- | ------------ | ----------- | --------------------------- |
-| Foundational (historical) | ~50%         | ~30%        | ~20%                        |
-| **Evolution (now)**       | —            | **~80%**    | **~15% certify · ~5% docs** |
+| Era                       | Architecture | Engineering                         | Governance / docs       |
+| ------------------------- | ------------ | ----------------------------------- | ----------------------- |
+| Foundational (historical) | ~50%         | ~30%                                | ~20%                    |
+| Integration (historical)  | —            | ~80%                                | ~15% certify · ~5% docs |
+| **Optimisation (now)**    | —            | **observe first** · then ~80% build | ~15% certify · ~5% docs |
 
 Documentation proves what was built. It must not become the work.
 
 ---
 
-## Capability workflow (default)
-
-You name a **capability**. Not a programme.
+## Capability workflow
 
 ```text
-Capability → Constitution Check → Inventory (1 page) → Build → Certify → Ship → Next
+Evidence → Delivery filter (4) → Constitution Check → Inventory (1 page) → Build → Certify → Ship → Observe
 ```
 
-### Constitution Check (mechanical)
+### Delivery filter (complete — all four required)
 
-Does it belong in **Product**, **Platform**, or **Provider**? If unclear or nowhere — **stop**.
+Before any capability enters engineering:
 
-### Delivery filter (required before engineering)
+| #   | Test               | Question                                                     |
+| --- | ------------------ | ------------------------------------------------------------ |
+| 1   | **Constitution**   | Does it belong (Product / Platform / Provider)?              |
+| 2   | **Platform value** | Does it reduce daily clicks, context switches, or decisions? |
+| 3   | **Evidence**       | Can we prove users experience this friction?                 |
+| 4   | **Delivery**       | Can we build and release it independently?                   |
 
-Every future capability must pass **all** of:
-
-1. Does it solve a **real daily friction**?
-2. Does it **reduce cognitive load**?
-3. Does it **leverage existing Platform Services**?
-4. Can it be **shipped independently**?
-
-If any answer is **no**, it does not enter the backlog yet.
-
-Underlying value test:
-
-> **Does this reduce the number of clicks, context switches, or decisions a user makes every day?**
-
-Friction evidence beats architectural elegance.
+If **any** answer is **no** — it waits.
 
 ### Inventory
 
-Usually one page. Engineering slices Cursor can build. No essays.
+Usually one page. No essays.
 
 ### Ship artefacts
 
 **code · tests · certification evidence · release notes**
 
-New programme documents only for a **permanent architectural concept**.
-
-No architectural theatre. Interrupt “perhaps we should consider…” without a constitutional reason.
+New programme documents only for a permanent architectural concept.
 
 ---
 
@@ -87,19 +73,13 @@ Progress = valuable capabilities shipped — not documents written.
 
 ## Core APZHUB Workbench
 
-**COMPLETE** — Search · Notifications · Activity · Personalisation · Quick Actions.  
-Face: [CORE-APZHUB-WORKBENCH.md](./capabilities/CORE-APZHUB-WORKBENCH.md)
+**COMPLETE** — [CORE-APZHUB-WORKBENCH.md](./capabilities/CORE-APZHUB-WORKBENCH.md)
 
-### Observation pause (in force)
+### Observation (in force)
 
-Do **not** immediately select the next capability. Use the platform internally. Watch hesitation and excess clicks. Let evidence choose the next ship.
+- Do **not** schedule Programme 003.
+- Do **not** select the next capability from ideas.
+- Use APZHUB internally. Collect evidence via the [Friction Dashboard](./capabilities/APZHUB-FRICTION-DASHBOARD.md) questions.
+- Then build **exactly one** capability for the biggest proven friction. Repeat.
 
-Cadence: **build → observe → improve** (not assume → build → hope).
-
-AI / RAG / agents remain candidates only when shared context and the delivery filter clear them.
-
----
-
-## Programme 003 / Capability Expansion
-
-**NOT OPEN** as a named programme. Work proceeds **capability by capability** under this rule.
+Cadence: **build → observe → improve**.

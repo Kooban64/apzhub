@@ -10,11 +10,14 @@
 
 ## Core APZHUB Workbench
 
-**COMPLETE** — Find · See · Understand · Prefer · Start.  
-Face: [CORE-APZHUB-WORKBENCH.md](./CORE-APZHUB-WORKBENCH.md)
+**COMPLETE** — [CORE-APZHUB-WORKBENCH.md](./CORE-APZHUB-WORKBENCH.md)
+
+## Era
+
+**Optimisation** — [APZHUB-OPTIMISATION-ERA.md](../APZHUB-OPTIMISATION-ERA.md)
 
 ## Next
 
-**Paused for observation.** No next capability selected.
+**Observation only.** Programme 003 not scheduled. No next capability selected.
 
-Use the platform; let measured friction choose the next ship. Every candidate must pass the [delivery filter](../APZHUB-EVOLUTION-OPERATING-RULE.md).
+Evidence → four-test delivery filter → then exactly one capability.

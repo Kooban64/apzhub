@@ -20,6 +20,8 @@ Five cross-cutting capabilities that turn product surfaces into one working envi
 
 ## Cadence after Core Workbench
 
-**Build → observe → improve.** Do not immediately select the next capability. Use the platform internally; let observed friction choose the next ship.
+**Optimisation Era open.** Source of truth: user behaviour.
 
-See [CAPABILITY-STATUS.md](./CAPABILITY-STATUS.md) and the [Evolution Operating Rule](../APZHUB-EVOLUTION-OPERATING-RULE.md) delivery filter.
+Do not select the next capability from ideas. Observe via the [Friction Dashboard](./APZHUB-FRICTION-DASHBOARD.md). Pass the four-test delivery filter. Build exactly one. Repeat.
+
+See [APZHUB-OPTIMISATION-ERA.md](../APZHUB-OPTIMISATION-ERA.md).
