@@ -56,7 +56,12 @@
 
 1. ✅ Original portfolio products — **COMPLETE** (7/7) · **FROZEN**
 2. ✅ **Portfolio Completion** (PORT-001…005) — **CLOSED** · freeze **IN FORCE**
-3. ▶ **APZHUB Platform Evolution** — Programme 001 **RC1 READY** ([release pack](./platform-evolution/release-foundation-1.0/README.md)) · **APE** engines · products **FROZEN** · AI deferred
+3. ✅ **Platform Evolution Programme 001** — Foundation v1.0 **CLOSED** (`apzhub-platform-engine-foundation-1.0`)
+4. ⏸ **Programme 002 — Platform Experience** — [proposed](./platform-evolution/programme-002-platform-experience/README.md) · not open · AI still deferred
+
+### Architecture (ratified)
+
+> Products deliver business capabilities. Platform Engines deliver shared capabilities. Providers deliver implementation.
 
 ---
 
@@ -64,4 +69,4 @@
 
 **Constitutional:** [APZHUB Delivery Standard v1.0](./APZHUB-DELIVERY-STANDARD.md) (**IMMUTABLE**)
 
-Seven consecutive Production Ready products confirm the standard as an organisational capability. Preserve it unchanged.
+Seven Production Ready products + certified Platform Engine Foundation. Preserve the standard and the APE architecture; extend capabilities — do not redefine them.

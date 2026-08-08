@@ -1,11 +1,11 @@
 # ADR-PE-0001 — Platform Owns Behaviour
 
-| Field     | Value                                     |
-| --------- | ----------------------------------------- |
-| Status    | **Accepted**                              |
-| Date      | 2026-08-08                                |
-| Programme | APZHUB Platform Evolution — Programme 001 |
-| Authority | Owner Decision (APZPE-002 Accepted)       |
+| Field     | Value                                        |
+| --------- | -------------------------------------------- |
+| Status    | **Accepted** · **Ratified** (Foundation RC1) |
+| Date      | 2026-08-08                                   |
+| Programme | APZHUB Platform Evolution — Programme 001    |
+| Authority | Owner Decision (APZPE-002 Accepted)          |
 
 ## Context
 
