@@ -1,26 +1,19 @@
 # Evolution Era
 
-| Field       | Value                                                               |
-| ----------- | ------------------------------------------------------------------- |
-| Document    | **EVOLUTION-ERA**                                                   |
-| Status      | **OPEN** — deliberate pause after Programme 002                     |
-| Predecessor | [Foundational Era](./APZHUB-FOUNDATIONAL-ERA-CLOSURE.md) **CLOSED** |
-| Discipline  | Delivery Standard v1.0 · Architecture Constitution                  |
+| Field          | Value                                                                                   |
+| -------------- | --------------------------------------------------------------------------------------- |
+| Status         | **OPEN** — post–Programme 002 pause                                                     |
+| Operating rule | [APZHUB-EVOLUTION-OPERATING-RULE.md](./APZHUB-EVOLUTION-OPERATING-RULE.md) **IN FORCE** |
+| Predecessor    | [Foundational Era](./APZHUB-FOUNDATIONAL-ERA-CLOSURE.md) **CLOSED**                     |
 
 ---
 
-## Programme posture
+## Posture
 
-| Programme                 | Status                                                        |
-| ------------------------- | ------------------------------------------------------------- |
-| 001 Foundation            | ✅ Production Ready · CLOSED                                  |
-| 002 Platform Services     | ✅ Production Ready · CLOSED (`apzhub-platform-services-1.0`) |
-| 003 Platform Intelligence | ⏸ **NOT OPEN** — assessment required first                    |
+| Programme             | Status                                                                                         |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| 001 Foundation        | ✅ PR · CLOSED                                                                                 |
+| 002 Platform Services | ✅ PR · CLOSED (`apzhub-platform-services-1.0`)                                                |
+| Next                  | ⏸ **Platform Capability Expansion** — Assessment only when Owner opens · not presumed to be AI |
 
----
-
-## Strategic position
-
-APZHUB now has: seven Production Ready products · Delivery Standard · Architecture Constitution · certified APE Foundation · certified Platform Service Layer.
-
-Higher-order evolution (intelligence) waits on assessment — same discipline as every prior programme.
+Architecture, governance, and methodology phases are **complete**. Emphasis: ship working software under the Constitution and Delivery Standard.
