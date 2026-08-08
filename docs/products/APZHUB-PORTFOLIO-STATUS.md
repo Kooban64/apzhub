@@ -11,6 +11,7 @@
 | Operating principle  | **No Engineering Execution without a finite closeout inventory**                                                                                                                                                                                       |
 | Delivery standard    | [v1.0 Reference Standard](./APZHUB-DELIVERY-STANDARD.md) (**IMMUTABLE**)                                                                                                                                                                               |
 | Programme measure    | **Portfolio COMPLETE** — 7 of 7 Production Ready · freeze **IN FORCE** · Platform Evolution **not open**                                                                                                                                               |
+| Programme closure    | [APZHUB-ORIGINAL-PORTFOLIO-PROGRAMME-CLOSURE.md](./APZHUB-ORIGINAL-PORTFOLIO-PROGRAMME-CLOSURE.md) · tag `apzhub-original-portfolio-complete` · `backup/apzhub-original-portfolio-complete-20260808`                                                   |
 
 ---
 

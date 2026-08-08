@@ -1,13 +1,15 @@
 # APZHUB Portfolio Completion Programme
 
-| Field     | Value                                                                          |
-| --------- | ------------------------------------------------------------------------------ |
-| Document  | **PORTFOLIO-COMPLETION-PROGRAMME**                                             |
-| Status    | **CLOSED** — PORT-001…005 complete; freeze **IN FORCE**                        |
-| Timestamp | 20260808T204500Z                                                               |
-| Authority | Owner — authorised after APZ Time Production Ready                             |
-| Pack      | [portfolio-completion/](./portfolio-completion/)                               |
-| Standard  | [APZHUB Delivery Standard v1.0](./APZHUB-DELIVERY-STANDARD.md) (**IMMUTABLE**) |
+| Field     | Value                                                                                              |
+| --------- | -------------------------------------------------------------------------------------------------- |
+| Document  | **PORTFOLIO-COMPLETION-PROGRAMME**                                                                 |
+| Status    | **CLOSED** — PORT-001…005 complete; freeze **IN FORCE**                                            |
+| Closure   | [APZHUB-ORIGINAL-PORTFOLIO-PROGRAMME-CLOSURE.md](./APZHUB-ORIGINAL-PORTFOLIO-PROGRAMME-CLOSURE.md) |
+| Milestone | tag `apzhub-original-portfolio-complete` · `backup/apzhub-original-portfolio-complete-20260808`    |
+| Timestamp | 20260808T210000Z                                                                                   |
+| Authority | Owner — authorised after APZ Time Production Ready                                                 |
+| Pack      | [portfolio-completion/](./portfolio-completion/)                                                   |
+| Standard  | [APZHUB Delivery Standard v1.0](./APZHUB-DELIVERY-STANDARD.md) (**IMMUTABLE**)                     |
 
 ---
 
