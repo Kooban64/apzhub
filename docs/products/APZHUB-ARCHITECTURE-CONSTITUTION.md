@@ -96,7 +96,7 @@ Inventory
     ↓
 Foundation          (Programme 001 — COMPLETE)
     ↓
-Services            (Programme 002 — APS-002 Accepted · APS-003 Engineering OPEN)
+Services            (Programme 002 — CLOSED · Platform Services v1.0 Production Ready)
     ↓
 Intelligence        (Programme 003 — deferred)
     ↓

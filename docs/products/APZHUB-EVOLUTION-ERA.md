@@ -1,35 +1,26 @@
 # Evolution Era
 
-| Field       | Value                                                                          |
-| ----------- | ------------------------------------------------------------------------------ |
-| Document    | **EVOLUTION-ERA**                                                              |
-| Status      | **OPEN**                                                                       |
-| Opened      | 20260808T231500Z                                                               |
-| Predecessor | [Foundational Era](./APZHUB-FOUNDATIONAL-ERA-CLOSURE.md) **CLOSED · COMPLETE** |
-| Discipline  | Delivery Standard v1.0 · Architecture Constitution                             |
-
----
-
-## Purpose
-
-Extend APZHUB capabilities while protecting constitutional identity.
-
-Operating question:
-
-> **Does this strengthen the platform without violating the Constitution?**
+| Field       | Value                                                               |
+| ----------- | ------------------------------------------------------------------- |
+| Document    | **EVOLUTION-ERA**                                                   |
+| Status      | **OPEN** — deliberate pause after Programme 002                     |
+| Predecessor | [Foundational Era](./APZHUB-FOUNDATIONAL-ERA-CLOSURE.md) **CLOSED** |
+| Discipline  | Delivery Standard v1.0 · Architecture Constitution                  |
 
 ---
 
 ## Programme posture
 
-| Programme                 | Status                                          |
-| ------------------------- | ----------------------------------------------- |
-| 001 Foundation            | CLOSED                                          |
-| 002 Platform Services     | **APS-002 Accepted · APS-003 Engineering OPEN** |
-| 003 Platform Intelligence | Deferred                                        |
+| Programme                 | Status                                                        |
+| ------------------------- | ------------------------------------------------------------- |
+| 001 Foundation            | ✅ Production Ready · CLOSED                                  |
+| 002 Platform Services     | ✅ Production Ready · CLOSED (`apzhub-platform-services-1.0`) |
+| 003 Platform Intelligence | ⏸ **NOT OPEN** — assessment required first                    |
 
 ---
 
-## Constitutional baseline
+## Strategic position
 
-Platform Identity · Architecture Constitution (incl. Law 6 · Two-Consumer Rule) · Delivery Standard v1.0 · APE · Provider model · Product ↔ Platform boundary · ADR-PE-0001 · Never Duplicate
+APZHUB now has: seven Production Ready products · Delivery Standard · Architecture Constitution · certified APE Foundation · certified Platform Service Layer.
+
+Higher-order evolution (intelligence) waits on assessment — same discipline as every prior programme.

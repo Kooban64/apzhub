@@ -1,9 +1,8 @@
 # APZHUB Platform Evolution
 
-| Field            | Value                                                                                                              |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Foundational era | [CLOSED](../APZHUB-FOUNDATIONAL-ERA-CLOSURE.md)                                                                    |
-| Evolution era    | [OPEN](../APZHUB-EVOLUTION-ERA.md)                                                                                 |
-| Programme 001    | **CLOSED**                                                                                                         |
-| Programme 002    | APS-002 ✅ · [APS-003 Engineering OPEN](./programme-002-platform-services/APS-003-PLATFORM-SERVICE-ENGINEERING.md) |
-| Constitution     | [../APZHUB-ARCHITECTURE-CONSTITUTION.md](../APZHUB-ARCHITECTURE-CONSTITUTION.md)                                   |
+| Field         | Value                                                                                                |
+| ------------- | ---------------------------------------------------------------------------------------------------- |
+| Programme 001 | **CLOSED** — Foundation v1.0                                                                         |
+| Programme 002 | **CLOSED** — Services v1.0 · [release pack](./programme-002-platform-services/release-services-1.0/) |
+| Programme 003 | **NOT OPEN**                                                                                         |
+| Constitution  | [../APZHUB-ARCHITECTURE-CONSTITUTION.md](../APZHUB-ARCHITECTURE-CONSTITUTION.md)                     |

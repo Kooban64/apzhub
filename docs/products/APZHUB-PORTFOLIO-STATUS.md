@@ -2,7 +2,7 @@
 
 | Field                | Value                                                                                                                                                                                                                                                  |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Timestamp            | 20260808T233500Z                                                                                                                                                                                                                                       |
+| Timestamp            | 20260808T234500Z                                                                                                                                                                                                                                       |
 | Authority            | Owner operating face — one-page dashboard                                                                                                                                                                                                              |
 | Complements          | [APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md](./APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md) · [APZHUB-PORTFOLIO-OPERATING-PRINCIPLE.md](./APZHUB-PORTFOLIO-OPERATING-PRINCIPLE.md) · [APZHUB-DELIVERY-STANDARD.md](./APZHUB-DELIVERY-STANDARD.md) |
 | Portfolio Completion | [PORTFOLIO-COMPLETION-PROGRAMME.md](./PORTFOLIO-COMPLETION-PROGRAMME.md) · [portfolio-completion/PORT-005-PORTFOLIO-FREEZE-NOTICE.md](./portfolio-completion/PORT-005-PORTFOLIO-FREEZE-NOTICE.md) **IN FORCE**                                         |
@@ -12,7 +12,7 @@
 | Delivery standard    | [v1.0 Reference Standard](./APZHUB-DELIVERY-STANDARD.md) (**IMMUTABLE**)                                                                                                                                                                               |
 | Programme measure    | **Portfolio COMPLETE** — 7 of 7 Production Ready · freeze **IN FORCE**                                                                                                                                                                                 |
 | Programme closure    | [APZHUB-ORIGINAL-PORTFOLIO-PROGRAMME-CLOSURE.md](./APZHUB-ORIGINAL-PORTFOLIO-PROGRAMME-CLOSURE.md) · tag `apzhub-original-portfolio-complete` · `backup/apzhub-original-portfolio-complete-20260808`                                                   |
-| Platform Evolution   | APS-002 Frozen (7) · APS-003 [RC1 Ready](./platform-evolution/programme-002-platform-services/release-services-1.0/RC1-READY.md) · Law 6 IN FORCE · Candidate Law 7 watched                                                                            |
+| Platform Evolution   | Programme 001–002 **PR · CLOSED** · Services tag `apzhub-platform-services-1.0` · [release pack](./platform-evolution/programme-002-platform-services/release-services-1.0/) · Programme 003 **NOT OPEN**                                              |
 
 ---
 
@@ -58,19 +58,15 @@
 2. ✅ **Portfolio Completion** (PORT-001…005) — **CLOSED** · freeze **IN FORCE**
 3. ✅ **Platform Evolution Programme 001** — Foundation v1.0 **CLOSED** (`apzhub-platform-engine-foundation-1.0`)
 4. ✅ **Foundational era** — Chapters 1–3 [CLOSED](./APZHUB-FOUNDATIONAL-ERA-CLOSURE.md)
-5. ▶ **Evolution era** — [OPEN](./APZHUB-EVOLUTION-ERA.md)
-6. ✅ **APS-001** — Accepted
-7. ✅ **APS-002** — Finite inventory [Accepted](./platform-evolution/programme-002-platform-services/OWNER-DECISION-APS-002.md) — **7 services**
-8. ▶ **APS-003** — Stages 1–4 complete · [RC1 Ready](./platform-evolution/programme-002-platform-services/release-services-1.0/RC1-READY.md) — awaiting Owner Approve
-9. ⏸ **Programme 003 — Platform Intelligence** — deferred
+5. ▶ **Evolution era** — [OPEN](./APZHUB-EVOLUTION-ERA.md) · deliberate pause before Intelligence
+6. ✅ **Programme 002 — Platform Services** — v1.0 **Production Ready** · [CLOSED](./platform-evolution/programme-002-platform-services/PROGRAMME-002-CLOSURE.md) · tag `apzhub-platform-services-1.0`
+7. ⏸ **Programme 003 — Platform Intelligence** — **NOT OPEN** (assessment required first)
 
 ### Architecture (constitutional)
 
-[Architecture Constitution](./APZHUB-ARCHITECTURE-CONSTITUTION.md) · [Identity](./APZHUB-PLATFORM-IDENTITY.md) · **Two-Consumer Rule** · **Law 6 (smaller platform)** IN FORCE
+[Architecture Constitution](./APZHUB-ARCHITECTURE-CONSTITUTION.md) · [Identity](./APZHUB-PLATFORM-IDENTITY.md) · **Two-Consumer Rule** · **Law 6** IN FORCE · Candidate Law 7 watched (not ratified)
 
-**Guiding question:** Does this belong in the platform?
-
-**Engineering:** Certify & rationalise only — no new services, no AI, no product redesign. Candidate Law 7 (one canonical contract) watched, not ratified.
+**Strategic position:** 7 PR products · Delivery Standard · Constitution · APE Foundation · Platform Service Layer — ready for higher-order evolution only after assessment.
 
 ---
 
