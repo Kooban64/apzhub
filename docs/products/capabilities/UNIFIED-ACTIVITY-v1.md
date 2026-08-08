@@ -1,14 +1,16 @@
 # Capability: Unified Activity Stream v1.0
 
-| Field        | Value                           |
-| ------------ | ------------------------------- |
-| Status       | **IMPLEMENTED — awaiting RC1**  |
-| Constitution | PASS — APS-Activity             |
-| Feed         | `/workspace/activity`           |
-| API          | `GET /api/v1/platform/activity` |
+| Field   | Value                                 |
+| ------- | ------------------------------------- |
+| Status  | **PRODUCTION READY**                  |
+| Tag     | `apzhub-unified-activity-1.0`         |
+| Branch  | `release/apzhub-unified-activity-1.0` |
+| Service | APS-Activity                          |
+| Feed    | `/workspace/activity`                 |
+| API     | `GET /api/v1/platform/activity`       |
 
-## Shipped
+RC1 **APPROVED**. Operational Learning open.
 
-Unified feed · product grouping · deep links · filters (product/type/date) · Playwright
+## Core Workbench Triangle
 
-No new engine. No AI. No redesign.
+Search · Notifications · Activity — complete.
