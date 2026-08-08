@@ -2,7 +2,7 @@
 
 | Field                | Value                                                                                                                                                                                                                                                  |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Timestamp            | 20260809T010700Z                                                                                                                                                                                                                                       |
+| Timestamp            | 20260809T010900Z                                                                                                                                                                                                                                       |
 | Authority            | Owner operating face — one-page dashboard                                                                                                                                                                                                              |
 | Complements          | [APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md](./APZHUB-PRODUCT-PORTFOLIO-READINESS-SUMMARY.md) · [APZHUB-PORTFOLIO-OPERATING-PRINCIPLE.md](./APZHUB-PORTFOLIO-OPERATING-PRINCIPLE.md) · [APZHUB-DELIVERY-STANDARD.md](./APZHUB-DELIVERY-STANDARD.md) |
 | Portfolio Completion | [PORTFOLIO-COMPLETION-PROGRAMME.md](./PORTFOLIO-COMPLETION-PROGRAMME.md) · [portfolio-completion/PORT-005-PORTFOLIO-FREEZE-NOTICE.md](./portfolio-completion/PORT-005-PORTFOLIO-FREEZE-NOTICE.md) **IN FORCE**                                         |
@@ -12,7 +12,7 @@
 | Delivery standard    | [v1.0 Reference Standard](./APZHUB-DELIVERY-STANDARD.md) (**IMMUTABLE**)                                                                                                                                                                               |
 | Programme measure    | **Portfolio COMPLETE** — 7 of 7 Production Ready · freeze **IN FORCE**                                                                                                                                                                                 |
 | Programme closure    | [APZHUB-ORIGINAL-PORTFOLIO-PROGRAMME-CLOSURE.md](./APZHUB-ORIGINAL-PORTFOLIO-PROGRAMME-CLOSURE.md) · tag `apzhub-original-portfolio-complete` · `backup/apzhub-original-portfolio-complete-20260808`                                                   |
-| Platform Evolution   | Core Workbench COMPLETE · [Optimisation Era](./APZHUB-OPTIMISATION-ERA.md) OPEN · [Friction Dashboard](./capabilities/APZHUB-FRICTION-DASHBOARD.md) defined · Programme 003 NOT SCHEDULED                                                              |
+| Platform Evolution   | [Graduated](./APZHUB-GRADUATION.md) · Lifecycle COMPLETE · steady-state evolution · evidence selects next                                                                                                                                              |
 
 ---
 

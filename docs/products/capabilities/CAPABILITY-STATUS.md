@@ -14,10 +14,10 @@
 
 ## Lifecycle
 
-[APZHUB-LIFECYCLE.md](../APZHUB-LIFECYCLE.md) — Foundational · Platform **CLOSED** · Optimisation **OPEN**.
+[Graduated](../APZHUB-GRADUATION.md) — Foundational · Platform **CLOSED** · Optimisation **OPEN** (steady-state).
 
 ## Next
 
-**Observation only.** No Programme 003. No idea-driven capability.
+**Observe.** No Programme 003. No idea-driven capability.
 
 > What evidence do we have?
