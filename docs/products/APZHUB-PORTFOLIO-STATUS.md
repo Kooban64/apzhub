@@ -49,15 +49,15 @@
 
 ## Product rows
 
-| Product           | Class        | Status                        | Baseline                         | Est. effort remaining          | Notes                                     |
-| ----------------- | ------------ | ----------------------------- | -------------------------------- | ------------------------------ | ----------------------------------------- |
-| **APZQEP**        | Engineering  | **Production Ready** · CLOSED | V1.1 (`apzqep-v1.1.0`)           | Defects / hotfixes only        | Operational Learning                      |
-| **APZ Projects**  | Delivery     | **Production Ready** · CLOSED | Release 3.0 (`apz-projects-3.0`) | Defects / hotfixes only        | Operational Learning                      |
-| **APZ Workflow**  | Engineering  | **Production Ready** · CLOSED | V1.0 (`apz-workflow-1.0`)        | Defects / hotfixes only        | Operational Learning                      |
-| **APZ Support**   | Operational  | **Production Ready** · CLOSED | V1.0 (`apz-support-1.0`)         | Defects / hotfixes only        | Operational Learning                      |
-| **APZ Analytics** | Intelligence | **Production Ready** · CLOSED | V1.0 (`apz-analytics-1.0`)       | Defects / hotfixes only        | Operational Learning                      |
-| **APZ Knowledge** | Intelligence | **Production Ready** · CLOSED | V1.0 (`apz-knowledge-1.0`)       | Defects / hotfixes only        | Operational Learning                      |
-| **APZ Time**      | Operational  | Operational                   | 1.0.0 · RI #001                  | Delivery-Standard elevate → PR | Final product before Portfolio Completion |
+| Product           | Class        | Status                        | Baseline                         | Est. effort remaining            | Notes                                                                               |
+| ----------------- | ------------ | ----------------------------- | -------------------------------- | -------------------------------- | ----------------------------------------------------------------------------------- |
+| **APZQEP**        | Engineering  | **Production Ready** · CLOSED | V1.1 (`apzqep-v1.1.0`)           | Defects / hotfixes only          | Operational Learning                                                                |
+| **APZ Projects**  | Delivery     | **Production Ready** · CLOSED | Release 3.0 (`apz-projects-3.0`) | Defects / hotfixes only          | Operational Learning                                                                |
+| **APZ Workflow**  | Engineering  | **Production Ready** · CLOSED | V1.0 (`apz-workflow-1.0`)        | Defects / hotfixes only          | Operational Learning                                                                |
+| **APZ Support**   | Operational  | **Production Ready** · CLOSED | V1.0 (`apz-support-1.0`)         | Defects / hotfixes only          | Operational Learning                                                                |
+| **APZ Analytics** | Intelligence | **Production Ready** · CLOSED | V1.0 (`apz-analytics-1.0`)       | Defects / hotfixes only          | Operational Learning                                                                |
+| **APZ Knowledge** | Intelligence | **Production Ready** · CLOSED | V1.0 (`apz-knowledge-1.0`)       | Defects / hotfixes only          | Operational Learning                                                                |
+| **APZ Time**      | Operational  | **Assessment**                | 1.0.0 · RI #001                  | Accept inventory → Engineer → PR | [APZTIM-002](./apztime/engineering/APZTIM-002-FINITE-PRODUCT-INVENTORY.md) proposed |
 
 ---
 
