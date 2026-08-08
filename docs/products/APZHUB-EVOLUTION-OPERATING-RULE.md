@@ -34,15 +34,29 @@ Documentation proves what was built. It must not become the work.
 
 ---
 
-## One-page cadence (mandatory)
+## Capability workflow (default)
+
+You name a **capability**. Not a programme.
 
 ```text
-Assessment → Finite Inventory → Owner Accept → Engineering → RC1 → Production Ready → Close
+Capability → Constitution Check → Inventory (1 page) → Build → Certify → Ship → Next
 ```
 
-No parallel programme-document industry. New programme docs only when introducing a **permanent architectural concept**.
+### Constitution Check (mechanical)
 
-Default artefacts: **code · tests · certification evidence · release notes**.
+Does it belong in **Product**, **Platform**, or **Provider**? If unclear or nowhere — **stop**.
+
+### Inventory
+
+Usually one page. Engineering slices Cursor can build. No essays.
+
+### Ship artefacts
+
+**code · tests · certification evidence · release notes**
+
+New programme documents only for a **permanent architectural concept**.
+
+No architectural theatre. Interrupt “perhaps we should consider…” without a constitutional reason.
 
 ---
 
@@ -50,37 +64,24 @@ Default artefacts: **code · tests · certification evidence · release notes**.
 
 > **If a programme produces more documentation than code, we've gone in the wrong direction.**
 
----
-
-## Next programme naming
-
-Do **not** open as “Platform Intelligence” by default.
-
-Working title until assessment decides:
-
-> **Platform Capability Expansion**
-
-Assessment must determine highest-value capabilities (AI is a candidate, not a presumption). Examples to evaluate, not invent:
-
-- Cross-product automation
-- Unified work queues
-- Global saved searches
-- Cross-product reporting
-- Shared dashboards
-- Provider failover
-- Offline capability
-- AI / RAG / agents (only if shared context justifies)
+Progress = valuable capabilities shipped — not documents written.
 
 ---
 
-## Conversation style
+## First-capability candidates (not opened)
 
-Constitution check → platform belonging → existing engine? → finite engineering inventory → **build**.
+Prefer user-visible exercise of certified APS (not AI first):
 
-Five minutes of gatekeeping. Then code.
+- Unified Notifications
+- Unified Activity Stream
+- Global Search
+
+Owner names one → Constitution Check → Inventory → Build.
+
+AI / RAG / agents remain candidates only when shared context and value justify them.
 
 ---
 
-## Programme 003
+## Programme 003 / Capability Expansion
 
-**NOT OPEN.** Opens only via Owner-authorised Assessment under this operating rule.
+**NOT OPEN** as a named programme. Work proceeds **capability by capability** under this rule.
