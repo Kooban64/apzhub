@@ -27,6 +27,8 @@ import { WorkflowWorkspaceRouter } from "@/components/workflow/workflow-workspac
 import { WorkflowEngineWorkspaceRouter } from "@/components/workflow-engine/workflow-engine-workspace-router";
 import { WorkflowsWorkspaceRouter } from "@/components/workflows/workflows-workspace-router";
 import { NotificationsWorkspaceRouter } from "@/components/notifications/notifications-workspace-router";
+import { UnifiedActivityStreamView } from "@/components/activity/unified-activity-stream-view";
+import { isActivityRoute } from "@/lib/unified-activity/routes";
 import { AdministrationWorkspaceRouter } from "@/components/administration/administration-workspace-router";
 import { ConfigurationWorkspaceRouter } from "@/components/configuration/configuration-workspace-router";
 import { IdentityWorkspaceRouter } from "@/components/identity/identity-workspace-router";
@@ -169,6 +171,7 @@ export function WorkbenchPage() {
   const workflowEngineActive = isWorkflowEngineRoute(pathname);
   const workflowsActive = isWorkflowsRoute(pathname);
   const notificationsActive = isNotificationsRoute(pathname);
+  const activityActive = isActivityRoute(pathname);
   const configurationActive = isConfigurationRoute(pathname);
   const identityActive = isIdentityRoute(pathname);
   const observeActive = isObserveRoute(pathname);
@@ -237,6 +240,8 @@ export function WorkbenchPage() {
         <WorkflowsWorkspaceRouter />
       ) : notificationsActive ? (
         <NotificationsWorkspaceRouter />
+      ) : activityActive ? (
+        <UnifiedActivityStreamView />
       ) : configurationActive ? (
         <ConfigurationWorkspaceRouter />
       ) : identityActive ? (

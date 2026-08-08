@@ -1,0 +1,30 @@
+manifestSchemaVersion: "1.0"
+id: platform-activity-stream
+name: Activity
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: Unified Activity Stream — APS-Activity capability surface.
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: home
+    label: Activity
+    icon: activity
+    route: /workspace/activity
+    order: 15
+    permission: platform.read
+  view:
+    title: Activity Stream
+    workspace: home
+    route: /workspace/activity
+    permission: platform.read
