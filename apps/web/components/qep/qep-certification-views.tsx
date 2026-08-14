@@ -132,6 +132,45 @@ function RcHomeView() {
   );
   const [lastEvaluationId, setLastEvaluationId] = useState<string | null>(null);
 
+  const recentChangesQuery = useQuery({
+    queryKey: ["qep-scm", "changes", "rc-picker"],
+    queryFn: () =>
+      fetchJson<{
+        changes: Array<{
+          changeEventId: string;
+          kind: string;
+          summary: string;
+          occurredAt: string;
+          repositoryId?: string;
+        }>;
+      }>("/api/v1/qep/scm/changes?limit=12"),
+  });
+
+  const securityQuery = useQuery({
+    queryKey: ["qep-security-assurance", "rc", changeEventId.trim()],
+    queryFn: () => {
+      const qs =
+        changeEventId.trim().length > 8
+          ? `?changeEventId=${encodeURIComponent(changeEventId.trim())}`
+          : "";
+      return fetchJson<{
+        summary: {
+          entitled: boolean;
+          linked: boolean;
+          href: string;
+          reviewClear: boolean;
+          detail: string;
+          critical: number;
+          high: number;
+          openCount: number;
+          assessmentPosition?: string;
+        };
+        externalRef: string | null;
+      }>(`/api/v1/qep/security-assurance${qs}`);
+    },
+    refetchInterval: 30_000,
+  });
+
   const byChangeQuery = useQuery({
     queryKey: ["qep-certification", "by-change", changeEventId.trim()],
     enabled: changeEventId.trim().length > 8,
@@ -159,10 +198,12 @@ function RcHomeView() {
     },
   });
 
+  const security = securityQuery.data?.summary;
+
   return (
     <QepPageShell
       title="Release Candidate"
-      description="Flagship Quality OS face — one change, domain readiness, explain-why, human GO / NO-GO. Domains are provider-masked."
+      description="One change → domain readiness (automation, security, performance, a11y, coverage, code quality) → explain-why → human GO / NO-GO. AI never certifies."
       actions={
         <Button
           type="button"
@@ -173,7 +214,85 @@ function RcHomeView() {
         </Button>
       }
     >
+      <QepPanel title="Security assurance (APZPEN)">
+        <div data-testid="qep-rc-security">
+          {securityQuery.isLoading ? (
+            <p className="text-sm text-[var(--color-muted-foreground)]">
+              Loading security posture…
+            </p>
+          ) : securityQuery.isError ? (
+            <QepErrorState message={(securityQuery.error as Error).message} />
+          ) : security ? (
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <QepStatusBadge status={security.reviewClear ? "ready" : "blocked"} />
+                  <span className="text-sm font-medium">
+                    {security.assessmentPosition ??
+                      (security.linked ? "linked" : "not linked")}
+                  </span>
+                </div>
+                <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
+                  {security.detail}
+                </p>
+                {securityQuery.data?.externalRef ? (
+                  <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">
+                    Bound repository: {securityQuery.data.externalRef}
+                  </p>
+                ) : null}
+              </div>
+              <Link
+                className="inline-flex h-8 items-center rounded-md border border-[var(--color-border)] px-3 text-sm"
+                href={security.href}
+              >
+                Open APZPEN
+              </Link>
+            </div>
+          ) : null}
+        </div>
+      </QepPanel>
+
       <QepPanel title="Select engineering change">
+        <p className="mb-3 text-sm text-[var(--color-muted-foreground)]">
+          Prefer a recent SCM change below, or paste a changeEventId. Path: SCM change →
+          provider evidence → evaluate RC → human decision. Security domain uses QEP
+          evidence plus APZPEN posture when linked.
+        </p>
+
+        {recentChangesQuery.isLoading ? (
+          <QepLoadingState label="Loading recent changes…" />
+        ) : recentChangesQuery.isError ? (
+          <p className="mb-3 text-sm text-[var(--color-muted-foreground)]">
+            Recent changes unavailable ({(recentChangesQuery.error as Error).message}).
+            Use manual id entry.
+          </p>
+        ) : (recentChangesQuery.data?.changes.length ?? 0) === 0 ? (
+          <p className="mb-3 text-sm text-[var(--color-muted-foreground)]">
+            No recent SCM changes yet. Sync a repository or paste a changeEventId.
+          </p>
+        ) : (
+          <ul className="mb-4 space-y-2" data-testid="qep-rc-recent-changes">
+            {(recentChangesQuery.data?.changes ?? []).map((change) => (
+              <li key={change.changeEventId}>
+                <button
+                  type="button"
+                  className="w-full rounded-md border border-[var(--color-border)] px-3 py-2 text-left text-sm hover:bg-[var(--color-muted)]"
+                  onClick={() => setChangeEventId(change.changeEventId)}
+                >
+                  <span className="font-medium">{change.kind}</span>
+                  <span className="text-[var(--color-muted-foreground)]">
+                    {" "}
+                    · {change.summary}
+                  </span>
+                  <span className="mt-1 block font-mono text-xs text-[var(--color-muted-foreground)]">
+                    {change.changeEventId}
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+
         <label className="mb-2 block text-sm">
           changeEventId
           <input
@@ -184,11 +303,6 @@ function RcHomeView() {
             data-testid="qep-rc-change-event-id"
           />
         </label>
-        <p className="text-sm text-[var(--color-muted-foreground)]">
-          Cold path: SCM change → provider evidence → evaluate RC → human decision.
-          Security and Performance stay honest empty until those providers join the
-          matrix.
-        </p>
         {evaluateMutation.isError ? (
           <QepErrorState message={(evaluateMutation.error as Error).message} />
         ) : null}
@@ -246,6 +360,30 @@ function RcWorkbenchView({ evaluationId }: { evaluationId: string }) {
       ),
   });
 
+  const securityQuery = useQuery({
+    queryKey: [
+      "qep-security-assurance",
+      "rc-workbench",
+      detailQuery.data?.evaluation.changeEventId,
+    ],
+    enabled: Boolean(detailQuery.data?.evaluation.changeEventId),
+    queryFn: () =>
+      fetchJson<{
+        summary: {
+          href: string;
+          reviewClear: boolean;
+          detail: string;
+          assessmentPosition?: string;
+          critical: number;
+          high: number;
+        };
+      }>(
+        `/api/v1/qep/security-assurance?changeEventId=${encodeURIComponent(
+          detailQuery.data!.evaluation.changeEventId,
+        )}`,
+      ),
+  });
+
   const decisionMutation = useMutation({
     mutationFn: (outcome: "GO" | "NO_GO") =>
       fetchJson<{ evaluation: CertificationEvaluation }>(
@@ -281,6 +419,7 @@ function RcWorkbenchView({ evaluationId }: { evaluationId: string }) {
   const evidenceForDomain = (evaluation.evidenceLinks ?? []).filter((link) =>
     activeDomain?.evidenceIds.includes(link.evidenceId),
   );
+  const security = securityQuery.data?.summary;
 
   return (
     <QepPageShell
@@ -318,7 +457,26 @@ function RcWorkbenchView({ evaluationId }: { evaluationId: string }) {
         >
           Source Control
         </Link>
+        {security ? (
+          <Link href={security.href} data-testid="qep-rc-open-apzpen">
+            APZPEN security
+          </Link>
+        ) : null}
       </div>
+
+      {security ? (
+        <QepPanel title="Security assurance (APZPEN)">
+          <div
+            className="flex flex-wrap items-center gap-2"
+            data-testid="qep-rc-workbench-security"
+          >
+            <QepStatusBadge status={security.reviewClear ? "ready" : "blocked"} />
+            <p className="text-sm text-[var(--color-muted-foreground)]">
+              {security.detail}
+            </p>
+          </div>
+        </QepPanel>
+      ) : null}
 
       {/* One composition: domain strip — programme face */}
       <section
@@ -346,7 +504,13 @@ function RcWorkbenchView({ evaluationId }: { evaluationId: string }) {
                 <span className="font-medium">{domain.label}</span>
                 <span aria-hidden="true">{domainMark(domain.status)}</span>
               </div>
-              <p className="mt-1 text-xs opacity-80">{domain.summary}</p>
+              <p className="mt-1 text-xs opacity-80">
+                {domain.domainId === "security" && security
+                  ? `${domain.summary} · APZPEN: ${
+                      security.assessmentPosition ?? "n/a"
+                    } (crit ${security.critical}/high ${security.high})`
+                  : domain.summary}
+              </p>
             </button>
           ))}
         </div>

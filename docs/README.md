@@ -24,7 +24,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | Document                                                                             | Description                                                                       |
 | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- |
 | [SPR-APZQEP-200](./sprint/SPR-APZQEP-200-competitive-full-swing.md)                  | **AUTHORISED · IN PROGRESS** — competitive full swing (RCC · providers · AI · GA) |
-| [SPR-APZQEP-201](./sprint/SPR-APZQEP-201-release-control-centre.md)                  | **IN PROGRESS** — Home + Release Readiness Release Control Centre                 |
+| [SPR-APZQEP-201](./sprint/SPR-APZQEP-201-release-control-centre.md)                  | **IN PROGRESS — closeout** — Home · Readiness · RC · APZPEN security bridge       |
 | [APZQEP PRODUCT-STATUS](./products/apzqep/PRODUCT-STATUS.md)                         | V1.1 **PRODUCTION READY · CLOSED** — kernel frozen; 200 = V1.2 / Wave-6-class     |
 | [APZQEP pillar vision](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md) | Experience + commercial identity authority                                        |
 

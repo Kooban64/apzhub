@@ -42,7 +42,7 @@ export type QepModuleDescriptor = {
  * Catalogue statuses (Tranche 2 Q6 honesty):
  * `enabled` = workspace router has a real surface (not Requirements fallthrough).
  * `stub` = package/nav may exist; UI must show unavailable — never impersonate another module.
- * Deeper GitHub-pivotal / readiness work remains Tranche 4 (still stub here).
+ * M01 Home + M12 Release Readiness enabled under SPR-APZQEP-201.
  */
 export const QEP_MODULES: readonly QepModuleDescriptor[] = [
   {

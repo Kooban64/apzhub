@@ -158,6 +158,24 @@ function HomeCommandCentreView() {
     queryFn: () => fetchJson<CommandCentre>("/api/v1/qep/quality-flows"),
     refetchInterval: 15_000,
   });
+  const securityQuery = useQuery({
+    queryKey: ["qep-security-assurance", "home"],
+    queryFn: () =>
+      fetchJson<{
+        summary: {
+          entitled: boolean;
+          linked: boolean;
+          href: string;
+          reviewClear: boolean;
+          detail: string;
+          critical: number;
+          high: number;
+          openCount: number;
+          assessmentPosition?: string;
+        };
+      }>("/api/v1/qep/security-assurance"),
+    refetchInterval: 30_000,
+  });
 
   if (query.isLoading) {
     return <QepLoadingState label="Loading release control centre…" />;
@@ -170,6 +188,7 @@ function HomeCommandCentreView() {
   const s = data.summary;
   const verdict = releaseVerdict(s);
   const blocked = data.active.filter((row) => row.blockedRelease).slice(0, 5);
+  const security = securityQuery.data?.summary;
 
   return (
     <QepPageShell
@@ -212,6 +231,49 @@ function HomeCommandCentreView() {
               {verdict.detail}
             </p>
           </div>
+        </div>
+      </QepPanel>
+
+      <QepPanel title="Security assurance (APZPEN)">
+        <div data-testid="qep-home-security">
+          {securityQuery.isLoading ? (
+            <p className="text-sm text-[var(--color-muted-foreground)]">
+              Loading security posture…
+            </p>
+          ) : securityQuery.isError ? (
+            <QepErrorState message={(securityQuery.error as Error).message} />
+          ) : security ? (
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <QepStatusBadge status={security.reviewClear ? "ready" : "blocked"} />
+                  <span className="text-sm font-medium">
+                    {security.linked
+                      ? (security.assessmentPosition ?? "linked")
+                      : security.entitled
+                        ? "not linked"
+                        : "not entitled"}
+                  </span>
+                </div>
+                <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
+                  {security.detail}
+                </p>
+                {security.linked ? (
+                  <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">
+                    Open critical {security.critical} · high {security.high} · open{" "}
+                    {security.openCount}
+                  </p>
+                ) : null}
+              </div>
+              <Link className={linkOutline} href={security.href}>
+                Open APZPEN
+              </Link>
+            </div>
+          ) : (
+            <p className="text-sm text-[var(--color-muted-foreground)]">
+              Security posture unavailable.
+            </p>
+          )}
         </div>
       </QepPanel>
 

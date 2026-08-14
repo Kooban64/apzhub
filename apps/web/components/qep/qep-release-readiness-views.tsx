@@ -47,6 +47,20 @@ type CommandCentre = {
   };
 };
 
+type SecurityAssurancePayload = {
+  summary: {
+    entitled: boolean;
+    linked: boolean;
+    href: string;
+    reviewClear: boolean;
+    detail: string;
+    critical: number;
+    high: number;
+    openCount: number;
+    assessmentPosition?: string;
+  };
+};
+
 type CheckItem = {
   id: string;
   label: string;
@@ -60,20 +74,33 @@ export function QepReleaseReadinessRouterView() {
 }
 
 function ReleaseReadinessView() {
-  const query = useQuery({
+  const flowsQuery = useQuery({
     queryKey: ["qep-quality-flows", "command-centre", "readiness"],
     queryFn: () => fetchJson<CommandCentre>("/api/v1/qep/quality-flows"),
     refetchInterval: 15_000,
   });
+  const securityQuery = useQuery({
+    queryKey: ["qep-security-assurance", "readiness"],
+    queryFn: () =>
+      fetchJson<SecurityAssurancePayload>("/api/v1/qep/security-assurance"),
+    refetchInterval: 30_000,
+  });
 
-  if (query.isLoading) {
+  if (flowsQuery.isLoading || securityQuery.isLoading) {
     return <QepLoadingState label="Loading release readiness…" />;
   }
-  if (query.isError) {
-    return <QepErrorState message={(query.error as Error).message} />;
+  if (flowsQuery.isError) {
+    return <QepErrorState message={(flowsQuery.error as Error).message} />;
   }
 
-  const s = query.data!.summary;
+  const s = flowsQuery.data!.summary;
+  const security = securityQuery.data?.summary;
+  const securityOk = security?.reviewClear === true;
+  const securityDetail = securityQuery.isError
+    ? `Unable to load APZPEN posture: ${(securityQuery.error as Error).message}`
+    : (security?.detail ?? "Security assurance posture unavailable.");
+  const securityHref = security?.href ?? "/apzpen";
+
   const checks: CheckItem[] = [
     {
       id: "exceptions",
@@ -106,20 +133,19 @@ function ReleaseReadinessView() {
       href: QEP_QUALITY_FLOWS_ROUTES.waiting,
     },
     {
+      id: "security",
+      label: "Security assurance review-clear",
+      ok: securityOk,
+      detail: securityDetail,
+      href: securityHref,
+    },
+    {
       id: "certify",
       label: "Human certification ready",
-      ok: s.exceptionCount === 0 && s.blockedReleaseCount === 0,
+      ok: s.exceptionCount === 0 && s.blockedReleaseCount === 0 && securityOk,
       detail:
         "Open Release Candidate for domain readiness, explain-why, and human GO/NO-GO. AI never certifies.",
       href: QEP_CERTIFICATION_ROUTES.rcHome,
-    },
-    {
-      id: "security",
-      label: "Security assurance reviewed",
-      ok: true,
-      detail:
-        "Confirm APZPEN security evidence is reflected on certification domains for the change under review.",
-      href: "/apzpen",
     },
   ];
 
@@ -138,7 +164,7 @@ function ReleaseReadinessView() {
   return (
     <QepPageShell
       title="Release Readiness"
-      description="Go/no-go checklist over live orchestration. Completing checks does not certify — human GO/NO-GO is on Release Candidate."
+      description="Go/no-go checklist over live orchestration and APZPEN security posture. Completing checks does not certify — human GO/NO-GO is on Release Candidate."
       breadcrumbs={["QEP", "Release Readiness"]}
       actions={
         <div className="flex flex-wrap gap-2">

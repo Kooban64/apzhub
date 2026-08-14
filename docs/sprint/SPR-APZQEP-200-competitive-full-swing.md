@@ -55,17 +55,17 @@ V1.1 architecture is mature; buyers still feel:
 
 Execute in order unless Owner reorders. Each sprint needs its own detailed execution guide before code.
 
-### SPR-APZQEP-201 — Release Control Centre & surface completion — **IN PROGRESS**
+### SPR-APZQEP-201 — Release Control Centre & surface completion — **IN PROGRESS (closeout)**
 
 **Outcome:** Operator can answer “Can we release?” in one place.
 
-| Ship                    | Notes                                              |
-| ----------------------- | -------------------------------------------------- |
-| Home Command Centre     | Un-stub `qep-home`; posture, open gates, blockers  |
-| Release Readiness       | Un-stub release-readiness over orchestration gates |
-| Certification RC UX     | Productise existing certification/RC APIs          |
-| APZPEN security domains | Show security evidence / position on gate views    |
-| Kill stub gap           | Home + Release Readiness no longer `status: stub`  |
+| Ship                    | Notes                                                    | Status |
+| ----------------------- | -------------------------------------------------------- | ------ |
+| Home Command Centre     | Live flow posture + APZPEN security panel                | Done   |
+| Release Readiness       | Checklist; security row from bridge (never hardcoded ok) | Done   |
+| Certification RC UX     | Recent SCM picker + APZPEN strip on RC home/workbench    | Done   |
+| APZPEN security domains | `GET /api/v1/qep/security-assurance` read-only bridge    | Done   |
+| Kill stub gap           | Home + Release Readiness no longer `status: stub`        | Done   |
 
 ### SPR-APZQEP-202 — Provider wave (Playwright · CI · SCM intimacy)
 

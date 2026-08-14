@@ -1,3 +1,4 @@
+import { createHmac } from "node:crypto";
 import { describe, expect, it, beforeEach } from "vitest";
 
 import {
@@ -51,7 +52,6 @@ describe("APZPEN GitHub PR security", () => {
 
   it("verifies HMAC signatures", () => {
     const body = '{"ok":true}';
-    const { createHmac } = await import("node:crypto");
     const sig = "sha256=" + createHmac("sha256", "secret").update(body).digest("hex");
     expect(
       verifyGithubWebhookSignature({
