@@ -1,0 +1,18 @@
+manifestSchemaVersion: "1.0"
+id: platform-iam-member-role-assigned
+name: Identity Lifecycle
+version: 0.1.0
+kind: event
+
+metadata:
+  category: platform
+  description: IAM commercial programme event (platform-iam-member-role-assigned).
+
+event:
+  category: platform
+  publisher: identity-lifecycle-service
+  permission: identity.manage
+  payload:
+    organisationId: string
+    userId: string
+    actorId: string

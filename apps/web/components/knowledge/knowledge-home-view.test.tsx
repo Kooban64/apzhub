@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
@@ -7,9 +8,24 @@ vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn() }),
 }));
 
+vi.mock("@/lib/knowledge/organisational-memory-api", () => ({
+  listKnowledgeObjects: vi.fn(async () => []),
+}));
+
+function renderHome(permissions: string[]) {
+  const client = new QueryClient({
+    defaultOptions: { queries: { retry: false } },
+  });
+  return render(
+    <QueryClientProvider client={client}>
+      <KnowledgeHomeView permissions={permissions} />
+    </QueryClientProvider>,
+  );
+}
+
 describe("KnowledgeHomeView", () => {
   it("expresses Memory Companion organisational memory experience", () => {
-    render(<KnowledgeHomeView permissions={["knowledge.view"]} />);
+    renderHome(["knowledge.view"]);
 
     expect(screen.getByTestId("knowledge-home-onboarding")).toBeInTheDocument();
     expect(
@@ -17,6 +33,7 @@ describe("KnowledgeHomeView", () => {
     ).toBeInTheDocument();
     expect(screen.getByTestId("knowledge-home-prompts")).toBeInTheDocument();
     expect(screen.getByTestId("knowledge-home-types")).toBeInTheDocument();
+    expect(screen.getByTestId("knowledge-home-live-memory")).toBeInTheDocument();
     expect(screen.getByTestId("knowledge-home-featured")).toBeInTheDocument();
     expect(screen.getByTestId("knowledge-home-link-companion")).toBeInTheDocument();
     expect(
@@ -26,12 +43,12 @@ describe("KnowledgeHomeView", () => {
   });
 
   it("keeps diagnostics secondary for operators", () => {
-    render(<KnowledgeHomeView permissions={["knowledge.view", "knowledge.admin"]} />);
+    renderHome(["knowledge.view", "knowledge.admin"]);
     expect(screen.getByTestId("knowledge-home-operator")).toBeInTheDocument();
   });
 
   it("denies access without knowledge.view", () => {
-    render(<KnowledgeHomeView permissions={[]} />);
+    renderHome([]);
     expect(screen.getByText("Permission required")).toBeInTheDocument();
   });
 });

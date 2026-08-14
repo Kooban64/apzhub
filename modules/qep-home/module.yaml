@@ -1,15 +1,18 @@
 manifestSchemaVersion: "1.0"
 id: qep-home
 name: Home and Command Centre
-version: 0.1.0
+version: 0.2.0
 kind: module
 
 metadata:
   category: quality-engineering
-  description: "Home and Command Centre (M01) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  description: >
+    Release Control entry surface for APZQEP (SPR-APZQEP-201). Answers
+    "Can we release with confidence?" over live Quality Flow posture.
   product: apzqep
   moduleCatalogueId: M01
   slug: home
+  programme: SPR-APZQEP-201
 
 dependencies:
   platform: []
@@ -18,17 +21,21 @@ dependencies:
 
 module:
   category: quality-engineering
-  status: stub
+  status: active
+
+permissions:
+  - id: qep.home.read
+    label: View Home and Command Centre
 
 workbench:
   navigation:
     level: sidebar
     workspace: qep
     parent: qep
-    label: Home and Command Centre
-    icon: flask-conical
+    label: Home
+    icon: layout-dashboard
     route: /workspace/qep/home
-    order: 10
+    order: 1
     permission: qep.home.read
   view:
     title: Home and Command Centre

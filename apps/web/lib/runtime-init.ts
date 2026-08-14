@@ -1,7 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { ensureEnvironmentValid } from "@apzhub/config";
+import { ensureEnvironmentValid, ensureLocalSecretsLoaded } from "@apzhub/config";
 import {
   ensurePlatformRuntimeReady as ensureCanonicalBootstrap,
   resetPlatformBootstrapForTests,
@@ -21,6 +21,10 @@ export function ensurePlatformEnvironmentValid() {
   if (process.env.NEXT_PHASE === "phase-production-build") {
     return;
   }
+
+  ensureLocalSecretsLoaded({
+    secretsDir: process.env.APZHUB_SECRETS_DIR?.trim() || undefined,
+  });
 
   return ensureEnvironmentValid({
     abortProcess: process.env.NODE_ENV === "production",

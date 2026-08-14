@@ -111,6 +111,13 @@ export type NotificationDeliveryDurableStorePort = {
   insertInAppItem(item: NotificationInAppItem): Promise<NotificationInAppItem>;
   getInAppItem(id: string): Promise<NotificationInAppItem | null>;
   updateInAppItem(item: NotificationInAppItem): Promise<NotificationInAppItem>;
+  /** Inbox query — tenant + recipient scoped. */
+  listInAppItemsForUser(input: {
+    readonly tenantId: string;
+    readonly userId: string;
+    readonly organisationId?: string;
+    readonly unreadOnly?: boolean;
+  }): Promise<readonly NotificationInAppItem[]>;
 
   /** P4 — admin list with tenant/org isolation (mandatory tenantId). */
   listDeliveriesAdmin(

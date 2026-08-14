@@ -1,14 +1,15 @@
 manifestSchemaVersion: "1.0"
 id: qep
 name: Quality
-version: 0.1.0
+version: 0.2.0
 kind: module
 
 metadata:
   category: quality-engineering
   description: >
     APZQEP Quality activity-bar workspace root. Child modules register under
-    parent qep. Flagship operational surface is Quality Flow Workspace.
+    parent qep. Entry surface is Home / Release Control (SPR-APZQEP-201);
+    Quality Flow Workspace remains the operational engine face.
   product: apzqep
 
 dependencies:
@@ -24,12 +25,12 @@ workbench:
     workspace: qep
     label: Quality
     icon: flask-conical
-    route: /workspace/qep/quality-flows
+    route: /workspace/qep/home
     order: 35
-    permission: qep.quality_flows.read
+    permission: qep.home.read
   view:
     title: Quality
     workspace: qep
-    route: /workspace/qep/quality-flows
+    route: /workspace/qep/home
     default: true
-    permission: qep.quality_flows.read
+    permission: qep.home.read

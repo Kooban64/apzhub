@@ -23,9 +23,31 @@ describe("@apzhub/qep-types", () => {
     const scm = QEP_MODULES.find((m) => m.id === "M19");
     expect(scm?.status).toBe("enabled");
     expect(scm?.title).toBe("Enterprise Source Control");
+
+    const enabledIds = new Set(
+      QEP_MODULES.filter((m) => m.status === "enabled").map((m) => m.id),
+    );
+    expect(enabledIds).toEqual(
+      new Set([
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M06",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "M12",
+        "M13",
+        "M14",
+        "M15",
+        "M19",
+      ]),
+    );
     expect(
-      QEP_MODULES.every((m) =>
-        m.id === "M07" || m.id === "M19" ? m.status === "enabled" : m.status === "stub",
+      QEP_MODULES.every(
+        (m) => m.status === "enabled" || m.status === "stub" || m.status === "planned",
       ),
     ).toBe(true);
   });

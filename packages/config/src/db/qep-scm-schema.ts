@@ -85,9 +85,38 @@ export const qepScmTraceabilityLink = pgTable(
   }),
 );
 
+/** Flagship F1 — durable commit / PR / push heartbeat records. */
+export const qepScmChangeEvent = pgTable(
+  "qep_scm_change_event",
+  {
+    id: text("id").primaryKey(),
+    tenantId: text("tenant_id").notNull(),
+    repositoryId: text("repository_id"),
+    providerId: varchar("provider_id", { length: 64 }).notNull(),
+    kind: varchar("kind", { length: 32 }).notNull(),
+    externalKey: text("external_key").notNull(),
+    occurredAt: timestamp("occurred_at", { withTimezone: true }).notNull(),
+    changeJson: jsonb("change_json").$type<Record<string, unknown>>().notNull(),
+  },
+  (t) => ({
+    tenantOccurredIdx: index("qep_scm_change_event_tenant_occurred_idx").on(
+      t.tenantId,
+      t.occurredAt,
+    ),
+    repositoryOccurredIdx: index("qep_scm_change_event_repository_occurred_idx").on(
+      t.repositoryId,
+      t.occurredAt,
+    ),
+    tenantProviderKeyUidx: uniqueIndex(
+      "qep_scm_change_event_tenant_provider_key_uidx",
+    ).on(t.tenantId, t.providerId, t.externalKey, t.kind),
+  }),
+);
+
 export const qepScmSchema = {
   qepScmRepository,
   qepScmWebhookAudit,
   qepScmWebhookIdempotency,
   qepScmTraceabilityLink,
+  qepScmChangeEvent,
 };

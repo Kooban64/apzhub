@@ -14,6 +14,7 @@ import {
   createProductionNotificationDeliveryDurableStore,
 } from "@apzhub/notification-delivery-persistence";
 
+import type { DomainEventPublisher } from "../../../events/domain-event-publisher";
 import {
   isNotificationDurableRuntimeEnabled,
   type NotificationDeliveryEnv,
@@ -44,6 +45,12 @@ export type CreateDurableNotificationRuntimeBootstrapInput = {
   readonly autoStartWorker?: boolean;
   readonly workerId?: string;
   readonly enableDispatch?: boolean;
+  readonly publisher?: DomainEventPublisher;
+  readonly resolveEmail?: (input: {
+    readonly tenantId: string;
+    readonly organisationId?: string;
+    readonly userId: string;
+  }) => string | undefined | Promise<string | undefined>;
 };
 
 /**
@@ -63,7 +70,9 @@ export function createDurableNotificationRuntimeBootstrap(
       "store" in envOrInput ||
       "autoStartWorker" in envOrInput ||
       "workerId" in envOrInput ||
-      "enableDispatch" in envOrInput)
+      "enableDispatch" in envOrInput ||
+      "publisher" in envOrInput ||
+      "resolveEmail" in envOrInput)
       ? (envOrInput as CreateDurableNotificationRuntimeBootstrapInput)
       : { env: envOrInput as NotificationDeliveryEnv };
 
@@ -90,6 +99,8 @@ export function createDurableNotificationRuntimeBootstrap(
         env,
         workerId: input.workerId,
         enableDispatch: input.enableDispatch,
+        publisher: input.publisher,
+        resolveEmail: input.resolveEmail,
       })
     : null;
 

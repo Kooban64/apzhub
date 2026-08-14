@@ -28,6 +28,7 @@ import {
   knowledgeSettingsPath,
 } from "@/lib/knowledge/routes";
 
+import { KnowledgeLiveMemoryPanel } from "./knowledge-live-memory-panel";
 import { EmptyState, KNOWLEDGE_PRODUCT_NAME, PageShell } from "./knowledge-ui";
 
 const COMPANION_LINKS = [
@@ -81,7 +82,7 @@ export function KnowledgeHomeView({
   const router = useRouter();
   const canView = canViewKnowledge(permissions);
   const isOperator = canAdminKnowledge(permissions);
-  const featured = listPublishedMemory().slice(0, 4);
+  const illustrative = listPublishedMemory().slice(0, 3);
 
   if (!canView) {
     return (
@@ -174,14 +175,22 @@ export function KnowledgeHomeView({
         </div>
       </section>
 
+      <KnowledgeLiveMemoryPanel
+        title="Trusted memory in focus"
+        testId="knowledge-home-live-memory"
+      />
+
       <section className="mt-6" data-testid="knowledge-home-featured">
-        <h2 className="mb-2 text-sm font-semibold">Trusted memory in focus</h2>
+        <h2 className="mb-2 text-sm font-semibold">Illustrative examples</h2>
+        <p className="mb-3 text-sm text-[var(--color-muted-foreground)]">
+          Catalogue samples for orientation — not the System of Record.
+        </p>
         <ul className="grid gap-2">
-          {featured.map((item) => (
+          {illustrative.map((item) => (
             <li key={item.id}>
               <button
                 type="button"
-                className="w-full rounded-lg border border-[var(--color-border)] p-3 text-left hover:bg-[var(--color-accent)]/40"
+                className="w-full rounded-lg border border-dashed border-[var(--color-border)] p-3 text-left hover:bg-[var(--color-accent)]/40"
                 onClick={() => router.push(knowledgeMemoryObjectPath(item.id))}
                 data-testid={`knowledge-home-memory-${item.id}`}
               >

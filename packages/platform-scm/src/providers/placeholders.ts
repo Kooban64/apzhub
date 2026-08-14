@@ -2,7 +2,6 @@ import type { ScmProvider } from "../contracts/provider";
 import type { ScmProviderId } from "../contracts/repository";
 
 const PLACEHOLDER_IDS = [
-  "gitlab",
   "azure_devops",
   "bitbucket",
   "gitea",
@@ -38,7 +37,6 @@ function createPlaceholder(providerId: ScmProviderId, name: string): ScmProvider
 
 export function createPlaceholderScmProviders(): readonly ScmProvider[] {
   return [
-    createPlaceholder("gitlab", "GitLab Provider"),
     createPlaceholder("azure_devops", "Azure DevOps Provider"),
     createPlaceholder("bitbucket", "Bitbucket Provider"),
     createPlaceholder("gitea", "Gitea Provider"),

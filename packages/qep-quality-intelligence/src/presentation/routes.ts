@@ -12,6 +12,9 @@ export const QEP_QI_ROUTES = {
   confidence: `${QEP_QI_BASE_PATH}/confidence`,
   explainability: (explanationId: string) =>
     `${QEP_QI_BASE_PATH}/explanations/${explanationId}`,
+  /** Flagship F6 — change-grounded advisory intelligence. */
+  byChange: (changeEventId: string) =>
+    `${QEP_QI_BASE_PATH}?changeEventId=${encodeURIComponent(changeEventId)}`,
 } as const;
 
 export function isQepQiRoute(pathname: string): boolean {

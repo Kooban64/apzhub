@@ -1,0 +1,37 @@
+manifestSchemaVersion: "1.0"
+id: payfast
+name: PayFast Payment Gateway Integration
+version: 0.1.0
+kind: integration
+
+metadata:
+  category: integrations
+  description: >
+    PayFast adapter for APZHUB BillingService. Checkout, ITN/webhooks, refunds.
+    Never stores card PAN. Secrets via env /.secrets only.
+  programme: SPR-IAM-COMMERCIAL-001
+  owner: APZHUB
+  tags:
+    - payfast
+    - payments
+    - billing
+
+dependencies:
+  platform: []
+
+integration:
+  type: payment-gateway
+  capabilities:
+    - health
+    - checkout
+    - webhook
+    - refund
+    - error-translation
+
+health:
+  enabled: true
+
+documentation:
+  userVisible: false
+  engineBranding: hidden
+  adapterImplementation: SPR-IAM-COMMERCIAL-001

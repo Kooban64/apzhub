@@ -2,6 +2,17 @@ import { z } from "zod";
 
 const booleanFromEnv = z.enum(["true", "false"]).transform((value) => value === "true");
 
+/** Treat blank env strings as unset for optional credentials. */
+const optionalNonEmptyString = z.preprocess(
+  (value) => (typeof value === "string" && value.trim() === "" ? undefined : value),
+  z.string().min(1).optional(),
+);
+
+const optionalEmail = z.preprocess(
+  (value) => (typeof value === "string" && value.trim() === "" ? undefined : value),
+  z.string().email().optional(),
+);
+
 export const platformEnvSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   PORT: z.coerce.number().default(3300),
@@ -22,6 +33,25 @@ export const platformEnvSchema = z.object({
   /** Comma-separated extra origins allowed for Better Auth (coexistence / public host). */
   BETTER_AUTH_TRUSTED_ORIGINS: z.string().optional(),
   EMAIL_FROM: z.string().email().default("noreply@apzhub.local"),
+  /** Outbound SMTP (loaded from `.secrets/smtp` when unset in env). */
+  SMTP_HOST: optionalNonEmptyString,
+  SMTP_PORT: z.preprocess(
+    (value) => (typeof value === "string" && value.trim() === "" ? undefined : value),
+    z.coerce.number().int().positive().optional(),
+  ),
+  SMTP_USER: optionalNonEmptyString,
+  SMTP_PASS: optionalNonEmptyString,
+  SMTP_FROM: optionalEmail,
+  SMTP_SECURE: z
+    .enum(["true", "false"])
+    .optional()
+    .transform((value) => (value === undefined ? undefined : value === "true")),
+  /** Optional AI / SCM operator credentials (from `.secrets/openai` / `.secrets/git`). */
+  OPENAI_API_KEY: optionalNonEmptyString,
+  GITHUB_TOKEN: optionalNonEmptyString,
+  APZHUB_SCM_GITHUB_TOKEN: optionalNonEmptyString,
+  GITHUB_USERNAME: optionalNonEmptyString,
+  GITHUB_LOGIN: optionalNonEmptyString,
   LAW_REPOSITORY_MODE: z.enum(["memory", "postgres"]).default("memory"),
   LAW_TENANT_ID: z.string().uuid().optional(),
   ENTITY_MAPPING_STORE_MODE: z.enum(["memory", "postgres"]).default("memory"),

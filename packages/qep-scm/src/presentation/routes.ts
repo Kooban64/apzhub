@@ -6,6 +6,9 @@ export const QEP_SCM_ROUTES = {
   repositories: `${QEP_SCM_BASE_PATH}/repositories`,
   repository: (repositoryId: string) =>
     `${QEP_SCM_BASE_PATH}/repositories/${repositoryId}`,
+  /** Flagship F7 — deep-link to propose test design for a change on a repository. */
+  designAssist: (repositoryId: string, changeEventId: string) =>
+    `${QEP_SCM_BASE_PATH}/repositories/${repositoryId}?designAssist=${encodeURIComponent(changeEventId)}`,
   webhooks: `${QEP_SCM_BASE_PATH}/webhooks`,
   provider: (providerId: string) => `${QEP_SCM_BASE_PATH}/providers/${providerId}`,
 } as const;

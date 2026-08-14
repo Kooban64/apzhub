@@ -43,6 +43,7 @@
     "@apzhub/notification-core": "workspace:*",
     "@apzhub/notification-persistence": "workspace:*",
     "@apzhub/notification-delivery-persistence": "workspace:*",
+    "@apzhub/platform-email": "workspace:*",
     "@apzhub/configuration-contracts": "workspace:*",
     "@apzhub/configuration-core": "workspace:*",
     "@apzhub/configuration-persistence": "workspace:*",

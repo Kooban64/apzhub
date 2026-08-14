@@ -1,0 +1,32 @@
+manifestSchemaVersion: "1.0"
+id: catalogue-service
+name: Catalogue Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: platform
+  description: >
+    APZHUB direct commercial catalogue (org plans, pen-test, QA report).
+    Partner marketplace runtime deferred; catalogue designed for extension.
+  programme: SPR-IAM-COMMERCIAL-001
+  owner: APZHUB
+  tags:
+    - commercial
+    - catalogue
+    - marketplace-ready
+
+dependencies:
+  platform: []
+  services: []
+  integrations: []
+
+service:
+  category: platform
+  status: active
+
+permissions:
+  - id: catalogue.read
+    description: View sellable SKUs
+  - id: catalogue.manage
+    description: Manage catalogue entries (platform)

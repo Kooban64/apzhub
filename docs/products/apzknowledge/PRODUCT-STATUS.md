@@ -36,4 +36,4 @@ The product is in **Operational Learning**. Knowledge 2.0, AI/RAG, and redesign 
 
 ## Next action
 
-Operational Learning. Portfolio next: **APZ Time** → then formal **Portfolio Completion** (before Platform Evolution).
+Operational Learning. Parallel harden **KNW-H6** (Memory Companion) accepted locally 2026-08-09 — steward grants, Wave A nav, live memory, find. Portfolio next per Owner (e.g. Workflow closeout inventory) → formal **Portfolio Completion** (before Platform Evolution).

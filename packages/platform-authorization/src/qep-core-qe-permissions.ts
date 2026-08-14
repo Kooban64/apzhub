@@ -8,12 +8,18 @@ export const DEFAULT_QEP_READER_ROLE_ID = "role-qep-reader";
 
 /** Authoritative Cap A–F permission keys used by domain services. */
 export const QEP_CORE_QE_PERMISSIONS = [
+  "qep.home.read",
+  "qep.release_readiness.read",
   "qep.quality_flows.read",
   "qep.quality_flows.operate",
+  "qep.certification.read",
+  "qep.certification.decide",
   "qep.automation.read",
   "qep.automation.operate",
   "qep.scm.read",
   "qep.scm.operate",
+  "qep.portfolio.read",
+  "qep.portfolio.operate",
   "qep.qi.read",
   "qep.qi.operate",
   "qep.dashboards.read",
@@ -48,16 +54,28 @@ export const QEP_CORE_QE_PERMISSIONS = [
   "qep.enterprise_reporting.create",
   "qep.enterprise_reporting.update",
   "qep.enterprise_reporting.admin",
+  "qep.specification.read",
+  "qep.specification.create",
+  "qep.specification.update",
+  "qep.specification.search",
+  "qep.traceability.trace_links.view",
+  "qep.traceability.trace_links.create",
   "qep.*",
 ] as const;
 
 export const QEP_OPERATOR_PERMISSIONS = [
+  "qep.home.read",
+  "qep.release_readiness.read",
   "qep.quality_flows.read",
   "qep.quality_flows.operate",
+  "qep.certification.read",
+  "qep.certification.decide",
   "qep.automation.read",
   "qep.automation.operate",
   "qep.scm.read",
   "qep.scm.operate",
+  "qep.portfolio.read",
+  "qep.portfolio.operate",
   "qep.qi.read",
   "qep.qi.operate",
   "qep.dashboards.read",
@@ -86,12 +104,22 @@ export const QEP_OPERATOR_PERMISSIONS = [
   "qep.enterprise_reporting.read",
   "qep.enterprise_reporting.create",
   "qep.enterprise_reporting.update",
+  "qep.specification.read",
+  "qep.specification.create",
+  "qep.specification.update",
+  "qep.specification.search",
+  "qep.traceability.trace_links.view",
+  "qep.traceability.trace_links.create",
 ] as const;
 
 export const QEP_READER_PERMISSIONS = [
+  "qep.home.read",
+  "qep.release_readiness.read",
   "qep.quality_flows.read",
+  "qep.certification.read",
   "qep.automation.read",
   "qep.scm.read",
+  "qep.portfolio.read",
   "qep.qi.read",
   "qep.dashboards.read",
   "qep.suites.read",
@@ -100,6 +128,9 @@ export const QEP_READER_PERMISSIONS = [
   "qep.defects.read",
   "qep.enterprise_requirements.read",
   "qep.enterprise_reporting.read",
+  "qep.specification.read",
+  "qep.specification.search",
+  "qep.traceability.trace_links.view",
 ] as const;
 
 /** When true, auto-provision also assigns qep-operator (dev/cert only). */

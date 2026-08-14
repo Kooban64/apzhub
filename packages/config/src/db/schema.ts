@@ -361,6 +361,7 @@ export {
   qepScmWebhookAudit,
   qepScmWebhookIdempotency,
   qepScmTraceabilityLink,
+  qepScmChangeEvent,
 } from "./qep-scm-schema";
 export {
   qepQualityIntelligenceSchema,

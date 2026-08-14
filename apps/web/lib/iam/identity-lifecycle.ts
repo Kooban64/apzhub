@@ -1,0 +1,82 @@
+/**
+ * SPR-IAM-COMMERCIAL-001 — Identity Lifecycle operations (org-scoped).
+ */
+
+import {
+  listPersonaRoles,
+  type PersonaRoleDefinition,
+} from "@apzhub/platform-authorization";
+
+import {
+  assignOrgMemberPersona,
+  getOrgMember,
+  inviteOrgMember,
+  listOrgMembers,
+  setOrgMemberStatus,
+  type OrgMemberRecord,
+} from "@/lib/iam/org-member-store";
+
+export function listAvailablePersonas(): readonly PersonaRoleDefinition[] {
+  return listPersonaRoles();
+}
+
+export function listOrganisationMembers(
+  organisationId: string,
+): readonly OrgMemberRecord[] {
+  return listOrgMembers({ organisationId });
+}
+
+export function inviteOrganisationMember(input: {
+  readonly organisationId: string;
+  readonly email: string;
+  readonly personaRoleId?: string;
+  readonly invitedBy: string;
+  readonly displayName?: string;
+}): OrgMemberRecord {
+  const requested = input.personaRoleId?.trim() || "role-employee";
+  const known = listPersonaRoles().some((p) => p.roleId === requested);
+  if (!known) {
+    throw new Error("iam.invite.persona_unknown");
+  }
+  return inviteOrgMember({
+    organisationId: input.organisationId,
+    email: input.email,
+    personaRoleId: requested,
+    invitedBy: input.invitedBy,
+    displayName: input.displayName,
+  });
+}
+
+export function changeOrganisationMemberPersona(input: {
+  readonly organisationId: string;
+  readonly membershipId: string;
+  readonly personaRoleId: string;
+}): OrgMemberRecord {
+  const known = listPersonaRoles().some((p) => p.roleId === input.personaRoleId);
+  if (!known) throw new Error("iam.invite.persona_unknown");
+  return assignOrgMemberPersona(input);
+}
+
+export function suspendOrganisationMember(input: {
+  readonly organisationId: string;
+  readonly membershipId: string;
+}): OrgMemberRecord {
+  const member = getOrgMember(input.organisationId, input.membershipId);
+  if (!member) throw new Error("iam.member.not_found");
+  return setOrgMemberStatus({
+    organisationId: input.organisationId,
+    membershipId: input.membershipId,
+    status: "suspended",
+  });
+}
+
+export function activateOrganisationMember(input: {
+  readonly organisationId: string;
+  readonly membershipId: string;
+}): OrgMemberRecord {
+  return setOrgMemberStatus({
+    organisationId: input.organisationId,
+    membershipId: input.membershipId,
+    status: "active",
+  });
+}

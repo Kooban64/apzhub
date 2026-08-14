@@ -1,6 +1,6 @@
 # APZHUB Quality Engineering Platform Strategy
 
-> **Status:** **SUPERSEDED for product identity** — use **[APZ TCMS Product Vision](./APZHUB-APZ-TCMS-Product-Vision.md)** and **APZTCMS-*** milestones (APZTCMS-001 complete). Retained as planning predecessor only. Kiwi TCMS wave remains superseded.
+> **Status:** **SUPERSEDED for product identity** — use **[APZQEP Enterprise Quality Engineering Platform](./APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md)** and parent **[APZOR Commercial Pillars](./APZOR-COMMERCIAL-PILLARS.md)**. TCMS capabilities are a subset of APZQEP, not the whole product. Historical: [APZ TCMS Product Vision](./APZHUB-APZ-TCMS-Product-Vision.md). Retained as planning predecessor only.
 
 **Milestone:** OSS-002  
 **Status:** Approved strategy — planning only; implementation via QE-001+ _(delivery IDs superseded by APZTCMS)_  

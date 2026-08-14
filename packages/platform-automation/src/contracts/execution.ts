@@ -5,13 +5,16 @@
 
 export type AutomationProviderId =
   | "playwright"
+  | "vitest"
   | "selenium"
   | "cypress"
   | "appium"
   | "rest"
   | "k6"
   | "visual"
-  | "accessibility";
+  | "accessibility"
+  | "security"
+  | "codequality";
 
 export type ExecutionLifecycleState =
   | "queued"
@@ -84,6 +87,11 @@ export interface AutomationArtifact {
   readonly uri?: string;
   readonly bytes?: number;
   readonly sha256?: string;
+  /**
+   * Optional in-process payload for evidence publication bridges.
+   * Prefer durable StoragePort after publish; do not treat as long-term SoR.
+   */
+  readonly contentBase64?: string;
   readonly createdAt: string;
 }
 

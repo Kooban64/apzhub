@@ -244,9 +244,33 @@ export class AutomationEngine {
           continue;
         }
 
+        // F3: failed CI/a11y runs still become governed evidence when artifacts exist.
+        let failedEvidenceRefs: readonly string[] = [];
+        if (result.artifacts.length > 0) {
+          failedEvidenceRefs = await this.evidenceSink({
+            executionId: record.executionId,
+            tenantId: record.tenantId,
+            correlationId: record.correlationId,
+            providerId: record.providerId,
+            artifacts: result.artifacts,
+            logs: [],
+            timing: result.timing ?? {
+              startedAt,
+              finishedAt,
+              durationMs: Date.parse(finishedAt) - Date.parse(startedAt),
+            },
+            metadata: {
+              summary: result.summary,
+              provider: record.providerId,
+              outcome: "failed",
+            },
+          });
+        }
+
         record = await this.transition(record, "failed", {
           errorMessage: result.errorMessage ?? result.summary,
           artifacts: [...record.artifacts, ...result.artifacts],
+          evidenceRefs: failedEvidenceRefs,
           resultSummary: result.summary,
           timing: {
             ...record.timing,
@@ -255,6 +279,22 @@ export class AutomationEngine {
             durationMs: Date.parse(finishedAt) - Date.parse(startedAt),
           },
         });
+
+        if (failedEvidenceRefs.length > 0) {
+          await this.publishEvent({
+            type: AUTOMATION_EVENT_TYPES.evidencePublished,
+            occurredAt: nowIso(),
+            executionId: record.executionId,
+            tenantId: record.tenantId,
+            correlationId: record.correlationId,
+            providerId: record.providerId,
+            state: record.state,
+            payload: {
+              evidenceCount: failedEvidenceRefs.length,
+              outcome: "failed",
+            },
+          });
+        }
         break;
       }
     } catch (error) {

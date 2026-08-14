@@ -116,6 +116,28 @@ export function QepEmptyState({ title }: { readonly title: string }) {
   );
 }
 
+/** Honest unavailable surface for stub / unrouted QEP modules (Q6). */
+export function QepUnavailableState({
+  title,
+  detail,
+}: {
+  readonly title: string;
+  readonly detail?: string;
+}) {
+  return (
+    <div
+      className="rounded-lg border border-dashed border-[var(--color-border)] px-4 py-10 text-center"
+      data-testid="qep-unavailable"
+      role="status"
+    >
+      <p className="text-sm font-medium text-[var(--color-foreground)]">{title}</p>
+      {detail ? (
+        <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">{detail}</p>
+      ) : null}
+    </div>
+  );
+}
+
 export function QepFilterBar({ children }: { readonly children: ReactNode }) {
   return (
     <div className="flex flex-wrap items-end gap-3" data-testid="qep-filter-bar">

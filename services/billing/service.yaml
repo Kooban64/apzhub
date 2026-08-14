@@ -1,0 +1,36 @@
+manifestSchemaVersion: "1.0"
+id: billing-service
+name: Billing Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: platform
+  description: >
+    Invoices, payments, credits/discounts, refunds, statements, and Cursor-like
+    dunning. Orchestrates PaymentGatewayService → PayFastAdapter.
+  programme: SPR-IAM-COMMERCIAL-001
+  owner: APZHUB
+  tags:
+    - commercial
+    - billing
+    - payfast
+
+dependencies:
+  platform: []
+  services:
+    - catalogue-service
+  integrations:
+    - payfast
+
+service:
+  category: platform
+  status: active
+
+permissions:
+  - id: billing.read
+    description: View invoices and statements
+  - id: billing.manage
+    description: Manage org/individual billing
+  - id: billing.admin
+    description: Platform commercial overrides

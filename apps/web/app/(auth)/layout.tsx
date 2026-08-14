@@ -1,3 +1,146 @@
-export default function AuthLayout({ children }: { children: React.ReactNode }) {
-  return <div className="min-h-full">{children}</div>;
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import type { ReactNode } from "react";
+
+import { ThemeToggle } from "@apzhub/ui";
+
+const TITLE_BY_PATH: Record<string, string> = {
+  "/login": "Sign in",
+  "/register": "Create account",
+  "/forgot-password": "Reset password",
+};
+
+const BLURB_BY_PATH: Record<string, string> = {
+  "/login": "Access your organisation workbench with a single sign-in.",
+  "/register": "Create an account to start a trial or join your organisation.",
+  "/forgot-password": "We’ll email a secure link to reset your password.",
+};
+
+export default function AuthLayout({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+  const title = TITLE_BY_PATH[pathname] ?? "Account";
+  const blurb = BLURB_BY_PATH[pathname] ?? "APZHUB account access.";
+
+  return (
+    <div className="grid min-h-full lg:grid-cols-[minmax(280px,42%)_1fr]">
+      <aside className="relative hidden overflow-hidden border-r border-[var(--color-border)] lg:flex lg:flex-col">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(120% 80% at 0% 0%, color-mix(in srgb, var(--color-primary) 28%, transparent), transparent 55%), linear-gradient(165deg, var(--color-surface), var(--color-background))",
+          }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-40"
+          style={{
+            backgroundImage:
+              "linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+            maskImage:
+              "radial-gradient(ellipse 80% 70% at 30% 40%, black 10%, transparent 70%)",
+          }}
+        />
+        <div className="relative z-10 flex flex-1 flex-col justify-between p-8 xl:p-10">
+          <div>
+            <Link
+              href="/"
+              className="font-[family-name:var(--font-display,var(--font-sans))] text-xl font-semibold tracking-tight"
+            >
+              APZHUB
+            </Link>
+            <p className="mt-8 max-w-sm text-3xl leading-tight font-semibold tracking-tight xl:text-4xl">
+              Build better software.
+              <span className="mt-2 block text-[var(--color-muted-foreground)]">
+                Ship with confidence.
+              </span>
+            </p>
+            <ul className="mt-10 max-w-sm space-y-4 text-sm text-[var(--color-muted-foreground)]">
+              <li className="border-l-2 border-[var(--color-primary)] pl-3">
+                One SSO into a permission-driven workbench
+              </li>
+              <li className="border-l-2 border-[var(--color-primary)] pl-3">
+                Quality OS with human GO / NO-GO gates
+              </li>
+              <li className="border-l-2 border-[var(--color-primary)] pl-3">
+                Security engagements via APZPenTest — separate from QA
+              </li>
+              <li className="border-l-2 border-[var(--color-border)] pl-3">
+                Productivity Suite (Projects, Time, Support, Documents) coming later
+              </li>
+            </ul>
+          </div>
+          <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-[var(--color-muted-foreground)]">
+            <Link href="/pricing" className="hover:text-[var(--color-foreground)]">
+              Pricing
+            </Link>
+            <Link href="/legal/terms" className="hover:text-[var(--color-foreground)]">
+              Terms
+            </Link>
+            <Link
+              href="/legal/privacy"
+              className="hover:text-[var(--color-foreground)]"
+            >
+              Privacy
+            </Link>
+            <Link href="/contact" className="hover:text-[var(--color-foreground)]">
+              Contact
+            </Link>
+          </div>
+        </div>
+      </aside>
+
+      <section className="relative flex min-h-full flex-col bg-[var(--color-background)]">
+        <header className="flex items-center justify-between gap-3 px-4 py-4 sm:px-8">
+          <div className="flex items-center gap-2 lg:hidden">
+            <Link href="/" className="text-lg font-semibold tracking-tight">
+              APZHUB
+            </Link>
+            <span className="text-[var(--color-muted-foreground)]" aria-hidden>
+              |
+            </span>
+            <span className="text-sm text-[var(--color-muted-foreground)]">
+              {title}
+            </span>
+          </div>
+          <div className="ml-auto flex items-center gap-3">
+            <Link
+              href="/"
+              className="hidden text-sm text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)] sm:inline"
+            >
+              Back to site
+            </Link>
+            <ThemeToggle />
+          </div>
+        </header>
+
+        <div className="flex flex-1 items-center justify-center px-4 py-8 sm:px-8">
+          <div className="w-full max-w-md">
+            <div className="mb-8 hidden lg:block">
+              <p className="text-xs font-medium tracking-[0.18em] text-[var(--color-muted-foreground)] uppercase">
+                APZHUB
+              </p>
+              <h1 className="mt-2 font-[family-name:var(--font-display,var(--font-sans))] text-3xl font-semibold tracking-tight">
+                {title}
+              </h1>
+              <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
+                {blurb}
+              </p>
+            </div>
+            <div className="mb-6 lg:hidden">
+              <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
+              <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
+                {blurb}
+              </p>
+            </div>
+            {children}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }

@@ -20,7 +20,8 @@ export type NotificationDeliveryHealth = {
   readonly commandIntakeEnabled: boolean;
   readonly workerEnabled: boolean;
   readonly workerRunning: boolean;
-  readonly smtpDeferred: true;
+  /** False when SMTP is configured and email delivery is active. */
+  readonly smtpDeferred: boolean;
   readonly message?: string;
   readonly checkedAt: string;
 };
@@ -59,7 +60,8 @@ export type NotificationDeliveryDiagnostics = {
   readonly configurationState: "valid" | "invalid" | "disabled";
   readonly lastSuccessfulProcessingAt?: string;
   readonly lastFailureCategory?: string;
-  readonly smtpDeliveryStatus: "deferred";
+  readonly smtpDeliveryStatus:
+    "deferred" | "active" | "unconfigured" | "misconfigured" | "unhealthy";
 };
 
 export type NotificationDeliveryMetricsSnapshot = {

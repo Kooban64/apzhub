@@ -1,0 +1,191 @@
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
+
+import { QEP_CERTIFICATION_ROUTES } from "@/lib/qep/certification-routes";
+import { QEP_QUALITY_FLOWS_ROUTES } from "@/lib/qep/quality-flow-routes";
+import {
+  QepErrorState,
+  QepLoadingState,
+  QepPageShell,
+  QepPanel,
+  QepStatusBadge,
+} from "./qep-ui";
+
+const linkPrimary =
+  "inline-flex h-8 items-center rounded-md bg-[var(--color-primary)] px-3 text-sm font-medium text-[var(--color-primary-foreground)]";
+const linkOutline =
+  "inline-flex h-8 items-center rounded-md border border-[var(--color-border)] px-3 text-sm";
+
+async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
+  const response = await fetch(url, {
+    ...init,
+    headers: {
+      "content-type": "application/json",
+      ...(init?.headers ?? {}),
+    },
+  });
+  const body = (await response.json()) as {
+    data?: T;
+    error?: { message?: string };
+  };
+  if (!response.ok) {
+    throw new Error(body.error?.message ?? `Request failed (${response.status})`);
+  }
+  return body.data as T;
+}
+
+type CommandCentre = {
+  summary: {
+    activeCount: number;
+    waitingCount: number;
+    exceptionCount: number;
+    blockedReleaseCount: number;
+    decisionCount: number;
+    definitionCount: number;
+  };
+};
+
+type CheckItem = {
+  id: string;
+  label: string;
+  ok: boolean;
+  detail: string;
+  href: string;
+};
+
+export function QepReleaseReadinessRouterView() {
+  return <ReleaseReadinessView />;
+}
+
+function ReleaseReadinessView() {
+  const query = useQuery({
+    queryKey: ["qep-quality-flows", "command-centre", "readiness"],
+    queryFn: () => fetchJson<CommandCentre>("/api/v1/qep/quality-flows"),
+    refetchInterval: 15_000,
+  });
+
+  if (query.isLoading) {
+    return <QepLoadingState label="Loading release readiness…" />;
+  }
+  if (query.isError) {
+    return <QepErrorState message={(query.error as Error).message} />;
+  }
+
+  const s = query.data!.summary;
+  const checks: CheckItem[] = [
+    {
+      id: "exceptions",
+      label: "No flow exceptions",
+      ok: s.exceptionCount === 0,
+      detail:
+        s.exceptionCount === 0
+          ? "Exception queue is clear."
+          : `${s.exceptionCount} exception(s) need recovery.`,
+      href: QEP_QUALITY_FLOWS_ROUTES.exceptions,
+    },
+    {
+      id: "blocked",
+      label: "No blocked releases",
+      ok: s.blockedReleaseCount === 0,
+      detail:
+        s.blockedReleaseCount === 0
+          ? "No flows are blocking release."
+          : `${s.blockedReleaseCount} flow(s) blocking release.`,
+      href: QEP_QUALITY_FLOWS_ROUTES.home,
+    },
+    {
+      id: "waiting",
+      label: "Waiting work cleared or accepted",
+      ok: s.waitingCount === 0,
+      detail:
+        s.waitingCount === 0
+          ? "No waiting approvals or evidence."
+          : `${s.waitingCount} item(s) waiting — clear or consciously accept.`,
+      href: QEP_QUALITY_FLOWS_ROUTES.waiting,
+    },
+    {
+      id: "certify",
+      label: "Human certification ready",
+      ok: s.exceptionCount === 0 && s.blockedReleaseCount === 0,
+      detail:
+        "Open Release Candidate for domain readiness, explain-why, and human GO/NO-GO. AI never certifies.",
+      href: QEP_CERTIFICATION_ROUTES.rcHome,
+    },
+    {
+      id: "security",
+      label: "Security assurance reviewed",
+      ok: true,
+      detail:
+        "Confirm APZPEN security evidence is reflected on certification domains for the change under review.",
+      href: "/apzpen",
+    },
+  ];
+
+  const failed = checks.filter((c) => !c.ok).length;
+  const overall =
+    failed === 0
+      ? {
+          status: "ready" as const,
+          label: "Checklist clear — proceed to human certify",
+        }
+      : {
+          status: "blocked" as const,
+          label: `${failed} check(s) still open`,
+        };
+
+  return (
+    <QepPageShell
+      title="Release Readiness"
+      description="Go/no-go checklist over live orchestration. Completing checks does not certify — human GO/NO-GO is on Release Candidate."
+      breadcrumbs={["QEP", "Release Readiness"]}
+      actions={
+        <div className="flex flex-wrap gap-2">
+          <Link className={linkPrimary} href={QEP_CERTIFICATION_ROUTES.rcHome}>
+            Open Release Candidate
+          </Link>
+          <Link className={linkOutline} href={QEP_QUALITY_FLOWS_ROUTES.home}>
+            Quality Flows
+          </Link>
+        </div>
+      }
+    >
+      <QepPanel title="Overall">
+        <div
+          className="flex flex-wrap items-center gap-3"
+          data-testid="qep-release-readiness-overall"
+        >
+          <QepStatusBadge status={overall.status} />
+          <p className="text-sm text-[var(--color-foreground)]">{overall.label}</p>
+        </div>
+      </QepPanel>
+
+      <QepPanel title="Checklist">
+        <ul className="space-y-3" data-testid="qep-release-readiness-checklist">
+          {checks.map((check) => (
+            <li
+              key={check.id}
+              className="flex flex-wrap items-start justify-between gap-3 rounded-lg border border-[var(--color-border)] px-3 py-3"
+            >
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <QepStatusBadge status={check.ok ? "ready" : "blocked"} />
+                  <p className="font-medium text-[var(--color-foreground)]">
+                    {check.label}
+                  </p>
+                </div>
+                <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
+                  {check.detail}
+                </p>
+              </div>
+              <Link className={linkOutline} href={check.href}>
+                Open
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </QepPanel>
+    </QepPageShell>
+  );
+}

@@ -3,9 +3,17 @@
 import { Button } from "@apzhub/ui";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useState } from "react";
 
-import { QEP_QI_ROUTES, parseQepQiRecommendationId } from "@/lib/qep/routes";
+import { QEP_CERTIFICATION_ROUTES } from "@/lib/qep/certification-routes";
+import { QEP_QUALITY_JOURNEY_ROUTES } from "@/lib/qep/quality-journey-routes";
+import {
+  QEP_EVIDENCE_ROUTES,
+  QEP_QI_ROUTES,
+  QEP_SCM_ROUTES,
+  parseQepQiRecommendationId,
+} from "@/lib/qep/routes";
 import {
   QepEmptyState,
   QepErrorState,
@@ -59,8 +67,51 @@ export function QepQualityIntelligenceRouterView() {
   return <QiHomeView />;
 }
 
+type QiAdviceItem = {
+  adviceId: string;
+  kind: string;
+  priority: string;
+  summary: string;
+  explanation: {
+    reason: string;
+    decisionPath: string[];
+    artifacts: Array<{ kind: string; ref: string; label: string }>;
+  };
+  advisory: true;
+};
+
 function QiHomeView() {
   const queryClient = useQueryClient();
+  const searchParams = useSearchParams();
+  const [changeEventId, setChangeEventId] = useState(
+    searchParams?.get("changeEventId") ?? "",
+  );
+
+  const adviceQuery = useQuery({
+    queryKey: ["qep-qi", "by-change", changeEventId.trim()],
+    enabled: changeEventId.trim().length > 8,
+    queryFn: () =>
+      fetchJson<{
+        changeEventId: string;
+        advisory: true;
+        impactSummary?: {
+          riskLevel: string;
+          requirementCount: number;
+          suiteMatchCount: number;
+          nodeCount: number;
+          repositoryId?: string;
+        };
+        certificationSummary?: {
+          evaluationId: string;
+          readiness: string;
+          score: number;
+          humanDecision?: string;
+        };
+        advice: QiAdviceItem[];
+      }>(
+        `/api/v1/qep/quality-intelligence/by-change/${encodeURIComponent(changeEventId.trim())}`,
+      ),
+  });
 
   const recommendationsQuery = useQuery({
     queryKey: ["qep-qi", "recommendations"],
@@ -121,26 +172,22 @@ function QiHomeView() {
     },
   });
 
-  if (recommendationsQuery.isLoading) {
-    return <QepLoadingState label="Loading quality intelligence…" />;
-  }
-  if (recommendationsQuery.isError) {
-    return <QepErrorState message={(recommendationsQuery.error as Error).message} />;
-  }
-
   const recommendations = recommendationsQuery.data?.recommendations ?? [];
+  const advice = adviceQuery.data?.advice ?? [];
 
   return (
     <QepPageShell
-      title="Enterprise Quality Intelligence"
-      description="Provider-neutral intelligence platform. Rules, statistical, historical and offline AI providers — no external AI APIs."
+      title="Quality Intelligence"
+      description="Flagship F6 — engineering advice grounded in quality graph + evidence. Advisory only; never certifies."
       actions={
         <Button
           type="button"
+          variant="outline"
           onClick={() => seedAndAnalyze.mutate()}
           disabled={seedAndAnalyze.isPending}
+          title="Dev/demo seed path — not the F6 change-grounded advisor"
         >
-          {seedAndAnalyze.isPending ? "Analysing…" : "Seed observations & analyse"}
+          {seedAndAnalyze.isPending ? "Analysing…" : "Seed demo observations"}
         </Button>
       }
     >
@@ -154,9 +201,145 @@ function QiHomeView() {
         <Link href={QEP_QI_ROUTES.providers}>Providers</Link>
       </div>
 
-      <QepPanel title="Recommendations">
-        {recommendations.length === 0 ? (
-          <QepEmptyState title="No recommendations yet — seed observations and run analysis." />
+      <QepPanel title="Advise this change (F6)">
+        <label className="mb-2 block text-sm">
+          changeEventId
+          <input
+            className="mt-1 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 font-mono text-xs"
+            value={changeEventId}
+            onChange={(event) => setChangeEventId(event.target.value)}
+            placeholder="chg-github-…"
+            data-testid="qep-qi-change-event-id"
+          />
+        </label>
+        {adviceQuery.isFetching ? (
+          <QepLoadingState label="Composing advice…" />
+        ) : adviceQuery.isError ? (
+          <QepErrorState message={(adviceQuery.error as Error).message} />
+        ) : adviceQuery.data ? (
+          <div className="space-y-3" data-testid="qep-qi-advice-bundle">
+            <p className="text-sm text-[var(--color-muted-foreground)]">
+              Impact risk {adviceQuery.data.impactSummary?.riskLevel ?? "—"} · cert{" "}
+              {adviceQuery.data.certificationSummary
+                ? `${adviceQuery.data.certificationSummary.readiness} ${adviceQuery.data.certificationSummary.score}%`
+                : "none"}
+              {adviceQuery.data.certificationSummary?.humanDecision
+                ? ` · human ${adviceQuery.data.certificationSummary.humanDecision}`
+                : ""}
+              {adviceQuery.data.certificationSummary?.evaluationId ? (
+                <>
+                  {" "}
+                  ·{" "}
+                  <Link
+                    href={QEP_CERTIFICATION_ROUTES.rcEvaluation(
+                      adviceQuery.data.certificationSummary.evaluationId,
+                    )}
+                  >
+                    Open RC
+                  </Link>
+                </>
+              ) : null}
+              {adviceQuery.data.impactSummary?.repositoryId ? (
+                <>
+                  {" "}
+                  ·{" "}
+                  <Link
+                    href={QEP_SCM_ROUTES.designAssist(
+                      adviceQuery.data.impactSummary.repositoryId,
+                      adviceQuery.data.changeEventId,
+                    )}
+                    data-testid="qep-qi-propose-design-link"
+                  >
+                    Propose test design
+                  </Link>
+                </>
+              ) : null}
+              <>
+                {" "}
+                ·{" "}
+                <Link
+                  href={QEP_QUALITY_JOURNEY_ROUTES.byChange(
+                    adviceQuery.data.changeEventId,
+                  )}
+                  data-testid="qep-qi-journey-link"
+                >
+                  Open journey
+                </Link>
+              </>
+              <span className="ml-1">· advisory only</span>
+            </p>
+            {advice.length === 0 ? (
+              <QepEmptyState title="No advisory items — change looks clean for current gates." />
+            ) : (
+              <ul className="space-y-3">
+                {advice.map((item) => (
+                  <li
+                    key={item.adviceId}
+                    className="rounded-md border border-[var(--color-border)] p-3 text-sm"
+                    data-testid={`qep-qi-advice-${item.kind}`}
+                  >
+                    <div className="flex flex-wrap items-center gap-2">
+                      <QepStatusBadge status={item.kind} />
+                      <QepStatusBadge status={item.priority} />
+                      <span className="font-medium">{item.summary}</span>
+                    </div>
+                    <p className="mt-1 text-[var(--color-muted-foreground)]">
+                      {item.explanation.reason}
+                    </p>
+                    <p className="mt-1 font-mono text-xs text-[var(--color-muted-foreground)]">
+                      {item.explanation.decisionPath.join(" → ")}
+                    </p>
+                    {item.explanation.artifacts.length > 0 ? (
+                      <ul className="mt-2 list-disc pl-5 text-xs">
+                        {item.explanation.artifacts.slice(0, 8).map((artifact) => (
+                          <li key={`${artifact.kind}:${artifact.ref}`}>
+                            {artifact.ref.startsWith("evidence://") ? (
+                              <Link
+                                href={QEP_EVIDENCE_ROUTES.detail(
+                                  artifact.ref.replace("evidence://", ""),
+                                )}
+                              >
+                                {artifact.label}
+                              </Link>
+                            ) : artifact.ref.startsWith("design-assist://") &&
+                              adviceQuery.data?.impactSummary?.repositoryId ? (
+                              <Link
+                                href={QEP_SCM_ROUTES.designAssist(
+                                  adviceQuery.data.impactSummary.repositoryId,
+                                  adviceQuery.data.changeEventId,
+                                )}
+                              >
+                                {artifact.label}
+                              </Link>
+                            ) : (
+                              <span>
+                                {artifact.kind}: {artifact.label}
+                              </span>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ) : (
+          <p className="text-sm text-[var(--color-muted-foreground)]">
+            Enter a changeEventId (or open from RC) to get gap / risk / regression /
+            blocker advice with artifact links.
+          </p>
+        )}
+      </QepPanel>
+
+      <QepPanel title="Provider recommendations (engine store)">
+        {recommendationsQuery.isLoading ? (
+          <QepLoadingState label="Loading recommendations…" />
+        ) : recommendationsQuery.isError ? (
+          <QepErrorState message={(recommendationsQuery.error as Error).message} />
+        ) : recommendations.length === 0 ? (
+          <QepEmptyState title="No engine recommendations yet — optional demo seed above." />
         ) : (
           <QepTable
             caption="Recommendations"

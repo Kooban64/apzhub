@@ -64,6 +64,7 @@ export type NotificationIntent = {
 
 export type NotificationRecipientHint = {
   readonly userId?: string;
+  readonly email?: string;
   readonly roleId?: string;
   readonly teamId?: string;
   readonly organisationId?: string;
@@ -88,8 +89,8 @@ export type NotificationDeliveryRecord = {
   readonly tenantId: string;
   readonly organisationId?: string;
   readonly userId: string;
-  readonly channel: "in_app";
-  readonly providerId: "in_app";
+  readonly channel: "in_app" | "email";
+  readonly providerId: "in_app" | "smtp";
   readonly status: NotificationDeliveryStatus;
   readonly receiptLevel: NotificationReceiptLevel;
   readonly idempotencyKey: string;
@@ -117,7 +118,7 @@ export type NotificationDeliveryTry = {
   readonly id: NotificationDeliveryTryId;
   readonly deliveryId: NotificationDeliveryId;
   readonly attemptNumber: number;
-  readonly providerId: "in_app";
+  readonly providerId: "in_app" | "smtp";
   readonly startedAt: string;
   readonly finishedAt?: string;
   readonly receiptLevel: NotificationReceiptLevel;
@@ -164,8 +165,8 @@ export type NotificationDeliveryPolicyDecision = {
 };
 
 export type NotificationProviderDescriptor = {
-  readonly providerId: "in_app";
-  readonly channel: "in_app";
+  readonly providerId: "in_app" | "smtp";
+  readonly channel: "in_app" | "email";
   readonly displayName: string;
   readonly enabled: boolean;
   readonly health: "healthy" | "degraded" | "unhealthy" | "disabled";

@@ -1,0 +1,16 @@
+manifestSchemaVersion: "1.0"
+id: platform-billing-refund-issued
+name: Platform Billing Refund Issued
+version: 0.1.0
+kind: event
+metadata:
+  category: platform
+  description: Emitted when a refund or credit note is issued.
+event:
+  category: platform
+  publisher: billing-service
+  permission: billing.admin
+  payload:
+    refundId: string
+    invoiceId: string
+    amountCents: number

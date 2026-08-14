@@ -11,8 +11,31 @@ import {
 } from "@apzhub/workbench-framework/server";
 import { createWorkbenchPermissionAdapter } from "@apzhub/workbench-framework";
 
+import {
+  filterWorkbenchItemsByProducts,
+  resolveEffectiveProductKeys,
+} from "@/lib/commercial/product-access";
+import type { ProductKey } from "@/lib/commercial/catalogue";
+
 import { ensurePlatformRuntimeReady } from "./runtime-init";
 import { createPlatformAuthPermissionContext } from "./session-permission-context";
+
+function filterWorkbenchByProductAccess(
+  dto: WorkbenchRegistryDto,
+  allowedProducts: ReadonlySet<ProductKey>,
+): WorkbenchRegistryDto {
+  return {
+    schemaVersion: dto.schemaVersion,
+    navItems: filterWorkbenchItemsByProducts(dto.navItems, allowedProducts),
+    views: filterWorkbenchItemsByProducts(
+      dto.views.map((item) => ({
+        ...item,
+        id: item.viewId,
+      })),
+      allowedProducts,
+    ),
+  };
+}
 
 export async function loadWorkbenchRegistryDto(): Promise<WorkbenchRegistryDto> {
   const bootstrap = await ensurePlatformRuntimeReady();
@@ -34,5 +57,19 @@ export async function loadWorkbenchRegistryDto(): Promise<WorkbenchRegistryDto> 
     allowDevRegistration: isDevRegistrationAllowed(),
   });
 
-  return filterWorkbenchRegistryDto(dto, permissionAdapter);
+  const rbacFiltered = filterWorkbenchRegistryDto(dto, permissionAdapter);
+
+  const organisationId =
+    session?.tenantId?.trim() ||
+    session?.user?.tenantId?.trim() ||
+    session?.user?.activeTenantId?.trim() ||
+    "";
+  const userId = session?.user?.id?.trim() || "";
+
+  if (!organisationId || !userId) {
+    return filterWorkbenchByProductAccess(rbacFiltered, new Set());
+  }
+
+  const effective = resolveEffectiveProductKeys({ organisationId, userId });
+  return filterWorkbenchByProductAccess(rbacFiltered, new Set(effective));
 }

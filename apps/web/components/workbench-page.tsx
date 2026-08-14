@@ -34,18 +34,21 @@ import { LandingPageRedirect } from "@/components/personalisation/landing-page-r
 import { RecentTracker } from "@/components/personalisation/recent-tracker";
 import { isPersonalisationRoute } from "@/lib/personalisation/routes";
 import { AdministrationWorkspaceRouter } from "@/components/administration/administration-workspace-router";
+import { BillingWorkspaceView } from "@/components/billing/billing-workspace-view";
 import { ConfigurationWorkspaceRouter } from "@/components/configuration/configuration-workspace-router";
 import { IdentityWorkspaceRouter } from "@/components/identity/identity-workspace-router";
 import { ObserveWorkspaceRouter } from "@/components/observe/observe-workspace-router";
 import { MetricsWorkspaceRouter } from "@/components/metrics/metrics-workspace-router";
 import { QepWorkspaceRouter } from "@/components/qep/qep-workspace-router";
-import { MyWorkView } from "@/components/my-work/my-work-view";
+import { RoleHomeDashboard } from "@/components/my-work/role-home-dashboard";
+import { WorkbenchOperatorRedirect } from "@/components/operator/operator-gate";
 import { useE2eActivityTimelinePresentationRefresh } from "@/lib/e2e-activity-timeline-presentation-refresh";
 import {
   isPlatformOperationsRoute,
   resolvePlatformOperationsSection,
 } from "@/lib/platform-operations/routes";
 import { isAdministrationRoute } from "@/lib/administration/routes";
+import { isBillingRoute } from "@/lib/billing/routes";
 import { isDocumentsRoute } from "@/lib/documents/routes";
 import { isIdentityRoute } from "@/lib/identity/routes";
 import { isNotificationsRoute } from "@/lib/notifications/routes";
@@ -182,6 +185,7 @@ export function WorkbenchPage() {
   const observeActive = isObserveRoute(pathname);
   const metricsActive = isMetricsRoute(pathname);
   const administrationActive = isAdministrationRoute(pathname);
+  const billingActive = isBillingRoute(pathname);
   const searchActive = isSearchRoute(pathname);
   const qepActive = isQepWorkspaceRoute(pathname);
   // Exact home landing only — /workspace/home/overview remains a separate view.
@@ -189,96 +193,102 @@ export function WorkbenchPage() {
     pathname === "/workspace/home" || pathname === "/workspace/home/";
 
   return (
-    <DesktopShell
-      userName={session?.user.name ?? session?.user.email}
-      environment={process.env.NODE_ENV}
-      onSignOut={handleSignOut}
-      activityBarItems={activityBarItems}
-      onActivityBarSelect={selectActivityBarItem}
-      sidebarItems={sidebarItems}
-      onSidebarSelect={selectSidebarItem}
-      enableCommandPalette
-      commandPaletteMode={commandPaletteMode}
-      enableGlobalSearch
-      onGlobalSearchNavigate={(href) => {
-        router.push(href);
-      }}
-      enableGlobalQuickActions
-      onGlobalQuickActionsNavigate={(href) => {
-        router.push(href);
-      }}
-      enableNotificationCentreShortcut
-      onOpenNotificationCentre={() => {
-        router.push("/workspace/notifications/inbox");
-      }}
-      enableGlobalShortcuts
-      enableContextMenu
-      enableToolbar
-      toolbarRegion="workspace"
-      enableNotificationBadge
-      enableNotificationPanel
-      enableActivityTimeline
-      enableActivityTimelinePanel
-      activityTimelineRenderKey={activityTimelineRenderKey}
-      contextMenuSurface="workspace"
-      contextMenuInput={contextMenuInput}
-    >
-      <LandingPageRedirect />
-      <RecentTracker />
-      {operationsSection ? (
-        <OperationsWorkspaceRouter section={operationsSection} />
-      ) : projectsActive ? (
-        <ProjectsWorkspaceRouter />
-      ) : timeActive ? (
-        <TimeWorkspaceRouter />
-      ) : analyticsActive ? (
-        <AnalyticsWorkspaceRouter />
-      ) : knowledgeActive ? (
-        <KnowledgeWorkspaceRouter />
-      ) : supportActive ? (
-        <SupportWorkspaceRouter />
-      ) : testingActive ? (
-        <TestingWorkspaceRouter />
-      ) : reportingActive ? (
-        <ReportingWorkspaceRouter />
-      ) : documentsActive ? (
-        <DocumentsWorkspaceRouter />
-      ) : workflowActive ? (
-        <WorkflowWorkspaceRouter />
-      ) : workflowEngineActive ? (
-        <WorkflowEngineWorkspaceRouter />
-      ) : workflowsActive ? (
-        <WorkflowsWorkspaceRouter />
-      ) : notificationsActive ? (
-        <NotificationsWorkspaceRouter />
-      ) : activityActive ? (
-        <UnifiedActivityStreamView />
-      ) : personalisationActive ? (
-        <PersonalisationCentreView />
-      ) : configurationActive ? (
-        <ConfigurationWorkspaceRouter />
-      ) : identityActive ? (
-        <IdentityWorkspaceRouter />
-      ) : observeActive ? (
-        <ObserveWorkspaceRouter />
-      ) : metricsActive ? (
-        <MetricsWorkspaceRouter />
-      ) : administrationActive ? (
-        <AdministrationWorkspaceRouter />
-      ) : searchActive ? (
-        <SearchWorkspaceRouter />
-      ) : qepActive ? (
-        <QepWorkspaceRouter />
-      ) : myWorkActive ? (
-        <MyWorkView />
-      ) : (
-        <div className="flex flex-col gap-2">
-          <h1 className="text-2xl font-semibold">{activeView?.title ?? "Workspace"}</h1>
-          <p className="text-[var(--color-muted-foreground)]">
-            {activeView?.route ?? pathname} — manifest-driven view placeholder.
-          </p>
-        </div>
-      )}
-    </DesktopShell>
+    <WorkbenchOperatorRedirect>
+      <DesktopShell
+        userName={session?.user.name ?? session?.user.email}
+        environment={process.env.NODE_ENV}
+        onSignOut={handleSignOut}
+        activityBarItems={activityBarItems}
+        onActivityBarSelect={selectActivityBarItem}
+        sidebarItems={sidebarItems}
+        onSidebarSelect={selectSidebarItem}
+        enableCommandPalette
+        commandPaletteMode={commandPaletteMode}
+        enableGlobalSearch
+        onGlobalSearchNavigate={(href) => {
+          router.push(href);
+        }}
+        enableGlobalQuickActions
+        onGlobalQuickActionsNavigate={(href) => {
+          router.push(href);
+        }}
+        enableNotificationCentreShortcut
+        onOpenNotificationCentre={() => {
+          router.push("/workspace/notifications/inbox");
+        }}
+        enableGlobalShortcuts
+        enableContextMenu
+        enableToolbar
+        toolbarRegion="workspace"
+        enableNotificationBadge
+        enableNotificationPanel
+        enableActivityTimeline
+        enableActivityTimelinePanel
+        activityTimelineRenderKey={activityTimelineRenderKey}
+        contextMenuSurface="workspace"
+        contextMenuInput={contextMenuInput}
+      >
+        <LandingPageRedirect />
+        <RecentTracker />
+        {operationsSection ? (
+          <OperationsWorkspaceRouter section={operationsSection} />
+        ) : projectsActive ? (
+          <ProjectsWorkspaceRouter />
+        ) : timeActive ? (
+          <TimeWorkspaceRouter />
+        ) : analyticsActive ? (
+          <AnalyticsWorkspaceRouter />
+        ) : knowledgeActive ? (
+          <KnowledgeWorkspaceRouter />
+        ) : supportActive ? (
+          <SupportWorkspaceRouter />
+        ) : testingActive ? (
+          <TestingWorkspaceRouter />
+        ) : reportingActive ? (
+          <ReportingWorkspaceRouter />
+        ) : documentsActive ? (
+          <DocumentsWorkspaceRouter />
+        ) : workflowActive ? (
+          <WorkflowWorkspaceRouter />
+        ) : workflowEngineActive ? (
+          <WorkflowEngineWorkspaceRouter />
+        ) : workflowsActive ? (
+          <WorkflowsWorkspaceRouter />
+        ) : notificationsActive ? (
+          <NotificationsWorkspaceRouter />
+        ) : activityActive ? (
+          <UnifiedActivityStreamView />
+        ) : personalisationActive ? (
+          <PersonalisationCentreView />
+        ) : configurationActive ? (
+          <ConfigurationWorkspaceRouter />
+        ) : identityActive ? (
+          <IdentityWorkspaceRouter />
+        ) : observeActive ? (
+          <ObserveWorkspaceRouter />
+        ) : metricsActive ? (
+          <MetricsWorkspaceRouter />
+        ) : administrationActive ? (
+          <AdministrationWorkspaceRouter />
+        ) : billingActive ? (
+          <BillingWorkspaceView />
+        ) : searchActive ? (
+          <SearchWorkspaceRouter />
+        ) : qepActive ? (
+          <QepWorkspaceRouter />
+        ) : myWorkActive ? (
+          <RoleHomeDashboard />
+        ) : (
+          <div className="flex flex-col gap-2">
+            <h1 className="text-2xl font-semibold">
+              {activeView?.title ?? "Workspace"}
+            </h1>
+            <p className="text-[var(--color-muted-foreground)]">
+              {activeView?.route ?? pathname} — manifest-driven view placeholder.
+            </p>
+          </div>
+        )}
+      </DesktopShell>
+    </WorkbenchOperatorRedirect>
   );
 }

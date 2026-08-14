@@ -3,6 +3,7 @@ import {
   type PlatformScm,
   type RegisterRepositoryRequest,
   type RepositoryStore,
+  type ScmChangeEventsPersistedHook,
   type ScmDomainEvent,
   type ScmProviderId,
   type ScmAuthCredentials,
@@ -12,6 +13,8 @@ export interface QepScmPorts {
   readonly onEvent?: (event: ScmDomainEvent) => void | Promise<void>;
   /** Hook for Automation / Evidence / QKI / Notifications — no duplication. */
   readonly onScmEvent?: (event: ScmDomainEvent) => void | Promise<void>;
+  /** Flagship F9 — after durable change upsert (soft-fail). */
+  readonly onChangeEventsPersisted?: ScmChangeEventsPersistedHook;
   readonly githubOffline?: boolean;
   readonly webhookSecrets?: Readonly<Partial<Record<ScmProviderId, string>>>;
   readonly store?: RepositoryStore;
@@ -60,6 +63,14 @@ export interface QepScmFacade {
   listTraceabilityLinks(
     repositoryId?: string,
   ): ReturnType<PlatformScm["engine"]["listTraceabilityLinks"]>;
+  listChangeEvents(
+    filter: Parameters<PlatformScm["engine"]["listChangeEvents"]>[0],
+  ): ReturnType<PlatformScm["engine"]["listChangeEvents"]>;
+  setDefaultCredentials(
+    tenantId: string,
+    providerId: ScmProviderId,
+    credentials: ScmAuthCredentials,
+  ): void;
 }
 
 export function createQepScm(ports: QepScmPorts = {}): QepScmFacade {
@@ -67,6 +78,7 @@ export function createQepScm(ports: QepScmPorts = {}): QepScmFacade {
     githubOffline: ports.githubOffline ?? true,
     webhookSecrets: ports.webhookSecrets,
     store: ports.store,
+    onChangeEventsPersisted: ports.onChangeEventsPersisted,
     publishEvent: async (event) => {
       await ports.onEvent?.(event);
       await ports.onScmEvent?.(event);
@@ -97,5 +109,8 @@ export function createQepScm(ports: QepScmPorts = {}): QepScmFacade {
     addTraceabilityLink: (input) => platform.engine.addTraceabilityLink(input),
     listTraceabilityLinks: (repositoryId) =>
       platform.engine.listTraceabilityLinks(repositoryId),
+    listChangeEvents: (filter) => platform.engine.listChangeEvents(filter),
+    setDefaultCredentials: (tenantId, providerId, credentials) =>
+      platform.engine.setDefaultCredentials(tenantId, providerId, credentials),
   };
 }

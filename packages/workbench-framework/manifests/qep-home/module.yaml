@@ -1,0 +1,55 @@
+manifestSchemaVersion: "1.0"
+id: qep-home
+name: Home and Command Centre
+version: 0.2.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: >
+    Release Control entry surface for APZQEP. Answers "Can we release with
+    confidence?" by composing live Quality Flow posture and deep links into
+    Release Candidate, Quality Flows, and Release Readiness. Presentation only.
+  product: apzqep
+  moduleCatalogueId: M01
+  slug: home
+  programme: SPR-APZQEP-201
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: active
+
+permissions:
+  - id: qep.home.read
+    label: View Home and Command Centre
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Home
+    icon: layout-dashboard
+    route: /workspace/qep/home
+    order: 1
+    permission: qep.home.read
+  view:
+    title: Home and Command Centre
+    workspace: qep
+    route: /workspace/qep/home
+    permission: qep.home.read
+  actions:
+    - id: qep.home.navigate
+      label: Open Quality Home
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: qep.home.read
+      palette: true
+      group: Quality
+      icon: layout-dashboard
+      order: 1
+      description: Open the Quality Home release control centre.

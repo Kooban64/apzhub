@@ -1,0 +1,22 @@
+{
+  "name": "@apzhub/platform-email",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Platform outbound email (SMTP) — auth and notification delivery",
+  "exports": {
+    ".": "./src/index.ts",
+    "./server": "./src/server.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "nodemailer": "^6.10.1"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.17"
+  }
+}

@@ -1,6 +1,6 @@
 /**
  * Hybrid Central Notification Delivery Service — Phase A (ADR-0071 Option D / ENG-004).
- * Event-driven + command intake · in-app certified path · SMTP deferred.
+ * Event-driven + command intake · in-app + SMTP email when configured.
  */
 
 import {
@@ -13,6 +13,7 @@ import {
   isTransientFailureClass,
   type CreateNotificationIntentCommand,
   type NotificationDeliveryDiagnostics,
+  type NotificationDeliveryDurableRuntimeStore,
   type NotificationDeliveryHealth,
   type NotificationDeliveryMetricsSnapshot,
   type NotificationDeliveryReadiness,
@@ -43,6 +44,7 @@ import {
   isNotificationDeliveryEnabled,
   isNotificationDurableRuntimeEnabled,
   isNotificationEventIntakeEnabled,
+  isNotificationEmailEnabled,
   isNotificationInAppEnabled,
   isNotificationWorkerEnabled,
   notificationMaxAttempts,
@@ -50,6 +52,8 @@ import {
   notificationRetryBaseDelayMs,
   type NotificationDeliveryEnv,
 } from "./delivery-env";
+import { dispatchEmailChannel } from "./email-channel";
+import { isSmtpConfigured } from "@apzhub/platform-email";
 
 export type NotificationDeliveryEventBusPort = {
   subscribe(options: {
@@ -59,20 +63,34 @@ export type NotificationDeliveryEventBusPort = {
   unsubscribe(subscriptionId: string): boolean;
 };
 
+export type NotificationDeliveryResolveUserResult =
+  | {
+      readonly ok: true;
+      readonly active: boolean;
+      readonly organisationId?: string;
+      readonly email?: string;
+    }
+  | { readonly ok: false };
+
 export type CreateNotificationDeliveryServiceInput = {
   readonly env?: NotificationDeliveryEnv;
   readonly now?: () => string;
   readonly nowMs?: () => number;
   readonly id?: () => string;
   readonly publisher?: DomainEventPublisher;
+  /**
+   * Durable SoR for intake + inbox when APZHUB_NOTIFICATION_DURABLE_RUNTIME is ON.
+   * Required in durable mode for createIntent (fail-loud if omitted).
+   */
+  readonly durableStore?: NotificationDeliveryDurableRuntimeStore;
   /** Optional identity lookup — defaults to accepting explicit userId hints in-tenant. */
   readonly resolveUser?: (input: {
     readonly tenantId: string;
     readonly organisationId?: string;
     readonly userId: string;
   }) =>
-    | { readonly ok: true; readonly active: boolean; readonly organisationId?: string }
-    | { readonly ok: false };
+    | NotificationDeliveryResolveUserResult
+    | Promise<NotificationDeliveryResolveUserResult>;
   readonly tickIntervalMs?: number;
   /** Test-only — force in-app adapter permanent failure. */
   readonly simulateInAppFailure?: boolean;
@@ -145,36 +163,56 @@ function evaluatePolicy(input: {
   readonly mandatory: boolean;
   readonly maxAttempts: number;
   readonly retryBaseDelayMs: number;
+  readonly env: NotificationDeliveryEnv;
 }): {
   readonly permitted: boolean;
   readonly mandatory: boolean;
-  readonly permittedChannels: readonly ["in_app"];
-  readonly channelOrder: readonly ["in_app"];
+  readonly permittedChannels: readonly ("in_app" | "email")[];
+  readonly channelOrder: readonly ("in_app" | "email")[];
   readonly maxAttempts: number;
   readonly retryBaseDelayMs: number;
   readonly policyRef: string;
   readonly failClosedReason?: string;
 } {
+  const channels: Array<"in_app" | "email"> = [];
+  if (isNotificationInAppEnabled(input.env)) channels.push("in_app");
+  if (isNotificationEmailEnabled(input.env)) channels.push("email");
+  const channelOrder = channels.length > 0 ? channels : (["in_app"] as const);
+
   if (!input.category.trim()) {
     return {
       permitted: false,
       mandatory: input.mandatory,
-      permittedChannels: ["in_app"],
-      channelOrder: ["in_app"],
+      permittedChannels: channelOrder,
+      channelOrder,
       maxAttempts: input.maxAttempts,
       retryBaseDelayMs: input.retryBaseDelayMs,
       policyRef: "phase-a-default",
       failClosedReason: "missing_category",
     };
   }
+  if (channels.length === 0) {
+    return {
+      permitted: false,
+      mandatory: input.mandatory,
+      permittedChannels: channelOrder,
+      channelOrder,
+      maxAttempts: input.maxAttempts,
+      retryBaseDelayMs: input.retryBaseDelayMs,
+      policyRef: "phase-a-channels",
+      failClosedReason: "no_channels_enabled",
+    };
+  }
   return {
     permitted: true,
     mandatory: input.mandatory,
-    permittedChannels: ["in_app"],
-    channelOrder: ["in_app"],
+    permittedChannels: channels,
+    channelOrder: channels,
     maxAttempts: input.maxAttempts,
     retryBaseDelayMs: input.retryBaseDelayMs,
-    policyRef: "phase-a-in-app-baseline",
+    policyRef: channels.includes("email")
+      ? "phase-a-in-app-email"
+      : "phase-a-in-app-baseline",
   };
 }
 
@@ -245,7 +283,7 @@ export function createNotificationDeliveryService(
   input: CreateNotificationDeliveryServiceInput = {},
 ): NotificationDeliveryService & {
   attachEventBus(bus: NotificationDeliveryEventBusPort): void;
-  ingestDomainEvent(envelope: DomainEventEnvelope): void;
+  ingestDomainEvent(envelope: DomainEventEnvelope): Promise<void>;
   setUserPreferenceDisabled(userId: string, category: string, disabled: boolean): void;
 } {
   const env = input.env ?? process.env;
@@ -254,6 +292,8 @@ export function createNotificationDeliveryService(
   let seq = 0;
   const id =
     input.id ?? (() => `nd_${Date.now().toString(36)}_${(++seq).toString(36)}`);
+  const durableEnabled = isNotificationDurableRuntimeEnabled(env);
+  const durableStore = input.durableStore;
 
   const intents = new Map<string, NotificationIntent>();
   const deliveries = new Map<string, NotificationDeliveryRecord>();
@@ -290,6 +330,8 @@ export function createNotificationDeliveryService(
   let workerRunning = false;
   let busAttached = false;
   const subscriptions: string[] = [];
+  /** deliveryId → email address for SMTP channel */
+  const emailEndpoints = new Map<string, string>();
 
   const resolveUser =
     input.resolveUser ??
@@ -298,6 +340,61 @@ export function createNotificationDeliveryService(
       active: true,
       organisationId: hint.organisationId,
     }));
+
+  function assertDurableStoreConfigured(): NotificationDeliveryDurableRuntimeStore {
+    if (!durableStore) {
+      throw new Error(
+        "APZHUB_NOTIFICATION_DURABLE_RUNTIME is enabled but durableStore was not provided. Inject a NotificationDeliveryDurableRuntimeStore so intake can persist and the durable worker can deliver.",
+      );
+    }
+    return durableStore;
+  }
+
+  async function persistIntentToStore(intent: NotificationIntent): Promise<void> {
+    if (!durableEnabled || !durableStore) return;
+    const existing = await durableStore.getIntent(intent.id);
+    if (existing) {
+      await durableStore.updateIntent(intent);
+      return;
+    }
+    await durableStore.insertIntent(intent);
+  }
+
+  async function persistDeliveryToStore(
+    delivery: NotificationDeliveryRecord,
+  ): Promise<void> {
+    if (!durableEnabled || !durableStore) return;
+    await durableStore.insertDelivery(delivery);
+  }
+
+  async function loadIntent(intentId: string): Promise<NotificationIntent | undefined> {
+    const cached = intents.get(intentId);
+    if (cached) return cached;
+    if (!durableEnabled || !durableStore) return undefined;
+    const fromStore = await durableStore.getIntent(asNotificationIntentId(intentId));
+    if (!fromStore) return undefined;
+    intents.set(fromStore.id, fromStore);
+    intentByIdem.set(`${fromStore.tenantId}:${fromStore.idempotencyKey}`, fromStore.id);
+    return fromStore;
+  }
+
+  async function loadDelivery(
+    deliveryId: string,
+  ): Promise<NotificationDeliveryRecord | undefined> {
+    const cached = deliveries.get(deliveryId);
+    if (cached) return cached;
+    if (!durableEnabled || !durableStore) return undefined;
+    const fromStore = await durableStore.getDelivery(
+      asNotificationDeliveryId(deliveryId),
+    );
+    if (!fromStore) return undefined;
+    deliveries.set(fromStore.id, fromStore);
+    deliveryByIdem.set(
+      `${fromStore.tenantId}:${fromStore.idempotencyKey}`,
+      fromStore.id,
+    );
+    return fromStore;
+  }
 
   function publish(
     eventId: string,
@@ -355,9 +452,9 @@ export function createNotificationDeliveryService(
     return next;
   }
 
-  function resolveRecipients(
+  async function resolveRecipients(
     cmd: CreateNotificationIntentCommand,
-  ): ResolvedNotificationRecipient[] {
+  ): Promise<ResolvedNotificationRecipient[]> {
     const resolved: ResolvedNotificationRecipient[] = [];
     const seen = new Set<string>();
     for (const hint of cmd.recipientHints) {
@@ -366,16 +463,27 @@ export function createNotificationDeliveryService(
         continue;
       }
       if (seen.has(hint.userId)) continue;
-      const lookup = resolveUser({
-        tenantId: cmd.tenantId,
-        organisationId: cmd.organisationId ?? hint.organisationId,
-        userId: hint.userId,
-      });
+      const lookup = await Promise.resolve(
+        resolveUser({
+          tenantId: cmd.tenantId,
+          organisationId: cmd.organisationId ?? hint.organisationId,
+          userId: hint.userId,
+        }),
+      );
       if (!lookup.ok || !lookup.active) {
         counters.recipientResolutionFailures += 1;
         continue;
       }
       seen.add(hint.userId);
+      const email =
+        (typeof hint.email === "string" && hint.email.includes("@")
+          ? hint.email
+          : undefined) ??
+        (lookup.ok && "email" in lookup && typeof lookup.email === "string"
+          ? lookup.email
+          : undefined);
+      const endpoints: Record<string, string> = { in_app: hint.userId };
+      if (email) endpoints.email = email;
       resolved.push({
         userId: hint.userId,
         tenantId: cmd.tenantId,
@@ -383,65 +491,106 @@ export function createNotificationDeliveryService(
         recipientType: "user",
         resolutionSource: "hint_user",
         snapshotAt: now(),
-        channelEndpoints: { in_app: hint.userId },
+        channelEndpoints: endpoints,
       });
     }
     return resolved;
+  }
+
+  function queueDelivery(input: {
+    readonly intent: NotificationIntent;
+    readonly recipient: ResolvedNotificationRecipient;
+    readonly channel: "in_app" | "email";
+    readonly providerId: "in_app" | "smtp";
+    readonly maxAttempts: number;
+  }): NotificationDeliveryRecord | undefined {
+    const deliveryIdem = `${input.intent.idempotencyKey}:${input.channel}:${input.recipient.userId}`;
+    const existingId = deliveryByIdem.get(`${input.intent.tenantId}:${deliveryIdem}`);
+    if (existingId) {
+      counters.idempotencyDeduplications += 1;
+      return deliveries.get(existingId);
+    }
+    const deliveryId = asNotificationDeliveryId(id());
+    const record: NotificationDeliveryRecord = {
+      id: deliveryId,
+      intentId: input.intent.id,
+      tenantId: input.intent.tenantId,
+      organisationId: input.recipient.organisationId ?? input.intent.organisationId,
+      userId: input.recipient.userId,
+      channel: input.channel,
+      providerId: input.providerId,
+      status: "queued",
+      receiptLevel: "requested",
+      idempotencyKey: deliveryIdem,
+      correlationId: input.intent.correlationId,
+      attemptCount: 0,
+      maxAttempts: input.maxAttempts,
+      nextAttemptAt: now(),
+      deadLetter: false,
+      createdAt: now(),
+      updatedAt: now(),
+    };
+    deliveries.set(deliveryId, record);
+    deliveryByIdem.set(`${input.intent.tenantId}:${deliveryIdem}`, deliveryId);
+    tries.set(deliveryId, []);
+    if (input.channel === "email" && input.recipient.channelEndpoints.email) {
+      emailEndpoints.set(deliveryId, input.recipient.channelEndpoints.email);
+    }
+    counters.deliveriesQueued += 1;
+    publish(
+      "notification.delivery.queued",
+      {
+        deliveryId,
+        intentId: input.intent.id,
+        channel: input.channel,
+        providerId: input.providerId,
+      },
+      {
+        tenantId: input.intent.tenantId,
+        correlationId: input.intent.correlationId,
+      },
+    );
+    return record;
   }
 
   function createDeliveriesForIntent(
     intent: NotificationIntent,
     recipients: readonly ResolvedNotificationRecipient[],
     maxAttempts: number,
-  ): void {
+    channels: readonly ("in_app" | "email")[],
+  ): NotificationDeliveryRecord[] {
+    const created: NotificationDeliveryRecord[] = [];
     for (const recipient of recipients) {
-      const deliveryIdem = `${intent.idempotencyKey}:in_app:${recipient.userId}`;
-      const existingId = deliveryByIdem.get(`${intent.tenantId}:${deliveryIdem}`);
-      if (existingId) {
-        counters.idempotencyDeduplications += 1;
-        continue;
+      for (const channel of channels) {
+        if (channel === "in_app") {
+          const record = queueDelivery({
+            intent,
+            recipient,
+            channel: "in_app",
+            providerId: "in_app",
+            maxAttempts,
+          });
+          if (record) created.push(record);
+          continue;
+        }
+        if (channel === "email" && recipient.channelEndpoints.email) {
+          const record = queueDelivery({
+            intent,
+            recipient,
+            channel: "email",
+            providerId: "smtp",
+            maxAttempts,
+          });
+          if (record) created.push(record);
+        }
       }
-      const deliveryId = asNotificationDeliveryId(id());
-      const record: NotificationDeliveryRecord = {
-        id: deliveryId,
-        intentId: intent.id,
-        tenantId: intent.tenantId,
-        organisationId: recipient.organisationId ?? intent.organisationId,
-        userId: recipient.userId,
-        channel: "in_app",
-        providerId: "in_app",
-        status: "queued",
-        receiptLevel: "requested",
-        idempotencyKey: deliveryIdem,
-        correlationId: intent.correlationId,
-        attemptCount: 0,
-        maxAttempts,
-        nextAttemptAt: now(),
-        deadLetter: false,
-        createdAt: now(),
-        updatedAt: now(),
-      };
-      deliveries.set(deliveryId, record);
-      deliveryByIdem.set(`${intent.tenantId}:${deliveryIdem}`, deliveryId);
-      tries.set(deliveryId, []);
-      counters.deliveriesQueued += 1;
-      publish(
-        "notification.delivery.queued",
-        {
-          deliveryId,
-          intentId: intent.id,
-          channel: "in_app",
-          providerId: "in_app",
-        },
-        {
-          tenantId: intent.tenantId,
-          correlationId: intent.correlationId,
-        },
-      );
     }
+    return created;
   }
 
-  function routeAndPersist(cmd: CreateNotificationIntentCommand): NotificationIntent {
+  async function routeAndPersist(
+    cmd: CreateNotificationIntentCommand,
+  ): Promise<NotificationIntent> {
     if (!isNotificationDeliveryEnabled(env)) {
       badRequest("Notification delivery is disabled", "DELIVERY_DISABLED");
     }
@@ -459,6 +608,18 @@ export function createNotificationDeliveryService(
     }
 
     const idemKey = `${cmd.tenantId}:${cmd.idempotencyKey}`;
+    if (durableEnabled && durableStore) {
+      const fromStore = await durableStore.getIntentByIdempotency(
+        cmd.tenantId,
+        cmd.idempotencyKey,
+      );
+      if (fromStore) {
+        counters.idempotencyDeduplications += 1;
+        intents.set(fromStore.id, fromStore);
+        intentByIdem.set(idemKey, fromStore.id);
+        return fromStore;
+      }
+    }
     const existingIntentId = intentByIdem.get(idemKey);
     if (existingIntentId) {
       counters.idempotencyDeduplications += 1;
@@ -522,6 +683,7 @@ export function createNotificationDeliveryService(
       mandatory: intent.mandatory,
       maxAttempts: notificationMaxAttempts(env),
       retryBaseDelayMs: notificationRetryBaseDelayMs(env),
+      env,
     });
     if (!policy.permitted) {
       counters.policyFailures += 1;
@@ -535,6 +697,7 @@ export function createNotificationDeliveryService(
         { intentId: intent.id, reason: intent.suppressionReason },
         { tenantId: intent.tenantId, correlationId: intent.correlationId },
       );
+      await persistIntentToStore(intent);
       return intent;
     }
 
@@ -546,21 +709,14 @@ export function createNotificationDeliveryService(
       { tenantId: intent.tenantId, correlationId: intent.correlationId },
     );
 
-    if (!isNotificationInAppEnabled(env)) {
-      intent = transitionIntent(intent, "suppressed", {
-        suppressionReason: "in_app_disabled",
-      });
-      counters.intentsSuppressed += 1;
-      return intent;
-    }
-
-    const recipients = resolveRecipients(cmd);
+    const recipients = await resolveRecipients(cmd);
     if (recipients.length === 0) {
       intent = transitionIntent(intent, "permanent_failure", {
         suppressionReason: "no_resolvable_recipients",
       });
       counters.permanentFailures += 1;
       counters.terminalFailureCount += 1;
+      await persistIntentToStore(intent);
       return intent;
     }
 
@@ -589,11 +745,21 @@ export function createNotificationDeliveryService(
         { intentId: intent.id, reason: "preference_suppressed" },
         { tenantId: intent.tenantId, correlationId: intent.correlationId },
       );
+      await persistIntentToStore(intent);
       return intent;
     }
 
     intent = transitionIntent(intent, "queued");
-    createDeliveriesForIntent(intent, eligible, policy.maxAttempts);
+    const createdDeliveries = createDeliveriesForIntent(
+      intent,
+      eligible,
+      policy.maxAttempts,
+      policy.channelOrder,
+    );
+    await persistIntentToStore(intent);
+    for (const delivery of createdDeliveries) {
+      await persistDeliveryToStore(delivery);
+    }
     return intent;
   }
 
@@ -680,7 +846,7 @@ export function createNotificationDeliveryService(
     }
   }
 
-  function processOne(deliveryId: string): void {
+  async function processOne(deliveryId: string): Promise<void> {
     const delivery = deliveries.get(deliveryId);
     if (!delivery) return;
     if (
@@ -728,14 +894,22 @@ export function createNotificationDeliveryService(
     const attemptNumber = current.attemptCount + 1;
     const tryId = asNotificationDeliveryTryId(id());
     const tryStart = now();
-    const result = dispatchInApp(current, intent);
+    const result =
+      current.channel === "email"
+        ? await dispatchEmailChannel({
+            delivery: current,
+            intent,
+            to: emailEndpoints.get(current.id) ?? "",
+            env,
+          })
+        : dispatchInApp(current, intent);
     counters.deliveryAttempts += 1;
 
     const tryRecord: NotificationDeliveryTry = {
       id: tryId,
       deliveryId: current.id,
       attemptNumber,
-      providerId: "in_app",
+      providerId: current.providerId,
       startedAt: tryStart,
       finishedAt: now(),
       receiptLevel: result.receiptLevel,
@@ -846,7 +1020,7 @@ export function createNotificationDeliveryService(
     );
   }
 
-  function processQueue(limit = 25): { readonly processed: number } {
+  async function processQueue(limit = 25): Promise<{ readonly processed: number }> {
     // Manual / ops ticks may run when the interval worker is disabled.
     if (!isNotificationDeliveryEnabled(env)) {
       return { processed: 0 };
@@ -864,7 +1038,7 @@ export function createNotificationDeliveryService(
       )
       .sort((a, b) => a.createdAt.localeCompare(b.createdAt))
       .slice(0, limit);
-    for (const d of due) processOne(d.id);
+    await Promise.all(due.map((d) => processOne(d.id)));
     return { processed: due.length };
   }
 
@@ -874,7 +1048,7 @@ export function createNotificationDeliveryService(
     if (workerTimer) return;
     workerRunning = true;
     workerTimer = setInterval(() => {
-      processQueue(25);
+      void processQueue(25);
     }, input.tickIntervalMs ?? 250);
   }
 
@@ -953,7 +1127,7 @@ export function createNotificationDeliveryService(
     };
   }
 
-  function ingestDomainEvent(envelope: DomainEventEnvelope): void {
+  async function ingestDomainEvent(envelope: DomainEventEnvelope): Promise<void> {
     if (!isNotificationEventIntakeEnabled(env)) return;
     if (!AUTHORISED_EVENT_TYPES.has(envelope.eventId)) {
       counters.eventIntakeFailures += 1;
@@ -969,9 +1143,14 @@ export function createNotificationDeliveryService(
       return;
     }
     try {
-      const intent = routeAndPersist(cmd);
-      if (intent.status === "queued" && isNotificationWorkerEnabled(env)) {
-        processQueue(10);
+      if (durableEnabled) assertDurableStoreConfigured();
+      const intent = await routeAndPersist(cmd);
+      if (
+        intent.status === "queued" &&
+        isNotificationWorkerEnabled(env) &&
+        !durableEnabled
+      ) {
+        await processQueue(10);
       }
     } catch {
       counters.eventIntakeFailures += 1;
@@ -985,7 +1164,9 @@ export function createNotificationDeliveryService(
       subscriptions.push(
         bus.subscribe({
           eventPattern: pattern,
-          handler: (envelope) => ingestDomainEvent(envelope),
+          handler: (envelope) => {
+            void ingestDomainEvent(envelope);
+          },
         }),
       );
     }
@@ -1005,7 +1186,7 @@ export function createNotificationDeliveryService(
 
   const service: NotificationDeliveryService & {
     attachEventBus(bus: NotificationDeliveryEventBusPort): void;
-    ingestDomainEvent(envelope: DomainEventEnvelope): void;
+    ingestDomainEvent(envelope: DomainEventEnvelope): Promise<void>;
     setUserPreferenceDisabled(
       userId: string,
       category: string,
@@ -1026,17 +1207,20 @@ export function createNotificationDeliveryService(
       if (ctx.tenantId !== cmd.tenantId) {
         deny("Tenant mismatch", "TENANT_ISOLATION");
       }
-      const intent = routeAndPersist({
+      if (durableEnabled) assertDurableStoreConfigured();
+      const intent = await routeAndPersist({
         ...cmd,
         requestedBy: cmd.requestedBy || ctx.userId,
         correlationId: cmd.correlationId || ctx.correlationId,
       });
-      processQueue(10);
+      if (!durableEnabled) {
+        void processQueue(10);
+      }
       return intent;
     },
     async getIntent(ctx, intentId) {
       requirePerm(ctx, "read");
-      const intent = intents.get(intentId);
+      const intent = await loadIntent(intentId);
       if (!intent) notFound("Intent not found");
       assertTenant(ctx, intent.tenantId, intent.organisationId);
       return intent;
@@ -1056,7 +1240,7 @@ export function createNotificationDeliveryService(
     },
     async cancelIntent(ctx, intentId) {
       requirePerm(ctx, "manage");
-      const intent = intents.get(intentId);
+      const intent = await loadIntent(intentId);
       if (!intent) notFound("Intent not found");
       assertTenant(ctx, intent.tenantId, intent.organisationId);
       const next = transitionIntent(intent, "cancelled");
@@ -1102,21 +1286,24 @@ export function createNotificationDeliveryService(
     },
     async getDelivery(ctx, deliveryId) {
       requirePerm(ctx, "read");
-      const delivery = deliveries.get(deliveryId);
+      const delivery = await loadDelivery(deliveryId);
       if (!delivery) notFound("Delivery not found");
       assertTenant(ctx, delivery.tenantId, delivery.organisationId);
       return delivery;
     },
     async listDeliveryAttempts(ctx, deliveryId) {
       requirePerm(ctx, "diagnostics");
-      const delivery = deliveries.get(deliveryId);
+      const delivery = await loadDelivery(deliveryId);
       if (!delivery) notFound("Delivery not found");
       assertTenant(ctx, delivery.tenantId, delivery.organisationId);
+      if (durableEnabled && durableStore) {
+        return durableStore.listTries(delivery.id);
+      }
       return tries.get(deliveryId) ?? [];
     },
     async retryDelivery(ctx, deliveryId) {
       requirePerm(ctx, "retry");
-      const delivery = deliveries.get(deliveryId);
+      const delivery = await loadDelivery(deliveryId);
       if (!delivery) notFound("Delivery not found");
       assertTenant(ctx, delivery.tenantId, delivery.organisationId);
       if (
@@ -1146,12 +1333,12 @@ export function createNotificationDeliveryService(
           actorId: ctx.userId,
         },
       );
-      if (isNotificationWorkerEnabled(env)) processQueue(5);
+      if (isNotificationWorkerEnabled(env)) void processQueue(5);
       return reset;
     },
     async replayTerminalFailure(ctx, deliveryId) {
       requirePerm(ctx, "retry");
-      const delivery = deliveries.get(deliveryId);
+      const delivery = await loadDelivery(deliveryId);
       if (!delivery) notFound("Delivery not found");
       assertTenant(ctx, delivery.tenantId, delivery.organisationId);
       if (!delivery.deadLetter && delivery.status !== "permanent_failure") {
@@ -1179,11 +1366,19 @@ export function createNotificationDeliveryService(
           actorId: ctx.userId,
         },
       );
-      if (isNotificationWorkerEnabled(env)) processQueue(5);
+      if (isNotificationWorkerEnabled(env)) void processQueue(5);
       return reset;
     },
     async getInAppNotifications(ctx, options) {
       requirePerm(ctx, "read");
+      if (durableEnabled && durableStore) {
+        return durableStore.listInAppItemsForUser({
+          tenantId: ctx.tenantId,
+          userId: ctx.userId,
+          organisationId: ctx.organisationId,
+          unreadOnly: options?.unreadOnly,
+        });
+      }
       return [...inApp.values()]
         .filter((item) => {
           if (item.tenantId !== ctx.tenantId) return false;
@@ -1202,13 +1397,19 @@ export function createNotificationDeliveryService(
     },
     async markInAppRead(ctx, notificationId) {
       requirePerm(ctx, "read");
-      const item = inApp.get(notificationId);
+      let item = inApp.get(notificationId);
+      if (!item && durableEnabled && durableStore) {
+        item = (await durableStore.getInAppItem(notificationId)) ?? undefined;
+      }
       if (!item) notFound("In-app notification not found");
       if (item.tenantId !== ctx.tenantId || item.userId !== ctx.userId) {
         deny("Recipient ownership required");
       }
       const next = { ...item, readAt: now() };
       inApp.set(notificationId, next);
+      if (durableEnabled && durableStore) {
+        await durableStore.updateInAppItem(next);
+      }
       // Read state must not alter provider delivery outcome
       publish(
         "notification.in_app.read",
@@ -1223,13 +1424,19 @@ export function createNotificationDeliveryService(
     },
     async markInAppUnread(ctx, notificationId) {
       requirePerm(ctx, "read");
-      const item = inApp.get(notificationId);
+      let item = inApp.get(notificationId);
+      if (!item && durableEnabled && durableStore) {
+        item = (await durableStore.getInAppItem(notificationId)) ?? undefined;
+      }
       if (!item) notFound("In-app notification not found");
       if (item.tenantId !== ctx.tenantId || item.userId !== ctx.userId) {
         deny("Recipient ownership required");
       }
       const next = { ...item, readAt: undefined };
       inApp.set(notificationId, next);
+      if (durableEnabled && durableStore) {
+        await durableStore.updateInAppItem(next);
+      }
       publish(
         "notification.in_app.unread",
         { notificationId, deliveryId: item.deliveryId },
@@ -1243,6 +1450,22 @@ export function createNotificationDeliveryService(
     },
     async markAllInAppRead(ctx) {
       requirePerm(ctx, "read");
+      if (durableEnabled && durableStore) {
+        const unread = await durableStore.listInAppItemsForUser({
+          tenantId: ctx.tenantId,
+          userId: ctx.userId,
+          organisationId: ctx.organisationId,
+          unreadOnly: true,
+        });
+        let updated = 0;
+        for (const item of unread) {
+          const next = { ...item, readAt: now() };
+          await durableStore.updateInAppItem(next);
+          inApp.set(item.id, next);
+          updated += 1;
+        }
+        return { updated };
+      }
       let updated = 0;
       for (const [key, item] of inApp) {
         if (item.tenantId !== ctx.tenantId || item.userId !== ctx.userId) continue;
@@ -1254,21 +1477,34 @@ export function createNotificationDeliveryService(
     },
     async getProviders(_ctx) {
       requirePerm(_ctx, "providers");
-      const enabled = isNotificationInAppEnabled(env);
-      const descriptor: NotificationProviderDescriptor = {
-        providerId: "in_app",
-        channel: "in_app",
-        displayName: "In-application notifications",
-        enabled,
-        health: enabled ? "healthy" : "disabled",
-        capabilities: [
-          "persistent_history",
-          "read_state",
-          "user_scoped",
-          "tenant_isolated",
-        ],
-      };
-      return [descriptor];
+      const inAppEnabled = isNotificationInAppEnabled(env);
+      const emailEnabled = isNotificationEmailEnabled(env);
+      const providers: NotificationProviderDescriptor[] = [
+        {
+          providerId: "in_app",
+          channel: "in_app",
+          displayName: "In-application notifications",
+          enabled: inAppEnabled,
+          health: inAppEnabled ? "healthy" : "disabled",
+          capabilities: [
+            "persistent_history",
+            "read_state",
+            "user_scoped",
+            "tenant_isolated",
+          ],
+        },
+      ];
+      if (isSmtpConfigured(env) || emailEnabled) {
+        providers.push({
+          providerId: "smtp",
+          channel: "email",
+          displayName: "SMTP email delivery",
+          enabled: emailEnabled,
+          health: emailEnabled ? "healthy" : "disabled",
+          capabilities: ["outbound_email", "user_scoped", "tenant_isolated"],
+        });
+      }
+      return providers;
     },
     async getHealth(_ctx): Promise<NotificationDeliveryHealth> {
       requirePerm(_ctx, "health");
@@ -1282,13 +1518,14 @@ export function createNotificationDeliveryService(
           commandIntakeEnabled: false,
           workerEnabled: false,
           workerRunning: false,
-          smtpDeferred: true,
+          smtpDeferred: !(isSmtpConfigured(env) && isNotificationEmailEnabled(env)),
           message: "disabled_by_configuration",
           checkedAt: now(),
         };
       }
       const inAppEnabled = isNotificationInAppEnabled(env);
-      const status = inAppEnabled ? "healthy" : "degraded";
+      const emailEnabled = isNotificationEmailEnabled(env);
+      const status = inAppEnabled || emailEnabled ? "healthy" : "degraded";
       return {
         status,
         enabled: true,
@@ -1297,7 +1534,7 @@ export function createNotificationDeliveryService(
         commandIntakeEnabled: isNotificationCommandIntakeEnabled(env),
         workerEnabled: isNotificationWorkerEnabled(env),
         workerRunning,
-        smtpDeferred: true,
+        smtpDeferred: !(isSmtpConfigured(env) && isNotificationEmailEnabled(env)),
         checkedAt: now(),
       };
     },
@@ -1305,14 +1542,20 @@ export function createNotificationDeliveryService(
       requirePerm(_ctx, "health");
       const enabled = isNotificationDeliveryEnabled(env);
       const inAppEnabled = isNotificationInAppEnabled(env);
+      const emailEnabled = isNotificationEmailEnabled(env);
       const checks = {
         deliveryEnabled: enabled,
         inAppEnabled,
+        emailEnabled,
         policyAvailable: true,
         templateAvailable: true,
         recipientResolution: true,
         workerConfigured: isNotificationWorkerEnabled(env),
-        smtp: "deferred",
+        smtp: emailEnabled
+          ? "active"
+          : isSmtpConfigured(env)
+            ? "disabled"
+            : "unconfigured",
       };
       if (!enabled) {
         return {
@@ -1323,9 +1566,9 @@ export function createNotificationDeliveryService(
         };
       }
       return {
-        ready: inAppEnabled,
+        ready: inAppEnabled || emailEnabled,
         enabled: true,
-        reason: inAppEnabled ? undefined : "in_app_disabled",
+        reason: inAppEnabled || emailEnabled ? undefined : "no_delivery_channels",
         checks,
       };
     },
@@ -1369,7 +1612,11 @@ export function createNotificationDeliveryService(
         configurationState: isNotificationDeliveryEnabled(env) ? "valid" : "disabled",
         lastSuccessfulProcessingAt: counters.lastSuccessfulProcessingAt,
         lastFailureCategory: counters.lastFailureCategory,
-        smtpDeliveryStatus: "deferred",
+        smtpDeliveryStatus: isNotificationEmailEnabled(env)
+          ? "active"
+          : isSmtpConfigured(env)
+            ? "deferred"
+            : "unconfigured",
       };
     },
     async getMetricsSnapshot(_ctx): Promise<NotificationDeliveryMetricsSnapshot> {

@@ -1,0 +1,16 @@
+manifestSchemaVersion: "1.0"
+id: platform-billing-dunning-advanced
+name: Platform Billing Dunning Advanced
+version: 0.1.0
+kind: event
+metadata:
+  category: platform
+  description: Emitted when dunning state advances (notice→warning→grace→soft→suspend).
+event:
+  category: platform
+  publisher: billing-service
+  permission: billing.manage
+  payload:
+    billingAccountId: string
+    fromState: string
+    toState: string

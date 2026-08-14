@@ -1,5 +1,5 @@
 # APZHUB host ports (R12-OPS-03 / ENVIRONMENT.md) — do not collide with legacy apz-stack:
-# web 3300 · storybook 6006 · postgres 54334 · redis 6380 · caddy 3080/3443
+# web 3300 · storybook 6006 · postgres 54334 · redis 6380 · caddy 3080/3443 · meilisearch 17700
 # Forbidden examples: 54333 (apzpg), 8080 (nginx-gateway), 18081–18088 (engines)
 services:
   postgres:
@@ -37,6 +37,25 @@ services:
       timeout: 3s
       retries: 10
 
+  meilisearch:
+    image: getmeili/meilisearch:v1.11
+    container_name: apzhub-meilisearch
+    restart: unless-stopped
+    environment:
+      MEILI_ENV: development
+      MEILI_NO_ANALYTICS: "true"
+      # Prefer host env / `.secrets/meilisearch`; fallback is local-dev only.
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY:-apzhub-meili-dev-master-key-change-me}
+    ports:
+      - "17700:7700"
+    volumes:
+      - apzhub_meilisearch_data:/meili_data
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:7700/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
   caddy:
     image: caddy:2-alpine
     container_name: apzhub-caddy
@@ -57,5 +76,6 @@ services:
 volumes:
   apzhub_postgres_data:
   apzhub_redis_data:
+  apzhub_meilisearch_data:
   apzhub_caddy_data:
   apzhub_caddy_config:

@@ -3,6 +3,8 @@
  * Not a storage technology selection. Not production infrastructure.
  */
 
+import { randomUUID } from "node:crypto";
+
 import type { EvidenceCollection } from "../../domain/evidence/collection";
 import type { Evidence, EvidenceVersion } from "../../domain/evidence/evidence";
 import type { EvidenceRelationship } from "../../domain/evidence/relationship";
@@ -407,6 +409,16 @@ export function createInMemoryIdPort(): IdPort {
     createId(prefix = "id") {
       n += 1;
       return `${prefix}-${n}`;
+    },
+  };
+}
+
+/** Durable ID port for postgres catalogue — avoids restart collisions with sequential IDs. */
+export function createUuidIdPort(): IdPort {
+  return {
+    portId: "IdPort",
+    createId(prefix = "id") {
+      return `${prefix}-${randomUUID()}`;
     },
   };
 }

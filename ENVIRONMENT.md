@@ -99,13 +99,14 @@ Internet → host nginx (:443 TLS) → Docker nginx-gateway (:8080) → app cont
 
 ## APZHUB public hostname (coexistence)
 
-| Item         | Value                                                                                                              |
-| ------------ | ------------------------------------------------------------------------------------------------------------------ |
-| Public URL   | **https://apzhub.apzportal.apzor.com**                                                                             |
-| DNS          | A record → host (coexists with `*.apzportal.apzor.com`)                                                            |
-| Host nginx   | `/etc/nginx/sites-enabled/05-apzhub-platform.conf` → `127.0.0.1:3300`                                              |
-| TLS          | Dedicated LE cert `apzhub.apzportal.apzor.com` (wildcard LE cert is **EXPIRED** — do not rely on it for this host) |
-| Legacy stack | Unchanged — wildcard still routes other subdomains to gateway `:8080`                                              |
+| Item         | Value                                                                                                                                                                                   |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Public URL   | **https://apzhub.apzportal.apzor.com**                                                                                                                                                  |
+| DNS          | A record → host (coexists with `*.apzportal.apzor.com`)                                                                                                                                 |
+| Host nginx   | `/etc/nginx/sites-enabled/05-apzhub-platform.conf` → `127.0.0.1:3300`                                                                                                                   |
+| TLS          | Dedicated LE cert `apzhub.apzportal.apzor.com` (wildcard LE cert is **EXPIRED** — do not rely on it for this host)                                                                      |
+| Brand sites  | Planned: `apzqa` / `apzqep` / `apzpentest` → same `:3300` (see [MKT-MULTI-SITE-HOSTS](./docs/operations/MKT-MULTI-SITE-HOSTS.md)); Productivity Suite is a later bundle, not a host yet |
+| Legacy stack | Unchanged — wildcard still routes other subdomains to gateway `:8080`                                                                                                                   |
 
 **Bring-up (ops):** Postgres `:54334` + Redis `:6380` via APZHUB compose; set `APP_URL` / `NEXT_PUBLIC_APP_URL` / `BETTER_AUTH_URL` to the public URL; `NODE_ENV=production`; rebuild `@apzhub/web`; start via standalone `node apps/web/.next/standalone/apps/web/server.js` (or supported start script) on **3300**. Do not bind legacy ports.
 
@@ -121,6 +122,7 @@ Dedicated ports for `/home/ubuntu/apz-portal` — chosen to avoid `apz-stack` co
 | Storybook               | **6006**  | `pnpm storybook`                  |
 | PostgreSQL (`apzhub`)   | **54334** | Docker; legacy `apzpg` uses 54333 |
 | Redis                   | **6380**  | Docker                            |
+| Meilisearch             | **17700** | Docker (`apzhub-meilisearch`)     |
 | Caddy HTTP              | **3080**  | Optional local reverse proxy      |
 | Caddy HTTPS             | **3443**  | `tls internal` for local dev      |
 
@@ -151,6 +153,7 @@ Apply schema with `pnpm db:migrate` (includes `0015_platform_entity_mapping`).
 | 3300        | APZHUB web (dev)        | localhost — when `pnpm dev` running       |
 | 54334       | APZHUB PostgreSQL       | localhost — when APZHUB compose running   |
 | 6380        | APZHUB Redis            | localhost — when APZHUB compose running   |
+| 17700       | APZHUB Meilisearch      | localhost — when APZHUB compose running   |
 | 3080, 3443  | APZHUB Caddy            | localhost — when APZHUB compose running   |
 | 6006        | APZHUB Storybook        | localhost — when `pnpm storybook` running |
 

@@ -225,6 +225,23 @@ export function createInMemoryNotificationDeliveryDurableStore(
       return item;
     },
 
+    async listInAppItemsForUser(input) {
+      return [...stores.inApp.values()]
+        .filter((item) => {
+          if (item.tenantId !== input.tenantId) return false;
+          if (item.userId !== input.userId) return false;
+          if (
+            input.organisationId !== undefined &&
+            (item.organisationId ?? undefined) !== input.organisationId
+          ) {
+            return false;
+          }
+          if (input.unreadOnly && item.readAt) return false;
+          return true;
+        })
+        .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    },
+
     async claimBatch(input) {
       const now = nowIso(input.now);
       const leaseExpires = leaseExpiresIso(now, input.leaseTtlMs);

@@ -31,6 +31,7 @@
     "db:migrate": "tsx scripts/db-migrate.ts",
     "db:seed": "tsx scripts/db-seed.ts",
     "db:reset": "pnpm db:migrate && pnpm db:seed",
+    "search:ensure-meili": "tsx scripts/ensure-meilisearch-platform-index.ts",
     "ops:backup-restore-drill": "tsx scripts/backup-restore-drill.ts",
     "ops:alert-strategy-audit": "tsx scripts/alert-strategy-audit.ts",
     "ops:host-coexistence-audit": "tsx scripts/host-coexistence-audit.ts",

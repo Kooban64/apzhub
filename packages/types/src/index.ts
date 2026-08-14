@@ -6,6 +6,17 @@ export interface DependencyHealth {
   message?: string;
 }
 
+/** Outbound SMTP dependency probe (platform-email). */
+export interface EmailDependencyHealth {
+  status: HealthStatus | "unconfigured" | "misconfigured";
+  configured: boolean;
+  host?: string;
+  port?: number;
+  from?: string;
+  message?: string;
+  checkedAt?: string;
+}
+
 export interface PlatformRuntimeHealthSummary {
   status: HealthStatus;
   platformReady: boolean;
@@ -145,6 +156,7 @@ export interface PlatformHealthResponse {
   dependencies: {
     database: DependencyHealth;
     redis: DependencyHealth;
+    email?: EmailDependencyHealth;
   };
   runtime?: PlatformRuntimeHealthSummary;
   commands?: ActionFrameworkHealthSummary;

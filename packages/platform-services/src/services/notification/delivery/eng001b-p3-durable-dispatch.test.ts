@@ -412,6 +412,117 @@ describe("ENG-001B-P3 durable dispatch orchestrator", () => {
     expect(result.processed).toBe(0);
   });
 
+  it("durable ON + memory store persists intake; processQueue no-ops; worker delivers in-app", async () => {
+    const store = createInMemoryNotificationDeliveryDurableStore();
+    const svc = createNotificationDeliveryService({
+      env: {
+        ...allOn,
+        APZHUB_NOTIFICATION_COMMAND_INTAKE_ENABLED: "true",
+      },
+      durableStore: store,
+      id: (() => {
+        let n = 0;
+        return () => `nd_durable_${++n}`;
+      })(),
+    });
+
+    const intent = await svc.createIntent(
+      {
+        tenantId: "tenant_a",
+        organisationId: "org_a",
+        userId: "user_admin",
+        correlationId: "corr_intake",
+        permissions: [
+          "notifications.send",
+          "notifications.read",
+          "notifications.diagnostics",
+        ],
+      },
+      {
+        tenantId: "tenant_a",
+        organisationId: "org_a",
+        sourceProduct: "platform",
+        category: "platform",
+        subject: "Durable intake",
+        recipientHints: [{ userId: "user_1" }],
+        correlationId: "corr_intake",
+        idempotencyKey: "durable_intake_1",
+        requestedBy: "user_admin",
+      },
+    );
+
+    expect(intent.status).toBe("queued");
+    const storedIntent = await store.getIntentByIdempotency(
+      "tenant_a",
+      "durable_intake_1",
+    );
+    expect(storedIntent?.id).toBe(intent.id);
+
+    const deliveries = await svc.listDeliveries({
+      tenantId: "tenant_a",
+      organisationId: "org_a",
+      userId: "user_admin",
+      correlationId: "corr_intake",
+      permissions: ["notifications.read"],
+    });
+    expect(deliveries).toHaveLength(1);
+    const storedDelivery = await store.getDelivery(deliveries[0]!.id);
+    expect(storedDelivery?.status).toBe("queued");
+    expect(storedDelivery?.channel).toBe("in_app");
+
+    expect((await svc.processQueue(25)).processed).toBe(0);
+
+    const worker = createDurableNotificationWorker({
+      store,
+      env: allOn,
+      workerId: "intake_worker",
+    });
+    worker.start();
+    const tick = await worker.tick();
+    expect(tick.claimed).toBe(1);
+    expect(tick.dispatched).toBe(1);
+    expect(tick.outcomes).toEqual(["delivered"]);
+    expect((await store.getDelivery(deliveries[0]!.id))?.status).toBe("delivered");
+
+    const inbox = await store.listInAppItemsForUser({
+      tenantId: "tenant_a",
+      userId: "user_1",
+      organisationId: "org_a",
+    });
+    expect(inbox).toHaveLength(1);
+    expect(inbox[0]?.title).toBe("Durable intake");
+    await worker.stop();
+  });
+
+  it("durable ON without durableStore fails loud on createIntent", async () => {
+    const svc = createNotificationDeliveryService({
+      env: {
+        ...allOn,
+        APZHUB_NOTIFICATION_COMMAND_INTAKE_ENABLED: "true",
+      },
+    });
+    await expect(
+      svc.createIntent(
+        {
+          tenantId: "tenant_a",
+          userId: "user_admin",
+          correlationId: "corr_x",
+          permissions: ["notifications.send"],
+        },
+        {
+          tenantId: "tenant_a",
+          sourceProduct: "platform",
+          category: "platform",
+          subject: "missing store",
+          recipientHints: [{ userId: "user_1" }],
+          correlationId: "corr_x",
+          idempotencyKey: "missing_store_1",
+          requestedBy: "user_admin",
+        },
+      ),
+    ).rejects.toThrow(/durableStore was not provided/);
+  });
+
   it("terminal deliveries remain immutable via fencing", async () => {
     const store = createInMemoryNotificationDeliveryDurableStore();
     await store.insertIntent(sampleIntent());

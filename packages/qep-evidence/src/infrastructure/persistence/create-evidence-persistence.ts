@@ -13,6 +13,7 @@ import {
   createInMemoryClockPort,
   createInMemoryIdPort,
   createInMemoryUnitOfWork,
+  createUuidIdPort,
   type EvidenceApplicationServices,
   type StoragePort,
 } from "../../application";
@@ -87,7 +88,8 @@ function buildRuntime(input: CreateEvidenceRuntimeInput): EvidenceRuntimeBundle 
     uow,
     storage: manager,
     clock: createInMemoryClockPort(input.now),
-    ids: createInMemoryIdPort(),
+    // Postgres catalogue must not reuse sequential IDs that reset on process restart.
+    ids: catalogueMode === "postgres" ? createUuidIdPort() : createInMemoryIdPort(),
     audit: createInMemoryAuditPort(),
     lifecycleHistory,
     secure: true,

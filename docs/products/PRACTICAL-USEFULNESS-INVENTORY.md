@@ -122,6 +122,8 @@ Share each component section with ChatGPT as needed.
 | Documents | Native metadata workbench — **no upload/create UI**; not a DMS |
 | Paperless | **No `integrations/paperless*`** — legacy apz-stack only       |
 
+**KNW-H6 Memory Companion harden (accepted locally):** `knowledge.manage` + steward role; Wave A sidebar; live memory on Home/Companion; in-product find; unmocked create→list→detail. Consumer overlays / AI / Paperless still deferred. Evidence: [apzknowledge/engineering/evidence/KNW-H6-MEMORY-COMPANION-HARDEN.md](./apzknowledge/engineering/evidence/KNW-H6-MEMORY-COMPANION-HARDEN.md).
+
 **Outstanding:** Paperless adapter (entire); Documents upload; or explicit “Knowledge-only, Paperless later” product decision.
 
 **Practically useful when:** (Knowledge) create/find organisational memory daily; **and/or** (Documents) upload → store → retrieve via Paperless or native DMS path.
@@ -136,9 +138,39 @@ Share each component section with ChatGPT as needed.
 | Backend  | Native PostgreSQL packages                      |
 | Engines  | Not Plane/Zammad/…; `qep-github` stub; not Kiwi |
 
-**Outstanding:** stub modules; SCM live path; ensure persistence flags on in prod; avoid confusing with legacy Testing/Kiwi.
+**Tranche 2 Q0–Q4 (accepted locally):** Cap A–F + siblings on `APZQEP_*_PERSISTENCE_MODE=postgres`; evidence content SoR `APZQEP_EVIDENCE_STORAGE_PROVIDER=local`; automation `onEvidencePublished` wired; proven API loop suite → plan → spec → execution handoff → session → defect → evidence download. `GET /api/health` → `coreQePersistence.mode=postgres`.
 
-**Practically useful when:** a QA team runs plan → execute → defect → evidence without leaving APZHUB (native path).
+**Tranche 2b Q5 (accepted locally):** `APZHUB_AUTOMATION_LIVE=true` + request `dryRun:false` → Chromium live; real PNG/trace bytes on artifacts; StoragePort local put (e.g. `apps/web/.data/qep-evidence/…/content.bin` verified PNG); `evidence://` refs; providers `liveModeEnabled`; UI live CTA; opt-in Vitest live smoke. Catalogue capture soft-fails associate lifecycle (storage is SoR for content).
+
+**Tranche 2b Q6 (accepted locally):** Stub/unknown `/workspace/qep/*` paths no longer fall through to Requirements; honest `qep-unavailable` surface. `qep-types` module catalogue statuses synced to wired Cap/V1.1 surfaces.
+
+**North star:** [apzqep/QUALITY-ECOSYSTEM-MAP.md](./apzqep/QUALITY-ECOSYSTEM-MAP.md) · **Flagship programme:** [apzqep/FLAGSHIP-PROGRAMME.md](./apzqep/FLAGSHIP-PROGRAMME.md) (Phases **F0–F11 complete** locally; **F12 report-pack scaffold**; Knowledge parallel).
+
+**F1 GitHub Heartbeat (accepted locally):** server-only PAT (`credentialsSource=server_secrets`); public HMAC ingress 202; durable change events via sync + webhook (SHA/author/files proven); UI heartbeat panel; `APZQEP_SCM_PERSISTENCE_MODE=postgres`. Live API mode still opt-in (`APZHUB_SCM_GITHUB_LIVE=true`).
+
+**F2 Quality Graph & Impact (accepted locally):** change → path/REQ/DEF edges → impact view → advisory regression pack → human accept → draft execution plan + SCM link. Suite convention `path:<prefix>` (or `customMetadata.pathPrefixes`).
+
+**F3 Provider Evidence Matrix (accepted locally + deepen):** All 11 providers active (Playwright live + report ingest for Vitest/a11y/security/codequality/k6/selenium/cypress/appium/rest/visual); cert gates include security/performance/code quality; RC tiles evidence-driven; UUID catalogue IDs.
+
+**F4 Certification Engine (accepted locally):** advisory gates (automation/CI/a11y-or-regression) → READY|BLOCKED score + explain-why; human GO/NO-GO via ApprovalEngine (immutable).
+
+**F5 RC Quality OS face (accepted locally):** `/workspace/qep/rc` one composition — score + domain strip (provider-masked) + explain-why + evidence drill + human decision; Security/Performance honest empty; M13 nav active.
+
+**F6 Quality Intelligence (accepted locally):** change-scoped advisory (gap/risk/regression/blocker) from graph + evidence + cert; artifact-linked explanations; never mutates cert/SoR; QI UI + `GET …/quality-intelligence/by-change/{id}`.
+
+**F7 Test Design Assist (accepted locally):** change → rule-based advisory draft specs (REQ smoke + domain gaps) → human accept → draft Spec SoR + optional traces; QI deep-link; tools remain verification engines; never auto-run/certify.
+
+**F8 Change Quality Journey (accepted locally):** one guided path per change (Impact → Design → Evidence → RC → GO/NO-GO); read-only glue + deep links; never auto-certifies; adoption face for teams.
+
+**F9 Auto verification on change (accepted locally):** opt-in `APZHUB_AUTOMATION_ON_CHANGE` → Playwright smoke on durable commit/PR; evidence linked via F3; other domains still CI ingest; never auto GO/NO-GO.
+
+**F10 Verification dispatch (accepted locally):** Option B — opt-in dispatch to GitHub Actions/webhook for Vitest/a11y/security/…; runners POST ingest; journey shows dispatch ledger; pen-test tools (Greenbone/Faraday/Kali) same pattern later.
+
+**F11 Security/pen-test dispatch (accepted locally):** security pack (`trivy,semgrep,nuclei,zap` + optional greenbone); dual Docker clusters (testing vs pen-test); Kali runner image only; Faraday deferred; never auto-certify.
+
+**F12 Professional report pack (scaffold):** draft Security Bill of Health from change-linked evidence (JSON/markdown; Typst PDF when installed); residual-risk + human sign-off fields; never auto-certify (RPT-009).
+
+**Practically useful (F0–F11 + F12 draft export):** guided journey + auto smoke + quality + security dispatch packs + ingest + RC GO/NO-GO + draft audit pack. **Flagship claim:** quality score from governed evidence + human decision; tools/CI prove; journey/design/QI advise only; report pack is human-published.
 
 ---
 

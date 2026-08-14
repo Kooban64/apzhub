@@ -1,0 +1,39 @@
+manifestSchemaVersion: "1.0"
+id: qep-early-check
+name: Early Check
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: >
+    Flagship F13 Developer Early Check — spot quality/security/Playwright for a
+    change and export an AI Fix Pack. Advisory only; never auto-certifies.
+  product: apzqep
+  slug: early-check
+  programme: FLAGSHIP-F13
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: active
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Early Check
+    icon: zap
+    route: /workspace/qep/early-check
+    order: 35
+    permission: qep.automation.read
+  view:
+    title: Early Check
+    workspace: qep
+    route: /workspace/qep/early-check
+    permission: qep.automation.read

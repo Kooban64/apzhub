@@ -20,13 +20,26 @@ import {
   isQepQiRoute,
   isQepDashboardsRoute,
   isQepQualityFlowsRoute,
+  isQepCertificationRoute,
+  isQepQualityJourneyRoute,
+  isQepEarlyCheckRoute,
+  isQepPortfolioRoute,
+  isQepHomeRoute,
+  isQepReleaseReadinessRoute,
+  isQepRequirementsRoute,
   isQepWorkspaceRoute,
 } from "@/lib/qep/routes";
 
 import { QepAutomationRouterView } from "./qep-automation-views";
+import { QepCertificationRouterView } from "./qep-certification-views";
 import { QepDashboardsRouterView } from "./qep-dashboards-views";
+import { QepEarlyCheckRouterView } from "./qep-early-check-views";
+import { QepHomeRouterView } from "./qep-home-views";
+import { QepPortfolioRouterView } from "./qep-portfolio-views";
 import { QepQualityFlowRouterView } from "./qep-quality-flow-views";
 import { QepQualityIntelligenceRouterView } from "./qep-quality-intelligence-views";
+import { QepQualityJourneyRouterView } from "./qep-quality-journey-views";
+import { QepReleaseReadinessRouterView } from "./qep-release-readiness-views";
 import { QepScmRouterView } from "./qep-scm-views";
 
 import { QepDefectsRouterView } from "./qep-defects-views";
@@ -41,10 +54,11 @@ import { QepTestExecutionRouterView } from "./qep-test-execution-views";
 import { QepTestPlanRouterView } from "./qep-test-plan-views";
 import { QepTestSpecificationRouterView } from "./qep-test-specification-views";
 import { QepTraceabilityRouterView } from "./qep-traceability-views";
+import { QepUnavailableModuleView } from "./qep-unavailable-module-view";
 import { QepVerificationRouterView } from "./qep-verification-views";
 
 /**
- * QEP workspace router — Quality Flow Workspace (flagship) + Caps A–F + ENG modules.
+ * QEP workspace router — Home / Release Control (SPR-201) + Quality Flows + Caps A–F.
  */
 export function QepWorkspaceRouter() {
   const pathname = usePathname() ?? "";
@@ -53,8 +67,32 @@ export function QepWorkspaceRouter() {
     return null;
   }
 
+  if (isQepHomeRoute(pathname)) {
+    return <QepHomeRouterView />;
+  }
+
+  if (isQepReleaseReadinessRoute(pathname)) {
+    return <QepReleaseReadinessRouterView />;
+  }
+
   if (isQepQualityFlowsRoute(pathname)) {
     return <QepQualityFlowRouterView />;
+  }
+
+  if (isQepQualityJourneyRoute(pathname)) {
+    return <QepQualityJourneyRouterView />;
+  }
+
+  if (isQepEarlyCheckRoute(pathname)) {
+    return <QepEarlyCheckRouterView />;
+  }
+
+  if (isQepPortfolioRoute(pathname)) {
+    return <QepPortfolioRouterView />;
+  }
+
+  if (isQepCertificationRoute(pathname)) {
+    return <QepCertificationRouterView />;
   }
 
   if (isQepAutomationRoute(pathname)) {
@@ -121,5 +159,10 @@ export function QepWorkspaceRouter() {
     return <QepTraceabilityRouterView pathname={pathname} />;
   }
 
-  return <QepRequirementsRouterView pathname={pathname} />;
+  if (isQepRequirementsRoute(pathname)) {
+    return <QepRequirementsRouterView pathname={pathname} />;
+  }
+
+  // Q6: never fall through stub/unknown paths into Requirements.
+  return <QepUnavailableModuleView pathname={pathname} />;
 }

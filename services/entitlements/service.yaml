@@ -1,0 +1,33 @@
+manifestSchemaVersion: "1.0"
+id: entitlement-service
+name: Entitlement Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: platform
+  description: >
+    Maps commercial plans/add-ons/SKUs to capability grants and limits.
+    Shell and Platform Services require RBAC AND entitlement for gated actions.
+  programme: SPR-IAM-COMMERCIAL-001
+  owner: APZHUB
+  tags:
+    - commercial
+    - entitlement
+    - saas
+
+dependencies:
+  platform: []
+  services:
+    - billing-service
+  integrations: []
+
+service:
+  category: platform
+  status: active
+
+permissions:
+  - id: entitlement.read
+    description: View entitlements for current account
+  - id: entitlement.manage
+    description: Platform manage of entitlement grants

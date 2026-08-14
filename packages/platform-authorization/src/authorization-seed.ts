@@ -1,5 +1,11 @@
 import type { AuthorizationService } from "./authorization-service";
 import {
+  DEFAULT_KNOWLEDGE_STEWARD_ROLE_ID,
+  KNOWLEDGE_STEWARD_PERMISSIONS,
+  isKnowledgeStewardAutoAssignEnabled,
+} from "./knowledge-steward-permissions";
+import { IAM_PLATFORM_PERMISSIONS, PERSONA_ROLE_DEFINITIONS } from "./persona-roles";
+import {
   DEFAULT_QEP_OPERATOR_ROLE_ID,
   DEFAULT_QEP_READER_ROLE_ID,
   QEP_CORE_QE_PERMISSIONS,
@@ -18,6 +24,11 @@ export {
   DEFAULT_QEP_OPERATOR_ROLE_ID,
   DEFAULT_QEP_READER_ROLE_ID,
 } from "./qep-core-qe-permissions";
+export {
+  DEFAULT_KNOWLEDGE_STEWARD_ROLE_ID,
+  KNOWLEDGE_STEWARD_PERMISSIONS,
+  isKnowledgeStewardAutoAssignEnabled,
+} from "./knowledge-steward-permissions";
 
 const DEFAULT_PERMISSIONS = [
   "*",
@@ -91,6 +102,7 @@ const DEFAULT_PERMISSIONS = [
   // APZ Knowledge — organisational memory identity (N-02).
   "knowledge.*",
   "knowledge.view",
+  "knowledge.manage",
   "knowledge.admin",
   "analytics.compute",
   "analytics.dashboard.view",
@@ -102,6 +114,18 @@ const DEFAULT_PERMISSIONS = [
   "analytics.saved.manage",
   "team.*",
   "search.*",
+  // Unified notifications + ENG-004 delivery plane
+  "notification.*",
+  "notification.read",
+  "notification.manage",
+  "notification.preference",
+  "notification.delivery",
+  "notifications.read",
+  "notifications.manage",
+  "notifications.preferences",
+  "notifications.send",
+  "notifications.health",
+  "notifications.providers",
   "support.*",
   "support.requests.list",
   "support.requests.create",
@@ -159,6 +183,7 @@ const DEFAULT_PERMISSIONS = [
   "approval.*",
   "dashboard.*",
   ...QEP_CORE_QE_PERMISSIONS,
+  ...IAM_PLATFORM_PERMISSIONS,
 ] as const;
 
 export function seedDefaultAuthorizationCatalog(service: AuthorizationService): void {
@@ -177,8 +202,39 @@ export function seedDefaultAuthorizationCatalog(service: AuthorizationService): 
         name: "Platform Administrator",
         scope: "platform",
       },
-      ["*"],
+      [
+        "platform.nav.home.view",
+        "platform.nav.administration.view",
+        "admin.read",
+        "admin.operate",
+        "admin.diagnostics",
+        "identity.read",
+        "observe.read",
+        "observe.health",
+        "observe.metrics",
+        "observe.logs",
+        "observe.traces",
+        "observe.alerts",
+        "observe.diagnostics",
+        "observe.manage",
+        "tenant.*",
+        "workspace.*",
+        "notification.read",
+        "notifications.read",
+        ...IAM_PLATFORM_PERMISSIONS.filter(
+          (p) => !p.startsWith("billing.admin") && p !== "catalogue.write",
+        ),
+      ],
     );
+  } else {
+    // Ensure existing installs do not keep break-glass "*" on platform-admin.
+    ensureRolePermissionGrants(service, DEFAULT_PLATFORM_ADMIN_ROLE_ID, [
+      "admin.operate",
+      "observe.read",
+      "observe.health",
+      "observe.manage",
+      "platform.nav.administration.view",
+    ]);
   }
 
   if (!service.roleService.getRole(DEFAULT_LAW_OPERATOR_ROLE_ID)) {
@@ -215,6 +271,13 @@ export function seedDefaultAuthorizationCatalog(service: AuthorizationService): 
         "team.read",
         "user.read",
         "search.execute",
+        "search.*",
+        "notification.*",
+        "notifications.read",
+        "notifications.preferences",
+        "notifications.send",
+        "notifications.health",
+        "notifications.providers",
         "time.*",
         "support.*",
         "document.*",
@@ -238,6 +301,20 @@ export function seedDefaultAuthorizationCatalog(service: AuthorizationService): 
         // Organisational memory identity only — not knowledge.* (excludes admin)
         "knowledge.view",
       ],
+    );
+  }
+
+  // Knowledge steward — capture/curate without admin (Memory Companion harden)
+  if (!service.roleService.getRole(DEFAULT_KNOWLEDGE_STEWARD_ROLE_ID)) {
+    service.createRole(
+      {
+        roleId: DEFAULT_KNOWLEDGE_STEWARD_ROLE_ID,
+        slug: "knowledge-steward",
+        name: "Knowledge Steward",
+        scope: "product",
+        productKey: "platform-knowledge",
+      },
+      [...KNOWLEDGE_STEWARD_PERMISSIONS],
     );
   }
 
@@ -267,6 +344,28 @@ export function seedDefaultAuthorizationCatalog(service: AuthorizationService): 
     );
   }
 
+  // SPR-IAM-COMMERCIAL-001 — Doc-007 personas + IAM/commercial permissions
+  for (const persona of PERSONA_ROLE_DEFINITIONS) {
+    if (!service.roleService.getRole(persona.roleId)) {
+      service.createRole(
+        {
+          roleId: persona.roleId,
+          slug: persona.slug,
+          name: persona.name,
+          scope: persona.scope,
+          tenantId: persona.scope === "tenant" ? DEFAULT_PLATFORM_TENANT_ID : undefined,
+          productKey: persona.productKey,
+        },
+        [...persona.permissions],
+      );
+    } else {
+      ensureRolePermissionGrants(service, persona.roleId, persona.permissions);
+    }
+  }
+  ensureRolePermissionGrants(service, DEFAULT_PLATFORM_ADMIN_ROLE_ID, [
+    ...IAM_PLATFORM_PERMISSIONS,
+  ]);
+
   // H4 — sync catalogue growth onto existing Cap roles (idempotent grants).
   ensureRolePermissionGrants(
     service,
@@ -278,6 +377,20 @@ export function seedDefaultAuthorizationCatalog(service: AuthorizationService): 
     DEFAULT_QEP_READER_ROLE_ID,
     QEP_READER_PERMISSIONS,
   );
+  ensureRolePermissionGrants(
+    service,
+    DEFAULT_KNOWLEDGE_STEWARD_ROLE_ID,
+    KNOWLEDGE_STEWARD_PERMISSIONS,
+  );
+  ensureRolePermissionGrants(service, DEFAULT_TENANT_MEMBER_ROLE_ID, [
+    "search.*",
+    "notification.*",
+    "notifications.read",
+    "notifications.preferences",
+    "notifications.send",
+    "notifications.health",
+    "notifications.providers",
+  ]);
 }
 
 function ensureRolePermissionGrants(
@@ -322,6 +435,15 @@ export function provisionDefaultAuthorizationForUser(
       roleId: DEFAULT_QEP_OPERATOR_ROLE_ID,
       tenantId,
       productKey: "apzqep",
+    });
+  }
+
+  if (isKnowledgeStewardAutoAssignEnabled()) {
+    service.assignRole({
+      userId: input.userId,
+      roleId: DEFAULT_KNOWLEDGE_STEWARD_ROLE_ID,
+      tenantId,
+      productKey: "platform-knowledge",
     });
   }
 }

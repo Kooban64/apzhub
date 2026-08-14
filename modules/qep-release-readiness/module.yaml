@@ -1,15 +1,18 @@
 manifestSchemaVersion: "1.0"
 id: qep-release-readiness
 name: Release Readiness
-version: 0.1.0
+version: 0.2.0
 kind: module
 
 metadata:
   category: quality-engineering
-  description: "Release Readiness (M12) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  description: >
+    Go/no-go release readiness checklist over live Quality Flow orchestration
+    (SPR-APZQEP-201). Presentation only — no separate SoR.
   product: apzqep
   moduleCatalogueId: M12
   slug: release-readiness
+  programme: SPR-APZQEP-201
 
 dependencies:
   platform: []
@@ -18,7 +21,11 @@ dependencies:
 
 module:
   category: quality-engineering
-  status: stub
+  status: active
+
+permissions:
+  - id: qep.release_readiness.read
+    label: View Release Readiness
 
 workbench:
   navigation:
@@ -26,12 +33,12 @@ workbench:
     workspace: qep
     parent: qep
     label: Release Readiness
-    icon: flask-conical
+    icon: shield-check
     route: /workspace/qep/release-readiness
-    order: 120
-    permission: qep.release-readiness.read
+    order: 8
+    permission: qep.release_readiness.read
   view:
     title: Release Readiness
     workspace: qep
     route: /workspace/qep/release-readiness
-    permission: qep.release-readiness.read
+    permission: qep.release_readiness.read

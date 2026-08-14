@@ -9,6 +9,7 @@ export type {
 } from "./components/command-palette/types";
 export { Button, buttonVariants } from "./components/button";
 export type { ButtonProps } from "./components/button";
+export { ThemeToggle } from "./components/theme-toggle";
 export { Input } from "./components/input";
 export type { InputProps } from "./components/input";
 export { Card, CardContent, CardHeader, CardTitle } from "./components/card";

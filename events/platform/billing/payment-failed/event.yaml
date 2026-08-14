@@ -1,0 +1,16 @@
+manifestSchemaVersion: "1.0"
+id: platform-billing-payment-failed
+name: Platform Billing Payment Failed
+version: 0.1.0
+kind: event
+metadata:
+  category: platform
+  description: Emitted when a payment attempt fails; starts or advances dunning.
+event:
+  category: platform
+  publisher: billing-service
+  permission: billing.manage
+  payload:
+    billingAccountId: string
+    invoiceId: string
+    reason: string

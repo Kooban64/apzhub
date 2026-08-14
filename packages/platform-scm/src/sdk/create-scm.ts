@@ -1,8 +1,9 @@
 import { SCM_EVENT_TYPES, type ScmEventPublisher } from "../contracts/events";
 import type { ScmProviderId } from "../contracts/repository";
-import { ScmEngine } from "../engine/scm-engine";
+import { ScmEngine, type ScmChangeEventsPersistedHook } from "../engine/scm-engine";
 import type { RepositoryStore } from "../engine/repository-store";
 import { createGitHubProvider } from "../providers/github";
+import { createGitLabProvider } from "../providers/gitlab";
 import { createPlaceholderScmProviders } from "../providers/placeholders";
 import { ScmProviderRegistry } from "../registry/provider-registry";
 
@@ -10,9 +11,13 @@ export interface CreatePlatformScmOptions {
   readonly publishEvent?: ScmEventPublisher;
   /** Default true — GitHub provider operates offline without api.github.com. */
   readonly githubOffline?: boolean;
+  /** Default true — GitLab provider operates offline without gitlab.com. */
+  readonly gitlabOffline?: boolean;
   readonly includePlaceholders?: boolean;
   readonly webhookSecrets?: Readonly<Partial<Record<ScmProviderId, string>>>;
   readonly store?: RepositoryStore;
+  /** Flagship F9 — after durable change upsert (soft-fail). */
+  readonly onChangeEventsPersisted?: ScmChangeEventsPersistedHook;
 }
 
 export interface PlatformScm {
@@ -22,7 +27,7 @@ export interface PlatformScm {
 
 /**
  * Bootstrap the Enterprise Source Control Platform.
- * Registers GitHub (active) + placeholder providers for future waves.
+ * Registers GitHub + GitLab (active) + remaining placeholders.
  */
 export function createPlatformScm(options: CreatePlatformScmOptions = {}): PlatformScm {
   const registry = new ScmProviderRegistry();
@@ -30,9 +35,15 @@ export function createPlatformScm(options: CreatePlatformScmOptions = {}): Platf
     forceOffline: options.githubOffline ?? true,
   });
   registry.register(github);
+  const gitlab = createGitLabProvider({
+    forceOffline: options.gitlabOffline ?? true,
+  });
+  registry.register(gitlab);
 
   if (options.includePlaceholders !== false) {
     for (const placeholder of createPlaceholderScmProviders()) {
+      // GitLab is now a real provider — skip placeholder duplicate.
+      if (placeholder.descriptor.providerId === "gitlab") continue;
       registry.register(placeholder);
     }
   }
@@ -57,6 +68,7 @@ export function createPlatformScm(options: CreatePlatformScmOptions = {}): Platf
     publishEvent,
     webhookSecrets: options.webhookSecrets,
     store: options.store,
+    onChangeEventsPersisted: options.onChangeEventsPersisted,
   });
 
   return { engine, registry };

@@ -21,7 +21,14 @@ export async function handleListAutomationProviders(
 ) {
   requireQepPermission(context, "qep.automation.read");
   const runtime = getQepAutomationRuntime();
-  return jsonDataResponse({ providers: runtime.listProviders() }, context.tracing);
+  return jsonDataResponse(
+    {
+      providers: runtime.listProviders(),
+      /** Live browser runs require APZHUB_AUTOMATION_LIVE=true and process restart. */
+      liveModeEnabled: process.env.APZHUB_AUTOMATION_LIVE === "true",
+    },
+    context.tracing,
+  );
 }
 
 export async function handleListAutomationExecutions(

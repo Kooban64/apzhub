@@ -10,6 +10,7 @@ import type { RecordObservationRequest } from "@apzhub/platform-quality-intellig
 import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
 import { PlatformApiHttpError } from "../errors";
 import { jsonDataResponse } from "../response";
+import { adviseChange } from "@/lib/qep/qi-change-advice";
 import { getQepQiRuntime } from "@/lib/qep/qi-runtime";
 import { requireQepPermission, sessionTenantId } from "./require-qep-permission";
 
@@ -253,6 +254,35 @@ export async function handleRunQiAnalysis(
     throw new PlatformApiHttpError(400, {
       code: "QI_ERROR",
       message: error instanceof Error ? error.message : String(error),
+    });
+  }
+}
+
+/** Flagship F6 — change-grounded advisory intelligence (read-only; never mutates cert). */
+export async function handleAdviseQiByChange(
+  _request: NextRequest,
+  context: PlatformApiRequestContext,
+  routeContext?: RouteContext,
+) {
+  requireQepPermission(context, "qep.qi.read");
+  const changeEventId = requireParam(await routeContext?.params, "changeEventId");
+  try {
+    const bundle = await adviseChange({
+      tenantId: sessionTenantId(context),
+      changeEventId,
+    });
+    return jsonDataResponse(bundle, context.tracing);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    if (message === "qi.change_not_found") {
+      throw new PlatformApiHttpError(404, {
+        code: "NOT_FOUND",
+        message: "Change event not found",
+      });
+    }
+    throw new PlatformApiHttpError(400, {
+      code: "QI_ADVICE_ERROR",
+      message,
     });
   }
 }

@@ -1,0 +1,15 @@
+manifestSchemaVersion: "1.0"
+id: platform-entitlement-revoked
+name: Platform Entitlement Revoked
+version: 0.1.0
+kind: event
+metadata:
+  category: platform
+  description: Emitted when an entitlement capability is revoked.
+event:
+  category: platform
+  publisher: entitlement-service
+  permission: entitlement.manage
+  payload:
+    billingAccountId: string
+    capability: string

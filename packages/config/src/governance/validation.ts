@@ -10,6 +10,7 @@ import {
   PLATFORM_CONFIG_REGISTRY,
   getConfigDefinition,
 } from "./registry";
+import { ensureLocalSecretsLoaded } from "../secrets/load-local-secrets";
 import { platformEnvSchema } from "./schema";
 import {
   buildSecretDiagnostics,
@@ -39,6 +40,9 @@ export function validatePlatformEnvironment(input?: {
   readonly env?: NodeJS.ProcessEnv;
   readonly tier?: ValidationTier;
 }): ConfigurationValidationResult {
+  if (!input?.env) {
+    ensureLocalSecretsLoaded();
+  }
   const env = input?.env ?? process.env;
   const profile = resolveEnvironmentProfile(env.NODE_ENV);
   const tier = input?.tier ?? resolveValidationTier(profile);

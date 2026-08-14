@@ -24,6 +24,23 @@ export function isNotificationInAppEnabled(
   return isTruthy(explicit);
 }
 
+/**
+ * Email channel — requires delivery enabled + SMTP credentials.
+ * Default ON when SMTP is configured unless explicitly disabled.
+ */
+export function isNotificationEmailEnabled(
+  env: NotificationDeliveryEnv = process.env,
+): boolean {
+  if (!isNotificationDeliveryEnabled(env)) return false;
+  const host = env.SMTP_HOST?.trim();
+  const user = env.SMTP_USER?.trim();
+  const pass = env.SMTP_PASS?.trim();
+  if (!host || !user || !pass) return false;
+  const explicit = env.APZHUB_NOTIFICATION_EMAIL_ENABLED;
+  if (explicit === undefined || explicit.trim() === "") return true;
+  return isTruthy(explicit);
+}
+
 export function isNotificationEventIntakeEnabled(
   env: NotificationDeliveryEnv = process.env,
 ): boolean {

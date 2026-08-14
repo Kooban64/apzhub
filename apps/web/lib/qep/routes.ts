@@ -188,3 +188,36 @@ export {
   isQepQualityFlowsRoute,
   parseQepQualityFlowInstanceId,
 } from "./quality-flow-routes";
+
+export {
+  QEP_CERTIFICATION_BASE_PATH,
+  QEP_CERTIFICATION_ROUTES,
+  isQepCertificationRoute,
+  parseQepCertificationEvaluationId,
+} from "./certification-routes";
+
+export {
+  QEP_QUALITY_JOURNEY_BASE_PATH,
+  QEP_QUALITY_JOURNEY_ROUTES,
+  isQepQualityJourneyRoute,
+} from "./quality-journey-routes";
+
+export {
+  QEP_EARLY_CHECK_BASE_PATH,
+  QEP_EARLY_CHECK_ROUTES,
+  isQepEarlyCheckRoute,
+} from "./early-check-routes";
+
+export {
+  QEP_PORTFOLIO_BASE_PATH,
+  QEP_PORTFOLIO_ROUTES,
+  isQepPortfolioRoute,
+} from "./portfolio-routes";
+
+export { QEP_HOME_BASE_PATH, QEP_HOME_ROUTES, isQepHomeRoute } from "./home-routes";
+
+export {
+  QEP_RELEASE_READINESS_BASE_PATH,
+  QEP_RELEASE_READINESS_ROUTES,
+  isQepReleaseReadinessRoute,
+} from "./release-readiness-routes";

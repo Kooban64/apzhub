@@ -6,10 +6,10 @@
 | Authority          | Owner · Product Board — **STANDING**                                             |
 | Audience           | Engineers, architects, auditors, AI assistants                                   |
 | Rule               | **Read this document before any APZQEP work**                                    |
-| Last updated       | 20260808T065300Z                                                                 |
+| Last updated       | 20260814T201800Z                                                                 |
 | Current baseline   | **Version 1.1 — PRODUCTION READY · CLOSED**                                      |
-| Engineering thread | **COMPLETE** (V1.1)                                                              |
-| Product posture    | **OPERATIONAL**                                                                  |
+| Engineering thread | **COMPLETE** (V1.1); **V1.2 SPR-APZQEP-200 AUTHORISED**                          |
+| Product posture    | **OPERATIONAL** + competitive full swing                                         |
 | Management posture | **Operational Learning**                                                         |
 | Release pack       | [release-1.1/](./release-1.1/)                                                   |
 | Owner decision     | [release-1.1/OWNER-RELEASE-DECISION.md](./release-1.1/OWNER-RELEASE-DECISION.md) |
@@ -52,11 +52,14 @@ Freeze:
 Production defects · security vulnerabilities · critical operational hotfixes only
 
 Next engineering priority (portfolio):
-APZ Workflow
+APZQEP competitive full swing — SPR-APZQEP-200 AUTHORISED · SPR-APZQEP-201 IN PROGRESS
+APZPEN CE complete; enterprise options parked
 
 Version 1.2:
-Future enhancements only — no redesign of V1.1 baseline
+SPR-APZQEP-200 programme (RCC · providers · governed AI · GA) — no redesign of V1.1 baseline
 ```
+
+> **Portfolio note (2026-08-14):** APZPEN CE is complete. **SPR-APZQEP-200 authorised.** Active build is [SPR-APZQEP-201](../../sprint/SPR-APZQEP-201-release-control-centre.md) (Home + Release Readiness). APZPEN enterprise depth is [parked](../../strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md).
 
 Authoritative release pack: [release-1.1/](./release-1.1/)
 

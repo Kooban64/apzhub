@@ -3,12 +3,32 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 
 import { createDb, getEnv, schema } from "@apzhub/config";
+import { isSmtpConfigured, sendPlatformEmail } from "@apzhub/platform-email/server";
 
 import {
   getBetterAuthAdvancedConfig,
   getBetterAuthSessionConfig,
 } from "./session-policy";
 import { isDevRegistrationAllowed } from "@apzhub/config";
+
+async function sendAuthEmail(input: {
+  readonly to: string;
+  readonly subject: string;
+  readonly text: string;
+  readonly html: string;
+}): Promise<void> {
+  if (!isSmtpConfigured()) {
+    throw new Error(
+      "SMTP is not configured — cannot send auth email. Provide `.secrets/smtp`.",
+    );
+  }
+  await sendPlatformEmail({
+    to: input.to,
+    subject: input.subject,
+    text: input.text,
+    html: input.html,
+  });
+}
 
 type AuthInstance = ReturnType<typeof betterAuth>;
 
@@ -53,12 +73,22 @@ export function createAuth(): AuthInstance {
       disableSignUp: !isDevRegistrationAllowed(),
       requireEmailVerification: false,
       sendResetPassword: async ({ user, url }) => {
-        console.info(`[auth] Password reset for ${user.email}: ${url}`);
+        await sendAuthEmail({
+          to: user.email,
+          subject: "Reset your APZHUB password",
+          text: `Reset your APZHUB password using this link:\n\n${url}\n\nIf you did not request this, ignore this email.`,
+          html: `<p>Reset your APZHUB password:</p><p><a href="${url}">${url}</a></p><p>If you did not request this, ignore this email.</p>`,
+        });
       },
     },
     emailVerification: {
       sendVerificationEmail: async ({ user, url }) => {
-        console.info(`[auth] Verify email for ${user.email}: ${url}`);
+        await sendAuthEmail({
+          to: user.email,
+          subject: "Verify your APZHUB email",
+          text: `Verify your APZHUB email using this link:\n\n${url}\n`,
+          html: `<p>Verify your APZHUB email:</p><p><a href="${url}">${url}</a></p>`,
+        });
       },
     },
     user: {

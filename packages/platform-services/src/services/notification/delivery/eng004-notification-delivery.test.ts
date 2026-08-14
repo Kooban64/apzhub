@@ -185,7 +185,7 @@ describe("ENG-004 Notification Delivery Phase A", () => {
 
   it("ingests authorised events and rejects unauthorised types", async () => {
     const svc = createNotificationDeliveryService({ env: enabledEnv });
-    svc.ingestDomainEvent({
+    await svc.ingestDomainEvent({
       envelopeId: "env_1",
       eventId: "support.request.created",
       eventVersion: "1",
@@ -200,7 +200,7 @@ describe("ENG-004 Notification Delivery Phase A", () => {
     expect(await svc.getInAppNotifications(ctx())).toHaveLength(1);
 
     const before = (await svc.getDiagnostics(ctx())).eventIntakeFailures;
-    svc.ingestDomainEvent({
+    await svc.ingestDomainEvent({
       envelopeId: "env_2",
       eventId: "finance.invoice.created",
       eventVersion: "1",
@@ -273,7 +273,7 @@ describe("ENG-004 Notification Delivery Phase A", () => {
     );
   });
 
-  it("reports smtp deferred and healthy in-app adapter", async () => {
+  it("reports smtp status and healthy in-app adapter", async () => {
     const svc = createNotificationDeliveryService({ env: enabledEnv });
     const health = await svc.getHealth(ctx());
     expect(health.smtpDeferred).toBe(true);

@@ -2,17 +2,47 @@ import { NextResponse, type NextRequest } from "next/server";
 
 import { fetchMiddlewareSession } from "@apzhub/auth/middleware-session";
 
+import { applyMarketingHostRewrite } from "./lib/marketing/host-rewrite";
 import {
   enforceTrafficGovernance,
   shouldApplyLawTrafficGovernance,
   shouldApplyTrafficGovernance,
 } from "./lib/traffic-governance-middleware";
 
-const publicPaths = ["/login", "/register", "/forgot-password", "/api/health"];
+const publicPaths = [
+  "/",
+  "/pricing",
+  "/contact",
+  "/login",
+  "/register",
+  "/forgot-password",
+  "/api/health",
+  "/qa",
+  "/pentest",
+  "/productivity",
+  "/services",
+  "/industries",
+  "/case-studies",
+  "/resources",
+  "/about",
+  "/methodology",
+];
 
-/** Paths reachable without session (Law API public endpoints + developer docs). */
 function isPublicPath(pathname: string): boolean {
-  if (publicPaths.some((p) => pathname === p || pathname.startsWith("/api/auth"))) {
+  if (pathname.startsWith("/api/auth") || pathname.startsWith("/legal/")) {
+    return true;
+  }
+
+  if (
+    publicPaths.some((p) => {
+      if (p === "/") return pathname === "/";
+      return pathname === p || pathname.startsWith(`${p}/`);
+    })
+  ) {
+    return true;
+  }
+
+  if (pathname === "/api/v1/billing/catalogue") {
     return true;
   }
 
@@ -20,8 +50,6 @@ function isPublicPath(pathname: string): boolean {
     return true;
   }
 
-  // Platform HTTP API v1 — health/readiness/openapi are public; other /api/v1 routes
-  // pass through without HTML login redirect so handlers can return JSON 401.
   if (
     pathname === "/api/v1/health" ||
     pathname === "/api/v1/readiness" ||
@@ -80,8 +108,15 @@ export async function middleware(request: NextRequest) {
     return trafficResponse;
   }
 
+  const hostRewrite = applyMarketingHostRewrite(request);
+
   if (isPublicPath(pathname)) {
-    return NextResponse.next();
+    return hostRewrite ?? NextResponse.next();
+  }
+
+  // Product-host rewritten paths under /qa or /pentest are public marketing.
+  if (hostRewrite) {
+    return hostRewrite;
   }
 
   const session = await fetchMiddlewareSession(request);

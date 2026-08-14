@@ -1,0 +1,17 @@
+manifestSchemaVersion: "1.0"
+id: platform-billing-invoice-issued
+name: Platform Billing Invoice Issued
+version: 0.1.0
+kind: event
+metadata:
+  category: platform
+  description: Emitted when a billing invoice is issued.
+event:
+  category: platform
+  publisher: billing-service
+  permission: billing.manage
+  payload:
+    invoiceId: string
+    billingAccountId: string
+    amountCents: number
+    currency: string

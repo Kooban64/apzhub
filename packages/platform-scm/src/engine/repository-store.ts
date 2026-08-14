@@ -1,3 +1,4 @@
+import type { ScmChangeEvent } from "../contracts/change-event";
 import type {
   RegisteredRepository,
   ScmTraceabilityLink,
@@ -5,7 +6,7 @@ import type {
 import type { WebhookAuditRecord } from "../contracts/webhook";
 
 /**
- * SCM Source of Record port (QX-PR-02).
+ * SCM Source of Record port (QX-PR-02 + Flagship F1).
  * Production implementations must survive process restart.
  */
 export interface RepositoryStore {
@@ -23,6 +24,13 @@ export interface RepositoryStore {
   rememberIdempotencyKey(key: string, tenantId: string): Promise<void>;
   addLink(link: ScmTraceabilityLink): Promise<ScmTraceabilityLink>;
   listLinks(repositoryId?: string): Promise<readonly ScmTraceabilityLink[]>;
+  /** Upsert durable change heartbeat records (commit / PR / push). */
+  upsertChangeEvents(events: readonly ScmChangeEvent[]): Promise<void>;
+  listChangeEvents(filter: {
+    readonly tenantId?: string;
+    readonly repositoryId?: string;
+    readonly limit?: number;
+  }): Promise<readonly ScmChangeEvent[]>;
 }
 
 /** Process-local store — allowed in development/tests only. */
@@ -31,6 +39,7 @@ export class InMemoryRepositoryStore implements RepositoryStore {
   private readonly webhookAudits: WebhookAuditRecord[] = [];
   private readonly idempotencyKeys = new Set<string>();
   private readonly links: ScmTraceabilityLink[] = [];
+  private readonly changeEvents = new Map<string, ScmChangeEvent>();
 
   async upsert(repository: RegisteredRepository): Promise<RegisteredRepository> {
     this.repositories.set(repository.repositoryId, repository);
@@ -91,5 +100,28 @@ export class InMemoryRepositoryStore implements RepositoryStore {
     return repositoryId
       ? this.links.filter((link) => link.repositoryId === repositoryId)
       : this.links;
+  }
+
+  async upsertChangeEvents(events: readonly ScmChangeEvent[]): Promise<void> {
+    for (const event of events) {
+      this.changeEvents.set(event.changeEventId, event);
+    }
+  }
+
+  async listChangeEvents(filter: {
+    readonly tenantId?: string;
+    readonly repositoryId?: string;
+    readonly limit?: number;
+  }): Promise<readonly ScmChangeEvent[]> {
+    let all = [...this.changeEvents.values()];
+    if (filter.tenantId) {
+      all = all.filter((event) => event.tenantId === filter.tenantId);
+    }
+    if (filter.repositoryId) {
+      all = all.filter((event) => event.repositoryId === filter.repositoryId);
+    }
+    all.sort((a, b) => b.occurredAt.localeCompare(a.occurredAt));
+    const limit = filter.limit ?? 100;
+    return all.slice(0, limit);
   }
 }

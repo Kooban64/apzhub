@@ -86,7 +86,11 @@ export function ShellLayout({
       <div className="flex min-h-0 min-w-0 flex-1 overflow-x-hidden">
         <ActivityBar items={activityBarItems} onItemSelect={onActivityBarSelect} />
         <Sidebar items={sidebarItems} onSelect={onSidebarSelect} />
-        <main className="min-w-0 flex-1 overflow-auto p-4 sm:p-6">{children}</main>
+        <main className="min-w-0 flex-1 overflow-auto p-4 sm:p-5 [font-family:var(--font-sans)]">
+          <div className="mx-auto w-full max-w-[var(--shell-content-max,72rem)]">
+            {children}
+          </div>
+        </main>
       </div>
       <StatusBar environment={environment} />
     </div>

@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@apzhub/config": "workspace:*",
+    "@apzhub/platform-email": "workspace:*",
     "@apzhub/platform-identity": "workspace:*",
     "better-auth": "^1.2.9"
   },

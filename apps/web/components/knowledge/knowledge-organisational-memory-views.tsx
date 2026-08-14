@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { isKnowledgeApiError } from "@/lib/knowledge/errors";
+import { filterMemoryObjects } from "@/lib/knowledge/filter-memory-objects";
 import {
   createDecisionKnowledge,
   createKnowledgeLesson,
@@ -104,11 +105,13 @@ export function KnowledgeLessonsView({
   const [resolution, setResolution] = useState("");
   const [recommendation, setRecommendation] = useState("");
   const [owner, setOwner] = useState("");
+  const [findQuery, setFindQuery] = useState("");
 
   const query = useQuery({
     queryKey: keys.objects("lesson"),
     queryFn: ({ signal }) => listKnowledgeObjects("lesson", { signal }),
   });
+  const filtered = filterMemoryObjects(query.data ?? [], findQuery);
 
   const createMutation = useMutation({
     mutationFn: () =>
@@ -200,6 +203,17 @@ export function KnowledgeLessonsView({
         </form>
       ) : null}
 
+      {query.isSuccess && query.data.length > 0 ? (
+        <div className="mb-4">
+          <Input
+            placeholder="Find lessons by title, tag, status, or owner"
+            value={findQuery}
+            onChange={(e) => setFindQuery(e.target.value)}
+            data-testid="knowledge-lessons-find"
+          />
+        </div>
+      ) : null}
+
       {query.isLoading ? <LoadingState label="Loading lessons…" /> : null}
       {query.isError ? (
         <ErrorState
@@ -217,9 +231,14 @@ export function KnowledgeLessonsView({
             title="No lessons captured yet"
             description="Capture operational learning so the organisation improves over time."
           />
+        ) : filtered.length === 0 ? (
+          <EmptyState
+            title="No lessons match"
+            description="Clear the find field or try another term."
+          />
         ) : (
           <ul className="flex flex-col gap-3" data-testid="knowledge-lessons-list">
-            {query.data.map((item) => (
+            {filtered.map((item) => (
               <ObjectCard
                 key={item.id}
                 item={item}
@@ -246,6 +265,7 @@ export function KnowledgeLibraryView({
   const [content, setContent] = useState("");
   const [owner, setOwner] = useState("");
   const [category, setCategory] = useState<KnowledgeLibraryCategory>("best_practices");
+  const [findQuery, setFindQuery] = useState("");
 
   const query = useQuery({
     queryKey: keys.objects("library"),
@@ -263,6 +283,7 @@ export function KnowledgeLibraryView({
       return batches.flat().sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
     },
   });
+  const filtered = filterMemoryObjects(query.data ?? [], findQuery);
 
   const createMutation = useMutation({
     mutationFn: () =>
@@ -356,15 +377,30 @@ export function KnowledgeLibraryView({
           }
         />
       ) : null}
+      {query.isSuccess && query.data.length > 0 ? (
+        <div className="mb-4">
+          <Input
+            placeholder="Find library items by title, tag, status, or owner"
+            value={findQuery}
+            onChange={(e) => setFindQuery(e.target.value)}
+            data-testid="knowledge-library-find"
+          />
+        </div>
+      ) : null}
       {query.isSuccess ? (
         query.data.length === 0 ? (
           <EmptyState
             title="Library is empty"
             description="Curate proven practices so teams work consistently."
           />
+        ) : filtered.length === 0 ? (
+          <EmptyState
+            title="No library items match"
+            description="Clear the find field or try another term."
+          />
         ) : (
           <ul className="flex flex-col gap-3" data-testid="knowledge-library-list">
-            {query.data.map((item) => (
+            {filtered.map((item) => (
               <ObjectCard
                 key={item.id}
                 item={item}
@@ -391,11 +427,13 @@ export function KnowledgeDecisionKnowledgeView({
   const [rationale, setRationale] = useState("");
   const [owner, setOwner] = useState("");
   const [decisionRef, setDecisionRef] = useState("");
+  const [findQuery, setFindQuery] = useState("");
 
   const query = useQuery({
     queryKey: keys.objects("decision_knowledge"),
     queryFn: ({ signal }) => listKnowledgeObjects("decision_knowledge", { signal }),
   });
+  const filtered = filterMemoryObjects(query.data ?? [], findQuery);
 
   const createMutation = useMutation({
     mutationFn: () =>
@@ -474,6 +512,16 @@ export function KnowledgeDecisionKnowledgeView({
         </form>
       ) : null}
 
+      {query.isSuccess && query.data.length > 0 ? (
+        <div className="mb-4">
+          <Input
+            placeholder="Find decision knowledge by title, tag, status, or owner"
+            value={findQuery}
+            onChange={(e) => setFindQuery(e.target.value)}
+            data-testid="knowledge-decision-find"
+          />
+        </div>
+      ) : null}
       {query.isLoading ? <LoadingState label="Loading decision knowledge…" /> : null}
       {query.isError ? (
         <ErrorState
@@ -491,9 +539,14 @@ export function KnowledgeDecisionKnowledgeView({
             title="No decision knowledge yet"
             description="Preserve rationale by reference — decisions stay owned by their Systems of Record."
           />
+        ) : filtered.length === 0 ? (
+          <EmptyState
+            title="No decision knowledge matches"
+            description="Clear the find field or try another term."
+          />
         ) : (
           <ul className="flex flex-col gap-3" data-testid="knowledge-decision-list">
-            {query.data.map((item) => (
+            {filtered.map((item) => (
               <ObjectCard
                 key={item.id}
                 item={item}

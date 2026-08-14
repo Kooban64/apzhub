@@ -23,7 +23,7 @@ import type {
   PersistRetryScheduleInput,
 } from "@apzhub/notification-contracts";
 import { asNotificationDeliveryId } from "@apzhub/notification-contracts";
-import { and, asc, eq, sql } from "drizzle-orm";
+import { and, asc, desc, eq, isNull, sql } from "drizzle-orm";
 
 import {
   asSqlRows,
@@ -304,6 +304,27 @@ export function createPostgresNotificationDeliveryDurableStore(
         .set(inAppToRow(item))
         .where(eq(platformNotificationInAppItem.id, item.id));
       return item;
+    },
+
+    async listInAppItemsForUser(input) {
+      const conditions = [
+        eq(platformNotificationInAppItem.tenantId, input.tenantId),
+        eq(platformNotificationInAppItem.userId, input.userId),
+      ];
+      if (input.organisationId !== undefined) {
+        conditions.push(
+          eq(platformNotificationInAppItem.organisationId, input.organisationId),
+        );
+      }
+      if (input.unreadOnly) {
+        conditions.push(isNull(platformNotificationInAppItem.readAt));
+      }
+      const rows = await db
+        .select()
+        .from(platformNotificationInAppItem)
+        .where(and(...conditions))
+        .orderBy(desc(platformNotificationInAppItem.createdAt));
+      return rows.map(mapInAppRow);
     },
 
     async claimBatch(input) {

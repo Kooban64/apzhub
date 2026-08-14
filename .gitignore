@@ -43,9 +43,13 @@ storybook-static/
 # Secrets and local credentials (never commit)
 .secrets/
 
+# Local tool binaries (e.g. Typst for F12 PDF)
+tooling/bin/
+
 # Cursor IDE
 .cursor/
 
 .env.production
 .env.production.*
 !.env.production.example
+.data/

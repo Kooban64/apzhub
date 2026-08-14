@@ -188,6 +188,33 @@ describe("notification-delivery-persistence (ENG-001B-P1/P2)", () => {
       createdAt: "2026-07-23T10:05:02.000Z",
     });
     expect(await store.getInAppItem("inapp_1")).toEqual(item);
+
+    await store.insertInAppItem({
+      id: "inapp_2",
+      deliveryId: delivery.id,
+      intentId: intent.id,
+      tenantId: "tenant_a",
+      organisationId: "org_a",
+      userId: "user_1",
+      category: "support.ticket",
+      priority: "normal",
+      title: "Newer",
+      sourceProduct: "support",
+      createdAt: "2026-07-23T10:06:02.000Z",
+      readAt: "2026-07-23T10:07:00.000Z",
+    });
+    const listed = await store.listInAppItemsForUser({
+      tenantId: "tenant_a",
+      userId: "user_1",
+      organisationId: "org_a",
+    });
+    expect(listed.map((row) => row.id)).toEqual(["inapp_2"]);
+    const unread = await store.listInAppItemsForUser({
+      tenantId: "tenant_a",
+      userId: "user_1",
+      unreadOnly: true,
+    });
+    expect(unread.map((row) => row.id)).toEqual(["inapp_1"]);
   });
 
   it("factory requires explicit memory allow or postgres db", () => {

@@ -7,6 +7,11 @@ export {
   type DatabaseExecutor,
   type DatabaseTransaction,
 } from "./client";
+export { lookupUserEmailById } from "./lookup-user-email";
+export {
+  ensureCredentialUser,
+  type EnsureCredentialUserInput,
+} from "./ensure-credential-user";
 export {
   getDatabaseExecutor,
   getRequestTenantId,
@@ -264,6 +269,7 @@ export {
   qepScmWebhookAudit,
   qepScmWebhookIdempotency,
   qepScmTraceabilityLink,
+  qepScmChangeEvent,
 } from "./qep-scm-schema";
 export {
   qepQualityIntelligenceSchema,

@@ -2,7 +2,8 @@
 
 > **Programme:** APZHUB-STRATEGY-001  
 > **Date:** 2026-07-20  
-> **Editions:** [PRODUCT-EDITIONS.md](../../product-management/PRODUCT-EDITIONS.md)
+> **Editions:** [PRODUCT-EDITIONS.md](../../product-management/PRODUCT-EDITIONS.md)  
+> **Commercial path forward (2026-08-13):** [APZOR Commercial Pillars](../APZOR-COMMERCIAL-PILLARS.md) — sell **APZQEP / APZPEN / APZPRD**; APZHUB is internal platform. Pillar SKUs and composable APZPRD packages supersede “sell the portal” framing below where they conflict.
 
 ---
 

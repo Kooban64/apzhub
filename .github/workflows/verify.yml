@@ -1,0 +1,77 @@
+# QEP external verification — quality pack (F10)
+
+# workflow_dispatch target for APZHUB_VERIFICATION_DISPATCH_WORKFLOW=verify.yml
+# Live mode: unset APZHUB_VERIFICATION_DISPATCH_MODE (do not use record_only).
+# Requires PAT with actions:write (same token family as SCM GitHub).
+
+name: QEP Verify Pack
+
+on:
+  workflow_dispatch:
+    inputs:
+      changeEventId:
+        description: Durable APZQEP changeEventId
+        required: true
+        type: string
+      domains:
+        description: Comma-separated domains (vitest,accessibility,security,codequality,k6)
+        required: false
+        default: "vitest,accessibility,security,codequality,k6"
+        type: string
+      repositoryFullName:
+        description: owner/repo of the change under test
+        required: false
+        type: string
+      correlationId:
+        description: Correlation ID from QEP dispatch
+        required: false
+        type: string
+      sha:
+        description: Commit SHA when known
+        required: false
+        type: string
+      branch:
+        description: Branch when known
+        required: false
+        type: string
+      assistOrigin:
+        description: QEP assist origin marker
+        required: false
+        type: string
+      pack:
+        description: Pack id (quality)
+        required: false
+        default: "quality"
+        type: string
+
+jobs:
+  verify-pack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout subject repo (optional)
+        if: ${{ inputs.repositoryFullName != '' }}
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.repositoryFullName }}
+          ref: ${{ inputs.sha != '' && inputs.sha || github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Record dispatch context
+        run: |
+          echo "changeEventId=${{ inputs.changeEventId }}"
+          echo "domains=${{ inputs.domains }}"
+          echo "correlationId=${{ inputs.correlationId }}"
+          echo "repositoryFullName=${{ inputs.repositoryFullName }}"
+          echo "sha=${{ inputs.sha }}"
+
+      - name: Placeholder — run domain tools then ingest
+        env:
+          QEP_INGEST_URL: ${{ secrets.QEP_INGEST_URL }}
+          QEP_INGEST_TOKEN: ${{ secrets.QEP_INGEST_TOKEN }}
+        run: |
+          echo "::notice::Wire domain runners (Vitest/axe/SARIF/k6) here."
+          echo "::notice::POST results to \$QEP_INGEST_URL/api/v1/qep/automation/executions"
+          echo "::notice::Include changeEventId=${{ inputs.changeEventId }} and provider/domain metadata."
+          if [ -z "${QEP_INGEST_URL}" ]; then
+            echo "QEP_INGEST_URL secret not set — skipping ingest (stub OK for workflow_dispatch proof)."
+          fi

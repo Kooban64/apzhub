@@ -1,0 +1,46 @@
+manifestSchemaVersion: "1.0"
+id: qep-scm
+name: Enterprise Source Control
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: >
+    Enterprise Source Control Integration Platform workspace (APZQEP-162).
+    Provider-neutral SCM with GitHub as the first active provider.
+  product: apzqep
+  moduleCatalogueId: M19
+  slug: scm
+  programme: APZQEP-162
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: active
+
+permissions:
+  - id: qep.scm.read
+    label: View Enterprise Source Control
+  - id: qep.scm.operate
+    label: Operate Enterprise Source Control
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Enterprise Source Control
+    icon: git-branch
+    route: /workspace/qep/scm
+    order: 71
+    permission: qep.scm.read
+  view:
+    title: Enterprise Source Control
+    workspace: qep
+    route: /workspace/qep/scm
+    permission: qep.scm.read

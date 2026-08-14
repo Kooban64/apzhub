@@ -1,0 +1,40 @@
+manifestSchemaVersion: "1.0"
+id: identity-lifecycle-service
+name: Identity Lifecycle Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: platform
+  description: >
+    Org-scoped invites, membership, persona role assignment, and member
+    suspension. One ruleset for all organisations including APZOR internal.
+  programme: SPR-IAM-COMMERCIAL-001
+  owner: APZHUB
+  tags:
+    - iam
+    - provisioning
+    - rbac
+
+dependencies:
+  platform: []
+  services: []
+  integrations: []
+
+service:
+  category: platform
+  status: active
+
+permissions:
+  - id: identity.read
+    description: View identity and membership
+  - id: identity.manage
+    description: Invite and manage members in own org
+  - id: identity.admin
+    description: Platform-wide identity operations
+  - id: admin.read
+    description: View administration surfaces
+  - id: admin.operate
+    description: Operate organisation administration
+  - id: admin.platform
+    description: Platform control plane operations

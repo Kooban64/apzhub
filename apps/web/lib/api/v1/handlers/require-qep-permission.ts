@@ -1,9 +1,11 @@
 /**
  * H4 — fail-closed QEP API permission gate (session grants only).
+ * Product-scoped qep.* operations also require org∩user product access.
  */
 
 import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
 import { PlatformApiHttpError } from "../errors";
+import { requireProductAccess } from "@/lib/commercial/require-product-access";
 
 function hasPermission(granted: readonly string[], required: string): boolean {
   if (
@@ -22,6 +24,14 @@ function hasPermission(granted: readonly string[], required: string): boolean {
   return false;
 }
 
+function isQepOperatePermission(permission: string): boolean {
+  return (
+    permission.startsWith("qep.") ||
+    permission.startsWith("cap.qep.") ||
+    permission === "qep.*"
+  );
+}
+
 /** Require at least one of the listed permissions from the authenticated session. */
 export function requireQepPermission(
   context: PlatformApiRequestContext,
@@ -34,6 +44,9 @@ export function requireQepPermission(
       code: "FORBIDDEN",
       message: `Missing permission: ${requiredAnyOf.join(" | ")}`,
     });
+  }
+  if (requiredAnyOf.some(isQepOperatePermission)) {
+    requireProductAccess(context, "qep");
   }
 }
 

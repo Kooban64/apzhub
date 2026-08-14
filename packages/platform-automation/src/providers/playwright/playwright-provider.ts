@@ -1,4 +1,7 @@
 import { createHash, randomUUID } from "node:crypto";
+import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 
 import type {
   AutomationArtifact,
@@ -41,17 +44,23 @@ function artifact(
   kind: AutomationArtifact["kind"],
   name: string,
   contentType: string,
-  payload?: string,
+  payload?: string | Buffer,
 ): AutomationArtifact {
-  const body = payload ?? name;
+  const body =
+    typeof payload === "undefined"
+      ? Buffer.from(name)
+      : typeof payload === "string"
+        ? Buffer.from(payload)
+        : payload;
   return {
     artifactId: randomUUID(),
     kind,
     name,
     contentType,
     uri: `memory://playwright/${name}`,
-    bytes: Buffer.byteLength(body),
+    bytes: body.byteLength,
     sha256: createHash("sha256").update(body).digest("hex"),
+    contentBase64: body.toString("base64"),
     createdAt: new Date().toISOString(),
   };
 }
@@ -180,15 +189,16 @@ export class PlaywrightAutomationProvider implements AutomationProvider {
       };
     }
 
+    const workDir = await mkdtemp(join(tmpdir(), "apzhub-pw-"));
     const browser = await playwright.chromium.launch({ headless: true });
     const artifacts: AutomationArtifact[] = [];
     try {
+      const videoDir = join(workDir, "videos");
       const contextBrowser = await browser.newContext({
-        recordVideo: context.options.collectVideos
-          ? { dir: "/tmp/apzhub-automation-videos" }
-          : undefined,
+        recordVideo: context.options.collectVideos ? { dir: videoDir } : undefined,
       });
       const page = await contextBrowser.newPage();
+      const video = context.options.collectVideos ? page.video() : null;
       const url = context.target.baseUrl ?? context.target.entry ?? "about:blank";
 
       if (context.options.collectTraces !== false) {
@@ -202,23 +212,33 @@ export class PlaywrightAutomationProvider implements AutomationProvider {
 
       if (context.options.collectScreenshots !== false) {
         const buffer = await page.screenshot({ fullPage: true });
-        artifacts.push({
-          artifactId: randomUUID(),
-          kind: "screenshot",
-          name: "page.png",
-          contentType: "image/png",
-          uri: "memory://playwright/page.png",
-          bytes: buffer.byteLength,
-          sha256: createHash("sha256").update(buffer).digest("hex"),
-          createdAt: new Date().toISOString(),
-        });
+        artifacts.push(artifact("screenshot", "page.png", "image/png", buffer));
       }
 
       if (context.options.collectTraces !== false) {
-        artifacts.push(
-          artifact("trace", "trace.zip", "application/zip", "trace-collected"),
-        );
-        await contextBrowser.tracing.stop();
+        const tracePath = join(workDir, "trace.zip");
+        await contextBrowser.tracing.stop({ path: tracePath });
+        const traceBuffer = await readFile(tracePath);
+        artifacts.push(artifact("trace", "trace.zip", "application/zip", traceBuffer));
+      }
+
+      await contextBrowser.close();
+
+      if (video) {
+        try {
+          const videoPath = await video.path();
+          const videoBuffer = await readFile(videoPath);
+          artifacts.push(artifact("video", "session.webm", "video/webm", videoBuffer));
+        } catch {
+          artifacts.push(
+            artifact(
+              "log",
+              "video-warning.log",
+              "text/plain",
+              "video requested but file was not available after context close",
+            ),
+          );
+        }
       }
 
       artifacts.push(
@@ -238,7 +258,6 @@ export class PlaywrightAutomationProvider implements AutomationProvider {
         artifact("log", "provider.log", "text/plain", `Navigated to ${url}`),
       );
 
-      await contextBrowser.close();
       const finishedAt = new Date().toISOString();
       return {
         ok: true,
@@ -261,6 +280,7 @@ export class PlaywrightAutomationProvider implements AutomationProvider {
       };
     } finally {
       await browser.close();
+      await rm(workDir, { recursive: true, force: true }).catch(() => undefined);
     }
   }
 }

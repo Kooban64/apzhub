@@ -1,0 +1,52 @@
+manifestSchemaVersion: "1.0"
+id: apzpen
+name: APZPEN Security Assurance
+version: 0.2.0
+kind: module
+
+metadata:
+  category: security-assurance
+  description: >
+    Enterprise Security Assurance & Penetration Testing workspace.
+    Engagements, RoE, findings, GitHub PR security, customer portal grants,
+    PDF packs and bounded intelligence — not a vulnerability scanner UI.
+    Commercial alias: pentest / APZPenTest.
+  product: apzpen
+  slug: apzpen
+  programme: SPR-APZPEN-014
+
+dependencies:
+  platform: []
+  services:
+    - apzpen-service
+
+module:
+  category: security-assurance
+  status: active
+
+workbench:
+  navigation:
+    level: activity
+    workspace: apzpen
+    label: Security
+    icon: shield
+    route: /apzpen
+    order: 20
+    permission: apzpen.read
+  view:
+    title: Security Assurance
+    workspace: apzpen
+    route: /apzpen
+    permission: apzpen.read
+
+permissions:
+  - id: apzpen.read
+    description: View engagements, findings and security posture
+  - id: apzpen.manage
+    description: Create and manage engagements, scope and RoE
+  - id: apzpen.test
+    description: Record findings, evidence and tester notes
+  - id: apzpen.retest
+    description: Request and record retests
+  - id: apzpen.certify
+    description: Set assessment certification position

@@ -3,9 +3,13 @@
 import { Button } from "@apzhub/ui";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
+import { QEP_CERTIFICATION_ROUTES } from "@/lib/qep/certification-routes";
+import { QEP_EARLY_CHECK_ROUTES } from "@/lib/qep/early-check-routes";
+import { QEP_PORTFOLIO_ROUTES } from "@/lib/qep/portfolio-routes";
+import { QEP_QUALITY_JOURNEY_ROUTES } from "@/lib/qep/quality-journey-routes";
 import { QEP_SCM_ROUTES, parseQepScmRepositoryId } from "@/lib/qep/routes";
 import {
   QepEmptyState,
@@ -16,6 +20,21 @@ import {
   QepStatusBadge,
   QepTable,
 } from "./qep-ui";
+
+type ChangeRow = {
+  changeEventId: string;
+  kind: string;
+  sha?: string;
+  prNumber?: number;
+  title?: string;
+  authorLogin?: string;
+  authorName?: string;
+  branch?: string;
+  summary: string;
+  source: string;
+  occurredAt: string;
+  filesChanged?: string[];
+};
 
 async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
   const response = await fetch(url, {
@@ -104,7 +123,7 @@ function ScmHomeView() {
   return (
     <QepPageShell
       title="Enterprise Source Control"
-      description="Provider-neutral SCM platform. GitHub is the first active provider."
+      description="Flagship F1 GitHub Heartbeat — catalogue repos; credentials from server secrets only; sync/webhooks persist durable change events."
       actions={
         <div className="flex items-center gap-2">
           <input
@@ -127,6 +146,9 @@ function ScmHomeView() {
         <Link href={QEP_SCM_ROUTES.providers}>Providers</Link>
         <Link href={QEP_SCM_ROUTES.repositories}>Repositories</Link>
         <Link href={QEP_SCM_ROUTES.webhooks}>Webhooks</Link>
+        <Link href={QEP_PORTFOLIO_ROUTES.home}>Portfolio</Link>
+        <Link href={QEP_EARLY_CHECK_ROUTES.home}>Early Check</Link>
+        <Link href={QEP_QUALITY_JOURNEY_ROUTES.home}>Quality Journey</Link>
       </div>
 
       <QepPanel title="Registered repositories">
@@ -231,7 +253,7 @@ function WebhooksView() {
   return (
     <QepPageShell
       title="Webhook history"
-      description="Delivery audit for provider-neutral webhook ingestion"
+      description="Delivery audit for provider-neutral webhook ingestion. Public GitHub URL: POST /api/v1/qep/scm/ingress/github (HMAC; no session)."
     >
       <div className="mb-4 text-sm">
         <Link href={QEP_SCM_ROUTES.home}>← Source Control</Link>
@@ -261,8 +283,27 @@ function WebhooksView() {
   );
 }
 
+type DesignDraftRow = {
+  proposalItemId: string;
+  kind: string;
+  title: string;
+  why: string;
+  type: string;
+  domain?: string;
+  requirementId?: string;
+};
+
 function RepositoryDetailView({ repositoryId }: { repositoryId: string }) {
   const queryClient = useQueryClient();
+  const searchParams = useSearchParams();
+  const [selectedChangeId, setSelectedChangeId] = useState<string | null>(null);
+  const [impactSummary, setImpactSummary] = useState<string | null>(null);
+  const [proposalNote, setProposalNote] = useState<string | null>(null);
+  const [acceptedPlanId, setAcceptedPlanId] = useState<string | null>(null);
+  const [designDrafts, setDesignDrafts] = useState<DesignDraftRow[]>([]);
+  const [designNote, setDesignNote] = useState<string | null>(null);
+  const [acceptedSpecIds, setAcceptedSpecIds] = useState<string[]>([]);
+  const [designAssistBootstrapped, setDesignAssistBootstrapped] = useState(false);
 
   const detailQuery = useQuery({
     queryKey: ["qep-scm", "repository", repositoryId],
@@ -285,6 +326,7 @@ function RepositoryDetailView({ repositoryId }: { repositoryId: string }) {
           externalRef: string;
           platformRef?: string;
         }>;
+        changes: ChangeRow[];
       }>(`/api/v1/qep/scm/repositories/${repositoryId}`),
   });
 
@@ -295,6 +337,7 @@ function RepositoryDetailView({ repositoryId }: { repositoryId: string }) {
         branches: Array<{ name: string; sha?: string }>;
         commits: Array<{ sha: string; message: string }>;
         pullRequests: Array<{ number: number; title: string; state: string }>;
+        changes: Array<{ changeEventId: string }>;
       }>(`/api/v1/qep/scm/repositories/${repositoryId}/sync`, {
         method: "POST",
         body: JSON.stringify({ correlationId: crypto.randomUUID() }),
@@ -315,6 +358,128 @@ function RepositoryDetailView({ repositoryId }: { repositoryId: string }) {
     },
   });
 
+  const impactMutation = useMutation({
+    mutationFn: (changeEventId: string) =>
+      fetchJson<{
+        impact: {
+          summary: string;
+          riskLevel: string;
+          nodes: Array<{
+            nodeId: string;
+            assetType: string;
+            name: string;
+            reason: string;
+          }>;
+          matchedSuiteIds: string[];
+        };
+      }>(`/api/v1/qep/scm/changes/${changeEventId}/impact`),
+    onSuccess: (data, changeEventId) => {
+      setSelectedChangeId(changeEventId);
+      setImpactSummary(
+        `${data.impact.riskLevel}: ${data.impact.summary} · nodes=${data.impact.nodes.length} · suites=${data.impact.matchedSuiteIds.length}`,
+      );
+      setProposalNote(null);
+      setAcceptedPlanId(null);
+    },
+  });
+
+  const proposeMutation = useMutation({
+    mutationFn: (changeEventId: string) =>
+      fetchJson<{
+        proposal: {
+          note: string;
+          proposedSuites: Array<{ suiteId: string; name: string }>;
+        };
+      }>(`/api/v1/qep/scm/changes/${changeEventId}/regression-proposal`, {
+        method: "POST",
+        body: JSON.stringify({}),
+      }),
+    onSuccess: (data) => {
+      setProposalNote(
+        `${data.proposal.note} · ${data.proposal.proposedSuites.map((s) => s.name).join(", ") || "none"}`,
+      );
+    },
+  });
+
+  const acceptMutation = useMutation({
+    mutationFn: async (changeEventId: string) => {
+      const proposal = await fetchJson<{
+        proposal: { proposedSuites: Array<{ suiteId: string; name: string }> };
+      }>(`/api/v1/qep/scm/changes/${changeEventId}/regression-proposal`, {
+        method: "POST",
+        body: JSON.stringify({}),
+      });
+      const suiteId = proposal.proposal.proposedSuites[0]?.suiteId;
+      if (!suiteId) {
+        throw new Error(
+          "No proposed suites — tag a suite with path:<prefix> matching changed files first.",
+        );
+      }
+      return fetchJson<{ acceptance: { planId: string; suiteId: string } }>(
+        `/api/v1/qep/scm/changes/${changeEventId}/regression-proposal/accept`,
+        {
+          method: "POST",
+          body: JSON.stringify({ suiteId }),
+        },
+      );
+    },
+    onSuccess: (data) => {
+      setAcceptedPlanId(data.acceptance.planId);
+      void queryClient.invalidateQueries({ queryKey: ["qep-scm"] });
+    },
+  });
+
+  const designProposeMutation = useMutation({
+    mutationFn: (changeEventId: string) =>
+      fetchJson<{
+        proposal: {
+          note: string;
+          drafts: DesignDraftRow[];
+        };
+      }>(`/api/v1/qep/scm/changes/${changeEventId}/design-proposal`, {
+        method: "POST",
+        body: JSON.stringify({}),
+      }),
+    onSuccess: (data, changeEventId) => {
+      setSelectedChangeId(changeEventId);
+      setDesignNote(data.proposal.note);
+      setDesignDrafts(data.proposal.drafts);
+      setAcceptedSpecIds([]);
+    },
+  });
+
+  const designAcceptMutation = useMutation({
+    mutationFn: (input: {
+      changeEventId: string;
+      proposalItemIds?: string[];
+      acceptAll?: boolean;
+    }) =>
+      fetchJson<{
+        acceptance: {
+          accepted: Array<{ specificationId: string; number: string; title: string }>;
+        };
+      }>(`/api/v1/qep/scm/changes/${input.changeEventId}/design-proposal/accept`, {
+        method: "POST",
+        body: JSON.stringify({
+          proposalItemIds: input.proposalItemIds,
+          acceptAll: input.acceptAll,
+        }),
+      }),
+    onSuccess: (data) => {
+      setAcceptedSpecIds(data.acceptance.accepted.map((row) => row.specificationId));
+      void queryClient.invalidateQueries({ queryKey: ["qep-scm"] });
+    },
+  });
+
+  useEffect(() => {
+    const designAssist = searchParams?.get("designAssist")?.trim();
+    if (!designAssist || designAssistBootstrapped) return;
+    setDesignAssistBootstrapped(true);
+    setSelectedChangeId(designAssist);
+    designProposeMutation.mutate(designAssist);
+    // Bootstrap once from QI/RC deep-link query param.
+  }, [searchParams, designAssistBootstrapped]);
+
   if (detailQuery.isLoading) {
     return <QepLoadingState label="Loading repository…" />;
   }
@@ -326,7 +491,7 @@ function RepositoryDetailView({ repositoryId }: { repositoryId: string }) {
     );
   }
 
-  const { repository, links } = detailQuery.data;
+  const { repository, links, changes } = detailQuery.data;
   const sync = syncMutation.data;
 
   return (
@@ -340,7 +505,7 @@ function RepositoryDetailView({ repositoryId }: { repositoryId: string }) {
             onClick={() => syncMutation.mutate()}
             disabled={syncMutation.isPending}
           >
-            {syncMutation.isPending ? "Syncing…" : "Sync"}
+            {syncMutation.isPending ? "Syncing…" : "Sync heartbeat"}
           </Button>
           <Button
             type="button"
@@ -390,6 +555,187 @@ function RepositoryDetailView({ repositoryId }: { repositoryId: string }) {
             </ul>
           )}
         </QepPanel>
+        <QepPanel title="Durable change heartbeat (F1) + Impact (F2)">
+          {changes.length === 0 ? (
+            <QepEmptyState title="No durable changes yet — Sync or receive a webhook." />
+          ) : (
+            <div className="flex flex-col gap-3">
+              <QepTable
+                caption="Change events"
+                columns={["When", "Kind", "Summary", "Author", "Actions"]}
+                rows={changes.map((change) => ({
+                  id: change.changeEventId,
+                  cells: [
+                    change.occurredAt,
+                    change.kind,
+                    change.prNumber
+                      ? `#${change.prNumber} ${change.title ?? change.summary}`
+                      : change.sha
+                        ? `${change.sha.slice(0, 7)} — ${change.title ?? change.summary}`
+                        : change.summary,
+                    change.authorLogin ?? change.authorName ?? "—",
+                    <div key="actions" className="flex flex-wrap gap-1">
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="outline"
+                        disabled={impactMutation.isPending}
+                        onClick={() => impactMutation.mutate(change.changeEventId)}
+                      >
+                        Impact
+                      </Button>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="outline"
+                        disabled={proposeMutation.isPending}
+                        onClick={() => proposeMutation.mutate(change.changeEventId)}
+                      >
+                        Propose
+                      </Button>
+                      <Button
+                        type="button"
+                        size="sm"
+                        disabled={acceptMutation.isPending}
+                        onClick={() => acceptMutation.mutate(change.changeEventId)}
+                      >
+                        Accept pack
+                      </Button>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="outline"
+                        disabled={designProposeMutation.isPending}
+                        onClick={() =>
+                          designProposeMutation.mutate(change.changeEventId)
+                        }
+                        data-testid="qep-scm-design-propose"
+                      >
+                        Propose design
+                      </Button>
+                      <Link
+                        className="text-xs underline"
+                        href={QEP_QUALITY_JOURNEY_ROUTES.byChange(change.changeEventId)}
+                      >
+                        Open journey
+                      </Link>
+                      <Link
+                        className="text-xs underline"
+                        href={QEP_EARLY_CHECK_ROUTES.byChange(change.changeEventId)}
+                      >
+                        Early Check
+                      </Link>
+                      <Link
+                        className="text-xs underline"
+                        href={QEP_CERTIFICATION_ROUTES.byChange(change.changeEventId)}
+                      >
+                        Open RC
+                      </Link>
+                    </div>,
+                  ],
+                }))}
+              />
+              {selectedChangeId ? (
+                <p className="text-sm text-[var(--color-muted-foreground)]">
+                  Selected change: {selectedChangeId.slice(0, 24)}…
+                </p>
+              ) : null}
+              {impactSummary ? (
+                <p className="text-sm" data-testid="qep-scm-impact-summary">
+                  {impactSummary}
+                </p>
+              ) : null}
+              {proposalNote ? (
+                <p className="text-sm" data-testid="qep-scm-proposal-note">
+                  {proposalNote}
+                </p>
+              ) : null}
+              {acceptedPlanId ? (
+                <p className="text-sm" data-testid="qep-scm-accepted-plan">
+                  Draft execution plan created: {acceptedPlanId}
+                </p>
+              ) : null}
+              {acceptMutation.isError ? (
+                <QepErrorState message={(acceptMutation.error as Error).message} />
+              ) : null}
+              {designNote ? (
+                <div className="space-y-2" data-testid="qep-scm-design-pack">
+                  <p className="text-sm font-medium">Test design assist (F7)</p>
+                  <p className="text-sm text-[var(--color-muted-foreground)]">
+                    {designNote}
+                  </p>
+                  {designDrafts.length === 0 ? (
+                    <QepEmptyState title="No draft specs suggested for this change." />
+                  ) : (
+                    <ul className="space-y-2">
+                      {designDrafts.map((draft) => (
+                        <li
+                          key={draft.proposalItemId}
+                          className="rounded-md border border-[var(--color-border)] p-2 text-sm"
+                          data-testid="qep-scm-design-draft"
+                        >
+                          <div className="flex flex-wrap items-center gap-2">
+                            <QepStatusBadge status={draft.kind} />
+                            <span className="font-medium">{draft.title}</span>
+                            <span className="text-xs text-[var(--color-muted-foreground)]">
+                              {draft.type}
+                              {draft.domain ? ` · ${draft.domain}` : ""}
+                            </span>
+                          </div>
+                          <p className="mt-1 text-[var(--color-muted-foreground)]">
+                            {draft.why}
+                          </p>
+                          {selectedChangeId ? (
+                            <Button
+                              type="button"
+                              size="sm"
+                              className="mt-2"
+                              disabled={designAcceptMutation.isPending}
+                              onClick={() =>
+                                designAcceptMutation.mutate({
+                                  changeEventId: selectedChangeId,
+                                  proposalItemIds: [draft.proposalItemId],
+                                })
+                              }
+                            >
+                              Accept draft
+                            </Button>
+                          ) : null}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {selectedChangeId && designDrafts.length > 0 ? (
+                    <Button
+                      type="button"
+                      size="sm"
+                      disabled={designAcceptMutation.isPending}
+                      onClick={() =>
+                        designAcceptMutation.mutate({
+                          changeEventId: selectedChangeId,
+                          acceptAll: true,
+                        })
+                      }
+                      data-testid="qep-scm-design-accept-all"
+                    >
+                      Accept all drafts
+                    </Button>
+                  ) : null}
+                  {acceptedSpecIds.length > 0 ? (
+                    <p className="text-sm" data-testid="qep-scm-accepted-specs">
+                      Draft specifications created: {acceptedSpecIds.join(", ")}
+                    </p>
+                  ) : null}
+                  {designAcceptMutation.isError ? (
+                    <QepErrorState
+                      message={(designAcceptMutation.error as Error).message}
+                    />
+                  ) : null}
+                </div>
+              ) : null}
+            </div>
+          )}
+        </QepPanel>
         <QepPanel title="Branches (last sync)">
           <ul className="list-disc pl-5 text-sm">
             {(sync?.branches ?? []).map((branch) => (
@@ -398,24 +744,7 @@ function RepositoryDetailView({ repositoryId }: { repositoryId: string }) {
                 {branch.sha ? ` · ${branch.sha.slice(0, 7)}` : ""}
               </li>
             ))}
-            {!sync ? <li>Run Sync to load branches.</li> : null}
-          </ul>
-        </QepPanel>
-        <QepPanel title="Commits / pull requests (last sync)">
-          <ul className="mb-3 list-disc pl-5 text-sm">
-            {(sync?.commits ?? []).map((commit) => (
-              <li key={commit.sha}>
-                {commit.sha.slice(0, 7)} — {commit.message}
-              </li>
-            ))}
-          </ul>
-          <ul className="list-disc pl-5 text-sm">
-            {(sync?.pullRequests ?? []).map((pullRequest) => (
-              <li key={pullRequest.number}>
-                #{pullRequest.number} {pullRequest.title} ({pullRequest.state})
-              </li>
-            ))}
-            {!sync ? <li>Run Sync to load commits and pull requests.</li> : null}
+            {!sync ? <li>Run Sync heartbeat to refresh remote snapshot.</li> : null}
           </ul>
         </QepPanel>
       </div>

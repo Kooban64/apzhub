@@ -25,6 +25,7 @@ import {
   notificationRetryBaseDelayMs,
   type NotificationDeliveryEnv,
 } from "./delivery-env";
+import { dispatchEmailChannel } from "./email-channel";
 import {
   dispatchInAppChannel,
   type InAppChannelDispatchResult,
@@ -46,6 +47,10 @@ export type DurableDispatchResult = {
   readonly uncertain?: boolean;
 };
 
+export type DurableChannelDispatchResult = InAppChannelDispatchResult & {
+  readonly messageId?: string;
+};
+
 export type DurableDispatchOrchestratorConfig = {
   readonly store: NotificationDeliveryDurableRuntimeStore;
   readonly workerId: string;
@@ -56,11 +61,20 @@ export type DurableDispatchOrchestratorConfig = {
   readonly id?: () => string;
   readonly simulateInAppFailure?: boolean;
   readonly simulateUncertainTimeout?: boolean;
-  /** Optional injectable channel (defaults to in-app). */
+  /**
+   * Optional email resolver when recipientHints lack email.
+   * Used only for email-channel deliveries.
+   */
+  readonly resolveEmail?: (input: {
+    readonly tenantId: string;
+    readonly organisationId?: string;
+    readonly userId: string;
+  }) => string | undefined | Promise<string | undefined>;
+  /** Optional injectable channel (defaults to in-app / email by delivery.channel). */
   readonly dispatchChannel?: (input: {
     readonly delivery: NotificationDeliveryRecord;
     readonly intent: NotificationIntent;
-  }) => InAppChannelDispatchResult | Promise<InAppChannelDispatchResult>;
+  }) => DurableChannelDispatchResult | Promise<DurableChannelDispatchResult>;
 };
 
 export type DurableDispatchOrchestrator = {
@@ -74,8 +88,33 @@ function backoffMs(base: number, attempt: number, jitterRatio = 0.2): number {
   return Math.floor(exp + jitter);
 }
 
-function classifyFailure(result: InAppChannelDispatchResult): NotificationFailureClass {
+function classifyFailure(
+  result: DurableChannelDispatchResult,
+): NotificationFailureClass {
   return result.failureClass ?? "unknown";
+}
+
+async function resolveRecipientEmail(input: {
+  readonly delivery: NotificationDeliveryRecord;
+  readonly intent: NotificationIntent;
+  readonly resolveEmail?: DurableDispatchOrchestratorConfig["resolveEmail"];
+}): Promise<string> {
+  const fromHint = input.intent.recipientHints.find(
+    (hint) =>
+      hint.userId === input.delivery.userId &&
+      typeof hint.email === "string" &&
+      hint.email.includes("@"),
+  )?.email;
+  if (fromHint) return fromHint;
+  if (input.resolveEmail) {
+    const resolved = await input.resolveEmail({
+      tenantId: input.delivery.tenantId,
+      organisationId: input.delivery.organisationId,
+      userId: input.delivery.userId,
+    });
+    if (typeof resolved === "string" && resolved.includes("@")) return resolved;
+  }
+  return "";
 }
 
 export function createDurableDispatchOrchestrator(
@@ -130,7 +169,7 @@ export function createDurableDispatchOrchestrator(
         id: asNotificationDeliveryTryId(id()),
         deliveryId: delivery.id,
         attemptNumber,
-        providerId: "in_app",
+        providerId: delivery.providerId,
         startedAt: tryStart,
         finishedAt: now(),
         receiptLevel: "failed",
@@ -207,7 +246,7 @@ export function createDurableDispatchOrchestrator(
       id: tryId,
       deliveryId: delivery.id,
       attemptNumber,
-      providerId: "in_app",
+      providerId: delivery.providerId,
       startedAt: tryStart,
       receiptLevel: "accepted_by_adapter",
       workerId: config.workerId,
@@ -232,17 +271,39 @@ export function createDurableDispatchOrchestrator(
     }
 
     // Channel / provider I/O — OUTSIDE any DB transaction.
-    const channelResult = await (config.dispatchChannel
-      ? config.dispatchChannel({ delivery, intent })
-      : dispatchInAppChannel({
-          delivery,
-          intent,
-          env,
-          id,
-          now,
-          simulateFailure: config.simulateInAppFailure,
-          simulateUncertainTimeout: config.simulateUncertainTimeout,
-        }));
+    let channelResult: DurableChannelDispatchResult;
+    if (config.dispatchChannel) {
+      channelResult = await config.dispatchChannel({ delivery, intent });
+    } else if (delivery.channel === "email") {
+      const to = await resolveRecipientEmail({
+        delivery,
+        intent,
+        resolveEmail: config.resolveEmail,
+      });
+      const emailResult = await dispatchEmailChannel({
+        delivery,
+        intent,
+        to,
+        env,
+      });
+      channelResult = {
+        ok: emailResult.ok,
+        receiptLevel: emailResult.receiptLevel,
+        failureClass: emailResult.failureClass,
+        failureCode: emailResult.failureCode,
+        messageId: emailResult.messageId,
+      };
+    } else {
+      channelResult = dispatchInAppChannel({
+        delivery,
+        intent,
+        env,
+        id,
+        now,
+        simulateFailure: config.simulateInAppFailure,
+        simulateUncertainTimeout: config.simulateUncertainTimeout,
+      });
+    }
 
     const finishedAt = now();
     const failureClass = classifyFailure(channelResult);
@@ -257,7 +318,7 @@ export function createDurableDispatchOrchestrator(
       note: channelResult.uncertain
         ? redactErrorMetadata("uncertain_provider_result")
         : undefined,
-      providerReference: channelResult.item?.id,
+      providerReference: channelResult.item?.id ?? channelResult.messageId,
       workerId: config.workerId,
     };
 

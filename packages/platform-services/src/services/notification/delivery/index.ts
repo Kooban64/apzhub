@@ -5,6 +5,7 @@ export {
 export type {
   CreateNotificationDeliveryServiceInput,
   NotificationDeliveryEventBusPort,
+  NotificationDeliveryResolveUserResult,
 } from "./create-notification-delivery-service";
 export {
   createDurableNotificationRuntimeBootstrap,

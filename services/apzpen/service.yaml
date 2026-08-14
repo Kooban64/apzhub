@@ -1,0 +1,44 @@
+manifestSchemaVersion: "1.0"
+id: apzpen-service
+name: APZPEN Security Assurance Service
+version: 0.1.0
+kind: service
+
+metadata:
+  category: security-assurance
+  description: >
+    Platform service for APZPEN — engagements, Rules of Engagement,
+    scope targets, findings lifecycle, retest, and assessment position.
+    Orchestrates provider evidence; contains no scanner UI logic.
+  product: apzpen
+  programme: SPR-APZPEN-006
+  owner: APZHUB
+  tags:
+    - apzpen
+    - security
+    - pentest
+    - evidence
+    - github
+    - openai
+    - customer-portal
+
+dependencies:
+  platform: []
+  services: []
+  integrations: []
+
+service:
+  category: security-assurance
+  status: active
+
+permissions:
+  - id: apzpen.read
+    description: Read APZPEN engagements and findings
+  - id: apzpen.manage
+    description: Manage engagements and RoE
+  - id: apzpen.test
+    description: Create and update findings
+  - id: apzpen.retest
+    description: Retest workflow
+  - id: apzpen.certify
+    description: Assessment certification position

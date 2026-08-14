@@ -8,4 +8,10 @@ export {
   resetEnvCache,
 } from "./env";
 export type { Env, PlatformEnv } from "./env";
+export {
+  ensureLocalSecretsLoaded,
+  loadLocalSecrets,
+  resetLocalSecretsLoadForTests,
+} from "./secrets/load-local-secrets";
+export type { LocalSecretsLoadResult } from "./secrets/load-local-secrets";
 export * from "./db/index";

@@ -4,6 +4,65 @@ This directory is the canonical source for APZHUB product and architecture docum
 
 **Status:** Platform **1.2.0** programme **CLOSED**. PLAN-001 **ACCEPTED**. ARCH-001 **ACCEPTED**. ENG-001 **ACCEPTED**. **Platform-1.3-ADR-0070** **Awaiting Owner ADR Acceptance** — **READY FOR OWNER ADR ACCEPTANCE**. See [CURRENT-MILESTONE](./foundation/CURRENT-MILESTONE.md) · [ADR-0070](./architecture/adr/ADR-0070-Observe-Live-Alert-Evaluation-and-Delivery.md).
 
+## APZOR Commercial Pillars (path forward — 2026-08-13)
+
+**APZHUB is the internal operating platform. Customers buy solutions — not APZHUB.**
+
+| Document                                                                      | Description                                                                          |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [APZOR Commercial Pillars](./strategy/APZOR-COMMERCIAL-PILLARS.md)            | **Authority** — platform vs sellable solutions; one platform, three pillars          |
+| [SaaS Commercial Model](./strategy/commercial/SAAS-COMMERCIAL-MODEL.md)       | **Authority (LOCKED)** — tenants, packages, APZPRD composability, Law/Knowledge/Sign |
+| [APZQEP](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md)        | Quality Engineering Platform — _Can we release with confidence?_                     |
+| [APZPEN](./strategy/APZPEN-ENTERPRISE-SECURITY-ASSURANCE-PLATFORM.md)         | Security Assurance & Pen Testing — _Can we demonstrate we are secure?_               |
+| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)      | **PARKED** — SBOM/WORM/SCM/legal-hold/locks; resume on deal or Owner sprint          |
+| [APZPRD](./strategy/APZPRD-ENTERPRISE-PRODUCTIVITY-PLATFORM.md)               | Productivity Platform — _Can our people work effectively?_ (composable)              |
+| [SPR-COMM-001](./sprint/SPR-COMM-001-catalogue-entitlements-tenant-switch.md) | **DELIVERED** — packages, entitlements, tenant switch, soft APZPEN gate              |
+| [SPR-COMM-002](./sprint/SPR-COMM-002-org-packages-tenant-switch-source.md)    | **DELIVERED** — org packages UI, tenant switcher, project source (QEP+PEN)           |
+
+### Priority product build — APZQEP (active)
+
+| Document                                                                             | Description                                                                       |
+| ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- |
+| [SPR-APZQEP-200](./sprint/SPR-APZQEP-200-competitive-full-swing.md)                  | **AUTHORISED · IN PROGRESS** — competitive full swing (RCC · providers · AI · GA) |
+| [SPR-APZQEP-201](./sprint/SPR-APZQEP-201-release-control-centre.md)                  | **IN PROGRESS** — Home + Release Readiness Release Control Centre                 |
+| [APZQEP PRODUCT-STATUS](./products/apzqep/PRODUCT-STATUS.md)                         | V1.1 **PRODUCTION READY · CLOSED** — kernel frozen; 200 = V1.2 / Wave-6-class     |
+| [APZQEP pillar vision](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md) | Experience + commercial identity authority                                        |
+
+### APZPEN (CE complete — enterprise parked)
+
+| Document                                                                   | Description                                                                                    |
+| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| [SPR-APZPEN-001](./sprint/SPR-APZPEN-001-security-assurance-foundation.md) | **DELIVERED** — Engagement → RoE → Findings                                                    |
+| [SPR-APZPEN-002](./sprint/SPR-APZPEN-002-provider-ingest.md)               | **DELIVERED** — Provider ingest, schedule, certify                                             |
+| [SPR-APZPEN-003](./sprint/SPR-APZPEN-003-live-runner-dispatch.md)          | **DELIVERED** — Live runner dispatch (scope-gated)                                             |
+| [SPR-APZPEN-004](./sprint/SPR-APZPEN-004-ce-product-complete.md)           | **DELIVERED** — CE product complete incl. MobSF, assets, reports                               |
+| [SPR-APZPEN-005](./sprint/SPR-APZPEN-005-github-portal-pdf-ai.md)          | **DELIVERED** — GitHub PR security, customer portal, PDF, AI assist                            |
+| [SPR-APZPEN-006](./sprint/SPR-APZPEN-006-openai-github-app-branded-pdf.md) | **DELIVERED** — OpenAI intelligence, GitHub App JWT, branded Typst PDF                         |
+| [SPR-APZPEN-007](./sprint/SPR-APZPEN-007-product-completion.md)            | **DELIVERED** — Access, source→sync, findings/portal UX, functional close                      |
+| [SPR-APZPEN-008](./sprint/SPR-APZPEN-008-workflow-surfaces-e2e.md)         | **DELIVERED** — Remediation/Retests/Evidence/Certification queues + E2E                        |
+| [SPR-APZPEN-009](./sprint/SPR-APZPEN-009-operator-ux-close.md)             | **DELIVERED** — Operator assign/evidence, manual findings, assets/portal polish                |
+| [SPR-APZPEN-010](./sprint/SPR-APZPEN-010-ops-loop-close.md)                | **DELIVERED** — Jobs history, RoE edit, schedule, finding detail                               |
+| [SPR-APZPEN-011](./sprint/SPR-APZPEN-011-operator-polish.md)               | **DELIVERED** — Dispatch target, intelligence apply, portal/schedule polish                    |
+| [SPR-APZPEN-012](./sprint/SPR-APZPEN-012-ops-polish.md)                    | **DELIVERED** — Job re-ingest, due-soon, cert blockers, provider health                        |
+| [SPR-APZPEN-013](./sprint/SPR-APZPEN-013-governance-ops-close.md)          | **DELIVERED** — My Work, re-dispatch, granular perms, RoE window, file ingest                  |
+| [SPR-APZPEN-014](./sprint/SPR-APZPEN-014-deferred-closeout.md)             | **DELIVERED** — Schedule worker, cert ledger, evidence vault, Postgres SoR, thin graph, GitLab |
+| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)   | **PARKED** — resume on deal / Owner sprint only                                                |
+| [APZ tools host layout](./operations/APZTOOLS-HOST-LAYOUT.md)              | `~/apztools/{security,quality,workbench,shared}` — runner workspaces by pillar                 |
+
+## IAM + Commercial Platform (SPR-IAM-COMMERCIAL-001)
+
+| Document                                                                               | Description                                                                   |
+| -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| [APZHUB-IAM-COMMERCIAL-PROGRAMME](./architecture/APZHUB-IAM-COMMERCIAL-PROGRAMME.md)   | Architecture authority — live IAM, PayFast, entitlements, one org ruleset     |
+| [SPR-IAM-COMMERCIAL-001 sprint guide](./sprint/SPR-IAM-COMMERCIAL-001-sprint-guide.md) | Execution guide — **READY FOR OWNER ACCEPTANCE**                              |
+| [SPR-IAM-COMMERCIAL-001 runbook](./operations/SPR-IAM-COMMERCIAL-001-RUNBOOK.md)       | PayFast, dunning, refunds, IAM seed                                           |
+| [SPR-IAM-COMMERCIAL-001 evidence](./operations/SPR-IAM-COMMERCIAL-001-EVIDENCE.md)     | Implementation evidence                                                       |
+| [Marketplace blueprint](./architecture/APZHUB-MARKETPLACE-BLUEPRINT.md)                | Partner marketplace design only (runtime deferred)                            |
+| [MKT-AUTH-PRODUCT-GATE evidence](./operations/MKT-AUTH-PRODUCT-GATE-EVIDENCE.md)       | Public marketing, auth chrome, product access gate                            |
+| [MKT-AUTH-PRODUCT-GATE ops](./operations/MKT-AUTH-PRODUCT-GATE-OPS.md)                 | Trial unlock, convert-trials, catalogue                                       |
+| [MKT multi-site hosts](./operations/MKT-MULTI-SITE-HOSTS.md)                           | APZHUB / APZQA / APZPenTest hosts + Productivity Suite (later)                |
+| [Operator Consoles programme](./operations/OPERATOR-CONSOLES-PROGRAMME.md)             | `/console` `/ops` `/finance` `/compliance` `/org` shells + suite provisioning |
+
 ## APZQEP Requirement Baselines (APZQEP-ENG-020E)
 
 | Document                                                                     | Description                                                                                                                             |

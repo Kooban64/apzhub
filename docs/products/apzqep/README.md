@@ -1,5 +1,6 @@
 # APZ QEP — APZ Quality Engineering Platform
 
+> **North-star blueprint:** [QUALITY-ECOSYSTEM-MAP.md](./QUALITY-ECOSYSTEM-MAP.md) · **Operating loop (PM/Dev/QA):** [QUALITY-OPERATING-LOOP.md](./QUALITY-OPERATING-LOOP.md) · **Flagship path:** [FLAGSHIP-PROGRAMME.md](./FLAGSHIP-PROGRAMME.md) — Quality Operating System; Early Check ≠ Certification.  
 > **Authoritative product status (read first):** [PRODUCT-STATUS.md](./PRODUCT-STATUS.md)  
 > **APZQEP Version 1.1** — **PRODUCTION READY** · **CLOSED** · Product phase **OPERATIONAL** — [release-1.1/](./release-1.1/) · [OWNER-RELEASE-DECISION](./release-1.1/OWNER-RELEASE-DECISION.md)  
 > **APZQEP Version 1.0** — **GENERAL AVAILABILITY** (historical) · [APZQEP-OPS-001](./v1.1/apzqep-ops-001/) · [PBR-APZQEP-1.0-001](./v1.1/pbr-apzqep-1.0-001/)

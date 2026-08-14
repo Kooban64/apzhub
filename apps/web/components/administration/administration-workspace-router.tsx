@@ -8,10 +8,14 @@ import { resolveAdministrationSection } from "@/lib/administration/routes";
 import { ContextLearningSummaryView } from "./context-learning-summary-view";
 import { FrictionRegisterView } from "./friction-register-view";
 import { PlatformAdministrationView } from "./platform-administration-view";
+import { OrgAdminMembersView } from "@/components/iam/org-admin-members-view";
 
 export function AdministrationWorkspaceRouter() {
   const pathname = usePathname();
   const section = resolveAdministrationSection(pathname);
+  if (section === "members") {
+    return <OrgAdminMembersView />;
+  }
   if (section === "product-learning") {
     return <ContextLearningSummaryView />;
   }

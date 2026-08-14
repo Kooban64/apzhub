@@ -271,6 +271,24 @@ export class TenantManagementService {
     return this.options.membershipRepository.listByUser(userId);
   }
 
+  /**
+   * Mark an existing membership as primary (active tenant). No-op create.
+   */
+  setPrimaryTenant(userId: string, tenantId: string): PlatformUserTenantMembership {
+    const existing = this.options.membershipRepository.getByUserAndTenant(
+      userId,
+      tenantId,
+    );
+    if (!existing || existing.status !== "active") {
+      throw new Error(`Active membership not found: ${userId}/${tenantId}`);
+    }
+    const updated = this.options.membershipRepository.setPrimary(userId, tenantId);
+    if (!updated) {
+      throw new Error(`Failed to set primary tenant: ${userId}/${tenantId}`);
+    }
+    return updated;
+  }
+
   listTenantUsers(tenantId: string): readonly PlatformUserTenantMembership[] {
     return this.options.membershipRepository.listByTenant(tenantId);
   }

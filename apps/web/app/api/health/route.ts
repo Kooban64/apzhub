@@ -1,8 +1,8 @@
 export const runtime = "nodejs";
 
-import { checkDatabaseHealth } from "@apzhub/config";
+import { checkDatabaseHealth, ensureLocalSecretsLoaded, getEnv } from "@apzhub/config";
+import { probePlatformEmailHealth } from "@apzhub/platform-email/server";
 import { checkRedisHealth } from "@apzhub/shared";
-import { getEnv } from "@apzhub/config";
 import type { PlatformHealthResponse } from "@apzhub/types";
 import { NextResponse } from "next/server";
 
@@ -21,10 +21,12 @@ import {
 import { getCoreQePersistenceHealth } from "@/lib/qep/persistence/resolve-core-qe-persistence";
 
 export async function GET() {
+  ensureLocalSecretsLoaded();
   const env = getEnv();
   const [
     database,
     redis,
+    email,
     bootstrap,
     commands,
     knowledge,
@@ -35,6 +37,12 @@ export async function GET() {
   ] = await Promise.all([
     checkDatabaseHealth(),
     checkRedisHealth(),
+    probePlatformEmailHealth().catch(() => ({
+      configured: false,
+      status: "unconfigured" as const,
+      message: "probe_failed",
+      checkedAt: new Date().toISOString(),
+    })),
     ensurePlatformRuntimeReady().catch(() => null),
     loadActionRegistryHealthSummary().catch(() => undefined),
     loadKnowledgeHealthSummary().catch(() => undefined),
@@ -54,6 +62,15 @@ export async function GET() {
       status: redis.ok ? ("healthy" as const) : ("unhealthy" as const),
       latencyMs: redis.latencyMs,
       message: redis.message,
+    },
+    email: {
+      status: email.status,
+      configured: email.configured,
+      host: email.host,
+      port: email.port,
+      from: email.from,
+      message: email.message,
+      checkedAt: email.checkedAt,
     },
   };
 

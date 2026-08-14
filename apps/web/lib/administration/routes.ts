@@ -7,6 +7,7 @@ export const ADMINISTRATION_WORKSPACE_BASE = "/workspace/administration";
 
 export const ADMINISTRATION_SECTIONS = [
   "overview",
+  "members",
   "modules",
   "categories",
   "sections",

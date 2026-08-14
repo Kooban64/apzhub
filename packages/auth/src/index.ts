@@ -1,2 +1,10 @@
-export { authClient, signIn, signOut, signUp, useSession } from "./client";
+export {
+  authClient,
+  requestPasswordReset,
+  resetPassword,
+  signIn,
+  signOut,
+  signUp,
+  useSession,
+} from "./client";
 export { AuthProvider, useAuthSession } from "./provider";

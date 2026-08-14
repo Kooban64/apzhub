@@ -1,23 +1,35 @@
 import { createHash, randomUUID } from "node:crypto";
 
+import type { ScmChangeEvent } from "../contracts/change-event";
 import type { ScmDomainEvent, ScmEventPublisher } from "../contracts/events";
 import { SCM_EVENT_TYPES } from "../contracts/events";
 import type {
   RegisterRepositoryRequest,
   RegisteredRepository,
   ScmAuthCredentials,
+  ScmCommitRef,
   ScmProviderId,
+  ScmPullRequestRef,
   ScmTraceabilityLink,
 } from "../contracts/repository";
 import type { ScmWebhookDelivery, WebhookAuditRecord } from "../contracts/webhook";
 import type { ScmProviderRegistry } from "../registry/provider-registry";
 import { InMemoryRepositoryStore, type RepositoryStore } from "./repository-store";
 
+/** Fired after durable change events are upserted (Flagship F9 hook). Soft-fail in callers. */
+export type ScmChangeEventsPersistedHook = (input: {
+  readonly tenantId: string;
+  readonly correlationId: string;
+  readonly source: "webhook" | "sync";
+  readonly events: readonly ScmChangeEvent[];
+}) => void | Promise<void>;
+
 export interface ScmEngineOptions {
   readonly registry: ScmProviderRegistry;
   readonly store?: RepositoryStore;
   readonly publishEvent?: ScmEventPublisher;
   readonly webhookSecrets?: Readonly<Partial<Record<ScmProviderId, string>>>;
+  readonly onChangeEventsPersisted?: ScmChangeEventsPersistedHook;
 }
 
 export class ScmEngine {
@@ -25,6 +37,7 @@ export class ScmEngine {
   private readonly store: RepositoryStore;
   private readonly publishEvent: ScmEventPublisher;
   private readonly webhookSecrets: Readonly<Partial<Record<ScmProviderId, string>>>;
+  private readonly onChangeEventsPersisted?: ScmChangeEventsPersistedHook;
   private readonly credentials = new Map<string, ScmAuthCredentials>();
 
   constructor(options: ScmEngineOptions) {
@@ -32,6 +45,7 @@ export class ScmEngine {
     this.store = options.store ?? new InMemoryRepositoryStore();
     this.publishEvent = options.publishEvent ?? (async () => undefined);
     this.webhookSecrets = options.webhookSecrets ?? {};
+    this.onChangeEventsPersisted = options.onChangeEventsPersisted;
   }
 
   listProviders() {
@@ -52,6 +66,26 @@ export class ScmEngine {
 
   async listTraceabilityLinks(repositoryId?: string) {
     return this.store.listLinks(repositoryId);
+  }
+
+  async listChangeEvents(filter: {
+    readonly tenantId?: string;
+    readonly repositoryId?: string;
+    readonly limit?: number;
+  }) {
+    return this.store.listChangeEvents(filter);
+  }
+
+  /**
+   * Seed provider credentials from server secrets (never from the browser).
+   * Call once at runtime bootstrap for Flagship F1.
+   */
+  setDefaultCredentials(
+    tenantId: string,
+    providerId: ScmProviderId,
+    credentials: ScmAuthCredentials,
+  ): void {
+    this.credentials.set(`${tenantId}:${providerId}`, credentials);
   }
 
   async connectProvider(
@@ -260,6 +294,23 @@ export class ScmEngine {
       },
     };
     await this.store.upsert(updated);
+    const syncedChangeEvents = [
+      ...commits.map((commit) =>
+        changeFromCommit(updated, commit, correlationId, "sync"),
+      ),
+      ...pullRequests.map((pullRequest) =>
+        changeFromPullRequest(updated, pullRequest, correlationId, "sync"),
+      ),
+    ];
+    await this.store.upsertChangeEvents(syncedChangeEvents);
+    if (syncedChangeEvents.length > 0) {
+      await this.notifyChangeEventsPersisted({
+        tenantId: updated.tenantId,
+        correlationId,
+        source: "sync",
+        events: syncedChangeEvents,
+      });
+    }
     await this.emit({
       type: SCM_EVENT_TYPES.repositoryUpdated,
       occurredAt: now,
@@ -396,7 +447,37 @@ export class ScmEngine {
       repository,
     );
 
+    const changeEvents = extractChangeEventsFromDelivery(
+      input.tenantId,
+      correlationId,
+      delivery,
+      repository,
+    );
+    if (changeEvents.length > 0) {
+      await this.store.upsertChangeEvents(changeEvents);
+      await this.notifyChangeEventsPersisted({
+        tenantId: input.tenantId,
+        correlationId,
+        source: "webhook",
+        events: changeEvents,
+      });
+    }
+
     return { audit, delivery };
+  }
+
+  private async notifyChangeEventsPersisted(input: {
+    readonly tenantId: string;
+    readonly correlationId: string;
+    readonly source: "webhook" | "sync";
+    readonly events: readonly ScmChangeEvent[];
+  }): Promise<void> {
+    if (!this.onChangeEventsPersisted) return;
+    try {
+      await this.onChangeEventsPersisted(input);
+    } catch {
+      // Soft-fail — never break webhook/sync persistence.
+    }
   }
 
   async addTraceabilityLink(
@@ -490,4 +571,215 @@ export class ScmEngine {
   private async emit(event: ScmDomainEvent): Promise<void> {
     await this.publishEvent(event);
   }
+}
+
+function changeEventId(
+  providerId: string,
+  repositoryKey: string,
+  kind: string,
+  externalKey: string,
+): string {
+  return `chg-${providerId}-${repositoryKey}-${kind}-${externalKey}`.replace(
+    /[^a-zA-Z0-9._:-]+/g,
+    "_",
+  );
+}
+
+function changeFromCommit(
+  repository: RegisteredRepository,
+  commit: ScmCommitRef,
+  correlationId: string,
+  source: ScmChangeEvent["source"],
+): ScmChangeEvent {
+  return {
+    changeEventId: changeEventId(
+      repository.providerId,
+      repository.repositoryId,
+      "commit",
+      commit.sha,
+    ),
+    tenantId: repository.tenantId,
+    repositoryId: repository.repositoryId,
+    providerId: repository.providerId,
+    kind: "commit",
+    externalKey: commit.sha,
+    sha: commit.sha,
+    branch: commit.branch,
+    title: commit.message,
+    authorName: commit.authorName,
+    htmlUrl: commit.htmlUrl,
+    occurredAt: commit.committedAt ?? new Date().toISOString(),
+    correlationId,
+    source,
+    summary: commit.message.slice(0, 200),
+  };
+}
+
+function changeFromPullRequest(
+  repository: RegisteredRepository,
+  pullRequest: ScmPullRequestRef,
+  correlationId: string,
+  source: ScmChangeEvent["source"],
+): ScmChangeEvent {
+  return {
+    changeEventId: changeEventId(
+      repository.providerId,
+      repository.repositoryId,
+      "pr",
+      String(pullRequest.number),
+    ),
+    tenantId: repository.tenantId,
+    repositoryId: repository.repositoryId,
+    providerId: repository.providerId,
+    kind: "pull_request",
+    externalKey: `pr:${pullRequest.number}`,
+    prNumber: pullRequest.number,
+    branch: pullRequest.sourceBranch,
+    title: pullRequest.title,
+    authorLogin: pullRequest.authorLogin,
+    htmlUrl: pullRequest.htmlUrl,
+    occurredAt: pullRequest.updatedAt ?? new Date().toISOString(),
+    correlationId,
+    source,
+    summary: `PR #${pullRequest.number} ${pullRequest.title}`.slice(0, 200),
+  };
+}
+
+function extractChangeEventsFromDelivery(
+  tenantId: string,
+  correlationId: string,
+  delivery: ScmWebhookDelivery,
+  repository?: RegisteredRepository,
+): ScmChangeEvent[] {
+  const repositoryKey =
+    repository?.repositoryId ?? delivery.repositoryFullName ?? "unknown";
+  const providerId = delivery.providerId;
+  const base = {
+    tenantId,
+    repositoryId: repository?.repositoryId,
+    providerId,
+    correlationId,
+    source: "webhook" as const,
+    occurredAt: delivery.receivedAt,
+  };
+
+  if (delivery.eventKind === "push") {
+    const ref = String(delivery.payload.ref ?? "");
+    const branch = ref.startsWith("refs/heads/")
+      ? ref.slice("refs/heads/".length)
+      : ref || undefined;
+    const commits = Array.isArray(delivery.payload.commits)
+      ? (delivery.payload.commits as Array<Record<string, unknown>>)
+      : [];
+    const pusher = delivery.payload.pusher as
+      { name?: string; email?: string } | undefined;
+    const head = delivery.payload.head_commit as
+      | { id?: string; message?: string; author?: { name?: string; username?: string } }
+      | undefined;
+
+    const fromCommits = commits.slice(0, 50).map((commit) => {
+      const sha = String(commit.id ?? commit.sha ?? "");
+      const author = commit.author as
+        { name?: string; username?: string; email?: string } | undefined;
+      const added = Array.isArray(commit.added) ? (commit.added as string[]) : [];
+      const modified = Array.isArray(commit.modified)
+        ? (commit.modified as string[])
+        : [];
+      const removed = Array.isArray(commit.removed) ? (commit.removed as string[]) : [];
+      return {
+        ...base,
+        changeEventId: changeEventId(
+          providerId,
+          repositoryKey,
+          "commit",
+          sha || delivery.deliveryId,
+        ),
+        kind: "commit" as const,
+        externalKey: sha || delivery.deliveryId,
+        sha: sha || undefined,
+        branch,
+        title: String(commit.message ?? delivery.summary).slice(0, 500),
+        authorLogin: author?.username,
+        authorName: author?.name ?? pusher?.name,
+        filesChanged: [...added, ...modified, ...removed].slice(0, 200),
+        htmlUrl: commit.url ? String(commit.url) : undefined,
+        summary: String(commit.message ?? delivery.summary).slice(0, 200),
+      } satisfies ScmChangeEvent;
+    });
+
+    if (fromCommits.length > 0) {
+      return fromCommits;
+    }
+
+    const sha = head?.id ? String(head.id) : delivery.deliveryId;
+    return [
+      {
+        ...base,
+        changeEventId: changeEventId(providerId, repositoryKey, "push", sha),
+        kind: "push",
+        externalKey: sha,
+        sha: head?.id ? String(head.id) : undefined,
+        branch,
+        title: head?.message ? String(head.message) : delivery.summary,
+        authorLogin: head?.author?.username ?? pusher?.name,
+        authorName: head?.author?.name ?? pusher?.name,
+        summary: delivery.summary,
+      },
+    ];
+  }
+
+  if (delivery.eventKind === "pull_request") {
+    const pr = delivery.payload.pull_request as
+      | {
+          number?: number;
+          title?: string;
+          html_url?: string;
+          user?: { login?: string };
+          head?: { ref?: string; sha?: string };
+          updated_at?: string;
+        }
+      | undefined;
+    const number = Number(pr?.number ?? 0);
+    const filePaths = Array.isArray(delivery.payload.changed_files)
+      ? (delivery.payload.changed_files as string[]).slice(0, 200)
+      : undefined;
+
+    return [
+      {
+        ...base,
+        changeEventId: changeEventId(
+          providerId,
+          repositoryKey,
+          "pr",
+          String(number || delivery.deliveryId),
+        ),
+        kind: "pull_request",
+        externalKey: number ? `pr:${number}` : delivery.deliveryId,
+        prNumber: number || undefined,
+        sha: pr?.head?.sha,
+        branch: pr?.head?.ref,
+        title: pr?.title,
+        authorLogin: pr?.user?.login,
+        htmlUrl: pr?.html_url,
+        filesChanged: filePaths,
+        occurredAt: pr?.updated_at ?? delivery.receivedAt,
+        summary: delivery.summary,
+      },
+    ];
+  }
+
+  return [
+    {
+      ...base,
+      changeEventId: changeEventId(
+        providerId,
+        repositoryKey,
+        "other",
+        delivery.deliveryId,
+      ),
+      kind: "other",
+      externalKey: delivery.deliveryId,
+      summary: delivery.summary,
+    },
+  ];
 }

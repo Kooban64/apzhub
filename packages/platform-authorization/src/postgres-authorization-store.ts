@@ -6,11 +6,13 @@ import {
   platformAuthorizationRole,
   platformAuthorizationRoleAssignment,
   platformAuthorizationRolePermission,
+  platformTenant,
 } from "@apzhub/config/db";
 
 import { DEFAULT_PLATFORM_TENANT_ID } from "./authorization-seed";
 import type { AuthorizationService } from "./authorization-service";
 import {
+  DEFAULT_KNOWLEDGE_STEWARD_ROLE_ID,
   DEFAULT_LAW_OPERATOR_ROLE_ID,
   DEFAULT_PLATFORM_ADMIN_ROLE_ID,
   DEFAULT_QEP_OPERATOR_ROLE_ID,
@@ -18,6 +20,11 @@ import {
   DEFAULT_TENANT_MEMBER_ROLE_ID,
   seedDefaultAuthorizationCatalog,
 } from "./authorization-seed";
+import { PERSONA_ROLE_DEFINITIONS } from "./persona-roles";
+import {
+  KNOWLEDGE_STEWARD_PERMISSIONS,
+  isKnowledgeStewardAutoAssignEnabled,
+} from "./knowledge-steward-permissions";
 import {
   QEP_CORE_QE_PERMISSIONS,
   QEP_OPERATOR_PERMISSIONS,
@@ -148,8 +155,37 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
     // APZ Knowledge — organisational memory identity (N-02)
     "knowledge.*",
     "knowledge.view",
+    "knowledge.manage",
     "knowledge.admin",
+    // Unified notifications + ENG-004 delivery plane
+    "notification.*",
+    "notification.read",
+    "notification.manage",
+    "notification.preference",
+    "notification.delivery",
+    "notifications.read",
+    "notifications.manage",
+    "notifications.preferences",
+    "notifications.send",
+    "notifications.health",
+    "notifications.providers",
+    "search.*",
+    "search.execute",
     ...QEP_CORE_QE_PERMISSIONS,
+    // Platform Ops console (non-break-glass platform-admin)
+    "admin.operate",
+    "admin.read",
+    "admin.diagnostics",
+    "observe.read",
+    "observe.health",
+    "observe.metrics",
+    "observe.logs",
+    "observe.traces",
+    "observe.alerts",
+    "observe.diagnostics",
+    "observe.manage",
+    "identity.read",
+    "platform.nav.administration.view",
   ];
 
   for (const permissionKey of permissions) {
@@ -159,6 +195,25 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
         permissionKey,
         namespace: permissionKey.split(".")[0] ?? "platform",
         description: `Seeded permission ${permissionKey}`,
+        createdAt: timestamp,
+        updatedAt: timestamp,
+      })
+      .onConflictDoNothing({ target: platformAuthorizationPermission.permissionKey });
+  }
+
+  const personaPermissionKeys = new Set<string>();
+  for (const persona of PERSONA_ROLE_DEFINITIONS) {
+    for (const permissionKey of persona.permissions) {
+      personaPermissionKeys.add(permissionKey);
+    }
+  }
+  for (const permissionKey of personaPermissionKeys) {
+    await db
+      .insert(platformAuthorizationPermission)
+      .values({
+        permissionKey,
+        namespace: permissionKey.split(".")[0] ?? "platform",
+        description: `Seeded persona permission ${permissionKey}`,
         createdAt: timestamp,
         updatedAt: timestamp,
       })
@@ -212,6 +267,25 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
       productKey: "apzqep",
       parentRoleId: null,
     },
+    {
+      roleId: DEFAULT_KNOWLEDGE_STEWARD_ROLE_ID,
+      slug: "knowledge-steward",
+      name: "Knowledge Steward",
+      scope: "product",
+      tenantId: null,
+      productKey: "platform-knowledge",
+      parentRoleId: null,
+    },
+    ...PERSONA_ROLE_DEFINITIONS.map((persona) => ({
+      roleId: persona.roleId,
+      slug: persona.slug,
+      name: persona.name,
+      scope: persona.scope,
+      // Template roles — tenant binding lives on the assignment, not the role row.
+      tenantId: null as string | null,
+      productKey: persona.productKey ?? null,
+      parentRoleId: null as string | null,
+    })),
   ] as const;
 
   for (const role of roles) {
@@ -227,6 +301,16 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
       .onConflictDoNothing({ target: platformAuthorizationRole.roleId });
   }
 
+  // Platform Admin must not retain break-glass "*" (Superadmin only).
+  await db
+    .delete(platformAuthorizationRolePermission)
+    .where(
+      and(
+        eq(platformAuthorizationRolePermission.roleId, DEFAULT_PLATFORM_ADMIN_ROLE_ID),
+        eq(platformAuthorizationRolePermission.permissionKey, "*"),
+      ),
+    );
+
   // N-02: break Tenant Member → Law Practice Operator inheritance on re-seed
   await db
     .update(platformAuthorizationRole)
@@ -234,7 +318,41 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
     .where(eq(platformAuthorizationRole.roleId, DEFAULT_TENANT_MEMBER_ROLE_ID));
 
   const rolePermissions = [
-    { roleId: DEFAULT_PLATFORM_ADMIN_ROLE_ID, permissionKey: "*", grantType: "allow" },
+    {
+      roleId: DEFAULT_PLATFORM_ADMIN_ROLE_ID,
+      permissionKey: "admin.operate",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_PLATFORM_ADMIN_ROLE_ID,
+      permissionKey: "admin.read",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_PLATFORM_ADMIN_ROLE_ID,
+      permissionKey: "observe.read",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_PLATFORM_ADMIN_ROLE_ID,
+      permissionKey: "observe.health",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_PLATFORM_ADMIN_ROLE_ID,
+      permissionKey: "observe.manage",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_PLATFORM_ADMIN_ROLE_ID,
+      permissionKey: "platform.nav.administration.view",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_PLATFORM_ADMIN_ROLE_ID,
+      permissionKey: "identity.read",
+      grantType: "allow",
+    },
     {
       roleId: DEFAULT_LAW_OPERATOR_ROLE_ID,
       permissionKey: "legal.*",
@@ -355,6 +473,51 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
       permissionKey: "knowledge.view",
       grantType: "allow",
     },
+    ...KNOWLEDGE_STEWARD_PERMISSIONS.map((permissionKey) => ({
+      roleId: DEFAULT_KNOWLEDGE_STEWARD_ROLE_ID,
+      permissionKey,
+      grantType: "allow" as const,
+    })),
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "search.*",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "search.execute",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "notification.*",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "notifications.read",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "notifications.preferences",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "notifications.send",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "notifications.health",
+      grantType: "allow",
+    },
+    {
+      roleId: DEFAULT_TENANT_MEMBER_ROLE_ID,
+      permissionKey: "notifications.providers",
+      grantType: "allow",
+    },
     ...QEP_OPERATOR_PERMISSIONS.map((permissionKey) => ({
       roleId: DEFAULT_QEP_OPERATOR_ROLE_ID,
       permissionKey,
@@ -365,6 +528,13 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
       permissionKey,
       grantType: "allow" as const,
     })),
+    ...PERSONA_ROLE_DEFINITIONS.flatMap((persona) =>
+      persona.permissions.map((permissionKey) => ({
+        roleId: persona.roleId,
+        permissionKey,
+        grantType: "allow" as const,
+      })),
+    ),
   ] as const;
 
   for (const grant of rolePermissions) {
@@ -407,6 +577,17 @@ export async function ensureUserAuthorizationMembership(input: {
             roleId: DEFAULT_QEP_OPERATOR_ROLE_ID,
             tenantId,
             productKey: "apzqep",
+          },
+        ]
+      : []),
+    ...(isKnowledgeStewardAutoAssignEnabled()
+      ? [
+          {
+            assignmentId: `asg-${input.userId}-knowledge-steward`,
+            userId: input.userId,
+            roleId: DEFAULT_KNOWLEDGE_STEWARD_ROLE_ID,
+            tenantId,
+            productKey: "platform-knowledge",
           },
         ]
       : []),
@@ -503,6 +684,58 @@ export async function resolvePostgresSessionAuthorization(
     roles: applicableRoles.map((role) => role.slug),
     permissions: [...allow],
   };
+}
+
+export async function upsertPostgresRoleAssignment(input: {
+  readonly userId: string;
+  readonly roleId: string;
+  readonly tenantId?: string | null;
+  readonly productKey?: string | null;
+  readonly assignmentId?: string;
+}): Promise<void> {
+  await seedDefaultAuthorizationRows();
+  const db = getDb();
+  const timestamp = new Date();
+  const assignmentId =
+    input.assignmentId ??
+    `asg-${input.userId}-${input.roleId}-${input.tenantId ?? "platform"}-${input.productKey ?? "none"}`;
+
+  await db
+    .insert(platformAuthorizationRoleAssignment)
+    .values({
+      assignmentId,
+      userId: input.userId,
+      roleId: input.roleId,
+      tenantId: input.tenantId ?? null,
+      productKey: input.productKey ?? null,
+      status: "active",
+      createdAt: timestamp,
+      updatedAt: timestamp,
+    })
+    .onConflictDoNothing({
+      target: platformAuthorizationRoleAssignment.assignmentId,
+    });
+}
+
+export async function ensurePlatformTenantRow(input: {
+  readonly tenantId: string;
+  readonly slug: string;
+  readonly name: string;
+}): Promise<void> {
+  const db = getDb();
+  const timestamp = new Date();
+  await db
+    .insert(platformTenant)
+    .values({
+      tenantId: input.tenantId,
+      slug: input.slug,
+      name: input.name,
+      status: "active",
+      metadata: {},
+      createdAt: timestamp,
+      updatedAt: timestamp,
+    })
+    .onConflictDoNothing({ target: platformTenant.tenantId });
 }
 
 export async function listPostgresRoles() {

@@ -38,34 +38,40 @@ export type QepModuleDescriptor = {
   status: "stub" | "planned" | "enabled";
 };
 
+/**
+ * Catalogue statuses (Tranche 2 Q6 honesty):
+ * `enabled` = workspace router has a real surface (not Requirements fallthrough).
+ * `stub` = package/nav may exist; UI must show unavailable — never impersonate another module.
+ * Deeper GitHub-pivotal / readiness work remains Tranche 4 (still stub here).
+ */
 export const QEP_MODULES: readonly QepModuleDescriptor[] = [
   {
     id: "M01",
     slug: "home",
     packageName: "qep-home",
     title: "Home and Command Centre",
-    status: "stub",
+    status: "enabled",
   },
   {
     id: "M02",
     slug: "portfolio",
     packageName: "qep-portfolio",
     title: "Portfolio and Projects",
-    status: "stub",
+    status: "enabled",
   },
   {
     id: "M03",
     slug: "requirements",
     packageName: "qep-requirements",
     title: "Requirements",
-    status: "stub",
+    status: "enabled",
   },
   {
     id: "M04",
     slug: "verification-library",
     packageName: "qep-verification-library",
     title: "Verification Library",
-    status: "stub",
+    status: "enabled",
   },
   {
     id: "M05",
@@ -79,7 +85,7 @@ export const QEP_MODULES: readonly QepModuleDescriptor[] = [
     slug: "execution",
     packageName: "qep-execution",
     title: "Execution and Sessions",
-    status: "stub",
+    status: "enabled",
   },
   {
     id: "M07",
@@ -93,21 +99,21 @@ export const QEP_MODULES: readonly QepModuleDescriptor[] = [
     slug: "defects",
     packageName: "qep-defects",
     title: "Defects and Quality Issues",
-    status: "stub",
+    status: "enabled",
   },
   {
     id: "M09",
     slug: "evidence",
     packageName: "qep-evidence",
     title: "Evidence",
-    status: "stub",
+    status: "enabled",
   },
   {
     id: "M10",
     slug: "traceability",
     packageName: "qep-traceability",
     title: "Traceability",
-    status: "stub",
+    status: "enabled",
   },
   {
     id: "M11",
@@ -121,28 +127,28 @@ export const QEP_MODULES: readonly QepModuleDescriptor[] = [
     slug: "release-readiness",
     packageName: "qep-release-readiness",
     title: "Release Readiness",
-    status: "stub",
+    status: "enabled",
   },
   {
     id: "M13",
     slug: "certification",
     packageName: "qep-certification",
-    title: "Certification",
-    status: "stub",
+    title: "Release Candidate",
+    status: "enabled",
   },
   {
     id: "M14",
     slug: "quality-intelligence",
     packageName: "qep-quality-intelligence",
     title: "Quality Intelligence",
-    status: "stub",
+    status: "enabled",
   },
   {
     id: "M15",
     slug: "reporting",
     packageName: "qep-reporting",
     title: "Reporting and Analytics",
-    status: "stub",
+    status: "enabled",
   },
   {
     id: "M16",
@@ -195,3 +201,7 @@ export const QEP_MODULES: readonly QepModuleDescriptor[] = [
     status: "stub",
   },
 ] as const;
+
+export function findQepModuleBySlug(slug: string): QepModuleDescriptor | undefined {
+  return QEP_MODULES.find((module) => module.slug === slug);
+}

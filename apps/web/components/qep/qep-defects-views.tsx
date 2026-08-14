@@ -445,10 +445,39 @@ function DefectDetailView({ defectId }: { readonly defectId: string }) {
   const queryClient = useQueryClient();
   const [assigneeId, setAssigneeId] = useState("");
   const [evidenceId, setEvidenceId] = useState("");
+  const [almMessage, setAlmMessage] = useState<string | null>(null);
 
   const detailQuery = useQuery({
     queryKey: qepQueryKeys.defects.detail(defectId),
     queryFn: ({ signal }) => getDefect(defectId, { signal }),
+  });
+
+  const almListQuery = useQuery({
+    queryKey: ["qep-alm-produce", "by-defect", defectId],
+    queryFn: async ({ signal }) => {
+      const response = await fetch(
+        `/api/v1/qep/defects/${encodeURIComponent(defectId)}/alm-produce`,
+        { signal },
+      );
+      const body = (await response.json()) as {
+        data?: {
+          records: Array<{
+            produceId: string;
+            channel: string;
+            status: string;
+            detail?: string;
+            externalRef?: string;
+            createdAt: string;
+          }>;
+          config?: { mode: string };
+        };
+        error?: { message?: string };
+      };
+      if (!response.ok) {
+        throw new Error(body.error?.message ?? `Request failed (${response.status})`);
+      }
+      return body.data!;
+    },
   });
 
   const invalidate = async () => {
@@ -476,6 +505,49 @@ function DefectDetailView({ defectId }: { readonly defectId: string }) {
       setEvidenceId("");
       await invalidate();
     },
+  });
+
+  const almProduceMutation = useMutation({
+    mutationFn: async () => {
+      const changeEventId =
+        typeof detailQuery.data?.defect.customMetadata?.changeEventId === "string"
+          ? detailQuery.data.defect.customMetadata.changeEventId
+          : undefined;
+      const response = await fetch(
+        `/api/v1/qep/defects/${encodeURIComponent(defectId)}/alm-produce`,
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            channels: ["projects", "support"],
+            changeEventId,
+          }),
+        },
+      );
+      const body = (await response.json()) as {
+        data?: {
+          records: Array<{ channel: string; status: string; detail?: string }>;
+          note?: string;
+          config?: { mode: string };
+        };
+        error?: { message?: string };
+      };
+      if (!response.ok) {
+        throw new Error(body.error?.message ?? `Request failed (${response.status})`);
+      }
+      return body.data!;
+    },
+    onSuccess: (data) => {
+      const summary = data.records.map((r) => `${r.channel}=${r.status}`).join(", ");
+      setAlmMessage(
+        `ALM produce (${data.config?.mode ?? "record_only"}): ${summary || "none"}. ${data.note ?? ""}`,
+      );
+      void queryClient.invalidateQueries({
+        queryKey: ["qep-alm-produce", "by-defect", defectId],
+      });
+      void invalidate();
+    },
+    onError: (error) => setAlmMessage((error as Error).message),
   });
 
   if (detailQuery.isLoading) {
@@ -592,6 +664,45 @@ function DefectDetailView({ defectId }: { readonly defectId: string }) {
                 Manual defect — no execution origin.
               </p>
             )}
+          </QepPanel>
+
+          <QepPanel title="ALM produce (F16)">
+            <p className="mb-2 text-xs text-[var(--color-muted-foreground)]">
+              Creates Projects / Support work-item intents via Platform Services.
+              Default mode is record_only — not certification.
+            </p>
+            <Button
+              type="button"
+              size="sm"
+              variant="outline"
+              data-testid="qep-defect-alm-produce"
+              disabled={almProduceMutation.isPending}
+              onClick={() => {
+                setAlmMessage(null);
+                almProduceMutation.mutate();
+              }}
+            >
+              {almProduceMutation.isPending ? "Producing…" : "Produce fix work items"}
+            </Button>
+            {almMessage ? (
+              <p
+                className="mt-2 text-sm text-[var(--color-muted-foreground)]"
+                data-testid="qep-defect-alm-message"
+              >
+                {almMessage}
+              </p>
+            ) : null}
+            {almListQuery.data?.records?.length ? (
+              <ul className="mt-3 space-y-1 text-xs">
+                {almListQuery.data.records.map((row) => (
+                  <li key={row.produceId} className="font-mono">
+                    {row.channel}:{row.status}
+                    {row.externalRef ? ` · ${row.externalRef}` : ""}
+                    {row.detail ? ` · ${row.detail}` : ""}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </QepPanel>
 
           <QepPanel title="Relationships">

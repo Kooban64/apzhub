@@ -4,6 +4,7 @@
  */
 import {
   getDatabaseExecutor,
+  qepScmChangeEvent,
   qepScmRepository,
   qepScmTraceabilityLink,
   qepScmWebhookAudit,
@@ -13,6 +14,7 @@ import {
 import type {
   RegisteredRepository,
   RepositoryStore,
+  ScmChangeEvent,
   ScmTraceabilityLink,
 } from "@apzhub/platform-scm";
 import type { WebhookAuditRecord } from "@apzhub/platform-scm";
@@ -32,6 +34,10 @@ function toTraceabilityLink(
   row: typeof qepScmTraceabilityLink.$inferSelect,
 ): ScmTraceabilityLink {
   return row.linkJson as unknown as ScmTraceabilityLink;
+}
+
+function toChangeEvent(row: typeof qepScmChangeEvent.$inferSelect): ScmChangeEvent {
+  return row.changeJson as unknown as ScmChangeEvent;
 }
 
 export function createPostgresRepositoryStore(db: DatabaseExecutor): RepositoryStore {
@@ -205,6 +211,86 @@ export function createPostgresRepositoryStore(db: DatabaseExecutor): RepositoryS
             .orderBy(desc(qepScmTraceabilityLink.createdAt));
       return rows.map(toTraceabilityLink);
     },
+
+    async upsertChangeEvents(events: readonly ScmChangeEvent[]): Promise<void> {
+      for (const event of events) {
+        const values = {
+          id: event.changeEventId,
+          tenantId: event.tenantId,
+          repositoryId: event.repositoryId ?? null,
+          providerId: event.providerId,
+          kind: event.kind,
+          externalKey: event.externalKey,
+          occurredAt: new Date(event.occurredAt),
+          changeJson: event as unknown as Record<string, unknown>,
+        };
+        const existing = await exec()
+          .select({ id: qepScmChangeEvent.id })
+          .from(qepScmChangeEvent)
+          .where(eq(qepScmChangeEvent.id, event.changeEventId))
+          .limit(1);
+        if (existing[0]) {
+          await exec()
+            .update(qepScmChangeEvent)
+            .set({
+              repositoryId: values.repositoryId,
+              kind: values.kind,
+              externalKey: values.externalKey,
+              occurredAt: values.occurredAt,
+              changeJson: values.changeJson,
+            })
+            .where(eq(qepScmChangeEvent.id, event.changeEventId));
+        } else {
+          await exec().insert(qepScmChangeEvent).values(values);
+        }
+      }
+    },
+
+    async listChangeEvents(filter: {
+      readonly tenantId?: string;
+      readonly repositoryId?: string;
+      readonly limit?: number;
+    }): Promise<readonly ScmChangeEvent[]> {
+      const limit = filter.limit ?? 100;
+      if (filter.repositoryId && filter.tenantId) {
+        const rows = await exec()
+          .select()
+          .from(qepScmChangeEvent)
+          .where(
+            and(
+              eq(qepScmChangeEvent.tenantId, filter.tenantId),
+              eq(qepScmChangeEvent.repositoryId, filter.repositoryId),
+            ),
+          )
+          .orderBy(desc(qepScmChangeEvent.occurredAt))
+          .limit(limit);
+        return rows.map(toChangeEvent);
+      }
+      if (filter.repositoryId) {
+        const rows = await exec()
+          .select()
+          .from(qepScmChangeEvent)
+          .where(eq(qepScmChangeEvent.repositoryId, filter.repositoryId))
+          .orderBy(desc(qepScmChangeEvent.occurredAt))
+          .limit(limit);
+        return rows.map(toChangeEvent);
+      }
+      if (filter.tenantId) {
+        const rows = await exec()
+          .select()
+          .from(qepScmChangeEvent)
+          .where(eq(qepScmChangeEvent.tenantId, filter.tenantId))
+          .orderBy(desc(qepScmChangeEvent.occurredAt))
+          .limit(limit);
+        return rows.map(toChangeEvent);
+      }
+      const rows = await exec()
+        .select()
+        .from(qepScmChangeEvent)
+        .orderBy(desc(qepScmChangeEvent.occurredAt))
+        .limit(limit);
+      return rows.map(toChangeEvent);
+    },
   };
 }
 
@@ -214,6 +300,7 @@ export async function deleteScmDataForTenant(
   db: DatabaseExecutor,
 ): Promise<void> {
   const exec = getDatabaseExecutor(db);
+  await exec.delete(qepScmChangeEvent).where(eq(qepScmChangeEvent.tenantId, tenantId));
   await exec
     .delete(qepScmTraceabilityLink)
     .where(eq(qepScmTraceabilityLink.tenantId, tenantId));

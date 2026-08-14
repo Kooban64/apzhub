@@ -34,27 +34,28 @@ Execution strategy for taking APZHUB to market: internal adoption, external cust
 
 ## Catalogue
 
-| Document                   | Path                                                             |
-| -------------------------- | ---------------------------------------------------------------- |
-| Executive Strategy         | [EXECUTIVE-STRATEGY.md](./EXECUTIVE-STRATEGY.md)                 |
-| Go-To-Market               | [GO-TO-MARKET.md](./GO-TO-MARKET.md)                             |
-| Pricing Strategy           | [PRICING-STRATEGY.md](./PRICING-STRATEGY.md)                     |
-| Packaging Strategy         | [PACKAGING-STRATEGY.md](./PACKAGING-STRATEGY.md)                 |
-| Licensing Strategy         | [LICENSING-STRATEGY.md](./LICENSING-STRATEGY.md)                 |
-| Customer Success           | [CUSTOMER-SUCCESS.md](./CUSTOMER-SUCCESS.md)                     |
-| Implementation Methodology | [IMPLEMENTATION-METHODOLOGY.md](./IMPLEMENTATION-METHODOLOGY.md) |
-| Sales Model                | [SALES-MODEL.md](./SALES-MODEL.md)                               |
-| Partner Strategy           | [PARTNER-STRATEGY.md](./PARTNER-STRATEGY.md)                     |
-| Marketing Strategy         | [MARKETING-STRATEGY.md](./MARKETING-STRATEGY.md)                 |
-| Onboarding                 | [ONBOARDING.md](./ONBOARDING.md)                                 |
-| Training                   | [TRAINING.md](./TRAINING.md)                                     |
-| Launch Plan                | [LAUNCH-PLAN.md](./LAUNCH-PLAN.md)                               |
-| Revenue Roadmap            | [REVENUE-ROADMAP.md](./REVENUE-ROADMAP.md)                       |
-| KPIs                       | [KPIS.md](./KPIS.md)                                             |
-| Success Measures           | [SUCCESS-MEASURES.md](./SUCCESS-MEASURES.md)                     |
-| Risk Assessment            | [RISK-ASSESSMENT.md](./RISK-ASSESSMENT.md)                       |
-| Completion Report          | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md)                   |
-| Acceptance Report          | [ACCEPTANCE-REPORT.md](./ACCEPTANCE-REPORT.md)                   |
+| Document                   | Path                                                                                                                                                                                                              |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **SaaS Commercial Model**  | [SAAS-COMMERCIAL-MODEL.md](./SAAS-COMMERCIAL-MODEL.md) — **LOCKED** authority tenants → offerings → modules → roles · [SPR-COMM-001](../../sprint/SPR-COMM-001-catalogue-entitlements-tenant-switch.md) delivered |
+| Executive Strategy         | [EXECUTIVE-STRATEGY.md](./EXECUTIVE-STRATEGY.md)                                                                                                                                                                  |
+| Go-To-Market               | [GO-TO-MARKET.md](./GO-TO-MARKET.md)                                                                                                                                                                              |
+| Pricing Strategy           | [PRICING-STRATEGY.md](./PRICING-STRATEGY.md)                                                                                                                                                                      |
+| Packaging Strategy         | [PACKAGING-STRATEGY.md](./PACKAGING-STRATEGY.md)                                                                                                                                                                  |
+| Licensing Strategy         | [LICENSING-STRATEGY.md](./LICENSING-STRATEGY.md)                                                                                                                                                                  |
+| Customer Success           | [CUSTOMER-SUCCESS.md](./CUSTOMER-SUCCESS.md)                                                                                                                                                                      |
+| Implementation Methodology | [IMPLEMENTATION-METHODOLOGY.md](./IMPLEMENTATION-METHODOLOGY.md)                                                                                                                                                  |
+| Sales Model                | [SALES-MODEL.md](./SALES-MODEL.md)                                                                                                                                                                                |
+| Partner Strategy           | [PARTNER-STRATEGY.md](./PARTNER-STRATEGY.md)                                                                                                                                                                      |
+| Marketing Strategy         | [MARKETING-STRATEGY.md](./MARKETING-STRATEGY.md)                                                                                                                                                                  |
+| Onboarding                 | [ONBOARDING.md](./ONBOARDING.md)                                                                                                                                                                                  |
+| Training                   | [TRAINING.md](./TRAINING.md)                                                                                                                                                                                      |
+| Launch Plan                | [LAUNCH-PLAN.md](./LAUNCH-PLAN.md)                                                                                                                                                                                |
+| Revenue Roadmap            | [REVENUE-ROADMAP.md](./REVENUE-ROADMAP.md)                                                                                                                                                                        |
+| KPIs                       | [KPIS.md](./KPIS.md)                                                                                                                                                                                              |
+| Success Measures           | [SUCCESS-MEASURES.md](./SUCCESS-MEASURES.md)                                                                                                                                                                      |
+| Risk Assessment            | [RISK-ASSESSMENT.md](./RISK-ASSESSMENT.md)                                                                                                                                                                        |
+| Completion Report          | [COMPLETION-REPORT.md](./COMPLETION-REPORT.md)                                                                                                                                                                    |
+| Acceptance Report          | [ACCEPTANCE-REPORT.md](./ACCEPTANCE-REPORT.md)                                                                                                                                                                    |
 
 ## Explicit non-goals
 

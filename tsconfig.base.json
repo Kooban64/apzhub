@@ -21,6 +21,8 @@
       "@apzhub/ui": ["./packages/ui/src/index.ts"],
       "@apzhub/types": ["./packages/types/src/index.ts"],
       "@apzhub/config": ["./packages/config/src/index.ts"],
+      "@apzhub/platform-email": ["./packages/platform-email/src/index.ts"],
+      "@apzhub/platform-email/server": ["./packages/platform-email/src/server.ts"],
       "@apzhub/config/db": ["./packages/config/src/db/index.ts"],
       "@apzhub/config/governance": ["./packages/config/src/governance/index.ts"],
       "@apzhub/theme": ["./packages/theme/src/index.ts"],

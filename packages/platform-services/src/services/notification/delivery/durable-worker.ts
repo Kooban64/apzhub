@@ -30,6 +30,11 @@ export type DurableNotificationWorkerConfig = {
   readonly idleWaitMs?: number;
   readonly shutdownGraceMs?: number;
   readonly publisher?: DomainEventPublisher;
+  readonly resolveEmail?: (input: {
+    readonly tenantId: string;
+    readonly organisationId?: string;
+    readonly userId: string;
+  }) => string | undefined | Promise<string | undefined>;
   readonly simulateInAppFailure?: boolean;
   readonly simulateUncertainTimeout?: boolean;
   readonly orchestrator?: DurableDispatchOrchestrator;
@@ -88,6 +93,7 @@ export function createDurableNotificationWorker(
       workerId,
       env,
       publisher: config.publisher,
+      resolveEmail: config.resolveEmail,
       simulateInAppFailure: config.simulateInAppFailure,
       simulateUncertainTimeout: config.simulateUncertainTimeout,
     });

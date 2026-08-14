@@ -1,0 +1,129 @@
+# APZQEP quality tools cluster — CE / OSS only
+# Host: ${APZTOOLS_ROOT}/quality → /work
+# Usage:
+#   docker compose -f docker-compose.testing-cluster.yml -p apzqep-testing \
+#     --profile runners --profile selenium --profile reporting up -d
+# Heavy optional:
+#   --profile sonar
+
+name: apzqep-testing
+
+x-apztools: &apztools
+  volumes:
+    - ${APZTOOLS_ROOT:-/home/ubuntu/apztools}/quality:/work
+    - ${APZTOOLS_ROOT:-/home/ubuntu/apztools}/shared:/shared:ro
+
+x-sleep: &sleep
+  command: ["sleep", "infinity"]
+  working_dir: /work
+  <<: *apztools
+  networks: [testing_net]
+
+services:
+  playwright-runner:
+    image: mcr.microsoft.com/playwright:v1.62.1-jammy
+    profiles: ["runners"]
+    <<: *sleep
+
+  vitest-runner:
+    image: node:24-bookworm
+    profiles: ["runners"]
+    <<: *sleep
+
+  cypress-runner:
+    image: cypress/included:15.20.0
+    profiles: ["runners"]
+    entrypoint: ["sleep", "infinity"]
+    working_dir: /work
+    <<: *apztools
+    networks: [testing_net]
+
+  selenium-hub:
+    image: selenium/hub:4.46.0
+    profiles: ["selenium"]
+    networks: [testing_net]
+
+  selenium-chrome:
+    image: selenium/node-chrome:4.46.0
+    profiles: ["selenium"]
+    depends_on: [selenium-hub]
+    shm_size: 2gb
+    environment:
+      SE_EVENT_BUS_HOST: selenium-hub
+    networks: [testing_net]
+
+  k6-runner:
+    image: grafana/k6:2.1.0
+    profiles: ["runners"]
+    entrypoint: ["sleep"]
+    command: ["infinity"]
+    working_dir: /work
+    <<: *apztools
+    networks: [testing_net]
+
+  axe-runner:
+    image: node:24-bookworm
+    profiles: ["runners"]
+    <<: *sleep
+
+  # --- Web perf / a11y / API / load (CE) ---
+  lighthouse-runner:
+    image: femtopixel/google-lighthouse:v12.2.1
+    profiles: ["runners"]
+    entrypoint: ["sleep"]
+    command: ["infinity"]
+    working_dir: /work
+    <<: *apztools
+    networks: [testing_net]
+
+  pa11y-runner:
+    image: node:24-bookworm
+    profiles: ["runners"]
+    <<: *sleep
+
+  jmeter-runner:
+    image: justb4/jmeter:5.5
+    profiles: ["runners"]
+    entrypoint: ["sleep"]
+    command: ["infinity"]
+    working_dir: /work
+    <<: *apztools
+    networks: [testing_net]
+
+  newman-runner:
+    image: postman/newman:6-alpine
+    profiles: ["runners"]
+    entrypoint: ["sleep"]
+    command: ["infinity"]
+    working_dir: /work
+    <<: *apztools
+    networks: [testing_net]
+
+  allure-runner:
+    image: frankescobar/allure-docker-service:2.27.0
+    profiles: ["reporting"]
+    environment:
+      CHECK_RESULTS_EVERY_SECONDS: NONE
+      KEEP_HISTORY: 1
+    ports:
+      - "127.0.0.1:5050:5050"
+    volumes:
+      - ${APZTOOLS_ROOT:-/home/ubuntu/apztools}/quality/out/allure:/app/allure-results
+      - ${APZTOOLS_ROOT:-/home/ubuntu/apztools}/quality:/work
+    networks: [testing_net]
+
+  # SonarQube Community Build (heavy — optional profile)
+  sonar-runner:
+    image: sonarqube:25.1.0.102122-community
+    profiles: ["sonar"]
+    environment:
+      SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: "true"
+    ports:
+      - "127.0.0.1:9000:9000"
+    volumes:
+      - ${APZTOOLS_ROOT:-/home/ubuntu/apztools}/quality/out/sonar:/opt/sonarqube/data
+    networks: [testing_net]
+
+networks:
+  testing_net:
+    driver: bridge

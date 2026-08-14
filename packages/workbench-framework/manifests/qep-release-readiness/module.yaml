@@ -1,0 +1,55 @@
+manifestSchemaVersion: "1.0"
+id: qep-release-readiness
+name: Release Readiness
+version: 0.2.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: >
+    Go/no-go oriented release readiness checklist over live Quality Flow
+    orchestration and Release Candidate deep links. Presentation only —
+    no separate SoR (SPR-APZQEP-201).
+  product: apzqep
+  moduleCatalogueId: M12
+  slug: release-readiness
+  programme: SPR-APZQEP-201
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: active
+
+permissions:
+  - id: qep.release_readiness.read
+    label: View Release Readiness
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Release Readiness
+    icon: shield-check
+    route: /workspace/qep/release-readiness
+    order: 8
+    permission: qep.release_readiness.read
+  view:
+    title: Release Readiness
+    workspace: qep
+    route: /workspace/qep/release-readiness
+    permission: qep.release_readiness.read
+  actions:
+    - id: qep.release_readiness.navigate
+      label: Open Release Readiness
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: qep.release_readiness.read
+      palette: true
+      group: Quality
+      icon: shield-check
+      order: 8
+      description: Open the Release Readiness checklist.

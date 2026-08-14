@@ -1,7 +1,7 @@
 manifestSchemaVersion: "1.0"
 id: platform-knowledge
 name: APZ Knowledge
-version: 0.1.0
+version: 0.1.1
 kind: module
 
 metadata:
@@ -30,6 +30,8 @@ module:
 permissions:
   - id: knowledge.view
     description: Enter APZ Knowledge — view organisational memory surfaces.
+  - id: knowledge.manage
+    description: Capture and curate organisational memory (steward; not admin).
   - id: knowledge.admin
     description: Administer APZ Knowledge operator surfaces (elevated).
 
@@ -50,6 +52,26 @@ navigation:
       label: Memory
       route: /workspace/knowledge/memory
       icon: book-marked
+      permission: knowledge.view
+    - id: knowledge.lessons
+      label: Lessons
+      route: /workspace/knowledge/lessons
+      icon: book-open
+      permission: knowledge.view
+    - id: knowledge.library
+      label: Library
+      route: /workspace/knowledge/library
+      icon: library
+      permission: knowledge.view
+    - id: knowledge.decision-knowledge
+      label: Decisions
+      route: /workspace/knowledge/decision-knowledge
+      icon: scale
+      permission: knowledge.view
+    - id: knowledge.quality
+      label: Quality
+      route: /workspace/knowledge/quality
+      icon: badge-check
       permission: knowledge.view
     - id: knowledge.companion
       label: Companion
@@ -79,6 +101,22 @@ commands:
     permission: knowledge.view
   - id: knowledge.memory.open
     label: Browse organisational memory
+    category: APZ Knowledge
+    permission: knowledge.view
+  - id: knowledge.lessons.open
+    label: Open operational lessons
+    category: APZ Knowledge
+    permission: knowledge.view
+  - id: knowledge.library.open
+    label: Open best practice library
+    category: APZ Knowledge
+    permission: knowledge.view
+  - id: knowledge.decision-knowledge.open
+    label: Open decision knowledge
+    category: APZ Knowledge
+    permission: knowledge.view
+  - id: knowledge.quality.open
+    label: Open knowledge quality
     category: APZ Knowledge
     permission: knowledge.view
   - id: knowledge.companion.open

@@ -9,6 +9,8 @@ loadEnv({ path: path.resolve(__dirname, "../../.env") });
 const nextConfig: NextConfig = withSecurityHeaders({
   // OPS-002 A1 — enables slim production container images (no user-facing behaviour change)
   output: "standalone",
+  // Public nginx hostname in front of `next dev` (ENVIRONMENT.md / bring-up).
+  allowedDevOrigins: ["apzhub.apzportal.apzor.com"],
   transpilePackages: [
     "@apzhub/activity-timeline-framework",
     "@apzhub/auth",

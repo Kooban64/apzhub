@@ -1,0 +1,37 @@
+manifestSchemaVersion: "1.0"
+id: platform-org-members
+name: Organisation Members
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: >
+    Live org member invite, persona assignment, and suspension
+    (SPR-IAM-COMMERCIAL-001). Same ruleset for all organisations.
+  programme: SPR-IAM-COMMERCIAL-001
+
+dependencies:
+  platform: []
+  services:
+    - identity-lifecycle-service
+
+module:
+  category: platform
+  status: active
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: administration
+    parent: platform-administration
+    label: Organisation Members
+    icon: users
+    route: /workspace/administration/members
+    order: 12
+    permission: identity.manage
+  view:
+    title: Organisation Members
+    workspace: administration
+    route: /workspace/administration/members
+    permission: identity.manage

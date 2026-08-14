@@ -47,7 +47,35 @@ export function QepAutomationRouterView() {
 
 function AutomationHomeView() {
   const queryClient = useQueryClient();
-  const [correlationId] = useState(() => crypto.randomUUID());
+  const [changeEventId, setChangeEventId] = useState("");
+  const [vitestJson, setVitestJson] = useState(
+    '{\n  "success": true,\n  "tests": [{ "title": "unit", "status": "passed", "duration": 4 }]\n}',
+  );
+  const [axeJson, setAxeJson] = useState(
+    '{\n  "url": "about:blank",\n  "violations": [],\n  "passes": [{ "id": "document-title" }]\n}',
+  );
+  const [securityJson, setSecurityJson] = useState(
+    '{\n  "ok": true,\n  "findings": []\n}',
+  );
+  const [codeQualityJson, setCodeQualityJson] = useState(
+    '{\n  "ok": true,\n  "findings": []\n}',
+  );
+  const [k6Json, setK6Json] = useState(
+    '{\n  "ok": true,\n  "p95": 120,\n  "http_req_failed": { "values": { "rate": 0 } },\n  "checks": { "values": { "rate": 1 } }\n}',
+  );
+  const [cypressJson, setCypressJson] = useState(
+    '{\n  "success": true,\n  "tests": [{ "title": "smoke", "status": "passed" }]\n}',
+  );
+  const [ingestNote, setIngestNote] = useState<string | null>(null);
+
+  const providersQuery = useQuery({
+    queryKey: ["qep-automation", "providers"],
+    queryFn: () =>
+      fetchJson<{
+        providers: Array<{ providerId: string }>;
+        liveModeEnabled: boolean;
+      }>("/api/v1/qep/automation/providers"),
+  });
 
   const executionsQuery = useQuery({
     queryKey: ["qep-automation", "executions"],
@@ -62,26 +90,89 @@ function AutomationHomeView() {
       }>("/api/v1/qep/automation/executions"),
   });
 
+  const changeMetadata = (): Record<string, string> | undefined => {
+    const id = changeEventId.trim();
+    return id ? { changeEventId: id } : undefined;
+  };
+
   const runMutation = useMutation({
-    mutationFn: () =>
+    mutationFn: (mode: "dry-run" | "live") =>
       fetchJson<{ execution: { executionId: string } }>(
         "/api/v1/qep/automation/executions",
         {
           method: "POST",
           body: JSON.stringify({
             providerId: "playwright",
-            correlationId,
+            correlationId: crypto.randomUUID(),
             runImmediately: true,
             target: {
               kind: "url",
-              name: "workspace-smoke",
+              name: mode === "live" ? "workspace-live-smoke" : "workspace-smoke",
               baseUrl: "about:blank",
+              metadata: changeMetadata(),
             },
-            options: { dryRun: true },
+            options: {
+              dryRun: mode !== "live",
+              collectScreenshots: true,
+              collectTraces: mode === "live",
+              collectVideos: false,
+            },
           }),
         },
       ),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      setIngestNote(
+        `Playwright execution ${data.execution.executionId.slice(0, 8)}… published` +
+          (changeEventId.trim()
+            ? ` · linked to change ${changeEventId.trim().slice(0, 24)}…`
+            : ""),
+      );
+      void queryClient.invalidateQueries({ queryKey: ["qep-automation"] });
+    },
+  });
+
+  const ingestMutation = useMutation({
+    mutationFn: (input: {
+      providerId:
+        | "vitest"
+        | "accessibility"
+        | "security"
+        | "codequality"
+        | "k6"
+        | "cypress"
+        | "selenium"
+        | "appium"
+        | "rest"
+        | "visual";
+      name: string;
+      report: string;
+    }) => {
+      JSON.parse(input.report);
+      return fetchJson<{ execution: { executionId: string; state: string } }>(
+        "/api/v1/qep/automation/executions",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            providerId: input.providerId,
+            correlationId: crypto.randomUUID(),
+            runImmediately: true,
+            target: {
+              kind: "custom",
+              name: input.name,
+              entry: input.report,
+              metadata: changeMetadata(),
+            },
+          }),
+        },
+      );
+    },
+    onSuccess: (data, variables) => {
+      setIngestNote(
+        `${variables.providerId} ${data.execution.state} · ${data.execution.executionId.slice(0, 8)}…` +
+          (changeEventId.trim()
+            ? ` · change ${changeEventId.trim().slice(0, 24)}…`
+            : " · set changeEventId to attach graph edges"),
+      );
       void queryClient.invalidateQueries({ queryKey: ["qep-automation"] });
     },
   });
@@ -94,19 +185,41 @@ function AutomationHomeView() {
   }
 
   const executions = executionsQuery.data?.executions ?? [];
+  const liveModeEnabled = providersQuery.data?.liveModeEnabled === true;
 
   return (
     <QepPageShell
       title="Enterprise Automation"
-      description="Provider-neutral automation foundation. Playwright is the first active provider."
+      description="F3 deepen — full provider evidence matrix. Playwright live runner + report ingest for CI, a11y, security, code quality, performance, and automation families. Link evidence to an SCM change for RC certification."
       actions={
-        <Button
-          type="button"
-          onClick={() => runMutation.mutate()}
-          disabled={runMutation.isPending}
-        >
-          {runMutation.isPending ? "Running…" : "Run Playwright dry-run"}
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          <Button
+            type="button"
+            onClick={() => runMutation.mutate("dry-run")}
+            disabled={runMutation.isPending || ingestMutation.isPending}
+          >
+            {runMutation.isPending && runMutation.variables === "dry-run"
+              ? "Running…"
+              : "Run Playwright dry-run"}
+          </Button>
+          <Button
+            type="button"
+            variant={liveModeEnabled ? "default" : "outline"}
+            onClick={() => runMutation.mutate("live")}
+            disabled={
+              runMutation.isPending || ingestMutation.isPending || !liveModeEnabled
+            }
+            title={
+              liveModeEnabled
+                ? "Live Chromium run with real screenshot/trace artifacts"
+                : "Set APZHUB_AUTOMATION_LIVE=true and restart the web process"
+            }
+          >
+            {runMutation.isPending && runMutation.variables === "live"
+              ? "Running live…"
+              : "Run Playwright live"}
+          </Button>
+        </div>
       }
     >
       <div className="mb-4 flex gap-3 text-sm">
@@ -114,10 +227,177 @@ function AutomationHomeView() {
         <Link href={QEP_AUTOMATION_ROUTES.queue}>Queue</Link>
         <Link href={QEP_AUTOMATION_ROUTES.history}>History</Link>
       </div>
+      {!liveModeEnabled ? (
+        <p className="mb-4 text-sm text-muted-foreground">
+          Live mode is off. Enable with{" "}
+          <code className="text-xs">APZHUB_AUTOMATION_LIVE=true</code> and restart web
+          to capture real browser artifacts into evidence storage.
+        </p>
+      ) : null}
+
+      <QepPanel title="Link to SCM change (F3 graph edge)">
+        <label className="mb-2 block text-sm">
+          changeEventId
+          <input
+            className="mt-1 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 font-mono text-xs"
+            value={changeEventId}
+            onChange={(event) => setChangeEventId(event.target.value)}
+            placeholder="chg-github-…-commit-…"
+            data-testid="qep-automation-change-event-id"
+          />
+        </label>
+        <p className="text-sm text-[var(--color-muted-foreground)]">
+          When set, published evidence rows are tagged and linked on the Quality Graph
+          for that change.
+        </p>
+        {ingestNote ? (
+          <p className="mt-2 text-sm" data-testid="qep-automation-ingest-note">
+            {ingestNote}
+          </p>
+        ) : null}
+        {ingestMutation.isError ? (
+          <QepErrorState message={(ingestMutation.error as Error).message} />
+        ) : null}
+      </QepPanel>
+
+      <div className="mb-4 grid gap-4 md:grid-cols-2">
+        <QepPanel title="Vitest CI ingest">
+          <textarea
+            className="mb-2 min-h-28 w-full rounded border border-[var(--color-border)] bg-transparent p-2 font-mono text-xs"
+            value={vitestJson}
+            onChange={(event) => setVitestJson(event.target.value)}
+            data-testid="qep-automation-vitest-json"
+          />
+          <Button
+            type="button"
+            size="sm"
+            disabled={ingestMutation.isPending}
+            onClick={() =>
+              ingestMutation.mutate({
+                providerId: "vitest",
+                name: "ci-unit-ingest",
+                report: vitestJson,
+              })
+            }
+          >
+            Ingest Vitest report
+          </Button>
+        </QepPanel>
+        <QepPanel title="Accessibility (axe) ingest">
+          <textarea
+            className="mb-2 min-h-28 w-full rounded border border-[var(--color-border)] bg-transparent p-2 font-mono text-xs"
+            value={axeJson}
+            onChange={(event) => setAxeJson(event.target.value)}
+            data-testid="qep-automation-axe-json"
+          />
+          <Button
+            type="button"
+            size="sm"
+            disabled={ingestMutation.isPending}
+            onClick={() =>
+              ingestMutation.mutate({
+                providerId: "accessibility",
+                name: "a11y-ingest",
+                report: axeJson,
+              })
+            }
+          >
+            Ingest axe summary
+          </Button>
+        </QepPanel>
+        <QepPanel title="Security scan ingest">
+          <textarea
+            className="mb-2 min-h-28 w-full rounded border border-[var(--color-border)] bg-transparent p-2 font-mono text-xs"
+            value={securityJson}
+            onChange={(event) => setSecurityJson(event.target.value)}
+            data-testid="qep-automation-security-json"
+          />
+          <Button
+            type="button"
+            size="sm"
+            disabled={ingestMutation.isPending}
+            onClick={() =>
+              ingestMutation.mutate({
+                providerId: "security",
+                name: "security-ingest",
+                report: securityJson,
+              })
+            }
+          >
+            Ingest security report
+          </Button>
+        </QepPanel>
+        <QepPanel title="Code quality ingest">
+          <textarea
+            className="mb-2 min-h-28 w-full rounded border border-[var(--color-border)] bg-transparent p-2 font-mono text-xs"
+            value={codeQualityJson}
+            onChange={(event) => setCodeQualityJson(event.target.value)}
+            data-testid="qep-automation-codequality-json"
+          />
+          <Button
+            type="button"
+            size="sm"
+            disabled={ingestMutation.isPending}
+            onClick={() =>
+              ingestMutation.mutate({
+                providerId: "codequality",
+                name: "code-quality-ingest",
+                report: codeQualityJson,
+              })
+            }
+          >
+            Ingest code quality report
+          </Button>
+        </QepPanel>
+        <QepPanel title="Performance (k6) ingest">
+          <textarea
+            className="mb-2 min-h-28 w-full rounded border border-[var(--color-border)] bg-transparent p-2 font-mono text-xs"
+            value={k6Json}
+            onChange={(event) => setK6Json(event.target.value)}
+            data-testid="qep-automation-k6-json"
+          />
+          <Button
+            type="button"
+            size="sm"
+            disabled={ingestMutation.isPending}
+            onClick={() =>
+              ingestMutation.mutate({
+                providerId: "k6",
+                name: "performance-ingest",
+                report: k6Json,
+              })
+            }
+          >
+            Ingest performance report
+          </Button>
+        </QepPanel>
+        <QepPanel title="Cypress (automation family) ingest">
+          <textarea
+            className="mb-2 min-h-28 w-full rounded border border-[var(--color-border)] bg-transparent p-2 font-mono text-xs"
+            value={cypressJson}
+            onChange={(event) => setCypressJson(event.target.value)}
+            data-testid="qep-automation-cypress-json"
+          />
+          <Button
+            type="button"
+            size="sm"
+            disabled={ingestMutation.isPending}
+            onClick={() =>
+              ingestMutation.mutate({
+                providerId: "cypress",
+                name: "cypress-ingest",
+                report: cypressJson,
+              })
+            }
+          >
+            Ingest Cypress report
+          </Button>
+        </QepPanel>
+      </div>
 
       <QepPanel title="Execution queue / history">
         {executions.length === 0 ? (
-          <QepEmptyState title="No executions yet — run a Playwright dry-run to begin." />
+          <QepEmptyState title="No executions yet — run Playwright or ingest a CI/a11y report." />
         ) : (
           <QepTable
             caption="Automation executions"

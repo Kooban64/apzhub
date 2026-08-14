@@ -4,6 +4,7 @@ export {
   QEP_PRODUCT_EXPANDED,
   QEP_MODULE_IDS,
   QEP_MODULES,
+  findQepModuleBySlug,
 } from "./module-ids";
 export type { QepModuleId, QepModuleDescriptor } from "./module-ids";
 

@@ -9,11 +9,38 @@ import type { RegisterRepositoryRequest, ScmProviderId } from "@apzhub/platform-
 
 import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
 import { PlatformApiHttpError } from "../errors";
-import { jsonDataResponse } from "../response";
-import { getQepScmRuntime } from "@/lib/qep/scm-runtime";
+import { jsonDataResponse, jsonErrorResponse } from "../response";
+import {
+  createPlatformApiTracing,
+  resolvePlatformApiTracing,
+} from "../request-context";
+import {
+  acceptRegressionProposal,
+  buildChangeImpact,
+  proposeRegressionPack,
+} from "@/lib/qep/scm-impact";
+import {
+  acceptTestDesignProposal,
+  proposeTestDesignPack,
+} from "@/lib/qep/test-design-assist";
+import {
+  defaultScmTenantId,
+  getQepScmRuntime,
+  resolveGithubPatFromEnv,
+} from "@/lib/qep/scm-runtime";
 import { requireQepPermission, sessionTenantId } from "./require-qep-permission";
 
 type RouteContext = { params: Promise<Record<string, string>> };
+
+function serverGithubCredentials(tenantId: string) {
+  const runtime = getQepScmRuntime();
+  const pat = resolveGithubPatFromEnv();
+  if (pat) {
+    runtime.setDefaultCredentials(tenantId, "github", { kind: "pat", token: pat });
+    return { kind: "pat" as const, token: pat };
+  }
+  return { kind: "none" as const };
+}
 
 function requireParam(
   params: Record<string, string> | undefined,
@@ -46,6 +73,7 @@ export async function handleConnectScmProvider(
   const body = (await request.json()) as {
     providerId?: ScmProviderId;
     correlationId?: string;
+    /** Ignored — PATs come from `.secrets/git` / server env only (F1). */
     token?: string;
   };
   if (!body.providerId || !body.correlationId) {
@@ -54,15 +82,27 @@ export async function handleConnectScmProvider(
       message: "providerId and correlationId are required",
     });
   }
+  const tenantId = sessionTenantId(context);
   const runtime = getQepScmRuntime();
+  const credentials =
+    body.providerId === "github"
+      ? serverGithubCredentials(tenantId)
+      : { kind: "none" as const };
   try {
     const result = await runtime.connectProvider(
-      sessionTenantId(context),
+      tenantId,
       body.providerId,
       body.correlationId,
-      body.token ? { kind: "pat", token: body.token } : { kind: "none" },
+      credentials,
     );
-    return jsonDataResponse({ connection: result }, context.tracing);
+    return jsonDataResponse(
+      {
+        connection: result,
+        liveModeEnabled: process.env.APZHUB_SCM_GITHUB_LIVE === "true",
+        credentialsSource: credentials.kind === "pat" ? "server_secrets" : "none",
+      },
+      context.tracing,
+    );
   } catch (error) {
     throw new PlatformApiHttpError(400, {
       code: "SCM_ERROR",
@@ -99,6 +139,9 @@ export async function handleRegisterScmRepository(
     });
   }
   const runtime = getQepScmRuntime();
+  if (body.providerId === "github") {
+    serverGithubCredentials(tenantId);
+  }
   try {
     const repository = await runtime.registerRepository({
       tenantId,
@@ -111,7 +154,9 @@ export async function handleRegisterScmRepository(
       selectedBranches: body.selectedBranches,
       metadata: body.metadata,
       registeredBy,
-      credentials: body.credentials,
+      // Never accept client-supplied PATs — server secrets only (F1).
+      credentials:
+        body.providerId === "github" ? serverGithubCredentials(tenantId) : undefined,
     });
     return jsonDataResponse({ repository }, context.tracing, { status: 201 });
   } catch (error) {
@@ -138,7 +183,35 @@ export async function handleGetScmRepository(
     });
   }
   const links = await runtime.listTraceabilityLinks(repositoryId);
-  return jsonDataResponse({ repository, links }, context.tracing);
+  const changes = await runtime.listChangeEvents({
+    tenantId: sessionTenantId(context),
+    repositoryId,
+    limit: 50,
+  });
+  return jsonDataResponse({ repository, links, changes }, context.tracing);
+}
+
+export async function handleListScmChangeEvents(
+  request: NextRequest,
+  context: PlatformApiRequestContext,
+) {
+  requireQepPermission(context, "qep.scm.read");
+  const tenantId = sessionTenantId(context);
+  const url = new URL(request.url);
+  const repositoryId = url.searchParams.get("repositoryId") ?? undefined;
+  const limitRaw = url.searchParams.get("limit");
+  const limit = limitRaw ? Number(limitRaw) : 50;
+  const runtime = getQepScmRuntime();
+  return jsonDataResponse(
+    {
+      changes: await runtime.listChangeEvents({
+        tenantId,
+        repositoryId,
+        limit: Number.isFinite(limit) ? Math.min(Math.max(limit, 1), 200) : 50,
+      }),
+    },
+    context.tracing,
+  );
 }
 
 export async function handleSyncScmRepository(
@@ -157,12 +230,20 @@ export async function handleSyncScmRepository(
       message: "Repository not found",
     });
   }
+  if (repository.providerId === "github") {
+    serverGithubCredentials(repository.tenantId);
+  }
   try {
     const result = await runtime.syncRepository(
       repositoryId,
       body.correlationId ?? crypto.randomUUID(),
     );
-    return jsonDataResponse(result, context.tracing);
+    const changes = await runtime.listChangeEvents({
+      tenantId: repository.tenantId,
+      repositoryId,
+      limit: 50,
+    });
+    return jsonDataResponse({ ...result, changes }, context.tracing);
   } catch (error) {
     throw new PlatformApiHttpError(400, {
       code: "SCM_ERROR",
@@ -189,7 +270,7 @@ export async function handleIngestScmWebhook(
   context: PlatformApiRequestContext,
   routeContext?: RouteContext,
 ) {
-  // Signature/provider verification is authoritative; require authenticated tenant context.
+  // Authenticated ingest retained for operator replay/tests.
   const providerId = requireParam(
     await routeContext?.params,
     "providerId",
@@ -224,6 +305,69 @@ export async function handleIngestScmWebhook(
       code: "SCM_ERROR",
       message: error instanceof Error ? error.message : String(error),
     });
+  }
+}
+
+/**
+ * Flagship F1 — public GitHub webhook ingress (HMAC only, no session).
+ * POST /api/v1/qep/scm/ingress/[providerId]?tenantId=...
+ */
+export async function handlePublicScmWebhookIngress(
+  request: NextRequest,
+  routeContext?: RouteContext,
+): Promise<Response> {
+  const tracingResult = resolvePlatformApiTracing(request);
+  const tracing = tracingResult.ok ? tracingResult.context : createPlatformApiTracing();
+  const providerId = (await routeContext?.params)?.providerId as
+    ScmProviderId | undefined;
+  if (!providerId) {
+    return jsonErrorResponse(
+      400,
+      { code: "VALIDATION_FAILED", message: "Missing providerId" },
+      tracing,
+    );
+  }
+
+  const url = new URL(request.url);
+  const tenantId =
+    url.searchParams.get("tenantId")?.trim() ||
+    request.headers.get("x-apzhub-tenant-id")?.trim() ||
+    defaultScmTenantId();
+
+  const rawBody = await request.text();
+  let payload: unknown = {};
+  try {
+    payload = rawBody ? JSON.parse(rawBody) : {};
+  } catch {
+    payload = { raw: rawBody };
+  }
+  const headers: Record<string, string | undefined> = {};
+  request.headers.forEach((value, key) => {
+    headers[key.toLowerCase()] = value;
+  });
+
+  const runtime = getQepScmRuntime();
+  try {
+    const result = await runtime.ingestWebhook({
+      tenantId,
+      providerId,
+      headers,
+      rawBody,
+      payload,
+      correlationId: tracing.correlationId,
+    });
+    return jsonDataResponse(result, tracing, {
+      status: result.audit.state === "rejected" ? 401 : 202,
+    });
+  } catch (error) {
+    return jsonErrorResponse(
+      400,
+      {
+        code: "SCM_ERROR",
+        message: error instanceof Error ? error.message : String(error),
+      },
+      tracing,
+    );
   }
 }
 
@@ -294,5 +438,167 @@ export async function handleCreateScmTraceabilityLink(
       code: "SCM_ERROR",
       message: error instanceof Error ? error.message : String(error),
     });
+  }
+}
+
+function mapScmImpactError(error: unknown): never {
+  const message = error instanceof Error ? error.message : String(error);
+  if (message === "scm.impact.change_not_found") {
+    throw new PlatformApiHttpError(404, {
+      code: "NOT_FOUND",
+      message: "Change event not found",
+    });
+  }
+  if (message === "scm.impact.suite_not_in_proposal") {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_FAILED",
+      message: "suiteId is not in the advisory regression proposal",
+    });
+  }
+  if (message === "scm.design.empty_proposal") {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_FAILED",
+      message: "No advisory design drafts available to accept",
+    });
+  }
+  if (message === "scm.design.proposal_item_required") {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_FAILED",
+      message: "proposalItemIds or acceptAll is required",
+    });
+  }
+  if (message === "scm.design.item_not_in_proposal") {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_FAILED",
+      message: "proposalItemId is not in the advisory design proposal",
+    });
+  }
+  if (message === "scm.design.change_id_required") {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_FAILED",
+      message: "changeEventId is required",
+    });
+  }
+  throw new PlatformApiHttpError(400, {
+    code: "SCM_IMPACT_ERROR",
+    message,
+  });
+}
+
+/** Flagship F2 — Quality Graph impact for a durable change event. */
+export async function handleGetScmChangeImpact(
+  _request: NextRequest,
+  context: PlatformApiRequestContext,
+  routeContext?: RouteContext,
+) {
+  requireQepPermission(context, "qep.scm.read");
+  const changeEventId = requireParam(await routeContext?.params, "changeEventId");
+  try {
+    const impact = await buildChangeImpact(
+      sessionTenantId(context),
+      changeEventId,
+      context.serviceContext.userId,
+    );
+    return jsonDataResponse({ impact }, context.tracing);
+  } catch (error) {
+    mapScmImpactError(error);
+  }
+}
+
+/** Flagship F2 — advisory regression pack (human must accept). */
+export async function handleProposeScmRegression(
+  _request: NextRequest,
+  context: PlatformApiRequestContext,
+  routeContext?: RouteContext,
+) {
+  requireQepPermission(context, "qep.scm.read");
+  const changeEventId = requireParam(await routeContext?.params, "changeEventId");
+  try {
+    const proposal = await proposeRegressionPack(
+      sessionTenantId(context),
+      changeEventId,
+    );
+    return jsonDataResponse({ proposal }, context.tracing);
+  } catch (error) {
+    mapScmImpactError(error);
+  }
+}
+
+/** Flagship F2 — accept advisory pack → draft execution plan on native SoR. */
+export async function handleAcceptScmRegression(
+  request: NextRequest,
+  context: PlatformApiRequestContext,
+  routeContext?: RouteContext,
+) {
+  requireQepPermission(context, "qep.scm.operate");
+  requireQepPermission(context, "qep.execution_plans.create");
+  const changeEventId = requireParam(await routeContext?.params, "changeEventId");
+  const body = (await request.json().catch(() => ({}))) as {
+    suiteId?: string;
+    planName?: string;
+  };
+  if (!body.suiteId?.trim()) {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_FAILED",
+      message: "suiteId is required",
+    });
+  }
+  try {
+    const result = await acceptRegressionProposal({
+      tenantId: sessionTenantId(context),
+      userId: context.serviceContext.userId,
+      permissions: context.serviceContext.permissions,
+      changeEventId,
+      suiteId: body.suiteId.trim(),
+      planName: body.planName,
+    });
+    return jsonDataResponse({ acceptance: result }, context.tracing, { status: 201 });
+  } catch (error) {
+    mapScmImpactError(error);
+  }
+}
+
+/** Flagship F7 — advisory test design pack (human must accept → draft specs). */
+export async function handleProposeScmDesign(
+  _request: NextRequest,
+  context: PlatformApiRequestContext,
+  routeContext?: RouteContext,
+) {
+  requireQepPermission(context, "qep.scm.read");
+  const changeEventId = requireParam(await routeContext?.params, "changeEventId");
+  try {
+    const proposal = await proposeTestDesignPack(
+      sessionTenantId(context),
+      changeEventId,
+    );
+    return jsonDataResponse({ proposal }, context.tracing);
+  } catch (error) {
+    mapScmImpactError(error);
+  }
+}
+
+/** Flagship F7 — accept design drafts → native Spec SoR + optional traces. */
+export async function handleAcceptScmDesign(
+  request: NextRequest,
+  context: PlatformApiRequestContext,
+  routeContext?: RouteContext,
+) {
+  requireQepPermission(context, "qep.scm.operate");
+  requireQepPermission(context, "qep.specification.create");
+  const changeEventId = requireParam(await routeContext?.params, "changeEventId");
+  const body = (await request.json().catch(() => ({}))) as {
+    proposalItemIds?: string[];
+    acceptAll?: boolean;
+  };
+  try {
+    const result = await acceptTestDesignProposal({
+      serviceContext: context.serviceContext,
+      changeEventId,
+      proposalItemIds: body.proposalItemIds,
+      acceptAll: body.acceptAll === true,
+    });
+    return jsonDataResponse({ acceptance: result }, context.tracing, { status: 201 });
+  } catch (error) {
+    mapScmImpactError(error);
   }
 }

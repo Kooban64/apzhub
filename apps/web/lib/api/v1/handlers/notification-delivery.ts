@@ -64,6 +64,7 @@ const createIntentBodySchema = z.object({
     .array(
       z.object({
         userId: z.string().optional(),
+        email: z.string().email().optional(),
         roleId: z.string().optional(),
         teamId: z.string().optional(),
         organisationId: z.string().optional(),

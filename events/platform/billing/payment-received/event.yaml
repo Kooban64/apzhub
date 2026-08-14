@@ -1,0 +1,17 @@
+manifestSchemaVersion: "1.0"
+id: platform-billing-payment-received
+name: Platform Billing Payment Received
+version: 0.1.0
+kind: event
+metadata:
+  category: platform
+  description: Emitted when a payment is recorded (PayFast ITN or manual).
+event:
+  category: platform
+  publisher: billing-service
+  permission: billing.manage
+  payload:
+    paymentId: string
+    invoiceId: string
+    billingAccountId: string
+    providerRef: string

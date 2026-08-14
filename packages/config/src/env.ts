@@ -4,6 +4,7 @@ import {
   validatePlatformEnvironment,
 } from "./governance/validation";
 import { platformEnvSchema, type PlatformEnv } from "./governance/schema";
+import { ensureLocalSecretsLoaded } from "./secrets/load-local-secrets";
 
 export type Env = PlatformEnv;
 
@@ -15,6 +16,7 @@ export function resetEnvCache(): void {
 
 export function getEnv(): Env {
   if (cached) return cached;
+  ensureLocalSecretsLoaded();
   const parsed = platformEnvSchema.safeParse(process.env);
   if (!parsed.success) {
     throw new Error(`Invalid environment configuration: ${parsed.error.message}`);
