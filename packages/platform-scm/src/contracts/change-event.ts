@@ -1,7 +1,7 @@
 import type { ScmProviderId } from "./repository";
 
 /** Durable engineering change signal (Flagship F1 — GitHub Heartbeat). */
-export type ScmChangeKind = "commit" | "pull_request" | "push" | "other";
+export type ScmChangeKind = "commit" | "pull_request" | "push" | "ci_run" | "other";
 
 export type ScmChangeSource = "webhook" | "sync" | "poll";
 

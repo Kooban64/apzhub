@@ -1,0 +1,46 @@
+manifestSchemaVersion: "1.0"
+id: qep-ai-workspace
+name: Governed Quality Assist
+version: 0.2.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: >
+    Audited, human-governed quality suggestions. Live LLM use is disabled
+    unless APZHUB_QEP_AI_ASSIST=true and a server-side secret is available.
+  product: apzqep
+  moduleCatalogueId: M17
+  slug: ai-workspace
+  programme: SPR-APZQEP-203
+
+dependencies:
+  platform: []
+  services:
+    - qep-ai
+
+module:
+  category: quality-engineering
+  status: active
+
+permissions:
+  - id: qep.ai_workspace.read
+    label: View Governed Quality Assist
+  - id: qep.ai_workspace.operate
+    label: Operate Governed Quality Assist
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Quality Assist
+    icon: sparkles
+    route: /workspace/qep/ai-workspace
+    order: 170
+    permission: qep.ai_workspace.read
+  view:
+    title: Governed Quality Assist
+    workspace: qep
+    route: /workspace/qep/ai-workspace
+    permission: qep.ai_workspace.read

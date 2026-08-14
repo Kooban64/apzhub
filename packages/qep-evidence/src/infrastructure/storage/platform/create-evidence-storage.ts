@@ -110,14 +110,19 @@ export function createEvidenceStorageSync(
   return { manager, config: cfg };
 }
 
+const DEFAULT_LOCAL_EVIDENCE_ROOT = "/var/lib/apzhub/qep/evidence";
+
 /**
- * Resolve platform config from environment (LA / ops).
- * Defaults to memory when unset — Local is never assumed.
+ * Resolve platform config from environment.
+ * Tests remain isolated in memory; every other unset environment defaults to
+ * durable local storage. Object-store durability remains an explicit future
+ * provider and is never implied by this local default.
  */
 export function resolveEvidenceStorageConfigFromEnv(
   env: Record<string, string | undefined> = process.env,
 ): EvidenceStoragePlatformConfig {
-  const providerRaw = (env.APZQEP_EVIDENCE_STORAGE_PROVIDER ?? "memory")
+  const defaultProvider = env.NODE_ENV === "test" ? "memory" : "local";
+  const providerRaw = (env.APZQEP_EVIDENCE_STORAGE_PROVIDER ?? defaultProvider)
     .trim()
     .toLowerCase();
   const provider = providerRaw === "local" ? ("local" as const) : ("memory" as const);
@@ -135,7 +140,8 @@ export function resolveEvidenceStorageConfigFromEnv(
     return {
       provider: "local",
       local: {
-        rootDirectory: env.APZQEP_EVIDENCE_STORAGE_ROOT ?? "",
+        rootDirectory:
+          env.APZQEP_EVIDENCE_STORAGE_ROOT?.trim() || DEFAULT_LOCAL_EVIDENCE_ROOT,
         maxObjectBytes: safeMax,
       },
     };

@@ -14,7 +14,10 @@ export type AutomationProviderId =
   | "visual"
   | "accessibility"
   | "security"
-  | "codequality";
+  | "codequality"
+  | "junit"
+  | "allure"
+  | "ci";
 
 export type ExecutionLifecycleState =
   | "queued"

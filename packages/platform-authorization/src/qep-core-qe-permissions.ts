@@ -9,7 +9,9 @@ export const DEFAULT_QEP_READER_ROLE_ID = "role-qep-reader";
 /** Authoritative Cap A–F permission keys used by domain services. */
 export const QEP_CORE_QE_PERMISSIONS = [
   "qep.home.read",
+  "qep.search.read",
   "qep.release_readiness.read",
+  "qep.integrations.read",
   "qep.quality_flows.read",
   "qep.quality_flows.operate",
   "qep.certification.read",
@@ -22,6 +24,8 @@ export const QEP_CORE_QE_PERMISSIONS = [
   "qep.portfolio.operate",
   "qep.qi.read",
   "qep.qi.operate",
+  "qep.ai_workspace.read",
+  "qep.ai_workspace.operate",
   "qep.dashboards.read",
   "qep.suites.read",
   "qep.suites.create",
@@ -65,7 +69,9 @@ export const QEP_CORE_QE_PERMISSIONS = [
 
 export const QEP_OPERATOR_PERMISSIONS = [
   "qep.home.read",
+  "qep.search.read",
   "qep.release_readiness.read",
+  "qep.integrations.read",
   "qep.quality_flows.read",
   "qep.quality_flows.operate",
   "qep.certification.read",
@@ -78,6 +84,8 @@ export const QEP_OPERATOR_PERMISSIONS = [
   "qep.portfolio.operate",
   "qep.qi.read",
   "qep.qi.operate",
+  "qep.ai_workspace.read",
+  "qep.ai_workspace.operate",
   "qep.dashboards.read",
   "qep.suites.read",
   "qep.suites.create",
@@ -114,13 +122,16 @@ export const QEP_OPERATOR_PERMISSIONS = [
 
 export const QEP_READER_PERMISSIONS = [
   "qep.home.read",
+  "qep.search.read",
   "qep.release_readiness.read",
+  "qep.integrations.read",
   "qep.quality_flows.read",
   "qep.certification.read",
   "qep.automation.read",
   "qep.scm.read",
   "qep.portfolio.read",
   "qep.qi.read",
+  "qep.ai_workspace.read",
   "qep.dashboards.read",
   "qep.suites.read",
   "qep.execution_plans.read",

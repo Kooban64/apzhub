@@ -221,3 +221,19 @@ export {
   QEP_RELEASE_READINESS_ROUTES,
   isQepReleaseReadinessRoute,
 } from "./release-readiness-routes";
+
+export {
+  QEP_INTEGRATIONS_BASE_PATH,
+  QEP_INTEGRATIONS_ROUTES,
+  isQepIntegrationsRoute,
+} from "./integrations-routes";
+
+export {
+  QEP_AI_WORKSPACE_BASE_PATH,
+  QEP_AI_WORKSPACE_ROUTES,
+  isQepAiWorkspaceRoute,
+} from "./ai-workspace-routes";
+
+export const QEP_SEARCH_BASE_PATH = "/workspace/qep/search";
+export const isQepSearchRoute = (pathname: string): boolean =>
+  pathname === QEP_SEARCH_BASE_PATH || pathname.startsWith(`${QEP_SEARCH_BASE_PATH}/`);

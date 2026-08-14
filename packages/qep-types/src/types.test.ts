@@ -43,6 +43,7 @@ describe("@apzhub/qep-types", () => {
         "M14",
         "M15",
         "M19",
+        "M22",
       ]),
     );
     expect(

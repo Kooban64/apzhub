@@ -308,13 +308,32 @@ export class GitHubScmProvider implements ScmProvider {
     else if (eventName === "delete") eventKind = "delete";
     else if (eventName === "release") eventKind = "release";
     else if (eventName === "ping") eventKind = "ping";
+    else if (eventName === "workflow_run") eventKind = "workflow_run";
+    else if (eventName === "check_suite") eventKind = "check_suite";
+
+    const workflowRun = body.workflow_run as
+      | {
+          name?: string;
+          conclusion?: string;
+          status?: string;
+          id?: number;
+          html_url?: string;
+        }
+      | undefined;
+    const checkSuite = body.check_suite as
+      | { conclusion?: string; status?: string; id?: number; app?: { name?: string } }
+      | undefined;
 
     const summary =
       eventKind === "push"
         ? `push ${String(body.ref ?? "")} ${String((body.head_commit as { id?: string } | undefined)?.id ?? "").slice(0, 7)}`
         : eventKind === "pull_request"
           ? `pull_request ${String(body.action ?? "")} #${String((body.pull_request as { number?: number } | undefined)?.number ?? "")}`
-          : `${eventName}`;
+          : eventKind === "workflow_run"
+            ? `workflow_run ${String(workflowRun?.name ?? "")} ${String(workflowRun?.conclusion ?? workflowRun?.status ?? "")}`
+            : eventKind === "check_suite"
+              ? `check_suite ${String(checkSuite?.app?.name ?? "checks")} ${String(checkSuite?.conclusion ?? checkSuite?.status ?? "")}`
+              : `${eventName}`;
 
     return {
       deliveryId,

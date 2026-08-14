@@ -21,12 +21,15 @@ This directory is the canonical source for APZHUB product and architecture docum
 
 ### Priority product build — APZQEP (active)
 
-| Document                                                                             | Description                                                                       |
-| ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- |
-| [SPR-APZQEP-200](./sprint/SPR-APZQEP-200-competitive-full-swing.md)                  | **AUTHORISED · IN PROGRESS** — competitive full swing (RCC · providers · AI · GA) |
-| [SPR-APZQEP-201](./sprint/SPR-APZQEP-201-release-control-centre.md)                  | **IN PROGRESS — closeout** — Home · Readiness · RC · APZPEN security bridge       |
-| [APZQEP PRODUCT-STATUS](./products/apzqep/PRODUCT-STATUS.md)                         | V1.1 **PRODUCTION READY · CLOSED** — kernel frozen; 200 = V1.2 / Wave-6-class     |
-| [APZQEP pillar vision](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md) | Experience + commercial identity authority                                        |
+| Document                                                                             | Description                                                                           |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| [SPR-APZQEP-200](./sprint/SPR-APZQEP-200-competitive-full-swing.md)                  | **COMPLETE · DELIVERED** — RCC · providers · governed AI · GA                         |
+| [SPR-APZQEP-201](./sprint/SPR-APZQEP-201-release-control-centre.md)                  | **DELIVERED** — Home · Readiness · RC · APZPEN security bridge                        |
+| [SPR-APZQEP-202](./sprint/SPR-APZQEP-202-provider-wave.md)                           | **DELIVERED** — JUnit/Allure/CI · SCM ci_run · Integration Centre · Playwright health |
+| [SPR-APZQEP-203](./sprint/SPR-APZQEP-203-governed-quality-assist.md)                 | **DELIVERED** — audited quality assist · optional flagged LLM · human acceptance      |
+| [SPR-APZQEP-204](./sprint/SPR-APZQEP-204-enterprise-ga-hardening.md)                 | **DELIVERED** — durable evidence · QEP search · OpenAPI · project ACL                 |
+| [APZQEP PRODUCT-STATUS](./products/apzqep/PRODUCT-STATUS.md)                         | V1.1 **PRODUCTION READY · CLOSED** — kernel frozen; 200 = V1.2 / Wave-6-class         |
+| [APZQEP pillar vision](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md) | Experience + commercial identity authority                                            |
 
 ### APZPEN (CE complete — enterprise parked)
 
@@ -1020,6 +1023,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [Platform Execution Layer Specification](./specs/APZHUB-Platform-Execution-Layer.md)                                                              | Pipeline / authz / policy / middleware                                                                              |
 | [Permission Catalogue](./specs/APZHUB-Platform-Permission-Catalogue.md)                                                                           | Governed `{capability}.{action}` keys                                                                               |
 | [Platform OpenAPI v1](./specs/APZHUB-Platform-OpenAPI-v1.yaml)                                                                                    | OSS-110-07/09 OpenAPI 3.1                                                                                           |
+| [APZQEP OpenAPI v1](./specs/apzqep-openapi-v1.yaml)                                                                                               | Key shipped QEP Home, quality flow, certification, automation, SCM, and assist paths                                |
 | [ADR-0048 Global Entity ID Strategy](./adr/ADR-0048-apzhub-global-entity-id-strategy.md)                                                          | Opaque APZHUB global IDs                                                                                            |
 | [ADR-0049 Persistent Entity Mapping Store](./adr/ADR-0049-persistent-entity-mapping-store.md)                                                     | PostgreSQL mapping persistence                                                                                      |
 | [ADR-0050 Production Authorisation](./adr/ADR-0050-production-authorisation-policy-enforcement.md)                                                | Deny-by-default authz strategy                                                                                      |

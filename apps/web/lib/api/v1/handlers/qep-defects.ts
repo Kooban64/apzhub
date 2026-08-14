@@ -28,6 +28,7 @@ import {
   qepDefectUpdateBodySchema,
 } from "../schemas/qep-defects";
 import { getDefectRuntime } from "@/lib/qep/defect-runtime";
+import { requireQepProjectMembership } from "@/lib/qep/project-acl";
 
 type RouteContext = { params: Promise<Record<string, string>> };
 
@@ -86,6 +87,7 @@ export async function handleListQepDefects(
 ) {
   try {
     const query = parseQuery(qepDefectListQuerySchema, request.nextUrl.searchParams);
+    await requireQepProjectMembership(context, query.projectId);
     const items = await getDefectRuntime().service.list(actorFromContext(context), {
       ...(query.projectId ? { projectId: query.projectId } : {}),
       ...(query.status ? { status: query.status as DefectLifecycleState } : {}),
@@ -116,6 +118,7 @@ export async function handleCreateQepDefect(
       qepDefectCreateBodySchema,
       PLATFORM_API_MAX_BODY_BYTES,
     );
+    await requireQepProjectMembership(context, body.projectId);
     const defect = await getDefectRuntime().service.create(
       actorFromContext(context),
       body,

@@ -70,6 +70,94 @@ export function requirementToSearchDraft(
   };
 }
 
+export type QepSearchMappableEvidence = {
+  readonly id: string;
+  readonly projectId: string;
+  readonly title?: string;
+  readonly description?: string;
+  readonly status: string;
+  readonly sourceKind: string;
+  readonly classification?: string;
+  readonly tags: readonly string[];
+  readonly ownerId: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+};
+
+export function evidenceToSearchDraft(
+  evidence: QepSearchMappableEvidence,
+): SearchEntityDraft {
+  return {
+    entityId: evidence.id,
+    entityType: "evidence",
+    title: evidence.title?.trim() || `Evidence ${evidence.id}`,
+    summary: evidence.description ?? `${evidence.sourceKind} evidence`,
+    metadata: {
+      projectId: evidence.projectId,
+      status: evidence.status,
+      sourceKind: evidence.sourceKind,
+      classification: evidence.classification ?? "",
+      owner: evidence.ownerId,
+    },
+    keywords: [
+      evidence.status,
+      evidence.sourceKind,
+      evidence.classification ?? "",
+      ...evidence.tags,
+    ],
+    createdAt: evidence.createdAt,
+    updatedAt: evidence.updatedAt,
+    lifecycleState: evidence.status === "archived" ? "archived" : "published",
+    navigationTarget: `/workspace/qep/evidence/${encodeURIComponent(evidence.id)}`,
+  };
+}
+
+export type QepSearchMappableDefect = {
+  readonly defectId: string;
+  readonly projectId?: string;
+  readonly title: string;
+  readonly description: string;
+  readonly status: string;
+  readonly severity: string;
+  readonly priority: string;
+  readonly assigneeId?: string;
+  readonly reporterId: string;
+  readonly tags: readonly string[];
+  readonly createdAt: string;
+  readonly updatedAt: string;
+  readonly archivedAt?: string;
+};
+
+export function defectToSearchDraft(
+  defect: QepSearchMappableDefect,
+): SearchEntityDraft {
+  return {
+    entityId: defect.defectId,
+    entityType: "defect",
+    title: defect.title,
+    summary: defect.description,
+    metadata: {
+      projectId: defect.projectId ?? "",
+      status: defect.status,
+      severity: defect.severity,
+      priority: defect.priority,
+      owner: defect.assigneeId ?? defect.reporterId,
+    },
+    keywords: [
+      defect.status,
+      defect.severity,
+      defect.priority,
+      defect.assigneeId ?? "",
+      ...defect.tags,
+    ],
+    createdAt: defect.createdAt,
+    updatedAt: defect.updatedAt,
+    lifecycleState:
+      defect.archivedAt || defect.status === "archived" ? "archived" : "published",
+    navigationTarget: `/workspace/qep/defects/${encodeURIComponent(defect.defectId)}`,
+  };
+}
+
 export type QepSearchMappableBaseline = Pick<
   QepBaselineDto,
   | "id"
@@ -330,6 +418,46 @@ export class QepSearchPublisher {
     return this.options.integrationPublisher.remove(
       toIntegrationContext(context),
       requirementId,
+    );
+  }
+
+  publishEvidence(
+    context: QepSearchPublicationContext,
+    evidence: QepSearchMappableEvidence,
+  ): SearchPublicationResult {
+    return this.options.integrationPublisher.publish(
+      toIntegrationContext(context),
+      evidenceToSearchDraft(evidence),
+    );
+  }
+
+  removeEvidence(
+    context: QepSearchPublicationContext,
+    evidenceId: string,
+  ): SearchPublicationResult {
+    return this.options.integrationPublisher.remove(
+      toIntegrationContext(context),
+      evidenceId,
+    );
+  }
+
+  publishDefect(
+    context: QepSearchPublicationContext,
+    defect: QepSearchMappableDefect,
+  ): SearchPublicationResult {
+    return this.options.integrationPublisher.publish(
+      toIntegrationContext(context),
+      defectToSearchDraft(defect),
+    );
+  }
+
+  removeDefect(
+    context: QepSearchPublicationContext,
+    defectId: string,
+  ): SearchPublicationResult {
+    return this.options.integrationPublisher.remove(
+      toIntegrationContext(context),
+      defectId,
     );
   }
 

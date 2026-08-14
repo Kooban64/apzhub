@@ -1,27 +1,63 @@
 manifestSchemaVersion: "1.0"
 id: qep-ai
 name: AI Quality Service
-version: 0.1.0
+version: 0.2.0
 kind: service
 
 metadata:
   category: ai
-  description: "AI Quality Service placeholder for APZ QEP (APZQEP-ENG-010). No business implementation."
+  description: >
+    Governed advisory quality-assist sessions with deterministic rules and an
+    optional feature-flagged OpenAI provider. Audited and never authorised to
+    make certification decisions.
   contractPackage: "@apzhub/qep-contracts"
   contractVersion: "0.1.0"
   owner: APZHUB
   tags:
     - qep
-    - stub
+    - quality-assist
+    - advisory
 
 dependencies:
-  platform: []
+  platform:
+    - permissions
+    - audit
   integrations: []
 
 integrations: []
 
 service:
   category: ai
-  status: stub
+  status: active
 
-permissions: []
+permissions:
+  - qep.ai_workspace.read
+  - qep.ai_workspace.operate
+
+operations:
+  - quality_assist.session.list
+  - quality_assist.session.create
+  - quality_assist.suggestion.accept
+  - quality_assist.suggestion.reject
+
+configuration:
+  featureFlags:
+    - APZHUB_QEP_AI_ASSIST
+  secrets:
+    - OPENAI_API_KEY
+
+governance:
+  advisoryOnly: true
+  humanAcceptanceRequired: true
+  prohibitedOperations:
+    - certification.decide
+    - certification.go
+    - certification.no_go
+
+health:
+  enabled: true
+
+tests:
+  unit: true
+  integration: true
+  contract: true

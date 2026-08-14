@@ -1,0 +1,147 @@
+openapi: 3.1.0
+info:
+  title: APZQEP API
+  version: 1.1.0
+  description: >
+    Key shipped APZQEP v1 routes. All operations require an authenticated
+    APZHUB session, permission checks, tenant context, and correlation IDs.
+servers:
+  - url: /
+security:
+  - sessionAuth: []
+paths:
+  /api/v1/qep/quality-flows:
+    get:
+      summary: Get the QEP Home release-control posture
+      operationId: getQualityFlowCommandCentre
+      responses:
+        "200": { $ref: "#/components/responses/Success" }
+  /api/v1/qep/security-assurance:
+    get:
+      summary: Get the provider-masked security assurance posture
+      operationId: getSecurityAssurance
+      responses:
+        "200": { $ref: "#/components/responses/Success" }
+  /api/v1/qep/quality-flows/definitions:
+    get:
+      summary: List quality-flow definitions
+      operationId: listQualityFlowDefinitions
+      responses:
+        "200": { $ref: "#/components/responses/Success" }
+  /api/v1/qep/quality-flows/instances:
+    get:
+      summary: List quality-flow instances
+      operationId: listQualityFlowInstances
+      responses:
+        "200": { $ref: "#/components/responses/Success" }
+    post:
+      summary: Start a quality-flow instance
+      operationId: createQualityFlowInstance
+      responses:
+        "201": { $ref: "#/components/responses/Success" }
+  /api/v1/qep/certification/evaluations:
+    post:
+      summary: Create a release-candidate certification evaluation
+      operationId: createCertificationEvaluation
+      responses:
+        "201": { $ref: "#/components/responses/Success" }
+  /api/v1/qep/certification/evaluations/{evaluationId}/decision:
+    post:
+      summary: Record the human GO or NO-GO decision
+      operationId: recordCertificationDecision
+      parameters:
+        - $ref: "#/components/parameters/EvaluationId"
+      responses:
+        "200": { $ref: "#/components/responses/Success" }
+  /api/v1/qep/automation/providers:
+    get:
+      summary: List automation providers and health
+      operationId: listAutomationProviders
+      responses:
+        "200": { $ref: "#/components/responses/Success" }
+  /api/v1/qep/automation/executions:
+    get:
+      summary: List automation executions
+      operationId: listAutomationExecutions
+      responses:
+        "200": { $ref: "#/components/responses/Success" }
+    post:
+      summary: Enqueue an automation execution
+      operationId: createAutomationExecution
+      responses:
+        "201": { $ref: "#/components/responses/Success" }
+  /api/v1/qep/scm/providers:
+    get:
+      summary: List SCM providers
+      operationId: listScmProviders
+      responses:
+        "200": { $ref: "#/components/responses/Success" }
+  /api/v1/qep/scm/repositories:
+    get:
+      summary: List SCM repositories
+      operationId: listScmRepositories
+      responses:
+        "200": { $ref: "#/components/responses/Success" }
+    post:
+      summary: Register an SCM repository
+      operationId: registerScmRepository
+      responses:
+        "201": { $ref: "#/components/responses/Success" }
+  /api/v1/qep/scm/changes:
+    get:
+      summary: List source-change events
+      operationId: listScmChangeEvents
+      responses:
+        "200": { $ref: "#/components/responses/Success" }
+  /api/v1/qep/quality-intelligence/recommendations:
+    get:
+      summary: List governed quality recommendations
+      operationId: listQualityRecommendations
+      responses:
+        "200": { $ref: "#/components/responses/Success" }
+  /api/v1/qep/quality-intelligence/recommendations/{recommendationId}:
+    get:
+      summary: Get a governed quality recommendation
+      operationId: getQualityRecommendation
+      parameters:
+        - $ref: "#/components/parameters/RecommendationId"
+      responses:
+        "200": { $ref: "#/components/responses/Success" }
+    post:
+      summary: Accept or reject a recommendation with human accountability
+      operationId: actOnQualityRecommendation
+      parameters:
+        - $ref: "#/components/parameters/RecommendationId"
+      responses:
+        "200": { $ref: "#/components/responses/Success" }
+components:
+  securitySchemes:
+    sessionAuth:
+      type: apiKey
+      in: cookie
+      name: better-auth.session_token
+  parameters:
+    EvaluationId:
+      name: evaluationId
+      in: path
+      required: true
+      schema: { type: string }
+    RecommendationId:
+      name: recommendationId
+      in: path
+      required: true
+      schema: { type: string }
+  responses:
+    Success:
+      description: Standard APZHUB response envelope
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [data]
+            properties:
+              data: {}
+              meta:
+                type: object
+                properties:
+                  correlationId: { type: string }

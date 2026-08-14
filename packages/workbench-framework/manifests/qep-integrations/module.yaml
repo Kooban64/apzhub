@@ -1,0 +1,43 @@
+manifestSchemaVersion: "1.0"
+id: qep-integrations
+name: Integration Centre
+version: 0.2.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: >
+    Integration Centre MVP (SPR-APZQEP-202). Automation + SCM provider catalogue
+    and Playwright runner health.
+  product: apzqep
+  slug: integrations
+  programme: SPR-APZQEP-202
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: active
+
+permissions:
+  - id: qep.integrations.read
+    label: View Integration Centre
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Integration Centre
+    icon: plug
+    route: /workspace/qep/integrations
+    order: 15
+    permission: qep.integrations.read
+  view:
+    title: Integration Centre
+    workspace: qep
+    route: /workspace/qep/integrations
+    permission: qep.integrations.read

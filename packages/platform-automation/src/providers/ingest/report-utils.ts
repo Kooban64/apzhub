@@ -39,7 +39,12 @@ export function resolveReportPayload(input: {
   }
   const entry = input.entry?.trim();
   if (entry) {
-    return JSON.parse(entry) as unknown;
+    try {
+      return JSON.parse(entry) as unknown;
+    } catch {
+      // Allow raw XML / text reports (JUnit, etc.)
+      return entry;
+    }
   }
   throw new Error(
     "INGEST_REPORT_MISSING: provide target.metadata.reportBase64 or target.entry JSON",

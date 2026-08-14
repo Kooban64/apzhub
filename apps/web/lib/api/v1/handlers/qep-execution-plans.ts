@@ -25,6 +25,7 @@ import {
   qepExecutionPlanUpdateBodySchema,
 } from "../schemas/qep-execution-plans";
 import { getExecutionPlanRuntime } from "@/lib/qep/execution-plan-runtime";
+import { requireQepProjectMembership } from "@/lib/qep/project-acl";
 
 type RouteContext = { params: Promise<Record<string, string>> };
 
@@ -92,6 +93,7 @@ export async function handleListQepExecutionPlans(
       qepExecutionPlanListQuerySchema,
       request.nextUrl.searchParams,
     );
+    await requireQepProjectMembership(context, query.projectId);
     const items = await getExecutionPlanRuntime().service.list(
       actorFromContext(context),
       {

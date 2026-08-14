@@ -1,15 +1,17 @@
 manifestSchemaVersion: "1.0"
 id: qep-integrations
 name: Integration Centre
-version: 0.1.0
+version: 0.2.0
 kind: module
 
 metadata:
   category: quality-engineering
-  description: "Integration Centre (M19) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  description: >
+    Integration Centre MVP (SPR-APZQEP-202). Lists automation and SCM providers
+    plus Playwright runner health. Presentation only over existing catalogues.
   product: apzqep
-  moduleCatalogueId: M19
   slug: integrations
+  programme: SPR-APZQEP-202
 
 dependencies:
   platform: []
@@ -18,7 +20,11 @@ dependencies:
 
 module:
   category: quality-engineering
-  status: stub
+  status: active
+
+permissions:
+  - id: qep.integrations.read
+    label: View Integration Centre
 
 workbench:
   navigation:
@@ -26,9 +32,9 @@ workbench:
     workspace: qep
     parent: qep
     label: Integration Centre
-    icon: flask-conical
+    icon: plug
     route: /workspace/qep/integrations
-    order: 190
+    order: 15
     permission: qep.integrations.read
   view:
     title: Integration Centre

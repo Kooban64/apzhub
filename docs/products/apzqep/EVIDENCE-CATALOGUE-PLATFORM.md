@@ -85,6 +85,7 @@ Typed relationships via `EvidenceRelationshipRepository` (`targetCapability`, `t
 ## Storage and integrity linkage
 
 - Storage: opaque S03 locators (`evst://memory/…`, `evst://local/…`); no filesystem paths in public contracts.
+- Default: `local` at `/var/lib/apzhub/qep/evidence` outside tests; Vitest defaults to `memory`. Operators may override both provider and root explicitly.
 - Integrity: status/fields on the aggregate; digests governed by S04 — catalogue does not recalculate policy.
 
 ## Query and ACL
@@ -99,6 +100,11 @@ List/search remain on the S02 path (`listEvidence` / `searchEvidence` → Permis
 | postgres | Requires `db`; no silent memory fallback                     |
 
 Storage provider selection (`APZQEP_EVIDENCE_STORAGE_PROVIDER`) remains orthogonal.
+
+Local storage is durable across process restarts but is still host-local. It is
+not replicated object storage, cloud WORM, or a substitute for backup policy.
+An S3-compatible/object-store provider remains a documented operational
+residual; this sprint does not claim it.
 
 ## Migration
 

@@ -35,6 +35,7 @@ import {
   qepExecutionRecordStepResultBodySchema,
   qepExecutionStepOrderParamSchema,
 } from "../schemas/qep-test-execution";
+import { requireQepProjectMembership } from "@/lib/qep/project-acl";
 
 type RouteContext = { params: Promise<Record<string, string>> };
 
@@ -109,6 +110,7 @@ export async function handleListQepExecutions(
   context: PlatformApiRequestContext,
 ) {
   const query = parseQuery(qepExecutionListQuerySchema, request.nextUrl.searchParams);
+  await requireQepProjectMembership(context, query.projectId);
   const service = await requireQepTestExecutionGateway();
   const limit = query.limit ?? query.perPage;
   const offset = query.offset ?? 0;
@@ -143,6 +145,7 @@ export async function handleCreateQepExecution(
     qepExecutionCreateBodySchema,
     PLATFORM_API_MAX_BODY_BYTES,
   );
+  await requireQepProjectMembership(context, body.projectId);
   const service = await requireQepTestExecutionGateway();
   const created = await invoke(context, () =>
     service.createExecution(context.serviceContext, body),
@@ -155,6 +158,7 @@ export async function handleListQepAssignedExecutions(
   context: PlatformApiRequestContext,
 ) {
   const query = parseQuery(qepExecutionListQuerySchema, request.nextUrl.searchParams);
+  await requireQepProjectMembership(context, query.projectId);
   const service = await requireQepTestExecutionGateway();
   const limit = query.limit ?? query.perPage;
   const offset = query.offset ?? 0;
@@ -184,6 +188,7 @@ export async function handleListQepReviewQueueExecutions(
   context: PlatformApiRequestContext,
 ) {
   const query = parseQuery(qepExecutionListQuerySchema, request.nextUrl.searchParams);
+  await requireQepProjectMembership(context, query.projectId);
   const service = await requireQepTestExecutionGateway();
   const limit = query.limit ?? query.perPage;
   const offset = query.offset ?? 0;

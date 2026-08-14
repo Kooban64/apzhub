@@ -6,10 +6,10 @@
 | Authority          | Owner · Product Board — **STANDING**                                             |
 | Audience           | Engineers, architects, auditors, AI assistants                                   |
 | Rule               | **Read this document before any APZQEP work**                                    |
-| Last updated       | 20260814T201800Z                                                                 |
+| Last updated       | 20260814T204100Z                                                                 |
 | Current baseline   | **Version 1.1 — PRODUCTION READY · CLOSED**                                      |
-| Engineering thread | **COMPLETE** (V1.1); **V1.2 SPR-APZQEP-200 AUTHORISED**                          |
-| Product posture    | **OPERATIONAL** + competitive full swing                                         |
+| Engineering thread | **COMPLETE** (V1.1); **V1.2 SPR-APZQEP-200 DELIVERED**                           |
+| Product posture    | **OPERATIONAL** + competitive wave delivered                                     |
 | Management posture | **Operational Learning**                                                         |
 | Release pack       | [release-1.1/](./release-1.1/)                                                   |
 | Owner decision     | [release-1.1/OWNER-RELEASE-DECISION.md](./release-1.1/OWNER-RELEASE-DECISION.md) |
@@ -52,14 +52,14 @@ Freeze:
 Production defects · security vulnerabilities · critical operational hotfixes only
 
 Next engineering priority (portfolio):
-APZQEP competitive full swing — SPR-APZQEP-200 AUTHORISED · SPR-APZQEP-201 IN PROGRESS
+APZQEP competitive full swing — SPR-APZQEP-200 COMPLETE (201–204 DELIVERED)
 APZPEN CE complete; enterprise options parked
 
 Version 1.2:
-SPR-APZQEP-200 programme (RCC · providers · governed AI · GA) — no redesign of V1.1 baseline
+SPR-APZQEP-200 programme DELIVERED (RCC · providers · governed AI · GA) — no redesign of V1.1 baseline
 ```
 
-> **Portfolio note (2026-08-14):** APZPEN CE is complete. **SPR-APZQEP-200 authorised.** Active build is [SPR-APZQEP-201](../../sprint/SPR-APZQEP-201-release-control-centre.md) (Home + Release Readiness). APZPEN enterprise depth is [parked](../../strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md).
+> **Portfolio note (2026-08-14):** APZPEN CE is complete. **SPR-APZQEP-200 is COMPLETE** — [201](../../sprint/SPR-APZQEP-201-release-control-centre.md), [202](../../sprint/SPR-APZQEP-202-provider-wave.md), [203](../../sprint/SPR-APZQEP-203-governed-quality-assist.md), [204](../../sprint/SPR-APZQEP-204-enterprise-ga-hardening.md) all DELIVERED. APZPEN enterprise depth is [parked](../../strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md).
 
 Authoritative release pack: [release-1.1/](./release-1.1/)
 
@@ -355,7 +355,7 @@ Board / audit / ops:
 ## Accepted residuals (not release blockers)
 
 1. Shell Cap navigation visibility prior to API denial (UX). — **Cleared in V1.1** (QX-P1-01 Closed).
-2. Project membership attribute refinement. — **Deferred to V1.2** (QX-P1-05); Cap RBAC remains V1.1 boundary.
+2. Project membership attribute refinement. — **Closed by SPR-APZQEP-204 thin ACL**: project-scoped Cap handlers resolve membership through ProjectService and fail closed; broader ABAC remains future evolution.
 3. Capability package versions remain 0.1.0 until promotion execution. — **Cleared in V1.1** (QX-PR-06 → 1.0.0).
 4. Historical APZQEP-150 retained unchanged.
 5. Capability-specific accessibility coverage to evolve over future releases.
@@ -367,7 +367,7 @@ V1.1 Production Ready status face: [engineering/APZQEP-V1.1-PRODUCTION-READY-STA
 ## Path remaining
 
 1. Operate Version 1.0 under APZQEP-OPS-001.
-2. Mandate APZQEP for APZHUB product quality; authorise 170/180/190/200 provider families separately.
+2. SPR-APZQEP-200 programme COMPLETE (201–204 DELIVERED) — operate the competitive wave.
 3. Do not authorise APZQEP-166 or external AI providers yet.
 4. V1.1 foundational architecture CLOSED; last V1.1 planning programme (165-PLAN) COMPLETE.
 

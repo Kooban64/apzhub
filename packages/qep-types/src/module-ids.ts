@@ -42,7 +42,8 @@ export type QepModuleDescriptor = {
  * Catalogue statuses (Tranche 2 Q6 honesty):
  * `enabled` = workspace router has a real surface (not Requirements fallthrough).
  * `stub` = package/nav may exist; UI must show unavailable — never impersonate another module.
- * M01 Home + M12 Release Readiness enabled under SPR-APZQEP-201.
+ * M01 Home + M12 Release Readiness enabled under SPR-APZQEP-201;
+ * M22 Search enabled under SPR-APZQEP-204.
  */
 export const QEP_MODULES: readonly QepModuleDescriptor[] = [
   {
@@ -195,10 +196,10 @@ export const QEP_MODULES: readonly QepModuleDescriptor[] = [
   },
   {
     id: "M22",
-    slug: "search-nav",
+    slug: "search",
     packageName: "qep-search",
-    title: "Search and Navigation",
-    status: "stub",
+    title: "QEP Search",
+    status: "enabled",
   },
 ] as const;
 

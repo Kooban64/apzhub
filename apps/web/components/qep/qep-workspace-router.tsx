@@ -26,6 +26,9 @@ import {
   isQepPortfolioRoute,
   isQepHomeRoute,
   isQepReleaseReadinessRoute,
+  isQepSearchRoute,
+  isQepIntegrationsRoute,
+  isQepAiWorkspaceRoute,
   isQepRequirementsRoute,
   isQepWorkspaceRoute,
 } from "@/lib/qep/routes";
@@ -35,11 +38,14 @@ import { QepCertificationRouterView } from "./qep-certification-views";
 import { QepDashboardsRouterView } from "./qep-dashboards-views";
 import { QepEarlyCheckRouterView } from "./qep-early-check-views";
 import { QepHomeRouterView } from "./qep-home-views";
+import { QepIntegrationsRouterView } from "./qep-integrations-views";
+import { QepAiWorkspaceRouterView } from "./qep-ai-workspace-views";
 import { QepPortfolioRouterView } from "./qep-portfolio-views";
 import { QepQualityFlowRouterView } from "./qep-quality-flow-views";
 import { QepQualityIntelligenceRouterView } from "./qep-quality-intelligence-views";
 import { QepQualityJourneyRouterView } from "./qep-quality-journey-views";
 import { QepReleaseReadinessRouterView } from "./qep-release-readiness-views";
+import { QepSearchRouterView } from "./qep-search-view";
 import { QepScmRouterView } from "./qep-scm-views";
 
 import { QepDefectsRouterView } from "./qep-defects-views";
@@ -71,8 +77,20 @@ export function QepWorkspaceRouter() {
     return <QepHomeRouterView />;
   }
 
+  if (isQepSearchRoute(pathname)) {
+    return <QepSearchRouterView />;
+  }
+
   if (isQepReleaseReadinessRoute(pathname)) {
     return <QepReleaseReadinessRouterView />;
+  }
+
+  if (isQepIntegrationsRoute(pathname)) {
+    return <QepIntegrationsRouterView />;
+  }
+
+  if (isQepAiWorkspaceRoute(pathname)) {
+    return <QepAiWorkspaceRouterView />;
   }
 
   if (isQepQualityFlowsRoute(pathname)) {

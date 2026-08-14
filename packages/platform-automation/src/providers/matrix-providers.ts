@@ -1,11 +1,15 @@
 /**
  * F3 deepen — full provider evidence matrix (all active report-ingest / live runners).
+ * SPR-APZQEP-202 adds JUnit, Allure, and CI check ingest providers.
  * No placeholder refusals. Vendor branding masked at RC face.
  */
 
 import type { AutomationProvider } from "../contracts/provider";
 import { createAccessibilityProvider } from "./accessibility";
 import { createReportIngestProvider } from "./ingest/create-report-ingest-provider";
+import { normalizeAllureSummary } from "./ingest/normalize-allure";
+import { normalizeCiCheckReport } from "./ingest/normalize-ci-check";
+import { normalizeJunitXml } from "./ingest/normalize-junit-xml";
 import { normalizeK6Summary } from "./ingest/normalize-k6";
 import { normalizeSarifOrFindings } from "./ingest/normalize-sarif";
 import { normalizeTestSuiteReport } from "./ingest/normalize-test-report";
@@ -28,6 +32,27 @@ export function createMatrixProviders(options?: {
     }),
     createVitestProvider(),
     createAccessibilityProvider(),
+    createReportIngestProvider({
+      providerId: "junit",
+      name: "JUnit Report Provider",
+      domain: "ci",
+      capabilities: ["junit-xml", "ci-ingest"],
+      normalize: normalizeJunitXml,
+    }),
+    createReportIngestProvider({
+      providerId: "allure",
+      name: "Allure Report Provider",
+      domain: "ci",
+      capabilities: ["allure-summary", "ci-ingest"],
+      normalize: normalizeAllureSummary,
+    }),
+    createReportIngestProvider({
+      providerId: "ci",
+      name: "CI Check Provider",
+      domain: "ci",
+      capabilities: ["github-actions", "workflow-run", "check-suite"],
+      normalize: normalizeCiCheckReport,
+    }),
     createReportIngestProvider({
       providerId: "security",
       name: "Security Scan Provider",

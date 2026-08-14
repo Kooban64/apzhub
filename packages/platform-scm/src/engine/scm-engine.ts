@@ -563,6 +563,18 @@ export class ScmEngine {
           payload: { summary: delivery.summary },
         });
         break;
+      case "workflow_run":
+      case "check_suite":
+        await this.emit({
+          ...base,
+          type: SCM_EVENT_TYPES.commitReceived,
+          payload: {
+            summary: delivery.summary,
+            ci: true,
+            eventKind: delivery.eventKind,
+          },
+        });
+        break;
       default:
         break;
     }
@@ -763,6 +775,54 @@ function extractChangeEventsFromDelivery(
         htmlUrl: pr?.html_url,
         filesChanged: filePaths,
         occurredAt: pr?.updated_at ?? delivery.receivedAt,
+        summary: delivery.summary,
+      },
+    ];
+  }
+
+  if (delivery.eventKind === "workflow_run" || delivery.eventKind === "check_suite") {
+    const workflowRun = delivery.payload.workflow_run as
+      | {
+          id?: number;
+          name?: string;
+          conclusion?: string;
+          status?: string;
+          html_url?: string;
+          head_sha?: string;
+          head_branch?: string;
+          updated_at?: string;
+        }
+      | undefined;
+    const checkSuite = delivery.payload.check_suite as
+      | {
+          id?: number;
+          conclusion?: string;
+          status?: string;
+          head_sha?: string;
+          head_branch?: string;
+          updated_at?: string;
+          app?: { name?: string };
+        }
+      | undefined;
+    const runId = String(workflowRun?.id ?? checkSuite?.id ?? delivery.deliveryId);
+    const sha = workflowRun?.head_sha ?? checkSuite?.head_sha;
+    const branch = workflowRun?.head_branch ?? checkSuite?.head_branch;
+    const title =
+      workflowRun?.name ??
+      checkSuite?.app?.name ??
+      (delivery.eventKind === "workflow_run" ? "workflow_run" : "check_suite");
+    return [
+      {
+        ...base,
+        changeEventId: changeEventId(providerId, repositoryKey, "ci", runId),
+        kind: "ci_run",
+        externalKey: `ci:${runId}`,
+        sha,
+        branch,
+        title: String(title),
+        htmlUrl: workflowRun?.html_url,
+        occurredAt:
+          workflowRun?.updated_at ?? checkSuite?.updated_at ?? delivery.receivedAt,
         summary: delivery.summary,
       },
     ];

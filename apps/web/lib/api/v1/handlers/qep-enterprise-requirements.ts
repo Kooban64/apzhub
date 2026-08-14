@@ -26,6 +26,7 @@ import {
   qepEnterpriseRequirementUpdateBodySchema,
 } from "../schemas/qep-enterprise-requirements";
 import { getEnterpriseRequirementsRuntime } from "@/lib/qep/enterprise-requirements-runtime";
+import { requireQepProjectMembership } from "@/lib/qep/project-acl";
 
 type RouteContext = { params: Promise<Record<string, string>> };
 
@@ -125,6 +126,7 @@ export async function handleListEnterpriseRequirements(
       qepEnterpriseRequirementListQuerySchema,
       request.nextUrl.searchParams,
     );
+    await requireQepProjectMembership(context, query.projectId);
     const items = await getEnterpriseRequirementsRuntime().service.list(
       actorFromContext(context),
       listFilterFromQuery(query),
@@ -145,6 +147,7 @@ export async function handleCreateEnterpriseRequirement(
       qepEnterpriseRequirementCreateBodySchema,
       PLATFORM_API_MAX_BODY_BYTES,
     );
+    await requireQepProjectMembership(context, body.projectId);
     const requirement = await getEnterpriseRequirementsRuntime().service.create(
       actorFromContext(context),
       body,
@@ -309,6 +312,7 @@ export async function handleMatrixEnterpriseRequirements(
       qepEnterpriseRequirementListQuerySchema,
       request.nextUrl.searchParams,
     );
+    await requireQepProjectMembership(context, query.projectId);
     const rows = await getEnterpriseRequirementsRuntime().service.matrix(
       actorFromContext(context),
       nowIso(),
@@ -329,6 +333,7 @@ export async function handleCoverageDashboardEnterpriseRequirements(
       qepEnterpriseRequirementListQuerySchema,
       request.nextUrl.searchParams,
     );
+    await requireQepProjectMembership(context, query.projectId);
     const dashboard =
       await getEnterpriseRequirementsRuntime().service.coverageDashboard(
         actorFromContext(context),

@@ -20,6 +20,7 @@ import {
   qepSuiteUpdateBodySchema,
 } from "../schemas/qep-suites";
 import { getSuiteRuntime } from "@/lib/qep/suite-runtime";
+import { requireQepProjectMembership } from "@/lib/qep/project-acl";
 
 type RouteContext = { params: Promise<Record<string, string>> };
 
@@ -60,6 +61,7 @@ export async function handleListQepSuites(
 ) {
   try {
     const query = parseQuery(qepSuiteListQuerySchema, request.nextUrl.searchParams);
+    await requireQepProjectMembership(context, query.projectId);
     const items = await getSuiteRuntime().service.list(actorFromContext(context), {
       ...(query.projectId ? { projectId: query.projectId } : {}),
       ...(query.status ? { status: query.status as SuiteLifecycleState } : {}),

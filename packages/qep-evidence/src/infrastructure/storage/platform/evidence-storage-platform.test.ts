@@ -35,12 +35,18 @@ async function tempRoot(): Promise<string> {
 
 describe("APZQEP-120-S03 Evidence Storage Platform", () => {
   describe("configuration", () => {
-    it("defaults to memory and never assumes local", () => {
+    it("defaults to durable local storage outside tests", () => {
       const cfg = resolveEvidenceStorageConfigFromEnv({});
+      expect(cfg.provider).toBe("local");
+      expect(cfg.local?.rootDirectory).toBe("/var/lib/apzhub/qep/evidence");
+    });
+
+    it("keeps the test default isolated in memory", () => {
+      const cfg = resolveEvidenceStorageConfigFromEnv({ NODE_ENV: "test" });
       expect(cfg.provider).toBe("memory");
     });
 
-    it("resolves local only when configured", () => {
+    it("honours an explicitly configured local root", () => {
       const cfg = resolveEvidenceStorageConfigFromEnv({
         APZQEP_EVIDENCE_STORAGE_PROVIDER: "local",
         APZQEP_EVIDENCE_STORAGE_ROOT: "/var/apzqep/evidence",

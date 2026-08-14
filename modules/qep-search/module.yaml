@@ -1,15 +1,15 @@
 manifestSchemaVersion: "1.0"
 id: qep-search
 name: Search and Navigation
-version: 0.1.0
+version: 0.2.0
 kind: module
 
 metadata:
   category: quality-engineering
-  description: "Search and Navigation (M22) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  description: "Permission-filtered QEP entity search over the Platform Search API (SPR-APZQEP-204)."
   product: apzqep
   moduleCatalogueId: M22
-  slug: search-nav
+  slug: search
 
 dependencies:
   platform: []
@@ -18,20 +18,24 @@ dependencies:
 
 module:
   category: quality-engineering
-  status: stub
+  status: active
+
+permissions:
+  - id: qep.search.read
+    label: Search QEP entities
 
 workbench:
   navigation:
     level: sidebar
     workspace: qep
     parent: qep
-    label: Search and Navigation
-    icon: flask-conical
-    route: /workspace/qep/search-nav
+    label: Search
+    icon: search
+    route: /workspace/qep/search
     order: 220
-    permission: qep.search-nav.read
+    permission: qep.search.read
   view:
-    title: Search and Navigation
+    title: QEP Search
     workspace: qep
-    route: /workspace/qep/search-nav
-    permission: qep.search-nav.read
+    route: /workspace/qep/search
+    permission: qep.search.read

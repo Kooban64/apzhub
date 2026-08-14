@@ -1,15 +1,19 @@
 manifestSchemaVersion: "1.0"
 id: qep-ai-workspace
 name: AI Quality Workspace
-version: 0.1.0
+version: 0.2.0
 kind: module
 
 metadata:
   category: quality-engineering
-  description: "AI Quality Workspace (M17) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  description: >
+    Governed Quality Assist workspace for audited coverage, failure,
+    test-draft, and suite recommendations. Advisory only; humans accept or
+    reject every suggestion and certification remains human-only.
   product: apzqep
   moduleCatalogueId: M17
   slug: ai-workspace
+  programme: SPR-APZQEP-203
 
 dependencies:
   platform: []
@@ -18,7 +22,13 @@ dependencies:
 
 module:
   category: quality-engineering
-  status: stub
+  status: active
+
+permissions:
+  - id: qep.ai_workspace.read
+    label: View Governed Quality Assist
+  - id: qep.ai_workspace.operate
+    label: Operate Governed Quality Assist
 
 workbench:
   navigation:
@@ -29,9 +39,9 @@ workbench:
     icon: flask-conical
     route: /workspace/qep/ai-workspace
     order: 170
-    permission: qep.ai-workspace.read
+    permission: qep.ai_workspace.read
   view:
     title: AI Quality Workspace
     workspace: qep
     route: /workspace/qep/ai-workspace
-    permission: qep.ai-workspace.read
+    permission: qep.ai_workspace.read

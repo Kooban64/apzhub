@@ -24,6 +24,7 @@ import {
   qepExecutionSessionStepResultBodySchema,
 } from "../schemas/qep-execution-workspace";
 import { getExecutionWorkspaceRuntime } from "@/lib/qep/execution-workspace-runtime";
+import { requireQepProjectMembership } from "@/lib/qep/project-acl";
 
 type RouteContext = { params: Promise<Record<string, string>> };
 
@@ -90,6 +91,7 @@ export async function handleListQepExecutionSessions(
       qepExecutionSessionListQuerySchema,
       request.nextUrl.searchParams,
     );
+    await requireQepProjectMembership(context, query.projectId);
     const items = await getExecutionWorkspaceRuntime().service.list(
       actorFromContext(context),
       {

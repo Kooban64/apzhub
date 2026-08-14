@@ -3,6 +3,8 @@ import { describe, expect, it } from "vitest";
 import {
   baselineToSearchDraft,
   createQepSearchAdapterForTest,
+  defectToSearchDraft,
+  evidenceToSearchDraft,
   relationshipToSearchDraft,
   requirementToSearchDraft,
   traceLinkToSearchDraft,
@@ -11,6 +13,38 @@ import {
 } from "./index";
 
 describe("@apzhub/search-qep", () => {
+  it("maps evidence and defects to QEP search drafts", () => {
+    const evidence = evidenceToSearchDraft({
+      id: "ev_1",
+      projectId: "project_1",
+      title: "Release test report",
+      status: "verified",
+      sourceKind: "automation",
+      tags: ["release"],
+      ownerId: "user_1",
+      createdAt: "2026-08-14T00:00:00.000Z",
+      updatedAt: "2026-08-14T01:00:00.000Z",
+    });
+    expect(evidence.entityType).toBe("evidence");
+    expect(evidence.metadata?.projectId).toBe("project_1");
+
+    const defect = defectToSearchDraft({
+      defectId: "def_1",
+      projectId: "project_1",
+      title: "Checkout regression",
+      description: "Checkout fails during release verification",
+      status: "triaged",
+      severity: "major",
+      priority: "p1",
+      reporterId: "user_1",
+      tags: ["release"],
+      createdAt: "2026-08-14T00:00:00.000Z",
+      updatedAt: "2026-08-14T01:00:00.000Z",
+    });
+    expect(defect.entityType).toBe("defect");
+    expect(defect.navigationTarget).toBe("/workspace/qep/defects/def_1");
+  });
+
   it("maps requirements to search drafts with product-safe fields", () => {
     const draft = requirementToSearchDraft({
       id: "req_abc",

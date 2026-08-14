@@ -1,7 +1,15 @@
 import type { ScmProviderId } from "./repository";
 
 export type ScmWebhookEventKind =
-  "push" | "pull_request" | "create" | "delete" | "release" | "ping" | "other";
+  | "push"
+  | "pull_request"
+  | "create"
+  | "delete"
+  | "release"
+  | "ping"
+  | "workflow_run"
+  | "check_suite"
+  | "other";
 
 export interface ScmWebhookRegistration {
   readonly callbackUrl: string;
