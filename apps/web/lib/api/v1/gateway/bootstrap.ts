@@ -640,9 +640,9 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
       const { createZammadAdapter } = await import("@apzhub/integration-zammad");
       const { registerZammadProviders } = await import("@apzhub/platform-services");
       const tenantId = process.env.ZAMMAD_BOOTSTRAP_TENANT_ID ?? "platform";
-      const baseUrl = process.env.ZAMMAD_BASE_URL ?? "http://localhost:3000";
-      const apiBaseUrl =
-        process.env.ZAMMAD_API_BASE_URL ?? `${baseUrl.replace(/\/$/, "")}/api/v1`;
+      const baseUrl = process.env.ZAMMAD_BASE_URL ?? "http://localhost:18081";
+      // Client paths already include `/api/v1/...` — apiBaseUrl is host root.
+      const apiBaseUrl = process.env.ZAMMAD_API_BASE_URL ?? baseUrl.replace(/\/$/, "");
       const result = await createZammadAdapter({
         tenantId,
         zammad: {

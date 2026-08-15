@@ -17,6 +17,7 @@ describe("loadLocalSecrets", () => {
     delete process.env.APZHUB_SCM_GITHUB_TOKEN;
     delete process.env.PLANE_API_TOKEN;
     delete process.env.PLANE_WORKSPACE_ID;
+    delete process.env.ZAMMAD_API_TOKEN;
   });
 
   it("loads smtp openai and git secrets without overwriting existing env", () => {
@@ -46,6 +47,10 @@ describe("loadLocalSecrets", () => {
         "\n",
       ),
     );
+    writeFileSync(
+      path.join(dir, "zammad"),
+      "ZAMMAD_API_TOKEN=zammad_test_token_min_16_chars\n",
+    );
 
     delete process.env.EMAIL_FROM;
     delete process.env.OPENAI_API_KEY;
@@ -56,6 +61,7 @@ describe("loadLocalSecrets", () => {
     delete process.env.SEARCH_MEILISEARCH_API_KEY;
     delete process.env.PLANE_API_TOKEN;
     delete process.env.PLANE_WORKSPACE_ID;
+    delete process.env.ZAMMAD_API_TOKEN;
     process.env.SMTP_HOST = "already.set";
     const result = loadLocalSecrets({ secretsDir: dir });
 
@@ -65,6 +71,7 @@ describe("loadLocalSecrets", () => {
       "git",
       "meilisearch",
       "plane",
+      "zammad",
     ]);
     expect(process.env.SMTP_HOST).toBe("already.set");
     expect(process.env.SMTP_PASS).toBe("abcd");
@@ -76,5 +83,6 @@ describe("loadLocalSecrets", () => {
     expect(process.env.SEARCH_MEILISEARCH_API_KEY).toBe("meili-test-master-key");
     expect(process.env.PLANE_API_TOKEN).toBe("plane_test_token_min_16");
     expect(process.env.PLANE_WORKSPACE_ID).toBe("apzportal");
+    expect(process.env.ZAMMAD_API_TOKEN).toBe("zammad_test_token_min_16_chars");
   });
 });

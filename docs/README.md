@@ -34,6 +34,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [OWNER APZPEN remain parked](./decisions/OWNER-APZPEN-REMAIN-PARKED.md)                           | **IN FORCE** — no further APZPEN enterprise until resume criteria                    |
 | [SPR-POLISH-001](./sprint/SPR-POLISH-001-entitlements-shell-consistency.md)                       | **COMPLETE · DELIVERED** — entitlements UX + shell consistency across pillars        |
 | [SPR-OPS-PLANE-001](./sprint/SPR-OPS-PLANE-001-projects-plane-adapter-host.md)                    | **COMPLETE · DELIVERED** — `.secrets/plane` loader + host enablement runbook         |
+| [SPR-OPS-ZAMMAD-001](./sprint/SPR-OPS-ZAMMAD-001-support-zammad-adapter-host.md)                  | **COMPLETE · DELIVERED** — `.secrets/zammad` loader + Support host enablement        |
 
 ### Priority product build — APZQEP (active)
 

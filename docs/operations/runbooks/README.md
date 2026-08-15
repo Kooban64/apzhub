@@ -26,6 +26,7 @@
 | [retire-authentik.md](./retire-authentik.md)                                 | BetterAuth cutover / APZPRD              | P1       |
 | [qep-automation-live.md](./qep-automation-live.md)                           | SPR-210 live Playwright                  | P2       |
 | [projects-plane-adapter.md](./projects-plane-adapter.md)                     | SPR-OPS-PLANE-001 Projects ↔ Plane       | P1       |
+| [support-zammad-adapter.md](./support-zammad-adapter.md)                     | SPR-OPS-ZAMMAD-001 Support ↔ Zammad      | P1       |
 | [qep-scm-github-live.md](./qep-scm-github-live.md)                           | SPR-210 live SCM                         | P2       |
 | [qep-dispatch-record-only.md](./qep-dispatch-record-only.md)                 | SPR-210 dispatch safety                  | INFO     |
 | [qep-typst-report-pack.md](./qep-typst-report-pack.md)                       | SPR-210 Typst PDF                        | P2       |
