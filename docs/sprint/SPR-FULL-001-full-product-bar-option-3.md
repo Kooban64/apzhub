@@ -44,4 +44,12 @@ Deliver Owner-defined **100% (not MVP)**: Phase 2 QEP + APZPEN Greenbone/Faraday
 | **A2 ENT-001**    | Greenbone + Faraday integration packages (normalize + health); catalogue/health/ingest wire |
 | **A3 BRIDGE-001** | Four-state `status`; dual entitlement; deep-link gating; bridge-read audit; `service.yaml`  |
 
-Remaining: 220-A/C/D Integration Centre depth; ENT operator UX + live Greenbone GMP; full Platform Service extraction for bridge.
+## Delivery record (Wave A second ships — 2026-08-15)
+
+| Track             | Second ships landed                                                            |
+| ----------------- | ------------------------------------------------------------------------------ |
+| **A1 220**        | Integration Centre enable/disable + last-sync; QI advisory banner              |
+| **A2 ENT-001**    | Engagement ingest preselect `?tool=greenbone                                   | faraday`; Providers VA ingest deep-links |
+| **A3 BRIDGE-001** | Compose extracted to `security-assurance-bridge-service.ts`; thin HTTP handler |
+
+Remaining: automation mapping/flaky depth (220-C); live Greenbone GMP; Faraday compose; formal platform-services package.
