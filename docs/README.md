@@ -45,6 +45,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-OPS-LTS-PLANE-001](./sprint/SPR-OPS-LTS-PLANE-001-apzhub-owned-plane-bring-up.md)            | **COMPLETE · DELIVERED** — APZHUB-owned Plane on 19085; Projects retargeted          |
 | [SPR-OPS-LTS-ZAMMAD-001](./sprint/SPR-OPS-LTS-ZAMMAD-001-apzhub-owned-zammad-bring-up.md)         | **COMPLETE · DELIVERED** — APZHUB-owned Zammad on 19081; Support retargeted          |
 | [SPR-OPS-LTS-KIMAI-001](./sprint/SPR-OPS-LTS-KIMAI-001-apzhub-owned-kimai-bring-up.md)            | **COMPLETE · DELIVERED** — APZHUB-owned Kimai on 19083; Time retargeted              |
+| [SPR-OPS-LTS-METABASE-001](./sprint/SPR-OPS-LTS-METABASE-001-apzhub-owned-metabase-bring-up.md)   | **COMPLETE · DELIVERED** — APZHUB-owned Metabase on 19084; Analytics retargeted      |
 | [OWNER-ENGINES-OUTSIDE-HUB](./decisions/OWNER-ENGINES-OUTSIDE-HUB.md)                             | **IN FORCE** — engines external; BetterAuth only; leave legacy alone                 |
 
 ### Priority product build — APZQEP (active)

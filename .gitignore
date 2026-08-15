@@ -17,6 +17,7 @@ out/
 infrastructure/docker/engines/**/.env
 infrastructure/docker/engines/**/.admin-password
 infrastructure/docker/engines/**/.api-token
+infrastructure/docker/engines/**/.api-key
 infrastructure/docker/engines/**/.auto_wizard.json
 infrastructure/docker/engines/**/plane-lts.env
 

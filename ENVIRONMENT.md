@@ -132,14 +132,14 @@ Dedicated ports for `/home/ubuntu/apz-portal` — chosen to avoid `apz-stack` co
 
 See [APZHUB-OWNED-ENGINE-TOPOLOGY](./docs/operations/APZHUB-OWNED-ENGINE-TOPOLOGY.md). Never reuse legacy `18081–18088` / `15678`.
 
-| Service (planned) | Host port | Product                                |
-| ----------------- | --------- | -------------------------------------- |
-| Zammad LTS        | **19081** | Support — **UP** (`apzhub-zammad-lts`) |
-| Paperless LTS     | **19082** | Documents\*                            |
-| Kimai LTS         | **19083** | Time — **UP** (`apzhub-kimai-lts`)     |
-| Metabase LTS      | **19084** | Analytics                              |
-| Plane LTS         | **19085** | Projects — **UP** (`apzhub-plane-lts`) |
-| n8n LTS           | **19678** | Workflow                               |
+| Service (planned) | Host port | Product                                    |
+| ----------------- | --------- | ------------------------------------------ |
+| Zammad LTS        | **19081** | Support — **UP** (`apzhub-zammad-lts`)     |
+| Paperless LTS     | **19082** | Documents\*                                |
+| Kimai LTS         | **19083** | Time — **UP** (`apzhub-kimai-lts`)         |
+| Metabase LTS      | **19084** | Analytics — **UP** (`apzhub-metabase-lts`) |
+| Plane LTS         | **19085** | Projects — **UP** (`apzhub-plane-lts`)     |
+| n8n LTS           | **19678** | Workflow                                   |
 
 \*Paperless still requires ADR + adapter before product wiring.
 
@@ -157,25 +157,26 @@ Apply schema with `pnpm db:migrate` (includes `0015_platform_entity_mapping`).
 
 ## Listening ports summary
 
-| Port        | Listener                | Exposure                                     |
-| ----------- | ----------------------- | -------------------------------------------- |
-| 22          | ssh                     | public                                       |
-| 80, 443     | host nginx              | public                                       |
-| 8080        | apz-nginx-gateway       | localhost only                               |
-| 54333       | apzpg PostgreSQL        | **0.0.0.0** (security note)                  |
-| 15678       | n8n                     | localhost                                    |
-| 19081       | APZHUB Zammad LTS       | localhost — `apzhub-zammad-lts` when running |
-| 19083       | APZHUB Kimai LTS        | localhost — `apzhub-kimai-lts` when running  |
-| 19085       | APZHUB Plane LTS        | localhost — `apzhub-plane-lts` when running  |
-| 18081–18088 | various apps            | localhost                                    |
-| 18092       | abode-tokenisation node | all interfaces                               |
-| 18443       | Kiwi HTTPS              | localhost                                    |
-| 3300        | APZHUB web (dev)        | localhost — when `pnpm dev` running          |
-| 54334       | APZHUB PostgreSQL       | localhost — when APZHUB compose running      |
-| 6380        | APZHUB Redis            | localhost — when APZHUB compose running      |
-| 17700       | APZHUB Meilisearch      | localhost — when APZHUB compose running      |
-| 3080, 3443  | APZHUB Caddy            | localhost — when APZHUB compose running      |
-| 6006        | APZHUB Storybook        | localhost — when `pnpm storybook` running    |
+| Port        | Listener                | Exposure                                       |
+| ----------- | ----------------------- | ---------------------------------------------- |
+| 22          | ssh                     | public                                         |
+| 80, 443     | host nginx              | public                                         |
+| 8080        | apz-nginx-gateway       | localhost only                                 |
+| 54333       | apzpg PostgreSQL        | **0.0.0.0** (security note)                    |
+| 15678       | n8n                     | localhost                                      |
+| 19081       | APZHUB Zammad LTS       | localhost — `apzhub-zammad-lts` when running   |
+| 19083       | APZHUB Kimai LTS        | localhost — `apzhub-kimai-lts` when running    |
+| 19084       | APZHUB Metabase LTS     | localhost — `apzhub-metabase-lts` when running |
+| 19085       | APZHUB Plane LTS        | localhost — `apzhub-plane-lts` when running    |
+| 18081–18088 | various apps            | localhost                                      |
+| 18092       | abode-tokenisation node | all interfaces                                 |
+| 18443       | Kiwi HTTPS              | localhost                                      |
+| 3300        | APZHUB web (dev)        | localhost — when `pnpm dev` running            |
+| 54334       | APZHUB PostgreSQL       | localhost — when APZHUB compose running        |
+| 6380        | APZHUB Redis            | localhost — when APZHUB compose running        |
+| 17700       | APZHUB Meilisearch      | localhost — when APZHUB compose running        |
+| 3080, 3443  | APZHUB Caddy            | localhost — when APZHUB compose running        |
+| 6006        | APZHUB Storybook        | localhost — when `pnpm storybook` running      |
 
 ## Networks
 
