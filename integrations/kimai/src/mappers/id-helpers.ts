@@ -70,8 +70,15 @@ export function toKimaiDateTime(isoOrLocal: string): string {
 export function toIsoDateTime(value: string | null | undefined): string | undefined {
   if (!value) return undefined;
   const trimmed = value.trim();
-  if (trimmed.endsWith("Z") || /[+-]\d{2}:\d{2}$/.test(trimmed)) {
-    return new Date(trimmed).toISOString();
+  // Kimai CE commonly returns offsets as +0000 / +0200 (no colon). Normalize before parse.
+  const normalized = trimmed.replace(/([+-]\d{2})(\d{2})$/, "$1:$2");
+  const candidate =
+    normalized.endsWith("Z") || /[+-]\d{2}:\d{2}$/.test(normalized)
+      ? normalized
+      : `${normalized}Z`;
+  const date = new Date(candidate);
+  if (Number.isNaN(date.getTime())) {
+    return undefined;
   }
-  return new Date(`${trimmed}Z`).toISOString();
+  return date.toISOString();
 }

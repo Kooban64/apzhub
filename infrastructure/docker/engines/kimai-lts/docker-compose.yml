@@ -1,0 +1,69 @@
+# APZHUB-owned Kimai CE/LTS — isolated from legacy apz-kimai (18083).
+# Project: apzhub-kimai-lts · publish 127.0.0.1:19083 only.
+
+name: apzhub-kimai-lts
+
+services:
+  kimai-db:
+    image: ${APZ_IMAGE_MYSQL}
+    container_name: apzhub-kimai-lts-db
+    restart: unless-stopped
+    networks: [kimai_lts_net]
+    command: --default-storage-engine innodb --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - kimai_lts_mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${KIMAI_DB_NAME:-kimai}
+      MYSQL_USER: ${KIMAI_DB_USER:-kimai}
+      MYSQL_PASSWORD: ${KIMAI_DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${KIMAI_MYSQL_ROOT_PASSWORD}
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'mysqladmin ping -h 127.0.0.1 -uroot -p"$$MYSQL_ROOT_PASSWORD" || exit 1',
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  kimai:
+    image: ${APZ_IMAGE_KIMAI}
+    pull_policy: never
+    container_name: apzhub-kimai-lts
+    restart: unless-stopped
+    networks: [kimai_lts_net]
+    ports:
+      - "127.0.0.1:${KIMAI_PUBLISH_PORT:-19083}:8001"
+    depends_on:
+      kimai-db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: mysql://${KIMAI_DB_USER:-kimai}:${KIMAI_DB_PASSWORD}@kimai-db/${KIMAI_DB_NAME:-kimai}?charset=utf8mb4&serverVersion=8.4.0
+      # Single-backslash regex (Symfony). Do not double-escape in Compose defaults.
+      TRUSTED_HOSTS: ${KIMAI_TRUSTED_HOSTS:-127\.0\.0\.1|localhost|kimai}
+      TRUSTED_PROXIES: ${KIMAI_TRUSTED_PROXIES:-127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16}
+      ADMINMAIL: ${KIMAI_ADMINMAIL:-admin@apzhub.local}
+      ADMINPASS: ${KIMAI_ADMINPASS}
+      APP_SECRET: ${KIMAI_APP_SECRET}
+      TZ: ${TZ:-UTC}
+      MAILER_URL: ${KIMAI_MAILER_URL:-}
+    volumes:
+      - kimai_lts_var:/opt/kimai/var
+    healthcheck:
+      test:
+        ["CMD-SHELL", "pgrep apache2 >/dev/null || pgrep apache >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 120s
+
+networks:
+  kimai_lts_net:
+    name: apzhub_kimai_lts_net
+    driver: bridge
+
+volumes:
+  kimai_lts_mysql:
+  kimai_lts_var:

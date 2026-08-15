@@ -136,7 +136,7 @@ See [APZHUB-OWNED-ENGINE-TOPOLOGY](./docs/operations/APZHUB-OWNED-ENGINE-TOPOLOG
 | ----------------- | --------- | -------------------------------------- |
 | Zammad LTS        | **19081** | Support — **UP** (`apzhub-zammad-lts`) |
 | Paperless LTS     | **19082** | Documents\*                            |
-| Kimai LTS         | **19083** | Time                                   |
+| Kimai LTS         | **19083** | Time — **UP** (`apzhub-kimai-lts`)     |
 | Metabase LTS      | **19084** | Analytics                              |
 | Plane LTS         | **19085** | Projects — **UP** (`apzhub-plane-lts`) |
 | n8n LTS           | **19678** | Workflow                               |
@@ -165,6 +165,7 @@ Apply schema with `pnpm db:migrate` (includes `0015_platform_entity_mapping`).
 | 54333       | apzpg PostgreSQL        | **0.0.0.0** (security note)                  |
 | 15678       | n8n                     | localhost                                    |
 | 19081       | APZHUB Zammad LTS       | localhost — `apzhub-zammad-lts` when running |
+| 19083       | APZHUB Kimai LTS        | localhost — `apzhub-kimai-lts` when running  |
 | 19085       | APZHUB Plane LTS        | localhost — `apzhub-plane-lts` when running  |
 | 18081–18088 | various apps            | localhost                                    |
 | 18092       | abode-tokenisation node | all interfaces                               |

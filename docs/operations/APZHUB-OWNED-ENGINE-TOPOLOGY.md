@@ -4,7 +4,7 @@
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Audience | Ops · platform owners                                                                                                                                                                                               |
 | Related  | [OWNER-ENGINES-OUTSIDE-HUB](../decisions/OWNER-ENGINES-OUTSIDE-HUB.md) · [HOST-COEXISTENCE-CONTROLS](./HOST-COEXISTENCE-CONTROLS.md) · [SPR-OPS-LTS-001](../sprint/SPR-OPS-LTS-001-apzhub-owned-engine-topology.md) |
-| Status   | **IN PROGRESS** — Plane LTS `19085` · Zammad LTS `19081` up; Kimai/Metabase/n8n/Paperless reserved                                                                                                                  |
+| Status   | **IN PROGRESS** — Plane `19085` · Zammad `19081` · Kimai `19083` up; Metabase/n8n/Paperless reserved                                                                                                                |
 
 ## Principle
 
@@ -44,7 +44,7 @@ Engines are **not** part of the hub process. They are replaceable backends behin
 | ----- | --------- | --------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | 19085 | Plane     | Projects        | `integrations/plane`              | **UP** — `apzhub-plane-lts` ([SPR-OPS-LTS-PLANE-001](../sprint/SPR-OPS-LTS-PLANE-001-apzhub-owned-plane-bring-up.md))     |
 | 19081 | Zammad    | Support         | `integrations/zammad`             | **UP** — `apzhub-zammad-lts` ([SPR-OPS-LTS-ZAMMAD-001](../sprint/SPR-OPS-LTS-ZAMMAD-001-apzhub-owned-zammad-bring-up.md)) |
-| 19083 | Kimai     | Time            | `integrations/kimai`              | Reserved                                                                                                                  |
+| 19083 | Kimai     | Time            | `integrations/kimai`              | **UP** — `apzhub-kimai-lts` ([SPR-OPS-LTS-KIMAI-001](../sprint/SPR-OPS-LTS-KIMAI-001-apzhub-owned-kimai-bring-up.md))     |
 | 19084 | Metabase  | Analytics       | `integrations/metabase`           | Reserved                                                                                                                  |
 | 19678 | n8n       | Workflow engine | `integrations/n8n`                | Reserved                                                                                                                  |
 | 19082 | Paperless | Documents DMS   | **No adapter yet** (ADR required) | Reserved                                                                                                                  |
