@@ -36,8 +36,13 @@ describe("Documents DMS Platform Services", () => {
       providerId: "documents-dms",
       message: "auth=valid; api=reachable",
     });
-    expect(documents[0]?.id).toMatch(/^dmsdoc_[a-f0-9]{24}$/);
-    expect(documents[0]?.id).not.toContain("42");
+    expect(documents[0]?.id).toMatch(/^dmsdoc_/);
+    expect(documents[0]?.id).not.toMatch(/42/);
+    const detail = await gateway.dms.getDocument(context, documents[0]!.id);
+    expect(detail.title).toBe("Supplier agreement");
+    const downloaded = await gateway.dms.downloadDocument(context, documents[0]!.id);
+    expect(downloaded.documentId).toBe(documents[0]!.id);
+    expect(downloaded.bytes.byteLength).toBeGreaterThan(0);
     const uploaded = await gateway.dms.uploadDocument(context, {
       fileName: "note.txt",
       contentType: "text/plain",
@@ -50,7 +55,19 @@ describe("Documents DMS Platform Services", () => {
       title: "Ops upload",
     });
     expect(uploaded.ingestId).toMatch(/^dmsingest_[a-f0-9]{24}$/);
-    expect(JSON.stringify({ health, documents, uploaded })).not.toMatch(/paperless/i);
+    expect(
+      JSON.stringify({
+        health,
+        documents,
+        detail,
+        uploaded,
+        downloadedMeta: {
+          documentId: downloaded.documentId,
+          contentType: downloaded.contentType,
+          fileName: downloaded.fileName,
+        },
+      }),
+    ).not.toMatch(/paperless/i);
     await disposePaperlessAdapter(adapter, factory);
   });
 });

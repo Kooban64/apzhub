@@ -2,7 +2,9 @@ import type { IntegrationRequestContext } from "@apzhub/integration-sdk";
 import type { IntegrationClient } from "@apzhub/integration-sdk/client";
 
 import type {
+  PaperlessDocumentRecord,
   PaperlessDocumentsListResponse,
+  PaperlessDownloadResult,
   PaperlessStatusResponse,
   PaperlessUploadInput,
   PaperlessUploadResult,
@@ -60,6 +62,69 @@ export class PaperlessRestClient {
       page_size: query.pageSize ?? 50,
       ordering: "-added",
     });
+  }
+
+  getDocument(
+    context: IntegrationRequestContext,
+    documentId: number,
+  ): Promise<PaperlessDocumentRecord> {
+    return this.request(context, `/documents/${documentId}/`);
+  }
+
+  async downloadDocument(
+    context: IntegrationRequestContext,
+    documentId: number,
+  ): Promise<PaperlessDownloadResult> {
+    const token = await this.getToken();
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), this.timeoutMs);
+    const startedAt = Date.now();
+    try {
+      const response = await this.fetchFn(
+        `${this.apiBaseUrl}/documents/${documentId}/download/`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Token ${token}`,
+            "X-Correlation-Id": context.correlationId,
+          },
+          signal: controller.signal,
+        },
+      );
+      this.lastLatencyMs = Date.now() - startedAt;
+      if (!response.ok) {
+        const text = await response.text();
+        let detail: unknown = text;
+        try {
+          detail = JSON.parse(text) as unknown;
+        } catch {
+          /* keep text */
+        }
+        const error = new Error(
+          typeof detail === "object" &&
+            detail !== null &&
+            "detail" in detail &&
+            typeof (detail as { detail: unknown }).detail === "string"
+            ? (detail as { detail: string }).detail
+            : `Documents DMS download failed (${response.status})`,
+        ) as Error & { statusCode?: number; body?: unknown };
+        error.statusCode = response.status;
+        error.body = detail;
+        throw error;
+      }
+      const buffer = new Uint8Array(await response.arrayBuffer());
+      const disposition = response.headers.get("content-disposition") ?? undefined;
+      const fileName = disposition
+        ? /filename\*?=(?:UTF-8''|")?([^";]+)/i.exec(disposition)?.[1]
+        : undefined;
+      return {
+        bytes: buffer,
+        contentType: response.headers.get("content-type") || "application/octet-stream",
+        fileName: fileName ? decodeURIComponent(fileName.replace(/"/g, "")) : undefined,
+      };
+    } finally {
+      clearTimeout(timer);
+    }
   }
 
   /**

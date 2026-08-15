@@ -3,6 +3,7 @@
  * remain independent and authoritative.
  */
 import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
 import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
 import { PlatformApiHttpError } from "../errors";
@@ -14,6 +15,8 @@ import { jsonCollectionResponse, jsonDataResponse } from "../response";
 
 /** 10 MiB soft cap for DMS ingest in this slice. */
 const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
+
+type RouteContext = { params: Promise<Record<string, string>> };
 
 async function assertDocumentsDmsEnabled(): Promise<void> {
   const bootstrap = await getPlatformApiGatewayBootstrap();
@@ -122,4 +125,86 @@ export async function handleUploadDocumentsDmsDocument(
     title,
   });
   return jsonDataResponse(result, context.tracing);
+}
+
+export async function handleGetDocumentsDmsDocument(
+  _request: NextRequest,
+  context: PlatformApiRequestContext,
+  routeContext?: RouteContext,
+) {
+  await assertDocumentsDmsEnabled();
+  const params = await routeContext?.params;
+  const documentId = params?.documentId?.trim() ?? "";
+  if (!documentId) {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_ERROR",
+      message: "documentId path parameter is required.",
+    });
+  }
+  const gateway = await getPlatformServiceGateway();
+  try {
+    const result = await gateway.documentsDms.dms.getDocument(
+      context.serviceContext,
+      documentId,
+    );
+    return jsonDataResponse(result, context.tracing);
+  } catch (error) {
+    if (
+      error instanceof Error &&
+      /Invalid Documents DMS document id/i.test(error.message)
+    ) {
+      throw new PlatformApiHttpError(400, {
+        code: "VALIDATION_ERROR",
+        message: "Invalid Documents DMS document id.",
+      });
+    }
+    throw error;
+  }
+}
+
+export async function handleDownloadDocumentsDmsDocument(
+  _request: NextRequest,
+  context: PlatformApiRequestContext,
+  routeContext?: RouteContext,
+) {
+  await assertDocumentsDmsEnabled();
+  const params = await routeContext?.params;
+  const documentId = params?.documentId?.trim() ?? "";
+  if (!documentId) {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_ERROR",
+      message: "documentId path parameter is required.",
+    });
+  }
+  const gateway = await getPlatformServiceGateway();
+  let result;
+  try {
+    result = await gateway.documentsDms.dms.downloadDocument(
+      context.serviceContext,
+      documentId,
+    );
+  } catch (error) {
+    if (
+      error instanceof Error &&
+      /Invalid Documents DMS document id/i.test(error.message)
+    ) {
+      throw new PlatformApiHttpError(400, {
+        code: "VALIDATION_ERROR",
+        message: "Invalid Documents DMS document id.",
+      });
+    }
+    throw error;
+  }
+  const safeName = result.fileName.replace(/[^\w.-]+/g, "_");
+  return new NextResponse(Buffer.from(result.bytes), {
+    status: 200,
+    headers: {
+      "Content-Type": result.contentType,
+      "Content-Length": String(result.bytes.byteLength),
+      "Content-Disposition": `attachment; filename="${safeName}"`,
+      "X-Documents-Dms-Id": result.documentId,
+      "X-Request-Id": context.tracing.requestId,
+      "X-Correlation-Id": context.tracing.correlationId,
+    },
+  });
 }

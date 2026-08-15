@@ -50,6 +50,27 @@ export function createMockPaperlessFetch(
       );
     }
     if (
+      url.pathname === `/api/documents/${MOCK_PAPERLESS_DOCUMENT.id}/` &&
+      (!init?.method || init.method === "GET")
+    ) {
+      return new Response(JSON.stringify(MOCK_PAPERLESS_DOCUMENT), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+    if (
+      url.pathname === `/api/documents/${MOCK_PAPERLESS_DOCUMENT.id}/download/` &&
+      (!init?.method || init.method === "GET")
+    ) {
+      return new Response("mock-pdf-bytes", {
+        status: 200,
+        headers: {
+          "Content-Type": "application/pdf",
+          "Content-Disposition": 'attachment; filename="supplier-agreement.pdf"',
+        },
+      });
+    }
+    if (
       url.pathname === "/api/documents/post_document/" &&
       (init?.method ?? "GET").toUpperCase() === "POST"
     ) {

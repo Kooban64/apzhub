@@ -52,8 +52,10 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-OPS-LTS-PAPERLESS-001](./sprint/SPR-OPS-LTS-PAPERLESS-001-apzhub-owned-paperless-bring-up.md) | **COMPLETE · INFRA ONLY** — Paperless on 19082; no Documents adapter                 |
 | [SPR-OPS-PAPERLESS-002](./sprint/SPR-OPS-PAPERLESS-002-documents-dms-paperless-foundation.md)      | **COMPLETE · DELIVERED** — Documents DMS Paperless foundation (ADR-0095)             |
 | [SPR-OPS-PAPERLESS-003](./sprint/SPR-OPS-PAPERLESS-003-documents-dms-upload.md)                    | **COMPLETE · DELIVERED** — Documents DMS multipart upload / ingest                   |
+| [SPR-OPS-PAPERLESS-004](./sprint/SPR-OPS-PAPERLESS-004-documents-dms-get-download.md)              | **COMPLETE · DELIVERED** — Documents DMS get + download                              |
 | [PAPERLESS-002 evidence](./products/paperless-002/README.md)                                       | DMS health/list dogfood · legacy untouched                                           |
 | [PAPERLESS-003 evidence](./products/paperless-003/README.md)                                       | DMS upload dogfood · opaque ingest id                                                |
+| [PAPERLESS-004 evidence](./products/paperless-004/README.md)                                       | DMS get/download dogfood                                                             |
 | [SPR-OPS-LTS-CLOSE](./sprint/SPR-OPS-LTS-CLOSE-apzhub-owned-engine-programme-closeout.md)          | **COMPLETE · DELIVERED** — LTS fleet closeout (adapter products + Paperless infra)   |
 | [ADR-0095 Paperless DMS](./adr/ADR-0095-paperless-ngx-documents-dms-provider.md)                   | **Accepted** — optional Documents DMS engine; native SoR first                       |
 | [OWNER-ENGINES-OUTSIDE-HUB](./decisions/OWNER-ENGINES-OUTSIDE-HUB.md)                              | **IN FORCE** — engines external; BetterAuth only; leave legacy alone                 |

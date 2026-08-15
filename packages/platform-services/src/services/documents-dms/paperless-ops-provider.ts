@@ -2,9 +2,15 @@ import { createHash } from "node:crypto";
 
 import type { PaperlessAdapter } from "@apzhub/integration-paperless";
 import type { IntegrationRequestContext } from "@apzhub/integration-sdk";
+import { PlatformServiceError } from "@apzhub/platform-service-contracts";
 import type { ServiceRequestContext } from "@apzhub/platform-service-contracts";
 
-import type { DocumentsDmsHealth, DocumentsDmsProvider } from "./documents-dms-types";
+import { fromPublicDocumentId, toPublicDocumentId } from "./document-ids";
+import type {
+  DocumentsDmsDocumentSummary,
+  DocumentsDmsHealth,
+  DocumentsDmsProvider,
+} from "./documents-dms-types";
 
 function toIntegrationContext(ctx: ServiceRequestContext): IntegrationRequestContext {
   return {
@@ -13,20 +19,48 @@ function toIntegrationContext(ctx: ServiceRequestContext): IntegrationRequestCon
   };
 }
 
-function toPublicDocumentId(engineId: number): string {
-  const digest = createHash("sha256")
-    .update(`documents-dms:${engineId}`)
-    .digest("hex")
-    .slice(0, 24);
-  return `dmsdoc_${digest}`;
-}
-
 function toPublicIngestId(taskId: string): string {
   const digest = createHash("sha256")
     .update(`documents-dms-ingest:${taskId}`)
     .digest("hex")
     .slice(0, 24);
   return `dmsingest_${digest}`;
+}
+
+function requireEngineId(publicId: string): number {
+  const engineId = fromPublicDocumentId(publicId);
+  if (engineId == null) {
+    throw new PlatformServiceError({
+      category: "validation",
+      code: "VALIDATION_ERROR",
+      message: "Invalid Documents DMS document id.",
+      correlationId: "documents-dms",
+      retryable: false,
+    });
+  }
+  return engineId;
+}
+
+function mapDocument(document: {
+  readonly id: number;
+  readonly title?: string;
+  readonly added?: string;
+  readonly created?: string;
+  readonly modified?: string;
+  readonly original_file_name?: string;
+  readonly archive_serial_number?: number | null;
+  readonly tags?: readonly number[];
+}): DocumentsDmsDocumentSummary {
+  return {
+    id: toPublicDocumentId(document.id),
+    title: document.title?.trim() || "Untitled document",
+    addedAt: document.added,
+    createdAt: document.created,
+    modifiedAt: document.modified,
+    originalFileName: document.original_file_name,
+    archiveSerialNumber: document.archive_serial_number ?? undefined,
+    tagCount: document.tags?.length ?? 0,
+  };
 }
 
 export function createPaperlessOpsProvider(
@@ -70,16 +104,27 @@ export function createPaperlessOpsProvider(
 
     async listDocuments(ctx, query) {
       const result = await adapter.listDocuments(toIntegrationContext(ctx), query);
-      return result.documents.map((document) => ({
-        id: toPublicDocumentId(document.id),
-        title: document.title?.trim() || "Untitled document",
-        addedAt: document.added,
-        createdAt: document.created,
-        modifiedAt: document.modified,
-        originalFileName: document.original_file_name,
-        archiveSerialNumber: document.archive_serial_number ?? undefined,
-        tagCount: document.tags?.length ?? 0,
-      }));
+      return result.documents.map(mapDocument);
+    },
+
+    async getDocument(ctx, documentId) {
+      const engineId = requireEngineId(documentId);
+      const document = await adapter.getDocument(toIntegrationContext(ctx), engineId);
+      return mapDocument(document);
+    },
+
+    async downloadDocument(ctx, documentId) {
+      const engineId = requireEngineId(documentId);
+      const downloaded = await adapter.downloadDocument(
+        toIntegrationContext(ctx),
+        engineId,
+      );
+      return {
+        documentId: toPublicDocumentId(engineId),
+        bytes: downloaded.bytes,
+        contentType: downloaded.contentType,
+        fileName: downloaded.fileName || `document-${toPublicDocumentId(engineId)}`,
+      };
     },
 
     async uploadDocument(ctx, input) {

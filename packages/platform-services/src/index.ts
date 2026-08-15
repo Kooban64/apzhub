@@ -335,6 +335,7 @@ export {
   type DocumentsDmsDocumentSummary,
   type DocumentsDmsUploadInput,
   type DocumentsDmsUploadResult,
+  type DocumentsDmsDownloadResult,
 } from "./services/documents-dms";
 export {
   createSearchPlatformServices,

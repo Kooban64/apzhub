@@ -20,6 +20,8 @@ function createBundle(
   const dms: DocumentsDmsGateway["dms"] = {
     getHealth: (ctx) => provider.getHealth(ctx),
     listDocuments: (ctx, query) => provider.listDocuments(ctx, query),
+    getDocument: (ctx, documentId) => provider.getDocument(ctx, documentId),
+    downloadDocument: (ctx, documentId) => provider.downloadDocument(ctx, documentId),
     uploadDocument: (ctx, input) => provider.uploadDocument(ctx, input),
   };
   const gatewaySurface: DocumentsDmsGateway = { dms };

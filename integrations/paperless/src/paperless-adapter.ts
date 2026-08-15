@@ -135,6 +135,40 @@ export class PaperlessAdapter extends IntegrationAdapterBase {
     }
   }
 
+  async getDocument(context: IntegrationRequestContext, documentId: number) {
+    this.assertNotDisposed();
+    this.assertInitialised();
+    try {
+      return await this.client.getDocument(context, documentId);
+    } catch (error) {
+      const translated = mapPaperlessUnknownError(error, {
+        correlationId: context.correlationId,
+        tenantId: context.tenantId,
+        operation: "get_document",
+        integrationId: this.integrationId,
+        adapterId: this.context.adapterId,
+      });
+      throw new Error(translated.error.message);
+    }
+  }
+
+  async downloadDocument(context: IntegrationRequestContext, documentId: number) {
+    this.assertNotDisposed();
+    this.assertInitialised();
+    try {
+      return await this.client.downloadDocument(context, documentId);
+    } catch (error) {
+      const translated = mapPaperlessUnknownError(error, {
+        correlationId: context.correlationId,
+        tenantId: context.tenantId,
+        operation: "download_document",
+        integrationId: this.integrationId,
+        adapterId: this.context.adapterId,
+      });
+      throw new Error(translated.error.message);
+    }
+  }
+
   async testConnection(
     context: IntegrationRequestContext,
   ): Promise<AdapterLifecycleResult> {

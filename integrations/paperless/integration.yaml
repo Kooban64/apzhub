@@ -25,6 +25,7 @@ integration:
     - diagnostics
     - documents
     - upload
+    - download
 
 health:
   enabled: true
@@ -33,7 +34,7 @@ documentation:
   userVisible: false
   engineBranding: hidden
   supportedApiVersion: "v1"
-  adapterImplementation: SPR-OPS-PAPERLESS-003
+  adapterImplementation: SPR-OPS-PAPERLESS-004
 
 tests:
   contract: present

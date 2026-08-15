@@ -25,6 +25,7 @@ describe("@apzhub/integration-paperless boundaries", () => {
     expect(yaml).toContain("id: paperless");
     expect(yaml).toContain("engineBranding: hidden");
     expect(yaml).toContain("- upload");
+    expect(yaml).toContain("- download");
     expect(yaml).not.toMatch(/\b(delete|update)\b/i);
   });
 });

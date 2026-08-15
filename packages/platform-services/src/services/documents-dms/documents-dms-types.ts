@@ -37,6 +37,13 @@ export interface DocumentsDmsUploadResult {
   readonly title?: string;
 }
 
+export interface DocumentsDmsDownloadResult {
+  readonly bytes: Uint8Array;
+  readonly contentType: string;
+  readonly fileName: string;
+  readonly documentId: string;
+}
+
 export interface DocumentsDmsProvider {
   readonly providerId: string;
   getHealth(ctx: ServiceRequestContext): Promise<DocumentsDmsHealth>;
@@ -44,6 +51,14 @@ export interface DocumentsDmsProvider {
     ctx: ServiceRequestContext,
     query?: { readonly page?: number; readonly pageSize?: number },
   ): Promise<readonly DocumentsDmsDocumentSummary[]>;
+  getDocument(
+    ctx: ServiceRequestContext,
+    documentId: string,
+  ): Promise<DocumentsDmsDocumentSummary>;
+  downloadDocument(
+    ctx: ServiceRequestContext,
+    documentId: string,
+  ): Promise<DocumentsDmsDownloadResult>;
   uploadDocument(
     ctx: ServiceRequestContext,
     input: DocumentsDmsUploadInput,
@@ -57,6 +72,14 @@ export interface DocumentsDmsGateway {
       ctx: ServiceRequestContext,
       query?: { readonly page?: number; readonly pageSize?: number },
     ): Promise<readonly DocumentsDmsDocumentSummary[]>;
+    getDocument(
+      ctx: ServiceRequestContext,
+      documentId: string,
+    ): Promise<DocumentsDmsDocumentSummary>;
+    downloadDocument(
+      ctx: ServiceRequestContext,
+      documentId: string,
+    ): Promise<DocumentsDmsDownloadResult>;
     uploadDocument(
       ctx: ServiceRequestContext,
       input: DocumentsDmsUploadInput,

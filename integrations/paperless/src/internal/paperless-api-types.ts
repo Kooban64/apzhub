@@ -33,3 +33,9 @@ export interface PaperlessUploadResult {
   /** Engine async ingest / task id — never exposed raw to clients. */
   readonly taskId: string;
 }
+
+export interface PaperlessDownloadResult {
+  readonly bytes: Uint8Array;
+  readonly contentType: string;
+  readonly fileName?: string;
+}

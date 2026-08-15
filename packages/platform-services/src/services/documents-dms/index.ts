@@ -3,9 +3,11 @@ export type { DocumentsDmsPlatformServicesBundle } from "./create-documents-dms-
 export { createPaperlessOpsProvider } from "./paperless-ops-provider";
 export type {
   DocumentsDmsDocumentSummary,
+  DocumentsDmsDownloadResult,
   DocumentsDmsGateway,
   DocumentsDmsHealth,
   DocumentsDmsProvider,
   DocumentsDmsUploadInput,
   DocumentsDmsUploadResult,
 } from "./documents-dms-types";
+export { fromPublicDocumentId, toPublicDocumentId } from "./document-ids";

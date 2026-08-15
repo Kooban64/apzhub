@@ -37,6 +37,11 @@ describe("@apzhub/integration-paperless adapter", () => {
     expect(uploaded.taskId).toMatch(
       /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
     );
+    const got = await adapter.getDocument(context, 42);
+    expect(got.title).toBe("Supplier agreement");
+    const downloaded = await adapter.downloadDocument(context, 42);
+    expect(downloaded.contentType).toContain("pdf");
+    expect(downloaded.bytes.byteLength).toBeGreaterThan(0);
     await disposePaperlessAdapter(adapter, factory);
   });
 
