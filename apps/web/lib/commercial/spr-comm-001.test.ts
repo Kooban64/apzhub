@@ -58,6 +58,7 @@ describe("SPR-COMM-001 catalogue packages", () => {
     const pkgs = listPackages();
     expect(pkgs.map((p) => p.packageId)).toEqual(
       expect.arrayContaining([
+        "pkg.apzprd.projects",
         "pkg.apzprd.time",
         "pkg.apzprd.workspace",
         "pkg.apzpen.starter",
@@ -72,6 +73,7 @@ describe("SPR-COMM-001 catalogue packages", () => {
       "analytics",
     ]);
     expect(getPackage("pkg.apzpen.starter")?.status).toBe("available");
+    expect(getPackage("pkg.apzprd.projects")?.status).toBe("available");
   });
 });
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import {
@@ -41,7 +42,7 @@ import { ProjectsSearchView } from "./projects-search-view";
 import { ProjectsSettingsView } from "./projects-settings-view";
 import { ProjectsSprintsView } from "./projects-sprints-view";
 import { ProjectsTasksView } from "./projects-tasks-view";
-import { EmptyState, PageShell } from "./projects-ui";
+import { EmptyState, PageShell, LoadingState } from "./projects-ui";
 import { TeamSurfaceView } from "./team-surface-view";
 import { TeamsDirectoryView } from "./teams-directory-view";
 
@@ -59,6 +60,42 @@ function PermissionDenied({ action }: { readonly action: string }) {
   );
 }
 
+function ProductAccessDenied() {
+  return (
+    <PageShell title="APZ Projects" breadcrumbs={["APZ Projects", "Product required"]}>
+      <EmptyState
+        title="Projects not entitled"
+        description="Your organisation or account is not entitled to APZ Projects. Ask an administrator to enable the Projects package."
+      />
+    </PageShell>
+  );
+}
+
+function useProjectsProductEntitled(): boolean | null {
+  const [entitled, setEntitled] = useState<boolean | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      try {
+        const res = await fetch("/api/v1/me/home-context", { cache: "no-store" });
+        const body = (await res.json()) as {
+          data?: { entitlements?: { productKeys?: readonly string[] } };
+        };
+        if (cancelled) return;
+        const keys = body.data?.entitlements?.productKeys ?? [];
+        // Soft: if entitlements absent/empty (bootstrap), allow; else require projects.
+        setEntitled(keys.length === 0 || keys.includes("projects"));
+      } catch {
+        if (!cancelled) setEntitled(true);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  return entitled;
+}
+
 /**
  * Projects workspace router — consumes APZHUB session permissions.
  * Never defaults to `projects.*`. Never exposes engine identity/roles.
@@ -71,8 +108,20 @@ export function ProjectsWorkspaceRouter({
   const pathname = usePathname();
   const route = resolveProjectsRoute(pathname);
   const permissions = useProjectsPermissions(permissionsOverride);
+  const productEntitled = useProjectsProductEntitled();
   // Baseline title before the active view refines it (loading / crash safety).
   useProjectsDocumentTitle(projectsRoutePageTitle(route));
+
+  if (productEntitled === null) {
+    return (
+      <PageShell title="APZ Projects" breadcrumbs={["APZ Projects"]}>
+        <LoadingState label="Checking product access…" />
+      </PageShell>
+    );
+  }
+  if (!productEntitled) {
+    return <ProductAccessDenied />;
+  }
 
   return (
     <ProjectsSurfaceErrorBoundary>

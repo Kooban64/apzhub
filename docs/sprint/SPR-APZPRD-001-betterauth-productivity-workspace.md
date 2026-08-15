@@ -1,6 +1,7 @@
 # SPR-APZPRD-001 — Productivity workspace on BetterAuth (Authentik retirement path)
 
-> **Status:** **AUTHORISED · IN PROGRESS** — 2026-08-15  
+> **Status:** **COMPLETE · DELIVERED** — 2026-08-15  
+> **Next:** [SPR-APZPRD-002](./SPR-APZPRD-002-entitled-projects-workbench.md)  
 > **Pillar:** [APZPRD](../strategy/APZPRD-ENTERPRISE-PRODUCTIVITY-PLATFORM.md)  
 > **Depends on:** BetterAuth sole AuthN ([OWNER-BETTERAUTH-SOLE-AUTHN](../decisions/OWNER-BETTERAUTH-SOLE-AUTHN.md)); SPR-COMM-001/002 entitlements  
 > **Does not:** Reintroduce Authentik · build launcher tiles · unbounded product rewrite
@@ -26,7 +27,7 @@ APZPRD users enter via **BetterAuth only**. The productivity workbench assembles
 4. At least one productivity engine call succeeds with BetterAuth session + adapter (not Authentik).
 5. Authentik remains running for legacy vhosts until checklist GO — then Owner authorises stop.
 
-## Delivery record (in progress)
+## Delivery record
 
 - **001-A:** [OWNER-BETTERAUTH-SOLE-AUTHN](../decisions/OWNER-BETTERAUTH-SOLE-AUTHN.md) IN FORCE; 007 / IAM quick-ref / ENVIRONMENT / strategy / QEP Admin aligned.
 - **001-B:** [retire-authentik.md](../operations/runbooks/retire-authentik.md) published (checklist — not GO).

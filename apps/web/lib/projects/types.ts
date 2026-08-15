@@ -135,6 +135,26 @@ export interface ProjectsHealthSnapshot {
   readonly details?: Record<string, string>;
 }
 
+/** SPR-APZPRD-001-D / 002-D — BetterAuth + adapter engine posture. */
+export interface ProjectsEngineHealthPayload {
+  readonly product: string;
+  readonly authN: string;
+  readonly authZ: string;
+  readonly engineAuth: string;
+  readonly authentikUsed: boolean;
+  readonly sessionUserId?: string;
+  readonly plane?: {
+    readonly integrationEnabled: boolean;
+    readonly healthStatus: string;
+    readonly apiTokenPresent: boolean;
+    readonly connectionConfigured: boolean;
+    readonly workspaceConfigured: boolean;
+    readonly issues: readonly string[];
+  };
+  readonly liveListOk: boolean | null;
+  readonly liveListError?: string;
+}
+
 export interface ProjectsApiRequestOptions {
   readonly signal?: AbortSignal;
   readonly correlationId?: string;

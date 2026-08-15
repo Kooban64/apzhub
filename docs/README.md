@@ -19,7 +19,8 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-COMM-001](./sprint/SPR-COMM-001-catalogue-entitlements-tenant-switch.md)  | **DELIVERED** — packages, entitlements, tenant switch, soft APZPEN gate              |
 | [SPR-COMM-002](./sprint/SPR-COMM-002-org-packages-tenant-switch-source.md)     | **DELIVERED** — org packages UI, tenant switcher, project source (QEP+PEN)           |
 | [OWNER BetterAuth sole AuthN](./decisions/OWNER-BETTERAUTH-SOLE-AUTHN.md)      | **IN FORCE** — BetterAuth only; Authentik retire with APZPRD                         |
-| [SPR-APZPRD-001](./sprint/SPR-APZPRD-001-betterauth-productivity-workspace.md) | **AUTHORISED · IN PROGRESS** — productivity workspace on BetterAuth                  |
+| [SPR-APZPRD-001](./sprint/SPR-APZPRD-001-betterauth-productivity-workspace.md) | **COMPLETE · DELIVERED** — BetterAuth sole AuthN; Projects health without Authentik  |
+| [SPR-APZPRD-002](./sprint/SPR-APZPRD-002-entitled-projects-workbench.md)       | **COMPLETE · DELIVERED** — entitled Projects workbench (catalogue → adapter)         |
 
 ### Priority product build — APZQEP (active)
 

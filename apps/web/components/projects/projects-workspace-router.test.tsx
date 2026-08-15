@@ -50,6 +50,14 @@ describe("ProjectsWorkspaceRouter", () => {
   beforeEach(() => {
     pathnameState.value = "/workspace/projects/list";
     vi.mocked(listProjects).mockReset();
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () =>
+        Response.json({
+          data: { entitlements: { productKeys: ["projects", "qep"] } },
+        }),
+      ),
+    );
   });
 
   it("renders list view for /workspace/projects/list", async () => {
@@ -70,48 +78,81 @@ describe("ProjectsWorkspaceRouter", () => {
     });
 
     render(wrap(<ProjectsWorkspaceRouter permissions={FULL} />));
-    expect(screen.getByTestId("projects-page")).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByTestId("projects-page")).toBeTruthy();
+    });
     await waitFor(() => {
       expect(screen.getByText("Alpha")).toBeTruthy();
     });
   });
 
-  it("denies create/search/health without grants (no projects.* default)", () => {
+  it("denies create/search/health without grants (no projects.* default)", async () => {
     pathnameState.value = "/workspace/projects/new";
     render(wrap(<ProjectsWorkspaceRouter permissions={[]} />));
-    expect(screen.getAllByText("Permission required").length).toBeGreaterThan(0);
+    await waitFor(() => {
+      expect(screen.getAllByText("Permission required").length).toBeGreaterThan(0);
+    });
     expect(screen.queryByTestId("route-create")).toBeNull();
 
     pathnameState.value = "/workspace/projects/search";
     render(wrap(<ProjectsWorkspaceRouter permissions={[]} />));
-    expect(screen.queryByTestId("route-search")).toBeNull();
+    await waitFor(() => {
+      expect(screen.queryByTestId("route-search")).toBeNull();
+    });
 
     pathnameState.value = "/workspace/projects/health";
     render(wrap(<ProjectsWorkspaceRouter permissions={[]} />));
-    expect(screen.queryByTestId("route-health")).toBeNull();
+    await waitFor(() => {
+      expect(screen.queryByTestId("route-health")).toBeNull();
+    });
   });
 
-  it("allows create/search/health with projects.*", () => {
+  it("allows create/search/health with projects.*", async () => {
     pathnameState.value = "/workspace/projects/new";
     render(wrap(<ProjectsWorkspaceRouter permissions={FULL} />));
-    expect(screen.getByTestId("route-create")).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByTestId("route-create")).toBeTruthy();
+    });
 
     pathnameState.value = "/workspace/projects/search";
     render(wrap(<ProjectsWorkspaceRouter permissions={FULL} />));
-    expect(screen.getByTestId("route-search")).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByTestId("route-search")).toBeTruthy();
+    });
 
     pathnameState.value = "/workspace/projects/health";
     render(wrap(<ProjectsWorkspaceRouter permissions={FULL} />));
-    expect(screen.getByTestId("route-health")).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByTestId("route-health")).toBeTruthy();
+    });
   });
 
-  it("routes help and settings", () => {
+  it("routes help and settings", async () => {
     pathnameState.value = "/workspace/projects/help";
     render(wrap(<ProjectsWorkspaceRouter permissions={FULL} />));
-    expect(screen.getByTestId("route-help")).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByTestId("route-help")).toBeTruthy();
+    });
 
     pathnameState.value = "/workspace/projects/settings";
     render(wrap(<ProjectsWorkspaceRouter permissions={FULL} />));
-    expect(screen.getByTestId("route-settings")).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByTestId("route-settings")).toBeTruthy();
+    });
+  });
+
+  it("denies workspace when product not entitled", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () =>
+        Response.json({
+          data: { entitlements: { productKeys: ["qep"] } },
+        }),
+      ),
+    );
+    render(wrap(<ProjectsWorkspaceRouter permissions={FULL} />));
+    await waitFor(() => {
+      expect(screen.getByText("Projects not entitled")).toBeTruthy();
+    });
   });
 });

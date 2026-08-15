@@ -78,6 +78,7 @@ export type PlanCatalogueEntry = {
 
 /** Named commercial packages (invoice lines) — expand to product modules. */
 export type PackageId =
+  | "pkg.apzprd.projects"
   | "pkg.apzprd.time"
   | "pkg.apzprd.service"
   | "pkg.apzprd.delivery"
@@ -168,7 +169,7 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
     productKey: "projects",
     name: "Projects",
     description: "Project workspaces and delivery boards.",
-    status: "coming_soon",
+    status: "available",
     moduleIds: ["projects"],
     suiteId: "productivity",
     bundle: "productivity",
@@ -247,6 +248,16 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
 ] as const;
 
 export const PACKAGE_CATALOGUE: readonly PackageCatalogueEntry[] = [
+  {
+    packageId: "pkg.apzprd.projects",
+    name: "APZPRD Projects",
+    description: "Projects workspaces only — first sellable APZPRD slice.",
+    suiteId: "productivity",
+    productKeys: ["projects"],
+    includesKnowledgeLite: false,
+    status: "available",
+    selfServe: true,
+  },
   {
     packageId: "pkg.apzprd.time",
     name: "APZPRD Time",

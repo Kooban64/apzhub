@@ -53,7 +53,7 @@ export function ProjectsHealthView() {
   return (
     <PageShell
       title="Readiness"
-      description="Operator summary of APZ Projects availability inside APZHUB."
+      description="Operator summary of APZ Projects availability inside APZHUB (BetterAuth session + adapter — no Authentik)."
       breadcrumbs={["APZ Projects", "Readiness"]}
     >
       <section

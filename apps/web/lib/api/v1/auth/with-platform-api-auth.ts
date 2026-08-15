@@ -108,6 +108,12 @@ export function withPlatformApiAuth(
         serviceContext,
       };
 
+      // SPR-APZPRD-002-B — commercial product gate for Projects APIs.
+      if (options.operation?.startsWith("projects.")) {
+        const { requireProjectsProductAccess } = await import("@/lib/projects/access");
+        requireProjectsProductAccess(context);
+      }
+
       logPlatformApiRequest(request, context, options.operation);
 
       const response = await runWithTenantContext(serviceContext.tenantId, () =>

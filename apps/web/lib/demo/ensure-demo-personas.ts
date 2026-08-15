@@ -20,8 +20,12 @@ import {
   setUserProductGrants,
   startPlanProductSubscriptions,
 } from "@/lib/commercial/product-access";
+import type { ProductKey } from "@/lib/commercial/catalogue";
 import { ensureApzorAllSuitesFree } from "@/lib/commercial/provisioning";
-import { subscribeOrganisationToSuites } from "@/lib/commercial/provisioning";
+import {
+  subscribeOrganisationToPackage,
+  subscribeOrganisationToSuites,
+} from "@/lib/commercial/provisioning";
 
 async function ensureDemoTenants(): Promise<void> {
   await ensurePlatformTenantRow({
@@ -108,13 +112,16 @@ function seedProductAccess(persona: DemoPersona, userId: string): void {
       status: "active",
       grantUserId: persona.kind === "org_member" ? undefined : userId,
     });
-    if (persona.kind === "org_member") {
-      setUserProductGrants({
-        organisationId: persona.tenantId,
-        userId,
-        productKeys: ["qep"],
-      });
+    // SPR-APZPRD-002-A — merge Projects (and pentest for admins) onto plan grants.
+    const productKeys = new Set<ProductKey>(["qep", "projects"]);
+    if (persona.kind === "superadmin" || persona.kind === "platform_admin") {
+      productKeys.add("pentest");
     }
+    setUserProductGrants({
+      organisationId: persona.tenantId,
+      userId,
+      productKeys: [...productKeys],
+    });
   } catch {
     /* ignore seed races */
   }
@@ -133,6 +140,23 @@ export async function ensureDemoPersonasSeeded(): Promise<{
   await ensureDemoTenants();
   ensureApzorAllSuitesFree();
 
+  // Demo org gets QA suite + first APZPRD slice (Projects) before user grants.
+  subscribeOrganisationToSuites({
+    organisationId: DEMO_ORG_TENANT_ID,
+    suiteIds: ["qa"],
+    planId: "plan.business",
+  });
+  subscribeOrganisationToPackage({
+    organisationId: DEMO_ORG_TENANT_ID,
+    packageId: "pkg.apzprd.projects",
+    planId: "plan.business",
+  });
+  subscribeOrganisationToPackage({
+    organisationId: "t-individual-self",
+    packageId: "pkg.apzprd.projects",
+    planId: "plan.individual",
+  });
+
   let seeded = 0;
   for (const persona of DEMO_PERSONAS) {
     const userId = await ensureAuthUser(persona);
@@ -140,13 +164,6 @@ export async function ensureDemoPersonasSeeded(): Promise<{
     seedProductAccess(persona, userId);
     seeded += 1;
   }
-
-  // Demo org gets QA suite; grants handled in seedProductAccess.
-  subscribeOrganisationToSuites({
-    organisationId: DEMO_ORG_TENANT_ID,
-    suiteIds: ["qa"],
-    planId: "plan.business",
-  });
 
   // Promote classic e2e user when present.
   try {

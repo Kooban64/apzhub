@@ -22,6 +22,7 @@ import type {
   ProjectRisk,
   ProjectsApiRequestOptions,
   ProjectsCollectionResult,
+  ProjectsEngineHealthPayload,
   ProjectsHealthSnapshot,
   Task,
   TaskListParams,
@@ -1783,11 +1784,39 @@ export async function listWorkspaces(
 export async function getProjectsPlatformHealth(
   options?: ProjectsApiRequestOptions,
 ): Promise<ProjectsHealthSnapshot> {
-  const envelope = await requestJson<DataEnvelope<ProjectsHealthSnapshot>>("/health", {
-    ...options,
-    method: "GET",
-  });
-  return envelope.data;
+  const envelope = await requestJson<DataEnvelope<ProjectsEngineHealthPayload>>(
+    "/projects/health",
+    {
+      ...options,
+      method: "GET",
+    },
+  );
+  const data = envelope.data;
+  const live =
+    data.liveListOk === true ? "ok" : data.liveListOk === false ? "failed" : "skipped";
+  const status =
+    data.liveListOk === true
+      ? "healthy"
+      : data.liveListOk === false
+        ? "degraded"
+        : (data.plane?.healthStatus ?? "unknown");
+  return {
+    status,
+    version: "apzprd-projects",
+    checks: {
+      authN: data.authN,
+      engineAuth: data.engineAuth,
+      authentikUsed: data.authentikUsed ? "yes" : "no",
+      plane: data.plane?.healthStatus ?? "unknown",
+      liveList: live,
+    },
+    details: {
+      ...(data.liveListError ? { liveListError: data.liveListError } : {}),
+      ...(data.plane?.issues?.length
+        ? { planeIssues: data.plane.issues.join("; ") }
+        : {}),
+    },
+  };
 }
 
 export async function getProjectDeliveryDashboard(
