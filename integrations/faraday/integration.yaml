@@ -1,0 +1,32 @@
+manifestSchemaVersion: "1.0"
+id: faraday
+name: Faraday Integration
+version: 0.1.0
+kind: integration
+
+metadata:
+  category: security-assurance
+  description: >
+    Faraday OSS pen-test management findings normalize and health probe for
+    APZPEN (SPR-APZPEN-ENT-001). Compose not yet deployed — artefact ingest path.
+  product: apzpen
+  ossFirst: true
+  owner: APZHUB
+  tags:
+    - faraday
+    - pentest
+    - findings-aggregator
+    - apzpen
+
+integration:
+  status: in_progress
+  capabilities:
+    - health
+    - findings_normalize
+  health:
+    selfReport: true
+
+documentation:
+  userVisible: false
+  engineBranding: hidden
+  adapterImplementation: SPR-APZPEN-ENT-001

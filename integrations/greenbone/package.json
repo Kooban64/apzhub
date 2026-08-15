@@ -1,0 +1,15 @@
+{
+  "name": "@apzhub/integration-greenbone",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Greenbone CE findings normalize + UI health probe for APZPEN (SPR-APZPEN-ENT-001)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "vitest run --config ../../vitest.config.ts integrations/greenbone"
+  }
+}

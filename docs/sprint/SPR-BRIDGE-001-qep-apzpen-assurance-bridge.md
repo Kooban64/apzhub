@@ -30,4 +30,6 @@ Release Readiness / Certification in **APZQEP** can show **security assurance si
 
 ## Delivery record
 
-_(in progress)_
+- **BR-001-A:** `service.yaml` at `services/qep/services/qep-security-assurance-bridge/`; summary contract adds `status` four-state.
+- **BR-001-C/D/E:** Dual QEP+APZPEN entitlement; deep-link only when `href` set; bridge-read audit `bridge.security_assurance.read`; Home/Readiness UI honesty.
+- **BR-001-B:** Still compose over APZPEN SoR in web handlers — Platform Service extraction + Greenbone freshness follow ENT-001.

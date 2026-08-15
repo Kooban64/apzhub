@@ -51,6 +51,7 @@ type SecurityAssurancePayload = {
   summary: {
     entitled: boolean;
     linked: boolean;
+    status?: "healthy" | "degraded" | "unavailable" | "not_entitled";
     href: string;
     reviewClear: boolean;
     detail: string;
@@ -111,10 +112,11 @@ function ReleaseReadinessView() {
   const s = flowsQuery.data!.summary;
   const security = securityQuery.data?.summary;
   const securityOk = security?.reviewClear === true;
+  const securityStatus = security?.status ?? "unavailable";
   const securityDetail = securityQuery.isError
     ? `Unable to load APZPEN posture: ${(securityQuery.error as Error).message}`
-    : (security?.detail ?? "Security assurance posture unavailable.");
-  const securityHref = security?.href ?? "/apzpen";
+    : `[${securityStatus}] ${security?.detail ?? "Security assurance posture unavailable."}`;
+  const securityHref = security?.href?.trim() || "";
 
   const risks = riskQuery.data?.items ?? [];
   const openRisks = risks.filter((r) => r.status === "open");
@@ -265,9 +267,15 @@ function ReleaseReadinessView() {
                   {check.detail}
                 </p>
               </div>
-              <Link className={linkOutline} href={check.href}>
-                Open
-              </Link>
+              {check.href ? (
+                <Link className={linkOutline} href={check.href}>
+                  Open
+                </Link>
+              ) : (
+                <span className="text-xs text-[var(--color-muted-foreground)]">
+                  No deep link
+                </span>
+              )}
             </li>
           ))}
         </ul>

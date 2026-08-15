@@ -1,0 +1,25 @@
+# SPR-BRIDGE-001 — Security Assurance Bridge (QEP ↔ APZPEN)
+
+manifestSchemaVersion: "1.0"
+id: qep-security-assurance-bridge
+name: Security Assurance Bridge
+version: 0.1.0
+kind: service
+
+metadata:
+  category: quality-engineering
+  description: >-
+    Read-only assurance summary for QEP Release Readiness / Home / RC.
+    APZPEN remains SoR for engagements and findings. Never auto-certifies.
+    Compose today in apps/web; Platform Service extraction follows.
+  product: apzqep
+  programme: SPR-BRIDGE-001
+
+service:
+  status: in_progress
+  ownsBusinessLogic: true
+  publishesEvents: false
+
+capabilities:
+  - id: getSummary
+    description: Assurance status healthy|degraded|unavailable|not_entitled

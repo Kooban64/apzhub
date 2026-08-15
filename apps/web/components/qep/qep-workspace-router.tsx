@@ -29,6 +29,7 @@ import {
   isQepSearchRoute,
   isQepIntegrationsRoute,
   isQepAiWorkspaceRoute,
+  isQepLearningRoute,
   isQepRequirementsRoute,
   isQepWorkspaceRoute,
 } from "@/lib/qep/routes";
@@ -48,6 +49,7 @@ import { QepReleaseReadinessRouterView } from "./qep-release-readiness-views";
 import { QepSearchRouterView } from "./qep-search-view";
 import { QepScmRouterView } from "./qep-scm-views";
 import { QepRiskRouterView } from "./qep-risk-views";
+import { QepKnowledgeRouterView } from "./qep-knowledge-views";
 import { QepAdministrationRouterView } from "./qep-administration-views";
 import { QepAuditRouterView } from "./qep-audit-views";
 import { QepVerificationDesignRouterView } from "./qep-verification-design-views";
@@ -105,6 +107,10 @@ export function QepWorkspaceRouter() {
 
   if (isPathPrefix(pathname, "/workspace/qep/risk")) {
     return <QepRiskRouterView />;
+  }
+
+  if (isQepLearningRoute(pathname)) {
+    return <QepKnowledgeRouterView />;
   }
 
   if (isPathPrefix(pathname, "/workspace/qep/administration")) {

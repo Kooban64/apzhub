@@ -250,6 +250,8 @@
       "@apzhub/lifecycle-engine": ["./packages/lifecycle-engine/src/index.ts"],
       "@apzhub/search-qep": ["./packages/search-qep/src/index.ts"],
       "@apzhub/integration-qep-github": ["./integrations/qep-github/src/index.ts"],
+      "@apzhub/integration-greenbone": ["./integrations/greenbone/src/index.ts"],
+      "@apzhub/integration-faraday": ["./integrations/faraday/src/index.ts"],
       "@apzhub/reporting-contracts": ["./packages/reporting-contracts/src/index.ts"],
       "@apzhub/reporting-core": ["./packages/reporting-core/src/index.ts"],
       "@apzhub/document-contracts": ["./packages/document-contracts/src/index.ts"],

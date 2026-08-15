@@ -4,6 +4,7 @@ export * from "./store";
 export * from "./ext-store";
 export * from "./provider-ingest";
 export * from "./provider-catalogue";
+export * from "./provider-health";
 export * from "./runner-dispatch";
 export * from "./reports";
 export * from "./report-pdf";

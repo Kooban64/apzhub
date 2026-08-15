@@ -35,3 +35,13 @@ Deliver Owner-defined **100% (not MVP)**: Phase 2 QEP + APZPEN Greenbone/Faraday
 - Wave A acceptance criteria on all three guides met and recorded.
 - Owner decides Wave B start (default: after Wave A).
 - Docs / PRODUCT-STATUS honesty updated (MVP closed; full-bar wave in progress or delivered).
+
+## Delivery record (Wave A first ships — 2026-08-15)
+
+| Track             | First ships landed                                                                          |
+| ----------------- | ------------------------------------------------------------------------------------------- |
+| **A1 220**        | M16 Learning KB active (API + UI); Risk owner/evidenceRef/accept                            |
+| **A2 ENT-001**    | Greenbone + Faraday integration packages (normalize + health); catalogue/health/ingest wire |
+| **A3 BRIDGE-001** | Four-state `status`; dual entitlement; deep-link gating; bridge-read audit; `service.yaml`  |
+
+Remaining: 220-A/C/D Integration Centre depth; ENT operator UX + live Greenbone GMP; full Platform Service extraction for bridge.

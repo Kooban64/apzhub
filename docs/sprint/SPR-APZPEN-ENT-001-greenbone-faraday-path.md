@@ -35,4 +35,18 @@ Prefer existing `apztools/security` + `apzqep-greenbone` layout ([APZTOOLS-HOST-
 
 ## Delivery record
 
-_(in progress)_
+| ID            | Ship             | Progress (2026-08-15)                                                                                                                                                                                                                                                                                                         |
+| ------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **ENT-001-A** | Greenbone live   | **In progress** — `@apzhub/integration-greenbone` (`integrations/greenbone/`): `normalizeGreenboneSimplified`, `probeGreenboneHealth` (UI `:9392` / `GREENBONE_UI_URL`). Catalogue notes + provider-health probe wired. Ingest uses integration normalize for `toolId: greenbone`. Host compose `apzqep-greenbone` unchanged. |
+| **ENT-001-B** | Faraday path     | **In progress** — `@apzhub/integration-faraday` (`integrations/faraday/`): `normalizeFaradayPayload` (`vulns` or simplified findings), health returns planned/`compose not deployed — ingest via artefact` unless `FARADAY_URL`. Catalogue row `faraday` (`ingest_ready`, Specialist, not dispatchable).                      |
+| **ENT-001-C** | Kali runner      | **Unchanged / documented** — Kali remains cluster runner image only (`provider-catalogue` + PENTEST-CLUSTER); no Kali UI / QEP module in this slice.                                                                                                                                                                          |
+| ENT-001-D     | Operator UX      | Not started this slice (catalogue + health rows only).                                                                                                                                                                                                                                                                        |
+| ENT-001-E     | Bridge contracts | Not started.                                                                                                                                                                                                                                                                                                                  |
+
+### First-slice artefacts
+
+- `integrations/greenbone/` — package + `integration.yaml` (status `in_progress`, capabilities `health` + `findings_normalize`, `engineBranding: hidden`, `product: apzpen`)
+- `integrations/faraday/` — same shape
+- `apps/web/lib/apzpen/provider-catalogue.ts` — Faraday provider; Greenbone notes → normalize path
+- `apps/web/lib/apzpen/provider-health.ts` — Greenbone UI probe + Faraday row
+- `apps/web/lib/apzpen/provider-ingest.ts` — optional wire to integration normalize helpers

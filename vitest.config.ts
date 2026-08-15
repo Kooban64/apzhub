@@ -590,6 +590,14 @@ const packageAliases = {
     __dirname,
     "integrations/qep-github/src/index.ts",
   ),
+  "@apzhub/integration-greenbone": path.resolve(
+    __dirname,
+    "integrations/greenbone/src/index.ts",
+  ),
+  "@apzhub/integration-faraday": path.resolve(
+    __dirname,
+    "integrations/faraday/src/index.ts",
+  ),
   "@apzhub/reporting-contracts": path.resolve(
     __dirname,
     "packages/reporting-contracts/src/index.ts",

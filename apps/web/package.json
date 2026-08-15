@@ -19,6 +19,8 @@
     "@apzhub/configuration-contracts": "workspace:*",
     "@apzhub/event-notification-framework": "workspace:*",
     "@apzhub/identity-contracts": "workspace:*",
+    "@apzhub/integration-faraday": "workspace:*",
+    "@apzhub/integration-greenbone": "workspace:*",
     "@apzhub/integration-kimai": "workspace:*",
     "@apzhub/integration-metabase": "workspace:*",
     "@apzhub/integration-n8n": "workspace:*",

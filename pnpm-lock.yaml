@@ -248,6 +248,12 @@ importers:
       '@apzhub/identity-contracts':
         specifier: workspace:*
         version: link:../../packages/identity-contracts
+      '@apzhub/integration-faraday':
+        specifier: workspace:*
+        version: link:../../integrations/faraday
+      '@apzhub/integration-greenbone':
+        specifier: workspace:*
+        version: link:../../integrations/greenbone
       '@apzhub/integration-kimai':
         specifier: workspace:*
         version: link:../../integrations/kimai
@@ -496,6 +502,8 @@ importers:
         specifier: ^5
         version: 5.9.3
 
+  integrations/faraday: {}
+
   integrations/github-actions:
     dependencies:
       '@apzhub/integration-sdk':
@@ -513,6 +521,8 @@ importers:
       '@apzhub/testing-contracts':
         specifier: workspace:*
         version: link:../../packages/testing-contracts
+
+  integrations/greenbone: {}
 
   integrations/kimai:
     dependencies:

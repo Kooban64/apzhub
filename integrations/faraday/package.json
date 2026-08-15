@@ -1,0 +1,15 @@
+{
+  "name": "@apzhub/integration-faraday",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Faraday findings normalize + health stub for APZPEN (SPR-APZPEN-ENT-001)",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "vitest run --config ../../vitest.config.ts integrations/faraday"
+  }
+}

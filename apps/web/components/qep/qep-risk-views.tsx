@@ -12,6 +12,8 @@ type RiskItem = {
   severity: "low" | "medium" | "high" | "critical";
   status: "open" | "mitigated" | "accepted" | "waived";
   waiverNote?: string;
+  owner?: string;
+  evidenceRef?: string;
   updatedAt: string;
 };
 
@@ -38,11 +40,19 @@ export function QepRiskRouterView() {
   const q = useQuery({ queryKey: ["qep", "risk"], queryFn: fetchRisks });
   const [title, setTitle] = useState("");
   const [severity, setSeverity] = useState<RiskItem["severity"]>("medium");
+  const [owner, setOwner] = useState("");
 
   const create = useMutation({
-    mutationFn: () => postRisk({ action: "create", title, severity }),
+    mutationFn: () =>
+      postRisk({
+        action: "create",
+        title,
+        severity,
+        ...(owner.trim() ? { owner: owner.trim() } : {}),
+      }),
     onSuccess: () => {
       setTitle("");
+      setOwner("");
       void qc.invalidateQueries({ queryKey: ["qep", "risk"] });
     },
   });
@@ -76,6 +86,12 @@ export function QepRiskRouterView() {
             placeholder="Risk title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+          />
+          <input
+            className="h-8 min-w-[140px] rounded border border-[var(--color-border)] bg-[var(--color-background)] px-2 text-xs"
+            placeholder="Owner (optional)"
+            value={owner}
+            onChange={(e) => setOwner(e.target.value)}
           />
           <select
             className="h-8 rounded border border-[var(--color-border)] bg-[var(--color-background)] px-2 text-xs"
@@ -127,6 +143,8 @@ export function QepRiskRouterView() {
                   <p className="font-medium">{r.title}</p>
                   <p className="font-mono text-[10px] text-[var(--color-muted-foreground)]">
                     {r.riskId} · {r.severity} · {r.status}
+                    {r.owner ? ` · owner:${r.owner}` : ""}
+                    {r.evidenceRef ? ` · evidence:${r.evidenceRef}` : ""}
                   </p>
                 </div>
                 <div className="flex gap-2">
@@ -145,6 +163,20 @@ export function QepRiskRouterView() {
                         }
                       >
                         Mitigate
+                      </button>
+                      <button
+                        type="button"
+                        className="text-[var(--color-primary)]"
+                        onClick={() =>
+                          void postRisk({
+                            action: "accept",
+                            riskId: r.riskId,
+                          }).then(() =>
+                            qc.invalidateQueries({ queryKey: ["qep", "risk"] }),
+                          )
+                        }
+                      >
+                        Accept
                       </button>
                       <button
                         type="button"

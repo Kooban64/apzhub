@@ -165,6 +165,7 @@ function HomeCommandCentreView() {
         summary: {
           entitled: boolean;
           linked: boolean;
+          status?: string;
           href: string;
           reviewClear: boolean;
           detail: string;
@@ -248,11 +249,12 @@ function HomeCommandCentreView() {
                 <div className="flex flex-wrap items-center gap-2">
                   <QepStatusBadge status={security.reviewClear ? "ready" : "blocked"} />
                   <span className="text-sm font-medium">
-                    {security.linked
-                      ? (security.assessmentPosition ?? "linked")
-                      : security.entitled
-                        ? "not linked"
-                        : "not entitled"}
+                    {security.status ??
+                      (security.linked
+                        ? (security.assessmentPosition ?? "linked")
+                        : security.entitled
+                          ? "not linked"
+                          : "not entitled")}
                   </span>
                 </div>
                 <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
@@ -265,9 +267,11 @@ function HomeCommandCentreView() {
                   </p>
                 ) : null}
               </div>
-              <Link className={linkOutline} href={security.href}>
-                Open APZPEN
-              </Link>
+              {security.href ? (
+                <Link className={linkOutline} href={security.href}>
+                  Open APZPEN
+                </Link>
+              ) : null}
             </div>
           ) : (
             <p className="text-sm text-[var(--color-muted-foreground)]">

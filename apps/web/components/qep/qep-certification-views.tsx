@@ -249,12 +249,18 @@ function RcHomeView() {
                   </p>
                 ) : null}
               </div>
-              <Link
-                className="inline-flex h-8 items-center rounded-md border border-[var(--color-border)] px-3 text-sm"
-                href={security.href}
-              >
-                Open APZPEN
-              </Link>
+              {security.href ? (
+                <Link
+                  className="inline-flex h-8 items-center rounded-md border border-[var(--color-border)] px-3 text-sm"
+                  href={security.href}
+                >
+                  Open APZPEN
+                </Link>
+              ) : (
+                <span className="text-xs text-[var(--color-muted-foreground)]">
+                  Entitlement required for APZPEN deep link
+                </span>
+              )}
             </div>
           ) : null}
         </div>
@@ -497,7 +503,7 @@ function RcWorkbenchView({ evaluationId }: { evaluationId: string }) {
         >
           Source Control
         </Link>
-        {security ? (
+        {security?.href ? (
           <Link href={security.href} data-testid="qep-rc-open-apzpen">
             APZPEN security
           </Link>

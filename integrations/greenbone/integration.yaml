@@ -1,0 +1,32 @@
+manifestSchemaVersion: "1.0"
+id: greenbone
+name: Greenbone Integration
+version: 0.1.0
+kind: integration
+
+metadata:
+  category: security-assurance
+  description: >
+    Greenbone Community Edition findings normalize and UI health probe for
+    APZPEN (SPR-APZPEN-ENT-001). Engine branding masked from operators.
+  product: apzpen
+  ossFirst: true
+  owner: APZHUB
+  tags:
+    - greenbone
+    - openvas
+    - vulnerability-assessment
+    - apzpen
+
+integration:
+  status: in_progress
+  capabilities:
+    - health
+    - findings_normalize
+  health:
+    selfReport: true
+
+documentation:
+  userVisible: false
+  engineBranding: hidden
+  adapterImplementation: SPR-APZPEN-ENT-001

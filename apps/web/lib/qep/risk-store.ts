@@ -1,5 +1,5 @@
 /**
- * QEP Risk register ledger (SPR-APZQEP-210) — platform metadata, not Cap SoR.
+ * QEP Risk register ledger (SPR-APZQEP-210 / 220-D) — platform metadata, not Cap SoR.
  */
 
 import { randomUUID } from "node:crypto";
@@ -20,6 +20,8 @@ export type RiskItem = {
   readonly severity: RiskSeverity;
   readonly status: RiskStatus;
   readonly waiverNote?: string;
+  readonly owner?: string;
+  readonly evidenceRef?: string;
   readonly createdAt: string;
   readonly updatedAt: string;
   readonly createdBy: string;
@@ -46,6 +48,11 @@ function persist(): void {
   });
 }
 
+export function resetRiskStoreForTests(): void {
+  items.splice(0, items.length);
+  hydrated = false;
+}
+
 export function listRisks(): readonly RiskItem[] {
   hydrate();
   return [...items];
@@ -55,14 +62,20 @@ export function createRisk(input: {
   readonly title: string;
   readonly severity: RiskSeverity;
   readonly actorId: string;
+  readonly owner?: string;
+  readonly evidenceRef?: string;
 }): RiskItem {
   hydrate();
   const now = new Date().toISOString();
+  const owner = input.owner?.trim() || undefined;
+  const evidenceRef = input.evidenceRef?.trim() || undefined;
   const item: RiskItem = {
     riskId: `risk_${randomUUID().slice(0, 8)}`,
     title: input.title.trim(),
     severity: input.severity,
     status: "open",
+    ...(owner ? { owner } : {}),
+    ...(evidenceRef ? { evidenceRef } : {}),
     createdAt: now,
     updatedAt: now,
     createdBy: input.actorId,

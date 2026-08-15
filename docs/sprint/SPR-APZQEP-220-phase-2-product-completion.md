@@ -30,4 +30,5 @@ APZQEP Phase 2 capabilities from [PRODUCT-CAPABILITIES](../products/apzqep/produ
 
 ## Delivery record
 
-_(in progress)_
+- **220-B Knowledge (M16):** module `active`; catalogue enabled; permissions `qep.knowledge.read` / `qep.knowledge.operate`; JSON ledger `qep-knowledge/articles.json`; API `GET|POST /api/v1/qep/knowledge`; Learning workspace UI with draft/publish + link to Verification Design.
+- **220-D Risk (light):** optional `owner` / `evidenceRef` on create; `accept` status action + Accept UI control (Integration Centre depth deferred).

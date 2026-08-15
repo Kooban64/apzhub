@@ -80,6 +80,16 @@ describe("APZPEN provider ingest", () => {
     expect(greenbone.seeds[0]?.providerTool).toBe("greenbone");
     expect(greenbone.seeds[0]?.location).toBe("10.0.0.8");
 
+    const faraday = ingestProviderPayload({
+      format: "simplified",
+      toolId: "faraday",
+      payload: {
+        vulns: [{ name: "Weak cipher", severity: "medium", target: "10.0.0.9" }],
+      },
+    });
+    expect(faraday.toolId).toBe("faraday");
+    expect(faraday.seeds[0]?.location).toBe("10.0.0.9");
+
     const nuclei = ingestProviderPayload({
       format: "nuclei_jsonl",
       rawText:

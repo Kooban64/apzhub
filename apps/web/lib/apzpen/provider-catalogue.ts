@@ -68,7 +68,16 @@ export const APZPEN_PROVIDERS: readonly ApzpenProvider[] = [
     discipline: "VA",
     status: "ops_cluster",
     dispatchable: false,
-    notes: "Separate compose project apzqep-greenbone — ingest artefacts",
+    notes:
+      "apzqep-greenbone compose · @apzhub/integration-greenbone normalizeGreenboneSimplified · ingest artefacts",
+  },
+  {
+    id: "faraday",
+    name: "Faraday",
+    discipline: "Specialist",
+    status: "ingest_ready",
+    dispatchable: false,
+    notes: "ENT-001 — artefact ingest via @apzhub/integration-faraday; compose planned",
   },
   {
     id: "gitleaks",

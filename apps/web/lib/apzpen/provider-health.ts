@@ -3,6 +3,9 @@
  * Never starts scanners — read-only checks only.
  */
 
+import { probeFaradayHealth } from "@apzhub/integration-faraday";
+import { probeGreenboneHealth } from "@apzhub/integration-greenbone";
+
 export type ProviderHealthStatus = "ok" | "degraded" | "unknown" | "down";
 
 export type ProviderHealthRow = {
@@ -40,6 +43,8 @@ async function probeHttp(
 
 export async function probeApzpenProviderHealth(input?: {
   readonly mobsfUrl?: string;
+  readonly greenboneUrl?: string;
+  readonly faradayUrl?: string;
 }): Promise<readonly ProviderHealthRow[]> {
   const checkedAt = new Date().toISOString();
   const mobsfUrl =
@@ -47,12 +52,20 @@ export async function probeApzpenProviderHealth(input?: {
     process.env.APZPEN_MOBSF_URL?.trim() ||
     "http://127.0.0.1:8000";
 
-  const mobsf = await probeHttp(mobsfUrl);
+  const [mobsf, greenbone, faraday] = await Promise.all([
+    probeHttp(mobsfUrl),
+    probeGreenboneHealth(input?.greenboneUrl),
+    probeFaradayHealth(input?.faradayUrl),
+  ]);
   const githubApp = Boolean(
     process.env.GITHUB_APP_ID?.trim() || process.env.GITHUB_APP_PRIVATE_KEY?.trim(),
   );
   const githubPat = Boolean(
     process.env.GITHUB_TOKEN?.trim() || process.env.GH_TOKEN?.trim(),
+  );
+
+  const faradayConfigured = Boolean(
+    input?.faradayUrl?.trim() || process.env.FARADAY_URL?.trim(),
   );
 
   return [
@@ -62,6 +75,18 @@ export async function probeApzpenProviderHealth(input?: {
       detail: mobsf.ok
         ? `Reachable at ${mobsfUrl} (${mobsf.detail})`
         : `Not reachable at ${mobsfUrl} (${mobsf.detail})`,
+      checkedAt,
+    },
+    {
+      id: "greenbone",
+      status: greenbone.ok ? "ok" : "down",
+      detail: greenbone.detail,
+      checkedAt,
+    },
+    {
+      id: "faraday",
+      status: faradayConfigured ? (faraday.ok ? "ok" : "down") : "unknown",
+      detail: faraday.detail,
       checkedAt,
     },
     {

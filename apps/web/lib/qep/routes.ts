@@ -237,3 +237,8 @@ export {
 export const QEP_SEARCH_BASE_PATH = "/workspace/qep/search";
 export const isQepSearchRoute = (pathname: string): boolean =>
   pathname === QEP_SEARCH_BASE_PATH || pathname.startsWith(`${QEP_SEARCH_BASE_PATH}/`);
+
+export const QEP_LEARNING_BASE_PATH = "/workspace/qep/learning";
+export const isQepLearningRoute = (pathname: string): boolean =>
+  pathname === QEP_LEARNING_BASE_PATH ||
+  pathname.startsWith(`${QEP_LEARNING_BASE_PATH}/`);

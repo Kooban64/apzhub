@@ -1,5 +1,5 @@
 /**
- * SPR-APZQEP-201 — QEP-facing security assurance compose (APZPEN read-only).
+ * SPR-APZQEP-201 / SPR-BRIDGE-001 — QEP-facing security assurance compose (APZPEN read-only).
  */
 
 import type { NextRequest } from "next/server";
@@ -8,11 +8,13 @@ import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
 import { jsonDataResponse } from "../response";
 import { hasProductAccess } from "@/lib/commercial/product-access";
 import { listProjectSourceBindings } from "@/lib/commercial/project-source-bindings";
+import { tenantHasProductSubscriptions } from "@/lib/commercial/resolve-entitlements";
 import { getEngagementPosture, listTenantEngagements } from "@/lib/apzpen/service";
 import {
   buildEngagementRows,
   summariseSecurityAssurance,
 } from "@/lib/qep/apzpen-security-bridge";
+import { appendQepAuditEvent } from "@/lib/qep/qep-audit-store";
 import { getQepScmRuntime } from "@/lib/qep/scm-runtime";
 import { requireQepPermission, sessionTenantId } from "./require-qep-permission";
 
@@ -41,11 +43,21 @@ export async function handleGetQepSecurityAssurance(
   const tenantId = sessionTenantId(context);
   const orgId = organisationId(context);
   const userId = context.session.user.id;
-  const entitled = hasProductAccess({
+
+  // BR-001-D — dual product entitlement when org has commercial subscriptions;
+  // bootstrap (no subs) stays open for local CE (APZPEN soft-gate pattern).
+  const hasSubs = Boolean(orgId) && tenantHasProductSubscriptions(orgId);
+  const qepEntitled = hasProductAccess({
+    organisationId: orgId,
+    userId,
+    productKey: "qep",
+  });
+  const penEntitled = hasProductAccess({
     organisationId: orgId,
     userId,
     productKey: "pentest",
   });
+  const entitled = hasSubs ? qepEntitled && penEntitled : true;
 
   const url = new URL(request.url);
   let externalRef = url.searchParams.get("externalRef")?.trim() || undefined;
@@ -64,11 +76,13 @@ export async function handleGetQepSecurityAssurance(
     }
   }
 
-  const engagements = listTenantEngagements(tenantId);
-  const bindings = listProjectSourceBindings({
-    tenantId,
-    productKey: "pentest",
-  });
+  const engagements = entitled ? listTenantEngagements(tenantId) : [];
+  const bindings = entitled
+    ? listProjectSourceBindings({
+        tenantId,
+        productKey: "pentest",
+      })
+    : [];
   const rows = buildEngagementRows({
     engagements: engagements.map((e) => ({
       engagementId: e.engagementId,
@@ -86,12 +100,36 @@ export async function handleGetQepSecurityAssurance(
     externalRef,
   });
 
+  // Soft honesty when only one product is missing.
+  const detailOverride =
+    !entitled && qepEntitled && !penEntitled
+      ? "APZPEN (Security Assurance) is not entitled — bridge cannot show linked posture."
+      : !entitled && penEntitled && !qepEntitled
+        ? "Quality (APZQEP) entitlement required to consume the assurance bridge."
+        : undefined;
+
+  const payloadSummary = detailOverride
+    ? { ...summary, detail: detailOverride, status: "not_entitled" as const }
+    : summary;
+
+  appendQepAuditEvent({
+    action: "bridge.security_assurance.read",
+    actor: userId,
+    correlationId: context.tracing.correlationId,
+    detail: `${payloadSummary.status}:${payloadSummary.engagementId ?? "none"}`,
+  });
+
   return jsonDataResponse(
     {
-      summary,
+      summary: payloadSummary,
       externalRef: externalRef ?? null,
       changeEventId: changeEventId ?? null,
       engagementCount: rows.length,
+      bridge: {
+        dualEntitlement: true,
+        qepEntitled,
+        penEntitled,
+      },
     },
     context.tracing,
   );

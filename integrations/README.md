@@ -13,3 +13,5 @@ Integration adapters live here. Canonical path per [BUILD-001](../docs/build/BUI
 | `@apzhub/integration-n8n`            | 0.1.0   | Workflow Engine Reference Adapter (frozen)                        |
 | `@apzhub/integration-github-actions` | 0.1.0   | CI/CD Reference Adapter (read-only)                               |
 | `@apzhub/integration-meilisearch`    | 0.1.0   | Search Reference Adapter (APZSEARCH-005)                          |
+| `@apzhub/integration-greenbone`      | 0.1.0   | APZPEN VA normalize + health (SPR-APZPEN-ENT-001)                 |
+| `@apzhub/integration-faraday`        | 0.1.0   | APZPEN Faraday path — artefact ingest (SPR-APZPEN-ENT-001)        |

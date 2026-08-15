@@ -36,6 +36,8 @@ describe("apzpen-security-bridge", () => {
     });
     expect(summary.linked).toBe(false);
     expect(summary.reviewClear).toBe(false);
+    expect(summary.status).toBe("not_entitled");
+    expect(summary.href).toBe("");
     expect(isSecurityReadinessClear(summary)).toBe(false);
     expect(summary.detail).toMatch(/not entitled/i);
   });
@@ -47,6 +49,7 @@ describe("apzpen-security-bridge", () => {
       externalRef: "acme/app",
     });
     expect(summary.linked).toBe(false);
+    expect(summary.status).toBe("unavailable");
     expect(summary.reviewClear).toBe(false);
     expect(summary.detail).toMatch(/No APZPEN engagement/i);
   });
@@ -91,6 +94,7 @@ describe("apzpen-security-bridge", () => {
     });
     expect(summary.linked).toBe(true);
     expect(summary.reviewClear).toBe(false);
+    expect(summary.status).toBe("degraded");
     expect(summary.critical).toBe(2);
     expect(summary.href).toBe("/apzpen/engagements/eng_1");
   });
@@ -114,6 +118,7 @@ describe("apzpen-security-bridge", () => {
       engagements: rows,
     });
     expect(summary.reviewClear).toBe(true);
+    expect(summary.status).toBe("healthy");
     expect(summary.detail).toMatch(/complete/i);
   });
 });

@@ -2,6 +2,9 @@
  * APZPEN provider ingest — parse best-of-breed CE tool output into ImportFindingSeed.
  */
 
+import { normalizeFaradayPayload } from "@apzhub/integration-faraday";
+import { normalizeGreenboneSimplified } from "@apzhub/integration-greenbone";
+
 import type { ReportPackSecurityToolId } from "@/lib/qep/report-pack";
 import {
   parseNucleiJsonl,
@@ -23,6 +26,7 @@ export type ProviderToolId =
   | "nuclei"
   | "zap"
   | "greenbone"
+  | "faraday"
   | "gitleaks"
   | "syft"
   | "grype"
@@ -204,6 +208,25 @@ export function parseGitleaksFindings(
   });
 }
 
+function seedsFromIntegrationNormalize(
+  seeds: readonly {
+    readonly title: string;
+    readonly severity: string;
+    readonly host?: string;
+    readonly message?: string;
+  }[],
+  providerTool: string,
+  limit: number,
+): ImportFindingSeed[] {
+  return seeds.slice(0, limit).map((s) => ({
+    title: s.title,
+    description: s.message ?? s.title,
+    severity: mapSeverity(s.severity),
+    providerTool,
+    location: s.host,
+  }));
+}
+
 function detectFormat(
   payload: unknown,
   text: string | undefined,
@@ -211,6 +234,8 @@ function detectFormat(
 ): ProviderIngestFormat {
   if (toolId === "mobsf") return "mobsf";
   if (toolId === "gitleaks") return "gitleaks";
+  if (toolId === "faraday") return "simplified";
+  if (toolId === "greenbone") return "simplified";
 
   if (text && text.trim().startsWith("{") === false && text.includes("\n")) {
     const first = text.trim().split("\n")[0] ?? "";
@@ -225,6 +250,7 @@ function detectFormat(
   const obj = payload as Record<string, unknown>;
   if (Array.isArray(obj.runs)) return "sarif";
   if (Array.isArray(obj.site) || Array.isArray(obj.alerts)) return "zap";
+  if (Array.isArray(obj.vulns)) return "simplified";
   if (
     obj.app_name !== undefined ||
     obj.package_name !== undefined ||
@@ -312,6 +338,29 @@ export function ingestProviderPayload(input: {
     }
     case "simplified":
     default: {
+      const obj =
+        payload && typeof payload === "object"
+          ? (payload as Record<string, unknown>)
+          : null;
+      const looksFaraday =
+        input.toolId === "faraday" || (obj !== null && Array.isArray(obj.vulns));
+      if (looksFaraday) {
+        toolId = "faraday";
+        seeds = seedsFromIntegrationNormalize(
+          normalizeFaradayPayload(payload),
+          "faraday",
+          limit,
+        );
+        break;
+      }
+      if (input.toolId === "greenbone" || input.toolId === undefined) {
+        const greenboneSeeds = normalizeGreenboneSimplified(payload);
+        if (greenboneSeeds.length > 0 || input.toolId === "greenbone") {
+          toolId = "greenbone";
+          seeds = seedsFromIntegrationNormalize(greenboneSeeds, "greenbone", limit);
+          break;
+        }
+      }
       toolId = input.toolId ?? "greenbone";
       const qepTid = asQepToolId(
         toolId === "greenbone" ||

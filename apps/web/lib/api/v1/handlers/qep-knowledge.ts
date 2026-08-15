@@ -3,13 +3,8 @@ import type { NextRequest } from "next/server";
 import type { PlatformApiRequestContext } from "@/lib/api/v1/auth/with-platform-api-auth";
 import { PlatformApiHttpError } from "@/lib/api/v1/errors";
 import { jsonDataResponse } from "@/lib/api/v1/response";
-import { appendQepAuditEvent, listQepAuditEvents } from "@/lib/qep/qep-audit-store";
-import {
-  createRisk,
-  listRisks,
-  updateRiskStatus,
-  type RiskSeverity,
-} from "@/lib/qep/risk-store";
+import { appendQepAuditEvent } from "@/lib/qep/qep-audit-store";
+import { createArticle, listArticles, publishArticle } from "@/lib/qep/knowledge-store";
 
 function hasPerm(context: PlatformApiRequestContext, keys: readonly string[]): boolean {
   const perms = context.serviceContext.permissions ?? [];
@@ -17,37 +12,35 @@ function hasPerm(context: PlatformApiRequestContext, keys: readonly string[]): b
   return keys.some((k) => perms.includes(k));
 }
 
-export async function handleListRisks(
+export async function handleListKnowledge(
   _request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  if (!hasPerm(context, ["qep.risk.read"])) {
+  if (!hasPerm(context, ["qep.knowledge.read"])) {
     throw new PlatformApiHttpError(403, {
       code: "FORBIDDEN",
-      message: "Missing permission: qep.risk.read",
+      message: "Missing permission: qep.knowledge.read",
     });
   }
-  return jsonDataResponse({ items: listRisks() }, context.tracing);
+  return jsonDataResponse({ items: listArticles() }, context.tracing);
 }
 
-export async function handleRiskMutation(
+export async function handleKnowledgeMutation(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  if (!hasPerm(context, ["qep.risk.operate", "qep.risk.read"])) {
+  if (!hasPerm(context, ["qep.knowledge.operate"])) {
     throw new PlatformApiHttpError(403, {
       code: "FORBIDDEN",
-      message: "Missing permission: qep.risk.operate",
+      message: "Missing permission: qep.knowledge.operate",
     });
   }
   const body = (await request.json()) as {
     action?: string;
     title?: string;
-    severity?: RiskSeverity;
-    riskId?: string;
-    waiverNote?: string;
-    owner?: string;
-    evidenceRef?: string;
+    body?: string;
+    tags?: string[];
+    articleId?: string;
   };
   const actorId = context.serviceContext.userId ?? "unknown";
   const { correlationId } = context.tracing;
@@ -59,55 +52,40 @@ export async function handleRiskMutation(
         message: "title is required",
       });
     }
-    const item = createRisk({
+    const item = createArticle({
       title: body.title,
-      severity: body.severity ?? "medium",
+      body: body.body ?? "",
+      tags: body.tags,
       actorId,
-      owner: body.owner,
-      evidenceRef: body.evidenceRef,
     });
     appendQepAuditEvent({
-      action: "risk.created",
+      action: "knowledge.created",
       actor: actorId,
       correlationId,
-      detail: item.riskId,
+      detail: item.articleId,
     });
     return jsonDataResponse(item, context.tracing);
   }
 
-  if (
-    body.action === "mitigate" ||
-    body.action === "waive" ||
-    body.action === "accept"
-  ) {
-    if (!body.riskId) {
+  if (body.action === "publish") {
+    if (!body.articleId) {
       throw new PlatformApiHttpError(400, {
         code: "VALIDATION_ERROR",
-        message: "riskId is required",
+        message: "articleId is required",
       });
     }
-    const status =
-      body.action === "waive"
-        ? "waived"
-        : body.action === "accept"
-          ? "accepted"
-          : "mitigated";
-    const item = updateRiskStatus({
-      riskId: body.riskId,
-      status,
-      waiverNote: body.waiverNote,
-    });
+    const item = publishArticle({ articleId: body.articleId });
     if (!item) {
       throw new PlatformApiHttpError(404, {
         code: "NOT_FOUND",
-        message: "Risk not found",
+        message: "Article not found",
       });
     }
     appendQepAuditEvent({
-      action: `risk.${body.action}`,
+      action: "knowledge.published",
       actor: actorId,
       correlationId,
-      detail: item.riskId,
+      detail: item.articleId,
     });
     return jsonDataResponse(item, context.tracing);
   }
@@ -116,17 +94,4 @@ export async function handleRiskMutation(
     code: "VALIDATION_ERROR",
     message: "Unknown action",
   });
-}
-
-export async function handleListQepAudit(
-  _request: NextRequest,
-  context: PlatformApiRequestContext,
-) {
-  if (!hasPerm(context, ["qep.audit.read", "administration.audit.read"])) {
-    throw new PlatformApiHttpError(403, {
-      code: "FORBIDDEN",
-      message: "Missing permission: qep.audit.read",
-    });
-  }
-  return jsonDataResponse({ items: listQepAuditEvents() }, context.tracing);
 }

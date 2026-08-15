@@ -6,7 +6,7 @@ kind: module
 
 metadata:
   category: quality-engineering
-  description: "Learning (M16) module stub for APZ QEP — skills and practice improvement. Not APZ Knowledge (organisational memory)."
+  description: "Learning KB (M16) — thin QE knowledge base for reusable articles, practice notes, and links from verification design. Not APZ Knowledge (organisational memory)."
   product: apzqep
   moduleCatalogueId: M16
   slug: learning
@@ -18,7 +18,7 @@ dependencies:
 
 module:
   category: quality-engineering
-  status: stub
+  status: active
 
 workbench:
   navigation:

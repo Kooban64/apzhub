@@ -156,7 +156,7 @@ export const QEP_MODULES: readonly QepModuleDescriptor[] = [
     slug: "learning",
     packageName: "qep-knowledge",
     title: "Learning",
-    status: "stub",
+    status: "enabled",
   },
   {
     id: "M17",

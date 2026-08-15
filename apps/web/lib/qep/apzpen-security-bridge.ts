@@ -1,10 +1,13 @@
 /**
- * SPR-APZQEP-201 — read-only APZPEN → QEP security assurance bridge.
+ * SPR-APZQEP-201 / SPR-BRIDGE-001 — read-only APZPEN → QEP security assurance bridge.
  * Presentation/compose only: never certifies, never writes APZPEN SoR.
  */
 
 import type { AssessmentPosition, SecurityPosture } from "@/lib/apzpen/types";
 import type { ProjectSourceBinding } from "@/lib/commercial/project-source-bindings";
+
+/** Honest operator status — never drives GO/NO-GO. */
+export type AssuranceStatus = "healthy" | "degraded" | "unavailable" | "not_entitled";
 
 export type SecurityAssuranceEngagementRow = {
   readonly engagementId: string;
@@ -20,8 +23,11 @@ export type SecurityAssuranceSummary = {
   readonly entitled: boolean;
   /** At least one engagement is linked (tenant or externalRef match). */
   readonly linked: boolean;
+  /** BRIDGE-001 four-state honesty. */
+  readonly status: AssuranceStatus;
   readonly engagementId?: string;
   readonly engagementTitle?: string;
+  /** Deep-link only when entitled; empty string when not. */
   readonly href: string;
   readonly assessmentPosition?: AssessmentPosition;
   readonly critical: number;
@@ -78,7 +84,8 @@ export function summariseSecurityAssurance(input: {
     return {
       entitled: false,
       linked: false,
-      href: "/apzpen",
+      status: "not_entitled",
+      href: "",
       critical: 0,
       high: 0,
       openCount: 0,
@@ -99,7 +106,8 @@ export function summariseSecurityAssurance(input: {
     return {
       entitled: true,
       linked: false,
-      href: "/apzpen",
+      status: "unavailable",
+      href: engagementHref(),
       critical: 0,
       high: 0,
       openCount: 0,
@@ -116,6 +124,8 @@ export function summariseSecurityAssurance(input: {
   const openCount = worst.posture.openCount;
   const blocked = worst.assessmentPosition === "blocked";
   const reviewClear = !blocked && critical === 0;
+  const status: AssuranceStatus =
+    blocked || critical > 0 ? "degraded" : reviewClear ? "healthy" : "degraded";
 
   let detail: string;
   if (blocked) {
@@ -133,6 +143,7 @@ export function summariseSecurityAssurance(input: {
   return {
     entitled: true,
     linked: true,
+    status,
     engagementId: worst.engagementId,
     engagementTitle: worst.title ?? worst.applicationName,
     href: engagementHref(worst.engagementId),
