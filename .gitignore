@@ -14,6 +14,11 @@ out/
 .env
 .env.*
 !.env.example
+infrastructure/docker/engines/**/.env
+infrastructure/docker/engines/**/.admin-password
+infrastructure/docker/engines/**/.api-token
+infrastructure/docker/engines/**/plane-lts.env
+
 
 # Logs
 *.log

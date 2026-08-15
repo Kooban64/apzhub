@@ -4,7 +4,7 @@
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Audience | Ops · platform owners                                                                                                                                                                                               |
 | Related  | [OWNER-ENGINES-OUTSIDE-HUB](../decisions/OWNER-ENGINES-OUTSIDE-HUB.md) · [HOST-COEXISTENCE-CONTROLS](./HOST-COEXISTENCE-CONTROLS.md) · [SPR-OPS-LTS-001](../sprint/SPR-OPS-LTS-001-apzhub-owned-engine-topology.md) |
-| Status   | **PLANNED** — ports reserved; containers not brought up in this slice                                                                                                                                               |
+| Status   | **IN PROGRESS** — Plane LTS up on `19085`; other engines reserved                                                                                                                                                   |
 
 ## Principle
 
@@ -38,16 +38,16 @@ Engines are **not** part of the hub process. They are replaceable backends behin
 | 17700       | APZHUB Meilisearch |
 | 3080 / 3443 | Caddy (optional)   |
 
-### Planned APZHUB-owned CE/LTS engines (reserved — not started)
+### APZHUB-owned CE/LTS engines
 
-| Port  | Engine    | Product surface | Adapter today                     |
-| ----- | --------- | --------------- | --------------------------------- |
-| 19085 | Plane     | Projects        | `integrations/plane`              |
-| 19081 | Zammad    | Support         | `integrations/zammad`             |
-| 19083 | Kimai     | Time            | `integrations/kimai`              |
-| 19084 | Metabase  | Analytics       | `integrations/metabase`           |
-| 19678 | n8n       | Workflow engine | `integrations/n8n`                |
-| 19082 | Paperless | Documents DMS   | **No adapter yet** (ADR required) |
+| Port  | Engine    | Product surface | Adapter today                     | Host status                                                                                                           |
+| ----- | --------- | --------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| 19085 | Plane     | Projects        | `integrations/plane`              | **UP** — `apzhub-plane-lts` ([SPR-OPS-LTS-PLANE-001](../sprint/SPR-OPS-LTS-PLANE-001-apzhub-owned-plane-bring-up.md)) |
+| 19081 | Zammad    | Support         | `integrations/zammad`             | Reserved                                                                                                              |
+| 19083 | Kimai     | Time            | `integrations/kimai`              | Reserved                                                                                                              |
+| 19084 | Metabase  | Analytics       | `integrations/metabase`           | Reserved                                                                                                              |
+| 19678 | n8n       | Workflow engine | `integrations/n8n`                | Reserved                                                                                                              |
+| 19082 | Paperless | Documents DMS   | **No adapter yet** (ADR required) | Reserved                                                                                                              |
 
 Encoded in `@apzhub/platform-operations` → `APZHUB_RESERVED_HOST_PORTS`.
 

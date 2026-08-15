@@ -33,10 +33,12 @@ Close the dogfood residual where Projects Readiness is healthy but the list is e
 
    ```bash
    PLANE_INTEGRATION_ENABLED=true
-   PLANE_BASE_URL=http://127.0.0.1:18085
-   PLANE_API_BASE_URL=http://127.0.0.1:18085
-   PLANE_WORKSPACE_ID=apzportal
+   PLANE_BASE_URL=http://127.0.0.1:19085
+   PLANE_API_BASE_URL=http://127.0.0.1:19085
+   PLANE_WORKSPACE_ID=apzhub
    ```
+
+   Prefer APZHUB-owned Plane LTS on **19085** ([SPR-OPS-LTS-PLANE-001](../../sprint/SPR-OPS-LTS-PLANE-001-apzhub-owned-plane-bring-up.md)). Legacy `18085` remains for the older platform only — do not reconfigure it.
 
 3. Restart `apps/web` so dotenv + `.secrets/plane` load.
 
