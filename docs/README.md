@@ -36,7 +36,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-APZQEP-210](./sprint/SPR-APZQEP-210-product-definition-closeout.md)             | **COMPLETE · DELIVERED** — product-definition MVP closeout (WF · stubs · auth)        |
 | [SPR-APZQEP-220](./sprint/SPR-APZQEP-220-phase-2-product-completion.md)              | **AUTHORISED · IN PROGRESS** — Phase 2 (QI · Knowledge · automation/risk/integration) |
 | [SPR-APZQEP-230](./sprint/SPR-APZQEP-230-phase-3-and-ai-horizon.md)                  | **QUEUED** — Phase 3 continuous signals + AI/MCP (Wave B)                             |
-| [SPR-BRIDGE-001](./sprint/SPR-BRIDGE-001-qep-apzpen-assurance-bridge.md)             | **AUTHORISED · IN PROGRESS** — QEP ↔ APZPEN assurance → readiness bridge              |
+| [SPR-BRIDGE-001](./sprint/SPR-BRIDGE-001-qep-apzpen-assurance-bridge.md)             | **COMPLETE · DELIVERED** — QEP ↔ APZPEN assurance → readiness bridge                  |
 | [APZQEP PRODUCT-STATUS](./products/apzqep/PRODUCT-STATUS.md)                         | V1.1 **PRODUCTION READY · CLOSED** — kernel frozen; 200 = V1.2 / Wave-6-class         |
 | [APZQEP pillar vision](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md) | Experience + commercial identity authority                                            |
 
@@ -58,7 +58,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-APZPEN-012](./sprint/SPR-APZPEN-012-ops-polish.md)                     | **DELIVERED** — Job re-ingest, due-soon, cert blockers, provider health                        |
 | [SPR-APZPEN-013](./sprint/SPR-APZPEN-013-governance-ops-close.md)           | **DELIVERED** — My Work, re-dispatch, granular perms, RoE window, file ingest                  |
 | [SPR-APZPEN-014](./sprint/SPR-APZPEN-014-deferred-closeout.md)              | **DELIVERED** — Schedule worker, cert ledger, evidence vault, Postgres SoR, thin graph, GitLab |
-| [SPR-APZPEN-ENT-001](./sprint/SPR-APZPEN-ENT-001-greenbone-faraday-path.md) | **AUTHORISED · IN PROGRESS** — Greenbone + Faraday path; Kali runner only                      |
+| [SPR-APZPEN-ENT-001](./sprint/SPR-APZPEN-ENT-001-greenbone-faraday-path.md) | **COMPLETE · DELIVERED** — Greenbone + Faraday artefact paths; Kali runner only                |
 | [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)    | **PARTIALLY UNPARKED** — Greenbone/Faraday via ENT-001; other options remain parked            |
 | [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)    | **PARKED** — resume on deal / Owner sprint only                                                |
 | [APZ tools host layout](./operations/APZTOOLS-HOST-LAYOUT.md)               | `~/apztools/{security,quality,workbench,shared}` — runner workspaces by pillar                 |
