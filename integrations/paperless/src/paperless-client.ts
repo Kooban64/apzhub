@@ -1,0 +1,35 @@
+import type { IntegrationRequestContext } from "@apzhub/integration-sdk";
+
+import type { PaperlessDocumentRecord } from "./internal/paperless-api-types";
+import {
+  PaperlessRestClient,
+  type PaperlessConnectionTestResult,
+} from "./internal/paperless-rest-client";
+
+export interface PaperlessDocumentPage {
+  readonly count: number;
+  readonly nextPageAvailable: boolean;
+  readonly documents: readonly PaperlessDocumentRecord[];
+}
+
+export class PaperlessClient {
+  constructor(private readonly rest: PaperlessRestClient) {}
+
+  testConnection(
+    context: IntegrationRequestContext,
+  ): Promise<PaperlessConnectionTestResult> {
+    return this.rest.testConnection(context);
+  }
+
+  async listDocuments(
+    context: IntegrationRequestContext,
+    query?: { readonly page?: number; readonly pageSize?: number },
+  ): Promise<PaperlessDocumentPage> {
+    const result = await this.rest.listDocuments(context, query);
+    return {
+      count: result.count,
+      nextPageAvailable: result.next !== null,
+      documents: result.results,
+    };
+  }
+}

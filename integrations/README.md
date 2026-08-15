@@ -11,6 +11,7 @@ Integration adapters live here. Canonical path per [BUILD-001](../docs/build/BUI
 | `@apzhub/integration-kimai`          | 0.2.0   | CERTIFIED_DOMAIN (APZHUB-INTEGRATION-KIMAI-002)                   |
 | `@apzhub/integration-metabase`       | 0.1.0   | CERTIFIED_FOUNDATION · ACCEPTED (APZHUB-INTEGRATION-METABASE-001) |
 | `@apzhub/integration-n8n`            | 0.1.0   | Workflow Engine Reference Adapter (frozen)                        |
+| `@apzhub/integration-paperless`      | 0.1.0   | Documents DMS foundation (ADR-0095 · health + catalogue list)     |
 | `@apzhub/integration-github-actions` | 0.1.0   | CI/CD Reference Adapter (read-only)                               |
 | `@apzhub/integration-meilisearch`    | 0.1.0   | Search Reference Adapter (APZSEARCH-005)                          |
 | `@apzhub/integration-greenbone`      | 0.1.0   | APZPEN VA normalize + health (SPR-APZPEN-ENT-001)                 |

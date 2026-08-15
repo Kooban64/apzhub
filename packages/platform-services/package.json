@@ -24,6 +24,7 @@
     "@apzhub/integration-n8n": "workspace:*",
     "@apzhub/integration-kimai": "workspace:*",
     "@apzhub/integration-metabase": "workspace:*",
+    "@apzhub/integration-paperless": "workspace:*",
     "@apzhub/integration-sdk": "workspace:*",
     "@apzhub/analytics-contracts": "workspace:*",
     "@apzhub/platform-authorization": "workspace:*",

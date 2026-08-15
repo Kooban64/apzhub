@@ -4,7 +4,7 @@
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Audience | Ops · platform owners                                                                                                                                                                                               |
 | Related  | [OWNER-ENGINES-OUTSIDE-HUB](../decisions/OWNER-ENGINES-OUTSIDE-HUB.md) · [HOST-COEXISTENCE-CONTROLS](./HOST-COEXISTENCE-CONTROLS.md) · [SPR-OPS-LTS-001](../sprint/SPR-OPS-LTS-001-apzhub-owned-engine-topology.md) |
-| Status   | **COMPLETE** — all reserved LTS engines up (Plane·Zammad·Kimai·Metabase·n8n·Paperless); Paperless infra-only pending ADR-0095                                                                                       |
+| Status   | **COMPLETE** — reserved LTS engines up; Documents DMS foundation wired to Paperless LTS (ADR-0095 Accepted · SPR-OPS-PAPERLESS-002)                                                                                 |
 
 ## Principle
 
@@ -40,14 +40,14 @@ Engines are **not** part of the hub process. They are replaceable backends behin
 
 ### APZHUB-owned CE/LTS engines
 
-| Port  | Engine    | Product surface | Adapter today                     | Host status                                                                                                                                                                                                            |
-| ----- | --------- | --------------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 19085 | Plane     | Projects        | `integrations/plane`              | **UP** — `apzhub-plane-lts` ([SPR-OPS-LTS-PLANE-001](../sprint/SPR-OPS-LTS-PLANE-001-apzhub-owned-plane-bring-up.md))                                                                                                  |
-| 19081 | Zammad    | Support         | `integrations/zammad`             | **UP** — `apzhub-zammad-lts` ([SPR-OPS-LTS-ZAMMAD-001](../sprint/SPR-OPS-LTS-ZAMMAD-001-apzhub-owned-zammad-bring-up.md))                                                                                              |
-| 19083 | Kimai     | Time            | `integrations/kimai`              | **UP** — `apzhub-kimai-lts` ([SPR-OPS-LTS-KIMAI-001](../sprint/SPR-OPS-LTS-KIMAI-001-apzhub-owned-kimai-bring-up.md))                                                                                                  |
-| 19084 | Metabase  | Analytics       | `integrations/metabase`           | **UP** — `apzhub-metabase-lts` ([SPR-OPS-LTS-METABASE-001](../sprint/SPR-OPS-LTS-METABASE-001-apzhub-owned-metabase-bring-up.md))                                                                                      |
-| 19678 | n8n       | Workflow engine | `integrations/n8n`                | **UP** — `apzhub-n8n-lts` ([SPR-OPS-LTS-N8N-001](../sprint/SPR-OPS-LTS-N8N-001-apzhub-owned-n8n-bring-up.md))                                                                                                          |
-| 19082 | Paperless | Documents DMS   | **No adapter yet** (ADR required) | **UP** — `apzhub-paperless-lts` infra only ([SPR-OPS-LTS-PAPERLESS-001](../sprint/SPR-OPS-LTS-PAPERLESS-001-apzhub-owned-paperless-bring-up.md) · [ADR-0095](../adr/ADR-0095-paperless-ngx-documents-dms-provider.md)) |
+| Port  | Engine    | Product surface | Adapter today                  | Host status                                                                                                                                                                                                     |
+| ----- | --------- | --------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 19085 | Plane     | Projects        | `integrations/plane`           | **UP** — `apzhub-plane-lts` ([SPR-OPS-LTS-PLANE-001](../sprint/SPR-OPS-LTS-PLANE-001-apzhub-owned-plane-bring-up.md))                                                                                           |
+| 19081 | Zammad    | Support         | `integrations/zammad`          | **UP** — `apzhub-zammad-lts` ([SPR-OPS-LTS-ZAMMAD-001](../sprint/SPR-OPS-LTS-ZAMMAD-001-apzhub-owned-zammad-bring-up.md))                                                                                       |
+| 19083 | Kimai     | Time            | `integrations/kimai`           | **UP** — `apzhub-kimai-lts` ([SPR-OPS-LTS-KIMAI-001](../sprint/SPR-OPS-LTS-KIMAI-001-apzhub-owned-kimai-bring-up.md))                                                                                           |
+| 19084 | Metabase  | Analytics       | `integrations/metabase`        | **UP** — `apzhub-metabase-lts` ([SPR-OPS-LTS-METABASE-001](../sprint/SPR-OPS-LTS-METABASE-001-apzhub-owned-metabase-bring-up.md))                                                                               |
+| 19678 | n8n       | Workflow engine | `integrations/n8n`             | **UP** — `apzhub-n8n-lts` ([SPR-OPS-LTS-N8N-001](../sprint/SPR-OPS-LTS-N8N-001-apzhub-owned-n8n-bring-up.md))                                                                                                   |
+| 19082 | Paperless | Documents DMS   | **Foundation** (health + list) | **UP** — `apzhub-paperless-lts` ([SPR-OPS-PAPERLESS-002](../sprint/SPR-OPS-PAPERLESS-002-documents-dms-paperless-foundation.md) · [ADR-0095](../adr/ADR-0095-paperless-ngx-documents-dms-provider.md) Accepted) |
 
 Encoded in `@apzhub/platform-operations` → `APZHUB_RESERVED_HOST_PORTS`.
 
@@ -61,10 +61,13 @@ Encoded in `@apzhub/platform-operations` → `APZHUB_RESERVED_HOST_PORTS`.
 
 ## Temporary coexistence (current)
 
-Dogfood may still call legacy localhost ports via adapters. That is **explicitly transitional**. Do not treat it as the end state.
+Dogfood may still call legacy localhost ports via adapters during transition. That is **explicitly transitional**.
+
+**Hard rule:** Do **not** stop or reconfigure the existing running `apz-*` / Authentik stack until Owner confirms APZHUB is a solid working product ([SPR-ADOPT-004](../sprint/SPR-ADOPT-004-lts-backed-engines-dogfood.md) is the LTS API dogfood gate — not automatic deprecation).
 
 ## Honesty
 
-- Does **not** stop or reconfigure legacy containers in this programme step.
+- Does **not** stop or reconfigure legacy containers in this programme.
 - Does **not** put Authentik on the APZHUB login path.
-- Does **not** invent a Paperless adapter without ADR + Owner.
+- Does **not** invent a Paperless adapter without ADR + Owner (ADR-0095 Accepted — foundation delivered).
+- Does **not** replace native Documents SoR with Paperless.

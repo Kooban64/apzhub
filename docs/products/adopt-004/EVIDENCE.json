@@ -1,0 +1,116 @@
+{
+  "title": "SPR-ADOPT-004 LTS-backed commercial dogfood",
+  "authN": "betterauth",
+  "actor": "dev@apzhub.local",
+  "rule": "legacy apz-* untouched; verify APZHUB against LTS ports only",
+  "targets": {
+    "plane": "http://127.0.0.1:19085",
+    "zammad": "http://127.0.0.1:19081",
+    "kimai": "http://127.0.0.1:19083",
+    "metabase": "http://127.0.0.1:19084",
+    "n8n": "http://127.0.0.1:19678"
+  },
+  "legacy_left_alone": [
+    "18081",
+    "18082",
+    "18083",
+    "18084",
+    "18085",
+    "15678",
+    "authentik"
+  ],
+  "results": [
+    {
+      "name": "projects.health",
+      "path": "/api/v1/projects/health",
+      "http": 200,
+      "ms": 934,
+      "pass": true,
+      "error": null,
+      "snippet": "{\"data\":{\"product\":\"projects\",\"authN\":\"betterauth\",\"authZ\":\"apzhub_permission_service\",\"engineAuth\":\"adapter_api_key\",\"authentikUsed\":false,\"sessionUserId\":\"0HdGfWngsZIp2pc95wv4eAUDMpgkhGje\",\"plane\":{\"integrationEnabled\":true,\"healthStatus\""
+    },
+    {
+      "name": "projects.list",
+      "path": "/api/v1/projects",
+      "http": 200,
+      "ms": 2281,
+      "pass": true,
+      "error": null,
+      "snippet": "{\"data\":[{\"id\":\"proj_78df8c8b36cd4f86a998683769e7d2dd\",\"tenantId\":\"t0000001-0000-4000-8000-000000000001\",\"workspaceId\":\"ws_9be6563e7bfb4c5ab628e909a89397fa\",\"name\":\"APZHUB Demo\",\"identifier\":\"DEMO\",\"description\":\"\",\"status\":\"active\",\"create"
+    },
+    {
+      "name": "support.list",
+      "path": "/api/v1/support-requests?limit=5",
+      "http": 200,
+      "ms": 2409,
+      "pass": true,
+      "error": null,
+      "snippet": "{\"data\":[{\"id\":\"sreq_4d83ab040fe147799d6061d1178ed98d\",\"tenantId\":\"t0000001-0000-4000-8000-000000000001\",\"displayId\":\"79001\",\"title\":\"Help me! I am an example ticket \ud83c\udf93\",\"groupId\":\"sgrp_cfd4a8d782954a129661612cddb54dbc\",\"requesterId\":\"suser_"
+    },
+    {
+      "name": "time.health",
+      "path": "/api/v1/time/health",
+      "http": 200,
+      "ms": 586,
+      "pass": true,
+      "error": null,
+      "snippet": "{\"data\":{\"status\":\"degraded\",\"checks\":[{\"name\":\"configuration\",\"status\":\"pass\",\"message\":\"Connection configuration validated\"},{\"name\":\"connectivity\",\"status\":\"pass\",\"message\":\"Base URL format is valid (logical connectivity \u2014 no network pro"
+    },
+    {
+      "name": "time.timesheets",
+      "path": "/api/v1/time/timesheets",
+      "http": 200,
+      "ms": 666,
+      "pass": true,
+      "error": null,
+      "snippet": "{\"data\":[{\"id\":\"tts_1\",\"tenantId\":\"t0000001-0000-4000-8000-000000000001\",\"userId\":\"1\",\"description\":\"APZHUB Demo timesheet on LTS 19083\",\"status\":\"stopped\",\"durationMinutes\":61,\"startedAt\":\"2026-08-15T14:36:00.000Z\",\"endedAt\":\"2026-08-15T15"
+    },
+    {
+      "name": "analytics.health",
+      "path": "/api/v1/analytics/health",
+      "http": 200,
+      "ms": 571,
+      "pass": true,
+      "error": null,
+      "snippet": "{\"data\":{\"status\":\"degraded\",\"checkedAt\":\"2026-08-15T17:37:40.715Z\",\"providerStatuses\":[{\"providerId\":\"metabase\",\"status\":\"degraded\",\"message\":\"auth=valid; api=reachable\"}],\"reasons\":[]},\"meta\":{\"requestId\":\"dad474bd-f279-428b-a99f-223690c7"
+    },
+    {
+      "name": "analytics.dashboards",
+      "path": "/api/v1/analytics/dashboards",
+      "http": 200,
+      "ms": 520,
+      "pass": true,
+      "error": null,
+      "snippet": "{\"data\":[{\"id\":\"dash_exec_overview\",\"tenantId\":\"t0000001-0000-4000-8000-000000000001\",\"title\":\"Executive Overview\",\"description\":\"Cross-product executive scorecards\",\"categoryId\":\"cat_executive\",\"status\":\"published\",\"tags\":[\"executive\"],\"pr"
+    },
+    {
+      "name": "workflow.health",
+      "path": "/api/v1/workflow/health",
+      "http": 200,
+      "ms": 490,
+      "pass": true,
+      "error": null,
+      "snippet": "{\"data\":{\"componentKey\":\"workflow.provider.n8n\",\"status\":\"degraded\",\"reasons\":[],\"checkedAt\":\"2026-08-15T17:37:41.727Z\",\"providerId\":\"n8n\"},\"meta\":{\"requestId\":\"d7c35100-839e-4188-a948-ba008114ec68\",\"correlationId\":\"d7c35100-839e-4188-a948-"
+    },
+    {
+      "name": "workflow.engine.health",
+      "path": "/api/v1/workflows/engine/health",
+      "http": 200,
+      "ms": 478,
+      "pass": true,
+      "error": null,
+      "snippet": "{\"data\":{\"level\":\"healthy\",\"reasons\":[],\"sdkStatus\":\"healthy\"},\"meta\":{\"requestId\":\"75c8e2be-4d5b-48fb-b777-d8b5d2f74d9c\",\"correlationId\":\"75c8e2be-4d5b-48fb-b777-d8b5d2f74d9c\"}}"
+    },
+    {
+      "name": "workflow.engine.workflows",
+      "path": "/api/v1/workflows/engine/workflows",
+      "http": 200,
+      "ms": 603,
+      "pass": true,
+      "error": null,
+      "snippet": "{\"data\":[{\"id\":\"ONVrHGOWbEvO17h0\",\"name\":\"APZHUB Demo Workflow\",\"active\":false,\"createdAt\":\"2026-08-15T17:24:26.866Z\",\"updatedAt\":\"2026-08-15T17:24:26.866Z\",\"tagNames\":[],\"nodeCount\":1,\"connectionCount\":0,\"versionHint\":\"1232266c-d117-4762-8"
+    }
+  ],
+  "passed": 10,
+  "failed": 0
+}

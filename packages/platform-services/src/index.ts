@@ -327,6 +327,14 @@ export {
   type AnalyticsRegistryProvider,
 } from "./services/analytics";
 export {
+  createDocumentsDmsPlatformServicesWithPaperless,
+  createPaperlessOpsProvider,
+  type DocumentsDmsPlatformServicesBundle,
+  type DocumentsDmsGateway,
+  type DocumentsDmsHealth,
+  type DocumentsDmsDocumentSummary,
+} from "./services/documents-dms";
+export {
   createSearchPlatformServices,
   createSearchPlatformServicesForProduction,
   createSearchPlatformServicesForTest,

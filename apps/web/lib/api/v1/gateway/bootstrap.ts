@@ -44,6 +44,7 @@ import {
   createTimePlatformServicesWithKimai,
   createAnalyticsPlatformServicesForTest,
   createAnalyticsPlatformServicesWithMetabase,
+  createDocumentsDmsPlatformServicesWithPaperless,
 } from "@apzhub/platform-services";
 import type {
   TestingPlatformServicesBundle,
@@ -62,6 +63,7 @@ import type {
   QepPlatformServicesBundle,
   TimePlatformServicesBundle,
   AnalyticsPlatformServicesBundle,
+  DocumentsDmsPlatformServicesBundle,
 } from "@apzhub/platform-services";
 import type { DocumentStorageConfig } from "@apzhub/document-core";
 
@@ -96,6 +98,8 @@ export interface PlatformApiGatewayBootstrap {
   /** APZHUB-PLATFORM-ANALYTICS-005 — Analytics Platform Services registered on gateway. */
   readonly analyticsEnabled: boolean;
   readonly analyticsReadiness?: AnalyticsPlatformServicesBundle["readiness"];
+  readonly documentsDmsEnabled: boolean;
+  readonly documentsDmsReadiness?: DocumentsDmsPlatformServicesBundle["readiness"];
   readonly testingReadiness?: TestingReadinessIndicators;
   readonly documentsReadiness?: DocumentPlatformServicesBundle["readiness"];
   readonly searchReadiness?: SearchPlatformServicesBundle["readiness"];
@@ -159,6 +163,58 @@ function isMetabaseIntegrationEnabled(env: NodeJS.ProcessEnv = process.env): boo
   const value = env.METABASE_INTEGRATION_ENABLED?.trim().toLowerCase();
   if (value === "0" || value === "false" || value === "off") return false;
   return value === "1" || value === "true" || value === "on";
+}
+
+function isDocumentsDmsEnabled(env: NodeJS.ProcessEnv = process.env): boolean {
+  const value = env.APZHUB_DOCUMENTS_DMS_ENABLED?.trim().toLowerCase();
+  return value === "1" || value === "true" || value === "on";
+}
+
+function isPaperlessIntegrationEnabled(env: NodeJS.ProcessEnv = process.env): boolean {
+  const value = env.PAPERLESS_INTEGRATION_ENABLED?.trim().toLowerCase();
+  return value === "1" || value === "true" || value === "on";
+}
+
+async function createDocumentsDmsServicesBundle(): Promise<DocumentsDmsPlatformServicesBundle> {
+  if (!isPaperlessIntegrationEnabled()) {
+    throw new Error(
+      "APZHUB_DOCUMENTS_DMS_ENABLED=true requires PAPERLESS_INTEGRATION_ENABLED=true",
+    );
+  }
+  const { ensureLocalSecretsLoaded } = await import("@apzhub/config");
+  ensureLocalSecretsLoaded();
+  const { createPaperlessAdapter } = await import("@apzhub/integration-paperless");
+  const tenantId =
+    process.env.PAPERLESS_BOOTSTRAP_TENANT_ID?.trim() ||
+    process.env.APZHUB_DEFAULT_TENANT_ID?.trim() ||
+    "t0000001-0000-4000-8000-000000000001";
+  const baseUrl = process.env.PAPERLESS_BASE_URL?.trim() || "http://127.0.0.1:19082";
+  const apiBaseUrl =
+    process.env.PAPERLESS_API_BASE_URL?.trim() || `${baseUrl.replace(/\/$/, "")}/api`;
+  const apiToken = process.env.PAPERLESS_API_TOKEN?.trim();
+  if (!apiToken) {
+    throw new Error(
+      "PAPERLESS_INTEGRATION_ENABLED=true requires PAPERLESS_API_TOKEN (prefer .secrets/paperless)",
+    );
+  }
+  const result = await createPaperlessAdapter({
+    tenantId,
+    paperless: {
+      baseUrl,
+      apiBaseUrl,
+      apiTokenRef: process.env.PAPERLESS_API_TOKEN_REF?.trim() || "paperless/api-token",
+    },
+    apiToken,
+    autoInitialise: true,
+  });
+  const connected = await result.adapter.connect({
+    tenantId,
+    correlationId: "documents-dms-bootstrap-connect",
+  });
+  if (!connected.ok) {
+    throw new Error(connected.message || "Documents DMS adapter connect failed");
+  }
+  return createDocumentsDmsPlatformServicesWithPaperless(result.adapter);
 }
 
 async function createAnalyticsServicesBundle(): Promise<AnalyticsPlatformServicesBundle> {
@@ -657,6 +713,7 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
   const qepEnabled = isQepServiceEnabled(process.env);
   const timeEnabled = isTimeServiceEnabled(process.env);
   const analyticsEnabled = isAnalyticsServiceEnabled(process.env);
+  const documentsDmsEnabled = isDocumentsDmsEnabled(process.env);
   let providersRegistered = false;
 
   // Mapping store from env (postgres in production by default).
@@ -773,6 +830,9 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
   const analytics = analyticsEnabled
     ? await createAnalyticsServicesBundle()
     : undefined;
+  const documentsDms = documentsDmsEnabled
+    ? await createDocumentsDmsServicesBundle()
+    : undefined;
 
   const automation = getOrCreateServerAutomationFoundation();
 
@@ -796,6 +856,7 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
     qepPlatform: qep,
     time,
     analytics,
+    documentsDms,
     domainEventPublisher,
     automation,
   });
@@ -823,6 +884,8 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
     timeReadiness: time?.readiness,
     analyticsEnabled,
     analyticsReadiness: analytics?.readiness,
+    documentsDmsEnabled,
+    documentsDmsReadiness: documentsDms?.readiness,
     testingReadiness: testing?.readiness,
     documentsReadiness: documents?.readiness,
     searchReadiness: searchPlatform?.readiness,
@@ -867,6 +930,8 @@ export function createTestPlatformApiGatewayBootstrap(
     timeReadiness: overrides.timeReadiness,
     analyticsEnabled: overrides.analyticsEnabled ?? false,
     analyticsReadiness: overrides.analyticsReadiness,
+    documentsDmsEnabled: overrides.documentsDmsEnabled ?? false,
+    documentsDmsReadiness: overrides.documentsDmsReadiness,
     testingReadiness: overrides.testingReadiness,
     documentsReadiness: overrides.documentsReadiness,
     searchReadiness: overrides.searchReadiness,

@@ -31,8 +31,10 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-APZPRD-003](./sprint/SPR-APZPRD-003-projects-workbench-deepen.md)                             | **COMPLETE · DELIVERED** — deepen Projects; BetterAuth only (no Authentik)           |
 | [SPR-ADOPT-002](./sprint/SPR-ADOPT-002-commercial-pillar-operator-dogfood.md)                      | **COMPLETE · DELIVERED** — commercial pillar operator dogfood (BetterAuth only)      |
 | [SPR-ADOPT-003](./sprint/SPR-ADOPT-003-wired-engines-dogfood.md)                                   | **COMPLETE · DELIVERED** — wired engines dogfood (Plane·Zammad·Kimai·Metabase·n8n)   |
+| [SPR-ADOPT-004](./sprint/SPR-ADOPT-004-lts-backed-engines-dogfood.md)                              | **COMPLETE · DELIVERED** — LTS-backed commercial dogfood (leave legacy alone)        |
 | [ADOPT-002 evidence](./products/adopt-002/README.md)                                               | Friction · evidence · checklist results                                              |
 | [ADOPT-003 evidence](./products/adopt-003/README.md)                                               | Post-OPS wired-engine dogfood evidence                                               |
+| [ADOPT-004 evidence](./products/adopt-004/README.md)                                               | LTS API dogfood · 10/10 · legacy untouched                                           |
 | [OWNER APZPEN remain parked](./decisions/OWNER-APZPEN-REMAIN-PARKED.md)                            | **IN FORCE** — no further APZPEN enterprise until resume criteria                    |
 | [SPR-POLISH-001](./sprint/SPR-POLISH-001-entitlements-shell-consistency.md)                        | **COMPLETE · DELIVERED** — entitlements UX + shell consistency across pillars        |
 | [SPR-OPS-PLANE-001](./sprint/SPR-OPS-PLANE-001-projects-plane-adapter-host.md)                     | **COMPLETE · DELIVERED** — `.secrets/plane` loader + host enablement runbook         |
@@ -48,8 +50,10 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-OPS-LTS-METABASE-001](./sprint/SPR-OPS-LTS-METABASE-001-apzhub-owned-metabase-bring-up.md)    | **COMPLETE · DELIVERED** — APZHUB-owned Metabase on 19084; Analytics retargeted      |
 | [SPR-OPS-LTS-N8N-001](./sprint/SPR-OPS-LTS-N8N-001-apzhub-owned-n8n-bring-up.md)                   | **COMPLETE · DELIVERED** — APZHUB-owned n8n on 19678; Workflow retargeted            |
 | [SPR-OPS-LTS-PAPERLESS-001](./sprint/SPR-OPS-LTS-PAPERLESS-001-apzhub-owned-paperless-bring-up.md) | **COMPLETE · INFRA ONLY** — Paperless on 19082; no Documents adapter                 |
+| [SPR-OPS-PAPERLESS-002](./sprint/SPR-OPS-PAPERLESS-002-documents-dms-paperless-foundation.md)      | **COMPLETE · DELIVERED** — Documents DMS Paperless foundation (ADR-0095)             |
+| [PAPERLESS-002 evidence](./products/paperless-002/README.md)                                       | DMS health/list dogfood · legacy untouched                                           |
 | [SPR-OPS-LTS-CLOSE](./sprint/SPR-OPS-LTS-CLOSE-apzhub-owned-engine-programme-closeout.md)          | **COMPLETE · DELIVERED** — LTS fleet closeout (adapter products + Paperless infra)   |
-| [ADR-0095 Paperless DMS](./adr/ADR-0095-paperless-ngx-documents-dms-provider.md)                   | **Proposed** — awaiting Owner acceptance before adapter work                         |
+| [ADR-0095 Paperless DMS](./adr/ADR-0095-paperless-ngx-documents-dms-provider.md)                   | **Accepted** — optional Documents DMS engine; native SoR first                       |
 | [OWNER-ENGINES-OUTSIDE-HUB](./decisions/OWNER-ENGINES-OUTSIDE-HUB.md)                              | **IN FORCE** — engines external; BetterAuth only; leave legacy alone                 |
 
 ### Priority product build — APZQEP (active)

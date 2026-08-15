@@ -21,6 +21,7 @@ describe("loadLocalSecrets", () => {
     delete process.env.KIMAI_API_TOKEN;
     delete process.env.METABASE_API_KEY;
     delete process.env.APZHUB_WORKFLOW_ENGINE_API_KEY;
+    delete process.env.PAPERLESS_API_TOKEN;
   });
 
   it("loads smtp openai and git secrets without overwriting existing env", () => {
@@ -66,6 +67,10 @@ describe("loadLocalSecrets", () => {
       path.join(dir, "n8n"),
       "APZHUB_WORKFLOW_ENGINE_API_KEY=n8n_test_api_key_min_16_chars\n",
     );
+    writeFileSync(
+      path.join(dir, "paperless"),
+      "PAPERLESS_API_TOKEN=paperless_test_api_token_min_16_chars\n",
+    );
 
     delete process.env.EMAIL_FROM;
     delete process.env.OPENAI_API_KEY;
@@ -80,6 +85,7 @@ describe("loadLocalSecrets", () => {
     delete process.env.KIMAI_API_TOKEN;
     delete process.env.METABASE_API_KEY;
     delete process.env.APZHUB_WORKFLOW_ENGINE_API_KEY;
+    delete process.env.PAPERLESS_API_TOKEN;
     process.env.SMTP_HOST = "already.set";
     const result = loadLocalSecrets({ secretsDir: dir });
 
@@ -93,6 +99,7 @@ describe("loadLocalSecrets", () => {
       "kimai",
       "metabase",
       "n8n",
+      "paperless",
     ]);
     expect(process.env.SMTP_HOST).toBe("already.set");
     expect(process.env.SMTP_PASS).toBe("abcd");
@@ -109,6 +116,9 @@ describe("loadLocalSecrets", () => {
     expect(process.env.METABASE_API_KEY).toBe("mb_test_metabase_api_key_min_16");
     expect(process.env.APZHUB_WORKFLOW_ENGINE_API_KEY).toBe(
       "n8n_test_api_key_min_16_chars",
+    );
+    expect(process.env.PAPERLESS_API_TOKEN).toBe(
+      "paperless_test_api_token_min_16_chars",
     );
   });
 });

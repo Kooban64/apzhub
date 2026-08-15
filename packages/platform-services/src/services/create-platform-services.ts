@@ -113,6 +113,7 @@ import type { MetricsPlatformServicesBundle } from "./metrics";
 import type { QepPlatformServicesBundle } from "./qep";
 import type { TimePlatformServicesBundle } from "./time";
 import type { AnalyticsPlatformServicesBundle } from "./analytics";
+import type { DocumentsDmsPlatformServicesBundle } from "./documents-dms";
 import type { DomainEventPublisher } from "../events/domain-event-publisher";
 import { createAutomationFoundation, type AutomationFoundation } from "./automation";
 
@@ -151,6 +152,7 @@ export interface PlatformServicesBundle {
   readonly qepPlatform?: QepPlatformServicesBundle;
   readonly time?: TimePlatformServicesBundle;
   readonly analytics?: AnalyticsPlatformServicesBundle;
+  readonly documentsDms?: DocumentsDmsPlatformServicesBundle;
   /** Platform-owned Cross-Product Automation Foundation (APZHUB-1.1-004). */
   readonly automation: AutomationFoundation;
   readonly gateway: PlatformServiceGateway;
@@ -188,6 +190,7 @@ export interface CreatePlatformServicesInput {
   readonly qepPlatform?: QepPlatformServicesBundle;
   readonly time?: TimePlatformServicesBundle;
   readonly analytics?: AnalyticsPlatformServicesBundle;
+  readonly documentsDms?: DocumentsDmsPlatformServicesBundle;
   /** Optional platform-owned domain event publisher (APZHUB-1.1-003). */
   readonly domainEventPublisher?: DomainEventPublisher;
   /** Optional Automation Foundation (APZHUB-1.1-004). Created when omitted. */
@@ -411,6 +414,7 @@ export function createPlatformServices(
   const qepApi = input.qepPlatform?.wrapWithPipeline(pipeline);
   const timeApi = input.time?.wrapWithPipeline(pipeline);
   const analyticsApi = input.analytics?.wrapWithPipeline(pipeline);
+  const documentsDmsApi = input.documentsDms?.wrapWithPipeline(pipeline);
 
   const automation = input.automation ?? createAutomationFoundation();
 
@@ -461,6 +465,7 @@ export function createPlatformServices(
     platformGovernanceApi,
     timeApi,
     analyticsApi,
+    documentsDmsApi,
     mapping,
     resolver,
     registry,
@@ -502,6 +507,7 @@ export function createPlatformServices(
     qepPlatform: input.qepPlatform,
     time: input.time,
     analytics: input.analytics,
+    documentsDms: input.documentsDms,
     automation,
     gateway,
   };

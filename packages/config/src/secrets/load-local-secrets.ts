@@ -63,6 +63,7 @@ function applyIfAbsent(key: string, value: string, applied: string[]): void {
  * - `.secrets/kimai` — KIMAI_API_TOKEN
  * - `.secrets/metabase` — METABASE_API_KEY
  * - `.secrets/n8n` — APZHUB_WORKFLOW_ENGINE_API_KEY (or N8N_API_KEY)
+ * - `.secrets/paperless` — PAPERLESS_API_TOKEN
  * - `.secrets/github-app` — GITHUB_APP_ID / INSTALLATION_ID / PRIVATE_KEY (+ optional webhook secret)
  * - `.secrets/github-app.pem` — optional PEM-only private key file
  */
@@ -237,6 +238,19 @@ export function loadLocalSecrets(options?: {
     }
     if (apiKey) {
       applyIfAbsent("APZHUB_WORKFLOW_ENGINE_API_KEY", apiKey, applied);
+    }
+  }
+
+  const paperlessPath = path.join(root, "paperless");
+  if (existsSync(paperlessPath)) {
+    loadedFiles.push("paperless");
+    const raw = readFileSync(paperlessPath, "utf8");
+    const kv = parseKeyValueFile(raw);
+    const apiToken =
+      kv.PAPERLESS_API_TOKEN?.replace(/\s+/g, "") ||
+      (raw.includes("=") ? undefined : raw.trim().replace(/\s+/g, ""));
+    if (apiToken) {
+      applyIfAbsent("PAPERLESS_API_TOKEN", apiToken, applied);
     }
   }
 

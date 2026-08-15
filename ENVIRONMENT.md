@@ -132,16 +132,18 @@ Dedicated ports for `/home/ubuntu/apz-portal` — chosen to avoid `apz-stack` co
 
 See [APZHUB-OWNED-ENGINE-TOPOLOGY](./docs/operations/APZHUB-OWNED-ENGINE-TOPOLOGY.md). Never reuse legacy `18081–18088` / `15678`.
 
-| Service (planned) | Host port | Product                                            |
-| ----------------- | --------- | -------------------------------------------------- |
-| Zammad LTS        | **19081** | Support — **UP** (`apzhub-zammad-lts`)             |
-| Paperless LTS     | **19082** | Documents* — **UP** infra (`apzhub-paperless-lts`) |
-| Kimai LTS         | **19083** | Time — **UP** (`apzhub-kimai-lts`)                 |
-| Metabase LTS      | **19084** | Analytics — **UP** (`apzhub-metabase-lts`)         |
-| Plane LTS         | **19085** | Projects — **UP** (`apzhub-plane-lts`)             |
-| n8n LTS           | **19678** | Workflow                                           |
+**Hard rule:** Do **not** stop, restart, or reconfigure legacy `apz-*` / Authentik until Owner confirms APZHUB is a solid working product ([OWNER-ENGINES-OUTSIDE-HUB](./docs/decisions/OWNER-ENGINES-OUTSIDE-HUB.md) · [SPR-ADOPT-004](./docs/sprint/SPR-ADOPT-004-lts-backed-engines-dogfood.md)).
 
-\*Paperless still requires ADR + adapter before product wiring.
+| Service (planned) | Host port | Product                                                              |
+| ----------------- | --------- | -------------------------------------------------------------------- |
+| Zammad LTS        | **19081** | Support — **UP** (`apzhub-zammad-lts`)                               |
+| Paperless LTS     | **19082** | Documents DMS — **UP** (`apzhub-paperless-lts`) · foundation adapter |
+| Kimai LTS         | **19083** | Time — **UP** (`apzhub-kimai-lts`)                                   |
+| Metabase LTS      | **19084** | Analytics — **UP** (`apzhub-metabase-lts`)                           |
+| Plane LTS         | **19085** | Projects — **UP** (`apzhub-plane-lts`)                               |
+| n8n LTS           | **19678** | Workflow — **UP** (`apzhub-n8n-lts`)                                 |
+
+\*Native Documents SoR remains primary; DMS is optional health/list via `/api/v1/documents/dms/*` ([ADR-0095](./docs/adr/ADR-0095-paperless-ngx-documents-dms-provider.md)).
 
 Compose file: `infrastructure/docker/docker-compose.dev.yml`
 

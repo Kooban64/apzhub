@@ -37,6 +37,7 @@ import type { MappingOrchestrator } from "../orchestration/mapping-orchestrator"
 import type { ProviderRegistry } from "../providers/registry/provider-registry";
 import type { ProviderResolver } from "../providers/registry/provider-resolver";
 import type { RequestPipeline } from "../execution/request-pipeline";
+import type { DocumentsDmsGateway } from "../services/documents-dms";
 import type {
   ProjectServiceImpl,
   SearchServiceImpl,
@@ -125,6 +126,7 @@ export interface PlatformServiceGatewayDeps {
   readonly platformGovernanceApi?: PlatformGovernanceGateway;
   readonly timeApi?: TimePlatformGateway;
   readonly analyticsApi?: AnalyticsPlatformGateway;
+  readonly documentsDmsApi?: DocumentsDmsGateway;
   readonly mapping: MappingOrchestrator;
   readonly resolver: ProviderResolver;
   readonly registry: ProviderRegistry;
@@ -312,6 +314,20 @@ export class PlatformServiceGateway {
       throw unsupportedAnalyticsCapability();
     }
     return this.deps.analyticsApi;
+  }
+
+  /** Optional external Documents DMS catalogue; native Documents remains authoritative. */
+  get documentsDms(): DocumentsDmsGateway {
+    if (!this.deps.documentsDmsApi) {
+      throw new PlatformServiceError({
+        category: "configuration",
+        code: "PROVIDER_CAPABILITY_UNSUPPORTED",
+        message: "Documents DMS platform services are not enabled",
+        correlationId: "platform-gateway",
+        retryable: false,
+      });
+    }
+    return this.deps.documentsDmsApi;
   }
 
   /**

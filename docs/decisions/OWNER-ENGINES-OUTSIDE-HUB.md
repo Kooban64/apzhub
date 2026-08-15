@@ -14,7 +14,7 @@
 3. **AuthN for APZHUB users is BetterAuth only.** Engine API tokens/keys stay server-side in adapters. Users never complete engine or Authentik login for normal APZHUB work.
 4. **Legacy host engines stay alone until cutover.** Running `apz-*` containers and Authentik remain for the older platform’s limited use. Do not restart, reconfigure, or “fix” them for APZHUB convenience.
 5. **Target state:** APZHUB-owned **CE/LTS** engine instances on dedicated host ports (see SPR-OPS-LTS-001). Temporary coexistence API wiring to legacy listeners is transitional dogfood only.
-6. **Deprecate the older platform** when APZHUB + its owned engines are the working path — not before.
+6. **Deprecate the older platform** only when APZHUB + its owned engines are confirmed a **solid working product** (Owner gate — e.g. ADOPT dogfood + broader acceptance). Until then: **do not stop, reconfigure, or “fix” legacy `apz-*` / Authentik.** Temporary coexistence is intentional.
 
 ## Consequences
 

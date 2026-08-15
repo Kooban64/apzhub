@@ -15,12 +15,34 @@ docker compose --env-file image-pins.env --env-file .env up -d
 
 Wait for HTTP on 19082 (redirect to login is fine).
 
-## Honesty — no Documents product wiring
+## APZHUB Documents DMS wiring
 
-- Native APZHUB Documents SoR remains authoritative ([APZDOCS](../../../../docs/products/APZHUB-PRODUCT-PORTFOLIO.md)).
-- **No** `integrations/paperless` adapter exists; **no** Documents env retarget in this slice.
-- Adapter work requires Owner acceptance of [ADR-0095](../../../../docs/adr/ADR-0095-paperless-ngx-documents-dms-provider.md).
-- No Authentik remote-user on this stack (BetterAuth is hub AuthN only).
+Native APZHUB Documents remains the authoritative SoR. The optional read-only DMS
+foundation exposes engine health and catalogue listing only.
+
+Create an API token in the LTS engine for a least-privilege service account and
+store it outside git:
+
+```bash
+cd /home/ubuntu/apz-portal
+mkdir -p .secrets
+printf 'PAPERLESS_API_TOKEN=%s\n' '<token>' > .secrets/paperless
+chmod 600 .secrets/paperless
+```
+
+Enable the APZHUB facet:
+
+```dotenv
+APZHUB_DOCUMENTS_DMS_ENABLED=true
+PAPERLESS_INTEGRATION_ENABLED=true
+PAPERLESS_BASE_URL=http://127.0.0.1:19082
+PAPERLESS_API_BASE_URL=http://127.0.0.1:19082/api
+# Optional; defaults to paperless/api-token
+PAPERLESS_API_TOKEN_REF=paperless/api-token
+```
+
+BetterAuth remains the only user authentication layer. No Authentik or
+remote-user configuration is used.
 
 ## Legacy
 

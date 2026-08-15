@@ -1,0 +1,39 @@
+manifestSchemaVersion: "1.0"
+id: paperless
+name: Documents DMS Engine Integration
+version: 0.1.0
+kind: integration
+
+metadata:
+  category: integrations
+  description: Read-only Documents DMS foundation adapter for health and catalogue discovery.
+  owner: APZHUB
+  tags:
+    - documents
+    - dms
+    - adapter
+    - foundation
+
+dependencies:
+  platform: []
+
+integration:
+  type: oss-application
+  capabilities:
+    - health
+    - authentication-bridge
+    - diagnostics
+    - documents
+
+health:
+  enabled: true
+
+documentation:
+  userVisible: false
+  engineBranding: hidden
+  supportedApiVersion: "v1"
+  adapterImplementation: SPR-OPS-PAPERLESS-002
+
+tests:
+  contract: present
+  integration: planned
