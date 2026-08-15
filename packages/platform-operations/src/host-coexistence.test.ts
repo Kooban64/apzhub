@@ -28,9 +28,15 @@ describe("host coexistence (R12-OPS-03)", () => {
     const reserved = listApzhubReservedPorts();
     expect(reserved).toContain(54334);
     expect(reserved).toContain(6380);
+    expect(reserved).toContain(17700);
+    expect(reserved).toContain(19085);
+    expect(reserved).toContain(19678);
     expect(reserved).not.toContain(54333);
+    expect(reserved).not.toContain(18085);
+    expect(reserved).not.toContain(15678);
     expect(FORBIDDEN_LEGACY_HOST_PORTS).toContain(54333);
     expect(FORBIDDEN_LEGACY_HOST_PORTS).toContain(8080);
+    expect(FORBIDDEN_LEGACY_HOST_PORTS).toContain(18085);
     expect(APZHUB_RESERVED_HOST_PORTS.every((p) => p.owner === "apzhub")).toBe(true);
   });
 

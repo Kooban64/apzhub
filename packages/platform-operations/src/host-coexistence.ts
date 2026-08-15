@@ -48,13 +48,13 @@ export interface HostCoexistenceAuditEvidence {
   readonly artefactPaths: readonly string[];
 }
 
-/** APZHUB reserved host ports — must match ENVIRONMENT.md SPR-001 table. */
+/** APZHUB reserved host ports — must match ENVIRONMENT.md SPR-001 + LTS plan tables. */
 export const APZHUB_RESERVED_HOST_PORTS: readonly HostPortReservation[] = [
   {
     service: "@apzhub/web",
     hostPort: 3300,
     owner: "apzhub",
-    notes: "pnpm dev",
+    notes: "pnpm dev / production web",
   },
   {
     service: "storybook",
@@ -75,6 +75,12 @@ export const APZHUB_RESERVED_HOST_PORTS: readonly HostPortReservation[] = [
     notes: "Docker",
   },
   {
+    service: "meilisearch",
+    hostPort: 17700,
+    owner: "apzhub",
+    notes: "Docker apzhub-meilisearch — platform search index, not a business engine",
+  },
+  {
     service: "caddy-http",
     hostPort: 3080,
     owner: "apzhub",
@@ -85,6 +91,45 @@ export const APZHUB_RESERVED_HOST_PORTS: readonly HostPortReservation[] = [
     hostPort: 3443,
     owner: "apzhub",
     notes: "tls internal for local dev",
+  },
+  // SPR-OPS-LTS-001 — planned APZHUB-owned CE/LTS engines (outside hub process).
+  // Do not bind until Owner authorises bring-up; never reuse legacy 18081–18088 / 15678.
+  {
+    service: "engine-zammad-lts",
+    hostPort: 19081,
+    owner: "apzhub",
+    notes: "Planned Support CE/LTS — SPR-OPS-LTS-001",
+  },
+  {
+    service: "engine-paperless-lts",
+    hostPort: 19082,
+    owner: "apzhub",
+    notes:
+      "Planned Documents DMS CE/LTS (requires ADR before adapter) — SPR-OPS-LTS-001",
+  },
+  {
+    service: "engine-kimai-lts",
+    hostPort: 19083,
+    owner: "apzhub",
+    notes: "Planned Time CE/LTS — SPR-OPS-LTS-001",
+  },
+  {
+    service: "engine-metabase-lts",
+    hostPort: 19084,
+    owner: "apzhub",
+    notes: "Planned Analytics CE/LTS — SPR-OPS-LTS-001",
+  },
+  {
+    service: "engine-plane-lts",
+    hostPort: 19085,
+    owner: "apzhub",
+    notes: "Planned Projects CE/LTS — SPR-OPS-LTS-001",
+  },
+  {
+    service: "engine-n8n-lts",
+    hostPort: 19678,
+    owner: "apzhub",
+    notes: "Planned Workflow CE/LTS — SPR-OPS-LTS-001",
   },
 ] as const;
 

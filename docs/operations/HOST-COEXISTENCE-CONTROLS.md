@@ -16,19 +16,25 @@ Keep APZHUB and legacy `apz-stack` co-resident without port or capacity collisio
 
 Authoritative catalogue: `@apzhub/platform-operations` → `APZHUB_RESERVED_HOST_PORTS`.
 
-| Service          | Host port             |
-| ---------------- | --------------------- |
-| `@apzhub/web`    | 3300                  |
-| Storybook        | 6006                  |
-| PostgreSQL       | **54334** (not 54333) |
-| Redis            | **6380**              |
-| Caddy HTTP/HTTPS | **3080** / **3443**   |
+| Service                         | Host port                                                                                          |
+| ------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `@apzhub/web`                   | 3300                                                                                               |
+| Storybook                       | 6006                                                                                               |
+| PostgreSQL                      | **54334** (not 54333)                                                                              |
+| Redis                           | **6380**                                                                                           |
+| Meilisearch                     | **17700**                                                                                          |
+| Caddy HTTP/HTTPS                | **3080** / **3443**                                                                                |
+| Planned engine LTS (Zammad…n8n) | **19081–19085**, **19678** — see [APZHUB-OWNED-ENGINE-TOPOLOGY](./APZHUB-OWNED-ENGINE-TOPOLOGY.md) |
 
 Compose: `infrastructure/docker/docker-compose.dev.yml`
 
 ## Forbidden for APZHUB compose
 
-Includes legacy `apzpg` **54333**, gateway **8080**, engine debug **18081–18088**, and other ENVIRONMENT.md listeners. Full set: `FORBIDDEN_LEGACY_HOST_PORTS`.
+Includes legacy `apzpg` **54333**, gateway **8080**, engine debug **18081–18088**, n8n **15678**, and other ENVIRONMENT.md listeners. Full set: `FORBIDDEN_LEGACY_HOST_PORTS`.
+
+## Engines outside the hub
+
+APZHUB does not run business engines inside the hub process. Adapters call external CE/LTS instances. Owner rule: [OWNER-ENGINES-OUTSIDE-HUB](../decisions/OWNER-ENGINES-OUTSIDE-HUB.md). Leave running legacy engines alone until cutover.
 
 ## Capacity thresholds
 

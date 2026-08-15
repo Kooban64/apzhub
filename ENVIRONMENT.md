@@ -26,6 +26,7 @@ Internet → host nginx (:443 TLS) → Docker nginx-gateway (:8080) → app cont
 - **TLS**: Let's Encrypt on host nginx (`/etc/nginx/sites-enabled/`)
 - **Identity (legacy stack)**: Authentik (`apz-authentik-server`) inside apz-stack; gateway uses forward-auth + group maps — **coexistence only; retire when APZPRD is working**
 - **Identity (APZHUB)**: **BetterAuth only** — see [OWNER-BETTERAUTH-SOLE-AUTHN](./docs/decisions/OWNER-BETTERAUTH-SOLE-AUTHN.md). Do not add Authentik to the APZHUB login path.
+- **Engines**: **Outside the hub** — see [OWNER-ENGINES-OUTSIDE-HUB](./docs/decisions/OWNER-ENGINES-OUTSIDE-HUB.md) · [APZHUB-OWNED-ENGINE-TOPOLOGY](./docs/operations/APZHUB-OWNED-ENGINE-TOPOLOGY.md). Legacy `18081–18088` / `15678` stay for the older platform until APZHUB-owned LTS cutover.
 - **Shared DB**: `apzpg` container, host port `54333` (PostgreSQL for authentik, n8n, abode, portal audit, etc.)
 
 ## Running Docker Containers (43 apz-stack + 2 cyclos = 45 total)
@@ -126,6 +127,21 @@ Dedicated ports for `/home/ubuntu/apz-portal` — chosen to avoid `apz-stack` co
 | Meilisearch             | **17700** | Docker (`apzhub-meilisearch`)     |
 | Caddy HTTP              | **3080**  | Optional local reverse proxy      |
 | Caddy HTTPS             | **3443**  | `tls internal` for local dev      |
+
+### Planned APZHUB-owned CE/LTS engines (reserved — not listening yet)
+
+See [APZHUB-OWNED-ENGINE-TOPOLOGY](./docs/operations/APZHUB-OWNED-ENGINE-TOPOLOGY.md). **Do not bind** until Owner authorises bring-up. Never reuse legacy `18081–18088` / `15678`.
+
+| Service (planned) | Host port | Product     |
+| ----------------- | --------- | ----------- |
+| Zammad LTS        | **19081** | Support     |
+| Paperless LTS     | **19082** | Documents\* |
+| Kimai LTS         | **19083** | Time        |
+| Metabase LTS      | **19084** | Analytics   |
+| Plane LTS         | **19085** | Projects    |
+| n8n LTS           | **19678** | Workflow    |
+
+\*Paperless still requires ADR + adapter before product wiring.
 
 Compose file: `infrastructure/docker/docker-compose.dev.yml`
 
