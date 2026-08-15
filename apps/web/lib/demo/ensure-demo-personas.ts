@@ -119,6 +119,7 @@ function seedProductAccess(persona: DemoPersona, userId: string): void {
       "pentest",
       "support",
       "time",
+      "analytics",
     ]);
     setUserProductGrants({
       organisationId: persona.tenantId,
@@ -166,6 +167,11 @@ export async function ensureDemoPersonasSeeded(): Promise<{
   });
   subscribeOrganisationToPackage({
     organisationId: DEMO_ORG_TENANT_ID,
+    packageId: "pkg.apzprd.delivery",
+    planId: "plan.business",
+  });
+  subscribeOrganisationToPackage({
+    organisationId: DEMO_ORG_TENANT_ID,
     packageId: "pkg.apzpen.starter",
     planId: "plan.business",
   });
@@ -182,6 +188,11 @@ export async function ensureDemoPersonasSeeded(): Promise<{
   subscribeOrganisationToPackage({
     organisationId: "t-individual-self",
     packageId: "pkg.apzprd.time",
+    planId: "plan.individual",
+  });
+  subscribeOrganisationToPackage({
+    organisationId: "t-individual-self",
+    packageId: "pkg.apzprd.delivery",
     planId: "plan.individual",
   });
   subscribeOrganisationToPackage({

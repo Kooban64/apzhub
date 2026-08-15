@@ -162,18 +162,33 @@ function isMetabaseIntegrationEnabled(env: NodeJS.ProcessEnv = process.env): boo
 
 async function createAnalyticsServicesBundle(): Promise<AnalyticsPlatformServicesBundle> {
   const domainMode = process.env.APZHUB_ANALYTICS_DOMAIN_MODE?.trim().toLowerCase();
+  // ANALYTICS-PR-01 — never allow in-memory Analytics domain in production.
+  if (domainMode === "in_memory" && process.env.NODE_ENV === "production") {
+    throw new Error(
+      "APZHUB_ANALYTICS_DOMAIN_MODE=in_memory is forbidden in production (fail-closed)",
+    );
+  }
   const allowInMemory =
     domainMode === "in_memory" && process.env.NODE_ENV !== "production";
   const tenantId =
     process.env.METABASE_BOOTSTRAP_TENANT_ID?.trim() ||
     process.env.APZHUB_ANALYTICS_BOOTSTRAP_TENANT_ID?.trim() ||
-    "platform";
+    process.env.APZHUB_DEFAULT_TENANT_ID?.trim() ||
+    "t0000001-0000-4000-8000-000000000001";
 
   if (isMetabaseIntegrationEnabled()) {
+    const { ensureLocalSecretsLoaded } = await import("@apzhub/config");
+    ensureLocalSecretsLoaded();
     const { createMetabaseAdapter } = await import("@apzhub/integration-metabase");
-    const baseUrl = process.env.METABASE_BASE_URL ?? "http://localhost:3000";
+    const baseUrl = process.env.METABASE_BASE_URL ?? "http://127.0.0.1:18084";
     const apiBaseUrl =
       process.env.METABASE_API_BASE_URL ?? `${baseUrl.replace(/\/$/, "")}/api`;
+    const apiKey = process.env.METABASE_API_KEY?.trim();
+    if (!apiKey) {
+      throw new Error(
+        "METABASE_INTEGRATION_ENABLED=true requires METABASE_API_KEY (prefer .secrets/metabase)",
+      );
+    }
     const result = await createMetabaseAdapter({
       tenantId,
       metabase: {
@@ -183,9 +198,16 @@ async function createAnalyticsServicesBundle(): Promise<AnalyticsPlatformService
           "api_key" | "session",
         apiKeyRef: process.env.METABASE_API_KEY_REF ?? "metabase/api-key",
       },
-      apiKey: process.env.METABASE_API_KEY,
-      autoInitialise: false,
+      apiKey,
+      autoInitialise: true,
     });
+    const connectResult = await result.adapter.connect({
+      tenantId,
+      correlationId: "metabase-bootstrap-connect",
+    });
+    if (!connectResult.ok) {
+      throw new Error(connectResult.message ?? "Metabase adapter connect failed");
+    }
     return createAnalyticsPlatformServicesWithMetabase(result.adapter, { tenantId });
   }
 

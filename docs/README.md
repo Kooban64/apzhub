@@ -36,6 +36,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-OPS-PLANE-001](./sprint/SPR-OPS-PLANE-001-projects-plane-adapter-host.md)                    | **COMPLETE · DELIVERED** — `.secrets/plane` loader + host enablement runbook         |
 | [SPR-OPS-ZAMMAD-001](./sprint/SPR-OPS-ZAMMAD-001-support-zammad-adapter-host.md)                  | **COMPLETE · DELIVERED** — `.secrets/zammad` loader + Support host enablement        |
 | [SPR-OPS-KIMAI-001](./sprint/SPR-OPS-KIMAI-001-time-kimai-adapter-host.md)                        | **COMPLETE · DELIVERED** — `.secrets/kimai` loader + Time host enablement            |
+| [SPR-OPS-METABASE-001](./sprint/SPR-OPS-METABASE-001-analytics-metabase-adapter-host.md)          | **COMPLETE · DELIVERED** — `.secrets/metabase` loader + Analytics host enablement    |
 
 ### Priority product build — APZQEP (active)
 

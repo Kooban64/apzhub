@@ -61,6 +61,7 @@ function applyIfAbsent(key: string, value: string, applied: string[]): void {
  * - `.secrets/plane` — PLANE_API_TOKEN (+ optional PLANE_WORKSPACE_ID / WEBHOOK_SECRET)
  * - `.secrets/zammad` — ZAMMAD_API_TOKEN
  * - `.secrets/kimai` — KIMAI_API_TOKEN
+ * - `.secrets/metabase` — METABASE_API_KEY
  * - `.secrets/github-app` — GITHUB_APP_ID / INSTALLATION_ID / PRIVATE_KEY (+ optional webhook secret)
  * - `.secrets/github-app.pem` — optional PEM-only private key file
  */
@@ -197,6 +198,24 @@ export function loadLocalSecrets(options?: {
     const kv = parseKeyValueFile(readFileSync(kimaiPath, "utf8"));
     if (kv.KIMAI_API_TOKEN) {
       applyIfAbsent("KIMAI_API_TOKEN", kv.KIMAI_API_TOKEN.replace(/\s+/g, ""), applied);
+    }
+  }
+
+  const metabasePath = path.join(root, "metabase");
+  if (existsSync(metabasePath)) {
+    loadedFiles.push("metabase");
+    const raw = readFileSync(metabasePath, "utf8");
+    const kv = parseKeyValueFile(raw);
+    let apiKey = kv.METABASE_API_KEY?.replace(/\s+/g, "");
+    if (!apiKey) {
+      // Allow raw mb_… key file (legacy portal-v2 layout).
+      const trimmed = raw.trim().replace(/\s+/g, "");
+      if (trimmed.startsWith("mb_")) {
+        apiKey = trimmed;
+      }
+    }
+    if (apiKey) {
+      applyIfAbsent("METABASE_API_KEY", apiKey, applied);
     }
   }
 
