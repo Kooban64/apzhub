@@ -370,6 +370,35 @@ describe("APZWORKFLOW-003 workflow handlers", () => {
     expect(caps.status).toBe(200);
     expect(capsBody.data.executionEnabled).toBe(false);
     expect(capsBody.data.engineConfigured).toBe(false);
+    expect(capsBody.data.capabilities.n8n).toBe(false);
+
+    // Honesty: when bootstrap readiness says n8n engine is on, surface it
+    // without unlocking execute.
+    setPlatformApiGatewayBootstrapForTests(
+      createTestPlatformApiGatewayBootstrap(createMockPlatformGateway(), {
+        workflowEnabled: true,
+        workflowReadiness: {
+          workflowEnabled: true,
+          persistenceMode: "postgres",
+          executionEnabled: false,
+          runtimePlaneEnabled: true,
+          providerExecuteSupported: false,
+          opsProviderId: "n8n",
+          engineEnabled: true,
+          engineProvider: "n8n",
+        },
+      }),
+    );
+    const capsLive = await handleGetWorkflowCapabilities(
+      makeRequest("/api/v1/workflows/capabilities"),
+      ctx,
+    );
+    const capsLiveBody = await capsLive.json();
+    expect(capsLive.status).toBe(200);
+    expect(capsLiveBody.data.executionEnabled).toBe(false);
+    expect(capsLiveBody.data.engineConfigured).toBe(true);
+    expect(capsLiveBody.data.capabilities.n8n).toBe(true);
+    expect(capsLiveBody.data.capabilities.execution).toBe(false);
 
     expect(
       (await handleGetWorkflowHealth(makeRequest("/api/v1/workflows/health"), ctx))

@@ -338,7 +338,7 @@ function mapManagement(raw: unknown): WorkflowManagementPlaneViewModel {
   return {
     workflowEnabled: Boolean(r.workflowEnabled),
     executionEnabled: false,
-    engineConfigured: false,
+    engineConfigured: Boolean(r.engineConfigured),
     persistenceMode: String(r.persistenceMode ?? "unknown"),
     capabilities: {
       metadataCrud: Boolean(caps.metadataCrud ?? true),
@@ -350,7 +350,7 @@ function mapManagement(raw: unknown): WorkflowManagementPlaneViewModel {
       audit: Boolean(caps.audit ?? true),
       execution: false,
       schedules: false,
-      n8n: false,
+      n8n: Boolean(caps.n8n),
     },
     status: r.status !== undefined ? String(r.status) : undefined,
     healthy: r.healthy !== undefined ? Boolean(r.healthy) : undefined,

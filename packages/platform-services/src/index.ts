@@ -367,6 +367,7 @@ export {
   isWorkflowServiceEnabled,
   mapWorkflowDomainError,
   mapEngineError,
+  createN8nWorkflowOpsProvider,
 } from "./services/workflow";
 export {
   createNotificationPlatformServices,

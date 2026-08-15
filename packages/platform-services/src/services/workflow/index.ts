@@ -31,7 +31,10 @@ export {
 } from "./workflow-engine-service-impls";
 export { createUnavailableWorkflowEngineServices } from "./unavailable-workflow-engine-services";
 export { isWorkflowServiceEnabled } from "./workflow-env";
-export { createMockWorkflowOpsProvider } from "./n8n-ops-provider";
+export {
+  createMockWorkflowOpsProvider,
+  createN8nWorkflowOpsProvider,
+} from "./n8n-ops-provider";
 export { createInMemoryWorkflowRuntimeRegistry } from "./in-memory-workflow-runtime-registry";
 export {
   ApprovalServiceImpl,

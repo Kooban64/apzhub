@@ -73,15 +73,19 @@ export async function assertWorkflowHttpEnabled(): Promise<void> {
   }
 }
 
-/** HTTP-only management DTO — no gateway method (execution always false). */
+/** HTTP management DTO — execution always false; engine flags reflect bootstrap readiness. */
 export function buildWorkflowManagementPlaneDto(input: {
   readonly workflowEnabled: boolean;
   readonly persistenceMode?: "postgres" | "memory" | "unknown";
+  readonly engineConfigured?: boolean;
+  readonly engineProvider?: "n8n" | "none" | string;
 }) {
+  const engineConfigured = Boolean(input.engineConfigured);
+  const n8nConfigured = engineConfigured && input.engineProvider === "n8n";
   return {
     workflowEnabled: input.workflowEnabled,
     executionEnabled: false as const,
-    engineConfigured: false as const,
+    engineConfigured,
     persistenceMode: input.persistenceMode ?? "unknown",
     capabilities: {
       metadataCrud: true,
@@ -91,9 +95,9 @@ export function buildWorkflowManagementPlaneDto(input: {
       categories: true,
       folders: true,
       audit: true,
-      execution: false,
-      schedules: false,
-      n8n: false,
+      execution: false as const,
+      schedules: false as const,
+      n8n: n8nConfigured,
     },
   };
 }
@@ -606,6 +610,8 @@ export async function handleGetWorkflowCapabilities(
     buildWorkflowManagementPlaneDto({
       workflowEnabled: true,
       persistenceMode: bootstrap.workflowReadiness?.persistenceMode ?? "postgres",
+      engineConfigured: bootstrap.workflowReadiness?.engineEnabled ?? false,
+      engineProvider: bootstrap.workflowReadiness?.engineProvider ?? "none",
     }),
     context.tracing,
   );
@@ -620,6 +626,8 @@ export async function handleGetWorkflowHealth(
   const dto = buildWorkflowManagementPlaneDto({
     workflowEnabled: true,
     persistenceMode: bootstrap.workflowReadiness?.persistenceMode ?? "postgres",
+    engineConfigured: bootstrap.workflowReadiness?.engineEnabled ?? false,
+    engineProvider: bootstrap.workflowReadiness?.engineProvider ?? "none",
   });
   return jsonDataResponse(
     {
@@ -640,6 +648,8 @@ export async function handleGetWorkflowReadiness(
   const dto = buildWorkflowManagementPlaneDto({
     workflowEnabled: true,
     persistenceMode: bootstrap.workflowReadiness?.persistenceMode ?? "postgres",
+    engineConfigured: bootstrap.workflowReadiness?.engineEnabled ?? false,
+    engineProvider: bootstrap.workflowReadiness?.engineProvider ?? "none",
   });
   return jsonDataResponse(
     {
@@ -660,6 +670,8 @@ export async function handleGetWorkflowDiagnostics(
   const dto = buildWorkflowManagementPlaneDto({
     workflowEnabled: true,
     persistenceMode: bootstrap.workflowReadiness?.persistenceMode ?? "postgres",
+    engineConfigured: bootstrap.workflowReadiness?.engineEnabled ?? false,
+    engineProvider: bootstrap.workflowReadiness?.engineProvider ?? "none",
   });
   return jsonDataResponse(
     {

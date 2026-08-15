@@ -12,6 +12,7 @@ import {
   createSearchPlatformServicesForProduction,
   createWorkflowPlatformServicesForProduction,
   createWorkflowEngineServicesForProduction,
+  createN8nWorkflowOpsProvider,
   createGatewayWorkflowApprovalExecutor,
   setProjectsWorkflowBridgeRuntimeExecutor,
   createNotificationPlatformServicesForProduction,
@@ -469,6 +470,10 @@ async function createWorkflowServicesBundle(): Promise<WorkflowPlatformServicesB
   return createWorkflowPlatformServicesForProduction({
     postgresDb: getDb(),
     engine,
+    ops:
+      engine?.adapter != null
+        ? createN8nWorkflowOpsProvider(engine.adapter)
+        : undefined,
   });
 }
 

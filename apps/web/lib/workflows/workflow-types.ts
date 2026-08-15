@@ -131,7 +131,7 @@ export type WorkflowValidationViewModel = {
 export type WorkflowManagementPlaneViewModel = {
   readonly workflowEnabled: boolean;
   readonly executionEnabled: false;
-  readonly engineConfigured: false;
+  readonly engineConfigured: boolean;
   readonly persistenceMode: string;
   readonly capabilities: {
     readonly metadataCrud: boolean;
@@ -143,7 +143,7 @@ export type WorkflowManagementPlaneViewModel = {
     readonly audit: boolean;
     readonly execution: false;
     readonly schedules: false;
-    readonly n8n: false;
+    readonly n8n: boolean;
   };
   readonly status?: string;
   readonly healthy?: boolean;
