@@ -1,22 +1,54 @@
-# Optional Faraday CE scaffold — Owner-enabled only.
-# NOT production-ready. Prefer upstream Faraday CE compose + FARADAY_URL + artefact ingest.
-# See README.md. Default `docker compose up` does nothing (profile-gated).
-#
-# Official bring-up (recommended):
-#   curl -O https://raw.githubusercontent.com/infobyte/faraday/master/docker-compose.yaml
-#   docker compose up -d
-#
-# This file is a minimal profile gate so the cluster tree documents Faraday without
-# claiming a pinned/production stack. Images/tags must be Owner-reviewed before use.
+# Optional Faraday CE stack — Owner-enabled profile only (SPR-FULL-002-C).
+# NOT started by default. Pin/replace images per Owner security review.
+# Primary APZHUB path remains artefact export → APZPEN ingest.
 
 name: apzqep-faraday
 
 services:
-  # Placeholder — replace with Owner-approved upstream faradaysec/faraday services.
-  faraday-docs-placeholder:
-    image: alpine:3.20
+  faraday-db:
+    image: postgres:15-alpine
     profiles: ["faraday"]
-    command: ["true"]
+    environment:
+      POSTGRES_USER: ${FARADAY_DB_USER:-faraday}
+      POSTGRES_PASSWORD: ${FARADAY_DB_PASSWORD:-faraday_change_me}
+      POSTGRES_DB: ${FARADAY_DB_NAME:-faraday}
+    volumes:
+      - faraday_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${FARADAY_DB_USER:-faraday}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  faraday-redis:
+    image: redis:7-alpine
+    profiles: ["faraday"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # Placeholder API/UI service — replace image tag with Owner-approved faradaysec/faraday pin.
+  faraday:
+    image: ${FARADAY_IMAGE:-faradaysec/faraday:latest}
+    profiles: ["faraday"]
+    depends_on:
+      faraday-db:
+        condition: service_healthy
+      faraday-redis:
+        condition: service_healthy
+    environment:
+      PGSQL_USER: ${FARADAY_DB_USER:-faraday}
+      PGSQL_PASSWD: ${FARADAY_DB_PASSWORD:-faraday_change_me}
+      PGSQL_DB: ${FARADAY_DB_NAME:-faraday}
+      PGSQL_HOST: faraday-db
+      REDIS_SERVER: faraday-redis
+    ports:
+      - "${FARADAY_PORT:-5985}:5985"
     labels:
-      apzhub.role: "optional-faraday-scaffold"
-      apzhub.note: "Owner-enabled profile only; primary ENT-001 path is artefact export → APZPEN ingest"
+      apzhub.role: "optional-faraday-ce"
+      apzhub.note: "Owner-enabled; artefact ingest remains primary ENT path"
+
+volumes:
+  faraday_pg:

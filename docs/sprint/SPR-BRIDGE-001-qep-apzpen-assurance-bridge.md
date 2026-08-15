@@ -5,7 +5,7 @@
 > **Authority:** [OWNER-FULL-PRODUCT-BAR-OPTION-3](../decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md)  
 > **Depends on:** APZPEN CE + ENT-001 contracts (can stub contract first); QEP readiness/cert (210)  
 > **Does not:** Merge pillars · QEP calling Greenbone/Faraday · auto GO from security findings  
-> **Residual:** formal `@apzhub/platform-services` package extraction (compose lives in `apps/web/lib/qep/security-assurance-bridge-service.ts`)
+> **Residual:** formal `@apzhub/platform-services` security-assurance export — **CLOSED** via [SPR-FULL-002](./SPR-FULL-002-post-option-3-hardening.md)
 
 ## Outcome
 

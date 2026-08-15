@@ -21,7 +21,7 @@ async function handleGet(request: NextRequest, context: PlatformApiRequestContex
     {
       root: greenboneArtefactRoot(),
       artefacts,
-      note: "Operator scan (gvm-tools/script) → artefacts here → POST engagement ingest with artefactPath when APZPEN_GREENBONE_ARTEFACT_INGEST=true. GMP API deferred.",
+      note: "Operator scan → artefacts → ingest. Optional GMP pull: POST …/gmp/pull when APZPEN_GREENBONE_GMP_PULL=true + GREENBONE_GMP_* env.",
     },
     context.tracing,
   );

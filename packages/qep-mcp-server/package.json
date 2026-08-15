@@ -1,0 +1,22 @@
+{
+  "name": "@apzhub/qep-mcp-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "APZQEP MCP stdio server — gated tools only (SPR-FULL-002-D)",
+  "bin": {
+    "apzhub-qep-mcp": "./src/cli.ts"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "start": "tsx src/cli.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "vitest run --config ../../vitest.config.ts packages/qep-mcp-server"
+  },
+  "dependencies": {
+    "tsx": "^4.19.2"
+  }
+}

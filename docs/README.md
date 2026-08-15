@@ -19,8 +19,10 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-COMM-001](./sprint/SPR-COMM-001-catalogue-entitlements-tenant-switch.md)       | **DELIVERED** — packages, entitlements, tenant switch, soft APZPEN gate              |
 | [SPR-COMM-002](./sprint/SPR-COMM-002-org-packages-tenant-switch-source.md)          | **DELIVERED** — org packages UI, tenant switcher, project source (QEP+PEN)           |
 | [OWNER BetterAuth sole AuthN](./decisions/OWNER-BETTERAUTH-SOLE-AUTHN.md)           | **IN FORCE** — BetterAuth only; Authentik retire with APZPRD                         |
-| [OWNER Full product bar (Option 3)](./decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md) | **IN FORCE** — Phase 2 + APZPEN Greenbone/Faraday + bridge; Phase 3+AI queued        |
+| [OWNER Full product bar (Option 3)](./decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md) | **SATISFIED · PROGRAMME COMPLETE** — Phase 2 + engines + bridge + Phase 3/AI         |
 | [SPR-FULL-001](./sprint/SPR-FULL-001-full-product-bar-option-3.md)                  | **PROGRAMME COMPLETE** — Option 3 Waves A+B delivered (220 · ENT · BRIDGE · 230)     |
+| [OWNER Post–Option 3 hardening](./decisions/OWNER-POST-OPTION-3-HARDENING.md)       | **SATISFIED · DELIVERED** — GMP · Faraday prod path · MCP stdio · platform-services  |
+| [SPR-FULL-002](./sprint/SPR-FULL-002-post-option-3-hardening.md)                    | **COMPLETE · DELIVERED** — post-bar hardening (GMP · Faraday · MCP stdio · services) |
 | [SPR-APZPRD-001](./sprint/SPR-APZPRD-001-betterauth-productivity-workspace.md)      | **COMPLETE · DELIVERED** — BetterAuth sole AuthN; Projects health without Authentik  |
 | [SPR-APZPRD-002](./sprint/SPR-APZPRD-002-entitled-projects-workbench.md)            | **COMPLETE · DELIVERED** — entitled Projects workbench (catalogue → adapter)         |
 

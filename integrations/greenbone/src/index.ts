@@ -1,4 +1,4 @@
-export const GREENBONE_INTEGRATION_VERSION = "0.1.0";
+export const GREENBONE_INTEGRATION_VERSION = "0.1.1";
 
 export type GreenboneFindingSeed = {
   readonly title: string;
@@ -11,6 +11,21 @@ export type GreenboneHealthResult = {
   readonly ok: boolean;
   readonly detail: string;
 };
+
+export {
+  buildGmpAuthenticateCommand,
+  buildGmpGetResultsCommand,
+  buildGmpGetVersionCommand,
+  fetchGmpResults,
+  fetchGmpVersion,
+  parseGmpResultsXml,
+  parseGmpVersionXml,
+  resolveGmpConfigFromEnv,
+  toGreenboneSimplifiedArtefact,
+  withGmpSession,
+  type GmpClientConfig,
+  type GmpVersionInfo,
+} from "./gmp-client.js";
 
 const DEFAULT_GREENBONE_UI_URL = "http://127.0.0.1:9392";
 

@@ -1029,3 +1029,18 @@ export type {
   ServiceMiddlewareResult,
   ServiceMiddleware,
 } from "./middleware/service-middleware";
+
+/** SPR-FULL-002-A — QEP ↔ APZPEN security assurance pure compose */
+export {
+  buildEngagementRows,
+  isSecurityReadinessClear,
+  summariseSecurityAssurance,
+} from "./security-assurance/index";
+export type {
+  AssuranceAssessmentPosition,
+  AssurancePosture,
+  AssuranceSourceBinding,
+  AssuranceStatus,
+  SecurityAssuranceEngagementRow,
+  SecurityAssuranceSummary,
+} from "./security-assurance/index";

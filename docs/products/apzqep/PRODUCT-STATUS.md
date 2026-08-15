@@ -60,7 +60,7 @@ SPR-APZQEP-200 programme DELIVERED (RCC · providers · governed AI · GA)
 SPR-APZQEP-210 DELIVERED (DEF / USER-WORKFLOWS MVP closeout)
 ```
 
-> **Portfolio note (2026-08-15):** APZPEN CE is complete. **SPR-APZQEP-200** through **SPR-APZQEP-230** and **SPR-FULL-001 (Option 3)** are **COMPLETE · DELIVERED** — Phase 2 (220) · Greenbone/Faraday (ENT-001) · QEP↔APZPEN bridge (BRIDGE-001) · Phase 3 + AI/MCP (230). Caps A–F remain closed. Owner “100% (not MVP)” bar **MET**. BetterAuth remains sole AuthN. Optional post-bar hardening (GMP live client, Faraday host bring-up, MCP SDK/stdio, platform-services package) requires a new Owner sprint.
+> **Portfolio note (2026-08-15):** APZPEN CE is complete. **SPR-APZQEP-200** through **SPR-APZQEP-230** and **SPR-FULL-001 (Option 3)** are **COMPLETE · DELIVERED**. Post-bar hardening **SPR-FULL-002** is **COMPLETE · DELIVERED** (platform-services security-assurance · Greenbone GMP · Faraday prod path · MCP stdio). Caps A–F remain closed. Owner “100% (not MVP)” bar **MET**. BetterAuth remains sole AuthN.
 
 Authoritative release pack: [release-1.1/](./release-1.1/)
 
