@@ -167,6 +167,7 @@ Apply schema with `pnpm db:migrate` (includes `0015_platform_entity_mapping`).
 | 19081       | APZHUB Zammad LTS       | localhost — `apzhub-zammad-lts` when running   |
 | 19083       | APZHUB Kimai LTS        | localhost — `apzhub-kimai-lts` when running    |
 | 19084       | APZHUB Metabase LTS     | localhost — `apzhub-metabase-lts` when running |
+| 19678       | APZHUB n8n LTS          | localhost — `apzhub-n8n-lts` when running      |
 | 19085       | APZHUB Plane LTS        | localhost — `apzhub-plane-lts` when running    |
 | 18081–18088 | various apps            | localhost                                      |
 | 18092       | abode-tokenisation node | all interfaces                                 |

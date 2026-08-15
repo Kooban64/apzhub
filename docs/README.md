@@ -46,6 +46,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-OPS-LTS-ZAMMAD-001](./sprint/SPR-OPS-LTS-ZAMMAD-001-apzhub-owned-zammad-bring-up.md)         | **COMPLETE · DELIVERED** — APZHUB-owned Zammad on 19081; Support retargeted          |
 | [SPR-OPS-LTS-KIMAI-001](./sprint/SPR-OPS-LTS-KIMAI-001-apzhub-owned-kimai-bring-up.md)            | **COMPLETE · DELIVERED** — APZHUB-owned Kimai on 19083; Time retargeted              |
 | [SPR-OPS-LTS-METABASE-001](./sprint/SPR-OPS-LTS-METABASE-001-apzhub-owned-metabase-bring-up.md)   | **COMPLETE · DELIVERED** — APZHUB-owned Metabase on 19084; Analytics retargeted      |
+| [SPR-OPS-LTS-N8N-001](./sprint/SPR-OPS-LTS-N8N-001-apzhub-owned-n8n-bring-up.md)                  | **COMPLETE · DELIVERED** — APZHUB-owned n8n on 19678; Workflow retargeted            |
 | [OWNER-ENGINES-OUTSIDE-HUB](./decisions/OWNER-ENGINES-OUTSIDE-HUB.md)                             | **IN FORCE** — engines external; BetterAuth only; leave legacy alone                 |
 
 ### Priority product build — APZQEP (active)
