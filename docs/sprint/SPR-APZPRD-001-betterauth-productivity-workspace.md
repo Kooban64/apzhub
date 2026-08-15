@@ -31,6 +31,6 @@ APZPRD users enter via **BetterAuth only**. The productivity workbench assembles
 - **001-A:** [OWNER-BETTERAUTH-SOLE-AUTHN](../decisions/OWNER-BETTERAUTH-SOLE-AUTHN.md) IN FORCE; 007 / IAM quick-ref / ENVIRONMENT / strategy / QEP Admin aligned.
 - **001-B:** [retire-authentik.md](../operations/runbooks/retire-authentik.md) published (checklist — not GO).
 - **001-C:** `apps/web` has **zero** Authentik/forward-auth imports; login is BetterAuth `signIn.email` only (`login-form.tsx`).
-- **001-D:** Plane productivity path uses server `PLANE_API_TOKEN` (adapter), not Authentik — confirm live health under SPR-APZPRD-001 follow-up; Support/Kimai same pattern when entitled.
+- **001-D:** `GET /api/v1/projects/health` — BetterAuth-gated; reports `authentikUsed: false`, adapter API-key posture, optional live list probe. Plane path uses `PLANE_API_TOKEN` (`X-Api-Key`), never Authentik.
 
 Authentik containers remain up for legacy vhosts until Owner GO on the retirement checklist.

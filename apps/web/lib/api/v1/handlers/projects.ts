@@ -177,3 +177,52 @@ export async function handleArchiveProject(
   );
   return jsonDataResponse(project, context.tracing);
 }
+
+/**
+ * SPR-APZPRD-001-D — BetterAuth session + Projects adapter posture (no Authentik).
+ * Config/diagnostics only; optional live list probe when Plane is enabled.
+ */
+export async function handleGetProjectsEngineHealth(
+  _request: NextRequest,
+  context: PlatformApiRequestContext,
+) {
+  const { getPlaneConfigurationDiagnostics } =
+    await import("@apzhub/config/governance/plane-config-diagnostics");
+  const diagnostics = getPlaneConfigurationDiagnostics(process.env);
+  let liveListOk: boolean | null = null;
+  let liveListError: string | undefined;
+  if (diagnostics.integrationEnabled && diagnostics.healthStatus === "configured") {
+    try {
+      const gateway = await getPlatformServiceGateway();
+      await gateway.projects.listProjects(context.serviceContext, {
+        page: { limit: 1, offset: 0 },
+      });
+      liveListOk = true;
+    } catch (error) {
+      liveListOk = false;
+      liveListError = error instanceof Error ? error.message : String(error);
+    }
+  }
+
+  return jsonDataResponse(
+    {
+      product: "projects",
+      authN: "betterauth",
+      authZ: "apzhub_permission_service",
+      engineAuth: "adapter_api_key",
+      authentikUsed: false as const,
+      sessionUserId: context.serviceContext.userId,
+      plane: {
+        integrationEnabled: diagnostics.integrationEnabled,
+        healthStatus: diagnostics.healthStatus,
+        apiTokenPresent: diagnostics.apiTokenPresent,
+        connectionConfigured: diagnostics.connectionConfigured,
+        workspaceConfigured: diagnostics.workspaceConfigured,
+        issues: diagnostics.issues,
+      },
+      liveListOk,
+      liveListError,
+    },
+    context.tracing,
+  );
+}
