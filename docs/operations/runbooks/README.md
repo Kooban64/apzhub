@@ -23,6 +23,10 @@
 | [automation-deferred-flood.md](./automation-deferred-flood.md)               | `alert.automation.deferred-flood`        | INFO     |
 | [observe-unavailable.md](./observe-unavailable.md)                           | `alert.observe.unavailable`              | P2       |
 | [host-coexistence-capacity.md](./host-coexistence-capacity.md)               | OPS-R-01 / R12-OPS-03                    | P1/P2    |
+| [qep-automation-live.md](./qep-automation-live.md)                           | SPR-210 live Playwright                  | P2       |
+| [qep-scm-github-live.md](./qep-scm-github-live.md)                           | SPR-210 live SCM                         | P2       |
+| [qep-dispatch-record-only.md](./qep-dispatch-record-only.md)                 | SPR-210 dispatch safety                  | INFO     |
+| [qep-typst-report-pack.md](./qep-typst-report-pack.md)                       | SPR-210 Typst PDF                        | P2       |
 
 ## Honesty
 

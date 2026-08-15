@@ -962,7 +962,8 @@ export type ReportPackPdfResult =
 
 /**
  * Compile draft PDF via Typst when a binary is available.
- * TODO(F12): wire durable storage + audited publish workflow (human-only).
+ * Durable path: apps/web/.data/qep-report-packs/{packId}/ (SPR-210 / F12).
+ * Object-store/WORM remains an explicit residual — local durable default matches Evidence.
  */
 export async function tryCompileReportPackPdf(
   pack: ReportPack,
@@ -971,6 +972,9 @@ export async function tryCompileReportPackPdf(
     readonly workDir?: string;
     readonly templatePath?: string;
     readonly env?: NodeJS.ProcessEnv;
+    /** Optional actor for audit trail when PDF is materialised. */
+    readonly actorId?: string;
+    readonly correlationId?: string;
   },
 ): Promise<ReportPackPdfResult> {
   const env = options?.env ?? process.env;
@@ -1003,5 +1007,24 @@ export async function tryCompileReportPackPdf(
     return { ok: false, reason: compiled.reason };
   }
   const bytes = await readFile(pdfPath);
+  // Manifest for durable local evidence of the render (not Cap Evidence SoR).
+  await writeFile(
+    join(workDir, "pdf-manifest.json"),
+    JSON.stringify(
+      {
+        packId: pack.packId,
+        changeEventId: pack.changeEventId,
+        pdfPath,
+        byteLength: bytes.byteLength,
+        typstBinary: binary,
+        renderedAt: new Date().toISOString(),
+        actorId: options?.actorId,
+        correlationId: options?.correlationId,
+      },
+      null,
+      2,
+    ),
+    "utf8",
+  );
   return { ok: true, pdfPath, bytes, typstBinary: binary };
 }

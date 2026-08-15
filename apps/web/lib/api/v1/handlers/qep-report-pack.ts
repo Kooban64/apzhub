@@ -75,7 +75,10 @@ export async function handleGetReportPackByChange(
     }
 
     if (format === "pdf") {
-      const pdf = await tryCompileReportPackPdf(pack);
+      const pdf = await tryCompileReportPackPdf(pack, {
+        actorId: context.serviceContext.userId,
+        correlationId: context.correlationId,
+      });
       if (!pdf.ok) {
         return jsonDataResponse(
           {
@@ -90,6 +93,17 @@ export async function handleGetReportPackByChange(
           context.tracing,
         );
       }
+      try {
+        const { appendQepAuditEvent } = await import("@/lib/qep/qep-audit-store");
+        appendQepAuditEvent({
+          action: "report_pack.pdf_rendered",
+          actor: context.serviceContext.userId,
+          correlationId: context.correlationId,
+          detail: `${pack.packId}:${pdf.pdfPath}`,
+        });
+      } catch {
+        // Audit ledger must not block export.
+      }
       return jsonDataResponse(
         {
           pack,
@@ -99,6 +113,7 @@ export async function handleGetReportPackByChange(
             path: pdf.pdfPath,
             bytesBase64: pdf.bytes.toString("base64"),
             typstBinary: pdf.typstBinary,
+            durable: true as const,
           },
         },
         context.tracing,

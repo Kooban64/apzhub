@@ -6,10 +6,10 @@
 | Authority          | Owner · Product Board — **STANDING**                                             |
 | Audience           | Engineers, architects, auditors, AI assistants                                   |
 | Rule               | **Read this document before any APZQEP work**                                    |
-| Last updated       | 20260814T204100Z                                                                 |
+| Last updated       | 20260815T013000Z                                                                 |
 | Current baseline   | **Version 1.1 — PRODUCTION READY · CLOSED**                                      |
-| Engineering thread | **COMPLETE** (V1.1); **SPR-200 DELIVERED**; **SPR-210 IN PROGRESS**              |
-| Product posture    | **OPERATIONAL** + product-definition closeout in flight                          |
+| Engineering thread | **COMPLETE** (V1.1); **SPR-200 + SPR-210 DELIVERED**                             |
+| Product posture    | **OPERATIONAL** + product-definition MVP closeout delivered                      |
 | Management posture | **Operational Learning**                                                         |
 | Release pack       | [release-1.1/](./release-1.1/)                                                   |
 | Owner decision     | [release-1.1/OWNER-RELEASE-DECISION.md](./release-1.1/OWNER-RELEASE-DECISION.md) |
@@ -52,15 +52,15 @@ Freeze:
 Production defects · security vulnerabilities · critical operational hotfixes only
 
 Next engineering priority (portfolio):
-APZQEP product-definition closeout — SPR-APZQEP-210 IN PROGRESS
+APZQEP product-definition closeout — SPR-APZQEP-210 COMPLETE
 APZPEN CE complete; enterprise options parked
 
 Version 1.2:
 SPR-APZQEP-200 programme DELIVERED (RCC · providers · governed AI · GA)
-SPR-APZQEP-210 authorised for remaining DEF / USER-WORKFLOWS MVP gaps
+SPR-APZQEP-210 DELIVERED (DEF / USER-WORKFLOWS MVP closeout)
 ```
 
-> **Portfolio note (2026-08-14):** APZPEN CE is complete. **SPR-APZQEP-200 is COMPLETE.** **SPR-APZQEP-210** ([guide](../../sprint/SPR-APZQEP-210-product-definition-closeout.md)) is **AUTHORISED · IN PROGRESS** for product-definition completeness (auth seed, catalogue honesty, Risk/Admin/Audit/Design, readiness waivers). Caps A–F remain closed. APZPEN enterprise depth is [parked](../../strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md).
+> **Portfolio note (2026-08-15):** APZPEN CE is complete. **SPR-APZQEP-200** and **SPR-APZQEP-210** are **COMPLETE · DELIVERED**. Caps A–F remain closed. APZPEN enterprise depth is [parked](../../strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md). Enterprise SSO / Authentik wire-up remains platform IAM follow-on.
 
 Authoritative release pack: [release-1.1/](./release-1.1/)
 
@@ -368,9 +368,10 @@ V1.1 Production Ready status face: [engineering/APZQEP-V1.1-PRODUCTION-READY-STA
 ## Path remaining
 
 1. Operate Version 1.0 under APZQEP-OPS-001.
-2. SPR-APZQEP-200 programme COMPLETE (201–204 DELIVERED) — operate the competitive wave.
+2. SPR-APZQEP-200 and SPR-APZQEP-210 COMPLETE — operate the competitive + DEF closeout wave.
 3. Do not authorise APZQEP-166 or external AI providers yet.
-4. V1.1 foundational architecture CLOSED; last V1.1 planning programme (165-PLAN) COMPLETE.
+4. Enterprise IdP / SSO wire-up remains platform IAM follow-on (007) — not QEP-local.
+5. V1.1 foundational architecture CLOSED; last V1.1 planning programme (165-PLAN) COMPLETE.
 
 ---
 

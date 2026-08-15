@@ -13,6 +13,9 @@ import {
   getCertificationByChange,
   getCertificationEvaluation,
   recordHumanCertificationDecision,
+  reproduceCertificationEvaluation,
+  F4_CERTIFIER_AUTHORITY,
+  F4_CO_APPROVER_AUTHORITY,
 } from "@/lib/qep/certification-runtime";
 import { requireQepPermission, sessionTenantId } from "./require-qep-permission";
 
@@ -36,6 +39,30 @@ function mapCertError(error: unknown): never {
     throw new PlatformApiHttpError(409, {
       code: "CONFLICT",
       message: "Human certification decision already recorded (immutable)",
+    });
+  }
+  if (message === "certification.authority_already_voted") {
+    throw new PlatformApiHttpError(409, {
+      code: "CONFLICT",
+      message: "This authority has already recorded a vote on this evaluation",
+    });
+  }
+  if (message === "certification.independent_approval_required") {
+    throw new PlatformApiHttpError(403, {
+      code: "FORBIDDEN",
+      message: "Co-approver must be a different human actor (independent approval)",
+    });
+  }
+  if (message === "certification.authority_invalid") {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_FAILED",
+      message: `authorityId must be ${F4_CERTIFIER_AUTHORITY} or ${F4_CO_APPROVER_AUTHORITY}`,
+    });
+  }
+  if (message === "certification.not_decided") {
+    throw new PlatformApiHttpError(409, {
+      code: "CONFLICT",
+      message: "Evaluation has no terminal human decision to reproduce",
     });
   }
   if (message === "certification.rationale_required") {
@@ -162,6 +189,7 @@ export async function handleRecordCertificationDecision(
   const body = (await request.json().catch(() => ({}))) as {
     outcome?: string;
     rationale?: string;
+    authorityId?: string;
   };
   const outcome = body.outcome?.trim().toUpperCase();
   if (outcome !== "GO" && outcome !== "NO_GO") {
@@ -176,6 +204,7 @@ export async function handleRecordCertificationDecision(
       actorId: context.serviceContext.userId,
       outcome,
       rationale: body.rationale ?? "",
+      authorityId: body.authorityId,
     });
     if (evaluation.tenantId !== sessionTenantId(context)) {
       throw new PlatformApiHttpError(404, {
@@ -184,6 +213,39 @@ export async function handleRecordCertificationDecision(
       });
     }
     return jsonDataResponse({ evaluation }, context.tracing);
+  } catch (error) {
+    if (error instanceof PlatformApiHttpError) throw error;
+    mapCertError(error);
+  }
+}
+
+export async function handleReproduceCertificationEvaluation(
+  _request: NextRequest,
+  context: PlatformApiRequestContext,
+  routeContext?: RouteContext,
+) {
+  requireQepPermission(
+    context,
+    "qep.certification.read",
+    "qep.quality_flows.read",
+    "qep.scm.read",
+  );
+  const evaluationId = (await routeContext?.params)?.evaluationId?.trim();
+  if (!evaluationId) {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_FAILED",
+      message: "evaluationId is required",
+    });
+  }
+  try {
+    const snapshot = await reproduceCertificationEvaluation(evaluationId);
+    if (snapshot.evaluation.tenantId !== sessionTenantId(context)) {
+      throw new PlatformApiHttpError(404, {
+        code: "NOT_FOUND",
+        message: "Certification evaluation not found",
+      });
+    }
+    return jsonDataResponse(snapshot, context.tracing);
   } catch (error) {
     if (error instanceof PlatformApiHttpError) throw error;
     mapCertError(error);

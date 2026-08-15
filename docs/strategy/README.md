@@ -10,7 +10,7 @@
 | [SaaS Commercial Model](./commercial/SAAS-COMMERCIAL-MODEL.md)            | **Tenants → offerings → modules → roles** — APZPRD composable packaging   |
 | [APZQEP Vision](./APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md)      | Enterprise Quality Engineering Platform                                   |
 | [SPR-APZQEP-200](../sprint/SPR-APZQEP-200-competitive-full-swing.md)      | **COMPLETE · DELIVERED** — competitive full swing (201–204)               |
-| [SPR-APZQEP-210](../sprint/SPR-APZQEP-210-product-definition-closeout.md) | **AUTHORISED · IN PROGRESS** — product-definition MVP closeout            |
+| [SPR-APZQEP-210](../sprint/SPR-APZQEP-210-product-definition-closeout.md) | **COMPLETE · DELIVERED** — product-definition MVP closeout                |
 | [SPR-APZQEP-201](../sprint/SPR-APZQEP-201-release-control-centre.md)      | **DELIVERED** — Release Control Centre (Home · Readiness)                 |
 | [APZPEN Vision](./APZPEN-ENTERPRISE-SECURITY-ASSURANCE-PLATFORM.md)       | Enterprise Security Assurance & Pen Testing                               |
 | [APZPEN Enterprise later](./APZPEN-ENTERPRISE-LATER-OPTIONS.md)           | **PARKED** — resume on deal / Owner sprint                                |

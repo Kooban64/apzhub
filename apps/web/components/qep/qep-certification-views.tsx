@@ -69,9 +69,17 @@ type CertificationEvaluation = {
   humanDecision?: {
     outcome: "GO" | "NO_GO";
     actorId: string;
+    coApproverActorId?: string;
     rationale: string;
     decidedAt: string;
   };
+  authorityVotes?: Array<{
+    authorityId: string;
+    outcome: "GO" | "NO_GO";
+    actorId: string;
+    rationale: string;
+    decidedAt: string;
+  }>;
 };
 
 async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
@@ -329,7 +337,7 @@ function RcHomeView() {
         ) : (
           <QepTable
             caption="Release candidate evaluations"
-            columns={["RC", "Readiness", "Score", "Human"]}
+            columns={["RC", "Readiness", "Score", "Human", "Reproduce"]}
             rows={(byChangeQuery.data?.evaluations ?? []).map((item) => ({
               id: item.evaluationId,
               href: QEP_CERTIFICATION_ROUTES.rcEvaluation(item.evaluationId),
@@ -338,6 +346,17 @@ function RcHomeView() {
                 <QepStatusBadge key="r" status={item.readiness} />,
                 `${item.score}%`,
                 item.humanDecision?.outcome ?? "—",
+                item.humanDecision ? (
+                  <Link
+                    key="rep"
+                    href={`${QEP_CERTIFICATION_ROUTES.rcEvaluation(item.evaluationId)}?reproduce=1`}
+                    className="text-[var(--color-primary)] underline-offset-2 hover:underline"
+                  >
+                    Snapshot
+                  </Link>
+                ) : (
+                  "—"
+                ),
               ],
             }))}
           />
@@ -349,8 +368,13 @@ function RcHomeView() {
 
 function RcWorkbenchView({ evaluationId }: { evaluationId: string }) {
   const queryClient = useQueryClient();
+  const searchParams = useSearchParams();
+  const reproduceMode = searchParams.get("reproduce") === "1";
   const [rationale, setRationale] = useState("");
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null);
+  const [authorityId, setAuthorityId] = useState<
+    "quality_certifier" | "quality_co_approver"
+  >("quality_certifier");
 
   const detailQuery = useQuery({
     queryKey: ["qep-certification", "evaluation", evaluationId],
@@ -358,6 +382,19 @@ function RcWorkbenchView({ evaluationId }: { evaluationId: string }) {
       fetchJson<{ evaluation: CertificationEvaluation }>(
         `/api/v1/qep/certification/evaluations/${evaluationId}`,
       ),
+  });
+
+  const reproduceQuery = useQuery({
+    queryKey: ["qep-certification", "reproduce", evaluationId],
+    enabled: reproduceMode,
+    queryFn: () =>
+      fetchJson<{
+        mode: "reproduce";
+        immutable: true;
+        lockedAt: string;
+        evaluation: CertificationEvaluation;
+        reportPackHref: string;
+      }>(`/api/v1/qep/certification/evaluations/${evaluationId}/reproduce`),
   });
 
   const securityQuery = useQuery({
@@ -390,7 +427,7 @@ function RcWorkbenchView({ evaluationId }: { evaluationId: string }) {
         `/api/v1/qep/certification/evaluations/${evaluationId}/decision`,
         {
           method: "POST",
-          body: JSON.stringify({ outcome, rationale }),
+          body: JSON.stringify({ outcome, rationale, authorityId }),
         },
       ),
     onSuccess: () => {
@@ -410,6 +447,9 @@ function RcWorkbenchView({ evaluationId }: { evaluationId: string }) {
   }
 
   const evaluation = detailQuery.data.evaluation;
+  const votes = evaluation.authorityVotes ?? [];
+  const certVoted = votes.some((v) => v.authorityId === "quality_certifier");
+  const coVoted = votes.some((v) => v.authorityId === "quality_co_approver");
   const domains = evaluation.domains ?? [];
   const activeDomain =
     domains.find((domain) => domain.domainId === selectedDomain) ?? domains[0];
@@ -555,20 +595,106 @@ function RcWorkbenchView({ evaluationId }: { evaluationId: string }) {
         </QepPanel>
 
         <QepPanel title="Human certification">
-          {evaluation.humanDecision ? (
+          {reproduceMode ? (
+            <div className="space-y-2 text-sm" data-testid="qep-rc-reproduce">
+              {reproduceQuery.isLoading ? (
+                <QepLoadingState label="Loading locked snapshot…" />
+              ) : reproduceQuery.isError ? (
+                <QepErrorState message={(reproduceQuery.error as Error).message} />
+              ) : reproduceQuery.data ? (
+                <>
+                  <p>
+                    <QepStatusBadge status="ready" /> Immutable reproduce snapshot ·
+                    locked {reproduceQuery.data.lockedAt}
+                  </p>
+                  <p>
+                    Decision:{" "}
+                    <QepStatusBadge
+                      status={reproduceQuery.data.evaluation.humanDecision!.outcome}
+                    />
+                  </p>
+                  <p>
+                    Certifier: {reproduceQuery.data.evaluation.humanDecision!.actorId}
+                  </p>
+                  {reproduceQuery.data.evaluation.humanDecision!.coApproverActorId ? (
+                    <p>
+                      Co-approver:{" "}
+                      {reproduceQuery.data.evaluation.humanDecision!.coApproverActorId}
+                    </p>
+                  ) : null}
+                  <p className="text-[var(--color-muted-foreground)]">
+                    {reproduceQuery.data.evaluation.humanDecision!.rationale}
+                  </p>
+                  <Link
+                    className="text-[var(--color-primary)] underline-offset-2 hover:underline"
+                    href={reproduceQuery.data.reportPackHref}
+                  >
+                    Open report pack JSON (as-of change)
+                  </Link>
+                </>
+              ) : null}
+            </div>
+          ) : evaluation.humanDecision ? (
             <div className="text-sm" data-testid="qep-rc-human-decision">
               <p>
                 Decision: <QepStatusBadge status={evaluation.humanDecision.outcome} />
               </p>
-              <p className="mt-1">Actor: {evaluation.humanDecision.actorId}</p>
+              <p className="mt-1">Certifier: {evaluation.humanDecision.actorId}</p>
+              {evaluation.humanDecision.coApproverActorId ? (
+                <p className="mt-1">
+                  Co-approver: {evaluation.humanDecision.coApproverActorId}
+                </p>
+              ) : null}
               <p className="mt-1">At: {evaluation.humanDecision.decidedAt}</p>
               <p className="mt-2">{evaluation.humanDecision.rationale}</p>
+              <p className="mt-3">
+                <Link
+                  href={`${QEP_CERTIFICATION_ROUTES.rcEvaluation(evaluation.evaluationId)}?reproduce=1`}
+                  className="text-[var(--color-primary)] underline-offset-2 hover:underline"
+                >
+                  Reproduce locked snapshot (WF-27)
+                </Link>
+              </p>
             </div>
           ) : (
             <>
               <p className="mb-2 text-sm text-[var(--color-muted-foreground)]">
-                Advisory score never certifies. Record an explicit human decision.
+                Dual human authority required for GO (certifier + co-approver, distinct
+                actors). Any NO-GO finalises immediately. Advisory score never
+                certifies.
               </p>
+              {votes.length > 0 ? (
+                <ul className="mb-3 space-y-1 text-xs">
+                  {votes.map((v) => (
+                    <li key={v.authorityId}>
+                      <span className="font-mono">{v.authorityId}</span>: {v.outcome} by{" "}
+                      {v.actorId}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+              <label className="mb-2 block text-sm">
+                Authority role
+                <select
+                  className="mt-1 h-8 w-full rounded border border-[var(--color-border)] bg-transparent px-2 text-sm"
+                  value={authorityId}
+                  onChange={(e) =>
+                    setAuthorityId(
+                      e.target.value as "quality_certifier" | "quality_co_approver",
+                    )
+                  }
+                  data-testid="qep-rc-authority"
+                >
+                  <option value="quality_certifier" disabled={certVoted}>
+                    Quality certifier
+                    {certVoted ? " (recorded)" : ""}
+                  </option>
+                  <option value="quality_co_approver" disabled={coVoted}>
+                    Quality co-approver
+                    {coVoted ? " (recorded)" : ""}
+                  </option>
+                </select>
+              </label>
               <label className="mb-2 block text-sm">
                 Rationale (required)
                 <textarea
@@ -581,7 +707,12 @@ function RcWorkbenchView({ evaluationId }: { evaluationId: string }) {
               <div className="flex flex-wrap gap-2">
                 <Button
                   type="button"
-                  disabled={decisionMutation.isPending || rationale.trim().length < 3}
+                  disabled={
+                    decisionMutation.isPending ||
+                    rationale.trim().length < 3 ||
+                    (authorityId === "quality_certifier" && certVoted) ||
+                    (authorityId === "quality_co_approver" && coVoted)
+                  }
                   onClick={() => decisionMutation.mutate("GO")}
                 >
                   Record GO
@@ -589,7 +720,12 @@ function RcWorkbenchView({ evaluationId }: { evaluationId: string }) {
                 <Button
                   type="button"
                   variant="outline"
-                  disabled={decisionMutation.isPending || rationale.trim().length < 3}
+                  disabled={
+                    decisionMutation.isPending ||
+                    rationale.trim().length < 3 ||
+                    (authorityId === "quality_certifier" && certVoted) ||
+                    (authorityId === "quality_co_approver" && coVoted)
+                  }
                   onClick={() => decisionMutation.mutate("NO_GO")}
                 >
                   Record NO-GO

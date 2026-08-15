@@ -24,6 +24,20 @@ export function QepAdministrationRouterView() {
             Open Org · Members & RBAC →
           </Link>
         </QepPanel>
+        <QepPanel title="Authentication posture">
+          <p className="mb-3 text-xs text-[var(--color-muted-foreground)]">
+            AuthN is BetterAuth email/password sessions. APZHUB PermissionService owns
+            roles and grants. Enterprise IdP / SSO and silent engine handoff are
+            platform IAM follow-on (Document 007) — not configured inside QEP. Legacy
+            host Authentik is coexistence-only, not the QEP login path.
+          </p>
+          <Link
+            href="/ops/sessions"
+            className="text-xs text-[var(--color-primary)] underline-offset-2 hover:underline"
+          >
+            Open Ops · Sessions →
+          </Link>
+        </QepPanel>
         <QepPanel title="Platform console">
           <p className="mb-3 text-xs text-[var(--color-muted-foreground)]">
             Superadmin catalogue, limits, and credentials live in Platform Console.
@@ -35,9 +49,10 @@ export function QepAdministrationRouterView() {
             Open Platform Console →
           </Link>
         </QepPanel>
-        <QepPanel title="Integrations">
+        <QepPanel title="Integrations & live tools">
           <p className="mb-3 text-xs text-[var(--color-muted-foreground)]">
-            Automation and SCM provider health for this tenant.
+            Automation and SCM provider health. Live flags and Typst are ops-runbook
+            controlled — see docs/operations/runbooks/qep-*.md.
           </p>
           <Link
             href="/workspace/qep/integrations"

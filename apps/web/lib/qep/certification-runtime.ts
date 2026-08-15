@@ -15,10 +15,19 @@ import { buildChangeImpact } from "@/lib/qep/scm-impact";
 import { getQepOrchestrationRuntime } from "@/lib/qep/orchestration-runtime";
 import { getQepScmRuntime } from "@/lib/qep/scm-runtime";
 
+export const F4_CERTIFIER_AUTHORITY = "quality_certifier";
+export const F4_CO_APPROVER_AUTHORITY = "quality_co_approver";
+export const F4_REQUIRED_AUTHORITIES = [
+  F4_CERTIFIER_AUTHORITY,
+  F4_CO_APPROVER_AUTHORITY,
+] as const;
+
 const DOC = "docs/products/apzqep/FLAGSHIP-PROGRAMME.md#f4";
 const F4_TEMPLATE_ID = "release_candidate" as const;
-const F4_APPROVAL_TEMPLATE = "tpl_f4_change_rc";
-const F4_AUTHORITY = "quality_certifier";
+/** Dual-authority template (SPR-210 WF-24). Legacy single-authority id remains unused for new bundles. */
+const F4_APPROVAL_TEMPLATE = "tpl_f4_change_rc_dual";
+const F4_AUTHORITY = F4_CERTIFIER_AUTHORITY;
+const F4_CO_AUTHORITY = F4_CO_APPROVER_AUTHORITY;
 const ARTEFACT_KIND = "decision_package" as const;
 
 export type CertificationGateView = {
@@ -45,6 +54,18 @@ export type HumanCertificationDecision = {
   readonly decidedAt: string;
   readonly approvalDecisionId: string;
   readonly approvalBundleId: string;
+  /** SPR-210 — both certifier and co-approver when dual GO. */
+  readonly coApproverActorId?: string;
+};
+
+/** Partial authority vote before terminal humanDecision (SPR-210 WF-24). */
+export type CertificationAuthorityVote = {
+  readonly authorityId: string;
+  readonly outcome: "GO" | "NO_GO";
+  readonly actorId: string;
+  readonly rationale: string;
+  readonly decidedAt: string;
+  readonly approvalDecisionId: string;
 };
 
 /** F5 RC face domain tile — user sees domains, never provider brands. */
@@ -98,6 +119,8 @@ export type CertificationEvaluation = {
     readonly evidenceEvaluated: readonly string[];
   }[];
   readonly humanDecision?: HumanCertificationDecision;
+  /** SPR-210 — authority votes collected before terminal GO. */
+  readonly authorityVotes?: readonly CertificationAuthorityVote[];
   /** F5 — domain strip for RC Quality OS face. */
   readonly domains: readonly RcDomainTile[];
   readonly impactSummary?: RcImpactSummary;
@@ -246,15 +269,32 @@ async function ensureF4Seed(): Promise<void> {
       }
 
       try {
+        orch.approvals.registerAuthority({
+          authorityId: F4_CO_AUTHORITY,
+          name: "Quality Co-Approver",
+          scope: "enterprise",
+          delegationSupported: false,
+          escalationSupported: false,
+          metadata: { flagship: "F4", programme: "SPR-APZQEP-210" },
+        });
+      } catch (error) {
+        if (!isExistsError(error)) throw error;
+      }
+
+      try {
         await orch.approvals.registerTemplate({
           templateId: F4_APPROVAL_TEMPLATE,
-          name: "F4 Change Certification",
-          version: "1.0.0",
-          requiredAuthorities: [F4_AUTHORITY],
+          name: "F4 Change Certification (dual authority)",
+          version: "2.0.0",
+          requiredAuthorities: [F4_AUTHORITY, F4_CO_AUTHORITY],
           decisionRule: { type: "all_required" },
-          sodRules: [{ type: "mandatory_authority", authorityId: F4_AUTHORITY }],
+          sodRules: [
+            { type: "mandatory_authority", authorityId: F4_AUTHORITY },
+            { type: "mandatory_authority", authorityId: F4_CO_AUTHORITY },
+            { type: "independent_approval" },
+          ],
           documentationRef: DOC,
-          metadata: { flagship: "F4" },
+          metadata: { flagship: "F4", programme: "SPR-APZQEP-210" },
         });
       } catch (error) {
         if (!isExistsError(error)) throw error;
@@ -791,6 +831,8 @@ export async function recordHumanCertificationDecision(input: {
   readonly actorId: string;
   readonly outcome: "GO" | "NO_GO";
   readonly rationale: string;
+  /** Defaults to quality_certifier; co-approver uses quality_co_approver. */
+  readonly authorityId?: string;
 }): Promise<CertificationEvaluation> {
   // Never allow automation/QI actors to flip certification (check before load).
   const actor = input.actorId.trim();
@@ -819,14 +861,30 @@ export async function recordHumanCertificationDecision(input: {
     throw new Error("certification.rationale_required");
   }
 
+  const authorityId = (input.authorityId ?? F4_AUTHORITY).trim();
+  if (authorityId !== F4_AUTHORITY && authorityId !== F4_CO_AUTHORITY) {
+    throw new Error("certification.authority_invalid");
+  }
+
+  const priorVotes = evaluation.authorityVotes ?? [];
+  if (priorVotes.some((v) => v.authorityId === authorityId)) {
+    throw new Error("certification.authority_already_voted");
+  }
+
+  // independent_approval SoD: distinct actors for certifier vs co-approver
+  if (priorVotes.some((v) => v.actorId === actor && v.authorityId !== authorityId)) {
+    throw new Error("certification.independent_approval_required");
+  }
+
   const orch = await getQepOrchestrationRuntime();
   const bundle = await orch.approvals.submitDecision(evaluation.approvalBundleId, {
-    authorityId: F4_AUTHORITY,
+    authorityId,
     actorId: actor,
     state: input.outcome === "GO" ? "approved" : "rejected",
     comments: rationale,
     metadata: {
       flagship: "F4",
+      programme: "SPR-APZQEP-210",
       changeEventId: evaluation.changeEventId,
       evaluationId: evaluation.evaluationId,
       outcome: input.outcome,
@@ -834,22 +892,89 @@ export async function recordHumanCertificationDecision(input: {
   });
 
   const decision =
-    bundle.authorityDecisions.find((d) => d.authorityId === F4_AUTHORITY) ??
+    bundle.authorityDecisions.find((d) => d.authorityId === authorityId) ??
     bundle.authorityDecisions[bundle.authorityDecisions.length - 1];
+
+  const vote: CertificationAuthorityVote = {
+    authorityId,
+    outcome: input.outcome,
+    actorId: actor,
+    rationale,
+    decidedAt: decision?.timestamp ?? new Date().toISOString(),
+    approvalDecisionId: decision?.decisionId ?? "unknown",
+  };
+  const votes = [...priorVotes, vote];
+
+  // Fail-closed: any NO_GO finalises immediately.
+  if (input.outcome === "NO_GO") {
+    const updated = withRcFace({
+      ...evaluation,
+      authorityVotes: votes,
+      humanDecision: {
+        outcome: "NO_GO",
+        actorId: actor,
+        rationale,
+        decidedAt: vote.decidedAt,
+        approvalDecisionId: vote.approvalDecisionId,
+        approvalBundleId: bundle.bundleId,
+      },
+    });
+    await persistEvaluation(updated);
+    return updated;
+  }
+
+  const certVote = votes.find((v) => v.authorityId === F4_AUTHORITY);
+  const coVote = votes.find((v) => v.authorityId === F4_CO_AUTHORITY);
+  const bothGo = certVote?.outcome === "GO" && coVote?.outcome === "GO";
+
+  if (!bothGo) {
+    const updated = withRcFace({
+      ...evaluation,
+      authorityVotes: votes,
+    });
+    await persistEvaluation(updated);
+    return updated;
+  }
 
   const updated = withRcFace({
     ...evaluation,
+    authorityVotes: votes,
     humanDecision: {
-      outcome: input.outcome,
-      actorId: actor,
-      rationale,
-      decidedAt: decision?.timestamp ?? new Date().toISOString(),
-      approvalDecisionId: decision?.decisionId ?? "unknown",
+      outcome: "GO",
+      actorId: certVote!.actorId,
+      coApproverActorId: coVote!.actorId,
+      rationale: `Certifier: ${certVote!.rationale} · Co-approver: ${coVote!.rationale}`,
+      decidedAt: coVote!.decidedAt,
+      approvalDecisionId: coVote!.approvalDecisionId,
       approvalBundleId: bundle.bundleId,
     },
   });
   await persistEvaluation(updated);
   return updated;
+}
+
+/** WF-27 — immutable reproduce snapshot of a decided evaluation (read-only). */
+export async function reproduceCertificationEvaluation(evaluationId: string): Promise<{
+  readonly mode: "reproduce";
+  readonly immutable: true;
+  readonly lockedAt: string;
+  readonly evaluation: CertificationEvaluation;
+  readonly reportPackHref: string;
+}> {
+  const evaluation = await loadEvaluation(evaluationId);
+  if (!evaluation) {
+    throw new Error("certification.evaluation_not_found");
+  }
+  if (!evaluation.humanDecision) {
+    throw new Error("certification.not_decided");
+  }
+  return {
+    mode: "reproduce",
+    immutable: true,
+    lockedAt: evaluation.humanDecision.decidedAt,
+    evaluation,
+    reportPackHref: `/api/v1/qep/report-packs/by-change/${encodeURIComponent(evaluation.changeEventId)}?format=json`,
+  };
 }
 
 /** Test helper */

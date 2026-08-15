@@ -19,16 +19,16 @@ Operational catalogue of APZHUB products for portfolio governance. Detailed hist
 
 ## Catalogue
 
-| Product             | Purpose                                      | Owner | Current version                               | Availability                      | Dependencies                      | Status              | Engineering             | Release                     |
-| ------------------- | -------------------------------------------- | ----- | --------------------------------------------- | --------------------------------- | --------------------------------- | ------------------- | ----------------------- | --------------------------- |
-| **APZHUB Platform** | Enterprise operating platform / workbench    | APZOR | Platform baseline **1.2.0** PRWL              | Production (PRWL)                 | PostgreSQL · Redis · Better Auth  | Maintained          | Complete (foundation)   | Closed                      |
-| **APZ Law**         | Legal practice management                    | APZOR | **1.0.0** PRWL                                | Production                        | Platform                          | Maintained          | Complete                | Closed                      |
-| **APZ Projects**    | Project / work management (Plane CE adapter) | APZOR | Adapter `@apzhub/integration-plane` **0.6.0** | Production (adapter); UI deferred | Integration SDK **1.0.0** · Plane | Maintained          | Wave 1 closed           | Adapter certified           |
-| **APZ Time**        | Time tracking (Kimai path)                   | APZOR | Production (portfolio)                        | Production                        | Integration SDK · Kimai           | Maintained          | Per portfolio           | Production                  |
-| **APZ Support**     | Support / ticketing (Zammad adapter)         | APZOR | `@apzhub/integration-zammad` **0.6.0**        | Production (PRWL)                 | Integration SDK · Zammad          | Maintained          | Wave 2 closed           | Certified w/ limitations    |
-| **APZ Documents**   | Document management                          | APZOR | Commercial **1.0.0**                          | Production                        | Platform native                   | Maintained          | Complete                | Closed                      |
-| **APZ QEP**         | Quality Engineering Platform                 | APZOR | **V1.1 Enterprise Quality Baseline**          | **PRODUCTION READY**              | Platform · QEP packages           | **Active product**  | **SPR-210 in progress** | V1.1 closed · 200 DELIVERED |
-| **Integration SDK** | Adapter framework                            | APZOR | `@apzhub/integration-sdk` **1.0.0**           | Production                        | Platform                          | Frozen / maintained | Complete                | 1.0.0                       |
+| Product             | Purpose                                      | Owner | Current version                               | Availability                      | Dependencies                      | Status              | Engineering           | Release                        |
+| ------------------- | -------------------------------------------- | ----- | --------------------------------------------- | --------------------------------- | --------------------------------- | ------------------- | --------------------- | ------------------------------ |
+| **APZHUB Platform** | Enterprise operating platform / workbench    | APZOR | Platform baseline **1.2.0** PRWL              | Production (PRWL)                 | PostgreSQL · Redis · Better Auth  | Maintained          | Complete (foundation) | Closed                         |
+| **APZ Law**         | Legal practice management                    | APZOR | **1.0.0** PRWL                                | Production                        | Platform                          | Maintained          | Complete              | Closed                         |
+| **APZ Projects**    | Project / work management (Plane CE adapter) | APZOR | Adapter `@apzhub/integration-plane` **0.6.0** | Production (adapter); UI deferred | Integration SDK **1.0.0** · Plane | Maintained          | Wave 1 closed         | Adapter certified              |
+| **APZ Time**        | Time tracking (Kimai path)                   | APZOR | Production (portfolio)                        | Production                        | Integration SDK · Kimai           | Maintained          | Per portfolio         | Production                     |
+| **APZ Support**     | Support / ticketing (Zammad adapter)         | APZOR | `@apzhub/integration-zammad` **0.6.0**        | Production (PRWL)                 | Integration SDK · Zammad          | Maintained          | Wave 2 closed         | Certified w/ limitations       |
+| **APZ Documents**   | Document management                          | APZOR | Commercial **1.0.0**                          | Production                        | Platform native                   | Maintained          | Complete              | Closed                         |
+| **APZ QEP**         | Quality Engineering Platform                 | APZOR | **V1.1 Enterprise Quality Baseline**          | **PRODUCTION READY**              | Platform · QEP packages           | **Active product**  | **SPR-210 DELIVERED** | V1.1 closed · 200+210 complete |
+| **Integration SDK** | Adapter framework                            | APZOR | `@apzhub/integration-sdk` **1.0.0**           | Production                        | Platform                          | Frozen / maintained | Complete              | 1.0.0                          |
 
 ### APZ QEP package baseline
 
@@ -40,13 +40,11 @@ Operational catalogue of APZHUB products for portfolio governance. Detailed hist
 | `@apzhub/qep-test-plans`     | **1.0.0** | CERTIFIED / FROZEN                                                         |
 | Traceability / Verification  | **1.0.0** | CERTIFIED / FROZEN                                                         |
 
-APZQEP V1.1 is **PRODUCTION READY · CLOSED**. SPR-APZQEP-200 (201–204) is
-**COMPLETE · DELIVERED**. The authorised follow-on
-[SPR-APZQEP-210](../sprint/SPR-APZQEP-210-product-definition-closeout.md)
-closes remaining product-definition / USER-WORKFLOWS MVP gaps (auth seed,
-catalogue honesty, Risk/Admin/Audit/Design surfaces, readiness waivers).
+APZQEP V1.1 is **PRODUCTION READY · CLOSED**. SPR-APZQEP-200 (201–204) and
+[SPR-APZQEP-210](../sprint/SPR-APZQEP-210-product-definition-closeout.md) are
+**COMPLETE · DELIVERED** — product-definition / USER-WORKFLOWS MVP closeout.
 Caps A–F are **not** reopened. APZQEP-166 and external AI providers remain
-**not authorised**.
+**not authorised**. Enterprise IdP SSO remains platform IAM follow-on.
 
 ---
 
