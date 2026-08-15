@@ -179,10 +179,10 @@ Module UI → Platform Service → Service Connector (Adapter) → OSS Engine AP
 
 ### Better Auth vs Authentik
 
-| Engine          | Role                   | Strategy                                                                                |
-| --------------- | ---------------------- | --------------------------------------------------------------------------------------- |
-| **Better Auth** | Primary authentication | **Build integration** — delivered in platform                                           |
-| **Authentik**   | Legacy host SSO        | **Coexist → migrate** — per-engine SSO config (Document 007); no new Authentik features |
+| Engine          | Role                  | Strategy                                                                                  |
+| --------------- | --------------------- | ----------------------------------------------------------------------------------------- |
+| **Better Auth** | **Sole APZHUB AuthN** | **IN FORCE** — [OWNER-BETTERAUTH-SOLE-AUTHN](../decisions/OWNER-BETTERAUTH-SOLE-AUTHN.md) |
+| **Authentik**   | Legacy host SSO only  | **Coexist → retire with APZPRD** — no new Authentik features; no APZHUB login dependency  |
 
 ---
 

@@ -24,7 +24,8 @@ Internet → host nginx (:443 TLS) → Docker nginx-gateway (:8080) → app cont
 - **Primary stack**: `apz-stack` — `/home/ubuntu/apzportal/docker/compose.yml`
 - **Cyclos (Boxer)**: separate compose — `/home/ubuntu/boxer/cyclos-local/docker-compose.yml`
 - **TLS**: Let's Encrypt on host nginx (`/etc/nginx/sites-enabled/`)
-- **Identity**: Authentik (`apz-authentik-server`) inside apz-stack; gateway uses forward-auth + group maps
+- **Identity (legacy stack)**: Authentik (`apz-authentik-server`) inside apz-stack; gateway uses forward-auth + group maps — **coexistence only; retire when APZPRD is working**
+- **Identity (APZHUB)**: **BetterAuth only** — see [OWNER-BETTERAUTH-SOLE-AUTHN](./docs/decisions/OWNER-BETTERAUTH-SOLE-AUTHN.md). Do not add Authentik to the APZHUB login path.
 - **Shared DB**: `apzpg` container, host port `54333` (PostgreSQL for authentik, n8n, abode, portal audit, etc.)
 
 ## Running Docker Containers (43 apz-stack + 2 cyclos = 45 total)

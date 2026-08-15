@@ -119,13 +119,13 @@ See [Commercial Roadmap](./APZHUB-Commercial-Roadmap.md).
 
 ## Open-source strategy
 
-| Layer                    | Strategy                                                                    |
-| ------------------------ | --------------------------------------------------------------------------- |
-| **APZHUB Platform Core** | Source-available or proprietary (owner decision); architecture is the moat  |
-| **OSS engines**          | Integrate CE/self-hosted; never fork unless upstream blocks critical path   |
-| **Observability**        | Prometheus, Grafana, Loki — behind connectors, not user-facing              |
-| **Auth**                 | BetterAuth primary; Authentik legacy coexistence during migration           |
-| **AI**                   | Local models (Ollama, etc.) + optional cloud APIs; no single-vendor lock-in |
+| Layer                    | Strategy                                                                      |
+| ------------------------ | ----------------------------------------------------------------------------- |
+| **APZHUB Platform Core** | Source-available or proprietary (owner decision); architecture is the moat    |
+| **OSS engines**          | Integrate CE/self-hosted; never fork unless upstream blocks critical path     |
+| **Observability**        | Prometheus, Grafana, Loki — behind connectors, not user-facing                |
+| **Auth**                 | **BetterAuth only** for APZHUB; Authentik legacy host until APZPRD retirement |
+| **AI**                   | Local models (Ollama, etc.) + optional cloud APIs; no single-vendor lock-in   |
 
 **Rule:** Every OSS integration gets `integration.yaml`, health checks, upgrade runbook, and replacement strategy before production.
 

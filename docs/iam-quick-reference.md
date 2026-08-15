@@ -25,7 +25,8 @@ Identity · Authorisation · Permission · Role · Provisioning · Session · Au
 | Masking                 | Engine auth errors → platform messages; no raw 401 pages                                                            |
 | Adapter docs            | Each engine: auth mode, config keys, provisioning prereqs, limitations, health                                      |
 
-Legacy host uses Authentik today — migration to BetterAuth-centred SSO planned per engine.
+Legacy host may still run Authentik for coexistence — **retire with APZPRD**.
+APZHUB AuthN is **BetterAuth only** ([OWNER-BETTERAUTH-SOLE-AUTHN](./decisions/OWNER-BETTERAUTH-SOLE-AUTHN.md)).
 
 ## Auth vs authorisation
 

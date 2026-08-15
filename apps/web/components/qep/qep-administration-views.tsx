@@ -26,10 +26,10 @@ export function QepAdministrationRouterView() {
         </QepPanel>
         <QepPanel title="Authentication posture">
           <p className="mb-3 text-xs text-[var(--color-muted-foreground)]">
-            AuthN is BetterAuth email/password sessions. APZHUB PermissionService owns
-            roles and grants. Enterprise IdP / SSO and silent engine handoff are
-            platform IAM follow-on (Document 007) — not configured inside QEP. Legacy
-            host Authentik is coexistence-only, not the QEP login path.
+            AuthN is BetterAuth only (email/password sessions). APZHUB PermissionService
+            owns roles and grants. Authentik is legacy host coexistence and will be
+            retired when APZPRD is working — it is not the APZHUB or QEP login path.
+            Engine silent handoff is adapter work (Document 007), not Authentik screens.
           </p>
           <Link
             href="/ops/sessions"

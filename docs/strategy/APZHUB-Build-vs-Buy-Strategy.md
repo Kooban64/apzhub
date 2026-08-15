@@ -43,7 +43,7 @@
 | Capability             | Decision                              | Justification                               |
 | ---------------------- | ------------------------------------- | ------------------------------------------- |
 | Session authentication | **Integrate OSS** (Better Auth)       | Auth is not differentiator; own permissions |
-| Legacy SSO (Authentik) | **Coexist → retire**                  | Migration path only                         |
+| Legacy SSO (Authentik) | **Coexist → retire with APZPRD**      | BetterAuth is sole APZHUB AuthN             |
 | Enterprise SAML/OIDC   | **Build config layer** on Better Auth | Per Document 007; per-engine adapters       |
 
 ---

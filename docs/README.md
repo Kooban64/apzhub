@@ -8,16 +8,18 @@ This directory is the canonical source for APZHUB product and architecture docum
 
 **APZHUB is the internal operating platform. Customers buy solutions — not APZHUB.**
 
-| Document                                                                      | Description                                                                          |
-| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| [APZOR Commercial Pillars](./strategy/APZOR-COMMERCIAL-PILLARS.md)            | **Authority** — platform vs sellable solutions; one platform, three pillars          |
-| [SaaS Commercial Model](./strategy/commercial/SAAS-COMMERCIAL-MODEL.md)       | **Authority (LOCKED)** — tenants, packages, APZPRD composability, Law/Knowledge/Sign |
-| [APZQEP](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md)        | Quality Engineering Platform — _Can we release with confidence?_                     |
-| [APZPEN](./strategy/APZPEN-ENTERPRISE-SECURITY-ASSURANCE-PLATFORM.md)         | Security Assurance & Pen Testing — _Can we demonstrate we are secure?_               |
-| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)      | **PARKED** — SBOM/WORM/SCM/legal-hold/locks; resume on deal or Owner sprint          |
-| [APZPRD](./strategy/APZPRD-ENTERPRISE-PRODUCTIVITY-PLATFORM.md)               | Productivity Platform — _Can our people work effectively?_ (composable)              |
-| [SPR-COMM-001](./sprint/SPR-COMM-001-catalogue-entitlements-tenant-switch.md) | **DELIVERED** — packages, entitlements, tenant switch, soft APZPEN gate              |
-| [SPR-COMM-002](./sprint/SPR-COMM-002-org-packages-tenant-switch-source.md)    | **DELIVERED** — org packages UI, tenant switcher, project source (QEP+PEN)           |
+| Document                                                                       | Description                                                                          |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| [APZOR Commercial Pillars](./strategy/APZOR-COMMERCIAL-PILLARS.md)             | **Authority** — platform vs sellable solutions; one platform, three pillars          |
+| [SaaS Commercial Model](./strategy/commercial/SAAS-COMMERCIAL-MODEL.md)        | **Authority (LOCKED)** — tenants, packages, APZPRD composability, Law/Knowledge/Sign |
+| [APZQEP](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md)         | Quality Engineering Platform — _Can we release with confidence?_                     |
+| [APZPEN](./strategy/APZPEN-ENTERPRISE-SECURITY-ASSURANCE-PLATFORM.md)          | Security Assurance & Pen Testing — _Can we demonstrate we are secure?_               |
+| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)       | **PARKED** — SBOM/WORM/SCM/legal-hold/locks; resume on deal or Owner sprint          |
+| [APZPRD](./strategy/APZPRD-ENTERPRISE-PRODUCTIVITY-PLATFORM.md)                | Productivity Platform — _Can our people work effectively?_ (composable)              |
+| [SPR-COMM-001](./sprint/SPR-COMM-001-catalogue-entitlements-tenant-switch.md)  | **DELIVERED** — packages, entitlements, tenant switch, soft APZPEN gate              |
+| [SPR-COMM-002](./sprint/SPR-COMM-002-org-packages-tenant-switch-source.md)     | **DELIVERED** — org packages UI, tenant switcher, project source (QEP+PEN)           |
+| [OWNER BetterAuth sole AuthN](./decisions/OWNER-BETTERAUTH-SOLE-AUTHN.md)      | **IN FORCE** — BetterAuth only; Authentik retire with APZPRD                         |
+| [SPR-APZPRD-001](./sprint/SPR-APZPRD-001-betterauth-productivity-workspace.md) | **AUTHORISED · IN PROGRESS** — productivity workspace on BetterAuth                  |
 
 ### Priority product build — APZQEP (active)
 

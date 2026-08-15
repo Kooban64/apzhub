@@ -415,7 +415,12 @@ Examples of engines likely needing extra config: Metabase, Kimai, n8n, Plane, Pa
 
 ### 22.4 Migration from legacy auth
 
-The live host currently uses Authentik and per-engine exposure ([ENVIRONMENT.md](../ENVIRONMENT.md)). APZHUB migration to BetterAuth-centred SSO must be planned per engine without breaking coexistence until cutover is approved.
+The live host may still run Authentik for legacy `apz-stack` forward-auth
+([ENVIRONMENT.md](../ENVIRONMENT.md)). **APZHUB AuthN is BetterAuth only** —
+Owner decision [OWNER-BETTERAUTH-SOLE-AUTHN](./decisions/OWNER-BETTERAUTH-SOLE-AUTHN.md).
+Do not add Authentik features. Retire Authentik when APZPRD is working and
+engine handoff is via APZHUB adapters. Until cutover, coexist without
+breaking legacy vhosts.
 
 ---
 
