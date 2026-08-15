@@ -28,6 +28,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [Commercial pillar operator guides (index)](./guides/COMMERCIAL-PILLAR-OPERATOR-GUIDES.md)        | APZQEP · APZPEN · APZPRD how-to index                                                |
 | [SPR-APZPRD-001](./sprint/SPR-APZPRD-001-betterauth-productivity-workspace.md)                    | **COMPLETE · DELIVERED** — BetterAuth sole AuthN; Projects health without Authentik  |
 | [SPR-APZPRD-002](./sprint/SPR-APZPRD-002-entitled-projects-workbench.md)                          | **COMPLETE · DELIVERED** — entitled Projects workbench (catalogue → adapter)         |
+| [SPR-APZPRD-003](./sprint/SPR-APZPRD-003-projects-workbench-deepen.md)                            | **COMPLETE · DELIVERED** — deepen Projects; BetterAuth only (no Authentik)           |
 
 ### Priority product build — APZQEP (active)
 

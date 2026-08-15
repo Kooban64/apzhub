@@ -58,6 +58,42 @@ export function ProjectsHealthView() {
     >
       <section
         className="rounded-lg border border-[var(--color-border)] p-4"
+        data-testid="projects-health-auth-posture"
+      >
+        <h2 className="text-sm font-semibold">Identity posture (locked)</h2>
+        <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
+          APZHUB AuthN is <strong>BetterAuth only</strong>. Projects never uses
+          Authentik forward-auth. Engine calls use a server-side adapter API key — users
+          do not see a Plane login for normal work.
+        </p>
+        {healthQuery.data?.checks ? (
+          <dl className="mt-3 grid gap-2 text-sm md:grid-cols-3">
+            <div>
+              <dt className="text-[var(--color-muted-foreground)]">AuthN</dt>
+              <dd data-testid="projects-health-authn">
+                {statusLabel(healthQuery.data.checks.authN)}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-[var(--color-muted-foreground)]">Engine auth</dt>
+              <dd data-testid="projects-health-engine-auth">
+                {statusLabel(healthQuery.data.checks.engineAuth)}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-[var(--color-muted-foreground)]">Authentik used</dt>
+              <dd data-testid="projects-health-authentik-used">
+                {statusLabel(healthQuery.data.checks.authentikUsed)}
+              </dd>
+            </div>
+          </dl>
+        ) : healthQuery.isLoading ? (
+          <LoadingState label="Loading identity posture…" />
+        ) : null}
+      </section>
+
+      <section
+        className="rounded-lg border border-[var(--color-border)] p-4"
         data-testid="projects-health-platform"
       >
         <h2 className="text-sm font-semibold">Product availability</h2>

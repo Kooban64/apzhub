@@ -4,56 +4,67 @@
 | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Audience  | Delivery leads · Project contributors · Org admins (entitlements)                                                                                                       |
 | Product   | APZPRD (Productivity — Projects workbench)                                                                                                                              |
-| Authority | [SPR-DOCS-001](../../../sprint/SPR-DOCS-001-commercial-pillar-operator-guides.md)                                                                                       |
+| Authority | [SPR-DOCS-001](../../../sprint/SPR-DOCS-001-commercial-pillar-operator-guides.md) · [SPR-APZPRD-003](../../../sprint/SPR-APZPRD-003-projects-workbench-deepen.md)       |
 | Related   | [SPR-APZPRD-001](../../../sprint/SPR-APZPRD-001-betterauth-productivity-workspace.md) · [SPR-APZPRD-002](../../../sprint/SPR-APZPRD-002-entitled-projects-workbench.md) |
 
-**Rules**
+## Auth non-negotiables
 
-- **BetterAuth** is the only APZHUB login (Authentik is legacy/retirement path — not the product AuthN).
-- Users see **Projects** — not Plane or other engine brands.
-- Work goes Client → APZHUB APIs → Platform Service → connector → engine.
+| Rule          | Operator expectation                                                                     |
+| ------------- | ---------------------------------------------------------------------------------------- |
+| Login         | **BetterAuth only** — one APZHUB sign-in                                                 |
+| Authentik     | **Not used** for Projects (legacy host coexistence only; do not configure for APZHUB)    |
+| Engine access | Silent adapter (`PLANE_API_TOKEN` on server) — **no Plane login screen** for normal work |
+| AuthZ         | APZHUB permissions + product entitlement — BetterAuth never grants roles                 |
 
 ## 1. Getting started
 
 1. Sign in to APZHUB with BetterAuth.
-2. Confirm your organisation package includes **Projects** (productivity).
-3. Open **Projects** from the Activity Bar / workbench (permission + entitlement filtered).
-4. If Projects is missing: you are not entitled, not in the org, or lack `projects` grants — ask an admin.
+2. Confirm your organisation package includes **Projects**.
+3. Open **Projects** from the Activity Bar (permission + entitlement filtered).
+4. If Projects is missing: not entitled, wrong org, or missing grants — ask an admin.
 
-## 2. What you can do today
+## 2. Workbench map
 
-| Capability         | How                                                                                                                                                |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Entitled workbench | Catalogue → adapter path for Projects when product access is granted                                                                               |
-| Health             | Operators/admins can check Projects health (`GET /api/v1/projects/health` style surface) — Authentik must not be required (`authentikUsed: false`) |
-| Soft product gate  | APIs for `projects.*` respect commercial entitlement                                                                                               |
+| Need                                      | Where                | Path                               |
+| ----------------------------------------- | -------------------- | ---------------------------------- |
+| Project list / open project               | Projects home        | `/workspace/projects`              |
+| Operator readiness (auth + adapter)       | Readiness            | `/workspace/projects/health`       |
+| Search                                    | Projects search      | `/workspace/projects/search`       |
+| Productivity (favourites, sessions, bulk) | Productivity         | `/workspace/projects/productivity` |
+| Portfolio                                 | Portfolio views      | `/workspace/projects/portfolio`    |
+| Teams                                     | Delivery teams       | `/workspace/projects/teams`        |
+| Admin registries                          | Admin (permissioned) | `/workspace/projects/admin`        |
 
-Day-to-day project work (issues, cycles, modules) is served through APZHUB’s Projects experience backed by the configured engine (e.g. Plane CE) via connector — always via APZHUB UI/API, never by sending users to a separate engine login for normal work.
+## 3. Readiness check (do this first on a new host)
 
-## 3. Admin / entitlement notes
+1. Open **Readiness** (`/workspace/projects/health`).
+2. Confirm **Identity posture**: AuthN = `betterauth`, Authentik used = `no`, Engine auth = adapter API key.
+3. Confirm product / Plane adapter status and live list when configured.
+4. If Authentik used ever showed `yes`, treat as a defect — that path is forbidden.
 
-1. Org packages and entitlements are managed in the commercial / admin surfaces (see COMM sprint docs).
-2. After granting Projects, users may need a refresh / re-login for nav to appear.
-3. Dogfood / operator grants may include `pkg.apzprd.projects` style package keys — exact labels follow the commercial catalogue.
+## 4. Day-to-day project work
 
-## 4. AuthN honesty
+1. Open a project from the list (APZHUB UI — engine branding masked).
+2. Use lifecycle, delivery, collaboration, and admin surfaces as your role allows.
+3. Never send colleagues to a separate Plane login for entitled APZHUB work.
 
-| Topic            | Operator expectation                                                                     |
-| ---------------- | ---------------------------------------------------------------------------------------- |
-| Login            | One APZHUB BetterAuth screen                                                             |
-| Engine SSO       | Silent/session handoff owned by platform — no user-facing Plane login for entitled flows |
-| Legacy Authentik | Not part of the APZPRD product path; retirement is a separate ops checklist              |
+## 5. Admin / entitlement notes
 
-## 5. Checklist — “can our team use Projects?”
+1. Org packages grant `projects` / `pkg.apzprd.projects` via commercial catalogue.
+2. After granting Projects, users may need refresh / re-login for nav.
+3. Adapter secrets (`PLANE_API_TOKEN`, workspace ids) are **ops-only** — never pasted into the UI.
+
+## 6. Checklist — “can our team use Projects?”
 
 - [ ] Org entitled to Projects
-- [ ] Users can sign in with BetterAuth
+- [ ] Users sign in with BetterAuth only
+- [ ] Readiness shows Authentik used = **no**
 - [ ] Projects appears in the shell for entitled roles
-- [ ] Health check does not depend on Authentik
-- [ ] Work stays inside APZHUB (no “open Plane separately” as the primary path)
+- [ ] List/open project works without a Plane login screen
+- [ ] Authentik containers are **not** required for this journey (legacy apps may still use them until Owner retirement GO)
 
-## 6. Out of scope for this guide
+## 7. Out of scope
 
-- Full Plane administration UI (engine-native admin)
-- Authentik cutover runbook (ops)
-- Building new APZPRD modules beyond the entitled Projects workbench already delivered
+- Stopping Authentik containers (separate Owner GO on [retire-authentik](../../../operations/runbooks/retire-authentik.md))
+- Authentik config UI
+- Support / Time GA expand beyond entitled Projects deepen

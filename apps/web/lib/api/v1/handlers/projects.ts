@@ -22,6 +22,9 @@ import {
   updateProjectBodySchema,
 } from "../schemas/project";
 import { toListQuery, toPlatformApiPage } from "./paging";
+import { buildProjectsEngineHealthPayload } from "@/lib/projects/engine-health-payload";
+
+export { buildProjectsEngineHealthPayload } from "@/lib/projects/engine-health-payload";
 
 function lifecycleService() {
   try {
@@ -179,7 +182,7 @@ export async function handleArchiveProject(
 }
 
 /**
- * SPR-APZPRD-001-D — BetterAuth session + Projects adapter posture (no Authentik).
+ * SPR-APZPRD-001-D / 003-B — BetterAuth session + Projects adapter posture (no Authentik).
  * Config/diagnostics only; optional live list probe when Plane is enabled.
  */
 export async function handleGetProjectsEngineHealth(
@@ -205,24 +208,12 @@ export async function handleGetProjectsEngineHealth(
   }
 
   return jsonDataResponse(
-    {
-      product: "projects",
-      authN: "betterauth",
-      authZ: "apzhub_permission_service",
-      engineAuth: "adapter_api_key",
-      authentikUsed: false as const,
-      sessionUserId: context.serviceContext.userId,
-      plane: {
-        integrationEnabled: diagnostics.integrationEnabled,
-        healthStatus: diagnostics.healthStatus,
-        apiTokenPresent: diagnostics.apiTokenPresent,
-        connectionConfigured: diagnostics.connectionConfigured,
-        workspaceConfigured: diagnostics.workspaceConfigured,
-        issues: diagnostics.issues,
-      },
+    buildProjectsEngineHealthPayload({
+      userId: context.serviceContext.userId,
+      diagnostics,
       liveListOk,
-      liveListError,
-    },
+      ...(liveListError ? { liveListError } : {}),
+    }),
     context.tracing,
   );
 }
