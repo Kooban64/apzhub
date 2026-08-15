@@ -47,6 +47,10 @@ import { QepQualityJourneyRouterView } from "./qep-quality-journey-views";
 import { QepReleaseReadinessRouterView } from "./qep-release-readiness-views";
 import { QepSearchRouterView } from "./qep-search-view";
 import { QepScmRouterView } from "./qep-scm-views";
+import { QepRiskRouterView } from "./qep-risk-views";
+import { QepAdministrationRouterView } from "./qep-administration-views";
+import { QepAuditRouterView } from "./qep-audit-views";
+import { QepVerificationDesignRouterView } from "./qep-verification-design-views";
 
 import { QepDefectsRouterView } from "./qep-defects-views";
 import { QepEnterpriseReportingRouterView } from "./qep-enterprise-reporting-views";
@@ -63,8 +67,14 @@ import { QepTraceabilityRouterView } from "./qep-traceability-views";
 import { QepUnavailableModuleView } from "./qep-unavailable-module-view";
 import { QepVerificationRouterView } from "./qep-verification-views";
 
+function isPathPrefix(pathname: string, base: string): boolean {
+  const n = pathname.replace(/\/+$/, "") || "/";
+  return n === base || n.startsWith(`${base}/`);
+}
+
 /**
- * QEP workspace router — Home / Release Control (SPR-201) + Quality Flows + Caps A–F.
+ * QEP workspace router — Home / Release Control (SPR-201) + Quality Flows + Caps A–F
+ * + SPR-210 MVP modules (Risk, Admin, Audit, Verification Design) + catalogue aliases.
  */
 export function QepWorkspaceRouter() {
   const pathname = usePathname() ?? "";
@@ -91,6 +101,42 @@ export function QepWorkspaceRouter() {
 
   if (isQepAiWorkspaceRoute(pathname)) {
     return <QepAiWorkspaceRouterView />;
+  }
+
+  if (isPathPrefix(pathname, "/workspace/qep/risk")) {
+    return <QepRiskRouterView />;
+  }
+
+  if (isPathPrefix(pathname, "/workspace/qep/administration")) {
+    return <QepAdministrationRouterView />;
+  }
+
+  if (isPathPrefix(pathname, "/workspace/qep/audit")) {
+    return <QepAuditRouterView />;
+  }
+
+  if (isPathPrefix(pathname, "/workspace/qep/verification-design")) {
+    return <QepVerificationDesignRouterView />;
+  }
+
+  // Catalogue aliases — Cap siblings are the SoR (SPR-210-B)
+  if (isPathPrefix(pathname, "/workspace/qep/verification-library")) {
+    return <QepSuitesRouterView pathname="/workspace/qep/suites" />;
+  }
+  if (
+    isPathPrefix(pathname, "/workspace/qep/execution") &&
+    !isQepExecutionPlansRoute(pathname) &&
+    !isQepExecutionWorkspaceRoute(pathname)
+  ) {
+    return <QepTestExecutionRouterView pathname="/workspace/qep/test-execution" />;
+  }
+  if (
+    isPathPrefix(pathname, "/workspace/qep/reporting") &&
+    !isQepEnterpriseReportingRoute(pathname)
+  ) {
+    return (
+      <QepEnterpriseReportingRouterView pathname="/workspace/qep/enterprise-reporting" />
+    );
   }
 
   if (isQepQualityFlowsRoute(pathname)) {

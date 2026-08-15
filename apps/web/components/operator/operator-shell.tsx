@@ -565,7 +565,7 @@ export function OperatorShell({
           ) : null}
         </aside>
 
-        <main className="min-w-0 flex-1 overflow-auto bg-[var(--color-background)]">
+        <main className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden bg-[var(--color-background)]">
           {children}
         </main>
       </div>

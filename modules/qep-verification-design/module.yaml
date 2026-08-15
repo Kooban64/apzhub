@@ -6,7 +6,7 @@ kind: module
 
 metadata:
   category: quality-engineering
-  description: "Verification Design (M05) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  description: "Verification Design (M05) — SPR-APZQEP-210 MVP authoring entry to Cap specifications."
   product: apzqep
   moduleCatalogueId: M05
   slug: verification-design
@@ -18,7 +18,7 @@ dependencies:
 
 module:
   category: quality-engineering
-  status: stub
+  status: active
 
 workbench:
   navigation:

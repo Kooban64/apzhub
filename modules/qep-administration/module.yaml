@@ -6,7 +6,7 @@ kind: module
 
 metadata:
   category: quality-engineering
-  description: "Administration (M20) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  description: "Administration (M20) — SPR-APZQEP-210 MVP entry to org RBAC and platform consoles."
   product: apzqep
   moduleCatalogueId: M20
   slug: administration
@@ -18,7 +18,7 @@ dependencies:
 
 module:
   category: quality-engineering
-  status: stub
+  status: active
 
 workbench:
   navigation:

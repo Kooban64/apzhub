@@ -6,7 +6,7 @@ kind: module
 
 metadata:
   category: quality-engineering
-  description: "Verification Library (M04) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  description: "Verification Library (M04) — aliases Cap Suites workbench (SPR-APZQEP-210)."
   product: apzqep
   moduleCatalogueId: M04
   slug: verification-library
@@ -18,7 +18,7 @@ dependencies:
 
 module:
   category: quality-engineering
-  status: stub
+  status: active
 
 workbench:
   navigation:

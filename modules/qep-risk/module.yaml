@@ -6,7 +6,7 @@ kind: module
 
 metadata:
   category: quality-engineering
-  description: "Risk Management (M11) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  description: "Risk Management (M11) — SPR-APZQEP-210 MVP register + waivers."
   product: apzqep
   moduleCatalogueId: M11
   slug: risk
@@ -18,7 +18,7 @@ dependencies:
 
 module:
   category: quality-engineering
-  status: stub
+  status: active
 
 workbench:
   navigation:

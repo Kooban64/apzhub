@@ -69,6 +69,16 @@ type CheckItem = {
   href: string;
 };
 
+type RiskListPayload = {
+  items: readonly {
+    riskId: string;
+    title: string;
+    severity: string;
+    status: string;
+    waiverNote?: string;
+  }[];
+};
+
 export function QepReleaseReadinessRouterView() {
   return <ReleaseReadinessView />;
 }
@@ -83,6 +93,11 @@ function ReleaseReadinessView() {
     queryKey: ["qep-security-assurance", "readiness"],
     queryFn: () =>
       fetchJson<SecurityAssurancePayload>("/api/v1/qep/security-assurance"),
+    refetchInterval: 30_000,
+  });
+  const riskQuery = useQuery({
+    queryKey: ["qep-risk", "readiness"],
+    queryFn: () => fetchJson<RiskListPayload>("/api/v1/qep/risk"),
     refetchInterval: 30_000,
   });
 
@@ -100,6 +115,18 @@ function ReleaseReadinessView() {
     ? `Unable to load APZPEN posture: ${(securityQuery.error as Error).message}`
     : (security?.detail ?? "Security assurance posture unavailable.");
   const securityHref = security?.href ?? "/apzpen";
+
+  const risks = riskQuery.data?.items ?? [];
+  const openRisks = risks.filter((r) => r.status === "open");
+  const waivedRisks = risks.filter((r) => r.status === "waived");
+  const riskOk = !riskQuery.isError && openRisks.length === 0;
+  const riskDetail = riskQuery.isError
+    ? `Unable to load risk register: ${(riskQuery.error as Error).message}`
+    : openRisks.length === 0
+      ? waivedRisks.length > 0
+        ? `No open risks. ${waivedRisks.length} waived — Ready with qualifications.`
+        : "Risk register has no open items."
+      : `${openRisks.length} open risk(s) must be mitigated or waived before certify.`;
 
   const checks: CheckItem[] = [
     {
@@ -133,6 +160,13 @@ function ReleaseReadinessView() {
       href: QEP_QUALITY_FLOWS_ROUTES.waiting,
     },
     {
+      id: "risk",
+      label: "Release risks mitigated or waived",
+      ok: riskOk,
+      detail: riskDetail,
+      href: "/workspace/qep/risk",
+    },
+    {
       id: "security",
       label: "Security assurance review-clear",
       ok: securityOk,
@@ -142,7 +176,7 @@ function ReleaseReadinessView() {
     {
       id: "certify",
       label: "Human certification ready",
-      ok: s.exceptionCount === 0 && s.blockedReleaseCount === 0 && securityOk,
+      ok: s.exceptionCount === 0 && s.blockedReleaseCount === 0 && securityOk && riskOk,
       detail:
         "Open Release Candidate for domain readiness, explain-why, and human GO/NO-GO. AI never certifies.",
       href: QEP_CERTIFICATION_ROUTES.rcHome,
@@ -152,10 +186,15 @@ function ReleaseReadinessView() {
   const failed = checks.filter((c) => !c.ok).length;
   const overall =
     failed === 0
-      ? {
-          status: "ready" as const,
-          label: "Checklist clear — proceed to human certify",
-        }
+      ? waivedRisks.length > 0
+        ? {
+            status: "ready" as const,
+            label: "Ready with qualifications — waived risks recorded; human certify",
+          }
+        : {
+            status: "ready" as const,
+            label: "Checklist clear — proceed to human certify",
+          }
       : {
           status: "blocked" as const,
           label: `${failed} check(s) still open`,
@@ -164,12 +203,15 @@ function ReleaseReadinessView() {
   return (
     <QepPageShell
       title="Release Readiness"
-      description="Go/no-go checklist over live orchestration and APZPEN security posture. Completing checks does not certify — human GO/NO-GO is on Release Candidate."
+      description="Go/no-go checklist over live orchestration, risk/waivers, and APZPEN security posture. Completing checks does not certify — human GO/NO-GO is on Release Candidate."
       breadcrumbs={["QEP", "Release Readiness"]}
       actions={
         <div className="flex flex-wrap gap-2">
           <Link className={linkPrimary} href={QEP_CERTIFICATION_ROUTES.rcHome}>
             Open Release Candidate
+          </Link>
+          <Link className={linkOutline} href="/workspace/qep/risk">
+            Risk register
           </Link>
           <Link className={linkOutline} href={QEP_QUALITY_FLOWS_ROUTES.home}>
             Quality Flows
@@ -186,6 +228,24 @@ function ReleaseReadinessView() {
           <p className="text-sm text-[var(--color-foreground)]">{overall.label}</p>
         </div>
       </QepPanel>
+
+      {waivedRisks.length > 0 ? (
+        <QepPanel title="Qualifications (waived risks)">
+          <ul className="space-y-2 text-sm">
+            {waivedRisks.map((r) => (
+              <li
+                key={r.riskId}
+                className="rounded border border-[var(--color-border)] px-3 py-2"
+              >
+                <p className="font-medium">{r.title}</p>
+                <p className="text-xs text-[var(--color-muted-foreground)]">
+                  {r.severity} · {r.waiverNote ?? "No rationale recorded"}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </QepPanel>
+      ) : null}
 
       <QepPanel title="Checklist">
         <ul className="space-y-3" data-testid="qep-release-readiness-checklist">

@@ -8,8 +8,8 @@
 | Rule               | **Read this document before any APZQEP work**                                    |
 | Last updated       | 20260814T204100Z                                                                 |
 | Current baseline   | **Version 1.1 — PRODUCTION READY · CLOSED**                                      |
-| Engineering thread | **COMPLETE** (V1.1); **V1.2 SPR-APZQEP-200 DELIVERED**                           |
-| Product posture    | **OPERATIONAL** + competitive wave delivered                                     |
+| Engineering thread | **COMPLETE** (V1.1); **SPR-200 DELIVERED**; **SPR-210 IN PROGRESS**              |
+| Product posture    | **OPERATIONAL** + product-definition closeout in flight                          |
 | Management posture | **Operational Learning**                                                         |
 | Release pack       | [release-1.1/](./release-1.1/)                                                   |
 | Owner decision     | [release-1.1/OWNER-RELEASE-DECISION.md](./release-1.1/OWNER-RELEASE-DECISION.md) |
@@ -52,14 +52,15 @@ Freeze:
 Production defects · security vulnerabilities · critical operational hotfixes only
 
 Next engineering priority (portfolio):
-APZQEP competitive full swing — SPR-APZQEP-200 COMPLETE (201–204 DELIVERED)
+APZQEP product-definition closeout — SPR-APZQEP-210 IN PROGRESS
 APZPEN CE complete; enterprise options parked
 
 Version 1.2:
-SPR-APZQEP-200 programme DELIVERED (RCC · providers · governed AI · GA) — no redesign of V1.1 baseline
+SPR-APZQEP-200 programme DELIVERED (RCC · providers · governed AI · GA)
+SPR-APZQEP-210 authorised for remaining DEF / USER-WORKFLOWS MVP gaps
 ```
 
-> **Portfolio note (2026-08-14):** APZPEN CE is complete. **SPR-APZQEP-200 is COMPLETE** — [201](../../sprint/SPR-APZQEP-201-release-control-centre.md), [202](../../sprint/SPR-APZQEP-202-provider-wave.md), [203](../../sprint/SPR-APZQEP-203-governed-quality-assist.md), [204](../../sprint/SPR-APZQEP-204-enterprise-ga-hardening.md) all DELIVERED. APZPEN enterprise depth is [parked](../../strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md).
+> **Portfolio note (2026-08-14):** APZPEN CE is complete. **SPR-APZQEP-200 is COMPLETE.** **SPR-APZQEP-210** ([guide](../../sprint/SPR-APZQEP-210-product-definition-closeout.md)) is **AUTHORISED · IN PROGRESS** for product-definition completeness (auth seed, catalogue honesty, Risk/Admin/Audit/Design, readiness waivers). Caps A–F remain closed. APZPEN enterprise depth is [parked](../../strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md).
 
 Authoritative release pack: [release-1.1/](./release-1.1/)
 

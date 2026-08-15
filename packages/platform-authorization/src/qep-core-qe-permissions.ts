@@ -1,10 +1,66 @@
 /**
  * Cap A–F permission catalogue and roles — APZQEP-152.
  * Least privilege: tenant-member does NOT receive these by default.
+ * SPR-APZQEP-210: operator/reader seeds include Cap domain keys used by APIs.
  */
 
 export const DEFAULT_QEP_OPERATOR_ROLE_ID = "role-qep-operator";
 export const DEFAULT_QEP_READER_ROLE_ID = "role-qep-reader";
+
+/** Cap domain keys required by evidence / plans / execution / verification / requirements APIs. */
+export const QEP_CAP_DOMAIN_PERMISSIONS = [
+  "qep.evidence.read",
+  "qep.evidence.create",
+  "qep.evidence.download",
+  "qep.evidence.associate",
+  "qep.evidence.classify",
+  "qep.evidence.review",
+  "qep.evidence.seal",
+  "qep.evidence.hold",
+  "qep.evidence.archive",
+  "qep.evidence.dispose",
+  "qep.evidence.verify",
+  "qep.evidence.audit",
+  "qep.evidence.access_check",
+  "qep.evidence.collection.manage",
+  "qep.execution.read",
+  "qep.execution.create",
+  "qep.execution.prepare",
+  "qep.execution.assign",
+  "qep.execution.execute",
+  "qep.execution.control",
+  "qep.execution.review",
+  "qep.execution.supersede",
+  "qep.execution.ingest",
+  "qep.plan.read",
+  "qep.plan.create",
+  "qep.plan.update",
+  "qep.plan.search",
+  "qep.plan.lifecycle",
+  "qep.requirements.view",
+  "qep.requirements.create",
+  "qep.requirements.update",
+  "qep.requirements.baselines.view",
+  "qep.requirements.baselines.create",
+  "qep.requirements.baselines.update",
+  "qep.requirements.relationships.view",
+  "qep.requirements.relationships.create",
+  "qep.requirements.relationships.update",
+  "qep.verification.view",
+  "qep.verification.create",
+  "qep.verification.update",
+  "qep.verification.search",
+  "qep.verification.history.view",
+  "qep.reporting.read",
+  "qep.risk.read",
+  "qep.risk.operate",
+  "qep.administration.read",
+  "qep.administration.operate",
+  "qep.audit.read",
+  "qep.verification-design.read",
+  "qep.verification-design.operate",
+  "qep.verification-library.read",
+] as const;
 
 /** Authoritative Cap A–F permission keys used by domain services. */
 export const QEP_CORE_QE_PERMISSIONS = [
@@ -64,6 +120,7 @@ export const QEP_CORE_QE_PERMISSIONS = [
   "qep.specification.search",
   "qep.traceability.trace_links.view",
   "qep.traceability.trace_links.create",
+  ...QEP_CAP_DOMAIN_PERMISSIONS,
   "qep.*",
 ] as const;
 
@@ -118,6 +175,7 @@ export const QEP_OPERATOR_PERMISSIONS = [
   "qep.specification.search",
   "qep.traceability.trace_links.view",
   "qep.traceability.trace_links.create",
+  ...QEP_CAP_DOMAIN_PERMISSIONS,
 ] as const;
 
 export const QEP_READER_PERMISSIONS = [
@@ -142,6 +200,24 @@ export const QEP_READER_PERMISSIONS = [
   "qep.specification.read",
   "qep.specification.search",
   "qep.traceability.trace_links.view",
+  "qep.evidence.read",
+  "qep.evidence.download",
+  "qep.evidence.access_check",
+  "qep.execution.read",
+  "qep.plan.read",
+  "qep.plan.search",
+  "qep.requirements.view",
+  "qep.requirements.baselines.view",
+  "qep.requirements.relationships.view",
+  "qep.verification.view",
+  "qep.verification.search",
+  "qep.verification.history.view",
+  "qep.reporting.read",
+  "qep.risk.read",
+  "qep.administration.read",
+  "qep.audit.read",
+  "qep.verification-design.read",
+  "qep.verification-library.read",
 ] as const;
 
 /** When true, auto-provision also assigns qep-operator (dev/cert only). */

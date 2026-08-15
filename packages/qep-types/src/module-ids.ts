@@ -79,7 +79,7 @@ export const QEP_MODULES: readonly QepModuleDescriptor[] = [
     slug: "verification-design",
     packageName: "qep-verification-design",
     title: "Verification Design",
-    status: "stub",
+    status: "enabled",
   },
   {
     id: "M06",
@@ -121,7 +121,7 @@ export const QEP_MODULES: readonly QepModuleDescriptor[] = [
     slug: "risk",
     packageName: "qep-risk",
     title: "Risk Management",
-    status: "stub",
+    status: "enabled",
   },
   {
     id: "M12",
@@ -163,7 +163,7 @@ export const QEP_MODULES: readonly QepModuleDescriptor[] = [
     slug: "ai-workspace",
     packageName: "qep-ai-workspace",
     title: "AI Quality Workspace",
-    status: "stub",
+    status: "enabled",
   },
   {
     id: "M18",
@@ -185,14 +185,14 @@ export const QEP_MODULES: readonly QepModuleDescriptor[] = [
     slug: "administration",
     packageName: "qep-administration",
     title: "Administration",
-    status: "stub",
+    status: "enabled",
   },
   {
     id: "M21",
     slug: "audit",
     packageName: "qep-audit",
     title: "Audit and Compliance",
-    status: "stub",
+    status: "enabled",
   },
   {
     id: "M22",

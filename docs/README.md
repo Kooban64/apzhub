@@ -28,6 +28,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-APZQEP-202](./sprint/SPR-APZQEP-202-provider-wave.md)                           | **DELIVERED** — JUnit/Allure/CI · SCM ci_run · Integration Centre · Playwright health |
 | [SPR-APZQEP-203](./sprint/SPR-APZQEP-203-governed-quality-assist.md)                 | **DELIVERED** — audited quality assist · optional flagged LLM · human acceptance      |
 | [SPR-APZQEP-204](./sprint/SPR-APZQEP-204-enterprise-ga-hardening.md)                 | **DELIVERED** — durable evidence · QEP search · OpenAPI · project ACL                 |
+| [SPR-APZQEP-210](./sprint/SPR-APZQEP-210-product-definition-closeout.md)             | **AUTHORISED · IN PROGRESS** — product-definition MVP closeout (WF · stubs · auth)    |
 | [APZQEP PRODUCT-STATUS](./products/apzqep/PRODUCT-STATUS.md)                         | V1.1 **PRODUCTION READY · CLOSED** — kernel frozen; 200 = V1.2 / Wave-6-class         |
 | [APZQEP pillar vision](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md) | Experience + commercial identity authority                                            |
 
