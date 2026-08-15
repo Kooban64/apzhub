@@ -4,7 +4,7 @@
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Audience | Ops · platform owners                                                                                                                                                                                               |
 | Related  | [OWNER-ENGINES-OUTSIDE-HUB](../decisions/OWNER-ENGINES-OUTSIDE-HUB.md) · [HOST-COEXISTENCE-CONTROLS](./HOST-COEXISTENCE-CONTROLS.md) · [SPR-OPS-LTS-001](../sprint/SPR-OPS-LTS-001-apzhub-owned-engine-topology.md) |
-| Status   | **COMPLETE** — — all reserved LTS engines up (Plane·Zammad·Kimai·Metabase·n8n·Paperless); Paperless infra-only pending ADR-0095                                                                                     |
+| Status   | **COMPLETE** — all reserved LTS engines up (Plane·Zammad·Kimai·Metabase·n8n·Paperless); Paperless infra-only pending ADR-0095                                                                                       |
 
 ## Principle
 
