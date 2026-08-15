@@ -30,6 +30,7 @@ import {
   isQepIntegrationsRoute,
   isQepAiWorkspaceRoute,
   isQepLearningRoute,
+  isQepMcpRoute,
   isQepRequirementsRoute,
   isQepWorkspaceRoute,
 } from "@/lib/qep/routes";
@@ -41,6 +42,7 @@ import { QepEarlyCheckRouterView } from "./qep-early-check-views";
 import { QepHomeRouterView } from "./qep-home-views";
 import { QepIntegrationsRouterView } from "./qep-integrations-views";
 import { QepAiWorkspaceRouterView } from "./qep-ai-workspace-views";
+import { QepMcpRouterView } from "./qep-mcp-views";
 import { QepPortfolioRouterView } from "./qep-portfolio-views";
 import { QepQualityFlowRouterView } from "./qep-quality-flow-views";
 import { QepQualityIntelligenceRouterView } from "./qep-quality-intelligence-views";
@@ -103,6 +105,10 @@ export function QepWorkspaceRouter() {
 
   if (isQepAiWorkspaceRoute(pathname)) {
     return <QepAiWorkspaceRouterView />;
+  }
+
+  if (isQepMcpRoute(pathname)) {
+    return <QepMcpRouterView />;
   }
 
   if (isPathPrefix(pathname, "/workspace/qep/risk")) {

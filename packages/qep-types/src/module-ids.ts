@@ -170,7 +170,7 @@ export const QEP_MODULES: readonly QepModuleDescriptor[] = [
     slug: "mcp-dx",
     packageName: "qep-mcp",
     title: "MCP and Developer Experience",
-    status: "stub",
+    status: "enabled",
   },
   {
     id: "M19",

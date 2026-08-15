@@ -70,6 +70,8 @@ function AutomationHomeView() {
   const [mapProviderId, setMapProviderId] = useState("playwright");
   const [mapExternalKey, setMapExternalKey] = useState("");
   const [mapOwner, setMapOwner] = useState("");
+  const [cvSource, setCvSource] = useState("automation.playwright");
+  const [cvSubject, setCvSubject] = useState("");
 
   const providersQuery = useQuery({
     queryKey: ["qep-automation", "providers"],
@@ -106,6 +108,38 @@ function AutomationHomeView() {
           stale: boolean;
         }>;
       }>("/api/v1/qep/automation/mappings"),
+  });
+
+  const continuousVerificationQuery = useQuery({
+    queryKey: ["qep-continuous-verification", "signals"],
+    queryFn: () =>
+      fetchJson<{
+        signals: Array<{
+          signalId: string;
+          source: string;
+          subjectRef: string;
+          status: string;
+          lastSeenAt: string;
+          staleAfterHours: number;
+        }>;
+      }>("/api/v1/qep/continuous-verification/signals"),
+  });
+
+  const continuousVerificationMutation = useMutation({
+    mutationFn: (input: {
+      action: "upsert" | "mark_stale" | "acknowledge";
+      source: string;
+      subjectRef: string;
+    }) =>
+      fetchJson("/api/v1/qep/continuous-verification/signals", {
+        method: "POST",
+        body: JSON.stringify(input),
+      }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({
+        queryKey: ["qep-continuous-verification"],
+      });
+    },
   });
 
   const changeMetadata = (): Record<string, string> | undefined => {
@@ -281,6 +315,98 @@ function AutomationHomeView() {
           to capture real browser artifacts into evidence storage.
         </p>
       ) : null}
+
+      <QepPanel title="Continuous verification signals">
+        <div data-testid="qep-continuous-verification">
+          <p className="mb-3 text-sm text-[var(--color-muted-foreground)]">
+            Event-driven freshness of verification/evidence sources (SPR-APZQEP-230-A).
+            Stale signals advise operators — they never auto-certify or set GO.
+          </p>
+          <form
+            className="mb-4 grid gap-2 md:grid-cols-3"
+            onSubmit={(event) => {
+              event.preventDefault();
+              if (!cvSource.trim() || !cvSubject.trim()) return;
+              continuousVerificationMutation.mutate({
+                action: "upsert",
+                source: cvSource.trim(),
+                subjectRef: cvSubject.trim(),
+              });
+              setCvSubject("");
+            }}
+          >
+            <label className="block text-sm">
+              source
+              <input
+                className="mt-1 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 font-mono text-xs"
+                value={cvSource}
+                onChange={(event) => setCvSource(event.target.value)}
+                data-testid="qep-cv-source"
+              />
+            </label>
+            <label className="block text-sm md:col-span-2">
+              subjectRef
+              <input
+                className="mt-1 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 font-mono text-xs"
+                value={cvSubject}
+                onChange={(event) => setCvSubject(event.target.value)}
+                placeholder="chg-… / suite/…"
+                data-testid="qep-cv-subject"
+              />
+            </label>
+            <div className="md:col-span-3">
+              <Button
+                type="submit"
+                size="sm"
+                disabled={continuousVerificationMutation.isPending}
+              >
+                Record heartbeat
+              </Button>
+            </div>
+          </form>
+          {continuousVerificationQuery.isLoading ? (
+            <QepLoadingState label="Loading signals…" />
+          ) : continuousVerificationQuery.isError ? (
+            <QepErrorState
+              message={(continuousVerificationQuery.error as Error).message}
+            />
+          ) : (continuousVerificationQuery.data?.signals.length ?? 0) === 0 ? (
+            <QepEmptyState title="No continuous verification signals yet." />
+          ) : (
+            <ul className="space-y-2">
+              {(continuousVerificationQuery.data?.signals ?? []).map((signal) => (
+                <li
+                  key={signal.signalId}
+                  className="flex flex-wrap items-center gap-2 rounded border border-[var(--color-border)] px-3 py-2 text-sm"
+                >
+                  <QepStatusBadge status={signal.status} />
+                  <span className="font-mono text-xs">{signal.source}</span>
+                  <span className="font-mono text-xs">{signal.subjectRef}</span>
+                  <span className="text-xs text-[var(--color-muted-foreground)]">
+                    last {signal.lastSeenAt}
+                  </span>
+                  {signal.status !== "acknowledged" ? (
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      onClick={() =>
+                        continuousVerificationMutation.mutate({
+                          action: "acknowledge",
+                          source: signal.source,
+                          subjectRef: signal.subjectRef,
+                        })
+                      }
+                    >
+                      Acknowledge
+                    </Button>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </QepPanel>
 
       <QepPanel title="Mapping governance">
         <div data-testid="qep-automation-mappings">

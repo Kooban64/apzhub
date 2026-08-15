@@ -234,6 +234,8 @@ export {
   isQepAiWorkspaceRoute,
 } from "./ai-workspace-routes";
 
+export { QEP_MCP_BASE_PATH, QEP_MCP_ROUTES, isQepMcpRoute } from "./mcp-routes";
+
 export const QEP_SEARCH_BASE_PATH = "/workspace/qep/search";
 export const isQepSearchRoute = (pathname: string): boolean =>
   pathname === QEP_SEARCH_BASE_PATH || pathname.startsWith(`${QEP_SEARCH_BASE_PATH}/`);

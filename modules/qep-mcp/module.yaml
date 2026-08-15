@@ -1,15 +1,18 @@
 manifestSchemaVersion: "1.0"
 id: qep-mcp
 name: MCP and Developer Experience
-version: 0.1.0
+version: 0.2.0
 kind: module
 
 metadata:
   category: quality-engineering
-  description: "MCP and Developer Experience (M18) module stub for APZ QEP (APZQEP-ENG-010). No UI or business routes implemented."
+  description: >
+    MCP and Developer Experience (M18) — catalogue + gated-write proposal ledger
+    (SPR-APZQEP-230-D). Advisory tools only; humans accept proposals; never certifies.
   product: apzqep
   moduleCatalogueId: M18
   slug: mcp-dx
+  programme: SPR-APZQEP-230
 
 dependencies:
   platform: []
@@ -18,7 +21,13 @@ dependencies:
 
 module:
   category: quality-engineering
-  status: stub
+  status: active
+
+permissions:
+  - id: qep.mcp-dx.read
+    label: View MCP and Developer Experience
+  - id: qep.mcp-dx.operate
+    label: Operate MCP gated-write proposals
 
 workbench:
   navigation:

@@ -1,8 +1,8 @@
 # SPR-FULL-001 — Full product bar (Option 3 · parallel tracks)
 
-> **Status:** **WAVE A COMPLETE · WAVE B QUEUED** — 2026-08-15  
+> **Status:** **WAVE A COMPLETE · WAVE B COMPLETE** — 2026-08-15  
 > **Authority:** [OWNER-FULL-PRODUCT-BAR-OPTION-3](../decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md) **IN FORCE**  
-> **Model:** Three Wave A tracks in parallel + Wave B queued  
+> **Model:** Three Wave A tracks in parallel + Wave B Phase 3 / AI  
 > **Does not:** Cap reopen · Kali UI module · auto-certify · Authentik AuthN
 
 ## Outcome
@@ -17,11 +17,11 @@ Deliver Owner-defined **100% (not MVP)**: Phase 2 QEP + APZPEN Greenbone/Faraday
 | **A2** APZPEN engines   | [SPR-APZPEN-ENT-001](./SPR-APZPEN-ENT-001-greenbone-faraday-path.md) | **COMPLETE · DELIVERED** |
 | **A3** Assurance bridge | [SPR-BRIDGE-001](./SPR-BRIDGE-001-qep-apzpen-assurance-bridge.md)    | **COMPLETE · DELIVERED** |
 
-## Wave B (queued)
+## Wave B (Phase 3 + AI)
 
-| Track               | Guide                                                        | Status                                                          |
-| ------------------- | ------------------------------------------------------------ | --------------------------------------------------------------- |
-| **B1** Phase 3 + AI | [SPR-APZQEP-230](./SPR-APZQEP-230-phase-3-and-ai-horizon.md) | **QUEUED** — Wave A accepted; start on Owner GO or pull-forward |
+| Track               | Guide                                                        | Status                   |
+| ------------------- | ------------------------------------------------------------ | ------------------------ |
+| **B1** Phase 3 + AI | [SPR-APZQEP-230](./SPR-APZQEP-230-phase-3-and-ai-horizon.md) | **COMPLETE · DELIVERED** |
 
 ## Parallel rules
 
@@ -69,5 +69,16 @@ Deliver Owner-defined **100% (not MVP)**: Phase 2 QEP + APZPEN Greenbone/Faraday
 | **A3 BRIDGE-001** | **COMPLETE** — service compose in apps/web; formal platform-services package residual   |
 
 **Wave A acceptance:** met for Owner Option 3 bar.  
-**Deferred residuals (not Wave A blockers):** live Greenbone GMP API client; production Faraday stack; `@apzhub/platform-services` package move.  
-**Next:** [SPR-APZQEP-230](./SPR-APZQEP-230-phase-3-and-ai-horizon.md) on Owner GO.
+**Deferred residuals (not Wave A blockers):** live Greenbone GMP API client; production Faraday stack; `@apzhub/platform-services` package move.
+
+## Delivery record (Wave B — SPR-APZQEP-230 — 2026-08-15)
+
+| Ship      | Landed                                                                                |
+| --------- | ------------------------------------------------------------------------------------- |
+| **230-A** | Continuous verification freshness ledger + Automation UI                              |
+| **230-B** | Continuous cert expiry/drift/freshness ledger + RC UI (acknowledge / request re-cert) |
+| **230-C** | AI Workspace horizon ON (banner + deep links; live LLM still flag-gated)              |
+| **230-D** | MCP DX un-stubbed — tool catalogue + gated-write proposals + audit                    |
+
+**Wave B acceptance:** met — continuous/AI/MCP never bypass human certification.  
+**Residuals:** external MCP transport; automatic CI→signal emitters beyond manual heartbeat.

@@ -2,12 +2,14 @@
 
 import { Button } from "@apzhub/ui";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
 import { useState } from "react";
 
 import type {
   QualityAssistMode,
   QualityAssistSession,
 } from "@/lib/qep/quality-assist-store";
+import { QEP_LEARNING_BASE_PATH } from "@/lib/qep/routes";
 import {
   QepEmptyState,
   QepErrorState,
@@ -85,6 +87,24 @@ export function QepAiWorkspaceRouterView() {
       title="Governed Quality Assist"
       description="Audited advisory suggestions. Humans accept or reject; this workspace cannot certify or set GO/NO-GO."
     >
+      <QepPanel title="Horizon policy (SPR-APZQEP-230-C)">
+        <p
+          className="text-sm text-[var(--color-muted-foreground)]"
+          data-testid="qep-ai-horizon-banner"
+        >
+          AI Quality Workspace is <strong>ON</strong> for entitled QEP tenants. Live LLM
+          remains default-deny unless{" "}
+          <code className="text-xs">APZHUB_QEP_AI_ASSIST=true</code> and a server secret
+          are configured. Accepted suggestions land only via explicit human action —
+          never silent SoR writes, never certify.
+        </p>
+        <div className="mt-3 flex flex-wrap gap-3 text-sm">
+          <Link href={QEP_LEARNING_BASE_PATH}>Learning KB</Link>
+          <Link href="/workspace/qep/verification-design">Verification Design</Link>
+          <Link href="/workspace/qep/mcp-dx">MCP / DX</Link>
+        </div>
+      </QepPanel>
+
       <QepPanel title="Start an assist session">
         <div className="grid gap-3 md:grid-cols-2">
           <label className="text-sm">

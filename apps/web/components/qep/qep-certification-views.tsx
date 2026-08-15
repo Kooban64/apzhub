@@ -139,6 +139,35 @@ function RcHomeView() {
     searchParams?.get("changeEventId") ?? "",
   );
   const [lastEvaluationId, setLastEvaluationId] = useState<string | null>(null);
+  const [certSignalEvalId, setCertSignalEvalId] = useState("");
+  const [certSignalDetail, setCertSignalDetail] = useState("");
+
+  const continuousCertQuery = useQuery({
+    queryKey: ["qep-continuous-cert", "signals"],
+    queryFn: () =>
+      fetchJson<{
+        signals: Array<{
+          signalId: string;
+          evaluationId: string;
+          kind: string;
+          detail: string;
+          status: string;
+          detectedAt: string;
+          expiresAt?: string;
+        }>;
+      }>("/api/v1/qep/continuous-cert/signals"),
+  });
+
+  const continuousCertMutation = useMutation({
+    mutationFn: (input: Record<string, string>) =>
+      fetchJson("/api/v1/qep/continuous-cert/signals", {
+        method: "POST",
+        body: JSON.stringify(input),
+      }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["qep-continuous-cert"] });
+    },
+  });
 
   const recentChangesQuery = useQuery({
     queryKey: ["qep-scm", "changes", "rc-picker"],
@@ -263,6 +292,110 @@ function RcHomeView() {
               )}
             </div>
           ) : null}
+        </div>
+      </QepPanel>
+
+      <QepPanel title="Continuous certification signals">
+        <div data-testid="qep-continuous-cert">
+          <p className="mb-3 text-sm text-[var(--color-muted-foreground)]">
+            Advisory expiry / drift / freshness on cert packs (SPR-APZQEP-230-B).
+            Escalate requests human re-approval — signals never auto-flip GO/NO-GO.
+          </p>
+          <form
+            className="mb-4 grid gap-2 md:grid-cols-2"
+            onSubmit={(event) => {
+              event.preventDefault();
+              if (!certSignalEvalId.trim() || !certSignalDetail.trim()) return;
+              continuousCertMutation.mutate({
+                action: "create",
+                evaluationId: certSignalEvalId.trim(),
+                kind: "drift",
+                detail: certSignalDetail.trim(),
+              });
+              setCertSignalDetail("");
+            }}
+          >
+            <label className="block text-sm">
+              evaluationId
+              <input
+                className="mt-1 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 font-mono text-xs"
+                value={certSignalEvalId}
+                onChange={(event) => setCertSignalEvalId(event.target.value)}
+                placeholder="eval-…"
+                data-testid="qep-ccs-evaluation-id"
+              />
+            </label>
+            <label className="block text-sm">
+              detail
+              <input
+                className="mt-1 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-xs"
+                value={certSignalDetail}
+                onChange={(event) => setCertSignalDetail(event.target.value)}
+                placeholder="Evidence pack drift detected…"
+                data-testid="qep-ccs-detail"
+              />
+            </label>
+            <div className="md:col-span-2">
+              <Button
+                type="submit"
+                size="sm"
+                disabled={continuousCertMutation.isPending}
+              >
+                Record drift signal
+              </Button>
+            </div>
+          </form>
+          {continuousCertQuery.isLoading ? (
+            <QepLoadingState label="Loading cert signals…" />
+          ) : continuousCertQuery.isError ? (
+            <QepErrorState message={(continuousCertQuery.error as Error).message} />
+          ) : (continuousCertQuery.data?.signals.length ?? 0) === 0 ? (
+            <QepEmptyState title="No continuous cert signals yet." />
+          ) : (
+            <ul className="space-y-2">
+              {(continuousCertQuery.data?.signals ?? []).map((signal) => (
+                <li
+                  key={signal.signalId}
+                  className="flex flex-wrap items-center gap-2 rounded border border-[var(--color-border)] px-3 py-2 text-sm"
+                >
+                  <QepStatusBadge status={signal.status} />
+                  <QepStatusBadge status={signal.kind} />
+                  <span className="font-mono text-xs">{signal.evaluationId}</span>
+                  <span className="text-xs">{signal.detail}</span>
+                  {signal.status === "open" ? (
+                    <>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="outline"
+                        onClick={() =>
+                          continuousCertMutation.mutate({
+                            action: "acknowledge",
+                            signalId: signal.signalId,
+                          })
+                        }
+                      >
+                        Acknowledge
+                      </Button>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="outline"
+                        onClick={() =>
+                          continuousCertMutation.mutate({
+                            action: "escalate",
+                            signalId: signal.signalId,
+                          })
+                        }
+                      >
+                        Request re-cert
+                      </Button>
+                    </>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </QepPanel>
 

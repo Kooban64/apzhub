@@ -20,7 +20,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-COMM-002](./sprint/SPR-COMM-002-org-packages-tenant-switch-source.md)          | **DELIVERED** — org packages UI, tenant switcher, project source (QEP+PEN)           |
 | [OWNER BetterAuth sole AuthN](./decisions/OWNER-BETTERAUTH-SOLE-AUTHN.md)           | **IN FORCE** — BetterAuth only; Authentik retire with APZPRD                         |
 | [OWNER Full product bar (Option 3)](./decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md) | **IN FORCE** — Phase 2 + APZPEN Greenbone/Faraday + bridge; Phase 3+AI queued        |
-| [SPR-FULL-001](./sprint/SPR-FULL-001-full-product-bar-option-3.md)                  | **WAVE A COMPLETE · WAVE B QUEUED** — 220 · ENT-001 · BRIDGE-001 delivered           |
+| [SPR-FULL-001](./sprint/SPR-FULL-001-full-product-bar-option-3.md)                  | **WAVES A+B COMPLETE** — 220 · ENT-001 · BRIDGE-001 · 230 delivered                  |
 | [SPR-APZPRD-001](./sprint/SPR-APZPRD-001-betterauth-productivity-workspace.md)      | **COMPLETE · DELIVERED** — BetterAuth sole AuthN; Projects health without Authentik  |
 | [SPR-APZPRD-002](./sprint/SPR-APZPRD-002-entitled-projects-workbench.md)            | **COMPLETE · DELIVERED** — entitled Projects workbench (catalogue → adapter)         |
 
@@ -35,7 +35,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-APZQEP-204](./sprint/SPR-APZQEP-204-enterprise-ga-hardening.md)                 | **DELIVERED** — durable evidence · QEP search · OpenAPI · project ACL                 |
 | [SPR-APZQEP-210](./sprint/SPR-APZQEP-210-product-definition-closeout.md)             | **COMPLETE · DELIVERED** — product-definition MVP closeout (WF · stubs · auth)        |
 | [SPR-APZQEP-220](./sprint/SPR-APZQEP-220-phase-2-product-completion.md)              | **COMPLETE · DELIVERED** — Phase 2 (QI · Knowledge · automation/risk/integration)     |
-| [SPR-APZQEP-230](./sprint/SPR-APZQEP-230-phase-3-and-ai-horizon.md)                  | **QUEUED** — Phase 3 continuous signals + AI/MCP (Wave B)                             |
+| [SPR-APZQEP-230](./sprint/SPR-APZQEP-230-phase-3-and-ai-horizon.md)                  | **COMPLETE · DELIVERED** — Phase 3 continuous signals + AI/MCP (Wave B)               |
 | [SPR-BRIDGE-001](./sprint/SPR-BRIDGE-001-qep-apzpen-assurance-bridge.md)             | **COMPLETE · DELIVERED** — QEP ↔ APZPEN assurance → readiness bridge                  |
 | [APZQEP PRODUCT-STATUS](./products/apzqep/PRODUCT-STATUS.md)                         | V1.1 **PRODUCTION READY · CLOSED** — kernel frozen; 200 = V1.2 / Wave-6-class         |
 | [APZQEP pillar vision](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md) | Experience + commercial identity authority                                            |

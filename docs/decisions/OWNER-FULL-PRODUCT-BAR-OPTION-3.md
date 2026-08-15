@@ -41,13 +41,13 @@ QEP remains broader than software unit testing (process, requirements, manual ve
 
 ## Programme authority
 
-| Track          | Sprint programme                                                                  |
-| -------------- | --------------------------------------------------------------------------------- |
-| Umbrella       | [SPR-FULL-001](../sprint/SPR-FULL-001-full-product-bar-option-3.md)               |
-| QEP Phase 2    | [SPR-APZQEP-220](../sprint/SPR-APZQEP-220-phase-2-product-completion.md)          |
-| APZPEN engines | [SPR-APZPEN-ENT-001](../sprint/SPR-APZPEN-ENT-001-greenbone-faraday-path.md)      |
-| Bridge         | [SPR-BRIDGE-001](../sprint/SPR-BRIDGE-001-qep-apzpen-assurance-bridge.md)         |
-| Wave B         | [SPR-APZQEP-230](../sprint/SPR-APZQEP-230-phase-3-and-ai-horizon.md) — **QUEUED** |
+| Track          | Sprint programme                                                                    |
+| -------------- | ----------------------------------------------------------------------------------- |
+| Umbrella       | [SPR-FULL-001](../sprint/SPR-FULL-001-full-product-bar-option-3.md)                 |
+| QEP Phase 2    | [SPR-APZQEP-220](../sprint/SPR-APZQEP-220-phase-2-product-completion.md)            |
+| APZPEN engines | [SPR-APZPEN-ENT-001](../sprint/SPR-APZPEN-ENT-001-greenbone-faraday-path.md)        |
+| Bridge         | [SPR-BRIDGE-001](../sprint/SPR-BRIDGE-001-qep-apzpen-assurance-bridge.md)           |
+| Wave B         | [SPR-APZQEP-230](../sprint/SPR-APZQEP-230-phase-3-and-ai-horizon.md) — **COMPLETE** |
 
 ## Non-goals
 

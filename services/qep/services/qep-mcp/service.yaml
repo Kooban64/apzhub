@@ -1,18 +1,20 @@
 manifestSchemaVersion: "1.0"
 id: qep-mcp
 name: MCP Gateway Service
-version: 0.1.0
+version: 0.2.0
 kind: service
 
 metadata:
   category: mcp
-  description: "MCP Gateway Service placeholder for APZ QEP (APZQEP-ENG-010). No business implementation."
+  description: >
+    MCP catalogue and gated-write proposal service for APZ QEP (SPR-APZQEP-230-D).
+    Live external MCP gateway wire remains optional; certification tools forbidden.
   contractPackage: "@apzhub/qep-contracts"
   contractVersion: "0.1.0"
   owner: APZHUB
   tags:
     - qep
-    - stub
+    - mcp
 
 dependencies:
   platform: []
@@ -22,6 +24,8 @@ integrations: []
 
 service:
   category: mcp
-  status: stub
+  status: active
 
-permissions: []
+permissions:
+  - qep.mcp-dx.read
+  - qep.mcp-dx.operate

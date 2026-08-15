@@ -1,9 +1,9 @@
 # SPR-APZQEP-230 — Phase 3 continuous signals + AI horizon
 
-> **Status:** **QUEUED** — 2026-08-15  
+> **Status:** **COMPLETE · DELIVERED** — 2026-08-15  
 > **Parent:** [SPR-FULL-001](./SPR-FULL-001-full-product-bar-option-3.md) Wave B  
 > **Authority:** [OWNER-FULL-PRODUCT-BAR-OPTION-3](../decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md)  
-> **Starts:** After Wave A acceptance **or** Owner pull-forward  
+> **Starts:** Owner pull-forward after Wave A  
 > **Does not:** Auto-certify · Cap reopen · replacing human GO
 
 ## Outcome
@@ -27,4 +27,11 @@ Phase 3 continuous verification/cert **signals** plus AI Quality Workspace / MCP
 
 ## Delivery record
 
-_Queued — not started._
+| ID        | Ship                            | Progress (2026-08-15)                                                                                                                                                                                             |
+| --------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **230-A** | Continuous verification signals | Ledger `qep-continuous-verification/signals.json`; API `GET\|POST /api/v1/qep/continuous-verification/signals`; Automation home panel; perms `qep.continuous_verification.*`; never certifies                     |
+| **230-B** | Continuous cert signals         | Ledger `qep-continuous-cert/signals.json`; API `GET\|POST /api/v1/qep/continuous-cert/signals` (create\|acknowledge\|escalate); RC home panel; perms `qep.continuous_cert.*`; escalate = re-cert **request** only |
+| **230-C** | AI Workspace ON                 | M17 already active (SPR-203); horizon banner + Learning / Verification Design / MCP deep links; live LLM still `APZHUB_QEP_AI_ASSIST` default-deny                                                                |
+| **230-D** | MCP gated write                 | M18 `active` / catalogue `enabled`; tool catalogue + proposal ledger; API `GET\|POST /api/v1/qep/mcp`; UI `/workspace/qep/mcp-dx`; perms `qep.mcp-dx.*`; `assertMcpNeverCertifies`; live gateway wire remains off |
+
+**Residuals (not blockers):** external MCP transport/server wire; automatic event emitters from all CI ingest paths (manual heartbeat + UI ship first).
