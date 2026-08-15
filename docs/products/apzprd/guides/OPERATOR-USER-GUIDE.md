@@ -47,6 +47,7 @@
 1. Open a project from the list (APZHUB UI — engine branding masked).
 2. Use lifecycle, delivery, collaboration, and admin surfaces as your role allows.
 3. Never send colleagues to a separate Plane login for entitled APZHUB work.
+4. If Readiness shows the Plane adapter **disabled / not configured**, the project list is empty until ops enable `PLANE_*` / adapter secrets — that is **not** an Authentik or Plane login problem.
 
 ## 5. Admin / entitlement notes
 

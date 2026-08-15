@@ -5,7 +5,7 @@ import {
   fetchFaradayVulns,
   resolveFaradayExportConfig,
   toFaradayArtefact,
-} from "./export-client.js";
+} from "./export-client";
 
 describe("faraday export-client (SPR-FULL-002-C)", () => {
   it("resolves config and vulns path", () => {

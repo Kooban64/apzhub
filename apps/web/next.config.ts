@@ -17,6 +17,8 @@ const nextConfig: NextConfig = withSecurityHeaders({
     "@apzhub/command-framework",
     "@apzhub/config",
     "@apzhub/event-notification-framework",
+    "@apzhub/integration-faraday",
+    "@apzhub/integration-greenbone",
     "@apzhub/legal-business-core",
     "@apzhub/platform-runtime",
     "@apzhub/shared",
@@ -28,7 +30,7 @@ const nextConfig: NextConfig = withSecurityHeaders({
     "@apzhub/workspace",
     "swagger-ui-react",
   ],
-  serverExternalPackages: ["pg", "ioredis"],
+  serverExternalPackages: ["pg", "ioredis", "drizzle-orm"],
   async rewrites() {
     return [
       {

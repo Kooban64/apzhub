@@ -6,7 +6,7 @@ import {
   parseGmpVersionXml,
   resolveGmpConfigFromEnv,
   toGreenboneSimplifiedArtefact,
-} from "./gmp-client.js";
+} from "./gmp-client";
 
 describe("greenbone gmp-client (SPR-FULL-002-B)", () => {
   it("builds authenticate XML without leaking raw angle brackets", () => {

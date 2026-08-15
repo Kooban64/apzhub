@@ -25,7 +25,7 @@ export {
   withGmpSession,
   type GmpClientConfig,
   type GmpVersionInfo,
-} from "./gmp-client.js";
+} from "./gmp-client";
 
 const DEFAULT_GREENBONE_UI_URL = "http://127.0.0.1:9392";
 

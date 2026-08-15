@@ -8,7 +8,17 @@
 ## Unpark notice (2026-08-15)
 
 Owner [OWNER-FULL-PRODUCT-BAR-OPTION-3](../decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md) authorised **Greenbone + Faraday** (Kali runner only) under [SPR-APZPEN-ENT-001](../sprint/SPR-APZPEN-ENT-001-greenbone-faraday-path.md) — **COMPLETE · DELIVERED**.  
-Items **1–5** in the parked table remain **PARKED** unless separately authorised.
+[SPR-FULL-002](../sprint/SPR-FULL-002-post-option-3-hardening.md) hardened GMP pull + Faraday export path — still **within** that authorised slice; it did **not** open items **1–5**.
+
+## Park reaffirmation (2026-08-15 — post adopt)
+
+After [SPR-ADOPT-002](../sprint/SPR-ADOPT-002-commercial-pillar-operator-dogfood.md) dogfood (CE engagement + artefact honesty path):
+
+| Still parked                                                               | Still out of scope without new Owner sprint                         |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Items **1–5** below (SBOM, WORM, extra SCMs, legal-hold, multi-host locks) | New APZPEN mega-features · enterprise vapourware stubs · Cap reopen |
+
+**No further APZPEN enterprise build** until resume criteria below are met. Next portfolio slice is **platform polish**, not APZPEN unpark.
 
 ---
 

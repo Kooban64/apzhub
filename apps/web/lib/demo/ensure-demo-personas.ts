@@ -172,21 +172,23 @@ export async function ensureDemoPersonasSeeded(): Promise<{
     seeded += 1;
   }
 
-  // Promote classic e2e user when present.
+  // Promote classic e2e / dogfood user when present (roles + product grants).
   try {
-    const passwordHash = await hashPassword("DevPassword123!");
-    const { userId } = await ensureCredentialUser({
-      email: "dev@apzhub.local",
-      name: "Dev Super Admin",
-      passwordHash,
-      activeTenantId: DEMO_PERSONAS[0]!.tenantId,
-      emailVerified: true,
-    });
-    await assignPersonaRoles(userId, {
+    const classic = {
       ...DEMO_PERSONAS[0]!,
       email: "dev@apzhub.local",
       name: "Dev Super Admin",
+    };
+    const passwordHash = await hashPassword("DevPassword123!");
+    const { userId } = await ensureCredentialUser({
+      email: classic.email,
+      name: classic.name,
+      passwordHash,
+      activeTenantId: classic.tenantId,
+      emailVerified: true,
     });
+    await assignPersonaRoles(userId, classic);
+    seedProductAccess(classic, userId);
   } catch {
     /* optional */
   }

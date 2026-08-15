@@ -52,8 +52,28 @@ export async function handleListProjects(
   context: PlatformApiRequestContext,
 ) {
   const query = parseQuery(projectListQuerySchema, request.nextUrl.searchParams);
-  const gateway = await getPlatformServiceGateway();
   const listQuery = toListQuery(query);
+
+  // SPR-ADOPT-002 — when Plane adapter is not enabled/configured, return an honest
+  // empty collection instead of a CONFIGURATION_ERROR 500 (Readiness already explains).
+  const { getPlaneConfigurationDiagnostics } =
+    await import("@apzhub/config/governance");
+  const diagnostics = getPlaneConfigurationDiagnostics(process.env);
+  if (!diagnostics.integrationEnabled || diagnostics.healthStatus !== "configured") {
+    const limit = listQuery.page?.perPage ?? 20;
+    return jsonCollectionResponse(
+      [],
+      {
+        cursor: query.cursor ?? null,
+        nextCursor: null,
+        limit,
+        hasMore: false,
+      },
+      context.tracing,
+    );
+  }
+
+  const gateway = await getPlatformServiceGateway();
   const result = await gateway.projects.listProjects(context.serviceContext, {
     page: listQuery.page,
     sort: listQuery.sort as
@@ -190,7 +210,7 @@ export async function handleGetProjectsEngineHealth(
   context: PlatformApiRequestContext,
 ) {
   const { getPlaneConfigurationDiagnostics } =
-    await import("@apzhub/config/governance/plane-config-diagnostics");
+    await import("@apzhub/config/governance");
   const diagnostics = getPlaneConfigurationDiagnostics(process.env);
   let liveListOk: boolean | null = null;
   let liveListError: string | undefined;

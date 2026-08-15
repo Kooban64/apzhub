@@ -3,7 +3,7 @@
  * Pulls vulns JSON when FARADAY_URL (+ optional token) is set; never certifies.
  */
 
-import { normalizeFaradayPayload, type FaradayFindingSeed } from "./normalize.js";
+import { normalizeFaradayPayload, type FaradayFindingSeed } from "./normalize";
 
 export type FaradayExportConfig = {
   readonly baseUrl: string;

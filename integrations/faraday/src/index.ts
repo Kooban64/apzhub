@@ -5,7 +5,7 @@ export type FaradayHealthResult = {
   readonly detail: string;
 };
 
-export { normalizeFaradayPayload, type FaradayFindingSeed } from "./normalize.js";
+export { normalizeFaradayPayload, type FaradayFindingSeed } from "./normalize";
 
 export {
   buildFaradayVulnsPath,
@@ -13,7 +13,7 @@ export {
   resolveFaradayExportConfig,
   toFaradayArtefact,
   type FaradayExportConfig,
-} from "./export-client.js";
+} from "./export-client";
 
 const PLANNED_DETAIL = "compose not deployed — ingest via artefact";
 

@@ -14,7 +14,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SaaS Commercial Model](./strategy/commercial/SAAS-COMMERCIAL-MODEL.md)                           | **Authority (LOCKED)** — tenants, packages, APZPRD composability, Law/Knowledge/Sign |
 | [APZQEP](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md)                            | Quality Engineering Platform — _Can we release with confidence?_                     |
 | [APZPEN](./strategy/APZPEN-ENTERPRISE-SECURITY-ASSURANCE-PLATFORM.md)                             | Security Assurance & Pen Testing — _Can we demonstrate we are secure?_               |
-| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)                          | **PARTIALLY UNPARKED** — Greenbone/Faraday via ENT-001; WORM/SBOM/… still parked     |
+| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)                          | **REMAIN PARKED** — ENT-001 Greenbone/Faraday done; items 1–5 still parked           |
 | [APZPRD](./strategy/APZPRD-ENTERPRISE-PRODUCTIVITY-PLATFORM.md)                                   | Productivity Platform — _Can our people work effectively?_ (composable)              |
 | [SPR-COMM-001](./sprint/SPR-COMM-001-catalogue-entitlements-tenant-switch.md)                     | **DELIVERED** — packages, entitlements, tenant switch, soft APZPEN gate              |
 | [SPR-COMM-002](./sprint/SPR-COMM-002-org-packages-tenant-switch-source.md)                        | **DELIVERED** — org packages UI, tenant switcher, project source (QEP+PEN)           |
@@ -29,6 +29,9 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-APZPRD-001](./sprint/SPR-APZPRD-001-betterauth-productivity-workspace.md)                    | **COMPLETE · DELIVERED** — BetterAuth sole AuthN; Projects health without Authentik  |
 | [SPR-APZPRD-002](./sprint/SPR-APZPRD-002-entitled-projects-workbench.md)                          | **COMPLETE · DELIVERED** — entitled Projects workbench (catalogue → adapter)         |
 | [SPR-APZPRD-003](./sprint/SPR-APZPRD-003-projects-workbench-deepen.md)                            | **COMPLETE · DELIVERED** — deepen Projects; BetterAuth only (no Authentik)           |
+| [SPR-ADOPT-002](./sprint/SPR-ADOPT-002-commercial-pillar-operator-dogfood.md)                     | **COMPLETE · DELIVERED** — commercial pillar operator dogfood (BetterAuth only)      |
+| [ADOPT-002 evidence](./products/adopt-002/README.md)                                              | Friction · evidence · checklist results                                              |
+| [OWNER APZPEN remain parked](./decisions/OWNER-APZPEN-REMAIN-PARKED.md)                           | **IN FORCE** — no further APZPEN enterprise until resume criteria                    |
 
 ### Priority product build — APZQEP (active)
 
@@ -68,8 +71,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-APZPEN-ENT-001](./sprint/SPR-APZPEN-ENT-001-greenbone-faraday-path.md)   | **COMPLETE · DELIVERED** — Greenbone + Faraday artefact paths; Kali runner only                |
 | [APZPEN operator user guide](./products/apzpen/guides/OPERATOR-USER-GUIDE.md) | **How-to** — engagements · artefact ingest · optional GMP/Faraday                              |
 | [APZPRD operator user guide](./products/apzprd/guides/OPERATOR-USER-GUIDE.md) | **How-to** — entitled Projects workbench · BetterAuth                                          |
-| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)      | **PARTIALLY UNPARKED** — Greenbone/Faraday via ENT-001; other options remain parked            |
-| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)      | **PARKED** — resume on deal / Owner sprint only                                                |
+| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)      | **REMAIN PARKED** — ENT-001 done; SBOM/WORM/extra SCM/legal-hold/locks still parked            |
 | [APZ tools host layout](./operations/APZTOOLS-HOST-LAYOUT.md)                 | `~/apztools/{security,quality,workbench,shared}` — runner workspaces by pillar                 |
 
 ## IAM + Commercial Platform (SPR-IAM-COMMERCIAL-001)

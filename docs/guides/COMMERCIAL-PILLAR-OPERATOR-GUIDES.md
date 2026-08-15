@@ -7,3 +7,5 @@
 | **APZPRD** | [OPERATOR-USER-GUIDE](../products/apzprd/guides/OPERATOR-USER-GUIDE.md) | same                                                                        |
 
 These are **how-to** guides for operators. Architecture, sprint, and platform capability docs remain separate.
+
+**Dogfood:** [SPR-ADOPT-002](../sprint/SPR-ADOPT-002-commercial-pillar-operator-dogfood.md) walked these guides on-host — see [adopt-002](../products/adopt-002/README.md).
