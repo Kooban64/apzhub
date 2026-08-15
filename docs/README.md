@@ -14,7 +14,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SaaS Commercial Model](./strategy/commercial/SAAS-COMMERCIAL-MODEL.md)             | **Authority (LOCKED)** — tenants, packages, APZPRD composability, Law/Knowledge/Sign |
 | [APZQEP](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md)              | Quality Engineering Platform — _Can we release with confidence?_                     |
 | [APZPEN](./strategy/APZPEN-ENTERPRISE-SECURITY-ASSURANCE-PLATFORM.md)               | Security Assurance & Pen Testing — _Can we demonstrate we are secure?_               |
-| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)            | **PARKED** — SBOM/WORM/SCM/legal-hold/locks; resume on deal or Owner sprint          |
+| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)            | **PARTIALLY UNPARKED** — Greenbone/Faraday via ENT-001; WORM/SBOM/… still parked     |
 | [APZPRD](./strategy/APZPRD-ENTERPRISE-PRODUCTIVITY-PLATFORM.md)                     | Productivity Platform — _Can our people work effectively?_ (composable)              |
 | [SPR-COMM-001](./sprint/SPR-COMM-001-catalogue-entitlements-tenant-switch.md)       | **DELIVERED** — packages, entitlements, tenant switch, soft APZPEN gate              |
 | [SPR-COMM-002](./sprint/SPR-COMM-002-org-packages-tenant-switch-source.md)          | **DELIVERED** — org packages UI, tenant switcher, project source (QEP+PEN)           |
