@@ -30,7 +30,9 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-APZPRD-002](./sprint/SPR-APZPRD-002-entitled-projects-workbench.md)                          | **COMPLETE · DELIVERED** — entitled Projects workbench (catalogue → adapter)         |
 | [SPR-APZPRD-003](./sprint/SPR-APZPRD-003-projects-workbench-deepen.md)                            | **COMPLETE · DELIVERED** — deepen Projects; BetterAuth only (no Authentik)           |
 | [SPR-ADOPT-002](./sprint/SPR-ADOPT-002-commercial-pillar-operator-dogfood.md)                     | **COMPLETE · DELIVERED** — commercial pillar operator dogfood (BetterAuth only)      |
+| [SPR-ADOPT-003](./sprint/SPR-ADOPT-003-wired-engines-dogfood.md)                                  | **COMPLETE · DELIVERED** — wired engines dogfood (Plane·Zammad·Kimai·Metabase·n8n)   |
 | [ADOPT-002 evidence](./products/adopt-002/README.md)                                              | Friction · evidence · checklist results                                              |
+| [ADOPT-003 evidence](./products/adopt-003/README.md)                                              | Post-OPS wired-engine dogfood evidence                                               |
 | [OWNER APZPEN remain parked](./decisions/OWNER-APZPEN-REMAIN-PARKED.md)                           | **IN FORCE** — no further APZPEN enterprise until resume criteria                    |
 | [SPR-POLISH-001](./sprint/SPR-POLISH-001-entitlements-shell-consistency.md)                       | **COMPLETE · DELIVERED** — entitlements UX + shell consistency across pillars        |
 | [SPR-OPS-PLANE-001](./sprint/SPR-OPS-PLANE-001-projects-plane-adapter-host.md)                    | **COMPLETE · DELIVERED** — `.secrets/plane` loader + host enablement runbook         |
