@@ -73,7 +73,7 @@ export function createMockPlaneFetch(options: MockPlaneApiOptions = {}): FetchFn
       );
     }
 
-    if (input.includes("/api/workspaces/")) {
+    if (input.includes("/api/v1/workspaces/")) {
       if (workspaceStatus >= 400) {
         return new Response(
           JSON.stringify({

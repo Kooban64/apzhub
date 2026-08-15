@@ -84,7 +84,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      "/api/workspaces/",
+      "/api/v1/workspaces/",
       undefined,
       toQueryRecord(query),
     );
@@ -97,7 +97,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${slug ?? this.workspaceSlug}/`,
+      `/api/v1/workspaces/${slug ?? this.workspaceSlug}/`,
     );
   }
 
@@ -108,7 +108,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/`,
       undefined,
       toQueryRecord(query),
     );
@@ -121,7 +121,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/`,
     );
   }
 
@@ -132,7 +132,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "POST",
-      `/api/workspaces/${this.workspaceSlug}/projects/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/`,
       body,
     );
   }
@@ -145,7 +145,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "PATCH",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/`,
       body,
     );
   }
@@ -167,7 +167,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/states/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/states/`,
       undefined,
       toQueryRecord(query),
     );
@@ -181,7 +181,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/states/${stateId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/states/${stateId}/`,
     );
   }
 
@@ -193,7 +193,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "POST",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/states/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/states/`,
       body,
     );
   }
@@ -207,7 +207,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "PATCH",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/states/${stateId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/states/${stateId}/`,
       body,
     );
   }
@@ -220,7 +220,7 @@ export class PlaneRestClient {
     await this.requestVoid(
       context,
       "DELETE",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/states/${stateId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/states/${stateId}/`,
     );
   }
 
@@ -232,7 +232,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/labels/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/labels/`,
       undefined,
       toQueryRecord(query),
     );
@@ -246,7 +246,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/labels/${labelId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/labels/${labelId}/`,
     );
   }
 
@@ -258,7 +258,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "POST",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/labels/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/labels/`,
       body,
     );
   }
@@ -272,7 +272,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "PATCH",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/labels/${labelId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/labels/${labelId}/`,
       body,
     );
   }
@@ -285,7 +285,7 @@ export class PlaneRestClient {
     await this.requestVoid(
       context,
       "DELETE",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/labels/${labelId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/labels/${labelId}/`,
     );
   }
 
@@ -297,7 +297,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/cycles/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/cycles/`,
       undefined,
       toQueryRecord(query),
     );
@@ -311,7 +311,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/cycles/${cycleId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/cycles/${cycleId}/`,
     );
   }
 
@@ -323,7 +323,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "POST",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/cycles/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/cycles/`,
       body,
     );
   }
@@ -337,7 +337,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "PATCH",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/cycles/${cycleId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/cycles/${cycleId}/`,
       body,
     );
   }
@@ -360,7 +360,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/modules/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/modules/`,
       undefined,
       toQueryRecord(query),
     );
@@ -374,7 +374,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/modules/${moduleId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/modules/${moduleId}/`,
     );
   }
 
@@ -386,7 +386,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "POST",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/modules/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/modules/`,
       body,
     );
   }
@@ -400,7 +400,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "PATCH",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/modules/${moduleId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/modules/${moduleId}/`,
       body,
     );
   }
@@ -421,7 +421,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/members/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/members/`,
       undefined,
       toQueryRecord(query),
     );
@@ -435,7 +435,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/members/${memberId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/members/${memberId}/`,
     );
   }
 
@@ -447,7 +447,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "POST",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/members/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/members/`,
       body,
     );
   }
@@ -461,7 +461,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "PATCH",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/members/${memberId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/members/${memberId}/`,
       body,
     );
   }
@@ -474,7 +474,7 @@ export class PlaneRestClient {
     await this.requestVoid(
       context,
       "DELETE",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/members/${memberId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/members/${memberId}/`,
     );
   }
 
@@ -486,7 +486,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/`,
       undefined,
       toQueryRecord(query),
     );
@@ -500,7 +500,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/`,
     );
   }
 
@@ -512,7 +512,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "POST",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/`,
       body,
     );
   }
@@ -526,7 +526,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "PATCH",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/`,
       body,
     );
   }
@@ -555,7 +555,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/comments/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/comments/`,
       undefined,
       toQueryRecord(query),
     );
@@ -570,7 +570,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/comments/${commentId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/comments/${commentId}/`,
     );
   }
 
@@ -583,7 +583,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "POST",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/comments/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/comments/`,
       body,
     );
   }
@@ -598,7 +598,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "PATCH",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/comments/${commentId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/comments/${commentId}/`,
       body,
     );
   }
@@ -612,7 +612,7 @@ export class PlaneRestClient {
     await this.requestVoid(
       context,
       "DELETE",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/comments/${commentId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/comments/${commentId}/`,
     );
   }
 
@@ -627,7 +627,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/history/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/history/`,
       undefined,
       toQueryRecord(query),
     );
@@ -644,7 +644,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-subscribers/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-subscribers/`,
       undefined,
       toQueryRecord(query),
     );
@@ -659,7 +659,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "POST",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-subscribers/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-subscribers/`,
       body,
     );
   }
@@ -673,7 +673,7 @@ export class PlaneRestClient {
     await this.requestVoid(
       context,
       "DELETE",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-subscribers/${subscriberId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-subscribers/${subscriberId}/`,
     );
   }
 
@@ -684,7 +684,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/project-stats/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/project-stats/`,
       undefined,
       toQueryRecord(query),
     );
@@ -698,7 +698,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/cycles/${cycleId}/progress/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/cycles/${cycleId}/progress/`,
     );
   }
 
@@ -710,7 +710,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/projects/${projectId}/cycles/${cycleId}/analytics/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/projects/${projectId}/cycles/${cycleId}/analytics/`,
     );
   }
 
@@ -723,7 +723,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/webhooks/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/webhooks/`,
       undefined,
       toQueryRecord(query),
     );
@@ -736,7 +736,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "GET",
-      `/api/workspaces/${this.workspaceSlug}/webhooks/${webhookId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/webhooks/${webhookId}/`,
     );
   }
 
@@ -747,7 +747,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "POST",
-      `/api/workspaces/${this.workspaceSlug}/webhooks/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/webhooks/`,
       body,
     );
   }
@@ -760,7 +760,7 @@ export class PlaneRestClient {
     return this.request(
       context,
       "PATCH",
-      `/api/workspaces/${this.workspaceSlug}/webhooks/${webhookId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/webhooks/${webhookId}/`,
       body,
     );
   }
@@ -772,7 +772,7 @@ export class PlaneRestClient {
     await this.requestVoid(
       context,
       "DELETE",
-      `/api/workspaces/${this.workspaceSlug}/webhooks/${webhookId}/`,
+      `/api/v1/workspaces/${this.workspaceSlug}/webhooks/${webhookId}/`,
     );
   }
 

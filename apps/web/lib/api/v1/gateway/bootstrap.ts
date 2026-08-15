@@ -610,8 +610,8 @@ async function buildPlatformApiGatewayBootstrap(): Promise<PlatformApiGatewayBoo
       const { registerPlaneProviders } = await import("@apzhub/platform-services");
       const tenantId = process.env.PLANE_BOOTSTRAP_TENANT_ID ?? "platform";
       const baseUrl = process.env.PLANE_BASE_URL ?? "http://localhost:18085";
-      const apiBaseUrl =
-        process.env.PLANE_API_BASE_URL ?? `${baseUrl.replace(/\/$/, "")}/api`;
+      // Paths in the Plane client already include `/api/v1/...` — apiBaseUrl is host root.
+      const apiBaseUrl = process.env.PLANE_API_BASE_URL ?? baseUrl.replace(/\/$/, "");
       const result = await createPlaneAdapter({
         tenantId,
         plane: {

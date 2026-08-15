@@ -26,4 +26,4 @@ Make Projects list/live probe **ops-enableable** on the coexistence host: `.secr
 
 ## Operator follow-up (this host)
 
-Create `.secrets/plane` with the existing Plane API token (e.g. label `apz-api`) and restart web — see runbook.
+Host verified 2026-08-15: `.secrets/plane` present, `liveListOk: true`, Projects list returns Plane workspace projects. Keep token out of git.

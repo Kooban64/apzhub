@@ -226,7 +226,7 @@ export function createMockPlaneCoreFetch(options: MockPlaneApiOptions = {}): Fet
       return baseFetch(input, init);
     }
 
-    if (pathname.endsWith("/api/workspaces/") && method === "GET") {
+    if (pathname.endsWith("/api/v1/workspaces/") && method === "GET") {
       return jsonResponse(paginate([MOCK_WORKSPACE]));
     }
 

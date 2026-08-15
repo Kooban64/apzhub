@@ -34,7 +34,7 @@ Close the dogfood residual where Projects Readiness is healthy but the list is e
    ```bash
    PLANE_INTEGRATION_ENABLED=true
    PLANE_BASE_URL=http://127.0.0.1:18085
-   PLANE_API_BASE_URL=http://127.0.0.1:18085/api
+   PLANE_API_BASE_URL=http://127.0.0.1:18085
    PLANE_WORKSPACE_ID=apzportal
    ```
 
@@ -49,6 +49,11 @@ Close the dogfood residual where Projects Readiness is healthy but the list is e
 ## Rollback
 
 Set `PLANE_INTEGRATION_ENABLED=false` and restart. Remove or empty `.secrets/plane` if needed.
+
+## Notes
+
+- Plane CE on this host expects **`/api/v1/workspaces/...`** with header **`X-Api-Key`** (not legacy `/api/workspaces/...`).
+- Set `PLANE_API_BASE_URL` to the **host root** (same as `PLANE_BASE_URL`). Client paths already include `/api/v1/...` — do not append `/api` or you get `/api/api/v1/...`.
 
 ## Honesty
 

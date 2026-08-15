@@ -22,8 +22,8 @@ Capability registration IDs: `webhooks`, `events`, `synchronisation`.
 
 Plane CE paths used (adapter-internal):
 
-- `GET/POST /api/workspaces/{slug}/webhooks/`
-- `GET/PATCH/DELETE /api/workspaces/{slug}/webhooks/{id}/`
+- `GET/POST /api/v1/workspaces/{slug}/webhooks/`
+- `GET/PATCH/DELETE /api/v1/workspaces/{slug}/webhooks/{id}/`
 
 Canonical `WebhookRegistration` never exposes secret values (`secretPresent` boolean only).
 

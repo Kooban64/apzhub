@@ -48,7 +48,7 @@ export class PlaneClient {
     const response = await this.client.request<PlaneWorkspaceResponse>({
       context,
       method: "GET",
-      path: `/api/workspaces/${this.workspaceSlug}/`,
+      path: `/api/v1/workspaces/${this.workspaceSlug}/`,
       headers: this.buildAuthHeaders(auth),
     });
     return response.data;

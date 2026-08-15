@@ -28,7 +28,7 @@ export async function detectPlaneFeatures(
   const probes = deps.probes ?? [
     {
       capabilityId: "webhooks",
-      endpoint: "/api/workspaces/{slug}/webhooks/",
+      endpoint: "/api/v1/workspaces/{slug}/webhooks/",
       optional: true,
       run: async (ctx) => {
         try {
@@ -45,7 +45,7 @@ export async function detectPlaneFeatures(
     },
     {
       capabilityId: "analytics",
-      endpoint: "/api/workspaces/{slug}/project-stats/",
+      endpoint: "/api/v1/workspaces/{slug}/project-stats/",
       optional: true,
       run: async (ctx) => {
         try {
