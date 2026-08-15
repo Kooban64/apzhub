@@ -1,0 +1,37 @@
+# SPR-FULL-001 — Full product bar (Option 3 · parallel tracks)
+
+> **Status:** **AUTHORISED · IN PROGRESS** — 2026-08-15  
+> **Authority:** [OWNER-FULL-PRODUCT-BAR-OPTION-3](../decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md) **IN FORCE**  
+> **Model:** Three Wave A tracks in parallel + Wave B queued  
+> **Does not:** Cap reopen · Kali UI module · auto-certify · Authentik AuthN
+
+## Outcome
+
+Deliver Owner-defined **100% (not MVP)**: Phase 2 QEP + APZPEN Greenbone/Faraday + QEP↔APZPEN bridge; then Phase 3 + AI when Wave A is accepted (or Owner pull-forward).
+
+## Tracks (Wave A — parallel)
+
+| Track                   | Guide                                                                | Status                       |
+| ----------------------- | -------------------------------------------------------------------- | ---------------------------- |
+| **A1** QEP Phase 2      | [SPR-APZQEP-220](./SPR-APZQEP-220-phase-2-product-completion.md)     | **AUTHORISED · IN PROGRESS** |
+| **A2** APZPEN engines   | [SPR-APZPEN-ENT-001](./SPR-APZPEN-ENT-001-greenbone-faraday-path.md) | **AUTHORISED · IN PROGRESS** |
+| **A3** Assurance bridge | [SPR-BRIDGE-001](./SPR-BRIDGE-001-qep-apzpen-assurance-bridge.md)    | **AUTHORISED · IN PROGRESS** |
+
+## Wave B (queued)
+
+| Track               | Guide                                                        | Status                                                                |
+| ------------------- | ------------------------------------------------------------ | --------------------------------------------------------------------- |
+| **B1** Phase 3 + AI | [SPR-APZQEP-230](./SPR-APZQEP-230-phase-3-and-ai-horizon.md) | **QUEUED** — starts after Wave A acceptance unless Owner pull-forward |
+
+## Parallel rules
+
+1. Tracks must not block each other on shared Cap kernels.
+2. Bridge consumes APZPEN **contracts** (findings/assurance summary) — never Faraday/Greenbone clients from QEP modules.
+3. APZPEN owns adapters; QEP owns readiness/cert presentation of bridged signals.
+4. CI / quality gates still apply per track (015).
+
+## Programme done when
+
+- Wave A acceptance criteria on all three guides met and recorded.
+- Owner decides Wave B start (default: after Wave A).
+- Docs / PRODUCT-STATUS honesty updated (MVP closed; full-bar wave in progress or delivered).

@@ -5,6 +5,13 @@
 > **Pillar vision:** [APZPEN Enterprise Security Assurance](./APZPEN-ENTERPRISE-SECURITY-ASSURANCE-PLATFORM.md)  
 > **Portfolio priority:** **APZQEP** (full swing) — APZPEN enterprise work is **not** the active build track
 
+## Unpark notice (2026-08-15)
+
+Owner [OWNER-FULL-PRODUCT-BAR-OPTION-3](../decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md) authorises **Greenbone + Faraday** (Kali runner only) under [SPR-APZPEN-ENT-001](../sprint/SPR-APZPEN-ENT-001-greenbone-faraday-path.md).  
+Items **1–5** in the table above remain **PARKED** unless separately authorised.
+
+---
+
 ## Intent
 
 APZPEN Community / CE product is **done enough to operate and sell as security assurance**.  

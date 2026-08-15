@@ -60,7 +60,7 @@ SPR-APZQEP-200 programme DELIVERED (RCC · providers · governed AI · GA)
 SPR-APZQEP-210 DELIVERED (DEF / USER-WORKFLOWS MVP closeout)
 ```
 
-> **Portfolio note (2026-08-15):** APZPEN CE is complete. **SPR-APZQEP-200** and **SPR-APZQEP-210** are **COMPLETE · DELIVERED**. Caps A–F remain closed. APZPEN enterprise depth is [parked](../../strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md). Enterprise SSO / Authentik wire-up remains platform IAM follow-on.
+> **Portfolio note (2026-08-15):** APZPEN CE is complete. **SPR-APZQEP-200** and **SPR-APZQEP-210** are **COMPLETE · DELIVERED**. Caps A–F remain closed. Owner authorised **full product bar (Option 3)** — [OWNER-FULL-PRODUCT-BAR-OPTION-3](../../decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md) / [SPR-FULL-001](../../sprint/SPR-FULL-001-full-product-bar-option-3.md): Phase 2 (220) + Greenbone/Faraday (ENT-001) + QEP↔APZPEN bridge (BRIDGE-001) in parallel; Phase 3 + AI (230) **QUEUED**. BetterAuth remains sole AuthN.
 
 Authoritative release pack: [release-1.1/](./release-1.1/)
 
