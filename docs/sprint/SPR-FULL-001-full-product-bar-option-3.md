@@ -46,10 +46,18 @@ Deliver Owner-defined **100% (not MVP)**: Phase 2 QEP + APZPEN Greenbone/Faraday
 
 ## Delivery record (Wave A second ships — 2026-08-15)
 
-| Track             | Second ships landed                                                            |
-| ----------------- | ------------------------------------------------------------------------------ |
-| **A1 220**        | Integration Centre enable/disable + last-sync; QI advisory banner              |
-| **A2 ENT-001**    | Engagement ingest preselect `?tool=greenbone                                   | faraday`; Providers VA ingest deep-links |
-| **A3 BRIDGE-001** | Compose extracted to `security-assurance-bridge-service.ts`; thin HTTP handler |
+| Track             | Second ships landed                                                                    |
+| ----------------- | -------------------------------------------------------------------------------------- |
+| **A1 220**        | Integration Centre enable/disable + last-sync; QI advisory banner                      |
+| **A2 ENT-001**    | Engagement ingest preselect `?tool=greenbone\|faraday`; Providers VA ingest deep-links |
+| **A3 BRIDGE-001** | Compose extracted to `security-assurance-bridge-service.ts`; thin HTTP handler         |
 
-Remaining: automation mapping/flaky depth (220-C); live Greenbone GMP; Faraday compose; formal platform-services package.
+## Delivery record (Wave A third ships — 2026-08-15)
+
+| Track             | Third ships landed                                                             |
+| ----------------- | ------------------------------------------------------------------------------ |
+| **A1 220**        | Automation mapping governance ledger (owner / flaky / stale) + UI              |
+| **A2 ENT-001**    | Greenbone `ingest_ready`; artefact list/helper; GMP deferred (script + ingest) |
+| **A3 BRIDGE-001** | VA freshness (`vaFreshness`) on assurance summary via APZPEN health probe      |
+
+Remaining: Faraday compose bring-up; live GMP API client; formal `@apzhub/platform-services` package; Wave B (230).

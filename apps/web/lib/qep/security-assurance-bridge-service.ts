@@ -6,6 +6,7 @@
 import { hasProductAccess } from "@/lib/commercial/product-access";
 import { listProjectSourceBindings } from "@/lib/commercial/project-source-bindings";
 import { tenantHasProductSubscriptions } from "@/lib/commercial/resolve-entitlements";
+import { getGreenboneFreshness } from "@/lib/apzpen/greenbone-freshness";
 import { getEngagementPosture, listTenantEngagements } from "@/lib/apzpen/service";
 import {
   buildEngagementRows,
@@ -94,6 +95,8 @@ export async function getSecurityAssuranceSummary(input: {
     externalRef,
   });
 
+  const vaFreshness = await getGreenboneFreshness();
+
   // Soft honesty when only one product is missing.
   const detailOverride =
     !entitled && qepEntitled && !penEntitled
@@ -102,9 +105,14 @@ export async function getSecurityAssuranceSummary(input: {
         ? "Quality (APZQEP) entitlement required to consume the assurance bridge."
         : undefined;
 
-  const payloadSummary = detailOverride
-    ? { ...summary, detail: detailOverride, status: "not_entitled" as const }
-    : summary;
+  const payloadSummary: SecurityAssuranceSummary = detailOverride
+    ? {
+        ...summary,
+        detail: detailOverride,
+        status: "not_entitled",
+        vaFreshness,
+      }
+    : { ...summary, vaFreshness };
 
   appendQepAuditEvent({
     action: "bridge.security_assurance.read",

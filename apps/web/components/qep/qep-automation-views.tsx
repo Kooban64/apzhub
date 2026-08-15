@@ -67,6 +67,9 @@ function AutomationHomeView() {
     '{\n  "success": true,\n  "tests": [{ "title": "smoke", "status": "passed" }]\n}',
   );
   const [ingestNote, setIngestNote] = useState<string | null>(null);
+  const [mapProviderId, setMapProviderId] = useState("playwright");
+  const [mapExternalKey, setMapExternalKey] = useState("");
+  const [mapOwner, setMapOwner] = useState("");
 
   const providersQuery = useQuery({
     queryKey: ["qep-automation", "providers"],
@@ -88,6 +91,21 @@ function AutomationHomeView() {
           resultSummary?: string;
         }>;
       }>("/api/v1/qep/automation/executions"),
+  });
+
+  const mappingsQuery = useQuery({
+    queryKey: ["qep-automation", "mappings"],
+    queryFn: () =>
+      fetchJson<{
+        mappings: Array<{
+          mappingId: string;
+          providerId: string;
+          externalKey: string;
+          owner?: string;
+          flaky: boolean;
+          stale: boolean;
+        }>;
+      }>("/api/v1/qep/automation/mappings"),
   });
 
   const changeMetadata = (): Record<string, string> | undefined => {
@@ -177,6 +195,32 @@ function AutomationHomeView() {
     },
   });
 
+  const mappingMutation = useMutation({
+    mutationFn: (payload: {
+      action:
+        | "upsert"
+        | "mark_flaky"
+        | "clear_flaky"
+        | "mark_stale"
+        | "clear_stale"
+        | "set_owner";
+      providerId: string;
+      externalKey: string;
+      owner?: string;
+    }) =>
+      fetchJson<{
+        mapping: { mappingId: string };
+      }>("/api/v1/qep/automation/mappings", {
+        method: "POST",
+        body: JSON.stringify(payload),
+      }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({
+        queryKey: ["qep-automation", "mappings"],
+      });
+    },
+  });
+
   if (executionsQuery.isLoading) {
     return <QepLoadingState label="Loading automation queue…" />;
   }
@@ -185,7 +229,10 @@ function AutomationHomeView() {
   }
 
   const executions = executionsQuery.data?.executions ?? [];
+  const mappings = mappingsQuery.data?.mappings ?? [];
   const liveModeEnabled = providersQuery.data?.liveModeEnabled === true;
+  const actionBtn =
+    "inline-flex h-7 items-center rounded-md border border-[var(--color-border)] px-2 text-xs disabled:opacity-50";
 
   return (
     <QepPageShell
@@ -234,6 +281,138 @@ function AutomationHomeView() {
           to capture real browser artifacts into evidence storage.
         </p>
       ) : null}
+
+      <QepPanel title="Mapping governance">
+        <div data-testid="qep-automation-mappings">
+          <p className="mb-3 text-sm text-[var(--color-muted-foreground)]">
+            Track provider external keys for flaky / stale governance
+            (SPR-APZQEP-220-C). QEP does not own the runner — this is platform metadata
+            only.
+          </p>
+          <form
+            className="mb-4 grid gap-2 md:grid-cols-4"
+            onSubmit={(event) => {
+              event.preventDefault();
+              if (!mapProviderId.trim() || !mapExternalKey.trim()) return;
+              mappingMutation.mutate({
+                action: "upsert",
+                providerId: mapProviderId.trim(),
+                externalKey: mapExternalKey.trim(),
+                ...(mapOwner.trim() ? { owner: mapOwner.trim() } : {}),
+              });
+              setMapExternalKey("");
+            }}
+          >
+            <label className="block text-sm">
+              providerId
+              <input
+                className="mt-1 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 font-mono text-xs"
+                value={mapProviderId}
+                onChange={(event) => setMapProviderId(event.target.value)}
+                data-testid="qep-automation-mapping-provider"
+              />
+            </label>
+            <label className="block text-sm md:col-span-2">
+              externalKey
+              <input
+                className="mt-1 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 font-mono text-xs"
+                value={mapExternalKey}
+                onChange={(event) => setMapExternalKey(event.target.value)}
+                placeholder="suite/login.spec.ts"
+                data-testid="qep-automation-mapping-external-key"
+              />
+            </label>
+            <label className="block text-sm">
+              owner
+              <input
+                className="mt-1 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-xs"
+                value={mapOwner}
+                onChange={(event) => setMapOwner(event.target.value)}
+                placeholder="optional"
+                data-testid="qep-automation-mapping-owner"
+              />
+            </label>
+            <div className="md:col-span-4">
+              <Button
+                type="submit"
+                size="sm"
+                disabled={
+                  mappingMutation.isPending ||
+                  !mapProviderId.trim() ||
+                  !mapExternalKey.trim()
+                }
+              >
+                Add mapping
+              </Button>
+            </div>
+          </form>
+          {mappingsQuery.isError ? (
+            <QepErrorState message={(mappingsQuery.error as Error).message} />
+          ) : mappingsQuery.isLoading ? (
+            <QepLoadingState label="Loading mappings…" />
+          ) : mappings.length === 0 ? (
+            <QepEmptyState title="No mappings yet — add a provider + external key." />
+          ) : (
+            <QepTable
+              caption="Automation mappings"
+              columns={[
+                "Provider",
+                "External key",
+                "Owner",
+                "Flaky",
+                "Stale",
+                "Actions",
+              ]}
+              rows={mappings.map((row) => ({
+                id: row.mappingId,
+                cells: [
+                  row.providerId,
+                  row.externalKey,
+                  row.owner ?? "—",
+                  row.flaky ? "Yes" : "No",
+                  row.stale ? "Yes" : "No",
+                  <div
+                    key={`${row.mappingId}:actions`}
+                    className="flex flex-wrap gap-1"
+                  >
+                    <button
+                      type="button"
+                      className={actionBtn}
+                      disabled={mappingMutation.isPending}
+                      onClick={() =>
+                        mappingMutation.mutate({
+                          action: row.flaky ? "clear_flaky" : "mark_flaky",
+                          providerId: row.providerId,
+                          externalKey: row.externalKey,
+                        })
+                      }
+                    >
+                      {row.flaky ? "Clear" : "Mark flaky"}
+                    </button>
+                    <button
+                      type="button"
+                      className={actionBtn}
+                      disabled={mappingMutation.isPending}
+                      onClick={() =>
+                        mappingMutation.mutate({
+                          action: row.stale ? "clear_stale" : "mark_stale",
+                          providerId: row.providerId,
+                          externalKey: row.externalKey,
+                        })
+                      }
+                    >
+                      {row.stale ? "Clear stale" : "Mark stale"}
+                    </button>
+                  </div>,
+                ],
+              }))}
+            />
+          )}
+          {mappingMutation.isError ? (
+            <QepErrorState message={(mappingMutation.error as Error).message} />
+          ) : null}
+        </div>
+      </QepPanel>
 
       <QepPanel title="Link to SCM change (F3 graph edge)">
         <label className="mb-2 block text-sm">

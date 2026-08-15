@@ -9,6 +9,17 @@ Official Greenbone CE containers — **separate** compose project from portal an
 | UI      | `http://127.0.0.1:9392` only (not public)                        |
 | Role    | Network/host VA → export findings → APZQEP security ingest (F11) |
 
+## APZHUB path
+
+**GMP API deferred.** Operator flow:
+
+1. Run `scan-*.sh` (gvm-tools) against Owner-approved targets.
+2. Artefacts land under `~/apztools/security/out/greenbone/` (e.g. `…/lovebloom/greenbone-findings.json`).
+3. List via `GET /api/v1/apzpen/providers/greenbone/artefacts` (APZPEN read).
+4. Ingest into an engagement: paste/upload in APZPEN Provider ingest, or when `APZPEN_GREENBONE_ARTEFACT_INGEST=true` POST `/api/v1/apzpen/engagements/:id/ingest` with `{ "fromArtefactPath": "…" }` / `artefactPath` (path must stay under the greenbone out dir).
+
+Catalogue status: **ingest_ready** · not dispatchable.
+
 ## Start / stop
 
 ```bash

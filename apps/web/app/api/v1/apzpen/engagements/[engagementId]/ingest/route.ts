@@ -9,6 +9,11 @@ import { jsonDataResponse } from "@/lib/api/v1/response";
 import { actorEmail, requireApzpenAccess, resolveTenantId } from "@/lib/apzpen/access";
 import { ApzpenDomainError } from "@/lib/apzpen/domain";
 import {
+  isGreenboneArtefactIngestEnabled,
+  isPathUnderGreenboneRoot,
+  readGreenboneArtefact,
+} from "@/lib/apzpen/greenbone-artefact";
+import {
   ingestDispatchJobArtefact,
   ingestProviderArtefact,
 } from "@/lib/apzpen/service";
@@ -54,6 +59,7 @@ async function handlePost(
   let payload: unknown;
   let rawText: string | undefined;
   let jobId: string | undefined;
+  let artefactPath: string | undefined;
 
   try {
     if (contentType.includes("application/json")) {
@@ -63,18 +69,71 @@ async function handlePost(
         payload?: unknown;
         rawText?: string;
         jobId?: string;
+        /** Server-side path under greenbone out (requires APZPEN_GREENBONE_ARTEFACT_INGEST=true). */
+        artefactPath?: string;
+        fromArtefactPath?: string;
       };
       jobId = body.jobId;
       format = body.format;
       toolId = body.toolId;
       payload = body.payload;
       rawText = body.rawText;
+      artefactPath = body.fromArtefactPath?.trim() || body.artefactPath?.trim();
     } else {
       rawText = await request.text();
       format =
         (request.nextUrl.searchParams.get("format") as ProviderIngestFormat) || "auto";
       toolId =
         (request.nextUrl.searchParams.get("toolId") as ProviderToolId) || undefined;
+    }
+
+    if (artefactPath) {
+      if (!isGreenboneArtefactIngestEnabled()) {
+        throw new PlatformApiHttpError(403, {
+          code: "FORBIDDEN",
+          message:
+            "Greenbone artefact-path ingest disabled — set APZPEN_GREENBONE_ARTEFACT_INGEST=true",
+        });
+      }
+      if (!isPathUnderGreenboneRoot(artefactPath)) {
+        throw new PlatformApiHttpError(400, {
+          code: "VALIDATION",
+          message: "artefactPath must be under security/out/greenbone",
+        });
+      }
+      let artefactPayload: unknown;
+      try {
+        artefactPayload = readGreenboneArtefact(artefactPath);
+      } catch (error) {
+        throw new PlatformApiHttpError(400, {
+          code: "VALIDATION",
+          message:
+            error instanceof Error
+              ? error.message
+              : "Unable to read Greenbone artefact",
+        });
+      }
+      const result = ingestProviderArtefact({
+        tenantId,
+        engagementId,
+        createdBy: actorEmail(context),
+        format: format ?? "simplified",
+        toolId: toolId ?? "greenbone",
+        payload: artefactPayload,
+      });
+      return jsonDataResponse(
+        {
+          format: result.format,
+          toolId: result.toolId,
+          parsedCount: result.parsedCount,
+          createdCount: result.created.length,
+          skipped: result.skipped,
+          findings: result.created,
+          artefactPath,
+        },
+        context.tracing,
+        { status: 201 },
+      );
     }
 
     if (jobId) {

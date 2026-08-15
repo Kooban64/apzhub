@@ -66,10 +66,10 @@ export const APZPEN_PROVIDERS: readonly ApzpenProvider[] = [
     id: "greenbone",
     name: "Greenbone / OpenVAS CE",
     discipline: "VA",
-    status: "ops_cluster",
+    status: "ingest_ready",
     dispatchable: false,
     notes:
-      "apzqep-greenbone compose · @apzhub/integration-greenbone normalizeGreenboneSimplified · ingest artefacts",
+      "Operator scan (gvm-tools/script) → artefact ingest; GMP API deferred; dispatchable false",
   },
   {
     id: "faraday",

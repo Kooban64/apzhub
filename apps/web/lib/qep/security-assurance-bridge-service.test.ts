@@ -8,6 +8,7 @@ const listProjectSourceBindings = vi.fn();
 const appendQepAuditEvent = vi.fn();
 const listChangeEvents = vi.fn();
 const getRepository = vi.fn();
+const getGreenboneFreshness = vi.fn();
 
 vi.mock("@/lib/commercial/product-access", () => ({
   hasProductAccess: (...args: unknown[]) => hasProductAccess(...args),
@@ -21,6 +22,10 @@ vi.mock("@/lib/commercial/resolve-entitlements", () => ({
 vi.mock("@/lib/apzpen/service", () => ({
   listTenantEngagements: (...args: unknown[]) => listTenantEngagements(...args),
   getEngagementPosture: (...args: unknown[]) => getEngagementPosture(...args),
+}));
+
+vi.mock("@/lib/apzpen/greenbone-freshness", () => ({
+  getGreenboneFreshness: (...args: unknown[]) => getGreenboneFreshness(...args),
 }));
 
 vi.mock("@/lib/commercial/project-source-bindings", () => ({
@@ -46,6 +51,12 @@ describe("getSecurityAssuranceSummary", () => {
     listTenantEngagements.mockReturnValue([]);
     listProjectSourceBindings.mockReturnValue([]);
     listChangeEvents.mockResolvedValue([]);
+    getGreenboneFreshness.mockResolvedValue({
+      toolId: "greenbone",
+      probedAt: "2026-08-15T07:00:00.000Z",
+      status: "ok",
+      detail: "Reachable at http://127.0.0.1:9392 (HTTP 200)",
+    });
   });
 
   it("returns not_entitled when org has subscriptions but pentest is missing", async () => {
@@ -67,6 +78,7 @@ describe("getSecurityAssuranceSummary", () => {
     expect(result.summary.detail).toMatch(
       /APZPEN \(Security Assurance\) is not entitled/i,
     );
+    expect(result.summary.vaFreshness?.toolId).toBe("greenbone");
     expect(result.bridge.qepEntitled).toBe(true);
     expect(result.bridge.penEntitled).toBe(false);
     expect(result.engagementCount).toBe(0);
@@ -93,8 +105,10 @@ describe("getSecurityAssuranceSummary", () => {
 
     expect(result.summary.status).toBe("unavailable");
     expect(result.summary.entitled).toBe(true);
+    expect(result.summary.vaFreshness?.status).toBe("ok");
     expect(result.bridge.qepEntitled).toBe(false);
     expect(result.bridge.penEntitled).toBe(false);
     expect(listTenantEngagements).toHaveBeenCalledWith("tenant-1");
+    expect(getGreenboneFreshness).toHaveBeenCalled();
   });
 });

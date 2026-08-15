@@ -173,6 +173,12 @@ function HomeCommandCentreView() {
           high: number;
           openCount: number;
           assessmentPosition?: string;
+          vaFreshness?: {
+            toolId: string;
+            probedAt: string;
+            status: string;
+            detail: string;
+          };
         };
       }>("/api/v1/qep/security-assurance"),
     refetchInterval: 30_000,
@@ -264,6 +270,16 @@ function HomeCommandCentreView() {
                   <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">
                     Open critical {security.critical} · high {security.high} · open{" "}
                     {security.openCount}
+                  </p>
+                ) : null}
+                {security.vaFreshness ? (
+                  <p
+                    className="mt-1 text-xs text-[var(--color-muted-foreground)]"
+                    data-testid="qep-home-security-va-freshness"
+                  >
+                    VA freshness ({security.vaFreshness.toolId}):{" "}
+                    {security.vaFreshness.status} — {security.vaFreshness.detail} ·
+                    probed {security.vaFreshness.probedAt}
                   </p>
                 ) : null}
               </div>

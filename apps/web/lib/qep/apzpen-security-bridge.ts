@@ -39,6 +39,13 @@ export type SecurityAssuranceSummary = {
    */
   readonly reviewClear: boolean;
   readonly detail: string;
+  /** Optional Greenbone VA probe freshness (ENT-001 / BRIDGE). */
+  readonly vaFreshness?: {
+    readonly toolId: string;
+    readonly probedAt: string;
+    readonly status: string;
+    readonly detail: string;
+  };
 };
 
 function engagementHref(engagementId?: string): string {

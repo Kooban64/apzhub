@@ -59,6 +59,12 @@ type SecurityAssurancePayload = {
     high: number;
     openCount: number;
     assessmentPosition?: string;
+    vaFreshness?: {
+      toolId: string;
+      probedAt: string;
+      status: string;
+      detail: string;
+    };
   };
 };
 
@@ -113,9 +119,12 @@ function ReleaseReadinessView() {
   const security = securityQuery.data?.summary;
   const securityOk = security?.reviewClear === true;
   const securityStatus = security?.status ?? "unavailable";
+  const freshnessLine = security?.vaFreshness
+    ? ` VA freshness (${security.vaFreshness.toolId}): ${security.vaFreshness.status} — ${security.vaFreshness.detail} (probed ${security.vaFreshness.probedAt}).`
+    : "";
   const securityDetail = securityQuery.isError
     ? `Unable to load APZPEN posture: ${(securityQuery.error as Error).message}`
-    : `[${securityStatus}] ${security?.detail ?? "Security assurance posture unavailable."}`;
+    : `[${securityStatus}] ${security?.detail ?? "Security assurance posture unavailable."}${freshnessLine}`;
   const securityHref = security?.href?.trim() || "";
 
   const risks = riskQuery.data?.items ?? [];
