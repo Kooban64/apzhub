@@ -62,6 +62,7 @@ function applyIfAbsent(key: string, value: string, applied: string[]): void {
  * - `.secrets/zammad` — ZAMMAD_API_TOKEN
  * - `.secrets/kimai` — KIMAI_API_TOKEN
  * - `.secrets/metabase` — METABASE_API_KEY
+ * - `.secrets/n8n` — APZHUB_WORKFLOW_ENGINE_API_KEY (or N8N_API_KEY)
  * - `.secrets/github-app` — GITHUB_APP_ID / INSTALLATION_ID / PRIVATE_KEY (+ optional webhook secret)
  * - `.secrets/github-app.pem` — optional PEM-only private key file
  */
@@ -216,6 +217,26 @@ export function loadLocalSecrets(options?: {
     }
     if (apiKey) {
       applyIfAbsent("METABASE_API_KEY", apiKey, applied);
+    }
+  }
+
+  const n8nPath = path.join(root, "n8n");
+  if (existsSync(n8nPath)) {
+    loadedFiles.push("n8n");
+    const raw = readFileSync(n8nPath, "utf8");
+    const kv = parseKeyValueFile(raw);
+    let apiKey =
+      kv.APZHUB_WORKFLOW_ENGINE_API_KEY?.replace(/\s+/g, "") ||
+      kv.N8N_API_KEY?.replace(/\s+/g, "");
+    if (!apiKey) {
+      // Allow raw JWT / opaque key file (legacy portal-v2 layout).
+      const trimmed = raw.trim().replace(/\s+/g, "");
+      if (trimmed.length >= 16) {
+        apiKey = trimmed;
+      }
+    }
+    if (apiKey) {
+      applyIfAbsent("APZHUB_WORKFLOW_ENGINE_API_KEY", apiKey, applied);
     }
   }
 

@@ -321,6 +321,9 @@ async function createWorkflowEngineBundle(): Promise<
   if (!isWorkflowEngineEnabled()) {
     return undefined;
   }
+  const { ensureLocalSecretsLoaded } = await import("@apzhub/config");
+  ensureLocalSecretsLoaded();
+
   const baseUrl = process.env.APZHUB_WORKFLOW_ENGINE_BASE_URL?.trim();
   if (!baseUrl) {
     throw new Error(
@@ -331,12 +334,20 @@ async function createWorkflowEngineBundle(): Promise<
     process.env.APZHUB_WORKFLOW_ENGINE_API_BASE_URL?.trim() ||
     `${baseUrl.replace(/\/$/, "")}/api/v1`;
   const tenantId =
-    process.env.APZHUB_WORKFLOW_ENGINE_BOOTSTRAP_TENANT_ID?.trim() || "platform";
+    process.env.APZHUB_WORKFLOW_ENGINE_BOOTSTRAP_TENANT_ID?.trim() ||
+    process.env.APZHUB_DEFAULT_TENANT_ID?.trim() ||
+    "t0000001-0000-4000-8000-000000000001";
   const apiKeyRef =
     process.env.APZHUB_WORKFLOW_ENGINE_API_KEY_REF?.trim() ||
     "secret://workflow-engine/api-key";
   const authMode = (process.env.APZHUB_WORKFLOW_ENGINE_AUTH_MODE?.trim() ||
     "api_key") as "api_key" | "personal_access_token" | "basic";
+  const apiKey = process.env.APZHUB_WORKFLOW_ENGINE_API_KEY?.trim();
+  if (!apiKey) {
+    throw new Error(
+      "APZHUB_WORKFLOW_ENGINE_ENABLED=true requires APZHUB_WORKFLOW_ENGINE_API_KEY (prefer .secrets/n8n)",
+    );
+  }
 
   // Dynamic import keeps the engine adapter off the cold path when disabled.
   const { createN8nAdapter } = await import("@apzhub/integration-n8n");
@@ -348,9 +359,16 @@ async function createWorkflowEngineBundle(): Promise<
       authMode,
       apiKeyRef,
     },
-    apiKey: process.env.APZHUB_WORKFLOW_ENGINE_API_KEY,
-    autoInitialise: false,
+    apiKey,
+    autoInitialise: true,
   });
+  const connectResult = await result.adapter.connect({
+    tenantId,
+    correlationId: "n8n-bootstrap-connect",
+  });
+  if (!connectResult.ok) {
+    throw new Error(connectResult.message ?? "n8n adapter connect failed");
+  }
   return createWorkflowEngineServicesForProduction({ adapter: result.adapter });
 }
 

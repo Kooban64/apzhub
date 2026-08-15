@@ -29,6 +29,7 @@
 | [support-zammad-adapter.md](./support-zammad-adapter.md)                     | SPR-OPS-ZAMMAD-001 Support ↔ Zammad       | P1       |
 | [time-kimai-adapter.md](./time-kimai-adapter.md)                             | SPR-OPS-KIMAI-001 Time ↔ Kimai            | P1       |
 | [analytics-metabase-adapter.md](./analytics-metabase-adapter.md)             | SPR-OPS-METABASE-001 Analytics ↔ Metabase | P1       |
+| [workflow-n8n-adapter.md](./workflow-n8n-adapter.md)                         | SPR-OPS-N8N-001 Workflow ↔ n8n            | P1       |
 | [qep-scm-github-live.md](./qep-scm-github-live.md)                           | SPR-210 live SCM                          | P2       |
 | [qep-dispatch-record-only.md](./qep-dispatch-record-only.md)                 | SPR-210 dispatch safety                   | INFO     |
 | [qep-typst-report-pack.md](./qep-typst-report-pack.md)                       | SPR-210 Typst PDF                         | P2       |
