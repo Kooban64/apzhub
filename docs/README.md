@@ -43,6 +43,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-OPS-N8N-002](./sprint/SPR-OPS-N8N-002-workflow-n8n-health-honesty.md)                        | **COMPLETE · DELIVERED** — Workflow health honesty when n8n engine is connected      |
 | [SPR-OPS-LTS-001](./sprint/SPR-OPS-LTS-001-apzhub-owned-engine-topology.md)                       | **COMPLETE · DELIVERED** — engines outside hub · LTS port reservation · cutover plan |
 | [SPR-OPS-LTS-PLANE-001](./sprint/SPR-OPS-LTS-PLANE-001-apzhub-owned-plane-bring-up.md)            | **COMPLETE · DELIVERED** — APZHUB-owned Plane on 19085; Projects retargeted          |
+| [SPR-OPS-LTS-ZAMMAD-001](./sprint/SPR-OPS-LTS-ZAMMAD-001-apzhub-owned-zammad-bring-up.md)         | **COMPLETE · DELIVERED** — APZHUB-owned Zammad on 19081; Support retargeted          |
 | [OWNER-ENGINES-OUTSIDE-HUB](./decisions/OWNER-ENGINES-OUTSIDE-HUB.md)                             | **IN FORCE** — engines external; BetterAuth only; leave legacy alone                 |
 
 ### Priority product build — APZQEP (active)

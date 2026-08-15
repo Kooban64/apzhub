@@ -1,0 +1,164 @@
+# APZHUB-owned Zammad CE/LTS — isolated from legacy apz-zammad-* (18081).
+# Project: apzhub-zammad-lts · publish 127.0.0.1:19081 only.
+
+name: apzhub-zammad-lts
+
+x-zammad-service: &zammad-service
+  image: ${APZ_IMAGE_ZAMMAD}
+  restart: unless-stopped
+  networks: [zammad_lts_net]
+  environment: &zammad-environment
+    MEMCACHE_SERVERS: zammad-memcached:11211
+    POSTGRESQL_DB: ${ZAMMAD_POSTGRES_DB:-zammad_production}
+    POSTGRESQL_HOST: zammad-postgresql
+    POSTGRESQL_USER: ${ZAMMAD_POSTGRES_USER:-zammad}
+    POSTGRESQL_PASS: ${ZAMMAD_POSTGRES_PASS}
+    POSTGRESQL_PORT: "5432"
+    POSTGRESQL_OPTIONS: "?pool=50"
+    REDIS_URL: redis://zammad-redis:6379
+    TZ: ${TZ:-UTC}
+    ELASTICSEARCH_ENABLED: "true"
+    ELASTICSEARCH_HOST: zammad-elasticsearch
+    ELASTICSEARCH_PORT: "9200"
+    ELASTICSEARCH_SCHEMA: http
+    ELASTICSEARCH_USER: ""
+    ELASTICSEARCH_PASS: ""
+    ELASTICSEARCH_NAMESPACE: zammad
+    ZAMMAD_FQDN: ${ZAMMAD_FQDN:-127.0.0.1}
+    ZAMMAD_HTTP_TYPE: ${ZAMMAD_HTTP_TYPE:-http}
+    RAILS_SERVE_STATIC_FILES: "true"
+  volumes:
+    - zammad_lts_backup:/var/tmp/zammad:ro
+    - zammad_lts_storage:/opt/zammad/storage
+  depends_on:
+    - zammad-memcached
+    - zammad-postgresql
+    - zammad-redis
+
+services:
+  zammad-elasticsearch:
+    image: ${APZ_IMAGE_ELASTICSEARCH}
+    container_name: apzhub-zammad-lts-es
+    restart: unless-stopped
+    networks: [zammad_lts_net]
+    volumes:
+      - zammad_lts_esdata:/usr/share/elasticsearch/data
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: ${ELASTICSEARCH_JAVA_OPTS:--Xms512m -Xmx512m}
+
+  zammad-postgresql:
+    image: ${APZ_IMAGE_POSTGRES17}
+    container_name: apzhub-zammad-lts-pg
+    restart: unless-stopped
+    networks: [zammad_lts_net]
+    volumes:
+      - zammad_lts_pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${ZAMMAD_POSTGRES_DB:-zammad_production}
+      POSTGRES_USER: ${ZAMMAD_POSTGRES_USER:-zammad}
+      POSTGRES_PASSWORD: ${ZAMMAD_POSTGRES_PASS}
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${ZAMMAD_POSTGRES_USER:-zammad} -d ${ZAMMAD_POSTGRES_DB:-zammad_production}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  zammad-memcached:
+    image: ${APZ_IMAGE_MEMCACHED}
+    container_name: apzhub-zammad-lts-memcached
+    restart: unless-stopped
+    networks: [zammad_lts_net]
+    command: memcached -m 256M
+
+  zammad-redis:
+    image: ${APZ_IMAGE_REDIS8_ALPINE}
+    container_name: apzhub-zammad-lts-redis
+    restart: unless-stopped
+    networks: [zammad_lts_net]
+    volumes:
+      - zammad_lts_redisdata:/data
+
+  zammad-init:
+    <<: *zammad-service
+    container_name: apzhub-zammad-lts-init
+    command: ["zammad-init"]
+    user: "0:0"
+    restart: on-failure
+    depends_on:
+      zammad-postgresql:
+        condition: service_healthy
+      zammad-elasticsearch:
+        condition: service_started
+    volumes:
+      - zammad_lts_backup:/var/tmp/zammad
+      - zammad_lts_storage:/opt/zammad/storage
+
+  zammad-railsserver:
+    <<: *zammad-service
+    container_name: apzhub-zammad-lts-rails
+    command: ["zammad-railsserver"]
+    depends_on:
+      zammad-memcached:
+        condition: service_started
+      zammad-postgresql:
+        condition: service_started
+      zammad-redis:
+        condition: service_started
+      zammad-elasticsearch:
+        condition: service_started
+      zammad-init:
+        condition: service_completed_successfully
+    environment:
+      <<: *zammad-environment
+
+  zammad-websocket:
+    <<: *zammad-service
+    container_name: apzhub-zammad-lts-ws
+    command: ["zammad-websocket"]
+    depends_on:
+      zammad-init:
+        condition: service_completed_successfully
+    environment:
+      <<: *zammad-environment
+
+  zammad-scheduler:
+    <<: *zammad-service
+    container_name: apzhub-zammad-lts-scheduler
+    command: ["zammad-scheduler"]
+    depends_on:
+      zammad-init:
+        condition: service_completed_successfully
+    environment:
+      <<: *zammad-environment
+
+  zammad-nginx:
+    <<: *zammad-service
+    container_name: apzhub-zammad-lts-nginx
+    command: ["zammad-nginx"]
+    ports:
+      - "127.0.0.1:${ZAMMAD_PUBLISH_PORT:-19081}:${NGINX_PORT:-8080}"
+    depends_on:
+      zammad-railsserver:
+        condition: service_started
+    environment:
+      <<: *zammad-environment
+      NGINX_PORT: ${NGINX_PORT:-8080}
+
+networks:
+  zammad_lts_net:
+    name: apzhub_zammad_lts_net
+    driver: bridge
+
+volumes:
+  zammad_lts_esdata:
+  zammad_lts_pgdata:
+  zammad_lts_redisdata:
+  zammad_lts_backup:
+  zammad_lts_storage:
