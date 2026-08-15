@@ -113,7 +113,13 @@ function seedProductAccess(persona: DemoPersona, userId: string): void {
       grantUserId: persona.kind === "org_member" ? undefined : userId,
     });
     // SPR-APZPRD-002-A — merge Projects (and pentest for admins) onto plan grants.
-    const productKeys = new Set<ProductKey>(["qep", "projects", "pentest", "support"]);
+    const productKeys = new Set<ProductKey>([
+      "qep",
+      "projects",
+      "pentest",
+      "support",
+      "time",
+    ]);
     setUserProductGrants({
       organisationId: persona.tenantId,
       userId,
@@ -155,6 +161,11 @@ export async function ensureDemoPersonasSeeded(): Promise<{
   });
   subscribeOrganisationToPackage({
     organisationId: DEMO_ORG_TENANT_ID,
+    packageId: "pkg.apzprd.time",
+    planId: "plan.business",
+  });
+  subscribeOrganisationToPackage({
+    organisationId: DEMO_ORG_TENANT_ID,
     packageId: "pkg.apzpen.starter",
     planId: "plan.business",
   });
@@ -166,6 +177,11 @@ export async function ensureDemoPersonasSeeded(): Promise<{
   subscribeOrganisationToPackage({
     organisationId: "t-individual-self",
     packageId: "pkg.apzprd.service",
+    planId: "plan.individual",
+  });
+  subscribeOrganisationToPackage({
+    organisationId: "t-individual-self",
+    packageId: "pkg.apzprd.time",
     planId: "plan.individual",
   });
   subscribeOrganisationToPackage({

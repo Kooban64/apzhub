@@ -79,6 +79,8 @@ function enqueueTimeArchive(
 
 /**
  * Wrap Time gateway surface so successful mutations enqueue journal publications.
+ * Important: pipeline-wrapped services are Proxies — object spread does not copy
+ * trapped methods, so read operations must be forwarded explicitly.
  */
 export function withTimeSearchPublicationOrchestration(
   gateway: TimePlatformGateway,
@@ -86,9 +88,11 @@ export function withTimeSearchPublicationOrchestration(
   mapper: TimeSearchEntityMapper = new TimeSearchEntityMapper(),
 ): TimePlatformGateway {
   return {
-    ...gateway,
+    tracking: gateway.tracking,
+    reporting: gateway.reporting,
     activities: {
-      ...gateway.activities,
+      list: (ctx, query) => gateway.activities.list(ctx, query),
+      get: (ctx, id) => gateway.activities.get(ctx, id),
       async create(ctx, input) {
         const entity = await gateway.activities.create(ctx, input);
         enqueueTimeUpsert(dispatcher, ctx, "time_activity", entity, "publish", mapper);
@@ -106,7 +110,8 @@ export function withTimeSearchPublicationOrchestration(
       },
     },
     customers: {
-      ...gateway.customers,
+      list: (ctx, query) => gateway.customers.list(ctx, query),
+      get: (ctx, id) => gateway.customers.get(ctx, id),
       async create(ctx, input) {
         const entity = await gateway.customers.create(ctx, input);
         enqueueTimeUpsert(dispatcher, ctx, "time_customer", entity, "publish", mapper);
@@ -124,7 +129,8 @@ export function withTimeSearchPublicationOrchestration(
       },
     },
     projects: {
-      ...gateway.projects,
+      list: (ctx, query) => gateway.projects.list(ctx, query),
+      get: (ctx, id) => gateway.projects.get(ctx, id),
       async create(ctx, input) {
         const entity = await gateway.projects.create(ctx, input);
         enqueueTimeUpsert(dispatcher, ctx, "time_project", entity, "publish", mapper);
@@ -142,7 +148,8 @@ export function withTimeSearchPublicationOrchestration(
       },
     },
     timesheets: {
-      ...gateway.timesheets,
+      list: (ctx, query) => gateway.timesheets.list(ctx, query),
+      get: (ctx, id) => gateway.timesheets.get(ctx, id),
       async create(ctx, input) {
         const entity = await gateway.timesheets.create(ctx, input);
         enqueueTimeUpsert(dispatcher, ctx, "time_entry", entity, "publish", mapper);
@@ -165,7 +172,8 @@ export function withTimeSearchPublicationOrchestration(
       },
     },
     tags: {
-      ...gateway.tags,
+      list: (ctx, query) => gateway.tags.list(ctx, query),
+      get: (ctx, id) => gateway.tags.get(ctx, id),
       async create(ctx, input) {
         const entity = await gateway.tags.create(ctx, input);
         enqueueTimeUpsert(dispatcher, ctx, "time_tag", entity, "publish", mapper);

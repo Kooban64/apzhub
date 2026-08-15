@@ -210,11 +210,22 @@ async function createTimeServicesBundle(): Promise<TimePlatformServicesBundle> {
     domainMode === "in_memory" && process.env.NODE_ENV !== "production";
 
   if (isKimaiIntegrationEnabled()) {
+    const { ensureLocalSecretsLoaded } = await import("@apzhub/config");
+    ensureLocalSecretsLoaded();
     const { createKimaiAdapter } = await import("@apzhub/integration-kimai");
-    const tenantId = process.env.KIMAI_BOOTSTRAP_TENANT_ID ?? "platform";
-    const baseUrl = process.env.KIMAI_BASE_URL ?? "http://localhost:8001";
+    const tenantId =
+      process.env.KIMAI_BOOTSTRAP_TENANT_ID?.trim() ||
+      process.env.APZHUB_DEFAULT_TENANT_ID?.trim() ||
+      "t0000001-0000-4000-8000-000000000001";
+    const baseUrl = process.env.KIMAI_BASE_URL ?? "http://localhost:18083";
     const apiBaseUrl =
       process.env.KIMAI_API_BASE_URL ?? `${baseUrl.replace(/\/$/, "")}/api`;
+    const apiToken = process.env.KIMAI_API_TOKEN?.trim();
+    if (!apiToken) {
+      throw new Error(
+        "KIMAI_INTEGRATION_ENABLED=true requires KIMAI_API_TOKEN (prefer .secrets/kimai)",
+      );
+    }
     const result = await createKimaiAdapter({
       tenantId,
       kimai: {
@@ -223,9 +234,16 @@ async function createTimeServicesBundle(): Promise<TimePlatformServicesBundle> {
         authMode: "bearer",
         apiTokenRef: "kimai/api-token",
       },
-      apiToken: process.env.KIMAI_API_TOKEN,
-      autoInitialise: false,
+      apiToken,
+      autoInitialise: true,
     });
+    const connectResult = await result.adapter.connect({
+      tenantId,
+      correlationId: "kimai-bootstrap-connect",
+    });
+    if (!connectResult.ok) {
+      throw new Error(connectResult.message ?? "Kimai adapter connect failed");
+    }
     return createTimePlatformServicesWithKimai(result.adapter);
   }
 

@@ -60,6 +60,7 @@ function applyIfAbsent(key: string, value: string, applied: string[]): void {
  * - `.secrets/meilisearch` — MEILI_MASTER_KEY / SEARCH_MEILISEARCH_API_KEY
  * - `.secrets/plane` — PLANE_API_TOKEN (+ optional PLANE_WORKSPACE_ID / WEBHOOK_SECRET)
  * - `.secrets/zammad` — ZAMMAD_API_TOKEN
+ * - `.secrets/kimai` — KIMAI_API_TOKEN
  * - `.secrets/github-app` — GITHUB_APP_ID / INSTALLATION_ID / PRIVATE_KEY (+ optional webhook secret)
  * - `.secrets/github-app.pem` — optional PEM-only private key file
  */
@@ -187,6 +188,15 @@ export function loadLocalSecrets(options?: {
         kv.ZAMMAD_API_TOKEN.replace(/\s+/g, ""),
         applied,
       );
+    }
+  }
+
+  const kimaiPath = path.join(root, "kimai");
+  if (existsSync(kimaiPath)) {
+    loadedFiles.push("kimai");
+    const kv = parseKeyValueFile(readFileSync(kimaiPath, "utf8"));
+    if (kv.KIMAI_API_TOKEN) {
+      applyIfAbsent("KIMAI_API_TOKEN", kv.KIMAI_API_TOKEN.replace(/\s+/g, ""), applied);
     }
   }
 

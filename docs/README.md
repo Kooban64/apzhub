@@ -35,6 +35,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-POLISH-001](./sprint/SPR-POLISH-001-entitlements-shell-consistency.md)                       | **COMPLETE · DELIVERED** — entitlements UX + shell consistency across pillars        |
 | [SPR-OPS-PLANE-001](./sprint/SPR-OPS-PLANE-001-projects-plane-adapter-host.md)                    | **COMPLETE · DELIVERED** — `.secrets/plane` loader + host enablement runbook         |
 | [SPR-OPS-ZAMMAD-001](./sprint/SPR-OPS-ZAMMAD-001-support-zammad-adapter-host.md)                  | **COMPLETE · DELIVERED** — `.secrets/zammad` loader + Support host enablement        |
+| [SPR-OPS-KIMAI-001](./sprint/SPR-OPS-KIMAI-001-time-kimai-adapter-host.md)                        | **COMPLETE · DELIVERED** — `.secrets/kimai` loader + Time host enablement            |
 
 ### Priority product build — APZQEP (active)
 
