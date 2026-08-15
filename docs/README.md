@@ -34,7 +34,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-APZQEP-203](./sprint/SPR-APZQEP-203-governed-quality-assist.md)                 | **DELIVERED** — audited quality assist · optional flagged LLM · human acceptance      |
 | [SPR-APZQEP-204](./sprint/SPR-APZQEP-204-enterprise-ga-hardening.md)                 | **DELIVERED** — durable evidence · QEP search · OpenAPI · project ACL                 |
 | [SPR-APZQEP-210](./sprint/SPR-APZQEP-210-product-definition-closeout.md)             | **COMPLETE · DELIVERED** — product-definition MVP closeout (WF · stubs · auth)        |
-| [SPR-APZQEP-220](./sprint/SPR-APZQEP-220-phase-2-product-completion.md)              | **AUTHORISED · IN PROGRESS** — Phase 2 (QI · Knowledge · automation/risk/integration) |
+| [SPR-APZQEP-220](./sprint/SPR-APZQEP-220-phase-2-product-completion.md)              | **COMPLETE · DELIVERED** — Phase 2 (QI · Knowledge · automation/risk/integration)     |
 | [SPR-APZQEP-230](./sprint/SPR-APZQEP-230-phase-3-and-ai-horizon.md)                  | **QUEUED** — Phase 3 continuous signals + AI/MCP (Wave B)                             |
 | [SPR-BRIDGE-001](./sprint/SPR-BRIDGE-001-qep-apzpen-assurance-bridge.md)             | **COMPLETE · DELIVERED** — QEP ↔ APZPEN assurance → readiness bridge                  |
 | [APZQEP PRODUCT-STATUS](./products/apzqep/PRODUCT-STATUS.md)                         | V1.1 **PRODUCTION READY · CLOSED** — kernel frozen; 200 = V1.2 / Wave-6-class         |
