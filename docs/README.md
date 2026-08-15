@@ -8,23 +8,26 @@ This directory is the canonical source for APZHUB product and architecture docum
 
 **APZHUB is the internal operating platform. Customers buy solutions — not APZHUB.**
 
-| Document                                                                            | Description                                                                          |
-| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| [APZOR Commercial Pillars](./strategy/APZOR-COMMERCIAL-PILLARS.md)                  | **Authority** — platform vs sellable solutions; one platform, three pillars          |
-| [SaaS Commercial Model](./strategy/commercial/SAAS-COMMERCIAL-MODEL.md)             | **Authority (LOCKED)** — tenants, packages, APZPRD composability, Law/Knowledge/Sign |
-| [APZQEP](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md)              | Quality Engineering Platform — _Can we release with confidence?_                     |
-| [APZPEN](./strategy/APZPEN-ENTERPRISE-SECURITY-ASSURANCE-PLATFORM.md)               | Security Assurance & Pen Testing — _Can we demonstrate we are secure?_               |
-| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)            | **PARTIALLY UNPARKED** — Greenbone/Faraday via ENT-001; WORM/SBOM/… still parked     |
-| [APZPRD](./strategy/APZPRD-ENTERPRISE-PRODUCTIVITY-PLATFORM.md)                     | Productivity Platform — _Can our people work effectively?_ (composable)              |
-| [SPR-COMM-001](./sprint/SPR-COMM-001-catalogue-entitlements-tenant-switch.md)       | **DELIVERED** — packages, entitlements, tenant switch, soft APZPEN gate              |
-| [SPR-COMM-002](./sprint/SPR-COMM-002-org-packages-tenant-switch-source.md)          | **DELIVERED** — org packages UI, tenant switcher, project source (QEP+PEN)           |
-| [OWNER BetterAuth sole AuthN](./decisions/OWNER-BETTERAUTH-SOLE-AUTHN.md)           | **IN FORCE** — BetterAuth only; Authentik retire with APZPRD                         |
-| [OWNER Full product bar (Option 3)](./decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md) | **SATISFIED · PROGRAMME COMPLETE** — Phase 2 + engines + bridge + Phase 3/AI         |
-| [SPR-FULL-001](./sprint/SPR-FULL-001-full-product-bar-option-3.md)                  | **PROGRAMME COMPLETE** — Option 3 Waves A+B delivered (220 · ENT · BRIDGE · 230)     |
-| [OWNER Post–Option 3 hardening](./decisions/OWNER-POST-OPTION-3-HARDENING.md)       | **SATISFIED · DELIVERED** — GMP · Faraday prod path · MCP stdio · platform-services  |
-| [SPR-FULL-002](./sprint/SPR-FULL-002-post-option-3-hardening.md)                    | **COMPLETE · DELIVERED** — post-bar hardening (GMP · Faraday · MCP stdio · services) |
-| [SPR-APZPRD-001](./sprint/SPR-APZPRD-001-betterauth-productivity-workspace.md)      | **COMPLETE · DELIVERED** — BetterAuth sole AuthN; Projects health without Authentik  |
-| [SPR-APZPRD-002](./sprint/SPR-APZPRD-002-entitled-projects-workbench.md)            | **COMPLETE · DELIVERED** — entitled Projects workbench (catalogue → adapter)         |
+| Document                                                                                          | Description                                                                          |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [APZOR Commercial Pillars](./strategy/APZOR-COMMERCIAL-PILLARS.md)                                | **Authority** — platform vs sellable solutions; one platform, three pillars          |
+| [SaaS Commercial Model](./strategy/commercial/SAAS-COMMERCIAL-MODEL.md)                           | **Authority (LOCKED)** — tenants, packages, APZPRD composability, Law/Knowledge/Sign |
+| [APZQEP](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md)                            | Quality Engineering Platform — _Can we release with confidence?_                     |
+| [APZPEN](./strategy/APZPEN-ENTERPRISE-SECURITY-ASSURANCE-PLATFORM.md)                             | Security Assurance & Pen Testing — _Can we demonstrate we are secure?_               |
+| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)                          | **PARTIALLY UNPARKED** — Greenbone/Faraday via ENT-001; WORM/SBOM/… still parked     |
+| [APZPRD](./strategy/APZPRD-ENTERPRISE-PRODUCTIVITY-PLATFORM.md)                                   | Productivity Platform — _Can our people work effectively?_ (composable)              |
+| [SPR-COMM-001](./sprint/SPR-COMM-001-catalogue-entitlements-tenant-switch.md)                     | **DELIVERED** — packages, entitlements, tenant switch, soft APZPEN gate              |
+| [SPR-COMM-002](./sprint/SPR-COMM-002-org-packages-tenant-switch-source.md)                        | **DELIVERED** — org packages UI, tenant switcher, project source (QEP+PEN)           |
+| [OWNER BetterAuth sole AuthN](./decisions/OWNER-BETTERAUTH-SOLE-AUTHN.md)                         | **IN FORCE** — BetterAuth only; Authentik retire with APZPRD                         |
+| [OWNER Full product bar (Option 3)](./decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md)               | **SATISFIED · PROGRAMME COMPLETE** — Phase 2 + engines + bridge + Phase 3/AI         |
+| [SPR-FULL-001](./sprint/SPR-FULL-001-full-product-bar-option-3.md)                                | **PROGRAMME COMPLETE** — Option 3 Waves A+B delivered (220 · ENT · BRIDGE · 230)     |
+| [OWNER Post–Option 3 hardening](./decisions/OWNER-POST-OPTION-3-HARDENING.md)                     | **SATISFIED · DELIVERED** — GMP · Faraday prod path · MCP stdio · platform-services  |
+| [SPR-FULL-002](./sprint/SPR-FULL-002-post-option-3-hardening.md)                                  | **COMPLETE · DELIVERED** — post-bar hardening (GMP · Faraday · MCP stdio · services) |
+| [OWNER Commercial pillar operator guides](./decisions/OWNER-COMMERCIAL-PILLAR-OPERATOR-GUIDES.md) | **SATISFIED · DELIVERED** — scoped how-to (QEP · PEN · PRD)                          |
+| [SPR-DOCS-001](./sprint/SPR-DOCS-001-commercial-pillar-operator-guides.md)                        | **COMPLETE · DELIVERED** — commercial pillar operator user guides                    |
+| [Commercial pillar operator guides (index)](./guides/COMMERCIAL-PILLAR-OPERATOR-GUIDES.md)        | APZQEP · APZPEN · APZPRD how-to index                                                |
+| [SPR-APZPRD-001](./sprint/SPR-APZPRD-001-betterauth-productivity-workspace.md)                    | **COMPLETE · DELIVERED** — BetterAuth sole AuthN; Projects health without Authentik  |
+| [SPR-APZPRD-002](./sprint/SPR-APZPRD-002-entitled-projects-workbench.md)                          | **COMPLETE · DELIVERED** — entitled Projects workbench (catalogue → adapter)         |
 
 ### Priority product build — APZQEP (active)
 
@@ -40,30 +43,33 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-APZQEP-230](./sprint/SPR-APZQEP-230-phase-3-and-ai-horizon.md)                  | **COMPLETE · DELIVERED** — Phase 3 continuous signals + AI/MCP (Wave B)               |
 | [SPR-BRIDGE-001](./sprint/SPR-BRIDGE-001-qep-apzpen-assurance-bridge.md)             | **COMPLETE · DELIVERED** — QEP ↔ APZPEN assurance → readiness bridge                  |
 | [APZQEP PRODUCT-STATUS](./products/apzqep/PRODUCT-STATUS.md)                         | V1.1 **PRODUCTION READY · CLOSED** — kernel frozen; 200 = V1.2 / Wave-6-class         |
+| [APZQEP operator user guide](./products/apzqep/guides/OPERATOR-USER-GUIDE.md)        | **How-to** — full product bar (Phase 2–3 · AI/MCP · bridge)                           |
 | [APZQEP pillar vision](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md) | Experience + commercial identity authority                                            |
 
 ### APZPEN (CE complete — enterprise parked)
 
-| Document                                                                    | Description                                                                                    |
-| --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| [SPR-APZPEN-001](./sprint/SPR-APZPEN-001-security-assurance-foundation.md)  | **DELIVERED** — Engagement → RoE → Findings                                                    |
-| [SPR-APZPEN-002](./sprint/SPR-APZPEN-002-provider-ingest.md)                | **DELIVERED** — Provider ingest, schedule, certify                                             |
-| [SPR-APZPEN-003](./sprint/SPR-APZPEN-003-live-runner-dispatch.md)           | **DELIVERED** — Live runner dispatch (scope-gated)                                             |
-| [SPR-APZPEN-004](./sprint/SPR-APZPEN-004-ce-product-complete.md)            | **DELIVERED** — CE product complete incl. MobSF, assets, reports                               |
-| [SPR-APZPEN-005](./sprint/SPR-APZPEN-005-github-portal-pdf-ai.md)           | **DELIVERED** — GitHub PR security, customer portal, PDF, AI assist                            |
-| [SPR-APZPEN-006](./sprint/SPR-APZPEN-006-openai-github-app-branded-pdf.md)  | **DELIVERED** — OpenAI intelligence, GitHub App JWT, branded Typst PDF                         |
-| [SPR-APZPEN-007](./sprint/SPR-APZPEN-007-product-completion.md)             | **DELIVERED** — Access, source→sync, findings/portal UX, functional close                      |
-| [SPR-APZPEN-008](./sprint/SPR-APZPEN-008-workflow-surfaces-e2e.md)          | **DELIVERED** — Remediation/Retests/Evidence/Certification queues + E2E                        |
-| [SPR-APZPEN-009](./sprint/SPR-APZPEN-009-operator-ux-close.md)              | **DELIVERED** — Operator assign/evidence, manual findings, assets/portal polish                |
-| [SPR-APZPEN-010](./sprint/SPR-APZPEN-010-ops-loop-close.md)                 | **DELIVERED** — Jobs history, RoE edit, schedule, finding detail                               |
-| [SPR-APZPEN-011](./sprint/SPR-APZPEN-011-operator-polish.md)                | **DELIVERED** — Dispatch target, intelligence apply, portal/schedule polish                    |
-| [SPR-APZPEN-012](./sprint/SPR-APZPEN-012-ops-polish.md)                     | **DELIVERED** — Job re-ingest, due-soon, cert blockers, provider health                        |
-| [SPR-APZPEN-013](./sprint/SPR-APZPEN-013-governance-ops-close.md)           | **DELIVERED** — My Work, re-dispatch, granular perms, RoE window, file ingest                  |
-| [SPR-APZPEN-014](./sprint/SPR-APZPEN-014-deferred-closeout.md)              | **DELIVERED** — Schedule worker, cert ledger, evidence vault, Postgres SoR, thin graph, GitLab |
-| [SPR-APZPEN-ENT-001](./sprint/SPR-APZPEN-ENT-001-greenbone-faraday-path.md) | **COMPLETE · DELIVERED** — Greenbone + Faraday artefact paths; Kali runner only                |
-| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)    | **PARTIALLY UNPARKED** — Greenbone/Faraday via ENT-001; other options remain parked            |
-| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)    | **PARKED** — resume on deal / Owner sprint only                                                |
-| [APZ tools host layout](./operations/APZTOOLS-HOST-LAYOUT.md)               | `~/apztools/{security,quality,workbench,shared}` — runner workspaces by pillar                 |
+| Document                                                                      | Description                                                                                    |
+| ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| [SPR-APZPEN-001](./sprint/SPR-APZPEN-001-security-assurance-foundation.md)    | **DELIVERED** — Engagement → RoE → Findings                                                    |
+| [SPR-APZPEN-002](./sprint/SPR-APZPEN-002-provider-ingest.md)                  | **DELIVERED** — Provider ingest, schedule, certify                                             |
+| [SPR-APZPEN-003](./sprint/SPR-APZPEN-003-live-runner-dispatch.md)             | **DELIVERED** — Live runner dispatch (scope-gated)                                             |
+| [SPR-APZPEN-004](./sprint/SPR-APZPEN-004-ce-product-complete.md)              | **DELIVERED** — CE product complete incl. MobSF, assets, reports                               |
+| [SPR-APZPEN-005](./sprint/SPR-APZPEN-005-github-portal-pdf-ai.md)             | **DELIVERED** — GitHub PR security, customer portal, PDF, AI assist                            |
+| [SPR-APZPEN-006](./sprint/SPR-APZPEN-006-openai-github-app-branded-pdf.md)    | **DELIVERED** — OpenAI intelligence, GitHub App JWT, branded Typst PDF                         |
+| [SPR-APZPEN-007](./sprint/SPR-APZPEN-007-product-completion.md)               | **DELIVERED** — Access, source→sync, findings/portal UX, functional close                      |
+| [SPR-APZPEN-008](./sprint/SPR-APZPEN-008-workflow-surfaces-e2e.md)            | **DELIVERED** — Remediation/Retests/Evidence/Certification queues + E2E                        |
+| [SPR-APZPEN-009](./sprint/SPR-APZPEN-009-operator-ux-close.md)                | **DELIVERED** — Operator assign/evidence, manual findings, assets/portal polish                |
+| [SPR-APZPEN-010](./sprint/SPR-APZPEN-010-ops-loop-close.md)                   | **DELIVERED** — Jobs history, RoE edit, schedule, finding detail                               |
+| [SPR-APZPEN-011](./sprint/SPR-APZPEN-011-operator-polish.md)                  | **DELIVERED** — Dispatch target, intelligence apply, portal/schedule polish                    |
+| [SPR-APZPEN-012](./sprint/SPR-APZPEN-012-ops-polish.md)                       | **DELIVERED** — Job re-ingest, due-soon, cert blockers, provider health                        |
+| [SPR-APZPEN-013](./sprint/SPR-APZPEN-013-governance-ops-close.md)             | **DELIVERED** — My Work, re-dispatch, granular perms, RoE window, file ingest                  |
+| [SPR-APZPEN-014](./sprint/SPR-APZPEN-014-deferred-closeout.md)                | **DELIVERED** — Schedule worker, cert ledger, evidence vault, Postgres SoR, thin graph, GitLab |
+| [SPR-APZPEN-ENT-001](./sprint/SPR-APZPEN-ENT-001-greenbone-faraday-path.md)   | **COMPLETE · DELIVERED** — Greenbone + Faraday artefact paths; Kali runner only                |
+| [APZPEN operator user guide](./products/apzpen/guides/OPERATOR-USER-GUIDE.md) | **How-to** — engagements · artefact ingest · optional GMP/Faraday                              |
+| [APZPRD operator user guide](./products/apzprd/guides/OPERATOR-USER-GUIDE.md) | **How-to** — entitled Projects workbench · BetterAuth                                          |
+| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)      | **PARTIALLY UNPARKED** — Greenbone/Faraday via ENT-001; other options remain parked            |
+| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)      | **PARKED** — resume on deal / Owner sprint only                                                |
+| [APZ tools host layout](./operations/APZTOOLS-HOST-LAYOUT.md)                 | `~/apztools/{security,quality,workbench,shared}` — runner workspaces by pillar                 |
 
 ## IAM + Commercial Platform (SPR-IAM-COMMERCIAL-001)
 

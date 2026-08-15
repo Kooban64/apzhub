@@ -4,6 +4,8 @@
 | -------- | --------------------------------------------------------- |
 | Product  | APZQEP Version 1.1                                        |
 
+> **Current operator how-to (full product bar):** [OPERATOR-USER-GUIDE.md](../../guides/OPERATOR-USER-GUIDE.md) — Phase 2–3, AI/MCP, continuous signals, APZPEN bridge.
+
 ## Getting started
 
 1. Sign in to APZHUB (single SSO).
