@@ -132,14 +132,14 @@ Dedicated ports for `/home/ubuntu/apz-portal` — chosen to avoid `apz-stack` co
 
 See [APZHUB-OWNED-ENGINE-TOPOLOGY](./docs/operations/APZHUB-OWNED-ENGINE-TOPOLOGY.md). Never reuse legacy `18081–18088` / `15678`.
 
-| Service (planned) | Host port | Product                                    |
-| ----------------- | --------- | ------------------------------------------ |
-| Zammad LTS        | **19081** | Support — **UP** (`apzhub-zammad-lts`)     |
-| Paperless LTS     | **19082** | Documents\*                                |
-| Kimai LTS         | **19083** | Time — **UP** (`apzhub-kimai-lts`)         |
-| Metabase LTS      | **19084** | Analytics — **UP** (`apzhub-metabase-lts`) |
-| Plane LTS         | **19085** | Projects — **UP** (`apzhub-plane-lts`)     |
-| n8n LTS           | **19678** | Workflow                                   |
+| Service (planned) | Host port | Product                                            |
+| ----------------- | --------- | -------------------------------------------------- |
+| Zammad LTS        | **19081** | Support — **UP** (`apzhub-zammad-lts`)             |
+| Paperless LTS     | **19082** | Documents* — **UP** infra (`apzhub-paperless-lts`) |
+| Kimai LTS         | **19083** | Time — **UP** (`apzhub-kimai-lts`)                 |
+| Metabase LTS      | **19084** | Analytics — **UP** (`apzhub-metabase-lts`)         |
+| Plane LTS         | **19085** | Projects — **UP** (`apzhub-plane-lts`)             |
+| n8n LTS           | **19678** | Workflow                                           |
 
 \*Paperless still requires ADR + adapter before product wiring.
 

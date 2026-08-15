@@ -4,7 +4,7 @@
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Audience | Ops · platform owners                                                                                                                                                                                               |
 | Related  | [OWNER-ENGINES-OUTSIDE-HUB](../decisions/OWNER-ENGINES-OUTSIDE-HUB.md) · [HOST-COEXISTENCE-CONTROLS](./HOST-COEXISTENCE-CONTROLS.md) · [SPR-OPS-LTS-001](../sprint/SPR-OPS-LTS-001-apzhub-owned-engine-topology.md) |
-| Status   | **IN PROGRESS** — Plane `19085` · Zammad `19081` · Kimai `19083` · Metabase `19084` · n8n `19678` up; Paperless reserved                                                                                            |
+| Status   | **COMPLETE** — — all reserved LTS engines up (Plane·Zammad·Kimai·Metabase·n8n·Paperless); Paperless infra-only pending ADR-0095                                                                                     |
 
 ## Principle
 
@@ -40,14 +40,14 @@ Engines are **not** part of the hub process. They are replaceable backends behin
 
 ### APZHUB-owned CE/LTS engines
 
-| Port  | Engine    | Product surface | Adapter today                     | Host status                                                                                                                       |
-| ----- | --------- | --------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| 19085 | Plane     | Projects        | `integrations/plane`              | **UP** — `apzhub-plane-lts` ([SPR-OPS-LTS-PLANE-001](../sprint/SPR-OPS-LTS-PLANE-001-apzhub-owned-plane-bring-up.md))             |
-| 19081 | Zammad    | Support         | `integrations/zammad`             | **UP** — `apzhub-zammad-lts` ([SPR-OPS-LTS-ZAMMAD-001](../sprint/SPR-OPS-LTS-ZAMMAD-001-apzhub-owned-zammad-bring-up.md))         |
-| 19083 | Kimai     | Time            | `integrations/kimai`              | **UP** — `apzhub-kimai-lts` ([SPR-OPS-LTS-KIMAI-001](../sprint/SPR-OPS-LTS-KIMAI-001-apzhub-owned-kimai-bring-up.md))             |
-| 19084 | Metabase  | Analytics       | `integrations/metabase`           | **UP** — `apzhub-metabase-lts` ([SPR-OPS-LTS-METABASE-001](../sprint/SPR-OPS-LTS-METABASE-001-apzhub-owned-metabase-bring-up.md)) |
-| 19678 | n8n       | Workflow engine | `integrations/n8n`                | **UP** — `apzhub-n8n-lts` ([SPR-OPS-LTS-N8N-001](../sprint/SPR-OPS-LTS-N8N-001-apzhub-owned-n8n-bring-up.md))                     |
-| 19082 | Paperless | Documents DMS   | **No adapter yet** (ADR required) | Reserved                                                                                                                          |
+| Port  | Engine    | Product surface | Adapter today                     | Host status                                                                                                                                                                                                            |
+| ----- | --------- | --------------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 19085 | Plane     | Projects        | `integrations/plane`              | **UP** — `apzhub-plane-lts` ([SPR-OPS-LTS-PLANE-001](../sprint/SPR-OPS-LTS-PLANE-001-apzhub-owned-plane-bring-up.md))                                                                                                  |
+| 19081 | Zammad    | Support         | `integrations/zammad`             | **UP** — `apzhub-zammad-lts` ([SPR-OPS-LTS-ZAMMAD-001](../sprint/SPR-OPS-LTS-ZAMMAD-001-apzhub-owned-zammad-bring-up.md))                                                                                              |
+| 19083 | Kimai     | Time            | `integrations/kimai`              | **UP** — `apzhub-kimai-lts` ([SPR-OPS-LTS-KIMAI-001](../sprint/SPR-OPS-LTS-KIMAI-001-apzhub-owned-kimai-bring-up.md))                                                                                                  |
+| 19084 | Metabase  | Analytics       | `integrations/metabase`           | **UP** — `apzhub-metabase-lts` ([SPR-OPS-LTS-METABASE-001](../sprint/SPR-OPS-LTS-METABASE-001-apzhub-owned-metabase-bring-up.md))                                                                                      |
+| 19678 | n8n       | Workflow engine | `integrations/n8n`                | **UP** — `apzhub-n8n-lts` ([SPR-OPS-LTS-N8N-001](../sprint/SPR-OPS-LTS-N8N-001-apzhub-owned-n8n-bring-up.md))                                                                                                          |
+| 19082 | Paperless | Documents DMS   | **No adapter yet** (ADR required) | **UP** — `apzhub-paperless-lts` infra only ([SPR-OPS-LTS-PAPERLESS-001](../sprint/SPR-OPS-LTS-PAPERLESS-001-apzhub-owned-paperless-bring-up.md) · [ADR-0095](../adr/ADR-0095-paperless-ngx-documents-dms-provider.md)) |
 
 Encoded in `@apzhub/platform-operations` → `APZHUB_RESERVED_HOST_PORTS`.
 

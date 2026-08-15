@@ -1,0 +1,89 @@
+# APZHUB-owned Paperless-ngx CE/LTS — isolated from legacy apz-paperless (18082).
+# Project: apzhub-paperless-lts · publish 127.0.0.1:19082 only.
+# Infrastructure only — no Documents product wiring / no adapter (ADR required).
+
+name: apzhub-paperless-lts
+
+services:
+  paperless-db:
+    image: ${APZ_IMAGE_POSTGRES}
+    container_name: apzhub-paperless-lts-db
+    restart: unless-stopped
+    networks: [paperless_lts_net]
+    volumes:
+      - paperless_lts_pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${PAPERLESS_DB_NAME:-paperless}
+      POSTGRES_USER: ${PAPERLESS_DB_USER:-paperless}
+      POSTGRES_PASSWORD: ${PAPERLESS_DB_PASSWORD}
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${PAPERLESS_DB_USER:-paperless} -d ${PAPERLESS_DB_NAME:-paperless}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  paperless-broker:
+    image: ${APZ_IMAGE_REDIS}
+    container_name: apzhub-paperless-lts-redis
+    restart: unless-stopped
+    networks: [paperless_lts_net]
+    volumes:
+      - paperless_lts_redis:/data
+
+  paperless-web:
+    image: ${APZ_IMAGE_PAPERLESS}
+    pull_policy: never
+    container_name: apzhub-paperless-lts
+    restart: unless-stopped
+    networks: [paperless_lts_net]
+    depends_on:
+      paperless-db:
+        condition: service_healthy
+      paperless-broker:
+        condition: service_started
+    ports:
+      - "127.0.0.1:${PAPERLESS_PUBLISH_PORT:-19082}:8000"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://127.0.0.1:8000/ -o /dev/null || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+    volumes:
+      - paperless_lts_data:/usr/src/paperless/data
+      - paperless_lts_media:/usr/src/paperless/media
+      - paperless_lts_export:/usr/src/paperless/export
+      - paperless_lts_consume:/usr/src/paperless/consume
+    environment:
+      PAPERLESS_REDIS: redis://paperless-broker:6379
+      PAPERLESS_DBHOST: paperless-db
+      PAPERLESS_DBUSER: ${PAPERLESS_DB_USER:-paperless}
+      PAPERLESS_DBPASS: ${PAPERLESS_DB_PASSWORD}
+      PAPERLESS_DBNAME: ${PAPERLESS_DB_NAME:-paperless}
+      PAPERLESS_URL: ${PAPERLESS_URL:-http://127.0.0.1:19082}
+      PAPERLESS_SECRET_KEY: ${PAPERLESS_SECRET_KEY}
+      PAPERLESS_ADMIN_USER: ${PAPERLESS_ADMIN_USER:-admin}
+      PAPERLESS_ADMIN_PASSWORD: ${PAPERLESS_ADMIN_PASSWORD}
+      PAPERLESS_TIME_ZONE: ${TZ:-UTC}
+      PAPERLESS_OCR_LANGUAGE: ${PAPERLESS_OCR_LANGUAGE:-eng}
+      # No Authentik remote-user — APZHUB AuthN is BetterAuth; engine stays token-ready for a future adapter.
+      PAPERLESS_ENABLE_HTTP_REMOTE_USER: "false"
+      PAPERLESS_ENABLE_HTTP_REMOTE_USER_API: "false"
+
+networks:
+  paperless_lts_net:
+    name: apzhub_paperless_lts_net
+    driver: bridge
+
+volumes:
+  paperless_lts_pgdata:
+  paperless_lts_redis:
+  paperless_lts_data:
+  paperless_lts_media:
+  paperless_lts_export:
+  paperless_lts_consume:
