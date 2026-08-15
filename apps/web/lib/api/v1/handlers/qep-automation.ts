@@ -11,6 +11,10 @@ import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
 import { PlatformApiHttpError } from "../errors";
 import { jsonDataResponse } from "../response";
 import { getQepAutomationRuntime } from "@/lib/qep/automation-runtime";
+import {
+  emitAutomationVerificationHeartbeat,
+  resolveAutomationSubjectRef,
+} from "@/lib/qep/continuous-signal-emitters";
 import { requireQepProjectMembership } from "@/lib/qep/project-acl";
 import { requireQepPermission, sessionTenantId } from "./require-qep-permission";
 
@@ -83,6 +87,17 @@ export async function handleCreateAutomationExecution(
     const execution = body.runImmediately
       ? await runtime.enqueueAndRun(payload)
       : await runtime.enqueue(payload);
+    const changeEventId = body.target?.metadata?.changeEventId;
+    emitAutomationVerificationHeartbeat({
+      providerId: body.providerId,
+      subjectRef: resolveAutomationSubjectRef({
+        executionId: execution.executionId,
+        changeEventId,
+        targetName: body.target?.name,
+      }),
+      actorId: requestedBy,
+      notes: body.runImmediately ? "execution.run" : "execution.enqueue",
+    });
     return jsonDataResponse({ execution }, context.tracing, { status: 201 });
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
@@ -206,6 +221,12 @@ export async function handleCiResultIngest(
       payload: body.payload,
       requestedBy: context.serviceContext.userId,
       correlationId: context.tracing.correlationId,
+    });
+    emitAutomationVerificationHeartbeat({
+      providerId,
+      subjectRef: changeEventId,
+      actorId: context.serviceContext.userId ?? "unknown",
+      notes: "ci.result.ingest",
     });
     return jsonDataResponse({ execution }, context.tracing, { status: 201 });
   } catch (error) {

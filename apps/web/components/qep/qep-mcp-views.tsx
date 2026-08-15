@@ -87,10 +87,9 @@ export function QepMcpRouterView() {
             "MCP tools are advisory. Certification remains human-only."}
         </p>
         <p className="mt-2 text-xs text-[var(--color-muted-foreground)]">
-          Live MCP gateway wire:{" "}
-          {catalogueQuery.data?.liveGatewayEnabled
-            ? "enabled"
-            : "off (catalogue + ledger only)"}
+          Transport: HTTP catalogue +{" "}
+          <code className="text-xs">POST /api/v1/qep/mcp/rpc</code> (JSON-RPC tools/list
+          · tools/call). Full external MCP SDK server remains optional.
         </p>
       </QepPanel>
 

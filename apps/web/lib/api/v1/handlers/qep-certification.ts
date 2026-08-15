@@ -17,6 +17,7 @@ import {
   F4_CERTIFIER_AUTHORITY,
   F4_CO_APPROVER_AUTHORITY,
 } from "@/lib/qep/certification-runtime";
+import { emitCertFreshnessSignal } from "@/lib/qep/continuous-signal-emitters";
 import { requireQepPermission, sessionTenantId } from "./require-qep-permission";
 
 type RouteContext = { params: Promise<Record<string, string>> };
@@ -109,6 +110,12 @@ export async function handleCreateCertificationEvaluation(
       tenantId: sessionTenantId(context),
       changeEventId,
       actorId: context.serviceContext.userId,
+    });
+    emitCertFreshnessSignal({
+      evaluationId: evaluation.evaluationId,
+      changeEventId,
+      readiness: evaluation.readiness,
+      actorId: context.serviceContext.userId ?? "unknown",
     });
     return jsonDataResponse({ evaluation }, context.tracing, { status: 201 });
   } catch (error) {

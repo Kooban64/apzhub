@@ -27,11 +27,17 @@ Phase 3 continuous verification/cert **signals** plus AI Quality Workspace / MCP
 
 ## Delivery record
 
-| ID        | Ship                            | Progress (2026-08-15)                                                                                                                                                                                             |
-| --------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **230-A** | Continuous verification signals | Ledger `qep-continuous-verification/signals.json`; API `GET\|POST /api/v1/qep/continuous-verification/signals`; Automation home panel; perms `qep.continuous_verification.*`; never certifies                     |
-| **230-B** | Continuous cert signals         | Ledger `qep-continuous-cert/signals.json`; API `GET\|POST /api/v1/qep/continuous-cert/signals` (create\|acknowledge\|escalate); RC home panel; perms `qep.continuous_cert.*`; escalate = re-cert **request** only |
-| **230-C** | AI Workspace ON                 | M17 already active (SPR-203); horizon banner + Learning / Verification Design / MCP deep links; live LLM still `APZHUB_QEP_AI_ASSIST` default-deny                                                                |
-| **230-D** | MCP gated write                 | M18 `active` / catalogue `enabled`; tool catalogue + proposal ledger; API `GET\|POST /api/v1/qep/mcp`; UI `/workspace/qep/mcp-dx`; perms `qep.mcp-dx.*`; `assertMcpNeverCertifies`; live gateway wire remains off |
+| ID        | Ship                            | Progress (2026-08-15)                                                                                                                                                                                                   |
+| --------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **230-A** | Continuous verification signals | Ledger `qep-continuous-verification/signals.json`; API `GET\|POST /api/v1/qep/continuous-verification/signals`; Automation home panel; perms `qep.continuous_verification.*`; never certifies                           |
+| **230-B** | Continuous cert signals         | Ledger `qep-continuous-cert/signals.json`; API `GET\|POST /api/v1/qep/continuous-cert/signals` (create\|acknowledge\|escalate); RC home panel; perms `qep.continuous_cert.*`; escalate = re-cert **request** only       |
+| **230-C** | AI Workspace ON                 | M17 already active (SPR-203); horizon banner + Learning / Verification Design / MCP deep links; live LLM still `APZHUB_QEP_AI_ASSIST` default-deny                                                                      |
+| **230-D** | MCP gated write                 | M18 `active` / catalogue `enabled`; tool catalogue + proposal ledger; API `GET\|POST /api/v1/qep/mcp`; JSON-RPC `POST /api/v1/qep/mcp/rpc`; UI `/workspace/qep/mcp-dx`; perms `qep.mcp-dx.*`; `assertMcpNeverCertifies` |
 
-**Residuals (not blockers):** external MCP transport/server wire; automatic event emitters from all CI ingest paths (manual heartbeat + UI ship first).
+**Follow-on residual ships (2026-08-15):**
+
+- Auto-emit continuous verification heartbeats from automation enqueue/run + CI ingest.
+- Auto-emit continuous cert **freshness** signals when an RC is evaluated (advisory only).
+- MCP JSON-RPC HTTP transport (`tools/list`, `tools/call` → gated write proposals).
+
+**Still deferred (not programme blockers):** full MCP SDK/stdio server; production Greenbone GMP client; Faraday live stack; `@apzhub/platform-services` package extraction.

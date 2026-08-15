@@ -81,4 +81,5 @@ Deliver Owner-defined **100% (not MVP)**: Phase 2 QEP + APZPEN Greenbone/Faraday
 | **230-D** | MCP DX un-stubbed — tool catalogue + gated-write proposals + audit                    |
 
 **Wave B acceptance:** met — continuous/AI/MCP never bypass human certification.  
-**Residuals:** external MCP transport; automatic CI→signal emitters beyond manual heartbeat.
+**Follow-on (same day):** automation/CI → CV heartbeats; RC evaluate → cert freshness; MCP JSON-RPC HTTP transport.  
+**Still deferred:** full MCP SDK/stdio server; Greenbone GMP API client; Faraday production bring-up; `@apzhub/platform-services` package move.
