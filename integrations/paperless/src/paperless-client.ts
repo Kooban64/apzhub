@@ -1,6 +1,10 @@
 import type { IntegrationRequestContext } from "@apzhub/integration-sdk";
 
-import type { PaperlessDocumentRecord } from "./internal/paperless-api-types";
+import type {
+  PaperlessDocumentRecord,
+  PaperlessUploadInput,
+  PaperlessUploadResult,
+} from "./internal/paperless-api-types";
 import {
   PaperlessRestClient,
   type PaperlessConnectionTestResult,
@@ -31,5 +35,12 @@ export class PaperlessClient {
       nextPageAvailable: result.next !== null,
       documents: result.results,
     };
+  }
+
+  uploadDocument(
+    context: IntegrationRequestContext,
+    input: PaperlessUploadInput,
+  ): Promise<PaperlessUploadResult> {
+    return this.rest.uploadDocument(context, input);
   }
 }

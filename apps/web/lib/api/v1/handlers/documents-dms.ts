@@ -12,6 +12,9 @@ import {
 } from "../gateway/bootstrap";
 import { jsonCollectionResponse, jsonDataResponse } from "../response";
 
+/** 10 MiB soft cap for DMS ingest in this slice. */
+const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
+
 async function assertDocumentsDmsEnabled(): Promise<void> {
   const bootstrap = await getPlatformApiGatewayBootstrap();
   if (!bootstrap.documentsDmsEnabled) {
@@ -62,4 +65,61 @@ export async function handleListDocumentsDmsDocuments(
     },
     context.tracing,
   );
+}
+
+export async function handleUploadDocumentsDmsDocument(
+  request: NextRequest,
+  context: PlatformApiRequestContext,
+) {
+  await assertDocumentsDmsEnabled();
+  const contentType = request.headers.get("content-type") ?? "";
+  if (!contentType.toLowerCase().includes("multipart/form-data")) {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_ERROR",
+      message: "Documents DMS upload requires multipart/form-data with a file field.",
+    });
+  }
+
+  let form: FormData;
+  try {
+    form = await request.formData();
+  } catch {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_ERROR",
+      message: "Unable to parse multipart upload body.",
+    });
+  }
+
+  const fileEntry = form.get("file") ?? form.get("document");
+  if (!(fileEntry instanceof File)) {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_ERROR",
+      message: "Multipart field 'file' (or 'document') is required.",
+    });
+  }
+  if (fileEntry.size <= 0) {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_ERROR",
+      message: "Uploaded file is empty.",
+    });
+  }
+  if (fileEntry.size > MAX_UPLOAD_BYTES) {
+    throw new PlatformApiHttpError(413, {
+      code: "PAYLOAD_TOO_LARGE",
+      message: `Uploaded file exceeds the ${MAX_UPLOAD_BYTES} byte limit.`,
+    });
+  }
+
+  const titleField = form.get("title");
+  const title =
+    typeof titleField === "string" && titleField.trim() ? titleField.trim() : undefined;
+  const bytes = new Uint8Array(await fileEntry.arrayBuffer());
+  const gateway = await getPlatformServiceGateway();
+  const result = await gateway.documentsDms.dms.uploadDocument(context.serviceContext, {
+    fileName: fileEntry.name || "upload.bin",
+    contentType: fileEntry.type || "application/octet-stream",
+    bytes,
+    title,
+  });
+  return jsonDataResponse(result, context.tracing);
 }

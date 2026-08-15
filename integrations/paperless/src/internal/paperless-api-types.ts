@@ -21,3 +21,15 @@ export interface PaperlessDocumentsListResponse {
   readonly previous: string | null;
   readonly results: readonly PaperlessDocumentRecord[];
 }
+
+export interface PaperlessUploadInput {
+  readonly fileName: string;
+  readonly contentType: string;
+  readonly bytes: Uint8Array;
+  readonly title?: string;
+}
+
+export interface PaperlessUploadResult {
+  /** Engine async ingest / task id — never exposed raw to clients. */
+  readonly taskId: string;
+}

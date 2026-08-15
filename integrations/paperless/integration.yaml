@@ -6,7 +6,7 @@ kind: integration
 
 metadata:
   category: integrations
-  description: Read-only Documents DMS foundation adapter for health and catalogue discovery.
+  description: Documents DMS foundation adapter for health, catalogue discovery, and ingest.
   owner: APZHUB
   tags:
     - documents
@@ -24,6 +24,7 @@ integration:
     - authentication-bridge
     - diagnostics
     - documents
+    - upload
 
 health:
   enabled: true
@@ -32,7 +33,7 @@ documentation:
   userVisible: false
   engineBranding: hidden
   supportedApiVersion: "v1"
-  adapterImplementation: SPR-OPS-PAPERLESS-002
+  adapterImplementation: SPR-OPS-PAPERLESS-003
 
 tests:
   contract: present

@@ -13,13 +13,15 @@ export const MOCK_PAPERLESS_DOCUMENT = {
   tags: [7, 8],
 };
 
+export const MOCK_PAPERLESS_UPLOAD_TASK_ID = "11111111-2222-4333-8444-555555555555";
+
 export function createMockPaperlessFetch(
   options: {
     readonly failAuth?: boolean;
   } = {},
 ): FetchFn {
   return async (input, init) => {
-    const url = new URL(input, "https://documents.example.test");
+    const url = new URL(String(input), "https://documents.example.test");
     const authorization = new Headers(init?.headers).get("Authorization");
     if (options.failAuth || authorization !== "Token test-token") {
       return new Response(JSON.stringify({ detail: "Invalid token." }), {
@@ -33,7 +35,10 @@ export function createMockPaperlessFetch(
         headers: { "Content-Type": "application/json" },
       });
     }
-    if (url.pathname === "/api/documents/") {
+    if (
+      url.pathname === "/api/documents/" &&
+      (!init?.method || init.method === "GET")
+    ) {
       return new Response(
         JSON.stringify({
           count: 1,
@@ -43,6 +48,15 @@ export function createMockPaperlessFetch(
         }),
         { status: 200, headers: { "Content-Type": "application/json" } },
       );
+    }
+    if (
+      url.pathname === "/api/documents/post_document/" &&
+      (init?.method ?? "GET").toUpperCase() === "POST"
+    ) {
+      return new Response(JSON.stringify(MOCK_PAPERLESS_UPLOAD_TASK_ID), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
     }
     return new Response(JSON.stringify({ detail: "Not found." }), { status: 404 });
   };

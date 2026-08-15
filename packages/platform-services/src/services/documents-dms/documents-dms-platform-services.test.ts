@@ -38,7 +38,19 @@ describe("Documents DMS Platform Services", () => {
     });
     expect(documents[0]?.id).toMatch(/^dmsdoc_[a-f0-9]{24}$/);
     expect(documents[0]?.id).not.toContain("42");
-    expect(JSON.stringify({ health, documents })).not.toMatch(/paperless/i);
+    const uploaded = await gateway.dms.uploadDocument(context, {
+      fileName: "note.txt",
+      contentType: "text/plain",
+      bytes: new TextEncoder().encode("hello"),
+      title: "Ops upload",
+    });
+    expect(uploaded).toMatchObject({
+      status: "accepted",
+      fileName: "note.txt",
+      title: "Ops upload",
+    });
+    expect(uploaded.ingestId).toMatch(/^dmsingest_[a-f0-9]{24}$/);
+    expect(JSON.stringify({ health, documents, uploaded })).not.toMatch(/paperless/i);
     await disposePaperlessAdapter(adapter, factory);
   });
 });

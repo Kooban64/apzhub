@@ -333,6 +333,8 @@ export {
   type DocumentsDmsGateway,
   type DocumentsDmsHealth,
   type DocumentsDmsDocumentSummary,
+  type DocumentsDmsUploadInput,
+  type DocumentsDmsUploadResult,
 } from "./services/documents-dms";
 export {
   createSearchPlatformServices,

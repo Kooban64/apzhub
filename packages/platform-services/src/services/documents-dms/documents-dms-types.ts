@@ -22,6 +22,21 @@ export interface DocumentsDmsDocumentSummary {
   readonly tagCount: number;
 }
 
+export interface DocumentsDmsUploadInput {
+  readonly fileName: string;
+  readonly contentType: string;
+  readonly bytes: Uint8Array;
+  readonly title?: string;
+}
+
+export interface DocumentsDmsUploadResult {
+  readonly status: "accepted";
+  /** Opaque ingest id — never a native Documents SoR id. */
+  readonly ingestId: string;
+  readonly fileName: string;
+  readonly title?: string;
+}
+
 export interface DocumentsDmsProvider {
   readonly providerId: string;
   getHealth(ctx: ServiceRequestContext): Promise<DocumentsDmsHealth>;
@@ -29,6 +44,10 @@ export interface DocumentsDmsProvider {
     ctx: ServiceRequestContext,
     query?: { readonly page?: number; readonly pageSize?: number },
   ): Promise<readonly DocumentsDmsDocumentSummary[]>;
+  uploadDocument(
+    ctx: ServiceRequestContext,
+    input: DocumentsDmsUploadInput,
+  ): Promise<DocumentsDmsUploadResult>;
 }
 
 export interface DocumentsDmsGateway {
@@ -38,5 +57,9 @@ export interface DocumentsDmsGateway {
       ctx: ServiceRequestContext,
       query?: { readonly page?: number; readonly pageSize?: number },
     ): Promise<readonly DocumentsDmsDocumentSummary[]>;
+    uploadDocument(
+      ctx: ServiceRequestContext,
+      input: DocumentsDmsUploadInput,
+    ): Promise<DocumentsDmsUploadResult>;
   };
 }

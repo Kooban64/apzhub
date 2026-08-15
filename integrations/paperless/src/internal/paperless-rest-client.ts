@@ -4,11 +4,17 @@ import type { IntegrationClient } from "@apzhub/integration-sdk/client";
 import type {
   PaperlessDocumentsListResponse,
   PaperlessStatusResponse,
+  PaperlessUploadInput,
+  PaperlessUploadResult,
 } from "./paperless-api-types";
+import type { FetchFn } from "./paperless-fetch-client";
 
 export interface PaperlessRestClientOptions {
   readonly client: IntegrationClient;
   readonly getToken: () => Promise<string>;
+  readonly apiBaseUrl: string;
+  readonly timeoutMs: number;
+  readonly fetchFn?: FetchFn;
 }
 
 export interface PaperlessConnectionTestResult {
@@ -19,11 +25,17 @@ export interface PaperlessConnectionTestResult {
 export class PaperlessRestClient {
   private readonly client: IntegrationClient;
   private readonly getToken: () => Promise<string>;
+  private readonly apiBaseUrl: string;
+  private readonly timeoutMs: number;
+  private readonly fetchFn: FetchFn;
   private lastLatencyMs?: number;
 
   constructor(options: PaperlessRestClientOptions) {
     this.client = options.client;
     this.getToken = options.getToken;
+    this.apiBaseUrl = options.apiBaseUrl.replace(/\/+$/, "");
+    this.timeoutMs = options.timeoutMs;
+    this.fetchFn = options.fetchFn ?? fetch;
   }
 
   getLastLatencyMs(): number | undefined {
@@ -48,6 +60,87 @@ export class PaperlessRestClient {
       page_size: query.pageSize ?? 50,
       ordering: "-added",
     });
+  }
+
+  /**
+   * Multipart ingest — Integration SDK transport multipart is not implemented,
+   * so this path uses fetch directly (adapter-internal only).
+   */
+  async uploadDocument(
+    context: IntegrationRequestContext,
+    input: PaperlessUploadInput,
+  ): Promise<PaperlessUploadResult> {
+    const token = await this.getToken();
+    const form = new FormData();
+    const blob = new Blob([Uint8Array.from(input.bytes)], {
+      type: input.contentType || "application/octet-stream",
+    });
+    form.append("document", blob, input.fileName);
+    if (input.title?.trim()) {
+      form.append("title", input.title.trim());
+    }
+
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), this.timeoutMs);
+    const startedAt = Date.now();
+    try {
+      const response = await this.fetchFn(
+        `${this.apiBaseUrl}/documents/post_document/`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Token ${token}`,
+            Accept: "application/json",
+            "X-Correlation-Id": context.correlationId,
+          },
+          body: form,
+          signal: controller.signal,
+        },
+      );
+      this.lastLatencyMs = Date.now() - startedAt;
+      const text = await response.text();
+      if (!response.ok) {
+        let detail: unknown = text;
+        try {
+          detail = JSON.parse(text) as unknown;
+        } catch {
+          /* keep text */
+        }
+        const error = new Error(
+          typeof detail === "object" &&
+            detail !== null &&
+            "detail" in detail &&
+            typeof (detail as { detail: unknown }).detail === "string"
+            ? (detail as { detail: string }).detail
+            : `Documents DMS upload failed (${response.status})`,
+        ) as Error & { statusCode?: number; body?: unknown };
+        error.statusCode = response.status;
+        error.body = detail;
+        throw error;
+      }
+      let taskId = text.trim();
+      try {
+        const parsed = JSON.parse(text) as unknown;
+        if (typeof parsed === "string") taskId = parsed;
+        else if (
+          typeof parsed === "object" &&
+          parsed !== null &&
+          "task_id" in parsed &&
+          typeof (parsed as { task_id: unknown }).task_id === "string"
+        ) {
+          taskId = (parsed as { task_id: string }).task_id;
+        }
+      } catch {
+        /* bare uuid string */
+      }
+      taskId = taskId.replace(/^"|"$/g, "").trim();
+      if (!taskId) {
+        throw new Error("Documents DMS upload returned an empty ingest id");
+      }
+      return { taskId };
+    } finally {
+      clearTimeout(timer);
+    }
   }
 
   private async request<T>(

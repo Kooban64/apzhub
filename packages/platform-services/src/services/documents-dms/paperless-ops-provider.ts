@@ -21,6 +21,14 @@ function toPublicDocumentId(engineId: number): string {
   return `dmsdoc_${digest}`;
 }
 
+function toPublicIngestId(taskId: string): string {
+  const digest = createHash("sha256")
+    .update(`documents-dms-ingest:${taskId}`)
+    .digest("hex")
+    .slice(0, 24);
+  return `dmsingest_${digest}`;
+}
+
 export function createPaperlessOpsProvider(
   adapter: PaperlessAdapter,
 ): DocumentsDmsProvider {
@@ -72,6 +80,16 @@ export function createPaperlessOpsProvider(
         archiveSerialNumber: document.archive_serial_number ?? undefined,
         tagCount: document.tags?.length ?? 0,
       }));
+    },
+
+    async uploadDocument(ctx, input) {
+      const result = await adapter.uploadDocument(toIntegrationContext(ctx), input);
+      return {
+        status: "accepted",
+        ingestId: toPublicIngestId(result.taskId),
+        fileName: input.fileName,
+        title: input.title?.trim() || undefined,
+      };
     },
   };
 }

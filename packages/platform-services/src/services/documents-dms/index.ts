@@ -6,4 +6,6 @@ export type {
   DocumentsDmsGateway,
   DocumentsDmsHealth,
   DocumentsDmsProvider,
+  DocumentsDmsUploadInput,
+  DocumentsDmsUploadResult,
 } from "./documents-dms-types";

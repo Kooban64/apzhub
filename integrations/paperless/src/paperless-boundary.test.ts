@@ -20,10 +20,11 @@ describe("@apzhub/integration-paperless boundaries", () => {
     expect(index).not.toContain("paperless-api-types");
   });
 
-  it("declares a hidden read-only integration manifest", () => {
+  it("declares a hidden ingest-capable integration manifest", () => {
     const yaml = readFileSync(join(PKG, "integration.yaml"), "utf8");
     expect(yaml).toContain("id: paperless");
     expect(yaml).toContain("engineBranding: hidden");
-    expect(yaml).not.toMatch(/\b(upload|delete|update)\b/i);
+    expect(yaml).toContain("- upload");
+    expect(yaml).not.toMatch(/\b(delete|update)\b/i);
   });
 });

@@ -73,6 +73,9 @@ export class PaperlessAdapter extends IntegrationAdapterBase {
       new PaperlessRestClient({
         client: transport,
         getToken: () => this.resolveToken(),
+        apiBaseUrl: configuration.paperless.apiBaseUrl,
+        timeoutMs: configuration.paperless.timeoutMs,
+        fetchFn: options.fetchFn,
       }),
     );
   }
@@ -100,6 +103,31 @@ export class PaperlessAdapter extends IntegrationAdapterBase {
         correlationId: context.correlationId,
         tenantId: context.tenantId,
         operation: "list_documents",
+        integrationId: this.integrationId,
+        adapterId: this.context.adapterId,
+      });
+      throw new Error(translated.error.message);
+    }
+  }
+
+  async uploadDocument(
+    context: IntegrationRequestContext,
+    input: {
+      readonly fileName: string;
+      readonly contentType: string;
+      readonly bytes: Uint8Array;
+      readonly title?: string;
+    },
+  ) {
+    this.assertNotDisposed();
+    this.assertInitialised();
+    try {
+      return await this.client.uploadDocument(context, input);
+    } catch (error) {
+      const translated = mapPaperlessUnknownError(error, {
+        correlationId: context.correlationId,
+        tenantId: context.tenantId,
+        operation: "upload_document",
         integrationId: this.integrationId,
         adapterId: this.context.adapterId,
       });

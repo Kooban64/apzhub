@@ -28,6 +28,15 @@ describe("@apzhub/integration-paperless adapter", () => {
       apiStatus: "reachable",
       authenticationStatus: "valid",
     });
+    const uploaded = await adapter.uploadDocument(context, {
+      fileName: "note.txt",
+      contentType: "text/plain",
+      bytes: new TextEncoder().encode("hello dms"),
+      title: "Upload demo",
+    });
+    expect(uploaded.taskId).toMatch(
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+    );
     await disposePaperlessAdapter(adapter, factory);
   });
 
