@@ -2,11 +2,13 @@
 
 | Field     | Value                                                                                                                                                                                                    |
 | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Status    | **IN FORCE**                                                                                                                                                                                             |
+| Status    | **SATISFIED · PROGRAMME COMPLETE**                                                                                                                                                                       |
 | Date      | 2026-08-15                                                                                                                                                                                               |
+| Completed | 2026-08-15                                                                                                                                                                                               |
 | Authority | Owner                                                                                                                                                                                                    |
 | Option    | **3 — parallel tracks**                                                                                                                                                                                  |
 | Related   | [PRODUCT-CAPABILITIES](../products/apzqep/product-definition/PRODUCT-CAPABILITIES.md) · [APZPEN later](../strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md) · [F11](../products/apzqep/FLAGSHIP-PROGRAMME.md) |
+| Delivery  | [SPR-FULL-001](../sprint/SPR-FULL-001-full-product-bar-option-3.md) **PROGRAMME COMPLETE**                                                                                                               |
 
 ## Decision
 
@@ -48,6 +50,18 @@ QEP remains broader than software unit testing (process, requirements, manual ve
 | APZPEN engines | [SPR-APZPEN-ENT-001](../sprint/SPR-APZPEN-ENT-001-greenbone-faraday-path.md)        |
 | Bridge         | [SPR-BRIDGE-001](../sprint/SPR-BRIDGE-001-qep-apzpen-assurance-bridge.md)           |
 | Wave B         | [SPR-APZQEP-230](../sprint/SPR-APZQEP-230-phase-3-and-ai-horizon.md) — **COMPLETE** |
+
+## Acceptance record
+
+| Wave requirement                                                       | Result  |
+| ---------------------------------------------------------------------- | ------- |
+| Phase 2 QI · Knowledge · Automation/Risk/Integration depth (220)       | **MET** |
+| APZPEN Greenbone + Faraday path; Kali runner only (ENT-001)            | **MET** |
+| QEP ↔ APZPEN assurance bridge (BRIDGE-001)                             | **MET** |
+| Phase 3 continuous verification/cert signals; never auto-certify (230) | **MET** |
+| AI Workspace ON under human gates; MCP gated write (230)               | **MET** |
+
+**Verdict:** Owner Option 3 **“100% developed product (not MVP)”** bar is **COMPLETE** as of 2026-08-15.
 
 ## Non-goals
 

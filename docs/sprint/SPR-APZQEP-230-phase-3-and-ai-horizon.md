@@ -40,4 +40,4 @@ Phase 3 continuous verification/cert **signals** plus AI Quality Workspace / MCP
 - Auto-emit continuous cert **freshness** signals when an RC is evaluated (advisory only).
 - MCP JSON-RPC HTTP transport (`tools/list`, `tools/call` → gated write proposals).
 
-**Still deferred (not programme blockers):** full MCP SDK/stdio server; production Greenbone GMP client; Faraday live stack; `@apzhub/platform-services` package extraction.
+**Option 3 Wave B:** **COMPLETE**. Further MCP SDK/stdio or engine host bring-up is post-bar hardening, not Wave B acceptance.

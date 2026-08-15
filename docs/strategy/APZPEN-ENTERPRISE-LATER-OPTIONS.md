@@ -7,8 +7,8 @@
 
 ## Unpark notice (2026-08-15)
 
-Owner [OWNER-FULL-PRODUCT-BAR-OPTION-3](../decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md) authorises **Greenbone + Faraday** (Kali runner only) under [SPR-APZPEN-ENT-001](../sprint/SPR-APZPEN-ENT-001-greenbone-faraday-path.md).  
-Items **1–5** in the table above remain **PARKED** unless separately authorised.
+Owner [OWNER-FULL-PRODUCT-BAR-OPTION-3](../decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md) authorised **Greenbone + Faraday** (Kali runner only) under [SPR-APZPEN-ENT-001](../sprint/SPR-APZPEN-ENT-001-greenbone-faraday-path.md) — **COMPLETE · DELIVERED**.  
+Items **1–5** in the parked table remain **PARKED** unless separately authorised.
 
 ---
 

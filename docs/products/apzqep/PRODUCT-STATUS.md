@@ -6,10 +6,10 @@
 | Authority          | Owner · Product Board — **STANDING**                                             |
 | Audience           | Engineers, architects, auditors, AI assistants                                   |
 | Rule               | **Read this document before any APZQEP work**                                    |
-| Last updated       | 20260815T013000Z                                                                 |
+| Last updated       | 20260815T081500Z                                                                 |
 | Current baseline   | **Version 1.1 — PRODUCTION READY · CLOSED**                                      |
-| Engineering thread | **COMPLETE** (V1.1); **SPR-200 + SPR-210 DELIVERED**                             |
-| Product posture    | **OPERATIONAL** + product-definition MVP closeout delivered                      |
+| Engineering thread | **COMPLETE** (V1.1); **SPR-200…230 + FULL-001 Option 3 DELIVERED**               |
+| Product posture    | **OPERATIONAL** + full product bar (Option 3) delivered                          |
 | Management posture | **Operational Learning**                                                         |
 | Release pack       | [release-1.1/](./release-1.1/)                                                   |
 | Owner decision     | [release-1.1/OWNER-RELEASE-DECISION.md](./release-1.1/OWNER-RELEASE-DECISION.md) |
@@ -60,7 +60,7 @@ SPR-APZQEP-200 programme DELIVERED (RCC · providers · governed AI · GA)
 SPR-APZQEP-210 DELIVERED (DEF / USER-WORKFLOWS MVP closeout)
 ```
 
-> **Portfolio note (2026-08-15):** APZPEN CE is complete. **SPR-APZQEP-200** and **SPR-APZQEP-210** are **COMPLETE · DELIVERED**. Caps A–F remain closed. Owner authorised **full product bar (Option 3)** — [OWNER-FULL-PRODUCT-BAR-OPTION-3](../../decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md) / [SPR-FULL-001](../../sprint/SPR-FULL-001-full-product-bar-option-3.md): Phase 2 (220) + Greenbone/Faraday (ENT-001) + QEP↔APZPEN bridge (BRIDGE-001) in parallel; Phase 3 + AI (230) **QUEUED**. BetterAuth remains sole AuthN.
+> **Portfolio note (2026-08-15):** APZPEN CE is complete. **SPR-APZQEP-200** through **SPR-APZQEP-230** and **SPR-FULL-001 (Option 3)** are **COMPLETE · DELIVERED** — Phase 2 (220) · Greenbone/Faraday (ENT-001) · QEP↔APZPEN bridge (BRIDGE-001) · Phase 3 + AI/MCP (230). Caps A–F remain closed. Owner “100% (not MVP)” bar **MET**. BetterAuth remains sole AuthN. Optional post-bar hardening (GMP live client, Faraday host bring-up, MCP SDK/stdio, platform-services package) requires a new Owner sprint.
 
 Authoritative release pack: [release-1.1/](./release-1.1/)
 

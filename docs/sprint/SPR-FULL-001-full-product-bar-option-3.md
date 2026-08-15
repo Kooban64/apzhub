@@ -1,13 +1,24 @@
 # SPR-FULL-001 — Full product bar (Option 3 · parallel tracks)
 
-> **Status:** **WAVE A COMPLETE · WAVE B COMPLETE** — 2026-08-15  
-> **Authority:** [OWNER-FULL-PRODUCT-BAR-OPTION-3](../decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md) **IN FORCE**  
+> **Status:** **PROGRAMME COMPLETE · DELIVERED** — 2026-08-15  
+> **Authority:** [OWNER-FULL-PRODUCT-BAR-OPTION-3](../decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md) **SATISFIED**  
 > **Model:** Three Wave A tracks in parallel + Wave B Phase 3 / AI  
 > **Does not:** Cap reopen · Kali UI module · auto-certify · Authentik AuthN
 
 ## Outcome
 
 Deliver Owner-defined **100% (not MVP)**: Phase 2 QEP + APZPEN Greenbone/Faraday + QEP↔APZPEN bridge; then Phase 3 + AI when Wave A is accepted (or Owner pull-forward).
+
+## Programme acceptance (Option 3)
+
+| Wave  | Tracks                              | Status                   |
+| ----- | ----------------------------------- | ------------------------ |
+| **A** | 220 · ENT-001 · BRIDGE-001          | **COMPLETE · DELIVERED** |
+| **B** | 230 (continuous signals · AI · MCP) | **COMPLETE · DELIVERED** |
+
+**Owner “100% developed product (not MVP)” bar:** **MET** — 2026-08-15.
+
+Post-bar hardening (optional; **not** Option 3 acceptance criteria): full MCP SDK/stdio server; live Greenbone GMP API client; Faraday production host bring-up; formal `@apzhub/platform-services` package extraction.
 
 ## Tracks (Wave A — parallel)
 
@@ -32,9 +43,9 @@ Deliver Owner-defined **100% (not MVP)**: Phase 2 QEP + APZPEN Greenbone/Faraday
 
 ## Programme done when
 
-- Wave A acceptance criteria on all three guides met and recorded.
-- Owner decides Wave B start (default: after Wave A).
-- Docs / PRODUCT-STATUS honesty updated (MVP closed; full-bar wave in progress or delivered).
+- [x] Wave A acceptance criteria on all three guides met and recorded.
+- [x] Wave B started (Owner pull-forward) and acceptance met.
+- [x] Docs / PRODUCT-STATUS honesty updated (full-bar Option 3 **COMPLETE**).
 
 ## Delivery record (Wave A first ships — 2026-08-15)
 
@@ -81,5 +92,9 @@ Deliver Owner-defined **100% (not MVP)**: Phase 2 QEP + APZPEN Greenbone/Faraday
 | **230-D** | MCP DX un-stubbed — tool catalogue + gated-write proposals + audit                    |
 
 **Wave B acceptance:** met — continuous/AI/MCP never bypass human certification.  
-**Follow-on (same day):** automation/CI → CV heartbeats; RC evaluate → cert freshness; MCP JSON-RPC HTTP transport.  
-**Still deferred:** full MCP SDK/stdio server; Greenbone GMP API client; Faraday production bring-up; `@apzhub/platform-services` package move.
+**Follow-on (same day):** automation/CI → CV heartbeats; RC evaluate → cert freshness; MCP JSON-RPC HTTP transport.
+
+## Option 3 closeout
+
+**PROGRAMME COMPLETE** — Waves A + B delivered and acceptance recorded.  
+Optional post-bar hardening (MCP SDK/stdio, GMP live client, Faraday host bring-up, platform-services package) is **outside** Option 3 scope unless Owner opens a new sprint.
