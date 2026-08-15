@@ -1,10 +1,11 @@
 # SPR-BRIDGE-001 — QEP ↔ APZPEN assurance bridge
 
-> **Status:** **AUTHORISED · IN PROGRESS** — 2026-08-15  
+> **Status:** **COMPLETE · DELIVERED** — 2026-08-15  
 > **Parent:** [SPR-FULL-001](./SPR-FULL-001-full-product-bar-option-3.md) Track A3  
 > **Authority:** [OWNER-FULL-PRODUCT-BAR-OPTION-3](../decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md)  
 > **Depends on:** APZPEN CE + ENT-001 contracts (can stub contract first); QEP readiness/cert (210)  
-> **Does not:** Merge pillars · QEP calling Greenbone/Faraday · auto GO from security findings
+> **Does not:** Merge pillars · QEP calling Greenbone/Faraday · auto GO from security findings  
+> **Residual:** formal `@apzhub/platform-services` package extraction (compose lives in `apps/web/lib/qep/security-assurance-bridge-service.ts`)
 
 ## Outcome
 

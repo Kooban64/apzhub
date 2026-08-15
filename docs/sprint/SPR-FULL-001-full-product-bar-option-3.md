@@ -1,6 +1,6 @@
 # SPR-FULL-001 — Full product bar (Option 3 · parallel tracks)
 
-> **Status:** **AUTHORISED · IN PROGRESS** — 2026-08-15  
+> **Status:** **WAVE A COMPLETE · WAVE B QUEUED** — 2026-08-15  
 > **Authority:** [OWNER-FULL-PRODUCT-BAR-OPTION-3](../decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md) **IN FORCE**  
 > **Model:** Three Wave A tracks in parallel + Wave B queued  
 > **Does not:** Cap reopen · Kali UI module · auto-certify · Authentik AuthN
@@ -11,17 +11,17 @@ Deliver Owner-defined **100% (not MVP)**: Phase 2 QEP + APZPEN Greenbone/Faraday
 
 ## Tracks (Wave A — parallel)
 
-| Track                   | Guide                                                                | Status                       |
-| ----------------------- | -------------------------------------------------------------------- | ---------------------------- |
-| **A1** QEP Phase 2      | [SPR-APZQEP-220](./SPR-APZQEP-220-phase-2-product-completion.md)     | **AUTHORISED · IN PROGRESS** |
-| **A2** APZPEN engines   | [SPR-APZPEN-ENT-001](./SPR-APZPEN-ENT-001-greenbone-faraday-path.md) | **AUTHORISED · IN PROGRESS** |
-| **A3** Assurance bridge | [SPR-BRIDGE-001](./SPR-BRIDGE-001-qep-apzpen-assurance-bridge.md)    | **AUTHORISED · IN PROGRESS** |
+| Track                   | Guide                                                                | Status                   |
+| ----------------------- | -------------------------------------------------------------------- | ------------------------ |
+| **A1** QEP Phase 2      | [SPR-APZQEP-220](./SPR-APZQEP-220-phase-2-product-completion.md)     | **COMPLETE · DELIVERED** |
+| **A2** APZPEN engines   | [SPR-APZPEN-ENT-001](./SPR-APZPEN-ENT-001-greenbone-faraday-path.md) | **COMPLETE · DELIVERED** |
+| **A3** Assurance bridge | [SPR-BRIDGE-001](./SPR-BRIDGE-001-qep-apzpen-assurance-bridge.md)    | **COMPLETE · DELIVERED** |
 
 ## Wave B (queued)
 
-| Track               | Guide                                                        | Status                                                                |
-| ------------------- | ------------------------------------------------------------ | --------------------------------------------------------------------- |
-| **B1** Phase 3 + AI | [SPR-APZQEP-230](./SPR-APZQEP-230-phase-3-and-ai-horizon.md) | **QUEUED** — starts after Wave A acceptance unless Owner pull-forward |
+| Track               | Guide                                                        | Status                                                          |
+| ------------------- | ------------------------------------------------------------ | --------------------------------------------------------------- |
+| **B1** Phase 3 + AI | [SPR-APZQEP-230](./SPR-APZQEP-230-phase-3-and-ai-horizon.md) | **QUEUED** — Wave A accepted; start on Owner GO or pull-forward |
 
 ## Parallel rules
 
@@ -60,4 +60,14 @@ Deliver Owner-defined **100% (not MVP)**: Phase 2 QEP + APZPEN Greenbone/Faraday
 | **A2 ENT-001**    | Greenbone `ingest_ready`; artefact list/helper; GMP deferred (script + ingest) |
 | **A3 BRIDGE-001** | VA freshness (`vaFreshness`) on assurance summary via APZPEN health probe      |
 
-Remaining: Faraday compose bring-up; live GMP API client; formal `@apzhub/platform-services` package; Wave B (230).
+## Delivery record (Wave A fourth ships + closeout — 2026-08-15)
+
+| Track             | Fourth ships / closeout                                                                 |
+| ----------------- | --------------------------------------------------------------------------------------- |
+| **A1 220**        | **COMPLETE** — QI commercial gate via H4 `requireProductAccess`; advisory banner        |
+| **A2 ENT-001**    | Faraday artefact path + optional compose scaffold docs; **COMPLETE** (GMP API deferred) |
+| **A3 BRIDGE-001** | **COMPLETE** — service compose in apps/web; formal platform-services package residual   |
+
+**Wave A acceptance:** met for Owner Option 3 bar.  
+**Deferred residuals (not Wave A blockers):** live Greenbone GMP API client; production Faraday stack; `@apzhub/platform-services` package move.  
+**Next:** [SPR-APZQEP-230](./SPR-APZQEP-230-phase-3-and-ai-horizon.md) on Owner GO.

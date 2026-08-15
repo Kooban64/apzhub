@@ -1,6 +1,6 @@
 # SPR-APZQEP-220 — Phase 2 product completion
 
-> **Status:** **AUTHORISED · IN PROGRESS** — 2026-08-15  
+> **Status:** **COMPLETE · DELIVERED** — 2026-08-15  
 > **Parent:** [SPR-FULL-001](./SPR-FULL-001-full-product-bar-option-3.md) Track A1  
 > **Authority:** [OWNER-FULL-PRODUCT-BAR-OPTION-3](../decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md)  
 > **Depends on:** SPR-APZQEP-210 **COMPLETE**; Caps A–F **CLOSED**  
@@ -34,4 +34,5 @@ APZQEP Phase 2 capabilities from [PRODUCT-CAPABILITIES](../products/apzqep/produ
 - **220-C Automation mapping / flaky governance:** JSON ledger `qep-automation/mappings.json`; API `GET|POST /api/v1/qep/automation/mappings` (upsert|mark_flaky|clear_flaky|mark_stale|clear_stale|set_owner); permissions `qep.automation.read` / `qep.automation.operate`; Automation home panel “Mapping governance” (`data-testid=qep-automation-mappings`) with add form + flaky/stale actions; Cap automation package untouched.
 - **220-D Risk (light):** optional `owner` / `evidenceRef` on create; `accept` status action + Accept UI control.
 - **220-D Integration Centre depth:** permissions `qep.integrations.read` / `qep.integrations.operate`; JSON ledger `qep-integrations/connectors.json`; API `GET|POST /api/v1/qep/integrations` (enable|disable|record_sync); UI merges catalogue∪ledger with Enabled / Last sync + Enable/Disable (`data-testid=qep-integrations-connectors`). Cap automation/SCM stores untouched.
-- **220-A QI advisory banner:** QiHomeView banner `data-testid=qep-qi-advisory-banner` — “Advisory only — Quality Intelligence never certifies and never auto-approves a release.”
+- **220-A QI:** Advisory banner on home; commercial product gate already via `requireQepPermission` → `requireProductAccess("qep")` (H4). Never auto-certifies.
+- **220-E Honesty:** Phase 2 ships B–D landed; Caps A–F untouched; AI Workspace remains OFF until SPR-230.

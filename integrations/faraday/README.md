@@ -11,7 +11,9 @@ APZPEN Faraday path (SPR-APZPEN-ENT-001). Engine branding is hidden from operato
 
 ## Ingest
 
-Compose is not deployed yet. Export Faraday JSON (or simplified findings) and ingest via APZPEN provider ingest (`toolId: faraday`). Live sync lands in a later ENT-001 slice.
+**Primary ENT-001 path:** export Faraday JSON → `~/apztools/security/out/faraday/` → APZPEN list (`GET …/providers/faraday/artefacts`) and optional path ingest when `APZPEN_FARADAY_ARTEFACT_INGEST=true`. Also paste/upload via provider ingest (`toolId: faraday`). Live API sync is not required for ingest.
+
+Optional compose scaffold (profile-gated, Owner-enabled): `infrastructure/docker/clusters/faraday/`. Prefer upstream Faraday CE compose + `FARADAY_URL` probe when an instance is running.
 
 ## Ops
 

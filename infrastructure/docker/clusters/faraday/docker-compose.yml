@@ -1,0 +1,22 @@
+# Optional Faraday CE scaffold — Owner-enabled only.
+# NOT production-ready. Prefer upstream Faraday CE compose + FARADAY_URL + artefact ingest.
+# See README.md. Default `docker compose up` does nothing (profile-gated).
+#
+# Official bring-up (recommended):
+#   curl -O https://raw.githubusercontent.com/infobyte/faraday/master/docker-compose.yaml
+#   docker compose up -d
+#
+# This file is a minimal profile gate so the cluster tree documents Faraday without
+# claiming a pinned/production stack. Images/tags must be Owner-reviewed before use.
+
+name: apzqep-faraday
+
+services:
+  # Placeholder — replace with Owner-approved upstream faradaysec/faraday services.
+  faraday-docs-placeholder:
+    image: alpine:3.20
+    profiles: ["faraday"]
+    command: ["true"]
+    labels:
+      apzhub.role: "optional-faraday-scaffold"
+      apzhub.note: "Owner-enabled profile only; primary ENT-001 path is artefact export → APZPEN ingest"

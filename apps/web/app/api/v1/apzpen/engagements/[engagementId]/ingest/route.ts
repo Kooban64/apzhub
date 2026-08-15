@@ -9,6 +9,11 @@ import { jsonDataResponse } from "@/lib/api/v1/response";
 import { actorEmail, requireApzpenAccess, resolveTenantId } from "@/lib/apzpen/access";
 import { ApzpenDomainError } from "@/lib/apzpen/domain";
 import {
+  isFaradayArtefactIngestEnabled,
+  isPathUnderFaradayRoot,
+  readFaradayArtefact,
+} from "@/lib/apzpen/faraday-artefact";
+import {
   isGreenboneArtefactIngestEnabled,
   isPathUnderGreenboneRoot,
   readGreenboneArtefact,
@@ -36,6 +41,45 @@ function mapError(error: unknown): never {
     });
   }
   throw error;
+}
+
+type ArtefactTool = "greenbone" | "faraday";
+
+function resolveArtefactTool(
+  artefactPath: string,
+  toolId: ProviderToolId | undefined,
+): ArtefactTool {
+  const underGreenbone = isPathUnderGreenboneRoot(artefactPath);
+  const underFaraday = isPathUnderFaradayRoot(artefactPath);
+
+  if (toolId === "greenbone") {
+    if (!underGreenbone) {
+      throw new PlatformApiHttpError(400, {
+        code: "VALIDATION",
+        message:
+          "artefactPath must be under security/out/greenbone for toolId greenbone",
+      });
+    }
+    return "greenbone";
+  }
+  if (toolId === "faraday") {
+    if (!underFaraday) {
+      throw new PlatformApiHttpError(400, {
+        code: "VALIDATION",
+        message: "artefactPath must be under security/out/faraday for toolId faraday",
+      });
+    }
+    return "faraday";
+  }
+
+  if (underFaraday && !underGreenbone) return "faraday";
+  if (underGreenbone && !underFaraday) return "greenbone";
+
+  throw new PlatformApiHttpError(400, {
+    code: "VALIDATION",
+    message:
+      "artefactPath must be under security/out/greenbone or security/out/faraday (or pass toolId)",
+  });
 }
 
 async function handlePost(
@@ -69,7 +113,7 @@ async function handlePost(
         payload?: unknown;
         rawText?: string;
         jobId?: string;
-        /** Server-side path under greenbone out (requires APZPEN_GREENBONE_ARTEFACT_INGEST=true). */
+        /** Server-side path under greenbone/faraday out (requires matching ARTEFACT_INGEST env). */
         artefactPath?: string;
         fromArtefactPath?: string;
       };
@@ -88,29 +132,66 @@ async function handlePost(
     }
 
     if (artefactPath) {
-      if (!isGreenboneArtefactIngestEnabled()) {
+      const artefactTool = resolveArtefactTool(artefactPath, toolId);
+
+      if (artefactTool === "greenbone") {
+        if (!isGreenboneArtefactIngestEnabled()) {
+          throw new PlatformApiHttpError(403, {
+            code: "FORBIDDEN",
+            message:
+              "Greenbone artefact-path ingest disabled — set APZPEN_GREENBONE_ARTEFACT_INGEST=true",
+          });
+        }
+        let artefactPayload: unknown;
+        try {
+          artefactPayload = readGreenboneArtefact(artefactPath);
+        } catch (error) {
+          throw new PlatformApiHttpError(400, {
+            code: "VALIDATION",
+            message:
+              error instanceof Error
+                ? error.message
+                : "Unable to read Greenbone artefact",
+          });
+        }
+        const result = ingestProviderArtefact({
+          tenantId,
+          engagementId,
+          createdBy: actorEmail(context),
+          format: format ?? "simplified",
+          toolId: "greenbone",
+          payload: artefactPayload,
+        });
+        return jsonDataResponse(
+          {
+            format: result.format,
+            toolId: result.toolId,
+            parsedCount: result.parsedCount,
+            createdCount: result.created.length,
+            skipped: result.skipped,
+            findings: result.created,
+            artefactPath,
+          },
+          context.tracing,
+          { status: 201 },
+        );
+      }
+
+      if (!isFaradayArtefactIngestEnabled()) {
         throw new PlatformApiHttpError(403, {
           code: "FORBIDDEN",
           message:
-            "Greenbone artefact-path ingest disabled — set APZPEN_GREENBONE_ARTEFACT_INGEST=true",
-        });
-      }
-      if (!isPathUnderGreenboneRoot(artefactPath)) {
-        throw new PlatformApiHttpError(400, {
-          code: "VALIDATION",
-          message: "artefactPath must be under security/out/greenbone",
+            "Faraday artefact-path ingest disabled — set APZPEN_FARADAY_ARTEFACT_INGEST=true",
         });
       }
       let artefactPayload: unknown;
       try {
-        artefactPayload = readGreenboneArtefact(artefactPath);
+        artefactPayload = readFaradayArtefact(artefactPath);
       } catch (error) {
         throw new PlatformApiHttpError(400, {
           code: "VALIDATION",
           message:
-            error instanceof Error
-              ? error.message
-              : "Unable to read Greenbone artefact",
+            error instanceof Error ? error.message : "Unable to read Faraday artefact",
         });
       }
       const result = ingestProviderArtefact({
@@ -118,7 +199,7 @@ async function handlePost(
         engagementId,
         createdBy: actorEmail(context),
         format: format ?? "simplified",
-        toolId: toolId ?? "greenbone",
+        toolId: "faraday",
         payload: artefactPayload,
       });
       return jsonDataResponse(

@@ -20,7 +20,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-COMM-002](./sprint/SPR-COMM-002-org-packages-tenant-switch-source.md)          | **DELIVERED** — org packages UI, tenant switcher, project source (QEP+PEN)           |
 | [OWNER BetterAuth sole AuthN](./decisions/OWNER-BETTERAUTH-SOLE-AUTHN.md)           | **IN FORCE** — BetterAuth only; Authentik retire with APZPRD                         |
 | [OWNER Full product bar (Option 3)](./decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md) | **IN FORCE** — Phase 2 + APZPEN Greenbone/Faraday + bridge; Phase 3+AI queued        |
-| [SPR-FULL-001](./sprint/SPR-FULL-001-full-product-bar-option-3.md)                  | **AUTHORISED · IN PROGRESS** — parallel Wave A (220 · ENT-001 · BRIDGE-001)          |
+| [SPR-FULL-001](./sprint/SPR-FULL-001-full-product-bar-option-3.md)                  | **WAVE A COMPLETE · WAVE B QUEUED** — 220 · ENT-001 · BRIDGE-001 delivered           |
 | [SPR-APZPRD-001](./sprint/SPR-APZPRD-001-betterauth-productivity-workspace.md)      | **COMPLETE · DELIVERED** — BetterAuth sole AuthN; Projects health without Authentik  |
 | [SPR-APZPRD-002](./sprint/SPR-APZPRD-002-entitled-projects-workbench.md)            | **COMPLETE · DELIVERED** — entitled Projects workbench (catalogue → adapter)         |
 

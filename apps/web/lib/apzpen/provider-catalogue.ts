@@ -77,7 +77,8 @@ export const APZPEN_PROVIDERS: readonly ApzpenProvider[] = [
     discipline: "Specialist",
     status: "ingest_ready",
     dispatchable: false,
-    notes: "ENT-001 — artefact ingest via @apzhub/integration-faraday; compose planned",
+    notes:
+      "ENT-001 — export JSON → security/out/faraday → artefact list/ingest (APZPEN_FARADAY_ARTEFACT_INGEST); FARADAY_URL probe optional; compose profile-gated optional; Kali runner-only",
   },
   {
     id: "gitleaks",

@@ -7,6 +7,7 @@ export * from "./provider-catalogue";
 export * from "./provider-health";
 export * from "./greenbone-artefact";
 export * from "./greenbone-freshness";
+export * from "./faraday-artefact";
 export * from "./runner-dispatch";
 export * from "./reports";
 export * from "./report-pdf";
