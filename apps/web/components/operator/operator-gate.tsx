@@ -3,7 +3,12 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 
+import { ProductAccessDeniedView } from "@/components/commercial/product-access-denied";
 import type { DemoPersonaKind } from "@/lib/demo/demo-personas";
+import {
+  softEvaluateProductAccess,
+  type EntitlementSnapshotLike,
+} from "@/lib/commercial/soft-product-access";
 import {
   isOperatorKind,
   shellLandingForKind,
@@ -23,17 +28,21 @@ const SHELL_KINDS: Record<OperatorShellId, readonly DemoPersonaKind[]> = {
 type HomeContextPayload = {
   kind?: DemoPersonaKind;
   landing?: { path?: string };
-  entitlements?: { productKeys?: readonly string[] };
+  entitlements?: EntitlementSnapshotLike | null;
 };
 
-function mayUseApzpen(
-  kind: DemoPersonaKind,
-  entitlements: HomeContextPayload["entitlements"],
-): boolean {
-  if (kind === "superadmin" || kind === "platform_admin" || kind === "support") {
-    return true;
-  }
-  return Boolean(entitlements?.productKeys?.includes("pentest"));
+type GateState =
+  | { readonly status: "loading" }
+  | { readonly status: "ok" }
+  | {
+      readonly status: "product_denied";
+      readonly reason:
+        "org_not_subscribed" | "user_not_granted" | "product_unavailable";
+    }
+  | { readonly status: "redirecting" };
+
+function mayBypassApzpenProduct(kind: DemoPersonaKind): boolean {
+  return kind === "superadmin" || kind === "platform_admin" || kind === "support";
 }
 
 export function OperatorGate({
@@ -44,7 +53,7 @@ export function OperatorGate({
   readonly children: ReactNode;
 }) {
   const router = useRouter();
-  const [ok, setOk] = useState(false);
+  const [state, setState] = useState<GateState>({ status: "loading" });
 
   useEffect(() => {
     let cancelled = false;
@@ -55,16 +64,25 @@ export function OperatorGate({
         if (cancelled) return;
         const kind = body.data?.kind ?? "org_member";
         const allowed = SHELL_KINDS[shell] ?? [];
-        const entitled =
-          shell !== "apzpen" || mayUseApzpen(kind, body.data?.entitlements);
-        if (!allowed.includes(kind) || !entitled) {
+        if (!allowed.includes(kind)) {
           const landing = shellLandingForKind(kind);
+          setState({ status: "redirecting" });
           router.replace(landing.path);
           return;
         }
-        setOk(true);
+        if (shell === "apzpen" && !mayBypassApzpenProduct(kind)) {
+          const access = softEvaluateProductAccess("pentest", body.data?.entitlements);
+          if (access.status === "denied") {
+            setState({ status: "product_denied", reason: access.reason });
+            return;
+          }
+        }
+        setState({ status: "ok" });
       } catch {
-        if (!cancelled) router.replace("/login");
+        if (!cancelled) {
+          setState({ status: "redirecting" });
+          router.replace("/login");
+        }
       }
     })();
     return () => {
@@ -72,7 +90,17 @@ export function OperatorGate({
     };
   }, [router, shell]);
 
-  if (!ok) {
+  if (state.status === "product_denied") {
+    return (
+      <ProductAccessDeniedView
+        productKey="pentest"
+        reason={state.reason}
+        breadcrumbs={["Security Assurance", "Product required"]}
+      />
+    );
+  }
+
+  if (state.status !== "ok") {
     return (
       <div className="p-6 text-xs text-[var(--color-muted-foreground)]">
         Checking access…

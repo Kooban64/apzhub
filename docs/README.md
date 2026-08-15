@@ -32,6 +32,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-ADOPT-002](./sprint/SPR-ADOPT-002-commercial-pillar-operator-dogfood.md)                     | **COMPLETE · DELIVERED** — commercial pillar operator dogfood (BetterAuth only)      |
 | [ADOPT-002 evidence](./products/adopt-002/README.md)                                              | Friction · evidence · checklist results                                              |
 | [OWNER APZPEN remain parked](./decisions/OWNER-APZPEN-REMAIN-PARKED.md)                           | **IN FORCE** — no further APZPEN enterprise until resume criteria                    |
+| [SPR-POLISH-001](./sprint/SPR-POLISH-001-entitlements-shell-consistency.md)                       | **COMPLETE · DELIVERED** — entitlements UX + shell consistency across pillars        |
 
 ### Priority product build — APZQEP (active)
 

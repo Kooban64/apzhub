@@ -146,13 +146,19 @@ describe("ProjectsWorkspaceRouter", () => {
       "fetch",
       vi.fn(async () =>
         Response.json({
-          data: { entitlements: { productKeys: ["qep"] } },
+          data: {
+            entitlements: {
+              productKeys: ["qep"],
+              orgProductKeys: ["qep"],
+            },
+          },
         }),
       ),
     );
     render(wrap(<ProjectsWorkspaceRouter permissions={FULL} />));
     await waitFor(() => {
-      expect(screen.getByText("Projects not entitled")).toBeTruthy();
+      expect(screen.getByTestId("product-access-denied")).toBeTruthy();
+      expect(screen.getByText("Projects not subscribed")).toBeTruthy();
     });
   });
 });

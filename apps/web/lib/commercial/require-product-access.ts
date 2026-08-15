@@ -93,6 +93,10 @@ export function requireProductAccess(
     throw new PlatformApiHttpError(403, {
       code: "PRODUCT_ACCESS_DENIED",
       message: `Product access denied (${decision.reason}): ${productKey}`,
+      details: {
+        reason: decision.reason,
+        productKey: decision.productKey,
+      },
     });
   }
 }

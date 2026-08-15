@@ -11,6 +11,7 @@ import {
   QepPanel,
   QepStatusBadge,
 } from "@/components/qep/qep-ui";
+import { productDisplayName } from "@/lib/commercial/soft-product-access";
 
 async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
   const response = await fetch(url, {
@@ -186,7 +187,10 @@ export function OrgAdminMembersView() {
                     {member.personaRoleId}
                   </span>
                   <span className="text-xs text-[var(--color-muted-foreground)]">
-                    grants: {(member.productGrants ?? []).join(", ") || "none"}
+                    grants:{" "}
+                    {(member.productGrants ?? [])
+                      .map((key) => productDisplayName(key))
+                      .join(", ") || "none"}
                   </span>
                   <MemberActions
                     membershipId={member.membershipId}
@@ -242,7 +246,10 @@ function MemberActions({
               );
             }}
           />
-          {productKey}
+          {productDisplayName(productKey)}
+          <span className="font-mono text-[10px] text-[var(--color-muted-foreground)]">
+            ({productKey})
+          </span>
         </label>
       ))}
       {orgProducts.length > 0 ? (

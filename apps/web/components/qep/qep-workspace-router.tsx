@@ -2,6 +2,8 @@
 
 import { usePathname } from "next/navigation";
 
+import { ProductAccessDeniedView } from "@/components/commercial/product-access-denied";
+import { useSoftProductAccess } from "@/lib/commercial/use-soft-product-access";
 import {
   isQepDefectsRoute,
   isQepEnterpriseReportingRoute,
@@ -82,9 +84,27 @@ function isPathPrefix(pathname: string, base: string): boolean {
  */
 export function QepWorkspaceRouter() {
   const pathname = usePathname() ?? "";
+  const productAccess = useSoftProductAccess("qep");
 
   if (!isQepWorkspaceRoute(pathname)) {
     return null;
+  }
+
+  if (productAccess === null) {
+    return (
+      <div className="p-6 text-sm text-[var(--color-muted-foreground)]">
+        Checking product access…
+      </div>
+    );
+  }
+  if (productAccess.status === "denied") {
+    return (
+      <ProductAccessDeniedView
+        productKey={productAccess.productKey}
+        reason={productAccess.reason}
+        breadcrumbs={["Quality", "Product required"]}
+      />
+    );
   }
 
   if (isQepHomeRoute(pathname)) {

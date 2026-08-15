@@ -1,6 +1,5 @@
 import type { PlatformApiRequestContext } from "@/lib/api/v1/auth/with-platform-api-auth";
 import { PlatformApiHttpError } from "@/lib/api/v1/errors";
-import { hasProductAccess } from "@/lib/commercial/product-access";
 import { tenantHasProductSubscriptions } from "@/lib/commercial/resolve-entitlements";
 import { requireProductAccess } from "@/lib/commercial/require-product-access";
 
@@ -127,20 +126,7 @@ export function requireApzpenAccess(
   if (hasSubs) {
     requireProductAccess(context, "pentest");
   } else if (organisationId && process.env.NODE_ENV === "production") {
-    // Production tenants must subscribe before using APZPEN.
-    const userId = context.session.user.id;
-    if (
-      !hasProductAccess({
-        organisationId,
-        userId,
-        productKey: "pentest",
-      })
-    ) {
-      throw new PlatformApiHttpError(403, {
-        code: "PRODUCT_ACCESS_DENIED",
-        message: "APZPEN product entitlement required",
-      });
-    }
+    requireProductAccess(context, "pentest");
   }
 
   if (perms.length === 0) {
