@@ -1,17 +1,18 @@
 manifestSchemaVersion: "1.0"
 id: qep-integrations
 name: Integration Centre
-version: 0.2.0
+version: 0.3.0
 kind: module
 
 metadata:
   category: quality-engineering
   description: >
-    Integration Centre MVP (SPR-APZQEP-202). Lists automation and SCM providers
-    plus Playwright runner health. Presentation only over existing catalogues.
+    Integration Centre (SPR-APZQEP-220-D). Lists automation and SCM providers
+    plus Playwright runner health, with enable/disable and last-sync ledger
+    (platform metadata only — not Cap connector SoR).
   product: apzqep
   slug: integrations
-  programme: SPR-APZQEP-202
+  programme: SPR-APZQEP-220
 
 dependencies:
   platform: []
@@ -25,6 +26,8 @@ module:
 permissions:
   - id: qep.integrations.read
     label: View Integration Centre
+  - id: qep.integrations.operate
+    label: Operate Integration Centre connectors
 
 workbench:
   navigation:

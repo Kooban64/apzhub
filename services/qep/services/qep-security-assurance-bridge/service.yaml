@@ -11,7 +11,7 @@ metadata:
   description: >-
     Read-only assurance summary for QEP Release Readiness / Home / RC.
     APZPEN remains SoR for engagements and findings. Never auto-certifies.
-    Compose today in apps/web; Platform Service extraction follows.
+    Compose via getSecurityAssuranceSummary (apps/web/lib/qep/security-assurance-bridge-service.ts).
   product: apzqep
   programme: SPR-BRIDGE-001
 

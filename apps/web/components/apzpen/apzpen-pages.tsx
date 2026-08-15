@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState, type ReactNode } from "react";
 
@@ -313,6 +314,16 @@ export function ApzpenHomePage() {
 
 export function ApzpenEngagementsPage() {
   const qc = useQueryClient();
+  const searchParams = useSearchParams();
+  const ingestTool = searchParams.get("ingestTool") ?? searchParams.get("tool");
+  const ingestFormat = searchParams.get("ingestFormat") ?? searchParams.get("format");
+  const engagementIngestQuery =
+    ingestTool || ingestFormat
+      ? `?${new URLSearchParams({
+          ...(ingestTool ? { tool: ingestTool } : {}),
+          ...(ingestFormat ? { format: ingestFormat } : {}),
+        }).toString()}`
+      : "";
   const q = useQuery({
     queryKey: ["apzpen", "engagements"],
     queryFn: () => fetchEngagements(true),
@@ -472,7 +483,7 @@ export function ApzpenEngagementsPage() {
                     >
                       <td className="py-2 pr-2">
                         <Link
-                          href={`/apzpen/engagements/${e.engagementId}`}
+                          href={`/apzpen/engagements/${e.engagementId}${engagementIngestQuery}`}
                           className="font-medium hover:underline"
                         >
                           {e.title}
@@ -521,6 +532,7 @@ export function ApzpenEngagementsPage() {
 
 export function ApzpenEngagementDetailPage({ engagementId }: { engagementId: string }) {
   const qc = useQueryClient();
+  const searchParams = useSearchParams();
   const q = useQuery({
     queryKey: ["apzpen", "engagement", engagementId],
     queryFn: () => fetchEngagement(engagementId),
@@ -542,6 +554,38 @@ export function ApzpenEngagementDetailPage({ engagementId }: { engagementId: str
   const [ingestFormat, setIngestFormat] = useState("auto");
   const [ingestTool, setIngestTool] = useState("zap");
   const [ingestMessage, setIngestMessage] = useState<string | null>(null);
+  const [ingestQueryApplied, setIngestQueryApplied] = useState(false);
+
+  useEffect(() => {
+    if (ingestQueryApplied) return;
+    const tool = (searchParams.get("tool") ?? searchParams.get("ingestTool") ?? "")
+      .trim()
+      .toLowerCase();
+    const format = (
+      searchParams.get("format") ??
+      searchParams.get("ingestFormat") ??
+      ""
+    )
+      .trim()
+      .toLowerCase();
+    if (tool === "greenbone") {
+      setIngestTool("greenbone");
+      setIngestFormat(format || "simplified");
+      setIngestQueryApplied(true);
+      return;
+    }
+    if (tool === "faraday") {
+      setIngestTool("faraday");
+      setIngestFormat(format || "auto");
+      setIngestQueryApplied(true);
+      return;
+    }
+    if (tool || format) {
+      if (tool) setIngestTool(tool);
+      if (format) setIngestFormat(format);
+      setIngestQueryApplied(true);
+    }
+  }, [searchParams, ingestQueryApplied]);
   const [dispatchTarget, setDispatchTarget] = useState("");
   const [nextRunAt, setNextRunAt] = useState("");
   const [emergencyContact, setEmergencyContact] = useState("");
@@ -1363,10 +1407,13 @@ export function ApzpenEngagementDetailPage({ engagementId }: { engagementId: str
             )}
           </OperatorPanel>
 
-          <OperatorPanel title="Provider ingest">
+          <OperatorPanel title="Provider ingest — VA & Security Ops">
             <p className="mb-2 text-[11px] text-[var(--color-muted-foreground)]">
-              Paste or upload ZAP JSON, SARIF, Greenbone simplified, Nuclei JSONL,
-              Gitleaks JSON, or MobSF JSON. Duplicates are skipped.
+              Paste or upload ZAP JSON, SARIF, VA artefacts (Vulnerability Assessment /
+              Greenbone simplified), Faraday Security Ops exports, Nuclei JSONL,
+              Gitleaks JSON, or MobSF JSON. Duplicates are skipped. Deep-link with
+              <code className="mx-0.5">?tool=greenbone&amp;format=simplified</code> or
+              <code className="mx-0.5">?tool=faraday</code> to preselect.
             </p>
             <div className="mb-2 flex flex-wrap gap-2">
               <select
@@ -1378,7 +1425,7 @@ export function ApzpenEngagementDetailPage({ engagementId }: { engagementId: str
                 <option value="auto">Auto-detect</option>
                 <option value="zap">ZAP JSON</option>
                 <option value="sarif">SARIF</option>
-                <option value="simplified">Simplified / Greenbone</option>
+                <option value="simplified">Simplified / VA artefact</option>
                 <option value="nuclei_jsonl">Nuclei JSONL</option>
                 <option value="gitleaks">Gitleaks JSON</option>
                 <option value="mobsf">MobSF JSON</option>
@@ -1831,7 +1878,21 @@ export function ApzpenProvidersPage() {
       };
     },
   });
+  const engagements = useQuery({
+    queryKey: ["apzpen", "engagements", "providers-ingest"],
+    queryFn: () => fetchEngagements(false),
+  });
+  const firstEngagementId = engagements.data?.engagements[0]?.engagementId;
   const healthById = new Map((health.data?.health ?? []).map((h) => [h.id, h]));
+
+  const vaIngestHref = (tool: "greenbone" | "faraday", format: string) => {
+    const q = `tool=${tool}&format=${format}`;
+    if (firstEngagementId) {
+      return `/apzpen/engagements/${firstEngagementId}?${q}`;
+    }
+    return `/apzpen/engagements?ingestTool=${tool}&ingestFormat=${format}`;
+  };
+
   return (
     <Frame
       title="Providers"
@@ -1851,6 +1912,7 @@ export function ApzpenProvidersPage() {
           <tbody>
             {providers.map((p) => {
               const h = healthById.get(p.id);
+              const isVaArtefact = p.id === "greenbone" || p.id === "faraday";
               return (
                 <tr key={p.id} className="border-t border-[var(--color-border)]">
                   <td className="py-2 pr-2 font-medium">{p.name}</td>
@@ -1894,7 +1956,38 @@ export function ApzpenProvidersPage() {
                         Code security
                       </Link>
                     ) : null}
-                    {!p.dispatchable && p.id !== "github" && p.id !== "mobsf" ? (
+                    {p.id === "greenbone" ? (
+                      <span className="inline-flex flex-col gap-0.5">
+                        <Link
+                          href={vaIngestHref("greenbone", "simplified")}
+                          className="underline"
+                          data-testid="apzpen-ingest-artefact-greenbone"
+                        >
+                          Ingest artefact
+                        </Link>
+                        <span className="text-[10px] text-[var(--color-muted-foreground)]">
+                          Open any engagement → Provider ingest (preselect VA)
+                        </span>
+                      </span>
+                    ) : null}
+                    {p.id === "faraday" ? (
+                      <span className="inline-flex flex-col gap-0.5">
+                        <Link
+                          href={vaIngestHref("faraday", "auto")}
+                          className="underline"
+                          data-testid="apzpen-ingest-artefact-faraday"
+                        >
+                          Ingest artefact
+                        </Link>
+                        <span className="text-[10px] text-[var(--color-muted-foreground)]">
+                          Open any engagement → Provider ingest (Security Ops)
+                        </span>
+                      </span>
+                    ) : null}
+                    {!p.dispatchable &&
+                    p.id !== "github" &&
+                    p.id !== "mobsf" &&
+                    !isVaArtefact ? (
                       <span className="text-[var(--color-muted-foreground)]">
                         Ingest
                       </span>

@@ -178,7 +178,7 @@ function QiHomeView() {
   return (
     <QepPageShell
       title="Quality Intelligence"
-      description="Flagship F6 — engineering advice grounded in quality graph + evidence. Advisory only; never certifies."
+      description="Flagship F6 — engineering advice grounded in quality graph + evidence. Advisory only; never certifies and never auto-approves a release."
       actions={
         <Button
           type="button"
@@ -191,6 +191,15 @@ function QiHomeView() {
         </Button>
       }
     >
+      <div
+        data-testid="qep-qi-advisory-banner"
+        role="status"
+        className="rounded-md border border-[var(--color-border)] bg-[var(--color-muted)]/50 px-4 py-3 text-sm text-[var(--color-foreground)]"
+      >
+        Advisory only — Quality Intelligence never certifies and never auto-approves a
+        release.
+      </div>
+
       <div className="mb-4 flex flex-wrap gap-3 text-sm">
         <Link href={QEP_QI_ROUTES.recommendations}>Recommendations</Link>
         <Link href={QEP_QI_ROUTES.signals}>Signals</Link>
