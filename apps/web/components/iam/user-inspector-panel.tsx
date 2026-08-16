@@ -3,7 +3,15 @@
 import { useState } from "react";
 
 type InspectorTabId =
-  "overview" | "products" | "roles" | "scopes" | "tools" | "provisioning";
+  | "overview"
+  | "products"
+  | "roles"
+  | "scopes"
+  | "tools"
+  | "provisioning"
+  | "activity"
+  | "audit"
+  | "sessions";
 
 type InspectionPayload = {
   readonly why?: readonly string[];
@@ -45,6 +53,23 @@ type InspectionPayload = {
       userId: string;
       why: readonly string[];
     };
+    readonly activity?: readonly {
+      id: string;
+      title: string;
+      timestamp: string;
+      activityTypeId: string;
+      why: string;
+    }[];
+    readonly audit?: readonly {
+      id: string;
+      summary: string;
+      timestamp: string;
+      why: string;
+    }[];
+    readonly sessions?: readonly {
+      status: string;
+      why: string;
+    }[];
   };
 };
 
@@ -55,6 +80,9 @@ const TABS: readonly { id: InspectorTabId; label: string }[] = [
   { id: "scopes", label: "Scopes" },
   { id: "tools", label: "Professional Tools" },
   { id: "provisioning", label: "Provisioning" },
+  { id: "activity", label: "Activity" },
+  { id: "audit", label: "Audit" },
+  { id: "sessions", label: "Sessions" },
 ];
 
 export function UserInspectorPanel({
@@ -283,6 +311,70 @@ export function UserInspectorPanel({
                     ))}
                   </ul>
                 </div>
+              ) : null}
+
+              {tab === "activity" ? (
+                <ul
+                  className="space-y-1"
+                  data-testid={`iam-inspect-activity-${membershipId}`}
+                >
+                  {(inspection.tabs?.activity ?? []).map((row) => (
+                    <li
+                      key={`${row.id}-${row.timestamp}`}
+                      className="rounded border border-[var(--color-border)]/60 px-2 py-1"
+                    >
+                      <div className="font-medium text-[var(--color-foreground)]">
+                        {row.title}
+                      </div>
+                      <div className="font-mono text-[10px]">
+                        {row.activityTypeId}
+                        {row.timestamp ? ` · ${row.timestamp}` : ""}
+                      </div>
+                      <div>{row.why}</div>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+
+              {tab === "audit" ? (
+                <ul
+                  className="space-y-1"
+                  data-testid={`iam-inspect-audit-${membershipId}`}
+                >
+                  {(inspection.tabs?.audit ?? []).map((row) => (
+                    <li
+                      key={`${row.id}-${row.timestamp}`}
+                      className="rounded border border-[var(--color-border)]/60 px-2 py-1"
+                    >
+                      <div className="font-medium text-[var(--color-foreground)]">
+                        {row.summary}
+                      </div>
+                      <div className="font-mono text-[10px]">
+                        {row.timestamp || "—"}
+                      </div>
+                      <div>{row.why}</div>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+
+              {tab === "sessions" ? (
+                <ul
+                  className="space-y-1"
+                  data-testid={`iam-inspect-sessions-${membershipId}`}
+                >
+                  {(inspection.tabs?.sessions ?? []).map((row) => (
+                    <li
+                      key={row.status}
+                      className="rounded border border-[var(--color-border)]/60 px-2 py-1"
+                    >
+                      <div className="font-medium text-[var(--color-foreground)]">
+                        {row.status}
+                      </div>
+                      <div>{row.why}</div>
+                    </li>
+                  ))}
+                </ul>
               ) : null}
             </>
           ) : null}

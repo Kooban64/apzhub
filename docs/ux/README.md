@@ -33,4 +33,6 @@
 
 **Phase I gap map:** [User Inspector flagship](../sprint/PHASE-I-USER-INSPECTOR-GAP-MAP.md) — **CERTIFIED 100%** ([sprint](../sprint/SPR-UX-PHASE-I-USER-INSPECTOR.md))
 
+**Phase J gap map:** [Inspector timeline + Support health](../sprint/PHASE-J-INSPECTOR-TIMELINE-GAP-MAP.md) — **CERTIFIED 100%** ([sprint](../sprint/SPR-UX-PHASE-J-INSPECTOR-TIMELINE.md))
+
 **Programme rule:** Streams **1–6 frozen**. Gap-map first; documentation accompanies code. Vertical proof before horizontal completion.

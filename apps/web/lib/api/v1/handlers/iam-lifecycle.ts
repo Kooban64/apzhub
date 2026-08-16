@@ -321,6 +321,8 @@ export async function handleInspectIamMemberAccess(
   }
   const { inspectMemberEffectiveAccess } =
     await import("@/lib/iam/effective-access-inspector");
+  const { loadInspectionTimelineTabs } =
+    await import("@/lib/iam/effective-access-timeline");
   const inspection = await inspectMemberEffectiveAccess({
     organisationId: sessionTenantId(context),
     membershipId,
@@ -331,5 +333,22 @@ export async function handleInspectIamMemberAccess(
       message: "iam.member.not_found",
     });
   }
-  return jsonDataResponse({ inspection }, context.tracing);
+  const timeline = await loadInspectionTimelineTabs({
+    userId: inspection.userId,
+    serviceContext: context.serviceContext,
+  });
+  return jsonDataResponse(
+    {
+      inspection: {
+        ...inspection,
+        tabs: {
+          ...inspection.tabs,
+          activity: timeline.activity,
+          audit: timeline.audit,
+          sessions: timeline.sessions,
+        },
+      },
+    },
+    context.tracing,
+  );
 }

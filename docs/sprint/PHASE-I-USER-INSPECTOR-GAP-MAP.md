@@ -22,7 +22,7 @@
 - Handler: `handleInspectIamMemberAccess` (async enrichment)
 - Model: `apps/web/lib/iam/effective-access-inspector.ts`
 - UI: `apps/web/components/iam/user-inspector-panel.tsx`
-- Deferred later: Sessions · Activity · Audit live feeds (spec tabs remain future)
+- Deferred later: ~~Sessions · Activity · Audit live feeds~~ → **closed in Phase J** ([PHASE-J-INSPECTOR-TIMELINE-GAP-MAP](./PHASE-J-INSPECTOR-TIMELINE-GAP-MAP.md)); Sessions remain honest-unavailable until BetterAuth session admin.
 
 ## Certification
 

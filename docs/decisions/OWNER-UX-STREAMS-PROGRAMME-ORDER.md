@@ -12,9 +12,9 @@
 >
 > Streams 1–6 remain frozen in scope. This decision governs how they are implemented, integrated and certified.
 >
-> **Engineering:** Phase A–I **CERTIFIED 100%**. Phase I User Inspector flagship deepen closed — ([SPR-UX-PHASE-I-USER-INSPECTOR](../sprint/SPR-UX-PHASE-I-USER-INSPECTOR.md) · [PHASE-I-USER-INSPECTOR-GAP-MAP](../sprint/PHASE-I-USER-INSPECTOR-GAP-MAP.md)).
+> **Engineering:** Phase A–J **CERTIFIED 100%**. Phase J closed Inspector timeline tabs + Support health — ([SPR-UX-PHASE-J-INSPECTOR-TIMELINE](../sprint/SPR-UX-PHASE-J-INSPECTOR-TIMELINE.md)).
 >
-> **Engineering 2026-08-16:** Phase I certified — Inspector tabs Overview/Products/Roles/Scopes/Professional Tools/Provisioning.
+> **Engineering 2026-08-16:** Phase J certified — Activity/Audit/Sessions tabs · Support `/health` (ADOPT F2).
 
 ---
 
@@ -54,6 +54,9 @@ projects.project:{id} · source.repo:{id} (+ readiness F1)
         ↓
 PHASE I — USER INSPECTOR FLAGSHIP   ← COMPLETE · CERTIFIED 100%
 Overview · Products · Roles · Scopes · Professional Tools · Provisioning
+        ↓
+PHASE J — INSPECTOR TIMELINE + F2   ← COMPLETE · CERTIFIED 100%
+Activity · Audit · Sessions (honest) · Support health
 ```
 
 **Stream 1 freeze interpretation:** Finish Stream 1 before authenticated QEP/PEN/PRD **product deep UX**. Foundation (5+6) precedes or underpins Stream 1.
