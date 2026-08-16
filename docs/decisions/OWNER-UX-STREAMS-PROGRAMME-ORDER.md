@@ -12,9 +12,9 @@
 >
 > Streams 1–6 remain frozen in scope. This decision governs how they are implemented, integrated and certified.
 >
-> **Engineering:** Phase A–D **COMPLETE · CERTIFIED 100%**. **Phase E** (Shared Source write track) **ACTIVE** — ([SPR-UX-PHASE-E-SHARED-SOURCE](../sprint/SPR-UX-PHASE-E-SHARED-SOURCE.md) · [PHASE-E-SHARED-SOURCE-GAP-MAP](../sprint/PHASE-E-SHARED-SOURCE-GAP-MAP.md)).
+> **Engineering:** Phase A–E **COMPLETE · CERTIFIED 100%**. Shared Source write track closed — ([SPR-UX-PHASE-E-SHARED-SOURCE](../sprint/SPR-UX-PHASE-E-SHARED-SOURCE.md) · [PHASE-E-SHARED-SOURCE-GAP-MAP](../sprint/PHASE-E-SHARED-SOURCE-GAP-MAP.md)). Review/Merge/Repo Admin requires a new approved sprint guide.
 >
-> **Engineering 2026-08-16:** Phase D certified. Phase E authorised — Shared Source Edit/Branch/Commit/Push/PR (Review/Merge later).
+> **Engineering 2026-08-16:** Phase E certified — Source tree/editor/tabs · branch/commit/PR · `source.write` · `/api/v1/source/*`.
 
 ---
 
@@ -40,7 +40,7 @@ APZQEP + APZPEN
         ↓
 COMMERCIAL PLATFORM UX COMPLETE     ← PHASES A–D CLOSED
         ↓
-PHASE E — SHARED SOURCE WRITE       ← ACTIVE
+PHASE E — SHARED SOURCE WRITE       ← COMPLETE · CERTIFIED 100%
 Edit / Branch / Commit / Push / PR
 (Review / Merge / Repo Admin later)
 ```

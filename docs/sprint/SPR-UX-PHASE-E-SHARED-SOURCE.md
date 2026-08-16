@@ -1,6 +1,6 @@
 # SPR-UX-PHASE-E — Shared Source Workspace (write track)
 
-> **Status:** **APPROVED · ACTIVE** — 2026-08-16  
+> **Status:** **COMPLETE · CERTIFIED 100%** — 2026-08-16  
 > **Authority:** [UX-SHARED-SOURCE-WORKSPACE](../ux/UX-SHARED-SOURCE-WORKSPACE.md) · [OWNER-UX-STREAMS-PROGRAMME-ORDER](../decisions/OWNER-UX-STREAMS-PROGRAMME-ORDER.md)  
 > **Gap map:** [PHASE-E-SHARED-SOURCE-GAP-MAP](./PHASE-E-SHARED-SOURCE-GAP-MAP.md)  
 > **Depends on:** Phase A–D **COMPLETE · CERTIFIED 100%**  

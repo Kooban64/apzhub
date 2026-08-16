@@ -12,6 +12,17 @@ import {
 } from "@/lib/source/routes";
 import { buildSourceFileTree, flattenSourceFileTree } from "@/lib/source/file-tree";
 import {
+  closeTab,
+  cycleTabPath,
+  isTabDirty,
+  markTabClean,
+  moveTreeFocus,
+  openOrFocusTab,
+  tabBasename,
+  updateTabDraft,
+  type SourceEditorTab,
+} from "@/lib/source/editor-tabs";
+import {
   QEP_DOMAINS_ROUTES,
   QEP_PR_QUALITY_ROUTES,
   QEP_QUALITY_GRAPH_ROUTES,
@@ -239,9 +250,9 @@ function SourceHomeView() {
 function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: string }) {
   const queryClient = useQueryClient();
   const [branch, setBranch] = useState("main");
-  const [openPath, setOpenPath] = useState<string | null>(null);
-  const [draft, setDraft] = useState("");
-  const [baseline, setBaseline] = useState("");
+  const [tabs, setTabs] = useState<readonly SourceEditorTab[]>([]);
+  const [activePath, setActivePath] = useState<string | null>(null);
+  const [treeFocus, setTreeFocus] = useState(0);
   const [commitMessage, setCommitMessage] = useState("");
   const [newBranchName, setNewBranchName] = useState("");
   const [prTitle, setPrTitle] = useState("");
@@ -288,25 +299,16 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
       ),
   });
 
-  const fileQuery = useQuery({
-    queryKey: ["source-workspace", "file", repositoryId, branch, openPath],
-    enabled: Boolean(openPath),
-    queryFn: () =>
-      fetchJson<{
-        file: { path: string; content: string; branch: string };
-      }>(
-        `/api/v1/source/repositories/${encodeURIComponent(repositoryId)}/file?path=${encodeURIComponent(openPath!)}&branch=${encodeURIComponent(branch)}`,
-      ),
-  });
+  const activeTab = tabs.find((tab) => tab.path === activePath) ?? null;
 
   const diffQuery = useQuery({
-    queryKey: ["source-workspace", "diff", repositoryId, openPath, branch, prTarget],
-    enabled: showDiff && Boolean(openPath),
+    queryKey: ["source-workspace", "diff", repositoryId, activePath, branch, prTarget],
+    enabled: showDiff && Boolean(activePath),
     queryFn: () =>
       fetchJson<{
         diff: { patch: string; status: string } | null;
       }>(
-        `/api/v1/source/repositories/${encodeURIComponent(repositoryId)}/diff?path=${encodeURIComponent(openPath!)}&baseRef=${encodeURIComponent(prTarget)}&headRef=${encodeURIComponent(branch)}`,
+        `/api/v1/source/repositories/${encodeURIComponent(repositoryId)}/diff?path=${encodeURIComponent(activePath!)}&baseRef=${encodeURIComponent(prTarget)}&headRef=${encodeURIComponent(branch)}`,
       ),
   });
 
@@ -315,17 +317,31 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
     if (defaultBranch) setBranch(defaultBranch);
   }, [detailQuery.data?.repository.defaultBranch]);
 
-  useEffect(() => {
-    if (fileQuery.data?.file) {
-      setDraft(fileQuery.data.file.content);
-      setBaseline(fileQuery.data.file.content);
+  const openFile = async (path: string) => {
+    const existing = tabs.find((tab) => tab.path === path);
+    if (existing) {
+      setActivePath(path);
+      return;
     }
-  }, [fileQuery.data?.file]);
+    try {
+      const data = await fetchJson<{
+        file: { path: string; content: string };
+      }>(
+        `/api/v1/source/repositories/${encodeURIComponent(repositoryId)}/file?path=${encodeURIComponent(path)}&branch=${encodeURIComponent(branch)}`,
+      );
+      const opened = openOrFocusTab(tabs, path, data.file.content);
+      setTabs(opened.tabs);
+      setActivePath(opened.activePath);
+    } catch (error) {
+      setStatusMessage((error as Error).message);
+    }
+  };
 
-  const dirty = openPath !== null && draft !== baseline;
+  const dirty = activeTab ? isTabDirty(activeTab) : false;
   const canWrite = capabilitiesQuery.data?.canWrite === true;
   const repository = detailQuery.data?.repository;
   const entries = treeQuery.data?.entries ?? [];
+  const fileEntries = entries.filter((entry) => entry.type === "file");
   const branches = branchesQuery.data?.branches ?? [];
   const commits = commitsQuery.data?.commits ?? [];
 
@@ -335,7 +351,7 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
 
   const commitMutation = useMutation({
     mutationFn: async () => {
-      if (!openPath) throw new Error("No file open");
+      if (!activeTab) throw new Error("No file open");
       if (!commitMessage.trim()) throw new Error("Commit message required");
       return fetchJson<{ commit: { sha: string; message: string } }>(
         `/api/v1/source/repositories/${encodeURIComponent(repositoryId)}/commit`,
@@ -345,13 +361,21 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
           body: JSON.stringify({
             branch,
             message: commitMessage.trim(),
-            files: [{ path: openPath, content: draft, operation: "upsert" }],
+            files: [
+              {
+                path: activeTab.path,
+                content: activeTab.draft,
+                operation: "upsert",
+              },
+            ],
           }),
         },
       );
     },
     onSuccess: async (data) => {
-      setBaseline(draft);
+      if (activeTab) {
+        setTabs(markTabClean(tabs, activeTab.path, activeTab.draft));
+      }
       setCommitMessage("");
       setStatusMessage(`Committed ${data.commit.sha.slice(0, 10)}`);
       await invalidateSource();
@@ -376,6 +400,8 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
     },
     onSuccess: async (data) => {
       setBranch(data.branch.name);
+      setTabs([]);
+      setActivePath(null);
       setNewBranchName("");
       setStatusMessage(`Created branch ${data.branch.name}`);
       await invalidateSource();
@@ -407,10 +433,66 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
     onError: (error) => setStatusMessage((error as Error).message),
   });
 
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      const tag = target?.tagName?.toLowerCase();
+      const typing =
+        tag === "textarea" ||
+        tag === "input" ||
+        tag === "select" ||
+        Boolean(target?.isContentEditable);
+
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "w") {
+        if (!activePath) return;
+        event.preventDefault();
+        const closed = closeTab(tabs, activePath, activePath);
+        setTabs(closed.tabs);
+        setActivePath(closed.activePath);
+        return;
+      }
+
+      if ((event.ctrlKey || event.metaKey) && event.key === "Tab") {
+        event.preventDefault();
+        const next = cycleTabPath(tabs, activePath, event.shiftKey ? -1 : 1);
+        if (next) setActivePath(next);
+        return;
+      }
+
+      if (typing) return;
+
+      if (event.key === "j" || event.key === "ArrowDown") {
+        event.preventDefault();
+        setTreeFocus((current) => moveTreeFocus(fileEntries.length, current, 1));
+        return;
+      }
+      if (event.key === "k" || event.key === "ArrowUp") {
+        event.preventDefault();
+        setTreeFocus((current) => moveTreeFocus(fileEntries.length, current, -1));
+        return;
+      }
+      if (event.key === "Enter") {
+        const focused = fileEntries[treeFocus];
+        if (focused) {
+          event.preventDefault();
+          void openFile(focused.path);
+        }
+        return;
+      }
+      if (event.key === "d" && activePath) {
+        event.preventDefault();
+        setShowDiff((value) => !value);
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [activePath, tabs, fileEntries, treeFocus]);
+
   return (
     <Shell
       title={repository?.fullName ?? "Repository"}
-      description="Shared Source workspace — tree, editor, branches, commit, and change requests. Write requires source.write."
+      description="Shared Source workspace — tabs, keyboard tree (j/k · Enter), commit, and change requests. Write requires source.write."
       actions={
         <span
           className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px]"
@@ -426,6 +508,14 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
         </p>
       ) : null}
 
+      <p
+        className="text-[11px] text-[var(--color-muted-foreground)]"
+        data-testid="source-keyboard-hints"
+      >
+        Keyboard: j/k tree · Enter open · Ctrl+Tab cycle tabs · Ctrl+W close · d toggle
+        diff
+      </p>
+
       <div className="flex flex-wrap items-center gap-2 text-sm">
         <label className="flex items-center gap-2">
           <span className="text-[var(--color-muted-foreground)]">Branch</span>
@@ -434,7 +524,8 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
             value={branch}
             onChange={(event) => {
               setBranch(event.target.value);
-              setOpenPath(null);
+              setTabs([]);
+              setActivePath(null);
             }}
             data-testid="source-branch-select"
           >
@@ -474,12 +565,13 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
       </div>
 
       <div
-        className="grid min-h-[28rem] gap-3 lg:grid-cols-[minmax(200px,0.8fr)_minmax(0,1.6fr)_minmax(200px,0.8fr)]"
+        className="grid min-h-[28rem] gap-3 lg:grid-cols-[minmax(200px,0.85fr)_minmax(0,1.7fr)_minmax(200px,0.85fr)]"
         data-testid="source-repo-workspace"
       >
         <section
           className="rounded-lg border border-[var(--color-border)] p-3"
           aria-label="Repository tree"
+          data-testid="source-tree-pane"
         >
           <h2 className="mb-2 text-xs font-semibold tracking-wide text-[var(--color-muted-foreground)] uppercase">
             Files
@@ -493,24 +585,21 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
             </p>
           ) : null}
           <ul className="max-h-[26rem] space-y-0.5 overflow-auto font-mono text-[11px]">
-            {entries.map((entry) => (
+            {fileEntries.map((entry, index) => (
               <li key={entry.path}>
-                {entry.type === "dir" ? (
-                  <span className="text-[var(--color-muted-foreground)]">
-                    ▸ {entry.name}
-                  </span>
-                ) : (
-                  <button
-                    type="button"
-                    className={`w-full text-left hover:underline ${
-                      openPath === entry.path ? "font-semibold" : ""
-                    }`}
-                    onClick={() => setOpenPath(entry.path)}
-                    data-testid={`source-file-${entry.path}`}
-                  >
-                    · {entry.name}
-                  </button>
-                )}
+                <button
+                  type="button"
+                  className={`w-full rounded px-1 py-0.5 text-left hover:bg-[var(--color-muted)] ${
+                    activePath === entry.path ? "font-semibold" : ""
+                  } ${treeFocus === index ? "ring-1 ring-[var(--color-primary)]" : ""}`}
+                  onClick={() => {
+                    setTreeFocus(index);
+                    void openFile(entry.path);
+                  }}
+                  data-testid={`source-file-${entry.path}`}
+                >
+                  · {entry.name}
+                </button>
               </li>
             ))}
           </ul>
@@ -521,22 +610,71 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
           aria-label="Editor"
           data-testid="source-editor"
         >
+          <div
+            className="mb-2 flex flex-wrap gap-1 border-b border-[var(--color-border)] pb-2"
+            data-testid="source-editor-tabs"
+            role="tablist"
+            aria-label="Open files"
+          >
+            {tabs.length === 0 ? (
+              <span className="text-xs text-[var(--color-muted-foreground)]">
+                No tabs open
+              </span>
+            ) : (
+              tabs.map((tab) => {
+                const selected = tab.path === activePath;
+                return (
+                  <div
+                    key={tab.path}
+                    className={`flex items-center gap-1 rounded border px-2 py-1 text-[11px] ${
+                      selected
+                        ? "border-[var(--color-primary)] bg-[var(--color-muted)]"
+                        : "border-[var(--color-border)]"
+                    }`}
+                    role="tab"
+                    aria-selected={selected}
+                  >
+                    <button
+                      type="button"
+                      className="font-mono hover:underline"
+                      onClick={() => setActivePath(tab.path)}
+                    >
+                      {tabBasename(tab.path)}
+                      {isTabDirty(tab) ? " •" : ""}
+                    </button>
+                    <button
+                      type="button"
+                      className="text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)]"
+                      aria-label={`Close ${tab.path}`}
+                      data-testid={`source-close-tab-${tab.path}`}
+                      onClick={() => {
+                        const closed = closeTab(tabs, tab.path, activePath);
+                        setTabs(closed.tabs);
+                        setActivePath(closed.activePath);
+                      }}
+                    >
+                      ×
+                    </button>
+                  </div>
+                );
+              })
+            )}
+          </div>
+
           <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
             <h2 className="font-mono text-xs text-[var(--color-muted-foreground)]">
-              {openPath ?? "Open a file"}
+              {activePath ?? "Open a file"}
               {dirty ? " · dirty" : ""}
             </h2>
-            <div className="flex flex-wrap gap-2">
-              <button
-                type="button"
-                className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px]"
-                disabled={!openPath}
-                onClick={() => setShowDiff((value) => !value)}
-                data-testid="source-toggle-diff"
-              >
-                {showDiff ? "Hide diff" : "Diff vs target"}
-              </button>
-            </div>
+            <button
+              type="button"
+              className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px]"
+              disabled={!activePath}
+              onClick={() => setShowDiff((value) => !value)}
+              data-testid="source-toggle-diff"
+            >
+              {showDiff ? "Hide diff" : "Diff vs target"}
+            </button>
           </div>
           {showDiff ? (
             <pre className="max-h-[22rem] flex-1 overflow-auto rounded bg-[var(--color-muted)]/30 p-3 font-mono text-[11px]">
@@ -546,14 +684,17 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
           ) : (
             <textarea
               className="min-h-[22rem] flex-1 resize-y rounded border border-[var(--color-border)] bg-transparent p-3 font-mono text-[12px] leading-relaxed"
-              value={openPath ? draft : ""}
-              onChange={(event) => setDraft(event.target.value)}
-              readOnly={!canWrite || !openPath}
+              value={activeTab?.draft ?? ""}
+              onChange={(event) => {
+                if (!activePath) return;
+                setTabs(updateTabDraft(tabs, activePath, event.target.value));
+              }}
+              readOnly={!canWrite || !activeTab}
               spellCheck={false}
               data-testid="source-editor-textarea"
             />
           )}
-          {canWrite && openPath ? (
+          {canWrite && activeTab ? (
             <div className="mt-3 flex flex-wrap items-center gap-2">
               <input
                 className="min-w-[14rem] flex-1 rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-xs"
@@ -575,7 +716,7 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
           ) : null}
         </section>
 
-        <aside className="space-y-3">
+        <aside className="space-y-3" data-testid="source-context-pane">
           <section className="rounded-lg border border-[var(--color-border)] p-3 text-sm">
             <h2 className="mb-2 text-xs font-semibold tracking-wide text-[var(--color-muted-foreground)] uppercase">
               History

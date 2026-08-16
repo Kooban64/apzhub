@@ -13,7 +13,7 @@
 
 **Freeze decisions:** [Streams 5–6](../decisions/OWNER-UX-STREAM-005-006-FREEZE.md) · [Stream 6 supersede](../decisions/OWNER-UX-STREAM-006-SUPERSEDE.md)
 
-**Programme order:** [OWNER-UX-STREAMS-PROGRAMME-ORDER](../decisions/OWNER-UX-STREAMS-PROGRAMME-ORDER.md) — **ACCEPTED** · Phase A–D **CERTIFIED 100%** · **Phase E ACTIVE** (Shared Source write)
+**Programme order:** [OWNER-UX-STREAMS-PROGRAMME-ORDER](../decisions/OWNER-UX-STREAMS-PROGRAMME-ORDER.md) — **ACCEPTED** · Phase A–E **CERTIFIED 100%**
 
 **Phase A gap map:** [PHASE-A-STREAMS-5-6-GAP-MAP](../sprint/PHASE-A-STREAMS-5-6-GAP-MAP.md) — all seven persona verticals certified
 
@@ -23,6 +23,6 @@
 
 **Phase D gap maps:** [Stream 2 APZQEP](../sprint/PHASE-D-STREAM-2-GAP-MAP.md) · [Stream 3 APZPEN](../sprint/PHASE-D-STREAM-3-GAP-MAP.md) — **CERTIFIED 100%**
 
-**Phase E gap map:** [Shared Source write](../sprint/PHASE-E-SHARED-SOURCE-GAP-MAP.md) — **ACTIVE**
+**Phase E gap map:** [Shared Source write](../sprint/PHASE-E-SHARED-SOURCE-GAP-MAP.md) — **CERTIFIED 100%**
 
 **Programme rule:** Streams **1–6 frozen**. Gap-map first; documentation accompanies code. Vertical proof before horizontal completion.

@@ -31,15 +31,15 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-UX-STREAM-006](./sprint/SPR-UX-STREAM-006-tenant-identity-rbac-administration.md)             | **FROZEN · NOT STARTED** — await Owner order                                          |
 | [OWNER UX Stream 6 supersede](./decisions/OWNER-UX-STREAM-006-SUPERSEDE.md)                        | **IN FORCE** — revised Stream 6 replaces earlier RBAC freeze text                     |
 | [UX Shared Source Workspace](./ux/UX-SHARED-SOURCE-WORKSPACE.md)                                   | **LOCKED** — one Cursor-quality source UX for QEP+PEN; provider-neutral               |
-| [OWNER UX programme order](./decisions/OWNER-UX-STREAMS-PROGRAMME-ORDER.md)                        | **ACCEPTED** — Phase A–D certified · **Phase E ACTIVE** (Source write)                |
-| [UX streams index](./ux/README.md)                                                                 | Streams 1–6 · Phase A–D certified · Phase E Shared Source ACTIVE                      |
+| [OWNER UX programme order](./decisions/OWNER-UX-STREAMS-PROGRAMME-ORDER.md)                        | **ACCEPTED** — Phase A–E **CERTIFIED 100%**                                           |
+| [UX streams index](./ux/README.md)                                                                 | Streams 1–6 · Phase A–E certified                                                     |
 | [Phase A Streams 5∥6 gap map](./sprint/PHASE-A-STREAMS-5-6-GAP-MAP.md)                             | Living — seven persona verticals certified                                            |
 | [Phase B Stream 1 gap map](./sprint/PHASE-B-STREAM-1-GAP-MAP.md)                                   | **COMPLETE · CERTIFIED 100%** — public commerce DoD                                   |
 | [Phase C Stream 4 gap map](./sprint/PHASE-C-STREAM-4-GAP-MAP.md)                                   | **COMPLETE · CERTIFIED 100%** — APZPRD                                                |
 | [Phase D Stream 2 gap map](./sprint/PHASE-D-STREAM-2-GAP-MAP.md)                                   | **COMPLETE · CERTIFIED 100%** — APZQEP                                                |
 | [Phase D Stream 3 gap map](./sprint/PHASE-D-STREAM-3-GAP-MAP.md)                                   | **COMPLETE · CERTIFIED 100%** — APZPEN                                                |
-| [SPR-UX-PHASE-E Shared Source](./sprint/SPR-UX-PHASE-E-SHARED-SOURCE.md)                           | **APPROVED · ACTIVE** — Source Edit/Branch/Commit/Push/PR                             |
-| [Phase E Shared Source gap map](./sprint/PHASE-E-SHARED-SOURCE-GAP-MAP.md)                         | Living — Shared Source write track                                                    |
+| [SPR-UX-PHASE-E Shared Source](./sprint/SPR-UX-PHASE-E-SHARED-SOURCE.md)                           | **COMPLETE · CERTIFIED 100%** — Source Edit/Branch/Commit/Push/PR                     |
+| [Phase E Shared Source gap map](./sprint/PHASE-E-SHARED-SOURCE-GAP-MAP.md)                         | **COMPLETE · CERTIFIED 100%** — Shared Source write track                             |
 | [SPR-UX-001](./sprint/SPR-UX-001-commercial-workbench-ui-remodel.md)                               | **PARKED** — workbench remodel deferred under Stream 1 freeze                         |
 | [APZQEP](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md)                             | Quality Engineering Platform — _Can we release with confidence?_                      |
 | [APZPEN](./strategy/APZPEN-ENTERPRISE-SECURITY-ASSURANCE-PLATFORM.md)                              | Security Assurance & Pen Testing — _Can we demonstrate we are secure?_                |
