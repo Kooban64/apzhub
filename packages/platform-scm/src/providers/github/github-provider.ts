@@ -9,9 +9,18 @@ import type {
   ScmRepositoryRef,
 } from "../../contracts/repository";
 import type {
+  ScmCommitFilesInput,
+  ScmCreateBranchInput,
+  ScmCreatePullRequestInput,
+  ScmFileContent,
+  ScmFileDiff,
+  ScmTreeEntry,
+} from "../../contracts/content";
+import type {
   ScmWebhookDelivery,
   ScmWebhookRegistration,
 } from "../../contracts/webhook";
+import { OfflineSourceWorkspace } from "../offline-workspace";
 
 export interface GitHubProviderOptions {
   /**
@@ -38,6 +47,13 @@ const DESCRIPTOR: ScmProviderDescriptor = {
     "provider-health",
     "connection-testing",
     "offline-mode",
+    "source-tree",
+    "source-file-content",
+    "source-diff",
+    "source-write",
+    "source-branch-create",
+    "source-commit",
+    "source-pull-request-create",
   ],
 };
 
@@ -62,6 +78,7 @@ export class GitHubScmProvider implements ScmProvider {
   private readonly forceOffline: boolean;
   private readonly apiBaseUrl: string;
   private readonly offlineRepos = new Map<string, ScmRepositoryRef>();
+  private readonly offlineWorkspace = new OfflineSourceWorkspace();
 
   constructor(options: GitHubProviderOptions = {}) {
     this.forceOffline = options.forceOffline ?? true;
@@ -141,10 +158,7 @@ export class GitHubScmProvider implements ScmProvider {
 
   async listBranches(context: ScmProviderContext, fullName: string) {
     if (this.forceOffline) {
-      return [
-        { name: "main", sha: "offline-main", protected: true },
-        { name: "develop", sha: "offline-develop", protected: false },
-      ] satisfies ScmBranchRef[];
+      return this.offlineWorkspace.listBranches(fullName);
     }
     const response = await this.gh(context, `/repos/${fullName}/branches?per_page=50`);
     if (!response.ok) {
@@ -164,17 +178,7 @@ export class GitHubScmProvider implements ScmProvider {
     options?: { readonly branch?: string; readonly limit?: number },
   ) {
     if (this.forceOffline) {
-      return [
-        {
-          sha: "offline-commit-1",
-          message: "chore: offline seed commit",
-          authorName: "APZQEP",
-          authorEmail: "dev@apzhub.local",
-          committedAt: new Date().toISOString(),
-          branch: options?.branch ?? "main",
-          htmlUrl: `https://github.com/${fullName}/commit/offline-commit-1`,
-        },
-      ] satisfies ScmCommitRef[];
+      return this.offlineWorkspace.listCommits(fullName, options);
     }
     const query = new URLSearchParams();
     if (options?.branch) query.set("sha", options.branch);
@@ -208,6 +212,8 @@ export class GitHubScmProvider implements ScmProvider {
     options?: { readonly state?: "open" | "closed" | "all"; readonly limit?: number },
   ) {
     if (this.forceOffline) {
+      const offline = this.offlineWorkspace.listPullRequests(fullName);
+      if (offline.length > 0) return offline;
       return [
         {
           externalId: "offline-pr-1",
@@ -251,6 +257,237 @@ export class GitHubScmProvider implements ScmProvider {
       htmlUrl: item.html_url ? String(item.html_url) : undefined,
       updatedAt: item.updated_at ? String(item.updated_at) : undefined,
     }));
+  }
+
+  async listTree(
+    _context: ScmProviderContext,
+    fullName: string,
+    options?: { readonly branch?: string; readonly path?: string },
+  ): Promise<readonly ScmTreeEntry[]> {
+    if (this.forceOffline) {
+      return this.offlineWorkspace.listTree(fullName, options);
+    }
+    // Live Contents API — list directory
+    const branch = options?.branch ?? "main";
+    const path = options?.path ? `/${options.path}` : "";
+    const response = await this.gh(
+      _context,
+      `/repos/${fullName}/contents${path}?ref=${encodeURIComponent(branch)}`,
+    );
+    if (!response.ok) {
+      throw new Error(`GitHub list tree failed (${response.status})`);
+    }
+    const body = (await response.json()) as
+      Array<Record<string, unknown>> | Record<string, unknown>;
+    const items = Array.isArray(body) ? body : [body];
+    return items.map((item) => ({
+      path: String(item.path ?? ""),
+      name: String(item.name ?? ""),
+      type: item.type === "dir" ? ("dir" as const) : ("file" as const),
+      sha: item.sha ? String(item.sha) : undefined,
+      size: typeof item.size === "number" ? item.size : undefined,
+    }));
+  }
+
+  async getFileContent(
+    context: ScmProviderContext,
+    fullName: string,
+    options: { readonly path: string; readonly branch?: string },
+  ): Promise<ScmFileContent | undefined> {
+    if (this.forceOffline) {
+      return this.offlineWorkspace.getFileContent(fullName, options);
+    }
+    const branch = options.branch ?? "main";
+    const response = await this.gh(
+      context,
+      `/repos/${fullName}/contents/${options.path}?ref=${encodeURIComponent(branch)}`,
+    );
+    if (response.status === 404) return undefined;
+    if (!response.ok) {
+      throw new Error(`GitHub get file failed (${response.status})`);
+    }
+    const body = (await response.json()) as Record<string, unknown>;
+    if (body.type !== "file") {
+      throw new Error("Path is not a file");
+    }
+    const encoding = String(body.encoding ?? "base64");
+    const raw = String(body.content ?? "").replace(/\n/g, "");
+    const content =
+      encoding === "base64" ? Buffer.from(raw, "base64").toString("utf-8") : raw;
+    return {
+      path: options.path,
+      branch,
+      content,
+      encoding: "utf-8",
+      sha: body.sha ? String(body.sha) : undefined,
+      truncated: content.length > 512_000,
+    };
+  }
+
+  async getFileDiff(
+    _context: ScmProviderContext,
+    fullName: string,
+    options: {
+      readonly path: string;
+      readonly baseRef: string;
+      readonly headRef: string;
+    },
+  ): Promise<ScmFileDiff | undefined> {
+    if (this.forceOffline) {
+      return this.offlineWorkspace.getFileDiff(fullName, options);
+    }
+    // Live: compare commits and extract file patch when present.
+    const response = await this.gh(
+      _context,
+      `/repos/${fullName}/compare/${encodeURIComponent(options.baseRef)}...${encodeURIComponent(options.headRef)}`,
+    );
+    if (!response.ok) {
+      throw new Error(`GitHub compare failed (${response.status})`);
+    }
+    const body = (await response.json()) as {
+      files?: Array<Record<string, unknown>>;
+    };
+    const file = (body.files ?? []).find((f) => String(f.filename) === options.path);
+    if (!file) return undefined;
+    const statusRaw = String(file.status ?? "modified");
+    const status =
+      statusRaw === "added" ||
+      statusRaw === "removed" ||
+      statusRaw === "renamed" ||
+      statusRaw === "modified"
+        ? statusRaw
+        : ("modified" as const);
+    return {
+      path: options.path,
+      baseRef: options.baseRef,
+      headRef: options.headRef,
+      patch: String(file.patch ?? ""),
+      status,
+    };
+  }
+
+  async createBranch(
+    context: ScmProviderContext,
+    fullName: string,
+    input: ScmCreateBranchInput,
+  ): Promise<ScmBranchRef> {
+    if (this.forceOffline) {
+      return this.offlineWorkspace.createBranch(fullName, input);
+    }
+    const refResponse = await this.gh(
+      context,
+      `/repos/${fullName}/git/ref/heads/${encodeURIComponent(input.fromRef)}`,
+    );
+    if (!refResponse.ok) {
+      throw new Error(`GitHub resolve ref failed (${refResponse.status})`);
+    }
+    const refBody = (await refResponse.json()) as {
+      object?: { sha?: string };
+    };
+    const sha = refBody.object?.sha;
+    if (!sha) throw new Error("Missing base ref sha");
+    const create = await this.gh(context, `/repos/${fullName}/git/refs`, {
+      method: "POST",
+      body: JSON.stringify({
+        ref: `refs/heads/${input.name}`,
+        sha,
+      }),
+    });
+    if (!create.ok) {
+      throw new Error(`GitHub create branch failed (${create.status})`);
+    }
+    return { name: input.name, sha, protected: false };
+  }
+
+  async commitFiles(
+    context: ScmProviderContext,
+    fullName: string,
+    input: ScmCommitFilesInput,
+  ): Promise<ScmCommitRef> {
+    if (this.forceOffline) {
+      return this.offlineWorkspace.commitFiles(fullName, input);
+    }
+    // Live Contents API upsert (single-file loop) — adequate for Phase E MVP.
+    let lastSha = "";
+    for (const file of input.files) {
+      if (file.operation === "delete") {
+        const existing = await this.getFileContent(context, fullName, {
+          path: file.path,
+          branch: input.branch,
+        });
+        if (!existing?.sha) continue;
+        const del = await this.gh(context, `/repos/${fullName}/contents/${file.path}`, {
+          method: "DELETE",
+          body: JSON.stringify({
+            message: input.message,
+            sha: existing.sha,
+            branch: input.branch,
+          }),
+        });
+        if (!del.ok) {
+          throw new Error(`GitHub delete file failed (${del.status})`);
+        }
+        continue;
+      }
+      const existing = await this.getFileContent(context, fullName, {
+        path: file.path,
+        branch: input.branch,
+      });
+      const put = await this.gh(context, `/repos/${fullName}/contents/${file.path}`, {
+        method: "PUT",
+        body: JSON.stringify({
+          message: input.message,
+          content: Buffer.from(file.content, "utf-8").toString("base64"),
+          branch: input.branch,
+          sha: existing?.sha,
+        }),
+      });
+      if (!put.ok) {
+        throw new Error(`GitHub commit file failed (${put.status})`);
+      }
+      const body = (await put.json()) as { commit?: { sha?: string } };
+      lastSha = body.commit?.sha ?? lastSha;
+    }
+    return {
+      sha: lastSha || `live-${randomUUID().slice(0, 10)}`,
+      message: input.message,
+      branch: input.branch,
+      committedAt: new Date().toISOString(),
+    };
+  }
+
+  async createPullRequest(
+    context: ScmProviderContext,
+    fullName: string,
+    input: ScmCreatePullRequestInput,
+  ): Promise<ScmPullRequestRef> {
+    if (this.forceOffline) {
+      return this.offlineWorkspace.createPullRequest(fullName, input);
+    }
+    const response = await this.gh(context, `/repos/${fullName}/pulls`, {
+      method: "POST",
+      body: JSON.stringify({
+        title: input.title,
+        body: input.body ?? "",
+        head: input.sourceBranch,
+        base: input.targetBranch,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error(`GitHub create pull request failed (${response.status})`);
+    }
+    const item = (await response.json()) as Record<string, unknown>;
+    return {
+      externalId: String(item.id),
+      number: Number(item.number),
+      title: String(item.title ?? input.title),
+      state: "open",
+      sourceBranch: input.sourceBranch,
+      targetBranch: input.targetBranch,
+      authorLogin: String((item.user as { login?: string } | undefined)?.login ?? ""),
+      htmlUrl: item.html_url ? String(item.html_url) : undefined,
+      updatedAt: item.updated_at ? String(item.updated_at) : new Date().toISOString(),
+    };
   }
 
   async registerWebhook(
@@ -361,16 +598,23 @@ export class GitHubScmProvider implements ScmProvider {
     };
   }
 
-  private async gh(context: ScmProviderContext, path: string): Promise<Response> {
+  private async gh(
+    context: ScmProviderContext,
+    path: string,
+    init?: { readonly method?: string; readonly body?: string },
+  ): Promise<Response> {
     const token = context.credentials?.token;
     if (!token) {
       throw new Error("GitHub PAT required for live mode");
     }
     return fetch(`${this.apiBaseUrl}${path}`, {
+      method: init?.method,
+      body: init?.body,
       headers: {
         accept: "application/vnd.github+json",
         authorization: `Bearer ${token}`,
         "user-agent": "apzhub-platform-scm",
+        ...(init?.body ? { "content-type": "application/json" } : {}),
       },
       signal: context.signal,
     });

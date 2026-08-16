@@ -3,3 +3,4 @@ export * from "./provider";
 export * from "./webhook";
 export * from "./events";
 export * from "./change-event";
+export * from "./content";

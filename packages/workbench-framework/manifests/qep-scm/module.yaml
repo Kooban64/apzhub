@@ -28,6 +28,10 @@ permissions:
     label: View Enterprise Source Control
   - id: qep.scm.operate
     label: Operate Enterprise Source Control
+  - id: source.read
+    label: Read Shared Source Workspace
+  - id: source.write
+    label: Write Shared Source Workspace
 
 workbench:
   navigation:

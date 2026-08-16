@@ -466,6 +466,160 @@ export class ScmEngine {
     return { audit, delivery };
   }
 
+  /** Phase E — resolve registered repo + provider context. */
+  private async resolveProviderContext(repositoryId: string, correlationId: string) {
+    const current = await this.store.get(repositoryId);
+    if (!current) {
+      throw new Error(`Repository not found: ${repositoryId}`);
+    }
+    const provider = this.registry.require(current.providerId);
+    const credentials = this.credentials.get(
+      `${current.tenantId}:${current.providerId}`,
+    );
+    return {
+      repository: current,
+      provider,
+      context: {
+        tenantId: current.tenantId,
+        correlationId,
+        credentials,
+      },
+    };
+  }
+
+  async listRepositoryBranches(repositoryId: string, correlationId: string) {
+    const { repository, provider, context } = await this.resolveProviderContext(
+      repositoryId,
+      correlationId,
+    );
+    return provider.listBranches(context, repository.fullName);
+  }
+
+  async listRepositoryCommits(
+    repositoryId: string,
+    correlationId: string,
+    options?: { readonly branch?: string; readonly limit?: number },
+  ) {
+    const { repository, provider, context } = await this.resolveProviderContext(
+      repositoryId,
+      correlationId,
+    );
+    return provider.listCommits(context, repository.fullName, options);
+  }
+
+  async listRepositoryTree(
+    repositoryId: string,
+    correlationId: string,
+    options?: { readonly branch?: string; readonly path?: string },
+  ) {
+    const { repository, provider, context } = await this.resolveProviderContext(
+      repositoryId,
+      correlationId,
+    );
+    if (!provider.listTree) {
+      throw new Error(`Provider ${repository.providerId} does not support source tree`);
+    }
+    return provider.listTree(context, repository.fullName, options);
+  }
+
+  async getRepositoryFile(
+    repositoryId: string,
+    correlationId: string,
+    options: { readonly path: string; readonly branch?: string },
+  ) {
+    const { repository, provider, context } = await this.resolveProviderContext(
+      repositoryId,
+      correlationId,
+    );
+    if (!provider.getFileContent) {
+      throw new Error(
+        `Provider ${repository.providerId} does not support file content`,
+      );
+    }
+    return provider.getFileContent(context, repository.fullName, options);
+  }
+
+  async getRepositoryFileDiff(
+    repositoryId: string,
+    correlationId: string,
+    options: {
+      readonly path: string;
+      readonly baseRef: string;
+      readonly headRef: string;
+    },
+  ) {
+    const { repository, provider, context } = await this.resolveProviderContext(
+      repositoryId,
+      correlationId,
+    );
+    if (!provider.getFileDiff) {
+      throw new Error(`Provider ${repository.providerId} does not support file diff`);
+    }
+    return provider.getFileDiff(context, repository.fullName, options);
+  }
+
+  async createRepositoryBranch(
+    repositoryId: string,
+    correlationId: string,
+    input: { readonly name: string; readonly fromRef: string },
+  ) {
+    const { repository, provider, context } = await this.resolveProviderContext(
+      repositoryId,
+      correlationId,
+    );
+    if (!provider.createBranch) {
+      throw new Error(
+        `Provider ${repository.providerId} does not support branch create`,
+      );
+    }
+    return provider.createBranch(context, repository.fullName, input);
+  }
+
+  async commitRepositoryFiles(
+    repositoryId: string,
+    correlationId: string,
+    input: {
+      readonly branch: string;
+      readonly message: string;
+      readonly files: readonly {
+        readonly path: string;
+        readonly content: string;
+        readonly operation?: "upsert" | "delete";
+      }[];
+    },
+  ) {
+    const { repository, provider, context } = await this.resolveProviderContext(
+      repositoryId,
+      correlationId,
+    );
+    if (!provider.commitFiles) {
+      throw new Error(`Provider ${repository.providerId} does not support commits`);
+    }
+    return provider.commitFiles(context, repository.fullName, input);
+  }
+
+  async createRepositoryPullRequest(
+    repositoryId: string,
+    correlationId: string,
+    input: {
+      readonly title: string;
+      readonly body?: string;
+      readonly sourceBranch: string;
+      readonly targetBranch: string;
+    },
+  ) {
+    const { repository, provider, context } = await this.resolveProviderContext(
+      repositoryId,
+      correlationId,
+    );
+    if (!provider.createPullRequest) {
+      throw new Error(
+        `Provider ${repository.providerId} does not support pull requests`,
+      );
+    }
+    return provider.createPullRequest(context, repository.fullName, input);
+  }
+
   private async notifyChangeEventsPersisted(input: {
     readonly tenantId: string;
     readonly correlationId: string;
