@@ -322,3 +322,219 @@ export function OrgBillingPage() {
     </OrgFrame>
   );
 }
+
+type ProfessionalToolsPayload = {
+  readonly catalogue: readonly {
+    readonly id: string;
+    readonly label: string;
+    readonly description: string;
+  }[];
+  readonly grants: readonly {
+    readonly id: string;
+    readonly userId: string;
+    readonly toolId: string;
+    readonly reason: string;
+    readonly expiresAt: string;
+    readonly grantedBy: string;
+    readonly createdAt: string;
+    readonly revokedAt?: string;
+  }[];
+  readonly boundaryWarning: string;
+};
+
+export function OrgProfessionalToolsPage() {
+  const qc = useQueryClient();
+  const [userId, setUserId] = useState("");
+  const [toolId, setToolId] = useState("workflow-designer");
+  const [reason, setReason] = useState("");
+  const [expiresAt, setExpiresAt] = useState(() => {
+    const d = new Date();
+    d.setDate(d.getDate() + 90);
+    return d.toISOString().slice(0, 10);
+  });
+  const [error, setError] = useState<string | null>(null);
+
+  const q = useQuery({
+    queryKey: ["org", "professional-tools"],
+    queryFn: async () => {
+      const res = await fetch("/api/v1/org/professional-tools");
+      const body = await res.json();
+      if (!res.ok) throw new Error(body?.error?.message ?? "Unable to load tools");
+      return body.data as ProfessionalToolsPayload;
+    },
+  });
+
+  const grantMut = useMutation({
+    mutationFn: async () => {
+      const res = await fetch("/api/v1/org/professional-tools?action=grant", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          userId,
+          toolId,
+          reason,
+          expiresAt: new Date(expiresAt).toISOString(),
+        }),
+      });
+      const body = await res.json();
+      if (!res.ok) throw new Error(body?.error?.message ?? "Grant failed");
+      return body.data;
+    },
+    onSuccess: async () => {
+      setError(null);
+      setReason("");
+      await qc.invalidateQueries({ queryKey: ["org", "professional-tools"] });
+    },
+    onError: (err) => {
+      setError(err instanceof Error ? err.message : "Grant failed");
+    },
+  });
+
+  const revokeMut = useMutation({
+    mutationFn: async (grantId: string) => {
+      const res = await fetch("/api/v1/org/professional-tools?action=revoke", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ grantId }),
+      });
+      const body = await res.json();
+      if (!res.ok) throw new Error(body?.error?.message ?? "Revoke failed");
+      return body.data;
+    },
+    onSuccess: async () => {
+      await qc.invalidateQueries({ queryKey: ["org", "professional-tools"] });
+    },
+  });
+
+  return (
+    <OrgFrame
+      title="Professional Tools"
+      subtitle="Specialist entitlements with reason and expiry — not provider launch pads."
+    >
+      <OperatorPanel title="Boundary">
+        <p className="text-sm text-[var(--color-muted-foreground)]" role="note">
+          {q.data?.boundaryWarning ??
+            "Professional Tools leave the normal APZ product chrome. Grant only to specialists."}
+        </p>
+      </OperatorPanel>
+
+      <OperatorPanel title="Catalogue">
+        <ul
+          className="space-y-2 text-sm"
+          data-testid="org-professional-tools-catalogue"
+        >
+          {(q.data?.catalogue ?? []).map((tool) => (
+            <li
+              key={tool.id}
+              className="rounded border border-[var(--color-border)] p-3"
+            >
+              <p className="font-medium">{tool.label}</p>
+              <p className="text-[var(--color-muted-foreground)]">{tool.description}</p>
+            </li>
+          ))}
+        </ul>
+      </OperatorPanel>
+
+      <OperatorPanel title="Grant access">
+        <form
+          className="grid gap-3 md:grid-cols-2"
+          data-testid="org-professional-tools-grant-form"
+          onSubmit={(event) => {
+            event.preventDefault();
+            grantMut.mutate();
+          }}
+        >
+          <label className="flex flex-col gap-1 text-xs">
+            User ID
+            <input
+              className="h-9 rounded-md border border-[var(--color-border)] bg-transparent px-2 text-sm"
+              value={userId}
+              onChange={(e) => setUserId(e.target.value)}
+              required
+            />
+          </label>
+          <label className="flex flex-col gap-1 text-xs">
+            Tool
+            <select
+              className="h-9 rounded-md border border-[var(--color-border)] bg-transparent px-2 text-sm"
+              value={toolId}
+              onChange={(e) => setToolId(e.target.value)}
+            >
+              {(q.data?.catalogue ?? []).map((tool) => (
+                <option key={tool.id} value={tool.id}>
+                  {tool.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="flex flex-col gap-1 text-xs md:col-span-2">
+            Reason
+            <input
+              className="h-9 rounded-md border border-[var(--color-border)] bg-transparent px-2 text-sm"
+              value={reason}
+              onChange={(e) => setReason(e.target.value)}
+              required
+            />
+          </label>
+          <label className="flex flex-col gap-1 text-xs">
+            Expires
+            <input
+              type="date"
+              className="h-9 rounded-md border border-[var(--color-border)] bg-transparent px-2 text-sm"
+              value={expiresAt}
+              onChange={(e) => setExpiresAt(e.target.value)}
+              required
+            />
+          </label>
+          <div className="flex items-end">
+            <button
+              type="submit"
+              className="inline-flex h-9 items-center rounded-md bg-[var(--color-primary)] px-3 text-sm font-medium text-[var(--color-primary-foreground)]"
+              disabled={grantMut.isPending}
+            >
+              {grantMut.isPending ? "Granting…" : "Grant"}
+            </button>
+          </div>
+          {error ? (
+            <p
+              className="md:col-span-2 text-sm text-[var(--color-destructive)]"
+              role="alert"
+            >
+              {error}
+            </p>
+          ) : null}
+        </form>
+      </OperatorPanel>
+
+      <OperatorPanel title="Active & historical grants">
+        {(q.data?.grants.length ?? 0) === 0 ? (
+          <p className="text-sm text-[var(--color-muted-foreground)]">No grants yet.</p>
+        ) : (
+          <DataTable
+            columns={["User", "Tool", "Expires", "Reason", "Status", ""]}
+            rows={(q.data?.grants ?? []).map((grant) => [
+              grant.userId,
+              grant.toolId,
+              grant.expiresAt.slice(0, 10),
+              grant.reason,
+              grant.revokedAt ? "Revoked" : "Active",
+              grant.revokedAt ? (
+                "—"
+              ) : (
+                <button
+                  key={`revoke-${grant.id}`}
+                  type="button"
+                  className="text-xs underline"
+                  onClick={() => revokeMut.mutate(grant.id)}
+                  data-testid={`org-professional-tools-revoke-${grant.id}`}
+                >
+                  Revoke
+                </button>
+              ),
+            ])}
+          />
+        )}
+      </OperatorPanel>
+    </OrgFrame>
+  );
+}

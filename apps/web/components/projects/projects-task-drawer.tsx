@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
 import { UniversalPreviewDrawer } from "@/components/preview/universal-preview-drawer";
+import { KnowledgeContextualSuggestions } from "@/components/knowledge/knowledge-contextual-suggestions";
 import { isTimeApiError } from "@/lib/time/errors";
 import { canCreateTimesheets } from "@/lib/time/permissions";
 import { writeLastTimesheetId } from "@/lib/time/preferences";
@@ -147,6 +148,13 @@ export function ProjectsTaskDrawer({
               No description.
             </p>
           )}
+          <KnowledgeContextualSuggestions
+            title="Related knowledge"
+            description="Suggested organisational memory for this task."
+            limit={3}
+            compact
+            testId="projects-task-knowledge-suggestions"
+          />
         </div>
       ) : null}
     </UniversalPreviewDrawer>

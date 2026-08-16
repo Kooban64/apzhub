@@ -14,6 +14,7 @@ import {
   returnTimesheet,
   submitTimesheetForApproval,
 } from "@/lib/time/timesheet-approvals";
+import { notifyTimesheetApprovalEvent } from "@/lib/time/notify-timesheet-approval";
 
 export async function handleGetTimesheetApproval(
   _request: NextRequest,
@@ -45,6 +46,11 @@ export async function handleSubmitTimesheetApproval(
     organisationId,
     decidedBy: context.serviceContext.userId,
   });
+  await notifyTimesheetApprovalEvent({
+    context,
+    approval,
+    event: "submitted",
+  });
   return jsonDataResponse({ approval }, context.tracing);
 }
 
@@ -62,6 +68,11 @@ export async function handleApproveTimesheet(
     decidedBy: context.serviceContext.userId,
     reason: body.reason,
   });
+  await notifyTimesheetApprovalEvent({
+    context,
+    approval,
+    event: "approved",
+  });
   return jsonDataResponse({ approval }, context.tracing);
 }
 
@@ -78,6 +89,11 @@ export async function handleReturnTimesheet(
       organisationId: sessionTenantId(context),
       decidedBy: context.serviceContext.userId,
       reason: body.reason ?? "",
+    });
+    await notifyTimesheetApprovalEvent({
+      context,
+      approval,
+      event: "returned",
     });
     return jsonDataResponse({ approval }, context.tracing);
   } catch (error) {

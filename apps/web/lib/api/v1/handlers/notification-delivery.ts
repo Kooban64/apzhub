@@ -57,7 +57,16 @@ const createIntentBodySchema = z.object({
   summary: z.string().optional(),
   priority: z.enum(["critical", "high", "normal", "low", "informational"]).optional(),
   sourceProduct: z
-    .enum(["observe", "support", "platform", "administration", "unknown"])
+    .enum([
+      "observe",
+      "support",
+      "platform",
+      "administration",
+      "time",
+      "projects",
+      "workflow",
+      "unknown",
+    ])
     .default("platform"),
   sourceEvent: z.string().optional(),
   recipientHints: z

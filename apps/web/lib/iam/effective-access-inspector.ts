@@ -110,6 +110,9 @@ export function inspectMemberEffectiveAccess(input: {
   why.push(
     "Search, Quick Actions, Activity Bar, and Home use the same effective product set.",
   );
+  why.push(
+    "Professional Tools (designer/models) are separate specialist grants — see Organisation → Professional Tools.",
+  );
 
   return {
     membershipId: member.membershipId,

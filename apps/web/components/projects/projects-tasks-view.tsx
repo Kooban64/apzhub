@@ -25,7 +25,16 @@ import {
   StatusBadge,
 } from "./projects-ui";
 
-type TasksLayout = "list" | "board";
+type TasksLayout = "list" | "board" | "timeline";
+
+function sortTasksForTimeline(tasks: readonly Task[]): Task[] {
+  return [...tasks].sort((a, b) => {
+    const aDue = a.dueDate ? Date.parse(a.dueDate) : Number.POSITIVE_INFINITY;
+    const bDue = b.dueDate ? Date.parse(b.dueDate) : Number.POSITIVE_INFINITY;
+    if (aDue !== bDue) return aDue - bDue;
+    return a.title.localeCompare(b.title);
+  });
+}
 
 export function ProjectsTasksView({
   permissions,
@@ -65,13 +74,14 @@ export function ProjectsTasksView({
 
   const projects = useMemo(() => projectsQuery.data?.items ?? [], [projectsQuery.data]);
   const tasks = tasksQuery.data?.items ?? [];
+  const timelineTasks = useMemo(() => sortTasksForTimeline(tasks), [tasks]);
   const statusOptions = useMemo(() => statusOptionsFromTasks(tasks), [tasks]);
   const projectName = projects.find((p) => p.id === projectId)?.name;
 
   return (
     <PageShell
       title="Tasks"
-      description="List or board for the selected project — open a task drawer for quick updates and Start Timer."
+      description="List, board, or due-date timeline — open a task drawer for quick updates and Start Timer."
       breadcrumbs={["APZ Projects", "Tasks"]}
     >
       <div className="flex flex-wrap items-end justify-between gap-3">
@@ -94,6 +104,7 @@ export function ProjectsTasksView({
             [
               { id: "list", label: "List" },
               { id: "board", label: "Board" },
+              { id: "timeline", label: "Timeline" },
             ] as const
           ).map((tab) => (
             <button
@@ -164,6 +175,38 @@ export function ProjectsTasksView({
             </tr>
           ))}
         </ProjectsTable>
+      ) : null}
+
+      {projectId && timelineTasks.length > 0 && layout === "timeline" ? (
+        <div className="space-y-2" data-testid="projects-tasks-timeline">
+          <p className="text-sm text-[var(--color-muted-foreground)]">
+            Due-date order for this project. Tasks without a due date appear last.
+            Portfolio and delivery timelines remain under Portfolio.
+          </p>
+          <ol className="space-y-2">
+            {timelineTasks.map((task) => (
+              <li key={task.id}>
+                <button
+                  type="button"
+                  className="flex w-full items-start justify-between gap-3 rounded-lg border border-[var(--color-border)] px-3 py-2 text-left hover:bg-[var(--color-muted)]/30"
+                  data-testid={`projects-tasks-timeline-row-${task.id}`}
+                  onClick={() => setSelectedTask(task)}
+                >
+                  <div className="min-w-0 space-y-1">
+                    <p className="truncate font-medium">{task.title}</p>
+                    <div className="flex flex-wrap gap-2">
+                      <StatusBadge status={task.status} />
+                      <PriorityBadge priority={task.priority} />
+                    </div>
+                  </div>
+                  <span className="shrink-0 text-xs text-[var(--color-muted-foreground)]">
+                    {task.dueDate ? formatProjectsDate(task.dueDate) : "No due date"}
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ol>
+        </div>
       ) : null}
 
       <ProjectsTaskDrawer

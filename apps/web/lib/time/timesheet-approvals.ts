@@ -13,6 +13,8 @@ export type TimesheetApprovalRecord = {
   readonly organisationId: string;
   readonly state: TimesheetApprovalState;
   readonly reason?: string;
+  /** Employee who submitted for approval (preserved across decide). */
+  readonly submittedBy?: string;
   readonly decidedBy?: string;
   readonly updatedAt: string;
   readonly createdAt: string;
@@ -84,6 +86,7 @@ export function upsertTimesheetApproval(input: {
   readonly organisationId: string;
   readonly state: TimesheetApprovalState;
   readonly reason?: string;
+  readonly submittedBy?: string;
   readonly decidedBy?: string;
 }): TimesheetApprovalRecord {
   hydrate();
@@ -91,13 +94,15 @@ export function upsertTimesheetApproval(input: {
   const existing = store.records.findIndex(
     (row) => row.timesheetId === input.timesheetId,
   );
+  const prior = existing >= 0 ? store.records[existing] : undefined;
   const next: TimesheetApprovalRecord = {
     timesheetId: input.timesheetId,
     organisationId: input.organisationId,
     state: input.state,
     reason: input.reason?.trim() || undefined,
+    submittedBy: input.submittedBy ?? prior?.submittedBy,
     decidedBy: input.decidedBy,
-    createdAt: existing >= 0 ? store.records[existing]!.createdAt : now,
+    createdAt: prior?.createdAt ?? now,
     updatedAt: now,
   };
   if (existing >= 0) store.records[existing] = next;
@@ -115,6 +120,8 @@ export function submitTimesheetForApproval(input: {
     ...input,
     state: "pending",
     reason: undefined,
+    submittedBy: input.decidedBy,
+    decidedBy: undefined,
   });
 }
 

@@ -21,17 +21,20 @@ describe("timesheet approvals overlay", () => {
       decidedBy: "user-1",
     });
     expect(pending.state).toBe("pending");
-    expect(
-      approveTimesheet({
-        timesheetId: "ts-1",
-        organisationId: "org-1",
-        decidedBy: "mgr-1",
-      }).state,
-    ).toBe("approved");
+    expect(pending.submittedBy).toBe("user-1");
+    const approved = approveTimesheet({
+      timesheetId: "ts-1",
+      organisationId: "org-1",
+      decidedBy: "mgr-1",
+    });
+    expect(approved.state).toBe("approved");
+    expect(approved.submittedBy).toBe("user-1");
+    expect(approved.decidedBy).toBe("mgr-1");
 
     submitTimesheetForApproval({
       timesheetId: "ts-2",
       organisationId: "org-1",
+      decidedBy: "user-2",
     });
     const returned = returnTimesheet({
       timesheetId: "ts-2",
@@ -41,6 +44,7 @@ describe("timesheet approvals overlay", () => {
     });
     expect(returned.state).toBe("returned");
     expect(returned.reason).toBe("Missing activity code");
+    expect(returned.submittedBy).toBe("user-2");
     expect(getTimesheetApproval("ts-2")?.state).toBe("returned");
   });
 

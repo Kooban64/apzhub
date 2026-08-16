@@ -32,7 +32,14 @@ export function asNotificationDeliveryTryId(value: string): NotificationDelivery
 }
 
 export type NotificationSourceProduct =
-  "observe" | "support" | "platform" | "administration" | "unknown";
+  | "observe"
+  | "support"
+  | "platform"
+  | "administration"
+  | "time"
+  | "projects"
+  | "workflow"
+  | "unknown";
 
 export type NotificationIntent = {
   readonly id: NotificationIntentId;

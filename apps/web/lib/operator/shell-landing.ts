@@ -269,6 +269,11 @@ export const ORG_NAV: readonly OperatorNavItem[] = [
   { id: "overview", href: "/org", label: "Overview" },
   { id: "members", href: "/org/members", label: "Members & RBAC" },
   { id: "services", href: "/org/services", label: "Service roles" },
+  {
+    id: "professional-tools",
+    href: "/org/professional-tools",
+    label: "Professional Tools",
+  },
   { id: "subscriptions", href: "/org/subscriptions", label: "Subscriptions" },
   { id: "billing", href: "/org/billing", label: "Billing" },
 ];
