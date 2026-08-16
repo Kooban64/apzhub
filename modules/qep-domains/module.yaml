@@ -1,0 +1,43 @@
+manifestSchemaVersion: "1.0"
+id: qep-domains
+name: Quality Domains
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: >
+    Stream 2 Security / Performance / Accessibility domain signals for release
+    quality — UNKNOWN when empty; Security opens APZPEN when entitled.
+  product: apzqep
+  slug: domains
+  programme: SPR-UX-STREAM-002
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: active
+
+permissions:
+  - id: qep.scm.read
+    label: View quality domains
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Domains
+    icon: layers
+    route: /workspace/qep/domains
+    order: 69
+    permission: qep.scm.read
+  view:
+    title: Quality Domains
+    workspace: qep
+    route: /workspace/qep/domains
+    permission: qep.scm.read

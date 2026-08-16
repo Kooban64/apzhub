@@ -1,0 +1,43 @@
+manifestSchemaVersion: "1.0"
+id: qep-quality-graph
+name: Quality Graph
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: >
+    Stream 2 signature Quality Graph — object-centred change impact explorer
+    with accessible list/hierarchy (not decorative).
+  product: apzqep
+  slug: quality-graph
+  programme: SPR-UX-STREAM-002
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: active
+
+permissions:
+  - id: qep.scm.read
+    label: View Quality Graph
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: Quality Graph
+    icon: git-branch
+    route: /workspace/qep/quality-graph
+    order: 67
+    permission: qep.scm.read
+  view:
+    title: Quality Graph
+    workspace: qep
+    route: /workspace/qep/quality-graph
+    permission: qep.scm.read

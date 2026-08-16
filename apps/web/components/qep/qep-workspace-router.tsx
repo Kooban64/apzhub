@@ -25,6 +25,8 @@ import {
   isQepCertificationRoute,
   isQepQualityJourneyRoute,
   isQepPrQualityRoute,
+  isQepQualityGraphRoute,
+  isQepDomainsRoute,
   isQepEarlyCheckRoute,
   isQepPortfolioRoute,
   isQepHomeRoute,
@@ -53,6 +55,8 @@ import { QepQualityFlowRouterView } from "./qep-quality-flow-views";
 import { QepQualityIntelligenceRouterView } from "./qep-quality-intelligence-views";
 import { QepQualityJourneyRouterView } from "./qep-quality-journey-views";
 import { QepPrQualityRouterView } from "./qep-pr-quality-views";
+import { QepQualityGraphRouterView } from "./qep-quality-graph-views";
+import { QepDomainsRouterView } from "./qep-domains-views";
 import { QepReleaseReadinessRouterView } from "./qep-release-readiness-views";
 import { QepSearchRouterView } from "./qep-search-view";
 import { QepScmRouterView } from "./qep-scm-views";
@@ -185,6 +189,14 @@ export function QepWorkspaceRouter() {
 
   if (isQepPrQualityRoute(pathname)) {
     return <QepPrQualityRouterView />;
+  }
+
+  if (isQepQualityGraphRoute(pathname)) {
+    return <QepQualityGraphRouterView />;
+  }
+
+  if (isQepDomainsRoute(pathname)) {
+    return <QepDomainsRouterView />;
   }
 
   if (isQepQualityJourneyRoute(pathname)) {

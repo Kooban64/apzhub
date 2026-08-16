@@ -9,7 +9,13 @@ import {
   parseSourceRepositoryId,
   SOURCE_ROUTES,
 } from "@/lib/source/routes";
-import { QEP_PR_QUALITY_ROUTES, QEP_SCM_ROUTES } from "@/lib/qep/routes";
+import { buildSourceFileTree, flattenSourceFileTree } from "@/lib/source/file-tree";
+import {
+  QEP_DOMAINS_ROUTES,
+  QEP_PR_QUALITY_ROUTES,
+  QEP_QUALITY_GRAPH_ROUTES,
+  QEP_SCM_ROUTES,
+} from "@/lib/qep/routes";
 
 type RepositoryRow = {
   repositoryId: string;
@@ -28,6 +34,7 @@ type ChangeRow = {
   branch?: string;
   occurredAt: string;
   repositoryId?: string;
+  filesChanged?: string[];
 };
 
 async function fetchJson<T>(url: string): Promise<T> {
@@ -93,6 +100,12 @@ function Shell({
             className="text-[var(--color-muted-foreground)] underline-offset-2 hover:underline"
           >
             PR Quality
+          </Link>
+          <Link
+            href={QEP_QUALITY_GRAPH_ROUTES.home}
+            className="text-[var(--color-muted-foreground)] underline-offset-2 hover:underline"
+          >
+            Quality Graph
           </Link>
           <Link
             href={QEP_SCM_ROUTES.home}
@@ -319,11 +332,14 @@ function ChangeBrowseView({ changeEventId }: { readonly changeEventId: string })
   });
 
   const change = changesQuery.data;
+  const fileRows = flattenSourceFileTree(
+    buildSourceFileTree(change?.filesChanged ?? []),
+  );
 
   return (
     <Shell
       title={change?.title ?? change?.summary ?? "Change"}
-      description="Shared Source change detail — open Quality or Security overlays without leaving the APZ surface."
+      description="Shared Source change detail — file explorer from changed paths; Quality/Security overlays stay product-owned."
     >
       {changesQuery.isLoading ? (
         <p className="text-xs text-[var(--color-muted-foreground)]">Loading…</p>
@@ -335,9 +351,44 @@ function ChangeBrowseView({ changeEventId }: { readonly changeEventId: string })
       ) : null}
       {change ? (
         <div
-          className="grid gap-4 lg:grid-cols-[1fr_280px]"
+          className="grid gap-4 lg:grid-cols-[minmax(220px,0.9fr)_minmax(0,1.2fr)_minmax(200px,0.7fr)]"
           data-testid="source-change-detail"
         >
+          <section
+            className="rounded-lg border border-[var(--color-border)] p-4 text-sm"
+            data-testid="source-file-explorer"
+            aria-label="Changed files explorer"
+          >
+            <h2 className="mb-2 text-xs font-semibold tracking-wide text-[var(--color-muted-foreground)] uppercase">
+              File explorer
+            </h2>
+            {fileRows.length === 0 ? (
+              <p className="text-xs text-[var(--color-muted-foreground)]">
+                No file paths on this change event yet. Sync or webhook payloads that
+                include filesChanged will appear here.
+              </p>
+            ) : (
+              <ul className="max-h-[28rem] space-y-0.5 overflow-auto font-mono text-[11px]">
+                {fileRows.map(({ node, depth }) => {
+                  const isDir = node.children.length > 0;
+                  return (
+                    <li
+                      key={node.path}
+                      style={{ paddingLeft: `${depth * 12}px` }}
+                      className={
+                        isDir
+                          ? "text-[var(--color-muted-foreground)]"
+                          : "text-[var(--color-foreground)]"
+                      }
+                    >
+                      {isDir ? "▸ " : "· "}
+                      {node.name}
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </section>
           <section className="rounded-lg border border-[var(--color-border)] p-4 text-sm">
             <dl className="grid gap-2 sm:grid-cols-2">
               <div>
@@ -371,6 +422,22 @@ function ChangeBrowseView({ changeEventId }: { readonly changeEventId: string })
                   data-testid="source-open-pr-quality"
                 >
                   PR Quality View
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={QEP_QUALITY_GRAPH_ROUTES.byChange(changeEventId)}
+                  className="underline"
+                >
+                  Quality Graph
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`${QEP_DOMAINS_ROUTES.home}?changeEventId=${encodeURIComponent(changeEventId)}`}
+                  className="underline"
+                >
+                  Quality domains
                 </Link>
               </li>
               <li>

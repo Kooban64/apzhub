@@ -14,7 +14,7 @@
 >
 > **Engineering:** Phase A–C **COMPLETE · CERTIFIED 100%**. **Phase D** (Streams 2∥3 APZQEP + APZPEN) **ACTIVE** — ([PHASE-D-STREAM-2-GAP-MAP](../sprint/PHASE-D-STREAM-2-GAP-MAP.md) · [PHASE-D-STREAM-3-GAP-MAP](../sprint/PHASE-D-STREAM-3-GAP-MAP.md)).
 >
-> **Engineering 2026-08-16:** Phase A–C certified. Phase D progressed — QEP My Work · execution · PR Quality · flaky centre · Release Readiness CTAs · PEN workbench · Finding Detail · remediation/retest · risk acceptance · Assurance Centre · Shared Source.
+> **Engineering 2026-08-16:** Phase A–C certified. Phase D progressed — QEP signatures (My Work · execution · PR Quality · Quality Graph · Domains · flaky · RCC) · PEN Assurance lifecycle · Shared Source browse + file explorer.
 
 ---
 

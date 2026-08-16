@@ -31,7 +31,7 @@
 | ----- | ------------------------------------------- | --------------------------------------------------------------- |
 | P3-00 | Spec freeze + gap map                       | **Done**                                                        |
 | P3-01 | Shell · home · personas · assets            | KEEP · polish later                                             |
-| P3-02 | Shared Source consumer (security overlay)   | **Done** (Source change + security deep links)                  |
+| P3-02 | Shared Source consumer (security overlay)   | **Done** (Source file explorer + overlays)                      |
 | P3-03 | Engagements · scope · RoE · authorisation   | KEEP                                                            |
 | P3-04 | Engagement Workbench                        | **Done** (tabbed workbench)                                     |
 | P3-05 | Tools centre · normalised findings          | KEEP ingest                                                     |

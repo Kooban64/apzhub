@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 
 import { QEP_EARLY_CHECK_ROUTES } from "@/lib/qep/early-check-routes";
 import { QEP_QUALITY_JOURNEY_ROUTES } from "@/lib/qep/quality-journey-routes";
+import { QEP_QUALITY_GRAPH_ROUTES } from "@/lib/qep/quality-graph-routes";
 import {
   parseQepPrQualityChangeId,
   QEP_PR_QUALITY_ROUTES,
@@ -388,6 +389,14 @@ function PrQualityDetailView({ changeEventId }: { readonly changeEventId: string
                   className="underline"
                 >
                   Quality Journey
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={QEP_QUALITY_GRAPH_ROUTES.byChange(changeEventId)}
+                  className="underline"
+                >
+                  Quality Graph
                 </Link>
               </li>
               <li>

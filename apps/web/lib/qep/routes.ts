@@ -204,6 +204,19 @@ export {
 } from "./pr-quality-routes";
 
 export {
+  QEP_QUALITY_GRAPH_BASE_PATH,
+  QEP_QUALITY_GRAPH_ROUTES,
+  isQepQualityGraphRoute,
+  parseQepQualityGraphChangeId,
+} from "./quality-graph-routes";
+
+export {
+  QEP_DOMAINS_BASE_PATH,
+  QEP_DOMAINS_ROUTES,
+  isQepDomainsRoute,
+} from "./domains-routes";
+
+export {
   QEP_QUALITY_JOURNEY_BASE_PATH,
   QEP_QUALITY_JOURNEY_ROUTES,
   isQepQualityJourneyRoute,
