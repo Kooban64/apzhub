@@ -70,6 +70,7 @@ export async function handleStartTrial(
   const body = (await request.json().catch(() => ({}))) as {
     planId?: string;
     email?: string;
+    packageId?: string;
   };
   const planId = (body.planId ?? "").trim() as PlanId;
   if (planId !== "plan.individual" && planId !== "plan.business") {
@@ -85,6 +86,7 @@ export async function handleStartTrial(
       ownerId: context.session.user.id,
       organisationId,
       email: body.email ?? context.session.user.email,
+      packageId: body.packageId?.trim() || undefined,
     });
     return jsonDataResponse(result, context.tracing);
   } catch (error) {

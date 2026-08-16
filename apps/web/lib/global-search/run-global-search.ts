@@ -2,6 +2,7 @@ import type { SearchProductId } from "@apzhub/search-contracts";
 import type { ServiceRequestContext } from "@apzhub/platform-service-contracts";
 
 import { getPlatformServiceGateway } from "@/lib/api/v1/gateway/bootstrap";
+import { isSurfaceEntitled } from "@/lib/commercial/surface-entitlements";
 
 import { listGlobalSearchProviders } from "./registry";
 import type {
@@ -48,6 +49,8 @@ export async function runGlobalSearch(input: {
   readonly query: string;
   readonly serviceContext: ServiceRequestContext;
   readonly userPermissions: readonly string[];
+  /** Commercial product keys (org ∩ grant). When set, providers outside the set are skipped. */
+  readonly entitledProductKeys?: readonly string[];
 }): Promise<GlobalSearchResponse> {
   const started = Date.now();
   const query = input.query.trim();
@@ -56,7 +59,12 @@ export async function runGlobalSearch(input: {
   }
 
   const permissionSet = new Set(input.userPermissions);
-  const providers = listGlobalSearchProviders();
+  const entitled = input.entitledProductKeys
+    ? new Set(input.entitledProductKeys)
+    : null;
+  const providers = listGlobalSearchProviders().filter((provider) =>
+    entitled ? isSurfaceEntitled(provider.product, entitled) : true,
+  );
   const ctx = {
     userPermissions: permissionSet,
     executeProductSearch: (productId: SearchProductId, q: string) =>

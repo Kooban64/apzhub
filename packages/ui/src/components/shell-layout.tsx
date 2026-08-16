@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 
+import { resolveLucideIcon } from "../icons/resolve-lucide-icon";
 import { Header } from "./header";
 import { Sidebar, type SidebarItem } from "./sidebar";
 import { StatusBar } from "./status-bar";
@@ -27,16 +28,20 @@ export interface ShellLayoutProps {
   onActivityBarSelect?: (id: string) => void;
   environment?: string;
   onSignOut?: () => void;
+  headerLeading?: React.ReactNode;
   headerTrailing?: React.ReactNode;
   children: ReactNode;
 }
 
-function resolveActivityBarGlyph(item: ActivityBarItem): string {
-  if (item.icon && item.icon.length === 1) {
-    return item.icon;
+function ActivityBarGlyph({ item }: { item: ActivityBarItem }) {
+  const Icon = resolveLucideIcon(item.icon);
+  if (Icon) {
+    return <Icon className="h-4 w-4" aria-hidden="true" strokeWidth={1.75} />;
   }
-
-  return item.label.charAt(0).toUpperCase();
+  if (item.icon && item.icon.length === 1) {
+    return <>{item.icon}</>;
+  }
+  return <>{item.label.charAt(0).toUpperCase()}</>;
 }
 
 export function ActivityBar({ items, onItemSelect }: ActivityBarProps) {
@@ -49,6 +54,7 @@ export function ActivityBar({ items, onItemSelect }: ActivityBarProps) {
         <button
           key={item.id}
           type="button"
+          title={item.label}
           onClick={() => onItemSelect?.(item.id)}
           className={`flex h-9 w-9 items-center justify-center rounded-md text-xs font-semibold transition-colors ${
             item.active
@@ -58,7 +64,7 @@ export function ActivityBar({ items, onItemSelect }: ActivityBarProps) {
           aria-label={item.ariaLabel}
           aria-current={item.active ? "page" : undefined}
         >
-          {resolveActivityBarGlyph(item)}
+          <ActivityBarGlyph item={item} />
         </button>
       ))}
     </nav>
@@ -73,6 +79,7 @@ export function ShellLayout({
   onActivityBarSelect,
   environment,
   onSignOut,
+  headerLeading,
   headerTrailing,
   children,
 }: ShellLayoutProps) {
@@ -80,19 +87,17 @@ export function ShellLayout({
     <div className="flex h-full min-h-0 max-w-full flex-col overflow-x-hidden bg-[var(--color-background)] text-[var(--color-foreground)]">
       <Header
         userName={userName}
+        environment={environment}
         onSignOut={onSignOut}
+        headerLeading={headerLeading}
         headerTrailing={headerTrailing}
       />
-      <div className="flex min-h-0 min-w-0 flex-1 overflow-x-hidden">
+      <div className="flex min-h-0 flex-1 overflow-hidden">
         <ActivityBar items={activityBarItems} onItemSelect={onActivityBarSelect} />
         <Sidebar items={sidebarItems} onSelect={onSidebarSelect} />
-        <main className="min-w-0 flex-1 overflow-auto p-4 sm:p-5 [font-family:var(--font-sans)]">
-          <div className="mx-auto w-full max-w-[var(--shell-content-max,72rem)]">
-            {children}
-          </div>
-        </main>
+        <main className="min-h-0 min-w-0 flex-1 overflow-auto">{children}</main>
       </div>
-      <StatusBar environment={environment} />
+      <StatusBar />
     </div>
   );
 }

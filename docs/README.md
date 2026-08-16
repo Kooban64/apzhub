@@ -8,57 +8,81 @@ This directory is the canonical source for APZHUB product and architecture docum
 
 **APZHUB is the internal operating platform. Customers buy solutions — not APZHUB.**
 
-| Document                                                                                           | Description                                                                          |
-| -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| [APZOR Commercial Pillars](./strategy/APZOR-COMMERCIAL-PILLARS.md)                                 | **Authority** — platform vs sellable solutions; one platform, three pillars          |
-| [SaaS Commercial Model](./strategy/commercial/SAAS-COMMERCIAL-MODEL.md)                            | **Authority (LOCKED)** — tenants, packages, APZPRD composability, Law/Knowledge/Sign |
-| [APZQEP](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md)                             | Quality Engineering Platform — _Can we release with confidence?_                     |
-| [APZPEN](./strategy/APZPEN-ENTERPRISE-SECURITY-ASSURANCE-PLATFORM.md)                              | Security Assurance & Pen Testing — _Can we demonstrate we are secure?_               |
-| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)                           | **REMAIN PARKED** — ENT-001 Greenbone/Faraday done; items 1–5 still parked           |
-| [APZPRD](./strategy/APZPRD-ENTERPRISE-PRODUCTIVITY-PLATFORM.md)                                    | Productivity Platform — _Can our people work effectively?_ (composable)              |
-| [SPR-COMM-001](./sprint/SPR-COMM-001-catalogue-entitlements-tenant-switch.md)                      | **DELIVERED** — packages, entitlements, tenant switch, soft APZPEN gate              |
-| [SPR-COMM-002](./sprint/SPR-COMM-002-org-packages-tenant-switch-source.md)                         | **DELIVERED** — org packages UI, tenant switcher, project source (QEP+PEN)           |
-| [OWNER BetterAuth sole AuthN](./decisions/OWNER-BETTERAUTH-SOLE-AUTHN.md)                          | **IN FORCE** — BetterAuth only; Authentik retire with APZPRD                         |
-| [OWNER Full product bar (Option 3)](./decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md)                | **SATISFIED · PROGRAMME COMPLETE** — Phase 2 + engines + bridge + Phase 3/AI         |
-| [SPR-FULL-001](./sprint/SPR-FULL-001-full-product-bar-option-3.md)                                 | **PROGRAMME COMPLETE** — Option 3 Waves A+B delivered (220 · ENT · BRIDGE · 230)     |
-| [OWNER Post–Option 3 hardening](./decisions/OWNER-POST-OPTION-3-HARDENING.md)                      | **SATISFIED · DELIVERED** — GMP · Faraday prod path · MCP stdio · platform-services  |
-| [SPR-FULL-002](./sprint/SPR-FULL-002-post-option-3-hardening.md)                                   | **COMPLETE · DELIVERED** — post-bar hardening (GMP · Faraday · MCP stdio · services) |
-| [OWNER Commercial pillar operator guides](./decisions/OWNER-COMMERCIAL-PILLAR-OPERATOR-GUIDES.md)  | **SATISFIED · DELIVERED** — scoped how-to (QEP · PEN · PRD)                          |
-| [SPR-DOCS-001](./sprint/SPR-DOCS-001-commercial-pillar-operator-guides.md)                         | **COMPLETE · DELIVERED** — commercial pillar operator user guides                    |
-| [Commercial pillar operator guides (index)](./guides/COMMERCIAL-PILLAR-OPERATOR-GUIDES.md)         | APZQEP · APZPEN · APZPRD how-to index                                                |
-| [SPR-APZPRD-001](./sprint/SPR-APZPRD-001-betterauth-productivity-workspace.md)                     | **COMPLETE · DELIVERED** — BetterAuth sole AuthN; Projects health without Authentik  |
-| [SPR-APZPRD-002](./sprint/SPR-APZPRD-002-entitled-projects-workbench.md)                           | **COMPLETE · DELIVERED** — entitled Projects workbench (catalogue → adapter)         |
-| [SPR-APZPRD-003](./sprint/SPR-APZPRD-003-projects-workbench-deepen.md)                             | **COMPLETE · DELIVERED** — deepen Projects; BetterAuth only (no Authentik)           |
-| [SPR-ADOPT-002](./sprint/SPR-ADOPT-002-commercial-pillar-operator-dogfood.md)                      | **COMPLETE · DELIVERED** — commercial pillar operator dogfood (BetterAuth only)      |
-| [SPR-ADOPT-003](./sprint/SPR-ADOPT-003-wired-engines-dogfood.md)                                   | **COMPLETE · DELIVERED** — wired engines dogfood (Plane·Zammad·Kimai·Metabase·n8n)   |
-| [SPR-ADOPT-004](./sprint/SPR-ADOPT-004-lts-backed-engines-dogfood.md)                              | **COMPLETE · DELIVERED** — LTS-backed commercial dogfood (leave legacy alone)        |
-| [ADOPT-002 evidence](./products/adopt-002/README.md)                                               | Friction · evidence · checklist results                                              |
-| [ADOPT-003 evidence](./products/adopt-003/README.md)                                               | Post-OPS wired-engine dogfood evidence                                               |
-| [ADOPT-004 evidence](./products/adopt-004/README.md)                                               | LTS API dogfood · 10/10 · legacy untouched                                           |
-| [OWNER APZPEN remain parked](./decisions/OWNER-APZPEN-REMAIN-PARKED.md)                            | **IN FORCE** — no further APZPEN enterprise until resume criteria                    |
-| [SPR-POLISH-001](./sprint/SPR-POLISH-001-entitlements-shell-consistency.md)                        | **COMPLETE · DELIVERED** — entitlements UX + shell consistency across pillars        |
-| [SPR-OPS-PLANE-001](./sprint/SPR-OPS-PLANE-001-projects-plane-adapter-host.md)                     | **COMPLETE · DELIVERED** — `.secrets/plane` loader + host enablement runbook         |
-| [SPR-OPS-ZAMMAD-001](./sprint/SPR-OPS-ZAMMAD-001-support-zammad-adapter-host.md)                   | **COMPLETE · DELIVERED** — `.secrets/zammad` loader + Support host enablement        |
-| [SPR-OPS-KIMAI-001](./sprint/SPR-OPS-KIMAI-001-time-kimai-adapter-host.md)                         | **COMPLETE · DELIVERED** — `.secrets/kimai` loader + Time host enablement            |
-| [SPR-OPS-METABASE-001](./sprint/SPR-OPS-METABASE-001-analytics-metabase-adapter-host.md)           | **COMPLETE · DELIVERED** — `.secrets/metabase` loader + Analytics host enablement    |
-| [SPR-OPS-N8N-001](./sprint/SPR-OPS-N8N-001-workflow-n8n-adapter-host.md)                           | **COMPLETE · DELIVERED** — `.secrets/n8n` loader + Workflow engine host enablement   |
-| [SPR-OPS-N8N-002](./sprint/SPR-OPS-N8N-002-workflow-n8n-health-honesty.md)                         | **COMPLETE · DELIVERED** — Workflow health honesty when n8n engine is connected      |
-| [SPR-OPS-LTS-001](./sprint/SPR-OPS-LTS-001-apzhub-owned-engine-topology.md)                        | **COMPLETE · DELIVERED** — engines outside hub · LTS port reservation · cutover plan |
-| [SPR-OPS-LTS-PLANE-001](./sprint/SPR-OPS-LTS-PLANE-001-apzhub-owned-plane-bring-up.md)             | **COMPLETE · DELIVERED** — APZHUB-owned Plane on 19085; Projects retargeted          |
-| [SPR-OPS-LTS-ZAMMAD-001](./sprint/SPR-OPS-LTS-ZAMMAD-001-apzhub-owned-zammad-bring-up.md)          | **COMPLETE · DELIVERED** — APZHUB-owned Zammad on 19081; Support retargeted          |
-| [SPR-OPS-LTS-KIMAI-001](./sprint/SPR-OPS-LTS-KIMAI-001-apzhub-owned-kimai-bring-up.md)             | **COMPLETE · DELIVERED** — APZHUB-owned Kimai on 19083; Time retargeted              |
-| [SPR-OPS-LTS-METABASE-001](./sprint/SPR-OPS-LTS-METABASE-001-apzhub-owned-metabase-bring-up.md)    | **COMPLETE · DELIVERED** — APZHUB-owned Metabase on 19084; Analytics retargeted      |
-| [SPR-OPS-LTS-N8N-001](./sprint/SPR-OPS-LTS-N8N-001-apzhub-owned-n8n-bring-up.md)                   | **COMPLETE · DELIVERED** — APZHUB-owned n8n on 19678; Workflow retargeted            |
-| [SPR-OPS-LTS-PAPERLESS-001](./sprint/SPR-OPS-LTS-PAPERLESS-001-apzhub-owned-paperless-bring-up.md) | **COMPLETE · INFRA ONLY** — Paperless on 19082; no Documents adapter                 |
-| [SPR-OPS-PAPERLESS-002](./sprint/SPR-OPS-PAPERLESS-002-documents-dms-paperless-foundation.md)      | **COMPLETE · DELIVERED** — Documents DMS Paperless foundation (ADR-0095)             |
-| [SPR-OPS-PAPERLESS-003](./sprint/SPR-OPS-PAPERLESS-003-documents-dms-upload.md)                    | **COMPLETE · DELIVERED** — Documents DMS multipart upload / ingest                   |
-| [SPR-OPS-PAPERLESS-004](./sprint/SPR-OPS-PAPERLESS-004-documents-dms-get-download.md)              | **COMPLETE · DELIVERED** — Documents DMS get + download                              |
-| [PAPERLESS-002 evidence](./products/paperless-002/README.md)                                       | DMS health/list dogfood · legacy untouched                                           |
-| [PAPERLESS-003 evidence](./products/paperless-003/README.md)                                       | DMS upload dogfood · opaque ingest id                                                |
-| [PAPERLESS-004 evidence](./products/paperless-004/README.md)                                       | DMS get/download dogfood                                                             |
-| [SPR-OPS-LTS-CLOSE](./sprint/SPR-OPS-LTS-CLOSE-apzhub-owned-engine-programme-closeout.md)          | **COMPLETE · DELIVERED** — LTS fleet closeout (adapter products + Paperless infra)   |
-| [ADR-0095 Paperless DMS](./adr/ADR-0095-paperless-ngx-documents-dms-provider.md)                   | **Accepted** — optional Documents DMS engine; native SoR first                       |
-| [OWNER-ENGINES-OUTSIDE-HUB](./decisions/OWNER-ENGINES-OUTSIDE-HUB.md)                              | **IN FORCE** — engines external; BetterAuth only; leave legacy alone                 |
+| Document                                                                                           | Description                                                                           |
+| -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [APZOR Commercial Pillars](./strategy/APZOR-COMMERCIAL-PILLARS.md)                                 | **Authority** — platform vs sellable solutions; one platform, three pillars           |
+| [SaaS Commercial Model](./strategy/commercial/SAAS-COMMERCIAL-MODEL.md)                            | **Authority (LOCKED)** — tenants, packages, APZPRD composability, Law/Knowledge/Sign  |
+| [OWNER UX Stream 1 freeze](./decisions/OWNER-UX-STREAM-001-FREEZE.md)                              | **IN FORCE** — finish public commerce journey before QEP/PEN/PRD app UX               |
+| [UX-STREAM-001](./ux/UX-STREAM-001-public-commercial-journey.md)                                   | **FROZEN** — public website → marketplace → PayFast → provision → invite              |
+| [SPR-UX-STREAM-001](./sprint/SPR-UX-STREAM-001-public-marketplace-purchase-provisioning.md)        | **APPROVED · READY** — execute Stream 1 DoD                                           |
+| [OWNER UX Stream 2 freeze](./decisions/OWNER-UX-STREAM-002-FREEZE.md)                              | **SPEC FROZEN** — APZQEP UX; execution order TBD after all streams filed              |
+| [UX-STREAM-002](./ux/UX-STREAM-002-apzqep-quality-engineering-platform.md)                         | **FROZEN** — QEP connected quality lifecycle · six signature experiences              |
+| [SPR-UX-STREAM-002](./sprint/SPR-UX-STREAM-002-apzqep-ui-ux.md)                                    | **FROZEN · NOT STARTED** — await Owner order vs Stream 1/3/4                          |
+| [OWNER UX Stream 3 freeze](./decisions/OWNER-UX-STREAM-003-FREEZE.md)                              | **SPEC FROZEN** — APZPEN UX + shared Source Workspace locked                          |
+| [UX-STREAM-003](./ux/UX-STREAM-003-apzpen-security-assurance.md)                                   | **FROZEN** — security assurance lifecycle · seven signature experiences               |
+| [SPR-UX-STREAM-003](./sprint/SPR-UX-STREAM-003-apzpen-ui-ux.md)                                    | **FROZEN · NOT STARTED** — await Owner order vs Stream 1/2/4                          |
+| [OWNER UX Stream 4 freeze](./decisions/OWNER-UX-STREAM-004-FREEZE.md)                              | **SPEC FROZEN** — APZPRD personalised productivity UX                                 |
+| [UX-STREAM-004](./ux/UX-STREAM-004-apzprd-enterprise-productivity.md)                              | **FROZEN** — everyday work environment · eight signature experiences                  |
+| [SPR-UX-STREAM-004](./sprint/SPR-UX-STREAM-004-apzprd-ui-ux.md)                                    | **FROZEN · NOT STARTED** — await Stream 5 then Owner order decision                   |
+| [OWNER UX Streams 5–6 freeze](./decisions/OWNER-UX-STREAM-005-006-FREEZE.md)                       | **SPEC FROZEN** — Shell + Tenant/RBAC; APZOR = ordinary tenant                        |
+| [UX-STREAM-005](./ux/UX-STREAM-005-platform-shell-design-system.md)                                | **FROZEN** — shared authenticated shell · workspace primitives · design language      |
+| [SPR-UX-STREAM-005](./sprint/SPR-UX-STREAM-005-platform-shell-design-system.md)                    | **FROZEN · NOT STARTED** — await Owner order                                          |
+| [UX-STREAM-006](./ux/UX-STREAM-006-tenant-identity-rbac-administration.md)                         | **FROZEN · SUPERSEDES prior** — five layers · Staff Function · APZOR reference tenant |
+| [SPR-UX-STREAM-006](./sprint/SPR-UX-STREAM-006-tenant-identity-rbac-administration.md)             | **FROZEN · NOT STARTED** — await Owner order                                          |
+| [OWNER UX Stream 6 supersede](./decisions/OWNER-UX-STREAM-006-SUPERSEDE.md)                        | **IN FORCE** — revised Stream 6 replaces earlier RBAC freeze text                     |
+| [UX Shared Source Workspace](./ux/UX-SHARED-SOURCE-WORKSPACE.md)                                   | **LOCKED** — one Cursor-quality source UX for QEP+PEN; provider-neutral               |
+| [UX streams index](./ux/README.md)                                                                 | Streams 1–6 filed · order decision pending                                            |
+| [OWNER UX programme order](./decisions/OWNER-UX-STREAMS-PROGRAMME-ORDER.md)                        | **ACCEPTED** — Phase A 5∥6 authorised · vertical proof · reuse IAM                    |
+| [Phase A Streams 5∥6 gap map](./sprint/PHASE-A-STREAMS-5-6-GAP-MAP.md)                             | Living — seven persona verticals certified                                            |
+| [Phase B Stream 1 gap map](./sprint/PHASE-B-STREAM-1-GAP-MAP.md)                                   | Living — Landing → Marketplace → Org onboarding → Checkout                            |
+| [SPR-UX-001](./sprint/SPR-UX-001-commercial-workbench-ui-remodel.md)                               | **PARKED** — workbench remodel deferred under Stream 1 freeze                         |
+| [APZQEP](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md)                             | Quality Engineering Platform — _Can we release with confidence?_                      |
+| [APZPEN](./strategy/APZPEN-ENTERPRISE-SECURITY-ASSURANCE-PLATFORM.md)                              | Security Assurance & Pen Testing — _Can we demonstrate we are secure?_                |
+| [APZPEN Enterprise later](./strategy/APZPEN-ENTERPRISE-LATER-OPTIONS.md)                           | **REMAIN PARKED** — ENT-001 Greenbone/Faraday done; items 1–5 still parked            |
+| [APZPRD](./strategy/APZPRD-ENTERPRISE-PRODUCTIVITY-PLATFORM.md)                                    | Productivity Platform — _Can our people work effectively?_ (composable)               |
+| [SPR-COMM-001](./sprint/SPR-COMM-001-catalogue-entitlements-tenant-switch.md)                      | **DELIVERED** — packages, entitlements, tenant switch, soft APZPEN gate               |
+| [SPR-COMM-002](./sprint/SPR-COMM-002-org-packages-tenant-switch-source.md)                         | **DELIVERED** — org packages UI, tenant switcher, project source (QEP+PEN)            |
+| [OWNER BetterAuth sole AuthN](./decisions/OWNER-BETTERAUTH-SOLE-AUTHN.md)                          | **IN FORCE** — BetterAuth only; Authentik retire with APZPRD                          |
+| [OWNER Full product bar (Option 3)](./decisions/OWNER-FULL-PRODUCT-BAR-OPTION-3.md)                | **SATISFIED · PROGRAMME COMPLETE** — Phase 2 + engines + bridge + Phase 3/AI          |
+| [SPR-FULL-001](./sprint/SPR-FULL-001-full-product-bar-option-3.md)                                 | **PROGRAMME COMPLETE** — Option 3 Waves A+B delivered (220 · ENT · BRIDGE · 230)      |
+| [OWNER Post–Option 3 hardening](./decisions/OWNER-POST-OPTION-3-HARDENING.md)                      | **SATISFIED · DELIVERED** — GMP · Faraday prod path · MCP stdio · platform-services   |
+| [SPR-FULL-002](./sprint/SPR-FULL-002-post-option-3-hardening.md)                                   | **COMPLETE · DELIVERED** — post-bar hardening (GMP · Faraday · MCP stdio · services)  |
+| [OWNER Commercial pillar operator guides](./decisions/OWNER-COMMERCIAL-PILLAR-OPERATOR-GUIDES.md)  | **SATISFIED · DELIVERED** — scoped how-to (QEP · PEN · PRD)                           |
+| [SPR-DOCS-001](./sprint/SPR-DOCS-001-commercial-pillar-operator-guides.md)                         | **COMPLETE · DELIVERED** — commercial pillar operator user guides                     |
+| [Commercial pillar operator guides (index)](./guides/COMMERCIAL-PILLAR-OPERATOR-GUIDES.md)         | APZQEP · APZPEN · APZPRD how-to index                                                 |
+| [SPR-APZPRD-001](./sprint/SPR-APZPRD-001-betterauth-productivity-workspace.md)                     | **COMPLETE · DELIVERED** — BetterAuth sole AuthN; Projects health without Authentik   |
+| [SPR-APZPRD-002](./sprint/SPR-APZPRD-002-entitled-projects-workbench.md)                           | **COMPLETE · DELIVERED** — entitled Projects workbench (catalogue → adapter)          |
+| [SPR-APZPRD-003](./sprint/SPR-APZPRD-003-projects-workbench-deepen.md)                             | **COMPLETE · DELIVERED** — deepen Projects; BetterAuth only (no Authentik)            |
+| [SPR-ADOPT-002](./sprint/SPR-ADOPT-002-commercial-pillar-operator-dogfood.md)                      | **COMPLETE · DELIVERED** — commercial pillar operator dogfood (BetterAuth only)       |
+| [SPR-ADOPT-003](./sprint/SPR-ADOPT-003-wired-engines-dogfood.md)                                   | **COMPLETE · DELIVERED** — wired engines dogfood (Plane·Zammad·Kimai·Metabase·n8n)    |
+| [SPR-ADOPT-004](./sprint/SPR-ADOPT-004-lts-backed-engines-dogfood.md)                              | **COMPLETE · DELIVERED** — LTS-backed commercial dogfood (leave legacy alone)         |
+| [ADOPT-002 evidence](./products/adopt-002/README.md)                                               | Friction · evidence · checklist results                                               |
+| [ADOPT-003 evidence](./products/adopt-003/README.md)                                               | Post-OPS wired-engine dogfood evidence                                                |
+| [ADOPT-004 evidence](./products/adopt-004/README.md)                                               | LTS API dogfood · 10/10 · legacy untouched                                            |
+| [OWNER APZPEN remain parked](./decisions/OWNER-APZPEN-REMAIN-PARKED.md)                            | **IN FORCE** — no further APZPEN enterprise until resume criteria                     |
+| [SPR-POLISH-001](./sprint/SPR-POLISH-001-entitlements-shell-consistency.md)                        | **COMPLETE · DELIVERED** — entitlements UX + shell consistency across pillars         |
+| [SPR-OPS-PLANE-001](./sprint/SPR-OPS-PLANE-001-projects-plane-adapter-host.md)                     | **COMPLETE · DELIVERED** — `.secrets/plane` loader + host enablement runbook          |
+| [SPR-OPS-ZAMMAD-001](./sprint/SPR-OPS-ZAMMAD-001-support-zammad-adapter-host.md)                   | **COMPLETE · DELIVERED** — `.secrets/zammad` loader + Support host enablement         |
+| [SPR-OPS-KIMAI-001](./sprint/SPR-OPS-KIMAI-001-time-kimai-adapter-host.md)                         | **COMPLETE · DELIVERED** — `.secrets/kimai` loader + Time host enablement             |
+| [SPR-OPS-METABASE-001](./sprint/SPR-OPS-METABASE-001-analytics-metabase-adapter-host.md)           | **COMPLETE · DELIVERED** — `.secrets/metabase` loader + Analytics host enablement     |
+| [SPR-OPS-N8N-001](./sprint/SPR-OPS-N8N-001-workflow-n8n-adapter-host.md)                           | **COMPLETE · DELIVERED** — `.secrets/n8n` loader + Workflow engine host enablement    |
+| [SPR-OPS-N8N-002](./sprint/SPR-OPS-N8N-002-workflow-n8n-health-honesty.md)                         | **COMPLETE · DELIVERED** — Workflow health honesty when n8n engine is connected       |
+| [SPR-OPS-LTS-001](./sprint/SPR-OPS-LTS-001-apzhub-owned-engine-topology.md)                        | **COMPLETE · DELIVERED** — engines outside hub · LTS port reservation · cutover plan  |
+| [SPR-OPS-LTS-PLANE-001](./sprint/SPR-OPS-LTS-PLANE-001-apzhub-owned-plane-bring-up.md)             | **COMPLETE · DELIVERED** — APZHUB-owned Plane on 19085; Projects retargeted           |
+| [SPR-OPS-LTS-ZAMMAD-001](./sprint/SPR-OPS-LTS-ZAMMAD-001-apzhub-owned-zammad-bring-up.md)          | **COMPLETE · DELIVERED** — APZHUB-owned Zammad on 19081; Support retargeted           |
+| [SPR-OPS-LTS-KIMAI-001](./sprint/SPR-OPS-LTS-KIMAI-001-apzhub-owned-kimai-bring-up.md)             | **COMPLETE · DELIVERED** — APZHUB-owned Kimai on 19083; Time retargeted               |
+| [SPR-OPS-LTS-METABASE-001](./sprint/SPR-OPS-LTS-METABASE-001-apzhub-owned-metabase-bring-up.md)    | **COMPLETE · DELIVERED** — APZHUB-owned Metabase on 19084; Analytics retargeted       |
+| [SPR-OPS-LTS-N8N-001](./sprint/SPR-OPS-LTS-N8N-001-apzhub-owned-n8n-bring-up.md)                   | **COMPLETE · DELIVERED** — APZHUB-owned n8n on 19678; Workflow retargeted             |
+| [SPR-OPS-LTS-PAPERLESS-001](./sprint/SPR-OPS-LTS-PAPERLESS-001-apzhub-owned-paperless-bring-up.md) | **COMPLETE · INFRA ONLY** — Paperless on 19082; no Documents adapter                  |
+| [SPR-OPS-PAPERLESS-002](./sprint/SPR-OPS-PAPERLESS-002-documents-dms-paperless-foundation.md)      | **COMPLETE · DELIVERED** — Documents DMS Paperless foundation (ADR-0095)              |
+| [SPR-OPS-PAPERLESS-003](./sprint/SPR-OPS-PAPERLESS-003-documents-dms-upload.md)                    | **COMPLETE · DELIVERED** — Documents DMS multipart upload / ingest                    |
+| [SPR-OPS-PAPERLESS-004](./sprint/SPR-OPS-PAPERLESS-004-documents-dms-get-download.md)              | **COMPLETE · DELIVERED** — Documents DMS get + download                               |
+| [PAPERLESS-002 evidence](./products/paperless-002/README.md)                                       | DMS health/list dogfood · legacy untouched                                            |
+| [PAPERLESS-003 evidence](./products/paperless-003/README.md)                                       | DMS upload dogfood · opaque ingest id                                                 |
+| [PAPERLESS-004 evidence](./products/paperless-004/README.md)                                       | DMS get/download dogfood                                                              |
+| [SPR-OPS-LTS-CLOSE](./sprint/SPR-OPS-LTS-CLOSE-apzhub-owned-engine-programme-closeout.md)          | **COMPLETE · DELIVERED** — LTS fleet closeout (adapter products + Paperless infra)    |
+| [ADR-0095 Paperless DMS](./adr/ADR-0095-paperless-ngx-documents-dms-provider.md)                   | **Accepted** — optional Documents DMS engine; native SoR first                        |
+| [OWNER-ENGINES-OUTSIDE-HUB](./decisions/OWNER-ENGINES-OUTSIDE-HUB.md)                              | **IN FORCE** — engines external; BetterAuth only; leave legacy alone                  |
 
 ### Priority product build — APZQEP (active)
 

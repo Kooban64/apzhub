@@ -102,5 +102,7 @@ describe("shell landings", () => {
     expect(shellLandingForKind("org_admin").path).toBe("/org");
     expect(shellLandingForKind("org_member").path).toBe("/workspace/home");
     expect(shellLandingForKind("individual").path).toBe("/workspace/home");
+    expect(shellLandingForKind("tenant_support").path).toBe("/workspace/home");
+    expect(shellLandingForKind("tenant_support").shell).toBe("workspace");
   });
 });

@@ -17,7 +17,7 @@ export function ForgotPasswordForm() {
     setError(null);
     const result = await requestPasswordReset({
       email,
-      redirectTo: "/login",
+      redirectTo: "/reset-password",
     });
     setLoading(false);
     if (result.error) {

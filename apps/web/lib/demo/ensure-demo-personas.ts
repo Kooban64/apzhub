@@ -21,8 +21,8 @@ import {
   startPlanProductSubscriptions,
 } from "@/lib/commercial/product-access";
 import type { ProductKey } from "@/lib/commercial/catalogue";
-import { ensureApzorAllSuitesFree } from "@/lib/commercial/provisioning";
 import {
+  ensureApzorOrdinarySubscriptions,
   subscribeOrganisationToPackage,
   subscribeOrganisationToSuites,
 } from "@/lib/commercial/provisioning";
@@ -121,6 +121,8 @@ function seedProductAccess(persona: DemoPersona, userId: string): void {
       "time",
       "analytics",
       "workflow",
+      "documents",
+      "knowledge",
     ]);
     setUserProductGrants({
       organisationId: persona.tenantId,
@@ -143,7 +145,8 @@ export async function ensureDemoPersonasSeeded(): Promise<{
 
   await seedDefaultAuthorizationRows();
   await ensureDemoTenants();
-  ensureApzorAllSuitesFree();
+  // Phase A — APZOR is an ordinary tenant (no free-all special path).
+  ensureApzorOrdinarySubscriptions();
 
   // Demo org gets QA suite + first APZPRD slice (Projects) before user grants.
   subscribeOrganisationToSuites({
@@ -174,6 +177,11 @@ export async function ensureDemoPersonasSeeded(): Promise<{
   subscribeOrganisationToPackage({
     organisationId: DEMO_ORG_TENANT_ID,
     packageId: "pkg.apzprd.operations",
+    planId: "plan.business",
+  });
+  subscribeOrganisationToPackage({
+    organisationId: DEMO_ORG_TENANT_ID,
+    packageId: "pkg.apzprd.workspace",
     planId: "plan.business",
   });
   subscribeOrganisationToPackage({

@@ -37,38 +37,39 @@ export default function HubLandingPage() {
         />
         <div className="relative z-10 mx-auto grid min-h-[min(88vh,52rem)] max-w-6xl items-center gap-12 px-4 py-20 sm:px-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <MarketingEyebrow>Software assurance platform</MarketingEyebrow>
-            <h1 className="mt-4 font-[family-name:var(--font-display)] text-5xl leading-[1.05] font-semibold tracking-tight sm:text-6xl">
-              Build better software. Ship with confidence.
+            <MarketingEyebrow>APZ platform</MarketingEyebrow>
+            <h1 className="mt-4 font-[family-name:var(--font-display)] text-[length:var(--marketing-display,3.25rem)] leading-[1.05] font-semibold tracking-tight sm:text-5xl lg:text-[3.5rem]">
+              One platform for better software, stronger security and more productive
+              teams.
             </h1>
             <p className="mt-5 max-w-xl text-lg text-[var(--color-muted-foreground)]">
-              Quality, security, and — soon — a productivity suite for delivery teams.
-              One platform. Clear entitlements. Human gates where it matters.
+              Quality engineering, security assurance and enterprise productivity —
+              connected through one platform and available independently or together.
             </p>
             <MarketingCtaGroup
-              primary={{ href: "/contact", label: "Book a consultation" }}
-              secondary={{ href: "/services", label: "Explore our services" }}
+              primary={{ href: "/marketplace", label: "Explore Products" }}
+              secondary={{ href: "/solutions", label: "View Solutions" }}
             />
           </div>
           <div className="grid gap-3" aria-label="Product areas">
             {[
               {
-                href: "/qa",
-                label: "APZQA",
-                title: "Quality Assurance",
-                detail: "Testing · automation · QEP gate",
+                href: "/solutions/quality",
+                label: "Quality",
+                title: "92% Release Ready",
+                detail: "Release assurance across test evidence",
               },
               {
-                href: "/pentest",
-                label: "APZPenTest",
-                title: "Security Testing",
-                detail: "Pentest · cloud · red team",
+                href: "/solutions/security",
+                label: "Security",
+                title: "3 Risks Require Attention",
+                detail: "Security findings awaiting remediation",
               },
               {
-                href: "/productivity",
-                label: "Coming soon",
-                title: "Productivity Suite",
-                detail: "Projects · Time · Support · Documents",
+                href: "/solutions/productivity",
+                label: "Productivity",
+                title: "8 Items Need Attention",
+                detail: "Projects · support · time · knowledge",
               },
             ].map((item, index) => (
               <Link
@@ -94,6 +95,20 @@ export default function HubLandingPage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section
+        className="border-y border-[var(--color-border)] bg-[var(--color-muted)]/20"
+        aria-label="Platform trust"
+      >
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3 px-4 py-5 text-center text-xs font-medium tracking-[0.14em] text-[var(--color-muted-foreground)] uppercase sm:px-8">
+          <span>Quality Engineering</span>
+          <span>Security Assurance</span>
+          <span>Productivity</span>
+          <span>One Identity</span>
+          <span>One Platform</span>
+          <span>Modular Licensing</span>
         </div>
       </section>
 

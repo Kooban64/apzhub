@@ -5,6 +5,7 @@ import {
   isKnowledgeStewardAutoAssignEnabled,
 } from "./knowledge-steward-permissions";
 import { IAM_PLATFORM_PERMISSIONS, PERSONA_ROLE_DEFINITIONS } from "./persona-roles";
+import { PRODUCT_ROLE_DEFINITIONS } from "./product-roles";
 import {
   DEFAULT_QEP_OPERATOR_ROLE_ID,
   DEFAULT_QEP_READER_ROLE_ID,
@@ -360,6 +361,24 @@ export function seedDefaultAuthorizationCatalog(service: AuthorizationService): 
       );
     } else {
       ensureRolePermissionGrants(service, persona.roleId, persona.permissions);
+    }
+  }
+
+  // Phase A — Stream 6 product roles (Support / Time / Knowledge)
+  for (const productRole of PRODUCT_ROLE_DEFINITIONS) {
+    if (!service.roleService.getRole(productRole.roleId)) {
+      service.createRole(
+        {
+          roleId: productRole.roleId,
+          slug: productRole.slug,
+          name: productRole.name,
+          scope: productRole.scope,
+          productKey: productRole.productKey,
+        },
+        [...productRole.permissions],
+      );
+    } else {
+      ensureRolePermissionGrants(service, productRole.roleId, productRole.permissions);
     }
   }
   ensureRolePermissionGrants(service, DEFAULT_PLATFORM_ADMIN_ROLE_ID, [

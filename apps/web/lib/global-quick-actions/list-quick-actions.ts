@@ -1,15 +1,21 @@
 import { filterQuickActionsByPermissions } from "./permissions";
 import { listGlobalQuickActionDescriptors } from "./registry";
 import type { GlobalQuickActionsResponse, QuickAction } from "./types";
+import { filterByEntitledProducts } from "@/lib/commercial/surface-entitlements";
 
 export function listGlobalQuickActions(input: {
   readonly userPermissions: readonly string[];
   readonly recentActionIds?: readonly string[];
+  /** Commercial product keys the user is entitled to (org ∩ grant). */
+  readonly entitledProductKeys?: readonly string[];
 }): GlobalQuickActionsResponse {
-  const allowed = filterQuickActionsByPermissions(
+  let allowed = filterQuickActionsByPermissions(
     listGlobalQuickActionDescriptors(),
     input.userPermissions,
   );
+  if (input.entitledProductKeys) {
+    allowed = filterByEntitledProducts(allowed, new Set(input.entitledProductKeys));
+  }
   const recentIds = (input.recentActionIds ?? []).filter((id) =>
     allowed.some((action) => action.id === id),
   );

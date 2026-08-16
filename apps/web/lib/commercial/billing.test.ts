@@ -115,5 +115,8 @@ describe("commercial billing", () => {
       invoiceId: "inv-1",
     });
     expect(checkout.fields.signature).toBeTruthy();
+    expect(checkout.fields.return_url).toContain("/checkout/processing");
+    expect(checkout.fields.cancel_url).toContain("/checkout/fail");
+    expect(checkout.integration).toBe("form");
   });
 });

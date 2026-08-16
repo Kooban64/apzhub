@@ -366,6 +366,11 @@ const SECTION_META: Record<
     description:
       "Administration metadata dashboard — runtime administration is not available.",
   },
+  members: {
+    title: "Members",
+    description:
+      "Organisation member directory metadata — provisioning is outside this surface.",
+  },
   modules: {
     title: "Modules",
     description: "Registered module metadata and lifecycle commands.",

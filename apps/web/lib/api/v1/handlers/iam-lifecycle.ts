@@ -13,7 +13,9 @@ import {
   changeOrganisationMemberPersona,
   inviteOrganisationMember,
   listAvailablePersonas,
+  listAvailableStaffFunctions,
   listOrganisationMembers,
+  provisionOrganisationMember,
   suspendOrganisationMember,
 } from "@/lib/iam/identity-lifecycle";
 import type { ProductKey } from "@/lib/commercial/catalogue";
@@ -29,7 +31,9 @@ function mapIamError(error: unknown): never {
   if (
     message === "iam.invite.email_invalid" ||
     message === "iam.invite.persona_required" ||
-    message === "iam.invite.persona_unknown"
+    message === "iam.invite.persona_unknown" ||
+    message === "iam.provision.staff_function_unknown" ||
+    message === "iam.provision.staff_function_required"
   ) {
     throw new PlatformApiHttpError(400, {
       code: "VALIDATION_FAILED",
@@ -59,7 +63,13 @@ export async function handleListIamPersonas(
   context: PlatformApiRequestContext,
 ) {
   requireQepPermission(context, "identity.read", "admin.read", "admin.operate");
-  return jsonDataResponse({ personas: listAvailablePersonas() }, context.tracing);
+  return jsonDataResponse(
+    {
+      personas: listAvailablePersonas(),
+      staffFunctions: listAvailableStaffFunctions(),
+    },
+    context.tracing,
+  );
 }
 
 export async function handleListIamMembers(
@@ -96,9 +106,43 @@ export async function handleInviteIamMember(
     personaRoleId?: string;
     displayName?: string;
     productKeys?: string[];
+    /** When true, create BetterAuth user + assign product roles from staff function. */
+    provision?: boolean;
+    staffFunctionId?: string;
+    temporaryPassword?: string;
   };
   try {
     const organisationId = sessionTenantId(context);
+
+    if (body.provision) {
+      const result = await provisionOrganisationMember({
+        organisationId,
+        email: body.email ?? "",
+        displayName: body.displayName ?? body.email ?? "User",
+        invitedBy: context.serviceContext.userId,
+        staffFunctionId: body.staffFunctionId,
+        orgJobRoleId: body.personaRoleId,
+        temporaryPassword: body.temporaryPassword,
+        productKeys: (body.productKeys ?? []) as ProductKey[],
+      });
+      return jsonDataResponse(
+        {
+          member: {
+            ...result.member,
+            productGrants: result.productKeys,
+          },
+          provisioned: true,
+          userId: result.userId,
+          created: result.created,
+          temporaryPassword: result.temporaryPassword,
+          staffFunction: result.staffFunction,
+          effectiveAccessSummary: result.effectiveAccessSummary,
+          note: "User provisioned. Temporary password returned once — share securely.",
+        },
+        context.tracing,
+      );
+    }
+
     const member = inviteOrganisationMember({
       organisationId,
       email: body.email ?? "",
@@ -126,7 +170,11 @@ export async function handleInviteIamMember(
           ...member,
           productGrants: grants.map((g) => g.productKey),
         },
-        note: "Invite recorded. Same ruleset for all organisations including APZOR internal.",
+        provisioned: false,
+        inviteUrl: member.inviteToken
+          ? `${process.env.APP_URL?.trim() || process.env.NEXT_PUBLIC_APP_URL?.trim() || "http://127.0.0.1:3300"}/invite/${member.inviteToken}`
+          : null,
+        note: "Invite recorded. Share inviteUrl with the teammate. Pass provision:true to create login + AuthZ immediately.",
       },
       context.tracing,
     );
@@ -255,4 +303,33 @@ export async function handleActivateIamMember(
   } catch (error) {
     mapIamError(error);
   }
+}
+
+/** Thin User Inspector — effective access “why” for Stream 6 signature path. */
+export async function handleInspectIamMemberAccess(
+  _request: NextRequest,
+  context: PlatformApiRequestContext,
+  routeContext?: { params: Promise<Record<string, string>> },
+) {
+  requireQepPermission(context, "identity.read", "identity.manage", "admin.operate");
+  const membershipId = (await routeContext?.params)?.membershipId?.trim();
+  if (!membershipId) {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_FAILED",
+      message: "membershipId is required",
+    });
+  }
+  const { inspectMemberEffectiveAccess } =
+    await import("@/lib/iam/effective-access-inspector");
+  const inspection = inspectMemberEffectiveAccess({
+    organisationId: sessionTenantId(context),
+    membershipId,
+  });
+  if (!inspection) {
+    throw new PlatformApiHttpError(404, {
+      code: "NOT_FOUND",
+      message: "iam.member.not_found",
+    });
+  }
+  return jsonDataResponse({ inspection }, context.tracing);
 }

@@ -25,8 +25,8 @@ export function resolvePayFastConfig(
     merchantKey: env.PAYFAST_MERCHANT_KEY?.trim() || "46f0cd694581a",
     passphrase: env.PAYFAST_PASSPHRASE?.trim() || "",
     sandbox: (env.PAYFAST_SANDBOX ?? "true").toLowerCase() !== "false",
-    returnUrl: `${appUrl}/workspace/billing?payfast=return`,
-    cancelUrl: `${appUrl}/workspace/billing?payfast=cancel`,
+    returnUrl: `${appUrl}/checkout/processing?payfast=return`,
+    cancelUrl: `${appUrl}/checkout/fail?payfast=cancel`,
     notifyUrl: `${appUrl}/api/v1/billing/payfast/itn`,
   };
 }
@@ -43,6 +43,8 @@ export type PayFastCheckoutSession = {
   readonly fields: Readonly<Record<string, string>>;
   readonly signature: string;
   readonly mode: "sandbox" | "live";
+  /** Form POST (classic) or onsite when merchant enables PayFast Onsite. */
+  readonly integration: "form" | "onsite";
 };
 
 function md5(value: string): string {
@@ -65,6 +67,10 @@ export function signPayFastParams(
   return md5(paramString);
 }
 
+/**
+ * Classic custom integration (form POST). Prefer Onsite when
+ * `PAYFAST_PAYMENT_MODE=onsite` and merchant supports it — APZ never stores PAN.
+ */
 export function createPayFastCheckout(
   input: PayFastCheckoutRequest,
   env: NodeJS.ProcessEnv = process.env,
@@ -84,14 +90,20 @@ export function createPayFastCheckout(
   };
   const signature = signPayFastParams(fields, config.passphrase);
   fields.signature = signature;
-  const processUrl = config.sandbox
-    ? "https://sandbox.payfast.co.za/eng/process"
-    : "https://www.payfast.co.za/eng/process";
+  const onsite = (env.PAYFAST_PAYMENT_MODE ?? "form").toLowerCase() === "onsite";
+  const processUrl = onsite
+    ? config.sandbox
+      ? "https://sandbox.payfast.co.za/onsite/process"
+      : "https://www.payfast.co.za/onsite/process"
+    : config.sandbox
+      ? "https://sandbox.payfast.co.za/eng/process"
+      : "https://www.payfast.co.za/eng/process";
   return {
     processUrl,
     fields,
     signature,
     mode: config.sandbox ? "sandbox" : "live",
+    integration: onsite ? "onsite" : "form",
   };
 }
 

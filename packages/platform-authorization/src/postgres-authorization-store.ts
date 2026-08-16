@@ -21,6 +21,7 @@ import {
   seedDefaultAuthorizationCatalog,
 } from "./authorization-seed";
 import { PERSONA_ROLE_DEFINITIONS } from "./persona-roles";
+import { PRODUCT_ROLE_DEFINITIONS } from "./product-roles";
 import {
   KNOWLEDGE_STEWARD_PERMISSIONS,
   isKnowledgeStewardAutoAssignEnabled,
@@ -207,6 +208,11 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
       personaPermissionKeys.add(permissionKey);
     }
   }
+  for (const productRole of PRODUCT_ROLE_DEFINITIONS) {
+    for (const permissionKey of productRole.permissions) {
+      personaPermissionKeys.add(permissionKey);
+    }
+  }
   for (const permissionKey of personaPermissionKeys) {
     await db
       .insert(platformAuthorizationPermission)
@@ -284,6 +290,15 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
       // Template roles — tenant binding lives on the assignment, not the role row.
       tenantId: null as string | null,
       productKey: persona.productKey ?? null,
+      parentRoleId: null as string | null,
+    })),
+    ...PRODUCT_ROLE_DEFINITIONS.map((productRole) => ({
+      roleId: productRole.roleId,
+      slug: productRole.slug,
+      name: productRole.name,
+      scope: productRole.scope,
+      tenantId: null as string | null,
+      productKey: productRole.productKey ?? null,
       parentRoleId: null as string | null,
     })),
   ] as const;
@@ -535,6 +550,13 @@ export async function seedDefaultAuthorizationRows(): Promise<void> {
         grantType: "allow" as const,
       })),
     ),
+    ...PRODUCT_ROLE_DEFINITIONS.flatMap((productRole) =>
+      productRole.permissions.map((permissionKey) => ({
+        roleId: productRole.roleId,
+        permissionKey,
+        grantType: "allow" as const,
+      })),
+    ),
   ] as const;
 
   for (const grant of rolePermissions) {
@@ -658,14 +680,26 @@ export async function resolvePostgresSessionAuthorization(
   const roleRows =
     roleIds.size === 0 ? [] : await db.select().from(platformAuthorizationRole);
 
+  // Shell / platform context includes all product roles the user holds.
+  // Only a concrete productKey (e.g. "support") scopes AuthZ to that product.
+  const productFilterActive =
+    Boolean(input.productKey?.trim()) && input.productKey !== "platform";
+
   const applicableRoles = roleRows.filter((role) => {
     if (role.status !== "active") return false;
     if (input.tenantId && role.tenantId && role.tenantId !== input.tenantId)
       return false;
-    if (input.productKey && role.productKey && role.productKey !== input.productKey)
+    if (
+      productFilterActive &&
+      role.productKey &&
+      role.productKey !== input.productKey
+    ) {
       return false;
+    }
     return roleIds.has(role.roleId);
   });
+
+  const applicableRoleIds = new Set(applicableRoles.map((role) => role.roleId));
 
   const grants =
     roleIds.size === 0
@@ -674,7 +708,7 @@ export async function resolvePostgresSessionAuthorization(
 
   const allow = new Set<string>();
   for (const grant of grants) {
-    if (!roleIds.has(grant.roleId) || grant.grantType !== "allow") {
+    if (!applicableRoleIds.has(grant.roleId) || grant.grantType !== "allow") {
       continue;
     }
     allow.add(grant.permissionKey);

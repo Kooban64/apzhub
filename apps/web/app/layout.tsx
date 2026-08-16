@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   description: "Enterprise Operating Platform",
 };
 
+/** SPR-UX-001 U0 — authenticated workbench; avoid brittle static prerender of CSR hooks. */
+export const dynamic = "force-dynamic";
+
 export default function RootLayout({
   children,
 }: Readonly<{

@@ -151,7 +151,11 @@ export function LoginForm({
           <p className="text-[var(--color-muted-foreground)]">
             New here?{" "}
             <Link
-              href="/register"
+              href={
+                callbackUrl.includes("/onboarding")
+                  ? `/register?${callbackUrl.includes("?") ? callbackUrl.split("?")[1] : ""}`
+                  : "/register"
+              }
               className="text-[var(--color-primary)] hover:underline"
             >
               Create an account

@@ -66,9 +66,9 @@ export async function GET() {
     email: {
       status: email.status,
       configured: email.configured,
-      host: email.host,
-      port: email.port,
-      from: email.from,
+      host: "host" in email ? email.host : undefined,
+      port: "port" in email ? email.port : undefined,
+      from: "from" in email ? email.from : undefined,
       message: email.message,
       checkedAt: email.checkedAt,
     },

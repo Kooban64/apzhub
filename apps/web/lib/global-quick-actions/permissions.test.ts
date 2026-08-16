@@ -45,4 +45,17 @@ describe("Global Quick Actions permissions", () => {
     const result = listGlobalQuickActions({ userPermissions: [] });
     expect(result.actions).toHaveLength(0);
   });
+
+  it("entitlement filter removes Projects/QEP for Support Agent product set", () => {
+    const result = listGlobalQuickActions({
+      userPermissions: ["*"],
+      entitledProductKeys: ["support", "time", "knowledge"],
+    });
+    const ids = result.actions.map((a) => a.id);
+    expect(ids).toContain("qa-new-ticket");
+    expect(ids).toContain("qa-log-time");
+    expect(ids).toContain("qa-create-knowledge");
+    expect(ids).not.toContain("qa-new-project");
+    expect(ids).not.toContain("qa-run-test");
+  });
 });

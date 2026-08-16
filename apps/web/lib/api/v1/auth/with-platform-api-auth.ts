@@ -41,6 +41,12 @@ export type PlatformApiRouteHandler = (
 
 export interface WithPlatformApiAuthOptions {
   readonly operation?: string;
+  /**
+   * AuthZ product scope for PermissionService resolution.
+   * Default `"platform"` = shell-wide (all product roles). Pass a concrete
+   * product key (e.g. `"apzqep"`) only for product-isolated Cap evaluation.
+   */
+  readonly authzProductKey?: string;
 }
 
 /**
@@ -81,10 +87,12 @@ export function withPlatformApiAuth(
 
       const { resolveSessionAuthorization } =
         await import("@apzhub/platform-authorization/server");
+      // Shell / gateway default: include all product roles the user holds.
+      // Product-scoped operations may override via options.authzProductKey.
       const authz = await resolveSessionAuthorization({
         userId: session.user.id,
         tenantId,
-        productKey: "apzqep",
+        productKey: options.authzProductKey ?? "platform",
       });
 
       serviceContext = buildServiceRequestContext({

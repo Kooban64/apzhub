@@ -312,8 +312,11 @@ export function OrgBillingPage() {
     <OrgFrame title="Billing" subtitle="Organisation plan and upgrade path.">
       <DenseLinkList
         items={[
-          { href: "/pricing", label: "Public catalogue / upgrade", hint: "pricing" },
+          { href: "/settings/billing", label: "Products & Billing", hint: "settings" },
           { href: "/workspace/billing", label: "Billing workspace", hint: "invoices" },
+          { href: "/marketplace", label: "Expand products", hint: "no new org" },
+          { href: "/pricing", label: "Public catalogue / upgrade", hint: "pricing" },
+          { href: "/onboarding/team", label: "Invite team", hint: "licences" },
         ]}
       />
     </OrgFrame>

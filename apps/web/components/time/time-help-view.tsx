@@ -57,8 +57,8 @@ export function TimeHelpView() {
           <h2 className="text-sm font-semibold">Where things live</h2>
           <ul className="mt-3 space-y-2 text-sm text-[var(--color-muted-foreground)]">
             <li>
-              <strong className="text-[var(--color-foreground)]">Overview</strong> —
-              recent work, current timer, and quick actions.
+              <strong className="text-[var(--color-foreground)]">Recording</strong> —
+              start/stop timer bar, week grid, and recent entries.
             </li>
             <li>
               <strong className="text-[var(--color-foreground)]">Timesheets</strong> —
@@ -129,7 +129,7 @@ export function TimeHelpView() {
             className="mt-4"
             onClick={() => router.push(timeDashboardPath())}
           >
-            Back to Overview
+            Back to Recording
           </Button>
         </section>
 

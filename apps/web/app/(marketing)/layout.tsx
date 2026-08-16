@@ -12,7 +12,7 @@ export default async function MarketingLayout({ children }: { children: ReactNod
 
   return (
     <div
-      className="flex min-h-full flex-col"
+      className="marketing-surface flex min-h-full flex-col"
       style={
         {
           "--font-display":

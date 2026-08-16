@@ -36,6 +36,10 @@ import {
   getPayFastHealth,
   verifyPayFastItn,
 } from "@/lib/commercial/payfast-adapter";
+import {
+  applyCommercePackageIntent,
+  saveCommercePackageIntent,
+} from "@/lib/commercial/commerce-package-intent";
 
 function activatePlanProductsForSubject(subjectId: string, skuId: string) {
   if (skuId !== "sku.plan.individual" && skuId !== "sku.plan.business") {
@@ -113,6 +117,7 @@ export function startTrialSubscription(input: {
   readonly ownerId: string;
   readonly organisationId: string;
   readonly email?: string;
+  readonly packageId?: string;
 }) {
   const plan = getPlan(input.planId);
   if (!plan || !plan.active) throw new Error("billing.plan_unavailable");
@@ -156,6 +161,19 @@ export function startTrialSubscription(input: {
     grantUserId: input.ownerId,
   });
 
+  let packageProvisioned: { applied: boolean; packageId?: string } | undefined;
+  if (input.packageId?.trim()) {
+    saveCommercePackageIntent({
+      organisationId: input.organisationId,
+      packageId: input.packageId.trim(),
+      planId: input.planId,
+      ownerUserId: input.ownerId,
+      invoiceId: invoice.invoiceId,
+    });
+    // Apply immediately so entitlements work before sandbox ITN (dogfood).
+    packageProvisioned = applyCommercePackageIntent(input.organisationId);
+  }
+
   return {
     account,
     invoice,
@@ -163,6 +181,7 @@ export function startTrialSubscription(input: {
     trialEndsAt,
     plan,
     products,
+    packageProvisioned,
     health: getPayFastHealth(),
   };
 }
@@ -294,6 +313,7 @@ export function handlePayFastItn(params: Record<string, string>) {
       const account = getBillingAccount(payment.billingAccountId);
       if (account) {
         activatePlanProductsForSubject(account.subjectId, invoice.skuId);
+        applyCommercePackageIntent(account.subjectId);
       }
     }
     return { ok: true as const, payment };

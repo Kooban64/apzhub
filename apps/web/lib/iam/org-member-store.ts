@@ -3,9 +3,23 @@
  * File-backed outside tests. One ruleset for all orgs.
  */
 
-import { randomUUID } from "node:crypto";
+import { randomUUID as nodeRandomUUID } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+
+function newUuid(): string {
+  if (typeof nodeRandomUUID === "function") {
+    try {
+      return nodeRandomUUID();
+    } catch {
+      /* vite may stub node:crypto in jsdom */
+    }
+  }
+  if (typeof globalThis.crypto?.randomUUID === "function") {
+    return globalThis.crypto.randomUUID();
+  }
+  return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+}
 
 export type OrgMemberStatus = "invited" | "active" | "suspended" | "removed";
 
@@ -18,6 +32,7 @@ export type OrgMemberRecord = {
   readonly personaRoleId: string;
   readonly status: OrgMemberStatus;
   readonly invitedBy: string;
+  readonly inviteToken?: string;
   readonly createdAt: string;
   readonly updatedAt: string;
 };
@@ -94,6 +109,42 @@ export function getOrgMember(
   );
 }
 
+export function getOrgMemberByInviteToken(token: string): OrgMemberRecord | undefined {
+  hydrate();
+  const trimmed = token.trim();
+  if (!trimmed) return undefined;
+  return members.find((row) => row.inviteToken === trimmed && row.status === "invited");
+}
+
+/** Bind authenticated user to an invite and activate membership. */
+export function acceptOrgMemberInvite(input: {
+  readonly inviteToken: string;
+  readonly userId: string;
+  readonly email: string;
+  readonly now?: () => Date;
+}): OrgMemberRecord {
+  hydrate();
+  const index = members.findIndex(
+    (row) => row.inviteToken === input.inviteToken.trim() && row.status === "invited",
+  );
+  if (index < 0) throw new Error("iam.invite.token_invalid");
+  const current = members[index]!;
+  const email = input.email.trim().toLowerCase();
+  if (email && current.email !== email) {
+    throw new Error("iam.invite.email_mismatch");
+  }
+  const updated: OrgMemberRecord = {
+    ...current,
+    userId: input.userId,
+    status: "active",
+    inviteToken: undefined,
+    updatedAt: (input.now ?? (() => new Date()))().toISOString(),
+  };
+  members[index] = updated;
+  persistAll();
+  return updated;
+}
+
 export function inviteOrgMember(input: {
   readonly organisationId: string;
   readonly email: string;
@@ -122,7 +173,7 @@ export function inviteOrgMember(input: {
   }
   const now = (input.now ?? (() => new Date()))().toISOString();
   const record: OrgMemberRecord = {
-    membershipId: `omem-${randomUUID()}`,
+    membershipId: `omem-${newUuid()}`,
     organisationId: input.organisationId,
     userId: input.userId?.trim() || `pending:${email}`,
     email,
@@ -130,6 +181,7 @@ export function inviteOrgMember(input: {
     personaRoleId: input.personaRoleId.trim(),
     status: "invited",
     invitedBy: input.invitedBy,
+    inviteToken: `inv_${newUuid().replace(/-/g, "")}`,
     createdAt: now,
     updatedAt: now,
   };

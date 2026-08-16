@@ -30,7 +30,7 @@ async function handleGet(request: NextRequest, context: PlatformApiRequestContex
   if (objectId && download === "1") {
     try {
       const { meta, bytes } = downloadVaultEvidence(tenantId, objectId);
-      return new Response(bytes, {
+      return new Response(new Uint8Array(bytes), {
         status: 200,
         headers: {
           "content-type": meta.contentType,

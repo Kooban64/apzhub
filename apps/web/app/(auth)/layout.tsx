@@ -10,12 +10,16 @@ const TITLE_BY_PATH: Record<string, string> = {
   "/login": "Sign in",
   "/register": "Create account",
   "/forgot-password": "Reset password",
+  "/reset-password": "Choose a new password",
+  "/verify": "Verify your email",
 };
 
 const BLURB_BY_PATH: Record<string, string> = {
   "/login": "Access your organisation workbench with a single sign-in.",
   "/register": "Create an account to start a trial or join your organisation.",
   "/forgot-password": "We’ll email a secure link to reset your password.",
+  "/reset-password": "Choose a strong password to regain access to your account.",
+  "/verify": "Confirm your email so we can restore your exact checkout state.",
 };
 
 export default function AuthLayout({ children }: { children: ReactNode }) {

@@ -8,6 +8,13 @@ export type DemoPersonaKind =
   | "platform_admin"
   | "finance"
   | "support"
+  | "tenant_support"
+  | "tenant_developer"
+  | "tenant_finance"
+  | "tenant_compliance"
+  | "tenant_executive"
+  | "tenant_qa"
+  | "tenant_security"
   | "compliance"
   | "org_admin"
   | "org_member"
@@ -168,11 +175,46 @@ export function resolveDashboardKindFromRoles(
   if (set.has("role-platform-finance") || set.has("platform-finance")) {
     return "finance";
   }
+  // Platform support ops ≠ tenant Support Agent (Stream 6 vertical).
   if (set.has("role-platform-support") || set.has("platform-support")) {
     return "support";
   }
   if (set.has("role-platform-compliance") || set.has("platform-compliance")) {
     return "compliance";
+  }
+  // Org-job roles drive tenant home kinds (product roles alone are ambiguous).
+  if (set.has("role-finance-staff") || set.has("finance-staff")) {
+    return "tenant_finance";
+  }
+  if (set.has("role-compliance-officer") || set.has("compliance-officer")) {
+    return "tenant_compliance";
+  }
+  if (set.has("role-executive") || set.has("executive")) {
+    return "tenant_executive";
+  }
+  if (set.has("role-qa-staff") || set.has("qa-staff")) {
+    return "tenant_qa";
+  }
+  if (set.has("role-security-staff") || set.has("security-staff")) {
+    return "tenant_security";
+  }
+  if (
+    set.has("role-product-projects-member") ||
+    set.has("product-projects-member") ||
+    set.has("role-product-qep-engineer") ||
+    set.has("product-qep-engineer") ||
+    set.has("role-developer") ||
+    set.has("developer")
+  ) {
+    return "tenant_developer";
+  }
+  if (
+    set.has("role-product-support-agent") ||
+    set.has("product-support-agent") ||
+    set.has("role-support-agent") ||
+    set.has("support-agent")
+  ) {
+    return "tenant_support";
   }
   if (set.has("role-org-admin") || set.has("org-admin")) return "org_admin";
   if (set.has("role-individual") || set.has("individual")) return "individual";

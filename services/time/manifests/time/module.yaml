@@ -90,9 +90,9 @@ navigation:
     permission: time.view
   sidebar:
     - id: time.dashboard
-      label: Overview
+      label: Recording
       route: /workspace/time
-      icon: layout-dashboard
+      icon: play
       permission: time.view
     - id: time.timesheets
       label: Timesheets

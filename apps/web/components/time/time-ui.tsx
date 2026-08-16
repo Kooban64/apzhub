@@ -225,6 +225,7 @@ export function SelectField({
   options,
   emptyLabel = "None",
   testId,
+  disabled,
 }: {
   readonly label: string;
   readonly value: string;
@@ -232,13 +233,15 @@ export function SelectField({
   readonly options: readonly { readonly value: string; readonly label: string }[];
   readonly emptyLabel?: string;
   readonly testId?: string;
+  readonly disabled?: boolean;
 }) {
   return (
     <label className="flex flex-col gap-1.5 text-sm">
       <span className="font-medium text-[var(--color-foreground)]">{label}</span>
       <select
-        className="h-9 rounded-md border border-[var(--color-border)] bg-[var(--color-background)] px-3 text-sm text-[var(--color-foreground)]"
+        className="h-9 rounded-md border border-[var(--color-border)] bg-[var(--color-background)] px-3 text-sm text-[var(--color-foreground)] disabled:opacity-60"
         value={value}
+        disabled={disabled}
         onChange={(event) => onChange(event.target.value)}
         data-testid={testId}
       >

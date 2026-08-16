@@ -2,14 +2,13 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 
-import { createDb, getEnv, schema } from "@apzhub/config";
+import { createDb, getEnv, isEmailPasswordSignUpAllowed, schema } from "@apzhub/config";
 import { isSmtpConfigured, sendPlatformEmail } from "@apzhub/platform-email/server";
 
 import {
   getBetterAuthAdvancedConfig,
   getBetterAuthSessionConfig,
 } from "./session-policy";
-import { isDevRegistrationAllowed } from "@apzhub/config";
 
 async function sendAuthEmail(input: {
   readonly to: string;
@@ -70,7 +69,7 @@ export function createAuth(): AuthInstance {
     trustedOrigins,
     emailAndPassword: {
       enabled: true,
-      disableSignUp: !isDevRegistrationAllowed(),
+      disableSignUp: !isEmailPasswordSignUpAllowed(),
       requireEmailVerification: false,
       sendResetPassword: async ({ user, url }) => {
         await sendAuthEmail({

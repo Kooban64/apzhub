@@ -10,6 +10,7 @@ import {
   useWorkbenchState,
 } from "@apzhub/workbench-framework/react";
 import { DesktopShell } from "@apzhub/workspace";
+import { WorkbenchHeaderChrome } from "@/components/shell/workbench-header-chrome";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
@@ -109,6 +110,7 @@ export function WorkbenchPage() {
       sidebarPresentation.map((item) => ({
         id: item.id,
         label: item.label,
+        icon: item.icon,
         active: item.active,
       })),
     [sidebarPresentation],
@@ -198,6 +200,7 @@ export function WorkbenchPage() {
         userName={session?.user.name ?? session?.user.email}
         environment={process.env.NODE_ENV}
         onSignOut={handleSignOut}
+        headerLeading={<WorkbenchHeaderChrome />}
         activityBarItems={activityBarItems}
         onActivityBarSelect={selectActivityBarItem}
         sidebarItems={sidebarItems}

@@ -30,6 +30,28 @@ export function isDevRegistrationAllowed(): boolean {
   return env.NODE_ENV === "development" && env.ALLOW_DEV_REGISTRATION;
 }
 
+/** Opt-in self-serve signup for Stream 1 commerce (production dogfood / sandbox). */
+export function isSelfServeRegistrationAllowed(
+  env: NodeJS.ProcessEnv = process.env,
+): boolean {
+  return (
+    env.ALLOW_SELF_SERVE_REGISTER === "true" ||
+    env.NEXT_PUBLIC_ALLOW_SELF_SERVE_REGISTER === "true"
+  );
+}
+
+/** True when BetterAuth email/password sign-up may be enabled. */
+export function isEmailPasswordSignUpAllowed(
+  env: NodeJS.ProcessEnv = process.env,
+): boolean {
+  try {
+    if (isDevRegistrationAllowed()) return true;
+  } catch {
+    /* getEnv may fail in edge; fall through to explicit flags */
+  }
+  return isSelfServeRegistrationAllowed(env);
+}
+
 export function getDatabaseUrl(forTest = false): string {
   const env = getEnv();
   if (forTest && env.DATABASE_URL_TEST) return env.DATABASE_URL_TEST;

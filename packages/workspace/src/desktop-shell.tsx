@@ -36,6 +36,8 @@ export interface DesktopShellProps {
   onSidebarSelect?: (id: string) => void;
   onSignOut?: () => void;
   children: ReactNode;
+  /** Org / Product switchers in the shell header (Stream 5). */
+  headerLeading?: ReactNode;
   /** Global Search (Ctrl+K) — APS-Search capability surface. */
   enableGlobalSearch?: boolean;
   globalSearchOpen?: boolean;
@@ -191,6 +193,7 @@ export function DesktopShell({
   onSidebarSelect,
   onSignOut,
   children,
+  headerLeading,
   enableGlobalSearch = false,
   globalSearchOpen,
   onGlobalSearchOpenChange,
@@ -301,6 +304,7 @@ export function DesktopShell({
       onSidebarSelect={onSidebarSelect}
       activityBarItems={activityBarItems}
       onActivityBarSelect={onActivityBarSelect}
+      headerLeading={headerLeading}
       headerTrailing={
         <>
           {enableGlobalSearch ? (

@@ -35,9 +35,13 @@ export const DEFAULT_MANAGER_ROLE_ID = "role-manager";
 export const DEFAULT_SUPERVISOR_ROLE_ID = "role-supervisor";
 export const DEFAULT_EMPLOYEE_ROLE_ID = "role-employee";
 export const DEFAULT_SUPPORT_AGENT_ROLE_ID = "role-support-agent";
+export const DEFAULT_DEVELOPER_ROLE_ID = "role-developer";
+export const DEFAULT_FINANCE_STAFF_ROLE_ID = "role-finance-staff";
 export const DEFAULT_AUDITOR_ROLE_ID = "role-auditor";
 export const DEFAULT_COMPLIANCE_OFFICER_ROLE_ID = "role-compliance-officer";
 export const DEFAULT_EXECUTIVE_ROLE_ID = "role-executive";
+export const DEFAULT_QA_STAFF_ROLE_ID = "role-qa-staff";
+export const DEFAULT_SECURITY_STAFF_ROLE_ID = "role-security-staff";
 export const DEFAULT_SUPERADMIN_ROLE_ID = "role-superadmin";
 export const DEFAULT_PLATFORM_FINANCE_ROLE_ID = "role-platform-finance";
 export const DEFAULT_PLATFORM_SUPPORT_ROLE_ID = "role-platform-support";
@@ -197,11 +201,28 @@ export const PERSONA_ROLE_DEFINITIONS: readonly PersonaRoleDefinition[] = [
     permissions: [...TENANT_BASE, "project.*", "projects.view", "document.read"],
   },
   {
+    // Org-job label only (Stream 6 Layer 3). Product access via product roles.
     roleId: DEFAULT_SUPPORT_AGENT_ROLE_ID,
     slug: "support-agent",
     name: "Support Agent",
     scope: "tenant",
-    permissions: [...TENANT_BASE, "support.*"],
+    permissions: [...TENANT_BASE],
+  },
+  {
+    // Org-job label only — Engineering / Developer staff function.
+    roleId: DEFAULT_DEVELOPER_ROLE_ID,
+    slug: "developer",
+    name: "Developer",
+    scope: "tenant",
+    permissions: [...TENANT_BASE],
+  },
+  {
+    // Org-job label only — Finance staff function (≠ platform-finance).
+    roleId: DEFAULT_FINANCE_STAFF_ROLE_ID,
+    slug: "finance-staff",
+    name: "Finance",
+    scope: "tenant",
+    permissions: [...TENANT_BASE],
   },
   {
     roleId: DEFAULT_AUDITOR_ROLE_ID,
@@ -219,35 +240,37 @@ export const PERSONA_ROLE_DEFINITIONS: readonly PersonaRoleDefinition[] = [
     ],
   },
   {
+    // Org-job label only — Compliance staff function (≠ platform-compliance).
+    // Document audit/retention come from product-documents-auditor.
     roleId: DEFAULT_COMPLIANCE_OFFICER_ROLE_ID,
     slug: "compliance-officer",
     name: "Compliance Officer",
     scope: "tenant",
-    permissions: [
-      ...TENANT_BASE,
-      "identity.read",
-      "admin.read",
-      "billing.read",
-      "entitlement.read",
-      "document.audit",
-      "document.retention",
-    ],
+    permissions: [...TENANT_BASE],
   },
   {
+    // Org-job label only — Executive staff function.
     roleId: DEFAULT_EXECUTIVE_ROLE_ID,
     slug: "executive",
     name: "Executive",
     scope: "tenant",
-    permissions: [
-      ...TENANT_BASE,
-      "identity.read",
-      "billing.read",
-      "catalogue.read",
-      "entitlement.read",
-      "analytics.view",
-      "analytics.kpi.view",
-      "dashboard.*",
-    ],
+    permissions: [...TENANT_BASE],
+  },
+  {
+    // Org-job label only — QA staff function (≠ Engineering; no PEN).
+    roleId: DEFAULT_QA_STAFF_ROLE_ID,
+    slug: "qa-staff",
+    name: "QA",
+    scope: "tenant",
+    permissions: [...TENANT_BASE],
+  },
+  {
+    // Org-job label only — Security / Pentester staff function.
+    roleId: DEFAULT_SECURITY_STAFF_ROLE_ID,
+    slug: "security-staff",
+    name: "Security",
+    scope: "tenant",
+    permissions: [...TENANT_BASE],
   },
 ] as const;
 

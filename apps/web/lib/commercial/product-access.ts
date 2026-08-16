@@ -3,7 +3,7 @@
  * Access = orgSubscribed ∩ userGranted ∩ product.available ∩ RBAC.
  */
 
-import { randomUUID } from "node:crypto";
+import { randomUUID as nodeRandomUUID } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
@@ -13,6 +13,20 @@ import {
   type PlanId,
   type ProductKey,
 } from "@/lib/commercial/catalogue";
+
+function newUuid(): string {
+  if (typeof nodeRandomUUID === "function") {
+    try {
+      return nodeRandomUUID();
+    } catch {
+      /* vite may stub node:crypto in jsdom */
+    }
+  }
+  if (typeof globalThis.crypto?.randomUUID === "function") {
+    return globalThis.crypto.randomUUID();
+  }
+  return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+}
 
 export type OrgProductSubscriptionStatus =
   "trial" | "active" | "past_due" | "cancelled" | "expired";
@@ -145,7 +159,7 @@ export function upsertOrgProductSubscription(input: {
     return updated;
   }
   const created: OrgProductSubscription = {
-    subscriptionId: `ops-${randomUUID()}`,
+    subscriptionId: `ops-${newUuid()}`,
     organisationId: input.organisationId,
     productKey: input.productKey,
     planId: input.planId,
@@ -177,7 +191,7 @@ export function setUserProductGrants(input: {
   );
 
   const created: UserProductGrant[] = allowed.map((productKey) => ({
-    grantId: `upg-${randomUUID()}`,
+    grantId: `upg-${newUuid()}`,
     organisationId: input.organisationId,
     userId: input.userId,
     productKey,

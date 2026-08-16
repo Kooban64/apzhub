@@ -100,7 +100,7 @@ export type PackageCatalogueEntry = {
   readonly selfServe: boolean;
 };
 
-/** APZOR internal organisation — entitled to all suites free. */
+/** APZOR organisation id — ordinary tenant (Stream 6). Not a platform super-tenant. */
 export const APZOR_ORGANISATION_ID =
   process.env.APZOR_ORGANISATION_ID?.trim() || "t0000001-0000-4000-8000-000000000001";
 
@@ -178,7 +178,7 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
     productKey: "time",
     name: "Time",
     description: "Time tracking and utilisation.",
-    status: "coming_soon",
+    status: "available",
     moduleIds: ["time"],
     suiteId: "productivity",
     bundle: "productivity",
@@ -187,7 +187,7 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
     productKey: "support",
     name: "Support",
     description: "Support desk and customer care.",
-    status: "coming_soon",
+    status: "available",
     moduleIds: ["support"],
     suiteId: "productivity",
     bundle: "productivity",
@@ -196,7 +196,7 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
     productKey: "documents",
     name: "Documents",
     description: "Document workflows and records.",
-    status: "coming_soon",
+    status: "available",
     moduleIds: ["documents"],
     suiteId: "productivity",
     bundle: "productivity",
@@ -205,7 +205,7 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
     productKey: "analytics",
     name: "Analytics",
     description: "Cross-product analytics and reporting.",
-    status: "coming_soon",
+    status: "available",
     moduleIds: ["analytics"],
     suiteId: "productivity",
     bundle: "observability",
@@ -214,7 +214,7 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
     productKey: "workflow",
     name: "Workflow",
     description: "Cross-product automation and orchestration.",
-    status: "coming_soon",
+    status: "available",
     moduleIds: ["workflow", "automation"],
     suiteId: "productivity",
     bundle: "productivity",
@@ -223,7 +223,7 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
     productKey: "knowledge",
     name: "Knowledge",
     description: "Knowledge base and discovery (lite included with APZPRD packages).",
-    status: "coming_soon",
+    status: "available",
     moduleIds: ["knowledge"],
     suiteId: "productivity",
     bundle: "productivity",

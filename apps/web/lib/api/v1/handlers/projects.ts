@@ -218,7 +218,7 @@ export async function handleGetProjectsEngineHealth(
     try {
       const gateway = await getPlatformServiceGateway();
       await gateway.projects.listProjects(context.serviceContext, {
-        page: { limit: 1, offset: 0 },
+        page: { page: 1, perPage: 1 },
       });
       liveListOk = true;
     } catch (error) {

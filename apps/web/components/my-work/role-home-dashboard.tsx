@@ -81,6 +81,121 @@ const DASHBOARDS: Record<
       { href: "/workspace/notifications/inbox", label: "Inbox", hint: "Attention" },
     ],
   },
+  tenant_support: {
+    title: "Support work",
+    subtitle: "Your Customer Support queue, time, and knowledge — nothing else.",
+    metrics: [
+      { label: "Open", value: "—" },
+      { label: "Attention", value: "—" },
+      { label: "Due today", value: "—" },
+      { label: "Waiting", value: "—" },
+    ],
+    links: [
+      { href: "/workspace/support", label: "Support queue", hint: "Tickets" },
+      { href: "/workspace/time", label: "Time", hint: "Record" },
+      { href: "/workspace/knowledge", label: "Knowledge", hint: "Contribute" },
+      {
+        href: "/workspace/notifications/inbox",
+        label: "Notifications",
+        hint: "Inbox",
+      },
+    ],
+  },
+  tenant_developer: {
+    title: "Engineering work",
+    subtitle: "Projects, quality, and security assurance — not Support queues.",
+    metrics: [
+      { label: "Attention", value: "—" },
+      { label: "Due today", value: "—" },
+      { label: "Waiting", value: "—" },
+      { label: "Done", value: "—" },
+    ],
+    links: [
+      { href: "/workspace/projects", label: "Projects", hint: "Delivery" },
+      { href: "/workspace/qep", label: "Quality", hint: "QEP" },
+      { href: "/apzpen", label: "Security assurance", hint: "PEN" },
+      { href: "/workspace/time", label: "Time", hint: "Record" },
+    ],
+  },
+  tenant_finance: {
+    title: "Finance work",
+    subtitle:
+      "Time, workflow, analytics, and documents — no engineering or support queues.",
+    metrics: [
+      { label: "Attention", value: "—" },
+      { label: "Due today", value: "—" },
+      { label: "Waiting", value: "—" },
+      { label: "Done", value: "—" },
+    ],
+    links: [
+      { href: "/workspace/time", label: "Time", hint: "Record" },
+      { href: "/workspace/workflows", label: "Workflow", hint: "Operate" },
+      { href: "/workspace/analytics", label: "Analytics", hint: "KPIs" },
+      { href: "/workspace/documents", label: "Documents", hint: "Records" },
+    ],
+  },
+  tenant_compliance: {
+    title: "Compliance work",
+    subtitle:
+      "Document audit, retention posture, analytics, and policy knowledge — not Support or QEP queues.",
+    metrics: [
+      { label: "Audits", value: "—" },
+      { label: "Retention", value: "—" },
+      { label: "Policies", value: "—" },
+      { label: "Findings", value: "—" },
+    ],
+    links: [
+      { href: "/workspace/documents", label: "Documents", hint: "Audit" },
+      { href: "/workspace/analytics", label: "Analytics", hint: "Posture" },
+      { href: "/workspace/knowledge", label: "Knowledge", hint: "Policies" },
+    ],
+  },
+  tenant_executive: {
+    title: "Executive work",
+    subtitle: "Analytics, documents, and knowledge overview — no operational queues.",
+    metrics: [
+      { label: "KPIs", value: "—" },
+      { label: "Attention", value: "—" },
+      { label: "Risk", value: "—" },
+      { label: "Done", value: "—" },
+    ],
+    links: [
+      { href: "/workspace/analytics", label: "Analytics", hint: "KPIs" },
+      { href: "/workspace/documents", label: "Documents", hint: "Review" },
+      { href: "/workspace/knowledge", label: "Knowledge", hint: "Browse" },
+    ],
+  },
+  tenant_qa: {
+    title: "QA work",
+    subtitle: "Quality plans, projects, and time — not Support queues or PEN tools.",
+    metrics: [
+      { label: "Attention", value: "—" },
+      { label: "Due today", value: "—" },
+      { label: "Waiting", value: "—" },
+      { label: "Done", value: "—" },
+    ],
+    links: [
+      { href: "/workspace/qep", label: "Quality", hint: "QEP" },
+      { href: "/workspace/projects", label: "Projects", hint: "Delivery" },
+      { href: "/workspace/time", label: "Time", hint: "Record" },
+    ],
+  },
+  tenant_security: {
+    title: "Security work",
+    subtitle:
+      "PEN engagements, evidence documents, and time — not Support or QEP queues.",
+    metrics: [
+      { label: "Attention", value: "—" },
+      { label: "Findings", value: "—" },
+      { label: "Waiting", value: "—" },
+      { label: "Done", value: "—" },
+    ],
+    links: [
+      { href: "/apzpen", label: "Security assurance", hint: "PEN" },
+      { href: "/workspace/documents", label: "Documents", hint: "Evidence" },
+      { href: "/workspace/time", label: "Time", hint: "Record" },
+    ],
+  },
   compliance: {
     title: "Compliance",
     subtitle: "Audit trails, retention, entitlement posture.",

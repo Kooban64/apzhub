@@ -19,6 +19,41 @@ const LANDINGS: Record<DemoPersonaKind, ShellLanding> = {
   platform_admin: { shell: "ops", path: "/ops", label: "Platform Ops" },
   finance: { shell: "finance", path: "/finance", label: "Finance" },
   support: { shell: "ops", path: "/ops", label: "Platform Ops" },
+  tenant_support: {
+    shell: "workspace",
+    path: "/workspace/home",
+    label: "Support work",
+  },
+  tenant_developer: {
+    shell: "workspace",
+    path: "/workspace/home",
+    label: "Engineering work",
+  },
+  tenant_finance: {
+    shell: "workspace",
+    path: "/workspace/home",
+    label: "Finance work",
+  },
+  tenant_compliance: {
+    shell: "workspace",
+    path: "/workspace/home",
+    label: "Compliance work",
+  },
+  tenant_executive: {
+    shell: "workspace",
+    path: "/workspace/home",
+    label: "Executive work",
+  },
+  tenant_qa: {
+    shell: "workspace",
+    path: "/workspace/home",
+    label: "QA work",
+  },
+  tenant_security: {
+    shell: "workspace",
+    path: "/workspace/home",
+    label: "Security work",
+  },
   compliance: {
     shell: "compliance",
     path: "/compliance",
@@ -129,6 +164,20 @@ export function modesForKind(kind: DemoPersonaKind): readonly OperatorMode[] {
     case "platform_admin":
     case "support":
       return OPERATOR_MODES.filter((m) => m.id === "ops" || m.id === "apzpen");
+    case "tenant_support":
+      return [];
+    case "tenant_developer":
+      return [];
+    case "tenant_finance":
+      return [];
+    case "tenant_compliance":
+      return [];
+    case "tenant_executive":
+      return [];
+    case "tenant_qa":
+      return [];
+    case "tenant_security":
+      return [];
     case "finance":
       return OPERATOR_MODES.filter((m) => m.id === "finance");
     case "compliance":

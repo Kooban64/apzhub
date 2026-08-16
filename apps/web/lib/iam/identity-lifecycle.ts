@@ -4,7 +4,9 @@
 
 import {
   listPersonaRoles,
+  listStaffFunctionTemplates,
   type PersonaRoleDefinition,
+  type StaffFunctionTemplate,
 } from "@apzhub/platform-authorization";
 
 import {
@@ -15,9 +17,15 @@ import {
   setOrgMemberStatus,
   type OrgMemberRecord,
 } from "@/lib/iam/org-member-store";
+import type { ProductKey } from "@/lib/commercial/catalogue";
+import type { ProvisionTenantUserResult } from "@/lib/iam/provision-tenant-user";
 
 export function listAvailablePersonas(): readonly PersonaRoleDefinition[] {
   return listPersonaRoles();
+}
+
+export function listAvailableStaffFunctions(): readonly StaffFunctionTemplate[] {
+  return listStaffFunctionTemplates();
 }
 
 export function listOrganisationMembers(
@@ -45,6 +53,22 @@ export function inviteOrganisationMember(input: {
     invitedBy: input.invitedBy,
     displayName: input.displayName,
   });
+}
+
+/** Create BetterAuth user + grants + product roles from a staff-function template. */
+export async function provisionOrganisationMember(input: {
+  readonly organisationId: string;
+  readonly email: string;
+  readonly displayName: string;
+  readonly invitedBy: string;
+  readonly staffFunctionId?: string;
+  readonly orgJobRoleId?: string;
+  readonly temporaryPassword?: string;
+  readonly productKeys?: readonly ProductKey[];
+}): Promise<ProvisionTenantUserResult> {
+  const { provisionTenantUserFromStaffFunction } =
+    await import("@/lib/iam/provision-tenant-user");
+  return provisionTenantUserFromStaffFunction(input);
 }
 
 export function changeOrganisationMemberPersona(input: {

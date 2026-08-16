@@ -2,6 +2,8 @@ export {
   getDatabaseUrl,
   getEnv,
   isDevRegistrationAllowed,
+  isEmailPasswordSignUpAllowed,
+  isSelfServeRegistrationAllowed,
   ensureEnvironmentValid,
   getConfigurationDiagnostics,
   validatePlatformEnvironment,

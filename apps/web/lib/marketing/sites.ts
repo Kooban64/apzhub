@@ -16,6 +16,7 @@ export type MarketingSiteId = "hub" | "qa" | "pentest";
 export type MarketingNavLink = {
   readonly href: string;
   readonly label: string;
+  readonly description?: string;
   readonly children?: readonly MarketingNavLink[];
 };
 
@@ -54,27 +55,34 @@ export const MARKETING_SITES: Record<MarketingSiteId, MarketingSiteConfig> = {
     tagline: "Quality, Security & Delivery Excellence",
     publicHosts: ["apzhub.apzportal.apzor.com", "localhost", "127.0.0.1"],
     pathPrefix: "",
-    primaryCta: { href: "/contact", label: "Book a consultation" },
-    secondaryCta: { href: "/services", label: "Explore our services" },
+    primaryCta: { href: "/marketplace", label: "Get started" },
+    secondaryCta: { href: "/contact", label: "Book a consultation" },
     nav: [
       {
-        href: "/services",
-        label: "Services",
+        href: "/solutions",
+        label: "Solutions",
         children: [
-          { href: "/qa", label: "Quality Assurance" },
-          { href: "/qa#automation", label: "Test Automation" },
-          { href: "/pentest", label: "Penetration Testing" },
-          { href: "/services/security-assessments", label: "Security Assessments" },
           {
-            href: "/productivity",
-            label: "Productivity Suite (soon)",
+            href: "/solutions/quality",
+            label: "APZQEP",
+            description: "Quality engineering, testing and release assurance",
+          },
+          {
+            href: "/solutions/security",
+            label: "APZPEN",
+            description: "Penetration testing and continuous security assurance",
+          },
+          {
+            href: "/solutions/productivity",
+            label: "APZPRD",
+            description: "Projects, support, time, workflow, analytics and knowledge",
           },
         ],
       },
-      { href: "/industries", label: "Industries" },
-      { href: "/case-studies", label: "Case Studies" },
-      { href: "/about", label: "About" },
+      { href: "/products", label: "Products" },
+      { href: "/marketplace", label: "Marketplace" },
       { href: "/pricing", label: "Pricing" },
+      { href: "/resources", label: "Resources" },
     ],
   },
   qa: {

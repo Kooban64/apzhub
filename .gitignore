@@ -5,6 +5,9 @@ node_modules/
 # Build outputs
 dist/
 build/
+# Stream 1 package builder route (not a build artifact)
+!apps/web/app/(marketing)/build/
+!apps/web/app/(marketing)/build/**
 .next/
 out/
 .turbo/

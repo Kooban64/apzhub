@@ -163,6 +163,7 @@ export function listApplicableRoles(
       role.scope === "product" &&
       role.productKey &&
       context.productKey &&
+      context.productKey !== "platform" &&
       role.productKey !== context.productKey
     ) {
       return false;

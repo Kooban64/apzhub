@@ -141,8 +141,19 @@ export function applySubscriptionChanged(
   };
 }
 
-/** Ensure APZOR has all three suites free (active). */
+/** Ensure APZOR has all three suites free (active).
+ * @deprecated Phase A — APZOR is an ordinary tenant. Prefer
+ * `ensureApzorOrdinarySubscriptions`. Opt-in only via
+ * `APZHUB_APZOR_ALL_SUITES_FREE=true` (or unit tests).
+ */
 export function ensureApzorAllSuitesFree(): ProvisioningResult {
+  const optIn =
+    process.env.APZHUB_APZOR_ALL_SUITES_FREE === "true" ||
+    process.env.VITEST === "true" ||
+    process.env.NODE_ENV === "test";
+  if (!optIn) {
+    return ensureApzorOrdinarySubscriptions();
+  }
   return applySubscriptionChanged({
     organisationId: APZOR_ORGANISATION_ID,
     suiteIds: ALL_SUITE_IDS,
@@ -150,6 +161,68 @@ export function ensureApzorAllSuitesFree(): ProvisioningResult {
     planId: "plan.custom",
     reason: "apzor_internal_all_suites_free",
   });
+}
+
+/**
+ * Ordinary APZOR tenant subscriptions (Stream 6) — named packages, not free-all.
+ */
+export function ensureApzorOrdinarySubscriptions(): ProvisioningResult {
+  subscribeOrganisationToPackage({
+    organisationId: APZOR_ORGANISATION_ID,
+    packageId: "pkg.apzprd.service",
+    planId: "plan.business",
+  });
+  subscribeOrganisationToPackage({
+    organisationId: APZOR_ORGANISATION_ID,
+    packageId: "pkg.apzprd.time",
+    planId: "plan.business",
+  });
+  subscribeOrganisationToPackage({
+    organisationId: APZOR_ORGANISATION_ID,
+    packageId: "pkg.apzprd.projects",
+    planId: "plan.business",
+  });
+  // Developer vertical — QEP + PEN on ordinary packages (not free-all).
+  subscribeOrganisationToPackage({
+    organisationId: APZOR_ORGANISATION_ID,
+    packageId: "pkg.apzqep.starter",
+    planId: "plan.business",
+  });
+  subscribeOrganisationToPackage({
+    organisationId: APZOR_ORGANISATION_ID,
+    packageId: "pkg.apzpen.starter",
+    planId: "plan.business",
+  });
+  // Finance vertical — analytics / workflow / documents via delivery + operations packages.
+  subscribeOrganisationToPackage({
+    organisationId: APZOR_ORGANISATION_ID,
+    packageId: "pkg.apzprd.delivery",
+    planId: "plan.business",
+  });
+  subscribeOrganisationToPackage({
+    organisationId: APZOR_ORGANISATION_ID,
+    packageId: "pkg.apzprd.operations",
+    planId: "plan.business",
+  });
+  subscribeOrganisationToPackage({
+    organisationId: APZOR_ORGANISATION_ID,
+    packageId: "pkg.apzprd.workspace",
+    planId: "plan.business",
+  });
+  const subscribedProducts = [
+    ...new Set(
+      listOrgProductSubscriptions(APZOR_ORGANISATION_ID).map((s) => s.productKey),
+    ),
+  ];
+  return {
+    organisationId: APZOR_ORGANISATION_ID,
+    subscribedProducts,
+    removedProducts: [],
+    grantsAdjusted: 0,
+    moduleIds: [
+      ...new Set(subscribedProducts.flatMap((key) => getProduct(key)?.moduleIds ?? [])),
+    ],
+  };
 }
 
 export function subscribeOrganisationToSuites(input: {
