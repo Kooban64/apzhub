@@ -1,7 +1,7 @@
 /**
- * Soft product-access evaluation for shell UIs (SPR-POLISH-001).
- * Mirrors evaluateProductAccess using home-context entitlement snapshot.
- * Bootstrap (no org subs / no grants) stays open for local CE.
+ * Soft / hard product-access evaluation for shell UIs.
+ * Hard mode denies empty entitlement ledgers (production default).
+ * CE bootstrap / tests may soft-open via APZHUB_CE_BOOTSTRAP or soft-open flag.
  */
 
 import {
@@ -30,18 +30,49 @@ export function isPillarProductKey(value: string): value is ProductKey {
   return PILLAR_KEYS.has(value as ProductKey);
 }
 
+/**
+ * Soft-open empty ledgers only when explicitly bootstrapping CE or in test.
+ * Production defaults to hard deny (Phase G).
+ */
+export function isEntitlementSoftOpenEnabled(
+  env: NodeJS.ProcessEnv = process.env,
+): boolean {
+  if (env.APZHUB_ENTITLEMENT_HARD_MODE === "true") {
+    return false;
+  }
+  if (env.APZHUB_CE_BOOTSTRAP === "true") {
+    return true;
+  }
+  if (env.APZHUB_ENTITLEMENT_SOFT_OPEN === "true") {
+    return true;
+  }
+  if (env.VITEST === "true" || env.NODE_ENV === "test") {
+    return true;
+  }
+  // Production / NODE_ENV=production — hard deny empty ledgers.
+  if (env.NODE_ENV === "production") {
+    return false;
+  }
+  // Local non-production without CE bootstrap still soft-opens for dogfood.
+  return true;
+}
+
 export function softEvaluateProductAccess(
   productKey: ProductKey,
   entitlements: EntitlementSnapshotLike | null | undefined,
+  options?: { readonly softOpen?: boolean },
 ): SoftProductAccess {
   if (!isProductAvailable(productKey)) {
     return { status: "denied", reason: "product_unavailable", productKey };
   }
   const orgKeys = entitlements?.orgProductKeys ?? [];
   const userKeys = entitlements?.productKeys ?? [];
-  // Bootstrap / empty ledger — keep CE open (matches server soft gates).
+  const softOpen = options?.softOpen ?? isEntitlementSoftOpenEnabled();
   if (orgKeys.length === 0 && userKeys.length === 0) {
-    return { status: "allowed" };
+    if (softOpen) {
+      return { status: "allowed" };
+    }
+    return { status: "denied", reason: "org_not_subscribed", productKey };
   }
   if (userKeys.includes(productKey)) {
     return { status: "allowed" };

@@ -20,7 +20,7 @@ import {
   upsertConsoleCustomer,
 } from "@/lib/commercial/platform-console-store";
 import {
-  ensureApzorAllSuitesFree,
+  ensureApzorOrdinarySubscriptions,
   subscribeOrganisationToSuites,
 } from "@/lib/commercial/provisioning";
 import { listSuites, getPublicCatalogue } from "@/lib/commercial/catalogue";
@@ -42,7 +42,7 @@ function requireSuperadmin(context: PlatformApiRequestContext): void {
 
 async function handleGet(_request: NextRequest, context: PlatformApiRequestContext) {
   requireSuperadmin(context);
-  ensureApzorAllSuitesFree();
+  ensureApzorOrdinarySubscriptions();
   return jsonDataResponse(
     {
       customers: listConsoleCustomers(),
@@ -154,8 +154,13 @@ async function handlePost(request: NextRequest, context: PlatformApiRequestConte
         context.tracing,
       );
     }
+    case "apzor.ensure_ordinary_subscriptions":
     case "apzor.ensure_suites": {
-      return jsonDataResponse({ result: ensureApzorAllSuitesFree() }, context.tracing);
+      // Phase G — ordinary packages only (free-all retired from console path).
+      return jsonDataResponse(
+        { result: ensureApzorOrdinarySubscriptions() },
+        context.tracing,
+      );
     }
     default:
       throw new PlatformApiHttpError(400, {

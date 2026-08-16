@@ -1,7 +1,8 @@
 # SPR-UX-STREAM-006 — Tenant, Identity, Org Roles, RBAC & Administration
 
-> **Status:** **FROZEN SPEC (SUPERSEDES prior Stream 6) · NOT STARTED · ORDER TBD** — 2026-08-16  
+> **Status:** **PHASE G ACTIVE** — horizontal close (verticals certified) — 2026-08-16  
 > **Authority:** [UX-STREAM-006](../ux/UX-STREAM-006-tenant-identity-rbac-administration.md)  
+> **Gap map:** [PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP](./PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP.md) · [PHASE-A-STREAMS-5-6-GAP-MAP](./PHASE-A-STREAMS-5-6-GAP-MAP.md)  
 > **Critical:** APZOR = ordinary reference tenant; five access layers; Staff Function ≠ permission  
 > **Does not:** Flat Admin/Manager/User · Collapse layers · Client-trusted tenant IDs · UI-as-security
 

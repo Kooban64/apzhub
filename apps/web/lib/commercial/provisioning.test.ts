@@ -9,6 +9,7 @@ import {
 import {
   applySubscriptionChanged,
   ensureApzorAllSuitesFree,
+  ensureApzorOrdinarySubscriptions,
   subscribeOrganisationToSuites,
 } from "@/lib/commercial/provisioning";
 import {
@@ -33,7 +34,7 @@ describe("provisioning pipeline", () => {
     resetProductAccessForTests();
   });
 
-  it("APZOR receives all suites free", () => {
+  it("APZOR free-all remains opt-in for tests", () => {
     const result = ensureApzorAllSuitesFree();
     expect(result.organisationId).toBe(APZOR_ORGANISATION_ID);
     expect(result.subscribedProducts).toEqual(
@@ -46,6 +47,12 @@ describe("provisioning pipeline", () => {
         "documents",
       ]),
     );
+  });
+
+  it("APZOR ordinary subscriptions seed named packages", () => {
+    const result = ensureApzorOrdinarySubscriptions();
+    expect(result.organisationId).toBe(APZOR_ORGANISATION_ID);
+    expect(result.subscribedProducts.length).toBeGreaterThan(0);
   });
 
   it("subscribe then remove suite revokes grants", () => {

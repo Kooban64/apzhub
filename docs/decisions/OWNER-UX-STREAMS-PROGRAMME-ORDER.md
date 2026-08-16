@@ -12,9 +12,9 @@
 >
 > Streams 1–6 remain frozen in scope. This decision governs how they are implemented, integrated and certified.
 >
-> **Engineering:** Phase A–F **COMPLETE · CERTIFIED 100%**. Shared Source phases 1–3 closed — ([PHASE-E-SHARED-SOURCE-GAP-MAP](../sprint/PHASE-E-SHARED-SOURCE-GAP-MAP.md) · [PHASE-F-SHARED-SOURCE-GAP-MAP](../sprint/PHASE-F-SHARED-SOURCE-GAP-MAP.md)).
+> **Engineering:** Phase A–F product/Source tracks **CERTIFIED 100%**. **Phase G** (Streams 5∥6 horizontal Shell/RBAC close) **ACTIVE** — ([SPR-UX-PHASE-G-STREAMS-5-6-HORIZONTAL](../sprint/SPR-UX-PHASE-G-STREAMS-5-6-HORIZONTAL.md) · [PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP](../sprint/PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP.md)).
 >
-> **Engineering 2026-08-16:** Phase F certified — Review/Merge/Admin · GitLab write parity · nested tree · search · dense editor. Shared Source track claimable at 100%.
+> **Engineering 2026-08-16:** Phase F certified. Phase G authorised to close Phase A horizontal debt (entitlements · shell policy · queue scopes).
 
 ---
 
@@ -45,6 +45,9 @@ Edit / Branch / Commit / Push / PR
         ↓
 PHASE F — SHARED SOURCE REVIEW      ← COMPLETE · CERTIFIED 100%
 Review / Merge / Repo Admin (+ leftovers)
+        ↓
+PHASE G — SHELL / RBAC HORIZONTAL   ← ACTIVE
+Streams 5 ∥ 6 debt close (entitlements · shell policy · queue scopes)
 ```
 
 **Stream 1 freeze interpretation:** Finish Stream 1 before authenticated QEP/PEN/PRD **product deep UX**. Foundation (5+6) precedes or underpins Stream 1.

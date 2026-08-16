@@ -1,100 +1,71 @@
-import { describe, expect, it, beforeEach } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import {
-  resetProductAccessForTests,
-  upsertOrgProductSubscription,
-} from "./product-access";
-import { softEvaluateProductAccess } from "./soft-product-access";
-import { evaluateProductAccess, requireProductAccess } from "./require-product-access";
-import { PlatformApiHttpError } from "@/lib/api/v1/errors";
+  isEntitlementSoftOpenEnabled,
+  softEvaluateProductAccess,
+} from "./soft-product-access";
 
-describe("SPR-POLISH-001 soft product access", () => {
-  beforeEach(() => {
-    resetProductAccessForTests();
-  });
-
-  it("allows bootstrap when ledger empty", () => {
+describe("isEntitlementSoftOpenEnabled", () => {
+  it("hard mode always wins", () => {
     expect(
-      softEvaluateProductAccess("qep", { productKeys: [], orgProductKeys: [] }),
-    ).toEqual({
-      status: "allowed",
-    });
-  });
-
-  it("denies with org_not_subscribed when org lacks product", () => {
-    expect(
-      softEvaluateProductAccess("projects", {
-        productKeys: ["qep"],
-        orgProductKeys: ["qep"],
+      isEntitlementSoftOpenEnabled({
+        APZHUB_ENTITLEMENT_HARD_MODE: "true",
+        APZHUB_CE_BOOTSTRAP: "true",
+        NODE_ENV: "development",
       }),
-    ).toEqual({
-      status: "denied",
-      reason: "org_not_subscribed",
-      productKey: "projects",
-    });
+    ).toBe(false);
   });
 
-  it("denies with user_not_granted when org has product but user does not", () => {
+  it("CE bootstrap soft-opens", () => {
     expect(
-      softEvaluateProductAccess("pentest", {
-        productKeys: ["qep"],
-        orgProductKeys: ["qep", "pentest"],
+      isEntitlementSoftOpenEnabled({
+        APZHUB_CE_BOOTSTRAP: "true",
+        NODE_ENV: "production",
       }),
-    ).toEqual({
-      status: "denied",
-      reason: "user_not_granted",
-      productKey: "pentest",
-    });
+    ).toBe(true);
   });
 
-  it("allows when user has grant", () => {
+  it("production without bootstrap is hard", () => {
     expect(
-      softEvaluateProductAccess("qep", {
-        productKeys: ["qep"],
-        orgProductKeys: ["qep"],
+      isEntitlementSoftOpenEnabled({
+        NODE_ENV: "production",
       }),
-    ).toEqual({ status: "allowed" });
+    ).toBe(false);
   });
 });
 
-describe("SPR-POLISH-001 PRODUCT_ACCESS_DENIED details", () => {
-  beforeEach(() => {
-    resetProductAccessForTests();
+describe("softEvaluateProductAccess", () => {
+  it("denies empty ledger when soft-open off", () => {
+    const result = softEvaluateProductAccess("qep", null, { softOpen: false });
+    expect(result).toEqual({
+      status: "denied",
+      reason: "org_not_subscribed",
+      productKey: "qep",
+    });
   });
 
-  it("includes structured details on requireProductAccess denial", () => {
-    upsertOrgProductSubscription({
-      organisationId: "org-polish",
-      productKey: "qep",
-      planId: "plan.business",
-      status: "active",
-    });
-    const context = {
-      session: { user: { id: "u-no-grant" }, tenantId: "org-polish" },
-      serviceContext: { tenantId: "org-polish", userId: "u-no-grant" },
-    } as Parameters<typeof requireProductAccess>[0];
+  it("allows empty ledger when soft-open on", () => {
+    const result = softEvaluateProductAccess("qep", null, { softOpen: true });
+    expect(result).toEqual({ status: "allowed" });
+  });
 
-    try {
-      requireProductAccess(context, "qep");
-      expect.unreachable("should throw");
-    } catch (error) {
-      expect(error).toBeInstanceOf(PlatformApiHttpError);
-      const http = error as PlatformApiHttpError;
-      expect(http.status).toBe(403);
-      expect(http.body.code).toBe("PRODUCT_ACCESS_DENIED");
-      expect(http.body.details).toEqual({
-        reason: "user_not_granted",
-        productKey: "qep",
-      });
-    }
+  it("allows when user grant present", () => {
+    const result = softEvaluateProductAccess(
+      "qep",
+      { productKeys: ["qep"], orgProductKeys: ["qep"] },
+      { softOpen: false },
+    );
+    expect(result).toEqual({ status: "allowed" });
+  });
 
-    const decision = evaluateProductAccess({
-      organisationId: "org-polish",
-      userId: "u-no-grant",
-      productKey: "qep",
-    });
-    expect(decision).toEqual({
-      allowed: false,
+  it("denies org-only without user grant", () => {
+    const result = softEvaluateProductAccess(
+      "qep",
+      { productKeys: [], orgProductKeys: ["qep"] },
+      { softOpen: false },
+    );
+    expect(result).toEqual({
+      status: "denied",
       reason: "user_not_granted",
       productKey: "qep",
     });

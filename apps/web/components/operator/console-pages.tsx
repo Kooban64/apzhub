@@ -571,9 +571,9 @@ export function ConsoleCataloguePage() {
             onClick={() => {
               setBusy(true);
               setMsg(null);
-              void postConsole("apzor.ensure_suites", {})
+              void postConsole("apzor.ensure_ordinary_subscriptions", {})
                 .then(async () => {
-                  setMsg("APZOR suites ensured (all free).");
+                  setMsg("APZOR ordinary subscriptions ensured.");
                   await qc.invalidateQueries({
                     queryKey: ["console", "platform"],
                   });
@@ -582,7 +582,7 @@ export function ConsoleCataloguePage() {
                 .finally(() => setBusy(false));
             }}
           >
-            Ensure APZOR free suites
+            Ensure APZOR ordinary subscriptions
           </ConsoleBtn>
         </>
       }
@@ -591,7 +591,7 @@ export function ConsoleCataloguePage() {
       {q.error ? <ErrorState message={(q.error as Error).message} /> : null}
       {msg ? (
         <div className="border-b border-[var(--color-border)] px-4 py-2">
-          <ConsoleBanner tone={msg.includes("ensured") ? "ok" : "warn"}>
+          <ConsoleBanner tone={msg.toLowerCase().includes("ensured") ? "ok" : "warn"}>
             {msg}
           </ConsoleBanner>
         </div>

@@ -97,7 +97,9 @@ export function isWorkbenchPath(pathname: string): boolean {
   return pathname === "/workspace" || pathname.startsWith("/workspace/");
 }
 
-/** Operator personas must not use productivity shell as home. */
+/** Operator personas must not use productivity DesktopShell as home.
+ * Aligns with `preferredShellFamily` — tenant_* staff stay on DesktopShell.
+ */
 export function isOperatorKind(kind: DemoPersonaKind): boolean {
   return (
     kind === "superadmin" ||

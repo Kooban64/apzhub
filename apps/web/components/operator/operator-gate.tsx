@@ -10,10 +10,10 @@ import {
   type EntitlementSnapshotLike,
 } from "@/lib/commercial/soft-product-access";
 import {
-  isOperatorKind,
   shellLandingForKind,
   type OperatorShellId,
 } from "@/lib/operator/shell-landing";
+import { preferredShellFamily } from "@/lib/shell/shell-policy";
 
 const SHELL_KINDS: Record<OperatorShellId, readonly DemoPersonaKind[]> = {
   console: ["superadmin"],
@@ -114,6 +114,7 @@ export function OperatorGate({
 /**
  * Keep operator personas off the productivity DesktopShell
  * (ActivityBar + Sidebar dual rail). Send them to their console home.
+ * Policy: `preferredShellFamily` in `@/lib/shell/shell-policy`.
  */
 export function WorkbenchOperatorRedirect({
   children,
@@ -135,7 +136,7 @@ export function WorkbenchOperatorRedirect({
         };
         if (cancelled) return;
         const kind = body.data?.kind ?? "org_member";
-        if (isOperatorKind(kind)) {
+        if (preferredShellFamily(kind) === "operator") {
           const target = body.data?.landing?.path ?? shellLandingForKind(kind).path;
           router.replace(target);
           return;

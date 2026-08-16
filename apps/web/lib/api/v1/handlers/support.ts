@@ -52,6 +52,13 @@ import {
   type UpdateSupportRequestBody,
 } from "../schemas/support";
 import { toListQuery, toPlatformApiPage } from "./paging";
+import {
+  filterItemsBySupportQueueScope,
+  isGroupInSupportQueueScope,
+  resolveScopedGroupIdFilter,
+  resolveSupportQueueScope,
+} from "@/lib/support/queue-scope";
+import { PlatformApiHttpError } from "../errors";
 import { requireSupportPermission } from "./require-support-permission";
 
 // ---------------------------------------------------------------------------
@@ -158,6 +165,14 @@ export async function handleListSupportRequests(
 ) {
   requireSupportPermission(context, "support.requests.list");
   const query = parseQuery(supportRequestListQuerySchema, request.nextUrl.searchParams);
+  const queueScope = resolveSupportQueueScope(context.serviceContext.permissions);
+  const scopedGroup = resolveScopedGroupIdFilter(query.groupId, queueScope);
+  if (!scopedGroup.ok) {
+    throw new PlatformApiHttpError(403, {
+      code: "FORBIDDEN",
+      message: "Support queue scope does not include the requested group",
+    });
+  }
   const gateway = await getPlatformServiceGateway();
   const listQuery = toListQuery(query);
   const result = await gateway.support.listSupportRequests(context.serviceContext, {
@@ -168,16 +183,17 @@ export async function handleListSupportRequests(
     filter: {
       status: query.status,
       priority: query.priority,
-      groupId: query.groupId,
+      groupId: scopedGroup.groupId,
       assigneeId: query.ownerId ?? query.assigneeId,
       requesterId: query.customerId ?? query.requesterId,
       organizationId: query.organizationId,
       search: query.search,
     },
   });
+  const items = filterItemsBySupportQueueScope(result.items, queueScope);
   return jsonCollectionResponse(
-    result.items,
-    toPlatformApiPage(result, query),
+    items,
+    toPlatformApiPage({ ...result, items }, query),
     context.tracing,
   );
 }
@@ -194,6 +210,13 @@ export async function handleGetSupportRequest(
     context.serviceContext,
     supportRequestId,
   );
+  const queueScope = resolveSupportQueueScope(context.serviceContext.permissions);
+  if (!isGroupInSupportQueueScope(ticket.groupId, queueScope)) {
+    throw new PlatformApiHttpError(403, {
+      code: "FORBIDDEN",
+      message: "Support queue scope does not include this request",
+    });
+  }
   return jsonDataResponse(ticket, context.tracing);
 }
 
@@ -719,9 +742,14 @@ export async function handleListGroups(
       active: query.active === undefined ? undefined : query.active === "true",
     },
   });
+  const queueScope = resolveSupportQueueScope(context.serviceContext.permissions);
+  const items =
+    queueScope.mode === "scoped"
+      ? result.items.filter((g) => isGroupInSupportQueueScope(g.id, queueScope))
+      : result.items;
   return jsonCollectionResponse(
-    result.items,
-    toPlatformApiPage(result, query),
+    items,
+    toPlatformApiPage({ ...result, items }, query),
     context.tracing,
   );
 }

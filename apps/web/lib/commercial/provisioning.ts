@@ -142,7 +142,7 @@ export function applySubscriptionChanged(
 }
 
 /** Ensure APZOR has all three suites free (active).
- * @deprecated Phase A — APZOR is an ordinary tenant. Prefer
+ * @deprecated Phase G — free-all retired from console. Prefer
  * `ensureApzorOrdinarySubscriptions`. Opt-in only via
  * `APZHUB_APZOR_ALL_SUITES_FREE=true` (or unit tests).
  */
