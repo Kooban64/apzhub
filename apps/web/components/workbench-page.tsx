@@ -41,6 +41,7 @@ import { IdentityWorkspaceRouter } from "@/components/identity/identity-workspac
 import { ObserveWorkspaceRouter } from "@/components/observe/observe-workspace-router";
 import { MetricsWorkspaceRouter } from "@/components/metrics/metrics-workspace-router";
 import { QepWorkspaceRouter } from "@/components/qep/qep-workspace-router";
+import { SourceWorkspaceView } from "@/components/source/source-workspace-view";
 import { RoleHomeDashboard } from "@/components/my-work/role-home-dashboard";
 import { MyWorkView } from "@/components/my-work/my-work-view";
 import { WorkbenchOperatorRedirect } from "@/components/operator/operator-gate";
@@ -69,6 +70,7 @@ import { isTimeRoute } from "@/lib/time/routes";
 import { isWorkflowRoute } from "@/lib/workflow/routes";
 import { isWorkflowEngineRoute, isWorkflowsRoute } from "@/lib/workflows/routes";
 import { isQepWorkspaceRoute } from "@/lib/qep/routes";
+import { isSourceWorkspaceRoute } from "@/lib/source/routes";
 import { resolveCommandPaletteMode } from "@/lib/resolve-command-palette-mode";
 
 export function WorkbenchPage() {
@@ -191,6 +193,7 @@ export function WorkbenchPage() {
   const administrationActive = isAdministrationRoute(pathname);
   const billingActive = isBillingRoute(pathname);
   const searchActive = isSearchRoute(pathname);
+  const sourceActive = isSourceWorkspaceRoute(pathname);
   const qepActive = isQepWorkspaceRoute(pathname);
   // Exact home landing only — /workspace/home/overview remains a separate view.
   const myWorkActive =
@@ -282,6 +285,8 @@ export function WorkbenchPage() {
           <BillingWorkspaceView />
         ) : searchActive ? (
           <SearchWorkspaceRouter />
+        ) : sourceActive ? (
+          <SourceWorkspaceView />
         ) : qepActive ? (
           <QepWorkspaceRouter />
         ) : myWorkQueuesActive ? (

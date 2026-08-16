@@ -92,9 +92,20 @@ export function ApzpenCodeSecurityPage() {
   return (
     <Frame
       title="Code security"
-      subtitle="GitHub PR security position — App JWT or PAT. Sensitive paths, required checks, finding overlap."
+      subtitle="Security overlay on source changes — sensitive paths, required checks, finding overlap. Browse repositories in shared Source."
     >
-      <OperatorPanel title="GitHub connection">
+      <p className="mb-3 text-[12px] text-[var(--color-muted-foreground)]">
+        Open{" "}
+        <Link
+          href="/workspace/source"
+          className="text-[var(--color-primary)] underline-offset-2 hover:underline"
+          data-testid="apzpen-open-shared-source"
+        >
+          Source
+        </Link>{" "}
+        for provider-neutral repository browse. This page keeps the security PR overlay.
+      </p>
+      <OperatorPanel title="Source connection">
         <p className="mb-2 text-[12px] text-[var(--color-muted-foreground)]">
           Auth mode: <span className="font-mono">{q.data?.auth?.mode ?? "…"}</span>
           {q.data?.auth?.appConfigured ? " · App configured" : " · App not configured"}

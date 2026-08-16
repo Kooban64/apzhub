@@ -18,7 +18,7 @@
 | Home / Command Centre    | `/workspace/qep/home` · `qep-home-views.tsx`   |
 | Requirements / baselines | `qep-requirements-views` · enterprise coverage |
 | Test specs / plans       | Full workbenches                               |
-| Execution / suites       | API-complete; UX step-focus later              |
+| Execution / suites       | API-complete; **Q2-04 step-focus Done**        |
 | Evidence / Traceability  | Production-ready centres                       |
 | Verification             | Queue / team / dashboard                       |
 | Certification / RC       | Partial flagship                               |
@@ -29,21 +29,21 @@
 
 ## Ship tracking (SPR-UX-STREAM-002)
 
-| ID    | Ship                                       | Status                              |
-| ----- | ------------------------------------------ | ----------------------------------- |
-| Q2-00 | Spec freeze + gap map                      | **Done**                            |
-| Q2-01 | Shell · product switcher · project context | KEEP                                |
-| Q2-02 | Persona-aware Home + My Work               | **Done** (`/workspace/qep/my-work`) |
-| Q2-03 | Requirements · coverage · traceability     | KEEP (polish later)                 |
-| Q2-04 | Test repository · plans · execution        | KEEP · execution excellence later   |
-| Q2-05 | Automation centre · flaky                  | Later                               |
-| Q2-06 | Shared Source · PR Quality                 | Later (shared Source track)         |
-| Q2-07 | Defects · retest                           | KEEP                                |
-| Q2-08 | Evidence · Quality Graph                   | Later graph                         |
-| Q2-09 | Security/Perf/A11y domains                 | Later                               |
-| Q2-10 | Release Control · cert pack                | Later polish                        |
-| Q2-11 | Insights · search · QA · notify            | KEEP platform                       |
-| Q2-12 | Admin · providers · entitlements           | Later                               |
+| ID    | Ship                                       | Status                                          |
+| ----- | ------------------------------------------ | ----------------------------------------------- |
+| Q2-00 | Spec freeze + gap map                      | **Done**                                        |
+| Q2-01 | Shell · product switcher · project context | KEEP                                            |
+| Q2-02 | Persona-aware Home + My Work               | **Done** (`/workspace/qep/my-work`)             |
+| Q2-03 | Requirements · coverage · traceability     | KEEP (polish later)                             |
+| Q2-04 | Test repository · plans · execution        | **Done** (step-focus + shortcuts + fail→defect) |
+| Q2-05 | Automation centre · flaky                  | Later                                           |
+| Q2-06 | Shared Source · PR Quality                 | **Phase-1 Done** (`/workspace/source` browse)   |
+| Q2-07 | Defects · retest                           | KEEP                                            |
+| Q2-08 | Evidence · Quality Graph                   | Later graph                                     |
+| Q2-09 | Security/Perf/A11y domains                 | Later                                           |
+| Q2-10 | Release Control · cert pack                | Later polish                                    |
+| Q2-11 | Insights · search · QA · notify            | KEEP platform                                   |
+| Q2-12 | Admin · providers · entitlements           | Later                                           |
 
 ---
 

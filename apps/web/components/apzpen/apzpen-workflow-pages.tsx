@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
 import {
   FindingAssignEvidenceForm,
@@ -90,14 +91,137 @@ function severityClass(severity: string): string {
   return "text-[var(--color-muted-foreground)]";
 }
 
+function FindingWorkbenchPanel({
+  finding,
+  onAction,
+  pending,
+  actionError,
+}: {
+  readonly finding: Finding;
+  readonly onAction: (payload: Record<string, unknown>) => void;
+  readonly pending?: boolean;
+  readonly actionError?: Error | null;
+}) {
+  return (
+    <aside
+      className="rounded-lg border border-[var(--color-border)] p-3"
+      data-testid="apzpen-finding-workbench-panel"
+      aria-label="Selected finding detail"
+    >
+      <div className="mb-2 flex flex-wrap items-start justify-between gap-2">
+        <div>
+          <p
+            className={`text-xs font-semibold uppercase ${severityClass(finding.severity)}`}
+          >
+            {finding.severity}
+          </p>
+          <h3 className="text-sm font-medium">{finding.title}</h3>
+          <p className="text-[11px] text-[var(--color-muted-foreground)]">
+            {finding.status}
+            {finding.assignedTo ? ` · ${finding.assignedTo}` : " · Unassigned"}
+          </p>
+        </div>
+        <Link
+          href={`/apzpen/findings/${finding.findingId}`}
+          className="text-[11px] text-[var(--color-primary)] underline-offset-2 hover:underline"
+        >
+          Open full detail
+        </Link>
+      </div>
+
+      <dl className="mb-3 grid gap-1 text-[11px]">
+        <div className="flex justify-between gap-2">
+          <dt className="text-[var(--color-muted-foreground)]">Location</dt>
+          <dd className="font-mono">{finding.location ?? "—"}</dd>
+        </div>
+        <div className="flex justify-between gap-2">
+          <dt className="text-[var(--color-muted-foreground)]">CWE / CVSS</dt>
+          <dd>
+            {finding.cwe ?? "—"} / {finding.cvss ?? "—"}
+          </dd>
+        </div>
+        <div className="flex justify-between gap-2">
+          <dt className="text-[var(--color-muted-foreground)]">Engagement</dt>
+          <dd>
+            <Link
+              href={`/apzpen/engagements/${finding.engagementId}`}
+              className="underline"
+            >
+              {finding.engagementId}
+            </Link>
+          </dd>
+        </div>
+      </dl>
+
+      <section className="mb-3">
+        <h4 className="mb-1 text-[10px] font-semibold tracking-wide text-[var(--color-muted-foreground)] uppercase">
+          Description
+        </h4>
+        <p className="max-h-28 overflow-auto whitespace-pre-wrap text-[12px]">
+          {finding.description || "—"}
+        </p>
+      </section>
+
+      <section className="mb-3">
+        <h4 className="mb-1 text-[10px] font-semibold tracking-wide text-[var(--color-muted-foreground)] uppercase">
+          Remediation
+        </h4>
+        <p className="max-h-28 overflow-auto whitespace-pre-wrap text-[12px]">
+          {finding.remediation ?? "No remediation guidance recorded yet."}
+        </p>
+      </section>
+
+      <section className="mb-3">
+        <h4 className="mb-1 text-[10px] font-semibold tracking-wide text-[var(--color-muted-foreground)] uppercase">
+          Evidence ({finding.evidence?.length ?? 0})
+        </h4>
+        {(finding.evidence?.length ?? 0) === 0 ? (
+          <p className="text-[11px] text-[var(--color-muted-foreground)]">
+            No evidence attached.
+          </p>
+        ) : (
+          <ul className="max-h-24 space-y-1 overflow-auto text-[11px]">
+            {finding.evidence.map((item) => (
+              <li key={item.evidenceId} className="font-mono">
+                {item.kind}: {item.label}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <div className="border-t border-[var(--color-border)] pt-2">
+        <FindingStatusButtons finding={finding} onAction={onAction} pending={pending} />
+        <FindingAssignEvidenceForm
+          finding={finding}
+          onAction={onAction}
+          pending={pending}
+        />
+        {actionError ? (
+          <p className="mt-2 text-[11px] text-[var(--color-destructive)]" role="alert">
+            {actionError.message}
+          </p>
+        ) : null}
+      </div>
+    </aside>
+  );
+}
+
 function WorkflowFindingsTable({
   findings,
   onAction,
   pending,
+  selectedFindingId,
+  onSelectFinding,
+  compactActions = false,
 }: {
   findings: readonly Finding[];
   onAction: (payload: Record<string, unknown>) => void;
   pending?: boolean;
+  selectedFindingId?: string | null;
+  onSelectFinding?: (findingId: string) => void;
+  /** When true, actions live in the side panel only. */
+  compactActions?: boolean;
 }) {
   if (findings.length === 0) {
     return (
@@ -116,55 +240,98 @@ function WorkflowFindingsTable({
             <th className="py-1.5 pr-2">Status</th>
             <th className="py-1.5 pr-2">Assignee</th>
             <th className="py-1.5 pr-2">Evidence</th>
-            <th className="py-1.5 pr-2">Actions</th>
+            {compactActions ? null : <th className="py-1.5 pr-2">Actions</th>}
           </tr>
         </thead>
         <tbody>
-          {findings.map((f) => (
-            <tr
-              key={f.findingId}
-              className="border-t border-[var(--color-border)] align-top"
-            >
-              <td
-                className={`py-2 pr-2 font-medium uppercase ${severityClass(f.severity)}`}
+          {findings.map((f) => {
+            const selected = f.findingId === selectedFindingId;
+            return (
+              <tr
+                key={f.findingId}
+                className={`border-t border-[var(--color-border)] align-top ${
+                  selected
+                    ? "bg-[var(--color-muted)]/40 ring-1 ring-inset ring-[var(--color-ring)]"
+                    : onSelectFinding
+                      ? "cursor-pointer hover:bg-[var(--color-muted)]/20"
+                      : ""
+                }`}
+                data-testid={`apzpen-workflow-row-${f.findingId}`}
+                aria-selected={onSelectFinding ? selected : undefined}
+                onClick={() => onSelectFinding?.(f.findingId)}
               >
-                {f.severity}
-              </td>
-              <td className="py-2 pr-2">
-                <Link
-                  href={`/apzpen/findings/${f.findingId}`}
-                  className="font-medium hover:underline"
+                <td
+                  className={`py-2 pr-2 font-medium uppercase ${severityClass(f.severity)}`}
                 >
-                  {f.title}
-                </Link>
-                <Link
-                  href={`/apzpen/engagements/${f.engagementId}`}
-                  className="mt-0.5 block font-mono text-[10px] underline"
-                >
-                  {f.engagementId}
-                </Link>
-              </td>
-              <td className="py-2 pr-2">{f.status}</td>
-              <td className="py-2 pr-2">{f.assignedTo ?? "—"}</td>
-              <td className="py-2 pr-2">{f.evidence?.length ?? 0}</td>
-              <td className="py-2 pr-2">
-                <FindingStatusButtons
-                  finding={f}
-                  onAction={onAction}
-                  pending={pending}
-                />
-                <FindingAssignEvidenceForm
-                  finding={f}
-                  onAction={onAction}
-                  pending={pending}
-                />
-              </td>
-            </tr>
-          ))}
+                  {f.severity}
+                </td>
+                <td className="py-2 pr-2">
+                  <Link
+                    href={`/apzpen/findings/${f.findingId}`}
+                    className="font-medium hover:underline"
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    {f.title}
+                  </Link>
+                  <Link
+                    href={`/apzpen/engagements/${f.engagementId}`}
+                    className="mt-0.5 block font-mono text-[10px] underline"
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    {f.engagementId}
+                  </Link>
+                </td>
+                <td className="py-2 pr-2">{f.status}</td>
+                <td className="py-2 pr-2">{f.assignedTo ?? "—"}</td>
+                <td className="py-2 pr-2">{f.evidence?.length ?? 0}</td>
+                {compactActions ? null : (
+                  <td
+                    className="py-2 pr-2"
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    <FindingStatusButtons
+                      finding={f}
+                      onAction={onAction}
+                      pending={pending}
+                    />
+                    <FindingAssignEvidenceForm
+                      finding={f}
+                      onAction={onAction}
+                      pending={pending}
+                    />
+                  </td>
+                )}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
   );
+}
+
+function useSelectedFinding(findings: readonly Finding[]): {
+  selectedId: string | null;
+  setSelectedId: (id: string) => void;
+  selected: Finding | null;
+} {
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  useEffect(() => {
+    if (findings.length === 0) {
+      setSelectedId(null);
+      return;
+    }
+    if (!selectedId || !findings.some((f) => f.findingId === selectedId)) {
+      setSelectedId(findings[0]!.findingId);
+    }
+  }, [findings, selectedId]);
+  const selected =
+    findings.find((f) => f.findingId === selectedId) ?? findings[0] ?? null;
+  return {
+    selectedId: selected?.findingId ?? null,
+    setSelectedId,
+    selected,
+  };
 }
 
 function useFindingActions() {
@@ -239,11 +406,12 @@ export function ApzpenRemediationPage() {
   });
   const action = useFindingActions();
   const rows = filterRemediationQueue(q.data?.findings ?? []);
+  const { selectedId, setSelectedId, selected } = useSelectedFinding(rows);
 
   return (
     <Frame
       title="Remediation"
-      subtitle="Developer / security fix queue — open and remediating findings by risk."
+      subtitle="Developer / security fix queue — select a finding for remediation guidance beside the list."
     >
       <OperatorMetricStrip
         metrics={[
@@ -258,18 +426,38 @@ export function ApzpenRemediationPage() {
           },
         ]}
       />
-      <OperatorPanel title="Fix queue">
-        {action.error ? (
-          <p className="mb-2 text-[11px] text-[var(--color-destructive)]">
-            {(action.error as Error).message}
+      <div
+        className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)]"
+        data-testid="apzpen-remediation-workbench"
+      >
+        <OperatorPanel title="Fix queue">
+          {action.error ? (
+            <p className="mb-2 text-[11px] text-[var(--color-destructive)]">
+              {(action.error as Error).message}
+            </p>
+          ) : null}
+          <WorkflowFindingsTable
+            findings={rows}
+            pending={action.isPending}
+            onAction={(payload) => action.mutate(payload)}
+            selectedFindingId={selectedId}
+            onSelectFinding={setSelectedId}
+            compactActions
+          />
+        </OperatorPanel>
+        {selected ? (
+          <FindingWorkbenchPanel
+            finding={selected}
+            onAction={(payload) => action.mutate(payload)}
+            pending={action.isPending}
+            actionError={action.error as Error | null}
+          />
+        ) : (
+          <p className="text-[12px] text-[var(--color-muted-foreground)]">
+            Select a finding to review remediation side-by-side.
           </p>
-        ) : null}
-        <WorkflowFindingsTable
-          findings={rows}
-          pending={action.isPending}
-          onAction={(payload) => action.mutate(payload)}
-        />
-      </OperatorPanel>
+        )}
+      </div>
     </Frame>
   );
 }
@@ -281,11 +469,12 @@ export function ApzpenRetestsPage() {
   });
   const action = useFindingActions();
   const rows = filterRetestQueue(q.data?.findings ?? []);
+  const { selectedId, setSelectedId, selected } = useSelectedFinding(rows);
 
   return (
     <Frame
       title="Retests"
-      subtitle="Verify remediations — requested, passed, and failed retests."
+      subtitle="Verify remediations — queue and selected finding detail for pass/fail decisions."
     >
       <OperatorMetricStrip
         metrics={[
@@ -300,13 +489,33 @@ export function ApzpenRetestsPage() {
           },
         ]}
       />
-      <OperatorPanel title="Retest queue">
-        <WorkflowFindingsTable
-          findings={rows}
-          pending={action.isPending}
-          onAction={(payload) => action.mutate(payload)}
-        />
-      </OperatorPanel>
+      <div
+        className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)]"
+        data-testid="apzpen-retest-workbench"
+      >
+        <OperatorPanel title="Retest queue">
+          <WorkflowFindingsTable
+            findings={rows}
+            pending={action.isPending}
+            onAction={(payload) => action.mutate(payload)}
+            selectedFindingId={selectedId}
+            onSelectFinding={setSelectedId}
+            compactActions
+          />
+        </OperatorPanel>
+        {selected ? (
+          <FindingWorkbenchPanel
+            finding={selected}
+            onAction={(payload) => action.mutate(payload)}
+            pending={action.isPending}
+            actionError={action.error as Error | null}
+          />
+        ) : (
+          <p className="text-[12px] text-[var(--color-muted-foreground)]">
+            Select a finding to retest side-by-side.
+          </p>
+        )}
+      </div>
     </Frame>
   );
 }

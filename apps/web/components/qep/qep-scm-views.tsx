@@ -11,6 +11,7 @@ import { QEP_EARLY_CHECK_ROUTES } from "@/lib/qep/early-check-routes";
 import { QEP_PORTFOLIO_ROUTES } from "@/lib/qep/portfolio-routes";
 import { QEP_QUALITY_JOURNEY_ROUTES } from "@/lib/qep/quality-journey-routes";
 import { QEP_SCM_ROUTES, parseQepScmRepositoryId } from "@/lib/qep/routes";
+import { SOURCE_ROUTES } from "@/lib/source/routes";
 import {
   QepEmptyState,
   QepErrorState,
@@ -122,8 +123,8 @@ function ScmHomeView() {
 
   return (
     <QepPageShell
-      title="Enterprise Source Control"
-      description="Flagship F1 GitHub Heartbeat — catalogue repos; credentials from server secrets only; sync/webhooks persist durable change events."
+      title="Quality source overlays"
+      description="Register repositories and run Quality overlays (impact, regression, design assist). Everyday browse lives in the shared Source workspace."
       actions={
         <div className="flex items-center gap-2">
           <input
@@ -137,12 +138,25 @@ function ScmHomeView() {
             onClick={() => registerMutation.mutate()}
             disabled={registerMutation.isPending || !fullName.trim()}
           >
-            {registerMutation.isPending ? "Registering…" : "Register GitHub repo"}
+            {registerMutation.isPending ? "Registering…" : "Register repository"}
           </Button>
         </div>
       }
     >
+      <p className="mb-3 text-sm text-[var(--color-muted-foreground)]">
+        Prefer{" "}
+        <Link
+          href={SOURCE_ROUTES.home}
+          className="text-[var(--color-primary)] underline-offset-2 hover:underline"
+          data-testid="qep-scm-open-shared-source"
+        >
+          Source
+        </Link>{" "}
+        for provider-neutral repository browse. This page keeps Quality administration
+        and overlays.
+      </p>
       <div className="mb-4 flex gap-3 text-sm">
+        <Link href={SOURCE_ROUTES.home}>Source</Link>
         <Link href={QEP_SCM_ROUTES.providers}>Providers</Link>
         <Link href={QEP_SCM_ROUTES.repositories}>Repositories</Link>
         <Link href={QEP_SCM_ROUTES.webhooks}>Webhooks</Link>
