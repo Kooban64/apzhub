@@ -1,8 +1,9 @@
 # SPR-UX-STREAM-004 — APZPRD authenticated UI/UX
 
-> **Status:** **FROZEN SPEC · NOT STARTED · ORDER TBD** — 2026-08-16  
+> **Status:** **FROZEN SPEC · PHASE C ACTIVE** — 2026-08-16  
 > **Authority:** [UX-STREAM-004](../ux/UX-STREAM-004-apzprd-enterprise-productivity.md)  
-> **Depends on:** Owner decision after Stream 5 (Platform Shell) filed  
+> **Gap map:** [PHASE-C-STREAM-4-GAP-MAP](./PHASE-C-STREAM-4-GAP-MAP.md)  
+> **Depends on:** Phase A (5∥6) + Phase B (Stream 1) complete  
 > **Does not:** Expose Plane/Zammad/Kimai/n8n/Metabase/Paperless to normal users · Duplicate Source Workspace · Rebuild full provider admin consoles
 
 ## Signature ships (when authorised)

@@ -12,9 +12,9 @@
 >
 > Streams 1–6 remain frozen in scope. This decision governs how they are implemented, integrated and certified.
 >
-> **Engineering:** Phase A vertical proofs **complete**. Phase B Stream 1 **COMPLETE · CERTIFIED 100%** ([PHASE-B-STREAM-1-GAP-MAP](../sprint/PHASE-B-STREAM-1-GAP-MAP.md)). **Phase C** (Stream 4 APZPRD) authorised next.
+> **Engineering:** Phase A vertical proofs **complete**. Phase B Stream 1 **COMPLETE · CERTIFIED 100%**. **Phase C** (Stream 4 APZPRD) **ACTIVE** — gap-map first ([PHASE-C-STREAM-4-GAP-MAP](../sprint/PHASE-C-STREAM-4-GAP-MAP.md)).
 >
-> **Engineering started 2026-08-16:** Phase A Support → Security **certified**. Phase B Stream 1 DoD (Discover → Pay → Provision → Invite → Work) **certified**.
+> **Engineering started 2026-08-16:** Phase A Support → Security **certified**. Phase B Stream 1 DoD **certified**. Phase C first vertical (Support three-pane + global timer) **in progress**.
 
 ---
 

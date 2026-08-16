@@ -43,6 +43,7 @@ import { MetricsWorkspaceRouter } from "@/components/metrics/metrics-workspace-r
 import { QepWorkspaceRouter } from "@/components/qep/qep-workspace-router";
 import { RoleHomeDashboard } from "@/components/my-work/role-home-dashboard";
 import { WorkbenchOperatorRedirect } from "@/components/operator/operator-gate";
+import { GlobalTimeTimer } from "@/components/time/global-time-timer";
 import { useE2eActivityTimelinePresentationRefresh } from "@/lib/e2e-activity-timeline-presentation-refresh";
 import {
   isPlatformOperationsRoute,
@@ -231,6 +232,7 @@ export function WorkbenchPage() {
         contextMenuSurface="workspace"
         contextMenuInput={contextMenuInput}
       >
+        <GlobalTimeTimer />
         <LandingPageRedirect />
         <RecentTracker />
         {operationsSection ? (

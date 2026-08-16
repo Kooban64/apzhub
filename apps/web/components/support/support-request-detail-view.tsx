@@ -27,7 +27,9 @@ import { CustomerReplyComposer } from "./customer-reply-composer";
 import { InternalNoteComposer } from "./internal-note-composer";
 import { SupportConversation } from "./support-conversation";
 import { SupportEntityLabel } from "./support-entity-label";
+import { SupportQueuePane } from "./support-queue-pane";
 import { SupportRequestCommands } from "./support-request-commands";
+import { SupportStartTimerButton } from "./support-start-timer-button";
 import {
   ContextSection,
   ErrorState,
@@ -122,6 +124,7 @@ export function SupportRequestDetailView({
       breadcrumbs={["APZ Support", "Requests", requestNumber]}
     >
       <SupportWorkspaceFrame
+        queue={<SupportQueuePane activeRequestId={supportRequestId} />}
         context={
           <>
             <ContextSection title="People">
@@ -144,6 +147,10 @@ export function SupportRequestDetailView({
             </ContextSection>
             <ContextSection title="Quick actions">
               <div className="flex flex-col gap-2">
+                <SupportStartTimerButton
+                  requestNumber={requestNumber}
+                  title={request.title}
+                />
                 <Button
                   type="button"
                   size="sm"

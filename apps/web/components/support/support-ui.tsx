@@ -74,23 +74,40 @@ export function PageShell({
   );
 }
 
-/** Primary workspace + optional context panel (native APZHUB composition). */
+/** Primary workspace: optional queue | conversation | context (Stream 4 three-pane). */
 export function SupportWorkspaceFrame({
   children,
   context,
+  queue,
 }: {
   readonly children: ReactNode;
   readonly context?: ReactNode;
+  readonly queue?: ReactNode;
 }) {
+  const threePane = Boolean(queue);
   return (
     <div
-      className="flex flex-col gap-6 lg:flex-row lg:items-start"
+      className={
+        threePane
+          ? "grid gap-4 lg:grid-cols-[minmax(14rem,18rem)_minmax(0,1fr)_minmax(14rem,18rem)] lg:items-start"
+          : "flex flex-col gap-6 lg:flex-row lg:items-start"
+      }
       data-testid="support-workspace-frame"
+      data-layout={threePane ? "three-pane" : "two-pane"}
     >
+      {queue ? (
+        <aside
+          className="min-h-0 w-full shrink-0 space-y-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-muted)]/10 p-3 lg:sticky lg:top-2 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto"
+          data-testid="support-queue-pane"
+          aria-label="Support request queue"
+        >
+          {queue}
+        </aside>
+      ) : null}
       <div className="min-w-0 flex-1 space-y-6">{children}</div>
       {context ? (
         <aside
-          className="w-full shrink-0 space-y-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-muted)]/10 p-4 lg:sticky lg:top-2 lg:w-72"
+          className="w-full shrink-0 space-y-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-muted)]/10 p-4 lg:sticky lg:top-2 lg:w-auto lg:max-w-none"
           data-testid="support-context-panel"
           aria-label="APZ Support context"
         >

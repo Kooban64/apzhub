@@ -34,7 +34,8 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [UX streams index](./ux/README.md)                                                                 | Streams 1–6 filed · order decision pending                                            |
 | [OWNER UX programme order](./decisions/OWNER-UX-STREAMS-PROGRAMME-ORDER.md)                        | **ACCEPTED** — Phase A 5∥6 authorised · vertical proof · reuse IAM                    |
 | [Phase A Streams 5∥6 gap map](./sprint/PHASE-A-STREAMS-5-6-GAP-MAP.md)                             | Living — seven persona verticals certified                                            |
-| [Phase B Stream 1 gap map](./sprint/PHASE-B-STREAM-1-GAP-MAP.md)                                   | Living — Landing → Marketplace → Org onboarding → Checkout                            |
+| [Phase B Stream 1 gap map](./sprint/PHASE-B-STREAM-1-GAP-MAP.md)                                   | **COMPLETE · CERTIFIED 100%** — public commerce DoD                                   |
+| [Phase C Stream 4 gap map](./sprint/PHASE-C-STREAM-4-GAP-MAP.md)                                   | Living — APZPRD first vertical (Support three-pane + global timer)                    |
 | [SPR-UX-001](./sprint/SPR-UX-001-commercial-workbench-ui-remodel.md)                               | **PARKED** — workbench remodel deferred under Stream 1 freeze                         |
 | [APZQEP](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md)                             | Quality Engineering Platform — _Can we release with confidence?_                      |
 | [APZPEN](./strategy/APZPEN-ENTERPRISE-SECURITY-ASSURANCE-PLATFORM.md)                              | Security Assurance & Pen Testing — _Can we demonstrate we are secure?_                |
