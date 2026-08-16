@@ -1,0 +1,43 @@
+manifestSchemaVersion: "1.0"
+id: platform-my-work
+name: My Work Queues
+version: 0.1.0
+kind: module
+
+metadata:
+  category: platform
+  description: >
+    Stream 4 My Work surface with All / Tasks / Tickets / Approvals / Time tabs.
+    Complements Home attention landing at /workspace/home.
+
+dependencies:
+  platform: []
+
+module:
+  category: platform
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: home
+    parent: platform-home
+    label: Queues
+    icon: list-todo
+    route: /workspace/my-work
+    order: 5
+    permission: platform.nav.home.view
+  view:
+    title: My Work
+    workspace: home
+    route: /workspace/my-work
+    permission: platform.nav.home.view
+  actions:
+    - id: platform.my-work.navigate
+      label: Open My Work queues
+      handler: workbench-bridge:workbench.navigation.reveal
+      permission: platform.nav.home.view
+      palette: true
+      group: Navigation
+      icon: list-todo
+      order: 6
+      description: Open the entitlement-composed My Work queues.

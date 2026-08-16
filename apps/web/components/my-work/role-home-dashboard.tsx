@@ -351,6 +351,13 @@ export function RoleHomeDashboard() {
         </div>
         <div className="flex flex-wrap gap-2 text-xs">
           <Link
+            href="/workspace/my-work"
+            className="rounded border border-[var(--color-border)] px-2.5 py-1.5 hover:bg-[var(--color-muted)]"
+            data-testid="role-home-open-my-work"
+          >
+            My Work
+          </Link>
+          <Link
             href="/workspace/notifications/inbox"
             className="rounded border border-[var(--color-border)] px-2.5 py-1.5 hover:bg-[var(--color-muted)]"
           >

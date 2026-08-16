@@ -4,9 +4,20 @@ import type { MyWorkComposition, WorkCard } from "@apzhub/platform-service-contr
 import { useSession } from "@apzhub/auth";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { useMemo, useState } from "react";
 
 import { fetchMyWorkComposition, isMyWorkApiError } from "@/lib/my-work/my-work-api";
 import { myWorkQueryKeys } from "@/lib/my-work/query-keys";
+
+type MyWorkTab = "all" | "tasks" | "tickets" | "approvals" | "time";
+
+const TABS: readonly { readonly id: MyWorkTab; readonly label: string }[] = [
+  { id: "all", label: "All" },
+  { id: "tasks", label: "Tasks" },
+  { id: "tickets", label: "Tickets" },
+  { id: "approvals", label: "Approvals" },
+  { id: "time", label: "Time" },
+];
 
 function greetingName(
   sessionName: string | undefined | null,
@@ -14,6 +25,26 @@ function greetingName(
 ): string {
   const name = sessionName?.trim() || composed?.trim();
   return name || "there";
+}
+
+function cardMatchesTab(card: WorkCard, tab: MyWorkTab): boolean {
+  if (tab === "all") return true;
+  if (tab === "tasks") return card.product === "projects" || card.kind === "task";
+  if (tab === "tickets")
+    return card.product === "support" || card.kind === "support_request";
+  if (tab === "time") return card.product === "time" || card.kind === "timesheet";
+  if (tab === "approvals")
+    return (
+      card.product === "workflow" ||
+      card.kind === "workflow_task" ||
+      card.lifecycle === "in_review" ||
+      card.lifecycle === "waiting"
+    );
+  return true;
+}
+
+function filterCards(cards: readonly WorkCard[], tab: MyWorkTab): WorkCard[] {
+  return cards.filter((card) => cardMatchesTab(card, tab));
 }
 
 function QueueSection({
@@ -78,27 +109,43 @@ function QueueSection({
   );
 }
 
-function MyWorkBody({ composition }: { readonly composition: MyWorkComposition }) {
+function MyWorkBody({
+  composition,
+  tab,
+}: {
+  readonly composition: MyWorkComposition;
+  readonly tab: MyWorkTab;
+}) {
+  const queues = useMemo(
+    () => ({
+      needsMyAttention: filterCards(composition.queues.needsMyAttention, tab),
+      dueToday: filterCards(composition.queues.dueToday, tab),
+      waitingForOthers: filterCards(composition.queues.waitingForOthers, tab),
+      recentlyCompleted: filterCards(composition.queues.recentlyCompleted, tab),
+    }),
+    [composition, tab],
+  );
+
   return (
     <div className="flex flex-col gap-8" data-testid="my-work-queues">
       <QueueSection
         title="Needs My Attention"
-        cards={composition.queues.needsMyAttention}
+        cards={queues.needsMyAttention}
         testId="my-work-needs-attention"
       />
       <QueueSection
         title="Due Today"
-        cards={composition.queues.dueToday}
+        cards={queues.dueToday}
         testId="my-work-due-today"
       />
       <QueueSection
         title="Waiting For Others"
-        cards={composition.queues.waitingForOthers}
+        cards={queues.waitingForOthers}
         testId="my-work-waiting"
       />
       <QueueSection
         title="Recently Completed"
-        cards={composition.queues.recentlyCompleted}
+        cards={queues.recentlyCompleted}
         testId="my-work-completed"
       />
     </div>
@@ -107,6 +154,7 @@ function MyWorkBody({ composition }: { readonly composition: MyWorkComposition }
 
 export function MyWorkView() {
   const { data: session } = useSession();
+  const [tab, setTab] = useState<MyWorkTab>("all");
   const query = useQuery({
     queryKey: myWorkQueryKeys.composition(),
     queryFn: ({ signal }) => fetchMyWorkComposition({ signal }),
@@ -137,6 +185,31 @@ export function MyWorkView() {
         </p>
       </header>
 
+      <div
+        className="flex flex-wrap gap-1 border-b border-[var(--color-border)] pb-2"
+        role="tablist"
+        aria-label="My Work filters"
+        data-testid="my-work-tabs"
+      >
+        {TABS.map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            role="tab"
+            aria-selected={tab === item.id}
+            className={`rounded-md px-3 py-1.5 text-sm ${
+              tab === item.id
+                ? "bg-[var(--color-muted)] font-medium"
+                : "text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)]"
+            }`}
+            onClick={() => setTab(item.id)}
+            data-testid={`my-work-tab-${item.id}`}
+          >
+            {item.label}
+          </button>
+        ))}
+      </div>
+
       {query.isLoading ? (
         <p
           className="text-sm text-[var(--color-muted-foreground)]"
@@ -158,7 +231,7 @@ export function MyWorkView() {
         </div>
       ) : null}
 
-      {query.data ? <MyWorkBody composition={query.data} /> : null}
+      {query.data ? <MyWorkBody composition={query.data} tab={tab} /> : null}
 
       {query.data?.partial ? (
         <p

@@ -42,6 +42,7 @@ import { ObserveWorkspaceRouter } from "@/components/observe/observe-workspace-r
 import { MetricsWorkspaceRouter } from "@/components/metrics/metrics-workspace-router";
 import { QepWorkspaceRouter } from "@/components/qep/qep-workspace-router";
 import { RoleHomeDashboard } from "@/components/my-work/role-home-dashboard";
+import { MyWorkView } from "@/components/my-work/my-work-view";
 import { WorkbenchOperatorRedirect } from "@/components/operator/operator-gate";
 import { GlobalTimeTimer } from "@/components/time/global-time-timer";
 import { useE2eActivityTimelinePresentationRefresh } from "@/lib/e2e-activity-timeline-presentation-refresh";
@@ -194,6 +195,8 @@ export function WorkbenchPage() {
   // Exact home landing only — /workspace/home/overview remains a separate view.
   const myWorkActive =
     pathname === "/workspace/home" || pathname === "/workspace/home/";
+  const myWorkQueuesActive =
+    pathname === "/workspace/my-work" || pathname.startsWith("/workspace/my-work/");
 
   return (
     <WorkbenchOperatorRedirect>
@@ -281,6 +284,8 @@ export function WorkbenchPage() {
           <SearchWorkspaceRouter />
         ) : qepActive ? (
           <QepWorkspaceRouter />
+        ) : myWorkQueuesActive ? (
+          <MyWorkView />
         ) : myWorkActive ? (
           <RoleHomeDashboard />
         ) : (

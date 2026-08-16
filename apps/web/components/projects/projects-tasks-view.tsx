@@ -10,8 +10,10 @@ import type { ProjectsPermissionSource } from "@/lib/projects/permissions";
 import { listProjects, listTasks } from "@/lib/projects/projects-api";
 import { projectsQueryKeys } from "@/lib/projects/query-keys";
 import { statusOptionsFromTasks } from "@/lib/projects/status-options";
+import type { Task } from "@/lib/projects/types";
 
-import { ProjectsTaskActions } from "./projects-task-actions";
+import { ProjectsTaskDrawer } from "./projects-task-drawer";
+import { ProjectsTasksBoard } from "./projects-tasks-board";
 import {
   EmptyState,
   ErrorState,
@@ -23,12 +25,16 @@ import {
   StatusBadge,
 } from "./projects-ui";
 
+type TasksLayout = "list" | "board";
+
 export function ProjectsTasksView({
   permissions,
 }: {
   readonly permissions?: ProjectsPermissionSource;
 }) {
   const [projectId, setProjectId] = useState("");
+  const [layout, setLayout] = useState<TasksLayout>("list");
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 
   useEffect(() => {
     const last = readLastProjectId();
@@ -60,22 +66,55 @@ export function ProjectsTasksView({
   const projects = useMemo(() => projectsQuery.data?.items ?? [], [projectsQuery.data]);
   const tasks = tasksQuery.data?.items ?? [];
   const statusOptions = useMemo(() => statusOptionsFromTasks(tasks), [tasks]);
+  const projectName = projects.find((p) => p.id === projectId)?.name;
 
   return (
     <PageShell
       title="Tasks"
-      description="Tasks for the selected project in APZ Projects."
+      description="List or board for the selected project — open a task drawer for quick updates and Start Timer."
       breadcrumbs={["APZ Projects", "Tasks"]}
     >
-      <ProjectPicker
-        projects={projects}
-        value={projectId}
-        onChange={(next) => {
-          setProjectId(next);
-          writeLastProjectId(next);
-        }}
-        testId="projects-tasks-picker"
-      />
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <ProjectPicker
+          projects={projects}
+          value={projectId}
+          onChange={(next) => {
+            setProjectId(next);
+            writeLastProjectId(next);
+            setSelectedTask(null);
+          }}
+          testId="projects-tasks-picker"
+        />
+        <div
+          className="flex gap-1 rounded-md border border-[var(--color-border)] p-0.5"
+          role="tablist"
+          aria-label="Tasks layout"
+        >
+          {(
+            [
+              { id: "list", label: "List" },
+              { id: "board", label: "Board" },
+            ] as const
+          ).map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              role="tab"
+              aria-selected={layout === tab.id}
+              className={`rounded px-3 py-1.5 text-sm ${
+                layout === tab.id
+                  ? "bg-[var(--color-muted)] font-medium"
+                  : "text-[var(--color-muted-foreground)]"
+              }`}
+              onClick={() => setLayout(tab.id)}
+              data-testid={`projects-tasks-layout-${tab.id}`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {!projectId ? (
         <EmptyState
           title="Select a project"
@@ -96,13 +135,23 @@ export function ProjectsTasksView({
       {projectId && tasksQuery.isSuccess && tasks.length === 0 ? (
         <EmptyState title="No tasks" description="This project has no tasks yet." />
       ) : null}
-      {projectId && tasks.length > 0 ? (
-        <ProjectsTable headers={["Title", "Status", "Priority", "Updated", "Actions"]}>
+
+      {projectId && tasks.length > 0 && layout === "board" ? (
+        <ProjectsTasksBoard
+          tasks={tasks}
+          selectedTaskId={selectedTask?.id}
+          onSelectTask={setSelectedTask}
+        />
+      ) : null}
+
+      {projectId && tasks.length > 0 && layout === "list" ? (
+        <ProjectsTable headers={["Title", "Status", "Priority", "Updated"]}>
           {tasks.map((task) => (
             <tr
               key={task.id}
-              className="border-b border-[var(--color-border)] last:border-0 align-top"
+              className="cursor-pointer border-b border-[var(--color-border)] last:border-0 align-top hover:bg-[var(--color-muted)]/40"
               data-testid={`projects-tasks-row-${task.id}`}
+              onClick={() => setSelectedTask(task)}
             >
               <td className="px-3 py-2 font-medium">{task.title}</td>
               <td className="px-3 py-2">
@@ -112,17 +161,19 @@ export function ProjectsTasksView({
                 <PriorityBadge priority={task.priority} />
               </td>
               <td className="px-3 py-2">{formatProjectsDate(task.updatedAt)}</td>
-              <td className="px-3 py-2">
-                <ProjectsTaskActions
-                  task={task}
-                  statusOptions={statusOptions}
-                  permissions={permissions}
-                />
-              </td>
             </tr>
           ))}
         </ProjectsTable>
       ) : null}
+
+      <ProjectsTaskDrawer
+        task={selectedTask}
+        statusOptions={statusOptions}
+        permissions={permissions}
+        projectName={projectName}
+        open={Boolean(selectedTask)}
+        onClose={() => setSelectedTask(null)}
+      />
     </PageShell>
   );
 }
