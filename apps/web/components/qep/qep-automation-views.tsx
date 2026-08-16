@@ -6,7 +6,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-import { QEP_AUTOMATION_ROUTES, parseQepAutomationExecutionId } from "@/lib/qep/routes";
+import {
+  QEP_AUTOMATION_ROUTES,
+  QEP_DEFECT_ROUTES,
+  parseQepAutomationExecutionId,
+} from "@/lib/qep/routes";
 import {
   QepEmptyState,
   QepErrorState,
@@ -39,6 +43,9 @@ export function QepAutomationRouterView() {
   if (pathname.includes("/providers")) {
     return <ProvidersView />;
   }
+  if (pathname.includes("/flaky")) {
+    return <FlakyCentreView />;
+  }
   if (executionId) {
     return <ExecutionDetailView executionId={executionId} />;
   }
@@ -70,6 +77,12 @@ function AutomationHomeView() {
   const [mapProviderId, setMapProviderId] = useState("playwright");
   const [mapExternalKey, setMapExternalKey] = useState("");
   const [mapOwner, setMapOwner] = useState("");
+  const [flakyTarget, setFlakyTarget] = useState<{
+    providerId: string;
+    externalKey: string;
+  } | null>(null);
+  const [flakyNotes, setFlakyNotes] = useState("");
+  const [flakyDefectRef, setFlakyDefectRef] = useState("");
   const [cvSource, setCvSource] = useState("automation.playwright");
   const [cvSubject, setCvSubject] = useState("");
 
@@ -106,6 +119,8 @@ function AutomationHomeView() {
           owner?: string;
           flaky: boolean;
           stale: boolean;
+          notes?: string;
+          defectRef?: string;
         }>;
       }>("/api/v1/qep/automation/mappings"),
   });
@@ -241,6 +256,8 @@ function AutomationHomeView() {
       providerId: string;
       externalKey: string;
       owner?: string;
+      notes?: string;
+      defectRef?: string;
     }) =>
       fetchJson<{
         mapping: { mappingId: string };
@@ -249,6 +266,9 @@ function AutomationHomeView() {
         body: JSON.stringify(payload),
       }),
     onSuccess: () => {
+      setFlakyTarget(null);
+      setFlakyNotes("");
+      setFlakyDefectRef("");
       void queryClient.invalidateQueries({
         queryKey: ["qep-automation", "mappings"],
       });
@@ -264,6 +284,7 @@ function AutomationHomeView() {
 
   const executions = executionsQuery.data?.executions ?? [];
   const mappings = mappingsQuery.data?.mappings ?? [];
+  const flakyMappings = mappings.filter((row) => row.flaky);
   const liveModeEnabled = providersQuery.data?.liveModeEnabled === true;
   const actionBtn =
     "inline-flex h-7 items-center rounded-md border border-[var(--color-border)] px-2 text-xs disabled:opacity-50";
@@ -271,9 +292,16 @@ function AutomationHomeView() {
   return (
     <QepPageShell
       title="Enterprise Automation"
-      description="F3 deepen — full provider evidence matrix. Playwright live runner + report ingest for CI, a11y, security, code quality, performance, and automation families. Link evidence to an SCM change for RC certification."
+      description="Provider evidence matrix + flaky governance. Mark flaky only with justification — never silent suppress."
       actions={
         <div className="flex flex-wrap gap-2">
+          <Link
+            href={`${QEP_AUTOMATION_ROUTES.home}/flaky`}
+            className="inline-flex h-8 items-center rounded-md border border-[var(--color-border)] px-3 text-sm"
+            data-testid="qep-automation-open-flaky"
+          >
+            Flaky centre ({flakyMappings.length})
+          </Link>
           <Button
             type="button"
             onClick={() => runMutation.mutate("dry-run")}
@@ -411,9 +439,8 @@ function AutomationHomeView() {
       <QepPanel title="Mapping governance">
         <div data-testid="qep-automation-mappings">
           <p className="mb-3 text-sm text-[var(--color-muted-foreground)]">
-            Track provider external keys for flaky / stale governance
-            (SPR-APZQEP-220-C). QEP does not own the runner — this is platform metadata
-            only.
+            Track provider external keys for flaky / stale governance. Marking flaky
+            requires a justification — silent suppress is blocked.
           </p>
           <form
             className="mb-4 grid gap-2 md:grid-cols-4"
@@ -487,6 +514,7 @@ function AutomationHomeView() {
                 "Owner",
                 "Flaky",
                 "Stale",
+                "Justification",
                 "Actions",
               ]}
               rows={mappings.map((row) => ({
@@ -497,24 +525,59 @@ function AutomationHomeView() {
                   row.owner ?? "—",
                   row.flaky ? "Yes" : "No",
                   row.stale ? "Yes" : "No",
+                  row.notes ? (
+                    <span className="text-xs" key={`${row.mappingId}:notes`}>
+                      {row.notes}
+                      {row.defectRef ? (
+                        <>
+                          {" "}
+                          ·{" "}
+                          <Link
+                            href={QEP_DEFECT_ROUTES.detail(row.defectRef)}
+                            className="underline"
+                          >
+                            {row.defectRef}
+                          </Link>
+                        </>
+                      ) : null}
+                    </span>
+                  ) : (
+                    "—"
+                  ),
                   <div
                     key={`${row.mappingId}:actions`}
                     className="flex flex-wrap gap-1"
                   >
-                    <button
-                      type="button"
-                      className={actionBtn}
-                      disabled={mappingMutation.isPending}
-                      onClick={() =>
-                        mappingMutation.mutate({
-                          action: row.flaky ? "clear_flaky" : "mark_flaky",
-                          providerId: row.providerId,
-                          externalKey: row.externalKey,
-                        })
-                      }
-                    >
-                      {row.flaky ? "Clear" : "Mark flaky"}
-                    </button>
+                    {row.flaky ? (
+                      <button
+                        type="button"
+                        className={actionBtn}
+                        disabled={mappingMutation.isPending}
+                        onClick={() =>
+                          mappingMutation.mutate({
+                            action: "clear_flaky",
+                            providerId: row.providerId,
+                            externalKey: row.externalKey,
+                          })
+                        }
+                      >
+                        Clear flaky
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        className={actionBtn}
+                        disabled={mappingMutation.isPending}
+                        onClick={() =>
+                          setFlakyTarget({
+                            providerId: row.providerId,
+                            externalKey: row.externalKey,
+                          })
+                        }
+                      >
+                        Mark flaky…
+                      </button>
+                    )}
                     <button
                       type="button"
                       className={actionBtn}
@@ -534,6 +597,72 @@ function AutomationHomeView() {
               }))}
             />
           )}
+          {flakyTarget ? (
+            <div
+              className="mt-4 space-y-2 rounded border border-dashed border-[var(--color-border)] p-3"
+              data-testid="qep-automation-flaky-form"
+            >
+              <p className="text-sm font-medium">
+                Mark flaky · {flakyTarget.providerId} / {flakyTarget.externalKey}
+              </p>
+              <label className="block text-xs text-[var(--color-muted-foreground)]">
+                Justification (required)
+                <textarea
+                  className="mt-1 min-h-[64px] w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1.5 text-sm"
+                  value={flakyNotes}
+                  onChange={(event) => setFlakyNotes(event.target.value)}
+                  data-testid="qep-automation-flaky-notes"
+                />
+              </label>
+              <label className="block text-xs text-[var(--color-muted-foreground)]">
+                Linked defect id (optional)
+                <input
+                  className="mt-1 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 font-mono text-xs"
+                  value={flakyDefectRef}
+                  onChange={(event) => setFlakyDefectRef(event.target.value)}
+                  placeholder="def-…"
+                />
+              </label>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  type="button"
+                  size="sm"
+                  disabled={mappingMutation.isPending || flakyNotes.trim().length < 8}
+                  onClick={() =>
+                    mappingMutation.mutate({
+                      action: "mark_flaky",
+                      providerId: flakyTarget.providerId,
+                      externalKey: flakyTarget.externalKey,
+                      notes: flakyNotes.trim(),
+                      ...(flakyDefectRef.trim()
+                        ? { defectRef: flakyDefectRef.trim() }
+                        : {}),
+                    })
+                  }
+                >
+                  Confirm flaky
+                </Button>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  onClick={() => {
+                    setFlakyTarget(null);
+                    setFlakyNotes("");
+                    setFlakyDefectRef("");
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Link
+                  href={QEP_DEFECT_ROUTES.home}
+                  className="inline-flex h-8 items-center text-xs underline"
+                >
+                  Open defects
+                </Link>
+              </div>
+            </div>
+          ) : null}
           {mappingMutation.isError ? (
             <QepErrorState message={(mappingMutation.error as Error).message} />
           ) : null}
@@ -719,6 +848,226 @@ function AutomationHomeView() {
             }))}
           />
         )}
+      </QepPanel>
+    </QepPageShell>
+  );
+}
+
+function FlakyCentreView() {
+  const queryClient = useQueryClient();
+  const [flakyNotes, setFlakyNotes] = useState("");
+  const [flakyDefectRef, setFlakyDefectRef] = useState("");
+  const [flakyTarget, setFlakyTarget] = useState<{
+    providerId: string;
+    externalKey: string;
+  } | null>(null);
+
+  const mappingsQuery = useQuery({
+    queryKey: ["qep-automation", "mappings"],
+    queryFn: () =>
+      fetchJson<{
+        mappings: Array<{
+          mappingId: string;
+          providerId: string;
+          externalKey: string;
+          owner?: string;
+          flaky: boolean;
+          stale: boolean;
+          notes?: string;
+          defectRef?: string;
+        }>;
+      }>("/api/v1/qep/automation/mappings"),
+  });
+
+  const mappingMutation = useMutation({
+    mutationFn: async (payload: {
+      action: string;
+      providerId: string;
+      externalKey: string;
+      notes?: string;
+      defectRef?: string;
+    }) => {
+      if (payload.action === "mark_flaky_new") {
+        await fetchJson("/api/v1/qep/automation/mappings", {
+          method: "POST",
+          body: JSON.stringify({
+            action: "upsert",
+            providerId: payload.providerId,
+            externalKey: payload.externalKey,
+          }),
+        });
+        return fetchJson("/api/v1/qep/automation/mappings", {
+          method: "POST",
+          body: JSON.stringify({
+            action: "mark_flaky",
+            providerId: payload.providerId,
+            externalKey: payload.externalKey,
+            notes: payload.notes,
+            ...(payload.defectRef ? { defectRef: payload.defectRef } : {}),
+          }),
+        });
+      }
+      return fetchJson("/api/v1/qep/automation/mappings", {
+        method: "POST",
+        body: JSON.stringify(payload),
+      });
+    },
+    onSuccess: () => {
+      setFlakyTarget(null);
+      setFlakyNotes("");
+      setFlakyDefectRef("");
+      void queryClient.invalidateQueries({
+        queryKey: ["qep-automation", "mappings"],
+      });
+    },
+  });
+
+  if (mappingsQuery.isLoading) {
+    return <QepLoadingState label="Loading flaky centre…" />;
+  }
+  if (mappingsQuery.isError) {
+    return <QepErrorState message={(mappingsQuery.error as Error).message} />;
+  }
+
+  const flaky = (mappingsQuery.data?.mappings ?? []).filter((row) => row.flaky);
+
+  return (
+    <QepPageShell
+      title="Flaky centre"
+      description="Governed flaky suppressions — justification required; link a defect when the flake is tracked as a quality debt."
+      breadcrumbs={["QEP", "Automation", "Flaky"]}
+      actions={
+        <Link
+          href={QEP_AUTOMATION_ROUTES.home}
+          className="inline-flex h-8 items-center rounded-md border border-[var(--color-border)] px-3 text-sm"
+        >
+          Automation home
+        </Link>
+      }
+    >
+      <QepPanel title={`Active flaky mappings (${flaky.length})`}>
+        {flaky.length === 0 ? (
+          <QepEmptyState title="No flaky mappings — mark from Automation home with a justification." />
+        ) : (
+          <ul className="space-y-3" data-testid="qep-flaky-centre-list">
+            {flaky.map((row) => (
+              <li
+                key={row.mappingId}
+                className="rounded border border-[var(--color-border)] px-3 py-3 text-sm"
+              >
+                <div className="flex flex-wrap items-start justify-between gap-2">
+                  <div>
+                    <p className="font-medium">
+                      {row.providerId} · {row.externalKey}
+                    </p>
+                    <p className="text-xs text-[var(--color-muted-foreground)]">
+                      Owner: {row.owner ?? "unassigned"}
+                    </p>
+                    <p className="mt-1 text-xs">{row.notes ?? "No justification"}</p>
+                    {row.defectRef ? (
+                      <Link
+                        href={QEP_DEFECT_ROUTES.detail(row.defectRef)}
+                        className="mt-1 inline-block text-xs underline"
+                      >
+                        Defect {row.defectRef}
+                      </Link>
+                    ) : null}
+                  </div>
+                  <button
+                    type="button"
+                    className="text-xs underline disabled:opacity-50"
+                    disabled={mappingMutation.isPending}
+                    onClick={() =>
+                      mappingMutation.mutate({
+                        action: "clear_flaky",
+                        providerId: row.providerId,
+                        externalKey: row.externalKey,
+                      })
+                    }
+                  >
+                    Resolve / clear
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+        {mappingMutation.isError ? (
+          <QepErrorState message={(mappingMutation.error as Error).message} />
+        ) : null}
+      </QepPanel>
+
+      <QepPanel title="Mark another mapping flaky">
+        <p className="mb-2 text-xs text-[var(--color-muted-foreground)]">
+          Prefer selecting from Automation home. Or enter provider + key here.
+        </p>
+        <div className="grid gap-2 md:grid-cols-2">
+          <label className="text-xs">
+            Provider
+            <input
+              className="mt-1 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 font-mono text-xs"
+              value={flakyTarget?.providerId ?? ""}
+              onChange={(event) =>
+                setFlakyTarget((prev) => ({
+                  providerId: event.target.value,
+                  externalKey: prev?.externalKey ?? "",
+                }))
+              }
+            />
+          </label>
+          <label className="text-xs">
+            External key
+            <input
+              className="mt-1 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 font-mono text-xs"
+              value={flakyTarget?.externalKey ?? ""}
+              onChange={(event) =>
+                setFlakyTarget((prev) => ({
+                  providerId: prev?.providerId ?? "",
+                  externalKey: event.target.value,
+                }))
+              }
+            />
+          </label>
+        </div>
+        <label className="mt-2 block text-xs">
+          Justification
+          <textarea
+            className="mt-1 min-h-[56px] w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-sm"
+            value={flakyNotes}
+            onChange={(event) => setFlakyNotes(event.target.value)}
+          />
+        </label>
+        <label className="mt-2 block text-xs">
+          Defect ref
+          <input
+            className="mt-1 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 font-mono text-xs"
+            value={flakyDefectRef}
+            onChange={(event) => setFlakyDefectRef(event.target.value)}
+          />
+        </label>
+        <Button
+          type="button"
+          size="sm"
+          className="mt-2"
+          disabled={
+            mappingMutation.isPending ||
+            !flakyTarget?.providerId.trim() ||
+            !flakyTarget.externalKey.trim() ||
+            flakyNotes.trim().length < 8
+          }
+          onClick={() => {
+            if (!flakyTarget) return;
+            mappingMutation.mutate({
+              action: "mark_flaky_new",
+              providerId: flakyTarget.providerId.trim(),
+              externalKey: flakyTarget.externalKey.trim(),
+              notes: flakyNotes.trim(),
+              ...(flakyDefectRef.trim() ? { defectRef: flakyDefectRef.trim() } : {}),
+            });
+          }}
+        >
+          Mark flaky
+        </Button>
       </QepPanel>
     </QepPageShell>
   );

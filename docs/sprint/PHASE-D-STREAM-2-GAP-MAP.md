@@ -21,29 +21,29 @@
 | Execution / suites       | API-complete; **Q2-04 step-focus Done**                        |
 | Evidence / Traceability  | Production-ready centres                                       |
 | Verification             | Queue / team / dashboard                                       |
-| Certification / RC       | Partial flagship                                               |
-| Defects / Automation     | Capability modules KEEP                                        |
+| Certification / RC       | **Q2-10 polish Done** (Review for Certification CTAs)          |
+| Defects / Automation     | KEEP · **Q2-05 flaky centre Done**                             |
 | SCM                      | KEEP admin · **PR Quality Done** (`/workspace/qep/pr-quality`) |
 
 ---
 
 ## Ship tracking (SPR-UX-STREAM-002)
 
-| ID    | Ship                                       | Status                                          |
-| ----- | ------------------------------------------ | ----------------------------------------------- |
-| Q2-00 | Spec freeze + gap map                      | **Done**                                        |
-| Q2-01 | Shell · product switcher · project context | KEEP                                            |
-| Q2-02 | Persona-aware Home + My Work               | **Done** (`/workspace/qep/my-work`)             |
-| Q2-03 | Requirements · coverage · traceability     | KEEP (polish later)                             |
-| Q2-04 | Test repository · plans · execution        | **Done** (step-focus + shortcuts + fail→defect) |
-| Q2-05 | Automation centre · flaky                  | Later                                           |
-| Q2-06 | Shared Source · PR Quality                 | **Done** (Source browse + PR Quality View)      |
-| Q2-07 | Defects · retest                           | KEEP                                            |
-| Q2-08 | Evidence · Quality Graph                   | Later graph                                     |
-| Q2-09 | Security/Perf/A11y domains                 | Later                                           |
-| Q2-10 | Release Control · cert pack                | Later polish                                    |
-| Q2-11 | Insights · search · QA · notify            | KEEP platform                                   |
-| Q2-12 | Admin · providers · entitlements           | Later                                           |
+| ID    | Ship                                       | Status                                           |
+| ----- | ------------------------------------------ | ------------------------------------------------ |
+| Q2-00 | Spec freeze + gap map                      | **Done**                                         |
+| Q2-01 | Shell · product switcher · project context | KEEP                                             |
+| Q2-02 | Persona-aware Home + My Work               | **Done** (`/workspace/qep/my-work`)              |
+| Q2-03 | Requirements · coverage · traceability     | KEEP (polish later)                              |
+| Q2-04 | Test repository · plans · execution        | **Done** (step-focus + shortcuts + fail→defect)  |
+| Q2-05 | Automation centre · flaky                  | **Done** (justified flaky + `/automation/flaky`) |
+| Q2-06 | Shared Source · PR Quality                 | **Done** (Source browse + PR Quality View)       |
+| Q2-07 | Defects · retest                           | KEEP                                             |
+| Q2-08 | Evidence · Quality Graph                   | Later graph                                      |
+| Q2-09 | Security/Perf/A11y domains                 | Later                                            |
+| Q2-10 | Release Control · cert pack                | **Done** (Review for Certification + cert packs) |
+| Q2-11 | Insights · search · QA · notify            | KEEP platform                                    |
+| Q2-12 | Admin · providers · entitlements           | Later                                            |
 
 ---
 

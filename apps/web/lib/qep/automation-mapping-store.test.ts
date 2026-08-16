@@ -79,13 +79,15 @@ describe("automation-mapping-store (SPR-APZQEP-220-C)", () => {
     expect(findMapping("missing", "x")).toBeNull();
   });
 
-  it("persists optional notes on upsert", () => {
+  it("persists optional notes and defectRef on upsert", () => {
     const row = upsertMapping({
       providerId: "accessibility",
       externalKey: "axe-home",
       actorId: "user-1",
       notes: "intermittent contrast",
+      defectRef: "def-123",
     });
     expect(row.notes).toBe("intermittent contrast");
+    expect(row.defectRef).toBe("def-123");
   });
 });

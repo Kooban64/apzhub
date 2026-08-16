@@ -164,6 +164,35 @@ export function buildCertificationBoard(
     });
 }
 
+export type AssuranceConclusion = "assured" | "assured_with_conditions" | "not_assured";
+
+/** Stream 3 P3-08 — never say “secure”; use assurance vocabulary. */
+export function assuranceConclusionForRow(
+  row: Pick<CertificationRow, "status" | "assessmentPosition" | "blockers">,
+): AssuranceConclusion {
+  if (row.status === "certified" || row.assessmentPosition === "complete") {
+    return "assured";
+  }
+  if (
+    row.assessmentPosition === "conditional" ||
+    (row.blockers.length === 0 && row.assessmentPosition === "in_progress")
+  ) {
+    return "assured_with_conditions";
+  }
+  return "not_assured";
+}
+
+export function assuranceConclusionLabel(conclusion: AssuranceConclusion): string {
+  switch (conclusion) {
+    case "assured":
+      return "ASSURED";
+    case "assured_with_conditions":
+      return "ASSURED WITH CONDITIONS";
+    case "not_assured":
+      return "NOT ASSURED";
+  }
+}
+
 export type WorkQueueSummary = {
   readonly remediationCount: number;
   readonly retestCount: number;

@@ -20,6 +20,8 @@ export type MappingRecord = {
   readonly flaky: boolean;
   readonly stale: boolean;
   readonly notes?: string;
+  /** Optional defect / ticket reference when flaky is suppressed with a linked defect. */
+  readonly defectRef?: string;
   readonly updatedAt: string;
   readonly updatedBy: string;
 };
@@ -73,6 +75,7 @@ export function upsertMapping(input: {
   readonly flaky?: boolean;
   readonly stale?: boolean;
   readonly notes?: string;
+  readonly defectRef?: string;
 }): MappingRecord {
   hydrate();
   const providerId = input.providerId.trim();
@@ -88,6 +91,9 @@ export function upsertMapping(input: {
   const owner = ownerRaw && ownerRaw.length > 0 ? ownerRaw : undefined;
   const notesRaw = input.notes !== undefined ? input.notes.trim() : prev?.notes;
   const notes = notesRaw && notesRaw.length > 0 ? notesRaw : undefined;
+  const defectRaw =
+    input.defectRef !== undefined ? input.defectRef.trim() : prev?.defectRef;
+  const defectRef = defectRaw && defectRaw.length > 0 ? defectRaw : undefined;
 
   const next: MappingRecord = {
     mappingId: prev?.mappingId ?? `map_${randomUUID().slice(0, 8)}`,
@@ -97,6 +103,7 @@ export function upsertMapping(input: {
     flaky: input.flaky ?? prev?.flaky ?? false,
     stale: input.stale ?? prev?.stale ?? false,
     ...(notes ? { notes } : {}),
+    ...(defectRef ? { defectRef } : {}),
     updatedAt: now,
     updatedBy: input.actorId,
   };

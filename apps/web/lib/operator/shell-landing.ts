@@ -291,7 +291,7 @@ export const APZPEN_NAV: readonly OperatorNavItem[] = [
     label: "Risk acceptance",
   },
   { id: "evidence", href: "/apzpen/evidence", label: "Evidence" },
-  { id: "certification", href: "/apzpen/certification", label: "Certification" },
+  { id: "certification", href: "/apzpen/certification", label: "Assurance" },
   { id: "assets", href: "/apzpen/assets", label: "Assets" },
   { id: "code", href: "/apzpen/code", label: "Code security" },
   { id: "intelligence", href: "/apzpen/intelligence", label: "Intelligence" },

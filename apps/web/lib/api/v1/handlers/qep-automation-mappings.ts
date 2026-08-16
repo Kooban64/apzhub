@@ -50,6 +50,7 @@ export async function handleAutomationMappingsMutation(
     externalKey?: string;
     owner?: string;
     notes?: string;
+    defectRef?: string;
   };
 
   const actorId = context.serviceContext.userId ?? "unknown";
@@ -73,6 +74,17 @@ export async function handleAutomationMappingsMutation(
     });
   }
 
+  if (action === "mark_flaky") {
+    const justification = body.notes?.trim() ?? "";
+    if (justification.length < 8) {
+      throw new PlatformApiHttpError(400, {
+        code: "VALIDATION_ERROR",
+        message:
+          "mark_flaky requires notes justification (at least 8 characters) — never silent suppress",
+      });
+    }
+  }
+
   if (
     action !== "upsert" &&
     action !== "set_owner" &&
@@ -92,6 +104,7 @@ export async function handleAutomationMappingsMutation(
     readonly flaky?: boolean;
     readonly stale?: boolean;
     readonly notes?: string;
+    readonly defectRef?: string;
   } = {
     providerId,
     externalKey,
@@ -102,7 +115,16 @@ export async function handleAutomationMappingsMutation(
         : {}
       : {}),
     ...(action === "upsert" && body.notes !== undefined ? { notes: body.notes } : {}),
-    ...(action === "mark_flaky" ? { flaky: true } : {}),
+    ...(action === "upsert" && body.defectRef !== undefined
+      ? { defectRef: body.defectRef }
+      : {}),
+    ...(action === "mark_flaky"
+      ? {
+          flaky: true,
+          notes: body.notes?.trim(),
+          ...(body.defectRef !== undefined ? { defectRef: body.defectRef.trim() } : {}),
+        }
+      : {}),
     ...(action === "clear_flaky" ? { flaky: false } : {}),
     ...(action === "mark_stale" ? { stale: true } : {}),
     ...(action === "clear_stale" ? { stale: false } : {}),

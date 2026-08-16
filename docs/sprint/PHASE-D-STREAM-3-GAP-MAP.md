@@ -20,7 +20,7 @@
 | Findings list        | Normalised table + operator controls         |
 | Remediation / Retest | Side-by-side · risk acceptance · change link |
 | Evidence / Assets    | Thin inventory                               |
-| Certification        | Partial posture/ledger                       |
+| Certification        | **Assurance Centre** (P3-08 Done)            |
 | Customer portal      | Partial KEEP                                 |
 
 ---
@@ -37,7 +37,7 @@
 | P3-05 | Tools centre · normalised findings          | KEEP ingest                                                     |
 | P3-06 | Finding Detail · evidence · HTTP viewer     | **Done** (`/apzpen/findings/[id]`)                              |
 | P3-07 | Remediation · PR · retest · risk acceptance | **Done** (side panel · `/apzpen/risk-acceptance` · change link) |
-| P3-08 | Assurance · certification · reports         | Later polish                                                    |
+| P3-08 | Assurance · certification · reports         | **Done** (ASSURED vocabulary · domain strip · packs)            |
 | P3-09 | QEP/PRD bridges · search · entitlements     | KEEP platform                                                   |
 
 ---

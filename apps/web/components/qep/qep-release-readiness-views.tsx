@@ -214,12 +214,23 @@ function ReleaseReadinessView() {
   return (
     <QepPageShell
       title="Release Readiness"
-      description="Go/no-go checklist over live orchestration, risk/waivers, and APZPEN security posture. Completing checks does not certify — human GO/NO-GO is on Release Candidate."
+      description="Go/no-go checklist over live orchestration, risk/waivers, and APZPEN security posture. Completing checks does not certify — Review for Certification opens human GO/NO-GO and cert packs."
       breadcrumbs={["QEP", "Release Readiness"]}
       actions={
         <div className="flex flex-wrap gap-2">
-          <Link className={linkPrimary} href={QEP_CERTIFICATION_ROUTES.rcHome}>
-            Open Release Candidate
+          <Link
+            className={linkPrimary}
+            href={QEP_CERTIFICATION_ROUTES.rcHome}
+            data-testid="qep-release-review-for-certification"
+          >
+            Review for Certification
+          </Link>
+          <Link
+            className={linkOutline}
+            href={QEP_CERTIFICATION_ROUTES.home}
+            data-testid="qep-release-open-cert-pack"
+          >
+            Cert packs / evaluations
           </Link>
           <Link className={linkOutline} href="/workspace/qep/risk">
             Risk register

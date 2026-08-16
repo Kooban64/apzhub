@@ -18,6 +18,8 @@ import {
 } from "@/components/operator/operator-shell";
 import type { Engagement, Finding, SecurityPosture } from "@/lib/apzpen/types";
 import {
+  assuranceConclusionForRow,
+  assuranceConclusionLabel,
   buildCertificationBoard,
   filterEvidenceGaps,
   filterEvidenceLibrary,
@@ -706,90 +708,129 @@ export function ApzpenCertificationPage() {
     },
   });
   const rows = buildCertificationBoard(q.data?.engagements ?? []);
+  const assured = rows.filter((r) => assuranceConclusionForRow(r) === "assured").length;
+  const conditional = rows.filter(
+    (r) => assuranceConclusionForRow(r) === "assured_with_conditions",
+  ).length;
+  const notAssured = rows.filter(
+    (r) => assuranceConclusionForRow(r) === "not_assured",
+  ).length;
 
   return (
     <Frame
-      title="Certification"
-      subtitle="Assurance positions across engagements — complete, conditional, or blocked."
+      title="Assurance Centre"
+      subtitle="ASSURED · ASSURED WITH CONDITIONS · NOT ASSURED — never “secure.” Immutable ledger below."
     >
-      <OperatorPanel title="Certification board">
+      <OperatorMetricStrip
+        metrics={[
+          { label: "Assured", value: String(assured) },
+          { label: "With conditions", value: String(conditional) },
+          { label: "Not assured", value: String(notAssured) },
+          {
+            label: "Ledger",
+            value: String(ledgerQ.data?.records?.length ?? 0),
+          },
+        ]}
+      />
+      <OperatorPanel title="Assurance board">
         {certify.error ? (
           <p className="mb-2 text-[11px] text-[var(--color-destructive)]">
             {(certify.error as Error).message}
           </p>
         ) : null}
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" data-testid="apzpen-assurance-board">
           <table className="w-full text-left text-[12px]">
             <thead className="text-[10px] tracking-wide text-[var(--color-muted-foreground)] uppercase">
               <tr>
                 <th className="py-1.5 pr-2">Engagement</th>
-                <th className="py-1.5 pr-2">Status</th>
-                <th className="py-1.5 pr-2">Position</th>
+                <th className="py-1.5 pr-2">Assurance</th>
+                <th className="py-1.5 pr-2">Domains</th>
                 <th className="py-1.5 pr-2">Open C/H</th>
                 <th className="py-1.5 pr-2" />
               </tr>
             </thead>
             <tbody>
-              {rows.map((row) => (
-                <tr
-                  key={row.engagementId}
-                  className="border-t border-[var(--color-border)]"
-                >
-                  <td className="py-2 pr-2">
-                    <Link
-                      href={`/apzpen/engagements/${row.engagementId}`}
-                      className="font-medium hover:underline"
-                    >
-                      {row.title}
-                    </Link>
-                    <p className="text-[11px] text-[var(--color-muted-foreground)]">
-                      {row.customerName} · {row.applicationName}
-                    </p>
-                  </td>
-                  <td className="py-2 pr-2">{row.status}</td>
-                  <td className="py-2 pr-2 uppercase">{row.assessmentPosition}</td>
-                  <td className="py-2 pr-2 font-mono tabular-nums">
-                    {row.critical}/{row.high} · open {row.openCount}
-                  </td>
-                  <td className="space-y-1 py-2 pr-2 whitespace-nowrap">
-                    {row.blockers.length > 0 ? (
-                      <p className="max-w-[220px] whitespace-normal text-[10px] text-[var(--color-muted-foreground)]">
-                        {row.blockers.join(" · ")}
-                      </p>
-                    ) : null}
-                    <div className="space-x-2">
+              {rows.map((row) => {
+                const conclusion = assuranceConclusionForRow(row);
+                return (
+                  <tr
+                    key={row.engagementId}
+                    className="border-t border-[var(--color-border)]"
+                  >
+                    <td className="py-2 pr-2">
                       <Link
-                        href={`/apzpen/reports?engagementId=${encodeURIComponent(row.engagementId)}`}
-                        className="text-[11px] underline"
+                        href={`/apzpen/engagements/${row.engagementId}`}
+                        className="font-medium hover:underline"
                       >
-                        Report
+                        {row.title}
                       </Link>
-                      {row.status !== "certified" ? (
-                        <button
-                          type="button"
-                          className="text-[11px] underline disabled:opacity-50"
-                          disabled={certify.isPending || !row.canCertify}
-                          title={
-                            row.canCertify
-                              ? "Certify assessment"
-                              : row.blockers.join("; ")
-                          }
-                          onClick={() => certify.mutate(row.engagementId)}
-                        >
-                          Certify
-                        </button>
+                      <p className="text-[11px] text-[var(--color-muted-foreground)]">
+                        {row.customerName} · {row.applicationName} · {row.status}
+                      </p>
+                    </td>
+                    <td className="py-2 pr-2">
+                      <span className="font-semibold tracking-wide">
+                        {assuranceConclusionLabel(conclusion)}
+                      </span>
+                      <p className="text-[10px] text-[var(--color-muted-foreground)] uppercase">
+                        {row.assessmentPosition}
+                      </p>
+                    </td>
+                    <td className="py-2 pr-2 text-[11px]">
+                      <span>RoE {row.roeStatus === "approved" ? "✓" : "✗"}</span>
+                      {" · "}
+                      <span>
+                        Scope {row.blockers.some((b) => /scope/i.test(b)) ? "✗" : "✓"}
+                      </span>
+                      {" · "}
+                      <span>
+                        Findings{" "}
+                        {row.critical > 0 ? "blocked" : row.high > 0 ? "cond." : "ok"}
+                      </span>
+                    </td>
+                    <td className="py-2 pr-2 font-mono tabular-nums">
+                      {row.critical}/{row.high} · open {row.openCount}
+                    </td>
+                    <td className="space-y-1 py-2 pr-2 whitespace-nowrap">
+                      {row.blockers.length > 0 ? (
+                        <p className="max-w-[220px] whitespace-normal text-[10px] text-[var(--color-muted-foreground)]">
+                          {row.blockers.join(" · ")}
+                        </p>
                       ) : null}
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                      <div className="space-x-2">
+                        <Link
+                          href={`/apzpen/reports?engagementId=${encodeURIComponent(row.engagementId)}`}
+                          className="text-[11px] underline"
+                        >
+                          Report pack
+                        </Link>
+                        {row.status !== "certified" ? (
+                          <button
+                            type="button"
+                            className="text-[11px] underline disabled:opacity-50"
+                            disabled={certify.isPending || !row.canCertify}
+                            title={
+                              row.canCertify
+                                ? "Record ASSURED certification"
+                                : row.blockers.join("; ")
+                            }
+                            onClick={() => certify.mutate(row.engagementId)}
+                          >
+                            Certify
+                          </button>
+                        ) : null}
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
       </OperatorPanel>
       <OperatorPanel title="Immutable certification ledger">
         <p className="mb-2 text-[11px] text-[var(--color-muted-foreground)]">
-          Append-only records — snapshot hash is never rewritten.
+          Append-only ASSURED records — snapshot hash is never rewritten.
         </p>
         {(ledgerQ.data?.records ?? []).length === 0 ? (
           <p className="text-[12px] text-[var(--color-muted-foreground)]">

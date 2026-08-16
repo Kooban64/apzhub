@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  assuranceConclusionForRow,
+  assuranceConclusionLabel,
   buildCertificationBoard,
   filterEvidenceGaps,
   filterMyWorkQueue,
@@ -128,5 +130,35 @@ describe("APZPEN workflow views", () => {
     expect(
       filterMyWorkQueue(findings, "dev@acme.test").map((f) => f.findingId),
     ).toEqual(["1"]);
+  });
+
+  it("maps assurance conclusions without saying secure", () => {
+    expect(
+      assuranceConclusionLabel(
+        assuranceConclusionForRow({
+          status: "certified",
+          assessmentPosition: "complete",
+          blockers: [],
+        }),
+      ),
+    ).toBe("ASSURED");
+    expect(
+      assuranceConclusionLabel(
+        assuranceConclusionForRow({
+          status: "remediating",
+          assessmentPosition: "conditional",
+          blockers: [],
+        }),
+      ),
+    ).toBe("ASSURED WITH CONDITIONS");
+    expect(
+      assuranceConclusionLabel(
+        assuranceConclusionForRow({
+          status: "in_progress",
+          assessmentPosition: "blocked",
+          blockers: ["1 open critical finding(s)"],
+        }),
+      ),
+    ).toBe("NOT ASSURED");
   });
 });
