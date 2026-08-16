@@ -18,7 +18,7 @@
 | Home / My Work       | `/apzpen` · `/apzpen/my-work` (thin queues)  |
 | Engagements          | List + detail (RoE, scope, dispatch, ingest) |
 | Findings list        | Normalised table + operator controls         |
-| Remediation / Retest | Side-by-side workbench (**P3-07 Done**)      |
+| Remediation / Retest | Side-by-side · risk acceptance · change link |
 | Evidence / Assets    | Thin inventory                               |
 | Certification        | Partial posture/ledger                       |
 | Customer portal      | Partial KEEP                                 |
@@ -27,18 +27,18 @@
 
 ## Ship tracking (SPR-UX-STREAM-003)
 
-| ID    | Ship                                        | Status                                        |
-| ----- | ------------------------------------------- | --------------------------------------------- |
-| P3-00 | Spec freeze + gap map                       | **Done**                                      |
-| P3-01 | Shell · home · personas · assets            | KEEP · polish later                           |
-| P3-02 | Shared Source consumer (security overlay)   | **Phase-1 Done** (link → `/workspace/source`) |
-| P3-03 | Engagements · scope · RoE · authorisation   | KEEP                                          |
-| P3-04 | Engagement Workbench                        | **Done** (tabbed workbench)                   |
-| P3-05 | Tools centre · normalised findings          | KEEP ingest                                   |
-| P3-06 | Finding Detail · evidence · HTTP viewer     | **Done** (`/apzpen/findings/[id]`)            |
-| P3-07 | Remediation · PR · retest · risk acceptance | **Done** (queue + side panel)                 |
-| P3-08 | Assurance · certification · reports         | Later polish                                  |
-| P3-09 | QEP/PRD bridges · search · entitlements     | KEEP platform                                 |
+| ID    | Ship                                        | Status                                                          |
+| ----- | ------------------------------------------- | --------------------------------------------------------------- |
+| P3-00 | Spec freeze + gap map                       | **Done**                                                        |
+| P3-01 | Shell · home · personas · assets            | KEEP · polish later                                             |
+| P3-02 | Shared Source consumer (security overlay)   | **Done** (Source change + security deep links)                  |
+| P3-03 | Engagements · scope · RoE · authorisation   | KEEP                                                            |
+| P3-04 | Engagement Workbench                        | **Done** (tabbed workbench)                                     |
+| P3-05 | Tools centre · normalised findings          | KEEP ingest                                                     |
+| P3-06 | Finding Detail · evidence · HTTP viewer     | **Done** (`/apzpen/findings/[id]`)                              |
+| P3-07 | Remediation · PR · retest · risk acceptance | **Done** (side panel · `/apzpen/risk-acceptance` · change link) |
+| P3-08 | Assurance · certification · reports         | Later polish                                                    |
+| P3-09 | QEP/PRD bridges · search · entitlements     | KEEP platform                                                   |
 
 ---
 

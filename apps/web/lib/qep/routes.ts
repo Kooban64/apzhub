@@ -197,6 +197,13 @@ export {
 } from "./certification-routes";
 
 export {
+  QEP_PR_QUALITY_BASE_PATH,
+  QEP_PR_QUALITY_ROUTES,
+  isQepPrQualityRoute,
+  parseQepPrQualityChangeId,
+} from "./pr-quality-routes";
+
+export {
   QEP_QUALITY_JOURNEY_BASE_PATH,
   QEP_QUALITY_JOURNEY_ROUTES,
   isQepQualityJourneyRoute,

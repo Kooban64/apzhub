@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 import type { Finding, FindingSeverity } from "@/lib/apzpen/types";
 
@@ -70,22 +71,6 @@ export function FindingStatusButtons({
           FP
         </button>
       ) : null}
-      {canLifecycle ? (
-        <button
-          type="button"
-          className="text-[11px] underline disabled:opacity-50"
-          disabled={pending}
-          onClick={() =>
-            onAction({
-              action: "update_status",
-              findingId: finding.findingId,
-              status: "risk_accepted",
-            })
-          }
-        >
-          Accept
-        </button>
-      ) : null}
       {canClose ? (
         <button
           type="button"
@@ -135,6 +120,138 @@ export function FindingStatusButtons({
         </>
       ) : null}
     </span>
+  );
+}
+
+export function RiskAcceptanceForm({
+  finding,
+  onAction,
+  pending,
+}: {
+  finding: Finding;
+  onAction: (payload: FindingActionPayload) => void;
+  pending?: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const [reason, setReason] = useState("");
+  const canAccept =
+    finding.status === "open" ||
+    finding.status === "remediating" ||
+    finding.status === "retest_failed";
+
+  if (finding.status === "risk_accepted" && finding.riskAcceptance) {
+    return (
+      <div
+        className="mt-2 rounded border border-[var(--color-border)] p-2 text-[11px]"
+        data-testid="apzpen-risk-acceptance-record"
+      >
+        <p className="font-medium">Risk accepted</p>
+        <p className="mt-1 whitespace-pre-wrap">{finding.riskAcceptance.reason}</p>
+        <p className="mt-1 text-[var(--color-muted-foreground)]">
+          {finding.riskAcceptance.acceptedBy} · {finding.riskAcceptance.acceptedAt}
+        </p>
+      </div>
+    );
+  }
+
+  if (!canAccept) return null;
+
+  return (
+    <div className="mt-1">
+      <button
+        type="button"
+        className="text-[11px] underline"
+        data-testid="apzpen-risk-acceptance-toggle"
+        onClick={() => setOpen((v) => !v)}
+      >
+        {open ? "Hide risk acceptance" : "Accept risk…"}
+      </button>
+      {open ? (
+        <div className="mt-2 space-y-2 rounded border border-dashed border-[var(--color-border)] p-2">
+          <label className="block text-[10px] text-[var(--color-muted-foreground)]">
+            Justification (required)
+            <textarea
+              className="mt-1 min-h-[64px] w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1.5 text-[11px]"
+              value={reason}
+              onChange={(e) => setReason(e.target.value)}
+              aria-label={`Risk acceptance reason for ${finding.title}`}
+              data-testid="apzpen-risk-acceptance-reason"
+            />
+          </label>
+          <button
+            type="button"
+            className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)] disabled:opacity-50"
+            disabled={reason.trim().length < 8 || pending}
+            data-testid="apzpen-risk-acceptance-submit"
+            onClick={() => {
+              onAction({
+                action: "accept_risk",
+                findingId: finding.findingId,
+                reason: reason.trim(),
+              });
+              setReason("");
+              setOpen(false);
+            }}
+          >
+            Record risk acceptance
+          </button>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+export function RemediationChangeLinkForm({
+  finding,
+  onAction,
+  pending,
+}: {
+  finding: Finding;
+  onAction: (payload: FindingActionPayload) => void;
+  pending?: boolean;
+}) {
+  const [ref, setRef] = useState(finding.remediationChangeRef ?? "");
+
+  return (
+    <div className="mt-2 space-y-1" data-testid="apzpen-remediation-change-link">
+      <label className="block text-[10px] text-[var(--color-muted-foreground)]">
+        Remediation change / PR ref
+        <input
+          className="mt-1 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[11px]"
+          placeholder="Source change id or PR reference"
+          value={ref}
+          onChange={(e) => setRef(e.target.value)}
+          aria-label={`Remediation change for ${finding.title}`}
+        />
+      </label>
+      <div className="flex flex-wrap items-center gap-2">
+        <button
+          type="button"
+          className="text-[11px] underline disabled:opacity-50"
+          disabled={!ref.trim() || pending}
+          onClick={() =>
+            onAction({
+              action: "link_remediation_change",
+              findingId: finding.findingId,
+              remediationChangeRef: ref.trim(),
+            })
+          }
+        >
+          Link change
+        </button>
+        {finding.remediationChangeRef ? (
+          <span className="font-mono text-[10px] text-[var(--color-muted-foreground)]">
+            Linked: {finding.remediationChangeRef}
+          </span>
+        ) : null}
+        <Link
+          href="/workspace/source"
+          className="text-[11px] text-[var(--color-primary)] underline-offset-2 hover:underline"
+        >
+          Open Source
+        </Link>
+      </div>
+    </div>
   );
 }
 

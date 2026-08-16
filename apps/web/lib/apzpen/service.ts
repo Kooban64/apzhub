@@ -281,9 +281,67 @@ export function updateFindingStatus(
     ...finding,
     status,
     updatedAt: now(),
+    riskAcceptance: status === "risk_accepted" ? finding.riskAcceptance : undefined,
   });
   refreshAssessment(tenantId, finding.engagementId);
   return saved;
+}
+
+/**
+ * Governed risk acceptance — justification required (P3-07).
+ */
+export function acceptFindingRisk(
+  tenantId: string,
+  findingId: string,
+  input: { readonly reason: string; readonly acceptedBy: string },
+): Finding {
+  const reason = input.reason.trim();
+  if (reason.length < 8) {
+    throw new ApzpenDomainError(
+      "VALIDATION",
+      "Risk acceptance requires a justification (at least 8 characters).",
+    );
+  }
+  const finding = getFinding(tenantId, findingId);
+  if (!finding) {
+    throw new ApzpenDomainError("NOT_FOUND", "Finding not found.");
+  }
+  const status = transitionFindingStatus(finding.status, "risk_accepted");
+  const saved = saveFinding({
+    ...finding,
+    status,
+    updatedAt: now(),
+    riskAcceptance: {
+      reason,
+      acceptedBy: input.acceptedBy.trim() || "unknown",
+      acceptedAt: now(),
+    },
+  });
+  refreshAssessment(tenantId, finding.engagementId);
+  return saved;
+}
+
+export function linkFindingRemediationChange(
+  tenantId: string,
+  findingId: string,
+  remediationChangeRef: string,
+): Finding {
+  const ref = remediationChangeRef.trim();
+  if (!ref) {
+    throw new ApzpenDomainError(
+      "VALIDATION",
+      "Remediation change reference is required.",
+    );
+  }
+  const finding = getFinding(tenantId, findingId);
+  if (!finding) {
+    throw new ApzpenDomainError("NOT_FOUND", "Finding not found.");
+  }
+  return saveFinding({
+    ...finding,
+    remediationChangeRef: ref,
+    updatedAt: now(),
+  });
 }
 
 export function requestRetest(

@@ -24,6 +24,7 @@ import {
   isQepQualityFlowsRoute,
   isQepCertificationRoute,
   isQepQualityJourneyRoute,
+  isQepPrQualityRoute,
   isQepEarlyCheckRoute,
   isQepPortfolioRoute,
   isQepHomeRoute,
@@ -51,6 +52,7 @@ import { QepPortfolioRouterView } from "./qep-portfolio-views";
 import { QepQualityFlowRouterView } from "./qep-quality-flow-views";
 import { QepQualityIntelligenceRouterView } from "./qep-quality-intelligence-views";
 import { QepQualityJourneyRouterView } from "./qep-quality-journey-views";
+import { QepPrQualityRouterView } from "./qep-pr-quality-views";
 import { QepReleaseReadinessRouterView } from "./qep-release-readiness-views";
 import { QepSearchRouterView } from "./qep-search-view";
 import { QepScmRouterView } from "./qep-scm-views";
@@ -179,6 +181,10 @@ export function QepWorkspaceRouter() {
 
   if (isQepQualityFlowsRoute(pathname)) {
     return <QepQualityFlowRouterView />;
+  }
+
+  if (isQepPrQualityRoute(pathname)) {
+    return <QepPrQualityRouterView />;
   }
 
   if (isQepQualityJourneyRoute(pathname)) {

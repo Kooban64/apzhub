@@ -112,6 +112,14 @@ export type Finding = {
   readonly updatedAt: string;
   readonly createdBy: string;
   readonly assignedTo?: string;
+  /** Formal risk acceptance record — required when status is risk_accepted. */
+  readonly riskAcceptance?: {
+    readonly reason: string;
+    readonly acceptedBy: string;
+    readonly acceptedAt: string;
+  };
+  /** Provider-neutral remediation change / PR reference (Source change id or URL). */
+  readonly remediationChangeRef?: string;
 };
 
 export type SecurityPosture = {

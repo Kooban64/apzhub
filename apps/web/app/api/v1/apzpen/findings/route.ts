@@ -9,11 +9,13 @@ import { jsonDataResponse } from "@/lib/api/v1/response";
 import { actorEmail, requireApzpenAccess, resolveTenantId } from "@/lib/apzpen/access";
 import { ApzpenDomainError } from "@/lib/apzpen/domain";
 import {
+  acceptFindingRisk,
   addFindingEvidence,
   assignFinding,
   createFinding,
   getTenantFinding,
   importProviderFindings,
+  linkFindingRemediationChange,
   listTenantFindings,
   requestRetest,
   updateFindingDetails,
@@ -118,7 +120,42 @@ async function handlePost(request: NextRequest, context: PlatformApiRequestConte
           message: "findingId and status required",
         });
       }
+      if (body.status === "risk_accepted") {
+        throw new PlatformApiHttpError(400, {
+          code: "VALIDATION",
+          message: "Use action accept_risk with a justification.",
+        });
+      }
       const finding = updateFindingStatus(tenantId, body.findingId, body.status);
+      return jsonDataResponse({ finding }, context.tracing);
+    }
+    if (body.action === "accept_risk") {
+      requireApzpenAccess(context, "test");
+      if (!body.findingId || !body.reason) {
+        throw new PlatformApiHttpError(400, {
+          code: "VALIDATION",
+          message: "findingId and reason required",
+        });
+      }
+      const finding = acceptFindingRisk(tenantId, body.findingId, {
+        reason: body.reason,
+        acceptedBy: actorEmail(context),
+      });
+      return jsonDataResponse({ finding }, context.tracing);
+    }
+    if (body.action === "link_remediation_change") {
+      requireApzpenAccess(context, "test");
+      if (!body.findingId || !body.remediationChangeRef) {
+        throw new PlatformApiHttpError(400, {
+          code: "VALIDATION",
+          message: "findingId and remediationChangeRef required",
+        });
+      }
+      const finding = linkFindingRemediationChange(
+        tenantId,
+        body.findingId,
+        body.remediationChangeRef,
+      );
       return jsonDataResponse({ finding }, context.tracing);
     }
     if (body.action === "request_retest") {

@@ -50,6 +50,15 @@ export function filterRetestQueue(findings: readonly Finding[]): readonly Findin
     .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 }
 
+export function filterRiskAcceptedQueue(
+  findings: readonly Finding[],
+): readonly Finding[] {
+  return findings
+    .filter((f) => f.status === "risk_accepted")
+    .slice()
+    .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+}
+
 export function filterEvidenceGaps(findings: readonly Finding[]): readonly Finding[] {
   return findings.filter(findingNeedsEvidence);
 }

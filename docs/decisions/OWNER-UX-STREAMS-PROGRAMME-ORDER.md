@@ -14,7 +14,7 @@
 >
 > **Engineering:** Phase A–C **COMPLETE · CERTIFIED 100%**. **Phase D** (Streams 2∥3 APZQEP + APZPEN) **ACTIVE** — ([PHASE-D-STREAM-2-GAP-MAP](../sprint/PHASE-D-STREAM-2-GAP-MAP.md) · [PHASE-D-STREAM-3-GAP-MAP](../sprint/PHASE-D-STREAM-3-GAP-MAP.md)).
 >
-> **Engineering 2026-08-16:** Phase A–C certified. Phase D progressed — QEP My Work · execution step-focus · PEN Engagement Workbench · Finding Detail · remediation/retest side-by-side · Shared Source Phase-1 browse (`/workspace/source`).
+> **Engineering 2026-08-16:** Phase A–C certified. Phase D progressed — QEP My Work · execution step-focus · PR Quality View · PEN Engagement Workbench · Finding Detail · remediation/retest · risk acceptance · Shared Source browse + change detail.
 
 ---
 

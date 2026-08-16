@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import {
   FindingAssignEvidenceForm,
   FindingStatusButtons,
+  RemediationChangeLinkForm,
+  RiskAcceptanceForm,
 } from "@/components/apzpen/finding-operator-controls";
 import { OperatorGate } from "@/components/operator/operator-gate";
 import {
@@ -22,6 +24,7 @@ import {
   filterMyWorkQueue,
   filterRemediationQueue,
   filterRetestQueue,
+  filterRiskAcceptedQueue,
 } from "@/lib/apzpen/workflow-views";
 import { useSession } from "@apzhub/auth";
 
@@ -192,6 +195,12 @@ function FindingWorkbenchPanel({
 
       <div className="border-t border-[var(--color-border)] pt-2">
         <FindingStatusButtons finding={finding} onAction={onAction} pending={pending} />
+        <RiskAcceptanceForm finding={finding} onAction={onAction} pending={pending} />
+        <RemediationChangeLinkForm
+          finding={finding}
+          onAction={onAction}
+          pending={pending}
+        />
         <FindingAssignEvidenceForm
           finding={finding}
           onAction={onAction}
@@ -513,6 +522,77 @@ export function ApzpenRetestsPage() {
         ) : (
           <p className="text-[12px] text-[var(--color-muted-foreground)]">
             Select a finding to retest side-by-side.
+          </p>
+        )}
+      </div>
+    </Frame>
+  );
+}
+
+export function ApzpenRiskAcceptancePage() {
+  const q = useQuery({
+    queryKey: ["apzpen", "findings", "risk-acceptance"],
+    queryFn: fetchFindings,
+  });
+  const action = useFindingActions();
+  const accepted = filterRiskAcceptedQueue(q.data?.findings ?? []);
+  const candidates = filterRemediationQueue(q.data?.findings ?? []).filter(
+    (f) => f.severity === "critical" || f.severity === "high",
+  );
+  const { selectedId, setSelectedId, selected } = useSelectedFinding(
+    accepted.length > 0 ? accepted : candidates,
+  );
+
+  return (
+    <Frame
+      title="Risk acceptance"
+      subtitle="Formal justifications for accepted residual risk — never a silent status click."
+    >
+      <OperatorMetricStrip
+        metrics={[
+          { label: "Accepted", value: String(accepted.length) },
+          {
+            label: "High/critical open",
+            value: String(candidates.length),
+          },
+        ]}
+      />
+      <div
+        className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)]"
+        data-testid="apzpen-risk-acceptance-workbench"
+      >
+        <div className="space-y-4">
+          <OperatorPanel title="Accepted risks">
+            <WorkflowFindingsTable
+              findings={accepted}
+              pending={action.isPending}
+              onAction={(payload) => action.mutate(payload)}
+              selectedFindingId={selectedId}
+              onSelectFinding={setSelectedId}
+              compactActions
+            />
+          </OperatorPanel>
+          <OperatorPanel title="Candidates (high / critical open)">
+            <WorkflowFindingsTable
+              findings={candidates}
+              pending={action.isPending}
+              onAction={(payload) => action.mutate(payload)}
+              selectedFindingId={selectedId}
+              onSelectFinding={setSelectedId}
+              compactActions
+            />
+          </OperatorPanel>
+        </div>
+        {selected ? (
+          <FindingWorkbenchPanel
+            finding={selected}
+            onAction={(payload) => action.mutate(payload)}
+            pending={action.isPending}
+            actionError={action.error as Error | null}
+          />
+        ) : (
+          <p className="text-[12px] text-[var(--color-muted-foreground)]">
+            Select a finding to record or review risk acceptance.
           </p>
         )}
       </div>

@@ -6,6 +6,8 @@ import Link from "next/link";
 import {
   FindingAssignEvidenceForm,
   FindingStatusButtons,
+  RemediationChangeLinkForm,
+  RiskAcceptanceForm,
 } from "@/components/apzpen/finding-operator-controls";
 import {
   OperatorMetricStrip,
@@ -225,6 +227,16 @@ export function ApzpenFindingDetailPage({ findingId }: { readonly findingId: str
 
             <OperatorPanel title="Operator actions">
               <FindingStatusButtons
+                finding={finding}
+                onAction={(payload) => action.mutate(payload)}
+                pending={action.isPending}
+              />
+              <RiskAcceptanceForm
+                finding={finding}
+                onAction={(payload) => action.mutate(payload)}
+                pending={action.isPending}
+              />
+              <RemediationChangeLinkForm
                 finding={finding}
                 onAction={(payload) => action.mutate(payload)}
                 pending={action.isPending}

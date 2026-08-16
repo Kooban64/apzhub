@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { ApzpenDomainError } from "./domain";
 import { ingestProviderArtefact } from "./service";
 import {
+  acceptFindingRisk,
   addScopeTarget,
   approveRulesOfEngagement,
   certifyEngagement,
@@ -11,6 +12,7 @@ import {
   ensureDemoEngagement,
   getEngagementPosture,
   importProviderFindings,
+  linkFindingRemediationChange,
   requestRetest,
   startEngagementTesting,
   updateFindingStatus,
@@ -194,10 +196,61 @@ describe("APZPEN service", () => {
     });
     expect(() => certifyEngagement("t5", eng.engagementId)).toThrow(/critical/);
 
-    updateFindingStatus("t5", critical.findingId, "risk_accepted");
+    acceptFindingRisk("t5", critical.findingId, {
+      reason: "Compensating control accepted by CISO for this release.",
+      acceptedBy: "ciso@acme.test",
+    });
     updateFindingStatus("t5", ingested.created[0]!.findingId, "closed");
     const certified = certifyEngagement("t5", eng.engagementId);
     expect(certified.status).toBe("certified");
     expect(certified.assessmentPosition).toBe("complete");
+  });
+
+  it("requires justification for risk acceptance and links remediation changes", () => {
+    const eng = createEngagement({
+      tenantId: "t-risk",
+      customerName: "Acme",
+      applicationName: "API",
+      title: "Risk ship",
+      environment: "prod",
+      createdBy: "sec@apzor.com",
+    });
+    addScopeTarget("t-risk", eng.engagementId, {
+      kind: "api",
+      label: "API",
+      identifier: "https://api.acme.test",
+      environment: "prod",
+    });
+    approveRulesOfEngagement("t-risk", eng.engagementId, "sec@apzor.com");
+    startEngagementTesting("t-risk", eng.engagementId);
+
+    const finding = createFinding({
+      tenantId: "t-risk",
+      engagementId: eng.engagementId,
+      title: "IDOR",
+      description: "tenant bypass",
+      severity: "high",
+      createdBy: "sec@apzor.com",
+    });
+    expect(() =>
+      acceptFindingRisk("t-risk", finding.findingId, {
+        reason: "short",
+        acceptedBy: "ciso",
+      }),
+    ).toThrow(/justification/i);
+
+    const linked = linkFindingRemediationChange(
+      "t-risk",
+      finding.findingId,
+      "chg-pr-42",
+    );
+    expect(linked.remediationChangeRef).toBe("chg-pr-42");
+
+    const accepted = acceptFindingRisk("t-risk", finding.findingId, {
+      reason: "Accepted with WAF rule compensating control.",
+      acceptedBy: "ciso@acme.test",
+    });
+    expect(accepted.status).toBe("risk_accepted");
+    expect(accepted.riskAcceptance?.reason).toContain("WAF");
   });
 });

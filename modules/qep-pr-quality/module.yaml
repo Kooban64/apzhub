@@ -1,0 +1,44 @@
+manifestSchemaVersion: "1.0"
+id: qep-pr-quality
+name: PR Quality
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: >
+    Stream 2 signature PR Quality View — risk, quality impact, verification
+    matrix, and APZQEP assessment for a change. Consumes Shared Source; does
+    not own the code browser.
+  product: apzqep
+  slug: pr-quality
+  programme: SPR-UX-STREAM-002
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: active
+
+permissions:
+  - id: qep.scm.read
+    label: View PR Quality
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: PR Quality
+    icon: git-pull-request
+    route: /workspace/qep/pr-quality
+    order: 66
+    permission: qep.scm.read
+  view:
+    title: PR Quality
+    workspace: qep
+    route: /workspace/qep/pr-quality
+    permission: qep.scm.read

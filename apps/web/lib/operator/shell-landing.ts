@@ -285,6 +285,11 @@ export const APZPEN_NAV: readonly OperatorNavItem[] = [
   { id: "findings", href: "/apzpen/findings", label: "Findings" },
   { id: "remediation", href: "/apzpen/remediation", label: "Remediation" },
   { id: "retests", href: "/apzpen/retests", label: "Retests" },
+  {
+    id: "risk-acceptance",
+    href: "/apzpen/risk-acceptance",
+    label: "Risk acceptance",
+  },
   { id: "evidence", href: "/apzpen/evidence", label: "Evidence" },
   { id: "certification", href: "/apzpen/certification", label: "Certification" },
   { id: "assets", href: "/apzpen/assets", label: "Assets" },

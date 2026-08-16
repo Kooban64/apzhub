@@ -13,17 +13,17 @@
 
 ## KEEP
 
-| Area                     | Path / note                                    |
-| ------------------------ | ---------------------------------------------- |
-| Home / Command Centre    | `/workspace/qep/home` · `qep-home-views.tsx`   |
-| Requirements / baselines | `qep-requirements-views` · enterprise coverage |
-| Test specs / plans       | Full workbenches                               |
-| Execution / suites       | API-complete; **Q2-04 step-focus Done**        |
-| Evidence / Traceability  | Production-ready centres                       |
-| Verification             | Queue / team / dashboard                       |
-| Certification / RC       | Partial flagship                               |
-| Defects / Automation     | Capability modules KEEP                        |
-| SCM                      | Partial — not PR Quality View yet              |
+| Area                     | Path / note                                                    |
+| ------------------------ | -------------------------------------------------------------- |
+| Home / Command Centre    | `/workspace/qep/home` · `qep-home-views.tsx`                   |
+| Requirements / baselines | `qep-requirements-views` · enterprise coverage                 |
+| Test specs / plans       | Full workbenches                                               |
+| Execution / suites       | API-complete; **Q2-04 step-focus Done**                        |
+| Evidence / Traceability  | Production-ready centres                                       |
+| Verification             | Queue / team / dashboard                                       |
+| Certification / RC       | Partial flagship                                               |
+| Defects / Automation     | Capability modules KEEP                                        |
+| SCM                      | KEEP admin · **PR Quality Done** (`/workspace/qep/pr-quality`) |
 
 ---
 
@@ -37,7 +37,7 @@
 | Q2-03 | Requirements · coverage · traceability     | KEEP (polish later)                             |
 | Q2-04 | Test repository · plans · execution        | **Done** (step-focus + shortcuts + fail→defect) |
 | Q2-05 | Automation centre · flaky                  | Later                                           |
-| Q2-06 | Shared Source · PR Quality                 | **Phase-1 Done** (`/workspace/source` browse)   |
+| Q2-06 | Shared Source · PR Quality                 | **Done** (Source browse + PR Quality View)      |
 | Q2-07 | Defects · retest                           | KEEP                                            |
 | Q2-08 | Evidence · Quality Graph                   | Later graph                                     |
 | Q2-09 | Security/Perf/A11y domains                 | Later                                           |

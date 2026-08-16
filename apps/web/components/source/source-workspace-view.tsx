@@ -4,8 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 
-import { parseSourceRepositoryId, SOURCE_ROUTES } from "@/lib/source/routes";
-import { QEP_SCM_ROUTES } from "@/lib/qep/routes";
+import {
+  parseSourceChangeId,
+  parseSourceRepositoryId,
+  SOURCE_ROUTES,
+} from "@/lib/source/routes";
+import { QEP_PR_QUALITY_ROUTES, QEP_SCM_ROUTES } from "@/lib/qep/routes";
 
 type RepositoryRow = {
   repositoryId: string;
@@ -46,7 +50,11 @@ async function fetchJson<T>(url: string): Promise<T> {
 export function SourceWorkspaceView() {
   const pathname = usePathname() ?? "";
   const repositoryId = parseSourceRepositoryId(pathname);
+  const changeEventId = parseSourceChangeId(pathname);
 
+  if (changeEventId) {
+    return <ChangeBrowseView changeEventId={changeEventId} />;
+  }
   if (repositoryId) {
     return <RepositoryBrowseView repositoryId={repositoryId} />;
   }
@@ -79,6 +87,12 @@ function Shell({
             className="text-[var(--color-primary)] underline-offset-2 hover:underline"
           >
             Repositories
+          </Link>
+          <Link
+            href={QEP_PR_QUALITY_ROUTES.home}
+            className="text-[var(--color-muted-foreground)] underline-offset-2 hover:underline"
+          >
+            PR Quality
           </Link>
           <Link
             href={QEP_SCM_ROUTES.home}
@@ -187,11 +201,27 @@ function SourceHomeView() {
                   key={change.changeEventId}
                   className="rounded border border-[var(--color-border)] px-3 py-2"
                 >
-                  <p className="font-medium">{change.title ?? change.summary}</p>
+                  <Link
+                    href={SOURCE_ROUTES.change(change.changeEventId)}
+                    className="font-medium hover:underline"
+                  >
+                    {change.title ?? change.summary}
+                  </Link>
                   <p className="text-[11px] text-[var(--color-muted-foreground)]">
                     {change.kind}
                     {change.branch ? ` · ${change.branch}` : ""} · {change.occurredAt}
                   </p>
+                  <div className="mt-1 flex gap-3 text-[11px]">
+                    <Link
+                      href={QEP_PR_QUALITY_ROUTES.byChange(change.changeEventId)}
+                      className="underline"
+                    >
+                      PR Quality
+                    </Link>
+                    <Link href="/apzpen/code" className="underline">
+                      Security
+                    </Link>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -257,7 +287,12 @@ function RepositoryBrowseView({ repositoryId }: { readonly repositoryId: string 
                 key={change.changeEventId}
                 className="border-t border-[var(--color-border)] pt-2 first:border-0 first:pt-0"
               >
-                <p className="font-medium">{change.title ?? change.summary}</p>
+                <Link
+                  href={SOURCE_ROUTES.change(change.changeEventId)}
+                  className="font-medium hover:underline"
+                >
+                  {change.title ?? change.summary}
+                </Link>
                 <p className="text-[11px] text-[var(--color-muted-foreground)]">
                   {change.kind} · {change.occurredAt}
                 </p>
@@ -266,6 +301,97 @@ function RepositoryBrowseView({ repositoryId }: { readonly repositoryId: string 
           </ul>
         )}
       </section>
+    </Shell>
+  );
+}
+
+function ChangeBrowseView({ changeEventId }: { readonly changeEventId: string }) {
+  const changesQuery = useQuery({
+    queryKey: ["source-workspace", "change", changeEventId],
+    queryFn: async () => {
+      const data = await fetchJson<{ changes: ChangeRow[] }>(
+        "/api/v1/qep/scm/changes?limit=200",
+      );
+      const change = data.changes.find((c) => c.changeEventId === changeEventId);
+      if (!change) throw new Error("Change not found");
+      return change;
+    },
+  });
+
+  const change = changesQuery.data;
+
+  return (
+    <Shell
+      title={change?.title ?? change?.summary ?? "Change"}
+      description="Shared Source change detail — open Quality or Security overlays without leaving the APZ surface."
+    >
+      {changesQuery.isLoading ? (
+        <p className="text-xs text-[var(--color-muted-foreground)]">Loading…</p>
+      ) : null}
+      {changesQuery.isError ? (
+        <p className="text-sm text-[var(--color-destructive)]" role="alert">
+          {(changesQuery.error as Error).message}
+        </p>
+      ) : null}
+      {change ? (
+        <div
+          className="grid gap-4 lg:grid-cols-[1fr_280px]"
+          data-testid="source-change-detail"
+        >
+          <section className="rounded-lg border border-[var(--color-border)] p-4 text-sm">
+            <dl className="grid gap-2 sm:grid-cols-2">
+              <div>
+                <dt className="text-[var(--color-muted-foreground)]">Kind</dt>
+                <dd>{change.kind}</dd>
+              </div>
+              <div>
+                <dt className="text-[var(--color-muted-foreground)]">Branch</dt>
+                <dd>{change.branch ?? "—"}</dd>
+              </div>
+              <div>
+                <dt className="text-[var(--color-muted-foreground)]">Occurred</dt>
+                <dd>{change.occurredAt}</dd>
+              </div>
+              <div>
+                <dt className="text-[var(--color-muted-foreground)]">Change id</dt>
+                <dd className="font-mono text-xs">{change.changeEventId}</dd>
+              </div>
+            </dl>
+            <p className="mt-4 whitespace-pre-wrap">{change.summary}</p>
+          </section>
+          <aside className="rounded-lg border border-[var(--color-border)] p-4 text-sm">
+            <h2 className="mb-2 text-xs font-semibold tracking-wide text-[var(--color-muted-foreground)] uppercase">
+              Product overlays
+            </h2>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href={QEP_PR_QUALITY_ROUTES.byChange(changeEventId)}
+                  className="underline"
+                  data-testid="source-open-pr-quality"
+                >
+                  PR Quality View
+                </Link>
+              </li>
+              <li>
+                <Link href="/apzpen/code" className="underline">
+                  Security code overlay
+                </Link>
+              </li>
+              {change.repositoryId ? (
+                <li>
+                  <Link
+                    href={SOURCE_ROUTES.repository(change.repositoryId)}
+                    className="underline"
+                  >
+                    Repository
+                  </Link>
+                </li>
+              ) : null}
+            </ul>
+          </aside>
+        </div>
+      ) : null}
     </Shell>
   );
 }
