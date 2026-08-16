@@ -12,9 +12,9 @@
 >
 > Streams 1–6 remain frozen in scope. This decision governs how they are implemented, integrated and certified.
 >
-> **Engineering:** Phase A–C **COMPLETE · CERTIFIED 100%**. **Phase D** (Streams 2∥3 APZQEP + APZPEN) **ACTIVE** — ([PHASE-D-STREAM-2-GAP-MAP](../sprint/PHASE-D-STREAM-2-GAP-MAP.md) · [PHASE-D-STREAM-3-GAP-MAP](../sprint/PHASE-D-STREAM-3-GAP-MAP.md)).
+> **Engineering:** Phase A–D **COMPLETE · CERTIFIED 100%**. Commercial Platform UX programme (Streams 1–6 foundation + commerce + productivity + assurance workbenches) **CLOSED** for this order — ([PHASE-D-STREAM-2-GAP-MAP](../sprint/PHASE-D-STREAM-2-GAP-MAP.md) · [PHASE-D-STREAM-3-GAP-MAP](../sprint/PHASE-D-STREAM-3-GAP-MAP.md)).
 >
-> **Engineering 2026-08-16:** Phase A–C certified. Phase D progressed — QEP signatures (My Work · execution · PR Quality · Quality Graph · Domains · flaky · RCC) · PEN Assurance lifecycle · Shared Source browse + file explorer.
+> **Engineering 2026-08-16:** Phase D certified — QEP signatures (My Work · execution · PR Quality · Quality Graph · Domains · flaky · RCC · Admin/entitlements) · PEN Assurance lifecycle · Shared Source browse + file explorer. No Phase E without a new approved sprint guide.
 
 ---
 
@@ -34,11 +34,11 @@ PHASE C — PRODUCTIVITY
 Stream 4
 APZPRD
         ↓
-PHASE D — ASSURANCE WORKBENCHES
+PHASE D — ASSURANCE WORKBENCHES     ← COMPLETE · CERTIFIED 100%
 Stream 2 ∥ Stream 3
 APZQEP + APZPEN
         ↓
-COMMERCIAL PLATFORM UX COMPLETE
+COMMERCIAL PLATFORM UX COMPLETE     ← PHASES A–D CLOSED
 ```
 
 **Stream 1 freeze interpretation:** Finish Stream 1 before authenticated QEP/PEN/PRD **product deep UX**. Foundation (5+6) precedes or underpins Stream 1.

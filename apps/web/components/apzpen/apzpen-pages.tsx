@@ -161,16 +161,33 @@ export function ApzpenHomePage() {
   return (
     <Frame
       title="Security Assurance"
-      subtitle="Work queues and risk posture — not a scanner dashboard."
+      subtitle="What needs attention — posture, remediation, retest, assurance. Not a scanner dashboard."
       actions={
-        <Link
-          href="/apzpen/engagements"
-          className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)]"
-        >
-          All engagements
-        </Link>
+        <div className="flex flex-wrap gap-2">
+          <Link
+            href="/apzpen/my-work"
+            className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)]"
+            data-testid="apzpen-home-my-work"
+          >
+            My Work
+          </Link>
+          <Link
+            href="/apzpen/engagements"
+            className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)]"
+          >
+            All engagements
+          </Link>
+        </div>
       }
     >
+      <p
+        className="mb-3 text-[12px] text-[var(--color-muted-foreground)]"
+        data-testid="apzpen-home-persona-hint"
+      >
+        Same Home for every Security persona — queues emphasise what needs{" "}
+        <strong>you</strong>. Pentesters open Engagements; developers open Remediation;
+        managers open Assurance.
+      </p>
       {loading ? (
         <p className="text-xs text-[var(--color-muted-foreground)]">
           Loading security posture…
@@ -231,10 +248,22 @@ export function ApzpenHomePage() {
                       hint: "Gaps needing proof",
                     },
                     {
+                      href: "/apzpen/risk-acceptance",
+                      label: "Risk acceptance",
+                      count: "→",
+                      hint: "Formal residual risk",
+                    },
+                    {
                       href: "/apzpen/certification",
-                      label: "Certification",
+                      label: "Assurance",
                       count: String(queues.certifiedCount),
-                      hint: `${queues.blockedCount} blocked`,
+                      hint: `${queues.blockedCount} not assured`,
+                    },
+                    {
+                      href: "/workspace/source",
+                      label: "Source",
+                      count: "→",
+                      hint: "Shared file explorer",
                     },
                   ] as const
                 ).map((row) => (

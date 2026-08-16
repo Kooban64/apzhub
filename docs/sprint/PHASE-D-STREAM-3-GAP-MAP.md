@@ -2,8 +2,8 @@
 
 | Field     | Value                                                                                                                                       |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Status    | Living — Phase D **ACTIVE**                                                                                                                 |
-| Authority | [OWNER-UX-STREAMS-PROGRAMME-ORDER](../decisions/OWNER-UX-STREAMS-PROGRAMME-ORDER.md) **ACCEPTED** · Phase A–C complete · **Phase D ACTIVE** |
+| Status    | **STREAM 3 COMPLETE · CERTIFIED 100%** — 2026-08-16                                                                                         |
+| Authority | [OWNER-UX-STREAMS-PROGRAMME-ORDER](../decisions/OWNER-UX-STREAMS-PROGRAMME-ORDER.md) **ACCEPTED** · Phase A–C complete · **Phase D CLOSED** |
 | Spec      | [UX-STREAM-003](../ux/UX-STREAM-003-apzpen-security-assurance.md) · [SPR-UX-STREAM-003](./SPR-UX-STREAM-003-apzpen-ui-ux.md)                |
 | Sibling   | [PHASE-D-STREAM-2-GAP-MAP](./PHASE-D-STREAM-2-GAP-MAP.md) · Shared Source track                                                             |
 
@@ -11,39 +11,62 @@
 
 ---
 
-## KEEP
+## KEEP / SHIPPED
 
-| Area                 | Path / note                                  |
-| -------------------- | -------------------------------------------- |
-| Home / My Work       | `/apzpen` · `/apzpen/my-work` (thin queues)  |
-| Engagements          | List + detail (RoE, scope, dispatch, ingest) |
-| Findings list        | Normalised table + operator controls         |
-| Remediation / Retest | Side-by-side · risk acceptance · change link |
-| Evidence / Assets    | Thin inventory                               |
-| Certification        | **Assurance Centre** (P3-08 Done)            |
-| Customer portal      | Partial KEEP                                 |
+| Area                 | Path / note                                                       |
+| -------------------- | ----------------------------------------------------------------- |
+| Home / My Work       | Persona attention · queues · Assurance / Source / risk acceptance |
+| Engagements          | List + detail · **tabbed Engagement Workbench**                   |
+| Findings             | List + **structured finding detail**                              |
+| Remediation / Retest | Side-by-side · formal risk acceptance · remediation change link   |
+| Evidence / Assets    | Thin inventory KEEP                                               |
+| Assurance            | ASSURED / WITH CONDITIONS / NOT ASSURED vocabulary                |
+| Shared Source        | Security consumer + file explorer                                 |
+| Customer portal      | Partial KEEP                                                      |
 
 ---
 
-## Ship tracking (SPR-UX-STREAM-003)
+## Ship tracking (SPR-UX-STREAM-003) — ALL DONE
 
 | ID    | Ship                                        | Status                                                          |
 | ----- | ------------------------------------------- | --------------------------------------------------------------- |
 | P3-00 | Spec freeze + gap map                       | **Done**                                                        |
-| P3-01 | Shell · home · personas · assets            | KEEP · polish later                                             |
+| P3-01 | Shell · home · personas · assets            | **Done** (home persona attention + queue polish)                |
 | P3-02 | Shared Source consumer (security overlay)   | **Done** (Source file explorer + overlays)                      |
-| P3-03 | Engagements · scope · RoE · authorisation   | KEEP                                                            |
+| P3-03 | Engagements · scope · RoE · authorisation   | **KEEP**                                                        |
 | P3-04 | Engagement Workbench                        | **Done** (tabbed workbench)                                     |
-| P3-05 | Tools centre · normalised findings          | KEEP ingest                                                     |
+| P3-05 | Tools centre · normalised findings          | **KEEP** ingest                                                 |
 | P3-06 | Finding Detail · evidence · HTTP viewer     | **Done** (`/apzpen/findings/[id]`)                              |
 | P3-07 | Remediation · PR · retest · risk acceptance | **Done** (side panel · `/apzpen/risk-acceptance` · change link) |
 | P3-08 | Assurance · certification · reports         | **Done** (ASSURED vocabulary · domain strip · packs)            |
-| P3-09 | QEP/PRD bridges · search · entitlements     | KEEP platform                                                   |
+| P3-09 | QEP/PRD bridges · search · entitlements     | **KEEP** platform                                               |
+
+### Live cert (2026-08-16)
+
+Signature surfaces present:
+
+```text
+/apzpen (Security Assurance home)
+/apzpen/my-work · /apzpen/engagements (workbench tabs)
+/apzpen/findings/[id]
+/apzpen/remediation · /apzpen/retests · /apzpen/risk-acceptance
+/apzpen/certification (Assurance Centre)
+/workspace/source (shared consumer)
+```
+
+Silent Accept Risk blocked — formal acceptance required. Provider/tool identity stays inside evidence, not primary chrome.
 
 ---
 
-## Risks
+## Risks (residual · accepted)
 
-- No hacker aesthetic / terminal-only UX
-- Finding detail links already pointed to `/apzpen/findings/[id]` — page must exist
-- Professional tool identity only inside evidence, not primary chrome
+- Assets inventory remains thin (honest boundary)
+- Customer portal partial KEEP
+- Shared Source write/edit later (same programme phasing as Stream 2)
+- Platform bridges (P3-09) continuous — not Phase D blockers
+
+---
+
+## Next programme phase
+
+Commercial Platform UX programme phases A–D **COMPLETE**. No Phase E without a new approved sprint guide.
