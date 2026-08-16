@@ -11,6 +11,10 @@ import type { PlatformApiRequestContext } from "../auth/with-platform-api-auth";
 import { PlatformApiHttpError } from "../errors";
 import { jsonDataResponse } from "../response";
 import { getQepScmRuntime } from "@/lib/qep/scm-runtime";
+import {
+  isRepositoryInSourceScope,
+  resolveSourceRepoScope,
+} from "@/lib/source/repo-scope";
 import { requireQepPermission, sessionTenantId } from "./require-qep-permission";
 
 type RouteContext = { params: Promise<Record<string, string>> };
@@ -35,6 +39,19 @@ function requireSourceRead(context: PlatformApiRequestContext): void {
 
 function requireSourceWrite(context: PlatformApiRequestContext): void {
   requireQepPermission(context, "source.write", "qep.scm.operate");
+}
+
+function requireRepositoryInScope(
+  context: PlatformApiRequestContext,
+  repositoryId: string,
+): void {
+  const scope = resolveSourceRepoScope(context.serviceContext.permissions);
+  if (!isRepositoryInSourceScope(repositoryId, scope)) {
+    throw new PlatformApiHttpError(403, {
+      code: "FORBIDDEN",
+      message: "Source repository scope does not include this repository",
+    });
+  }
 }
 
 function correlationId(request: NextRequest): string {
@@ -82,6 +99,7 @@ export async function handleSourceListBranches(
   sessionTenantId(context);
   const params = await routeContext.params;
   const repositoryId = requireParam(params, "repositoryId");
+  requireRepositoryInScope(context, repositoryId);
   const runtime = getQepScmRuntime();
   try {
     const branches = await runtime.listRepositoryBranches(
@@ -106,6 +124,7 @@ export async function handleSourceListCommits(
   sessionTenantId(context);
   const params = await routeContext.params;
   const repositoryId = requireParam(params, "repositoryId");
+  requireRepositoryInScope(context, repositoryId);
   const branch = request.nextUrl.searchParams.get("branch") ?? undefined;
   const limitRaw = request.nextUrl.searchParams.get("limit");
   const limit = limitRaw ? Number(limitRaw) : 20;
@@ -134,6 +153,7 @@ export async function handleSourceListTree(
   sessionTenantId(context);
   const params = await routeContext.params;
   const repositoryId = requireParam(params, "repositoryId");
+  requireRepositoryInScope(context, repositoryId);
   const branch = request.nextUrl.searchParams.get("branch") ?? undefined;
   const path = request.nextUrl.searchParams.get("path") ?? undefined;
   const runtime = getQepScmRuntime();
@@ -161,6 +181,7 @@ export async function handleSourceGetFile(
   sessionTenantId(context);
   const params = await routeContext.params;
   const repositoryId = requireParam(params, "repositoryId");
+  requireRepositoryInScope(context, repositoryId);
   const path = request.nextUrl.searchParams.get("path");
   if (!path) {
     throw new PlatformApiHttpError(400, {
@@ -200,6 +221,7 @@ export async function handleSourceGetDiff(
   sessionTenantId(context);
   const params = await routeContext.params;
   const repositoryId = requireParam(params, "repositoryId");
+  requireRepositoryInScope(context, repositoryId);
   const path = request.nextUrl.searchParams.get("path");
   const baseRef = request.nextUrl.searchParams.get("baseRef");
   const headRef = request.nextUrl.searchParams.get("headRef");
@@ -234,6 +256,7 @@ export async function handleSourceCreateBranch(
   sessionTenantId(context);
   const params = await routeContext.params;
   const repositoryId = requireParam(params, "repositoryId");
+  requireRepositoryInScope(context, repositoryId);
   const body = (await request.json()) as {
     name?: string;
     fromRef?: string;
@@ -269,6 +292,7 @@ export async function handleSourceCommitFiles(
   sessionTenantId(context);
   const params = await routeContext.params;
   const repositoryId = requireParam(params, "repositoryId");
+  requireRepositoryInScope(context, repositoryId);
   const body = (await request.json()) as {
     branch?: string;
     message?: string;
@@ -327,6 +351,7 @@ export async function handleSourceCreatePullRequest(
   sessionTenantId(context);
   const params = await routeContext.params;
   const repositoryId = requireParam(params, "repositoryId");
+  requireRepositoryInScope(context, repositoryId);
   const body = (await request.json()) as {
     title?: string;
     body?: string;
@@ -369,6 +394,7 @@ export async function handleSourceListPullRequests(
   sessionTenantId(context);
   const params = await routeContext.params;
   const repositoryId = requireParam(params, "repositoryId");
+  requireRepositoryInScope(context, repositoryId);
   const stateParam = request.nextUrl.searchParams.get("state");
   const state =
     stateParam === "closed" || stateParam === "all" || stateParam === "open"
@@ -399,6 +425,7 @@ export async function handleSourceMergePullRequest(
   sessionTenantId(context);
   const params = await routeContext.params;
   const repositoryId = requireParam(params, "repositoryId");
+  requireRepositoryInScope(context, repositoryId);
   const numberRaw = requireParam(params, "number");
   const number = Number(numberRaw);
   if (!Number.isFinite(number) || number <= 0) {
@@ -435,6 +462,7 @@ export async function handleSourceSearch(
   sessionTenantId(context);
   const params = await routeContext.params;
   const repositoryId = requireParam(params, "repositoryId");
+  requireRepositoryInScope(context, repositoryId);
   const query = request.nextUrl.searchParams.get("q")?.trim() ?? "";
   const branch = request.nextUrl.searchParams.get("branch") ?? undefined;
   if (!query) {

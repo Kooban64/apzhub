@@ -23,6 +23,12 @@ import {
 } from "../schemas/project";
 import { toListQuery, toPlatformApiPage } from "./paging";
 import { buildProjectsEngineHealthPayload } from "@/lib/projects/engine-health-payload";
+import {
+  filterProjectsByScope,
+  isProjectInScope,
+  resolveProjectsResourceScope,
+} from "@/lib/projects/project-scope";
+import { PlatformApiHttpError } from "../errors";
 
 export { buildProjectsEngineHealthPayload } from "@/lib/projects/engine-health-payload";
 
@@ -88,13 +94,15 @@ export async function handleListProjects(
     },
   });
 
+  const scope = resolveProjectsResourceScope(context.serviceContext.permissions);
+  const scopedItems = filterProjectsByScope(result.items, scope);
   const items = await Promise.all(
-    result.items.map((item) => withLifecycleStatus(context, item)),
+    scopedItems.map((item) => withLifecycleStatus(context, item)),
   );
 
   return jsonCollectionResponse(
     items,
-    toPlatformApiPage(result, query),
+    toPlatformApiPage({ ...result, items: scopedItems }, query),
     context.tracing,
   );
 }
@@ -110,6 +118,13 @@ export async function handleGetProject(
     params?.projectId ?? "",
     "projectId",
   );
+  const scope = resolveProjectsResourceScope(context.serviceContext.permissions);
+  if (!isProjectInScope(projectId, scope)) {
+    throw new PlatformApiHttpError(403, {
+      code: "FORBIDDEN",
+      message: "Project scope does not include this project",
+    });
+  }
   const gateway = await getPlatformServiceGateway();
   const project = await gateway.projects.getProject(context.serviceContext, projectId);
   return jsonDataResponse(await withLifecycleStatus(context, project), context.tracing);
@@ -140,6 +155,13 @@ export async function handleUpdateProject(
     params?.projectId ?? "",
     "projectId",
   );
+  const scope = resolveProjectsResourceScope(context.serviceContext.permissions);
+  if (!isProjectInScope(projectId, scope)) {
+    throw new PlatformApiHttpError(403, {
+      code: "FORBIDDEN",
+      message: "Project scope does not include this project",
+    });
+  }
   const body = await parseJsonBody(
     request,
     updateProjectBodySchema,
@@ -181,6 +203,13 @@ export async function handleArchiveProject(
     params?.projectId ?? "",
     "projectId",
   );
+  const scope = resolveProjectsResourceScope(context.serviceContext.permissions);
+  if (!isProjectInScope(projectId, scope)) {
+    throw new PlatformApiHttpError(403, {
+      code: "FORBIDDEN",
+      message: "Project scope does not include this project",
+    });
+  }
   const life = await lifecycleService().getLifecycle(context.serviceContext, projectId);
   if (life) {
     return jsonErrorResponse(
@@ -237,3 +266,6 @@ export async function handleGetProjectsEngineHealth(
     context.tracing,
   );
 }
+
+/** ADOPT-003 F1 — dedicated readiness path (avoid `[projectId]` collision). */
+export const handleGetProjectsReadiness = handleGetProjectsEngineHealth;

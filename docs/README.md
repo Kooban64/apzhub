@@ -44,6 +44,8 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [Phase F Shared Source gap map](./sprint/PHASE-F-SHARED-SOURCE-GAP-MAP.md)                         | **COMPLETE · CERTIFIED 100%** — Shared Source phase 3                                 |
 | [SPR-UX-PHASE-G Streams 5∥6](./sprint/SPR-UX-PHASE-G-STREAMS-5-6-HORIZONTAL.md)                    | **COMPLETE · CERTIFIED 100%** — entitlements · shell · queue scopes                   |
 | [Phase G Streams 5∥6 gap map](./sprint/PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP.md)                  | **COMPLETE · CERTIFIED 100%** — horizontal Shell/RBAC close                           |
+| [SPR-UX-PHASE-H Resource scopes](./sprint/SPR-UX-PHASE-H-RESOURCE-SCOPES.md)                       | **COMPLETE · CERTIFIED 100%** — Projects + Source scopes · readiness F1               |
+| [Phase H resource scopes gap map](./sprint/PHASE-H-RESOURCE-SCOPES-GAP-MAP.md)                     | **COMPLETE · CERTIFIED 100%** — `projects.project:` · `source.repo:`                  |
 | [SPR-UX-001](./sprint/SPR-UX-001-commercial-workbench-ui-remodel.md)                               | **PARKED** — workbench remodel deferred under Stream 1 freeze                         |
 | [APZQEP](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md)                             | Quality Engineering Platform — _Can we release with confidence?_                      |
 | [APZPEN](./strategy/APZPEN-ENTERPRISE-SECURITY-ASSURANCE-PLATFORM.md)                              | Security Assurance & Pen Testing — _Can we demonstrate we are secure?_                |

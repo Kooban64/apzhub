@@ -64,4 +64,4 @@
 
 - CE local dogfood must keep opt-in bootstrap (`APZHUB_CE_BOOTSTRAP=true`)
 - Full Operator→Desktop merge remains out of scope
-- Queue scopes start with Support groups; Projects/repos later
+- Queue scopes start with Support groups; Projects/repos → **Phase H**

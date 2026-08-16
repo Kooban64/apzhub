@@ -28,6 +28,11 @@ import {
   getQepScmRuntime,
   resolveGithubPatFromEnv,
 } from "@/lib/qep/scm-runtime";
+import {
+  filterRepositoriesBySourceScope,
+  isRepositoryInSourceScope,
+  resolveSourceRepoScope,
+} from "@/lib/source/repo-scope";
 import { requireQepPermission, sessionTenantId } from "./require-qep-permission";
 
 type RouteContext = { params: Promise<Record<string, string>> };
@@ -118,8 +123,10 @@ export async function handleListScmRepositories(
   requireQepPermission(context, "qep.scm.read");
   const tenantId = sessionTenantId(context);
   const runtime = getQepScmRuntime();
+  const repositories = await runtime.listRepositories(tenantId);
+  const scope = resolveSourceRepoScope(context.serviceContext.permissions);
   return jsonDataResponse(
-    { repositories: await runtime.listRepositories(tenantId) },
+    { repositories: filterRepositoriesBySourceScope(repositories, scope) },
     context.tracing,
   );
 }
@@ -174,6 +181,13 @@ export async function handleGetScmRepository(
 ) {
   requireQepPermission(context, "qep.scm.read");
   const repositoryId = requireParam(await routeContext?.params, "repositoryId");
+  const scope = resolveSourceRepoScope(context.serviceContext.permissions);
+  if (!isRepositoryInSourceScope(repositoryId, scope)) {
+    throw new PlatformApiHttpError(403, {
+      code: "FORBIDDEN",
+      message: "Source repository scope does not include this repository",
+    });
+  }
   const runtime = getQepScmRuntime();
   const repository = await runtime.getRepository(repositoryId);
   if (!repository || repository.tenantId !== sessionTenantId(context)) {

@@ -12,9 +12,9 @@
 >
 > Streams 1–6 remain frozen in scope. This decision governs how they are implemented, integrated and certified.
 >
-> **Engineering:** Phase A–G product/Shell/Source tracks **CERTIFIED 100%**. Phase G (Streams 5∥6 horizontal) closed — ([SPR-UX-PHASE-G-STREAMS-5-6-HORIZONTAL](../sprint/SPR-UX-PHASE-G-STREAMS-5-6-HORIZONTAL.md) · [PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP](../sprint/PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP.md)).
+> **Engineering:** Phase A–H **CERTIFIED 100%**. Phase H closed Projects & Source resource scopes — ([SPR-UX-PHASE-H-RESOURCE-SCOPES](../sprint/SPR-UX-PHASE-H-RESOURCE-SCOPES.md) · [PHASE-H-RESOURCE-SCOPES-GAP-MAP](../sprint/PHASE-H-RESOURCE-SCOPES-GAP-MAP.md)).
 >
-> **Engineering 2026-08-16:** Phase G certified — entitlement hard-mode · shell policy · Support queue scopes · Playwright smoke.
+> **Engineering 2026-08-16:** Phase H certified — `projects.project:` · `source.repo:` · Projects readiness F1.
 
 ---
 
@@ -48,6 +48,9 @@ Review / Merge / Repo Admin (+ leftovers)
         ↓
 PHASE G — SHELL / RBAC HORIZONTAL   ← COMPLETE · CERTIFIED 100%
 Streams 5 ∥ 6 debt close (entitlements · shell policy · queue scopes)
+        ↓
+PHASE H — PROJECT / SOURCE SCOPES   ← COMPLETE · CERTIFIED 100%
+projects.project:{id} · source.repo:{id} (+ readiness F1)
 ```
 
 **Stream 1 freeze interpretation:** Finish Stream 1 before authenticated QEP/PEN/PRD **product deep UX**. Foundation (5+6) precedes or underpins Stream 1.
