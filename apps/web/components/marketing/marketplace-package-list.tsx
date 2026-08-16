@@ -29,6 +29,7 @@ const SUITE_LABEL: Record<string, string> = {
 export function MarketplacePackageList() {
   const [packages, setPackages] = useState<readonly PublicPackage[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -47,6 +48,8 @@ export function MarketplacePackageList() {
         }
       } catch (err) {
         if (!cancelled) setError((err as Error).message);
+      } finally {
+        if (!cancelled) setLoaded(true);
       }
     })();
     return () => {
@@ -117,7 +120,9 @@ export function MarketplacePackageList() {
         </ul>
         {available.length === 0 && !error ? (
           <p className="mt-4 text-sm text-[var(--color-muted-foreground)]">
-            Loading packages…
+            {loaded
+              ? "No self-serve packages are available right now. Check Solutions or Contact us."
+              : "Loading packages…"}
           </p>
         ) : null}
       </section>

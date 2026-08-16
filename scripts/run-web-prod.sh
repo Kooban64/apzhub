@@ -26,7 +26,10 @@ set +a
 
 export NODE_ENV=production
 export PORT="${PORT:-3300}"
-export HOSTNAME="${HOSTNAME:-0.0.0.0}"
+# Next.js binds to HOSTNAME. Do not inherit the shell machine hostname
+# (e.g. ip-172-31-…) or the process listens only on the private NIC and
+# 127.0.0.1 / nginx → :3300 breaks (unstyled public pages, health 000).
+export HOSTNAME="${APZHUB_BIND_HOST:-0.0.0.0}"
 export APZHUB_WORKSPACE_ROOT="${APZHUB_WORKSPACE_ROOT:-$ROOT}"
 export APZHUB_SECRETS_DIR="${APZHUB_SECRETS_DIR:-$ROOT/.secrets}"
 # Production must not enable public self-registration by default.

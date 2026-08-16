@@ -9,3 +9,13 @@ body,
 #__next {
   height: 100%;
 }
+
+body {
+  font-family: var(--font-sans);
+}
+
+/* Marketing shell — slight denser reading measure; tokens only */
+.marketing-surface {
+  color: var(--color-foreground);
+  background: var(--color-background);
+}

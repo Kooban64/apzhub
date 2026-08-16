@@ -43,9 +43,6 @@ export default function ProductivityBundlePage() {
               <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
                 {product.summary}
               </p>
-              <p className="mt-4 font-mono text-xs text-[var(--color-muted-foreground)]">
-                productKey: {product.key}
-              </p>
             </article>
           ))}
         </div>

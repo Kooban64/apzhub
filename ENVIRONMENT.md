@@ -110,7 +110,7 @@ Internet → host nginx (:443 TLS) → Docker nginx-gateway (:8080) → app cont
 | Brand sites  | Planned: `apzqa` / `apzqep` / `apzpentest` → same `:3300` (see [MKT-MULTI-SITE-HOSTS](./docs/operations/MKT-MULTI-SITE-HOSTS.md)); Productivity Suite is a later bundle, not a host yet |
 | Legacy stack | Unchanged — wildcard still routes other subdomains to gateway `:8080`                                                                                                                   |
 
-**Bring-up (ops):** Postgres `:54334` + Redis `:6380` via APZHUB compose; set `APP_URL` / `NEXT_PUBLIC_APP_URL` / `BETTER_AUTH_URL` to the public URL; `NODE_ENV=production`; rebuild `@apzhub/web`; start via standalone `node apps/web/.next/standalone/apps/web/server.js` (or supported start script) on **3300**. Do not bind legacy ports.
+**Bring-up (ops):** Postgres `:54334` + Redis `:6380` via APZHUB compose; set `APP_URL` / `NEXT_PUBLIC_APP_URL` / `BETTER_AUTH_URL` to the public URL; `NODE_ENV=production`; rebuild `@apzhub/web`; start with `bash scripts/run-web-prod.sh` on **3300** (forces bind `0.0.0.0` — do not inherit shell `HOSTNAME`). After rebuild, **restart** the process so HTML and `/_next/static/chunks/*.css` hashes match (stale deleted-cwd processes serve unstyled pages). Do not bind legacy ports.
 
 ## APZHUB development ports (SPR-001)
 
