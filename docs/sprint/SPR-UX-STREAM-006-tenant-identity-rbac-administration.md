@@ -1,8 +1,8 @@
 # SPR-UX-STREAM-006 — Tenant, Identity, Org Roles, RBAC & Administration
 
-> **Status:** **PHASE G CERTIFIED** — horizontal close complete — 2026-08-16  
+> **Status:** **PHASE K CERTIFIED** — create-user wizard (S6-04) complete after Phase G–J  
 > **Authority:** [UX-STREAM-006](../ux/UX-STREAM-006-tenant-identity-rbac-administration.md)  
-> **Gap map:** [PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP](./PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP.md) · [PHASE-A-STREAMS-5-6-GAP-MAP](./PHASE-A-STREAMS-5-6-GAP-MAP.md)  
+> **Gap map:** [PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP](./PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP.md) · [PHASE-K-CREATE-USER-WIZARD-GAP-MAP](./PHASE-K-CREATE-USER-WIZARD-GAP-MAP.md) · [PHASE-A-STREAMS-5-6-GAP-MAP](./PHASE-A-STREAMS-5-6-GAP-MAP.md)  
 > **Critical:** APZOR = ordinary reference tenant; five access layers; Staff Function ≠ permission  
 > **Does not:** Flat Admin/Manager/User · Collapse layers · Client-trusted tenant IDs · UI-as-security
 

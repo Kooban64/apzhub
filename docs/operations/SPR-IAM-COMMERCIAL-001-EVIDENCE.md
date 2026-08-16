@@ -2,7 +2,7 @@
 
 | Field  | Value                                                                         |
 | ------ | ----------------------------------------------------------------------------- |
-| Status | **LOCAL IMPLEMENTED** 2026-08-10                                              |
+| Status | **LOCAL IMPLEMENTED** 2026-08-10 · Owner **ACCEPTED** 2026-08-16              |
 | Guide  | [SPR-IAM-COMMERCIAL-001](../../sprint/SPR-IAM-COMMERCIAL-001-sprint-guide.md) |
 
 ## Delivered

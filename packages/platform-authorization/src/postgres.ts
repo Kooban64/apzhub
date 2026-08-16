@@ -8,4 +8,5 @@ export {
   resolvePostgresSessionAuthorization,
   seedDefaultAuthorizationRows,
   upsertPostgresRoleAssignment,
+  upsertPostgresUserScopedPermissions,
 } from "./postgres-authorization-store";

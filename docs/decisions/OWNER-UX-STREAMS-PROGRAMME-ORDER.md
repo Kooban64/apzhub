@@ -12,9 +12,11 @@
 >
 > Streams 1–6 remain frozen in scope. This decision governs how they are implemented, integrated and certified.
 >
-> **Engineering:** Phase A–J **CERTIFIED 100%**. Phase J closed Inspector timeline tabs + Support health — ([SPR-UX-PHASE-J-INSPECTOR-TIMELINE](../sprint/SPR-UX-PHASE-J-INSPECTOR-TIMELINE.md)).
+> **Engineering:** Phase A–K **CERTIFIED 100%**. Phase K closed create-user wizard (Stream 6 §§31–39) — ([SPR-UX-PHASE-K-CREATE-USER-WIZARD](../sprint/SPR-UX-PHASE-K-CREATE-USER-WIZARD.md)).
 >
 > **Engineering 2026-08-16:** Phase J certified — Activity/Audit/Sessions tabs · Support `/health` (ADOPT F2).
+>
+> **Owner 2026-08-16:** [SPR-IAM-COMMERCIAL-001](../sprint/SPR-IAM-COMMERCIAL-001-sprint-guide.md) **ACCEPTED · ACTIVE**. Phase K create-user wizard certified same day.
 
 ---
 
@@ -57,6 +59,9 @@ Overview · Products · Roles · Scopes · Professional Tools · Provisioning
         ↓
 PHASE J — INSPECTOR TIMELINE + F2   ← COMPLETE · CERTIFIED 100%
 Activity · Audit · Sessions (honest) · Support health
+        ↓
+PHASE K — CREATE-USER WIZARD        ← COMPLETE · CERTIFIED 100%
+Identity → Template → Products → Scopes → Professional Tools → Review → Provision
 ```
 
 **Stream 1 freeze interpretation:** Finish Stream 1 before authenticated QEP/PEN/PRD **product deep UX**. Foundation (5+6) precedes or underpins Stream 1.

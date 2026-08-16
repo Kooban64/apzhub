@@ -1,6 +1,6 @@
 "use client";
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
 import {
@@ -12,6 +12,7 @@ import {
   QepStatusBadge,
 } from "@/components/qep/qep-ui";
 import { productDisplayName } from "@/lib/commercial/soft-product-access";
+import { CreateUserWizard } from "@/components/iam/create-user-wizard";
 import { UserInspectorPanel } from "@/components/iam/user-inspector-panel";
 
 async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
@@ -51,12 +52,6 @@ type Member = {
 
 export function OrgAdminMembersView() {
   const queryClient = useQueryClient();
-  const [email, setEmail] = useState("");
-  const [displayName, setDisplayName] = useState("");
-  const [personaRoleId, setPersonaRoleId] = useState("role-employee");
-  const [staffFunctionId, setStaffFunctionId] = useState("");
-  const [provision, setProvision] = useState(false);
-  const [inviteProducts, setInviteProducts] = useState<string[]>([]);
   const [message, setMessage] = useState<string | null>(null);
   const [issuedPassword, setIssuedPassword] = useState<string | null>(null);
 
@@ -79,45 +74,6 @@ export function OrgAdminMembersView() {
       }>("/api/v1/iam/members"),
   });
 
-  const inviteMutation = useMutation({
-    mutationFn: () =>
-      fetchJson<{
-        member: Member;
-        provisioned?: boolean;
-        temporaryPassword?: string;
-        effectiveAccessSummary?: {
-          products: readonly { productKey: string; label: string }[];
-        };
-      }>("/api/v1/iam/members", {
-        method: "POST",
-        body: JSON.stringify({
-          email,
-          displayName: displayName || undefined,
-          personaRoleId: staffFunctionId ? undefined : personaRoleId,
-          staffFunctionId: staffFunctionId || undefined,
-          productKeys: inviteProducts,
-          provision,
-        }),
-      }),
-    onSuccess: (data) => {
-      if (data.provisioned && data.temporaryPassword) {
-        setIssuedPassword(data.temporaryPassword);
-        const products =
-          data.effectiveAccessSummary?.products.map((p) => p.label).join(", ") ||
-          inviteProducts.join(", ");
-        setMessage(`Provisioned. Effective access: ${products || "shell only"}`);
-      } else {
-        setIssuedPassword(null);
-        setMessage("Invite recorded");
-      }
-      setEmail("");
-      setDisplayName("");
-      setInviteProducts([]);
-      void queryClient.invalidateQueries({ queryKey: ["iam", "members"] });
-    },
-    onError: (error) => setMessage((error as Error).message),
-  });
-
   const personas = personasQuery.data?.personas ?? [];
   const staffFunctions = personasQuery.data?.staffFunctions ?? [];
   const members = membersQuery.data?.members ?? [];
@@ -126,129 +82,24 @@ export function OrgAdminMembersView() {
   return (
     <QepPageShell
       title="Organisation members"
-      description="Invite and manage members for your organisation. Grant only products your organisation has subscribed. Provision creates a login and assigns product roles from a staff function template."
+      description="Create users with a review-before-provision wizard. Grant only products your organisation has subscribed. Scopes and professional tools apply when login is created."
     >
-      <QepPanel title="Invite / provision member">
-        <div className="flex flex-wrap items-end gap-2">
-          <label className="block text-sm">
-            Email
-            <input
-              className="mt-1 block w-64 rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-sm"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              data-testid="iam-invite-email"
-            />
-          </label>
-          <label className="block text-sm">
-            Display name
-            <input
-              className="mt-1 block w-48 rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-sm"
-              value={displayName}
-              onChange={(e) => setDisplayName(e.target.value)}
-              data-testid="iam-invite-display-name"
-            />
-          </label>
-          <label className="block text-sm">
-            Staff function
-            <select
-              className="mt-1 block rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-sm"
-              value={staffFunctionId}
-              onChange={(e) => {
-                const id = e.target.value;
-                setStaffFunctionId(id);
-                const tmpl = staffFunctions.find((f) => f.id === id);
-                if (tmpl) {
-                  setPersonaRoleId(tmpl.orgJobRoleId);
-                  setInviteProducts(
-                    tmpl.suggestedProducts
-                      .map((p) => p.productKey)
-                      .filter((key) => orgProducts.includes(key)),
-                  );
-                  setProvision(true);
-                }
-              }}
-              data-testid="iam-invite-staff-function"
-            >
-              <option value="">— optional template —</option>
-              {staffFunctions.map((f) => (
-                <option key={f.id} value={f.id}>
-                  {f.name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="block text-sm">
-            Org job persona
-            <select
-              className="mt-1 block rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-sm"
-              value={personaRoleId}
-              onChange={(e) => setPersonaRoleId(e.target.value)}
-              data-testid="iam-invite-persona"
-            >
-              {personas.map((p) => (
-                <option key={p.roleId} value={p.roleId}>
-                  {p.name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="flex items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              checked={provision}
-              onChange={(e) => setProvision(e.target.checked)}
-              data-testid="iam-invite-provision"
-            />
-            Create login &amp; assign roles
-          </label>
-          <button
-            type="button"
-            data-testid="iam-invite-submit"
-            className="inline-flex items-center rounded-md border border-[var(--color-border)] px-3 py-1.5 text-sm hover:bg-[var(--color-muted)] disabled:opacity-50"
-            disabled={!email.trim() || inviteMutation.isPending}
-            onClick={() => {
-              setMessage(null);
-              setIssuedPassword(null);
-              inviteMutation.mutate();
-            }}
-          >
-            {inviteMutation.isPending
-              ? provision
-                ? "Provisioning…"
-                : "Inviting…"
-              : provision
-                ? "Provision"
-                : "Invite"}
-          </button>
-        </div>
-        {orgProducts.length > 0 ? (
-          <fieldset className="mt-3">
-            <legend className="text-sm font-medium">Product grants</legend>
-            <div className="mt-2 flex flex-wrap gap-3">
-              {orgProducts.map((productKey) => (
-                <label key={productKey} className="flex items-center gap-2 text-sm">
-                  <input
-                    type="checkbox"
-                    checked={inviteProducts.includes(productKey)}
-                    onChange={(e) => {
-                      setInviteProducts((prev) =>
-                        e.target.checked
-                          ? [...prev, productKey]
-                          : prev.filter((p) => p !== productKey),
-                      );
-                    }}
-                    data-testid={`iam-invite-product-${productKey}`}
-                  />
-                  {productDisplayName(productKey)}
-                </label>
-              ))}
-            </div>
-          </fieldset>
+      <QepPanel title="Create user">
+        {personasQuery.isLoading ? (
+          <QepLoadingState label="Loading templates…" />
+        ) : personasQuery.isError ? (
+          <QepErrorState message={(personasQuery.error as Error).message} />
         ) : (
-          <p className="mt-3 text-xs text-[var(--color-muted-foreground)]">
-            No org product subscriptions yet — start a plan trial from Pricing to enable
-            grants.
-          </p>
+          <CreateUserWizard
+            personas={personas}
+            staffFunctions={staffFunctions}
+            orgProducts={orgProducts}
+            onProvisioned={({ message: nextMessage, temporaryPassword }) => {
+              setMessage(nextMessage);
+              setIssuedPassword(temporaryPassword ?? null);
+              void queryClient.invalidateQueries({ queryKey: ["iam", "members"] });
+            }}
+          />
         )}
         {message ? (
           <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">{message}</p>
@@ -269,7 +120,7 @@ export function OrgAdminMembersView() {
         ) : membersQuery.isError ? (
           <QepErrorState message={(membersQuery.error as Error).message} />
         ) : members.length === 0 ? (
-          <QepEmptyState title="No members yet — invite your first teammate." />
+          <QepEmptyState title="No members yet — create your first teammate." />
         ) : (
           <QepPanel title={`Members (${members.length})`}>
             <ul className="space-y-2" data-testid="iam-members-list">

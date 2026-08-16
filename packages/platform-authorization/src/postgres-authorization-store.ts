@@ -807,3 +807,74 @@ export async function getPostgresAuthorizationDiagnostics() {
     assignmentCount: assignments.length,
   };
 }
+
+/**
+ * Phase K — per-user resource-scope overlay role (support.queue / projects.project / source.repo).
+ * Replaces prior grants on the same role id so re-provision is idempotent.
+ */
+export async function upsertPostgresUserScopedPermissions(input: {
+  readonly userId: string;
+  readonly tenantId: string;
+  readonly permissionKeys: readonly string[];
+}): Promise<{ readonly roleId: string; readonly permissionKeys: readonly string[] }> {
+  await seedDefaultAuthorizationRows();
+  const db = getDb();
+  const timestamp = new Date();
+  const roleId = `role-user-scope-${input.userId}`;
+  const slug = `user-scope-${input.userId}`;
+  const keys = [...new Set(input.permissionKeys.map((k) => k.trim()).filter(Boolean))];
+
+  for (const permissionKey of keys) {
+    await db
+      .insert(platformAuthorizationPermission)
+      .values({
+        permissionKey,
+        namespace: permissionKey.split(".")[0] ?? "scoped",
+        description: `User scoped grant ${permissionKey}`,
+        metadata: { kind: "user_scoped_grant" },
+        createdAt: timestamp,
+        updatedAt: timestamp,
+      })
+      .onConflictDoNothing({ target: platformAuthorizationPermission.permissionKey });
+  }
+
+  await db
+    .insert(platformAuthorizationRole)
+    .values({
+      roleId,
+      slug,
+      name: "User resource scopes",
+      scope: "tenant",
+      tenantId: input.tenantId,
+      productKey: null,
+      parentRoleId: null,
+      status: "active",
+      metadata: { kind: "user_scoped_grants" },
+      createdAt: timestamp,
+      updatedAt: timestamp,
+    })
+    .onConflictDoNothing({ target: platformAuthorizationRole.roleId });
+
+  await db
+    .delete(platformAuthorizationRolePermission)
+    .where(eq(platformAuthorizationRolePermission.roleId, roleId));
+
+  for (const permissionKey of keys) {
+    await db
+      .insert(platformAuthorizationRolePermission)
+      .values({
+        roleId,
+        permissionKey,
+        grantType: "allow",
+      })
+      .onConflictDoNothing();
+  }
+
+  await upsertPostgresRoleAssignment({
+    userId: input.userId,
+    roleId,
+    tenantId: input.tenantId,
+  });
+
+  return { roleId, permissionKeys: keys };
+}

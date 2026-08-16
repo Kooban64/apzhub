@@ -25,6 +25,7 @@ import {
   setUserProductGrants,
 } from "@/lib/commercial/product-access";
 import { getOrgMember } from "@/lib/iam/org-member-store";
+import { applyProvisionOverlays } from "@/lib/iam/provision-overlays";
 
 function mapIamError(error: unknown): never {
   const message = error instanceof Error ? error.message : String(error);
@@ -33,7 +34,9 @@ function mapIamError(error: unknown): never {
     message === "iam.invite.persona_required" ||
     message === "iam.invite.persona_unknown" ||
     message === "iam.provision.staff_function_unknown" ||
-    message === "iam.provision.staff_function_required"
+    message === "iam.provision.staff_function_required" ||
+    message === "iam.provision.scope_invalid" ||
+    message === "iam.provision.professional_tool_unknown"
   ) {
     throw new PlatformApiHttpError(400, {
       code: "VALIDATION_FAILED",
@@ -110,6 +113,10 @@ export async function handleInviteIamMember(
     provision?: boolean;
     staffFunctionId?: string;
     temporaryPassword?: string;
+    resourceScopeGrants?: string[];
+    professionalToolIds?: string[];
+    professionalToolsExpiresAt?: string;
+    professionalToolsReason?: string;
   };
   try {
     const organisationId = sessionTenantId(context);
@@ -125,6 +132,15 @@ export async function handleInviteIamMember(
         temporaryPassword: body.temporaryPassword,
         productKeys: (body.productKeys ?? []) as ProductKey[],
       });
+      const overlays = await applyProvisionOverlays({
+        organisationId,
+        userId: result.userId,
+        invitedBy: context.serviceContext.userId,
+        resourceScopeGrants: body.resourceScopeGrants,
+        professionalToolIds: body.professionalToolIds,
+        professionalToolsExpiresAt: body.professionalToolsExpiresAt,
+        professionalToolsReason: body.professionalToolsReason,
+      });
       return jsonDataResponse(
         {
           member: {
@@ -137,6 +153,11 @@ export async function handleInviteIamMember(
           temporaryPassword: result.temporaryPassword,
           staffFunction: result.staffFunction,
           effectiveAccessSummary: result.effectiveAccessSummary,
+          overlays: {
+            resourceScopeGrants: overlays.resourceScopeGrants,
+            professionalToolIds: overlays.professionalToolIds,
+            scopedRoleId: overlays.scopedRoleId,
+          },
           note: "User provisioned. Temporary password returned once — share securely.",
         },
         context.tracing,

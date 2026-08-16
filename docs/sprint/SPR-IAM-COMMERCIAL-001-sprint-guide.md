@@ -2,7 +2,7 @@
 
 | Field        | Value                                                                                 |
 | ------------ | ------------------------------------------------------------------------------------- |
-| Status       | **READY FOR OWNER ACCEPTANCE** — execution authorised once Owner marks ACCEPTED       |
+| Status       | **ACCEPTED · ACTIVE** — Owner accepted 2026-08-16; residual Stream 6 ships continue   |
 | Programme    | [APZHUB-IAM-COMMERCIAL-PROGRAMME](../architecture/APZHUB-IAM-COMMERCIAL-PROGRAMME.md) |
 | Prerequisite | Platform foundation (SPR-001 / BUILD-001) available                                   |
 | Out of scope | Partner marketplace runtime; full multi-engine SSO                                    |
@@ -45,10 +45,10 @@ Requirements → design → impl → tests → docs → Owner review before merg
 
 ## Owner acceptance
 
-| Field       | Value                                                |
-| ----------- | ---------------------------------------------------- |
-| Accepted by | _pending_                                            |
-| Accepted at | _pending_                                            |
-| Notes       | Owner may accept S0 and authorise S1–S4 sequentially |
+| Field       | Value                                                                                                                                                                                              |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Accepted by | Owner (chat — “I accept, please continue”)                                                                                                                                                         |
+| Accepted at | 2026-08-16                                                                                                                                                                                         |
+| Notes       | S0–S4 evidence is **LOCAL IMPLEMENTED** ([EVIDENCE](../operations/SPR-IAM-COMMERCIAL-001-EVIDENCE.md)). Residual UX (create-user wizard / dogfood) continues under this guide and Stream 6 freeze. |
 
-**Engineering note:** Implementation of S1–S4 proceeds under this guide once Owner accepts; evidence lands in `docs/operations/` and `docs/architecture/`.
+**Engineering note:** Post-acceptance residual ships under Stream 6 / programme order (Phase K+). Evidence stays in `docs/operations/` and sprint gap maps.
