@@ -9,6 +9,7 @@ import { isSupportApiError, shouldRetrySupportQuery } from "@/lib/support/errors
 import { formatSupportDate } from "@/lib/support/format";
 import {
   canCreateSupportRequest,
+  isSupportAgent,
   type SupportPermissionSource,
 } from "@/lib/support/permissions";
 import {
@@ -104,12 +105,17 @@ export function SupportInboxView({
   }
 
   const canCreate = canCreateSupportRequest(permissions);
+  const agent = isSupportAgent(permissions);
 
   return (
     <PageShell
-      title="Requests"
-      description="Ask for help, follow progress, and reach resolution in APZ Support."
-      breadcrumbs={["APZ Support", "Requests"]}
+      title={agent ? "Requests" : "My requests"}
+      description={
+        agent
+          ? "Ask for help, follow progress, and reach resolution in APZ Support."
+          : "Follow the requests you raised — no agent queues or internal tools."
+      }
+      breadcrumbs={["APZ Support", agent ? "Requests" : "My requests"]}
       actions={
         canCreate ? (
           <Button
@@ -137,14 +143,16 @@ export function SupportInboxView({
                     New request
                   </Button>
                 ) : null}
-                <Button
-                  type="button"
-                  size="sm"
-                  variant="outline"
-                  onClick={() => router.push(supportSearchPath())}
-                >
-                  Search APZ Support
-                </Button>
+                {agent ? (
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    onClick={() => router.push(supportSearchPath())}
+                  >
+                    Search APZ Support
+                  </Button>
+                ) : null}
                 <Button
                   type="button"
                   size="sm"
@@ -239,26 +247,30 @@ export function SupportInboxView({
             onChange={(event) => updateParam("search", event.target.value)}
             data-testid="support-filter-search"
           />
-          <Input
-            label="Organisation"
-            value={params.organizationId ?? ""}
-            onChange={(event) => updateParam("organizationId", event.target.value)}
-          />
-          <Input
-            label="Group"
-            value={params.groupId ?? ""}
-            onChange={(event) => updateParam("groupId", event.target.value)}
-          />
-          <Input
-            label="Owner"
-            value={params.ownerId ?? ""}
-            onChange={(event) => updateParam("ownerId", event.target.value)}
-          />
-          <Input
-            label="Customer"
-            value={params.customerId ?? ""}
-            onChange={(event) => updateParam("customerId", event.target.value)}
-          />
+          {agent ? (
+            <>
+              <Input
+                label="Organisation"
+                value={params.organizationId ?? ""}
+                onChange={(event) => updateParam("organizationId", event.target.value)}
+              />
+              <Input
+                label="Group"
+                value={params.groupId ?? ""}
+                onChange={(event) => updateParam("groupId", event.target.value)}
+              />
+              <Input
+                label="Owner"
+                value={params.ownerId ?? ""}
+                onChange={(event) => updateParam("ownerId", event.target.value)}
+              />
+              <Input
+                label="Customer"
+                value={params.customerId ?? ""}
+                onChange={(event) => updateParam("customerId", event.target.value)}
+              />
+            </>
+          ) : null}
           <label className="flex flex-col gap-1 text-sm">
             <span className="font-medium">Sort</span>
             <select

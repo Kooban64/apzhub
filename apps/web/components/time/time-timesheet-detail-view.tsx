@@ -21,6 +21,7 @@ import {
   updateTimesheet,
 } from "@/lib/time/time-api";
 
+import { TimeTimesheetApprovalPanel } from "./time-timesheet-approval-panel";
 import {
   ContextSection,
   ErrorState,
@@ -342,6 +343,11 @@ export function TimeTimesheetDetailView({
               </form>
             ) : null}
           </div>
+          <TimeTimesheetApprovalPanel
+            timesheetId={timesheetId}
+            timesheetStatus={timesheet.status}
+            permissions={permissions}
+          />
         </TimeWorkspaceFrame>
       ) : null}
     </PageShell>

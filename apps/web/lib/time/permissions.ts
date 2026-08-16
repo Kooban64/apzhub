@@ -62,6 +62,15 @@ export function canManageTimesheets(source: TimePermissionSource): boolean {
   );
 }
 
+/** Manager approve/return for Stream 4 Time overlay. */
+export function canApproveTimesheets(source: TimePermissionSource): boolean {
+  return (
+    hasTimePermission(source, "time.timesheet.manage") ||
+    hasTimePermission(source, "time.manage") ||
+    hasTimePermission(source, "time.admin")
+  );
+}
+
 export function canListActivities(source: TimePermissionSource): boolean {
   return (
     hasTimePermission(source, "time.activity.list") ||

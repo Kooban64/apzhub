@@ -46,6 +46,10 @@ describe("effective access inspector", () => {
     expect(inspection?.productKeys).toEqual(
       expect.arrayContaining(["support", "time", "knowledge"]),
     );
+    expect(inspection?.provisionStatus).toBe("invited");
+    expect(inspection?.orgProductKeys).toEqual(
+      expect.arrayContaining(["support", "time", "knowledge"]),
+    );
     expect(inspection?.why.some((line) => line.includes("shell baseline"))).toBe(true);
   });
 });

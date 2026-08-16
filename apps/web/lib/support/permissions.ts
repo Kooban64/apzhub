@@ -101,3 +101,20 @@ export function canExecuteSupportSearch(source: SupportPermissionSource): boolea
 export function canReadSupportAnalytics(source: SupportPermissionSource): boolean {
   return hasSupportPermission(source, "support.analytics.read");
 }
+
+/**
+ * Agent vs requester UX mode (Stream 4).
+ * Agents can assign/transition; requesters only see their simple request experience.
+ */
+export function isSupportAgent(source: SupportPermissionSource): boolean {
+  return (
+    canAssignSupportRequest(source) ||
+    canTransitionSupportRequest(source) ||
+    hasSupportPermission(source, "support.groups.list") ||
+    hasSupportPermission(source, "support.users.list")
+  );
+}
+
+export function isSupportRequesterOnly(source: SupportPermissionSource): boolean {
+  return canListSupportRequests(source) && !isSupportAgent(source);
+}

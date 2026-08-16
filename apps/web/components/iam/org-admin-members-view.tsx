@@ -327,6 +327,11 @@ function MemberActions({
   );
   const [grants, setGrants] = useState<string[]>([...initialGrants]);
   const [inspectionWhy, setInspectionWhy] = useState<string[] | null>(null);
+  const [inspectionMeta, setInspectionMeta] = useState<{
+    provisionStatus?: string;
+    productRoles?: string;
+    orgProducts?: string;
+  } | null>(null);
 
   return (
     <span className="ml-auto flex flex-wrap items-center gap-2">
@@ -359,16 +364,33 @@ function MemberActions({
               `/api/v1/iam/members/${encodeURIComponent(membershipId)}/access`,
             );
             const body = (await res.json()) as {
-              data?: { inspection?: { why?: string[]; productKeys?: string[] } };
+              data?: {
+                inspection?: {
+                  why?: string[];
+                  productKeys?: string[];
+                  orgProductKeys?: string[];
+                  provisionStatus?: string;
+                  productRoles?: readonly { productKey: string; roleHint: string }[];
+                };
+              };
               error?: { message?: string };
             };
             if (!res.ok) {
+              setInspectionMeta(null);
               setInspectionWhy([body.error?.message ?? "Inspect failed"]);
               return;
             }
             const inspection = body.data?.inspection;
+            setInspectionMeta({
+              provisionStatus: inspection?.provisionStatus,
+              orgProducts: (inspection?.orgProductKeys ?? []).join(", ") || "none",
+              productRoles:
+                (inspection?.productRoles ?? [])
+                  .map((r) => `${r.productKey}→${r.roleHint}`)
+                  .join(", ") || "none",
+            });
             setInspectionWhy([
-              `Products: ${(inspection?.productKeys ?? []).join(", ") || "none"}`,
+              `Effective products: ${(inspection?.productKeys ?? []).join(", ") || "none"}`,
               ...(inspection?.why ?? []),
             ]);
           })();
@@ -377,14 +399,41 @@ function MemberActions({
         Inspect access
       </button>
       {inspectionWhy ? (
-        <ul
-          className="w-full basis-full rounded border border-[var(--color-border)] bg-[var(--color-muted)] px-2 py-1 text-[11px] text-[var(--color-muted-foreground)]"
+        <div
+          className="w-full basis-full space-y-2 rounded border border-[var(--color-border)] bg-[var(--color-muted)] px-2 py-2 text-[11px] text-[var(--color-muted-foreground)]"
           data-testid={`iam-inspect-why-${membershipId}`}
+          data-user-inspector="expanded"
         >
-          {inspectionWhy.map((line) => (
-            <li key={line}>{line}</li>
-          ))}
-        </ul>
+          {inspectionMeta ? (
+            <dl className="grid gap-1 sm:grid-cols-3">
+              <div>
+                <dt className="font-medium text-[var(--color-foreground)]">
+                  Provision
+                </dt>
+                <dd data-testid={`iam-inspect-provision-${membershipId}`}>
+                  {inspectionMeta.provisionStatus ?? "—"}
+                </dd>
+              </div>
+              <div>
+                <dt className="font-medium text-[var(--color-foreground)]">
+                  Org products
+                </dt>
+                <dd>{inspectionMeta.orgProducts}</dd>
+              </div>
+              <div>
+                <dt className="font-medium text-[var(--color-foreground)]">
+                  Product roles
+                </dt>
+                <dd>{inspectionMeta.productRoles}</dd>
+              </div>
+            </dl>
+          ) : null}
+          <ul className="space-y-0.5">
+            {inspectionWhy.map((line) => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
+        </div>
       ) : null}
       {orgProducts.length > 0 ? (
         <button

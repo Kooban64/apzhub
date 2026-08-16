@@ -10,6 +10,7 @@ import { formatSupportDate } from "@/lib/support/format";
 import {
   canCreateSupportArticle,
   canListSupportArticles,
+  isSupportAgent,
   type SupportPermissionSource,
 } from "@/lib/support/permissions";
 import { writeLastRequestId } from "@/lib/support/preferences";
@@ -115,16 +116,19 @@ export function SupportRequestDetailView({
 
   const request = requestQuery.data.data;
   const canCompose = canCreateSupportArticle(permissions);
+  const agent = isSupportAgent(permissions);
   const requestNumber = request.displayId ?? "Request";
 
   return (
     <PageShell
       title={request.title}
-      description={`Request ${requestNumber}`}
-      breadcrumbs={["APZ Support", "Requests", requestNumber]}
+      description={`Request ${requestNumber}${agent ? "" : " · Your request"}`}
+      breadcrumbs={["APZ Support", agent ? "Requests" : "My requests", requestNumber]}
     >
       <SupportWorkspaceFrame
-        queue={<SupportQueuePane activeRequestId={supportRequestId} />}
+        queue={
+          agent ? <SupportQueuePane activeRequestId={supportRequestId} /> : undefined
+        }
         context={
           <>
             <ContextSection title="People">
@@ -132,32 +136,41 @@ export function SupportRequestDetailView({
                 <span className="font-medium">Customer: </span>
                 <SupportEntityLabel kind="user" id={request.requesterId} />
               </p>
-              <p>
-                <span className="font-medium">Owner: </span>
-                <SupportEntityLabel kind="user" id={request.assigneeId} />
-              </p>
-              <p>
-                <span className="font-medium">Group: </span>
-                <SupportEntityLabel kind="group" id={request.groupId} />
-              </p>
-              <p>
-                <span className="font-medium">Organisation: </span>
-                <SupportEntityLabel kind="organization" id={request.organizationId} />
-              </p>
+              {agent ? (
+                <>
+                  <p>
+                    <span className="font-medium">Owner: </span>
+                    <SupportEntityLabel kind="user" id={request.assigneeId} />
+                  </p>
+                  <p>
+                    <span className="font-medium">Group: </span>
+                    <SupportEntityLabel kind="group" id={request.groupId} />
+                  </p>
+                  <p>
+                    <span className="font-medium">Organisation: </span>
+                    <SupportEntityLabel
+                      kind="organization"
+                      id={request.organizationId}
+                    />
+                  </p>
+                </>
+              ) : null}
             </ContextSection>
             <ContextSection title="Quick actions">
               <div className="flex flex-col gap-2">
-                <SupportStartTimerButton
-                  requestNumber={requestNumber}
-                  title={request.title}
-                />
+                {agent ? (
+                  <SupportStartTimerButton
+                    requestNumber={requestNumber}
+                    title={request.title}
+                  />
+                ) : null}
                 <Button
                   type="button"
                   size="sm"
                   variant="outline"
                   onClick={() => router.push(supportInboxPath())}
                 >
-                  Back to requests
+                  {agent ? "Back to requests" : "Back to my requests"}
                 </Button>
                 <Button
                   type="button"
@@ -169,11 +182,13 @@ export function SupportRequestDetailView({
                 </Button>
               </div>
             </ContextSection>
-            <EnterpriseContextPanel
-              focusType="support"
-              focusId={request.id}
-              focusName={request.title}
-            />
+            {agent ? (
+              <EnterpriseContextPanel
+                focusType="support"
+                focusId={request.id}
+                focusName={request.title}
+              />
+            ) : null}
           </>
         }
       >
@@ -208,11 +223,13 @@ export function SupportRequestDetailView({
               {formatSupportDate(request.updatedAt)}
             </p>
           </div>
-          <SupportRequestCommands
-            request={request}
-            permissions={permissions}
-            onUpdated={invalidateAll}
-          />
+          {agent ? (
+            <SupportRequestCommands
+              request={request}
+              permissions={permissions}
+              onUpdated={invalidateAll}
+            />
+          ) : null}
         </div>
 
         <div className="flex gap-2" role="tablist" aria-label="Request sections">
@@ -268,11 +285,18 @@ export function SupportRequestDetailView({
               />
             ) : null}
             {canCompose ? (
-              <div className="grid gap-4 lg:grid-cols-2">
-                <InternalNoteComposer
-                  supportRequestId={supportRequestId}
-                  onCreated={invalidateArticles}
-                />
+              <div
+                className={`grid gap-4 ${agent ? "lg:grid-cols-2" : ""}`}
+                data-testid={
+                  agent ? "support-compose-agent" : "support-compose-requester"
+                }
+              >
+                {agent ? (
+                  <InternalNoteComposer
+                    supportRequestId={supportRequestId}
+                    onCreated={invalidateArticles}
+                  />
+                ) : null}
                 <CustomerReplyComposer
                   supportRequestId={supportRequestId}
                   onCreated={invalidateArticles}
