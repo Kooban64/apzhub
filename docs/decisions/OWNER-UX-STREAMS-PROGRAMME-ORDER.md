@@ -12,11 +12,11 @@
 >
 > Streams 1–6 remain frozen in scope. This decision governs how they are implemented, integrated and certified.
 >
-> **Engineering:** Phase A–K **CERTIFIED 100%**. Phase K closed create-user wizard (Stream 6 §§31–39) — ([SPR-UX-PHASE-K-CREATE-USER-WIZARD](../sprint/SPR-UX-PHASE-K-CREATE-USER-WIZARD.md)).
+> **Engineering:** Phase A–L **CERTIFIED 100%**. Phase L closed APZOR create-user dogfood (S6-09 slice) — ([SPR-UX-PHASE-L-CREATE-USER-DOGFOOD](../sprint/SPR-UX-PHASE-L-CREATE-USER-DOGFOOD.md)).
 >
 > **Engineering 2026-08-16:** Phase J certified — Activity/Audit/Sessions tabs · Support `/health` (ADOPT F2).
 >
-> **Owner 2026-08-16:** [SPR-IAM-COMMERCIAL-001](../sprint/SPR-IAM-COMMERCIAL-001-sprint-guide.md) **ACCEPTED · ACTIVE**. Phase K create-user wizard certified same day.
+> **Owner 2026-08-16:** [SPR-IAM-COMMERCIAL-001](../sprint/SPR-IAM-COMMERCIAL-001-sprint-guide.md) **ACCEPTED · ACTIVE**. Phases K–L certified same day.
 
 ---
 
@@ -62,6 +62,9 @@ Activity · Audit · Sessions (honest) · Support health
         ↓
 PHASE K — CREATE-USER WIZARD        ← COMPLETE · CERTIFIED 100%
 Identity → Template → Products → Scopes → Professional Tools → Review → Provision
+        ↓
+PHASE L — CREATE-USER DOGFOOD       ← COMPLETE · CERTIFIED 100%
+Support Agent + queue scope + PT → Inspector → Support-shaped shell
 ```
 
 **Stream 1 freeze interpretation:** Finish Stream 1 before authenticated QEP/PEN/PRD **product deep UX**. Foundation (5+6) precedes or underpins Stream 1.

@@ -31,7 +31,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-UX-STREAM-006](./sprint/SPR-UX-STREAM-006-tenant-identity-rbac-administration.md)             | **PHASE G CERTIFIED** — horizontal RBAC close                                         |
 | [OWNER UX Stream 6 supersede](./decisions/OWNER-UX-STREAM-006-SUPERSEDE.md)                        | **IN FORCE** — revised Stream 6 replaces earlier RBAC freeze text                     |
 | [UX Shared Source Workspace](./ux/UX-SHARED-SOURCE-WORKSPACE.md)                                   | **LOCKED** — one Cursor-quality source UX for QEP+PEN; provider-neutral               |
-| [OWNER UX programme order](./decisions/OWNER-UX-STREAMS-PROGRAMME-ORDER.md)                        | **ACCEPTED** — Phase A–K **CERTIFIED 100%**                                           |
+| [OWNER UX programme order](./decisions/OWNER-UX-STREAMS-PROGRAMME-ORDER.md)                        | **ACCEPTED** — Phase A–L **CERTIFIED 100%**                                           |
 | [UX streams index](./ux/README.md)                                                                 | Streams 1–6 · Phase A–G certified                                                     |
 | [Phase A Streams 5∥6 gap map](./sprint/PHASE-A-STREAMS-5-6-GAP-MAP.md)                             | Living — seven persona verticals certified · horizontal → Phase G closed              |
 | [Phase B Stream 1 gap map](./sprint/PHASE-B-STREAM-1-GAP-MAP.md)                                   | **COMPLETE · CERTIFIED 100%** — public commerce DoD                                   |
@@ -52,6 +52,8 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [Phase J Inspector timeline gap map](./sprint/PHASE-J-INSPECTOR-TIMELINE-GAP-MAP.md)               | **COMPLETE · CERTIFIED 100%** — Phase I leftover tabs + ADOPT F2                      |
 | [SPR-UX-PHASE-K Create-user wizard](./sprint/SPR-UX-PHASE-K-CREATE-USER-WIZARD.md)                 | **COMPLETE · CERTIFIED 100%** — Stream 6 §§31–39 · S6-04                              |
 | [Phase K create-user wizard gap map](./sprint/PHASE-K-CREATE-USER-WIZARD-GAP-MAP.md)               | **COMPLETE · CERTIFIED 100%** — review-before-provision wizard                        |
+| [SPR-UX-PHASE-L Create-user dogfood](./sprint/SPR-UX-PHASE-L-CREATE-USER-DOGFOOD.md)               | **COMPLETE · CERTIFIED 100%** — S6-09 Support Agent + overlays                        |
+| [Phase L create-user dogfood gap map](./sprint/PHASE-L-CREATE-USER-DOGFOOD-GAP-MAP.md)             | **COMPLETE · CERTIFIED 100%** — Inspector + Support-shaped shell                      |
 | [SPR-UX-001](./sprint/SPR-UX-001-commercial-workbench-ui-remodel.md)                               | **PARKED** — workbench remodel deferred under Stream 1 freeze                         |
 | [APZQEP](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md)                             | Quality Engineering Platform — _Can we release with confidence?_                      |
 | [APZPEN](./strategy/APZPEN-ENTERPRISE-SECURITY-ASSURANCE-PLATFORM.md)                              | Security Assurance & Pen Testing — _Can we demonstrate we are secure?_                |

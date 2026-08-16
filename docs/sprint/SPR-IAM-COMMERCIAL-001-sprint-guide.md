@@ -45,10 +45,10 @@ Requirements → design → impl → tests → docs → Owner review before merg
 
 ## Owner acceptance
 
-| Field       | Value                                                                                                                                                                                              |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Accepted by | Owner (chat — “I accept, please continue”)                                                                                                                                                         |
-| Accepted at | 2026-08-16                                                                                                                                                                                         |
-| Notes       | S0–S4 evidence is **LOCAL IMPLEMENTED** ([EVIDENCE](../operations/SPR-IAM-COMMERCIAL-001-EVIDENCE.md)). Residual UX (create-user wizard / dogfood) continues under this guide and Stream 6 freeze. |
+| Field       | Value                                                                                                                                                                                                                                                            |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Accepted by | Owner (chat — “I accept, please continue”)                                                                                                                                                                                                                       |
+| Accepted at | 2026-08-16                                                                                                                                                                                                                                                       |
+| Notes       | S0–S4 evidence is **LOCAL IMPLEMENTED** ([EVIDENCE](../operations/SPR-IAM-COMMERCIAL-001-EVIDENCE.md)). Create-user wizard (Phase K) + APZOR dogfood smoke (Phase L / `pnpm test:e2e:phase-l`) landed under Stream 6. Residual: billing Playwright, S6-06 teams. |
 
 **Engineering note:** Post-acceptance residual ships under Stream 6 / programme order (Phase K+). Evidence stays in `docs/operations/` and sprint gap maps.

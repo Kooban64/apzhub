@@ -45,4 +45,8 @@ pnpm exec vitest run \
   packages/platform-authorization/src/persona-roles.test.ts \
   apps/web/lib/iam/identity-lifecycle.test.ts \
   apps/web/lib/commercial/billing.test.ts
+
+# Stream 6 create-user dogfood (Phase L)
+pnpm exec vitest run apps/web/lib/iam/create-user-dogfood.test.ts
+pnpm test:e2e:phase-l
 ```
