@@ -1,9 +1,10 @@
 # SPR-UX-STREAM-003 — APZPEN authenticated UI/UX
 
-> **Status:** **FROZEN SPEC · NOT STARTED · ORDER TBD** — 2026-08-16  
+> **Status:** **FROZEN SPEC · PHASE D ACTIVE** — 2026-08-16  
 > **Authority:** [UX-STREAM-003](../ux/UX-STREAM-003-apzpen-security-assurance.md)  
+> **Gap map:** [PHASE-D-STREAM-3-GAP-MAP](./PHASE-D-STREAM-3-GAP-MAP.md)  
 > **Shared:** [UX-SHARED-SOURCE-WORKSPACE](../ux/UX-SHARED-SOURCE-WORKSPACE.md)  
-> **Depends on:** Owner serial/parallel decision after Streams 1–4 filed  
+> **Depends on:** Phase A–C complete · parallel with Stream 2  
 > **Does not:** Kali-in-browser · scanner aggregator · duplicate source browser · replace APZQEP
 
 ## Signature ships (when authorised)

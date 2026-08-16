@@ -596,6 +596,9 @@ export function ApzpenEngagementDetailPage({ engagementId }: { engagementId: str
   const [allowedTech, setAllowedTech] = useState<string[]>([]);
   const [restrictedTech, setRestrictedTech] = useState<string[]>([]);
   const [roeHydrated, setRoeHydrated] = useState(false);
+  const [workbenchTab, setWorkbenchTab] = useState<
+    "overview" | "scope" | "testing" | "findings"
+  >("overview");
 
   const engForRoe = q.data?.engagement;
   useEffect(() => {
@@ -747,796 +750,855 @@ export function ApzpenEngagementDetailPage({ engagementId }: { engagementId: str
             ]}
           />
 
-          <div className="grid gap-4 lg:grid-cols-2">
-            <OperatorPanel title="Rules of Engagement">
-              <p className="mb-2 text-[11px] text-[var(--color-muted-foreground)]">
-                Testers must always know what is authorised.
-              </p>
-              {eng.roe.status === "approved" ? (
-                <div className="grid gap-3 sm:grid-cols-2 text-[12px]">
-                  <div>
-                    <p className="text-[10px] uppercase text-[var(--color-muted-foreground)]">
-                      Allowed
-                    </p>
-                    <ul className="mt-1 list-disc pl-4">
-                      {eng.roe.allowedTechniques.map((t) => (
-                        <li key={t}>{t.replaceAll("_", " ")}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase text-[var(--color-muted-foreground)]">
-                      Restricted
-                    </p>
-                    <ul className="mt-1 list-disc pl-4">
-                      {eng.roe.restrictedTechniques.map((t) => (
-                        <li key={t}>{t.replaceAll("_", " ")}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  {eng.roe.emergencyContact ? (
-                    <p className="col-span-2 text-[11px]">
-                      Emergency: {eng.roe.emergencyContact}
-                    </p>
-                  ) : null}
-                  {eng.roe.testingWindowStart || eng.roe.testingWindowEnd ? (
-                    <p className="col-span-2 text-[11px]">
-                      Window: {eng.roe.testingWindowStart ?? "—"} →{" "}
-                      {eng.roe.testingWindowEnd ?? "—"}
-                    </p>
-                  ) : null}
-                  {eng.methodology.length > 0 ? (
-                    <p className="col-span-2 text-[11px]">
-                      Methodology: {eng.methodology.join(" · ")}
-                    </p>
-                  ) : null}
-                  {eng.roe.notes ? (
-                    <p className="col-span-2 text-[11px] text-[var(--color-muted-foreground)]">
-                      Notes: {eng.roe.notes}
-                    </p>
-                  ) : null}
-                </div>
-              ) : (
-                <div className="space-y-3 text-[12px]">
-                  <div className="grid gap-3 sm:grid-cols-2">
+          <div
+            className="flex flex-wrap gap-1 rounded-md border border-[var(--color-border)] p-0.5"
+            role="tablist"
+            aria-label="Engagement workbench"
+            data-testid="apzpen-engagement-workbench-tabs"
+          >
+            {(
+              [
+                { id: "overview", label: "Overview" },
+                { id: "scope", label: "Scope & RoE" },
+                { id: "testing", label: "Testing" },
+                { id: "findings", label: "Findings" },
+              ] as const
+            ).map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                role="tab"
+                aria-selected={workbenchTab === tab.id}
+                className={`rounded px-3 py-1.5 text-sm ${
+                  workbenchTab === tab.id
+                    ? "bg-[var(--color-muted)] font-medium"
+                    : "text-[var(--color-muted-foreground)]"
+                }`}
+                onClick={() => setWorkbenchTab(tab.id)}
+                data-testid={`apzpen-engagement-tab-${tab.id}`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          <div
+            className={workbenchTab === "scope" ? "space-y-4" : "hidden"}
+            data-testid="apzpen-engagement-pane-scope"
+            hidden={workbenchTab !== "scope"}
+          >
+            <div className="grid gap-4 lg:grid-cols-2">
+              <OperatorPanel title="Rules of Engagement">
+                <p className="mb-2 text-[11px] text-[var(--color-muted-foreground)]">
+                  Testers must always know what is authorised.
+                </p>
+                {eng.roe.status === "approved" ? (
+                  <div className="grid gap-3 sm:grid-cols-2 text-[12px]">
                     <div>
-                      <p className="mb-1 text-[10px] uppercase text-[var(--color-muted-foreground)]">
+                      <p className="text-[10px] uppercase text-[var(--color-muted-foreground)]">
                         Allowed
                       </p>
-                      <ul className="space-y-1">
-                        {CATALOGUE_ALLOWED_TECHNIQUES.map((t) => (
-                          <li key={t}>
-                            <label className="flex items-center gap-2">
-                              <input
-                                type="checkbox"
-                                checked={allowedTech.includes(t)}
-                                onChange={(e) =>
-                                  setAllowedTech((prev) =>
-                                    e.target.checked
-                                      ? [...prev, t]
-                                      : prev.filter((x) => x !== t),
-                                  )
-                                }
-                              />
-                              <span>{t.replaceAll("_", " ")}</span>
-                            </label>
-                          </li>
+                      <ul className="mt-1 list-disc pl-4">
+                        {eng.roe.allowedTechniques.map((t) => (
+                          <li key={t}>{t.replaceAll("_", " ")}</li>
                         ))}
                       </ul>
                     </div>
                     <div>
-                      <p className="mb-1 text-[10px] uppercase text-[var(--color-muted-foreground)]">
+                      <p className="text-[10px] uppercase text-[var(--color-muted-foreground)]">
                         Restricted
                       </p>
-                      <ul className="space-y-1">
-                        {CATALOGUE_RESTRICTED_TECHNIQUES.map((t) => (
-                          <li key={t}>
-                            <label className="flex items-center gap-2">
-                              <input
-                                type="checkbox"
-                                checked={restrictedTech.includes(t)}
-                                onChange={(e) =>
-                                  setRestrictedTech((prev) =>
-                                    e.target.checked
-                                      ? [...prev, t]
-                                      : prev.filter((x) => x !== t),
-                                  )
-                                }
-                              />
-                              <span>{t.replaceAll("_", " ")}</span>
-                            </label>
-                          </li>
+                      <ul className="mt-1 list-disc pl-4">
+                        {eng.roe.restrictedTechniques.map((t) => (
+                          <li key={t}>{t.replaceAll("_", " ")}</li>
                         ))}
                       </ul>
                     </div>
+                    {eng.roe.emergencyContact ? (
+                      <p className="col-span-2 text-[11px]">
+                        Emergency: {eng.roe.emergencyContact}
+                      </p>
+                    ) : null}
+                    {eng.roe.testingWindowStart || eng.roe.testingWindowEnd ? (
+                      <p className="col-span-2 text-[11px]">
+                        Window: {eng.roe.testingWindowStart ?? "—"} →{" "}
+                        {eng.roe.testingWindowEnd ?? "—"}
+                      </p>
+                    ) : null}
+                    {eng.methodology.length > 0 ? (
+                      <p className="col-span-2 text-[11px]">
+                        Methodology: {eng.methodology.join(" · ")}
+                      </p>
+                    ) : null}
+                    {eng.roe.notes ? (
+                      <p className="col-span-2 text-[11px] text-[var(--color-muted-foreground)]">
+                        Notes: {eng.roe.notes}
+                      </p>
+                    ) : null}
                   </div>
-                  <input
-                    className="w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[11px]"
-                    placeholder="Emergency contact"
-                    value={emergencyContact}
-                    onChange={(e) => setEmergencyContact(e.target.value)}
-                  />
-                  <div className="grid gap-2 sm:grid-cols-2">
-                    <label className="block text-[10px] uppercase text-[var(--color-muted-foreground)]">
-                      Window start
-                      <input
-                        type="datetime-local"
-                        className="mt-1 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[11px] normal-case tracking-normal"
-                        value={testingWindowStart}
-                        onChange={(e) => setTestingWindowStart(e.target.value)}
-                        data-testid="apzpen-roe-window-start"
-                        aria-label="Testing window start"
-                      />
-                    </label>
-                    <label className="block text-[10px] uppercase text-[var(--color-muted-foreground)]">
-                      Window end
-                      <input
-                        type="datetime-local"
-                        className="mt-1 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[11px] normal-case tracking-normal"
-                        value={testingWindowEnd}
-                        onChange={(e) => setTestingWindowEnd(e.target.value)}
-                        data-testid="apzpen-roe-window-end"
-                        aria-label="Testing window end"
-                      />
-                    </label>
+                ) : (
+                  <div className="space-y-3 text-[12px]">
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <div>
+                        <p className="mb-1 text-[10px] uppercase text-[var(--color-muted-foreground)]">
+                          Allowed
+                        </p>
+                        <ul className="space-y-1">
+                          {CATALOGUE_ALLOWED_TECHNIQUES.map((t) => (
+                            <li key={t}>
+                              <label className="flex items-center gap-2">
+                                <input
+                                  type="checkbox"
+                                  checked={allowedTech.includes(t)}
+                                  onChange={(e) =>
+                                    setAllowedTech((prev) =>
+                                      e.target.checked
+                                        ? [...prev, t]
+                                        : prev.filter((x) => x !== t),
+                                    )
+                                  }
+                                />
+                                <span>{t.replaceAll("_", " ")}</span>
+                              </label>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="mb-1 text-[10px] uppercase text-[var(--color-muted-foreground)]">
+                          Restricted
+                        </p>
+                        <ul className="space-y-1">
+                          {CATALOGUE_RESTRICTED_TECHNIQUES.map((t) => (
+                            <li key={t}>
+                              <label className="flex items-center gap-2">
+                                <input
+                                  type="checkbox"
+                                  checked={restrictedTech.includes(t)}
+                                  onChange={(e) =>
+                                    setRestrictedTech((prev) =>
+                                      e.target.checked
+                                        ? [...prev, t]
+                                        : prev.filter((x) => x !== t),
+                                    )
+                                  }
+                                />
+                                <span>{t.replaceAll("_", " ")}</span>
+                              </label>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                    <input
+                      className="w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[11px]"
+                      placeholder="Emergency contact"
+                      value={emergencyContact}
+                      onChange={(e) => setEmergencyContact(e.target.value)}
+                    />
+                    <div className="grid gap-2 sm:grid-cols-2">
+                      <label className="block text-[10px] uppercase text-[var(--color-muted-foreground)]">
+                        Window start
+                        <input
+                          type="datetime-local"
+                          className="mt-1 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[11px] normal-case tracking-normal"
+                          value={testingWindowStart}
+                          onChange={(e) => setTestingWindowStart(e.target.value)}
+                          data-testid="apzpen-roe-window-start"
+                          aria-label="Testing window start"
+                        />
+                      </label>
+                      <label className="block text-[10px] uppercase text-[var(--color-muted-foreground)]">
+                        Window end
+                        <input
+                          type="datetime-local"
+                          className="mt-1 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[11px] normal-case tracking-normal"
+                          value={testingWindowEnd}
+                          onChange={(e) => setTestingWindowEnd(e.target.value)}
+                          data-testid="apzpen-roe-window-end"
+                          aria-label="Testing window end"
+                        />
+                      </label>
+                    </div>
+                    <textarea
+                      className="min-h-[48px] w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1.5 text-[11px]"
+                      placeholder="Methodology (one per line)"
+                      value={methodologyText}
+                      onChange={(e) => setMethodologyText(e.target.value)}
+                      data-testid="apzpen-roe-methodology"
+                      aria-label="Engagement methodology"
+                    />
+                    <textarea
+                      className="min-h-[56px] w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1.5 text-[11px]"
+                      placeholder="RoE notes (window, contacts, constraints)"
+                      value={roeNotes}
+                      onChange={(e) => setRoeNotes(e.target.value)}
+                      aria-label="RoE notes"
+                    />
+                    <button
+                      type="button"
+                      className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)] disabled:opacity-50"
+                      disabled={action.isPending || allowedTech.length === 0}
+                      onClick={() =>
+                        action.mutate({
+                          action: "update_roe",
+                          allowedTechniques: allowedTech,
+                          restrictedTechniques: restrictedTech,
+                          emergencyContact,
+                          notes: roeNotes,
+                          testingWindowStart: testingWindowStart
+                            ? new Date(testingWindowStart).toISOString()
+                            : "",
+                          testingWindowEnd: testingWindowEnd
+                            ? new Date(testingWindowEnd).toISOString()
+                            : "",
+                          methodology: methodologyText
+                            .split("\n")
+                            .map((l) => l.trim())
+                            .filter(Boolean),
+                        })
+                      }
+                    >
+                      Save RoE draft
+                    </button>
                   </div>
-                  <textarea
-                    className="min-h-[48px] w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1.5 text-[11px]"
-                    placeholder="Methodology (one per line)"
-                    value={methodologyText}
-                    onChange={(e) => setMethodologyText(e.target.value)}
-                    data-testid="apzpen-roe-methodology"
-                    aria-label="Engagement methodology"
-                  />
-                  <textarea
-                    className="min-h-[56px] w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1.5 text-[11px]"
-                    placeholder="RoE notes (window, contacts, constraints)"
-                    value={roeNotes}
-                    onChange={(e) => setRoeNotes(e.target.value)}
-                    aria-label="RoE notes"
-                  />
+                )}
+                <div className="mt-3 flex flex-wrap gap-2">
                   <button
                     type="button"
                     className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)] disabled:opacity-50"
-                    disabled={action.isPending || allowedTech.length === 0}
+                    disabled={action.isPending || eng.roe.status === "approved"}
+                    onClick={() => action.mutate({ action: "approve_roe" })}
+                  >
+                    Approve RoE
+                  </button>
+                  <button
+                    type="button"
+                    className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)] disabled:opacity-50"
+                    disabled={action.isPending || eng.status === "in_progress"}
+                    onClick={() => action.mutate({ action: "start_testing" })}
+                  >
+                    Start testing
+                  </button>
+                </div>
+                {action.error ? (
+                  <p className="mt-2 text-[11px] text-[var(--color-destructive)]">
+                    {(action.error as Error).message}
+                  </p>
+                ) : null}
+              </OperatorPanel>
+
+              <OperatorPanel title="Scope targets">
+                <ul className="mb-3 space-y-1 text-[12px]">
+                  {eng.scope.map((t) => (
+                    <li key={t.targetId}>
+                      <span className="font-medium">{t.label}</span>
+                      <span className="text-[var(--color-muted-foreground)]">
+                        {" "}
+                        · {t.kind} · {t.identifier}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex flex-wrap gap-2">
+                  <select
+                    className="rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[12px]"
+                    value={scopeKind}
+                    onChange={(e) => setScopeKind(e.target.value as typeof scopeKind)}
+                    aria-label="Scope kind"
+                  >
+                    <option value="web_application">Web application</option>
+                    <option value="api">API</option>
+                    <option value="repository">Repository (owner/repo)</option>
+                    <option value="mobile">Mobile</option>
+                    <option value="host">Host</option>
+                    <option value="domain">Domain</option>
+                    <option value="container">Container</option>
+                    <option value="cloud_account">Cloud account</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <input
+                    className="min-w-[140px] flex-1 rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[12px]"
+                    placeholder="Label"
+                    value={scopeLabel}
+                    onChange={(e) => setScopeLabel(e.target.value)}
+                  />
+                  <input
+                    className="min-w-[180px] flex-1 rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[12px]"
+                    placeholder={
+                      scopeKind === "repository" ? "owner/repo" : "Identifier / URL"
+                    }
+                    value={scopeId}
+                    onChange={(e) => setScopeId(e.target.value)}
+                  />
+                  <button
+                    type="button"
+                    className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)]"
+                    disabled={!scopeLabel || !scopeId || action.isPending}
                     onClick={() =>
                       action.mutate({
-                        action: "update_roe",
-                        allowedTechniques: allowedTech,
-                        restrictedTechniques: restrictedTech,
-                        emergencyContact,
-                        notes: roeNotes,
-                        testingWindowStart: testingWindowStart
-                          ? new Date(testingWindowStart).toISOString()
-                          : "",
-                        testingWindowEnd: testingWindowEnd
-                          ? new Date(testingWindowEnd).toISOString()
-                          : "",
-                        methodology: methodologyText
-                          .split("\n")
-                          .map((l) => l.trim())
-                          .filter(Boolean),
+                        action: "add_scope",
+                        kind: scopeKind,
+                        label: scopeLabel,
+                        identifier: scopeId,
+                        environment: eng.environment,
                       })
                     }
                   >
-                    Save RoE draft
+                    Add target
                   </button>
                 </div>
-              )}
-              <div className="mt-3 flex flex-wrap gap-2">
-                <button
-                  type="button"
-                  className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)] disabled:opacity-50"
-                  disabled={action.isPending || eng.roe.status === "approved"}
-                  onClick={() => action.mutate({ action: "approve_roe" })}
-                >
-                  Approve RoE
-                </button>
-                <button
-                  type="button"
-                  className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)] disabled:opacity-50"
-                  disabled={action.isPending || eng.status === "in_progress"}
-                  onClick={() => action.mutate({ action: "start_testing" })}
-                >
-                  Start testing
-                </button>
-              </div>
-              {action.error ? (
-                <p className="mt-2 text-[11px] text-[var(--color-destructive)]">
-                  {(action.error as Error).message}
+              </OperatorPanel>
+            </div>
+          </div>
+
+          <div
+            className={workbenchTab === "overview" ? "space-y-4" : "hidden"}
+            data-testid="apzpen-engagement-pane-overview"
+            hidden={workbenchTab !== "overview"}
+          >
+            <div className="grid gap-4 lg:grid-cols-2">
+              <OperatorPanel title="Assessment position">
+                <p className="mb-2 text-[11px] text-[var(--color-muted-foreground)]">
+                  Current:{" "}
+                  <strong className="uppercase">{eng.assessmentPosition}</strong>
+                  {q.data?.suggestedAssessmentPosition &&
+                  q.data.suggestedAssessmentPosition !== eng.assessmentPosition ? (
+                    <>
+                      {" "}
+                      · Suggested from findings:{" "}
+                      <strong className="uppercase">
+                        {q.data.suggestedAssessmentPosition}
+                      </strong>
+                    </>
+                  ) : null}
                 </p>
-              ) : null}
+                <div className="flex flex-wrap gap-2">
+                  {(
+                    [
+                      "not_started",
+                      "in_progress",
+                      "blocked",
+                      "conditional",
+                      "complete",
+                    ] as const
+                  ).map((position) => (
+                    <button
+                      key={position}
+                      type="button"
+                      className={`rounded border px-2 py-1 text-[11px] ${
+                        eng.assessmentPosition === position
+                          ? "border-[var(--color-foreground)] bg-[var(--color-muted)]"
+                          : "border-[var(--color-border)] hover:bg-[var(--color-muted)]"
+                      }`}
+                      disabled={action.isPending}
+                      onClick={() =>
+                        action.mutate({
+                          action: "set_assessment_position",
+                          assessmentPosition: position,
+                        })
+                      }
+                    >
+                      {position.replaceAll("_", " ")}
+                    </button>
+                  ))}
+                  <button
+                    type="button"
+                    data-testid="apzpen-sync-assessment"
+                    className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)] disabled:opacity-50"
+                    disabled={action.isPending}
+                    onClick={() => action.mutate({ action: "sync_assessment" })}
+                  >
+                    Sync from findings
+                  </button>
+                </div>
+                {formatSourceBindingsSummary(eng.sourceBindings) ? (
+                  <p className="mt-2 font-mono text-[11px] text-[var(--color-muted-foreground)]">
+                    Source: {formatSourceBindingsSummary(eng.sourceBindings)}
+                  </p>
+                ) : (
+                  <p className="mt-2 text-[11px] text-[var(--color-muted-foreground)]">
+                    No source binding — add a repository scope or bind GitHub on create.
+                  </p>
+                )}
+              </OperatorPanel>
+
+              <OperatorPanel title="Schedule">
+                <p className="mb-2 text-[11px] text-[var(--color-muted-foreground)]">
+                  Once-off · frequent · on-demand assurance runs.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {(["once", "frequent", "on_demand"] as const).map((mode) => (
+                    <button
+                      key={mode}
+                      type="button"
+                      data-testid={`apzpen-schedule-${mode}`}
+                      className={`rounded border px-2 py-1 text-[11px] ${
+                        eng.scheduleMode === mode
+                          ? "border-[var(--color-foreground)] bg-[var(--color-muted)]"
+                          : "border-[var(--color-border)] hover:bg-[var(--color-muted)]"
+                      }`}
+                      disabled={action.isPending}
+                      onClick={() =>
+                        action.mutate({
+                          action: "set_schedule",
+                          scheduleMode: mode,
+                          nextRunAt:
+                            mode === "on_demand"
+                              ? undefined
+                              : nextRunAt
+                                ? new Date(nextRunAt).toISOString()
+                                : eng.nextRunAt,
+                        })
+                      }
+                    >
+                      {mode.replaceAll("_", " ")}
+                    </button>
+                  ))}
+                </div>
+                {eng.scheduleMode !== "on_demand" ? (
+                  <div className="mt-3 flex flex-wrap items-center gap-2">
+                    <input
+                      type="datetime-local"
+                      className="rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[11px]"
+                      value={nextRunAt}
+                      onChange={(e) => setNextRunAt(e.target.value)}
+                      aria-label="Next run at"
+                    />
+                    <button
+                      type="button"
+                      className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)] disabled:opacity-50"
+                      disabled={action.isPending || !nextRunAt}
+                      onClick={() =>
+                        action.mutate({
+                          action: "set_schedule",
+                          scheduleMode: eng.scheduleMode,
+                          nextRunAt: new Date(nextRunAt).toISOString(),
+                        })
+                      }
+                    >
+                      Save next run
+                    </button>
+                  </div>
+                ) : null}
+                {eng.nextRunAt ? (
+                  <p className="mt-2 text-[11px] text-[var(--color-muted-foreground)]">
+                    Next run: {new Date(eng.nextRunAt).toLocaleString()}
+                  </p>
+                ) : null}
+              </OperatorPanel>
+
+              <OperatorPanel title="Certification">
+                <p className="mb-2 text-[11px] text-[var(--color-muted-foreground)]">
+                  Completes when no open critical findings remain. Humans certify —
+                  tools never auto-certify.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    data-testid="apzpen-certify"
+                    className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)] disabled:opacity-50"
+                    disabled={action.isPending || eng.status === "certified"}
+                    onClick={() => action.mutate({ action: "certify" })}
+                  >
+                    {eng.status === "certified" ? "Certified" : "Certify assessment"}
+                  </button>
+                  <Link
+                    href={`/apzpen/reports?engagementId=${encodeURIComponent(engagementId)}`}
+                    className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)]"
+                  >
+                    Generate report
+                  </Link>
+                </div>
+              </OperatorPanel>
+            </div>
+
+            <ApzpenGrantsPanel engagementId={engagementId} />
+          </div>
+
+          <div
+            className={workbenchTab === "testing" ? "space-y-4" : "hidden"}
+            data-testid="apzpen-engagement-pane-testing"
+            hidden={workbenchTab !== "testing"}
+          >
+            <OperatorPanel title="Live runner dispatch">
+              <p className="mb-2 text-[11px] text-[var(--color-muted-foreground)]">
+                Runs CE tools in <code className="font-mono">~/apztools/security</code>{" "}
+                Docker runners. Targets must be in scope. Dry-run first; live executes
+                Docker. MobSF opens at <code className="font-mono">127.0.0.1:8000</code>{" "}
+                for APK/IPA.
+              </p>
+              <div className="mb-3">
+                <label className="mb-1 block text-[10px] tracking-wide text-[var(--color-muted-foreground)] uppercase">
+                  Dispatch target
+                </label>
+                <select
+                  data-testid="apzpen-dispatch-target"
+                  className="w-full max-w-xl rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[11px]"
+                  value={dispatchTarget}
+                  onChange={(e) => setDispatchTarget(e.target.value)}
+                  aria-label="Dispatch target"
+                >
+                  <option value="">Auto (tool default)</option>
+                  {eng.scope.map((t) => (
+                    <option key={t.targetId} value={t.identifier}>
+                      {t.label} · {t.kind} · {t.identifier}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {ALL_DISPATCH_TOOLS.map((tool) => (
+                  <div key={tool} className="flex gap-1">
+                    <button
+                      type="button"
+                      data-testid={`apzpen-dispatch-${tool}`}
+                      className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)] disabled:opacity-50"
+                      disabled={action.isPending}
+                      onClick={() =>
+                        void (async () => {
+                          const preferred =
+                            dispatchTarget || defaultScopeTargetId(tool, eng.scope);
+                          const res = await fetch(
+                            `/api/v1/apzpen/engagements/${engagementId}/dispatch`,
+                            {
+                              method: "POST",
+                              headers: { "content-type": "application/json" },
+                              body: JSON.stringify({
+                                tool,
+                                dryRun: true,
+                                target: preferred || undefined,
+                              }),
+                            },
+                          );
+                          const body = await res.json();
+                          const targets = scopeTargetsForTool(tool, eng.scope)
+                            .map((t) => t.identifier)
+                            .join(", ");
+                          setIngestMessage(
+                            res.ok
+                              ? `Dry-run ${tool} → ${body.data?.job?.target ?? preferred}: ${body.data?.job?.commandPreview?.slice(0, 120) ?? "ok"}…${targets ? ` · scope ${targets}` : ""}`
+                              : (body?.error?.message ?? "Dispatch failed"),
+                          );
+                          if (res.ok) {
+                            await qc.invalidateQueries({
+                              queryKey: ["apzpen", "jobs", engagementId],
+                            });
+                          }
+                        })()
+                      }
+                    >
+                      Dry {tool}
+                    </button>
+                    <button
+                      type="button"
+                      data-testid={`apzpen-dispatch-live-${tool}`}
+                      className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] text-[var(--color-muted-foreground)] hover:bg-[var(--color-muted)] disabled:opacity-50"
+                      disabled={action.isPending}
+                      title="Live Docker exec — authorised scope only"
+                      onClick={() =>
+                        void (async () => {
+                          const preferred =
+                            dispatchTarget || defaultScopeTargetId(tool, eng.scope);
+                          const res = await fetch(
+                            `/api/v1/apzpen/engagements/${engagementId}/dispatch`,
+                            {
+                              method: "POST",
+                              headers: { "content-type": "application/json" },
+                              body: JSON.stringify({
+                                tool,
+                                dryRun: false,
+                                target: preferred || undefined,
+                              }),
+                            },
+                          );
+                          const body = await res.json();
+                          setIngestMessage(
+                            res.ok
+                              ? `Live ${tool} → ${body.data?.job?.target ?? preferred}: ${body.data?.job?.status}${
+                                  body.data?.ingest
+                                    ? ` · ingested ${body.data.ingest.createdCount ?? body.data.ingest.created?.length ?? 0}`
+                                    : ""
+                                }`
+                              : (body?.error?.message ?? "Dispatch failed"),
+                          );
+                          if (res.ok) {
+                            await qc.invalidateQueries({
+                              queryKey: ["apzpen"],
+                            });
+                          }
+                        })()
+                      }
+                    >
+                      Live
+                    </button>
+                  </div>
+                ))}
+              </div>
             </OperatorPanel>
 
-            <OperatorPanel title="Scope targets">
-              <ul className="mb-3 space-y-1 text-[12px]">
-                {eng.scope.map((t) => (
-                  <li key={t.targetId}>
-                    <span className="font-medium">{t.label}</span>
-                    <span className="text-[var(--color-muted-foreground)]">
-                      {" "}
-                      · {t.kind} · {t.identifier}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-wrap gap-2">
+            <OperatorPanel title="Dispatch jobs">
+              {(jobsQ.data?.jobs ?? []).length === 0 ? (
+                <p className="text-[12px] text-[var(--color-muted-foreground)]">
+                  No jobs yet — dry-run or live dispatch a tool above.
+                </p>
+              ) : (
+                <table className="w-full text-left text-[12px]">
+                  <thead className="text-[10px] tracking-wide text-[var(--color-muted-foreground)] uppercase">
+                    <tr>
+                      <th className="py-1.5 pr-2">When</th>
+                      <th className="py-1.5 pr-2">Tool</th>
+                      <th className="py-1.5 pr-2">Status</th>
+                      <th className="py-1.5 pr-2">Target</th>
+                      <th className="py-1.5 pr-2">Artefact</th>
+                      <th className="py-1.5 pr-2" />
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(jobsQ.data?.jobs ?? []).map((job) => (
+                      <tr
+                        key={job.jobId}
+                        className="border-t border-[var(--color-border)] align-top"
+                      >
+                        <td className="py-2 pr-2 font-mono text-[10px]">
+                          {job.createdAt.slice(0, 19)}
+                        </td>
+                        <td className="py-2 pr-2">
+                          {job.tool}
+                          {job.dryRun ? " · dry" : ""}
+                        </td>
+                        <td className="py-2 pr-2">{job.status}</td>
+                        <td className="py-2 pr-2 font-mono text-[10px]">
+                          {job.target}
+                        </td>
+                        <td className="py-2 pr-2 font-mono text-[10px] text-[var(--color-muted-foreground)]">
+                          {job.artefactPath
+                            ? job.artefactPath.split("/").slice(-2).join("/")
+                            : "—"}
+                          {job.error ? (
+                            <p className="text-[var(--color-destructive)]">
+                              {job.error.slice(0, 120)}
+                            </p>
+                          ) : null}
+                        </td>
+                        <td className="space-y-1 py-2 pr-2">
+                          {job.artefactPath && !job.dryRun ? (
+                            <button
+                              type="button"
+                              data-testid={`apzpen-reingest-${job.jobId}`}
+                              className="block text-[11px] underline disabled:opacity-50"
+                              disabled={ingest.isPending}
+                              onClick={() =>
+                                void (async () => {
+                                  const res = await fetch(
+                                    `/api/v1/apzpen/engagements/${engagementId}/ingest`,
+                                    {
+                                      method: "POST",
+                                      headers: {
+                                        "content-type": "application/json",
+                                      },
+                                      body: JSON.stringify({ jobId: job.jobId }),
+                                    },
+                                  );
+                                  const body = await res.json();
+                                  setIngestMessage(
+                                    res.ok
+                                      ? `Re-ingest ${job.tool}: created ${body.data?.createdCount ?? 0}, skipped ${body.data?.skipped ?? 0}`
+                                      : (body?.error?.message ?? "Re-ingest failed"),
+                                  );
+                                  if (res.ok) {
+                                    await qc.invalidateQueries({
+                                      queryKey: ["apzpen"],
+                                    });
+                                  }
+                                })()
+                              }
+                            >
+                              Re-ingest
+                            </button>
+                          ) : null}
+                          {job.status === "failed" || job.status === "skipped" ? (
+                            <button
+                              type="button"
+                              data-testid={`apzpen-redispatch-${job.jobId}`}
+                              className="block text-[11px] underline disabled:opacity-50"
+                              onClick={() =>
+                                void (async () => {
+                                  const res = await fetch(
+                                    `/api/v1/apzpen/engagements/${engagementId}/dispatch`,
+                                    {
+                                      method: "POST",
+                                      headers: {
+                                        "content-type": "application/json",
+                                      },
+                                      body: JSON.stringify({
+                                        jobId: job.jobId,
+                                        dryRun: job.dryRun,
+                                      }),
+                                    },
+                                  );
+                                  const body = await res.json();
+                                  setIngestMessage(
+                                    res.ok
+                                      ? `Re-run ${job.tool}: ${body.data?.job?.status ?? "queued"} (${body.data?.job?.jobId ?? "new"})`
+                                      : (body?.error?.message ?? "Re-dispatch failed"),
+                                  );
+                                  if (res.ok) {
+                                    await qc.invalidateQueries({
+                                      queryKey: ["apzpen", "jobs", engagementId],
+                                    });
+                                  }
+                                })()
+                              }
+                            >
+                              Re-run
+                            </button>
+                          ) : null}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </OperatorPanel>
+
+            <OperatorPanel title="Provider ingest — VA & Security Ops">
+              <p className="mb-2 text-[11px] text-[var(--color-muted-foreground)]">
+                Paste or upload ZAP JSON, SARIF, VA artefacts (Vulnerability Assessment
+                / Greenbone simplified), Faraday Security Ops exports, Nuclei JSONL,
+                Gitleaks JSON, or MobSF JSON. Duplicates are skipped. Deep-link with
+                <code className="mx-0.5">?tool=greenbone&amp;format=simplified</code> or
+                <code className="mx-0.5">?tool=faraday</code> to preselect.
+              </p>
+              <div className="mb-2 flex flex-wrap gap-2">
                 <select
-                  className="rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[12px]"
-                  value={scopeKind}
-                  onChange={(e) => setScopeKind(e.target.value as typeof scopeKind)}
-                  aria-label="Scope kind"
+                  className="rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[11px]"
+                  value={ingestFormat}
+                  onChange={(e) => setIngestFormat(e.target.value)}
+                  aria-label="Ingest format"
                 >
-                  <option value="web_application">Web application</option>
-                  <option value="api">API</option>
-                  <option value="repository">Repository (owner/repo)</option>
-                  <option value="mobile">Mobile</option>
-                  <option value="host">Host</option>
-                  <option value="domain">Domain</option>
-                  <option value="container">Container</option>
-                  <option value="cloud_account">Cloud account</option>
-                  <option value="other">Other</option>
+                  <option value="auto">Auto-detect</option>
+                  <option value="zap">ZAP JSON</option>
+                  <option value="sarif">SARIF</option>
+                  <option value="simplified">Simplified / VA artefact</option>
+                  <option value="nuclei_jsonl">Nuclei JSONL</option>
+                  <option value="gitleaks">Gitleaks JSON</option>
+                  <option value="mobsf">MobSF JSON</option>
                 </select>
-                <input
-                  className="min-w-[140px] flex-1 rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[12px]"
-                  placeholder="Label"
-                  value={scopeLabel}
-                  onChange={(e) => setScopeLabel(e.target.value)}
-                />
-                <input
-                  className="min-w-[180px] flex-1 rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[12px]"
-                  placeholder={
-                    scopeKind === "repository" ? "owner/repo" : "Identifier / URL"
-                  }
-                  value={scopeId}
-                  onChange={(e) => setScopeId(e.target.value)}
-                />
+                <select
+                  className="rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[11px]"
+                  value={ingestTool}
+                  onChange={(e) => setIngestTool(e.target.value)}
+                  aria-label="Provider tool"
+                >
+                  {APZPEN_PROVIDERS.filter(
+                    (p) => p.id !== "github" && p.id !== "kali",
+                  ).map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.name}
+                    </option>
+                  ))}
+                </select>
+                <label className="inline-flex cursor-pointer items-center rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)]">
+                  Upload file
+                  <input
+                    type="file"
+                    accept=".json,.jsonl,.sarif,.txt,application/json,text/plain"
+                    className="sr-only"
+                    data-testid="apzpen-ingest-file"
+                    aria-label="Upload provider artefact file"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (!file) return;
+                      const reader = new FileReader();
+                      reader.onload = () => {
+                        const text =
+                          typeof reader.result === "string" ? reader.result : "";
+                        setIngestText(text);
+                        setIngestMessage(
+                          `Loaded ${file.name} (${Math.round(file.size / 1024)} KB)`,
+                        );
+                      };
+                      reader.onerror = () => {
+                        setIngestMessage(`Failed to read ${file.name}`);
+                      };
+                      reader.readAsText(file);
+                      e.target.value = "";
+                    }}
+                  />
+                </label>
+                <button
+                  type="button"
+                  data-testid="apzpen-ingest-submit"
+                  className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)] disabled:opacity-50"
+                  disabled={!ingestText.trim() || ingest.isPending}
+                  onClick={() => ingest.mutate()}
+                >
+                  {ingest.isPending ? "Importing…" : "Import artefact"}
+                </button>
                 <button
                   type="button"
                   className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)]"
-                  disabled={!scopeLabel || !scopeId || action.isPending}
+                  disabled={findingAction.isPending}
                   onClick={() =>
-                    action.mutate({
-                      action: "add_scope",
-                      kind: scopeKind,
-                      label: scopeLabel,
-                      identifier: scopeId,
-                      environment: eng.environment,
+                    findingAction.mutate({
+                      action: "import",
+                      engagementId,
+                      seeds: [
+                        {
+                          title: "Imported Nuclei finding (sample)",
+                          description: "Provider import path verification",
+                          severity: "low",
+                          providerTool: "nuclei",
+                        },
+                      ],
                     })
                   }
                 >
-                  Add target
+                  Sample seed
                 </button>
               </div>
+              <textarea
+                data-testid="apzpen-ingest-payload"
+                className="min-h-[120px] w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1.5 font-mono text-[11px]"
+                placeholder='{"site":[{"alerts":[{"name":"…","riskdesc":"High","desc":"…"}]}]}'
+                value={ingestText}
+                onChange={(e) => setIngestText(e.target.value)}
+              />
+              {ingestMessage ? (
+                <p className="mt-2 text-[11px] text-[var(--color-muted-foreground)]">
+                  {ingestMessage}
+                </p>
+              ) : null}
             </OperatorPanel>
           </div>
 
-          <div className="grid gap-4 lg:grid-cols-2">
-            <OperatorPanel title="Assessment position">
-              <p className="mb-2 text-[11px] text-[var(--color-muted-foreground)]">
-                Current: <strong className="uppercase">{eng.assessmentPosition}</strong>
-                {q.data?.suggestedAssessmentPosition &&
-                q.data.suggestedAssessmentPosition !== eng.assessmentPosition ? (
-                  <>
-                    {" "}
-                    · Suggested from findings:{" "}
-                    <strong className="uppercase">
-                      {q.data.suggestedAssessmentPosition}
-                    </strong>
-                  </>
-                ) : null}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {(
-                  [
-                    "not_started",
-                    "in_progress",
-                    "blocked",
-                    "conditional",
-                    "complete",
-                  ] as const
-                ).map((position) => (
-                  <button
-                    key={position}
-                    type="button"
-                    className={`rounded border px-2 py-1 text-[11px] ${
-                      eng.assessmentPosition === position
-                        ? "border-[var(--color-foreground)] bg-[var(--color-muted)]"
-                        : "border-[var(--color-border)] hover:bg-[var(--color-muted)]"
-                    }`}
-                    disabled={action.isPending}
-                    onClick={() =>
-                      action.mutate({
-                        action: "set_assessment_position",
-                        assessmentPosition: position,
-                      })
-                    }
-                  >
-                    {position.replaceAll("_", " ")}
-                  </button>
-                ))}
-                <button
-                  type="button"
-                  data-testid="apzpen-sync-assessment"
-                  className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)] disabled:opacity-50"
-                  disabled={action.isPending}
-                  onClick={() => action.mutate({ action: "sync_assessment" })}
-                >
-                  Sync from findings
-                </button>
-              </div>
-              {formatSourceBindingsSummary(eng.sourceBindings) ? (
-                <p className="mt-2 font-mono text-[11px] text-[var(--color-muted-foreground)]">
-                  Source: {formatSourceBindingsSummary(eng.sourceBindings)}
-                </p>
-              ) : (
-                <p className="mt-2 text-[11px] text-[var(--color-muted-foreground)]">
-                  No source binding — add a repository scope or bind GitHub on create.
-                </p>
-              )}
-            </OperatorPanel>
-
-            <OperatorPanel title="Schedule">
-              <p className="mb-2 text-[11px] text-[var(--color-muted-foreground)]">
-                Once-off · frequent · on-demand assurance runs.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {(["once", "frequent", "on_demand"] as const).map((mode) => (
-                  <button
-                    key={mode}
-                    type="button"
-                    data-testid={`apzpen-schedule-${mode}`}
-                    className={`rounded border px-2 py-1 text-[11px] ${
-                      eng.scheduleMode === mode
-                        ? "border-[var(--color-foreground)] bg-[var(--color-muted)]"
-                        : "border-[var(--color-border)] hover:bg-[var(--color-muted)]"
-                    }`}
-                    disabled={action.isPending}
-                    onClick={() =>
-                      action.mutate({
-                        action: "set_schedule",
-                        scheduleMode: mode,
-                        nextRunAt:
-                          mode === "on_demand"
-                            ? undefined
-                            : nextRunAt
-                              ? new Date(nextRunAt).toISOString()
-                              : eng.nextRunAt,
-                      })
-                    }
-                  >
-                    {mode.replaceAll("_", " ")}
-                  </button>
-                ))}
-              </div>
-              {eng.scheduleMode !== "on_demand" ? (
-                <div className="mt-3 flex flex-wrap items-center gap-2">
-                  <input
-                    type="datetime-local"
-                    className="rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[11px]"
-                    value={nextRunAt}
-                    onChange={(e) => setNextRunAt(e.target.value)}
-                    aria-label="Next run at"
-                  />
-                  <button
-                    type="button"
-                    className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)] disabled:opacity-50"
-                    disabled={action.isPending || !nextRunAt}
-                    onClick={() =>
-                      action.mutate({
-                        action: "set_schedule",
-                        scheduleMode: eng.scheduleMode,
-                        nextRunAt: new Date(nextRunAt).toISOString(),
-                      })
-                    }
-                  >
-                    Save next run
-                  </button>
-                </div>
-              ) : null}
-              {eng.nextRunAt ? (
-                <p className="mt-2 text-[11px] text-[var(--color-muted-foreground)]">
-                  Next run: {new Date(eng.nextRunAt).toLocaleString()}
+          <div
+            className={workbenchTab === "findings" ? "space-y-4" : "hidden"}
+            data-testid="apzpen-engagement-pane-findings"
+            hidden={workbenchTab !== "findings"}
+          >
+            <OperatorPanel title="Manual finding">
+              <ManualFindingCreateForm
+                engagementId={engagementId}
+                pending={findingAction.isPending}
+                onAction={(payload) => findingAction.mutate(payload)}
+              />
+              {findingAction.error ? (
+                <p className="mt-2 text-[11px] text-[var(--color-destructive)]">
+                  {(findingAction.error as Error).message}
                 </p>
               ) : null}
             </OperatorPanel>
 
-            <OperatorPanel title="Certification">
-              <p className="mb-2 text-[11px] text-[var(--color-muted-foreground)]">
-                Completes when no open critical findings remain. Humans certify — tools
-                never auto-certify.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <button
-                  type="button"
-                  data-testid="apzpen-certify"
-                  className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)] disabled:opacity-50"
-                  disabled={action.isPending || eng.status === "certified"}
-                  onClick={() => action.mutate({ action: "certify" })}
-                >
-                  {eng.status === "certified" ? "Certified" : "Certify assessment"}
-                </button>
-                <Link
-                  href={`/apzpen/reports?engagementId=${encodeURIComponent(engagementId)}`}
-                  className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)]"
-                >
-                  Generate report
-                </Link>
-              </div>
+            <OperatorPanel title="Findings">
+              <FindingsTable
+                findings={findings}
+                pending={findingAction.isPending}
+                onAction={(payload) => findingAction.mutate(payload)}
+              />
             </OperatorPanel>
           </div>
-
-          <ApzpenGrantsPanel engagementId={engagementId} />
-
-          <OperatorPanel title="Live runner dispatch">
-            <p className="mb-2 text-[11px] text-[var(--color-muted-foreground)]">
-              Runs CE tools in <code className="font-mono">~/apztools/security</code>{" "}
-              Docker runners. Targets must be in scope. Dry-run first; live executes
-              Docker. MobSF opens at <code className="font-mono">127.0.0.1:8000</code>{" "}
-              for APK/IPA.
-            </p>
-            <div className="mb-3">
-              <label className="mb-1 block text-[10px] tracking-wide text-[var(--color-muted-foreground)] uppercase">
-                Dispatch target
-              </label>
-              <select
-                data-testid="apzpen-dispatch-target"
-                className="w-full max-w-xl rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[11px]"
-                value={dispatchTarget}
-                onChange={(e) => setDispatchTarget(e.target.value)}
-                aria-label="Dispatch target"
-              >
-                <option value="">Auto (tool default)</option>
-                {eng.scope.map((t) => (
-                  <option key={t.targetId} value={t.identifier}>
-                    {t.label} · {t.kind} · {t.identifier}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {ALL_DISPATCH_TOOLS.map((tool) => (
-                <div key={tool} className="flex gap-1">
-                  <button
-                    type="button"
-                    data-testid={`apzpen-dispatch-${tool}`}
-                    className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)] disabled:opacity-50"
-                    disabled={action.isPending}
-                    onClick={() =>
-                      void (async () => {
-                        const preferred =
-                          dispatchTarget || defaultScopeTargetId(tool, eng.scope);
-                        const res = await fetch(
-                          `/api/v1/apzpen/engagements/${engagementId}/dispatch`,
-                          {
-                            method: "POST",
-                            headers: { "content-type": "application/json" },
-                            body: JSON.stringify({
-                              tool,
-                              dryRun: true,
-                              target: preferred || undefined,
-                            }),
-                          },
-                        );
-                        const body = await res.json();
-                        const targets = scopeTargetsForTool(tool, eng.scope)
-                          .map((t) => t.identifier)
-                          .join(", ");
-                        setIngestMessage(
-                          res.ok
-                            ? `Dry-run ${tool} → ${body.data?.job?.target ?? preferred}: ${body.data?.job?.commandPreview?.slice(0, 120) ?? "ok"}…${targets ? ` · scope ${targets}` : ""}`
-                            : (body?.error?.message ?? "Dispatch failed"),
-                        );
-                        if (res.ok) {
-                          await qc.invalidateQueries({
-                            queryKey: ["apzpen", "jobs", engagementId],
-                          });
-                        }
-                      })()
-                    }
-                  >
-                    Dry {tool}
-                  </button>
-                  <button
-                    type="button"
-                    data-testid={`apzpen-dispatch-live-${tool}`}
-                    className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] text-[var(--color-muted-foreground)] hover:bg-[var(--color-muted)] disabled:opacity-50"
-                    disabled={action.isPending}
-                    title="Live Docker exec — authorised scope only"
-                    onClick={() =>
-                      void (async () => {
-                        const preferred =
-                          dispatchTarget || defaultScopeTargetId(tool, eng.scope);
-                        const res = await fetch(
-                          `/api/v1/apzpen/engagements/${engagementId}/dispatch`,
-                          {
-                            method: "POST",
-                            headers: { "content-type": "application/json" },
-                            body: JSON.stringify({
-                              tool,
-                              dryRun: false,
-                              target: preferred || undefined,
-                            }),
-                          },
-                        );
-                        const body = await res.json();
-                        setIngestMessage(
-                          res.ok
-                            ? `Live ${tool} → ${body.data?.job?.target ?? preferred}: ${body.data?.job?.status}${
-                                body.data?.ingest
-                                  ? ` · ingested ${body.data.ingest.createdCount ?? body.data.ingest.created?.length ?? 0}`
-                                  : ""
-                              }`
-                            : (body?.error?.message ?? "Dispatch failed"),
-                        );
-                        if (res.ok) {
-                          await qc.invalidateQueries({
-                            queryKey: ["apzpen"],
-                          });
-                        }
-                      })()
-                    }
-                  >
-                    Live
-                  </button>
-                </div>
-              ))}
-            </div>
-          </OperatorPanel>
-
-          <OperatorPanel title="Dispatch jobs">
-            {(jobsQ.data?.jobs ?? []).length === 0 ? (
-              <p className="text-[12px] text-[var(--color-muted-foreground)]">
-                No jobs yet — dry-run or live dispatch a tool above.
-              </p>
-            ) : (
-              <table className="w-full text-left text-[12px]">
-                <thead className="text-[10px] tracking-wide text-[var(--color-muted-foreground)] uppercase">
-                  <tr>
-                    <th className="py-1.5 pr-2">When</th>
-                    <th className="py-1.5 pr-2">Tool</th>
-                    <th className="py-1.5 pr-2">Status</th>
-                    <th className="py-1.5 pr-2">Target</th>
-                    <th className="py-1.5 pr-2">Artefact</th>
-                    <th className="py-1.5 pr-2" />
-                  </tr>
-                </thead>
-                <tbody>
-                  {(jobsQ.data?.jobs ?? []).map((job) => (
-                    <tr
-                      key={job.jobId}
-                      className="border-t border-[var(--color-border)] align-top"
-                    >
-                      <td className="py-2 pr-2 font-mono text-[10px]">
-                        {job.createdAt.slice(0, 19)}
-                      </td>
-                      <td className="py-2 pr-2">
-                        {job.tool}
-                        {job.dryRun ? " · dry" : ""}
-                      </td>
-                      <td className="py-2 pr-2">{job.status}</td>
-                      <td className="py-2 pr-2 font-mono text-[10px]">{job.target}</td>
-                      <td className="py-2 pr-2 font-mono text-[10px] text-[var(--color-muted-foreground)]">
-                        {job.artefactPath
-                          ? job.artefactPath.split("/").slice(-2).join("/")
-                          : "—"}
-                        {job.error ? (
-                          <p className="text-[var(--color-destructive)]">
-                            {job.error.slice(0, 120)}
-                          </p>
-                        ) : null}
-                      </td>
-                      <td className="space-y-1 py-2 pr-2">
-                        {job.artefactPath && !job.dryRun ? (
-                          <button
-                            type="button"
-                            data-testid={`apzpen-reingest-${job.jobId}`}
-                            className="block text-[11px] underline disabled:opacity-50"
-                            disabled={ingest.isPending}
-                            onClick={() =>
-                              void (async () => {
-                                const res = await fetch(
-                                  `/api/v1/apzpen/engagements/${engagementId}/ingest`,
-                                  {
-                                    method: "POST",
-                                    headers: {
-                                      "content-type": "application/json",
-                                    },
-                                    body: JSON.stringify({ jobId: job.jobId }),
-                                  },
-                                );
-                                const body = await res.json();
-                                setIngestMessage(
-                                  res.ok
-                                    ? `Re-ingest ${job.tool}: created ${body.data?.createdCount ?? 0}, skipped ${body.data?.skipped ?? 0}`
-                                    : (body?.error?.message ?? "Re-ingest failed"),
-                                );
-                                if (res.ok) {
-                                  await qc.invalidateQueries({
-                                    queryKey: ["apzpen"],
-                                  });
-                                }
-                              })()
-                            }
-                          >
-                            Re-ingest
-                          </button>
-                        ) : null}
-                        {job.status === "failed" || job.status === "skipped" ? (
-                          <button
-                            type="button"
-                            data-testid={`apzpen-redispatch-${job.jobId}`}
-                            className="block text-[11px] underline disabled:opacity-50"
-                            onClick={() =>
-                              void (async () => {
-                                const res = await fetch(
-                                  `/api/v1/apzpen/engagements/${engagementId}/dispatch`,
-                                  {
-                                    method: "POST",
-                                    headers: {
-                                      "content-type": "application/json",
-                                    },
-                                    body: JSON.stringify({
-                                      jobId: job.jobId,
-                                      dryRun: job.dryRun,
-                                    }),
-                                  },
-                                );
-                                const body = await res.json();
-                                setIngestMessage(
-                                  res.ok
-                                    ? `Re-run ${job.tool}: ${body.data?.job?.status ?? "queued"} (${body.data?.job?.jobId ?? "new"})`
-                                    : (body?.error?.message ?? "Re-dispatch failed"),
-                                );
-                                if (res.ok) {
-                                  await qc.invalidateQueries({
-                                    queryKey: ["apzpen", "jobs", engagementId],
-                                  });
-                                }
-                              })()
-                            }
-                          >
-                            Re-run
-                          </button>
-                        ) : null}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
-          </OperatorPanel>
-
-          <OperatorPanel title="Provider ingest — VA & Security Ops">
-            <p className="mb-2 text-[11px] text-[var(--color-muted-foreground)]">
-              Paste or upload ZAP JSON, SARIF, VA artefacts (Vulnerability Assessment /
-              Greenbone simplified), Faraday Security Ops exports, Nuclei JSONL,
-              Gitleaks JSON, or MobSF JSON. Duplicates are skipped. Deep-link with
-              <code className="mx-0.5">?tool=greenbone&amp;format=simplified</code> or
-              <code className="mx-0.5">?tool=faraday</code> to preselect.
-            </p>
-            <div className="mb-2 flex flex-wrap gap-2">
-              <select
-                className="rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[11px]"
-                value={ingestFormat}
-                onChange={(e) => setIngestFormat(e.target.value)}
-                aria-label="Ingest format"
-              >
-                <option value="auto">Auto-detect</option>
-                <option value="zap">ZAP JSON</option>
-                <option value="sarif">SARIF</option>
-                <option value="simplified">Simplified / VA artefact</option>
-                <option value="nuclei_jsonl">Nuclei JSONL</option>
-                <option value="gitleaks">Gitleaks JSON</option>
-                <option value="mobsf">MobSF JSON</option>
-              </select>
-              <select
-                className="rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-[11px]"
-                value={ingestTool}
-                onChange={(e) => setIngestTool(e.target.value)}
-                aria-label="Provider tool"
-              >
-                {APZPEN_PROVIDERS.filter(
-                  (p) => p.id !== "github" && p.id !== "kali",
-                ).map((p) => (
-                  <option key={p.id} value={p.id}>
-                    {p.name}
-                  </option>
-                ))}
-              </select>
-              <label className="inline-flex cursor-pointer items-center rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)]">
-                Upload file
-                <input
-                  type="file"
-                  accept=".json,.jsonl,.sarif,.txt,application/json,text/plain"
-                  className="sr-only"
-                  data-testid="apzpen-ingest-file"
-                  aria-label="Upload provider artefact file"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (!file) return;
-                    const reader = new FileReader();
-                    reader.onload = () => {
-                      const text =
-                        typeof reader.result === "string" ? reader.result : "";
-                      setIngestText(text);
-                      setIngestMessage(
-                        `Loaded ${file.name} (${Math.round(file.size / 1024)} KB)`,
-                      );
-                    };
-                    reader.onerror = () => {
-                      setIngestMessage(`Failed to read ${file.name}`);
-                    };
-                    reader.readAsText(file);
-                    e.target.value = "";
-                  }}
-                />
-              </label>
-              <button
-                type="button"
-                data-testid="apzpen-ingest-submit"
-                className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)] disabled:opacity-50"
-                disabled={!ingestText.trim() || ingest.isPending}
-                onClick={() => ingest.mutate()}
-              >
-                {ingest.isPending ? "Importing…" : "Import artefact"}
-              </button>
-              <button
-                type="button"
-                className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)]"
-                disabled={findingAction.isPending}
-                onClick={() =>
-                  findingAction.mutate({
-                    action: "import",
-                    engagementId,
-                    seeds: [
-                      {
-                        title: "Imported Nuclei finding (sample)",
-                        description: "Provider import path verification",
-                        severity: "low",
-                        providerTool: "nuclei",
-                      },
-                    ],
-                  })
-                }
-              >
-                Sample seed
-              </button>
-            </div>
-            <textarea
-              data-testid="apzpen-ingest-payload"
-              className="min-h-[120px] w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1.5 font-mono text-[11px]"
-              placeholder='{"site":[{"alerts":[{"name":"…","riskdesc":"High","desc":"…"}]}]}'
-              value={ingestText}
-              onChange={(e) => setIngestText(e.target.value)}
-            />
-            {ingestMessage ? (
-              <p className="mt-2 text-[11px] text-[var(--color-muted-foreground)]">
-                {ingestMessage}
-              </p>
-            ) : null}
-          </OperatorPanel>
-
-          <OperatorPanel title="Manual finding">
-            <ManualFindingCreateForm
-              engagementId={engagementId}
-              pending={findingAction.isPending}
-              onAction={(payload) => findingAction.mutate(payload)}
-            />
-            {findingAction.error ? (
-              <p className="mt-2 text-[11px] text-[var(--color-destructive)]">
-                {(findingAction.error as Error).message}
-              </p>
-            ) : null}
-          </OperatorPanel>
-
-          <OperatorPanel title="Findings">
-            <FindingsTable
-              findings={findings}
-              pending={findingAction.isPending}
-              onAction={(payload) => findingAction.mutate(payload)}
-            />
-          </OperatorPanel>
         </>
       ) : null}
     </Frame>

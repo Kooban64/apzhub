@@ -1,4 +1,4 @@
-import { ApzpenFindingDetailPage } from "@/components/apzpen/apzpen-finding-detail";
+import { ApzpenFindingDetailPage } from "@/components/apzpen/apzpen-finding-detail-page";
 
 export default async function Page({
   params,

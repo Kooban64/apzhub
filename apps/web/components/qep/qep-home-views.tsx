@@ -204,7 +204,14 @@ function HomeCommandCentreView() {
       breadcrumbs={["QEP", "Home"]}
       actions={
         <div className="flex flex-wrap gap-2">
-          <Link className={linkPrimary} href={QEP_CERTIFICATION_ROUTES.rcHome}>
+          <Link
+            className={linkPrimary}
+            href={QEP_HOME_ROUTES.myWork}
+            data-testid="qep-home-open-my-work"
+          >
+            My Work
+          </Link>
+          <Link className={linkOutline} href={QEP_CERTIFICATION_ROUTES.rcHome}>
             Release Candidate
           </Link>
           <Link className={linkOutline} href={QEP_QUALITY_FLOWS_ROUTES.home}>
@@ -216,6 +223,17 @@ function HomeCommandCentreView() {
         </div>
       }
     >
+      <p
+        className="mb-4 text-sm text-[var(--color-muted-foreground)]"
+        data-testid="qep-home-persona-hint"
+      >
+        Same Home for every Quality persona — ranking emphasises what needs{" "}
+        <strong>you</strong>. Open{" "}
+        <Link href={QEP_HOME_ROUTES.myWork} className="underline">
+          My Work
+        </Link>{" "}
+        for Tests · Defects · Reviews · Approvals.
+      </p>
       <QepPanel title="Release confidence">
         <div
           className="flex flex-wrap items-center gap-3"

@@ -1,8 +1,9 @@
 # SPR-UX-STREAM-002 — APZQEP authenticated UI/UX
 
-> **Status:** **FROZEN SPEC · NOT STARTED · ORDER TBD** — 2026-08-16  
+> **Status:** **FROZEN SPEC · PHASE D ACTIVE** — 2026-08-16  
 > **Authority:** [UX-STREAM-002](../ux/UX-STREAM-002-apzqep-quality-engineering-platform.md)  
-> **Depends on programme decision:** Owner will decide serial vs parallel after Streams 1–4 are filed  
+> **Gap map:** [PHASE-D-STREAM-2-GAP-MAP](./PHASE-D-STREAM-2-GAP-MAP.md)  
+> **Depends on:** Phase A–C complete · parallel with Stream 3  
 > **Does not:** Reinvent QEP architecture · Clone TCMS · Make AI certify · Replace APZPEN
 
 ## Intent
@@ -11,11 +12,7 @@ Implement APZQEP as a connected Quality Engineering experience (Home → Require
 
 ## Execution gate
 
-Do **not** begin implementation until Owner confirms order relative to:
-
-- [SPR-UX-STREAM-001](./SPR-UX-STREAM-001-public-marketplace-purchase-provisioning.md) (public commerce)
-- Stream 3 APZPEN (pending paste)
-- Stream 4 APZPRD (pending paste)
+**Authorised** under Phase D (Streams 2∥3) after Phase A–C certification. Gap-map first; preserve `/workspace/qep/*` KEEP surfaces.
 
 ## Signature ships (when authorised)
 

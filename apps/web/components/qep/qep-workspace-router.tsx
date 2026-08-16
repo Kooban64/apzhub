@@ -27,6 +27,7 @@ import {
   isQepEarlyCheckRoute,
   isQepPortfolioRoute,
   isQepHomeRoute,
+  isQepMyWorkRoute,
   isQepReleaseReadinessRoute,
   isQepSearchRoute,
   isQepIntegrationsRoute,
@@ -42,6 +43,7 @@ import { QepCertificationRouterView } from "./qep-certification-views";
 import { QepDashboardsRouterView } from "./qep-dashboards-views";
 import { QepEarlyCheckRouterView } from "./qep-early-check-views";
 import { QepHomeRouterView } from "./qep-home-views";
+import { QepMyWorkView } from "./qep-my-work-view";
 import { QepIntegrationsRouterView } from "./qep-integrations-views";
 import { QepAiWorkspaceRouterView } from "./qep-ai-workspace-views";
 import { QepMcpRouterView } from "./qep-mcp-views";
@@ -105,6 +107,10 @@ export function QepWorkspaceRouter() {
         breadcrumbs={["Quality", "Product required"]}
       />
     );
+  }
+
+  if (isQepMyWorkRoute(pathname)) {
+    return <QepMyWorkView />;
   }
 
   if (isQepHomeRoute(pathname)) {

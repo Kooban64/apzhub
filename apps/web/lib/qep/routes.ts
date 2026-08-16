@@ -214,7 +214,13 @@ export {
   isQepPortfolioRoute,
 } from "./portfolio-routes";
 
-export { QEP_HOME_BASE_PATH, QEP_HOME_ROUTES, isQepHomeRoute } from "./home-routes";
+export {
+  QEP_HOME_BASE_PATH,
+  QEP_MY_WORK_BASE_PATH,
+  QEP_HOME_ROUTES,
+  isQepHomeRoute,
+  isQepMyWorkRoute,
+} from "./home-routes";
 
 export {
   QEP_RELEASE_READINESS_BASE_PATH,

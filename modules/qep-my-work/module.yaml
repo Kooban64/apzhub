@@ -1,0 +1,43 @@
+manifestSchemaVersion: "1.0"
+id: qep-my-work
+name: My Work
+version: 0.1.0
+kind: module
+
+metadata:
+  category: quality-engineering
+  description: >
+    Stream 2 persona attention queues for APZQEP — Tests, Defects, Reviews, Approvals.
+  product: apzqep
+  moduleCatalogueId: M01B
+  slug: my-work
+  programme: SPR-UX-STREAM-002
+
+dependencies:
+  platform: []
+  services:
+    - qep-platform-service
+
+module:
+  category: quality-engineering
+  status: active
+
+permissions:
+  - id: qep.home.read
+    label: View Quality My Work
+
+workbench:
+  navigation:
+    level: sidebar
+    workspace: qep
+    parent: qep
+    label: My Work
+    icon: list-todo
+    route: /workspace/qep/my-work
+    order: 2
+    permission: qep.home.read
+  view:
+    title: My Work
+    workspace: qep
+    route: /workspace/qep/my-work
+    permission: qep.home.read
