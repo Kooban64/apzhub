@@ -12,6 +12,7 @@ import {
   QepStatusBadge,
 } from "@/components/qep/qep-ui";
 import { productDisplayName } from "@/lib/commercial/soft-product-access";
+import { UserInspectorPanel } from "@/components/iam/user-inspector-panel";
 
 async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
   const response = await fetch(url, {
@@ -326,15 +327,9 @@ function MemberActions({
     personas[0]?.roleId ?? "role-employee",
   );
   const [grants, setGrants] = useState<string[]>([...initialGrants]);
-  const [inspectionWhy, setInspectionWhy] = useState<string[] | null>(null);
-  const [inspectionMeta, setInspectionMeta] = useState<{
-    provisionStatus?: string;
-    productRoles?: string;
-    orgProducts?: string;
-  } | null>(null);
 
   return (
-    <span className="ml-auto flex flex-wrap items-center gap-2">
+    <span className="ml-auto flex w-full flex-wrap items-center gap-2">
       {orgProducts.map((productKey) => (
         <label key={productKey} className="flex items-center gap-1 text-xs">
           <input
@@ -354,87 +349,7 @@ function MemberActions({
           </span>
         </label>
       ))}
-      <button
-        type="button"
-        className="rounded border border-[var(--color-border)] px-2 py-0.5 text-xs hover:bg-[var(--color-muted)]"
-        data-testid={`iam-inspect-${membershipId}`}
-        onClick={() => {
-          void (async () => {
-            const res = await fetch(
-              `/api/v1/iam/members/${encodeURIComponent(membershipId)}/access`,
-            );
-            const body = (await res.json()) as {
-              data?: {
-                inspection?: {
-                  why?: string[];
-                  productKeys?: string[];
-                  orgProductKeys?: string[];
-                  provisionStatus?: string;
-                  productRoles?: readonly { productKey: string; roleHint: string }[];
-                };
-              };
-              error?: { message?: string };
-            };
-            if (!res.ok) {
-              setInspectionMeta(null);
-              setInspectionWhy([body.error?.message ?? "Inspect failed"]);
-              return;
-            }
-            const inspection = body.data?.inspection;
-            setInspectionMeta({
-              provisionStatus: inspection?.provisionStatus,
-              orgProducts: (inspection?.orgProductKeys ?? []).join(", ") || "none",
-              productRoles:
-                (inspection?.productRoles ?? [])
-                  .map((r) => `${r.productKey}→${r.roleHint}`)
-                  .join(", ") || "none",
-            });
-            setInspectionWhy([
-              `Effective products: ${(inspection?.productKeys ?? []).join(", ") || "none"}`,
-              ...(inspection?.why ?? []),
-            ]);
-          })();
-        }}
-      >
-        Inspect access
-      </button>
-      {inspectionWhy ? (
-        <div
-          className="w-full basis-full space-y-2 rounded border border-[var(--color-border)] bg-[var(--color-muted)] px-2 py-2 text-[11px] text-[var(--color-muted-foreground)]"
-          data-testid={`iam-inspect-why-${membershipId}`}
-          data-user-inspector="expanded"
-        >
-          {inspectionMeta ? (
-            <dl className="grid gap-1 sm:grid-cols-3">
-              <div>
-                <dt className="font-medium text-[var(--color-foreground)]">
-                  Provision
-                </dt>
-                <dd data-testid={`iam-inspect-provision-${membershipId}`}>
-                  {inspectionMeta.provisionStatus ?? "—"}
-                </dd>
-              </div>
-              <div>
-                <dt className="font-medium text-[var(--color-foreground)]">
-                  Org products
-                </dt>
-                <dd>{inspectionMeta.orgProducts}</dd>
-              </div>
-              <div>
-                <dt className="font-medium text-[var(--color-foreground)]">
-                  Product roles
-                </dt>
-                <dd>{inspectionMeta.productRoles}</dd>
-              </div>
-            </dl>
-          ) : null}
-          <ul className="space-y-0.5">
-            {inspectionWhy.map((line) => (
-              <li key={line}>{line}</li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
+      <UserInspectorPanel membershipId={membershipId} />
       {orgProducts.length > 0 ? (
         <button
           type="button"

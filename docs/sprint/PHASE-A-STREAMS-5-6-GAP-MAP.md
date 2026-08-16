@@ -93,6 +93,7 @@
 - Demo org Documents entitlement requires `pkg.apzprd.workspace` (subscribe via Org Console if seed lag).
 - Documents **auditor** has no `document.write` → no `qa-upload-document`.
 - Phase A remaining debt: **closed in Phase G** (queue scopes · shell policy · free-all retirement · Playwright smoke). See [PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP](./PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP.md) — **CERTIFIED 100%**.
+- User Inspector signature deepen: **closed in Phase I** — [PHASE-I-USER-INSPECTOR-GAP-MAP](./PHASE-I-USER-INSPECTOR-GAP-MAP.md).
 
 ## FIRST VERTICAL — touch order
 

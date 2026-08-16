@@ -321,7 +321,7 @@ export async function handleInspectIamMemberAccess(
   }
   const { inspectMemberEffectiveAccess } =
     await import("@/lib/iam/effective-access-inspector");
-  const inspection = inspectMemberEffectiveAccess({
+  const inspection = await inspectMemberEffectiveAccess({
     organisationId: sessionTenantId(context),
     membershipId,
   });

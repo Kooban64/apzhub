@@ -31,4 +31,6 @@
 
 **Phase H gap map:** [Projects & Source scopes](../sprint/PHASE-H-RESOURCE-SCOPES-GAP-MAP.md) — **CERTIFIED 100%** ([sprint](../sprint/SPR-UX-PHASE-H-RESOURCE-SCOPES.md))
 
+**Phase I gap map:** [User Inspector flagship](../sprint/PHASE-I-USER-INSPECTOR-GAP-MAP.md) — **CERTIFIED 100%** ([sprint](../sprint/SPR-UX-PHASE-I-USER-INSPECTOR.md))
+
 **Programme rule:** Streams **1–6 frozen**. Gap-map first; documentation accompanies code. Vertical proof before horizontal completion.

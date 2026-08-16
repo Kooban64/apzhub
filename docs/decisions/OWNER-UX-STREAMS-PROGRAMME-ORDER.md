@@ -12,9 +12,9 @@
 >
 > Streams 1–6 remain frozen in scope. This decision governs how they are implemented, integrated and certified.
 >
-> **Engineering:** Phase A–H **CERTIFIED 100%**. Phase H closed Projects & Source resource scopes — ([SPR-UX-PHASE-H-RESOURCE-SCOPES](../sprint/SPR-UX-PHASE-H-RESOURCE-SCOPES.md) · [PHASE-H-RESOURCE-SCOPES-GAP-MAP](../sprint/PHASE-H-RESOURCE-SCOPES-GAP-MAP.md)).
+> **Engineering:** Phase A–I **CERTIFIED 100%**. Phase I User Inspector flagship deepen closed — ([SPR-UX-PHASE-I-USER-INSPECTOR](../sprint/SPR-UX-PHASE-I-USER-INSPECTOR.md) · [PHASE-I-USER-INSPECTOR-GAP-MAP](../sprint/PHASE-I-USER-INSPECTOR-GAP-MAP.md)).
 >
-> **Engineering 2026-08-16:** Phase H certified — `projects.project:` · `source.repo:` · Projects readiness F1.
+> **Engineering 2026-08-16:** Phase I certified — Inspector tabs Overview/Products/Roles/Scopes/Professional Tools/Provisioning.
 
 ---
 
@@ -51,6 +51,9 @@ Streams 5 ∥ 6 debt close (entitlements · shell policy · queue scopes)
         ↓
 PHASE H — PROJECT / SOURCE SCOPES   ← COMPLETE · CERTIFIED 100%
 projects.project:{id} · source.repo:{id} (+ readiness F1)
+        ↓
+PHASE I — USER INSPECTOR FLAGSHIP   ← COMPLETE · CERTIFIED 100%
+Overview · Products · Roles · Scopes · Professional Tools · Provisioning
 ```
 
 **Stream 1 freeze interpretation:** Finish Stream 1 before authenticated QEP/PEN/PRD **product deep UX**. Foundation (5+6) precedes or underpins Stream 1.
