@@ -157,6 +157,7 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [MKT-AUTH-PRODUCT-GATE ops](./operations/MKT-AUTH-PRODUCT-GATE-OPS.md)                 | Trial unlock, convert-trials, catalogue                                       |
 | [MKT multi-site hosts](./operations/MKT-MULTI-SITE-HOSTS.md)                           | APZHUB / APZQA / APZPenTest hosts + Productivity Suite (later)                |
 | [Operator Consoles programme](./operations/OPERATOR-CONSOLES-PROGRAMME.md)             | `/console` `/ops` `/finance` `/compliance` `/org` shells + suite provisioning |
+| [Human-ready browser audit](./operations/HUMAN-READY-BROWSER-AUDIT.md)                 | Playwright crawl of public + demo personas — `pnpm audit:human-ready`         |
 
 ## APZQEP Requirement Baselines (APZQEP-ENG-020E)
 
