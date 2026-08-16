@@ -1,14 +1,18 @@
 "use client";
 
 import { Button } from "@apzhub/ui";
+import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 import {
   canAdminWorkflow,
   canViewWorkflow,
+  canViewWorkflowTasks,
   type WorkflowPermissionSource,
 } from "@/lib/workflow/permissions";
+import { workflowQueryKeys } from "@/lib/workflow/query-keys";
 import {
+  workflowApprovalDetailPath,
   workflowApprovalsPath,
   workflowDefinitionsPath,
   workflowHelpPath,
@@ -17,8 +21,15 @@ import {
   workflowTasksPath,
   workflowTemplatesPath,
 } from "@/lib/workflow/routes";
+import { listWorkflowApprovals } from "@/lib/workflow/workflow-api";
 
-import { EmptyState, PageShell, WORKFLOW_PRODUCT_NAME } from "./workflow-ui";
+import {
+  EmptyState,
+  LoadingState,
+  PageShell,
+  StatusBadge,
+  WORKFLOW_PRODUCT_NAME,
+} from "./workflow-ui";
 
 const BUSINESS_LINKS = [
   {
@@ -47,7 +58,7 @@ const BUSINESS_LINKS = [
     testId: "workflow-home-participants",
   },
   {
-    label: "Approvals",
+    label: "My approvals",
     path: workflowApprovalsPath,
     testId: "workflow-home-approvals",
   },
@@ -65,7 +76,14 @@ export function WorkflowHomeView({
 }) {
   const router = useRouter();
   const canView = canViewWorkflow(permissions);
+  const canApprovals = canViewWorkflowTasks(permissions);
   const isOperator = canAdminWorkflow(permissions);
+  const approvalsQuery = useQuery({
+    queryKey: workflowQueryKeys.approvals({ limit: 5, status: "pending" }),
+    queryFn: ({ signal }) =>
+      listWorkflowApprovals({ limit: 5, status: "pending" }, { signal }),
+    enabled: canView && canApprovals,
+  });
 
   if (!canView) {
     return (
@@ -77,6 +95,12 @@ export function WorkflowHomeView({
       </PageShell>
     );
   }
+
+  const pending = approvalsQuery.data?.items ?? [];
+  const pendingLabel =
+    approvalsQuery.isSuccess && pending.length > 0
+      ? ` (${pending.length}${approvalsQuery.data?.page?.hasMore ? "+" : ""})`
+      : "";
 
   return (
     <PageShell
@@ -115,6 +139,54 @@ export function WorkflowHomeView({
           ))}
         </div>
       </section>
+
+      {canApprovals ? (
+        <section className="mt-6" data-testid="workflow-home-my-approvals">
+          <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+            <h2 className="text-sm font-semibold">My approvals</h2>
+            <Button
+              type="button"
+              size="sm"
+              variant="ghost"
+              onClick={() => router.push(workflowApprovalsPath())}
+              data-testid="workflow-home-open-my-approvals"
+            >
+              View all
+              {pendingLabel}
+            </Button>
+          </div>
+          <p className="mb-3 text-sm text-[var(--color-muted-foreground)]">
+            Decisions waiting for you — not operator run history.
+          </p>
+          {approvalsQuery.isLoading ? (
+            <LoadingState label="Loading approvals…" />
+          ) : null}
+          {approvalsQuery.isSuccess && pending.length === 0 ? (
+            <p className="text-sm text-[var(--color-muted-foreground)]">
+              No approvals waiting for you.
+            </p>
+          ) : null}
+          {pending.length > 0 ? (
+            <ul className="grid gap-2">
+              {pending.slice(0, 3).map((item) => (
+                <li key={item.id}>
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-between gap-3 rounded-lg border border-[var(--color-border)] px-3 py-2 text-left hover:bg-[var(--color-muted)]/30"
+                    data-testid={`workflow-home-approval-${item.id}`}
+                    onClick={() => router.push(workflowApprovalDetailPath(item.id))}
+                  >
+                    <span className="min-w-0 truncate text-sm font-medium">
+                      {item.title ?? item.id}
+                    </span>
+                    <StatusBadge status={String(item.status)} />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </section>
+      ) : null}
 
       <section data-testid="workflow-home-journeys">
         <h2 className="mb-2 text-sm font-semibold">Business process excellence</h2>

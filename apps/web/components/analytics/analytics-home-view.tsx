@@ -1,8 +1,10 @@
 "use client";
 
 import { Button } from "@apzhub/ui";
+import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
+import { listAnalyticsDashboards } from "@/lib/analytics/analytics-api";
 import {
   ENTERPRISE_QUESTION_CATALOGUE,
   INSIGHT_HORIZONS,
@@ -14,6 +16,7 @@ import {
   type AnalyticsPermissionSource,
 } from "@/lib/analytics/permissions";
 import {
+  analyticsDashboardDetailPath,
   analyticsDecisionPacksPath,
   analyticsHelpPath,
   analyticsHorizonPath,
@@ -27,7 +30,12 @@ import {
   type AnalyticsHorizonKey,
 } from "@/lib/analytics/routes";
 
-import { EmptyState, PageShell, ANALYTICS_PRODUCT_NAME } from "./analytics-ui";
+import {
+  EmptyState,
+  LoadingState,
+  PageShell,
+  ANALYTICS_PRODUCT_NAME,
+} from "./analytics-ui";
 
 const COMPANION_LINKS = [
   {
@@ -80,6 +88,11 @@ export function AnalyticsHomeView({
   const router = useRouter();
   const canView = canViewAnalytics(permissions);
   const isOperator = canAdminAnalytics(permissions);
+  const dashboardsQuery = useQuery({
+    queryKey: ["analytics", "dashboards", "home"],
+    queryFn: ({ signal }) => listAnalyticsDashboards({ limit: 6 }, { signal }),
+    enabled: canView,
+  });
 
   if (!canView) {
     return (
@@ -91,6 +104,8 @@ export function AnalyticsHomeView({
       </PageShell>
     );
   }
+
+  const dashboards = dashboardsQuery.data?.items ?? [];
 
   return (
     <PageShell
@@ -128,6 +143,45 @@ export function AnalyticsHomeView({
             </Button>
           ))}
         </div>
+      </section>
+
+      <section className="mt-6" data-testid="analytics-home-apz-dashboards">
+        <h2 className="mb-2 text-sm font-semibold">Your APZ dashboards</h2>
+        <p className="mb-3 text-sm text-[var(--color-muted-foreground)]">
+          Saved decision views for this organisation — secondary to the question
+          catalogue.
+        </p>
+        {dashboardsQuery.isLoading ? (
+          <LoadingState label="Loading dashboards…" />
+        ) : null}
+        {dashboardsQuery.isSuccess && dashboards.length === 0 ? (
+          <p className="text-sm text-[var(--color-muted-foreground)]">
+            No APZ dashboards yet. Start from an enterprise question.
+          </p>
+        ) : null}
+        {dashboards.length > 0 ? (
+          <ul className="grid gap-2 md:grid-cols-2">
+            {dashboards.map((dashboard) => (
+              <li key={dashboard.id}>
+                <button
+                  type="button"
+                  className="flex w-full flex-col rounded-lg border border-[var(--color-border)] px-3 py-2 text-left hover:bg-[var(--color-muted)]/30"
+                  data-testid={`analytics-home-dashboard-${dashboard.id}`}
+                  onClick={() =>
+                    router.push(analyticsDashboardDetailPath(dashboard.id))
+                  }
+                >
+                  <span className="font-medium">{dashboard.title}</span>
+                  {dashboard.description ? (
+                    <span className="text-xs text-[var(--color-muted-foreground)]">
+                      {dashboard.description}
+                    </span>
+                  ) : null}
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : null}
       </section>
 
       <section data-testid="analytics-home-horizons">

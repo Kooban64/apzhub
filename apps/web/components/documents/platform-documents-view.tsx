@@ -34,6 +34,7 @@ import {
   PageShell,
   WorkContextPanel,
 } from "./documents-ui";
+import { UniversalPreviewDrawer } from "@/components/preview/universal-preview-drawer";
 
 function DocumentsTable({
   columns,
@@ -144,7 +145,7 @@ async function copyText(value: string): Promise<void> {
 
 const SECTION_TITLES: Record<Exclude<DocumentsSection, "help" | "settings">, string> = {
   overview: "Overview",
-  documents: "Library",
+  documents: "Document explorer",
   versions: "Versions",
   collections: "Collections",
   folders: "Folders",
@@ -180,6 +181,7 @@ export function PlatformDocumentsView({
   const [page, setPage] = useState(1);
   const [selectedDocumentId, setSelectedDocumentId] = useState<string | null>(null);
   const [selectedVersionId, setSelectedVersionId] = useState<string | null>(null);
+  const [previewOpen, setPreviewOpen] = useState(false);
   const [detailPanel, setDetailPanel] = useState<
     | "metadata"
     | "versions"
@@ -595,6 +597,7 @@ export function PlatformDocumentsView({
           onRowClick={(id) => {
             setSelectedDocumentId(id);
             setSelectedVersionId(null);
+            setPreviewOpen(true);
           }}
           rows={pagedDocuments.map((doc) => ({
             id: doc.documentId,
@@ -785,11 +788,12 @@ export function PlatformDocumentsView({
           </p>
         ) : detailPanel === "folder" ? (
           <p className="text-sm">
-            Folder ID: <strong>{detail?.folderId ?? "(unassigned)"}</strong>
+            Folder: <strong>{detail?.folderId ? detail.folderId : "Unassigned"}</strong>
           </p>
         ) : detailPanel === "collection" ? (
           <p className="text-sm">
-            Collection ID: <strong>{detail?.collectionId ?? "(unassigned)"}</strong>
+            Collection:{" "}
+            <strong>{detail?.collectionId ? detail.collectionId : "Unassigned"}</strong>
           </p>
         ) : auditQuery.isLoading ? (
           <p role="status">Loading audit…</p>
@@ -881,8 +885,8 @@ export function PlatformDocumentsView({
             ) : null}
             <p className="text-sm text-[var(--color-muted-foreground)]">
               Work companion overview. Select a document to see related work context.
-              Use <strong>Library</strong> for the Enterprise Document Library when you
-              need governed browse.
+              Use <strong>Document explorer</strong> for governed browse when you need
+              the Enterprise Document Library.
             </p>
             {filters}
             {renderDocumentList("Overview document list")}
@@ -894,14 +898,13 @@ export function PlatformDocumentsView({
         <div className="space-y-4">
           {filters}
           {renderDocumentList(
-            section === "metadata"
-              ? "Document metadata list"
-              : "Enterprise Document Library",
+            section === "metadata" ? "Document metadata list" : "Document explorer",
           )}
           {section === "documents" ? (
             <p className="text-sm text-[var(--color-muted-foreground)]">
-              Enterprise Document Library — governed browse. Prefer attaching from work
-              surfaces when adding documents to projects or requests.
+              Document explorer — governed browse with metadata preview. Prefer
+              attaching from work surfaces when adding documents to projects or
+              requests.
             </p>
           ) : null}
         </div>
@@ -963,13 +966,16 @@ export function PlatformDocumentsView({
           ) : (
             <DocumentsTable
               caption="Folder assignments"
-              columns={["Folder ID", "Documents"]}
+              columns={["Folder", "Documents"]}
               onRowClick={(id) => {
                 if (id !== "(unassigned)") setFolderFilter(id);
               }}
               rows={folderRows.map((row) => ({
                 id: row.id,
-                cells: [row.id, String(row.count)],
+                cells: [
+                  row.id === "(unassigned)" ? "Unassigned" : row.id,
+                  String(row.count),
+                ],
               }))}
             />
           )}
@@ -984,13 +990,16 @@ export function PlatformDocumentsView({
           ) : (
             <DocumentsTable
               caption="Collection assignments"
-              columns={["Collection ID", "Documents"]}
+              columns={["Collection", "Documents"]}
               onRowClick={(id) => {
                 if (id !== "(unassigned)") setCollectionFilter(id);
               }}
               rows={collectionRows.map((row) => ({
                 id: row.id,
-                cells: [row.id, String(row.count)],
+                cells: [
+                  row.id === "(unassigned)" ? "Unassigned" : row.id,
+                  String(row.count),
+                ],
               }))}
             />
           )}
@@ -1117,6 +1126,59 @@ export function PlatformDocumentsView({
       ) : null}
 
       {renderDetailPanel()}
+
+      <UniversalPreviewDrawer
+        open={previewOpen && Boolean(selectedId)}
+        title={detailQuery.data?.title ?? "Document"}
+        subtitle={
+          detailQuery.data
+            ? `${detailQuery.data.status} · ${detailQuery.data.classification}`
+            : undefined
+        }
+        onClose={() => setPreviewOpen(false)}
+        testId="documents-preview-drawer"
+      >
+        {detailQuery.isLoading ? (
+          <p role="status" className="text-sm text-[var(--color-muted-foreground)]">
+            Loading document…
+          </p>
+        ) : detailQuery.data ? (
+          <div className="space-y-4">
+            <WorkContextPanel
+              title={detailQuery.data.title}
+              ownerUserId={detailQuery.data.ownerUserId}
+              lifecycleStatus={detailQuery.data.status}
+              references={detailQuery.data.workReferences}
+            />
+            <dl className="grid gap-2 text-sm">
+              <div>
+                <dt className="text-xs uppercase tracking-wide text-[var(--color-muted-foreground)]">
+                  Tags
+                </dt>
+                <dd>{(detailQuery.data.tagNames ?? []).join(", ") || "None"}</dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-wide text-[var(--color-muted-foreground)]">
+                  Folder
+                </dt>
+                <dd>{detailQuery.data.folderId ?? "Unassigned"}</dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-wide text-[var(--color-muted-foreground)]">
+                  Collection
+                </dt>
+                <dd>{detailQuery.data.collectionId ?? "Unassigned"}</dd>
+              </div>
+            </dl>
+            <p className="text-xs text-[var(--color-muted-foreground)]">
+              Metadata preview only — open from Projects or Support to work with the
+              attached file.
+            </p>
+          </div>
+        ) : (
+          <EmptyState title="Document unavailable" />
+        )}
+      </UniversalPreviewDrawer>
     </PageShell>
   );
 }

@@ -33,6 +33,7 @@ describe("KnowledgeHomeView", () => {
     ).toBeInTheDocument();
     expect(screen.getByTestId("knowledge-home-prompts")).toBeInTheDocument();
     expect(screen.getByTestId("knowledge-home-types")).toBeInTheDocument();
+    expect(screen.getByTestId("knowledge-home-suggestions")).toBeInTheDocument();
     expect(screen.getByTestId("knowledge-home-live-memory")).toBeInTheDocument();
     expect(screen.getByTestId("knowledge-home-featured")).toBeInTheDocument();
     expect(screen.getByTestId("knowledge-home-link-companion")).toBeInTheDocument();

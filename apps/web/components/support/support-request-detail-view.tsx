@@ -23,6 +23,7 @@ import {
 } from "@/lib/support/support-api";
 
 import { EnterpriseContextPanel } from "@/components/context/enterprise-context-panel";
+import { KnowledgeContextualSuggestions } from "@/components/knowledge/knowledge-contextual-suggestions";
 
 import { CustomerReplyComposer } from "./customer-reply-composer";
 import { InternalNoteComposer } from "./internal-note-composer";
@@ -189,6 +190,13 @@ export function SupportRequestDetailView({
                 focusName={request.title}
               />
             ) : null}
+            <KnowledgeContextualSuggestions
+              title="Related knowledge"
+              description="Suggested organisational memory for this request."
+              limit={3}
+              compact
+              testId="support-request-knowledge-suggestions"
+            />
           </>
         }
       >

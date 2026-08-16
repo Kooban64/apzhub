@@ -21,6 +21,8 @@ export type StaffFunctionTemplate = {
 
 /** Product-scoped roles — Phase A verticals. */
 export const DEFAULT_PRODUCT_SUPPORT_AGENT_ROLE_ID = "role-product-support-agent";
+export const DEFAULT_PRODUCT_SUPPORT_REQUESTER_ROLE_ID =
+  "role-product-support-requester";
 export const DEFAULT_PRODUCT_TIME_EMPLOYEE_ROLE_ID = "role-product-time-employee";
 export const DEFAULT_PRODUCT_KNOWLEDGE_CONTRIBUTOR_ROLE_ID =
   "role-product-knowledge-contributor";

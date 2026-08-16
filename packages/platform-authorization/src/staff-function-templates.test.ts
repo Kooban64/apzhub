@@ -94,11 +94,17 @@ describe("Phase A staff functions + product roles", () => {
       DEFAULT_PRODUCT_SUPPORT_AGENT_ROLE_ID,
     );
     expect(support.some((g) => g.permissionKey === "support.*")).toBe(true);
+    const requester = listProductRoles().find(
+      (role) => role.slug === "product-support-requester",
+    );
+    expect(requester?.permissions).toContain("support.requests.list");
+    expect(requester?.permissions).not.toContain("support.*");
+    expect(requester?.permissions).not.toContain("support.requests.assign");
     const projects = service.roleService.listRolePermissions(
       DEFAULT_PRODUCT_PROJECTS_MEMBER_ROLE_ID,
     );
     expect(projects.some((g) => g.permissionKey === "projects.view")).toBe(true);
-    expect(listProductRoles().length).toBeGreaterThanOrEqual(9);
+    expect(listProductRoles().length).toBeGreaterThanOrEqual(10);
   });
 
   it("keeps Support Agent, Developer, Finance, Compliance, and Executive org-job personas as shell baseline only", () => {

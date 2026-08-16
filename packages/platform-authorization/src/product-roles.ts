@@ -15,6 +15,7 @@ import {
   DEFAULT_PRODUCT_PROJECTS_MEMBER_ROLE_ID,
   DEFAULT_PRODUCT_QEP_ENGINEER_ROLE_ID,
   DEFAULT_PRODUCT_SUPPORT_AGENT_ROLE_ID,
+  DEFAULT_PRODUCT_SUPPORT_REQUESTER_ROLE_ID,
   DEFAULT_PRODUCT_TIME_EMPLOYEE_ROLE_ID,
   DEFAULT_PRODUCT_WORKFLOW_OPERATOR_ROLE_ID,
 } from "./staff-function-templates";
@@ -22,6 +23,22 @@ import {
 /** Support Agent — queue work only. */
 export const PRODUCT_SUPPORT_AGENT_PERMISSIONS = [
   "support.*",
+  "notification.read",
+  "notifications.read",
+  "notifications.preferences",
+  "search.execute",
+] as const;
+
+/**
+ * Support Requester — own requests only (no queue/assign/transition/groups/users).
+ * Stream 4: pairs with `isSupportRequesterOnly` permission detection.
+ */
+export const PRODUCT_SUPPORT_REQUESTER_PERMISSIONS = [
+  "support.requests.list",
+  "support.requests.create",
+  "support.requests.update",
+  "support.articles.list",
+  "support.articles.read",
   "notification.read",
   "notifications.read",
   "notifications.preferences",
@@ -152,6 +169,14 @@ export const PRODUCT_ROLE_DEFINITIONS: readonly PersonaRoleDefinition[] = [
     scope: "product",
     productKey: "support",
     permissions: [...PRODUCT_SUPPORT_AGENT_PERMISSIONS],
+  },
+  {
+    roleId: DEFAULT_PRODUCT_SUPPORT_REQUESTER_ROLE_ID,
+    slug: "product-support-requester",
+    name: "Support Requester",
+    scope: "product",
+    productKey: "support",
+    permissions: [...PRODUCT_SUPPORT_REQUESTER_PERMISSIONS],
   },
   {
     roleId: DEFAULT_PRODUCT_TIME_EMPLOYEE_ROLE_ID,

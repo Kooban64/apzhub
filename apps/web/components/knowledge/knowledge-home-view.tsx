@@ -28,6 +28,7 @@ import {
   knowledgeSettingsPath,
 } from "@/lib/knowledge/routes";
 
+import { KnowledgeContextualSuggestions } from "./knowledge-contextual-suggestions";
 import { KnowledgeLiveMemoryPanel } from "./knowledge-live-memory-panel";
 import { EmptyState, KNOWLEDGE_PRODUCT_NAME, PageShell } from "./knowledge-ui";
 
@@ -174,6 +175,12 @@ export function KnowledgeHomeView({
           ))}
         </div>
       </section>
+
+      <KnowledgeContextualSuggestions
+        title="Suggested for your work"
+        description="Memory that may apply across Support, Projects, and Workflow — surfaced so you can act without searching first."
+        testId="knowledge-home-suggestions"
+      />
 
       <KnowledgeLiveMemoryPanel
         title="Trusted memory in focus"
