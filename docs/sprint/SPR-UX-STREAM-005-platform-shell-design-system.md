@@ -1,6 +1,6 @@
 # SPR-UX-STREAM-005 — Platform Shell & Design System
 
-> **Status:** **PHASE G ACTIVE** — horizontal close (verticals certified) — 2026-08-16  
+> **Status:** **PHASE G CERTIFIED** — horizontal close complete — 2026-08-16  
 > **Authority:** [UX-STREAM-005](../ux/UX-STREAM-005-platform-shell-design-system.md)  
 > **Gap map:** [PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP](./PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP.md) · [PHASE-A-STREAMS-5-6-GAP-MAP](./PHASE-A-STREAMS-5-6-GAP-MAP.md)  
 > **Pairs with:** [SPR-UX-STREAM-006](./SPR-UX-STREAM-006-tenant-identity-rbac-administration.md)  

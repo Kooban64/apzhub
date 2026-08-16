@@ -92,7 +92,7 @@
 - Home kinds use **org-job** slugs (`finance-staff`, `compliance-officer`, …) so shared product roles (e.g. analytics-viewer) do not collide.
 - Demo org Documents entitlement requires `pkg.apzprd.workspace` (subscribe via Org Console if seed lag).
 - Documents **auditor** has no `document.write` → no `qa-upload-document`.
-- Phase A remaining debt (→ **Phase G**): queue resource scope; OperatorShell vs DesktopShell policy; retire free-all completely; Playwright CI against this build. See [PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP](./PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP.md).
+- Phase A remaining debt: **closed in Phase G** (queue scopes · shell policy · free-all retirement · Playwright smoke). See [PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP](./PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP.md) — **CERTIFIED 100%**.
 
 ## FIRST VERTICAL — touch order
 

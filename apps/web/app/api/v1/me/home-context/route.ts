@@ -8,6 +8,7 @@ import { resolveSessionAuthorization } from "@apzhub/platform-authorization/serv
 import { resolveDashboardKindFromRoles } from "@/lib/demo/demo-personas";
 import { DEMO_PERSONAS } from "@/lib/demo/demo-personas";
 import { shellLandingForKind } from "@/lib/operator/shell-landing";
+import { preferredShellFamily } from "@/lib/shell/shell-policy";
 import { resolveTenantEntitlements } from "@/lib/commercial/resolve-entitlements";
 
 async function handleGetHomeContext(
@@ -34,6 +35,7 @@ async function handleGetHomeContext(
   }
 
   const landing = shellLandingForKind(kind);
+  const shellFamily = preferredShellFamily(kind);
   const entitlements = tenantId
     ? resolveTenantEntitlements({ organisationId: tenantId, userId })
     : null;
@@ -41,6 +43,7 @@ async function handleGetHomeContext(
   return jsonDataResponse(
     {
       kind,
+      shellFamily,
       landing,
       roles: authz.roles,
       permissions: authz.permissions.slice(0, 80),

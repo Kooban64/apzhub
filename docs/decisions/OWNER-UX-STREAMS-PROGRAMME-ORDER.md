@@ -12,9 +12,9 @@
 >
 > Streams 1–6 remain frozen in scope. This decision governs how they are implemented, integrated and certified.
 >
-> **Engineering:** Phase A–F product/Source tracks **CERTIFIED 100%**. **Phase G** (Streams 5∥6 horizontal Shell/RBAC close) **ACTIVE** — ([SPR-UX-PHASE-G-STREAMS-5-6-HORIZONTAL](../sprint/SPR-UX-PHASE-G-STREAMS-5-6-HORIZONTAL.md) · [PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP](../sprint/PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP.md)).
+> **Engineering:** Phase A–G product/Shell/Source tracks **CERTIFIED 100%**. Phase G (Streams 5∥6 horizontal) closed — ([SPR-UX-PHASE-G-STREAMS-5-6-HORIZONTAL](../sprint/SPR-UX-PHASE-G-STREAMS-5-6-HORIZONTAL.md) · [PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP](../sprint/PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP.md)).
 >
-> **Engineering 2026-08-16:** Phase F certified. Phase G authorised to close Phase A horizontal debt (entitlements · shell policy · queue scopes).
+> **Engineering 2026-08-16:** Phase G certified — entitlement hard-mode · shell policy · Support queue scopes · Playwright smoke.
 
 ---
 
@@ -46,7 +46,7 @@ Edit / Branch / Commit / Push / PR
 PHASE F — SHARED SOURCE REVIEW      ← COMPLETE · CERTIFIED 100%
 Review / Merge / Repo Admin (+ leftovers)
         ↓
-PHASE G — SHELL / RBAC HORIZONTAL   ← ACTIVE
+PHASE G — SHELL / RBAC HORIZONTAL   ← COMPLETE · CERTIFIED 100%
 Streams 5 ∥ 6 debt close (entitlements · shell policy · queue scopes)
 ```
 

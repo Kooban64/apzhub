@@ -26,14 +26,14 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [SPR-UX-STREAM-004](./sprint/SPR-UX-STREAM-004-apzprd-ui-ux.md)                                    | **COMPLETE · CERTIFIED 100%** — APZPRD                                                |
 | [OWNER UX Streams 5–6 freeze](./decisions/OWNER-UX-STREAM-005-006-FREEZE.md)                       | **SPEC FROZEN** — Shell + Tenant/RBAC; APZOR = ordinary tenant                        |
 | [UX-STREAM-005](./ux/UX-STREAM-005-platform-shell-design-system.md)                                | **FROZEN** — shared authenticated shell · workspace primitives · design language      |
-| [SPR-UX-STREAM-005](./sprint/SPR-UX-STREAM-005-platform-shell-design-system.md)                    | **PHASE G ACTIVE** — horizontal Shell close                                           |
+| [SPR-UX-STREAM-005](./sprint/SPR-UX-STREAM-005-platform-shell-design-system.md)                    | **PHASE G CERTIFIED** — horizontal Shell close                                        |
 | [UX-STREAM-006](./ux/UX-STREAM-006-tenant-identity-rbac-administration.md)                         | **FROZEN · SUPERSEDES prior** — five layers · Staff Function · APZOR reference tenant |
-| [SPR-UX-STREAM-006](./sprint/SPR-UX-STREAM-006-tenant-identity-rbac-administration.md)             | **PHASE G ACTIVE** — horizontal RBAC close                                            |
+| [SPR-UX-STREAM-006](./sprint/SPR-UX-STREAM-006-tenant-identity-rbac-administration.md)             | **PHASE G CERTIFIED** — horizontal RBAC close                                         |
 | [OWNER UX Stream 6 supersede](./decisions/OWNER-UX-STREAM-006-SUPERSEDE.md)                        | **IN FORCE** — revised Stream 6 replaces earlier RBAC freeze text                     |
 | [UX Shared Source Workspace](./ux/UX-SHARED-SOURCE-WORKSPACE.md)                                   | **LOCKED** — one Cursor-quality source UX for QEP+PEN; provider-neutral               |
-| [OWNER UX programme order](./decisions/OWNER-UX-STREAMS-PROGRAMME-ORDER.md)                        | **ACCEPTED** — Phase A–F certified · **Phase G ACTIVE**                               |
-| [UX streams index](./ux/README.md)                                                                 | Streams 1–6 · Phase A–F certified · Phase G horizontal ACTIVE                         |
-| [Phase A Streams 5∥6 gap map](./sprint/PHASE-A-STREAMS-5-6-GAP-MAP.md)                             | Living — seven persona verticals certified · horizontal → Phase G                     |
+| [OWNER UX programme order](./decisions/OWNER-UX-STREAMS-PROGRAMME-ORDER.md)                        | **ACCEPTED** — Phase A–G **CERTIFIED 100%**                                           |
+| [UX streams index](./ux/README.md)                                                                 | Streams 1–6 · Phase A–G certified                                                     |
+| [Phase A Streams 5∥6 gap map](./sprint/PHASE-A-STREAMS-5-6-GAP-MAP.md)                             | Living — seven persona verticals certified · horizontal → Phase G closed              |
 | [Phase B Stream 1 gap map](./sprint/PHASE-B-STREAM-1-GAP-MAP.md)                                   | **COMPLETE · CERTIFIED 100%** — public commerce DoD                                   |
 | [Phase C Stream 4 gap map](./sprint/PHASE-C-STREAM-4-GAP-MAP.md)                                   | **COMPLETE · CERTIFIED 100%** — APZPRD                                                |
 | [Phase D Stream 2 gap map](./sprint/PHASE-D-STREAM-2-GAP-MAP.md)                                   | **COMPLETE · CERTIFIED 100%** — APZQEP                                                |
@@ -42,8 +42,8 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [Phase E Shared Source gap map](./sprint/PHASE-E-SHARED-SOURCE-GAP-MAP.md)                         | **COMPLETE · CERTIFIED 100%** — Shared Source write track                             |
 | [SPR-UX-PHASE-F Shared Source](./sprint/SPR-UX-PHASE-F-SHARED-SOURCE.md)                           | **COMPLETE · CERTIFIED 100%** — Review/Merge/Admin leftovers                          |
 | [Phase F Shared Source gap map](./sprint/PHASE-F-SHARED-SOURCE-GAP-MAP.md)                         | **COMPLETE · CERTIFIED 100%** — Shared Source phase 3                                 |
-| [SPR-UX-PHASE-G Streams 5∥6](./sprint/SPR-UX-PHASE-G-STREAMS-5-6-HORIZONTAL.md)                    | **ACTIVE** — entitlements · shell policy · queue scopes                               |
-| [Phase G Streams 5∥6 gap map](./sprint/PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP.md)                  | Living — horizontal Shell/RBAC close                                                  |
+| [SPR-UX-PHASE-G Streams 5∥6](./sprint/SPR-UX-PHASE-G-STREAMS-5-6-HORIZONTAL.md)                    | **COMPLETE · CERTIFIED 100%** — entitlements · shell · queue scopes                   |
+| [Phase G Streams 5∥6 gap map](./sprint/PHASE-G-STREAMS-5-6-HORIZONTAL-GAP-MAP.md)                  | **COMPLETE · CERTIFIED 100%** — horizontal Shell/RBAC close                           |
 | [SPR-UX-001](./sprint/SPR-UX-001-commercial-workbench-ui-remodel.md)                               | **PARKED** — workbench remodel deferred under Stream 1 freeze                         |
 | [APZQEP](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md)                             | Quality Engineering Platform — _Can we release with confidence?_                      |
 | [APZPEN](./strategy/APZPEN-ENTERPRISE-SECURITY-ASSURANCE-PLATFORM.md)                              | Security Assurance & Pen Testing — _Can we demonstrate we are secure?_                |
