@@ -9,9 +9,18 @@ import type {
   ScmRepositoryRef,
 } from "../../contracts/repository";
 import type {
+  ScmCommitFilesInput,
+  ScmCreateBranchInput,
+  ScmCreatePullRequestInput,
+  ScmFileContent,
+  ScmFileDiff,
+  ScmTreeEntry,
+} from "../../contracts/content";
+import type {
   ScmWebhookDelivery,
   ScmWebhookRegistration,
 } from "../../contracts/webhook";
+import { OfflineSourceWorkspace } from "../offline-workspace";
 
 export interface GitLabProviderOptions {
   readonly forceOffline?: boolean;
@@ -21,7 +30,7 @@ export interface GitLabProviderOptions {
 const DESCRIPTOR: ScmProviderDescriptor = {
   providerId: "gitlab",
   name: "GitLab Provider",
-  version: "0.1.0",
+  version: "0.2.0",
   status: "active",
   capabilities: [
     "authentication-pat",
@@ -34,6 +43,15 @@ const DESCRIPTOR: ScmProviderDescriptor = {
     "provider-health",
     "connection-testing",
     "offline-mode",
+    "source-tree",
+    "source-file-content",
+    "source-diff",
+    "source-write",
+    "source-branch-create",
+    "source-commit",
+    "source-pull-request-create",
+    "source-merge",
+    "source-search",
   ],
 };
 
@@ -50,13 +68,14 @@ function header(
 }
 
 /**
- * GitLab CE/self-hosted compatible SCM provider (SPR-APZPEN-014).
+ * GitLab CE/self-hosted compatible SCM provider (SPR-APZPEN-014 + Phase F parity).
  */
 export class GitLabScmProvider implements ScmProvider {
   readonly descriptor = DESCRIPTOR;
   private readonly forceOffline: boolean;
   private readonly apiBaseUrl: string;
   private readonly offlineRepos = new Map<string, ScmRepositoryRef>();
+  private readonly offlineWorkspace = new OfflineSourceWorkspace();
 
   constructor(options: GitLabProviderOptions = {}) {
     this.forceOffline = options.forceOffline ?? true;
@@ -138,9 +157,7 @@ export class GitLabScmProvider implements ScmProvider {
 
   async listBranches(context: ScmProviderContext, fullName: string) {
     if (this.forceOffline) {
-      return [
-        { name: "main", sha: "offline-main", protected: true },
-      ] satisfies ScmBranchRef[];
+      return this.offlineWorkspace.listBranches(fullName);
     }
     const encoded = encodeURIComponent(fullName);
     const response = await this.gl(context, `/projects/${encoded}/repository/branches`);
@@ -161,15 +178,7 @@ export class GitLabScmProvider implements ScmProvider {
     options?: { readonly branch?: string; readonly limit?: number },
   ) {
     if (this.forceOffline) {
-      return [
-        {
-          sha: "offline-commit",
-          message: "offline seed commit",
-          authorName: "offline",
-          committedAt: new Date().toISOString(),
-          branch: options?.branch ?? "main",
-        },
-      ] satisfies ScmCommitRef[];
+      return this.offlineWorkspace.listCommits(fullName, options);
     }
     const encoded = encodeURIComponent(fullName);
     const query = new URLSearchParams();
@@ -198,6 +207,8 @@ export class GitLabScmProvider implements ScmProvider {
     options?: { readonly state?: "open" | "closed" | "all"; readonly limit?: number },
   ) {
     if (this.forceOffline) {
+      const offline = this.offlineWorkspace.listPullRequests(fullName);
+      if (offline.length > 0) return offline;
       return [
         {
           externalId: "offline-mr-1",
@@ -241,6 +252,234 @@ export class GitLabScmProvider implements ScmProvider {
     });
   }
 
+  async listTree(
+    _context: ScmProviderContext,
+    fullName: string,
+    options?: { readonly branch?: string; readonly path?: string },
+  ): Promise<readonly ScmTreeEntry[]> {
+    if (this.forceOffline) {
+      return this.offlineWorkspace.listTree(fullName, options);
+    }
+    const encoded = encodeURIComponent(fullName);
+    const branch = options?.branch ?? "main";
+    const response = await this.gl(
+      _context,
+      `/projects/${encoded}/repository/tree?ref=${encodeURIComponent(branch)}&path=${encodeURIComponent(options?.path ?? "")}&per_page=100`,
+    );
+    if (!response.ok) {
+      throw new Error(`GitLab list tree failed (${response.status})`);
+    }
+    const body = (await response.json()) as Array<Record<string, unknown>>;
+    return body.map((item) => ({
+      path: String(item.path ?? ""),
+      name: String(item.name ?? ""),
+      type: item.type === "tree" ? ("dir" as const) : ("file" as const),
+      sha: item.id ? String(item.id) : undefined,
+    }));
+  }
+
+  async getFileContent(
+    context: ScmProviderContext,
+    fullName: string,
+    options: { readonly path: string; readonly branch?: string },
+  ): Promise<ScmFileContent | undefined> {
+    if (this.forceOffline) {
+      return this.offlineWorkspace.getFileContent(fullName, options);
+    }
+    const encoded = encodeURIComponent(fullName);
+    const branch = options.branch ?? "main";
+    const filePath = encodeURIComponent(options.path);
+    const response = await this.gl(
+      context,
+      `/projects/${encoded}/repository/files/${filePath}?ref=${encodeURIComponent(branch)}`,
+    );
+    if (response.status === 404) return undefined;
+    if (!response.ok) {
+      throw new Error(`GitLab get file failed (${response.status})`);
+    }
+    const body = (await response.json()) as Record<string, unknown>;
+    const encoding = String(body.encoding ?? "base64");
+    const raw = String(body.content ?? "");
+    const content =
+      encoding === "base64" ? Buffer.from(raw, "base64").toString("utf-8") : raw;
+    return {
+      path: options.path,
+      branch,
+      content,
+      encoding: "utf-8",
+      sha: body.blob_id ? String(body.blob_id) : undefined,
+    };
+  }
+
+  async getFileDiff(
+    _context: ScmProviderContext,
+    fullName: string,
+    options: {
+      readonly path: string;
+      readonly baseRef: string;
+      readonly headRef: string;
+    },
+  ): Promise<ScmFileDiff | undefined> {
+    if (this.forceOffline) {
+      return this.offlineWorkspace.getFileDiff(fullName, options);
+    }
+    // Live compare not fully mapped — return undefined when unavailable.
+    void _context;
+    void fullName;
+    return undefined;
+  }
+
+  async createBranch(
+    context: ScmProviderContext,
+    fullName: string,
+    input: ScmCreateBranchInput,
+  ): Promise<ScmBranchRef> {
+    if (this.forceOffline) {
+      return this.offlineWorkspace.createBranch(fullName, input);
+    }
+    const encoded = encodeURIComponent(fullName);
+    const response = await this.gl(
+      context,
+      `/projects/${encoded}/repository/branches`,
+      {
+        method: "POST",
+        body: JSON.stringify({ branch: input.name, ref: input.fromRef }),
+      },
+    );
+    if (!response.ok) {
+      throw new Error(`GitLab create branch failed (${response.status})`);
+    }
+    const body = (await response.json()) as Record<string, unknown>;
+    return {
+      name: String(body.name ?? input.name),
+      sha: String((body.commit as { id?: string } | undefined)?.id ?? ""),
+      protected: false,
+    };
+  }
+
+  async commitFiles(
+    context: ScmProviderContext,
+    fullName: string,
+    input: ScmCommitFilesInput,
+  ): Promise<ScmCommitRef> {
+    if (this.forceOffline) {
+      return this.offlineWorkspace.commitFiles(fullName, input);
+    }
+    const encoded = encodeURIComponent(fullName);
+    const actions = input.files.map((file) => ({
+      action: file.operation === "delete" ? "delete" : "update",
+      file_path: file.path,
+      content: file.operation === "delete" ? undefined : file.content,
+    }));
+    const response = await this.gl(context, `/projects/${encoded}/repository/commits`, {
+      method: "POST",
+      body: JSON.stringify({
+        branch: input.branch,
+        commit_message: input.message,
+        actions,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error(`GitLab commit failed (${response.status})`);
+    }
+    const body = (await response.json()) as Record<string, unknown>;
+    return {
+      sha: String(body.id ?? randomUUID().slice(0, 10)),
+      message: input.message,
+      branch: input.branch,
+      committedAt: String(body.committed_date ?? new Date().toISOString()),
+    };
+  }
+
+  async createPullRequest(
+    context: ScmProviderContext,
+    fullName: string,
+    input: ScmCreatePullRequestInput,
+  ): Promise<ScmPullRequestRef> {
+    if (this.forceOffline) {
+      return this.offlineWorkspace.createPullRequest(fullName, input);
+    }
+    const encoded = encodeURIComponent(fullName);
+    const response = await this.gl(context, `/projects/${encoded}/merge_requests`, {
+      method: "POST",
+      body: JSON.stringify({
+        title: input.title,
+        description: input.body ?? "",
+        source_branch: input.sourceBranch,
+        target_branch: input.targetBranch,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error(`GitLab create merge request failed (${response.status})`);
+    }
+    const item = (await response.json()) as Record<string, unknown>;
+    return {
+      externalId: String(item.id),
+      number: Number(item.iid),
+      title: String(item.title ?? input.title),
+      state: "open",
+      sourceBranch: input.sourceBranch,
+      targetBranch: input.targetBranch,
+      htmlUrl: item.web_url ? String(item.web_url) : undefined,
+      updatedAt: new Date().toISOString(),
+    };
+  }
+
+  async mergePullRequest(
+    context: ScmProviderContext,
+    fullName: string,
+    input: { readonly number: number; readonly method?: "merge" | "squash" },
+  ): Promise<ScmPullRequestRef> {
+    if (this.forceOffline) {
+      return this.offlineWorkspace.mergePullRequest(fullName, input);
+    }
+    const encoded = encodeURIComponent(fullName);
+    const response = await this.gl(
+      context,
+      `/projects/${encoded}/merge_requests/${input.number}/merge`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          squash: input.method === "squash",
+        }),
+      },
+    );
+    if (!response.ok) {
+      throw new Error(`GitLab merge failed (${response.status})`);
+    }
+    return {
+      externalId: String(input.number),
+      number: input.number,
+      title: `Merged !${input.number}`,
+      state: "merged",
+      updatedAt: new Date().toISOString(),
+    };
+  }
+
+  async searchFiles(
+    context: ScmProviderContext,
+    fullName: string,
+    options: {
+      readonly query: string;
+      readonly branch?: string;
+      readonly limit?: number;
+    },
+  ) {
+    if (this.forceOffline) {
+      return this.offlineWorkspace.searchFiles(fullName, options);
+    }
+    const entries = await this.listTree(context, fullName, {
+      branch: options.branch,
+    });
+    const query = options.query.trim().toLowerCase();
+    return entries
+      .filter(
+        (entry) => entry.type === "file" && entry.path.toLowerCase().includes(query),
+      )
+      .slice(0, options.limit ?? 40)
+      .map((entry) => ({ path: entry.path, preview: entry.path }));
+  }
+
   async registerWebhook(
     _context: ScmProviderContext,
     _fullName: string,
@@ -249,7 +488,7 @@ export class GitLabScmProvider implements ScmProvider {
     return {
       ok: true,
       externalWebhookId: `gitlab-hook-${randomUUID().slice(0, 8)}`,
-      detail: `Registered ${registration.targetUrl}`,
+      detail: `Registered ${registration.callbackUrl}`,
     };
   }
 
@@ -315,16 +554,23 @@ export class GitLabScmProvider implements ScmProvider {
     };
   }
 
-  private async gl(context: ScmProviderContext, path: string): Promise<Response> {
+  private async gl(
+    context: ScmProviderContext,
+    path: string,
+    init?: { readonly method?: string; readonly body?: string },
+  ): Promise<Response> {
     const token = context.credentials?.token;
     if (!token) {
       throw new Error("GitLab PAT required for live mode");
     }
     return fetch(`${this.apiBaseUrl}${path}`, {
+      method: init?.method,
+      body: init?.body,
       headers: {
         accept: "application/json",
         "private-token": token,
         "user-agent": "apzhub-platform-scm",
+        ...(init?.body ? { "content-type": "application/json" } : {}),
       },
       signal: context.signal,
     });

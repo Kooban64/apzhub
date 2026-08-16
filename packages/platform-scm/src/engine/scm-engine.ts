@@ -620,6 +620,52 @@ export class ScmEngine {
     return provider.createPullRequest(context, repository.fullName, input);
   }
 
+  async listRepositoryPullRequests(
+    repositoryId: string,
+    correlationId: string,
+    options?: { readonly state?: "open" | "closed" | "all"; readonly limit?: number },
+  ) {
+    const { repository, provider, context } = await this.resolveProviderContext(
+      repositoryId,
+      correlationId,
+    );
+    return provider.listPullRequests(context, repository.fullName, options);
+  }
+
+  async mergeRepositoryPullRequest(
+    repositoryId: string,
+    correlationId: string,
+    input: { readonly number: number; readonly method?: "merge" | "squash" },
+  ) {
+    const { repository, provider, context } = await this.resolveProviderContext(
+      repositoryId,
+      correlationId,
+    );
+    if (!provider.mergePullRequest) {
+      throw new Error(`Provider ${repository.providerId} does not support merge`);
+    }
+    return provider.mergePullRequest(context, repository.fullName, input);
+  }
+
+  async searchRepositoryFiles(
+    repositoryId: string,
+    correlationId: string,
+    options: {
+      readonly query: string;
+      readonly branch?: string;
+      readonly limit?: number;
+    },
+  ) {
+    const { repository, provider, context } = await this.resolveProviderContext(
+      repositoryId,
+      correlationId,
+    );
+    if (!provider.searchFiles) {
+      throw new Error(`Provider ${repository.providerId} does not support search`);
+    }
+    return provider.searchFiles(context, repository.fullName, options);
+  }
+
   private async notifyChangeEventsPersisted(input: {
     readonly tenantId: string;
     readonly correlationId: string;

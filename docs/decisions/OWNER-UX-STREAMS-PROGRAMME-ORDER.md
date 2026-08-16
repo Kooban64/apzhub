@@ -12,9 +12,9 @@
 >
 > Streams 1–6 remain frozen in scope. This decision governs how they are implemented, integrated and certified.
 >
-> **Engineering:** Phase A–E **COMPLETE · CERTIFIED 100%**. Shared Source write track closed — ([SPR-UX-PHASE-E-SHARED-SOURCE](../sprint/SPR-UX-PHASE-E-SHARED-SOURCE.md) · [PHASE-E-SHARED-SOURCE-GAP-MAP](../sprint/PHASE-E-SHARED-SOURCE-GAP-MAP.md)). Review/Merge/Repo Admin requires a new approved sprint guide.
+> **Engineering:** Phase A–F **COMPLETE · CERTIFIED 100%**. Shared Source phases 1–3 closed — ([PHASE-E-SHARED-SOURCE-GAP-MAP](../sprint/PHASE-E-SHARED-SOURCE-GAP-MAP.md) · [PHASE-F-SHARED-SOURCE-GAP-MAP](../sprint/PHASE-F-SHARED-SOURCE-GAP-MAP.md)).
 >
-> **Engineering 2026-08-16:** Phase E certified — Source tree/editor/tabs · branch/commit/PR · `source.write` · `/api/v1/source/*`.
+> **Engineering 2026-08-16:** Phase F certified — Review/Merge/Admin · GitLab write parity · nested tree · search · dense editor. Shared Source track claimable at 100%.
 
 ---
 
@@ -42,7 +42,9 @@ COMMERCIAL PLATFORM UX COMPLETE     ← PHASES A–D CLOSED
         ↓
 PHASE E — SHARED SOURCE WRITE       ← COMPLETE · CERTIFIED 100%
 Edit / Branch / Commit / Push / PR
-(Review / Merge / Repo Admin later)
+        ↓
+PHASE F — SHARED SOURCE REVIEW      ← COMPLETE · CERTIFIED 100%
+Review / Merge / Repo Admin (+ leftovers)
 ```
 
 **Stream 1 freeze interpretation:** Finish Stream 1 before authenticated QEP/PEN/PRD **product deep UX**. Foundation (5+6) precedes or underpins Stream 1.

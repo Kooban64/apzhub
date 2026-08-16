@@ -359,3 +359,99 @@ export async function handleSourceCreatePullRequest(
     });
   }
 }
+
+export async function handleSourceListPullRequests(
+  request: NextRequest,
+  context: PlatformApiRequestContext,
+  routeContext: RouteContext,
+) {
+  requireSourceRead(context);
+  sessionTenantId(context);
+  const params = await routeContext.params;
+  const repositoryId = requireParam(params, "repositoryId");
+  const stateParam = request.nextUrl.searchParams.get("state");
+  const state =
+    stateParam === "closed" || stateParam === "all" || stateParam === "open"
+      ? stateParam
+      : "open";
+  const runtime = getQepScmRuntime();
+  try {
+    const pullRequests = await runtime.listRepositoryPullRequests(
+      repositoryId,
+      correlationId(request),
+      { state, limit: 50 },
+    );
+    return jsonDataResponse({ pullRequests }, context.tracing);
+  } catch (error) {
+    throw new PlatformApiHttpError(400, {
+      code: "SOURCE_ERROR",
+      message: error instanceof Error ? error.message : String(error),
+    });
+  }
+}
+
+export async function handleSourceMergePullRequest(
+  request: NextRequest,
+  context: PlatformApiRequestContext,
+  routeContext: RouteContext,
+) {
+  requireSourceWrite(context);
+  sessionTenantId(context);
+  const params = await routeContext.params;
+  const repositoryId = requireParam(params, "repositoryId");
+  const numberRaw = requireParam(params, "number");
+  const number = Number(numberRaw);
+  if (!Number.isFinite(number) || number <= 0) {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_FAILED",
+      message: "number must be a positive integer",
+    });
+  }
+  const body = (await request.json().catch(() => ({}))) as {
+    method?: "merge" | "squash";
+  };
+  const runtime = getQepScmRuntime();
+  try {
+    const pullRequest = await runtime.mergeRepositoryPullRequest(
+      repositoryId,
+      correlationId(request),
+      { number, method: body.method ?? "merge" },
+    );
+    return jsonDataResponse({ pullRequest }, context.tracing);
+  } catch (error) {
+    throw new PlatformApiHttpError(400, {
+      code: "SOURCE_ERROR",
+      message: error instanceof Error ? error.message : String(error),
+    });
+  }
+}
+
+export async function handleSourceSearch(
+  request: NextRequest,
+  context: PlatformApiRequestContext,
+  routeContext: RouteContext,
+) {
+  requireSourceRead(context);
+  sessionTenantId(context);
+  const params = await routeContext.params;
+  const repositoryId = requireParam(params, "repositoryId");
+  const query = request.nextUrl.searchParams.get("q")?.trim() ?? "";
+  const branch = request.nextUrl.searchParams.get("branch") ?? undefined;
+  if (!query) {
+    return jsonDataResponse({ hits: [] }, context.tracing);
+  }
+  const runtime = getQepScmRuntime();
+  try {
+    const hits = await runtime.searchRepositoryFiles(
+      repositoryId,
+      correlationId(request),
+      { query, branch, limit: 40 },
+    );
+    return jsonDataResponse({ hits }, context.tracing);
+  } catch (error) {
+    throw new PlatformApiHttpError(400, {
+      code: "SOURCE_ERROR",
+      message: error instanceof Error ? error.message : String(error),
+    });
+  }
+}

@@ -54,6 +54,8 @@ const DESCRIPTOR: ScmProviderDescriptor = {
     "source-branch-create",
     "source-commit",
     "source-pull-request-create",
+    "source-merge",
+    "source-search",
   ],
 };
 
@@ -488,6 +490,61 @@ export class GitHubScmProvider implements ScmProvider {
       htmlUrl: item.html_url ? String(item.html_url) : undefined,
       updatedAt: item.updated_at ? String(item.updated_at) : new Date().toISOString(),
     };
+  }
+
+  async mergePullRequest(
+    context: ScmProviderContext,
+    fullName: string,
+    input: { readonly number: number; readonly method?: "merge" | "squash" },
+  ): Promise<ScmPullRequestRef> {
+    if (this.forceOffline) {
+      return this.offlineWorkspace.mergePullRequest(fullName, input);
+    }
+    const response = await this.gh(
+      context,
+      `/repos/${fullName}/pulls/${input.number}/merge`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          merge_method: input.method === "squash" ? "squash" : "merge",
+        }),
+      },
+    );
+    if (!response.ok) {
+      throw new Error(`GitHub merge failed (${response.status})`);
+    }
+    return {
+      externalId: String(input.number),
+      number: input.number,
+      title: `Merged #${input.number}`,
+      state: "merged",
+      updatedAt: new Date().toISOString(),
+    };
+  }
+
+  async searchFiles(
+    context: ScmProviderContext,
+    fullName: string,
+    options: {
+      readonly query: string;
+      readonly branch?: string;
+      readonly limit?: number;
+    },
+  ) {
+    if (this.forceOffline) {
+      return this.offlineWorkspace.searchFiles(fullName, options);
+    }
+    // Live: GitHub code search is org-scoped and noisy — fall back to tree path filter.
+    const entries = await this.listTree(context, fullName, {
+      branch: options.branch,
+    });
+    const query = options.query.trim().toLowerCase();
+    return entries
+      .filter(
+        (entry) => entry.type === "file" && entry.path.toLowerCase().includes(query),
+      )
+      .slice(0, options.limit ?? 40)
+      .map((entry) => ({ path: entry.path, preview: entry.path }));
   }
 
   async registerWebhook(

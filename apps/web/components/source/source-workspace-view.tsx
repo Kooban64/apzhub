@@ -8,9 +8,13 @@ import { useEffect, useState } from "react";
 import {
   parseSourceChangeId,
   parseSourceRepositoryId,
+  parseSourceRepositoryMode,
   SOURCE_ROUTES,
 } from "@/lib/source/routes";
 import { buildSourceFileTree, flattenSourceFileTree } from "@/lib/source/file-tree";
+import { SourceLineEditor } from "@/components/source/source-line-editor";
+import { SourceReviewView } from "@/components/source/source-review-view";
+import { SourceAdminView } from "@/components/source/source-admin-view";
 import {
   closeTab,
   cycleTabPath,
@@ -78,14 +82,71 @@ export function SourceWorkspaceView() {
   const pathname = usePathname() ?? "";
   const repositoryId = parseSourceRepositoryId(pathname);
   const changeEventId = parseSourceChangeId(pathname);
+  const mode = parseSourceRepositoryMode(pathname);
 
   if (changeEventId) {
     return <ChangeBrowseView changeEventId={changeEventId} />;
+  }
+  if (repositoryId && mode === "review") {
+    return <RepositoryModeShell repositoryId={repositoryId} mode="review" />;
+  }
+  if (repositoryId && mode === "admin") {
+    return <RepositoryModeShell repositoryId={repositoryId} mode="admin" />;
   }
   if (repositoryId) {
     return <RepositoryWorkspaceView repositoryId={repositoryId} />;
   }
   return <SourceHomeView />;
+}
+
+function RepositoryModeShell({
+  repositoryId,
+  mode,
+}: {
+  readonly repositoryId: string;
+  readonly mode: "review" | "admin";
+}) {
+  const capabilitiesQuery = useQuery({
+    queryKey: ["source-workspace", "capabilities"],
+    queryFn: () =>
+      fetchJson<{ canRead: boolean; canWrite: boolean }>("/api/v1/source/capabilities"),
+  });
+  const canWrite = capabilitiesQuery.data?.canWrite === true;
+  return (
+    <Shell
+      title={mode === "review" ? "Source · Review" : "Source · Admin"}
+      description={
+        mode === "review"
+          ? "Review and merge change requests for this APZ repository."
+          : "Repository registration, sync, and health."
+      }
+      actions={
+        <nav className="flex flex-wrap gap-3 text-sm">
+          <Link href={SOURCE_ROUTES.repository(repositoryId)} className="underline">
+            Files
+          </Link>
+          <Link
+            href={SOURCE_ROUTES.repositoryReview(repositoryId)}
+            className="underline"
+          >
+            Review
+          </Link>
+          <Link
+            href={SOURCE_ROUTES.repositoryAdmin(repositoryId)}
+            className="underline"
+          >
+            Admin
+          </Link>
+        </nav>
+      }
+    >
+      {mode === "review" ? (
+        <SourceReviewView repositoryId={repositoryId} canWrite={canWrite} />
+      ) : (
+        <SourceAdminView repositoryId={repositoryId} canWrite={canWrite} />
+      )}
+    </Shell>
+  );
 }
 
 function Shell({
@@ -259,6 +320,10 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
   const [prTarget, setPrTarget] = useState("main");
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [showDiff, setShowDiff] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [expandedDirs, setExpandedDirs] = useState<ReadonlySet<string>>(
+    () => new Set<string>(),
+  );
 
   const detailQuery = useQuery({
     queryKey: ["source-workspace", "repository", repositoryId],
@@ -296,6 +361,23 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
     queryFn: () =>
       fetchJson<{ commits: CommitRow[] }>(
         `/api/v1/source/repositories/${encodeURIComponent(repositoryId)}/commits?branch=${encodeURIComponent(branch)}&limit=12`,
+      ),
+  });
+
+  const searchQueryDebounced = searchQuery.trim();
+  const searchQueryEnabled = searchQueryDebounced.length >= 2;
+  const searchResultsQuery = useQuery({
+    queryKey: [
+      "source-workspace",
+      "search",
+      repositoryId,
+      branch,
+      searchQueryDebounced,
+    ],
+    enabled: searchQueryEnabled,
+    queryFn: () =>
+      fetchJson<{ hits: Array<{ path: string; line?: number; preview: string }> }>(
+        `/api/v1/source/repositories/${encodeURIComponent(repositoryId)}/search?q=${encodeURIComponent(searchQueryDebounced)}&branch=${encodeURIComponent(branch)}`,
       ),
   });
 
@@ -342,8 +424,24 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
   const repository = detailQuery.data?.repository;
   const entries = treeQuery.data?.entries ?? [];
   const fileEntries = entries.filter((entry) => entry.type === "file");
+  const nestedTree = buildSourceFileTree(fileEntries.map((entry) => entry.path));
   const branches = branchesQuery.data?.branches ?? [];
   const commits = commitsQuery.data?.commits ?? [];
+  const searchHits = searchResultsQuery.data?.hits ?? [];
+
+  useEffect(() => {
+    const dirs = new Set<string>();
+    const walk = (nodes: typeof nestedTree) => {
+      for (const node of nodes) {
+        if (node.children.length > 0) {
+          dirs.add(node.path);
+          walk(node.children);
+        }
+      }
+    };
+    walk(nestedTree);
+    setExpandedDirs(dirs);
+  }, [treeQuery.dataUpdatedAt]);
 
   const invalidateSource = async () => {
     await queryClient.invalidateQueries({ queryKey: ["source-workspace"] });
@@ -494,12 +592,31 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
       title={repository?.fullName ?? "Repository"}
       description="Shared Source workspace — tabs, keyboard tree (j/k · Enter), commit, and change requests. Write requires source.write."
       actions={
-        <span
-          className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px]"
-          data-testid="source-write-gate"
-        >
-          {canWrite ? "Write enabled" : "Read only"}
-        </span>
+        <div className="flex flex-wrap items-center gap-3">
+          <span
+            className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px]"
+            data-testid="source-write-gate"
+          >
+            {canWrite ? "Write enabled" : "Read only"}
+          </span>
+          <nav className="flex flex-wrap gap-3 text-sm">
+            <Link href={SOURCE_ROUTES.repository(repositoryId)} className="underline">
+              Files
+            </Link>
+            <Link
+              href={SOURCE_ROUTES.repositoryReview(repositoryId)}
+              className="underline"
+            >
+              Review
+            </Link>
+            <Link
+              href={SOURCE_ROUTES.repositoryAdmin(repositoryId)}
+              className="underline"
+            >
+              Admin
+            </Link>
+          </nav>
+        </div>
       }
     >
       {detailQuery.isError ? (
@@ -576,6 +693,41 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
           <h2 className="mb-2 text-xs font-semibold tracking-wide text-[var(--color-muted-foreground)] uppercase">
             Files
           </h2>
+          <input
+            className="mb-2 w-full rounded border border-[var(--color-border)] bg-transparent px-2 py-1 text-xs"
+            placeholder="Search paths & contents…"
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            data-testid="source-search-input"
+          />
+          {searchQueryEnabled ? (
+            <ul
+              className="mb-3 max-h-32 space-y-1 overflow-auto border-b border-[var(--color-border)] pb-2 font-mono text-[11px]"
+              data-testid="source-search-hits"
+            >
+              {searchResultsQuery.isLoading ? (
+                <li className="text-[var(--color-muted-foreground)]">Searching…</li>
+              ) : null}
+              {searchHits.length === 0 && !searchResultsQuery.isLoading ? (
+                <li className="text-[var(--color-muted-foreground)]">No hits</li>
+              ) : null}
+              {searchHits.map((hit, index) => (
+                <li key={`${hit.path}:${hit.line ?? 0}:${index}`}>
+                  <button
+                    type="button"
+                    className="w-full text-left hover:underline"
+                    onClick={() => void openFile(hit.path)}
+                  >
+                    {hit.path}
+                    {hit.line ? `:${hit.line}` : ""}
+                    <span className="block truncate text-[var(--color-muted-foreground)]">
+                      {hit.preview}
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : null}
           {treeQuery.isLoading ? (
             <p className="text-xs text-[var(--color-muted-foreground)]">Loading…</p>
           ) : null}
@@ -584,23 +736,30 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
               {(treeQuery.error as Error).message}
             </p>
           ) : null}
-          <ul className="max-h-[26rem] space-y-0.5 overflow-auto font-mono text-[11px]">
-            {fileEntries.map((entry, index) => (
-              <li key={entry.path}>
-                <button
-                  type="button"
-                  className={`w-full rounded px-1 py-0.5 text-left hover:bg-[var(--color-muted)] ${
-                    activePath === entry.path ? "font-semibold" : ""
-                  } ${treeFocus === index ? "ring-1 ring-[var(--color-primary)]" : ""}`}
-                  onClick={() => {
-                    setTreeFocus(index);
-                    void openFile(entry.path);
-                  }}
-                  data-testid={`source-file-${entry.path}`}
-                >
-                  · {entry.name}
-                </button>
-              </li>
+          <ul className="max-h-[22rem] space-y-0.5 overflow-auto font-mono text-[11px]">
+            {nestedTree.map((node) => (
+              <NestedTreeNode
+                key={node.path}
+                node={node}
+                depth={0}
+                expandedDirs={expandedDirs}
+                activePath={activePath}
+                onToggle={(dirPath) => {
+                  setExpandedDirs((current) => {
+                    const next = new Set(current);
+                    if (next.has(dirPath)) next.delete(dirPath);
+                    else next.add(dirPath);
+                    return next;
+                  });
+                }}
+                onOpen={(filePath) => {
+                  const index = fileEntries.findIndex(
+                    (entry) => entry.path === filePath,
+                  );
+                  if (index >= 0) setTreeFocus(index);
+                  void openFile(filePath);
+                }}
+              />
             ))}
           </ul>
         </section>
@@ -682,16 +841,13 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
                 (diffQuery.isLoading ? "Loading diff…" : "No diff")}
             </pre>
           ) : (
-            <textarea
-              className="min-h-[22rem] flex-1 resize-y rounded border border-[var(--color-border)] bg-transparent p-3 font-mono text-[12px] leading-relaxed"
+            <SourceLineEditor
               value={activeTab?.draft ?? ""}
-              onChange={(event) => {
+              onChange={(next) => {
                 if (!activePath) return;
-                setTabs(updateTabDraft(tabs, activePath, event.target.value));
+                setTabs(updateTabDraft(tabs, activePath, next));
               }}
               readOnly={!canWrite || !activeTab}
-              spellCheck={false}
-              data-testid="source-editor-textarea"
             />
           )}
           {canWrite && activeTab ? (
@@ -801,6 +957,66 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
         </aside>
       </div>
     </Shell>
+  );
+}
+
+function NestedTreeNode({
+  node,
+  depth,
+  expandedDirs,
+  activePath,
+  onToggle,
+  onOpen,
+}: {
+  readonly node: ReturnType<typeof buildSourceFileTree>[number];
+  readonly depth: number;
+  readonly expandedDirs: ReadonlySet<string>;
+  readonly activePath: string | null;
+  readonly onToggle: (path: string) => void;
+  readonly onOpen: (path: string) => void;
+}) {
+  const isDir = node.children.length > 0;
+  const expanded = expandedDirs.has(node.path);
+  return (
+    <li style={{ paddingLeft: `${depth * 12}px` }}>
+      {isDir ? (
+        <button
+          type="button"
+          className="w-full text-left text-[var(--color-muted-foreground)] hover:underline"
+          onClick={() => onToggle(node.path)}
+          data-testid={`source-dir-${node.path}`}
+        >
+          {expanded ? "▾ " : "▸ "}
+          {node.name}
+        </button>
+      ) : (
+        <button
+          type="button"
+          className={`w-full rounded px-1 py-0.5 text-left hover:bg-[var(--color-muted)] ${
+            activePath === node.path ? "font-semibold" : ""
+          }`}
+          onClick={() => onOpen(node.path)}
+          data-testid={`source-file-${node.path}`}
+        >
+          · {node.name}
+        </button>
+      )}
+      {isDir && expanded ? (
+        <ul>
+          {node.children.map((child) => (
+            <NestedTreeNode
+              key={child.path}
+              node={child}
+              depth={depth + 1}
+              expandedDirs={expandedDirs}
+              activePath={activePath}
+              onToggle={onToggle}
+              onOpen={onOpen}
+            />
+          ))}
+        </ul>
+      ) : null}
+    </li>
   );
 }
 

@@ -284,4 +284,73 @@ export class OfflineSourceWorkspace {
     this.pullRequests.set(fullName, [pr, ...existing]);
     return pr;
   }
+
+  mergePullRequest(
+    fullName: string,
+    input: { readonly number: number },
+  ): ScmPullRequestRef {
+    this.ensureRepo(fullName);
+    const existing = this.pullRequests.get(fullName) ?? [];
+    const index = existing.findIndex((pr) => pr.number === input.number);
+    if (index < 0) {
+      throw new Error(`Change request #${input.number} not found`);
+    }
+    const current = existing[index]!;
+    if (current.state === "merged") {
+      return current;
+    }
+    if (current.state !== "open" && current.state !== "draft") {
+      throw new Error(`Change request #${input.number} is not open`);
+    }
+    const merged: ScmPullRequestRef = {
+      ...current,
+      state: "merged",
+      updatedAt: new Date().toISOString(),
+    };
+    const next = [...existing];
+    next[index] = merged;
+    this.pullRequests.set(fullName, next);
+    return merged;
+  }
+
+  searchFiles(
+    fullName: string,
+    options: {
+      readonly query: string;
+      readonly branch?: string;
+      readonly limit?: number;
+    },
+  ): readonly {
+    readonly path: string;
+    readonly line?: number;
+    readonly preview: string;
+  }[] {
+    this.ensureRepo(fullName);
+    const query = options.query.trim().toLowerCase();
+    if (!query) return [];
+    const branch = options.branch ?? "main";
+    const files = this.trees.get(this.key(fullName, branch)) ?? new Map();
+    const limit = options.limit ?? 40;
+    const hits: { path: string; line?: number; preview: string }[] = [];
+
+    for (const [path, content] of files) {
+      if (path.toLowerCase().includes(query)) {
+        hits.push({ path, preview: path });
+      }
+      const lines = content.split("\n");
+      for (let i = 0; i < lines.length; i += 1) {
+        const line = lines[i] ?? "";
+        if (line.toLowerCase().includes(query)) {
+          hits.push({
+            path,
+            line: i + 1,
+            preview: line.trim().slice(0, 160),
+          });
+        }
+        if (hits.length >= limit) return hits;
+      }
+      if (hits.length >= limit) return hits;
+    }
+    return hits;
+  }
 }

@@ -127,6 +127,25 @@ export interface QepScmFacade {
       readonly targetBranch: string;
     },
   ): ReturnType<PlatformScm["engine"]["createRepositoryPullRequest"]>;
+  listRepositoryPullRequests(
+    repositoryId: string,
+    correlationId: string,
+    options?: { readonly state?: "open" | "closed" | "all"; readonly limit?: number },
+  ): ReturnType<PlatformScm["engine"]["listRepositoryPullRequests"]>;
+  mergeRepositoryPullRequest(
+    repositoryId: string,
+    correlationId: string,
+    input: { readonly number: number; readonly method?: "merge" | "squash" },
+  ): ReturnType<PlatformScm["engine"]["mergeRepositoryPullRequest"]>;
+  searchRepositoryFiles(
+    repositoryId: string,
+    correlationId: string,
+    options: {
+      readonly query: string;
+      readonly branch?: string;
+      readonly limit?: number;
+    },
+  ): ReturnType<PlatformScm["engine"]["searchRepositoryFiles"]>;
 }
 
 export function createQepScm(ports: QepScmPorts = {}): QepScmFacade {
@@ -184,5 +203,11 @@ export function createQepScm(ports: QepScmPorts = {}): QepScmFacade {
       platform.engine.commitRepositoryFiles(repositoryId, correlationId, input),
     createRepositoryPullRequest: (repositoryId, correlationId, input) =>
       platform.engine.createRepositoryPullRequest(repositoryId, correlationId, input),
+    listRepositoryPullRequests: (repositoryId, correlationId, options) =>
+      platform.engine.listRepositoryPullRequests(repositoryId, correlationId, options),
+    mergeRepositoryPullRequest: (repositoryId, correlationId, input) =>
+      platform.engine.mergeRepositoryPullRequest(repositoryId, correlationId, input),
+    searchRepositoryFiles: (repositoryId, correlationId, options) =>
+      platform.engine.searchRepositoryFiles(repositoryId, correlationId, options),
   };
 }

@@ -45,5 +45,11 @@ describe("Phase E Shared Source content/write", () => {
       targetBranch: "main",
     });
     expect(pr.number).toBe(1);
+
+    const merged = ws.mergePullRequest("apzor/apzhub", { number: 1 });
+    expect(merged.state).toBe("merged");
+
+    const hits = ws.searchFiles("apzor/apzhub", { query: "greet" });
+    expect(hits.some((hit) => hit.path === "src/app.ts")).toBe(true);
   });
 });

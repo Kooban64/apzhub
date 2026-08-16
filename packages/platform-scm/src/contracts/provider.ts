@@ -125,6 +125,28 @@ export interface ScmProvider {
     fullName: string,
     input: ScmCreatePullRequestInput,
   ): Promise<ScmPullRequestRef>;
+  /** Phase F — merge an open pull/merge request. */
+  mergePullRequest?(
+    context: ScmProviderContext,
+    fullName: string,
+    input: { readonly number: number; readonly method?: "merge" | "squash" },
+  ): Promise<ScmPullRequestRef>;
+  /** Phase F — search file paths and contents. */
+  searchFiles?(
+    context: ScmProviderContext,
+    fullName: string,
+    options: {
+      readonly query: string;
+      readonly branch?: string;
+      readonly limit?: number;
+    },
+  ): Promise<
+    readonly {
+      readonly path: string;
+      readonly line?: number;
+      readonly preview: string;
+    }[]
+  >;
 }
 
 export type ScmProviderFactory = () => ScmProvider;

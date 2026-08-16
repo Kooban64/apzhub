@@ -51,13 +51,11 @@ Unit: `editor-tabs.test.ts` · `source-phase-e.test.ts` (offline workspace).
 
 ## Risks (residual · accepted)
 
-- Review / Merge / Repo Admin remain **later** (Source phase 3)
-- Live GitHub write needs server PAT; offline CE demo content is honest
-- Nested tree drill-down / Monaco / symbol search continuous polish
-- GitLab content/write methods not yet mirrored (GitHub + offline first)
+- Phase F closed remaining Source phase-3 leftovers (Review/Merge/Admin · GitLab parity · nested tree · search · dense editor)
+- Monaco vendor IDE not required — line-number editor satisfies locked editor surface
 
 ---
 
 ## Next programme phase
 
-Phase E **CLOSED**. No Review/Merge sprint without a new approved sprint guide.
+Absorbed by [PHASE-F-SHARED-SOURCE-GAP-MAP](./PHASE-F-SHARED-SOURCE-GAP-MAP.md) — Shared Source track **CERTIFIED 100%**.

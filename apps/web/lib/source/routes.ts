@@ -1,12 +1,18 @@
-/** Shared APZ Source Workspace routes (UX-SHARED-SOURCE-WORKSPACE Phase-1). */
+/** Shared APZ Source Workspace routes (phases 1–3). */
 
 export const SOURCE_BASE = "/workspace/source" as const;
+
+export type SourceRepositoryMode = "files" | "review" | "admin";
 
 export const SOURCE_ROUTES = {
   home: SOURCE_BASE,
   repositories: `${SOURCE_BASE}/repositories`,
   repository: (repositoryId: string) =>
     `${SOURCE_BASE}/repositories/${encodeURIComponent(repositoryId)}`,
+  repositoryReview: (repositoryId: string) =>
+    `${SOURCE_BASE}/repositories/${encodeURIComponent(repositoryId)}/review`,
+  repositoryAdmin: (repositoryId: string) =>
+    `${SOURCE_BASE}/repositories/${encodeURIComponent(repositoryId)}/admin`,
   changes: `${SOURCE_BASE}/changes`,
   change: (changeEventId: string) =>
     `${SOURCE_BASE}/changes/${encodeURIComponent(changeEventId)}`,
@@ -30,6 +36,20 @@ export function parseSourceRepositoryId(pathname: string): string | null {
   if (!normalized.startsWith(prefix)) return null;
   const id = normalized.slice(prefix.length).split("/")[0];
   return id ? decodeURIComponent(id) : null;
+}
+
+export function parseSourceRepositoryMode(pathname: string): SourceRepositoryMode {
+  const normalized = normalizePath(pathname);
+  const repositoryId = parseSourceRepositoryId(normalized);
+  if (!repositoryId) return "files";
+  const prefix = `${SOURCE_BASE}/repositories/${encodeURIComponent(repositoryId)}`;
+  if (normalized === `${prefix}/review` || normalized.startsWith(`${prefix}/review/`)) {
+    return "review";
+  }
+  if (normalized === `${prefix}/admin` || normalized.startsWith(`${prefix}/admin/`)) {
+    return "admin";
+  }
+  return "files";
 }
 
 export function parseSourceChangeId(pathname: string): string | null {
