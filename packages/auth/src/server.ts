@@ -67,6 +67,20 @@ export function createAuth(): AuthInstance {
     secret: env.BETTER_AUTH_SECRET,
     baseURL: env.BETTER_AUTH_URL,
     trustedOrigins,
+    // Dogfood / Playwright switch personas frequently. Middleware self-fetches
+    // `/get-session` on every protected navigation — never rate-limit that path
+    // or humans get false logouts mid-walkthrough while cookies are still valid.
+    rateLimit: {
+      window: 60,
+      max: 400,
+      customRules: {
+        "/get-session": false,
+        "/sign-in/email": {
+          window: 60,
+          max: 40,
+        },
+      },
+    },
     emailAndPassword: {
       enabled: true,
       disableSignUp: !isEmailPasswordSignUpAllowed(),
@@ -139,5 +153,6 @@ export {
 } from "./session-validation";
 export {
   fetchMiddlewareSession,
+  resolveMiddlewareSession,
   isMiddlewareSessionActive,
 } from "./middleware-session";

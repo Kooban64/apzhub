@@ -52,6 +52,7 @@ export function ProductSwitcher({ className = "" }: { readonly className?: strin
 
   const products = [...(q.data?.productKeys ?? [])].sort();
   const active = activeProductFromPath(pathname);
+  const loading = q.isLoading || q.isFetching;
 
   useEffect(() => {
     if (!open) return;
@@ -62,7 +63,27 @@ export function ProductSwitcher({ className = "" }: { readonly className?: strin
     return () => document.removeEventListener("mousedown", onDoc);
   }, [open]);
 
-  if (products.length === 0) return null;
+  // Always mount chrome control (loading / empty / entitled) so shell audits and
+  // humans never see a missing header affordance after entitlements resolve late.
+  if (!loading && products.length === 0) {
+    return (
+      <div
+        className={`relative ${className}`}
+        data-testid="product-switcher"
+        data-empty="true"
+      >
+        <button
+          type="button"
+          disabled
+          className="inline-flex h-7 max-w-[160px] items-center gap-1 rounded px-1.5 text-[11px] text-[var(--color-muted-foreground)] opacity-70"
+          aria-label="No entitled products"
+        >
+          <Boxes className="h-3.5 w-3.5 shrink-0" />
+          <span className="truncate">Products</span>
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div ref={rootRef} className={`relative ${className}`}>
@@ -73,11 +94,12 @@ export function ProductSwitcher({ className = "" }: { readonly className?: strin
         aria-haspopup="listbox"
         aria-label="Switch product"
         data-testid="product-switcher"
+        disabled={loading}
         onClick={() => setOpen((v) => !v)}
       >
         <Boxes className="h-3.5 w-3.5 shrink-0 text-[var(--color-muted-foreground)]" />
         <span className="truncate">
-          {active ? productDisplayName(active) : "Product"}
+          {loading ? "Products…" : active ? productDisplayName(active) : "Product"}
         </span>
         <ChevronDown className="h-3 w-3 shrink-0 text-[var(--color-muted-foreground)]" />
       </button>

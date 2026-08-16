@@ -7,7 +7,6 @@ import {
   QepEmptyState,
   QepErrorState,
   QepLoadingState,
-  QepPageShell,
   QepPanel,
   QepStatusBadge,
 } from "@/components/qep/qep-ui";
@@ -80,10 +79,7 @@ export function OrgAdminMembersView() {
   const orgProducts = membersQuery.data?.orgProducts ?? [];
 
   return (
-    <QepPageShell
-      title="Organisation members"
-      description="Create users with a review-before-provision wizard. Grant only products your organisation has subscribed. Scopes and professional tools apply when login is created."
-    >
+    <div data-testid="org-admin-members-view">
       <QepPanel title="Create user">
         {personasQuery.isLoading ? (
           <QepLoadingState label="Loading templates…" />
@@ -157,7 +153,7 @@ export function OrgAdminMembersView() {
           </QepPanel>
         )}
       </div>
-    </QepPageShell>
+    </div>
   );
 }
 

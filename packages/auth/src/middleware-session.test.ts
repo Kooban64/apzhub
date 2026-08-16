@@ -47,3 +47,11 @@ describe("middleware-session origin", () => {
     ).toBe(false);
   });
 });
+
+describe("resolveMiddlewareSession transient handling", () => {
+  it("exports resolveMiddlewareSession alongside fetchMiddlewareSession", async () => {
+    const mod = await import("./middleware-session");
+    expect(typeof mod.resolveMiddlewareSession).toBe("function");
+    expect(typeof mod.fetchMiddlewareSession).toBe("function");
+  });
+});

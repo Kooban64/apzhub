@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-import { fetchMiddlewareSession } from "@apzhub/auth/middleware-session";
+import { resolveMiddlewareSession } from "@apzhub/auth/middleware-session";
 
 import { applyMarketingHostRewrite } from "./lib/marketing/host-rewrite";
 import {
@@ -128,13 +128,19 @@ export async function middleware(request: NextRequest) {
     return hostRewrite;
   }
 
-  const session = await fetchMiddlewareSession(request);
-  if (!session) {
+  const sessionResult = await resolveMiddlewareSession(request);
+  if (sessionResult.kind === "none") {
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(loginUrl);
   }
+  // Transient get-session failures (rate limit / 5xx / hairpin): keep cookies
+  // and allow the page — route handlers re-check auth authoritatively.
+  if (sessionResult.kind === "transient") {
+    return NextResponse.next();
+  }
 
+  const session = sessionResult.session;
   const authenticatedTraffic = await applySharedTrafficGovernance(request, {
     userId: session.user?.id,
     tenantId: session.tenantId,

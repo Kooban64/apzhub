@@ -59,10 +59,25 @@ export function OperatorGate({
     let cancelled = false;
     void (async () => {
       try {
-        const res = await fetch("/api/v1/me/home-context");
-        const body = (await res.json()) as { data?: HomeContextPayload };
+        const res = await fetch("/api/v1/me/home-context", { cache: "no-store" });
         if (cancelled) return;
-        const kind = body.data?.kind ?? "org_member";
+        if (res.status === 401 || res.status === 403) {
+          setState({ status: "redirecting" });
+          router.replace("/login");
+          return;
+        }
+        if (!res.ok) {
+          // Transient API failure — do not invent a persona (defaulting to
+          // org_member incorrectly ejects org_admin from /org/*).
+          setState({ status: "ok" });
+          return;
+        }
+        const body = (await res.json()) as { data?: HomeContextPayload };
+        const kind = body.data?.kind;
+        if (!kind) {
+          setState({ status: "ok" });
+          return;
+        }
         const allowed = SHELL_KINDS[shell] ?? [];
         if (!allowed.includes(kind)) {
           const landing = shellLandingForKind(kind);
@@ -80,8 +95,8 @@ export function OperatorGate({
         setState({ status: "ok" });
       } catch {
         if (!cancelled) {
-          setState({ status: "redirecting" });
-          router.replace("/login");
+          // Network blip — fail open into the shell; APIs still enforce auth.
+          setState({ status: "ok" });
         }
       }
     })();
@@ -131,11 +146,23 @@ export function WorkbenchOperatorRedirect({
         const res = await fetch("/api/v1/me/home-context", {
           cache: "no-store",
         });
+        if (cancelled) return;
+        if (res.status === 401 || res.status === 403) {
+          router.replace("/login");
+          return;
+        }
+        if (!res.ok) {
+          setReady(true);
+          return;
+        }
         const body = (await res.json()) as {
           data?: { kind?: DemoPersonaKind; landing?: { path?: string } };
         };
-        if (cancelled) return;
-        const kind = body.data?.kind ?? "org_member";
+        const kind = body.data?.kind;
+        if (!kind) {
+          setReady(true);
+          return;
+        }
         if (preferredShellFamily(kind) === "operator") {
           const target = body.data?.landing?.path ?? shellLandingForKind(kind).path;
           router.replace(target);

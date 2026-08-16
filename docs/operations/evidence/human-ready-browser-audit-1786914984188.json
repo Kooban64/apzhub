@@ -1,0 +1,109 @@
+{
+  "origin": "http://127.0.0.1:3300",
+  "checked": 146,
+  "generatedAt": "2026-08-16T21:16:24.188Z",
+  "summary": {
+    "blocker": 0,
+    "major": 0,
+    "minor": 0,
+    "info": 16
+  },
+  "findings": [
+    {
+      "severity": "info",
+      "area": "health",
+      "path": "/api/health",
+      "message": "OK"
+    },
+    {
+      "severity": "info",
+      "area": "public-cta",
+      "path": "/marketplace",
+      "message": "Clicked “Explore Products” → /marketplace"
+    },
+    {
+      "severity": "info",
+      "area": "public-cta",
+      "path": "/solutions",
+      "message": "Clicked “View Solutions” → /solutions"
+    },
+    {
+      "severity": "info",
+      "area": "persona:superadmin",
+      "path": "/console",
+      "message": "Landing path OK"
+    },
+    {
+      "severity": "info",
+      "area": "persona:platform_admin",
+      "path": "/ops",
+      "message": "Landing path OK"
+    },
+    {
+      "severity": "info",
+      "area": "persona:finance",
+      "path": "/finance",
+      "message": "Landing path OK"
+    },
+    {
+      "severity": "info",
+      "area": "persona:support",
+      "path": "/ops",
+      "message": "Landing path OK"
+    },
+    {
+      "severity": "info",
+      "area": "persona:compliance",
+      "path": "/compliance",
+      "message": "Landing path OK"
+    },
+    {
+      "severity": "info",
+      "area": "persona:org_admin",
+      "path": "/org",
+      "message": "Landing path OK"
+    },
+    {
+      "severity": "info",
+      "area": "shell:org_admin",
+      "path": "/org/members",
+      "message": "Wizard next navigation works"
+    },
+    {
+      "severity": "info",
+      "area": "persona:org_member",
+      "path": "/workspace/home",
+      "message": "Landing path OK"
+    },
+    {
+      "severity": "info",
+      "area": "workspace:org_member",
+      "path": "/workspace/home",
+      "message": "workbench-header-chrome present"
+    },
+    {
+      "severity": "info",
+      "area": "workspace:org_member",
+      "path": "/workspace/home",
+      "message": "product-switcher present"
+    },
+    {
+      "severity": "info",
+      "area": "persona:individual",
+      "path": "/workspace/home",
+      "message": "Landing path OK"
+    },
+    {
+      "severity": "info",
+      "area": "workspace:individual",
+      "path": "/workspace/home",
+      "message": "workbench-header-chrome present"
+    },
+    {
+      "severity": "info",
+      "area": "workspace:individual",
+      "path": "/workspace/home",
+      "message": "product-switcher present"
+    }
+  ]
+}
