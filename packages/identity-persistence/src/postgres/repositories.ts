@@ -265,6 +265,9 @@ export function mapIdentityEmployment(
       ? asIdentityDepartmentId(row.departmentId)
       : undefined,
     positionId: row.positionId ? asIdentityPositionId(row.positionId) : undefined,
+    staffFunctionKey: row.staffFunctionKey ?? undefined,
+    jobTitle: row.jobTitle ?? undefined,
+    managerUserId: row.managerUserId ?? undefined,
     status: row.status as IdentityLifecycleStatus,
     startedAt: row.startedAt ?? undefined,
     endedAt: row.endedAt ?? undefined,

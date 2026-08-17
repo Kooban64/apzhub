@@ -20,11 +20,22 @@ export function PlatformAdminGate({ children }: { readonly children: ReactNode }
 
   useEffect(() => {
     let cancelled = false;
+    const timer = window.setTimeout(() => {
+      if (!cancelled) {
+        // Prefer shell + server enforcement over an indefinite spinner.
+        setState({ status: "ok" });
+      }
+    }, 12_000);
+
     void (async () => {
       try {
         const res = await fetch("/api/v1/me/home-context", { cache: "no-store" });
         if (cancelled) return;
         if (res.status === 401 || res.status === 403) {
+          setState({
+            status: "denied",
+            message: "Sign in required for Platform Admin.",
+          });
           router.replace("/login");
           return;
         }
@@ -57,12 +68,16 @@ export function PlatformAdminGate({ children }: { readonly children: ReactNode }
     })();
     return () => {
       cancelled = true;
+      window.clearTimeout(timer);
     };
   }, [router]);
 
   if (state.status === "loading") {
     return (
-      <div className="flex h-dvh items-center justify-center text-xs text-[var(--color-muted-foreground)]">
+      <div
+        className="flex h-dvh items-center justify-center text-xs text-[var(--color-muted-foreground)]"
+        data-testid="platform-admin-gate-loading"
+      >
         Checking Platform Admin access…
       </div>
     );

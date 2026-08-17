@@ -355,6 +355,21 @@ export function listAllUserProductGrantsForOrg(
   return store.grants.filter((row) => row.organisationId === organisationId);
 }
 
+/** All org subscriptions across organisations (file ledger). */
+export function listAllOrgProductSubscriptions(): readonly OrgProductSubscription[] {
+  hydrate();
+  return store.subscriptions.filter(
+    (row) =>
+      row.status === "trial" || row.status === "active" || row.status === "past_due",
+  );
+}
+
+/** All user product grants across organisations (file ledger). */
+export function listAllUserProductGrants(): readonly UserProductGrant[] {
+  hydrate();
+  return [...store.grants];
+}
+
 /**
  * Map workbench nav / view identity → product key or platform (always allowed by product gate).
  */

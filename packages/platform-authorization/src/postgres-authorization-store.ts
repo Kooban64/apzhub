@@ -6,6 +6,8 @@ import {
   platformAuthorizationRole,
   platformAuthorizationRoleAssignment,
   platformAuthorizationRolePermission,
+  platformAuthorizationTeamRole,
+  platformIamMembership,
   platformTenant,
 } from "@apzhub/config/db";
 
@@ -652,7 +654,16 @@ export async function resolvePostgresSessionAuthorization(
       ),
     );
 
-  if (assignments.length === 0 && input.provisionIfEmpty !== false) {
+  const teamRoleIds = await resolveInheritedTeamRoleIds({
+    userId: input.userId,
+    tenantId: input.tenantId,
+  });
+
+  if (
+    assignments.length === 0 &&
+    teamRoleIds.length === 0 &&
+    input.provisionIfEmpty !== false
+  ) {
     await ensureUserAuthorizationMembership({
       userId: input.userId,
       tenantId: input.tenantId,
@@ -663,7 +674,7 @@ export async function resolvePostgresSessionAuthorization(
     );
   }
 
-  const roleIds = new Set<string>();
+  const roleIds = new Set<string>(teamRoleIds);
   for (const assignment of assignments) {
     roleIds.add(assignment.roleId);
     const role = await db
@@ -725,14 +736,18 @@ export async function upsertPostgresRoleAssignment(input: {
   readonly roleId: string;
   readonly tenantId?: string | null;
   readonly productKey?: string | null;
+  readonly sourceKind?: "direct" | "team";
+  readonly sourceId?: string | null;
   readonly assignmentId?: string;
 }): Promise<void> {
   await seedDefaultAuthorizationRows();
   const db = getDb();
   const timestamp = new Date();
+  const sourceKind = input.sourceKind ?? "direct";
+  const sourceId = input.sourceId ?? "";
   const assignmentId =
     input.assignmentId ??
-    `asg-${input.userId}-${input.roleId}-${input.tenantId ?? "platform"}-${input.productKey ?? "none"}`;
+    `asg-${input.userId}-${input.roleId}-${input.tenantId ?? "platform"}-${input.productKey ?? "none"}-${sourceKind}-${sourceId || "root"}`;
 
   await db
     .insert(platformAuthorizationRoleAssignment)
@@ -742,13 +757,13 @@ export async function upsertPostgresRoleAssignment(input: {
       roleId: input.roleId,
       tenantId: input.tenantId ?? null,
       productKey: input.productKey ?? null,
+      sourceKind,
+      sourceId,
       status: "active",
       createdAt: timestamp,
       updatedAt: timestamp,
     })
-    .onConflictDoNothing({
-      target: platformAuthorizationRoleAssignment.assignmentId,
-    });
+    .onConflictDoNothing();
 }
 
 export async function ensurePlatformTenantRow(input: {
@@ -877,4 +892,254 @@ export async function upsertPostgresUserScopedPermissions(input: {
   });
 
   return { roleId, permissionKeys: keys };
+}
+
+async function resolveInheritedTeamRoleIds(input: {
+  readonly userId: string;
+  readonly tenantId?: string;
+}): Promise<readonly string[]> {
+  if (!input.tenantId) return [];
+  const db = getDb();
+  const memberships = await db
+    .select()
+    .from(platformIamMembership)
+    .where(
+      and(
+        eq(platformIamMembership.userId, input.userId),
+        eq(platformIamMembership.tenantId, input.tenantId),
+      ),
+    );
+  const teamIds = memberships
+    .filter(
+      (m) => m.kind === "group" && (m.status === "active" || m.status === "published"),
+    )
+    .map((m) => m.targetId);
+  if (teamIds.length === 0) return [];
+
+  const teamRoles = await db
+    .select()
+    .from(platformAuthorizationTeamRole)
+    .where(
+      and(
+        eq(platformAuthorizationTeamRole.tenantId, input.tenantId),
+        eq(platformAuthorizationTeamRole.status, "active"),
+      ),
+    );
+  return teamRoles.filter((tr) => teamIds.includes(tr.teamId)).map((tr) => tr.roleId);
+}
+
+export async function listProductRoleAssignmentsForUser(input: {
+  readonly userId: string;
+  readonly tenantId: string;
+}): Promise<
+  readonly {
+    readonly assignmentId: string;
+    readonly roleId: string;
+    readonly roleSlug: string;
+    readonly roleName: string;
+    readonly productKey: string;
+    readonly sourceKind: "direct" | "team";
+    readonly sourceId: string;
+  }[]
+> {
+  await seedDefaultAuthorizationRows();
+  const db = getDb();
+  const assignments = await db
+    .select()
+    .from(platformAuthorizationRoleAssignment)
+    .where(
+      and(
+        eq(platformAuthorizationRoleAssignment.userId, input.userId),
+        eq(platformAuthorizationRoleAssignment.status, "active"),
+      ),
+    );
+  const roles = await db.select().from(platformAuthorizationRole);
+  const roleById = new Map(roles.map((r) => [r.roleId, r]));
+
+  const direct = assignments
+    .filter((a) => !a.tenantId || a.tenantId === input.tenantId)
+    .map((a) => {
+      const role = roleById.get(a.roleId);
+      if (!role || role.scope !== "product" || !role.productKey) return null;
+      return {
+        assignmentId: a.assignmentId,
+        roleId: a.roleId,
+        roleSlug: role.slug,
+        roleName: role.name,
+        productKey: role.productKey,
+        sourceKind: (a.sourceKind === "team" ? "team" : "direct") as "direct" | "team",
+        sourceId: a.sourceId ?? "",
+      };
+    })
+    .filter((x): x is NonNullable<typeof x> => Boolean(x));
+
+  const memberships = await db
+    .select()
+    .from(platformIamMembership)
+    .where(
+      and(
+        eq(platformIamMembership.userId, input.userId),
+        eq(platformIamMembership.tenantId, input.tenantId),
+      ),
+    );
+  const teamIds = memberships.filter((m) => m.kind === "group").map((m) => m.targetId);
+  const teamRoles =
+    teamIds.length === 0
+      ? []
+      : (
+          await db
+            .select()
+            .from(platformAuthorizationTeamRole)
+            .where(
+              and(
+                eq(platformAuthorizationTeamRole.tenantId, input.tenantId),
+                eq(platformAuthorizationTeamRole.status, "active"),
+              ),
+            )
+        ).filter((tr) => teamIds.includes(tr.teamId));
+
+  const inherited = teamRoles
+    .map((tr) => {
+      const role = roleById.get(tr.roleId);
+      if (!role || role.scope !== "product" || !role.productKey) return null;
+      return {
+        assignmentId: `team:${tr.id}`,
+        roleId: tr.roleId,
+        roleSlug: role.slug,
+        roleName: role.name,
+        productKey: role.productKey,
+        sourceKind: "team" as const,
+        sourceId: tr.teamId,
+      };
+    })
+    .filter((x): x is NonNullable<typeof x> => Boolean(x));
+
+  return [...direct, ...inherited];
+}
+
+export async function explainPostgresPermission(input: {
+  readonly userId: string;
+  readonly tenantId: string;
+  readonly permissionKey: string;
+}): Promise<AuthorizationEvaluationResult> {
+  const { evaluatePermissionAgainstEffective } =
+    await import("./authorization-evaluation");
+  const { createEmptyEffectivePermissions } =
+    await import("./authorization-evaluation");
+  type AuthorizationEvaluationResult =
+    import("./authorization-types").AuthorizationEvaluationResult;
+
+  await seedDefaultAuthorizationRows();
+  const db = getDb();
+  const snapshot = await resolvePostgresSessionAuthorization(
+    {
+      userId: input.userId,
+      tenantId: input.tenantId,
+      productKey: "platform",
+      provisionIfEmpty: false,
+    },
+    // Minimal fallback — should not be used when rows exist.
+    {
+      resolveSessionPermissions: () => ({ roles: [], permissions: [] }),
+    } as unknown as AuthorizationService,
+  );
+
+  const roles = await db.select().from(platformAuthorizationRole);
+  const grants = await db.select().from(platformAuthorizationRolePermission);
+  const assignments = await db
+    .select()
+    .from(platformAuthorizationRoleAssignment)
+    .where(eq(platformAuthorizationRoleAssignment.userId, input.userId));
+
+  const roleIds = roles
+    .filter((r) => snapshot.roles.includes(r.slug))
+    .map((r) => r.roleId);
+
+  const effective = {
+    ...createEmptyEffectivePermissions({
+      userId: input.userId,
+      tenantId: input.tenantId,
+    }),
+    roleSlugs: snapshot.roles,
+    roleIds,
+    allowPermissions: snapshot.permissions,
+    effectivePermissions: snapshot.permissions,
+    denyPermissions: [] as string[],
+  };
+
+  const permissionRows = await db.select().from(platformAuthorizationPermission);
+  const permissionSet = new Set(permissionRows.map((p) => p.permissionKey));
+
+  return evaluatePermissionAgainstEffective(input.permissionKey, effective, {
+    permissionExists: (key) => permissionSet.has(key) || key.includes("*") || true,
+    roleExists: (roleId) => roles.some((r) => r.roleId === roleId),
+    assignments: assignments.map((a) => ({
+      assignmentId: a.assignmentId,
+      userId: a.userId,
+      roleId: a.roleId,
+      tenantId: a.tenantId ?? undefined,
+      productKey: a.productKey ?? undefined,
+      sourceKind: (a.sourceKind === "team" ? "team" : "direct") as "direct" | "team",
+      sourceId: a.sourceId || undefined,
+      status: a.status === "removed" ? ("removed" as const) : ("active" as const),
+      createdAt: a.createdAt.toISOString(),
+      updatedAt: a.updatedAt.toISOString(),
+    })),
+    roles: roles.map((r) => ({
+      roleId: r.roleId,
+      slug: r.slug,
+      name: r.name,
+      scope: r.scope as "platform" | "tenant" | "product",
+      tenantId: r.tenantId ?? undefined,
+      productKey: r.productKey ?? undefined,
+      parentRoleId: r.parentRoleId ?? undefined,
+      status: r.status === "archived" ? ("archived" as const) : ("active" as const),
+      createdAt: r.createdAt.toISOString(),
+      updatedAt: r.updatedAt.toISOString(),
+    })),
+    grants: grants.map((g) => ({
+      roleId: g.roleId,
+      permissionKey: g.permissionKey,
+      grantType: g.grantType === "deny" ? ("deny" as const) : ("allow" as const),
+    })),
+    context: { userId: input.userId, tenantId: input.tenantId },
+    withProvenance: true,
+  }) as AuthorizationEvaluationResult;
+}
+
+export async function deactivatePostgresRoleAssignment(input: {
+  readonly userId: string;
+  readonly roleId: string;
+  readonly tenantId?: string | null;
+  readonly productKey?: string | null;
+  readonly sourceKind?: "direct" | "team";
+}): Promise<boolean> {
+  const db = getDb();
+  const rows = await db
+    .select()
+    .from(platformAuthorizationRoleAssignment)
+    .where(
+      and(
+        eq(platformAuthorizationRoleAssignment.userId, input.userId),
+        eq(platformAuthorizationRoleAssignment.roleId, input.roleId),
+        eq(platformAuthorizationRoleAssignment.status, "active"),
+      ),
+    );
+  const sourceKind = input.sourceKind ?? "direct";
+  const matched = rows.filter((row) => {
+    if (input.tenantId && row.tenantId && row.tenantId !== input.tenantId) return false;
+    if (input.productKey != null && (row.productKey ?? null) !== input.productKey)
+      return false;
+    if ((row.sourceKind ?? "direct") !== sourceKind) return false;
+    return true;
+  });
+  if (matched.length === 0) return false;
+  const now = new Date();
+  for (const row of matched) {
+    await db
+      .update(platformAuthorizationRoleAssignment)
+      .set({ status: "removed", updatedAt: now })
+      .where(eq(platformAuthorizationRoleAssignment.assignmentId, row.assignmentId));
+  }
+  return true;
 }

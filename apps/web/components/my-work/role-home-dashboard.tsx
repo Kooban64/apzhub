@@ -6,300 +6,93 @@ import { useQuery } from "@tanstack/react-query";
 
 import { fetchMyWorkComposition } from "@/lib/my-work/my-work-api";
 import { myWorkQueryKeys } from "@/lib/my-work/query-keys";
-import type { DemoPersonaKind } from "@/lib/demo/demo-personas";
+import type { WorkCard } from "@apzhub/platform-service-contracts";
 
-type DashLink = { href: string; label: string; hint: string };
+function greetingForHour(hour: number): string {
+  if (hour < 12) return "Good morning";
+  if (hour < 18) return "Good afternoon";
+  return "Good evening";
+}
 
-const DASHBOARDS: Record<
-  DemoPersonaKind,
-  {
-    title: string;
-    subtitle: string;
-    metrics: readonly { label: string; value: string }[];
-    links: readonly DashLink[];
+function formatLongDate(d: Date): string {
+  return d.toLocaleDateString(undefined, {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  });
+}
+
+function formatRelative(iso?: string): string {
+  if (!iso) return "—";
+  const t = Date.parse(iso);
+  if (Number.isNaN(t)) return "—";
+  const mins = Math.round((Date.now() - t) / 60_000);
+  if (mins < 1) return "just now";
+  if (mins < 60) return `${mins} min ago`;
+  const hrs = Math.round(mins / 60);
+  if (hrs < 24) return `${hrs} hr ago`;
+  return new Date(t).toLocaleDateString();
+}
+
+function dueLabel(iso?: string): string {
+  if (!iso) return "—";
+  const due = new Date(iso);
+  const today = new Date();
+  if (
+    due.getFullYear() === today.getFullYear() &&
+    due.getMonth() === today.getMonth() &&
+    due.getDate() === today.getDate()
+  ) {
+    return "Today";
   }
-> = {
-  superadmin: {
-    title: "Super Admin",
-    subtitle: "Platform-critical controls across every surface.",
-    metrics: [
-      { label: "Health", value: "OK" },
-      { label: "Tenants", value: "—" },
-      { label: "Jobs", value: "—" },
-      { label: "Alerts", value: "0" },
-    ],
-    links: [
-      { href: "/console", label: "Platform Console", hint: "Superadmin" },
-      { href: "/console/customers", label: "Customers", hint: "Orgs" },
-      { href: "/console/catalogue", label: "Suites & pricing", hint: "Commercial" },
-      { href: "/ops", label: "Platform Ops", hint: "Day-2" },
-    ],
-  },
-  platform_admin: {
-    title: "Platform Admin",
-    subtitle: "Operational authority — keep the platform running.",
-    metrics: [
-      { label: "Incidents", value: "0" },
-      { label: "Queues", value: "—" },
-      { label: "Connectors", value: "—" },
-      { label: "Members", value: "—" },
-    ],
-    links: [
-      { href: "/platform-admin", label: "Platform Admin", hint: "Control plane" },
-      { href: "/platform-admin/operations", label: "Operations", hint: "Health" },
-      { href: "/ops", label: "Legacy Ops", hint: "Day-2" },
-      { href: "/workspace/observability", label: "Observability", hint: "Deep" },
-    ],
-  },
-  finance: {
-    title: "Finance",
-    subtitle: "Subscriptions, invoices, credits, and dunning.",
-    metrics: [
-      { label: "Open invoices", value: "—" },
-      { label: "Dunning", value: "—" },
-      { label: "Credits", value: "—" },
-      { label: "MRR", value: "—" },
-    ],
-    links: [
-      { href: "/finance", label: "Finance console", hint: "Ledger" },
-      { href: "/finance/dunning", label: "Dunning", hint: "Advance" },
-      { href: "/pricing", label: "Public catalogue", hint: "Plans" },
-    ],
-  },
-  support: {
-    title: "Support",
-    subtitle: "Customer care queues and request handling.",
-    metrics: [
-      { label: "Open", value: "—" },
-      { label: "SLA risk", value: "—" },
-      { label: "Unassigned", value: "—" },
-      { label: "Resolved 24h", value: "—" },
-    ],
-    links: [
-      { href: "/ops", label: "Platform Ops", hint: "Ops" },
-      { href: "/workspace/support", label: "Support workspace", hint: "Tickets" },
-      { href: "/workspace/notifications/inbox", label: "Inbox", hint: "Attention" },
-    ],
-  },
-  tenant_support: {
-    title: "Support work",
-    subtitle: "Your Customer Support queue, time, and knowledge — nothing else.",
-    metrics: [
-      { label: "Open", value: "—" },
-      { label: "Attention", value: "—" },
-      { label: "Due today", value: "—" },
-      { label: "Waiting", value: "—" },
-    ],
-    links: [
-      { href: "/workspace/support", label: "Support queue", hint: "Tickets" },
-      { href: "/workspace/time", label: "Time", hint: "Record" },
-      { href: "/workspace/knowledge", label: "Knowledge", hint: "Contribute" },
-      {
-        href: "/workspace/notifications/inbox",
-        label: "Notifications",
-        hint: "Inbox",
-      },
-    ],
-  },
-  tenant_developer: {
-    title: "Engineering work",
-    subtitle: "Projects, quality, and security assurance — not Support queues.",
-    metrics: [
-      { label: "Attention", value: "—" },
-      { label: "Due today", value: "—" },
-      { label: "Waiting", value: "—" },
-      { label: "Done", value: "—" },
-    ],
-    links: [
-      { href: "/workspace/projects", label: "Projects", hint: "Delivery" },
-      { href: "/workspace/qep", label: "Quality", hint: "QEP" },
-      { href: "/apzpen", label: "Security assurance", hint: "PEN" },
-      { href: "/workspace/time", label: "Time", hint: "Record" },
-    ],
-  },
-  tenant_finance: {
-    title: "Finance work",
-    subtitle:
-      "Time, workflow, analytics, and documents — no engineering or support queues.",
-    metrics: [
-      { label: "Attention", value: "—" },
-      { label: "Due today", value: "—" },
-      { label: "Waiting", value: "—" },
-      { label: "Done", value: "—" },
-    ],
-    links: [
-      { href: "/workspace/time", label: "Time", hint: "Record" },
-      { href: "/workspace/workflows", label: "Workflow", hint: "Operate" },
-      { href: "/workspace/analytics", label: "Analytics", hint: "KPIs" },
-      { href: "/workspace/documents", label: "Documents", hint: "Records" },
-    ],
-  },
-  tenant_compliance: {
-    title: "Compliance work",
-    subtitle:
-      "Document audit, retention posture, analytics, and policy knowledge — not Support or QEP queues.",
-    metrics: [
-      { label: "Audits", value: "—" },
-      { label: "Retention", value: "—" },
-      { label: "Policies", value: "—" },
-      { label: "Findings", value: "—" },
-    ],
-    links: [
-      { href: "/workspace/documents", label: "Documents", hint: "Audit" },
-      { href: "/workspace/analytics", label: "Analytics", hint: "Posture" },
-      { href: "/workspace/knowledge", label: "Knowledge", hint: "Policies" },
-    ],
-  },
-  tenant_executive: {
-    title: "Executive work",
-    subtitle: "Analytics, documents, and knowledge overview — no operational queues.",
-    metrics: [
-      { label: "KPIs", value: "—" },
-      { label: "Attention", value: "—" },
-      { label: "Risk", value: "—" },
-      { label: "Done", value: "—" },
-    ],
-    links: [
-      { href: "/workspace/analytics", label: "Analytics", hint: "KPIs" },
-      { href: "/workspace/documents", label: "Documents", hint: "Review" },
-      { href: "/workspace/knowledge", label: "Knowledge", hint: "Browse" },
-    ],
-  },
-  tenant_qa: {
-    title: "QA work",
-    subtitle: "Quality plans, projects, and time — not Support queues or PEN tools.",
-    metrics: [
-      { label: "Attention", value: "—" },
-      { label: "Due today", value: "—" },
-      { label: "Waiting", value: "—" },
-      { label: "Done", value: "—" },
-    ],
-    links: [
-      { href: "/workspace/qep", label: "Quality", hint: "QEP" },
-      { href: "/workspace/projects", label: "Projects", hint: "Delivery" },
-      { href: "/workspace/time", label: "Time", hint: "Record" },
-    ],
-  },
-  tenant_security: {
-    title: "Security work",
-    subtitle:
-      "PEN engagements, evidence documents, and time — not Support or QEP queues.",
-    metrics: [
-      { label: "Attention", value: "—" },
-      { label: "Findings", value: "—" },
-      { label: "Waiting", value: "—" },
-      { label: "Done", value: "—" },
-    ],
-    links: [
-      { href: "/apzpen", label: "Security assurance", hint: "PEN" },
-      { href: "/workspace/documents", label: "Documents", hint: "Evidence" },
-      { href: "/workspace/time", label: "Time", hint: "Record" },
-    ],
-  },
-  compliance: {
-    title: "Compliance",
-    subtitle: "Audit trails, retention, entitlement posture.",
-    metrics: [
-      { label: "Audits", value: "—" },
-      { label: "Retention", value: "—" },
-      { label: "Entitlements", value: "—" },
-      { label: "Findings", value: "—" },
-    ],
-    links: [
-      { href: "/compliance", label: "Compliance console", hint: "Review" },
-      { href: "/compliance/signups", label: "Signup review", hint: "Orgs" },
-      { href: "/compliance/entitlements", label: "Entitlements", hint: "Posture" },
-    ],
-  },
-  org_admin: {
-    title: "Organisation Admin",
-    subtitle: "Members, product grants, and org subscription.",
-    metrics: [
-      { label: "Members", value: "—" },
-      { label: "Products", value: "QEP" },
-      { label: "Trial/Plan", value: "—" },
-      { label: "Invites", value: "—" },
-    ],
-    links: [
-      { href: "/org", label: "Org console", hint: "Admin" },
-      { href: "/org/members", label: "Members & RBAC", hint: "IAM" },
-      { href: "/org/services", label: "Service roles", hint: "Provision" },
-      { href: "/org/subscriptions", label: "Subscriptions", hint: "Suites" },
-    ],
-  },
-  org_member: {
-    title: "My work",
-    subtitle: "Your queues across entitled products.",
-    metrics: [
-      { label: "Attention", value: "—" },
-      { label: "Due today", value: "—" },
-      { label: "Waiting", value: "—" },
-      { label: "Done", value: "—" },
-    ],
-    links: [
-      { href: "/workspace/qep/quality-flows", label: "Quality", hint: "Operate" },
-      { href: "/workspace/notifications/inbox", label: "Notifications", hint: "Inbox" },
-      { href: "/workspace/personalisation", label: "Preferences", hint: "You" },
-    ],
-  },
-  individual: {
-    title: "Individual",
-    subtitle: "You control your account, plan, and products.",
-    metrics: [
-      { label: "Plan", value: "Individual" },
-      { label: "Products", value: "QEP" },
-      { label: "Billing", value: "Self" },
-      { label: "Grants", value: "Owner" },
-    ],
-    links: [
-      { href: "/workspace/billing", label: "My billing", hint: "Subscription" },
-      { href: "/workspace/qep/quality-flows", label: "Quality", hint: "QEP" },
-      { href: "/pricing", label: "Plans", hint: "Upgrade" },
-      { href: "/workspace/personalisation", label: "Preferences", hint: "Self" },
-    ],
-  },
-};
+  return due.toLocaleDateString();
+}
 
-function MetricStrip({
-  metrics,
-}: {
-  readonly metrics: readonly { label: string; value: string }[];
-}) {
-  return (
-    <div className="grid grid-cols-2 gap-px overflow-hidden rounded-md border border-[var(--color-border)] bg-[var(--color-border)] sm:grid-cols-4">
-      {metrics.map((m) => (
-        <div key={m.label} className="bg-[var(--color-surface)] px-3 py-2.5">
-          <p className="text-[10px] tracking-wide text-[var(--color-muted-foreground)] uppercase">
-            {m.label}
-          </p>
-          <p className="mt-1 font-mono text-sm font-medium tabular-nums">{m.value}</p>
-        </div>
-      ))}
-    </div>
-  );
+function kindLabel(card: WorkCard): string {
+  switch (card.kind) {
+    case "task":
+      return "Task";
+    case "support_request":
+      return "Ticket";
+    case "timesheet":
+      return "Approval";
+    case "quality_execution":
+      return "Test";
+    case "workflow_task":
+      return "Workflow";
+    default:
+      return card.kind;
+  }
 }
 
 async function fetchHomeContext(): Promise<{
-  kind: DemoPersonaKind;
   name?: string;
   email?: string;
+  organisationName?: string;
 }> {
-  const res = await fetch("/api/v1/me/home-context");
+  const res = await fetch("/api/v1/me/home-context", { cache: "no-store" });
   const body = (await res.json()) as {
-    data?: { kind?: DemoPersonaKind; name?: string; email?: string };
+    data?: {
+      name?: string;
+      email?: string;
+      organisationName?: string;
+      tenantName?: string;
+    };
   };
-  if (!res.ok) {
-    return { kind: "org_member" };
-  }
+  if (!res.ok) return {};
   return {
-    kind: body.data?.kind ?? "org_member",
     name: body.data?.name,
     email: body.data?.email,
+    organisationName: body.data?.organisationName ?? body.data?.tenantName,
   };
 }
 
+/**
+ * User Workbench Home / My Work — attention-first, not admin metrics dashboard.
+ */
 export function RoleHomeDashboard() {
   const { data: session } = useSession();
+  const now = new Date();
   const contextQuery = useQuery({
     queryKey: ["me", "home-context"],
     queryFn: fetchHomeContext,
@@ -309,119 +102,255 @@ export function RoleHomeDashboard() {
     queryFn: ({ signal }) => fetchMyWorkComposition({ signal }),
   });
 
-  const kind = contextQuery.data?.kind ?? "org_member";
-  const dash = DASHBOARDS[kind];
   const name =
     contextQuery.data?.name?.trim() ||
     session?.user?.name?.trim() ||
+    myWork.data?.displayName?.trim() ||
     session?.user?.email?.trim() ||
-    myWork.data?.displayName ||
-    "Operator";
+    "there";
 
-  const attention = myWork.data?.queues.needsMyAttention.length;
-  const due = myWork.data?.queues.dueToday.length;
-
-  const metrics = dash.metrics.map((m) => {
-    if (m.label === "Attention" && attention !== undefined) {
-      return { ...m, value: String(attention) };
-    }
-    if (m.label === "Due today" && due !== undefined) {
-      return { ...m, value: String(due) };
-    }
-    return m;
-  });
+  const firstName = name.split(/\s+/)[0] ?? name;
+  const attention = myWork.data?.queues.needsMyAttention ?? [];
+  const dueToday = myWork.data?.queues.dueToday ?? [];
+  const assigned = [...attention, ...dueToday]
+    .filter((c, i, arr) => arr.findIndex((x) => x.id === c.id) === i)
+    .slice(0, 8);
+  const recent = myWork.data?.queues.recentlyCompleted.slice(0, 6) ?? [];
+  const attentionCount = attention.length;
+  const missingProviders =
+    myWork.data?.providers.filter((p) => p.error).map((p) => p.providerId) ?? [];
+  const partial = myWork.data?.partial === true;
 
   return (
     <div
-      className="mx-auto flex w-full max-w-[var(--shell-content-max)] flex-col gap-5 p-4 sm:p-5"
+      className="mx-auto flex w-full max-w-5xl flex-col gap-5 px-5 py-4"
       data-testid="role-home-dashboard"
-      data-dashboard-kind={kind}
+      data-workbench-home="true"
     >
-      <header className="flex flex-wrap items-end justify-between gap-3 border-b border-[var(--color-border)] pb-3">
-        <div>
-          <p className="text-[10px] font-medium tracking-[0.16em] text-[var(--color-muted-foreground)] uppercase">
-            {dash.title}
-          </p>
-          <h1 className="mt-1 text-lg font-semibold tracking-tight sm:text-xl">
-            {name}
-          </h1>
-          <p className="mt-1 text-xs text-[var(--color-muted-foreground)] sm:text-sm">
-            {dash.subtitle}
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-2 text-xs">
-          <Link
-            href="/workspace/my-work"
-            className="rounded border border-[var(--color-border)] px-2.5 py-1.5 hover:bg-[var(--color-muted)]"
-            data-testid="role-home-open-my-work"
-          >
-            My Work
-          </Link>
-          <Link
-            href="/workspace/notifications/inbox"
-            className="rounded border border-[var(--color-border)] px-2.5 py-1.5 hover:bg-[var(--color-muted)]"
-          >
-            Inbox
-          </Link>
-          <Link
-            href="/workspace/personalisation"
-            className="rounded border border-[var(--color-border)] px-2.5 py-1.5 hover:bg-[var(--color-muted)]"
-          >
-            Preferences
-          </Link>
-        </div>
+      <header className="border-b border-[var(--color-border)] pb-3">
+        <h1 className="text-base font-semibold tracking-tight">My Work</h1>
+        <p className="mt-0.5 text-xs text-[var(--color-muted-foreground)]">
+          {formatLongDate(now)}
+        </p>
       </header>
 
-      <MetricStrip metrics={metrics} />
-
-      <section>
-        <h2 className="mb-2 text-[11px] font-medium tracking-wide text-[var(--color-muted-foreground)] uppercase">
-          Jump to
-        </h2>
-        <ul className="divide-y divide-[var(--color-border)] rounded-md border border-[var(--color-border)]">
-          {dash.links.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="flex items-center justify-between gap-3 px-3 py-2.5 text-sm hover:bg-[var(--color-muted)]/60"
-              >
-                <span className="font-medium">{link.label}</span>
-                <span className="font-mono text-[11px] text-[var(--color-muted-foreground)]">
-                  {link.hint}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+      <section data-testid="workbench-home-greeting">
+        <p className="text-[11px] font-semibold tracking-[0.14em] text-[var(--color-muted-foreground)] uppercase">
+          {greetingForHour(now.getHours())}, {firstName}
+        </p>
+        <p className="mt-2 text-sm">
+          {myWork.isLoading
+            ? "Loading your work…"
+            : attentionCount === 0
+              ? "Nothing needs your attention right now."
+              : `${attentionCount} thing${attentionCount === 1 ? "" : "s"} need your attention`}
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <Link
+            href="/workspace/my-work"
+            className="border border-[var(--color-foreground)] bg-[var(--color-foreground)] px-3 py-1.5 text-xs font-medium text-[var(--color-background)]"
+            data-testid="workbench-start-work"
+          >
+            Start work
+          </Link>
+          <button
+            type="button"
+            className="border border-[var(--color-border)] px-3 py-1.5 text-xs"
+            data-testid="workbench-create-menu"
+            title="Open Quick Actions (Ctrl+Shift+A)"
+            onClick={() => {
+              window.dispatchEvent(
+                new KeyboardEvent("keydown", {
+                  key: "A",
+                  ctrlKey: true,
+                  shiftKey: true,
+                  bubbles: true,
+                }),
+              );
+            }}
+          >
+            Create ▾
+          </button>
+        </div>
       </section>
 
-      {(kind === "org_member" || kind === "individual" || kind === "org_admin") &&
-      myWork.data ? (
-        <section>
-          <h2 className="mb-2 text-[11px] font-medium tracking-wide text-[var(--color-muted-foreground)] uppercase">
-            Needs attention
+      <div className="grid gap-6 border-y border-[var(--color-border)] py-4 lg:grid-cols-2">
+        <section data-testid="workbench-home-priority">
+          <h2 className="text-[11px] font-semibold tracking-wide uppercase">
+            Priority
           </h2>
-          {myWork.data.queues.needsMyAttention.length === 0 ? (
-            <p className="text-xs text-[var(--color-muted-foreground)]">Queue clear.</p>
+          {attention.length === 0 ? (
+            <p className="mt-3 text-xs text-[var(--color-muted-foreground)]">
+              No priority items from accessible products.
+            </p>
           ) : (
-            <ul className="divide-y divide-[var(--color-border)] rounded-md border border-[var(--color-border)]">
-              {myWork.data.queues.needsMyAttention.slice(0, 6).map((card) => (
+            <ul className="mt-3 space-y-3">
+              {attention.slice(0, 5).map((card) => (
                 <li key={card.id}>
                   <Link
                     href={card.href}
-                    className="flex justify-between gap-2 px-3 py-2 text-sm hover:bg-[var(--color-muted)]/60"
+                    className="group block text-xs hover:underline"
                   >
-                    <span className="truncate">{card.title}</span>
-                    <span className="shrink-0 text-[11px] text-[var(--color-muted-foreground)]">
+                    <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-foreground)]" />
+                    <span className="font-medium">{card.productLabel}</span>
+                    <span className="mt-0.5 block pl-3.5 text-[var(--color-foreground)]">
+                      {card.title}
+                    </span>
+                    <span className="block pl-3.5 text-[11px] text-[var(--color-muted-foreground)]">
                       {card.productLabel}
+                      {card.dueAt ? ` · Due ${dueLabel(card.dueAt)}` : ""}
+                      {card.priority ? ` · ${card.priority}` : ""}
                     </span>
                   </Link>
                 </li>
               ))}
             </ul>
           )}
+          <Link
+            href="/workspace/my-work"
+            className="mt-3 inline-block text-xs text-[var(--color-muted-foreground)] hover:underline"
+          >
+            View all →
+          </Link>
         </section>
-      ) : null}
+
+        <section data-testid="workbench-home-today">
+          <h2 className="text-[11px] font-semibold tracking-wide uppercase">Today</h2>
+          {dueToday.length === 0 ? (
+            <p className="mt-3 text-xs text-[var(--color-muted-foreground)]">
+              No due-today items from accessible product sources.
+            </p>
+          ) : (
+            <ul className="mt-3 space-y-2 text-xs">
+              {dueToday.slice(0, 6).map((card) => (
+                <li key={card.id} className="flex gap-3">
+                  <span className="w-16 shrink-0 text-[var(--color-muted-foreground)]">
+                    {card.dueAt
+                      ? new Date(card.dueAt).toLocaleTimeString(undefined, {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })
+                      : "—"}
+                  </span>
+                  <Link href={card.href} className="hover:underline">
+                    {card.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+          <div className="mt-4 border-t border-[var(--color-border)] pt-3 text-xs">
+            <p className="text-[var(--color-muted-foreground)]">Time recorded</p>
+            <p className="mt-1" data-availability="partial">
+              {myWork.data?.providers.some((p) => p.providerId.includes("time"))
+                ? "See Time workspace for recorded hours"
+                : "Not configured — Time source not in composition"}
+            </p>
+            <Link
+              href="/workspace/time"
+              className="mt-2 inline-block text-[var(--color-muted-foreground)] hover:underline"
+            >
+              Open Time →
+            </Link>
+          </div>
+        </section>
+      </div>
+
+      <section data-testid="workbench-home-assigned">
+        <h2 className="text-[11px] font-semibold tracking-wide uppercase">
+          Assigned to Me
+        </h2>
+        {assigned.length === 0 ? (
+          <p className="mt-3 text-xs text-[var(--color-muted-foreground)]">
+            No assigned work from accessible products.
+            {partial || missingProviders.length > 0
+              ? " Some product sources are unavailable or incomplete."
+              : ""}
+          </p>
+        ) : (
+          <div className="mt-3 overflow-x-auto">
+            <table className="w-full min-w-[36rem] border-collapse text-left text-xs">
+              <thead>
+                <tr className="border-b border-[var(--color-border)] text-[11px] text-[var(--color-muted-foreground)]">
+                  <th className="py-2 pr-3 font-medium">Type</th>
+                  <th className="py-2 pr-3 font-medium">Item</th>
+                  <th className="py-2 pr-3 font-medium">Product</th>
+                  <th className="py-2 pr-3 font-medium">Due</th>
+                  <th className="py-2 font-medium">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {assigned.map((card) => (
+                  <tr
+                    key={card.id}
+                    className="border-b border-[var(--color-border)]/70"
+                  >
+                    <td className="py-2 pr-3">{kindLabel(card)}</td>
+                    <td className="py-2 pr-3">
+                      <Link href={card.href} className="hover:underline">
+                        {card.title}
+                      </Link>
+                    </td>
+                    <td className="py-2 pr-3">{card.productLabel}</td>
+                    <td className="py-2 pr-3">{dueLabel(card.dueAt)}</td>
+                    <td className="py-2 capitalize">
+                      {card.nativeStatus ?? card.lifecycle.replace(/_/g, " ")}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        {(partial || missingProviders.length > 0) && (
+          <p
+            className="mt-2 text-[11px] text-[var(--color-muted-foreground)]"
+            data-testid="workbench-home-composition-gaps"
+          >
+            Partial composition
+            {missingProviders.length > 0
+              ? ` — unavailable sources: ${missingProviders.join(", ")}`
+              : " — not all product providers returned items"}
+            . Cross-product aggregation is honest about gaps; no fabricated feed.
+          </p>
+        )}
+        <div className="mt-2 text-right">
+          <Link
+            href="/workspace/my-work"
+            className="text-xs text-[var(--color-muted-foreground)] hover:underline"
+          >
+            View all →
+          </Link>
+        </div>
+      </section>
+
+      <section data-testid="workbench-home-recent">
+        <h2 className="text-[11px] font-semibold tracking-wide uppercase">Recent</h2>
+        {recent.length === 0 ? (
+          <p className="mt-3 text-xs text-[var(--color-muted-foreground)]">
+            No recent completed items yet.
+          </p>
+        ) : (
+          <ul className="mt-3 divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
+            {recent.map((card) => (
+              <li key={card.id} className="flex items-center gap-3 py-2 text-xs">
+                <Link
+                  href={card.href}
+                  className="min-w-0 flex-1 truncate font-medium hover:underline"
+                >
+                  {card.title}
+                </Link>
+                <span className="shrink-0 text-[var(--color-muted-foreground)]">
+                  {card.productLabel}
+                </span>
+                <span className="w-20 shrink-0 text-right text-[var(--color-muted-foreground)]">
+                  {formatRelative(card.updatedAt)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </div>
   );
 }

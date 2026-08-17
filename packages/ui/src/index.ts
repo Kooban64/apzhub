@@ -25,6 +25,13 @@ export type {
   ActivityBarProps,
   ShellLayoutProps,
 } from "./components/shell-layout";
+export { WorkbenchShellLayout } from "./components/workbench-shell-layout";
+export type {
+  WorkbenchBottomTabId,
+  WorkbenchShellLayoutProps,
+  WorkbenchShellLayoutState,
+  WorkbenchStatusBarProps,
+} from "./components/workbench-shell-layout";
 export { resolveLucideIcon } from "./icons/resolve-lucide-icon";
 export { Toolbar } from "./components/toolbar/toolbar";
 export type { ToolbarProps } from "./components/toolbar/toolbar";

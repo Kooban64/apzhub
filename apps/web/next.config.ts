@@ -10,7 +10,7 @@ const nextConfig: NextConfig = withSecurityHeaders({
   // OPS-002 A1 — enables slim production container images (no user-facing behaviour change)
   output: "standalone",
   // Public nginx hostname in front of `next dev` (ENVIRONMENT.md / bring-up).
-  allowedDevOrigins: ["apzhub.apzportal.apzor.com"],
+  allowedDevOrigins: ["apzhub.apzportal.apzor.com", "127.0.0.1", "localhost"],
   transpilePackages: [
     "@apzhub/activity-timeline-framework",
     "@apzhub/auth",

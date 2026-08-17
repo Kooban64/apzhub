@@ -16,7 +16,8 @@
     "@apzhub/event-notification-framework": "workspace:*",
     "@apzhub/knowledge-discovery-framework": "workspace:*",
     "@apzhub/ui": "workspace:*",
-    "@apzhub/workbench-framework": "workspace:*"
+    "@apzhub/workbench-framework": "workspace:*",
+    "react-resizable-panels": "^3.0.6"
   },
   "peerDependencies": {
     "react": "^19.0.0"

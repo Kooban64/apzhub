@@ -1,11 +1,9 @@
-# Platform Admin Overview — implementation evidence
+# Platform Admin — implementation evidence
 
-| Field      | Value                                                        |
-| ---------- | ------------------------------------------------------------ |
-| Date       | 2026-08-17                                                   |
-| Route      | `/platform-admin`                                            |
-| Screenshot | [overview-platform-admin.png](./overview-platform-admin.png) |
-| E2E        | `pnpm test:e2e:platform-admin-overview` — **passed**         |
-| Unit       | `apps/web/lib/platform-admin/*.test.ts` — **passed**         |
+| Slice                   | Screenshot                                                               | E2E                                         |
+| ----------------------- | ------------------------------------------------------------------------ | ------------------------------------------- |
+| Step 1 — Overview       | [overview-platform-admin.png](./overview-platform-admin.png)             | `pnpm test:e2e:platform-admin-overview`     |
+| Step 2 — Tenants        | [tenants-platform-admin.png](./tenants-platform-admin.png)               | `pnpm test:e2e:platform-admin-tenants`      |
+| Step 3 — User Inspector | [user-inspector-platform-admin.png](./user-inspector-platform-admin.png) | `pnpm test:e2e:platform-admin-tenant-users` |
 
-Stopped after Overview for Owner review. Next recommended screen: **Tenants**.
+Gap map for Step 3: [../STEP-3-GAP-MAP.md](../STEP-3-GAP-MAP.md)

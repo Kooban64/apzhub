@@ -39,8 +39,8 @@ vi.mock("@apzhub/config/db", () => ({
   platformUserTenant: { tenantId: "tenant_id", status: "status" },
 }));
 
-vi.mock("@/lib/commercial/product-access", () => ({
-  listOrgProductSubscriptions: vi.fn((organisationId: string) => {
+vi.mock("@/lib/commercial/product-access-durable", () => ({
+  listOrgProductSubscriptionsDurable: vi.fn(async (organisationId: string) => {
     if (organisationId === "t-demo") {
       return [
         {

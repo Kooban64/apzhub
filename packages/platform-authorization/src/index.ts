@@ -175,6 +175,28 @@ export {
   CANONICAL_PERMISSION_NAMESPACES,
 } from "./permission-model";
 
+export {
+  RESOURCE_SCOPE_CATALOGUE,
+  ALLOWED_SCOPE_PREFIXES,
+  parseResourceScopeGrant,
+  parseResourceScopesFromPermissions,
+  type ResourceScopeKind,
+  type ResourceScopeDefinition,
+  type ParsedResourceScope,
+} from "./resource-scopes";
+
+export {
+  buildPermissionProvenance,
+  findMatchingGrantRoles,
+  attachProvenanceToEvaluation,
+} from "./permission-provenance";
+
+export type {
+  AssignmentSourceKind,
+  PermissionGrantSource,
+  PermissionProvenance,
+} from "./authorization-types";
+
 export type { AuthorizationRepositoryBundle } from "./repositories/repository-interfaces";
 
 export {

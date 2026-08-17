@@ -1,5 +1,8 @@
-import { OrgOverviewPage } from "@/components/operator/org-pages";
+import { redirect } from "next/navigation";
 
-export default function Page() {
-  return <OrgOverviewPage />;
+import { ORGANISATION_ADMIN_BASE } from "@/lib/organisation-admin/nav";
+
+/** Legacy `/org` → Organisation Admin Home. */
+export default function OrgRedirectPage() {
+  redirect(ORGANISATION_ADMIN_BASE);
 }

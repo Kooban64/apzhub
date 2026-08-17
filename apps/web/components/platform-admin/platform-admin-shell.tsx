@@ -167,6 +167,9 @@ export function PlatformAdminShell({
           <span className="truncate text-[11px] font-medium tracking-wide text-[var(--color-muted-foreground)] uppercase">
             Platform Admin
           </span>
+          <span className="hidden truncate text-[10px] text-[var(--color-muted-foreground)] sm:inline">
+            · Control plane
+          </span>
         </div>
         <div className="ml-auto flex items-center gap-1.5">
           <div className="relative hidden sm:block">
@@ -250,6 +253,9 @@ export function PlatformAdminShell({
               APZ
             </p>
             <p className="text-[11px] font-medium">Platform Admin</p>
+            <p className="mt-0.5 text-[10px] leading-snug text-[var(--color-muted-foreground)]">
+              Commercial &amp; platform control plane
+            </p>
           </div>
           {grouped.map(({ group, items }) => (
             <div key={group} className="px-2 py-1.5">
@@ -304,7 +310,9 @@ export function PlatformAdminShell({
         className="flex h-8 shrink-0 items-center gap-3 border-t border-[var(--color-border)] px-3 text-[10px] text-[var(--color-muted-foreground)]"
         data-testid="platform-admin-status-bar"
       >
-        <span className="font-medium text-[var(--color-foreground)]">APZ Platform</span>
+        <span className="font-medium text-[var(--color-foreground)]">
+          APZ Platform Admin
+        </span>
         <span className="inline-flex items-center gap-1 capitalize">
           <span aria-hidden>●</span>
           {footerHealth}

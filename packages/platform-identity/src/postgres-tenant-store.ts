@@ -188,3 +188,48 @@ export async function listMembershipsForUser(
     updatedAt: row.updatedAt.toISOString(),
   }));
 }
+
+/** All memberships for a tenant (any status except removed-equivalent). */
+export async function listMembershipsForTenant(
+  tenantId: string,
+): Promise<readonly PlatformUserTenantMembership[]> {
+  const db = getDb();
+  const rows = await db
+    .select()
+    .from(platformUserTenant)
+    .where(eq(platformUserTenant.tenantId, tenantId));
+
+  return rows.map((row) => ({
+    membershipId: row.membershipId,
+    userId: row.userId,
+    tenantId: row.tenantId,
+    isPrimary: row.isPrimary,
+    status: row.status as PlatformUserTenantMembership["status"],
+    createdAt: row.createdAt.toISOString(),
+    updatedAt: row.updatedAt.toISOString(),
+  }));
+}
+
+export async function setUserTenantMembershipStatus(input: {
+  readonly userId: string;
+  readonly tenantId: string;
+  readonly status: PlatformUserTenantMembership["status"];
+}): Promise<boolean> {
+  const db = getDb();
+  const [existing] = await db
+    .select()
+    .from(platformUserTenant)
+    .where(
+      and(
+        eq(platformUserTenant.userId, input.userId),
+        eq(platformUserTenant.tenantId, input.tenantId),
+      ),
+    )
+    .limit(1);
+  if (!existing) return false;
+  await db
+    .update(platformUserTenant)
+    .set({ status: input.status, updatedAt: new Date() })
+    .where(eq(platformUserTenant.membershipId, existing.membershipId));
+  return true;
+}

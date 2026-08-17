@@ -23,9 +23,9 @@ export function PlatformAdminSectionStub({
       <div className="rounded border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-4 text-xs text-[var(--color-muted-foreground)]">
         <p className="font-medium text-[var(--color-foreground)]">Not configured</p>
         <p className="mt-1">
-          This screen is reserved in the Platform Admin information architecture.
-          Implementation starts after Owner review of Overview. No operational metrics
-          are simulated here.
+          This Platform Admin destination is reserved in the information architecture.
+          It is not implemented yet — no operational or commercial metrics are
+          simulated.
         </p>
         <p className="mt-3">
           <Link

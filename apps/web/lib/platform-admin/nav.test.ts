@@ -12,7 +12,23 @@ describe("platform-admin nav", () => {
     const implemented = PLATFORM_ADMIN_NAV.filter((item) => item.implemented).map(
       (i) => i.id,
     );
-    expect(implemented).toEqual(["overview", "tenants"]);
+    expect(implemented).toEqual([
+      "overview",
+      "tenants",
+      "billing",
+      "products",
+      "provisioning",
+      "providers",
+      "operations",
+      "identity",
+      "security",
+      "audit",
+    ]);
+  });
+
+  it("routes Identity & Access to /identity-access", () => {
+    const identity = PLATFORM_ADMIN_NAV.find((i) => i.id === "identity");
+    expect(identity?.href).toBe("/platform-admin/identity-access");
   });
 
   it("exposes compact sidebar groups without exploding children", () => {

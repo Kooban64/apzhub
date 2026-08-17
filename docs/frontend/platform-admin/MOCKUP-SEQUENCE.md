@@ -35,9 +35,16 @@ For each mockup step:
 
 ## Current position
 
-| Item                             | State                                                |
-| -------------------------------- | ---------------------------------------------------- |
-| Spec pack                        | **LOCKED**                                           |
-| Step 1 — Overview                | **ACCEPTED** (2026-08-17) — see STEP-1-ACCEPTED.md   |
-| Step 2 — Tenants master list     | **IMPLEMENTED** (2026-08-17) — stop for Owner review |
-| Next after Owner accepts Tenants | Minimal Tenant Detail → **Users → User Inspector**   |
+| Item                                                                          | State                                                                         |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Spec pack                                                                     | **LOCKED**                                                                    |
+| Step 1 — Overview                                                             | **ACCEPTED** (2026-08-17) — see STEP-1-ACCEPTED.md                            |
+| Step 2 — Tenants master list                                                  | **ACCEPTED** (2026-08-17) — see STEP-2-ACCEPTED.md                            |
+| Step 3 — Users + User Inspector                                               | **ACCEPTED** (2026-08-17) — see STEP-3-ACCEPTED.md                            |
+| Stream 6 IAM Completion                                                       | **ACCEPTED** — see STREAM-6-IAM-COMPLETION.md                                 |
+| Stream 6 IAM Write Paths Phase 1                                              | **ACCEPTED** (2026-08-17) — see STREAM-6-IAM-WRITE-PATHS.md                   |
+| Tenant Products / Subscription / Provisioning                                 | **ACCEPTED** (2026-08-17) — see TENANT-COMMERCIAL-TABS.md                     |
+| Platform Ops Control Plane (Products / Provisioning / Providers / Operations) | **ACCEPTED** — see OPS-CONTROL-PLANE.md                                       |
+| Governance Control Plane (Identity & Access · Security · Audit)               | **ACCEPTED** — see GOVERNANCE-CONTROL-PLANE.md                                |
+| Billing + Platform Admin E2E finish                                           | **READY FOR OWNER VISUAL REVIEW** — see BILLING.md · PLATFORM-ADMIN-FINISH.md |
+| Next                                                                          | Leave Platform Admin → next user-facing UX stream                             |

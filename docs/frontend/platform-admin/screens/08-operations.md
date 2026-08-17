@@ -1,8 +1,8 @@
 # Screen — Operations
 
-| Field  | Value      |
-| ------ | ---------- |
-| Status | **LOCKED** |
+| Field  | Value                                                                    |
+| ------ | ------------------------------------------------------------------------ |
+| Status | **IMPLEMENTED** — see [../OPS-CONTROL-PLANE.md](../OPS-CONTROL-PLANE.md) |
 
 ## Naming rule
 

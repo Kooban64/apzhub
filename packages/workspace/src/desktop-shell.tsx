@@ -2,7 +2,13 @@
 
 import { useState, type ReactNode } from "react";
 
-import { ShellLayout, type ActivityBarItem, type SidebarItem } from "@apzhub/ui";
+import {
+  WorkbenchShellLayout,
+  type ActivityBarItem,
+  type SidebarItem,
+  type WorkbenchShellLayoutState,
+  type WorkbenchStatusBarProps,
+} from "@apzhub/ui";
 
 import { WorkbenchCommandPalette } from "./command-palette/workbench-command-palette";
 import type { CommandPaletteMode } from "./command-palette/command-palette-mode";
@@ -18,7 +24,7 @@ import {
 } from "./context-menu";
 import { ToolbarProvider, WorkbenchToolbar } from "./toolbar";
 import { WorkbenchNotifications } from "./notifications";
-import { WorkbenchContextPanel } from "./context-panel";
+import { WorkbenchContextPanelActivityTab } from "./context-panel";
 import { useGlobalShortcuts } from "./desktop-shell/global-shortcuts";
 import { useCommandPaletteShortcut } from "./desktop-shell/palette-shortcut";
 import { GlobalSearchDialog } from "./global-search/global-search-dialog";
@@ -32,60 +38,57 @@ export interface DesktopShellProps {
   environment?: string;
   activityBarItems: ActivityBarItem[];
   onActivityBarSelect?: (id: string) => void;
+  activityBarFooterItems?: ActivityBarItem[];
+  onActivityBarFooterSelect?: (id: string) => void;
   sidebarItems: SidebarItem[];
   onSidebarSelect?: (id: string) => void;
+  sidebarTitle?: string;
   onSignOut?: () => void;
   children: ReactNode;
-  /** Org / Product switchers in the shell header (Stream 5). */
+  /** Full header override (User Workbench compact chrome). */
+  header?: ReactNode;
+  /** Legacy: org / product switchers when header not provided. */
   headerLeading?: ReactNode;
-  /** Global Search (Ctrl+K) — APS-Search capability surface. */
+  statusBar?: WorkbenchStatusBarProps;
+  mobileNav?: ReactNode;
+  onLayoutStateChange?: (state: WorkbenchShellLayoutState) => void;
+  inspectorDefaultCollapsed?: boolean;
+  bottomDefaultCollapsed?: boolean;
+  sidebarDefaultCollapsed?: boolean;
   enableGlobalSearch?: boolean;
   globalSearchOpen?: boolean;
   onGlobalSearchOpenChange?: (open: boolean) => void;
   onGlobalSearchNavigate?: (href: string) => void;
-  /** Global Quick Actions (Ctrl+Shift+A) — APS-Command capability surface. */
   enableGlobalQuickActions?: boolean;
   globalQuickActionsOpen?: boolean;
   onGlobalQuickActionsOpenChange?: (open: boolean) => void;
   onGlobalQuickActionsNavigate?: (href: string) => void;
-  /** Ctrl+Shift+N → Unified Notification Centre */
   enableNotificationCentreShortcut?: boolean;
   onOpenNotificationCentre?: () => void;
-  /** Renders Command Palette surface — requires CommandRegistryProvider ancestor (AF-011). */
   enableCommandPalette?: boolean;
-  /** Palette mode — knowledge mode queries via Knowledge Service (DF-013). */
   commandPaletteMode?: import("./command-palette/command-palette-mode").CommandPaletteMode;
   commandPaletteOpen?: boolean;
   onCommandPaletteOpenChange?: (open: boolean) => void;
-  /** Global shortcut listener — requires CommandRegistryProvider ancestor (AF-015). */
   enableGlobalShortcuts?: boolean;
-  /** When true, global shortcuts are suppressed (e.g. open modal). */
   modalOpen?: boolean;
   readonly onShortcutExecuted?: (commandId: string) => void;
-  /** Context Menu surface — requires CommandRegistryProvider ancestor (AF-016). */
   enableContextMenu?: boolean;
   readonly contextMenuSurface?: string;
   readonly contextMenuInput?: WorkbenchContextMenuInput;
   readonly onContextMenuExecuted?: (commandId: string) => void;
-  /** Toolbar surface — requires CommandRegistryProvider ancestor (AF-017). */
   enableToolbar?: boolean;
   readonly toolbarRegion?: string;
   readonly onToolbarExecuted?: (commandId: string) => void;
-  /** Notification badge — requires NotificationServiceProvider ancestor (EN-013). */
   enableNotificationBadge?: boolean;
-  /** Notification panel popover — requires NotificationServiceProvider + CommandRegistryProvider (EN-013). */
   enableNotificationPanel?: boolean;
   notificationPanelOpen?: boolean;
   onNotificationPanelOpenChange?: (open: boolean) => void;
   readonly onNotificationActionExecuted?: (actionId: string) => void;
-  /** Activity timeline feature — requires ActivityTimeline providers (AT-013). */
   enableActivityTimeline?: boolean;
-  /** Context Panel Activity tab — requires ActivityTimeline + CommandRegistry providers (AT-013). */
   enableActivityTimelinePanel?: boolean;
   contextPanelOpen?: boolean;
   onContextPanelOpenChange?: (open: boolean) => void;
   readonly onActivityActionExecuted?: (actionId: string) => void;
-  /** E2E-only — forces Timeline Experience remount after Activity Service mutations. */
   readonly activityTimelineRenderKey?: number;
 }
 
@@ -185,15 +188,22 @@ function CommandPaletteSurface({
 }
 
 export function DesktopShell({
-  userName,
-  environment,
   activityBarItems,
   onActivityBarSelect,
+  activityBarFooterItems,
+  onActivityBarFooterSelect,
   sidebarItems,
   onSidebarSelect,
-  onSignOut,
+  sidebarTitle,
   children,
+  header,
   headerLeading,
+  statusBar,
+  mobileNav,
+  onLayoutStateChange,
+  inspectorDefaultCollapsed = true,
+  bottomDefaultCollapsed = true,
+  sidebarDefaultCollapsed = false,
   enableGlobalSearch = false,
   globalSearchOpen,
   onGlobalSearchOpenChange,
@@ -226,7 +236,7 @@ export function DesktopShell({
   enableActivityTimeline = false,
   enableActivityTimelinePanel = false,
   contextPanelOpen,
-  onContextPanelOpenChange,
+  onContextPanelOpenChange: _onContextPanelOpenChange,
   onActivityActionExecuted,
   activityTimelineRenderKey,
 }: DesktopShellProps) {
@@ -276,75 +286,92 @@ export function DesktopShell({
     children
   );
 
-  const workspaceWithContextPanel =
+  const inspector =
     enableActivityTimeline && enableActivityTimelinePanel ? (
       <div
-        className="flex min-h-0 flex-1"
-        data-testid="workbench-layout-with-context-panel"
+        className="flex h-full min-h-0 flex-col"
+        data-testid="workbench-context-panel"
       >
-        <div className="min-w-0 flex-1 overflow-auto">{workspaceContent}</div>
-        <WorkbenchContextPanel
-          enableActivityTab={enableActivityTimeline}
-          panelOpen={contextPanelOpen}
-          onPanelOpenChange={onContextPanelOpenChange}
-          onActivityActionExecuted={onActivityActionExecuted}
-          activityTimelineRenderKey={activityTimelineRenderKey}
-        />
+        <div className="border-b border-[var(--color-border)] px-3 py-2 text-[11px] font-semibold tracking-wide uppercase">
+          Activity
+        </div>
+        <div
+          className="min-h-0 flex-1 overflow-auto p-3"
+          key={activityTimelineRenderKey}
+        >
+          <WorkbenchContextPanelActivityTab
+            open={contextPanelOpen ?? true}
+            onActionExecuted={onActivityActionExecuted}
+          />
+        </div>
       </div>
     ) : (
-      workspaceContent
+      <div
+        className="p-3 text-xs text-[var(--color-muted-foreground)]"
+        data-testid="workbench-inspector-empty"
+      >
+        <p className="font-medium text-[var(--color-foreground)]">Inspector</p>
+        <p className="mt-1">
+          Contextual details appear here when you select work items. Collapsed by
+          default.
+        </p>
+      </div>
     );
 
+  const notificationsSlot =
+    enableNotificationBadge || enableNotificationPanel ? (
+      <WorkbenchNotifications
+        enableBadge={enableNotificationBadge}
+        enablePanel={enableNotificationPanel}
+        panelOpen={notificationPanelOpen}
+        onPanelOpenChange={onNotificationPanelOpenChange}
+        onNotificationActionExecuted={onNotificationActionExecuted}
+      />
+    ) : null;
+
+  const resolvedHeader = header ?? (
+    <div
+      className="flex h-11 items-center gap-2 border-b border-[var(--color-border)] px-3"
+      data-testid="workbench-header-fallback"
+    >
+      <span className="text-sm font-semibold">APZ</span>
+      {headerLeading}
+      <div className="ml-auto flex items-center gap-2">
+        {enableGlobalSearch ? (
+          <button
+            type="button"
+            data-testid="global-search-trigger"
+            className="rounded border border-[var(--color-border)] px-2 py-1 text-xs"
+            onClick={() => setGlobalSearchOpen(true)}
+          >
+            Search APZ... <kbd className="ml-1">Ctrl+K</kbd>
+          </button>
+        ) : null}
+        {notificationsSlot}
+      </div>
+    </div>
+  );
+
   const shell = (
-    <ShellLayout
-      userName={userName}
-      environment={environment}
-      onSignOut={onSignOut}
-      sidebarItems={sidebarItems}
-      onSidebarSelect={onSidebarSelect}
+    <WorkbenchShellLayout
       activityBarItems={activityBarItems}
       onActivityBarSelect={onActivityBarSelect}
-      headerLeading={headerLeading}
-      headerTrailing={
-        <>
-          {enableGlobalSearch ? (
-            <button
-              type="button"
-              data-testid="global-search-trigger"
-              className="mr-2 rounded-md border border-[var(--color-border)] px-2 py-1 text-xs text-[var(--color-muted-foreground)] hover:bg-[var(--color-muted)]"
-              onClick={() => setGlobalSearchOpen(true)}
-              aria-label="Open global search"
-            >
-              Search
-              <kbd className="ml-2 hidden sm:inline">Ctrl+K</kbd>
-            </button>
-          ) : null}
-          {enableGlobalQuickActions ? (
-            <button
-              type="button"
-              data-testid="global-quick-actions-trigger"
-              className="mr-2 rounded-md border border-[var(--color-border)] px-2 py-1 text-xs text-[var(--color-muted-foreground)] hover:bg-[var(--color-muted)]"
-              onClick={() => setQuickActionsOpen(true)}
-              aria-label="Open quick actions"
-            >
-              Actions
-              <kbd className="ml-2 hidden sm:inline">Ctrl+Shift+A</kbd>
-            </button>
-          ) : null}
-          {enableNotificationBadge || enableNotificationPanel ? (
-            <WorkbenchNotifications
-              enableBadge={enableNotificationBadge}
-              enablePanel={enableNotificationPanel}
-              panelOpen={notificationPanelOpen}
-              onPanelOpenChange={onNotificationPanelOpenChange}
-              onNotificationActionExecuted={onNotificationActionExecuted}
-            />
-          ) : null}
-        </>
-      }
+      activityBarFooterItems={activityBarFooterItems}
+      onActivityBarFooterSelect={onActivityBarFooterSelect}
+      sidebarTitle={sidebarTitle}
+      sidebarItems={sidebarItems}
+      onSidebarSelect={onSidebarSelect}
+      header={resolvedHeader}
+      inspector={inspector}
+      inspectorDefaultCollapsed={inspectorDefaultCollapsed}
+      bottomDefaultCollapsed={bottomDefaultCollapsed}
+      sidebarDefaultCollapsed={sidebarDefaultCollapsed}
+      onLayoutStateChange={onLayoutStateChange}
+      statusBar={statusBar}
+      mobileNav={mobileNav}
     >
-      {workspaceWithContextPanel}
-    </ShellLayout>
+      {workspaceContent}
+    </WorkbenchShellLayout>
   );
 
   const shellWithContextMenu = enableContextMenu ? (

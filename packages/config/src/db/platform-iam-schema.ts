@@ -171,6 +171,12 @@ export const platformIamEmployment = pgTable("platform_iam_employment", {
   organisationId: text("organisation_id").notNull(),
   departmentId: text("department_id"),
   positionId: text("position_id"),
+  /** Descriptive staff-function template key — not an authorisation grant. */
+  staffFunctionKey: text("staff_function_key"),
+  /** Free-text job title — descriptive only. */
+  jobTitle: text("job_title"),
+  /** Manager user id within the same tenant — descriptive / routing only. */
+  managerUserId: text("manager_user_id"),
   status: varchar("status", { length: 64 }).notNull().default("draft"),
   startedAt: text("started_at"),
   endedAt: text("ended_at"),

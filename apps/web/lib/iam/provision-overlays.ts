@@ -3,21 +3,15 @@
  * Extends BetterAuth / PermissionService path — no parallel IAM.
  */
 
-import { getSharedAuthorizationService } from "@apzhub/platform-authorization";
+import {
+  ALLOWED_SCOPE_PREFIXES,
+  getSharedAuthorizationService,
+} from "@apzhub/platform-authorization";
 
 import {
   grantProfessionalTool,
   type ProfessionalToolId,
 } from "@/lib/iam/professional-tools";
-import { PROJECTS_SCOPE_PREFIX } from "@/lib/projects/project-scope";
-import { SOURCE_REPO_SCOPE_PREFIX } from "@/lib/source/repo-scope";
-import { SUPPORT_QUEUE_SCOPE_PREFIX } from "@/lib/support/queue-scope";
-
-const ALLOWED_SCOPE_PREFIXES = [
-  SUPPORT_QUEUE_SCOPE_PREFIX,
-  PROJECTS_SCOPE_PREFIX,
-  SOURCE_REPO_SCOPE_PREFIX,
-] as const;
 
 const PROFESSIONAL_TOOL_IDS = new Set<ProfessionalToolId>([
   "workflow-designer",

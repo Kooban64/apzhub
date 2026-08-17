@@ -50,16 +50,46 @@ export interface RolePermissionGrant {
   readonly grantType: AuthorizationGrantType;
 }
 
+export type AssignmentSourceKind = "direct" | "team";
+
 export interface RoleAssignment {
   readonly assignmentId: string;
   readonly userId: string;
   readonly roleId: string;
   readonly tenantId?: string;
   readonly productKey?: string;
+  readonly sourceKind?: AssignmentSourceKind;
+  readonly sourceId?: string;
   readonly status: AuthorizationAssignmentStatus;
   readonly createdAt: string;
   readonly updatedAt: string;
 }
+
+export type PermissionGrantSource = {
+  readonly roleId: string;
+  readonly roleSlug: string;
+  readonly roleName: string;
+  readonly productKey?: string;
+  readonly sourceKind: AssignmentSourceKind;
+  readonly sourceId?: string;
+  readonly sourceLabel?: string;
+};
+
+export type PermissionProvenance = {
+  readonly decision: "ALLOWED" | "DENIED";
+  readonly permissionKey: string;
+  readonly tenantId?: string;
+  readonly grantedBy?: PermissionGrantSource;
+  readonly currentRoles?: readonly PermissionGrantSource[];
+  readonly requiredPermission?: string;
+  readonly productKey?: string;
+  readonly scopes?: readonly {
+    readonly kind: string;
+    readonly resourceId: string;
+    readonly label: string;
+  }[];
+  readonly reason?: string;
+};
 
 export interface CreatePlatformPermissionInput {
   readonly permissionKey: string;
@@ -90,6 +120,7 @@ export interface AuthorizationEvaluationResult {
   readonly permissionKey: string;
   readonly matchedRoleIds?: readonly string[];
   readonly reason?: string;
+  readonly provenance?: PermissionProvenance;
 }
 
 export interface EffectivePermissions {

@@ -9,6 +9,7 @@ import type {
   RolePermissionGrant,
 } from "./authorization-types";
 import { permissionPatternMatches } from "./permission-model";
+import { attachProvenanceToEvaluation } from "./permission-provenance";
 
 export function evaluatePermissionAgainstEffective(
   permissionKey: string | undefined,
@@ -18,7 +19,9 @@ export function evaluatePermissionAgainstEffective(
     readonly roleExists: (roleId: string) => boolean;
     readonly assignments: readonly RoleAssignment[];
     readonly roles: readonly PlatformRole[];
+    readonly grants?: readonly RolePermissionGrant[];
     readonly context: AuthorizationContext;
+    readonly withProvenance?: boolean;
   },
 ): AuthorizationEvaluationResult {
   if (!permissionKey?.trim()) {
@@ -43,56 +46,81 @@ export function evaluatePermissionAgainstEffective(
     };
   }
 
+  let result: AuthorizationEvaluationResult | undefined;
+
   for (const deny of effective.denyPermissions) {
     if (permissionPatternMatches(deny, normalized)) {
-      return {
+      result = {
         outcome: "deny",
         permissionKey: normalized,
         matchedRoleIds: [...effective.roleIds],
         reason: "Explicit deny grant.",
       };
+      break;
     }
   }
 
-  for (const allow of effective.effectivePermissions) {
-    if (permissionPatternMatches(allow, normalized)) {
-      return {
-        outcome: "allow",
+  if (!result) {
+    for (const allow of effective.effectivePermissions) {
+      if (permissionPatternMatches(allow, normalized)) {
+        result = {
+          outcome: "allow",
+          permissionKey: normalized,
+          matchedRoleIds: [...effective.roleIds],
+        };
+        break;
+      }
+    }
+  }
+
+  if (!result) {
+    const mismatch = detectTenantMismatch(
+      options.assignments,
+      options.roles,
+      options.context,
+    );
+    if (mismatch) {
+      result = {
+        outcome: "tenant_mismatch",
         permissionKey: normalized,
-        matchedRoleIds: [...effective.roleIds],
+        reason: mismatch,
       };
     }
   }
 
-  const mismatch = detectTenantMismatch(
-    options.assignments,
-    options.roles,
-    options.context,
-  );
-  if (mismatch) {
-    return {
-      outcome: "tenant_mismatch",
+  if (!result) {
+    const unknownRole = options.assignments.find(
+      (assignment) => !options.roleExists(assignment.roleId),
+    );
+    if (unknownRole) {
+      result = {
+        outcome: "unknown_role",
+        permissionKey: normalized,
+        reason: `Unknown role: ${unknownRole.roleId}`,
+      };
+    }
+  }
+
+  if (!result) {
+    result = {
+      outcome: "deny",
       permissionKey: normalized,
-      reason: mismatch,
+      reason: "No matching allow grant.",
     };
   }
 
-  const unknownRole = options.assignments.find(
-    (assignment) => !options.roleExists(assignment.roleId),
-  );
-  if (unknownRole) {
-    return {
-      outcome: "unknown_role",
-      permissionKey: normalized,
-      reason: `Unknown role: ${unknownRole.roleId}`,
-    };
+  if (options.withProvenance !== false && options.grants) {
+    return attachProvenanceToEvaluation(result, {
+      effective,
+      roles: options.roles,
+      grants: options.grants,
+      assignments: options.assignments,
+      context: options.context,
+      scopedPermissions: effective.effectivePermissions,
+    });
   }
 
-  return {
-    outcome: "deny",
-    permissionKey: normalized,
-    reason: "No matching allow grant.",
-  };
+  return result;
 }
 
 function detectTenantMismatch(

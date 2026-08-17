@@ -3,7 +3,7 @@ import { listPlatformTenants } from "@apzhub/platform-identity/server";
 import type { PlatformTenant } from "@apzhub/platform-identity";
 import { sql } from "drizzle-orm";
 
-import { listOrgProductSubscriptions } from "@/lib/commercial/product-access";
+import { listOrgProductSubscriptionsDurable } from "@/lib/commercial/product-access-durable";
 import { PLATFORM_ADMIN_BASE } from "@/lib/platform-admin/nav";
 import type {
   PlatformAdminTenantRow,
@@ -56,13 +56,13 @@ async function countActiveUsersByTenant(): Promise<{
   }
 }
 
-function enrichCommercial(tenantId: string): {
+async function enrichCommercial(tenantId: string): Promise<{
   plan: TenantListField<string>;
   products: TenantListField<string>;
   hasTrialSubscription: boolean;
-} {
+}> {
   try {
-    const subs = listOrgProductSubscriptions(tenantId);
+    const subs = await listOrgProductSubscriptionsDurable(tenantId);
     if (subs.length === 0) {
       return {
         plan: unavailable("No commercial subscription on file"),
@@ -102,12 +102,12 @@ function provisioningField(tenant: PlatformTenant): TenantListField<string> {
   };
 }
 
-function toRow(
+async function toRow(
   tenant: PlatformTenant,
   userCounts: Map<string, number>,
   usersAvailable: boolean,
-): PlatformAdminTenantRow {
-  const commercial = enrichCommercial(tenant.tenantId);
+): Promise<PlatformAdminTenantRow> {
+  const commercial = await enrichCommercial(tenant.tenantId);
   const users: TenantListField<number> = usersAvailable
     ? ok(userCounts.get(tenant.tenantId) ?? 0)
     : unavailable("User membership counts unavailable");
@@ -135,7 +135,7 @@ export async function buildPlatformAdminTenants(): Promise<PlatformAdminTenantsP
   const tenants = await listPlatformTenants();
   const { ok: usersOk, map: userCounts } = await countActiveUsersByTenant();
 
-  const rows = tenants.map((t) => toRow(t, userCounts, usersOk));
+  const rows = await Promise.all(tenants.map((t) => toRow(t, userCounts, usersOk)));
 
   // Stable sort by name — no APZOR pinning.
   rows.sort((a, b) => a.name.localeCompare(b.name));

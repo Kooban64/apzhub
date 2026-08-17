@@ -31,6 +31,12 @@
 | [screens/10-global-search.md](./screens/10-global-search.md)     | Tenant lookup / global search                                 |
 | [screens/11-responsive.md](./screens/11-responsive.md)           | Desktop-first · mobile critical path                          |
 | [MOCKUP-SEQUENCE.md](./MOCKUP-SEQUENCE.md)                       | Ordered mockup stream (go slowly)                             |
+| [STREAM-6-IAM-COMPLETION.md](./STREAM-6-IAM-COMPLETION.md)       | IAM read model (accepted)                                     |
+| [TENANT-COMMERCIAL-TABS.md](./TENANT-COMMERCIAL-TABS.md)         | Tenant Products / Subscription / Provisioning                 |
+| [OPS-CONTROL-PLANE.md](./OPS-CONTROL-PLANE.md)                   | Platform Products / Provisioning / Providers / Operations     |
+| [GOVERNANCE-CONTROL-PLANE.md](./GOVERNANCE-CONTROL-PLANE.md)     | Identity & Access · Security · Audit                          |
+| [BILLING.md](./BILLING.md)                                       | Platform commercial Billing surface                           |
+| [PLATFORM-ADMIN-FINISH.md](./PLATFORM-ADMIN-FINISH.md)           | Capability matrix + deferred list                             |
 
 ## Relationship to existing `/ops` · `/console` shells
 

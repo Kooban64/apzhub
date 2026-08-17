@@ -164,6 +164,11 @@ export type IdentityEmployment = {
   readonly organisationId: IdentityOrganizationId;
   readonly departmentId?: IdentityDepartmentId;
   readonly positionId?: IdentityPositionId;
+  /** Descriptive staff-function template key — not authorisation. */
+  readonly staffFunctionKey?: string;
+  readonly jobTitle?: string;
+  /** Manager within tenant — descriptive / routing only. */
+  readonly managerUserId?: string;
   readonly status: IdentityLifecycleStatus;
   readonly startedAt?: string;
   readonly endedAt?: string;

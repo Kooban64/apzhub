@@ -1,5 +1,7 @@
 "use client";
 
+import { Bell, House, MoreHorizontal, Search } from "lucide-react";
+import Link from "next/link";
 import { signOut, useSession } from "@apzhub/auth";
 import type { ActivityBarItem, SidebarItem } from "@apzhub/ui";
 import {
@@ -9,10 +11,12 @@ import {
   useWorkbenchNavigationActions,
   useWorkbenchState,
 } from "@apzhub/workbench-framework/react";
-import { DesktopShell } from "@apzhub/workspace";
-import { WorkbenchHeaderChrome } from "@/components/shell/workbench-header-chrome";
+import { DesktopShell, WorkbenchNotifications } from "@apzhub/workspace";
+import { TenantSwitcher } from "@/components/operator/tenant-switcher";
+import { WorkbenchHeader } from "@/components/shell/workbench-header";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 import { OperationsWorkspaceRouter } from "@/components/platform-operations/operations-workspace-router";
 import { DocumentsWorkspaceRouter } from "@/components/documents/documents-workspace-router";
@@ -72,13 +76,38 @@ import { isWorkflowEngineRoute, isWorkflowsRoute } from "@/lib/workflows/routes"
 import { isQepWorkspaceRoute } from "@/lib/qep/routes";
 import { isSourceWorkspaceRoute } from "@/lib/source/routes";
 import { resolveCommandPaletteMode } from "@/lib/resolve-command-palette-mode";
+import { composeWorkbenchRail } from "@/lib/workbench/compose-workbench-rail";
+
+async function fetchEffectiveProducts(): Promise<{
+  readonly productKeys: readonly string[];
+  readonly organisationName?: string;
+  readonly tenantId?: string | null;
+}> {
+  const res = await fetch("/api/v1/me/home-context", { cache: "no-store" });
+  const body = (await res.json()) as {
+    data?: {
+      entitlements?: { productKeys?: readonly string[] };
+      organisationName?: string;
+      tenantName?: string;
+      tenantId?: string | null;
+    };
+  };
+  if (!res.ok) return { productKeys: [] };
+  return {
+    productKeys: body.data?.entitlements?.productKeys ?? [],
+    organisationName: body.data?.organisationName ?? body.data?.tenantName,
+    tenantId: body.data?.tenantId,
+  };
+}
 
 export function WorkbenchPage() {
   const router = useRouter();
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "/workspace/home";
   const searchParams = useSearchParams();
   const commandPaletteMode = resolveCommandPaletteMode(searchParams.get("paletteMode"));
   const [activityTimelineRenderKey, setActivityTimelineRenderKey] = useState(0);
+  const [globalSearchOpen, setGlobalSearchOpen] = useState(false);
+  const [railOverride, setRailOverride] = useState<string | undefined>();
   const refreshActivityTimelinePresentation = useCallback(() => {
     setActivityTimelineRenderKey((key) => key + 1);
   }, []);
@@ -97,7 +126,12 @@ export function WorkbenchPage() {
     clearSession,
   } = useWorkbenchNavigationActions();
 
-  const activityBarItems = useMemo<ActivityBarItem[]>(
+  const entitlementsQ = useQuery({
+    queryKey: ["me", "home-context", "workbench-rail"],
+    queryFn: fetchEffectiveProducts,
+  });
+
+  const legacyActivityBarItems = useMemo<ActivityBarItem[]>(
     () =>
       activityBarPresentation.map((item) => ({
         id: item.id,
@@ -109,7 +143,7 @@ export function WorkbenchPage() {
     [activityBarPresentation],
   );
 
-  const sidebarItems = useMemo<SidebarItem[]>(
+  const legacySidebarItems = useMemo<SidebarItem[]>(
     () =>
       sidebarPresentation.map((item) => ({
         id: item.id,
@@ -119,6 +153,28 @@ export function WorkbenchPage() {
       })),
     [sidebarPresentation],
   );
+
+  const rail = useMemo(
+    () =>
+      composeWorkbenchRail({
+        activityBarItems: legacyActivityBarItems,
+        sidebarItems: legacySidebarItems,
+        effectiveProducts: entitlementsQ.data?.productKeys ?? [],
+        pathname,
+        activeRailId: railOverride,
+      }),
+    [
+      legacyActivityBarItems,
+      legacySidebarItems,
+      entitlementsQ.data?.productKeys,
+      pathname,
+      railOverride,
+    ],
+  );
+
+  useEffect(() => {
+    setRailOverride(undefined);
+  }, [pathname]);
 
   const contextMenuInput = useMemo(
     () => ({
@@ -134,9 +190,6 @@ export function WorkbenchPage() {
   );
 
   useEffect(() => {
-    // Longest-prefix view resolution activates the matching workspace view for deep links
-    // (e.g. /workspace/projects/{id} → Projects) while still preferring longer exact routes
-    // such as /workspace/home/overview over /workspace/home (RG-AUTH-SHELL-RESIDUAL).
     activateViewForRoute(pathname);
   }, [pathname, activateViewForRoute]);
 
@@ -148,10 +201,6 @@ export function WorkbenchPage() {
     const previousRoute = previousActiveViewRoute.current;
     previousActiveViewRoute.current = nextRoute;
 
-    // Initial focus and same-view deep links are owned by activateViewForRoute.
-    // Only rewind the URL when the selected view route actually changes (Activity
-    // Bar / Sidebar). Depending on pathname here rewound nested Evidence routes
-    // such as …/items/{id}/provenance to a stale Home focus (APZQEP-REM-002 / B-02).
     if (previousRoute === undefined || previousRoute === nextRoute) {
       return;
     }
@@ -167,6 +216,77 @@ export function WorkbenchPage() {
     await signOut();
     router.push("/login");
     router.refresh();
+  }
+
+  function handleRailSelect(id: string) {
+    setRailOverride(id);
+    switch (id) {
+      case "home":
+        router.push("/workspace/home");
+        return;
+      case "productivity":
+        // Stay on launcher sidebar; navigate to first entitled product if already in product
+        if (!rail.productivityProducts.some((p) => pathname.startsWith(p.href))) {
+          // Soft: just select rail — sidebar shows products
+          return;
+        }
+        return;
+      case "quality":
+        router.push("/workspace/qep");
+        return;
+      case "security":
+        router.push("/apzpen");
+        return;
+      case "source":
+        router.push("/workspace/source");
+        return;
+      case "search":
+        setGlobalSearchOpen(true);
+        return;
+      case "notifications":
+        router.push("/workspace/notifications/inbox");
+        return;
+      case "more":
+        return;
+      default: {
+        const legacy = legacyActivityBarItems.find((i) => i.id === id);
+        if (legacy) selectActivityBarItem(id);
+      }
+    }
+  }
+
+  function handleFooterSelect(id: string) {
+    if (id === "settings") {
+      router.push("/workspace/personalisation");
+      return;
+    }
+    if (id === "account") {
+      router.push("/workspace/personalisation");
+    }
+  }
+
+  function handleSidebarSelect(id: string) {
+    if (id === "nav-home") {
+      router.push("/workspace/home");
+      return;
+    }
+    if (id === "nav-assigned") {
+      router.push("/workspace/my-work");
+      return;
+    }
+    if (id === "nav-activity") {
+      router.push("/workspace/activity");
+      return;
+    }
+    if (id.startsWith("prd-")) {
+      const key = id.slice(4);
+      const product = rail.productivityProducts.find((p) => p.key === key);
+      if (product) {
+        router.push(product.href);
+        return;
+      }
+    }
+    selectSidebarItem(id);
   }
 
   const operationsSection = isPlatformOperationsRoute(pathname)
@@ -195,26 +315,92 @@ export function WorkbenchPage() {
   const searchActive = isSearchRoute(pathname);
   const sourceActive = isSourceWorkspaceRoute(pathname);
   const qepActive = isQepWorkspaceRoute(pathname);
-  // Exact home landing only — /workspace/home/overview remains a separate view.
   const myWorkActive =
     pathname === "/workspace/home" || pathname === "/workspace/home/";
   const myWorkQueuesActive =
     pathname === "/workspace/my-work" || pathname.startsWith("/workspace/my-work/");
 
+  const orgLabel =
+    entitlementsQ.data?.organisationName?.trim() ||
+    entitlementsQ.data?.tenantId?.trim() ||
+    "Organisation";
+
+  const mobileNav = (
+    <nav
+      className="flex h-12 shrink-0 items-center justify-around border-t border-[var(--color-border)] bg-[var(--color-surface)]"
+      data-testid="workbench-mobile-nav"
+      aria-label="Mobile workbench"
+    >
+      <Link
+        href="/workspace/home"
+        className="flex flex-col items-center gap-0.5 text-[10px] text-[var(--color-muted-foreground)]"
+      >
+        <House className="h-4 w-4" aria-hidden />
+        Home
+      </Link>
+      <Link
+        href="/workspace/my-work"
+        className="flex flex-col items-center gap-0.5 text-[10px] text-[var(--color-muted-foreground)]"
+      >
+        <MoreHorizontal className="h-4 w-4" aria-hidden />
+        Work
+      </Link>
+      <button
+        type="button"
+        className="flex flex-col items-center gap-0.5 text-[10px] text-[var(--color-muted-foreground)]"
+        onClick={() => setGlobalSearchOpen(true)}
+      >
+        <Search className="h-4 w-4" aria-hidden />
+        Search
+      </button>
+      <Link
+        href="/workspace/notifications/inbox"
+        className="flex flex-col items-center gap-0.5 text-[10px] text-[var(--color-muted-foreground)]"
+      >
+        <Bell className="h-4 w-4" aria-hidden />
+        Alerts
+      </Link>
+      <Link
+        href="/workspace/personalisation"
+        className="flex flex-col items-center gap-0.5 text-[10px] text-[var(--color-muted-foreground)]"
+      >
+        <MoreHorizontal className="h-4 w-4" aria-hidden />
+        More
+      </Link>
+    </nav>
+  );
+
   return (
     <WorkbenchOperatorRedirect>
       <DesktopShell
         userName={session?.user.name ?? session?.user.email}
-        environment={process.env.NODE_ENV}
         onSignOut={handleSignOut}
-        headerLeading={<WorkbenchHeaderChrome />}
-        activityBarItems={activityBarItems}
-        onActivityBarSelect={selectActivityBarItem}
-        sidebarItems={sidebarItems}
-        onSidebarSelect={selectSidebarItem}
+        header={
+          <WorkbenchHeader
+            organisation={<TenantSwitcher />}
+            userName={session?.user.name ?? session?.user.email}
+            onSignOut={handleSignOut}
+            onOpenSearch={() => setGlobalSearchOpen(true)}
+            notifications={<WorkbenchNotifications enableBadge enablePanel />}
+          />
+        }
+        activityBarItems={[...rail.primary]}
+        onActivityBarSelect={handleRailSelect}
+        activityBarFooterItems={[...rail.footer]}
+        onActivityBarFooterSelect={handleFooterSelect}
+        sidebarTitle={rail.sidebarTitle}
+        sidebarItems={[...rail.contextSidebarItems]}
+        onSidebarSelect={handleSidebarSelect}
+        statusBar={{
+          organisationLabel: orgLabel,
+          rightLabel: "APZ Workbench",
+        }}
+        mobileNav={mobileNav}
         enableCommandPalette
         commandPaletteMode={commandPaletteMode}
         enableGlobalSearch
+        globalSearchOpen={globalSearchOpen}
+        onGlobalSearchOpenChange={setGlobalSearchOpen}
         onGlobalSearchNavigate={(href) => {
           router.push(href);
         }}
@@ -230,13 +416,15 @@ export function WorkbenchPage() {
         enableContextMenu
         enableToolbar
         toolbarRegion="workspace"
-        enableNotificationBadge
-        enableNotificationPanel
+        enableNotificationBadge={false}
+        enableNotificationPanel={false}
         enableActivityTimeline
         enableActivityTimelinePanel
         activityTimelineRenderKey={activityTimelineRenderKey}
         contextMenuSurface="workspace"
         contextMenuInput={contextMenuInput}
+        inspectorDefaultCollapsed
+        bottomDefaultCollapsed
       >
         <GlobalTimeTimer />
         <LandingPageRedirect />
@@ -294,12 +482,12 @@ export function WorkbenchPage() {
         ) : myWorkActive ? (
           <RoleHomeDashboard />
         ) : (
-          <div className="flex flex-col gap-2">
-            <h1 className="text-2xl font-semibold">
+          <div className="flex flex-col gap-2 p-4">
+            <h1 className="text-base font-semibold">
               {activeView?.title ?? "Workspace"}
             </h1>
-            <p className="text-[var(--color-muted-foreground)]">
-              {activeView?.route ?? pathname} — manifest-driven view placeholder.
+            <p className="text-xs text-[var(--color-muted-foreground)]">
+              {activeView?.route ?? pathname}
             </p>
           </div>
         )}

@@ -47,7 +47,7 @@ test.describe("Platform Admin Tenants", () => {
       timeout: 30_000,
     });
     await expect(page.getByTestId("tenant-detail-tabs")).toBeVisible();
-    await expect(page.getByTestId("tenant-tab-users")).toBeDisabled();
+    await expect(page.getByTestId("tenant-tab-users")).toBeEnabled();
     expect(page.url()).toMatch(/\/platform-admin\/tenants\//);
   });
 });

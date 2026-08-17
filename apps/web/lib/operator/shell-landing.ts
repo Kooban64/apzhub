@@ -63,7 +63,11 @@ const LANDINGS: Record<DemoPersonaKind, ShellLanding> = {
     path: "/compliance",
     label: "Compliance",
   },
-  org_admin: { shell: "org", path: "/org", label: "Organisation" },
+  org_admin: {
+    shell: "org",
+    path: "/organisation-admin",
+    label: "Organisation Admin",
+  },
   org_member: {
     shell: "workspace",
     path: "/workspace/home",
@@ -94,6 +98,8 @@ export function isOperatorShellPath(pathname: string): boolean {
     pathname.startsWith("/compliance/") ||
     pathname === "/org" ||
     pathname.startsWith("/org/") ||
+    pathname === "/organisation-admin" ||
+    pathname.startsWith("/organisation-admin/") ||
     pathname === "/apzpen" ||
     pathname.startsWith("/apzpen/")
   );
@@ -152,7 +158,12 @@ export const OPERATOR_MODES: readonly OperatorMode[] = [
     label: "Compliance",
     shortLabel: "Compliance",
   },
-  { id: "org", href: "/org", label: "Organisation", shortLabel: "Org" },
+  {
+    id: "org",
+    href: "/organisation-admin",
+    label: "Organisation Admin",
+    shortLabel: "Org",
+  },
   {
     id: "apzpen",
     href: "/apzpen",
@@ -273,9 +284,10 @@ export const COMPLIANCE_NAV: readonly OperatorNavItem[] = [
   { id: "findings", href: "/compliance/findings", label: "Findings" },
 ];
 
+/** @deprecated Prefer Organisation Admin nav (`/organisation-admin`). Kept for legacy `/org/*` stubs. */
 export const ORG_NAV: readonly OperatorNavItem[] = [
-  { id: "overview", href: "/org", label: "Overview" },
-  { id: "members", href: "/org/members", label: "Members & RBAC" },
+  { id: "overview", href: "/organisation-admin", label: "Home" },
+  { id: "members", href: "/organisation-admin/people", label: "People" },
   { id: "services", href: "/org/services", label: "Service roles" },
   {
     id: "professional-tools",

@@ -1,12 +1,15 @@
 export {
   ensureUserAuthorizationMembership,
   ensurePlatformTenantRow,
+  explainPostgresPermission,
   getPostgresAuthorizationDiagnostics,
   listPostgresAssignments,
   listPostgresPermissions,
   listPostgresRoles,
+  listProductRoleAssignmentsForUser,
   resolvePostgresSessionAuthorization,
   seedDefaultAuthorizationRows,
   upsertPostgresRoleAssignment,
   upsertPostgresUserScopedPermissions,
+  deactivatePostgresRoleAssignment,
 } from "./postgres-authorization-store";

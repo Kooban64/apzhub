@@ -4,6 +4,8 @@ export {
   getPlatformTenantDiagnostics,
   listPlatformTenants,
   listMembershipsForUser,
+  listMembershipsForTenant,
+  setUserTenantMembershipStatus,
 } from "./postgres-tenant-store";
 
 export {

@@ -1,22 +1,24 @@
-import { PlatformAdminSectionStub } from "@/components/platform-admin/platform-admin-section-stub";
 import { notFound } from "next/navigation";
 
-const TITLES: Record<string, string> = {
-  tenants: "Tenants",
+import { PlatformAdminAuditView } from "@/components/platform-admin/platform-admin-audit";
+import { PlatformAdminBillingView } from "@/components/platform-admin/platform-admin-billing";
+import { PlatformAdminIdentityAccessView } from "@/components/platform-admin/platform-admin-identity-access";
+import { PlatformAdminOperationsView } from "@/components/platform-admin/platform-admin-operations";
+import { PlatformAdminProductsView } from "@/components/platform-admin/platform-admin-products";
+import { PlatformAdminProvidersView } from "@/components/platform-admin/platform-admin-providers";
+import { PlatformAdminProvisioningView } from "@/components/platform-admin/platform-admin-provisioning";
+import { PlatformAdminSectionStub } from "@/components/platform-admin/platform-admin-section-stub";
+import { PlatformAdminSecurityView } from "@/components/platform-admin/platform-admin-security";
+import { PlatformAdminTenantsView } from "@/components/platform-admin/platform-admin-tenants";
+
+const STUB_TITLES: Record<string, string> = {
   subscriptions: "Subscriptions",
   marketplace: "Marketplace",
-  billing: "Billing",
-  products: "Products",
-  provisioning: "Provisioning",
-  providers: "Providers",
   configuration: "Configuration",
-  operations: "Operations",
   incidents: "Incidents",
   jobs: "Jobs & Queues",
   identity: "Identity & Access",
-  security: "Security",
   compliance: "Compliance",
-  audit: "Audit",
   help: "Help",
   settings: "Settings",
 };
@@ -27,7 +29,30 @@ export default async function PlatformAdminSectionPage({
   readonly params: Promise<{ readonly section: string }>;
 }) {
   const { section } = await params;
-  const title = TITLES[section];
-  if (!title) notFound();
-  return <PlatformAdminSectionStub title={title} />;
+
+  switch (section) {
+    case "tenants":
+      return <PlatformAdminTenantsView />;
+    case "billing":
+      return <PlatformAdminBillingView />;
+    case "products":
+      return <PlatformAdminProductsView />;
+    case "provisioning":
+      return <PlatformAdminProvisioningView />;
+    case "providers":
+      return <PlatformAdminProvidersView />;
+    case "operations":
+      return <PlatformAdminOperationsView />;
+    case "identity-access":
+      return <PlatformAdminIdentityAccessView />;
+    case "security":
+      return <PlatformAdminSecurityView />;
+    case "audit":
+      return <PlatformAdminAuditView />;
+    default: {
+      const title = STUB_TITLES[section];
+      if (!title) notFound();
+      return <PlatformAdminSectionStub title={title} />;
+    }
+  }
 }

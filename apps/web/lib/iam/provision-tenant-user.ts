@@ -160,6 +160,30 @@ export async function provisionTenantUserFromStaffFunction(
       userId,
       productKeys,
     });
+    try {
+      const { setUserProductGrantsDurable } =
+        await import("@/lib/commercial/product-access-durable");
+      await setUserProductGrantsDurable({
+        organisationId: input.organisationId,
+        userId,
+        productKeys,
+      });
+    } catch {
+      /* durable optional when migrating */
+    }
+  }
+
+  try {
+    const { upsertEmploymentMetadata } = await import("@/lib/iam/employment-write");
+    await upsertEmploymentMetadata({
+      tenantId: input.organisationId,
+      userId,
+      staffFunctionKey: staffFunction.id,
+      jobTitle: input.displayName.trim() || staffFunction.name,
+      status: "active",
+    });
+  } catch {
+    /* employment optional */
   }
 
   const member = inviteOrgMember({

@@ -1,8 +1,8 @@
 # Screen — Identity & Access (platform control plane)
 
-| Field  | Value      |
-| ------ | ---------- |
-| Status | **LOCKED** |
+| Field  | Value                                                                                                 |
+| ------ | ----------------------------------------------------------------------------------------------------- |
+| Status | **IMPLEMENTED (read/inspect)** — see [../GOVERNANCE-CONTROL-PLANE.md](../GOVERNANCE-CONTROL-PLANE.md) |
 
 ## Scope
 

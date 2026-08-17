@@ -1,8 +1,8 @@
 # Screen — Billing
 
-| Field  | Value      |
-| ------ | ---------- |
-| Status | **LOCKED** |
+| Field  | Value                                                               |
+| ------ | ------------------------------------------------------------------- |
+| Status | **IMPLEMENTED (read/inspect)** — see [../BILLING.md](../BILLING.md) |
 
 ## Rules
 

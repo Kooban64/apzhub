@@ -159,7 +159,8 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [Operator Consoles programme](./operations/OPERATOR-CONSOLES-PROGRAMME.md)             | `/console` `/ops` `/finance` `/compliance` `/org` shells + suite provisioning |
 | [Human-ready browser audit](./operations/HUMAN-READY-BROWSER-AUDIT.md)                 | Playwright crawl of public + demo personas — `pnpm audit:human-ready`         |
 | [Frontend UX specs](./frontend/README.md)                                              | Literal screen specs for Cursor — start: Platform Admin                       |
-| [Platform Admin UX](./frontend/platform-admin/README.md)                               | **LOCKED · IA** — commercial control plane (APZOR = ordinary tenant)          |
+| [Platform Admin UX](./frontend/platform-admin/README.md)                               | **ACCEPTED · COMPLETE** — commercial control plane (APZOR = ordinary tenant)  |
+| [Organisation Admin UX](./frontend/organisation-admin/README.md)                       | **Block 2 READY FOR REVIEW** — Teams · Roles · Products · Provisioning        |
 
 ## APZQEP Requirement Baselines (APZQEP-ENG-020E)
 

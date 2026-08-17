@@ -39,6 +39,9 @@ export {
   platformAuthorizationRole,
   platformAuthorizationRoleAssignment,
   platformAuthorizationRolePermission,
+  platformAuthorizationTeamRole,
+  platformProductOrgSubscription,
+  platformProductUserGrant,
 } from "./platform-authorization-schema";
 export {
   platformPersonalisationSchema,
