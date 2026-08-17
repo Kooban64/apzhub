@@ -1,10 +1,10 @@
 # Screen — Overview
 
-| Field          | Value                        |
-| -------------- | ---------------------------- |
-| Route (target) | Platform Admin → Overview    |
-| Status         | **LOCKED · FIRST VISUAL**    |
-| Parent         | [../README.md](../README.md) |
+| Field          | Value                                                    |
+| -------------- | -------------------------------------------------------- |
+| Route (target) | Platform Admin → Overview                                |
+| Status         | **LOCKED · FIRST VISUAL** · **IMPLEMENTED** (2026-08-17) |
+| Route (live)   | `/platform-admin`                                        |
 
 ## Intent
 

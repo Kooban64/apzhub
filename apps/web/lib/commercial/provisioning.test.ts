@@ -103,7 +103,7 @@ describe("provisioning pipeline", () => {
 describe("shell landings", () => {
   it("routes operators away from workbench", () => {
     expect(shellLandingForKind("superadmin").path).toBe("/console");
-    expect(shellLandingForKind("platform_admin").path).toBe("/ops");
+    expect(shellLandingForKind("platform_admin").path).toBe("/platform-admin");
     expect(shellLandingForKind("finance").path).toBe("/finance");
     expect(shellLandingForKind("compliance").path).toBe("/compliance");
     expect(shellLandingForKind("org_admin").path).toBe("/org");

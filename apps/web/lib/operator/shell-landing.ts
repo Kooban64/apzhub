@@ -16,7 +16,11 @@ export type ShellLanding = {
 
 const LANDINGS: Record<DemoPersonaKind, ShellLanding> = {
   superadmin: { shell: "console", path: "/console", label: "Platform Console" },
-  platform_admin: { shell: "ops", path: "/ops", label: "Platform Ops" },
+  platform_admin: {
+    shell: "ops",
+    path: "/platform-admin",
+    label: "Platform Admin",
+  },
   finance: { shell: "finance", path: "/finance", label: "Finance" },
   support: { shell: "ops", path: "/ops", label: "Platform Ops" },
   tenant_support: {
@@ -78,6 +82,8 @@ export function shellLandingForKind(kind: DemoPersonaKind): ShellLanding {
 
 export function isOperatorShellPath(pathname: string): boolean {
   return (
+    pathname === "/platform-admin" ||
+    pathname.startsWith("/platform-admin/") ||
     pathname === "/console" ||
     pathname.startsWith("/console/") ||
     pathname === "/ops" ||

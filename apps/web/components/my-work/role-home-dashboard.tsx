@@ -45,9 +45,9 @@ const DASHBOARDS: Record<
       { label: "Members", value: "—" },
     ],
     links: [
-      { href: "/ops", label: "Platform Ops", hint: "Ops console" },
-      { href: "/ops/health", label: "Health", hint: "Status" },
-      { href: "/ops/workers", label: "Workers", hint: "Start/stop" },
+      { href: "/platform-admin", label: "Platform Admin", hint: "Control plane" },
+      { href: "/platform-admin/operations", label: "Operations", hint: "Health" },
+      { href: "/ops", label: "Legacy Ops", hint: "Day-2" },
       { href: "/workspace/observability", label: "Observability", hint: "Deep" },
     ],
   },

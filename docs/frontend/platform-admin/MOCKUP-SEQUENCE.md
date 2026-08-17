@@ -35,8 +35,9 @@ For each mockup step:
 
 ## Current position
 
-| Item                                            | State                                                   |
-| ----------------------------------------------- | ------------------------------------------------------- |
-| Spec pack under `docs/frontend/platform-admin/` | **LOCKED**                                              |
-| Implementation / interactive mockups            | **Not started** — await Owner to begin Step 0 or Step 1 |
-| Suggested first deep Stream 6 proof             | Step 4 — User Inspector inside Tenant → Users           |
+| Item                                            | State                                                           |
+| ----------------------------------------------- | --------------------------------------------------------------- |
+| Spec pack under `docs/frontend/platform-admin/` | **LOCKED**                                                      |
+| Step 1 — Overview                               | **IMPLEMENTED** (2026-08-17) — `/platform-admin` vertical slice |
+| Further screens                                 | **Stopped for Owner review** — do not auto-advance              |
+| Recommended next after Owner accepts Overview   | Step 2 — Tenants master list                                    |

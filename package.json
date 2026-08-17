@@ -21,6 +21,7 @@
     "test:e2e": "playwright test --config testing/playwright/playwright.config.ts",
     "test:e2e:phase-g": "playwright test --config testing/playwright/playwright.config.ts testing/playwright/e2e/phase-g-streams-5-6-horizontal.spec.ts",
     "test:e2e:phase-l": "playwright test --config testing/playwright/playwright.config.ts testing/playwright/e2e/phase-l-create-user-dogfood.spec.ts",
+    "test:e2e:platform-admin-overview": "playwright test --config testing/playwright/playwright.config.ts testing/playwright/e2e/platform-admin-overview.spec.ts",
     "audit:human-ready": "tsx scripts/human-ready-browser-audit.ts",
     "test:e2e:law": "playwright test --config testing/playwright/playwright.law.config.ts",
     "format": "prettier --write .",
