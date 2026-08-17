@@ -8,11 +8,11 @@ import {
 } from "@/lib/platform-admin/nav";
 
 describe("platform-admin nav", () => {
-  it("keeps Overview as the only implemented primary item", () => {
-    const implemented = PLATFORM_ADMIN_NAV.filter((item) => item.implemented);
-    expect(implemented).toHaveLength(1);
-    expect(implemented[0]?.id).toBe("overview");
-    expect(implemented[0]?.href).toBe("/platform-admin");
+  it("keeps Overview and Tenants as implemented primary items", () => {
+    const implemented = PLATFORM_ADMIN_NAV.filter((item) => item.implemented).map(
+      (i) => i.id,
+    );
+    expect(implemented).toEqual(["overview", "tenants"]);
   });
 
   it("exposes compact sidebar groups without exploding children", () => {

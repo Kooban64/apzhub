@@ -1,9 +1,9 @@
 # Screen — Tenants (master + detail)
 
-| Field  | Value                                                           |
-| ------ | --------------------------------------------------------------- |
-| Status | **LOCKED**                                                      |
-| Notes  | Most important Platform Admin screen · APZOR is an ordinary row |
+| Field  | Value                                                                   |
+| ------ | ----------------------------------------------------------------------- |
+| Status | **LOCKED** · **IMPLEMENTED** (2026-08-17) — master list                 |
+| Route  | `/platform-admin/tenants` · detail `/platform-admin/tenants/[tenantId]` |
 
 ## Master — Tenants
 

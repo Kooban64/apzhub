@@ -35,9 +35,9 @@ For each mockup step:
 
 ## Current position
 
-| Item                                            | State                                                           |
-| ----------------------------------------------- | --------------------------------------------------------------- |
-| Spec pack under `docs/frontend/platform-admin/` | **LOCKED**                                                      |
-| Step 1 — Overview                               | **IMPLEMENTED** (2026-08-17) — `/platform-admin` vertical slice |
-| Further screens                                 | **Stopped for Owner review** — do not auto-advance              |
-| Recommended next after Owner accepts Overview   | Step 2 — Tenants master list                                    |
+| Item                             | State                                                |
+| -------------------------------- | ---------------------------------------------------- |
+| Spec pack                        | **LOCKED**                                           |
+| Step 1 — Overview                | **ACCEPTED** (2026-08-17) — see STEP-1-ACCEPTED.md   |
+| Step 2 — Tenants master list     | **IMPLEMENTED** (2026-08-17) — stop for Owner review |
+| Next after Owner accepts Tenants | Minimal Tenant Detail → **Users → User Inspector**   |

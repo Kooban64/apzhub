@@ -31,7 +31,7 @@ export const PLATFORM_ADMIN_NAV: readonly PlatformAdminNavItem[] = [
     href: `${PLATFORM_ADMIN_BASE}/tenants`,
     label: "Tenants",
     group: "customers",
-    implemented: false,
+    implemented: true,
   },
   {
     id: "subscriptions",
