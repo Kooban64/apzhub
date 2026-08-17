@@ -158,6 +158,8 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [MKT multi-site hosts](./operations/MKT-MULTI-SITE-HOSTS.md)                           | APZHUB / APZQA / APZPenTest hosts + Productivity Suite (later)                |
 | [Operator Consoles programme](./operations/OPERATOR-CONSOLES-PROGRAMME.md)             | `/console` `/ops` `/finance` `/compliance` `/org` shells + suite provisioning |
 | [Human-ready browser audit](./operations/HUMAN-READY-BROWSER-AUDIT.md)                 | Playwright crawl of public + demo personas — `pnpm audit:human-ready`         |
+| [Frontend UX specs](./frontend/README.md)                                              | Literal screen specs for Cursor — start: Platform Admin                       |
+| [Platform Admin UX](./frontend/platform-admin/README.md)                               | **LOCKED · IA** — commercial control plane (APZOR = ordinary tenant)          |
 
 ## APZQEP Requirement Baselines (APZQEP-ENG-020E)
 
