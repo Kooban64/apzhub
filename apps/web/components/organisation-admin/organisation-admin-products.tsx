@@ -76,8 +76,8 @@ export function OrganisationAdminProductsView() {
       data-testid="organisation-admin-products"
     >
       <OrgAdminPageHeader
-        title="Products"
-        subtitle={`Products available to ${q.data?.tenant.name ?? "this organisation"}`}
+        title="Marketplace"
+        subtitle={`Products available for ${q.data?.tenant.name ?? "your organisation"}`}
       />
 
       <OrgAdminSecondaryTabs
@@ -170,10 +170,20 @@ export function OrganisationAdminProductsView() {
 
                     <p className="mt-3 text-xs">
                       <Link
-                        href={suite.href}
+                        href={
+                          suite.status === "active"
+                            ? suite.href
+                            : `/marketplace?pillar=${
+                                suite.section === "QUALITY"
+                                  ? "quality"
+                                  : suite.section === "SECURITY"
+                                    ? "security"
+                                    : "productivity"
+                              }`
+                        }
                         className="text-[var(--color-primary)] hover:underline"
                       >
-                        Manage Access →
+                        {suite.status === "active" ? "Manage →" : "Explore →"}
                       </Link>
                     </p>
                   </article>

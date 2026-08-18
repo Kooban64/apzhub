@@ -21,11 +21,11 @@ export const OPERATOR_SHELL_IDS = [
 
 export type PlatformOperatorShellId = (typeof OPERATOR_SHELL_IDS)[number];
 
-/** Personas that must stay on OperatorShell (redirected off DesktopShell). */
+/** Personas that must stay on OperatorShell (redirected off DesktopShell).
+ * Org Admin is a Workbench user first — Organisation Administration is a menu entry. */
 export const OPERATOR_PERSONA_KINDS = [
   "superadmin",
   "platform_admin",
-  "org_admin",
   "finance",
   "compliance",
   "support",

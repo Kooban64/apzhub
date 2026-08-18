@@ -67,7 +67,7 @@ export function ApzpenFindingDetailPage({ findingId }: { findingId: string }) {
         actions={
           finding ? (
             <Link
-              href={`/apzpen/engagements/${finding.engagementId}`}
+              href={`/workspace/pen/engagements/${finding.engagementId}`}
               className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)]"
             >
               Engagement

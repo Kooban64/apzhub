@@ -93,7 +93,7 @@ export function PricingCards() {
           </p>
           {plan.trialDays > 0 ? (
             <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">
-              {plan.trialDays}-day trial · card required
+              {plan.trialDays}-day trial · no card required
             </p>
           ) : (
             <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">

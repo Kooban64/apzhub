@@ -131,6 +131,10 @@ export function LoginForm({
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        <label className="flex items-center gap-2 text-sm text-[var(--color-muted-foreground)]">
+          <input type="checkbox" name="remember" data-testid="login-remember" />
+          Remember me
+        </label>
         {error ? (
           <p className="text-sm text-[var(--color-destructive)]" role="alert">
             {error}
@@ -149,7 +153,7 @@ export function LoginForm({
         </Link>
         {selfServeRegisterEnabled() ? (
           <p className="text-[var(--color-muted-foreground)]">
-            New here?{" "}
+            New to APZ?{" "}
             <Link
               href={
                 callbackUrl.includes("/onboarding")
@@ -158,7 +162,7 @@ export function LoginForm({
               }
               className="text-[var(--color-primary)] hover:underline"
             >
-              Create an account
+              Create account
             </Link>
           </p>
         ) : null}

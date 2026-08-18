@@ -11,6 +11,10 @@ vi.mock("next/navigation", () => ({
   useSearchParams: () => new URLSearchParams(),
 }));
 
+vi.mock("@/components/commercial/soft-product-gate", () => ({
+  SoftProductGate: ({ children }: { children: ReactNode }) => <>{children}</>,
+}));
+
 vi.mock("@/lib/time/time-api", () => ({
   listTimesheets: vi.fn(),
 }));

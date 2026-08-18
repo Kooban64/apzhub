@@ -13,6 +13,8 @@ This directory is the canonical source for APZHUB product and architecture docum
 | [APZOR Commercial Pillars](./strategy/APZOR-COMMERCIAL-PILLARS.md)                                 | **Authority** — platform vs sellable solutions; one platform, three pillars           |
 | [SaaS Commercial Model](./strategy/commercial/SAAS-COMMERCIAL-MODEL.md)                            | **Authority (LOCKED)** — tenants, packages, APZPRD composability, Law/Knowledge/Sign  |
 | [OWNER UX Stream 1 freeze](./decisions/OWNER-UX-STREAM-001-FREEZE.md)                              | **IN FORCE** — finish public commerce journey before QEP/PEN/PRD app UX               |
+| [OWNER Commercial Pricing Decision Gate](./decisions/OWNER-COMMERCIAL-PRICING-DECISION-GATE.md)    | **IN FORCE** — Price Book v1.0 Owner decision; engineering stopped                    |
+| [APZ Commercial Price Book v1.0](./strategy/commercial/APZ-COMMERCIAL-PRICE-BOOK-V1.md)            | **OWNER RECOMMENDED** — Global / Africa / ZA; draft entry not yet authorised          |
 | [UX-STREAM-001](./ux/UX-STREAM-001-public-commercial-journey.md)                                   | **FROZEN** — public website → marketplace → PayFast → provision → invite              |
 | [SPR-UX-STREAM-001](./sprint/SPR-UX-STREAM-001-public-marketplace-purchase-provisioning.md)        | **APPROVED · READY** — execute Stream 1 DoD                                           |
 | [OWNER UX Stream 2 freeze](./decisions/OWNER-UX-STREAM-002-FREEZE.md)                              | **SPEC FROZEN** — APZQEP UX; execution order TBD after all streams filed              |

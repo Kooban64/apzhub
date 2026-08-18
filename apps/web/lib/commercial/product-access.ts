@@ -51,14 +51,24 @@ export type UserProductGrant = {
   readonly updatedAt: string;
 };
 
+/** Durable org-level trial consumption — one trial per organisation (Price Book v1.0). */
+export type OrganisationTrialClaim = {
+  readonly organisationId: string;
+  readonly claimedAt: string;
+  readonly trialEndsAt: string;
+  readonly planId: PlanId;
+};
+
 type Snapshot = {
   subscriptions: OrgProductSubscription[];
   grants: UserProductGrant[];
+  trialClaims: OrganisationTrialClaim[];
 };
 
 const store: Snapshot = {
   subscriptions: [],
   grants: [],
+  trialClaims: [],
 };
 let hydrated = false;
 
@@ -93,6 +103,9 @@ function hydrate(): void {
     if (Array.isArray(snap.grants)) {
       store.grants.push(...snap.grants);
     }
+    if (Array.isArray(snap.trialClaims)) {
+      store.trialClaims.push(...snap.trialClaims);
+    }
   } catch {
     /* ignore corrupt */
   }
@@ -107,7 +120,48 @@ function persistAll(): void {
 export function resetProductAccessForTests(): void {
   store.subscriptions.splice(0, store.subscriptions.length);
   store.grants.splice(0, store.grants.length);
+  store.trialClaims.splice(0, store.trialClaims.length);
   hydrated = false;
+}
+
+export function organisationHasConsumedTrial(organisationId: string): boolean {
+  hydrate();
+  const id = organisationId.trim();
+  if (!id) return false;
+  if (store.trialClaims.some((row) => row.organisationId === id)) return true;
+  // Legacy rows: any prior trialEndsAt on this org counts as consumption.
+  return store.subscriptions.some(
+    (row) => row.organisationId === id && row.trialEndsAt != null,
+  );
+}
+
+export function claimOrganisationTrial(input: {
+  readonly organisationId: string;
+  readonly trialEndsAt: string;
+  readonly planId: PlanId;
+}): OrganisationTrialClaim {
+  hydrate();
+  const organisationId = input.organisationId.trim();
+  if (!organisationId) throw new Error("billing.organisation_required");
+  if (organisationHasConsumedTrial(organisationId)) {
+    throw new Error("billing.trial_already_used");
+  }
+  const claim: OrganisationTrialClaim = {
+    organisationId,
+    claimedAt: new Date().toISOString(),
+    trialEndsAt: input.trialEndsAt,
+    planId: input.planId,
+  };
+  store.trialClaims.push(claim);
+  persistAll();
+  return claim;
+}
+
+export function getOrganisationTrialClaim(
+  organisationId: string,
+): OrganisationTrialClaim | undefined {
+  hydrate();
+  return store.trialClaims.find((row) => row.organisationId === organisationId.trim());
 }
 
 export function listOrgProductSubscriptions(

@@ -40,6 +40,9 @@ import {
   SupportTable,
   SupportWorkspaceFrame,
 } from "./support-ui";
+import { TicketInspectorBody } from "@/components/workbench/inspector-bodies";
+import { useWorkbenchInspector } from "@/lib/workbench/workbench-inspector";
+import type { SupportRequest } from "@/lib/support/types";
 
 const STATUSES: readonly SupportRequestStatus[] = [
   "new",
@@ -106,6 +109,25 @@ export function SupportInboxView({
 
   const canCreate = canCreateSupportRequest(permissions);
   const agent = isSupportAgent(permissions);
+  const { setSelection } = useWorkbenchInspector();
+
+  function selectRequest(item: SupportRequest) {
+    setSelection({
+      id: item.id,
+      title: "TICKET",
+      content: (
+        <TicketInspectorBody
+          id={item.id}
+          displayId={item.displayId}
+          title={item.title}
+          status={item.status}
+          priority={item.priority}
+          updatedLabel={formatSupportDate(item.updatedAt)}
+          detailHref={supportRequestDetailPath(item.id)}
+        />
+      ),
+    });
+  }
 
   return (
     <PageShell
@@ -335,7 +357,10 @@ export function SupportInboxView({
                   formatSupportDate(item.updatedAt),
                 ],
               }))}
-              onRowClick={(id) => router.push(supportRequestDetailPath(id))}
+              onRowClick={(id) => {
+                const item = query.data.data.find((row) => row.id === id);
+                if (item) selectRequest(item);
+              }}
             />
             <div className="flex items-center justify-between gap-2">
               <Button

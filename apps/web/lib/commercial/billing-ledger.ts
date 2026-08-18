@@ -234,6 +234,11 @@ export function listInvoices(billingAccountId: string): readonly InvoiceRecord[]
   return ledger.invoices.filter((row) => row.billingAccountId === billingAccountId);
 }
 
+export function findInvoiceById(invoiceId: string): InvoiceRecord | undefined {
+  hydrate();
+  return ledger.invoices.find((row) => row.invoiceId === invoiceId);
+}
+
 export function recordPayment(input: {
   readonly invoiceId: string;
   readonly amountCents: number;
@@ -243,10 +248,23 @@ export function recordPayment(input: {
   readonly now?: () => Date;
 }): PaymentRecord {
   hydrate();
-  const invoice = ledger.invoices.find((row) => row.invoiceId === input.invoiceId);
+  const invoice = findInvoiceById(input.invoiceId);
   if (!invoice) throw new Error("billing.invoice_not_found");
   const now = (input.now ?? (() => new Date()))().toISOString();
   const status = input.status ?? "received";
+
+  if (status === "received") {
+    const existing = ledger.payments.find(
+      (row) =>
+        row.invoiceId === invoice.invoiceId &&
+        row.status === "received" &&
+        row.providerRef &&
+        input.providerRef &&
+        row.providerRef === input.providerRef,
+    );
+    if (existing) return existing;
+  }
+
   const payment: PaymentRecord = {
     paymentId: `pay-${randomUUID()}`,
     invoiceId: invoice.invoiceId,

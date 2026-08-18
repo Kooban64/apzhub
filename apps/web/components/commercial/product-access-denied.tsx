@@ -12,6 +12,12 @@ const PILLAR_TITLE: Record<string, string> = {
   qep: "Quality (APZQEP)",
   pentest: "Security Assurance (APZPEN)",
   projects: "Projects",
+  support: "APZ Support",
+  time: "APZ Time",
+  workflow: "APZ Workflow",
+  analytics: "APZ Analytics",
+  knowledge: "APZ Knowledge",
+  documents: "APZ Documents",
 };
 
 function copyFor(

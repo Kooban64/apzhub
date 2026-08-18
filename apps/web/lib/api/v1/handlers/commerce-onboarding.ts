@@ -9,7 +9,6 @@ import { PlatformApiHttpError } from "../errors";
 import { jsonDataResponse } from "../response";
 import { onboardCommerceOrganisation } from "@/lib/commercial/commerce-onboarding";
 import { checkoutPath, type CommerceCart } from "@/lib/commercial/commerce-cart";
-import { getPackage } from "@/lib/commercial/catalogue";
 
 export async function handleCommerceOnboardOrganisation(
   request: NextRequest,
@@ -19,8 +18,11 @@ export async function handleCommerceOnboardOrganisation(
     name?: string;
     slug?: string;
     packageId?: string;
+    packageIds?: string[];
     planId?: string;
     seats?: number;
+    countryCode?: string;
+    timezone?: string;
   };
 
   const name = (body.name ?? "").trim();
@@ -37,13 +39,22 @@ export async function handleCommerceOnboardOrganisation(
       userId: context.session.user.id,
       name,
       slug: slug || name,
+      countryCode: body.countryCode?.trim(),
+      timezone: body.timezone?.trim(),
     });
 
+    const packageIds = [
+      ...(Array.isArray(body.packageIds)
+        ? body.packageIds.map((id) => id.trim()).filter(Boolean)
+        : []),
+      ...(body.packageId?.trim() ? [body.packageId.trim()] : []),
+    ];
+    const uniquePackageIds = [...new Set(packageIds)];
+
     let checkoutHref = "/pricing/checkout?plan=plan.business";
-    const packageId = (body.packageId ?? "").trim();
-    if (packageId && getPackage(packageId)) {
+    if (uniquePackageIds.length > 0) {
       const cart: CommerceCart = {
-        packageId,
+        packageIds: uniquePackageIds,
         planId: body.planId === "plan.individual" ? "plan.individual" : "plan.business",
         seats:
           typeof body.seats === "number" && body.seats > 0 ? Math.floor(body.seats) : 1,

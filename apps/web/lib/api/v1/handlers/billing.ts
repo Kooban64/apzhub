@@ -33,6 +33,8 @@ function mapBillingError(error: unknown): never {
     message === "billing.sku_unavailable" ||
     message === "billing.plan_unavailable" ||
     message === "billing.plan_contact_sales" ||
+    message === "billing.trial_already_used" ||
+    message === "billing.trial_unavailable" ||
     message === "billing.account_not_found" ||
     message === "billing.invoice_not_found" ||
     message === "entitlement.sku_unknown" ||
@@ -46,6 +48,18 @@ function mapBillingError(error: unknown): never {
   if (message === "billing.payfast_signature_invalid") {
     throw new PlatformApiHttpError(401, {
       code: "UNAUTHORIZED",
+      message,
+    });
+  }
+  if (
+    message === "billing.payfast_amount_mismatch" ||
+    message === "billing.pricing_unavailable" ||
+    message === "billing.package_coming_soon" ||
+    message === "billing.package_contact_sales" ||
+    message === "billing.checkout_invalid"
+  ) {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_FAILED",
       message,
     });
   }
@@ -71,6 +85,7 @@ export async function handleStartTrial(
     planId?: string;
     email?: string;
     packageId?: string;
+    packageIds?: string[];
   };
   const planId = (body.planId ?? "").trim() as PlanId;
   if (planId !== "plan.individual" && planId !== "plan.business") {
@@ -87,6 +102,7 @@ export async function handleStartTrial(
       organisationId,
       email: body.email ?? context.session.user.email,
       packageId: body.packageId?.trim() || undefined,
+      packageIds: body.packageIds,
     });
     return jsonDataResponse(result, context.tracing);
   } catch (error) {

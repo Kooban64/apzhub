@@ -14,6 +14,7 @@ import {
 import { DesktopShell, WorkbenchNotifications } from "@apzhub/workspace";
 import { TenantSwitcher } from "@/components/operator/tenant-switcher";
 import { WorkbenchHeader } from "@/components/shell/workbench-header";
+import { WorkbenchAccountMenu } from "@/components/shell/workbench-account-menu";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -45,6 +46,7 @@ import { IdentityWorkspaceRouter } from "@/components/identity/identity-workspac
 import { ObserveWorkspaceRouter } from "@/components/observe/observe-workspace-router";
 import { MetricsWorkspaceRouter } from "@/components/metrics/metrics-workspace-router";
 import { QepWorkspaceRouter } from "@/components/qep/qep-workspace-router";
+import { ApzpenWorkspaceRouter } from "@/components/apzpen/apzpen-workspace-router";
 import { SourceWorkspaceView } from "@/components/source/source-workspace-view";
 import { RoleHomeDashboard } from "@/components/my-work/role-home-dashboard";
 import { MyWorkView } from "@/components/my-work/my-work-view";
@@ -74,14 +76,28 @@ import { isTimeRoute } from "@/lib/time/routes";
 import { isWorkflowRoute } from "@/lib/workflow/routes";
 import { isWorkflowEngineRoute, isWorkflowsRoute } from "@/lib/workflows/routes";
 import { isQepWorkspaceRoute } from "@/lib/qep/routes";
+import { isApzpenWorkbenchRoute } from "@/lib/apzpen/workbench-routes";
 import { isSourceWorkspaceRoute } from "@/lib/source/routes";
 import { resolveCommandPaletteMode } from "@/lib/resolve-command-palette-mode";
 import { composeWorkbenchRail } from "@/lib/workbench/compose-workbench-rail";
+import { resolveApzprdSidebarHref } from "@/lib/workbench/compose-apzprd-sidebars";
+import { resolvePenSidebarHref } from "@/lib/workbench/compose-pen-sidebars";
+import { resolveQepSidebarHref } from "@/lib/workbench/compose-qep-sidebars";
+import { resolveQepBottomPanelContent } from "@/components/workbench/qep-bottom-panels";
+import {
+  PEN_BOTTOM_TAB_LABELS,
+  resolvePenBottomPanelContent,
+} from "@/components/workbench/pen-bottom-panels";
+import {
+  WorkbenchInspectorProvider,
+  useWorkbenchInspector,
+} from "@/lib/workbench/workbench-inspector";
 
 async function fetchEffectiveProducts(): Promise<{
   readonly productKeys: readonly string[];
   readonly organisationName?: string;
   readonly tenantId?: string | null;
+  readonly kind?: string;
 }> {
   const res = await fetch("/api/v1/me/home-context", { cache: "no-store" });
   const body = (await res.json()) as {
@@ -90,6 +106,7 @@ async function fetchEffectiveProducts(): Promise<{
       organisationName?: string;
       tenantName?: string;
       tenantId?: string | null;
+      kind?: string;
     };
   };
   if (!res.ok) return { productKeys: [] };
@@ -97,10 +114,34 @@ async function fetchEffectiveProducts(): Promise<{
     productKeys: body.data?.entitlements?.productKeys ?? [],
     organisationName: body.data?.organisationName ?? body.data?.tenantName,
     tenantId: body.data?.tenantId,
+    kind: body.data?.kind,
+  };
+}
+
+async function fetchSourceCapabilities(): Promise<{
+  readonly canRead: boolean;
+  readonly canWrite: boolean;
+}> {
+  const res = await fetch("/api/v1/source/capabilities", { cache: "no-store" });
+  const body = (await res.json()) as {
+    data?: { canRead?: boolean; canWrite?: boolean };
+  };
+  if (!res.ok) return { canRead: false, canWrite: false };
+  return {
+    canRead: body.data?.canRead === true,
+    canWrite: body.data?.canWrite === true,
   };
 }
 
 export function WorkbenchPage() {
+  return (
+    <WorkbenchInspectorProvider>
+      <WorkbenchPageInner />
+    </WorkbenchInspectorProvider>
+  );
+}
+
+function WorkbenchPageInner() {
   const router = useRouter();
   const pathname = usePathname() ?? "/workspace/home";
   const searchParams = useSearchParams();
@@ -108,6 +149,7 @@ export function WorkbenchPage() {
   const [activityTimelineRenderKey, setActivityTimelineRenderKey] = useState(0);
   const [globalSearchOpen, setGlobalSearchOpen] = useState(false);
   const [railOverride, setRailOverride] = useState<string | undefined>();
+  const inspector = useWorkbenchInspector();
   const refreshActivityTimelinePresentation = useCallback(() => {
     setActivityTimelineRenderKey((key) => key + 1);
   }, []);
@@ -130,6 +172,13 @@ export function WorkbenchPage() {
     queryKey: ["me", "home-context", "workbench-rail"],
     queryFn: fetchEffectiveProducts,
   });
+
+  const sourceCapabilitiesQ = useQuery({
+    queryKey: ["source-workspace", "capabilities", "workbench-rail"],
+    queryFn: fetchSourceCapabilities,
+  });
+
+  const hasSourceAccess = sourceCapabilitiesQ.data?.canRead === true;
 
   const legacyActivityBarItems = useMemo<ActivityBarItem[]>(
     () =>
@@ -162,6 +211,7 @@ export function WorkbenchPage() {
         effectiveProducts: entitlementsQ.data?.productKeys ?? [],
         pathname,
         activeRailId: railOverride,
+        hasSourceAccess,
       }),
     [
       legacyActivityBarItems,
@@ -169,11 +219,14 @@ export function WorkbenchPage() {
       entitlementsQ.data?.productKeys,
       pathname,
       railOverride,
+      hasSourceAccess,
     ],
   );
 
   useEffect(() => {
     setRailOverride(undefined);
+    inspector.clearSelection();
+    // Clear selection when navigating; intentionally omit inspector from deps.
   }, [pathname]);
 
   const contextMenuInput = useMemo(
@@ -225,17 +278,13 @@ export function WorkbenchPage() {
         router.push("/workspace/home");
         return;
       case "productivity":
-        // Stay on launcher sidebar; navigate to first entitled product if already in product
-        if (!rail.productivityProducts.some((p) => pathname.startsWith(p.href))) {
-          // Soft: just select rail — sidebar shows products
-          return;
-        }
+        // Always show Productivity launcher sidebar (even while inside a product).
         return;
       case "quality":
         router.push("/workspace/qep");
         return;
       case "security":
-        router.push("/apzpen");
+        router.push("/workspace/pen");
         return;
       case "source":
         router.push("/workspace/source");
@@ -266,6 +315,9 @@ export function WorkbenchPage() {
   }
 
   function handleSidebarSelect(id: string) {
+    if (id.startsWith("prd-sep-") || id.includes("-sep-")) {
+      return;
+    }
     if (id === "nav-home") {
       router.push("/workspace/home");
       return;
@@ -278,13 +330,28 @@ export function WorkbenchPage() {
       router.push("/workspace/activity");
       return;
     }
-    if (id.startsWith("prd-")) {
-      const key = id.slice(4);
-      const product = rail.productivityProducts.find((p) => p.key === key);
-      if (product) {
-        router.push(product.href);
-        return;
-      }
+    if (id === "source-repos") {
+      router.push("/workspace/source");
+      return;
+    }
+    if (id === "source-changes") {
+      router.push("/workspace/source/changes");
+      return;
+    }
+    const qepHref = resolveQepSidebarHref(id);
+    if (qepHref) {
+      router.push(qepHref);
+      return;
+    }
+    const penHref = resolvePenSidebarHref(id);
+    if (penHref) {
+      router.push(penHref);
+      return;
+    }
+    const apzprdHref = resolveApzprdSidebarHref(id, rail.productivityProducts);
+    if (apzprdHref) {
+      router.push(apzprdHref);
+      return;
     }
     selectSidebarItem(id);
   }
@@ -315,6 +382,7 @@ export function WorkbenchPage() {
   const searchActive = isSearchRoute(pathname);
   const sourceActive = isSourceWorkspaceRoute(pathname);
   const qepActive = isQepWorkspaceRoute(pathname);
+  const penActive = isApzpenWorkbenchRoute(pathname);
   const myWorkActive =
     pathname === "/workspace/home" || pathname === "/workspace/home/";
   const myWorkQueuesActive =
@@ -324,6 +392,21 @@ export function WorkbenchPage() {
     entitlementsQ.data?.organisationName?.trim() ||
     entitlementsQ.data?.tenantId?.trim() ||
     "Organisation";
+
+  const personaKind = entitlementsQ.data?.kind;
+  const showOrgAdmin = personaKind === "org_admin" || personaKind === "superadmin";
+  const showPlatformAdmin =
+    personaKind === "platform_admin" || personaKind === "superadmin";
+
+  const bottomPanelContent = useMemo(
+    () =>
+      resolvePenBottomPanelContent(pathname) ?? resolveQepBottomPanelContent(pathname),
+    [pathname],
+  );
+  const bottomTabLabels = useMemo(
+    () => (penActive ? PEN_BOTTOM_TAB_LABELS : undefined),
+    [penActive],
+  );
 
   const mobileNav = (
     <nav
@@ -382,6 +465,15 @@ export function WorkbenchPage() {
             onSignOut={handleSignOut}
             onOpenSearch={() => setGlobalSearchOpen(true)}
             notifications={<WorkbenchNotifications enableBadge enablePanel />}
+            accountMenu={
+              <WorkbenchAccountMenu
+                userName={session?.user.name}
+                userEmail={session?.user.email}
+                showOrgAdmin={showOrgAdmin}
+                showPlatformAdmin={showPlatformAdmin}
+                onSignOut={handleSignOut}
+              />
+            }
           />
         }
         activityBarItems={[...rail.primary]}
@@ -424,7 +516,12 @@ export function WorkbenchPage() {
         contextMenuSurface="workspace"
         contextMenuInput={contextMenuInput}
         inspectorDefaultCollapsed
+        inspectorContent={inspector.selection?.content ?? null}
+        inspectorTitle={inspector.selection?.title ?? "Inspector"}
+        inspectorExpandToken={inspector.selection ? inspector.expandToken : null}
         bottomDefaultCollapsed
+        bottomPanelContent={bottomPanelContent}
+        bottomTabLabels={bottomTabLabels}
       >
         <GlobalTimeTimer />
         <LandingPageRedirect />
@@ -475,6 +572,8 @@ export function WorkbenchPage() {
           <SearchWorkspaceRouter />
         ) : sourceActive ? (
           <SourceWorkspaceView />
+        ) : penActive ? (
+          <ApzpenWorkspaceRouter />
         ) : qepActive ? (
           <QepWorkspaceRouter />
         ) : myWorkQueuesActive ? (

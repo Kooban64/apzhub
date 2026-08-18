@@ -1,5 +1,5 @@
 /**
- * Pending package intent for commerce checkout → ITN provision.
+ * Pending commerce basket intent for checkout → ITN provision.
  * File-backed when persist enabled (same pattern as product-access).
  */
 
@@ -11,7 +11,7 @@ import { subscribeOrganisationToPackage } from "@/lib/commercial/provisioning";
 
 type PendingIntent = {
   readonly organisationId: string;
-  readonly packageId: string;
+  readonly packageIds: readonly string[];
   readonly planId: string;
   readonly ownerUserId?: string;
   readonly invoiceId?: string;
@@ -44,7 +44,18 @@ function hydrate(): void {
   try {
     const raw = readFileSync(join(dataDir(), "ledger.json"), "utf8");
     const parsed = JSON.parse(raw) as Store;
-    if (Array.isArray(parsed.intents)) store = { intents: parsed.intents };
+    if (Array.isArray(parsed.intents)) {
+      store = {
+        intents: parsed.intents.map((row) => ({
+          ...row,
+          packageIds: Array.isArray(row.packageIds)
+            ? row.packageIds
+            : (row as { packageId?: string }).packageId
+              ? [(row as { packageId: string }).packageId]
+              : [],
+        })),
+      };
+    }
   } catch {
     store = { intents: [] };
   }
@@ -61,21 +72,28 @@ export function resetCommerceIntentsForTests(): void {
   hydrated = false;
 }
 
-export function saveCommercePackageIntent(input: {
+function validatePackageIds(packageIds: readonly string[]): readonly string[] {
+  const ids = [...new Set(packageIds.map((id) => id.trim()).filter(Boolean))];
+  if (ids.length === 0) throw new Error("commerce.basket_empty");
+  for (const id of ids) {
+    if (!getPackage(id)) throw new Error("product.package_unknown");
+  }
+  return ids;
+}
+
+export function saveCommerceBasketIntent(input: {
   readonly organisationId: string;
-  readonly packageId: string;
+  readonly packageIds: readonly string[];
   readonly planId: string;
   readonly ownerUserId?: string;
   readonly invoiceId?: string;
 }): PendingIntent {
   hydrate();
-  if (!getPackage(input.packageId)) {
-    throw new Error("product.package_unknown");
-  }
+  const packageIds = validatePackageIds(input.packageIds);
   const now = new Date().toISOString();
   const next: PendingIntent = {
     organisationId: input.organisationId,
-    packageId: input.packageId,
+    packageIds,
     planId: input.planId,
     ownerUserId: input.ownerUserId,
     invoiceId: input.invoiceId,
@@ -90,26 +108,67 @@ export function saveCommercePackageIntent(input: {
   return next;
 }
 
-export function getCommercePackageIntent(
+/** @deprecated use saveCommerceBasketIntent */
+export function saveCommercePackageIntent(input: {
+  readonly organisationId: string;
+  readonly packageId: string;
+  readonly planId: string;
+  readonly ownerUserId?: string;
+  readonly invoiceId?: string;
+}): PendingIntent {
+  return saveCommerceBasketIntent({
+    organisationId: input.organisationId,
+    packageIds: [input.packageId],
+    planId: input.planId,
+    ownerUserId: input.ownerUserId,
+    invoiceId: input.invoiceId,
+  });
+}
+
+export function getCommerceBasketIntent(
   organisationId: string,
 ): PendingIntent | undefined {
   hydrate();
   return store.intents.find((row) => row.organisationId === organisationId);
 }
 
-/** Apply pending package subscription for an organisation (ITN / trial start). */
+/** @deprecated use getCommerceBasketIntent */
+export function getCommercePackageIntent(
+  organisationId: string,
+): PendingIntent | undefined {
+  return getCommerceBasketIntent(organisationId);
+}
+
+/** Apply pending basket subscription for an organisation (ITN only — not trial start). */
+export function applyCommerceBasketIntent(organisationId: string): {
+  readonly applied: boolean;
+  readonly packageIds?: readonly string[];
+} {
+  const intent = getCommerceBasketIntent(organisationId);
+  if (!intent || intent.packageIds.length === 0) return { applied: false };
+  const planId =
+    intent.planId === "plan.individual" ? "plan.individual" : "plan.business";
+  for (const packageId of intent.packageIds) {
+    subscribeOrganisationToPackage({
+      organisationId,
+      packageId,
+      planId,
+      status: "active",
+      // Commercial entitlement only — do not auto-grant users on payment.
+      grantUserIds: undefined,
+    });
+  }
+  return { applied: true, packageIds: intent.packageIds };
+}
+
+/** @deprecated use applyCommerceBasketIntent */
 export function applyCommercePackageIntent(organisationId: string): {
   readonly applied: boolean;
   readonly packageId?: string;
 } {
-  const intent = getCommercePackageIntent(organisationId);
-  if (!intent) return { applied: false };
-  subscribeOrganisationToPackage({
-    organisationId,
-    packageId: intent.packageId,
-    planId: intent.planId === "plan.individual" ? "plan.individual" : "plan.business",
-    status: "active",
-    grantUserIds: intent.ownerUserId ? [intent.ownerUserId] : undefined,
-  });
-  return { applied: true, packageId: intent.packageId };
+  const result = applyCommerceBasketIntent(organisationId);
+  return {
+    applied: result.applied,
+    packageId: result.packageIds?.[0],
+  };
 }

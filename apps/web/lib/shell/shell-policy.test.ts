@@ -16,7 +16,7 @@ describe("shell-policy", () => {
   it("routes platform personas to operator family", () => {
     expect(preferredShellFamily("superadmin")).toBe("operator");
     expect(preferredShellFamily("platform_admin")).toBe("operator");
-    expect(preferredShellFamily("org_admin")).toBe("operator");
+    expect(preferredShellFamily("org_admin")).toBe("desktop");
     expect(preferredShellFamily("finance")).toBe("operator");
     expect(preferredShellFamily("compliance")).toBe("operator");
     expect(preferredShellFamily("support")).toBe("operator");
@@ -27,5 +27,6 @@ describe("shell-policy", () => {
     expect(preferredShellFamily("individual")).toBe("desktop");
     expect(preferredShellFamily("tenant_support")).toBe("desktop");
     expect(isOperatorPersonaKind("tenant_support")).toBe(false);
+    expect(isOperatorPersonaKind("org_admin")).toBe(false);
   });
 });

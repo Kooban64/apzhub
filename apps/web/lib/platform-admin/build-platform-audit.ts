@@ -5,6 +5,10 @@
 import { createPlatformAuditService } from "@apzhub/platform-audit";
 import { listPlatformTenants } from "@apzhub/platform-identity/server";
 
+import {
+  COMMERCIAL_AUDIT_TENANT_ID,
+  createCommercialAuditProvider,
+} from "@/lib/commercial/commercial-audit";
 import type { TenantListField } from "@/lib/platform-admin/tenants-types";
 
 export type PlatformAuditEventRow = {
@@ -47,18 +51,24 @@ export type PlatformAuditPayload = {
 
 /**
  * Platform-wide audit list.
- * APE-Audit currently has no attached domain providers in the HTTP handler;
- * we reuse the same empty-provider facade so we do not invent a second store.
+ * Commercial configuration history is attached as an APE-Audit administration provider.
+ * Domain SoR remains the commercial control-plane history log.
  */
 export async function buildPlatformAdminAudit(): Promise<PlatformAuditPayload> {
-  const audit = createPlatformAuditService({ providers: [] });
+  const audit = createPlatformAuditService({
+    providers: [createCommercialAuditProvider()],
+  });
   const tenants = await listPlatformTenants().catch(() => []);
   const tenantName = new Map(tenants.map((t) => [t.tenantId, t.name]));
+  tenantName.set(COMMERCIAL_AUDIT_TENANT_ID, "Platform");
 
   const collected: PlatformAuditEventRow[] = [];
-  // Fan-out per tenant — providers empty ⇒ empty batches (honest).
-  for (const t of tenants.slice(0, 50)) {
-    const result = await audit.list({ tenantId: t.tenantId, limit: 50 });
+  const tenantIds = [
+    COMMERCIAL_AUDIT_TENANT_ID,
+    ...tenants.slice(0, 50).map((t) => t.tenantId),
+  ];
+  for (const tenantId of tenantIds) {
+    const result = await audit.list({ tenantId, limit: 50 });
     for (const e of result.items) {
       collected.push({
         id: e.id,

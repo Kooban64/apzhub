@@ -519,14 +519,30 @@ const packageAliases = {
     "node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.20.0_kysely@0.29.2_pg@8.22.0/node_modules/drizzle-orm",
   ),
   // APZQEP-140 Caps A–F + readiness chain (APZQEP-150)
+  "@apzhub/qep-suites/presentation": path.resolve(
+    __dirname,
+    "packages/qep-suites/src/presentation/index.ts",
+  ),
   "@apzhub/qep-suites": path.resolve(__dirname, "packages/qep-suites/src/index.ts"),
+  "@apzhub/qep-execution-plans/presentation": path.resolve(
+    __dirname,
+    "packages/qep-execution-plans/src/presentation/index.ts",
+  ),
   "@apzhub/qep-execution-plans": path.resolve(
     __dirname,
     "packages/qep-execution-plans/src/index.ts",
   ),
+  "@apzhub/qep-execution-workspace/presentation": path.resolve(
+    __dirname,
+    "packages/qep-execution-workspace/src/presentation/index.ts",
+  ),
   "@apzhub/qep-execution-workspace": path.resolve(
     __dirname,
     "packages/qep-execution-workspace/src/index.ts",
+  ),
+  "@apzhub/qep-defects/presentation": path.resolve(
+    __dirname,
+    "packages/qep-defects/src/presentation/index.ts",
   ),
   "@apzhub/qep-defects": path.resolve(__dirname, "packages/qep-defects/src/index.ts"),
   "@apzhub/platform-automation": path.resolve(
@@ -537,6 +553,10 @@ const packageAliases = {
     __dirname,
     "packages/platform-orchestration/src/index.ts",
   ),
+  "@apzhub/qep-automation/presentation": path.resolve(
+    __dirname,
+    "packages/qep-automation/src/presentation/index.ts",
+  ),
   "@apzhub/qep-automation": path.resolve(
     __dirname,
     "packages/qep-automation/src/index.ts",
@@ -546,10 +566,26 @@ const packageAliases = {
     __dirname,
     "packages/platform-quality-intelligence/src/index.ts",
   ),
+  "@apzhub/qep-scm/presentation": path.resolve(
+    __dirname,
+    "packages/qep-scm/src/presentation/index.ts",
+  ),
   "@apzhub/qep-scm": path.resolve(__dirname, "packages/qep-scm/src/index.ts"),
   "@apzhub/qep-quality-intelligence": path.resolve(
     __dirname,
     "packages/qep-quality-intelligence/src/index.ts",
+  ),
+  "@apzhub/qep-evidence/presentation": path.resolve(
+    __dirname,
+    "packages/qep-evidence/src/presentation/index.ts",
+  ),
+  "@apzhub/qep-test-execution/presentation": path.resolve(
+    __dirname,
+    "packages/qep-test-execution/src/presentation/index.ts",
+  ),
+  "@apzhub/qep-test-execution": path.resolve(
+    __dirname,
+    "packages/qep-test-execution/src/index.ts",
   ),
   "@apzhub/platform-dashboard": path.resolve(
     __dirname,

@@ -51,38 +51,36 @@ export const PRODUCTIVITY_BUNDLE = {
 export const MARKETING_SITES: Record<MarketingSiteId, MarketingSiteConfig> = {
   hub: {
     id: "hub",
-    brand: "APZHUB",
-    tagline: "Quality, Security & Delivery Excellence",
+    brand: "APZ",
+    tagline: "Productivity · Quality · Security",
     publicHosts: ["apzhub.apzportal.apzor.com", "localhost", "127.0.0.1"],
     pathPrefix: "",
-    primaryCta: { href: "/marketplace", label: "Get started" },
-    secondaryCta: { href: "/contact", label: "Book a consultation" },
+    primaryCta: { href: "/register", label: "Get Started" },
+    secondaryCta: { href: "/products", label: "Explore Products" },
     nav: [
+      { href: "/products", label: "Products" },
       {
         href: "/solutions",
         label: "Solutions",
         children: [
           {
-            href: "/solutions/quality",
+            href: "/products/apzqep",
             label: "APZQEP",
-            description: "Quality engineering, testing and release assurance",
+            description: "Quality engineering connected to delivery",
           },
           {
-            href: "/solutions/security",
+            href: "/products/apzpen",
             label: "APZPEN",
-            description: "Penetration testing and continuous security assurance",
+            description: "Professional penetration testing",
           },
           {
-            href: "/solutions/productivity",
+            href: "/products/apzprd",
             label: "APZPRD",
-            description: "Projects, support, time, workflow, analytics and knowledge",
+            description: "Everyday productivity in one workbench",
           },
         ],
       },
-      { href: "/products", label: "Products" },
-      { href: "/marketplace", label: "Marketplace" },
       { href: "/pricing", label: "Pricing" },
-      { href: "/resources", label: "Resources" },
     ],
   },
   qa: {

@@ -1,7 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import type { ReactNode } from "react";
 
+import { SoftProductGate } from "@/components/commercial/soft-product-gate";
 import {
   canAdminTime,
   canCreateActivities,
@@ -28,7 +30,7 @@ import { TimeTagsView } from "./time-tags-view";
 import { TimeTimesheetCreateView } from "./time-timesheet-create-view";
 import { TimeTimesheetDetailView } from "./time-timesheet-detail-view";
 import { TimeTimesheetsView } from "./time-timesheets-view";
-import { EmptyState, PageShell } from "./time-ui";
+import { EmptyState, LoadingState, PageShell } from "./time-ui";
 
 function PermissionDenied({ action }: { readonly action: string }) {
   return (
@@ -54,66 +56,89 @@ export function TimeWorkspaceRouter({
   const route = resolveTimeRoute(pathname);
   const permissions = useTimePermissions(permissionsOverride);
 
+  let content: ReactNode;
   switch (route.kind) {
     case "dashboard":
-      return <TimeDashboardView permissions={permissions} />;
+      content = <TimeDashboardView permissions={permissions} />;
+      break;
     case "timesheets":
-      return <TimeTimesheetsView permissions={permissions} />;
+      content = <TimeTimesheetsView permissions={permissions} />;
+      break;
     case "timesheet-create":
-      if (!canCreateTimesheets(permissions)) {
-        return <PermissionDenied action="create timesheets" />;
-      }
-      return <TimeTimesheetCreateView />;
+      content = !canCreateTimesheets(permissions) ? (
+        <PermissionDenied action="create timesheets" />
+      ) : (
+        <TimeTimesheetCreateView />
+      );
+      break;
     case "timesheet-detail":
-      return (
+      content = (
         <TimeTimesheetDetailView
           key={route.timesheetId}
           timesheetId={route.timesheetId}
           permissions={permissions}
         />
       );
+      break;
     case "activities":
-      return <TimeActivitiesView permissions={permissions} />;
+      content = <TimeActivitiesView permissions={permissions} />;
+      break;
     case "activity-create":
-      if (!canCreateActivities(permissions)) {
-        return <PermissionDenied action="create activities" />;
-      }
-      return <TimeActivityCreateView />;
+      content = !canCreateActivities(permissions) ? (
+        <PermissionDenied action="create activities" />
+      ) : (
+        <TimeActivityCreateView />
+      );
+      break;
     case "customers":
-      return <TimeCustomersView permissions={permissions} />;
+      content = <TimeCustomersView permissions={permissions} />;
+      break;
     case "customer-create":
-      if (!canCreateCustomers(permissions)) {
-        return <PermissionDenied action="create customers" />;
-      }
-      return <TimeCustomerCreateView />;
+      content = !canCreateCustomers(permissions) ? (
+        <PermissionDenied action="create customers" />
+      ) : (
+        <TimeCustomerCreateView />
+      );
+      break;
     case "tags":
-      return <TimeTagsView permissions={permissions} />;
+      content = <TimeTagsView permissions={permissions} />;
+      break;
     case "tag-create":
-      if (!canCreateTags(permissions)) {
-        return <PermissionDenied action="create tags" />;
-      }
-      return <TimeTagCreateView />;
+      content = !canCreateTags(permissions) ? (
+        <PermissionDenied action="create tags" />
+      ) : (
+        <TimeTagCreateView />
+      );
+      break;
     case "search":
-      return <TimeSearchView />;
+      content = <TimeSearchView />;
+      break;
     case "help":
-      return <TimeHelpView />;
+      content = <TimeHelpView />;
+      break;
     case "settings":
-      if (!canAdminTime(permissions)) {
-        return <PermissionDenied action="manage APZ Time settings" />;
-      }
-      return <TimeSettingsView />;
+      content = !canAdminTime(permissions) ? (
+        <PermissionDenied action="manage APZ Time settings" />
+      ) : (
+        <TimeSettingsView />
+      );
+      break;
     case "health":
-      if (!canAdminTime(permissions)) {
-        return <PermissionDenied action="view APZ Time health" />;
-      }
-      return <TimeHealthView />;
+      content = !canAdminTime(permissions) ? (
+        <PermissionDenied action="view APZ Time health" />
+      ) : (
+        <TimeHealthView />
+      );
+      break;
     case "diagnostics":
-      if (!canAdminTime(permissions)) {
-        return <PermissionDenied action="view APZ Time platform readiness" />;
-      }
-      return <TimeDiagnosticsView />;
+      content = !canAdminTime(permissions) ? (
+        <PermissionDenied action="view APZ Time platform readiness" />
+      ) : (
+        <TimeDiagnosticsView />
+      );
+      break;
     default:
-      return (
+      content = (
         <PageShell title="APZ Time" breadcrumbs={["APZ Time", "Unknown"]}>
           <EmptyState
             title="Unknown APZ Time route"
@@ -122,4 +147,18 @@ export function TimeWorkspaceRouter({
         </PageShell>
       );
   }
+
+  return (
+    <SoftProductGate
+      productKey="time"
+      productLabel="APZ Time"
+      loading={
+        <PageShell title="APZ Time" breadcrumbs={["APZ Time"]}>
+          <LoadingState label="Checking product access…" />
+        </PageShell>
+      }
+    >
+      {content}
+    </SoftProductGate>
+  );
 }

@@ -166,7 +166,7 @@ export async function buildOrganisationAdminRolesAccess(
             : "Direct assignment",
         scopeLabel: "Organisation",
         personHref: `${ORGANISATION_ADMIN_BASE}/people/${encodeURIComponent(userId)}`,
-        productHref: productHref(a.productKey, tenantId),
+        productHref: productHref(a.productKey),
       });
     }
   }

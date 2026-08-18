@@ -1,7 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import type { ReactNode } from "react";
 
+import { SoftProductGate } from "@/components/commercial/soft-product-gate";
 import {
   canAdminWorkflow,
   canViewWorkflow,
@@ -39,7 +41,12 @@ import { WorkflowSearchView } from "./workflow-search-view";
 import { WorkflowSettingsView } from "./workflow-settings-view";
 import { WorkflowTaskDetailView } from "./workflow-task-detail-view";
 import { WorkflowTasksView } from "./workflow-tasks-view";
-import { EmptyState, PageShell, WORKFLOW_PRODUCT_NAME } from "./workflow-ui";
+import {
+  EmptyState,
+  LoadingState,
+  PageShell,
+  WORKFLOW_PRODUCT_NAME,
+} from "./workflow-ui";
 
 function PermissionDenied({ action }: { readonly action: string }) {
   return (
@@ -67,6 +74,28 @@ export function WorkflowWorkspaceRouter({
   const route = resolveWorkflowRoute(pathname);
   const permissions = useWorkflowPermissions(permissionsOverride);
 
+  return (
+    <SoftProductGate
+      productKey="workflow"
+      productLabel={WORKFLOW_PRODUCT_NAME}
+      loading={
+        <PageShell title={WORKFLOW_PRODUCT_NAME} breadcrumbs={[WORKFLOW_PRODUCT_NAME]}>
+          <LoadingState label="Checking product access…" />
+        </PageShell>
+      }
+    >
+      <WorkflowRouteSwitch route={route} permissions={permissions} />
+    </SoftProductGate>
+  );
+}
+
+function WorkflowRouteSwitch({
+  route,
+  permissions,
+}: {
+  readonly route: ReturnType<typeof resolveWorkflowRoute>;
+  readonly permissions: ReturnType<typeof useWorkflowPermissions>;
+}): ReactNode {
   if (route.kind === "help") {
     return <WorkflowHelpView />;
   }

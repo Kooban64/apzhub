@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { MetricOrGap } from "@/components/platform-admin/ops-status-badge";
 import type { PlatformBillingPayload } from "@/lib/platform-admin/build-platform-billing";
+import { PlatformAdminCataloguePrices } from "@/components/platform-admin/platform-admin-catalogue-prices";
 
 async function fetchBilling(): Promise<PlatformBillingPayload> {
   const res = await fetch("/api/v1/platform-admin/billing", { cache: "no-store" });
@@ -18,10 +19,12 @@ async function fetchBilling(): Promise<PlatformBillingPayload> {
   return body.data;
 }
 
-type TabId = "overview" | "invoices" | "payments" | "billing-issues";
+type TabId =
+  "overview" | "catalogue-prices" | "invoices" | "payments" | "billing-issues";
 
 const TABS: readonly { id: TabId; label: string }[] = [
   { id: "overview", label: "Overview" },
+  { id: "catalogue-prices", label: "Catalogue prices" },
   { id: "invoices", label: "Invoices" },
   { id: "payments", label: "Payments" },
   { id: "billing-issues", label: "Billing Issues" },
@@ -49,7 +52,11 @@ function GapPanel({
   );
 }
 
-export function PlatformAdminBillingView() {
+export function PlatformAdminBillingView({
+  embedded = false,
+}: {
+  readonly embedded?: boolean;
+}) {
   const q = useQuery({
     queryKey: ["platform-admin", "billing"],
     queryFn: fetchBilling,
@@ -57,34 +64,43 @@ export function PlatformAdminBillingView() {
   const [tab, setTab] = useState<TabId>("overview");
 
   return (
-    <div className="flex flex-col gap-3 p-4" data-testid="platform-admin-billing">
-      <div>
-        <h1 className="text-lg font-semibold tracking-tight">Billing</h1>
-        <p className="text-xs text-[var(--color-muted-foreground)]">
-          Platform commercial operations
-        </p>
-      </div>
+    <div
+      className={embedded ? "flex flex-col gap-3" : "flex flex-col gap-3 p-4"}
+      data-testid={
+        embedded ? "platform-admin-billing-overview" : "platform-admin-billing"
+      }
+    >
+      {embedded ? null : (
+        <>
+          <div>
+            <h1 className="text-lg font-semibold tracking-tight">Billing</h1>
+            <p className="text-xs text-[var(--color-muted-foreground)]">
+              Platform commercial operations
+            </p>
+          </div>
 
-      <div
-        role="tablist"
-        className="flex flex-wrap gap-1 border-b border-[var(--color-border)] pb-2"
-      >
-        {TABS.map((t) => (
-          <button
-            key={t.id}
-            type="button"
-            role="tab"
-            aria-selected={tab === t.id}
-            className={`rounded px-2.5 py-1.5 text-xs ${
-              tab === t.id ? "bg-[var(--color-muted)] font-medium" : "opacity-70"
-            }`}
-            onClick={() => setTab(t.id)}
-            data-testid={`billing-tab-${t.id}`}
+          <div
+            role="tablist"
+            className="flex flex-wrap gap-1 border-b border-[var(--color-border)] pb-2"
           >
-            {t.label}
-          </button>
-        ))}
-      </div>
+            {TABS.map((t) => (
+              <button
+                key={t.id}
+                type="button"
+                role="tab"
+                aria-selected={tab === t.id}
+                className={`rounded px-2.5 py-1.5 text-xs ${
+                  tab === t.id ? "bg-[var(--color-muted)] font-medium" : "opacity-70"
+                }`}
+                onClick={() => setTab(t.id)}
+                data-testid={`billing-tab-${t.id}`}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
 
       {q.isLoading ? (
         <p className="text-xs text-[var(--color-muted-foreground)]">Loading…</p>
@@ -95,7 +111,7 @@ export function PlatformAdminBillingView() {
         </p>
       ) : null}
 
-      {q.data && tab === "overview" ? (
+      {q.data && (embedded || tab === "overview") ? (
         <div className="flex flex-col gap-4" data-testid="billing-overview">
           <section>
             <h2 className="mb-2 text-[11px] font-semibold tracking-wide uppercase">
@@ -211,7 +227,11 @@ export function PlatformAdminBillingView() {
         </div>
       ) : null}
 
-      {q.data && tab === "invoices" ? (
+      {!embedded && q.data && tab === "catalogue-prices" ? (
+        <PlatformAdminCataloguePrices />
+      ) : null}
+
+      {!embedded && q.data && tab === "invoices" ? (
         <GapPanel
           title="Invoices"
           message={q.data.invoices.message}
@@ -219,7 +239,7 @@ export function PlatformAdminBillingView() {
         />
       ) : null}
 
-      {q.data && tab === "payments" ? (
+      {!embedded && q.data && tab === "payments" ? (
         <GapPanel
           title="Payments"
           message={q.data.payments.message}
@@ -227,7 +247,7 @@ export function PlatformAdminBillingView() {
         />
       ) : null}
 
-      {q.data && tab === "billing-issues" ? (
+      {!embedded && q.data && tab === "billing-issues" ? (
         <GapPanel
           title="Billing Issues"
           message={q.data.billingIssues.message}

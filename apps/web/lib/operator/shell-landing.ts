@@ -64,9 +64,9 @@ const LANDINGS: Record<DemoPersonaKind, ShellLanding> = {
     label: "Compliance",
   },
   org_admin: {
-    shell: "org",
-    path: "/organisation-admin",
-    label: "Organisation Admin",
+    shell: "workspace",
+    path: "/workspace/home",
+    label: "Workbench",
   },
   org_member: {
     shell: "workspace",
@@ -100,8 +100,8 @@ export function isOperatorShellPath(pathname: string): boolean {
     pathname.startsWith("/org/") ||
     pathname === "/organisation-admin" ||
     pathname.startsWith("/organisation-admin/") ||
-    pathname === "/apzpen" ||
-    pathname.startsWith("/apzpen/")
+    pathname === "/workspace/pen" ||
+    pathname.startsWith("/workspace/pen/")
   );
 }
 
@@ -110,7 +110,7 @@ export function isWorkbenchPath(pathname: string): boolean {
 }
 
 /** Operator personas must not use productivity DesktopShell as home.
- * Aligns with `preferredShellFamily` — tenant_* staff stay on DesktopShell.
+ * Aligns with `preferredShellFamily` — Org Admin is a Workbench user first.
  */
 export function isOperatorKind(kind: DemoPersonaKind): boolean {
   return (
@@ -118,8 +118,7 @@ export function isOperatorKind(kind: DemoPersonaKind): boolean {
     kind === "platform_admin" ||
     kind === "finance" ||
     kind === "support" ||
-    kind === "compliance" ||
-    kind === "org_admin"
+    kind === "compliance"
   );
 }
 
@@ -166,7 +165,7 @@ export const OPERATOR_MODES: readonly OperatorMode[] = [
   },
   {
     id: "apzpen",
-    href: "/apzpen",
+    href: "/workspace/pen",
     label: "Security Assurance",
     shortLabel: "APZPEN",
   },
@@ -299,24 +298,24 @@ export const ORG_NAV: readonly OperatorNavItem[] = [
 ];
 
 export const APZPEN_NAV: readonly OperatorNavItem[] = [
-  { id: "overview", href: "/apzpen", label: "Home" },
-  { id: "my-work", href: "/apzpen/my-work", label: "My Work" },
-  { id: "engagements", href: "/apzpen/engagements", label: "Engagements" },
-  { id: "findings", href: "/apzpen/findings", label: "Findings" },
-  { id: "remediation", href: "/apzpen/remediation", label: "Remediation" },
-  { id: "retests", href: "/apzpen/retests", label: "Retests" },
+  { id: "overview", href: "/workspace/pen", label: "Home" },
+  { id: "my-work", href: "/workspace/pen/my-work", label: "My Work" },
+  { id: "engagements", href: "/workspace/pen/engagements", label: "Engagements" },
+  { id: "findings", href: "/workspace/pen/findings", label: "Findings" },
+  { id: "remediation", href: "/workspace/pen/remediation", label: "Remediation" },
+  { id: "retests", href: "/workspace/pen/retests", label: "Retests" },
   {
     id: "risk-acceptance",
-    href: "/apzpen/risk-acceptance",
+    href: "/workspace/pen/risk-acceptance",
     label: "Risk acceptance",
   },
-  { id: "evidence", href: "/apzpen/evidence", label: "Evidence" },
-  { id: "certification", href: "/apzpen/certification", label: "Assurance" },
-  { id: "assets", href: "/apzpen/assets", label: "Assets" },
-  { id: "code", href: "/apzpen/code", label: "Code security" },
-  { id: "intelligence", href: "/apzpen/intelligence", label: "Intelligence" },
-  { id: "providers", href: "/apzpen/providers", label: "Providers" },
-  { id: "reports", href: "/apzpen/reports", label: "Reports" },
+  { id: "evidence", href: "/workspace/pen/evidence", label: "Evidence" },
+  { id: "certification", href: "/workspace/pen/certification", label: "Assurance" },
+  { id: "assets", href: "/workspace/pen/assets", label: "Assets" },
+  { id: "code", href: "/workspace/pen/code", label: "Code security" },
+  { id: "intelligence", href: "/workspace/pen/intelligence", label: "Intelligence" },
+  { id: "providers", href: "/workspace/pen/providers", label: "Providers" },
+  { id: "reports", href: "/workspace/pen/reports", label: "Reports" },
 ];
 
 export function navForShell(shell: OperatorShellId): readonly OperatorNavItem[] {

@@ -87,7 +87,7 @@ describe("composeWorkbenchRail", () => {
     expect(rail.productivityProducts).toEqual([]);
   });
 
-  it("builds productivity launcher sidebar from effective access", () => {
+  it("builds productivity launcher sidebar from effective access with My Work first", () => {
     const rail = composeWorkbenchRail({
       activityBarItems: sampleBar,
       sidebarItems: [],
@@ -98,8 +98,138 @@ describe("composeWorkbenchRail", () => {
     expect(rail.mode).toBe("productivity-launcher");
     expect(rail.sidebarTitle).toBe("PRODUCTIVITY");
     expect(rail.contextSidebarItems.map((i) => i.label)).toEqual([
+      "My Work",
+      "",
       "Projects",
       "Knowledge",
     ]);
+  });
+
+  it("uses product context sidebar when inside an entitled product", () => {
+    const rail = composeWorkbenchRail({
+      activityBarItems: sampleBar,
+      sidebarItems: [{ id: "legacy", label: "Legacy dump", active: false }],
+      effectiveProducts: ["projects", "support"],
+      pathname: "/workspace/projects/tasks",
+    });
+    expect(rail.mode).toBe("product");
+    expect(rail.sidebarTitle).toBe("PROJECTS");
+    expect(rail.contextSidebarItems.map((i) => i.label)).toContain("My Tasks");
+    expect(rail.contextSidebarItems.map((i) => i.label)).toContain("Tasks");
+    expect(rail.contextSidebarItems.map((i) => i.id)).not.toContain("legacy");
+  });
+
+  it("omits inaccessible products from productivity launcher", () => {
+    const rail = composeWorkbenchRail({
+      activityBarItems: sampleBar,
+      sidebarItems: [],
+      effectiveProducts: ["time"],
+      pathname: "/workspace/home",
+      activeRailId: "productivity",
+    });
+    expect(rail.contextSidebarItems.map((i) => i.label)).toEqual([
+      "My Work",
+      "",
+      "Time",
+    ]);
+    expect(rail.contextSidebarItems.map((i) => i.label)).not.toContain("Projects");
+  });
+
+  it("explicit Productivity rail click forces launcher even on a product path", () => {
+    const rail = composeWorkbenchRail({
+      activityBarItems: sampleBar,
+      sidebarItems: [],
+      effectiveProducts: ["projects", "time"],
+      pathname: "/workspace/projects/tasks",
+      activeRailId: "productivity",
+    });
+    expect(rail.mode).toBe("productivity-launcher");
+    expect(rail.contextSidebarItems.map((i) => i.label)).toContain("My Work");
+    expect(rail.contextSidebarItems.map((i) => i.label)).toContain("Projects");
+  });
+
+  it("Quality sidebar uses composeQep Owner vocabulary (Overview / Applications / Test Library)", () => {
+    const rail = composeWorkbenchRail({
+      activityBarItems: sampleBar,
+      sidebarItems: [{ id: "legacy", label: "Legacy dump", active: false }],
+      effectiveProducts: ["qep"],
+      pathname: "/workspace/qep",
+    });
+    expect(rail.mode).toBe("quality");
+    expect(rail.sidebarTitle).toBe("QUALITY");
+    const labels = rail.contextSidebarItems.map((i) => i.label);
+    expect(labels).toContain("Overview");
+    expect(labels).toContain("Applications");
+    expect(labels).toContain("Test Library");
+    expect(labels).not.toContain("Legacy dump");
+    expect(rail.contextSidebarItems.some((i) => i.id === "qep-source")).toBe(false);
+  });
+
+  it("includes Source in Quality sidebar only when hasSourceAccess", () => {
+    const without = composeWorkbenchRail({
+      activityBarItems: sampleBar,
+      sidebarItems: [],
+      effectiveProducts: ["qep"],
+      pathname: "/workspace/qep",
+      hasSourceAccess: false,
+    });
+    expect(without.contextSidebarItems.some((i) => i.id === "qep-source")).toBe(false);
+
+    const withAccess = composeWorkbenchRail({
+      activityBarItems: sampleBar,
+      sidebarItems: [],
+      effectiveProducts: ["qep"],
+      pathname: "/workspace/qep",
+      hasSourceAccess: true,
+    });
+    expect(withAccess.contextSidebarItems.some((i) => i.id === "qep-source")).toBe(
+      true,
+    );
+  });
+
+  it("shows Source rail only when hasSourceAccess", () => {
+    const without = composeWorkbenchRail({
+      activityBarItems: sampleBar,
+      sidebarItems: [],
+      effectiveProducts: ["qep"],
+      pathname: "/workspace/home",
+      hasSourceAccess: false,
+    });
+    expect(without.primary.some((i) => i.id === "source")).toBe(false);
+
+    const withAccess = composeWorkbenchRail({
+      activityBarItems: sampleBar,
+      sidebarItems: [],
+      effectiveProducts: ["qep"],
+      pathname: "/workspace/home",
+      hasSourceAccess: true,
+    });
+    expect(withAccess.primary.some((i) => i.id === "source")).toBe(true);
+  });
+
+  it("includes Security rail when pentest is entitled", () => {
+    const rail = composeWorkbenchRail({
+      activityBarItems: sampleBar,
+      sidebarItems: [],
+      effectiveProducts: ["pentest"],
+      pathname: "/workspace/pen",
+    });
+    expect(rail.primary.some((i) => i.id === "security")).toBe(true);
+    expect(rail.mode).toBe("security");
+    expect(rail.sidebarTitle).toBe("SECURITY");
+    expect(rail.contextSidebarItems.map((i) => i.id)).toContain("pen-overview");
+    expect(rail.contextSidebarItems.map((i) => i.id)).toContain("pen-findings");
+  });
+
+  it("omits Security when pentest is not entitled", () => {
+    const rail = composeWorkbenchRail({
+      activityBarItems: sampleBar.filter(
+        (i) => !/pen|security|pentest/i.test(`${i.id} ${i.label}`),
+      ),
+      sidebarItems: [],
+      effectiveProducts: ["projects"],
+      pathname: "/workspace/home",
+    });
+    expect(rail.primary.some((i) => i.id === "security")).toBe(false);
   });
 });

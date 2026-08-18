@@ -6,6 +6,7 @@ import {
   WorkbenchShellLayout,
   type ActivityBarItem,
   type SidebarItem,
+  type WorkbenchBottomTabId,
   type WorkbenchShellLayoutState,
   type WorkbenchStatusBarProps,
 } from "@apzhub/ui";
@@ -53,8 +54,16 @@ export interface DesktopShellProps {
   mobileNav?: ReactNode;
   onLayoutStateChange?: (state: WorkbenchShellLayoutState) => void;
   inspectorDefaultCollapsed?: boolean;
+  /** Selection content for the shell Inspector (task, ticket, document, …). */
+  inspectorContent?: ReactNode;
+  inspectorTitle?: string;
+  /** When set/changed, expand the inspector (selection pattern). */
+  inspectorExpandToken?: string | number | null;
   bottomDefaultCollapsed?: boolean;
   sidebarDefaultCollapsed?: boolean;
+  /** Optional content for bottom tabs (Terminal stays Not configured). */
+  bottomPanelContent?: Partial<Record<WorkbenchBottomTabId, ReactNode>>;
+  bottomTabLabels?: Partial<Record<WorkbenchBottomTabId, string>>;
   enableGlobalSearch?: boolean;
   globalSearchOpen?: boolean;
   onGlobalSearchOpenChange?: (open: boolean) => void;
@@ -202,8 +211,13 @@ export function DesktopShell({
   mobileNav,
   onLayoutStateChange,
   inspectorDefaultCollapsed = true,
+  inspectorContent,
+  inspectorTitle = "Inspector",
+  inspectorExpandToken = null,
   bottomDefaultCollapsed = true,
   sidebarDefaultCollapsed = false,
+  bottomPanelContent,
+  bottomTabLabels,
   enableGlobalSearch = false,
   globalSearchOpen,
   onGlobalSearchOpenChange,
@@ -287,7 +301,17 @@ export function DesktopShell({
   );
 
   const inspector =
-    enableActivityTimeline && enableActivityTimelinePanel ? (
+    inspectorContent != null ? (
+      <div
+        className="flex h-full min-h-0 flex-col"
+        data-testid="workbench-inspector-selection"
+      >
+        <div className="border-b border-[var(--color-border)] px-3 py-2 text-[11px] font-semibold tracking-wide uppercase">
+          {inspectorTitle}
+        </div>
+        <div className="min-h-0 flex-1 overflow-auto p-3">{inspectorContent}</div>
+      </div>
+    ) : enableActivityTimeline && enableActivityTimelinePanel ? (
       <div
         className="flex h-full min-h-0 flex-col"
         data-testid="workbench-context-panel"
@@ -364,8 +388,11 @@ export function DesktopShell({
       header={resolvedHeader}
       inspector={inspector}
       inspectorDefaultCollapsed={inspectorDefaultCollapsed}
+      inspectorExpandToken={inspectorExpandToken}
       bottomDefaultCollapsed={bottomDefaultCollapsed}
       sidebarDefaultCollapsed={sidebarDefaultCollapsed}
+      bottomPanelContent={bottomPanelContent}
+      bottomTabLabels={bottomTabLabels}
       onLayoutStateChange={onLayoutStateChange}
       statusBar={statusBar}
       mobileNav={mobileNav}

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
@@ -11,10 +11,17 @@ import {
   parseSourceRepositoryMode,
   SOURCE_ROUTES,
 } from "@/lib/source/routes";
+import { parseSourceFileQuery } from "@/lib/source/qep-source-links";
+import { parseSourcePenQuery } from "@/lib/source/pen-source-links";
+import { APZPEN_WB } from "@/lib/apzpen/workbench-routes";
 import { buildSourceFileTree, flattenSourceFileTree } from "@/lib/source/file-tree";
 import { SourceLineEditor } from "@/components/source/source-line-editor";
 import { SourceReviewView } from "@/components/source/source-review-view";
 import { SourceAdminView } from "@/components/source/source-admin-view";
+import {
+  QEP_TEST_SPECIFICATION_ROUTES,
+  QEP_TEST_EXECUTION_ROUTES,
+} from "@/lib/qep/routes";
 import {
   closeTab,
   cycleTabPath,
@@ -32,6 +39,12 @@ import {
   QEP_QUALITY_GRAPH_ROUTES,
   QEP_SCM_ROUTES,
 } from "@/lib/qep/routes";
+
+/**
+ * Workbench Slice 3 = Phase 1 Read+Context — do not expose write/PR/merge/admin write chrome.
+ * Hide editor commit / PR / admin write UI regardless of capability flags for this slice.
+ */
+const SOURCE_SLICE3_READ_CONTEXT_ONLY = true;
 
 type RepositoryRow = {
   repositoryId: string;
@@ -77,6 +90,8 @@ async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
 /**
  * Shared Source Workspace — Phase E browse + permission-gated write.
  * Provider-neutral; QEP/PEN overlays remain product-owned.
+ *
+ * Workbench Slice 3 = Phase 1 Read+Context — do not expose write/PR/merge/admin write chrome.
  */
 export function SourceWorkspaceView() {
   const pathname = usePathname() ?? "";
@@ -99,6 +114,21 @@ export function SourceWorkspaceView() {
   return <SourceHomeView />;
 }
 
+function SourceAccessDenied({ message }: { readonly message: string }) {
+  return (
+    <div
+      className="flex h-full flex-col items-start justify-center gap-2 p-6"
+      data-testid="source-access-denied"
+      role="alert"
+    >
+      <h1 className="text-lg font-semibold text-[var(--color-foreground)]">
+        Access denied
+      </h1>
+      <p className="max-w-xl text-sm text-[var(--color-muted-foreground)]">{message}</p>
+    </div>
+  );
+}
+
 function RepositoryModeShell({
   repositoryId,
   mode,
@@ -111,7 +141,28 @@ function RepositoryModeShell({
     queryFn: () =>
       fetchJson<{ canRead: boolean; canWrite: boolean }>("/api/v1/source/capabilities"),
   });
-  const canWrite = capabilitiesQuery.data?.canWrite === true;
+  // Slice 3 Read+Context: force write UI off even if capability grants write.
+  const canWrite =
+    !SOURCE_SLICE3_READ_CONTEXT_ONLY && capabilitiesQuery.data?.canWrite === true;
+  const canRead = capabilitiesQuery.data?.canRead === true;
+
+  if (capabilitiesQuery.isLoading) {
+    return (
+      <Shell
+        title={mode === "review" ? "Source · Review" : "Source · Admin"}
+        description="Checking Source access…"
+      >
+        <p className="text-xs text-[var(--color-muted-foreground)]">Loading…</p>
+      </Shell>
+    );
+  }
+
+  if (capabilitiesQuery.isSuccess && !canRead) {
+    return (
+      <SourceAccessDenied message="Source access is not assigned for this repository." />
+    );
+  }
+
   return (
     <Shell
       title={mode === "review" ? "Source · Review" : "Source · Admin"}
@@ -207,16 +258,37 @@ function Shell({
 }
 
 function SourceHomeView() {
+  const capabilitiesQuery = useQuery({
+    queryKey: ["source-workspace", "capabilities"],
+    queryFn: () =>
+      fetchJson<{ canRead: boolean; canWrite: boolean }>("/api/v1/source/capabilities"),
+  });
+  const canRead = capabilitiesQuery.data?.canRead === true;
+
   const repositoriesQuery = useQuery({
     queryKey: ["source-workspace", "repositories"],
     queryFn: () =>
       fetchJson<{ repositories: RepositoryRow[] }>("/api/v1/qep/scm/repositories"),
+    enabled: capabilitiesQuery.isSuccess && canRead,
   });
   const changesQuery = useQuery({
     queryKey: ["source-workspace", "changes"],
     queryFn: () =>
       fetchJson<{ changes: ChangeRow[] }>("/api/v1/qep/scm/changes?limit=30"),
+    enabled: capabilitiesQuery.isSuccess && canRead,
   });
+
+  if (capabilitiesQuery.isLoading) {
+    return (
+      <Shell title="Source" description="Checking Source Workspace access…">
+        <p className="text-xs text-[var(--color-muted-foreground)]">Loading…</p>
+      </Shell>
+    );
+  }
+
+  if (capabilitiesQuery.isSuccess && !canRead) {
+    return <SourceAccessDenied message="Source Workspace access is not assigned." />;
+  }
 
   const repositories = repositoriesQuery.data?.repositories ?? [];
   const changes = changesQuery.data?.changes ?? [];
@@ -224,7 +296,7 @@ function SourceHomeView() {
   return (
     <Shell
       title="Source"
-      description="Browse and edit APZ repositories. Providers stay behind adapters — shared platform surface for Quality and Security overlays."
+      description="Browse APZ repositories (Read+Context). Providers stay behind adapters — shared platform surface for Quality and Security overlays."
     >
       <div className="grid gap-4 lg:grid-cols-2">
         <section
@@ -310,9 +382,15 @@ function SourceHomeView() {
 
 function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: string }) {
   const queryClient = useQueryClient();
+  const searchParams = useSearchParams();
+  const fileQuery = parseSourceFileQuery(searchParams?.toString() ?? "");
+  const penQuery = parseSourcePenQuery(searchParams?.toString() ?? "");
   const [branch, setBranch] = useState("main");
   const [tabs, setTabs] = useState<readonly SourceEditorTab[]>([]);
   const [activePath, setActivePath] = useState<string | null>(null);
+  const [revealLine, setRevealLine] = useState<number | undefined>(
+    fileQuery.line ?? undefined,
+  );
   const [treeFocus, setTreeFocus] = useState(0);
   const [commitMessage, setCommitMessage] = useState("");
   const [newBranchName, setNewBranchName] = useState("");
@@ -399,6 +477,11 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
     if (defaultBranch) setBranch(defaultBranch);
   }, [detailQuery.data?.repository.defaultBranch]);
 
+  // Slice 3 Read+Context: force write UI off even if capability grants write.
+  const canWrite =
+    !SOURCE_SLICE3_READ_CONTEXT_ONLY && capabilitiesQuery.data?.canWrite === true;
+  const canRead = capabilitiesQuery.data?.canRead === true;
+
   const openFile = async (path: string) => {
     const existing = tabs.find((tab) => tab.path === path);
     if (existing) {
@@ -419,8 +502,14 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
     }
   };
 
+  useEffect(() => {
+    if (!fileQuery.path || !canRead) return;
+    void openFile(fileQuery.path);
+    if (fileQuery.line) setRevealLine(fileQuery.line);
+    // Deep-link open once per repository/path.
+  }, [repositoryId, fileQuery.path, canRead]);
+
   const dirty = activeTab ? isTabDirty(activeTab) : false;
-  const canWrite = capabilitiesQuery.data?.canWrite === true;
   const repository = detailQuery.data?.repository;
   const entries = treeQuery.data?.entries ?? [];
   const fileEntries = entries.filter((entry) => entry.type === "file");
@@ -587,10 +676,24 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [activePath, tabs, fileEntries, treeFocus]);
 
+  if (capabilitiesQuery.isLoading) {
+    return (
+      <Shell title="Repository" description="Checking Source access…">
+        <p className="text-xs text-[var(--color-muted-foreground)]">Loading…</p>
+      </Shell>
+    );
+  }
+
+  if (capabilitiesQuery.isSuccess && !canRead) {
+    return (
+      <SourceAccessDenied message="Source access is not assigned for this repository." />
+    );
+  }
+
   return (
     <Shell
       title={repository?.fullName ?? "Repository"}
-      description="Shared Source workspace — tabs, keyboard tree (j/k · Enter), commit, and change requests. Write requires source.write."
+      description="Shared Source workspace — tabs, keyboard tree (j/k · Enter), and read context. Write requires a later slice (source.write)."
       actions={
         <div className="flex flex-wrap items-center gap-3">
           <span
@@ -848,6 +951,10 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
                 setTabs(updateTabDraft(tabs, activePath, next));
               }}
               readOnly={!canWrite || !activeTab}
+              path={activePath ?? undefined}
+              revealLine={
+                activePath && fileQuery.path === activePath ? revealLine : undefined
+              }
             />
           )}
           {canWrite && activeTab ? (
@@ -873,6 +980,92 @@ function RepositoryWorkspaceView({ repositoryId }: { readonly repositoryId: stri
         </section>
 
         <aside className="space-y-3" data-testid="source-context-pane">
+          {fileQuery.qepTestId || fileQuery.qepRunId ? (
+            <section
+              className="rounded-lg border border-[var(--color-border)] p-3 text-sm"
+              data-testid="source-qep-context"
+            >
+              <h2 className="mb-2 text-xs font-semibold tracking-wide text-[var(--color-muted-foreground)] uppercase">
+                Related Quality
+              </h2>
+              {fileQuery.qepTestId ? (
+                <p className="text-xs">
+                  Test{" "}
+                  <Link
+                    href={QEP_TEST_SPECIFICATION_ROUTES.detail(fileQuery.qepTestId)}
+                    className="font-medium underline underline-offset-2"
+                    data-testid="source-qep-open-test"
+                  >
+                    {fileQuery.qepTestId}
+                  </Link>
+                </p>
+              ) : null}
+              {fileQuery.qepRunId ? (
+                <p className="mt-1 text-xs">
+                  Run{" "}
+                  <Link
+                    href={QEP_TEST_EXECUTION_ROUTES.detail(fileQuery.qepRunId)}
+                    className="font-medium underline underline-offset-2"
+                  >
+                    {fileQuery.qepRunId}
+                  </Link>
+                </p>
+              ) : null}
+              {fileQuery.qepTestId ? (
+                <p className="mt-2">
+                  <Link
+                    href={QEP_TEST_SPECIFICATION_ROUTES.detail(fileQuery.qepTestId)}
+                    className="text-[11px] underline underline-offset-2"
+                  >
+                    ← Back to Test
+                  </Link>
+                </p>
+              ) : null}
+            </section>
+          ) : null}
+          {penQuery.penFindingId || penQuery.penEngagementId ? (
+            <section
+              className="rounded-lg border border-[var(--color-border)] p-3 text-sm"
+              data-testid="source-pen-context"
+            >
+              <h2 className="mb-2 text-xs font-semibold tracking-wide text-[var(--color-muted-foreground)] uppercase">
+                Related Security
+              </h2>
+              {penQuery.penEngagementId ? (
+                <p className="text-xs">
+                  Engagement{" "}
+                  <Link
+                    href={APZPEN_WB.engagement(penQuery.penEngagementId)}
+                    className="font-medium underline underline-offset-2"
+                  >
+                    {penQuery.penEngagementId}
+                  </Link>
+                </p>
+              ) : null}
+              {penQuery.penFindingId ? (
+                <p className="mt-1 text-xs">
+                  Finding{" "}
+                  <Link
+                    href={APZPEN_WB.finding(penQuery.penFindingId)}
+                    className="font-medium underline underline-offset-2"
+                    data-testid="source-pen-open-finding"
+                  >
+                    {penQuery.penFindingId}
+                  </Link>
+                </p>
+              ) : null}
+              {penQuery.penFindingId ? (
+                <p className="mt-2">
+                  <Link
+                    href={APZPEN_WB.finding(penQuery.penFindingId)}
+                    className="text-[11px] underline underline-offset-2"
+                  >
+                    ← Back to Finding
+                  </Link>
+                </p>
+              ) : null}
+            </section>
+          ) : null}
           <section className="rounded-lg border border-[var(--color-border)] p-3 text-sm">
             <h2 className="mb-2 text-xs font-semibold tracking-wide text-[var(--color-muted-foreground)] uppercase">
               History

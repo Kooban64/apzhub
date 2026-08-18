@@ -165,14 +165,14 @@ export function ApzpenHomePage() {
       actions={
         <div className="flex flex-wrap gap-2">
           <Link
-            href="/apzpen/my-work"
+            href="/workspace/pen/my-work"
             className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)]"
             data-testid="apzpen-home-my-work"
           >
             My Work
           </Link>
           <Link
-            href="/apzpen/engagements"
+            href="/workspace/pen/engagements"
             className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)]"
           >
             All engagements
@@ -224,37 +224,37 @@ export function ApzpenHomePage() {
                 {(
                   [
                     {
-                      href: "/apzpen/my-work",
+                      href: "/workspace/pen/my-work",
                       label: "My Work",
                       count: "→",
                       hint: "Assigned to you",
                     },
                     {
-                      href: "/apzpen/remediation",
+                      href: "/workspace/pen/remediation",
                       label: "Remediation",
                       count: String(queues.remediationCount),
                       hint: "Open + remediating",
                     },
                     {
-                      href: "/apzpen/retests",
+                      href: "/workspace/pen/retests",
                       label: "Retests",
                       count: String(queues.retestCount),
                       hint: "Verify fixes",
                     },
                     {
-                      href: "/apzpen/evidence",
+                      href: "/workspace/pen/evidence",
                       label: "Evidence",
                       count: String(queues.evidenceGapCount),
                       hint: "Gaps needing proof",
                     },
                     {
-                      href: "/apzpen/risk-acceptance",
+                      href: "/workspace/pen/risk-acceptance",
                       label: "Risk acceptance",
                       count: "→",
                       hint: "Formal residual risk",
                     },
                     {
-                      href: "/apzpen/certification",
+                      href: "/workspace/pen/certification",
                       label: "Assurance",
                       count: String(queues.certifiedCount),
                       hint: `${queues.blockedCount} not assured`,
@@ -293,7 +293,7 @@ export function ApzpenHomePage() {
                     <dt className="text-[var(--color-muted-foreground)]">Engagement</dt>
                     <dd>
                       <Link
-                        href={`/apzpen/engagements/${primary.engagementId}`}
+                        href={`/workspace/pen/engagements/${primary.engagementId}`}
                         className="font-medium hover:underline"
                       >
                         {primary.title}
@@ -512,7 +512,7 @@ export function ApzpenEngagementsPage() {
                     >
                       <td className="py-2 pr-2">
                         <Link
-                          href={`/apzpen/engagements/${e.engagementId}${engagementIngestQuery}`}
+                          href={`/workspace/pen/engagements/${e.engagementId}${engagementIngestQuery}`}
                           className="font-medium hover:underline"
                         >
                           {e.title}
@@ -749,7 +749,7 @@ export function ApzpenEngagementDetailPage({ engagementId }: { engagementId: str
       }
       actions={
         <Link
-          href="/apzpen/engagements"
+          href="/workspace/pen/engagements"
           className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)]"
         >
           Back
@@ -1233,7 +1233,7 @@ export function ApzpenEngagementDetailPage({ engagementId }: { engagementId: str
                     {eng.status === "certified" ? "Certified" : "Certify assessment"}
                   </button>
                   <Link
-                    href={`/apzpen/reports?engagementId=${encodeURIComponent(engagementId)}`}
+                    href={`/workspace/pen/reports?engagementId=${encodeURIComponent(engagementId)}`}
                     className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)]"
                   >
                     Generate report
@@ -1676,7 +1676,7 @@ function FindingsTable({
               </td>
               <td className="py-2 pr-2">
                 <Link
-                  href={`/apzpen/findings/${f.findingId}`}
+                  href={`/workspace/pen/findings/${f.findingId}`}
                   className="font-medium hover:underline"
                 >
                   {f.title}
@@ -1932,7 +1932,7 @@ export function ApzpenAssetsPage() {
                       {a.engagementIds.map((id, i) => (
                         <li key={id}>
                           <Link
-                            href={`/apzpen/engagements/${id}`}
+                            href={`/workspace/pen/engagements/${id}`}
                             className="hover:underline"
                           >
                             {a.engagementTitles[i] ?? id}
@@ -1979,9 +1979,9 @@ export function ApzpenProvidersPage() {
   const vaIngestHref = (tool: "greenbone" | "faraday", format: string) => {
     const q = `tool=${tool}&format=${format}`;
     if (firstEngagementId) {
-      return `/apzpen/engagements/${firstEngagementId}?${q}`;
+      return `/workspace/pen/engagements/${firstEngagementId}?${q}`;
     }
-    return `/apzpen/engagements?ingestTool=${tool}&ingestFormat=${format}`;
+    return `/workspace/pen/engagements?ingestTool=${tool}&ingestFormat=${format}`;
   };
 
   return (
@@ -2028,7 +2028,7 @@ export function ApzpenProvidersPage() {
                   </td>
                   <td className="space-x-2 py-2 pr-2 text-[11px]">
                     {p.dispatchable ? (
-                      <Link href="/apzpen/engagements" className="underline">
+                      <Link href="/workspace/pen/engagements" className="underline">
                         Dispatch
                       </Link>
                     ) : null}
@@ -2043,7 +2043,7 @@ export function ApzpenProvidersPage() {
                       </a>
                     ) : null}
                     {p.id === "github" ? (
-                      <Link href="/apzpen/code" className="underline">
+                      <Link href="/workspace/pen/code" className="underline">
                         Code security
                       </Link>
                     ) : null}

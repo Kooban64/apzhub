@@ -7,20 +7,52 @@ import { useEffect, useState } from "react";
 import { Button } from "@apzhub/ui";
 
 import {
+  commerceCartToQuery,
   resolveCommerceCart,
   writeCommerceCartToStorage,
   type CommerceCart,
 } from "@/lib/commercial/commerce-cart";
 import { getPackage } from "@/lib/commercial/catalogue";
 
+type QuoteLine = {
+  readonly packageId: string;
+  readonly name: string;
+  readonly amountCents: number;
+  readonly currency: string;
+};
+
+type QuotePayload =
+  | {
+      readonly ok: true;
+      readonly quoteId: string;
+      readonly lines: readonly QuoteLine[];
+      readonly subtotalCents: number;
+      readonly discountCents?: number;
+      readonly taxCents: number;
+      readonly totalCents: number;
+      readonly currency: string;
+      readonly expiresAt?: string;
+    }
+  | {
+      readonly ok: false;
+      readonly code: string;
+      readonly message: string;
+      readonly missingPriceFields?: readonly string[];
+    };
+
+function formatMoney(cents: number, currency: string): string {
+  if (cents <= 0) return "Pricing not available";
+  return `${(cents / 100).toFixed(2)} ${currency}`;
+}
+
 export function CheckoutClient() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [cart, setCart] = useState<CommerceCart | null>(null);
-  const planId = searchParams.get("plan") ?? cart?.planId ?? "plan.individual";
-  const packageId = searchParams.get("package") ?? cart?.packageId ?? "";
+  const [quote, setQuote] = useState<QuotePayload | null>(null);
   const [agree, setAgree] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [quoteLoading, setQuoteLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [checkoutUrl, setCheckoutUrl] = useState<string | null>(null);
   const [fields, setFields] = useState<Record<string, string> | null>(null);
@@ -31,42 +63,81 @@ export function CheckoutClient() {
     if (resolved) writeCommerceCartToStorage(resolved);
   }, [searchParams]);
 
-  if (planId === "plan.custom") {
+  useEffect(() => {
+    if (!cart?.packageIds.length) {
+      setQuote(null);
+      setQuoteLoading(false);
+      return;
+    }
+    const countryCode = searchParams.get("country")?.trim().toUpperCase() || "ZA";
+    let cancelled = false;
+    setQuoteLoading(true);
+    void (async () => {
+      try {
+        const res = await fetch("/api/v1/commerce/quote", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            packageIds: cart.packageIds,
+            seats: cart.seats,
+            countryCode,
+          }),
+        });
+        const body = (await res.json()) as {
+          data?: { quote?: QuotePayload };
+        };
+        if (!cancelled) {
+          setQuote(body.data?.quote ?? null);
+        }
+      } catch {
+        if (!cancelled) setQuote(null);
+      } finally {
+        if (!cancelled) setQuoteLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [cart, searchParams]);
+
+  if (cart?.planId === "plan.custom") {
     router.replace("/contact");
     return null;
   }
 
-  const pkg = packageId ? getPackage(packageId) : undefined;
+  const packages = (cart?.packageIds ?? []).map((id) => getPackage(id)).filter(Boolean);
 
-  async function startTrial() {
+  async function startCheckout() {
+    if (!cart?.packageIds.length) return;
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/v1/billing/subscriptions/start-trial", {
+      const countryCode = searchParams.get("country")?.trim().toUpperCase() || "ZA";
+      const res = await fetch("/api/v1/commerce/checkout/create", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
-          planId,
-          packageId: packageId || undefined,
+          packageIds: cart.packageIds,
+          seats: cart.seats,
+          planId: cart.planId,
+          quoteId: quote && quote.ok ? quote.quoteId : undefined,
+          countryCode,
         }),
       });
       const body = (await res.json()) as {
         data?: {
           checkout?: { processUrl?: string; fields?: Record<string, string> };
-          trialEndsAt?: string;
-          packageProvisioned?: { applied?: boolean; packageId?: string };
         };
         error?: { message?: string };
       };
       if (res.status === 401) {
-        const cb = `/pricing/checkout?plan=${encodeURIComponent(planId)}${
-          packageId ? `&package=${encodeURIComponent(packageId)}` : ""
-        }`;
-        router.push(`/login?callbackUrl=${encodeURIComponent(cb)}`);
+        router.push(
+          `/login?callbackUrl=${encodeURIComponent(`/pricing/checkout?${commerceCartToQuery(cart)}`)}`,
+        );
         return;
       }
       if (!res.ok) {
-        throw new Error(body.error?.message ?? `Trial start failed (${res.status})`);
+        throw new Error(body.error?.message ?? `Checkout failed (${res.status})`);
       }
       setCheckoutUrl(body.data?.checkout?.processUrl ?? null);
       setFields(body.data?.checkout?.fields ?? null);
@@ -77,22 +148,72 @@ export function CheckoutClient() {
     }
   }
 
+  const pricingBlocked = quote && !quote.ok && quote.code === "pricing_unavailable";
+
   return (
     <div className="mx-auto max-w-lg px-4 py-12 sm:px-8">
       <h1 className="font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight">
-        Start trial
+        Checkout
       </h1>
       <p className="mt-3 text-sm text-[var(--color-muted-foreground)]">
-        Plan: <span className="font-mono">{planId}</span>
-        {pkg ? (
+        Plan: <span className="font-mono">{cart?.planId ?? "plan.business"}</span>
+        {packages.length > 0 ? (
           <>
             {" "}
-            · Package: <span className="font-mono">{pkg.packageId}</span> ({pkg.name})
+            ·{" "}
+            {packages.map((pkg) => (
+              <span key={pkg!.packageId} className="font-mono">
+                {pkg!.packageId}{" "}
+              </span>
+            ))}
           </>
         ) : null}
-        . Card authorisation via PayFast is required. This is a recurring subscription
-        authorisation; converts to paid after 7 days unless cancelled per Terms.
       </p>
+
+      <div className="mt-6 border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
+        <h2 className="text-sm font-medium">Order summary</h2>
+        {quoteLoading ? (
+          <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
+            Calculating…
+          </p>
+        ) : quote?.ok ? (
+          <ul className="mt-3 space-y-2 text-sm">
+            {quote.lines.map((line) => (
+              <li key={line.packageId} className="flex justify-between gap-4">
+                <span>{line.name}</span>
+                <span>{formatMoney(line.amountCents, line.currency)}</span>
+              </li>
+            ))}
+            {quote.taxCents > 0 ? (
+              <li className="flex justify-between gap-4 text-[var(--color-muted-foreground)]">
+                <span>VAT</span>
+                <span>{formatMoney(quote.taxCents, quote.currency)}</span>
+              </li>
+            ) : null}
+            <li className="flex justify-between gap-4 border-t border-[var(--color-border)] pt-2 font-medium">
+              <span>Total</span>
+              <span>{formatMoney(quote.totalCents, quote.currency)}</span>
+            </li>
+          </ul>
+        ) : quote && !quote.ok ? (
+          <p className="mt-2 text-sm text-[var(--color-destructive)]" role="alert">
+            {quote.message}
+            {quote.missingPriceFields?.length ? (
+              <span className="mt-1 block font-mono text-xs">
+                Owner fields: {quote.missingPriceFields.join(", ")}
+              </span>
+            ) : null}
+          </p>
+        ) : (
+          <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
+            Select products to continue.
+          </p>
+        )}
+        <p className="mt-3 text-xs text-[var(--color-muted-foreground)]">
+          Amounts are calculated server-side. PayFast receives the authoritative total
+          only after validation.
+        </p>
+      </div>
 
       {!checkoutUrl ? (
         <div className="mt-8 space-y-4">
@@ -108,12 +229,8 @@ export function CheckoutClient() {
               I agree to the{" "}
               <Link href="/legal/terms" className="underline">
                 Terms
-              </Link>
-              ,{" "}
-              <Link href="/legal/privacy" className="underline">
-                Privacy Policy
-              </Link>
-              , recurring billing consent, and trial billing notice.
+              </Link>{" "}
+              and recurring billing consent.
             </span>
           </label>
           {error ? (
@@ -123,8 +240,15 @@ export function CheckoutClient() {
           ) : null}
           <Button
             type="button"
-            disabled={!agree || loading}
-            onClick={() => void startTrial()}
+            disabled={
+              !agree ||
+              loading ||
+              quoteLoading ||
+              !cart?.packageIds.length ||
+              pricingBlocked ||
+              (quote != null && !quote.ok)
+            }
+            onClick={() => void startCheckout()}
             data-testid="checkout-start-trial"
           >
             {loading ? "Starting…" : "Continue to PayFast"}
@@ -139,9 +263,8 @@ export function CheckoutClient() {
       ) : (
         <div className="mt-8 space-y-4">
           <p className="text-sm text-[var(--color-muted-foreground)]">
-            Trial created. Submit the PayFast form to authorise your card. After PayFast
-            you will land on a processing screen — activation waits for server-side ITN
-            verification (APZ never stores card details).
+            Submit the PayFast form to pay. After PayFast you will land on a processing
+            screen — activation waits for server-side ITN verification.
           </p>
           {fields && checkoutUrl ? (
             <form
@@ -152,7 +275,7 @@ export function CheckoutClient() {
               {Object.entries(fields).map(([key, value]) => (
                 <input key={key} type="hidden" name={key} value={value} />
               ))}
-              <Button type="submit">Subscribe &amp; Pay with PayFast</Button>
+              <Button type="submit">Pay with PayFast</Button>
             </form>
           ) : null}
           <div className="flex flex-col gap-2 text-sm">
@@ -165,9 +288,6 @@ export function CheckoutClient() {
             </Link>
             <Link href="/checkout/fail?payfast=cancel" className="underline">
               Sandbox: simulate cancel
-            </Link>
-            <Link href="/workspace/home" className="underline">
-              Continue to workspace
             </Link>
           </div>
         </div>

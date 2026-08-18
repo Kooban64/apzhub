@@ -7,28 +7,44 @@ import {
   getPlan,
   getPublicCatalogue,
   listCatalogueSkus,
-  skuIdForPlan,
   type PlanId,
 } from "@/lib/commercial/catalogue";
+import { listResolvedPackagePrices } from "@/lib/commercial/catalogue-price-overlay";
 import {
   advanceDunning,
   applyCredit,
   composeStatement,
   ensureBillingAccount,
+  findInvoiceById,
   getBillingAccount,
   issueInvoice,
   issueRefund,
-  listBillingAccountsForSubject,
-  listInvoices,
   recordPayment,
   type BillingAccountKind,
 } from "@/lib/commercial/billing-ledger";
+import {
+  applyCommerceBasketIntent,
+  saveCommerceBasketIntent,
+} from "@/lib/commercial/commerce-package-intent";
+import {
+  createCommerceOrder,
+  getCommerceOrderByInvoice,
+  setCommerceOrderStatus,
+} from "@/lib/commercial/commerce-order";
+import {
+  quoteCommerceBasket,
+  type CommerceQuote,
+  type CommerceQuoteResult,
+} from "@/lib/commercial/commerce-quote";
+import { requireFreshQuote } from "@/lib/commercial/quote-store";
 import { grantSkuCapabilities } from "@/lib/commercial/entitlements";
 import {
   activateSubscription,
+  claimOrganisationTrial,
   expireSubscription,
   listOrgProductSubscriptions,
   listTrialSubscriptionsDue,
+  organisationHasConsumedTrial,
   startPlanProductSubscriptions,
 } from "@/lib/commercial/product-access";
 import {
@@ -36,10 +52,8 @@ import {
   getPayFastHealth,
   verifyPayFastItn,
 } from "@/lib/commercial/payfast-adapter";
-import {
-  applyCommercePackageIntent,
-  saveCommercePackageIntent,
-} from "@/lib/commercial/commerce-package-intent";
+
+export const COMMERCE_BASKET_SKU_ID = "sku.commerce.basket";
 
 function activatePlanProductsForSubject(subjectId: string, skuId: string) {
   if (skuId !== "sku.plan.individual" && skuId !== "sku.plan.business") {
@@ -51,7 +65,6 @@ function activatePlanProductsForSubject(subjectId: string, skuId: string) {
       activateSubscription(sub.subscriptionId);
     }
   }
-  // Ensure active rows exist if trial never started (manual purchase path)
   startPlanProductSubscriptions({
     organisationId: subjectId,
     planId,
@@ -59,11 +72,75 @@ function activatePlanProductsForSubject(subjectId: string, skuId: string) {
   });
 }
 
+function fulfillVerifiedCommercePayment(input: {
+  readonly invoiceId: string;
+  readonly amountCents: number;
+  readonly provider: "payfast" | "manual";
+  readonly providerRef?: string;
+}) {
+  const invoice = findInvoiceById(input.invoiceId);
+  if (!invoice) throw new Error("billing.invoice_not_found");
+  if (input.amountCents !== invoice.amountCents) {
+    throw new Error("billing.payfast_amount_mismatch");
+  }
+
+  const payment = recordPayment({
+    invoiceId: input.invoiceId,
+    amountCents: input.amountCents,
+    provider: input.provider,
+    providerRef: input.providerRef,
+    status: "received",
+  });
+
+  const account = getBillingAccount(payment.billingAccountId);
+  const order = getCommerceOrderByInvoice(input.invoiceId);
+
+  if (order) {
+    setCommerceOrderStatus(order.orderId, "paid");
+    setCommerceOrderStatus(order.orderId, "provisioning");
+    if (account) {
+      applyCommerceBasketIntent(account.subjectId);
+    }
+    setCommerceOrderStatus(order.orderId, "active");
+    return { payment, order, commerce: true as const };
+  }
+
+  grantSkuCapabilities(payment.billingAccountId, invoice.skuId);
+  if (account) {
+    activatePlanProductsForSubject(account.subjectId, invoice.skuId);
+  }
+  return { payment, order: undefined, commerce: false as const };
+}
+
 export function getCommercialCatalogue() {
+  const base = getPublicCatalogue();
+  const resolved = listResolvedPackagePrices();
+  const byId = new Map(resolved.map((row) => [row.packageId, row]));
   return {
-    ...getPublicCatalogue(),
+    ...base,
+    packages: base.packages.map((pkg) => {
+      const row = byId.get(pkg.packageId);
+      return row
+        ? {
+            ...pkg,
+            amountCents: row.amountCents,
+            priceSource: row.source,
+          }
+        : pkg;
+    }),
     skus: listCatalogueSkus({ activeOnly: true }),
   };
+}
+
+export function getCommerceQuote(input: {
+  readonly packageIds?: readonly string[];
+  readonly seats?: number;
+  readonly countryCode?: string | null;
+  readonly interval?: "month" | "year";
+  readonly promotionCode?: string;
+  readonly lines?: readonly { packageId: string; quantity?: number }[];
+}): CommerceQuoteResult {
+  return quoteCommerceBasket(input);
 }
 
 export function openOrGetBillingAccount(input: {
@@ -109,8 +186,119 @@ export function purchaseSku(input: {
 }
 
 /**
- * Start a 7-day card-required trial for Individual / Business.
- * Creates first invoice + PayFast checkout; grants trial product subscriptions.
+ * Authoritative multi-package checkout.
+ * Entitlements apply only after verified payment (ITN / manual).
+ */
+export function createCommerceCheckout(input: {
+  readonly organisationId: string;
+  readonly ownerId: string;
+  readonly email?: string;
+  readonly packageIds?: readonly string[];
+  readonly seats?: number;
+  readonly planId?: PlanId;
+  readonly countryCode?: string | null;
+  readonly quoteId?: string;
+  readonly interval?: "month" | "year";
+  readonly promotionCode?: string;
+}) {
+  let quote: CommerceQuote;
+  if (input.quoteId?.trim()) {
+    quote = requireFreshQuote(input.quoteId.trim());
+    if (quote.layer !== "published" || quote.previewOnly) {
+      const err = new Error("billing.quote_not_purchasable");
+      (err as Error & { details?: unknown }).details = {
+        ok: false,
+        code: "quote_not_purchasable",
+        message: "Draft or preview quotes cannot be checked out",
+      };
+      throw err;
+    }
+  } else {
+    const generated = quoteCommerceBasket({
+      packageIds: input.packageIds ?? [],
+      seats: input.seats,
+      countryCode: input.countryCode,
+      interval: input.interval,
+      promotionCode: input.promotionCode,
+      layer: "published",
+    });
+    if (!generated.ok) {
+      const code =
+        generated.code === "pricing_unavailable"
+          ? "billing.pricing_unavailable"
+          : generated.code === "package_coming_soon"
+            ? "billing.package_coming_soon"
+            : generated.code === "package_contact_sales"
+              ? "billing.package_contact_sales"
+              : generated.code === "package_dependency_unmet"
+                ? "billing.package_dependency_unmet"
+                : generated.code === "package_conflict"
+                  ? "billing.package_conflict"
+                  : generated.code === "quote_expired"
+                    ? "billing.quote_expired"
+                    : "billing.checkout_invalid";
+      const err = new Error(code);
+      (err as Error & { details?: unknown }).details = generated;
+      throw err;
+    }
+    quote = generated;
+  }
+
+  const planId =
+    input.planId === "plan.individual" ? "plan.individual" : "plan.business";
+  const account = ensureBillingAccount({
+    kind: "organisation",
+    ownerId: input.ownerId,
+    subjectId: input.organisationId,
+  });
+
+  const invoice = issueInvoice({
+    billingAccountId: account.billingAccountId,
+    skuId: COMMERCE_BASKET_SKU_ID,
+    amountCents: quote.totalCents,
+    currency: quote.currency,
+  });
+
+  const order = createCommerceOrder({
+    organisationId: input.organisationId,
+    ownerUserId: input.ownerId,
+    invoiceId: invoice.invoiceId,
+    quote,
+  });
+
+  saveCommerceBasketIntent({
+    organisationId: input.organisationId,
+    packageIds: quote.packageIds,
+    planId,
+    ownerUserId: input.ownerId,
+    invoiceId: invoice.invoiceId,
+  });
+
+  const itemName = quote.lines
+    .map((line) => line.name)
+    .join(" + ")
+    .slice(0, 100);
+  const checkout = createPayFastCheckout({
+    amountCents: quote.totalCents,
+    itemName,
+    invoiceId: invoice.invoiceId,
+    email: input.email,
+  });
+
+  return {
+    quote,
+    account,
+    invoice,
+    order,
+    checkout,
+    health: getPayFastHealth(),
+  };
+}
+
+/**
+ * Start Trial Policy v1.0 for Individual / Business:
+ * 14 days (catalogue trialDays), no card required, one trial per organisation.
+ * Does not create paid / payment-successful state. Package basket checkout remains separate.
  */
 export function startTrialSubscription(input: {
   readonly planId: PlanId;
@@ -118,14 +306,16 @@ export function startTrialSubscription(input: {
   readonly organisationId: string;
   readonly email?: string;
   readonly packageId?: string;
+  readonly packageIds?: readonly string[];
 }) {
   const plan = getPlan(input.planId);
   if (!plan || !plan.active) throw new Error("billing.plan_unavailable");
   if (!plan.selfServe) throw new Error("billing.plan_contact_sales");
-  const skuId = skuIdForPlan(input.planId);
-  if (!skuId) throw new Error("billing.sku_unavailable");
-  const sku = getCatalogueSku(skuId);
-  if (!sku) throw new Error("billing.sku_unavailable");
+  if (plan.trialDays <= 0) throw new Error("billing.trial_unavailable");
+
+  if (organisationHasConsumedTrial(input.organisationId)) {
+    throw new Error("billing.trial_already_used");
+  }
 
   const kind: BillingAccountKind =
     input.planId === "plan.individual" ? "individual" : "organisation";
@@ -139,18 +329,10 @@ export function startTrialSubscription(input: {
     Date.now() + plan.trialDays * 24 * 60 * 60 * 1000,
   ).toISOString();
 
-  const invoice = issueInvoice({
-    billingAccountId: account.billingAccountId,
-    skuId: sku.skuId,
-    amountCents: sku.amountCents,
-    currency: sku.currency,
-  });
-
-  const checkout = createPayFastCheckout({
-    amountCents: invoice.amountCents,
-    itemName: `${sku.name} (trial authorization)`,
-    invoiceId: invoice.invoiceId,
-    email: input.email,
+  claimOrganisationTrial({
+    organisationId: input.organisationId,
+    trialEndsAt,
+    planId: input.planId,
   });
 
   const products = startPlanProductSubscriptions({
@@ -158,37 +340,38 @@ export function startTrialSubscription(input: {
     planId: input.planId,
     status: "trial",
     trialEndsAt,
-    grantUserId: input.ownerId,
   });
 
-  let packageProvisioned: { applied: boolean; packageId?: string } | undefined;
-  if (input.packageId?.trim()) {
-    saveCommercePackageIntent({
+  // Optional basket intent without invoice — conversion requires explicit paid checkout.
+  const basketPackageIds = [
+    ...(input.packageIds ?? []),
+    ...(input.packageId?.trim() ? [input.packageId.trim()] : []),
+  ];
+  if (basketPackageIds.length > 0) {
+    saveCommerceBasketIntent({
       organisationId: input.organisationId,
-      packageId: input.packageId.trim(),
+      packageIds: basketPackageIds,
       planId: input.planId,
       ownerUserId: input.ownerId,
-      invoiceId: invoice.invoiceId,
     });
-    // Apply immediately so entitlements work before sandbox ITN (dogfood).
-    packageProvisioned = applyCommercePackageIntent(input.organisationId);
   }
 
   return {
     account,
-    invoice,
-    checkout,
+    invoice: null,
+    checkout: null,
+    cardRequired: false as const,
+    trialDays: plan.trialDays,
     trialEndsAt,
     plan,
     products,
-    packageProvisioned,
     health: getPayFastHealth(),
   };
 }
 
 /**
- * Convert due trials → paid / pending payment / expired.
- * Card was collected at trial start; ITN or manual payment marks paid + activates.
+ * Expire due trials. Never auto-converts trial → paid.
+ * Paid entitlement requires verified commercial checkout / ITN.
  */
 export function convertDueTrials(now = new Date()) {
   const due = listTrialSubscriptionsDue(now);
@@ -196,65 +379,17 @@ export function convertDueTrials(now = new Date()) {
     subscriptionId: string;
     organisationId: string;
     productKey: string;
-    outcome: "activated" | "expired" | "pending_payment";
+    outcome: "expired";
   }[] = [];
 
-  const byOrg = new Map<string, (typeof due)[number][]>();
   for (const row of due) {
-    const list = byOrg.get(row.organisationId) ?? [];
-    list.push(row);
-    byOrg.set(row.organisationId, list);
-  }
-
-  for (const [organisationId, rows] of byOrg) {
-    const accounts = listBillingAccountsForSubject(organisationId);
-    const account =
-      accounts[0] ??
-      ensureBillingAccount({
-        kind: "organisation",
-        ownerId: organisationId,
-        subjectId: organisationId,
-      });
-    const statement = composeStatement(account.billingAccountId);
-    const hasPaidPlan = statement.invoices.some(
-      (inv) =>
-        inv.status === "paid" &&
-        (inv.skuId === "sku.plan.individual" || inv.skuId === "sku.plan.business"),
-    );
-
-    for (const row of rows) {
-      if (hasPaidPlan) {
-        activateSubscription(row.subscriptionId);
-        results.push({
-          subscriptionId: row.subscriptionId,
-          organisationId,
-          productKey: row.productKey,
-          outcome: "activated",
-        });
-      } else {
-        const openPlanInvoice = statement.invoices.find(
-          (inv) =>
-            inv.status === "issued" &&
-            (inv.skuId === "sku.plan.individual" || inv.skuId === "sku.plan.business"),
-        );
-        if (openPlanInvoice) {
-          results.push({
-            subscriptionId: row.subscriptionId,
-            organisationId,
-            productKey: row.productKey,
-            outcome: "pending_payment",
-          });
-        } else {
-          expireSubscription(row.subscriptionId);
-          results.push({
-            subscriptionId: row.subscriptionId,
-            organisationId,
-            productKey: row.productKey,
-            outcome: "expired",
-          });
-        }
-      }
-    }
+    expireSubscription(row.subscriptionId);
+    results.push({
+      subscriptionId: row.subscriptionId,
+      organisationId: row.organisationId,
+      productKey: row.productKey,
+      outcome: "expired",
+    });
   }
 
   return { converted: results.length, results };
@@ -295,29 +430,23 @@ export function handlePayFastItn(params: Record<string, string>) {
   }
   const invoiceId = params.m_payment_id?.trim();
   if (!invoiceId) throw new Error("billing.invoice_not_found");
+  if (!findInvoiceById(invoiceId)) {
+    throw new Error("billing.invoice_not_found");
+  }
+
   const paymentStatus = params.payment_status?.toLowerCase();
   const amountCents = Math.round(Number(params.amount_gross || "0") * 100);
+
   if (paymentStatus === "complete") {
-    const payment = recordPayment({
+    const result = fulfillVerifiedCommercePayment({
       invoiceId,
       amountCents,
       provider: "payfast",
       providerRef: params.pf_payment_id,
-      status: "received",
     });
-    const invoice = listInvoices(payment.billingAccountId).find(
-      (row) => row.invoiceId === invoiceId,
-    );
-    if (invoice) {
-      grantSkuCapabilities(payment.billingAccountId, invoice.skuId);
-      const account = getBillingAccount(payment.billingAccountId);
-      if (account) {
-        activatePlanProductsForSubject(account.subjectId, invoice.skuId);
-        applyCommercePackageIntent(account.subjectId);
-      }
-    }
-    return { ok: true as const, payment };
+    return { ok: true as const, ...result };
   }
+
   const payment = recordPayment({
     invoiceId,
     amountCents,
@@ -330,23 +459,11 @@ export function handlePayFastItn(params: Record<string, string>) {
 
 /** Ops / test helper — record successful payment without PayFast. */
 export function recordManualPayment(invoiceId: string, amountCents: number) {
-  const payment = recordPayment({
+  return fulfillVerifiedCommercePayment({
     invoiceId,
     amountCents,
     provider: "manual",
-    status: "received",
-  });
-  const invoice = listInvoices(payment.billingAccountId).find(
-    (row) => row.invoiceId === invoiceId,
-  );
-  if (invoice) {
-    grantSkuCapabilities(payment.billingAccountId, invoice.skuId);
-    const account = getBillingAccount(payment.billingAccountId);
-    if (account) {
-      activatePlanProductsForSubject(account.subjectId, invoice.skuId);
-    }
-  }
-  return payment;
+  }).payment;
 }
 
 export function runDunningTick(billingAccountId: string) {

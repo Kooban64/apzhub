@@ -14,6 +14,7 @@ import {
   upsertPostgresRoleAssignment,
 } from "@apzhub/platform-authorization/postgres";
 import { getSharedTenantManagementService } from "@apzhub/platform-identity";
+import type { PlatformTenantMetadata } from "@apzhub/platform-identity";
 
 import { switchActiveTenant } from "@/lib/identity/switch-active-tenant";
 
@@ -21,6 +22,8 @@ export type CommerceOnboardOrganisationInput = {
   readonly userId: string;
   readonly name: string;
   readonly slug: string;
+  readonly countryCode?: string;
+  readonly timezone?: string;
 };
 
 export type CommerceOnboardOrganisationResult = {
@@ -49,12 +52,18 @@ export async function onboardCommerceOrganisation(
   if (!slug || slug.length < 2) throw new Error("commerce.org_slug_invalid");
 
   const organisationId = `t-${randomUUID()}`;
+  const tenantMetadata: PlatformTenantMetadata = {};
+  const countryCode = input.countryCode?.trim().toUpperCase();
+  const timezone = input.timezone?.trim();
+  if (countryCode) tenantMetadata.countryCode = countryCode;
+  if (timezone) tenantMetadata.timezone = timezone;
 
   if (process.env.DATABASE_URL) {
     await ensurePlatformTenantRow({
       tenantId: organisationId,
       slug,
       name,
+      metadata: tenantMetadata,
     });
     const { ensureUserTenantMembership } =
       await import("@apzhub/platform-identity/postgres");
@@ -92,6 +101,7 @@ export async function onboardCommerceOrganisation(
       slug,
       name,
       status: "active",
+      metadata: tenantMetadata,
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);

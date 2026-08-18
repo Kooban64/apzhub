@@ -127,7 +127,7 @@ function FindingWorkbenchPanel({
           </p>
         </div>
         <Link
-          href={`/apzpen/findings/${finding.findingId}`}
+          href={`/workspace/pen/findings/${finding.findingId}`}
           className="text-[11px] text-[var(--color-primary)] underline-offset-2 hover:underline"
         >
           Open full detail
@@ -149,7 +149,7 @@ function FindingWorkbenchPanel({
           <dt className="text-[var(--color-muted-foreground)]">Engagement</dt>
           <dd>
             <Link
-              href={`/apzpen/engagements/${finding.engagementId}`}
+              href={`/workspace/pen/engagements/${finding.engagementId}`}
               className="underline"
             >
               {finding.engagementId}
@@ -278,14 +278,14 @@ function WorkflowFindingsTable({
                 </td>
                 <td className="py-2 pr-2">
                   <Link
-                    href={`/apzpen/findings/${f.findingId}`}
+                    href={`/workspace/pen/findings/${f.findingId}`}
                     className="font-medium hover:underline"
                     onClick={(event) => event.stopPropagation()}
                   >
                     {f.title}
                   </Link>
                   <Link
-                    href={`/apzpen/engagements/${f.engagementId}`}
+                    href={`/workspace/pen/engagements/${f.engagementId}`}
                     className="mt-0.5 block font-mono text-[10px] underline"
                     onClick={(event) => event.stopPropagation()}
                   >
@@ -642,7 +642,7 @@ export function ApzpenEvidencePage() {
                 className="border-t border-[var(--color-border)] pt-2"
               >
                 <Link
-                  href={`/apzpen/findings/${f.findingId}`}
+                  href={`/workspace/pen/findings/${f.findingId}`}
                   className="font-medium hover:underline"
                 >
                   {f.title}
@@ -759,7 +759,7 @@ export function ApzpenCertificationPage() {
                   >
                     <td className="py-2 pr-2">
                       <Link
-                        href={`/apzpen/engagements/${row.engagementId}`}
+                        href={`/workspace/pen/engagements/${row.engagementId}`}
                         className="font-medium hover:underline"
                       >
                         {row.title}
@@ -799,7 +799,7 @@ export function ApzpenCertificationPage() {
                       ) : null}
                       <div className="space-x-2">
                         <Link
-                          href={`/apzpen/reports?engagementId=${encodeURIComponent(row.engagementId)}`}
+                          href={`/workspace/pen/reports?engagementId=${encodeURIComponent(row.engagementId)}`}
                           className="text-[11px] underline"
                         >
                           Report pack
@@ -855,7 +855,7 @@ export function ApzpenCertificationPage() {
                   </td>
                   <td className="py-2 pr-2">
                     <Link
-                      href={`/apzpen/engagements/${r.engagementId}`}
+                      href={`/workspace/pen/engagements/${r.engagementId}`}
                       className="hover:underline"
                     >
                       {r.engagementTitle}

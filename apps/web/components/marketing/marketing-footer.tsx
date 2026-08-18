@@ -43,21 +43,27 @@ export function MarketingFooter({ site }: { readonly site: MarketingSiteConfig }
           <p className="text-sm font-medium">Products</p>
           <ul className="mt-3 space-y-2 text-sm text-[var(--color-muted-foreground)]">
             <li>
-              <Link href="/qa" className="hover:text-[var(--color-foreground)]">
-                APZQA — Quality
-              </Link>
-            </li>
-            <li>
-              <Link href="/pentest" className="hover:text-[var(--color-foreground)]">
-                APZPenTest — Security
+              <Link
+                href="/products/apzprd"
+                className="hover:text-[var(--color-foreground)]"
+              >
+                APZPRD — Productivity
               </Link>
             </li>
             <li>
               <Link
-                href="/productivity"
+                href="/products/apzqep"
                 className="hover:text-[var(--color-foreground)]"
               >
-                Productivity Suite — soon
+                APZQEP — Quality
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/products/apzpen"
+                className="hover:text-[var(--color-foreground)]"
+              >
+                APZPEN — Security
               </Link>
             </li>
             <li>

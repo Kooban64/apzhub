@@ -1,10 +1,15 @@
 import { render, screen } from "@testing-library/react";
+import type { ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
 
 import { DocumentsWorkspaceRouter } from "./documents-workspace-router";
 
 vi.mock("next/navigation", () => ({
   usePathname: () => "/workspace/documents/diagnostics",
+}));
+
+vi.mock("@/components/commercial/soft-product-gate", () => ({
+  SoftProductGate: ({ children }: { children: ReactNode }) => <>{children}</>,
 }));
 
 vi.mock("./platform-documents-view", () => ({

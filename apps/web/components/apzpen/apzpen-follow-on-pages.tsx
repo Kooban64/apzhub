@@ -196,7 +196,7 @@ export function ApzpenCodeSecurityPage() {
                       {a.openFindingOverlap.map((f) => (
                         <li key={f.findingId}>
                           <Link
-                            href={`/apzpen/findings/${f.findingId}`}
+                            href={`/workspace/pen/findings/${f.findingId}`}
                             className="underline"
                           >
                             [{f.severity}] {f.title}
@@ -374,7 +374,7 @@ export function ApzpenIntelligencePage() {
                   {(s.findingIds ?? []).slice(0, 3).map((id) => (
                     <Link
                       key={id}
-                      href={`/apzpen/findings/${id}`}
+                      href={`/workspace/pen/findings/${id}`}
                       className="underline"
                     >
                       Open {id.slice(0, 12)}…

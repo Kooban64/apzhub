@@ -106,7 +106,7 @@ describe("shell landings", () => {
     expect(shellLandingForKind("platform_admin").path).toBe("/platform-admin");
     expect(shellLandingForKind("finance").path).toBe("/finance");
     expect(shellLandingForKind("compliance").path).toBe("/compliance");
-    expect(shellLandingForKind("org_admin").path).toBe("/org");
+    expect(shellLandingForKind("org_admin").path).toBe("/workspace/home");
     expect(shellLandingForKind("org_member").path).toBe("/workspace/home");
     expect(shellLandingForKind("individual").path).toBe("/workspace/home");
     expect(shellLandingForKind("tenant_support").path).toBe("/workspace/home");

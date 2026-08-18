@@ -39,8 +39,14 @@ export type WorkbenchShellLayoutProps = {
   readonly header: ReactNode;
   readonly inspector?: ReactNode;
   readonly inspectorDefaultCollapsed?: boolean;
+  /** When this value changes, expand the inspector panel (selection pattern). */
+  readonly inspectorExpandToken?: string | number | null;
   readonly bottomDefaultCollapsed?: boolean;
   readonly sidebarDefaultCollapsed?: boolean;
+  /** Optional content for bottom tabs. Terminal always stays "Not configured". */
+  readonly bottomPanelContent?: Partial<Record<WorkbenchBottomTabId, ReactNode>>;
+  /** Optional display labels (e.g. PEN: Tool Output / Evidence). */
+  readonly bottomTabLabels?: Partial<Record<WorkbenchBottomTabId, string>>;
   readonly onLayoutStateChange?: (state: WorkbenchShellLayoutState) => void;
   readonly statusBar?: WorkbenchStatusBarProps;
   readonly children: ReactNode;
@@ -152,6 +158,16 @@ function ContextSidebar({
         ) : (
           <ul className="space-y-0.5">
             {sidebarItems.map((item) => {
+              if (item.kind === "separator") {
+                return (
+                  <li
+                    key={item.id}
+                    className="my-1.5 border-t border-[var(--color-border)]"
+                    aria-hidden
+                    data-testid={`workbench-sidebar-${item.id}`}
+                  />
+                );
+              }
               const Icon = resolveLucideIcon(item.icon);
               return (
                 <li key={item.id}>
@@ -200,8 +216,11 @@ export function WorkbenchShellLayout({
   header,
   inspector,
   inspectorDefaultCollapsed = true,
+  inspectorExpandToken = null,
   bottomDefaultCollapsed = true,
   sidebarDefaultCollapsed = false,
+  bottomPanelContent,
+  bottomTabLabels,
   onLayoutStateChange,
   statusBar,
   children,
@@ -226,6 +245,14 @@ export function WorkbenchShellLayout({
     mq.addEventListener("change", sync);
     return () => mq.removeEventListener("change", sync);
   }, []);
+
+  useEffect(() => {
+    if (inspectorExpandToken == null || inspectorExpandToken === "") return;
+    const panel = inspectorRef.current;
+    if (!panel) return;
+    if (panel.isCollapsed()) panel.expand();
+    setInspectorCollapsed(false);
+  }, [inspectorExpandToken]);
 
   useEffect(() => {
     onLayoutStateChange?.({
@@ -458,7 +485,7 @@ export function WorkbenchShellLayout({
                     onClick={() => setBottomTab(tab.id)}
                     data-testid={`workbench-bottom-tab-${tab.id}`}
                   >
-                    {tab.label}
+                    {bottomTabLabels?.[tab.id] ?? tab.label}
                   </button>
                 ))}
                 <button
@@ -471,14 +498,20 @@ export function WorkbenchShellLayout({
                 </button>
               </div>
               <div className="flex-1 overflow-auto p-3 text-xs text-[var(--color-muted-foreground)]">
-                <p className="font-medium text-[var(--color-foreground)]">
-                  Not configured
-                </p>
-                <p className="mt-1 max-w-xl">
-                  {bottomTab === "terminal"
-                    ? "Terminal capability arrives with Source / QEP / PEN workspaces. Panel infrastructure only in this slice."
-                    : `${BOTTOM_TABS.find((t) => t.id === bottomTab)?.label ?? "Panel"} content is not available in Workbench Slice 1.`}
-                </p>
+                {bottomTab === "terminal" || bottomPanelContent?.[bottomTab] == null ? (
+                  <>
+                    <p className="font-medium text-[var(--color-foreground)]">
+                      Not configured
+                    </p>
+                    <p className="mt-1 max-w-xl">
+                      {bottomTab === "terminal"
+                        ? "Terminal is not configured for this workspace."
+                        : `${BOTTOM_TABS.find((t) => t.id === bottomTab)?.label ?? "Panel"} content is not available in Workbench Slice 1.`}
+                    </p>
+                  </>
+                ) : (
+                  bottomPanelContent[bottomTab]
+                )}
               </div>
             </div>
           </Panel>

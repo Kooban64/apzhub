@@ -1,9 +1,25 @@
-import { OperatorShellLayout } from "@/components/operator/operator-shell-layout";
+import { ApzpenLegacyClientRedirect } from "./apzpen-legacy-redirect";
 
-export default function ApzpenLayout({ children }: { children: React.ReactNode }) {
+/**
+ * Legacy Operator `/apzpen` group — redirect into Workbench Security IA (Slice 4).
+ * Pages remain briefly for SSR; client replace lands users in Workbench chrome.
+ */
+export default function ApzpenLegacyLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <OperatorShellLayout shell="apzpen" title="Security Assurance">
-      {children}
-    </OperatorShellLayout>
+    <>
+      <ApzpenLegacyClientRedirect />
+      <div className="p-6 text-sm text-[var(--color-muted-foreground)]">
+        Opening Security in Workbench…
+        {children ? (
+          <div className="sr-only" aria-hidden>
+            {children}
+          </div>
+        ) : null}
+      </div>
+    </>
   );
 }

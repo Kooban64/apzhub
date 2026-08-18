@@ -1,163 +1,217 @@
 "use client";
 
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useMemo, useState } from "react";
 
-import { getPackage } from "@/lib/commercial/catalogue";
+import { Button, Input } from "@apzhub/ui";
+
+import { listPackages, type PackageCatalogueEntry } from "@/lib/commercial/catalogue";
 import {
-  loginPath,
-  onboardingOrganisationPath,
   registerPath,
   resolveCommerceCart,
+  togglePackageInCart,
   writeCommerceCartToStorage,
   type CommerceCart,
 } from "@/lib/commercial/commerce-cart";
 
-function BuildSummaryInner() {
+const SUITE_LABEL: Record<string, string> = {
+  qa: "APZQEP — Quality Engineering",
+  pentest: "APZPEN — Security Testing",
+  productivity: "APZPRD — Productivity",
+  law: "APZLaw",
+};
+
+type QuoteSummary = {
+  readonly ok: boolean;
+  readonly totalCents?: number;
+  readonly currency?: string;
+  readonly message?: string;
+};
+
+function BuildWorkspaceInner() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const available = useMemo(
+    () => listPackages().filter((p) => p.selfServe && p.status === "available"),
+    [],
+  );
+
   const [cart, setCart] = useState<CommerceCart | null>(null);
-  const [signedIn, setSignedIn] = useState<boolean | null>(null);
+  const [quote, setQuote] = useState<QuoteSummary | null>(null);
+  const planId = "plan.business" as const;
 
   useEffect(() => {
     const resolved = resolveCommerceCart(searchParams);
-    setCart(resolved);
-    if (resolved) writeCommerceCartToStorage(resolved);
-  }, [searchParams]);
+    if (resolved) {
+      setCart(resolved);
+    } else if (available.length > 0) {
+      setCart({
+        packageIds: [available[0]!.packageId],
+        planId,
+        seats: 1,
+      });
+    }
+  }, [searchParams, available]);
 
   useEffect(() => {
+    if (!cart?.packageIds.length) {
+      setQuote(null);
+      return;
+    }
     let cancelled = false;
     void (async () => {
-      try {
-        const res = await fetch("/api/v1/me/home-context");
-        if (!cancelled) setSignedIn(res.ok);
-      } catch {
-        if (!cancelled) setSignedIn(false);
+      const res = await fetch("/api/v1/commerce/quote", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ packageIds: cart.packageIds, seats: cart.seats }),
+      });
+      const body = (await res.json()) as {
+        data?: {
+          quote?: {
+            ok: boolean;
+            totalCents?: number;
+            currency?: string;
+            message?: string;
+          };
+        };
+      };
+      if (!cancelled) {
+        const q = body.data?.quote;
+        setQuote(
+          q
+            ? {
+                ok: q.ok,
+                totalCents: q.totalCents,
+                currency: q.currency,
+                message: q.message,
+              }
+            : null,
+        );
       }
     })();
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [cart]);
 
-  const pkg = cart ? getPackage(cart.packageId) : undefined;
-
-  if (!cart || !pkg) {
-    return (
-      <div className="mx-auto max-w-lg px-4 py-12 sm:px-8">
-        <h1 className="font-[family-name:var(--font-display)] text-3xl font-semibold">
-          Configure package
-        </h1>
-        <p className="mt-3 text-sm text-[var(--color-muted-foreground)]">
-          No package selected.{" "}
-          <Link href="/marketplace" className="underline">
-            Browse the marketplace
-          </Link>
-          .
-        </p>
-      </div>
-    );
+  function togglePackage(pkg: PackageCatalogueEntry) {
+    setCart((current) => {
+      const next = togglePackageInCart(current, pkg.packageId);
+      writeCommerceCartToStorage(next);
+      return next;
+    });
   }
 
-  const nextHref =
-    signedIn === true ? onboardingOrganisationPath(cart) : registerPath(cart);
+  function continueNext() {
+    if (!cart || cart.packageIds.length === 0) return;
+    writeCommerceCartToStorage(cart);
+    router.push(registerPath(cart));
+  }
+
+  const selectedIds = new Set(cart?.packageIds ?? []);
 
   return (
-    <div className="mx-auto grid max-w-5xl gap-8 px-4 py-12 sm:px-8 lg:grid-cols-[1.2fr_0.8fr]">
-      <div>
-        <h1 className="font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight">
-          Configure your package
-        </h1>
-        <p className="mt-3 text-[var(--color-muted-foreground)]">
-          Configure seats for your package. Sticky summary updates as you change licence
-          counts.
-        </p>
+    <div className="mx-auto max-w-3xl px-4 py-12 sm:px-8" data-testid="build-workspace">
+      <p className="text-xs font-medium tracking-[0.18em] text-[var(--color-muted-foreground)] uppercase">
+        Build your APZ workspace
+      </p>
+      <h1 className="mt-2 font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight">
+        Choose products
+      </h1>
+      <p className="mt-3 text-sm text-[var(--color-muted-foreground)]">
+        Select APZPRD, APZQEP, and APZPEN independently or in combination.
+      </p>
 
-        <label className="mt-8 block text-sm font-medium">
-          Seats / licences
-          <input
-            type="number"
-            min={1}
-            max={500}
-            value={cart.seats}
-            className="mt-1 w-full max-w-xs rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2"
-            data-testid="build-seats"
-            onChange={(e) => {
-              const seats = Math.max(1, Math.floor(Number(e.target.value) || 1));
-              const next = { ...cart, seats };
-              setCart(next);
-              writeCommerceCartToStorage(next);
-            }}
-          />
-        </label>
-        <p className="mt-2 text-xs text-[var(--color-muted-foreground)]">
-          Licence metrics are product-specific at assign time (agents vs users). This
-          seat count carries into checkout and invite capacity checks.
-        </p>
-
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link
-            href={nextHref}
-            className="rounded-md bg-[var(--color-primary)] px-5 py-2.5 text-sm font-medium text-[var(--color-primary-foreground)]"
-            data-testid="build-continue"
-            onClick={() => writeCommerceCartToStorage(cart)}
-          >
-            {signedIn ? "Create organisation" : "Create account"}
-          </Link>
-          {!signedIn ? (
-            <Link
-              href={loginPath(cart)}
-              className="rounded-md border border-[var(--color-border)] px-5 py-2.5 text-sm"
-              onClick={() => writeCommerceCartToStorage(cart)}
+      <fieldset className="mt-10 space-y-4">
+        <legend className="sr-only">Available packages</legend>
+        {available.map((pkg) => {
+          const checked = selectedIds.has(pkg.packageId);
+          return (
+            <label
+              key={pkg.packageId}
+              className={`block cursor-pointer border p-4 ${
+                checked
+                  ? "border-[var(--color-primary)] bg-[var(--color-muted)]/30"
+                  : "border-[var(--color-border)]"
+              }`}
+              data-testid={`build-package-${pkg.packageId}`}
             >
-              Sign in
-            </Link>
-          ) : null}
-        </div>
+              <div className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  className="mt-1"
+                  checked={checked}
+                  onChange={() => togglePackage(pkg)}
+                />
+                <div className="min-w-0 flex-1">
+                  <p className="text-[10px] font-medium tracking-[0.14em] text-[var(--color-muted-foreground)] uppercase">
+                    {SUITE_LABEL[pkg.suiteId] ?? pkg.suiteId}
+                  </p>
+                  <p className="mt-1 font-medium">{pkg.name}</p>
+                  <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
+                    {pkg.description}
+                  </p>
+                  <p className="mt-2 font-mono text-xs text-[var(--color-muted-foreground)]">
+                    {pkg.productKeys.join(" · ")}
+                  </p>
+                </div>
+              </div>
+            </label>
+          );
+        })}
+      </fieldset>
+
+      <div className="mt-8 max-w-xs">
+        <Input
+          label="Users (seats)"
+          name="seats"
+          type="number"
+          min={1}
+          value={String(cart?.seats ?? 1)}
+          onChange={(e) => {
+            const seats = Math.max(1, Number(e.target.value) || 1);
+            setCart((current) => {
+              if (!current) return current;
+              const next = { ...current, seats };
+              writeCommerceCartToStorage(next);
+              return next;
+            });
+          }}
+          data-testid="build-seats"
+        />
       </div>
 
-      <aside
-        className="border border-[var(--color-border)] bg-[var(--color-surface)] p-5 lg:sticky lg:top-24 lg:self-start"
-        data-testid="build-summary"
-      >
-        <p className="text-xs tracking-wide text-[var(--color-muted-foreground)] uppercase">
-          Summary
-        </p>
-        <h2 className="mt-2 font-[family-name:var(--font-display)] text-xl font-semibold">
-          {pkg.name}
-        </h2>
-        <dl className="mt-4 space-y-2 text-sm">
-          <div className="flex justify-between gap-4">
-            <dt className="text-[var(--color-muted-foreground)]">Plan</dt>
-            <dd className="font-mono">{cart.planId}</dd>
-          </div>
-          <div className="flex justify-between gap-4">
-            <dt className="text-[var(--color-muted-foreground)]">Seats</dt>
-            <dd>{cart.seats}</dd>
-          </div>
-          <div className="flex justify-between gap-4">
-            <dt className="text-[var(--color-muted-foreground)]">Products</dt>
-            <dd className="text-right">{pkg.productKeys.join(", ")}</dd>
-          </div>
-        </dl>
-        <p className="mt-4 text-xs text-[var(--color-muted-foreground)]">
-          Next: account → organisation → PayFast trial authorisation.
-        </p>
-      </aside>
+      <div className="mt-10 border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
+        <h2 className="text-sm font-medium">Estimated subscription</h2>
+        {quote?.ok && quote.totalCents != null ? (
+          <p className="mt-2 text-sm">
+            {(quote.totalCents / 100).toFixed(2)} {quote.currency ?? "ZAR"} / month
+          </p>
+        ) : (
+          <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
+            {quote?.message ?? "Pricing unavailable until Owner sets catalogue prices."}
+          </p>
+        )}
+      </div>
+
+      <div className="mt-8 flex flex-wrap items-center gap-4">
+        <Button
+          type="button"
+          disabled={!cart?.packageIds.length}
+          onClick={continueNext}
+          data-testid="build-continue"
+        >
+          Continue →
+        </Button>
+      </div>
     </div>
   );
 }
 
-export default function BuildPage() {
+export default function BuildWorkspacePage() {
   return (
-    <Suspense
-      fallback={
-        <div className="mx-auto max-w-lg px-4 py-12 text-sm text-[var(--color-muted-foreground)]">
-          Loading…
-        </div>
-      }
-    >
-      <BuildSummaryInner />
+    <Suspense fallback={<div className="p-12 text-sm">Loading…</div>}>
+      <BuildWorkspaceInner />
     </Suspense>
   );
 }

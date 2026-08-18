@@ -48,14 +48,20 @@ describe("marketing commercial catalogue + product access", () => {
     expect(products.some((p) => p.productKey === "law")).toBe(true);
   });
 
-  it("starts trial with PayFast checkout and org+user qep grants", () => {
+  it("starts 14-day no-card trial and org subscription without auto user grant", () => {
     const trial = startTrialSubscription({
       planId: "plan.business",
       ownerId: "user-1",
       organisationId: "org-1",
       email: "ops@example.com",
     });
-    expect(trial.checkout.processUrl).toContain("payfast");
+    expect(trial.cardRequired).toBe(false);
+    expect(trial.checkout).toBeNull();
+    expect(trial.invoice).toBeNull();
+    expect(trial.trialDays).toBe(14);
+    const ends = new Date(trial.trialEndsAt).getTime();
+    const expected = Date.now() + 14 * 24 * 60 * 60 * 1000;
+    expect(Math.abs(ends - expected)).toBeLessThan(5_000);
     expect(trial.products.subscriptions.some((s) => s.productKey === "qep")).toBe(true);
     expect(
       hasProductAccess({
@@ -63,14 +69,55 @@ describe("marketing commercial catalogue + product access", () => {
         userId: "user-1",
         productKey: "qep",
       }),
-    ).toBe(true);
-    expect(
-      hasProductAccess({
-        organisationId: "org-1",
-        userId: "user-2",
-        productKey: "qep",
-      }),
     ).toBe(false);
+  });
+
+  it("rejects a second trial for the same organisation", () => {
+    startTrialSubscription({
+      planId: "plan.business",
+      ownerId: "user-1",
+      organisationId: "org-1",
+    });
+    expect(() =>
+      startTrialSubscription({
+        planId: "plan.individual",
+        ownerId: "user-2",
+        organisationId: "org-1",
+      }),
+    ).toThrow("billing.trial_already_used");
+  });
+
+  it("expires due trials without creating paid subscription", () => {
+    startTrialSubscription({
+      planId: "plan.individual",
+      ownerId: "user-1",
+      organisationId: "org-1",
+    });
+    upsertOrgProductSubscription({
+      organisationId: "org-1",
+      productKey: "qep",
+      planId: "plan.individual",
+      status: "trial",
+      trialEndsAt: new Date(Date.now() - 1000).toISOString(),
+    });
+    const result = convertDueTrials(new Date());
+    expect(result.results.every((r) => r.outcome === "expired")).toBe(true);
+    expect(
+      listOrgProductSubscriptions("org-1").find((s) => s.productKey === "qep"),
+    ).toBeUndefined();
+  });
+
+  it("paid conversion requires verified payment, not trial expiry", () => {
+    startTrialSubscription({
+      planId: "plan.individual",
+      ownerId: "user-1",
+      organisationId: "org-1",
+    });
+    expect(
+      listOrgProductSubscriptions("org-1").find((s) => s.productKey === "qep")?.status,
+    ).toBe("trial");
+    // No invoice from trial — paid path uses commerce checkout + verified payment.
+    expect(() => recordManualPayment("inv-missing", 100)).toThrow();
   });
 
   it("denies member without grant even when org subscribed", () => {
@@ -87,27 +134,6 @@ describe("marketing commercial catalogue + product access", () => {
     });
     expect(decision.allowed).toBe(false);
     if (!decision.allowed) expect(decision.reason).toBe("user_not_granted");
-  });
-
-  it("converts due trials to active after payment", () => {
-    const trial = startTrialSubscription({
-      planId: "plan.individual",
-      ownerId: "user-1",
-      organisationId: "org-1",
-    });
-    upsertOrgProductSubscription({
-      organisationId: "org-1",
-      productKey: "qep",
-      planId: "plan.individual",
-      status: "trial",
-      trialEndsAt: new Date(Date.now() - 1000).toISOString(),
-    });
-    const pending = convertDueTrials(new Date());
-    expect(pending.results.some((r) => r.outcome === "pending_payment")).toBe(true);
-    recordManualPayment(trial.invoice.invoiceId, trial.invoice.amountCents);
-    expect(
-      listOrgProductSubscriptions("org-1").find((s) => s.productKey === "qep")?.status,
-    ).toBe("active");
   });
 
   it("maps workbench items and filters hydration by effective products", () => {

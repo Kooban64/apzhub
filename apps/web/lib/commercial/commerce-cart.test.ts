@@ -4,37 +4,28 @@ import {
   buildPathWithCart,
   commerceCartFromSearchParams,
   commerceCartToQuery,
-  DEFAULT_ORG_COMMERCE_PLAN_ID,
-  isDogfoodSelfServePackage,
-  normalizeCommercePlanId,
   parseCommerceCart,
+  togglePackageInCart,
 } from "./commerce-cart";
 
-describe("commerce-cart", () => {
-  it("defaults plan to business for org path", () => {
-    expect(normalizeCommercePlanId(undefined)).toBe(DEFAULT_ORG_COMMERCE_PLAN_ID);
-    expect(normalizeCommercePlanId("plan.custom")).toBe("plan.business");
-    expect(normalizeCommercePlanId("plan.individual")).toBe("plan.individual");
-  });
-
-  it("parses cart and rejects empty package", () => {
-    expect(parseCommerceCart({})).toBeNull();
+describe("commerce-cart v2", () => {
+  it("parses multi-package cart", () => {
     expect(
       parseCommerceCart({
-        packageId: "pkg.apzqep.starter",
+        packageIds: ["pkg.apzqep.starter", "pkg.apzpen.starter"],
         planId: "plan.business",
-        seats: 3,
+        seats: 2,
       }),
     ).toEqual({
-      packageId: "pkg.apzqep.starter",
+      packageIds: ["pkg.apzqep.starter", "pkg.apzpen.starter"],
       planId: "plan.business",
-      seats: 3,
+      seats: 2,
     });
   });
 
-  it("round-trips query string", () => {
+  it("round-trips packages query string", () => {
     const cart = {
-      packageId: "pkg.apzpen.starter",
+      packageIds: ["pkg.apzpen.starter", "pkg.apzqep.starter"],
       planId: "plan.business" as const,
       seats: 1,
     };
@@ -42,18 +33,24 @@ describe("commerce-cart", () => {
     expect(commerceCartFromSearchParams(params)).toEqual(cart);
   });
 
-  it("builds paths with cart query", () => {
+  it("builds paths with multi-package query", () => {
     expect(
-      buildPathWithCart("/build", {
-        packageId: "pkg.apzqep.starter",
+      buildPathWithCart("/pricing/checkout", {
+        packageIds: ["pkg.apzqep.starter", "pkg.apzprd.projects"],
         planId: "plan.business",
         seats: 1,
       }),
-    ).toBe("/build?package=pkg.apzqep.starter&plan=plan.business&seats=1");
+    ).toBe(
+      "/pricing/checkout?packages=pkg.apzqep.starter%2Cpkg.apzprd.projects&plan=plan.business&seats=1",
+    );
   });
 
-  it("recognises dogfood self-serve packages", () => {
-    expect(isDogfoodSelfServePackage("pkg.apzqep.starter")).toBe(true);
-    expect(isDogfoodSelfServePackage("pkg.apzprd.workspace")).toBe(false);
+  it("toggles packages in basket", () => {
+    const first = togglePackageInCart(null, "pkg.apzqep.starter");
+    expect(first.packageIds).toEqual(["pkg.apzqep.starter"]);
+    const second = togglePackageInCart(first, "pkg.apzpen.starter");
+    expect(second.packageIds).toEqual(["pkg.apzqep.starter", "pkg.apzpen.starter"]);
+    const third = togglePackageInCart(second, "pkg.apzqep.starter");
+    expect(third.packageIds).toEqual(["pkg.apzpen.starter"]);
   });
 });

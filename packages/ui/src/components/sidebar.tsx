@@ -7,6 +7,8 @@ export interface SidebarItem {
   label: string;
   icon?: string;
   active?: boolean;
+  /** Visual divider — not selectable. */
+  kind?: "item" | "separator";
 }
 
 export interface SidebarProps {

@@ -1,7 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import type { ReactNode } from "react";
 
+import { SoftProductGate } from "@/components/commercial/soft-product-gate";
 import {
   canAdminKnowledge,
   canViewKnowledge,
@@ -24,7 +26,12 @@ import {
   KnowledgeQualityView,
 } from "./knowledge-organisational-memory-views";
 import { KnowledgeSettingsView } from "./knowledge-settings-view";
-import { EmptyState, KNOWLEDGE_PRODUCT_NAME, PageShell } from "./knowledge-ui";
+import {
+  EmptyState,
+  KNOWLEDGE_PRODUCT_NAME,
+  LoadingState,
+  PageShell,
+} from "./knowledge-ui";
 
 function PermissionDenied({ action }: { readonly action: string }) {
   return (
@@ -52,6 +59,31 @@ export function KnowledgeWorkspaceRouter({
   const route = resolveKnowledgeRoute(pathname);
   const permissions = useKnowledgePermissions(permissionsOverride);
 
+  return (
+    <SoftProductGate
+      productKey="knowledge"
+      productLabel={KNOWLEDGE_PRODUCT_NAME}
+      loading={
+        <PageShell
+          title={KNOWLEDGE_PRODUCT_NAME}
+          breadcrumbs={[KNOWLEDGE_PRODUCT_NAME]}
+        >
+          <LoadingState label="Checking product access…" />
+        </PageShell>
+      }
+    >
+      <KnowledgeRouteSwitch route={route} permissions={permissions} />
+    </SoftProductGate>
+  );
+}
+
+function KnowledgeRouteSwitch({
+  route,
+  permissions,
+}: {
+  readonly route: ReturnType<typeof resolveKnowledgeRoute>;
+  readonly permissions: ReturnType<typeof useKnowledgePermissions>;
+}): ReactNode {
   if (route.kind === "diagnostics") {
     if (!canAdminKnowledge(permissions)) {
       return <PermissionDenied action="view Knowledge diagnostics" />;

@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useMemo, useState } from "react";
 
 import {
   buildPathWithCart,
+  readCommerceCartFromStorage,
+  togglePackageInCart,
   writeCommerceCartToStorage,
-  type CommerceCart,
 } from "@/lib/commercial/commerce-cart";
 
 type PublicPackage = {
@@ -17,6 +19,7 @@ type PublicPackage = {
   readonly productKeys: readonly string[];
   readonly status: string;
   readonly selfServe: boolean;
+  readonly amountCents?: number | null;
 };
 
 const SUITE_LABEL: Record<string, string> = {
@@ -26,7 +29,16 @@ const SUITE_LABEL: Record<string, string> = {
   law: "APZLaw",
 };
 
+const PILLAR_FILTERS = [
+  { id: "all", label: "All", suiteIds: null as readonly string[] | null },
+  { id: "productivity", label: "Productivity", suiteIds: ["productivity"] },
+  { id: "quality", label: "Quality", suiteIds: ["qa"] },
+  { id: "security", label: "Security", suiteIds: ["pentest"] },
+] as const;
+
 export function MarketplacePackageList() {
+  const searchParams = useSearchParams();
+  const pillarParam = searchParams.get("pillar") ?? "all";
   const [packages, setPackages] = useState<readonly PublicPackage[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loaded, setLoaded] = useState(false);
@@ -57,21 +69,49 @@ export function MarketplacePackageList() {
     };
   }, []);
 
-  function selectPackage(pkg: PublicPackage) {
-    const cart: CommerceCart = {
-      packageId: pkg.packageId,
-      planId: "plan.business",
-      seats: 1,
-    };
-    writeCommerceCartToStorage(cart);
-  }
+  const activeFilter =
+    PILLAR_FILTERS.find((f) => f.id === pillarParam) ?? PILLAR_FILTERS[0];
 
-  const sellable = packages.filter((p) => p.selfServe);
-  const available = sellable.filter((p) => p.status === "available");
-  const soon = sellable.filter((p) => p.status !== "available");
+  const filtered = useMemo(() => {
+    const sellable = packages.filter((p) => p.selfServe);
+    if (!activeFilter.suiteIds) return sellable;
+    return sellable.filter((p) => activeFilter.suiteIds!.includes(p.suiteId));
+  }, [packages, activeFilter]);
+
+  const available = filtered.filter((p) => p.status === "available");
+  const soon = filtered.filter((p) => p.status !== "available");
+
+  function selectPackage(pkg: PublicPackage) {
+    const current = readCommerceCartFromStorage();
+    const next = togglePackageInCart(current, pkg.packageId);
+    writeCommerceCartToStorage(next);
+  }
 
   return (
     <div className="space-y-10" data-testid="marketplace-package-list">
+      <nav
+        className="flex flex-wrap gap-2"
+        aria-label="Product pillars"
+        data-testid="marketplace-pillar-filters"
+      >
+        {PILLAR_FILTERS.map((f) => {
+          const active = f.id === activeFilter.id;
+          return (
+            <Link
+              key={f.id}
+              href={f.id === "all" ? "/marketplace" : `/marketplace?pillar=${f.id}`}
+              className={`rounded-md border px-3 py-1.5 text-sm ${
+                active
+                  ? "border-[var(--color-primary)] bg-[var(--color-muted)]/40"
+                  : "border-[var(--color-border)] text-[var(--color-muted-foreground)]"
+              }`}
+            >
+              {f.label}
+            </Link>
+          );
+        })}
+      </nav>
+
       {error ? (
         <p className="text-sm text-[var(--color-destructive)]" role="alert">
           {error}
@@ -103,9 +143,14 @@ export function MarketplacePackageList() {
               <p className="mt-3 font-mono text-xs text-[var(--color-muted-foreground)]">
                 {pkg.productKeys.join(" · ")}
               </p>
+              <p className="mt-2 text-sm font-medium">
+                {pkg.amountCents != null && pkg.amountCents > 0
+                  ? `R${(pkg.amountCents / 100).toFixed(2)} / month`
+                  : "Contact us"}
+              </p>
               <Link
-                href={buildPathWithCart(`/marketplace/${pkg.packageId}`, {
-                  packageId: pkg.packageId,
+                href={buildPathWithCart("/build", {
+                  packageIds: [pkg.packageId],
                   planId: "plan.business",
                   seats: 1,
                 })}
@@ -113,16 +158,14 @@ export function MarketplacePackageList() {
                 className="mt-4 inline-block rounded-md bg-[var(--color-primary)] px-4 py-2 text-sm font-medium text-[var(--color-primary-foreground)]"
                 data-testid={`marketplace-select-${pkg.packageId}`}
               >
-                View package
+                Explore
               </Link>
             </li>
           ))}
         </ul>
         {available.length === 0 && !error ? (
           <p className="mt-4 text-sm text-[var(--color-muted-foreground)]">
-            {loaded
-              ? "No self-serve packages are available right now. Check Solutions or Contact us."
-              : "Loading packages…"}
+            {loaded ? "No self-serve packages match this filter." : "Loading packages…"}
           </p>
         ) : null}
       </section>
@@ -152,5 +195,13 @@ export function MarketplacePackageList() {
         </section>
       ) : null}
     </div>
+  );
+}
+
+export function MarketplacePackageListPage() {
+  return (
+    <Suspense fallback={<div className="text-sm">Loading packages…</div>}>
+      <MarketplacePackageList />
+    </Suspense>
   );
 }

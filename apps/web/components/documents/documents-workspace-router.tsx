@@ -1,7 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import type { ReactNode } from "react";
 
+import { SoftProductGate } from "@/components/commercial/soft-product-gate";
 import {
   canAdminDocuments,
   canViewDocuments,
@@ -12,7 +14,12 @@ import { useDocumentsPermissions } from "@/lib/documents/use-documents-permissio
 
 import { DocumentsHelpView } from "./documents-help-view";
 import { DocumentsSettingsView } from "./documents-settings-view";
-import { DOCUMENTS_PRODUCT_NAME, EmptyState, PageShell } from "./documents-ui";
+import {
+  DOCUMENTS_PRODUCT_NAME,
+  EmptyState,
+  LoadingState,
+  PageShell,
+} from "./documents-ui";
 import { PlatformDocumentsView } from "./platform-documents-view";
 
 function PermissionDenied({ action }: { readonly action: string }) {
@@ -44,6 +51,31 @@ export function DocumentsWorkspaceRouter({
   const section = resolveDocumentsSection(pathname);
   const permissions = useDocumentsPermissions(permissionsOverride);
 
+  return (
+    <SoftProductGate
+      productKey="documents"
+      productLabel={DOCUMENTS_PRODUCT_NAME}
+      loading={
+        <PageShell
+          title={DOCUMENTS_PRODUCT_NAME}
+          breadcrumbs={[DOCUMENTS_PRODUCT_NAME]}
+        >
+          <LoadingState label="Checking product access…" />
+        </PageShell>
+      }
+    >
+      <DocumentsRouteSwitch section={section} permissions={permissions} />
+    </SoftProductGate>
+  );
+}
+
+function DocumentsRouteSwitch({
+  section,
+  permissions,
+}: {
+  readonly section: ReturnType<typeof resolveDocumentsSection>;
+  readonly permissions: ReturnType<typeof useDocumentsPermissions>;
+}): ReactNode {
   if (section === "help") {
     return <DocumentsHelpView />;
   }

@@ -10,6 +10,10 @@ vi.mock("next/navigation", () => ({
   useSearchParams: () => new URLSearchParams(),
 }));
 
+vi.mock("@/components/commercial/soft-product-gate", () => ({
+  SoftProductGate: ({ children }: { children: ReactNode }) => <>{children}</>,
+}));
+
 vi.mock("./support-inbox-view", () => ({
   SupportInboxView: ({ permissions }: { permissions?: readonly string[] }) => (
     <div data-testid="route-inbox">{permissions?.join(",") ?? ""}</div>

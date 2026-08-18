@@ -160,6 +160,37 @@ export const PLATFORM_ADMIN_GROUP_LABELS: Record<
 
 export const PLATFORM_ADMIN_PERMISSION = "platform.nav.administration.view" as const;
 
+export const BILLING_SUBNAV: readonly {
+  readonly id: string;
+  readonly href: string;
+  readonly label: string;
+}[] = [
+  { id: "overview", href: `${PLATFORM_ADMIN_BASE}/billing`, label: "Overview" },
+  {
+    id: "catalogue",
+    href: `${PLATFORM_ADMIN_BASE}/billing/catalogue`,
+    label: "Catalogue",
+  },
+  { id: "pricing", href: `${PLATFORM_ADMIN_BASE}/billing/pricing`, label: "Pricing" },
+  {
+    id: "regional",
+    href: `${PLATFORM_ADMIN_BASE}/billing/regional`,
+    label: "Regional Pricing",
+  },
+  { id: "plans", href: `${PLATFORM_ADMIN_BASE}/billing/plans`, label: "Plans" },
+  {
+    id: "discounts",
+    href: `${PLATFORM_ADMIN_BASE}/billing/discounts`,
+    label: "Discounts",
+  },
+  { id: "tax", href: `${PLATFORM_ADMIN_BASE}/billing/tax`, label: "Tax" },
+  {
+    id: "configuration",
+    href: `${PLATFORM_ADMIN_BASE}/billing/configuration`,
+    label: "Configuration",
+  },
+];
+
 export function isPlatformAdminPath(pathname: string): boolean {
   return (
     pathname === PLATFORM_ADMIN_BASE || pathname.startsWith(`${PLATFORM_ADMIN_BASE}/`)

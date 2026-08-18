@@ -1,7 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import type { ReactNode } from "react";
 
+import { SoftProductGate } from "@/components/commercial/soft-product-gate";
 import {
   canViewAnalytics,
   canViewAnalyticsDatasets,
@@ -32,7 +34,12 @@ import { AnalyticsSavedView } from "./analytics-saved-view";
 import { AnalyticsSearchView } from "./analytics-search-view";
 import { AnalyticsSettingsView } from "./analytics-settings-view";
 import { AnalyticsSuiteView } from "./analytics-suite-view";
-import { EmptyState, PageShell, ANALYTICS_PRODUCT_NAME } from "./analytics-ui";
+import {
+  EmptyState,
+  LoadingState,
+  PageShell,
+  ANALYTICS_PRODUCT_NAME,
+} from "./analytics-ui";
 
 function PermissionDenied({ action }: { readonly action: string }) {
   return (
@@ -61,6 +68,31 @@ export function AnalyticsWorkspaceRouter({
   const route = resolveAnalyticsRoute(pathname);
   const permissions = useAnalyticsPermissions(permissionsOverride);
 
+  return (
+    <SoftProductGate
+      productKey="analytics"
+      productLabel={ANALYTICS_PRODUCT_NAME}
+      loading={
+        <PageShell
+          title={ANALYTICS_PRODUCT_NAME}
+          breadcrumbs={[ANALYTICS_PRODUCT_NAME]}
+        >
+          <LoadingState label="Checking product access…" />
+        </PageShell>
+      }
+    >
+      <AnalyticsRouteSwitch route={route} permissions={permissions} />
+    </SoftProductGate>
+  );
+}
+
+function AnalyticsRouteSwitch({
+  route,
+  permissions,
+}: {
+  readonly route: ReturnType<typeof resolveAnalyticsRoute>;
+  readonly permissions: ReturnType<typeof useAnalyticsPermissions>;
+}): ReactNode {
   const isPresentationAsset = route.kind === "datasets" || route.kind === "reports";
   const isOperatorSurface = route.kind === "health" || route.kind === "diagnostics";
 

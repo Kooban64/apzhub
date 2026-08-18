@@ -65,7 +65,7 @@ function applyIfAbsent(key: string, value: string, applied: string[]): void {
  * - `.secrets/n8n` — APZHUB_WORKFLOW_ENGINE_API_KEY (or N8N_API_KEY)
  * - `.secrets/paperless` — PAPERLESS_API_TOKEN
  * - `.secrets/github-app` — GITHUB_APP_ID / INSTALLATION_ID / PRIVATE_KEY (+ optional webhook secret)
- * - `.secrets/github-app.pem` — optional PEM-only private key file
+ * - `.secrets/payfast-production.env` — PAYFAST_MERCHANT_ID / KEY / PASSPHRASE / SANDBOX
  */
 export function loadLocalSecrets(options?: {
   readonly secretsDir?: string;
@@ -294,6 +294,28 @@ export function loadLocalSecrets(options?: {
     const pem = readFileSync(githubAppPem, "utf8").trim();
     if (pem.includes("BEGIN")) {
       applyIfAbsent("GITHUB_APP_PRIVATE_KEY", pem, applied);
+    }
+  }
+
+  const payfastPath = path.join(root, "payfast-production.env");
+  if (existsSync(payfastPath)) {
+    loadedFiles.push("payfast-production.env");
+    const kv = parseKeyValueFile(readFileSync(payfastPath, "utf8"));
+    for (const key of [
+      "PAYFAST_MERCHANT_ID",
+      "PAYFAST_MERCHANT_KEY",
+      "PAYFAST_PASSPHRASE",
+      "PAYFAST_SANDBOX",
+    ] as const) {
+      const value = kv[key];
+      if (value !== undefined && value !== "") {
+        applyIfAbsent(key, value, applied);
+      } else if (key === "PAYFAST_PASSPHRASE" && kv[key] === "") {
+        applyIfAbsent(key, "", applied);
+      }
+    }
+    if (kv.PAYFAST_SANDBOX) {
+      applyIfAbsent("PAYFAST_SANDBOX", kv.PAYFAST_SANDBOX, applied);
     }
   }
 

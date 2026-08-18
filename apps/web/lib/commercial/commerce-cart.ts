@@ -1,12 +1,13 @@
 /**
- * Stream 1 commerce cart — package + plan intent across public → account → checkout.
+ * Stream 1 commerce basket — multi-package selection across public → checkout.
  * Client storage: sessionStorage. Server never trusts cart alone for AuthZ.
  */
 
-export const COMMERCE_CART_STORAGE_KEY = "apzhub.commerce.cart.v1";
+export const COMMERCE_CART_STORAGE_KEY = "apzhub.commerce.cart.v2";
+export const LEGACY_COMMERCE_CART_STORAGE_KEY = "apzhub.commerce.cart.v1";
 
 export type CommerceCart = {
-  readonly packageId: string;
+  readonly packageIds: readonly string[];
   readonly planId: "plan.individual" | "plan.business";
   readonly seats: number;
 };
@@ -31,18 +32,28 @@ export function normalizeCommercePlanId(
   return DEFAULT_ORG_COMMERCE_PLAN_ID;
 }
 
+function normalizePackageIds(raw: unknown): string[] {
+  if (Array.isArray(raw)) {
+    return [...new Set(raw.map((v) => String(v).trim()).filter(Boolean))];
+  }
+  if (typeof raw === "string" && raw.trim()) return [raw.trim()];
+  return [];
+}
+
 export function parseCommerceCart(raw: unknown): CommerceCart | null {
   if (!raw || typeof raw !== "object") return null;
   const record = raw as Record<string, unknown>;
-  const packageId = typeof record.packageId === "string" ? record.packageId.trim() : "";
-  if (!packageId) return null;
+  const packageIds = normalizePackageIds(
+    record.packageIds ?? record.packageId ?? record.packages,
+  );
+  if (packageIds.length === 0) return null;
   const seatsRaw = record.seats;
   const seats =
     typeof seatsRaw === "number" && Number.isFinite(seatsRaw) && seatsRaw > 0
       ? Math.floor(seatsRaw)
       : 1;
   return {
-    packageId,
+    packageIds,
     planId: normalizeCommercePlanId(
       typeof record.planId === "string" ? record.planId : undefined,
     ),
@@ -53,11 +64,20 @@ export function parseCommerceCart(raw: unknown): CommerceCart | null {
 export function commerceCartFromSearchParams(
   params: URLSearchParams | { get(name: string): string | null },
 ): CommerceCart | null {
-  const packageId = params.get("package")?.trim() ?? "";
-  if (!packageId) return null;
+  const fromList = params.get("packages")?.trim();
+  const fromSingle = params.get("package")?.trim();
+  const packageIds = fromList
+    ? fromList
+        .split(",")
+        .map((id) => id.trim())
+        .filter(Boolean)
+    : fromSingle
+      ? [fromSingle]
+      : [];
+  if (packageIds.length === 0) return null;
   const seatsRaw = Number(params.get("seats") ?? "1");
   return {
-    packageId,
+    packageIds: [...new Set(packageIds)],
     planId: normalizeCommercePlanId(params.get("plan")),
     seats: Number.isFinite(seatsRaw) && seatsRaw > 0 ? Math.floor(seatsRaw) : 1,
   };
@@ -65,7 +85,7 @@ export function commerceCartFromSearchParams(
 
 export function commerceCartToQuery(cart: CommerceCart): string {
   const params = new URLSearchParams({
-    package: cart.packageId,
+    packages: cart.packageIds.join(","),
     plan: cart.planId,
     seats: String(cart.seats),
   });
@@ -73,7 +93,7 @@ export function commerceCartToQuery(cart: CommerceCart): string {
 }
 
 export function buildPathWithCart(path: string, cart: CommerceCart | null): string {
-  if (!cart) return path;
+  if (!cart || cart.packageIds.length === 0) return path;
   const query = commerceCartToQuery(cart);
   return path.includes("?") ? `${path}&${query}` : `${path}?${query}`;
 }
@@ -81,9 +101,22 @@ export function buildPathWithCart(path: string, cart: CommerceCart | null): stri
 export function readCommerceCartFromStorage(): CommerceCart | null {
   if (typeof sessionStorage === "undefined") return null;
   try {
-    const raw = sessionStorage.getItem(COMMERCE_CART_STORAGE_KEY);
+    const raw =
+      sessionStorage.getItem(COMMERCE_CART_STORAGE_KEY) ??
+      sessionStorage.getItem(LEGACY_COMMERCE_CART_STORAGE_KEY);
     if (!raw) return null;
-    return parseCommerceCart(JSON.parse(raw) as unknown);
+    const parsed = parseCommerceCart(JSON.parse(raw) as unknown);
+    if (parsed) return parsed;
+    // Legacy v1 single package
+    const legacy = JSON.parse(raw) as { packageId?: string };
+    if (legacy.packageId) {
+      return parseCommerceCart({
+        packageId: legacy.packageId,
+        planId: "plan.business",
+        seats: 1,
+      });
+    }
+    return null;
   } catch {
     return null;
   }
@@ -97,9 +130,10 @@ export function writeCommerceCartToStorage(cart: CommerceCart): void {
 export function clearCommerceCartStorage(): void {
   if (typeof sessionStorage === "undefined") return;
   sessionStorage.removeItem(COMMERCE_CART_STORAGE_KEY);
+  sessionStorage.removeItem(LEGACY_COMMERCE_CART_STORAGE_KEY);
 }
 
-/** Merge URL params over storage; persist when package present. */
+/** Merge URL params over storage; persist when packages present. */
 export function resolveCommerceCart(
   params?: URLSearchParams | { get(name: string): string | null },
 ): CommerceCart | null {
@@ -126,4 +160,20 @@ export function registerPath(cart: CommerceCart | null): string {
 export function loginPath(cart: CommerceCart | null): string {
   const next = onboardingOrganisationPath(cart);
   return `/login?callbackUrl=${encodeURIComponent(next)}`;
+}
+
+export function togglePackageInCart(
+  cart: CommerceCart | null,
+  packageId: string,
+): CommerceCart {
+  const id = packageId.trim();
+  const base: CommerceCart = cart ?? {
+    packageIds: [],
+    planId: DEFAULT_ORG_COMMERCE_PLAN_ID,
+    seats: 1,
+  };
+  const set = new Set(base.packageIds);
+  if (set.has(id)) set.delete(id);
+  else set.add(id);
+  return { ...base, packageIds: [...set] };
 }

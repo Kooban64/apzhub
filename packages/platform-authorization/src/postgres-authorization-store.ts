@@ -770,6 +770,7 @@ export async function ensurePlatformTenantRow(input: {
   readonly tenantId: string;
   readonly slug: string;
   readonly name: string;
+  readonly metadata?: Readonly<Record<string, unknown>>;
 }): Promise<void> {
   const db = getDb();
   const timestamp = new Date();
@@ -780,11 +781,21 @@ export async function ensurePlatformTenantRow(input: {
       slug: input.slug,
       name: input.name,
       status: "active",
-      metadata: {},
+      metadata: input.metadata ?? {},
       createdAt: timestamp,
       updatedAt: timestamp,
     })
     .onConflictDoNothing({ target: platformTenant.tenantId });
+
+  if (input.metadata && Object.keys(input.metadata).length > 0) {
+    await db
+      .update(platformTenant)
+      .set({
+        metadata: input.metadata,
+        updatedAt: timestamp,
+      })
+      .where(eq(platformTenant.tenantId, input.tenantId));
+  }
 }
 
 export async function listPostgresRoles() {

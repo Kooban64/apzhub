@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
+import { SoftProductGate } from "@/components/commercial/soft-product-gate";
 import {
   canCreateSupportRequest,
   canExecuteSupportSearch,
@@ -24,7 +25,7 @@ import { SupportRequestDetailView } from "./support-request-detail-view";
 import { SupportSearchView } from "./support-search-view";
 import { SupportSettingsView } from "./support-settings-view";
 import { SupportUsersView } from "./support-users-view";
-import { EmptyState, PageShell } from "./support-ui";
+import { EmptyState, LoadingState, PageShell } from "./support-ui";
 
 function PermissionDenied({ action }: { readonly action: string }) {
   return (
@@ -132,5 +133,17 @@ export function SupportWorkspaceRouter({
       );
   }
 
-  return <SupportRealtimeProvider>{content}</SupportRealtimeProvider>;
+  return (
+    <SoftProductGate
+      productKey="support"
+      productLabel="APZ Support"
+      loading={
+        <PageShell title="APZ Support" breadcrumbs={["APZ Support"]}>
+          <LoadingState label="Checking product access…" />
+        </PageShell>
+      }
+    >
+      <SupportRealtimeProvider>{content}</SupportRealtimeProvider>
+    </SoftProductGate>
+  );
 }

@@ -24,6 +24,7 @@ import {
   ProjectsTable,
   StatusBadge,
 } from "./projects-ui";
+import { usePublishTaskInspector } from "@/components/workbench/inspector-bodies";
 
 type TasksLayout = "list" | "board" | "timeline";
 
@@ -44,6 +45,7 @@ export function ProjectsTasksView({
   const [projectId, setProjectId] = useState("");
   const [layout, setLayout] = useState<TasksLayout>("list");
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const { publishTask, clear: clearInspector } = usePublishTaskInspector();
 
   useEffect(() => {
     const last = readLastProjectId();
@@ -77,6 +79,18 @@ export function ProjectsTasksView({
   const timelineTasks = useMemo(() => sortTasksForTimeline(tasks), [tasks]);
   const statusOptions = useMemo(() => statusOptionsFromTasks(tasks), [tasks]);
   const projectName = projects.find((p) => p.id === projectId)?.name;
+
+  useEffect(() => {
+    if (selectedTask) {
+      publishTask({
+        task: selectedTask,
+        projectName,
+        projectId: projectId || undefined,
+      });
+    } else {
+      clearInspector();
+    }
+  }, [selectedTask, projectId, projectName, publishTask, clearInspector]);
 
   return (
     <PageShell

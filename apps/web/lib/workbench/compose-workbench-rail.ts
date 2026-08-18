@@ -7,6 +7,13 @@ import type { ActivityBarItem, SidebarItem } from "@apzhub/ui";
 
 import type { ProductKey } from "@/lib/commercial/catalogue";
 
+import {
+  composeProductContextSidebar,
+  composeProductivityLauncherSidebar,
+} from "./compose-apzprd-sidebars";
+import { composePenContextSidebar } from "./compose-pen-sidebars";
+import { composeQepContextSidebar } from "./compose-qep-sidebars";
+
 const PRD_PRODUCT_KEYS = [
   "projects",
   "support",
@@ -140,6 +147,8 @@ export function composeWorkbenchRail(input: {
   readonly effectiveProducts: readonly string[];
   readonly pathname: string;
   readonly activeRailId?: string;
+  /** Independent Source Workspace access (source.read) — not implied by QEP. */
+  readonly hasSourceAccess?: boolean;
 }): WorkbenchRailModel {
   const effective = new Set(input.effectiveProducts);
   const productivityProducts = PRODUCTIVITY_PRODUCTS.filter((p) =>
@@ -154,21 +163,24 @@ export function composeWorkbenchRail(input: {
   const hasPen =
     hasProduct(effective, "pentest") ||
     input.pathname.startsWith("/apzpen") ||
+    input.pathname.startsWith("/workspace/pen") ||
     input.activityBarItems.some((i) =>
       /pen|security|pentest/i.test(`${i.id} ${i.label}`),
     );
-  const hasSource =
-    input.activityBarItems.some((i) => /source/i.test(`${i.id} ${i.label}`)) ||
-    input.pathname.startsWith("/workspace/source");
+  const hasSourceEntitlement = input.hasSourceAccess === true;
+  const showSourceRail =
+    hasSourceEntitlement || input.pathname.startsWith("/workspace/source");
 
   const path = input.pathname;
   const onHome = path === "/workspace/home" || path === "/workspace/home/";
+  const onMyWorkQueues =
+    path === "/workspace/my-work" || path.startsWith("/workspace/my-work/");
   const onProductivityProduct = productivityProducts.some((p) =>
     path.startsWith(p.href),
   );
   const onQep =
     path.startsWith("/workspace/qep") || path.startsWith("/workspace/testing");
-  const onPen = path.startsWith("/apzpen");
+  const onPen = path.startsWith("/apzpen") || path.startsWith("/workspace/pen");
   const onSource = path.startsWith("/workspace/source");
   const onSearch = path.startsWith("/workspace/search");
   const onNotifications = path.startsWith("/workspace/notifications");
@@ -177,19 +189,21 @@ export function composeWorkbenchRail(input: {
     input.activeRailId ??
     (onHome
       ? "home"
-      : onProductivityProduct
+      : onMyWorkQueues
         ? "productivity"
-        : onQep
-          ? "quality"
-          : onPen
-            ? "security"
-            : onSource
-              ? "source"
-              : onSearch
-                ? "search"
-                : onNotifications
-                  ? "notifications"
-                  : "home");
+        : onProductivityProduct
+          ? "productivity"
+          : onQep
+            ? "quality"
+            : onPen
+              ? "security"
+              : onSource
+                ? "source"
+                : onSearch
+                  ? "search"
+                  : onNotifications
+                    ? "notifications"
+                    : "home");
 
   const primary: ActivityBarItem[] = [
     {
@@ -231,7 +245,7 @@ export function composeWorkbenchRail(input: {
     });
   }
 
-  if (hasSource) {
+  if (showSourceRail) {
     primary.push({
       id: "source",
       label: "Source",
@@ -295,20 +309,31 @@ export function composeWorkbenchRail(input: {
     },
   ];
 
-  // Context sidebar content — rail override wins over path when selecting Productivity on Home.
   let mode: WorkbenchRailModel["mode"] = "other";
   let sidebarTitle = "WORKSPACE";
   let contextSidebarItems: SidebarItem[] = [...input.sidebarItems];
 
-  if (activeId === "productivity" && !onProductivityProduct) {
+  // Explicit Productivity rail click always shows the launcher (Owner Slice 2).
+  const explicitProductivityClick = input.activeRailId === "productivity";
+
+  if (explicitProductivityClick || (activeId === "productivity" && onMyWorkQueues)) {
     mode = "productivity-launcher";
     sidebarTitle = "PRODUCTIVITY";
-    contextSidebarItems = productivityProducts.map((p) => ({
-      id: `prd-${p.key}`,
-      label: p.label,
-      icon: p.icon,
-      active: path.startsWith(p.href),
-    }));
+    contextSidebarItems = [
+      ...composeProductivityLauncherSidebar({
+        pathname: path,
+        products: productivityProducts,
+      }),
+    ];
+  } else if (activeId === "productivity" && !onProductivityProduct) {
+    mode = "productivity-launcher";
+    sidebarTitle = "PRODUCTIVITY";
+    contextSidebarItems = [
+      ...composeProductivityLauncherSidebar({
+        pathname: path,
+        products: productivityProducts,
+      }),
+    ];
   } else if (activeId === "home" || onHome) {
     mode = "home";
     sidebarTitle = "MY WORK";
@@ -318,19 +343,7 @@ export function composeWorkbenchRail(input: {
         id: "nav-assigned",
         label: "Assigned to Me",
         icon: "user-check",
-        active: path.startsWith("/workspace/my-work"),
-      },
-      {
-        id: "nav-recent",
-        label: "Recent",
-        icon: "history",
-        active: false,
-      },
-      {
-        id: "nav-favourites",
-        label: "Favourites",
-        icon: "star",
-        active: false,
+        active: onMyWorkQueues,
       },
       {
         id: "nav-activity",
@@ -343,36 +356,49 @@ export function composeWorkbenchRail(input: {
     mode = "product";
     const current = productivityProducts.find((p) => path.startsWith(p.href));
     sidebarTitle = current?.label.toUpperCase() ?? "PRODUCTIVITY";
-    contextSidebarItems =
-      input.sidebarItems.length > 0
-        ? [...input.sidebarItems]
-        : productivityProducts.map((p) => ({
-            id: `prd-${p.key}`,
-            label: p.label,
-            icon: p.icon,
-            active: path.startsWith(p.href),
-          }));
+    contextSidebarItems = current
+      ? [...composeProductContextSidebar(current.key, path)]
+      : [
+          ...composeProductivityLauncherSidebar({
+            pathname: path,
+            products: productivityProducts,
+          }),
+        ];
   } else if (activeId === "quality" || onQep) {
     mode = "quality";
     sidebarTitle = "QUALITY";
-    contextSidebarItems =
-      input.sidebarItems.length > 0
-        ? [...input.sidebarItems]
-        : [{ id: "qep-overview", label: "Overview", active: true }];
+    contextSidebarItems = [
+      ...composeQepContextSidebar(path, {
+        hasSourceAccess: hasSourceEntitlement,
+      }),
+    ];
   } else if (activeId === "security" || onPen) {
     mode = "security";
     sidebarTitle = "SECURITY";
-    contextSidebarItems =
-      input.sidebarItems.length > 0
-        ? [...input.sidebarItems]
-        : [{ id: "pen-overview", label: "Overview", active: true }];
+    contextSidebarItems = [
+      ...composePenContextSidebar(path, {
+        hasSourceAccess: hasSourceEntitlement,
+      }),
+    ];
   } else if (activeId === "source" || onSource) {
     mode = "source";
-    sidebarTitle = "SOURCE";
-    contextSidebarItems =
-      input.sidebarItems.length > 0
-        ? [...input.sidebarItems]
-        : [{ id: "source-repos", label: "Repositories", active: true }];
+    sidebarTitle = "EXPLORER";
+    contextSidebarItems = [
+      {
+        id: "source-repos",
+        label: "Repositories",
+        icon: "folder-git-2",
+        active:
+          path === "/workspace/source" ||
+          path.startsWith("/workspace/source/repositories"),
+      },
+      {
+        id: "source-changes",
+        label: "Changes",
+        icon: "git-commit-horizontal",
+        active: path.startsWith("/workspace/source/changes"),
+      },
+    ];
   } else if (activeId === "search" || onSearch) {
     mode = "search";
     sidebarTitle = "SEARCH";

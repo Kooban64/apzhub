@@ -22,7 +22,18 @@ const SHELL_KINDS: Record<OperatorShellId, readonly DemoPersonaKind[]> = {
   compliance: ["compliance", "superadmin"],
   org: ["org_admin", "superadmin"],
   apzpen: ["superadmin", "platform_admin", "support", "org_admin", "org_member"],
-  workspace: ["org_member", "individual"],
+  workspace: [
+    "org_admin",
+    "org_member",
+    "individual",
+    "tenant_support",
+    "tenant_developer",
+    "tenant_finance",
+    "tenant_compliance",
+    "tenant_executive",
+    "tenant_qa",
+    "tenant_security",
+  ],
 };
 
 type HomeContextPayload = {
@@ -181,7 +192,7 @@ export function WorkbenchOperatorRedirect({
   if (!ready) {
     return (
       <div className="flex h-dvh items-center justify-center text-xs text-[var(--color-muted-foreground)]">
-        Opening your console…
+        Opening your workbench…
       </div>
     );
   }

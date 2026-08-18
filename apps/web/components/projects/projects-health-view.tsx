@@ -64,7 +64,7 @@ export function ProjectsHealthView() {
         <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
           APZHUB AuthN is <strong>BetterAuth only</strong>. Projects never uses
           Authentik forward-auth. Engine calls use a server-side adapter API key — users
-          do not see a Plane login for normal work.
+          do not see a separate engine login for normal work.
         </p>
         {healthQuery.data?.checks ? (
           <dl className="mt-3 grid gap-2 text-sm md:grid-cols-3">

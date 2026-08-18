@@ -16,10 +16,10 @@ export default function TermsPage() {
       </p>
       <h2 className="pt-2 text-base font-semibold">Trials & billing</h2>
       <p>
-        Individual and Business plans may start with a 7-day trial that requires card
-        authorisation via PayFast. Unless cancelled before the trial ends in accordance
-        with Platform controls, the subscription converts to paid billing at the
-        catalogue rate then in effect.
+        Individual and Business plans may start with a 14-day trial that does not
+        require a card. One trial is permitted per organisation. A trial does not
+        automatically convert to a paid subscription — paid access begins only after an
+        authoritative checkout and verified payment.
       </p>
       <h2 className="pt-2 text-base font-semibold">Acceptable use</h2>
       <p>

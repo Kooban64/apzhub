@@ -17,9 +17,11 @@ function RegisterFormInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [cart, setCart] = useState<CommerceCart | null>(null);
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [agree, setAgree] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -31,8 +33,13 @@ function RegisterFormInner() {
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
+    if (!agree) {
+      setError("Please agree to the Terms and Privacy Policy.");
+      return;
+    }
     setLoading(true);
     setError(null);
+    const name = `${firstName.trim()} ${lastName.trim()}`.trim();
     const result = await signUp.email({ name, email, password });
     setLoading(false);
     if (result.error) {
@@ -45,7 +52,7 @@ function RegisterFormInner() {
   }
 
   return (
-    <div>
+    <div data-testid="register-form">
       {cart ? (
         <p className="mb-4 text-xs text-[var(--color-muted-foreground)]">
           After account creation you will set up your organisation for{" "}
@@ -54,14 +61,6 @@ function RegisterFormInner() {
       ) : null}
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <Input
-          label="Name"
-          name="name"
-          placeholder="Your name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <Input
           label="Work email"
           name="email"
           type="email"
@@ -69,6 +68,22 @@ function RegisterFormInner() {
           placeholder="you@company.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <Input
+          label="First name"
+          name="firstName"
+          autoComplete="given-name"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          required
+        />
+        <Input
+          label="Last name"
+          name="lastName"
+          autoComplete="family-name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
           required
         />
         <Input
@@ -82,23 +97,37 @@ function RegisterFormInner() {
           required
           minLength={8}
         />
-        <p className="text-xs text-[var(--color-muted-foreground)]">
-          By registering you agree to the{" "}
-          <Link href="/legal/terms" className="underline">
-            Terms
-          </Link>{" "}
-          and{" "}
-          <Link href="/legal/privacy" className="underline">
-            Privacy Policy
-          </Link>
-          .
-        </p>
+        <label className="flex items-start gap-2 text-xs text-[var(--color-muted-foreground)]">
+          <input
+            type="checkbox"
+            className="mt-0.5"
+            checked={agree}
+            onChange={(e) => setAgree(e.target.checked)}
+            data-testid="register-agree"
+          />
+          <span>
+            I agree to the{" "}
+            <Link href="/legal/terms" className="underline">
+              Terms
+            </Link>{" "}
+            and{" "}
+            <Link href="/legal/privacy" className="underline">
+              Privacy Policy
+            </Link>
+            .
+          </span>
+        </label>
         {error ? (
           <p className="text-sm text-[var(--color-destructive)]" role="alert">
             {error}
           </p>
         ) : null}
-        <Button type="submit" className="h-10 w-full" disabled={loading}>
+        <Button
+          type="submit"
+          className="h-10 w-full"
+          disabled={loading || !agree}
+          data-testid="register-submit"
+        >
           {loading ? "Creating…" : "Create account"}
         </Button>
       </form>

@@ -30,10 +30,7 @@ export function ForgotPasswordForm() {
   if (done) {
     return (
       <div className="space-y-4 text-sm text-[var(--color-muted-foreground)]">
-        <p>
-          If an account exists for that email, a reset link has been sent. In
-          development, check the server console for the link.
-        </p>
+        <p>If an account exists for that email, a reset link has been sent.</p>
         <Link href="/login" className="text-[var(--color-primary)] hover:underline">
           Back to sign in
         </Link>

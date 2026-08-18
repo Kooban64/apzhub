@@ -20,7 +20,7 @@ export type CatalogueSku = {
   readonly planId?: string;
 };
 
-export type ProductStatus = "available" | "coming_soon";
+export type ProductStatus = "available" | "coming_soon" | "contact_sales";
 
 export type ProductKey =
   | "qep"
@@ -46,6 +46,12 @@ export type ProductCatalogueEntry = {
   readonly moduleIds: readonly string[];
   /** Commercial suite membership */
   readonly suiteId: SuiteId;
+  /**
+   * Module list price in minor units. `null` = Owner/admin has not set a price.
+   * Never invent a number here.
+   */
+  readonly amountCents: number | null;
+  readonly currency: string;
   /** @deprecated use suiteId */
   readonly bundle?: "productivity" | "assurance" | "observability";
 };
@@ -81,11 +87,17 @@ export type PackageId =
   | "pkg.apzprd.projects"
   | "pkg.apzprd.time"
   | "pkg.apzprd.service"
+  | "pkg.apzprd.workflow"
+  | "pkg.apzprd.analytics"
+  | "pkg.apzprd.knowledge"
+  | "pkg.apzprd.documents"
   | "pkg.apzprd.delivery"
   | "pkg.apzprd.operations"
   | "pkg.apzprd.workspace"
   | "pkg.apzpen.starter"
+  | "pkg.apzpen.collaborator"
   | "pkg.apzqep.starter"
+  | "pkg.apzqep.collaborator"
   | "pkg.law.practice";
 
 export type PackageCatalogueEntry = {
@@ -98,6 +110,15 @@ export type PackageCatalogueEntry = {
   readonly includesKnowledgeLite: boolean;
   readonly status: ProductStatus;
   readonly selfServe: boolean;
+  /**
+   * Sellable line price in minor units. `null` = Owner/admin has not set a price.
+   * Checkout must refuse to charge when this remains null after admin overlay.
+   */
+  readonly amountCents: number | null;
+  readonly currency: string;
+  readonly interval: "month";
+  /** When true, quote multiplies amountCents by seats. Default false — do not invent seat rules. */
+  readonly seatBased: boolean;
 };
 
 /** APZOR organisation id — ordinary tenant (Stream 6). Not a platform super-tenant. */
@@ -154,6 +175,8 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
     status: "available",
     moduleIds: ["qep", "qep-quality-flows"],
     suiteId: "qa",
+    amountCents: null,
+    currency: "ZAR",
     bundle: "assurance",
   },
   {
@@ -164,6 +187,8 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
     status: "available",
     moduleIds: ["apzpen", "pentest"],
     suiteId: "pentest",
+    amountCents: null,
+    currency: "ZAR",
   },
   {
     productKey: "projects",
@@ -172,6 +197,8 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
     status: "available",
     moduleIds: ["projects"],
     suiteId: "productivity",
+    amountCents: null,
+    currency: "ZAR",
     bundle: "productivity",
   },
   {
@@ -181,6 +208,8 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
     status: "available",
     moduleIds: ["time"],
     suiteId: "productivity",
+    amountCents: null,
+    currency: "ZAR",
     bundle: "productivity",
   },
   {
@@ -190,6 +219,8 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
     status: "available",
     moduleIds: ["support"],
     suiteId: "productivity",
+    amountCents: null,
+    currency: "ZAR",
     bundle: "productivity",
   },
   {
@@ -199,6 +230,8 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
     status: "available",
     moduleIds: ["documents"],
     suiteId: "productivity",
+    amountCents: null,
+    currency: "ZAR",
     bundle: "productivity",
   },
   {
@@ -208,6 +241,8 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
     status: "available",
     moduleIds: ["analytics"],
     suiteId: "productivity",
+    amountCents: null,
+    currency: "ZAR",
     bundle: "observability",
   },
   {
@@ -217,6 +252,8 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
     status: "available",
     moduleIds: ["workflow", "automation"],
     suiteId: "productivity",
+    amountCents: null,
+    currency: "ZAR",
     bundle: "productivity",
   },
   {
@@ -226,6 +263,8 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
     status: "available",
     moduleIds: ["knowledge"],
     suiteId: "productivity",
+    amountCents: null,
+    currency: "ZAR",
     bundle: "productivity",
   },
   {
@@ -235,6 +274,8 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
     status: "coming_soon",
     moduleIds: ["law", "law-platform"],
     suiteId: "law",
+    amountCents: null,
+    currency: "ZAR",
   },
   {
     productKey: "monitoring",
@@ -243,6 +284,8 @@ export const PRODUCT_CATALOGUE: readonly ProductCatalogueEntry[] = [
     status: "coming_soon",
     moduleIds: ["monitoring"],
     suiteId: "productivity",
+    amountCents: null,
+    currency: "ZAR",
     bundle: "observability",
   },
 ] as const;
@@ -257,6 +300,10 @@ export const PACKAGE_CATALOGUE: readonly PackageCatalogueEntry[] = [
     includesKnowledgeLite: false,
     status: "available",
     selfServe: true,
+    amountCents: null,
+    currency: "ZAR",
+    interval: "month",
+    seatBased: false,
   },
   {
     packageId: "pkg.apzprd.time",
@@ -267,6 +314,10 @@ export const PACKAGE_CATALOGUE: readonly PackageCatalogueEntry[] = [
     includesKnowledgeLite: true,
     status: "coming_soon",
     selfServe: true,
+    amountCents: null,
+    currency: "ZAR",
+    interval: "month",
+    seatBased: false,
   },
   {
     packageId: "pkg.apzprd.service",
@@ -277,6 +328,67 @@ export const PACKAGE_CATALOGUE: readonly PackageCatalogueEntry[] = [
     includesKnowledgeLite: true,
     status: "coming_soon",
     selfServe: true,
+    amountCents: null,
+    currency: "ZAR",
+    interval: "month",
+    seatBased: false,
+  },
+  {
+    packageId: "pkg.apzprd.workflow",
+    name: "APZPRD Workflow",
+    description:
+      "Workflow automation — commercial catalogue for existing Workflow product.",
+    suiteId: "productivity",
+    productKeys: ["workflow"],
+    includesKnowledgeLite: false,
+    status: "coming_soon",
+    selfServe: true,
+    amountCents: null,
+    currency: "ZAR",
+    interval: "month",
+    seatBased: false,
+  },
+  {
+    packageId: "pkg.apzprd.analytics",
+    name: "APZPRD Analytics",
+    description: "Analytics — commercial catalogue for existing Analytics product.",
+    suiteId: "productivity",
+    productKeys: ["analytics"],
+    includesKnowledgeLite: false,
+    status: "coming_soon",
+    selfServe: true,
+    amountCents: null,
+    currency: "ZAR",
+    interval: "month",
+    seatBased: false,
+  },
+  {
+    packageId: "pkg.apzprd.knowledge",
+    name: "APZPRD Knowledge",
+    description: "Knowledge — commercial catalogue for existing Knowledge product.",
+    suiteId: "productivity",
+    productKeys: ["knowledge"],
+    includesKnowledgeLite: false,
+    status: "coming_soon",
+    selfServe: true,
+    amountCents: null,
+    currency: "ZAR",
+    interval: "month",
+    seatBased: false,
+  },
+  {
+    packageId: "pkg.apzprd.documents",
+    name: "APZPRD Documents",
+    description: "Documents — commercial catalogue for existing Documents product.",
+    suiteId: "productivity",
+    productKeys: ["documents"],
+    includesKnowledgeLite: false,
+    status: "coming_soon",
+    selfServe: true,
+    amountCents: null,
+    currency: "ZAR",
+    interval: "month",
+    seatBased: false,
   },
   {
     packageId: "pkg.apzprd.delivery",
@@ -287,6 +399,10 @@ export const PACKAGE_CATALOGUE: readonly PackageCatalogueEntry[] = [
     includesKnowledgeLite: true,
     status: "coming_soon",
     selfServe: true,
+    amountCents: null,
+    currency: "ZAR",
+    interval: "month",
+    seatBased: false,
   },
   {
     packageId: "pkg.apzprd.operations",
@@ -297,11 +413,16 @@ export const PACKAGE_CATALOGUE: readonly PackageCatalogueEntry[] = [
     includesKnowledgeLite: true,
     status: "coming_soon",
     selfServe: false,
+    amountCents: null,
+    currency: "ZAR",
+    interval: "month",
+    seatBased: false,
   },
   {
     packageId: "pkg.apzprd.workspace",
-    name: "APZPRD Workspace",
-    description: "Full productivity module set.",
+    name: "APZPRD Complete",
+    description:
+      "Commercial entitlement to the full APZPRD suite — mutually exclusive with individual APZPRD module purchases for the same basket.",
     suiteId: "productivity",
     productKeys: [
       "projects",
@@ -315,26 +436,68 @@ export const PACKAGE_CATALOGUE: readonly PackageCatalogueEntry[] = [
     includesKnowledgeLite: true,
     status: "coming_soon",
     selfServe: false,
+    amountCents: null,
+    currency: "ZAR",
+    interval: "month",
+    seatBased: false,
   },
   {
     packageId: "pkg.apzpen.starter",
-    name: "APZPEN Starter",
-    description: "Security Assurance core — additive with other pillars.",
+    name: "APZPEN Practitioner",
+    description: "Security Assurance practitioner seat — additive with other pillars.",
     suiteId: "pentest",
     productKeys: ["pentest"],
     includesKnowledgeLite: false,
     status: "available",
     selfServe: true,
+    amountCents: null,
+    currency: "ZAR",
+    interval: "month",
+    seatBased: false,
+  },
+  {
+    packageId: "pkg.apzpen.collaborator",
+    name: "APZPEN Collaborator",
+    description:
+      "Commercial collaborator seat for APZPEN — requires ≥1 Practitioner in the same basket. Does not grant Source, Terminal, or Professional Tool access.",
+    suiteId: "pentest",
+    productKeys: ["pentest"],
+    includesKnowledgeLite: false,
+    status: "available",
+    selfServe: true,
+    amountCents: null,
+    currency: "ZAR",
+    interval: "month",
+    seatBased: false,
   },
   {
     packageId: "pkg.apzqep.starter",
-    name: "APZQEP Starter",
-    description: "Quality Engineering core — additive with other pillars.",
+    name: "APZQEP Engineer",
+    description: "Quality Engineering engineer seat — additive with other pillars.",
     suiteId: "qa",
     productKeys: ["qep"],
     includesKnowledgeLite: false,
     status: "available",
     selfServe: true,
+    amountCents: null,
+    currency: "ZAR",
+    interval: "month",
+    seatBased: false,
+  },
+  {
+    packageId: "pkg.apzqep.collaborator",
+    name: "APZQEP Collaborator",
+    description:
+      "Commercial collaborator seat for APZQEP — requires ≥1 Engineer in the same basket. Not an IAM role.",
+    suiteId: "qa",
+    productKeys: ["qep"],
+    includesKnowledgeLite: false,
+    status: "available",
+    selfServe: true,
+    amountCents: null,
+    currency: "ZAR",
+    interval: "month",
+    seatBased: false,
   },
   {
     packageId: "pkg.law.practice",
@@ -345,6 +508,10 @@ export const PACKAGE_CATALOGUE: readonly PackageCatalogueEntry[] = [
     includesKnowledgeLite: false,
     status: "coming_soon",
     selfServe: false,
+    amountCents: null,
+    currency: "ZAR",
+    interval: "month",
+    seatBased: false,
   },
 ] as const;
 
@@ -374,9 +541,13 @@ export const PLAN_CATALOGUE: readonly PlanCatalogueEntry[] = [
     products: ["qep"],
     suiteIds: ["qa"],
     selfServe: true,
-    trialDays: 7,
+    trialDays: 14,
     seatBased: false,
-    highlights: ["QEP Quality OS", "7-day card trial", "Personal billing account"],
+    highlights: [
+      "QEP Quality OS",
+      "14-day trial · no card required",
+      "Personal billing account",
+    ],
     active: true,
   },
   {
@@ -389,10 +560,11 @@ export const PLAN_CATALOGUE: readonly PlanCatalogueEntry[] = [
     products: ["qep"],
     suiteIds: ["qa"],
     selfServe: true,
-    trialDays: 7,
+    trialDays: 14,
     seatBased: true,
     highlights: [
       "QEP for the organisation",
+      "14-day trial · no card required",
       "Seat-based membership",
       "Org Admin product grants",
     ],
@@ -455,6 +627,18 @@ export const CATALOGUE_SKUS: readonly CatalogueSku[] = [
     currency: "ZAR",
     interval: "month",
     capabilities: ["cap.org.core", "cap.qep.basic", "cap.qep.advanced"],
+    active: true,
+  },
+  {
+    skuId: "sku.commerce.basket",
+    name: "Commerce basket",
+    kind: "addon",
+    description:
+      "Multi-package self-serve checkout — invoice amount is computed server-side from catalogue.",
+    amountCents: 0,
+    currency: "ZAR",
+    interval: "month",
+    capabilities: [],
     active: true,
   },
   {
@@ -594,6 +778,8 @@ export function getPublicCatalogue() {
       status: product.status,
       suiteId: product.suiteId,
       bundle: product.bundle,
+      amountCents: product.amountCents,
+      currency: product.currency,
     })),
     suites: listSuites().map((suite) => ({
       suiteId: suite.suiteId,
@@ -623,6 +809,10 @@ export function getPublicCatalogue() {
       status: pkg.status,
       selfServe: pkg.selfServe,
       includesKnowledgeLite: pkg.includesKnowledgeLite,
+      amountCents: pkg.amountCents,
+      currency: pkg.currency,
+      interval: pkg.interval,
+      seatBased: pkg.seatBased,
     })),
   };
 }
@@ -652,4 +842,55 @@ export function isPackageId(value: string): value is PackageId {
 
 export function skuIdForPlan(planId: PlanId): string | undefined {
   return CATALOGUE_SKUS.find((sku) => sku.planId === planId)?.skuId;
+}
+
+const OWNER_PRICE_PACKAGE_IDS = [
+  "pkg.apzprd.projects",
+  "pkg.apzprd.time",
+  "pkg.apzprd.service",
+  "pkg.apzprd.workflow",
+  "pkg.apzprd.analytics",
+  "pkg.apzprd.knowledge",
+  "pkg.apzprd.documents",
+  "pkg.apzprd.delivery",
+  "pkg.apzprd.operations",
+  "pkg.apzprd.workspace",
+  "pkg.apzqep.starter",
+  "pkg.apzqep.collaborator",
+  "pkg.apzpen.starter",
+  "pkg.apzpen.collaborator",
+] as const;
+
+const OWNER_PRICE_PRODUCT_KEYS = [
+  "projects",
+  "support",
+  "time",
+  "workflow",
+  "analytics",
+  "knowledge",
+  "documents",
+  "qep",
+  "pentest",
+] as const;
+
+/** Fields the Owner/admin must set before a package can be charged. */
+export function listUnsetCataloguePriceFields(): readonly string[] {
+  const missing: string[] = [];
+  for (const id of OWNER_PRICE_PACKAGE_IDS) {
+    const pkg = getPackage(id);
+    if (pkg && pkg.amountCents == null) {
+      missing.push(`${id}.amountCents`);
+    }
+  }
+  for (const key of OWNER_PRICE_PRODUCT_KEYS) {
+    const product = getProduct(key);
+    if (product && product.amountCents == null) {
+      missing.push(`product.${key}.amountCents`);
+    }
+  }
+  return missing;
+}
+
+export function isPackagePurchasable(pkg: PackageCatalogueEntry): boolean {
+  return pkg.status === "available" && pkg.selfServe;
 }

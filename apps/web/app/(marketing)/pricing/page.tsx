@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { PricingCards } from "./pricing-cards";
+import { PublicProductPricing } from "./public-product-pricing";
 
 export default function PricingPage() {
   return (
@@ -9,12 +10,13 @@ export default function PricingPage() {
         Pricing
       </h1>
       <p className="mt-3 max-w-2xl text-[var(--color-muted-foreground)]">
-        Three plans. Individual and Business start with a 7-day card trial via PayFast.
-        Custom is enterprise quote only.
+        Three plans. Individual and Business start with a 14-day trial — no card
+        required. Custom is enterprise quote only.
       </p>
       <div className="mt-10">
         <PricingCards />
       </div>
+      <PublicProductPricing />
       <p className="mt-10 text-sm text-[var(--color-muted-foreground)]">
         By starting a trial you agree to the{" "}
         <Link href="/legal/terms" className="underline">

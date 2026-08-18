@@ -222,9 +222,12 @@ export function seedDefaultAuthorizationCatalog(service: AuthorizationService): 
         "workspace.*",
         "notification.read",
         "notifications.read",
-        ...IAM_PLATFORM_PERMISSIONS.filter(
-          (p) => !p.startsWith("billing.admin") && p !== "catalogue.write",
-        ),
+        ...IAM_PLATFORM_PERMISSIONS.filter((p) => {
+          if (p.startsWith("billing.admin")) return false;
+          if (p === "catalogue.write") return false;
+          if (p.startsWith("commerce.") && p.endsWith(".manage")) return false;
+          return true;
+        }),
       ],
     );
   } else {
@@ -382,7 +385,13 @@ export function seedDefaultAuthorizationCatalog(service: AuthorizationService): 
     }
   }
   ensureRolePermissionGrants(service, DEFAULT_PLATFORM_ADMIN_ROLE_ID, [
-    ...IAM_PLATFORM_PERMISSIONS,
+    ...IAM_PLATFORM_PERMISSIONS.filter(
+      (p) => !(p.startsWith("commerce.") && p.endsWith(".manage")),
+    ),
+    "commerce.catalogue.read",
+    "commerce.pricing.read",
+    "commerce.discount.read",
+    "commerce.tax.read",
   ]);
 
   // H4 — sync catalogue growth onto existing Cap roles (idempotent grants).

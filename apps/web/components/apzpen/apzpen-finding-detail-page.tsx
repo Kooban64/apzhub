@@ -93,7 +93,7 @@ export function ApzpenFindingDetailPage({ findingId }: { readonly findingId: str
         }
         actions={
           <Link
-            href="/apzpen/findings"
+            href="/workspace/pen/findings"
             className="rounded border border-[var(--color-border)] px-2 py-1 text-[11px] hover:bg-[var(--color-muted)]"
           >
             Back to findings
@@ -180,7 +180,7 @@ export function ApzpenFindingDetailPage({ findingId }: { readonly findingId: str
                 <p className="mt-3 text-xs text-[var(--color-muted-foreground)]">
                   Engagement:{" "}
                   <Link
-                    href={`/apzpen/engagements/${finding.engagementId}`}
+                    href={`/workspace/pen/engagements/${finding.engagementId}`}
                     className="underline"
                   >
                     {finding.engagementId}

@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 
 import { PlatformAdminAuditView } from "@/components/platform-admin/platform-admin-audit";
-import { PlatformAdminBillingView } from "@/components/platform-admin/platform-admin-billing";
 import { PlatformAdminIdentityAccessView } from "@/components/platform-admin/platform-admin-identity-access";
 import { PlatformAdminOperationsView } from "@/components/platform-admin/platform-admin-operations";
 import { PlatformAdminProductsView } from "@/components/platform-admin/platform-admin-products";
@@ -33,8 +32,6 @@ export default async function PlatformAdminSectionPage({
   switch (section) {
     case "tenants":
       return <PlatformAdminTenantsView />;
-    case "billing":
-      return <PlatformAdminBillingView />;
     case "products":
       return <PlatformAdminProductsView />;
     case "provisioning":

@@ -53,7 +53,10 @@ function ProcessingInner() {
       if (!cancelled && attempts < 20) {
         window.setTimeout(() => void poll(), 1500);
       } else if (!cancelled && attempts >= 20) {
-        router.replace("/checkout/success?partial=1");
+        // Do not claim success — payment/provisioning was not verified.
+        setError(
+          "Payment or provisioning is still pending. We could not confirm activation yet. Check billing status or try again shortly.",
+        );
       }
     };
     void poll();
@@ -75,28 +78,43 @@ function ProcessingInner() {
         Subscription activates only after server-side verification.
       </p>
       {error ? (
-        <p className="mt-4 text-sm text-[var(--color-destructive)]" role="alert">
-          {error}
-        </p>
+        <div className="mt-4 space-y-2">
+          <p className="text-sm text-[var(--color-destructive)]" role="alert">
+            {error}
+          </p>
+          <p className="text-sm">
+            <Link href="/workspace/billing" className="underline">
+              Open billing status
+            </Link>
+            {" · "}
+            <button
+              type="button"
+              className="underline"
+              onClick={() => window.location.reload()}
+            >
+              Try again
+            </button>
+          </p>
+        </div>
       ) : null}
       <ul className="mt-8 space-y-3" aria-live="polite">
-        {(
-          status?.steps ?? [
-            { id: "payment", label: "Verifying payment", status: "pending" },
-            { id: "organisation", label: "Organisation", status: "pending" },
-            { id: "workspace", label: "Workspace", status: "pending" },
-          ]
-        ).map((step) => (
-          <li
-            key={step.id}
-            className="flex items-center justify-between border-b border-[var(--color-border)] py-2 text-sm"
-          >
-            <span>{step.label}</span>
-            <span className="text-[var(--color-muted-foreground)] capitalize">
-              {step.status}
-            </span>
+        {status?.steps?.length ? (
+          status.steps.map((step) => (
+            <li
+              key={step.id}
+              className="flex items-center justify-between border-b border-[var(--color-border)] py-2 text-sm"
+            >
+              <span>{step.label}</span>
+              <span className="text-[var(--color-muted-foreground)] capitalize">
+                {step.status}
+              </span>
+            </li>
+          ))
+        ) : (
+          <li className="text-sm text-[var(--color-muted-foreground)]">
+            Provisioning status unavailable
           </li>
-        ))}
+        )}
       </ul>
       <p className="mt-8 text-sm">
         <Link href="/workspace/billing" className="underline">

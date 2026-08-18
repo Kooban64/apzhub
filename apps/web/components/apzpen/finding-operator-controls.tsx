@@ -240,9 +240,19 @@ export function RemediationChangeLinkForm({
           Link change
         </button>
         {finding.remediationChangeRef ? (
-          <span className="font-mono text-[10px] text-[var(--color-muted-foreground)]">
-            Linked: {finding.remediationChangeRef}
-          </span>
+          finding.remediationChangeRef.startsWith("/workspace/source") ? (
+            <Link
+              href={finding.remediationChangeRef}
+              className="font-mono text-[10px] text-[var(--color-primary)] underline underline-offset-2"
+              data-testid="apzpen-finding-view-source"
+            >
+              View Source →
+            </Link>
+          ) : (
+            <span className="font-mono text-[10px] text-[var(--color-muted-foreground)]">
+              Linked: {finding.remediationChangeRef}
+            </span>
+          )
         ) : null}
         <Link
           href="/workspace/source"
