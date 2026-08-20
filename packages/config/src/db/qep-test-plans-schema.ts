@@ -76,6 +76,7 @@ export const qepTestPlan = pgTable(
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
     updatedBy: text("updated_by").notNull(),
     correlationId: text("correlation_id"),
+    applicationId: text("application_id"),
   },
   (table) => [
     uniqueIndex("qep_test_plans_tenant_number_uidx").on(table.tenantId, table.number),
@@ -83,6 +84,10 @@ export const qepTestPlan = pgTable(
     index("qep_test_plans_tenant_status_idx").on(table.tenantId, table.status),
     index("qep_test_plans_tenant_owner_idx").on(table.tenantId, table.ownerId),
     index("qep_test_plans_tenant_updated_idx").on(table.tenantId, table.updatedAt),
+    index("qep_test_plans_tenant_application_idx").on(
+      table.tenantId,
+      table.applicationId,
+    ),
   ],
 );
 

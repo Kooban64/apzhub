@@ -145,9 +145,22 @@ export default async function globalSetup(): Promise<void> {
     });
   } catch (error) {
     console.warn(
-      "[e2e-setup] db:seed failed (continuing if roles already present):",
+      "[e2e-setup] db:seed failed, retrying once:",
       error instanceof Error ? error.message : error,
     );
+    await new Promise((resolve) => setTimeout(resolve, 2_000));
+    try {
+      execFileSync("pnpm", ["db:seed"], {
+        cwd: ROOT,
+        stdio: "inherit",
+        env: process.env,
+      });
+    } catch (retryError) {
+      console.warn(
+        "[e2e-setup] db:seed failed (continuing if roles already present):",
+        retryError instanceof Error ? retryError.message : retryError,
+      );
+    }
   }
   await waitForHealthy();
   await ensureDevCredentials();

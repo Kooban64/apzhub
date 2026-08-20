@@ -9,11 +9,10 @@ import type { ScmChangeEvent } from "@apzhub/platform-scm";
 
 import { getQepAutomationRuntime } from "@/lib/qep/automation-runtime";
 
+import type { EnvVars } from "@/lib/env-vars";
 export const F9_ASSIST_ORIGIN = "f9_on_change" as const;
 
-export function isAutomationOnChangeEnabled(
-  env: NodeJS.ProcessEnv = process.env,
-): boolean {
+export function isAutomationOnChangeEnabled(env: EnvVars = process.env): boolean {
   const raw = (env.APZHUB_AUTOMATION_ON_CHANGE ?? "").toLowerCase();
   return raw === "true" || raw === "1" || raw === "yes";
 }
@@ -57,7 +56,7 @@ export async function triggerAutomationForPersistedChanges(input: {
   readonly correlationId: string;
   readonly source: "webhook" | "sync";
   readonly events: readonly ScmChangeEvent[];
-  readonly env?: NodeJS.ProcessEnv;
+  readonly env?: EnvVars;
 }): Promise<readonly AutoVerificationTriggerResult[]> {
   const env = input.env ?? process.env;
   if (!isAutomationOnChangeEnabled(env)) {

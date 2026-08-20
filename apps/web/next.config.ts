@@ -30,10 +30,8 @@ const nextConfig: NextConfig = withSecurityHeaders({
     "@apzhub/workspace",
     "swagger-ui-react",
   ],
-  // SPR-UX-001 U0 — pre-existing type debt blocks production cutover; track cleanup.
-  // Do not treat this as a permanent quality exemption.
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   serverExternalPackages: ["pg", "ioredis", "drizzle-orm"],
   async rewrites() {

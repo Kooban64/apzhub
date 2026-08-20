@@ -76,17 +76,21 @@ async function mockReleaseControlApis(page: Page, reviewClear: boolean) {
 }
 
 test.describe("SPR-APZQEP-201 Release Control Centre", () => {
-  test("Home shows release confidence and APZPEN security posture", async ({
+  test("Home is the Quality Command Centre, not a release-score dashboard", async ({
     page,
   }) => {
     await signInDevUser(page);
     await mockReleaseControlApis(page, false);
     await page.goto("/workspace/qep/home");
-    await expect(page.getByTestId("qep-page")).toBeVisible({ timeout: 30_000 });
-    await expect(page.getByTestId("qep-home-verdict")).toBeVisible();
-    await expect(page.getByTestId("qep-home-metrics")).toBeVisible();
-    await expect(page.getByTestId("qep-home-security")).toContainText(/blocked/i);
-    await expect(page.getByRole("link", { name: "Release Candidate" })).toBeVisible();
+    await expect(page.getByTestId("qep-command-centre")).toBeVisible({
+      timeout: 30_000,
+    });
+    await expect(page.getByTestId("qep-page")).toBeVisible();
+    await expect(page.getByText("Quality Command Centre")).toBeVisible();
+    await expect(page.getByTestId("qep-home-verdict")).toHaveCount(0);
+    await expect(page.getByTestId("qep-home-metrics")).toHaveCount(0);
+    await expect(page.getByText(/\bREADY\b/)).toHaveCount(0);
+    await expect(page.getByText("AT RISK")).toHaveCount(0);
   });
 
   test("Release Readiness security check is honest (not auto-ok)", async ({ page }) => {

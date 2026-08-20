@@ -621,19 +621,21 @@ function DefectDetailView({ defectId }: { readonly defectId: string }) {
           <QepPanel title="Execution origin">
             {defect.executionOrigin ? (
               <dl className="space-y-1 text-sm">
-                <div>
-                  <dt className="text-[var(--color-muted-foreground)]">Session</dt>
-                  <dd>
-                    <Link
-                      href={QEP_EXECUTION_WORKSPACE_ROUTES.detail(
-                        defect.executionOrigin.sessionId,
-                      )}
-                      className="font-mono text-xs text-[var(--color-primary)] underline"
-                    >
-                      {defect.executionOrigin.sessionId}
-                    </Link>
-                  </dd>
-                </div>
+                {defect.executionOrigin.sessionId ? (
+                  <div>
+                    <dt className="text-[var(--color-muted-foreground)]">Session</dt>
+                    <dd>
+                      <Link
+                        href={QEP_EXECUTION_WORKSPACE_ROUTES.detail(
+                          defect.executionOrigin.sessionId,
+                        )}
+                        className="font-mono text-xs text-[var(--color-primary)] underline"
+                      >
+                        {defect.executionOrigin.sessionId}
+                      </Link>
+                    </dd>
+                  </div>
+                ) : null}
                 {defect.executionOrigin.stepId ? (
                   <div>
                     <dt className="text-[var(--color-muted-foreground)]">Step</dt>

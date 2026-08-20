@@ -6,6 +6,7 @@ import {
   setPackageListPrice,
 } from "./catalogue-price-overlay";
 
+import type { EnvVars } from "@/lib/env-vars";
 describe("commerce-quote", () => {
   beforeEach(() => {
     resetCataloguePriceOverlayForTests();
@@ -51,7 +52,7 @@ describe("commerce-quote", () => {
     setPackageListPrice("pkg.apzqep.starter", 10000);
     const quote = quoteCommerceBasket({ packageIds: ["pkg.apzqep.starter"] }, {
       COMMERCE_VAT_BPS: "1500",
-    } as NodeJS.ProcessEnv);
+    } as EnvVars);
     expect(quote.ok).toBe(true);
     if (quote.ok) {
       expect(quote.taxCents).toBe(1500);

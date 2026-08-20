@@ -19,6 +19,7 @@ import {
   type RunVerificationPacksResult,
 } from "@/lib/qep/run-verification-packs";
 
+import type { EnvVars } from "@/lib/env-vars";
 export type EarlyCheckPlaywrightResult = {
   readonly attempted: boolean;
   readonly enabled: boolean;
@@ -54,7 +55,7 @@ async function triggerPlaywrightForEarlyCheck(input: {
   readonly change: ScmChangeEvent;
   readonly correlationId: string;
   readonly force: boolean;
-  readonly env: NodeJS.ProcessEnv;
+  readonly env: EnvVars;
 }): Promise<EarlyCheckPlaywrightResult> {
   const enabled = isAutomationOnChangeEnabled(input.env);
   if (!enabled) {
@@ -136,7 +137,7 @@ export async function runEarlyCheckForChange(input: {
   readonly changeEventId: string;
   readonly includePlaywright?: boolean;
   readonly force?: boolean;
-  readonly env?: NodeJS.ProcessEnv;
+  readonly env?: EnvVars;
 }): Promise<RunEarlyCheckResult> {
   const changeEventId = input.changeEventId.trim();
   if (!changeEventId) {

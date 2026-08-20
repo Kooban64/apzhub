@@ -26,11 +26,11 @@ export async function notifyTimesheetApprovalEvent(input: {
   if (event !== "submitted" && !recipientUserId) return;
   if (event === "submitted") return; // employee→manager broadcast deferred; approve/return are G-20
 
-  const subjects: Record<typeof event, string> = {
+  const subjects = {
     submitted: "Timesheet submitted for approval",
     approved: "Timesheet approved",
     returned: "Timesheet returned for correction",
-  };
+  } as const;
 
   try {
     const svc = getOrCreateNotificationDeliveryService();

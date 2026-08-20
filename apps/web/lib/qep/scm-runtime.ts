@@ -6,6 +6,7 @@ import { resolveScmPersistence } from "@/lib/qep/persistence/resolve-scm-persist
 import { triggerSecurityDispatchForPersistedChanges } from "@/lib/qep/security-dispatch-on-change";
 import { triggerVerificationDispatchForPersistedChanges } from "@/lib/qep/verification-dispatch-on-change";
 
+import type { EnvVars } from "@/lib/env-vars";
 /** Matches platform-authorization DEFAULT_PLATFORM_TENANT_ID. */
 const DEFAULT_PLATFORM_TENANT_ID = "t0000001-0000-4000-8000-000000000001";
 
@@ -13,7 +14,7 @@ let singleton: QepScmFacade | undefined;
 
 /** Resolve GitHub PAT from server env / `.secrets/git` (never from the client). */
 export function resolveGithubPatFromEnv(
-  env: NodeJS.ProcessEnv = process.env,
+  env: EnvVars = process.env,
 ): string | undefined {
   const token =
     env.APZHUB_SCM_GITHUB_TOKEN?.trim() ||

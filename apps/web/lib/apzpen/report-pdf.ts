@@ -10,6 +10,7 @@ import { join } from "node:path";
 
 import type { ReportPack } from "./reports";
 
+import type { EnvVars } from "@/lib/env-vars";
 export type ApzpenPdfResult =
   | {
       readonly ok: true;
@@ -64,9 +65,7 @@ export function resolveApzpenTypstTemplatePath(): string {
   return join(process.cwd(), "lib/apzpen/report-templates/assurance-pack.typ");
 }
 
-export function resolveTypstBinary(
-  env: NodeJS.ProcessEnv = process.env,
-): string | undefined {
+export function resolveTypstBinary(env: EnvVars = process.env): string | undefined {
   const configured = env.APZHUB_TYPST_BIN?.trim();
   if (configured && existsSync(configured)) return configured;
   const local = join(process.cwd(), "tooling/bin/typst");
@@ -198,7 +197,7 @@ export async function tryCompileApzpenPdf(
     readonly typstBinary?: string;
     readonly workDir?: string;
     readonly preferEmbedded?: boolean;
-    readonly env?: NodeJS.ProcessEnv;
+    readonly env?: EnvVars;
   },
 ): Promise<ApzpenPdfResult> {
   if (options?.preferEmbedded) {

@@ -1,0 +1,1 @@
+Repository inspector was not captured because no SCM repositories are registered in this environment. Associating a repository requires a real SCM registration (`qep.scm.read` / existing `qep_scm_repository` rows). Empty Repositories table is captured as 07-repositories.png. No fake repository rows were invented.

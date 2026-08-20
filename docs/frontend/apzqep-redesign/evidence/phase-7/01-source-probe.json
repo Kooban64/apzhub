@@ -1,0 +1,8 @@
+{
+  "status": 200,
+  "raw": "{\"data\":{\"sourceAuthorised\":false,\"sourceAccess\":\"authorised\",\"sourcePresent\":false,\"denied\":[]},\"meta\":{\"requestId\":\"817cc428-9217-4b86-8c6d-3f11a4e24a44\",\"correlationId\":\"817cc428-9217-4b86-8c6d-3f11a4e24a44\"}}",
+  "sourceAuthorised": false,
+  "sourceAccess": "authorised",
+  "sourcePresent": false,
+  "denied": []
+}

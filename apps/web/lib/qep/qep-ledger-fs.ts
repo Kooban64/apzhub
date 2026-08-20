@@ -12,9 +12,8 @@ import {
 } from "node:fs";
 import { join } from "node:path";
 
-export function isQepLedgerPersistEnabled(
-  env: NodeJS.ProcessEnv = process.env,
-): boolean {
+import type { EnvVars } from "@/lib/env-vars";
+export function isQepLedgerPersistEnabled(env: EnvVars = process.env): boolean {
   if (env.APZHUB_QEP_LEDGER_PERSIST === "true") return true;
   if (env.APZHUB_QEP_LEDGER_PERSIST === "false") return false;
   if (env.VITEST === "true" || env.NODE_ENV === "test") return false;
@@ -23,7 +22,7 @@ export function isQepLedgerPersistEnabled(
 
 export function resolveQepDataRoot(
   segment: string,
-  env: NodeJS.ProcessEnv = process.env,
+  env: EnvVars = process.env,
 ): string {
   const override = env.APZHUB_QEP_DATA_DIR?.trim();
   const cwd = process.cwd();

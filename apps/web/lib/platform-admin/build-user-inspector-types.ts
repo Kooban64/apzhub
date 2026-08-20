@@ -1,3 +1,4 @@
+import type { EffectiveAccessInspection } from "@/lib/iam/effective-access-inspector";
 import type { FieldAvailability } from "@/lib/platform-admin/overview-types";
 import type { InspectorSessionLine } from "@/lib/iam/better-auth-sessions";
 
@@ -112,7 +113,7 @@ export type PlatformAdminUserInspectorPayload = {
       readonly message: string;
     };
   };
-  readonly inspection: null;
+  readonly inspection: EffectiveAccessInspection | null;
   readonly products: readonly InspectorProductLine[];
   readonly roles: readonly InspectorRoleLine[];
   readonly scopes: readonly InspectorScopeLine[];

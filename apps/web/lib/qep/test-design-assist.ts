@@ -193,9 +193,11 @@ export function composeTestDesignPack(input: {
   readonly evidenceDomains: ReadonlySet<string> | readonly string[];
 }): TestDesignPack {
   const { changeEventId, impact } = input;
-  const domains = Array.isArray(input.evidenceDomains)
-    ? new Set(input.evidenceDomains)
-    : input.evidenceDomains;
+  const domains = new Set(
+    Array.isArray(input.evidenceDomains)
+      ? input.evidenceDomains
+      : [...input.evidenceDomains],
+  );
   const gaps = domainGapsFromEvidence(domains);
   const drafts: TestDesignDraftProposal[] = [];
   const primarySuiteId = impact.matchedSuiteIds[0];

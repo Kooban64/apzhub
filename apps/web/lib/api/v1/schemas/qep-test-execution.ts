@@ -126,6 +126,7 @@ export const qepExecutionIngestBodySchema = z
     payloadHash: z.string().min(1).max(256),
     signatureMetadata: z.string().max(2000).optional(),
     isComplete: z.boolean(),
+    automationExecutionId: z.string().min(1).max(128).optional(),
     stepResults: z.array(z.object(recordStepResultShape).strict()).optional(),
     create: z
       .object({

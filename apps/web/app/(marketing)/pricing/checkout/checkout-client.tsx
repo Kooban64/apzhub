@@ -100,11 +100,6 @@ export function CheckoutClient() {
     };
   }, [cart, searchParams]);
 
-  if (cart?.planId === "plan.custom") {
-    router.replace("/contact");
-    return null;
-  }
-
   const packages = (cart?.packageIds ?? []).map((id) => getPackage(id)).filter(Boolean);
 
   async function startCheckout() {

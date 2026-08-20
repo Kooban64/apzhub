@@ -54,10 +54,10 @@ export function QepVerificationDesignRouterView() {
             Governed suggestions only — never auto-runs or certifies.
           </p>
           <Link
-            href="/workspace/qep/ai-workspace"
+            href="/workspace/qep/ai-companion"
             className="text-xs text-[var(--color-primary)] underline-offset-2 hover:underline"
           >
-            Open AI Quality Workspace →
+            Open AI Quality Companion →
           </Link>
         </QepPanel>
       </div>

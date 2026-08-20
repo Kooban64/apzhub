@@ -16,6 +16,7 @@ import {
   type AlmProduceRecord,
 } from "@/lib/qep/alm-produce-store";
 
+import type { EnvVars } from "@/lib/env-vars";
 export const F16_ASSIST_ORIGIN = "f16_alm_produce" as const;
 
 export type AlmProduceMode = "record_only" | "live";
@@ -44,9 +45,7 @@ export type AlmProduceDeps = {
   readonly now?: () => Date;
 };
 
-export function resolveAlmProduceConfig(
-  env: NodeJS.ProcessEnv = process.env,
-): AlmProduceConfig {
+export function resolveAlmProduceConfig(env: EnvVars = process.env): AlmProduceConfig {
   const modeRaw = (env.APZHUB_ALM_PRODUCE_MODE ?? "record_only").toLowerCase();
   const mode: AlmProduceMode =
     modeRaw === "live" || modeRaw === "produce" ? "live" : "record_only";
@@ -133,6 +132,7 @@ async function persistAlmMetadata(input: {
           almProduce: { items },
         },
       },
+      new Date().toISOString(),
     );
   } catch {
     // soft — ledger still holds truth for F16 proof
@@ -147,7 +147,7 @@ export async function produceAlmWorkItemsFromDefect(input: {
   readonly defectId: string;
   readonly changeEventId?: string;
   readonly channels?: readonly AlmProduceChannel[];
-  readonly env?: NodeJS.ProcessEnv;
+  readonly env?: EnvVars;
   readonly deps?: AlmProduceDeps;
 }): Promise<{
   readonly defectId: string;

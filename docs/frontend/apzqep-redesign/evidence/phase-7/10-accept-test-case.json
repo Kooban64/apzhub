@@ -1,0 +1,44 @@
+{
+  "status": 200,
+  "raw": "{\"data\":{\"proposal\":{\"id\":\"qai_e83ca55bb96944718e29274eb7eefe57\",\"tenantId\":\"t-demo-org-0001\",\"applicationId\":\"qapp-a1037050-af7b-4ad1-a504-aa95eda448cd\",\"proposalType\":\"test_case\",\"status\":\"accepted\",\"originalContent\":{\"title\":\"Cover login AC\",\"description\":\"Proposal only\"},\"reviewedContent\":{\"title\":\"Cover login AC (reviewed)\",\"description\":\"Human edited\"},\"contextRefs\":[],\"fingerprints\":[],\"sourceAuthorised\":false,\"evidenceExtractUsed\":false,\"provider\":\"untrusted\",\"model\":\"untrusted\",\"generatedAt\":\"2026-08-20T18:50:54.568Z\",\"generatedBy\":\"9fdd9cf9-f215-48af-88e0-6c6a668e6130\",\"reviewedAt\":\"2026-08-20T18:51:15.478Z\",\"reviewedBy\":\"9fdd9cf9-f215-48af-88e0-6c6a668e6130\",\"resultingRecordId\":\"tsp_29fd8ebda1464ebca0e96529aa80802a\",\"resultingRecordKind\":\"test_case\",\"createdAt\":\"2026-08-20T18:50:54.568Z\",\"updatedAt\":\"2026-08-20T18:51:15.478Z\"},\"audit\":{\"proposalId\":\"qai_e83ca55bb96944718e29274eb7eefe57\",\"tenantId\":\"t-demo-org-0001\",\"applicationId\":\"qapp-a1037050-af7b-4ad1-a504-aa95eda448cd\",\"proposalType\":\"test_case\",\"status\":\"accepted\",\"sourceAuthorised\":false,\"resultingRecordId\":\"tsp_29fd8ebda1464ebca0e96529aa80802a\",\"provider\":\"untrusted\",\"model\":\"untrusted\"}},\"meta\":{\"requestId\":\"2367ecbe-f036-4f37-88dc-91dff478761d\",\"correlationId\":\"2367ecbe-f036-4f37-88dc-91dff478761d\"}}",
+  "proposal": {
+    "id": "qai_e83ca55bb96944718e29274eb7eefe57",
+    "tenantId": "t-demo-org-0001",
+    "applicationId": "qapp-a1037050-af7b-4ad1-a504-aa95eda448cd",
+    "proposalType": "test_case",
+    "status": "accepted",
+    "originalContent": {
+      "title": "Cover login AC",
+      "description": "Proposal only"
+    },
+    "reviewedContent": {
+      "title": "Cover login AC (reviewed)",
+      "description": "Human edited"
+    },
+    "contextRefs": [],
+    "fingerprints": [],
+    "sourceAuthorised": false,
+    "evidenceExtractUsed": false,
+    "provider": "untrusted",
+    "model": "untrusted",
+    "generatedAt": "2026-08-20T18:50:54.568Z",
+    "generatedBy": "9fdd9cf9-f215-48af-88e0-6c6a668e6130",
+    "reviewedAt": "2026-08-20T18:51:15.478Z",
+    "reviewedBy": "9fdd9cf9-f215-48af-88e0-6c6a668e6130",
+    "resultingRecordId": "tsp_29fd8ebda1464ebca0e96529aa80802a",
+    "resultingRecordKind": "test_case",
+    "createdAt": "2026-08-20T18:50:54.568Z",
+    "updatedAt": "2026-08-20T18:51:15.478Z"
+  },
+  "audit": {
+    "proposalId": "qai_e83ca55bb96944718e29274eb7eefe57",
+    "tenantId": "t-demo-org-0001",
+    "applicationId": "qapp-a1037050-af7b-4ad1-a504-aa95eda448cd",
+    "proposalType": "test_case",
+    "status": "accepted",
+    "sourceAuthorised": false,
+    "resultingRecordId": "tsp_29fd8ebda1464ebca0e96529aa80802a",
+    "provider": "untrusted",
+    "model": "untrusted"
+  }
+}

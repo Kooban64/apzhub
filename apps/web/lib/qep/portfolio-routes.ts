@@ -1,15 +1,20 @@
-export const QEP_PORTFOLIO_BASE_PATH = "/workspace/qep/portfolio" as const;
+import {
+  QEP_APPLICATIONS_BASE_PATH,
+  isQepApplicationsRoute,
+  isQepPortfolioAliasRoute,
+  parseQepApplicationRouteId,
+} from "@apzhub/qep-applications/presentation";
+
+export const QEP_PORTFOLIO_BASE_PATH = QEP_APPLICATIONS_BASE_PATH;
 
 export const QEP_PORTFOLIO_ROUTES = {
   home: QEP_PORTFOLIO_BASE_PATH,
-  /** Flagship F14 — quality project insight. */
   byProject: (projectId: string) =>
-    `${QEP_PORTFOLIO_BASE_PATH}?projectId=${encodeURIComponent(projectId)}`,
+    `${QEP_PORTFOLIO_BASE_PATH}/${encodeURIComponent(projectId)}`,
 } as const;
 
 export function isQepPortfolioRoute(pathname: string): boolean {
-  return (
-    pathname === QEP_PORTFOLIO_BASE_PATH ||
-    pathname.startsWith(`${QEP_PORTFOLIO_BASE_PATH}/`)
-  );
+  return isQepApplicationsRoute(pathname) || isQepPortfolioAliasRoute(pathname);
 }
+
+export { parseQepApplicationRouteId, isQepApplicationsRoute, isQepPortfolioAliasRoute };

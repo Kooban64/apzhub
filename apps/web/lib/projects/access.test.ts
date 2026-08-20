@@ -28,7 +28,7 @@ function makeContext(input: {
       tenantId: input.tenantId,
       permissions: [],
     },
-  } as PlatformApiRequestContext;
+  } as unknown as PlatformApiRequestContext;
 }
 
 describe("requireProjectsProductAccess", () => {

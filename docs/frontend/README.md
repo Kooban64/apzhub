@@ -33,3 +33,4 @@ Move from conceptual UX into **literal screen specifications** Cursor can reprod
 - [OWNER UX programme order](../decisions/OWNER-UX-STREAMS-PROGRAMME-ORDER.md)
 - [UX-STREAM-005](../ux/UX-STREAM-005-platform-shell-design-system.md) · [UX-STREAM-006](../ux/UX-STREAM-006-tenant-identity-rbac-administration.md)
 - Operator consoles (legacy route map): [OPERATOR-CONSOLES-PROGRAMME](../operations/OPERATOR-CONSOLES-PROGRAMME.md)
+- APZQEP UI/UX replacement (Phase 2 **ACCEPTED** · Phase 3 Screens 1–4 **LOCKED**): [apzqep-redesign/](./apzqep-redesign/README.md)

@@ -149,6 +149,8 @@ export function composeWorkbenchRail(input: {
   readonly activeRailId?: string;
   /** Independent Source Workspace access (source.read) — not implied by QEP. */
   readonly hasSourceAccess?: boolean;
+  /** Effective session permissions — used to filter QEP IA. */
+  readonly permissions?: readonly string[];
 }): WorkbenchRailModel {
   const effective = new Set(input.effectiveProducts);
   const productivityProducts = PRODUCTIVITY_PRODUCTS.filter((p) =>
@@ -228,10 +230,10 @@ export function composeWorkbenchRail(input: {
   if (hasQep) {
     primary.push({
       id: "quality",
-      label: "Quality",
+      label: "APZQEP",
       icon: "badge-check",
       active: activeId === "quality",
-      ariaLabel: "Quality",
+      ariaLabel: "APZQEP",
     });
   }
 
@@ -366,10 +368,12 @@ export function composeWorkbenchRail(input: {
         ];
   } else if (activeId === "quality" || onQep) {
     mode = "quality";
-    sidebarTitle = "QUALITY";
+    sidebarTitle = "APZQEP";
     contextSidebarItems = [
       ...composeQepContextSidebar(path, {
         hasSourceAccess: hasSourceEntitlement,
+        entitled: hasQep,
+        permissions: input.permissions,
       }),
     ];
   } else if (activeId === "security" || onPen) {

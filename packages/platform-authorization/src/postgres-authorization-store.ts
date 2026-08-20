@@ -38,6 +38,7 @@ import type {
   ResolveSessionAuthorizationInput,
   SessionAuthorizationSnapshot,
 } from "./server";
+import type { AuthorizationEvaluationResult } from "./authorization-types";
 
 export async function seedDefaultAuthorizationRows(): Promise<void> {
   const db = getDb();
@@ -1037,8 +1038,6 @@ export async function explainPostgresPermission(input: {
     await import("./authorization-evaluation");
   const { createEmptyEffectivePermissions } =
     await import("./authorization-evaluation");
-  type AuthorizationEvaluationResult =
-    import("./authorization-types").AuthorizationEvaluationResult;
 
   await seedDefaultAuthorizationRows();
   const db = getDb();

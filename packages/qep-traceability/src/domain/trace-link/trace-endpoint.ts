@@ -30,6 +30,7 @@ const KIND_OWNING_DOMAIN: Record<TraceEndpointKind, string> = {
   requirement_relationship: "requirements",
   test_specification: "verification",
   test_case: "verification",
+  acceptance_criterion: "definition",
   test_execution: "execution",
   evidence: "evidence",
   defect: "defects",
@@ -39,6 +40,14 @@ const KIND_OWNING_DOMAIN: Record<TraceEndpointKind, string> = {
   certification_artefact: "certification",
   document: "documents",
   external_reference: "cross_cutting",
+  exploratory_session: "experience",
+  experience_plan: "experience",
+  experience_verification: "experience",
+  quality_observation: "experience",
+  quality_issue: "experience",
+  test_plan: "verification",
+  suite: "verification",
+  user_story: "definition",
 };
 
 const KIND_ID_PREFIX: Partial<Record<TraceEndpointKind, RegExp>> = {
@@ -46,6 +55,7 @@ const KIND_ID_PREFIX: Partial<Record<TraceEndpointKind, RegExp>> = {
   requirement_content_version: /^rcv_[A-Za-z0-9_-]+$/,
   requirement_baseline: /^rbl_[A-Za-z0-9_-]+$/,
   requirement_relationship: /^rrl_[A-Za-z0-9_-]+$/,
+  acceptance_criterion: /^qac[-_][A-Za-z0-9_-]+$/,
 };
 
 function assertArtefactIdShape(kind: TraceEndpointKind, artefactId: string): void {

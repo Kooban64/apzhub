@@ -29,12 +29,16 @@ const SUITE_LABEL: Record<string, string> = {
   law: "APZLaw",
 };
 
-const PILLAR_FILTERS = [
-  { id: "all", label: "All", suiteIds: null as readonly string[] | null },
+const PILLAR_FILTERS: readonly {
+  readonly id: string;
+  readonly label: string;
+  readonly suiteIds: readonly string[] | null;
+}[] = [
+  { id: "all", label: "All", suiteIds: null },
   { id: "productivity", label: "Productivity", suiteIds: ["productivity"] },
   { id: "quality", label: "Quality", suiteIds: ["qa"] },
   { id: "security", label: "Security", suiteIds: ["pentest"] },
-] as const;
+];
 
 export function MarketplacePackageList() {
   const searchParams = useSearchParams();
@@ -69,8 +73,8 @@ export function MarketplacePackageList() {
     };
   }, []);
 
-  const activeFilter =
-    PILLAR_FILTERS.find((f) => f.id === pillarParam) ?? PILLAR_FILTERS[0];
+  const activeFilter = PILLAR_FILTERS.find((f) => f.id === pillarParam) ??
+    PILLAR_FILTERS[0] ?? { id: "all", label: "All", suiteIds: null };
 
   const filtered = useMemo(() => {
     const sellable = packages.filter((p) => p.selfServe);

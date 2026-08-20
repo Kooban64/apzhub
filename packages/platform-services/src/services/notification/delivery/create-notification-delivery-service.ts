@@ -925,7 +925,7 @@ export function createNotificationDeliveryService(
       current = transitionDelivery(current, "delivered", {
         attemptCount: attemptNumber,
         receiptLevel: result.receiptLevel,
-        inAppNotificationId: result.inAppId,
+        inAppNotificationId: "inAppId" in result ? result.inAppId : undefined,
         nextAttemptAt: undefined,
         lastFailureClass: undefined,
         lastFailureCode: undefined,

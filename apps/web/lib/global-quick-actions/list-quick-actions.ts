@@ -22,7 +22,7 @@ export function listGlobalQuickActions(input: {
   const recentRank = new Map(recentIds.map((id, index) => [id, index]));
 
   const actions: QuickAction[] = [...allowed]
-    .map((action) => {
+    .map((action): QuickAction => {
       const rank = recentRank.get(action.id);
       return rank === undefined ? action : { ...action, recentRank: rank };
     })

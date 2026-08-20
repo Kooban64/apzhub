@@ -224,7 +224,6 @@ export function seedDefaultAuthorizationCatalog(service: AuthorizationService): 
         "notifications.read",
         ...IAM_PLATFORM_PERMISSIONS.filter((p) => {
           if (p.startsWith("billing.admin")) return false;
-          if (p === "catalogue.write") return false;
           if (p.startsWith("commerce.") && p.endsWith(".manage")) return false;
           return true;
         }),

@@ -12,6 +12,7 @@ import {
 } from "./intelligence";
 import type { Engagement, Finding } from "./types";
 
+import type { EnvVars } from "@/lib/env-vars";
 export type IntelligenceMode = "offline_rules" | "openai";
 
 const OPENAI_DISCLAIMER =
@@ -121,7 +122,7 @@ function parseSuggestions(
   }
 }
 
-export function isOpenAiConfigured(env: NodeJS.ProcessEnv = process.env): boolean {
+export function isOpenAiConfigured(env: EnvVars = process.env): boolean {
   ensureLocalSecretsLoaded();
   return Boolean(env.OPENAI_API_KEY?.trim());
 }
@@ -130,7 +131,7 @@ export async function assistSecurityIntelligenceOpenAi(input: {
   readonly engagement: Engagement;
   readonly findings: readonly Finding[];
   readonly fetchFn?: typeof fetch;
-  readonly env?: NodeJS.ProcessEnv;
+  readonly env?: EnvVars;
   readonly model?: string;
 }): Promise<IntelligenceAssistResult> {
   ensureLocalSecretsLoaded();
@@ -209,7 +210,7 @@ export async function assistSecurityIntelligenceAuto(input: {
   readonly engagement: Engagement;
   readonly findings: readonly Finding[];
   readonly fetchFn?: typeof fetch;
-  readonly env?: NodeJS.ProcessEnv;
+  readonly env?: EnvVars;
 }): Promise<IntelligenceAssistResult> {
   ensureLocalSecretsLoaded();
   const env = input.env ?? process.env;

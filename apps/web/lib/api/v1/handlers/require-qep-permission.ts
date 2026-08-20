@@ -32,6 +32,13 @@ function isQepOperatePermission(permission: string): boolean {
   );
 }
 
+export function sessionHasQepPermission(
+  context: PlatformApiRequestContext,
+  permission: string,
+): boolean {
+  return hasPermission(context.serviceContext.permissions ?? [], permission);
+}
+
 /** Require at least one of the listed permissions from the authenticated session. */
 export function requireQepPermission(
   context: PlatformApiRequestContext,

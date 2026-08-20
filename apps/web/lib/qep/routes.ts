@@ -229,9 +229,28 @@ export {
 } from "./early-check-routes";
 
 export {
+  QEP_EXPLORATORY_SESSIONS_BASE_PATH,
+  QEP_EXPERIENCE_PLANS_BASE_PATH,
+  isQepExploratorySessionsRoute,
+  isQepExperiencePlansRoute,
+  parseQepExploratorySessionRouteId,
+  parseQepExperiencePlanRouteId,
+} from "@apzhub/qep-experience/presentation";
+
+export {
+  QEP_QUALITY_GATES_BASE_PATH,
+  QEP_QUALITY_RISK_BASE_PATH,
+  isQepQualityGatesRoute,
+  isQepQualityRiskRoute,
+  parseQepQualityGateRouteId,
+  parseQepQualityRiskRouteId,
+} from "@apzhub/qep-assurance/presentation";
+
+export {
   QEP_PORTFOLIO_BASE_PATH,
   QEP_PORTFOLIO_ROUTES,
   isQepPortfolioRoute,
+  parseQepApplicationRouteId,
 } from "./portfolio-routes";
 
 export {
@@ -259,6 +278,18 @@ export {
   QEP_AI_WORKSPACE_ROUTES,
   isQepAiWorkspaceRoute,
 } from "./ai-workspace-routes";
+
+export {
+  QEP_AI_ANALYSIS_BASE_PATH,
+  QEP_AI_COMPANION_BASE_PATH,
+  QEP_AI_GENERATE_BASE_PATH,
+  QEP_AI_REVIEW_BASE_PATH,
+  isQepAiAnalysisRoute,
+  isQepAiCompanionRoute,
+  isQepAiGenerateRoute,
+  isQepAiPhase7Route,
+  isQepAiReviewRoute,
+} from "@apzhub/qep-ai/presentation";
 
 export { QEP_MCP_BASE_PATH, QEP_MCP_ROUTES, isQepMcpRoute } from "./mcp-routes";
 

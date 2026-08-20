@@ -148,6 +148,7 @@ describe("SPR-APZPEN-012 ops polish", () => {
       ],
       posture: {
         engagementId: eng.engagementId,
+        status: "in_progress" as const,
         assessmentPosition: "blocked" as const,
         critical: 1,
         high: 0,
@@ -157,6 +158,7 @@ describe("SPR-APZPEN-012 ops polish", () => {
         openCount: 1,
         remediatingCount: 0,
         retestCount: 0,
+        closedCount: 0,
         scopeCount: 1,
         roeApproved: true,
       },

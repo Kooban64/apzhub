@@ -18,7 +18,7 @@ export default async function MarketplacePackageDetailPage({ params }: PageProps
 
   const available = pkg.status === "available";
   const cart = {
-    packageId: pkg.packageId,
+    packageIds: [pkg.packageId],
     planId: "plan.business" as const,
     seats: 1,
   };

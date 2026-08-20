@@ -13,6 +13,8 @@ import {
   type QualityAssistSuggestion,
 } from "@/lib/qep/quality-assist-store";
 
+import type { EnvVars } from "@/lib/env-vars";
+
 const ADVISORY_DISCLAIMER =
   "Advisory only. A human must accept or reject each suggestion. This does not certify a release or set GO/NO-GO.";
 
@@ -31,7 +33,7 @@ type CreateQualityAssistInput = {
   readonly subjectRef: string;
   readonly context: string;
   readonly liveLlmRequested?: boolean;
-  readonly env?: NodeJS.ProcessEnv;
+  readonly env?: EnvVars;
   readonly fetchFn?: typeof fetch;
   readonly now?: () => Date;
 };
@@ -51,7 +53,7 @@ type OpenAiResponse = {
   readonly choices?: readonly { readonly message?: { readonly content?: string } }[];
 };
 
-export function isQepLiveAssistEnabled(env: NodeJS.ProcessEnv = process.env): boolean {
+export function isQepLiveAssistEnabled(env: EnvVars = process.env): boolean {
   return env.APZHUB_QEP_AI_ASSIST?.trim().toLowerCase() === "true";
 }
 
@@ -248,12 +250,12 @@ function parseOpenAiSuggestions(
   }
 }
 
-async function requestOpenAiSuggestions(input: {
+export async function requestOpenAiSuggestions(input: {
   readonly apiKey: string;
   readonly mode: QualityAssistMode;
   readonly subjectRef: string;
   readonly context: string;
-  readonly env: NodeJS.ProcessEnv;
+  readonly env: EnvVars;
   readonly fetchFn: typeof fetch;
 }): Promise<readonly QualityAssistSuggestion[]> {
   assertQualityAssistNeverCertifies("quality_assist.suggest");
@@ -308,7 +310,6 @@ export async function createGovernedQualityAssist(
   if (input.context.length > 8_000) throw new Error("quality_assist.context_too_large");
 
   ensureLocalSecretsLoaded();
-  const env = input.env ?? process.env;
   const now = (input.now ?? (() => new Date()))().toISOString();
   const sessionId = randomUUID();
   const liveRequested = input.liveLlmRequested === true;
@@ -318,35 +319,10 @@ export async function createGovernedQualityAssist(
   let suggestions: readonly QualityAssistSuggestion[] = [];
 
   if (liveRequested) {
-    const flagEnabled = isQepLiveAssistEnabled(env);
-    const apiKey = env.OPENAI_API_KEY?.trim();
-    if (!flagEnabled || !apiKey) {
-      provider = "disabled";
-      status = "disabled";
-      providerReason = !flagEnabled
-        ? "Live LLM assist is disabled. Set APZHUB_QEP_AI_ASSIST=true to enable it."
-        : "Live LLM assist is disabled because the server-side OpenAI secret is unavailable.";
-    } else {
-      try {
-        suggestions = await requestOpenAiSuggestions({
-          apiKey,
-          mode: input.mode,
-          subjectRef,
-          context: input.context,
-          env,
-          fetchFn: input.fetchFn ?? fetch,
-        });
-        if (suggestions.length === 0) {
-          throw new Error("quality_assist.openai_empty");
-        }
-        provider = "openai";
-        providerReason =
-          "Feature flag and server-side secret authorised the live provider.";
-      } catch (error) {
-        provider = "rule_based";
-        providerReason = `Live provider failed safely; deterministic rules used (${error instanceof Error ? error.message : "unknown error"}).`;
-      }
-    }
+    provider = "disabled";
+    status = "disabled";
+    providerReason =
+      "Live Quality Assist LLM is superseded by Phase 7. Caller-supplied context is never sent to a model.";
   }
   if (provider === "rule_based") {
     suggestions = buildRuleBasedQualityAssist({

@@ -1,23 +1,24 @@
 manifestSchemaVersion: "1.0"
 id: qep-portfolio
-name: Portfolio and Projects
-version: 0.2.0
+name: Applications
+version: 0.3.0
 kind: module
 
 metadata:
   category: quality-engineering
   description: >
-    Flagship F14 PM Project Quality Hub — create quality projects, attach SCM
-    repos, view token health + QEP insight. PAT server-side only; never browser.
+    APZQEP Applications registry — durable Application aggregate, environments,
+    execution targets, and SCM repository association. Does not grant Source
+    access. Does not execute SSH.
   product: apzqep
   moduleCatalogueId: M02
-  slug: portfolio
-  programme: FLAGSHIP-F14
+  slug: applications
+  programme: PHASE-1E
 
 dependencies:
   platform: []
   services:
-    - qep-platform-service
+    - qep-application
 
 module:
   category: quality-engineering
@@ -25,22 +26,22 @@ module:
 
 permissions:
   - id: qep.portfolio.read
-    description: View quality projects and QEP project insight
+    description: View applications and application setup
   - id: qep.portfolio.operate
-    description: Create quality projects and attach repositories
+    description: Register applications and configure repositories, environments, and execution targets
 
 workbench:
   navigation:
     level: sidebar
     workspace: qep
     parent: qep
-    label: Portfolio and Projects
-    icon: briefcase
-    route: /workspace/qep/portfolio
+    label: Applications
+    icon: app-window
+    route: /workspace/qep/applications
     order: 20
     permission: qep.portfolio.read
   view:
-    title: Portfolio and Projects
+    title: Applications
     workspace: qep
-    route: /workspace/qep/portfolio
+    route: /workspace/qep/applications
     permission: qep.portfolio.read

@@ -10,6 +10,7 @@ export default tseslint.config(
       "**/out/**",
       "**/coverage/**",
       "**/storybook-static/**",
+      "**/superseded-draft/**",
     ],
   },
   eslint.configs.recommended,

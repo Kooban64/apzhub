@@ -16,6 +16,7 @@ import {
   type VerificationDispatchRecord,
 } from "@/lib/qep/verification-dispatch-store";
 
+import type { EnvVars } from "@/lib/env-vars";
 export const F10_ASSIST_ORIGIN = "f10_verification_dispatch" as const;
 
 export const DEFAULT_DISPATCH_DOMAINS = [
@@ -26,16 +27,12 @@ export const DEFAULT_DISPATCH_DOMAINS = [
   "k6",
 ] as const;
 
-export function isVerificationDispatchEnabled(
-  env: NodeJS.ProcessEnv = process.env,
-): boolean {
+export function isVerificationDispatchEnabled(env: EnvVars = process.env): boolean {
   const raw = (env.APZHUB_VERIFICATION_DISPATCH ?? "").toLowerCase();
   return raw === "true" || raw === "1" || raw === "yes";
 }
 
-export function resolveDispatchDomains(
-  env: NodeJS.ProcessEnv = process.env,
-): readonly string[] {
+export function resolveDispatchDomains(env: EnvVars = process.env): readonly string[] {
   const raw = env.APZHUB_VERIFICATION_DISPATCH_DOMAINS?.trim();
   if (!raw) return [...DEFAULT_DISPATCH_DOMAINS];
   return raw
@@ -55,9 +52,7 @@ export type DispatchConfig = {
   readonly recordOnly: boolean;
 };
 
-export function resolveDispatchConfig(
-  env: NodeJS.ProcessEnv = process.env,
-): DispatchConfig {
+export function resolveDispatchConfig(env: EnvVars = process.env): DispatchConfig {
   const mode = (env.APZHUB_VERIFICATION_DISPATCH_MODE ?? "").toLowerCase();
   return {
     owner: env.APZHUB_VERIFICATION_DISPATCH_OWNER?.trim() || undefined,
@@ -145,7 +140,7 @@ export async function dispatchWebhook(input: {
   };
 }
 
-export function resolveGithubToken(env: NodeJS.ProcessEnv): string | undefined {
+export function resolveGithubToken(env: EnvVars): string | undefined {
   const token =
     env.APZHUB_SCM_GITHUB_TOKEN?.trim() ||
     env.GITHUB_TOKEN?.trim() ||
@@ -158,7 +153,7 @@ export async function triggerVerificationDispatchForPersistedChanges(input: {
   readonly correlationId: string;
   readonly source: "webhook" | "sync" | "manual";
   readonly events: readonly ScmChangeEvent[];
-  readonly env?: NodeJS.ProcessEnv;
+  readonly env?: EnvVars;
   /** Self-serve re-run — skip already_dispatched short-circuit. */
   readonly force?: boolean;
   readonly resolveRepositoryFullName?: (

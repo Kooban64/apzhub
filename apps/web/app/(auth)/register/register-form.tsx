@@ -56,7 +56,7 @@ function RegisterFormInner() {
       {cart ? (
         <p className="mb-4 text-xs text-[var(--color-muted-foreground)]">
           After account creation you will set up your organisation for{" "}
-          <span className="font-mono">{cart.packageId}</span>.
+          <span className="font-mono">{cart.packageIds.join(", ")}</span>.
         </p>
       ) : null}
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>

@@ -466,7 +466,7 @@ export function filterWorkbenchItemsByProducts<
     workspace?: string;
     permission?: string;
   },
->(items: readonly T[], allowedProducts: ReadonlySet<ProductKey>): T[] {
+>(items: readonly T[], allowedProducts: ReadonlySet<string>): T[] {
   return items.filter((item) => {
     const productKey = resolveProductKeyFromWorkbenchItem(item);
     if (productKey === "platform") return true;

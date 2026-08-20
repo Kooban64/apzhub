@@ -31,6 +31,7 @@ import {
   type RegionConfig,
 } from "@/lib/commercial/commercial-config";
 
+import type { EnvVars } from "@/lib/env-vars";
 export type PriceLayer = "draft" | "published";
 
 export type ResolvedListPrice = {
@@ -255,7 +256,7 @@ export function resolveListPrice(input: {
 
 export function publishedTaxBps(
   countryCode: string | null | undefined,
-  env: NodeJS.ProcessEnv = process.env,
+  env: EnvVars = process.env,
 ): {
   readonly taxBps: number | null;
   readonly taxConfigured: boolean;
@@ -271,7 +272,7 @@ export function publishedTaxBps(
 export function taxBpsForLayer(
   countryCode: string | null | undefined,
   layer: PriceLayer = "published",
-  env: NodeJS.ProcessEnv = process.env,
+  env: EnvVars = process.env,
 ): {
   readonly taxBps: number | null;
   readonly taxConfigured: boolean;

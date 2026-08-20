@@ -28,6 +28,7 @@ import {
   scheduleSearchPublicationDrain,
 } from "../publication-runtime";
 
+import type { EnvVars } from "@/lib/env-vars";
 function toHookContext(ctx: ServiceRequestContext) {
   return {
     tenantId: ctx.tenantId,
@@ -198,7 +199,7 @@ export function withTimeSearchPublicationOrchestration(
  */
 export function wireTimeBundleSearchPublication(
   bundle: TimePlatformServicesBundle,
-  env: NodeJS.ProcessEnv | Record<string, string | undefined> = process.env,
+  env: EnvVars | Record<string, string | undefined> = process.env,
 ): TimePlatformServicesBundle {
   const runtime = getSearchPublicationRuntime(env);
   const gatewaySurface = withTimeSearchPublicationOrchestration(

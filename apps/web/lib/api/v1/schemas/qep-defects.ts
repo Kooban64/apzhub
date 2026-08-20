@@ -21,6 +21,7 @@ export const qepDefectCreateBodySchema = z.object({
   evidenceIds: z.array(z.string().max(128)).max(100).optional(),
   suiteId: z.string().max(128).optional(),
   planId: z.string().max(128).optional(),
+  testExecutionId: z.string().max(128).optional(),
 });
 
 export const qepDefectFromExecutionBodySchema = z.object({
@@ -103,6 +104,7 @@ export const qepDefectRelationshipBodySchema = z.object({
   kind: z.enum([
     "execution_session",
     "execution_step",
+    "test_execution",
     "evidence",
     "suite",
     "execution_plan",
@@ -110,6 +112,12 @@ export const qepDefectRelationshipBodySchema = z.object({
     "release",
     "environment",
     "requirement_future",
+    "exploratory_session",
+    "experience_verification",
+    "quality_observation",
+    "quality_issue",
+    "experience_criterion",
+    "experience_context",
   ]),
   targetId: z.string().min(1).max(128),
   label: z.string().max(500).optional(),

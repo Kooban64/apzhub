@@ -1,0 +1,7 @@
+09-qep-source-hidden-no-access.png was not produced.
+
+Required visual: QEP shell for a QEP-entitled user with Source independently unavailable.
+No DEMO_PERSONAS entry is QEP-entitled and Source-denied.
+org_member is QEP entitled and typically has source.read.
+finance is not QEP entitled; using it would not show the QEP shell.
+Source permissions were not altered for this pass.

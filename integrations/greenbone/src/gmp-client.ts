@@ -94,7 +94,7 @@ export function parseGmpVersionXml(xml: string): GmpVersionInfo {
 }
 
 export function resolveGmpConfigFromEnv(
-  env: NodeJS.ProcessEnv = process.env,
+  env: Record<string, string | undefined> = process.env,
 ): GmpClientConfig | null {
   const host = env.GREENBONE_GMP_HOST?.trim() || env.GVM_GMP_HOST?.trim();
   const username = env.GREENBONE_GMP_USER?.trim() || env.GVM_GMP_USER?.trim();

@@ -61,7 +61,7 @@ export type PlatformAdminTenantUsersPayload = {
   readonly gaps: readonly string[];
 };
 
-function unavailable(message: string): TenantUserListField {
+function unavailable<T = string | number>(message: string): TenantUserListField<T> {
   return { availability: "unavailable", message };
 }
 
@@ -141,7 +141,7 @@ export async function buildPlatformAdminTenantUsers(
             value: emp.staffFunctionKey,
             message: "Employment staff function key",
           }
-        : unavailable("Staff function not on employment");
+        : unavailable<string>("Staff function not on employment");
 
     users.push({
       userId: m.userId,
@@ -150,12 +150,14 @@ export async function buildPlatformAdminTenantUsers(
       email: profile?.email ?? "—",
       displayName: profile?.name ?? profile?.email ?? m.userId,
       status: m.status,
-      department: unavailable("Department via employment.departmentId when set"),
+      department: unavailable<string>(
+        "Department via employment.departmentId when set",
+      ),
       staffFunction,
       products:
         grants.length > 0
           ? { availability: "ok", value: grants.length }
-          : unavailable("No user product grants on file"),
+          : unavailable<number>("No user product grants on file"),
       href: `${PLATFORM_ADMIN_BASE}/tenants/${encodeURIComponent(tenantId)}/users/${encodeURIComponent(m.userId)}`,
     });
   }

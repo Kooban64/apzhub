@@ -53,7 +53,13 @@ export interface DesktopShellProps {
   statusBar?: WorkbenchStatusBarProps;
   mobileNav?: ReactNode;
   onLayoutStateChange?: (state: WorkbenchShellLayoutState) => void;
+  /** Hide the 52px activity rail (QEP uses a full product sidebar instead). */
+  hideActivityRail?: boolean;
+  /** Navy product sidebar (APZQEP). */
+  sidebarTone?: "default" | "navy";
   inspectorDefaultCollapsed?: boolean;
+  /** Viewport width at which rail + context sidebar appear. Default 768. */
+  desktopMinWidth?: number;
   /** Selection content for the shell Inspector (task, ticket, document, …). */
   inspectorContent?: ReactNode;
   inspectorTitle?: string;
@@ -211,6 +217,9 @@ export function DesktopShell({
   mobileNav,
   onLayoutStateChange,
   inspectorDefaultCollapsed = true,
+  desktopMinWidth,
+  hideActivityRail = false,
+  sidebarTone = "default",
   inspectorContent,
   inspectorTitle = "Inspector",
   inspectorExpandToken = null,
@@ -306,9 +315,11 @@ export function DesktopShell({
         className="flex h-full min-h-0 flex-col"
         data-testid="workbench-inspector-selection"
       >
-        <div className="border-b border-[var(--color-border)] px-3 py-2 text-[11px] font-semibold tracking-wide uppercase">
-          {inspectorTitle}
-        </div>
+        {inspectorTitle ? (
+          <div className="border-b border-[var(--color-border)] px-3 py-2 text-[11px] font-semibold tracking-wide uppercase">
+            {inspectorTitle}
+          </div>
+        ) : null}
         <div className="min-h-0 flex-1 overflow-auto p-3">{inspectorContent}</div>
       </div>
     ) : enableActivityTimeline && enableActivityTimelinePanel ? (
@@ -396,6 +407,9 @@ export function DesktopShell({
       onLayoutStateChange={onLayoutStateChange}
       statusBar={statusBar}
       mobileNav={mobileNav}
+      desktopMinWidth={desktopMinWidth}
+      hideActivityRail={hideActivityRail}
+      sidebarTone={sidebarTone}
     >
       {workspaceContent}
     </WorkbenchShellLayout>

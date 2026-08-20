@@ -158,3 +158,5 @@ export {
   type ListQepVerificationsQuery,
   type QepVerificationListResult,
 } from "./verification";
+
+export { QEP_EXPERIENCE_PERMISSIONS, type QepExperiencePermission } from "./experience";

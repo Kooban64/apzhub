@@ -46,14 +46,17 @@ function hydrate(): void {
     const parsed = JSON.parse(raw) as Store;
     if (Array.isArray(parsed.intents)) {
       store = {
-        intents: parsed.intents.map((row) => ({
-          ...row,
-          packageIds: Array.isArray(row.packageIds)
-            ? row.packageIds
-            : (row as { packageId?: string }).packageId
-              ? [(row as { packageId: string }).packageId]
-              : [],
-        })),
+        intents: parsed.intents.map((row) => {
+          const legacy = row as unknown as { packageId?: string };
+          return {
+            ...row,
+            packageIds: Array.isArray(row.packageIds)
+              ? row.packageIds
+              : legacy.packageId
+                ? [legacy.packageId]
+                : [],
+          };
+        }),
       };
     }
   } catch {

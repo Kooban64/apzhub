@@ -23,6 +23,7 @@ import {
   type VerificationDispatchRecord,
 } from "@/lib/qep/verification-dispatch-store";
 
+import type { EnvVars } from "@/lib/env-vars";
 export const F11_ASSIST_ORIGIN = "f11_security_dispatch" as const;
 
 /** Default security pack — maps to security-domain ingest (SARIF/findings). */
@@ -36,15 +37,13 @@ export const DEFAULT_SECURITY_DISPATCH_DOMAINS = [
 /** Optional breadth — enable via APZHUB_SECURITY_DISPATCH_DOMAINS. */
 export const OPTIONAL_SECURITY_DISPATCH_DOMAINS = ["greenbone"] as const;
 
-export function isSecurityDispatchEnabled(
-  env: NodeJS.ProcessEnv = process.env,
-): boolean {
+export function isSecurityDispatchEnabled(env: EnvVars = process.env): boolean {
   const raw = (env.APZHUB_SECURITY_DISPATCH ?? "").toLowerCase();
   return raw === "true" || raw === "1" || raw === "yes";
 }
 
 export function resolveSecurityDispatchDomains(
-  env: NodeJS.ProcessEnv = process.env,
+  env: EnvVars = process.env,
 ): readonly string[] {
   const raw = env.APZHUB_SECURITY_DISPATCH_DOMAINS?.trim();
   if (!raw) return [...DEFAULT_SECURITY_DISPATCH_DOMAINS];
@@ -65,7 +64,7 @@ export type SecurityDispatchConfig = {
 };
 
 export function resolveSecurityDispatchConfig(
-  env: NodeJS.ProcessEnv = process.env,
+  env: EnvVars = process.env,
 ): SecurityDispatchConfig {
   const mode = (env.APZHUB_SECURITY_DISPATCH_MODE ?? "").toLowerCase();
   return {
@@ -84,7 +83,7 @@ export async function triggerSecurityDispatchForPersistedChanges(input: {
   readonly correlationId: string;
   readonly source: "webhook" | "sync" | "manual";
   readonly events: readonly ScmChangeEvent[];
-  readonly env?: NodeJS.ProcessEnv;
+  readonly env?: EnvVars;
   /** Self-serve re-run — skip already_dispatched short-circuit. */
   readonly force?: boolean;
   readonly resolveRepositoryFullName?: (

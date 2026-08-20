@@ -2,6 +2,8 @@
  * Organisation Admin People — Stream 6 durable memberships for session tenant.
  */
 
+import { listPlatformTenants } from "@apzhub/platform-identity/server";
+
 import { buildPlatformAdminTenantUsers } from "@/lib/platform-admin/build-tenant-users";
 import { buildPlatformAdminUserInspector } from "@/lib/platform-admin/build-user-inspector";
 import { ORGANISATION_ADMIN_BASE } from "@/lib/organisation-admin/nav";
@@ -19,7 +21,13 @@ export async function buildOrganisationAdminPeople(tenantId: string) {
 }
 
 export async function buildOrganisationAdminPerson(tenantId: string, userId: string) {
-  const inspector = await buildPlatformAdminUserInspector({ tenantId, userId });
+  const tenants = await listPlatformTenants();
+  const tenantName = tenants.find((t) => t.tenantId === tenantId)?.name ?? tenantId;
+  const inspector = await buildPlatformAdminUserInspector({
+    tenantId,
+    userId,
+    tenantName,
+  });
   if (!inspector) return null;
   return {
     ...inspector,

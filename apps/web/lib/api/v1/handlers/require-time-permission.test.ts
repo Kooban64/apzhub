@@ -16,7 +16,7 @@ function ctx(permissions: readonly string[] = []): PlatformApiRequestContext {
       tenantId: "tenant_t",
       userId: "user_t",
       permissions: [...permissions],
-    } as PlatformApiRequestContext["serviceContext"],
+    } as unknown as PlatformApiRequestContext["serviceContext"],
   };
 }
 

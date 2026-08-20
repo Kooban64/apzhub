@@ -107,20 +107,21 @@ This directory is the canonical source for APZHUB product and architecture docum
 
 ### Priority product build — APZQEP (active)
 
-| Document                                                                             | Description                                                                           |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
-| [SPR-APZQEP-200](./sprint/SPR-APZQEP-200-competitive-full-swing.md)                  | **COMPLETE · DELIVERED** — RCC · providers · governed AI · GA                         |
-| [SPR-APZQEP-201](./sprint/SPR-APZQEP-201-release-control-centre.md)                  | **DELIVERED** — Home · Readiness · RC · APZPEN security bridge                        |
-| [SPR-APZQEP-202](./sprint/SPR-APZQEP-202-provider-wave.md)                           | **DELIVERED** — JUnit/Allure/CI · SCM ci_run · Integration Centre · Playwright health |
-| [SPR-APZQEP-203](./sprint/SPR-APZQEP-203-governed-quality-assist.md)                 | **DELIVERED** — audited quality assist · optional flagged LLM · human acceptance      |
-| [SPR-APZQEP-204](./sprint/SPR-APZQEP-204-enterprise-ga-hardening.md)                 | **DELIVERED** — durable evidence · QEP search · OpenAPI · project ACL                 |
-| [SPR-APZQEP-210](./sprint/SPR-APZQEP-210-product-definition-closeout.md)             | **COMPLETE · DELIVERED** — product-definition MVP closeout (WF · stubs · auth)        |
-| [SPR-APZQEP-220](./sprint/SPR-APZQEP-220-phase-2-product-completion.md)              | **COMPLETE · DELIVERED** — Phase 2 (QI · Knowledge · automation/risk/integration)     |
-| [SPR-APZQEP-230](./sprint/SPR-APZQEP-230-phase-3-and-ai-horizon.md)                  | **COMPLETE · DELIVERED** — Phase 3 continuous signals + AI/MCP (Wave B)               |
-| [SPR-BRIDGE-001](./sprint/SPR-BRIDGE-001-qep-apzpen-assurance-bridge.md)             | **COMPLETE · DELIVERED** — QEP ↔ APZPEN assurance → readiness bridge                  |
-| [APZQEP PRODUCT-STATUS](./products/apzqep/PRODUCT-STATUS.md)                         | V1.1 **PRODUCTION READY · CLOSED** — kernel frozen; 200 = V1.2 / Wave-6-class         |
-| [APZQEP operator user guide](./products/apzqep/guides/OPERATOR-USER-GUIDE.md)        | **How-to** — full product bar (Phase 2–3 · AI/MCP · bridge)                           |
-| [APZQEP pillar vision](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md) | Experience + commercial identity authority                                            |
+| Document                                                                             | Description                                                                                                    |
+| ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| [SPR-APZQEP-200](./sprint/SPR-APZQEP-200-competitive-full-swing.md)                  | **COMPLETE · DELIVERED** — RCC · providers · governed AI · GA                                                  |
+| [SPR-APZQEP-201](./sprint/SPR-APZQEP-201-release-control-centre.md)                  | **DELIVERED** — Home · Readiness · RC · APZPEN security bridge                                                 |
+| [SPR-APZQEP-202](./sprint/SPR-APZQEP-202-provider-wave.md)                           | **DELIVERED** — JUnit/Allure/CI · SCM ci_run · Integration Centre · Playwright health                          |
+| [SPR-APZQEP-203](./sprint/SPR-APZQEP-203-governed-quality-assist.md)                 | **DELIVERED** — audited quality assist · optional flagged LLM · human acceptance                               |
+| [SPR-APZQEP-204](./sprint/SPR-APZQEP-204-enterprise-ga-hardening.md)                 | **DELIVERED** — durable evidence · QEP search · OpenAPI · project ACL                                          |
+| [SPR-APZQEP-210](./sprint/SPR-APZQEP-210-product-definition-closeout.md)             | **COMPLETE · DELIVERED** — product-definition MVP closeout (WF · stubs · auth)                                 |
+| [SPR-APZQEP-220](./sprint/SPR-APZQEP-220-phase-2-product-completion.md)              | **COMPLETE · DELIVERED** — Phase 2 (QI · Knowledge · automation/risk/integration)                              |
+| [SPR-APZQEP-230](./sprint/SPR-APZQEP-230-phase-3-and-ai-horizon.md)                  | **COMPLETE · DELIVERED** — Phase 3 continuous signals + AI/MCP (Wave B)                                        |
+| [SPR-BRIDGE-001](./sprint/SPR-BRIDGE-001-qep-apzpen-assurance-bridge.md)             | **COMPLETE · DELIVERED** — QEP ↔ APZPEN assurance → readiness bridge                                           |
+| [APZQEP PRODUCT-STATUS](./products/apzqep/PRODUCT-STATUS.md)                         | V1.1 **PRODUCTION READY · CLOSED** — kernel frozen; 200 = V1.2 / Wave-6-class                                  |
+| [APZQEP operator user guide](./products/apzqep/guides/OPERATOR-USER-GUIDE.md)        | **How-to** — full product bar (Phase 2–3 · AI/MCP · bridge)                                                    |
+| [APZQEP pillar vision](./strategy/APZQEP-ENTERPRISE-QUALITY-ENGINEERING-PLATFORM.md) | Experience + commercial identity authority                                                                     |
+| [APZQEP UI/UX replacement](./frontend/apzqep-redesign/README.md)                     | **COMPLETE** — Phases 1–7 CLOSED · ACCEPTED · FROZEN; Phase 8 NOT REQUIRED; product state OPERATIONAL LEARNING |
 
 ### APZPEN (CE complete — enterprise parked)
 

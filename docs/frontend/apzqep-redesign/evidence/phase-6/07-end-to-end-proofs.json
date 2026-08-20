@@ -1,0 +1,11 @@
+{
+  "applicationId": "qapp-db93327c-ec70-44dc-b3da-6e3f12d3195a",
+  "environmentId": "qappe-29abdf4e-5ce5-433d-81fa-6cfff1e0ba2d",
+  "ordinaryGo": "GO",
+  "failedBlockingRejectsGo": 409,
+  "failedBlockingRejectsConditional": 409,
+  "conditionalGo": "CONDITIONAL_GO",
+  "noGo": "NO_GO",
+  "defer": "DEFER",
+  "historicalUnchanged": true
+}

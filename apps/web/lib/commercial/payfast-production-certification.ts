@@ -14,7 +14,8 @@ import {
   resolvePayFastConfig,
 } from "@/lib/commercial/payfast-adapter";
 
-function selfServeAllowed(env: NodeJS.ProcessEnv = process.env): boolean {
+import type { EnvVars } from "@/lib/env-vars";
+function selfServeAllowed(env: EnvVars = process.env): boolean {
   return (
     env.ALLOW_SELF_SERVE_REGISTER === "true" ||
     env.NEXT_PUBLIC_ALLOW_SELF_SERVE_REGISTER === "true"

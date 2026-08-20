@@ -14,7 +14,7 @@ import {
   upsertPostgresRoleAssignment,
 } from "@apzhub/platform-authorization/postgres";
 import { getSharedTenantManagementService } from "@apzhub/platform-identity";
-import type { PlatformTenantMetadata } from "@apzhub/platform-identity";
+import type { CreatePlatformTenantInput } from "@apzhub/platform-identity";
 
 import { switchActiveTenant } from "@/lib/identity/switch-active-tenant";
 
@@ -52,11 +52,12 @@ export async function onboardCommerceOrganisation(
   if (!slug || slug.length < 2) throw new Error("commerce.org_slug_invalid");
 
   const organisationId = `t-${randomUUID()}`;
-  const tenantMetadata: PlatformTenantMetadata = {};
   const countryCode = input.countryCode?.trim().toUpperCase();
   const timezone = input.timezone?.trim();
-  if (countryCode) tenantMetadata.countryCode = countryCode;
-  if (timezone) tenantMetadata.timezone = timezone;
+  const tenantMetadata: NonNullable<CreatePlatformTenantInput["metadata"]> = {
+    ...(countryCode ? { countryCode } : {}),
+    ...(timezone ? { timezone } : {}),
+  };
 
   if (process.env.DATABASE_URL) {
     await ensurePlatformTenantRow({

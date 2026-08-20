@@ -19,7 +19,7 @@ import type {
   PlatformAdminOverview,
 } from "@/lib/platform-admin/overview-types";
 
-function metricUnavailable(message: string): MetricField {
+function metricUnavailable<T = number>(message: string): MetricField<T> {
   return { availability: "unavailable", message };
 }
 
@@ -260,8 +260,10 @@ export async function buildPlatformAdminOverview(
     },
     billing: {
       availability: "not_configured",
-      monthlyRevenue: metricUnavailable("Platform billing rollup not configured"),
-      outstanding: metricUnavailable("Platform billing rollup not configured"),
+      monthlyRevenue: metricUnavailable<string>(
+        "Platform billing rollup not configured",
+      ),
+      outstanding: metricUnavailable<string>("Platform billing rollup not configured"),
       failedPayments: metricUnavailable("Platform billing rollup not configured"),
       renewals30d: metricUnavailable("Platform billing rollup not configured"),
       href: `${PLATFORM_ADMIN_BASE}/billing`,

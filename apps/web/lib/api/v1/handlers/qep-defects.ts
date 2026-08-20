@@ -118,12 +118,24 @@ export async function handleCreateQepDefect(
       qepDefectCreateBodySchema,
       PLATFORM_API_MAX_BODY_BYTES,
     );
-    await requireQepProjectMembership(context, body.projectId);
+    if (!body.testExecutionId) {
+      await requireQepProjectMembership(context, body.projectId);
+    }
     const defect = await getDefectRuntime().service.create(
       actorFromContext(context),
       body,
       nowIso(),
     );
+    if (body.testExecutionId) {
+      const { getTestManagementService } =
+        await import("@/lib/qep/test-management-runtime");
+      await getTestManagementService().relateDefectToTestExecution({
+        tenantId: context.serviceContext.tenantId,
+        testExecutionId: body.testExecutionId,
+        defectId: defect.defectId,
+        actorId: context.serviceContext.userId,
+      });
+    }
     return jsonDataResponse(defect, context.tracing, { status: 201 });
   } catch (error) {
     mapError(error);

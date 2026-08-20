@@ -23,6 +23,7 @@ import {
   qepExecutionSessionListQuerySchema,
   qepExecutionSessionStepResultBodySchema,
 } from "../schemas/qep-execution-workspace";
+import { captureExecutionSnapshots } from "@/lib/qep/capture-execution-snapshots";
 import { getExecutionWorkspaceRuntime } from "@/lib/qep/execution-workspace-runtime";
 import { requireQepProjectMembership } from "@/lib/qep/project-acl";
 
@@ -127,6 +128,13 @@ export async function handleCreateQepExecutionSession(
       body.handoffId,
       nowIso(),
     );
+    await captureExecutionSnapshots({
+      tenantId: context.serviceContext.tenantId,
+      executionId: session.sessionId,
+      executionKind: "workspace_session",
+      planId: session.planning.planId,
+      suiteId: session.planning.suiteId,
+    });
     return jsonDataResponse(session, context.tracing, { status: 201 });
   } catch (error) {
     mapError(error);

@@ -261,6 +261,7 @@ export function toExecutionRowValues(execution: TestExecution) {
     specRefVersionLabel: execution.sourceRefs.specRef?.versionLabel ?? null,
     planItemId: execution.sourceRefs.planItemId ?? null,
     contextJson: { ...execution.context.descriptors },
+    applicationId: execution.context.descriptors.applicationId ?? null,
     ownerId: execution.assignment.ownerId,
     executorId: execution.assignment.executorId ?? null,
     reviewerId: execution.assignment.reviewerId ?? null,

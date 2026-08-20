@@ -10,6 +10,7 @@ import type { AutomationExecutionRecord } from "@apzhub/platform-automation";
 
 import type { ReportPackSecurityToolId, SeverityRollup } from "./report-pack";
 
+import type { EnvVars } from "@/lib/env-vars";
 export type FindingSeverity =
   "critical" | "high" | "medium" | "low" | "info" | "unknown";
 
@@ -497,7 +498,7 @@ export function loadFindingsFromArtefactRoot(root: string): {
 } {
   if (!existsSync(root)) return { findings: [], engagement: {} };
   const findings: ReportFinding[] = [];
-  const engagement: Partial<ReportEngagement> = {};
+  let engagement: Partial<ReportEngagement> = {};
 
   const tryFile = (path: string, loader: (text: string) => ReportFinding[]) => {
     if (!existsSync(path)) return;
@@ -540,9 +541,12 @@ export function loadFindingsFromArtefactRoot(root: string): {
   );
 
   if (dir.includes("lovebloom")) {
-    engagement.repositoryFullName = "kooban-apzor/lovebloom";
-    engagement.targetUrl = "https://lovebloom.apztdg.com";
-    engagement.hostIp = "196.216.100.6";
+    engagement = {
+      ...engagement,
+      repositoryFullName: "kooban-apzor/lovebloom",
+      targetUrl: "https://lovebloom.apztdg.com",
+      hostIp: "196.216.100.6",
+    };
   }
 
   return { findings, engagement };
@@ -728,7 +732,7 @@ export function sortFindings(findings: readonly ReportFinding[]): ReportFinding[
   });
 }
 
-export function resolveArtefactRoot(env: NodeJS.ProcessEnv = process.env): string {
+export function resolveArtefactRoot(env: EnvVars = process.env): string {
   const configured = env.APZTOOLS_ROOT?.trim();
   if (configured) return join(configured, "pentest", "out");
   return join("/home/ubuntu/apztools", "pentest", "out");

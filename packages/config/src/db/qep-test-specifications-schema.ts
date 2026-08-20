@@ -93,6 +93,9 @@ export const qepTestSpecification = pgTable(
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
     updatedBy: text("updated_by").notNull(),
     correlationId: text("correlation_id").notNull(),
+    applicationId: text("application_id"),
+    definitionVersion: integer("definition_version").notNull().default(1),
+    manualCapable: boolean("manual_capable").notNull().default(true),
   },
   (table) => [
     index("qep_test_specifications_tenant_id_idx").on(table.tenantId, table.id),
@@ -106,6 +109,10 @@ export const qepTestSpecification = pgTable(
     index("qep_test_specifications_tenant_auth_idx").on(
       table.tenantId,
       table.isAuthoritative,
+    ),
+    index("qep_test_specifications_tenant_application_idx").on(
+      table.tenantId,
+      table.applicationId,
     ),
   ],
 );

@@ -1,3 +1,4 @@
+import type { EnvVars } from "@/lib/env-vars";
 /**
  * Demo / development personas for quick login + role dashboards.
  * Gated to non-production (or ALLOW_DEMO_PERSONAS=true).
@@ -136,7 +137,7 @@ export const DEMO_PERSONAS: readonly DemoPersona[] = [
   },
 ] as const;
 
-export function isDemoPersonasEnabled(env: NodeJS.ProcessEnv = process.env): boolean {
+export function isDemoPersonasEnabled(env: EnvVars = process.env): boolean {
   if (env.ALLOW_DEMO_PERSONAS === "true") return true;
   if (env.NODE_ENV === "production" && env.ALLOW_DEMO_PERSONAS !== "true") {
     return false;

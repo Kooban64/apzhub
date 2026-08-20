@@ -12,8 +12,7 @@ function asList(
   source: readonly string[] | ReadonlySet<string> | undefined | null,
 ): readonly string[] {
   if (!source) return [];
-  if (source instanceof Set) return [...source];
-  return source;
+  return [...source];
 }
 
 export function resolveResourceScope(

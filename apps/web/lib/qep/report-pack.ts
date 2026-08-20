@@ -39,6 +39,7 @@ import {
   type ReportFinding,
 } from "@/lib/qep/report-pack-findings";
 
+import type { EnvVars } from "@/lib/env-vars";
 export const REPORT_PACK_SECURITY_TOOLS = [
   "trivy",
   "semgrep",
@@ -572,7 +573,10 @@ export async function getReportPack(input: {
 
   const getCertification =
     deps.getCertification ??
-    ((tenantId: string, id: string) => getCertificationByChange(tenantId, id));
+    (async (tenantId: string, id: string) => {
+      const result = await getCertificationByChange(tenantId, id);
+      return result.evaluations[0];
+    });
 
   let evidenceLinks: readonly CertificationEvidenceLink[] = [];
   try {
@@ -621,7 +625,7 @@ export async function getReportPack(input: {
 /** Markdown draft for auditors / first proof (`?format=markdown`). */
 export function renderReportPackMarkdown(pack: ReportPack): string {
   const statusLabel = pack.status === "published" ? "PUBLISHED" : "DRAFT";
-  const lines: string[] = [
+  const lines: (string | undefined)[] = [
     `# Security Bill of Health (${statusLabel})`,
     ``,
     pack.status === "published"
@@ -909,9 +913,7 @@ export function renderReportPackTypst(
   });
 }
 
-export function resolveTypstBinary(
-  env: NodeJS.ProcessEnv = process.env,
-): string | undefined {
+export function resolveTypstBinary(env: EnvVars = process.env): string | undefined {
   const configured = env.APZHUB_TYPST_BIN?.trim();
   if (configured && existsSync(configured)) return configured;
   const local = join(process.cwd(), "tooling/bin/typst");
@@ -971,7 +973,7 @@ export async function tryCompileReportPackPdf(
     readonly typstBinary?: string;
     readonly workDir?: string;
     readonly templatePath?: string;
-    readonly env?: NodeJS.ProcessEnv;
+    readonly env?: EnvVars;
     /** Optional actor for audit trail when PDF is materialised. */
     readonly actorId?: string;
     readonly correlationId?: string;

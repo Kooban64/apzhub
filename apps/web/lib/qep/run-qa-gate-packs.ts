@@ -14,6 +14,7 @@ import {
   type RunVerificationPacksResult,
 } from "@/lib/qep/run-verification-packs";
 
+import type { EnvVars } from "@/lib/env-vars";
 export type RunQaGatePacksResult = {
   readonly changeEventId: string;
   readonly assistOrigin: typeof F15_ASSIST_ORIGIN;
@@ -37,7 +38,7 @@ export async function runQaGatePacksForChange(input: {
   readonly includeQuality?: boolean;
   readonly includePlaywright?: boolean;
   readonly force?: boolean;
-  readonly env?: NodeJS.ProcessEnv;
+  readonly env?: EnvVars;
 }): Promise<RunQaGatePacksResult> {
   let includePenTest = input.includePenTest !== false;
   if (includePenTest) {

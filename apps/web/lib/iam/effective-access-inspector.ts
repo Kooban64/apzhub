@@ -196,8 +196,9 @@ export async function inspectMemberEffectiveAccess(input: {
     (s) => s.productKey,
   );
 
+  const entitledKeys = new Set<string>(entitlements.productKeys);
   const productRoles = (tmpl?.suggestedProducts ?? [])
-    .filter((p) => entitlements.productKeys.includes(p.productKey))
+    .filter((p) => entitledKeys.has(p.productKey))
     .map((p) => ({
       productKey: p.productKey,
       roleHint: p.roleId,

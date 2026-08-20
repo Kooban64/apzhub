@@ -29,6 +29,7 @@ import {
 } from "@/lib/commercial/pricing-engine";
 import { rememberQuote } from "@/lib/commercial/quote-store";
 
+import type { EnvVars } from "@/lib/env-vars";
 export type QuoteAdjustment = {
   readonly kind: "regional" | "annual" | "promotional" | "tax";
   readonly label: string;
@@ -141,7 +142,7 @@ export function quoteCommerceBasket(
      */
     readonly adminPreview?: boolean;
   },
-  env: NodeJS.ProcessEnv = process.env,
+  env: EnvVars = process.env,
 ): CommerceQuoteResult {
   const layer: PriceLayer = input.layer === "draft" ? "draft" : "published";
   /** Admin/certification preview may price coming_soon; never checkout-eligible. */
@@ -303,9 +304,10 @@ export function quoteCommerceBasket(
 
   const afterDiscount = Math.max(0, subtotalCents - discountCents);
   const tax = taxBpsForLayer(countryCode, layer, env);
-  const taxCents = tax.taxConfigured && tax.taxBps != null
-    ? Math.round((afterDiscount * tax.taxBps) / 10_000)
-    : 0;
+  const taxCents =
+    tax.taxConfigured && tax.taxBps != null
+      ? Math.round((afterDiscount * tax.taxBps) / 10_000)
+      : 0;
   if (taxCents > 0) {
     adjustments.push({
       kind: "tax",

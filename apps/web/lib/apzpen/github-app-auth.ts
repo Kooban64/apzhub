@@ -7,6 +7,7 @@ import { createSign, createPrivateKey } from "node:crypto";
 
 import { ensureLocalSecretsLoaded } from "@apzhub/config";
 
+import type { EnvVars } from "@/lib/env-vars";
 export type GithubAuthMode = "github_app" | "pat" | "none";
 
 export type GithubAuthStatus = {
@@ -27,9 +28,7 @@ function b64url(input: Buffer | string): string {
     .replace(/\//g, "_");
 }
 
-export function getGithubAuthStatus(
-  env: NodeJS.ProcessEnv = process.env,
-): GithubAuthStatus {
+export function getGithubAuthStatus(env: EnvVars = process.env): GithubAuthStatus {
   ensureLocalSecretsLoaded();
   const appIdPresent = Boolean(env.GITHUB_APP_ID?.trim());
   const installationIdPresent = Boolean(env.GITHUB_APP_INSTALLATION_ID?.trim());
@@ -87,7 +86,7 @@ type FetchLike = typeof fetch;
  * Resolve a GitHub API bearer token — App installation token preferred, else PAT.
  */
 export async function resolveGithubAccessToken(input?: {
-  readonly env?: NodeJS.ProcessEnv;
+  readonly env?: EnvVars;
   readonly fetchFn?: FetchLike;
   readonly apiBaseUrl?: string;
 }): Promise<GithubTokenResult | null> {

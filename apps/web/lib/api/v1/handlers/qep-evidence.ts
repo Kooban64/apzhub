@@ -40,7 +40,10 @@ import {
   qepEvidenceVerifyBodySchema,
   qepEvidenceGrantIdParamSchema,
 } from "../schemas/qep-evidence";
-import { requireQepProjectMembership } from "@/lib/qep/project-acl";
+import {
+  requireQepProjectMembership,
+  requireQepProjectOrApplication,
+} from "@/lib/qep/project-acl";
 
 type RouteContext = { params: Promise<Record<string, string>> };
 
@@ -149,7 +152,7 @@ export async function handleCaptureQepEvidence(
     qepEvidenceCaptureBodySchema,
     PLATFORM_API_MAX_BODY_BYTES,
   );
-  await requireQepProjectMembership(context, body.projectId);
+  await requireQepProjectOrApplication(context, body.projectId);
   const service = await requireQepEvidenceGateway();
   const created = await invoke(context, () =>
     service.capture(context.serviceContext, {

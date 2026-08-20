@@ -14,6 +14,7 @@ import type {
   DefectRelationship,
   DefectRelationshipKind,
   DefectSeverity,
+  ExecutionOrigin,
 } from "../domain/types";
 import {
   buildDefectDomainEvent,
@@ -54,6 +55,8 @@ export type CreateDefectInput = {
   readonly evidenceIds?: readonly string[];
   readonly suiteId?: string;
   readonly planId?: string;
+  readonly testExecutionId?: string;
+  readonly qualityOrigin?: ExecutionOrigin;
   readonly customMetadata?: Readonly<Record<string, unknown>>;
 };
 
@@ -303,6 +306,19 @@ export function createDefectApplicationService(deps: {
           createdBy: actor.userId,
         });
       }
+      if (input.testExecutionId) {
+        executionOrigin = {
+          ...(executionOrigin ?? {}),
+          testExecutionId: input.testExecutionId,
+        };
+        relationships.push({
+          relationshipId: nextId("rel"),
+          kind: "test_execution",
+          targetId: input.testExecutionId,
+          createdAt: now,
+          createdBy: actor.userId,
+        });
+      }
       if (input.planId && !relationships.some((r) => r.kind === "execution_plan")) {
         relationships.push({
           relationshipId: nextId("rel"),
@@ -311,6 +327,32 @@ export function createDefectApplicationService(deps: {
           createdAt: now,
           createdBy: actor.userId,
         });
+      }
+      if (input.qualityOrigin) {
+        executionOrigin = {
+          ...(executionOrigin ?? {}),
+          ...input.qualityOrigin,
+        };
+        const origin = input.qualityOrigin;
+        const pushRel = (
+          kind: DefectRelationshipKind,
+          targetId: string | undefined,
+        ) => {
+          if (!targetId) return;
+          relationships.push({
+            relationshipId: nextId("rel"),
+            kind,
+            targetId,
+            createdAt: now,
+            createdBy: actor.userId,
+          });
+        };
+        pushRel("exploratory_session", origin.exploratorySessionId);
+        pushRel("experience_verification", origin.experienceActivityId);
+        pushRel("quality_observation", origin.observationId);
+        pushRel("quality_issue", origin.issueId);
+        pushRel("experience_criterion", origin.criterionId);
+        pushRel("experience_context", origin.experienceContextId);
       }
 
       const defectId = input.defectId ?? nextId("def");

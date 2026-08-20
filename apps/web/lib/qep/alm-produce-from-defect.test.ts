@@ -40,12 +40,16 @@ describe("F16 alm-produce", () => {
   });
 
   it("record_only produces ledger rows for projects + support", async () => {
-    const defect = await getDefectRuntime().service.create(actor, {
-      title: "F16 sample defect",
-      description: "from QA Gate",
-      severity: "major",
-      priority: "p1",
-    });
+    const defect = await getDefectRuntime().service.create(
+      actor,
+      {
+        title: "F16 sample defect",
+        description: "from QA Gate",
+        severity: "major",
+        priority: "p1",
+      },
+      new Date().toISOString(),
+    );
 
     const result = await produceAlmWorkItemsFromDefect({
       tenantId: actor.tenantId,
@@ -78,11 +82,15 @@ describe("F16 alm-produce", () => {
   });
 
   it("live soft-fails projects create and records failed status", async () => {
-    const defect = await getDefectRuntime().service.create(actor, {
-      title: "F16 live fail",
-      severity: "minor",
-      priority: "p3",
-    });
+    const defect = await getDefectRuntime().service.create(
+      actor,
+      {
+        title: "F16 live fail",
+        severity: "minor",
+        priority: "p3",
+      },
+      new Date().toISOString(),
+    );
 
     const result = await produceAlmWorkItemsFromDefect({
       tenantId: actor.tenantId,

@@ -73,6 +73,7 @@ import {
 } from "./notification-delivery-bootstrap";
 import { createQepSearchLifecycleOptions } from "../../../search/wiring/qep-publication";
 
+import type { EnvVars } from "@/lib/env-vars";
 export interface PlatformApiGatewayBootstrap {
   readonly gateway: PlatformServiceGateway;
   readonly mappingStoreMode: string;
@@ -140,37 +141,37 @@ function isZammadEnabled(): boolean {
 }
 
 /** Platform Time HTTP / services enablement (APZHUB-TIME-HTTP-001). */
-function isTimeServiceEnabled(env: NodeJS.ProcessEnv = process.env): boolean {
+function isTimeServiceEnabled(env: EnvVars = process.env): boolean {
   const value = env.APZHUB_TIME_ENABLED?.trim().toLowerCase();
   if (value === "0" || value === "false" || value === "off") return false;
   return value === "1" || value === "true" || value === "on";
 }
 
-function isKimaiIntegrationEnabled(env: NodeJS.ProcessEnv = process.env): boolean {
+function isKimaiIntegrationEnabled(env: EnvVars = process.env): boolean {
   const value = env.KIMAI_INTEGRATION_ENABLED?.trim().toLowerCase();
   if (value === "0" || value === "false" || value === "off") return false;
   return value === "1" || value === "true" || value === "on";
 }
 
 /** Platform Analytics HTTP / services enablement (APZHUB-PLATFORM-ANALYTICS-005). */
-function isAnalyticsServiceEnabled(env: NodeJS.ProcessEnv = process.env): boolean {
+function isAnalyticsServiceEnabled(env: EnvVars = process.env): boolean {
   const value = env.APZHUB_ANALYTICS_ENABLED?.trim().toLowerCase();
   if (value === "0" || value === "false" || value === "off") return false;
   return value === "1" || value === "true" || value === "on";
 }
 
-function isMetabaseIntegrationEnabled(env: NodeJS.ProcessEnv = process.env): boolean {
+function isMetabaseIntegrationEnabled(env: EnvVars = process.env): boolean {
   const value = env.METABASE_INTEGRATION_ENABLED?.trim().toLowerCase();
   if (value === "0" || value === "false" || value === "off") return false;
   return value === "1" || value === "true" || value === "on";
 }
 
-function isDocumentsDmsEnabled(env: NodeJS.ProcessEnv = process.env): boolean {
+function isDocumentsDmsEnabled(env: EnvVars = process.env): boolean {
   const value = env.APZHUB_DOCUMENTS_DMS_ENABLED?.trim().toLowerCase();
   return value === "1" || value === "true" || value === "on";
 }
 
-function isPaperlessIntegrationEnabled(env: NodeJS.ProcessEnv = process.env): boolean {
+function isPaperlessIntegrationEnabled(env: EnvVars = process.env): boolean {
   const value = env.PAPERLESS_INTEGRATION_ENABLED?.trim().toLowerCase();
   return value === "1" || value === "true" || value === "on";
 }
@@ -439,7 +440,7 @@ function createTestingServicesBundle(): TestingPlatformServicesBundle {
   return createTestingPlatformServicesForProduction({ postgresDb: getDb() });
 }
 
-function resolveDocumentStorageConfig(env: NodeJS.ProcessEnv): DocumentStorageConfig {
+function resolveDocumentStorageConfig(env: EnvVars): DocumentStorageConfig {
   const mode = (env.DOCUMENT_STORAGE_MODE ?? "filesystem") as "filesystem" | "s3";
   const maxObjectBytes = Number(
     env.DOCUMENT_STORAGE_MAX_OBJECT_BYTES ?? 64 * 1024 * 1024,

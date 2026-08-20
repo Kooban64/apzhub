@@ -85,13 +85,16 @@ export async function requireOrganisationAdminRoute(
       return {
         ok: false,
         response: guardFailureResponse(
-          lastFailure ??
-            ({
-              ok: false,
-              status: 403,
-              code: "FORBIDDEN",
-              message: "Organisation Admin surface permission required",
-            } as PlatformApiGuardFailure),
+          lastFailure ?? {
+            ok: false,
+            status: 403,
+            body: {
+              error: {
+                code: "FORBIDDEN",
+                message: "Organisation Admin surface permission required",
+              },
+            },
+          },
         ),
       };
     }

@@ -112,6 +112,34 @@
       "@apzhub/qep-scm/presentation": [
         "../../packages/qep-scm/src/presentation/index.ts"
       ],
+      "@apzhub/qep-applications": ["../../packages/qep-applications/src/index.ts"],
+      "@apzhub/qep-applications/presentation": [
+        "../../packages/qep-applications/src/presentation/index.ts"
+      ],
+      "@apzhub/qep-definition": ["../../packages/qep-definition/src/index.ts"],
+      "@apzhub/qep-definition/presentation": [
+        "../../packages/qep-definition/src/presentation/index.ts"
+      ],
+      "@apzhub/qep-test-management": [
+        "../../packages/qep-test-management/src/index.ts"
+      ],
+      "@apzhub/qep-test-management/presentation": [
+        "../../packages/qep-test-management/src/presentation/index.ts"
+      ],
+      "@apzhub/qep-experience": ["../../packages/qep-experience/src/index.ts"],
+      "@apzhub/qep-experience/domain": [
+        "../../packages/qep-experience/src/domain/index.ts"
+      ],
+      "@apzhub/qep-experience/presentation": [
+        "../../packages/qep-experience/src/presentation/index.ts"
+      ],
+      "@apzhub/qep-assurance": ["../../packages/qep-assurance/src/index.ts"],
+      "@apzhub/qep-assurance/domain": [
+        "../../packages/qep-assurance/src/domain/index.ts"
+      ],
+      "@apzhub/qep-assurance/presentation": [
+        "../../packages/qep-assurance/src/presentation/index.ts"
+      ],
       "@apzhub/platform-quality-intelligence": [
         "../../packages/platform-quality-intelligence/src/index.ts"
       ],
@@ -138,8 +166,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", ".next/dev"]
 }

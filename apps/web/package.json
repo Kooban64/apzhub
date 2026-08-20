@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start --port 3300",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {
     "@apzhub/activity-timeline-framework": "workspace:*",
@@ -54,11 +54,16 @@
     "@apzhub/platform-service-contracts": "workspace:*",
     "@apzhub/platform-services": "workspace:*",
     "@apzhub/platform-visualization": "workspace:*",
+    "@apzhub/qep-applications": "workspace:*",
+    "@apzhub/qep-definition": "workspace:*",
     "@apzhub/qep-automation": "workspace:*",
     "@apzhub/qep-contracts": "workspace:*",
     "@apzhub/qep-dashboards": "workspace:*",
     "@apzhub/qep-defects": "workspace:*",
     "@apzhub/qep-evidence": "workspace:*",
+    "@apzhub/qep-experience": "workspace:*",
+    "@apzhub/qep-assurance": "workspace:*",
+    "@apzhub/qep-ai": "workspace:*",
     "@apzhub/qep-execution-plans": "workspace:*",
     "@apzhub/qep-execution-workspace": "workspace:*",
     "@apzhub/qep-quality-intelligence": "workspace:*",
@@ -68,6 +73,7 @@
     "@apzhub/qep-scm": "workspace:*",
     "@apzhub/qep-suites": "workspace:*",
     "@apzhub/qep-test-execution": "workspace:*",
+    "@apzhub/qep-test-management": "workspace:*",
     "@apzhub/qep-test-plans": "workspace:*",
     "@apzhub/qep-test-specifications": "workspace:*",
     "@apzhub/qep-traceability": "workspace:*",

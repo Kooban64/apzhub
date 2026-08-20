@@ -140,8 +140,8 @@ export async function buildPlatformAdminUserInspector(input: {
 
   const scopes = parseResourceScopesFromPermissions(authz.permissions);
 
-  const orgProductKeys = orgProducts.map((s) => s.productKey);
-  const grantedKeys = new Set(userGrants.map((g) => g.productKey));
+  const orgProductKeys: readonly string[] = orgProducts.map((s) => s.productKey);
+  const grantedKeys = new Set<string>(userGrants.map((g) => g.productKey));
   for (const pr of productRoles) grantedKeys.add(pr.productKey);
 
   const productLines = [...new Set([...orgProductKeys, ...grantedKeys])]

@@ -23,6 +23,7 @@ import {
   type QepRequirementTransitionInput,
 } from "@/lib/qep/qep-api";
 import { qepQueryKeys } from "@/lib/qep/query-keys";
+import { useQepApplicationContext } from "@/lib/qep/qep-application-context";
 import {
   QEP_REQUIREMENTS_ROUTES,
   isQepBaselinesRoute,
@@ -35,6 +36,8 @@ import {
   QepRequirementRelationshipsPanel,
   QepRelationshipsRouterView,
 } from "./qep-relationships-views";
+import { QepPhase2RequirementDetailView } from "./qep-phase-2-requirement-detail-view";
+import { QepPhase2RequirementsView } from "./qep-phase-2-requirements-view";
 import {
   QepEmptyState,
   QepErrorState,
@@ -45,8 +48,6 @@ import {
   QepStatusBadge,
   QepTable,
 } from "./qep-ui";
-
-const DEFAULT_PROJECT_ID = "default";
 
 function formatLifecycleAction(action: string): string {
   return action.replace(/_/g, " ");
@@ -575,11 +576,13 @@ function RequirementForm({
   submitLabel,
   onSubmit,
   isSubmitting,
+  applicationId,
 }: {
   readonly initial?: Partial<CreateQepRequirementInput>;
   readonly submitLabel: string;
   readonly onSubmit: (values: CreateQepRequirementInput) => void;
   readonly isSubmitting: boolean;
+  readonly applicationId?: string;
 }) {
   const [key, setKey] = useState(initial?.key ?? "");
   const [title, setTitle] = useState(initial?.title ?? "");
@@ -588,11 +591,13 @@ function RequirementForm({
   const [priority, setPriority] = useState(initial?.priority ?? "medium");
   const [changeReason, setChangeReason] = useState("");
   const isEdit = Boolean(initial?.key);
+  const projectId = applicationId ?? initial?.projectId;
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!projectId) return;
     onSubmit({
-      projectId: initial?.projectId ?? DEFAULT_PROJECT_ID,
+      projectId,
       key: key.trim(),
       title: title.trim(),
       description: description.trim() || undefined,
@@ -649,7 +654,7 @@ function RequirementForm({
           </p>
         </>
       ) : null}
-      <Button type="submit" disabled={isSubmitting}>
+      <Button type="submit" disabled={isSubmitting || !projectId}>
         {submitLabel}
       </Button>
     </form>
@@ -659,6 +664,7 @@ function RequirementForm({
 export function QepRequirementCreateView() {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { selected } = useQepApplicationContext();
 
   const mutation = useMutation({
     mutationFn: (input: CreateQepRequirementInput) => createRequirement(input),
@@ -675,6 +681,11 @@ export function QepRequirementCreateView() {
       breadcrumbs={["Requirements", "New"]}
     >
       <QepPanel title="Requirement">
+        {!selected ? (
+          <p className="mb-3 text-sm text-[var(--color-muted-foreground)]">
+            Select an application before creating a requirement.
+          </p>
+        ) : null}
         {mutation.isError ? (
           <QepErrorState
             message={
@@ -683,9 +694,10 @@ export function QepRequirementCreateView() {
           />
         ) : null}
         <RequirementForm
+          applicationId={selected?.id}
           submitLabel={mutation.isPending ? "Creating…" : "Create requirement"}
           onSubmit={(values) => mutation.mutate(values)}
-          isSubmitting={mutation.isPending}
+          isSubmitting={mutation.isPending || !selected}
         />
       </QepPanel>
     </QepPageShell>
@@ -785,8 +797,8 @@ export function QepRequirementsRouterView({ pathname }: { readonly pathname: str
     return <QepRequirementEditView requirementId={id} />;
   }
   if (id) {
-    return <QepRequirementDetailView requirementId={id} />;
+    return <QepPhase2RequirementDetailView requirementId={id} />;
   }
 
-  return <QepRequirementsListView />;
+  return <QepPhase2RequirementsView />;
 }

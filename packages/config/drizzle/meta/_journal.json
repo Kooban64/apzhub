@@ -1030,6 +1030,118 @@
       "when": 1786900000001,
       "tag": "0146_stream6_iam_completion",
       "breakpoints": true
+    },
+    {
+      "idx": 147,
+      "version": "7",
+      "when": 1787040000001,
+      "tag": "0147_apz_qep_application_sor",
+      "breakpoints": true
+    },
+    {
+      "idx": 148,
+      "version": "7",
+      "when": 1787040000002,
+      "tag": "0148_apz_qep_application_sor_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 149,
+      "version": "7",
+      "when": 1787040000003,
+      "tag": "0149_apz_qep_application_legacy_ref",
+      "breakpoints": true
+    },
+    {
+      "idx": 150,
+      "version": "7",
+      "when": 1787040000004,
+      "tag": "0150_apz_qep_application_legacy_ref_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 151,
+      "version": "7",
+      "when": 1787040000005,
+      "tag": "0151_apz_qep_definition_sor",
+      "breakpoints": true
+    },
+    {
+      "idx": 152,
+      "version": "7",
+      "when": 1787040000006,
+      "tag": "0152_apz_qep_definition_sor_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 153,
+      "version": "7",
+      "when": 1787040000007,
+      "tag": "0153_apz_qep_test_management_sor",
+      "breakpoints": true
+    },
+    {
+      "idx": 154,
+      "version": "7",
+      "when": 1787040000008,
+      "tag": "0154_apz_qep_test_management_sor_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 155,
+      "version": "7",
+      "when": 1787043600000,
+      "tag": "0155_apz_qep_phase4_execution_composition",
+      "breakpoints": true
+    },
+    {
+      "idx": 156,
+      "version": "7",
+      "when": 1787043600001,
+      "tag": "0156_apz_qep_phase4_execution_composition_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 157,
+      "version": "7",
+      "when": 1787047200000,
+      "tag": "0157_apz_qep_phase5_experience",
+      "breakpoints": true
+    },
+    {
+      "idx": 158,
+      "version": "7",
+      "when": 1787047200001,
+      "tag": "0158_apz_qep_phase5_experience_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 159,
+      "version": "7",
+      "when": 1787050800000,
+      "tag": "0159_apz_qep_phase6_assurance",
+      "breakpoints": true
+    },
+    {
+      "idx": 160,
+      "version": "7",
+      "when": 1787050800001,
+      "tag": "0160_apz_qep_phase6_assurance_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 161,
+      "version": "7",
+      "when": 1787054400000,
+      "tag": "0161_apz_qep_phase7_ai",
+      "breakpoints": true
+    },
+    {
+      "idx": 162,
+      "version": "7",
+      "when": 1787054400001,
+      "tag": "0162_apz_qep_phase7_ai_rls",
+      "breakpoints": true
     }
   ]
 }

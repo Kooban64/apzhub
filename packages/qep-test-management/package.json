@@ -1,0 +1,21 @@
+{
+  "name": "@apzhub/qep-test-management",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "APZQEP Test management — Test Case, Suite membership, Test Plan strategy (Phase 3).",
+  "exports": {
+    ".": "./src/index.ts",
+    "./domain": "./src/domain/index.ts",
+    "./presentation": "./src/presentation/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src/",
+    "test": "cd ../.. && vitest run --config vitest.config.ts packages/qep-test-management"
+  },
+  "dependencies": {
+    "@apzhub/config": "workspace:*",
+    "drizzle-orm": "^0.45.2"
+  }
+}

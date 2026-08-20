@@ -33,6 +33,13 @@
   --z-header: 50;
   --z-status: 40;
 
+  /* APZQEP product nav — stays navy in light and dark (Owner visual). */
+  --qep-nav-background: #0b1f3a;
+  --qep-nav-foreground: #f8fafc;
+  --qep-nav-muted: #93c5fd;
+  --qep-nav-active: #2563eb;
+  --qep-nav-active-foreground: #ffffff;
+
   /* Public commerce surface (UX-STREAM-001 §3) */
   --marketing-density: 1;
   --marketing-radius-card: 0.625rem; /* 10px */
@@ -64,4 +71,9 @@
   --color-warning: #fbbf24;
   --color-warning-foreground: #422006;
   --color-ring: #60a5fa;
+  --qep-nav-background: #071526;
+  --qep-nav-foreground: #f8fafc;
+  --qep-nav-muted: #93c5fd;
+  --qep-nav-active: #3b82f6;
+  --qep-nav-active-foreground: #ffffff;
 }

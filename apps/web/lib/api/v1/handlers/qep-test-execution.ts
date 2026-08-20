@@ -35,7 +35,9 @@ import {
   qepExecutionRecordStepResultBodySchema,
   qepExecutionStepOrderParamSchema,
 } from "../schemas/qep-test-execution";
+import { captureExecutionSnapshots } from "@/lib/qep/capture-execution-snapshots";
 import { requireQepProjectMembership } from "@/lib/qep/project-acl";
+import { getTestManagementService } from "@/lib/qep/test-management-runtime";
 
 type RouteContext = { params: Promise<Record<string, string>> };
 
@@ -150,6 +152,15 @@ export async function handleCreateQepExecution(
   const created = await invoke(context, () =>
     service.createExecution(context.serviceContext, body),
   );
+  await captureExecutionSnapshots({
+    tenantId: context.serviceContext.tenantId,
+    executionId: created.id,
+    executionKind: "test_execution",
+    ...(body.sourceRefs.specRef?.id
+      ? { specificationId: body.sourceRefs.specRef.id }
+      : {}),
+    ...(body.sourceRefs.planRef?.id ? { planId: body.sourceRefs.planRef.id } : {}),
+  });
   return jsonDataResponse(created, context.tracing, { status: 201 });
 }
 
@@ -216,16 +227,77 @@ export async function handleIngestQepExecutionResult(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
-  const body = await parseJsonBody(
-    request,
-    qepExecutionIngestBodySchema,
-    PLATFORM_API_MAX_BODY_BYTES,
-  );
-  const service = await requireQepTestExecutionGateway();
-  const result = await invoke(context, () =>
-    service.ingestExternalResult(context.serviceContext, body),
-  );
-  return jsonDataResponse(result, context.tracing, { status: 201 });
+  try {
+    const body = await parseJsonBody(
+      request,
+      qepExecutionIngestBodySchema,
+      PLATFORM_API_MAX_BODY_BYTES,
+    );
+    const service = await requireQepTestExecutionGateway();
+    const { automationExecutionId, ...ingestBody } = body;
+    const tenantId = context.serviceContext.tenantId;
+    const specId = ingestBody.create?.sourceRefs.specRef?.id;
+    const planId = ingestBody.create?.sourceRefs.planRef?.id;
+    let resolved:
+      | {
+          readonly steps: readonly {
+            readonly order: number;
+            readonly instruction: string;
+            readonly expectedResult: string;
+            readonly requireActualResult: boolean;
+            readonly allowUnordered: boolean;
+            readonly testDataRef?: string;
+          }[];
+          readonly preconditions: readonly string[];
+        }
+      | undefined;
+    if (specId) {
+      const testCase = await getTestManagementService().getTestCase(tenantId, specId);
+      resolved = {
+        steps: testCase.steps.map((step) => ({
+          order: step.order,
+          instruction: step.action,
+          expectedResult: step.expectedResult,
+          requireActualResult: true,
+          allowUnordered: false,
+          ...(step.testDataRef ? { testDataRef: step.testDataRef } : {}),
+        })),
+        preconditions: [...testCase.preconditions],
+      };
+    }
+    const result = await invoke(context, () =>
+      service.ingestExternalResult(context.serviceContext, {
+        ...ingestBody,
+        ...(resolved ? { resolved } : {}),
+      }),
+    );
+    const applicationId = ingestBody.create?.projectId;
+    if (applicationId) {
+      await getTestManagementService().bindTestExecutionApplication(
+        tenantId,
+        result.id,
+        applicationId,
+      );
+    }
+    await captureExecutionSnapshots({
+      tenantId,
+      executionId: result.id,
+      executionKind: "test_execution",
+      ...(specId ? { specificationId: specId } : {}),
+      ...(planId ? { planId } : {}),
+    });
+    if (automationExecutionId) {
+      await getTestManagementService().correlateAutomation({
+        tenantId,
+        testExecutionId: result.id,
+        automationExecutionId,
+        correlationId: body.idempotencyKey,
+      });
+    }
+    return jsonDataResponse(result, context.tracing, { status: 201 });
+  } catch (error) {
+    mapHandlerError(error);
+  }
 }
 
 export async function handleGetQepPlanExecutionProgress(

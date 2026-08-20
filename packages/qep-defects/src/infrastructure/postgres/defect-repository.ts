@@ -47,6 +47,7 @@ export function createPostgresDefectRepository(db: DatabaseExecutor): DefectRepo
         assigneeId: d.assigneeId ?? null,
         sessionId: d.executionOrigin?.sessionId ?? null,
         suiteId: d.executionOrigin?.suiteId ?? null,
+        testExecutionId: d.executionOrigin?.testExecutionId ?? null,
         defectJson: d as unknown as Record<string, unknown>,
         historyJson: [...aggregate.history],
         revision: d.revision,

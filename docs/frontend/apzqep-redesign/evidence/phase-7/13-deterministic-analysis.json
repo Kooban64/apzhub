@@ -1,0 +1,48 @@
+{
+  "status": 200,
+  "raw": "{\"data\":{\"analysis\":{\"tenantId\":\"t-demo-org-0001\",\"applicationId\":\"qapp-a1037050-af7b-4ad1-a504-aa95eda448cd\",\"gaps\":[{\"kind\":\"ac_without_verification\",\"count\":0,\"summary\":\"0 acceptance criteria have no Test Case verification\"},{\"kind\":\"never_executed\",\"count\":1,\"summary\":\"1 test cases have never been executed\"},{\"kind\":\"failed_without_evidence\",\"count\":0,\"summary\":\"0 failed executions have no Evidence\"},{\"kind\":\"missing_trace\",\"count\":1,\"summary\":\"1 mandatory trace relationships are missing\"},{\"kind\":\"open_defects\",\"count\":0,\"summary\":\"0 open defects\"},{\"kind\":\"failed_gates\",\"count\":0,\"summary\":\"0 failed quality gates\"},{\"kind\":\"open_risks\",\"count\":0,\"summary\":\"0 open quality risks\"}],\"computedAt\":\"2026-08-20T18:51:17.337Z\",\"source\":\"qep_facts\"},\"source\":\"qep_facts\"},\"meta\":{\"requestId\":\"f4d2d614-dd7d-4c43-833d-5ae25c1e34d1\",\"correlationId\":\"f4d2d614-dd7d-4c43-833d-5ae25c1e34d1\"}}",
+  "analysis": {
+    "tenantId": "t-demo-org-0001",
+    "applicationId": "qapp-a1037050-af7b-4ad1-a504-aa95eda448cd",
+    "gaps": [
+      {
+        "kind": "ac_without_verification",
+        "count": 0,
+        "summary": "0 acceptance criteria have no Test Case verification"
+      },
+      {
+        "kind": "never_executed",
+        "count": 1,
+        "summary": "1 test cases have never been executed"
+      },
+      {
+        "kind": "failed_without_evidence",
+        "count": 0,
+        "summary": "0 failed executions have no Evidence"
+      },
+      {
+        "kind": "missing_trace",
+        "count": 1,
+        "summary": "1 mandatory trace relationships are missing"
+      },
+      {
+        "kind": "open_defects",
+        "count": 0,
+        "summary": "0 open defects"
+      },
+      {
+        "kind": "failed_gates",
+        "count": 0,
+        "summary": "0 failed quality gates"
+      },
+      {
+        "kind": "open_risks",
+        "count": 0,
+        "summary": "0 open quality risks"
+      }
+    ],
+    "computedAt": "2026-08-20T18:51:17.337Z",
+    "source": "qep_facts"
+  },
+  "source": "qep_facts"
+}

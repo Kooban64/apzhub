@@ -34,7 +34,7 @@ describe("Governed Quality Assist", () => {
     expect(session.provider).toBe("disabled");
     expect(session.status).toBe("disabled");
     expect(session.suggestions).toEqual([]);
-    expect(session.providerReason).toContain("APZHUB_QEP_AI_ASSIST=true");
+    expect(session.providerReason).toContain("superseded by Phase 7");
   });
 
   it("produces audited deterministic suggestions for every governed mode", async () => {

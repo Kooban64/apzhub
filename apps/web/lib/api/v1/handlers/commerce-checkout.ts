@@ -31,7 +31,10 @@ function mapCommerceError(error: unknown): never {
     throw new PlatformApiHttpError(400, {
       code: "VALIDATION_FAILED",
       message,
-      details,
+      details:
+        details && typeof details === "object" && !Array.isArray(details)
+          ? (details as Readonly<Record<string, unknown>>)
+          : undefined,
     });
   }
   if (message === "commerce.basket_empty" || message === "product.package_unknown") {

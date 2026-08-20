@@ -30,7 +30,10 @@ describe("Price Book v1.0 draft persist (Platform Admin surface)", () => {
     const parsed = JSON.parse(readFileSync(file, "utf8")) as {
       plane: {
         taxRules: { status: string; taxRuleId: string }[];
-        items: Record<string, { published: object; draft: object }>;
+        items: Record<
+          string,
+          { published: Record<string, unknown>; draft: Record<string, unknown> }
+        >;
       };
     };
     const tax = parsed.plane.taxRules.find(

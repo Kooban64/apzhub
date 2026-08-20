@@ -2,34 +2,58 @@
 
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { useSession } from "@apzhub/auth";
 
-import { QEP_CERTIFICATION_ROUTES } from "@/lib/qep/certification-routes";
-import { QEP_HOME_ROUTES } from "@/lib/qep/home-routes";
-import { QEP_PORTFOLIO_ROUTES } from "@/lib/qep/portfolio-routes";
-import { QEP_QUALITY_FLOWS_ROUTES } from "@/lib/qep/quality-flow-routes";
-import { QEP_RELEASE_READINESS_ROUTES } from "@/lib/qep/release-readiness-routes";
+import { QEP_DEFECT_ROUTES } from "@apzhub/qep-defects/presentation";
+import { QEP_EVIDENCE_ROUTES } from "@apzhub/qep-evidence/presentation";
+import { QEP_ENTERPRISE_REQUIREMENTS_BASE_PATH } from "@apzhub/qep-requirements-traceability/presentation";
+import { QEP_REQUIREMENTS_ROUTES } from "@apzhub/qep-requirements/presentation";
+import { QEP_TEST_EXECUTION_ROUTES } from "@apzhub/qep-test-execution/presentation";
+import { QEP_TEST_PLAN_ROUTES } from "@apzhub/qep-test-plans/presentation";
+import { QEP_TEST_SPECIFICATION_ROUTES } from "@apzhub/qep-test-specifications/presentation";
 import {
-  QepErrorState,
-  QepLoadingState,
-  QepPageShell,
-  QepPanel,
-  QepStatusBadge,
-  QepTable,
-} from "./qep-ui";
+  AlertTriangle,
+  ChevronRight,
+  ClipboardList,
+  Clock,
+  FolderOpen,
+  ListTodo,
+} from "lucide-react";
+import { isQualityCommandCentreActivity } from "@/lib/qep/qep-command-centre-activity";
+import { QEP_HOME_ROUTES } from "@/lib/qep/home-routes";
+import { listDefects } from "@/lib/qep/qep-defects-api";
+import { listAssignedExecutions } from "@/lib/qep/qep-test-execution-api";
+import { getCoverageDashboard } from "@/lib/qep/qep-enterprise-requirements-api";
+import { useQepApplicationContext } from "@/lib/qep/qep-application-context";
+import { QepLoadingState } from "./qep-ui";
 
-const linkPrimary =
-  "inline-flex h-8 items-center rounded-md bg-[var(--color-primary)] px-3 text-sm font-medium text-[var(--color-primary-foreground)]";
-const linkOutline =
-  "inline-flex h-8 items-center rounded-md border border-[var(--color-border)] px-3 text-sm";
+type AttentionItem = {
+  readonly kind: "critical" | "verification" | "retest";
+  readonly id: string;
+  readonly title: string;
+  readonly detail?: string;
+  readonly href?: string;
+};
 
-async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(url, {
-    ...init,
-    headers: {
-      "content-type": "application/json",
-      ...(init?.headers ?? {}),
-    },
-  });
+type WorkRow = {
+  readonly id: string;
+  readonly typeLabel: string;
+  readonly item: string;
+  readonly state: string;
+  readonly context: string;
+  readonly href: string;
+};
+
+type ActivityRow = {
+  readonly id: string;
+  readonly title: string;
+  readonly at?: string;
+  readonly actor?: string;
+};
+
+async function fetchJson<T>(url: string): Promise<T | null> {
+  const response = await fetch(url, { cache: "no-store" });
+  if (response.status === 403 || response.status === 404) return null;
   const body = (await response.json()) as {
     data?: T;
     error?: { message?: string };
@@ -37,421 +61,541 @@ async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
   if (!response.ok) {
     throw new Error(body.error?.message ?? `Request failed (${response.status})`);
   }
-  return body.data as T;
+  return (body.data as T) ?? null;
 }
 
-type CommandCentre = {
-  summary: {
-    activeCount: number;
-    waitingCount: number;
-    exceptionCount: number;
-    blockedReleaseCount: number;
-    decisionCount: number;
-    definitionCount: number;
-  };
-  active: Array<{
-    instanceId: string;
-    qualityFlowId: string;
-    currentState: string;
-    paused: boolean;
-    nextAction: string;
-    blockedRelease: boolean;
-    outstandingApprovalCount: number;
-    outstandingEvidenceCount: number;
-    createdAt: string;
-  }>;
-  waiting: Array<{
-    instanceId: string;
-    qualityFlowId: string;
-    currentState: string;
-    nextAction: string;
-  }>;
-  exceptions: Array<{
-    instanceId: string;
-    qualityFlowId: string;
-    currentState: string;
-    nextAction: string;
-  }>;
-  decisions: Array<{
-    decisionPackageId: string;
-    platformConclusion: string;
-    qualityFlowRef: string;
-    createdAt: string;
-  }>;
-};
+function formatState(value: string): string {
+  return value.replaceAll("_", " ");
+}
 
-function Metric({
-  label,
-  value,
-  tone = "default",
-}: {
-  readonly label: string;
-  readonly value: number;
-  readonly tone?: "default" | "warn" | "danger" | "ok";
-}) {
-  const color =
-    tone === "danger"
-      ? "text-red-700 dark:text-red-300"
-      : tone === "warn"
-        ? "text-amber-700 dark:text-amber-300"
-        : tone === "ok"
-          ? "text-emerald-700 dark:text-emerald-300"
-          : "text-[var(--color-foreground)]";
+function formatClock(iso?: string): string {
+  if (!iso) return "";
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return iso;
+  return date.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+}
+
+export function QepHomeRouterView() {
+  return <QualityCommandCentreView />;
+}
+
+function QualityCommandCentreView() {
+  const { data: session } = useSession();
+  const userId = session?.user.id;
+  const application = useQepApplicationContext();
+
+  const defectsQ = useQuery({
+    queryKey: ["qep-command-centre", "defects"],
+    queryFn: async () => {
+      try {
+        const [critical, retest, listed] = await Promise.all([
+          listDefects({
+            severity: "critical",
+            sortBy: "updatedAt",
+            sortDirection: "desc",
+          }),
+          listDefects({
+            status: "ready_for_retest",
+            sortBy: "updatedAt",
+            sortDirection: "desc",
+          }),
+          listDefects({
+            sortBy: "updatedAt",
+            sortDirection: "desc",
+          }),
+        ]);
+        const isOpen = (status: string) =>
+          status !== "closed" && status !== "archived" && status !== "verified";
+        return {
+          critical: critical.items.filter((d) => isOpen(d.status)),
+          retest: retest.items,
+          items: listed.items,
+          openCount: listed.items.filter((d) => isOpen(d.status)).length,
+        };
+      } catch {
+        return null;
+      }
+    },
+  });
+
+  const assignedQ = useQuery({
+    queryKey: ["qep-command-centre", "assigned", userId],
+    enabled: Boolean(userId),
+    queryFn: async () => {
+      try {
+        const executions = await listAssignedExecutions({ limit: 20 });
+        const defects = await listDefects({
+          assigneeId: userId,
+          sortBy: "updatedAt",
+          sortDirection: "desc",
+        });
+        return { executions: executions.items, defects: defects.items };
+      } catch {
+        return null;
+      }
+    },
+  });
+
+  const coverageQ = useQuery({
+    queryKey: ["qep-command-centre", "coverage"],
+    queryFn: async () => {
+      try {
+        return await getCoverageDashboard({
+          uncoveredOnly: true,
+        });
+      } catch {
+        return null;
+      }
+    },
+  });
+
+  const activityQ = useQuery({
+    queryKey: ["qep-command-centre", "audit"],
+    queryFn: async () => {
+      try {
+        const data = await fetchJson<{
+          items?: readonly {
+            readonly auditId: string;
+            readonly action: string;
+            readonly createdAt: string;
+            readonly detail?: string;
+            readonly actor?: string;
+          }[];
+        }>("/api/v1/qep/audit");
+        const items = (data?.items ?? []).filter(isQualityCommandCentreActivity);
+        return items.map((event) => ({
+          id: event.auditId,
+          title: event.detail ? `${event.action} · ${event.detail}` : event.action,
+          at: event.createdAt,
+          actor: event.actor,
+        }));
+      } catch {
+        return null;
+      }
+    },
+  });
+
+  if (defectsQ.isLoading || !userId || assignedQ.isLoading) {
+    return <QepLoadingState label="Loading quality command centre…" />;
+  }
+
+  const defectsUnavailable = defectsQ.isFetched && defectsQ.data == null;
+  const assignedUnavailable = assignedQ.isFetched && assignedQ.data == null;
+  const coverageUnavailable = coverageQ.isFetched && coverageQ.data == null;
+  const critical = defectsQ.data?.critical ?? [];
+  const retest = defectsQ.data?.retest ?? [];
+  const selectedId = application.selectedId;
+  const associatedOpenCount =
+    selectedId && defectsQ.data
+      ? (defectsQ.data.items ?? []).filter(
+          (row) =>
+            row.status !== "closed" &&
+            row.status !== "archived" &&
+            row.status !== "verified" &&
+            application.resolver.isAssociated(row.projectId, selectedId),
+        ).length
+      : undefined;
+  const openCount = selectedId ? associatedOpenCount : defectsQ.data?.openCount;
+  const assignedExec = assignedQ.data?.executions ?? [];
+  const assignedDefects = assignedQ.data?.defects ?? [];
+  const uncovered = coverageQ.data?.summary.uncovered;
+  const activity = activityQ.data;
+
+  const attentionItems: AttentionItem[] = [];
+  for (const d of critical.slice(0, 4)) {
+    attentionItems.push({
+      kind: "critical",
+      id: d.defectId,
+      title: `${d.defectId} · ${d.title}`,
+      detail: formatState(d.status),
+      href: QEP_DEFECT_ROUTES.detail(d.defectId),
+    });
+  }
+  if (coverageQ.isFetched && coverageQ.data != null && uncovered && uncovered > 0) {
+    attentionItems.push({
+      kind: "verification",
+      id: "verification-gaps",
+      title: `${uncovered} required check${uncovered === 1 ? "" : "s"} outstanding`,
+      detail: "",
+    });
+  }
+  const first = retest[0];
+  if (first) {
+    attentionItems.push({
+      kind: "retest",
+      id: first.defectId,
+      title:
+        retest.length === 1
+          ? `${first.defectId} · ${first.title}`
+          : `${retest.length} tests require retest`,
+      detail: "Retest required",
+      href: QEP_DEFECT_ROUTES.detail(first.defectId),
+    });
+  }
+
+  const workRows: WorkRow[] = [
+    ...assignedDefects.map((row) => ({
+      id: `defect:${row.defectId}`,
+      typeLabel: row.status === "ready_for_retest" ? "Retest" : "Defect",
+      item: `${row.defectId} ${row.title}`,
+      state: formatState(row.status),
+      context: application.displayContext(row.projectId),
+      href: QEP_DEFECT_ROUTES.detail(row.defectId),
+    })),
+    ...assignedExec.map((row) => ({
+      id: `execution:${row.id}`,
+      typeLabel: "Execution",
+      item: row.executionNumber,
+      state: formatState(row.status),
+      context: application.displayContext(row.projectId),
+      href: QEP_TEST_EXECUTION_ROUTES.detail(row.id),
+    })),
+  ].slice(0, 5);
+
+  const verificationFact = coverageUnavailable
+    ? "Unavailable"
+    : uncovered === undefined
+      ? "Unknown"
+      : uncovered === 0
+        ? "None detected"
+        : `${uncovered} outstanding`;
+  const criticalFact = defectsUnavailable
+    ? "Unavailable"
+    : defectsQ.isFetched
+      ? critical.length === 0
+        ? "None"
+        : String(critical.length)
+      : "Unknown";
+  const retestFact = defectsUnavailable
+    ? "Unavailable"
+    : defectsQ.isFetched
+      ? retest.length === 0
+        ? "None"
+        : String(retest.length)
+      : "Unknown";
+  const openDefectFact = defectsUnavailable
+    ? "Unavailable"
+    : defectsQ.isFetched
+      ? String(openCount ?? 0)
+      : "Unknown";
+
   return (
-    <div className="rounded-lg border border-[var(--color-border)] px-3 py-3">
-      <p className="text-xs uppercase tracking-wide text-[var(--color-muted-foreground)]">
-        {label}
-      </p>
-      <p className={`mt-1 text-2xl font-semibold tabular-nums ${color}`}>{value}</p>
+    <div
+      className="flex h-full min-h-0 flex-col overflow-auto bg-[var(--color-muted)] px-5 py-5"
+      data-testid="qep-command-centre"
+    >
+      <header
+        className="mb-5 flex flex-wrap items-start justify-between gap-3"
+        data-testid="qep-page"
+      >
+        <div>
+          <h1 className="text-xl font-semibold tracking-tight">
+            Quality Command Centre
+          </h1>
+          <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
+            Your attention and decision hub for quality.
+          </p>
+        </div>
+        <p
+          className="text-xs text-[var(--color-muted-foreground)]"
+          data-testid="qep-cc-application"
+        >
+          Application:{" "}
+          <span className="font-medium text-[var(--color-foreground)]">
+            {application.applications.length === 0
+              ? "None"
+              : (application.selected?.name ?? "Not selected")}
+          </span>
+        </p>
+      </header>
+
+      <div className="grid gap-4 lg:grid-cols-4" data-testid="qep-cc-mobile">
+        <AttentionPanel
+          defectsUnavailable={defectsUnavailable}
+          coverageUnavailable={coverageUnavailable}
+          items={attentionItems}
+          criticalFact={criticalFact}
+          retestFact={retestFact}
+          verificationFact={verificationFact}
+        />
+        <QualityContextPanel
+          applicationName={application.selected?.name}
+          verificationFact={verificationFact}
+          defectCount={openDefectFact}
+        />
+        <MyWorkPanel unavailable={assignedUnavailable} rows={workRows} />
+        <ActivityPanel activity={activity} loading={activityQ.isLoading} />
+      </div>
+
+      <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(16rem,0.6fr)]">
+        <section className={cardClass}>
+          <h2 className="text-sm font-semibold">Quality at a glance</h2>
+          <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">
+            Test Runs (7d)
+          </p>
+          <div className="mt-8 flex flex-col items-center justify-center px-6 py-8 text-center">
+            <FolderOpen
+              className="h-10 w-10 text-[var(--color-muted-foreground)]"
+              aria-hidden
+              strokeWidth={1.5}
+            />
+            <p className="mt-3 max-w-sm text-sm text-[var(--color-muted-foreground)]">
+              No execution data in the selected context. Select an application to see
+              quality at a glance.
+            </p>
+          </div>
+        </section>
+        <section className={cardClass}>
+          <h2 className="text-sm font-semibold">Helpful links</h2>
+          <ul className="mt-3 space-y-1 text-sm">
+            {HELPFUL_LINKS.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="flex items-center justify-between rounded-md px-1 py-1.5 text-[var(--color-primary)] hover:bg-[var(--color-muted)]"
+                >
+                  {link.label}
+                  <ChevronRight className="h-4 w-4" aria-hidden />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
     </div>
   );
 }
 
-function releaseVerdict(summary: CommandCentre["summary"]): {
-  label: string;
-  detail: string;
-  tone: "ok" | "warn" | "danger";
-} {
-  if (summary.exceptionCount > 0) {
-    return {
-      label: "Not ready — exceptions",
-      detail: "Resolve Quality Flow exceptions before a release decision.",
-      tone: "danger",
-    };
-  }
-  if (summary.blockedReleaseCount > 0) {
-    return {
-      label: "Blocked",
-      detail: "One or more flows are blocking release until gates clear.",
-      tone: "danger",
-    };
-  }
-  if (summary.waitingCount > 0) {
-    return {
-      label: "Waiting on work",
-      detail: "Approvals or evidence still outstanding — review waiting queue.",
-      tone: "warn",
-    };
-  }
-  if (summary.activeCount > 0) {
-    return {
-      label: "In progress",
-      detail: "Active quality flows are running — monitor and certify when ready.",
-      tone: "warn",
-    };
-  }
-  return {
-    label: "Quiet posture",
-    detail:
-      "No active blockers. Start a flow or open Release Candidate when a change arrives.",
-    tone: "ok",
-  };
-}
-
-export function QepHomeRouterView() {
-  return <HomeCommandCentreView />;
-}
-
-function HomeCommandCentreView() {
-  const query = useQuery({
-    queryKey: ["qep-quality-flows", "command-centre", "home"],
-    queryFn: () => fetchJson<CommandCentre>("/api/v1/qep/quality-flows"),
-    refetchInterval: 15_000,
-  });
-  const securityQuery = useQuery({
-    queryKey: ["qep-security-assurance", "home"],
-    queryFn: () =>
-      fetchJson<{
-        summary: {
-          entitled: boolean;
-          linked: boolean;
-          status?: string;
-          href: string;
-          reviewClear: boolean;
-          detail: string;
-          critical: number;
-          high: number;
-          openCount: number;
-          assessmentPosition?: string;
-          vaFreshness?: {
-            toolId: string;
-            probedAt: string;
-            status: string;
-            detail: string;
-          };
-        };
-      }>("/api/v1/qep/security-assurance"),
-    refetchInterval: 30_000,
-  });
-
-  if (query.isLoading) {
-    return <QepLoadingState label="Loading release control centre…" />;
-  }
-  if (query.isError) {
-    return <QepErrorState message={(query.error as Error).message} />;
-  }
-
-  const data = query.data!;
-  const s = data.summary;
-  const verdict = releaseVerdict(s);
-  const blocked = data.active.filter((row) => row.blockedRelease).slice(0, 5);
-  const security = securityQuery.data?.summary;
-
+function AttentionPanel({
+  defectsUnavailable,
+  coverageUnavailable,
+  items,
+  criticalFact,
+  retestFact,
+  verificationFact,
+}: {
+  readonly defectsUnavailable: boolean;
+  readonly coverageUnavailable: boolean;
+  readonly items: readonly AttentionItem[];
+  readonly criticalFact: string;
+  readonly retestFact: string;
+  readonly verificationFact: string;
+}) {
   return (
-    <QepPageShell
-      title="Home — Release Control"
-      description="Can we release with confidence? Live posture from continuous quality orchestration — humans still certify."
-      breadcrumbs={["QEP", "Home"]}
-      actions={
-        <div className="flex flex-wrap gap-2">
-          <Link
-            className={linkPrimary}
-            href={QEP_HOME_ROUTES.myWork}
-            data-testid="qep-home-open-my-work"
-          >
-            My Work
-          </Link>
-          <Link className={linkOutline} href={QEP_CERTIFICATION_ROUTES.rcHome}>
-            Release Candidate
-          </Link>
-          <Link className={linkOutline} href={QEP_QUALITY_FLOWS_ROUTES.home}>
-            Quality Flows
-          </Link>
-          <Link className={linkOutline} href={QEP_RELEASE_READINESS_ROUTES.home}>
-            Readiness
-          </Link>
-        </div>
-      }
-    >
-      <p
-        className="mb-4 text-sm text-[var(--color-muted-foreground)]"
-        data-testid="qep-home-persona-hint"
-      >
-        Same Home for every Quality persona — ranking emphasises what needs{" "}
-        <strong>you</strong>. Open{" "}
-        <Link href={QEP_HOME_ROUTES.myWork} className="underline">
-          My Work
-        </Link>{" "}
-        for Tests · Defects · Reviews · Approvals.
-      </p>
-      <QepPanel title="Release confidence">
-        <div
-          className="flex flex-wrap items-center gap-3"
-          data-testid="qep-home-verdict"
+    <section className={cardClass} data-testid="qep-cc-attention">
+      <div className="mb-3 flex items-center gap-2">
+        <AlertTriangle className="h-4 w-4 text-[var(--color-warning)]" aria-hidden />
+        <h2 className="text-sm font-semibold">Attention</h2>
+      </div>
+      {defectsUnavailable && coverageUnavailable ? (
+        <p
+          className="text-xs text-[var(--color-muted-foreground)]"
+          data-testid="qep-cc-attention-unavailable"
         >
-          <QepStatusBadge
-            status={
-              verdict.tone === "ok"
-                ? "ready"
-                : verdict.tone === "warn"
-                  ? "waiting"
-                  : "blocked"
-            }
-          />
-          <div>
-            <p className="text-base font-medium text-[var(--color-foreground)]">
-              {verdict.label}
-            </p>
-            <p className="text-sm text-[var(--color-muted-foreground)]">
-              {verdict.detail}
-            </p>
-          </div>
+          Attention is unavailable.
+        </p>
+      ) : items.length === 0 ? (
+        <div className="text-xs" data-testid="qep-cc-attention-empty">
+          <p>No quality items currently require your attention.</p>
+          <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-[var(--color-muted-foreground)]">
+            <dt>Critical defects</dt>
+            <dd className="text-[var(--color-foreground)]">{criticalFact}</dd>
+            <dt>Retests required</dt>
+            <dd className="text-[var(--color-foreground)]">{retestFact}</dd>
+            <dt>Verification gaps</dt>
+            <dd className="text-[var(--color-foreground)]">{verificationFact}</dd>
+            <dt>Evidence gaps</dt>
+            <dd className="text-[var(--color-foreground)]">Unavailable</dd>
+          </dl>
         </div>
-      </QepPanel>
-
-      <QepPanel title="Security assurance (APZPEN)">
-        <div data-testid="qep-home-security">
-          {securityQuery.isLoading ? (
-            <p className="text-sm text-[var(--color-muted-foreground)]">
-              Loading security posture…
-            </p>
-          ) : securityQuery.isError ? (
-            <QepErrorState message={(securityQuery.error as Error).message} />
-          ) : security ? (
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <QepStatusBadge status={security.reviewClear ? "ready" : "blocked"} />
-                  <span className="text-sm font-medium">
-                    {security.status ??
-                      (security.linked
-                        ? (security.assessmentPosition ?? "linked")
-                        : security.entitled
-                          ? "not linked"
-                          : "not entitled")}
-                  </span>
-                </div>
-                <p className="mt-1 text-sm text-[var(--color-muted-foreground)]">
-                  {security.detail}
-                </p>
-                {security.linked ? (
-                  <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">
-                    Open critical {security.critical} · high {security.high} · open{" "}
-                    {security.openCount}
-                  </p>
-                ) : null}
-                {security.vaFreshness ? (
-                  <p
-                    className="mt-1 text-xs text-[var(--color-muted-foreground)]"
-                    data-testid="qep-home-security-va-freshness"
-                  >
-                    VA freshness ({security.vaFreshness.toolId}):{" "}
-                    {security.vaFreshness.status} — {security.vaFreshness.detail} ·
-                    probed {security.vaFreshness.probedAt}
-                  </p>
-                ) : null}
-              </div>
-              {security.href ? (
-                <Link className={linkOutline} href={security.href}>
-                  Open APZPEN
+      ) : (
+        <ul className="space-y-2.5">
+          {items.map((item) => (
+            <li key={item.id} className="text-xs">
+              <p className="font-medium capitalize">
+                {item.kind === "critical" ? "Critical" : item.kind}
+              </p>
+              {item.href ? (
+                <Link href={item.href} className="hover:underline">
+                  {item.title}
                 </Link>
+              ) : (
+                <p
+                  data-testid={
+                    item.kind === "verification" ? "qep-cc-coverage-gaps" : undefined
+                  }
+                >
+                  {item.title}
+                </p>
+              )}
+              {item.detail ? (
+                <p className="text-[var(--color-muted-foreground)]">{item.detail}</p>
               ) : null}
-            </div>
-          ) : (
-            <p className="text-sm text-[var(--color-muted-foreground)]">
-              Security posture unavailable.
-            </p>
-          )}
-        </div>
-      </QepPanel>
-
-      <div
-        className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6"
-        data-testid="qep-home-metrics"
-      >
-        <Metric label="Active flows" value={s.activeCount} />
-        <Metric label="Waiting" value={s.waitingCount} tone="warn" />
-        <Metric
-          label="Blocked releases"
-          value={s.blockedReleaseCount}
-          tone={s.blockedReleaseCount > 0 ? "danger" : "ok"}
-        />
-        <Metric
-          label="Exceptions"
-          value={s.exceptionCount}
-          tone={s.exceptionCount > 0 ? "danger" : "default"}
-        />
-        <Metric label="Decisions" value={s.decisionCount} />
-        <Metric label="Definitions" value={s.definitionCount} />
-      </div>
-
-      <div className="grid gap-4 lg:grid-cols-2">
-        <QepPanel title="Blocked / attention">
-          {blocked.length === 0 ? (
-            <p className="text-sm text-[var(--color-muted-foreground)]">
-              No flows currently blocking release.
-            </p>
-          ) : (
-            <QepTable
-              caption="Blocked quality flows"
-              columns={["Flow", "State", "Next action"]}
-              rows={blocked.map((row) => ({
-                id: row.instanceId,
-                href: QEP_QUALITY_FLOWS_ROUTES.instance(row.instanceId),
-                cells: [
-                  row.qualityFlowId,
-                  <QepStatusBadge
-                    key={`${row.instanceId}-state`}
-                    status={row.currentState}
-                  />,
-                  row.nextAction,
-                ],
-              }))}
-            />
-          )}
-        </QepPanel>
-
-        <QepPanel title="Operate">
-          <ul className="space-y-2 text-sm">
-            <li>
-              <Link
-                className="font-medium underline-offset-2 hover:underline"
-                href={QEP_QUALITY_FLOWS_ROUTES.waiting}
-              >
-                Waiting queue
-              </Link>
-              <span className="text-[var(--color-muted-foreground)]">
-                {" "}
-                — approvals and evidence
-              </span>
             </li>
-            <li>
-              <Link
-                className="font-medium underline-offset-2 hover:underline"
-                href={QEP_QUALITY_FLOWS_ROUTES.exceptions}
-              >
-                Exceptions
-              </Link>
-              <span className="text-[var(--color-muted-foreground)]">
-                {" "}
-                — recover stuck flows
-              </span>
+          ))}
+          {coverageUnavailable ? (
+            <li
+              className="text-xs text-[var(--color-muted-foreground)]"
+              data-testid="qep-cc-coverage-unavailable"
+            >
+              Verification gaps unavailable.
             </li>
-            <li>
-              <Link
-                className="font-medium underline-offset-2 hover:underline"
-                href={QEP_PORTFOLIO_ROUTES.home}
-              >
-                Portfolio
-              </Link>
-              <span className="text-[var(--color-muted-foreground)]">
-                {" "}
-                — quality projects and change context
-              </span>
-            </li>
-            <li>
-              <Link
-                className="font-medium underline-offset-2 hover:underline"
-                href="/apzpen"
-              >
-                Security assurance (APZPEN)
-              </Link>
-              <span className="text-[var(--color-muted-foreground)]">
-                {" "}
-                — security evidence feeds release gates
-              </span>
-            </li>
-            <li>
-              <Link
-                className="font-medium underline-offset-2 hover:underline"
-                href={QEP_HOME_ROUTES.home}
-              >
-                Refresh Home
-              </Link>
-              <span className="text-[var(--color-muted-foreground)]">
-                {" "}
-                — posture auto-refreshes every 15s
-              </span>
-            </li>
-          </ul>
-        </QepPanel>
-      </div>
-
-      <QepPanel title="Recent platform conclusions">
-        {data.decisions.length === 0 ? (
-          <p className="text-sm text-[var(--color-muted-foreground)]">
-            No decision packages yet. Orchestration conclusions appear here after gate
-            evaluation — human GO/NO-GO remains on Release Candidate.
-          </p>
-        ) : (
-          <QepTable
-            caption="Recent platform conclusions"
-            columns={["Package", "Conclusion", "Flow", "When"]}
-            rows={data.decisions.slice(0, 8).map((d) => ({
-              id: d.decisionPackageId,
-              cells: [
-                d.decisionPackageId,
-                <QepStatusBadge
-                  key={d.decisionPackageId}
-                  status={d.platformConclusion}
-                />,
-                d.qualityFlowRef,
-                new Date(d.createdAt).toLocaleString(),
-              ],
-            }))}
-          />
-        )}
-      </QepPanel>
-    </QepPageShell>
+          ) : null}
+        </ul>
+      )}
+      <p className="mt-4">
+        <Link className={linkClass} href={QEP_DEFECT_ROUTES.home}>
+          View all attention →
+        </Link>
+      </p>
+    </section>
   );
 }
+
+function QualityContextPanel({
+  applicationName,
+  verificationFact,
+  defectCount,
+}: {
+  readonly applicationName?: string;
+  readonly verificationFact: string;
+  readonly defectCount: string;
+}) {
+  return (
+    <section className={cardClass} data-testid="qep-cc-context">
+      <div className="mb-3 flex items-center gap-2">
+        <ClipboardList className="h-4 w-4 text-[var(--color-primary)]" aria-hidden />
+        <h2 className="text-sm font-semibold">Quality context</h2>
+      </div>
+      <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-xs">
+        <dt className="text-[var(--color-muted-foreground)]">Application</dt>
+        <dd>{applicationName ?? "Not selected"}</dd>
+        <dt className="text-[var(--color-muted-foreground)]">Verification</dt>
+        <dd>{verificationFact}</dd>
+        <dt className="text-[var(--color-muted-foreground)]">Evidence</dt>
+        <dd>Unavailable</dd>
+        <dt className="text-[var(--color-muted-foreground)]">Open defects</dt>
+        <dd>{defectCount}</dd>
+      </dl>
+      <p className="mt-4">
+        <Link
+          className={linkClass}
+          href={`${QEP_ENTERPRISE_REQUIREMENTS_BASE_PATH}/coverage`}
+        >
+          Open coverage →
+        </Link>
+      </p>
+    </section>
+  );
+}
+
+function MyWorkPanel({
+  unavailable,
+  rows,
+}: {
+  readonly unavailable: boolean;
+  readonly rows: readonly WorkRow[];
+}) {
+  return (
+    <section className={cardClass} data-testid="qep-cc-my-work">
+      <div className="mb-3 flex items-center gap-2">
+        <ListTodo className="h-4 w-4 text-[var(--color-primary)]" aria-hidden />
+        <h2 className="text-sm font-semibold">My work</h2>
+      </div>
+      {unavailable ? (
+        <p className="text-xs text-[var(--color-muted-foreground)]">
+          Assigned work is unavailable.
+        </p>
+      ) : rows.length === 0 ? (
+        <div className="text-xs" data-testid="qep-cc-my-work-empty">
+          <p>No quality work is currently assigned to you.</p>
+          <p className="mt-1 text-[var(--color-muted-foreground)]">
+            When executions, defects or retests are assigned to you, they will appear
+            here.
+          </p>
+        </div>
+      ) : (
+        <ul className="space-y-2 text-xs">
+          {rows.map((row) => (
+            <li key={row.id}>
+              <p className="text-[var(--color-muted-foreground)]">{row.typeLabel}</p>
+              <Link href={row.href} className="font-medium hover:underline">
+                {row.item}
+              </Link>
+              <p className="text-[var(--color-muted-foreground)]">{row.state}</p>
+              <p className="text-[var(--color-muted-foreground)]">{row.context}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+      <p className="mt-4">
+        <Link className={linkClass} href={QEP_HOME_ROUTES.myWork}>
+          Go to My Work →
+        </Link>
+      </p>
+    </section>
+  );
+}
+
+function ActivityPanel({
+  activity,
+  loading,
+}: {
+  readonly activity: readonly ActivityRow[] | null | undefined;
+  readonly loading: boolean;
+}) {
+  return (
+    <section className={cardClass} data-testid="qep-cc-activity">
+      <div className="mb-3 flex items-center gap-2">
+        <Clock className="h-4 w-4 text-[var(--color-warning)]" aria-hidden />
+        <h2 className="text-sm font-semibold">Recent quality activity</h2>
+      </div>
+      {loading ? (
+        <p className="text-xs text-[var(--color-muted-foreground)]">Loading…</p>
+      ) : activity == null ? (
+        <p className="text-xs text-[var(--color-muted-foreground)]">
+          Activity is unavailable.
+        </p>
+      ) : activity.length === 0 ? (
+        <p className="text-xs text-[var(--color-muted-foreground)]">
+          No recent activity.
+        </p>
+      ) : (
+        <ul className="space-y-1.5 text-xs">
+          {activity.slice(0, 5).map((event) => (
+            <li key={event.id ?? `${event.title}-${event.at}`}>
+              <span className="text-[var(--color-foreground)]">{event.title}</span>
+              {event.at ? (
+                <span className="ml-2 text-[var(--color-muted-foreground)]">
+                  {formatClock(event.at)}
+                </span>
+              ) : null}
+            </li>
+          ))}
+        </ul>
+      )}
+      <p className="mt-4">
+        <Link className={linkClass} href="/workspace/qep/audit">
+          Open audit →
+        </Link>
+      </p>
+    </section>
+  );
+}
+
+const cardClass =
+  "rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4 shadow-sm";
+
+const linkClass = "text-xs font-medium text-[var(--color-primary)] hover:underline";
+
+const HELPFUL_LINKS = [
+  { href: QEP_REQUIREMENTS_ROUTES.new, label: "Create Requirement" },
+  { href: QEP_TEST_SPECIFICATION_ROUTES.new, label: "Create Test Case" },
+  { href: QEP_TEST_PLAN_ROUTES.new, label: "Create Test Plan" },
+  { href: QEP_DEFECT_ROUTES.new, label: "Create Defect" },
+  { href: QEP_EVIDENCE_ROUTES.new, label: "Add Evidence" },
+] as const;

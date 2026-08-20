@@ -20,7 +20,7 @@ export function resolveSourceRepoScope(
 ): SourceRepoScope {
   return resolveResourceScope(permissions, {
     prefix: SOURCE_REPO_SCOPE_PREFIX,
-    unrestrictedKeys: ["source.*", "source.repo.*", "qep.*", "qep.scm.administer"],
+    unrestrictedKeys: ["source.*", "source.repo.*"],
   });
 }
 

@@ -91,6 +91,7 @@ function certFixture(
       suiteMatchCount: 1,
       nodeCount: 2,
     },
+    domains: [],
     ...overrides,
   };
 }

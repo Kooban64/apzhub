@@ -28,13 +28,20 @@ export type DefectPriority = (typeof DEFECT_PRIORITIES)[number];
 export type DefectRelationshipKind =
   | "execution_session"
   | "execution_step"
+  | "test_execution"
   | "evidence"
   | "suite"
   | "execution_plan"
   | "defect"
   | "release"
   | "environment"
-  | "requirement_future";
+  | "requirement_future"
+  | "exploratory_session"
+  | "experience_verification"
+  | "quality_observation"
+  | "quality_issue"
+  | "experience_criterion"
+  | "experience_context";
 
 export type DefectRelationship = {
   readonly relationshipId: string;
@@ -47,7 +54,8 @@ export type DefectRelationship = {
 
 /** Immutable factual context copied at raise-time — Cap C remains SoR. */
 export type ExecutionOrigin = {
-  readonly sessionId: string;
+  readonly sessionId?: string;
+  readonly testExecutionId?: string;
   readonly stepId?: string;
   readonly stepTitle?: string;
   readonly stepOutcome?: string;
@@ -55,6 +63,13 @@ export type ExecutionOrigin = {
   readonly suiteId?: string;
   readonly suiteName?: string;
   readonly failureNotes?: string;
+  readonly exploratorySessionId?: string;
+  readonly experienceActivityId?: string;
+  readonly observationId?: string;
+  readonly issueId?: string;
+  readonly criterionId?: string;
+  readonly experienceContextId?: string;
+  readonly viewportLabel?: string;
 };
 
 export type DefectEvidenceRef = {

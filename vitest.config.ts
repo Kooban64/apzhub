@@ -566,11 +566,51 @@ const packageAliases = {
     __dirname,
     "packages/platform-quality-intelligence/src/index.ts",
   ),
+  "@apzhub/qep-applications/presentation": path.resolve(
+    __dirname,
+    "packages/qep-applications/src/presentation/index.ts",
+  ),
+  "@apzhub/qep-applications/domain": path.resolve(
+    __dirname,
+    "packages/qep-applications/src/domain/index.ts",
+  ),
+  "@apzhub/qep-applications": path.resolve(
+    __dirname,
+    "packages/qep-applications/src/index.ts",
+  ),
+  "@apzhub/qep-definition/presentation": path.resolve(
+    __dirname,
+    "packages/qep-definition/src/presentation/index.ts",
+  ),
+  "@apzhub/qep-definition/domain": path.resolve(
+    __dirname,
+    "packages/qep-definition/src/domain/index.ts",
+  ),
+  "@apzhub/qep-definition": path.resolve(
+    __dirname,
+    "packages/qep-definition/src/index.ts",
+  ),
+  "@apzhub/qep-test-management/presentation": path.resolve(
+    __dirname,
+    "packages/qep-test-management/src/presentation/index.ts",
+  ),
+  "@apzhub/qep-test-management/domain": path.resolve(
+    __dirname,
+    "packages/qep-test-management/src/domain/index.ts",
+  ),
+  "@apzhub/qep-test-management": path.resolve(
+    __dirname,
+    "packages/qep-test-management/src/index.ts",
+  ),
   "@apzhub/qep-scm/presentation": path.resolve(
     __dirname,
     "packages/qep-scm/src/presentation/index.ts",
   ),
   "@apzhub/qep-scm": path.resolve(__dirname, "packages/qep-scm/src/index.ts"),
+  "@apzhub/qep-quality-intelligence/presentation": path.resolve(
+    __dirname,
+    "packages/qep-quality-intelligence/src/presentation/index.ts",
+  ),
   "@apzhub/qep-quality-intelligence": path.resolve(
     __dirname,
     "packages/qep-quality-intelligence/src/index.ts",
@@ -600,9 +640,17 @@ const packageAliases = {
     "packages/qep-dashboards/src/index.ts",
   ),
 
+  "@apzhub/qep-requirements-traceability/presentation": path.resolve(
+    __dirname,
+    "packages/qep-requirements-traceability/src/presentation/index.ts",
+  ),
   "@apzhub/qep-requirements-traceability": path.resolve(
     __dirname,
     "packages/qep-requirements-traceability/src/index.ts",
+  ),
+  "@apzhub/qep-reporting/presentation": path.resolve(
+    __dirname,
+    "packages/qep-reporting/src/presentation/index.ts",
   ),
   "@apzhub/qep-reporting": path.resolve(
     __dirname,

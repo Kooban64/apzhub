@@ -75,7 +75,40 @@ function mapCertError(error: unknown): never {
   if (message === "certification.human_actor_required") {
     throw new PlatformApiHttpError(403, {
       code: "FORBIDDEN",
-      message: "Only a human session actor may record GO/NO-GO",
+      message: "Only a human session actor may record a certification decision",
+    });
+  }
+  if (message === "certification.blocking_gate_go_prohibited") {
+    throw new PlatformApiHttpError(409, {
+      code: "CONFLICT",
+      message:
+        "Ordinary GO is prohibited while a Blocking Gate has failed (exception does not permit GO)",
+    });
+  }
+  if (message === "certification.blocking_gate_conditional_go_prohibited") {
+    throw new PlatformApiHttpError(409, {
+      code: "CONFLICT",
+      message:
+        "CONDITIONAL_GO is prohibited while a Blocking Gate has failed without a valid authorised Certification Exception",
+    });
+  }
+  if (message === "certification.blocking_gate_not_evaluated") {
+    throw new PlatformApiHttpError(409, {
+      code: "CONFLICT",
+      message:
+        "GO and CONDITIONAL_GO are prohibited while a Blocking Gate is Not Evaluated",
+    });
+  }
+  if (message === "certification.application_required") {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_FAILED",
+      message: "applicationId is required",
+    });
+  }
+  if (message === "certification.environment_required") {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_FAILED",
+      message: "environmentId is required",
     });
   }
   throw new PlatformApiHttpError(400, {
@@ -97,6 +130,8 @@ export async function handleCreateCertificationEvaluation(
   );
   const body = (await request.json().catch(() => ({}))) as {
     changeEventId?: string;
+    applicationId?: string;
+    environmentId?: string;
   };
   const changeEventId = body.changeEventId?.trim();
   if (!changeEventId) {
@@ -105,11 +140,21 @@ export async function handleCreateCertificationEvaluation(
       message: "changeEventId is required",
     });
   }
+  const applicationId = body.applicationId?.trim();
+  const environmentId = body.environmentId?.trim();
+  if (!applicationId || !environmentId) {
+    throw new PlatformApiHttpError(400, {
+      code: "VALIDATION_FAILED",
+      message: "applicationId and environmentId are required",
+    });
+  }
   try {
     const evaluation = await evaluateChangeCertification({
       tenantId: sessionTenantId(context),
       changeEventId,
       actorId: context.serviceContext.userId,
+      applicationId,
+      environmentId,
     });
     emitCertFreshnessSignal({
       evaluationId: evaluation.evaluationId,
@@ -199,10 +244,15 @@ export async function handleRecordCertificationDecision(
     authorityId?: string;
   };
   const outcome = body.outcome?.trim().toUpperCase();
-  if (outcome !== "GO" && outcome !== "NO_GO") {
+  if (
+    outcome !== "GO" &&
+    outcome !== "CONDITIONAL_GO" &&
+    outcome !== "NO_GO" &&
+    outcome !== "DEFER"
+  ) {
     throw new PlatformApiHttpError(400, {
       code: "VALIDATION_FAILED",
-      message: 'outcome must be "GO" or "NO_GO"',
+      message: 'outcome must be "GO", "CONDITIONAL_GO", "NO_GO", or "DEFER"',
     });
   }
   try {

@@ -1,0 +1,4 @@
+qep.portfolio.read present: true
+source.read present: false
+source.write present: false
+Application APIs use qep.portfolio.* / qep.scm.read. Associating a repository does not add source.read.

@@ -1,6 +1,18 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { requireQepProjectMembership } from "./project-acl";
+import {
+  requireQepProjectMembership,
+  requireQepProjectOrApplication,
+} from "./project-acl";
+
+vi.mock("@/lib/qep/application-runtime", () => ({
+  getApplicationService: () => ({
+    get: async (_tenantId: string, id: string) => {
+      if (id === "qapp-known") return { id };
+      throw new Error("application.not_found");
+    },
+  }),
+}));
 
 const context = {
   serviceContext: { tenantId: "tenant_1" },
@@ -44,5 +56,25 @@ describe("QEP project membership ACL", () => {
       resolver,
     });
     expect(resolver).not.toHaveBeenCalled();
+  });
+
+  it("accepts a tenant QEP application when Plane project membership is missing", async () => {
+    const resolver = vi.fn().mockResolvedValue(false);
+    await expect(
+      requireQepProjectOrApplication(context, "qapp-known", {
+        required: true,
+        resolver,
+      }),
+    ).resolves.toBeUndefined();
+  });
+
+  it("still fails closed when neither Plane project nor QEP application exists", async () => {
+    const resolver = vi.fn().mockResolvedValue(false);
+    await expect(
+      requireQepProjectOrApplication(context, "missing-id", {
+        required: true,
+        resolver,
+      }),
+    ).rejects.toMatchObject({ status: 403 });
   });
 });

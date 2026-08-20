@@ -68,7 +68,7 @@ export async function sendPlatformEmail(
   const mailer = getMailer(config);
   const info = await mailer.sendMail({
     from: input.from ?? config.from,
-    to: Array.isArray(input.to) ? [...input.to] : input.to,
+    to: typeof input.to === "string" ? input.to : [...input.to],
     subject: input.subject,
     text: input.text,
     html: input.html,

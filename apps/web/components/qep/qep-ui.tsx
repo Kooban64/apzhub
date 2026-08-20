@@ -204,9 +204,19 @@ export function QepTable({
 
 export function QepStatusBadge({ status }: { readonly status: string }) {
   const label = status.replace(/_/g, " ");
+  const tone =
+    status === "in_progress"
+      ? "border-amber-500 text-amber-700 dark:text-amber-400"
+      : status === "completed"
+        ? "border-emerald-500 text-emerald-700 dark:text-emerald-400"
+        : status === "planned"
+          ? "border-sky-500 text-sky-700 dark:text-sky-400"
+          : status === "blocked"
+            ? "border-red-500 text-red-700 dark:text-red-400"
+            : "text-[var(--color-muted-foreground)]";
   return (
     <span
-      className="inline-flex rounded-full border border-[var(--color-border)] px-2 py-0.5 text-xs capitalize"
+      className={`inline-flex rounded-full border border-[var(--color-border)] px-2 py-0.5 text-xs capitalize ${tone}`}
       data-testid="qep-status-badge"
       aria-label={`Status: ${label}`}
     >

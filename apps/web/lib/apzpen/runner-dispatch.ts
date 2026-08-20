@@ -20,7 +20,7 @@ import type { Engagement, ScopeTarget } from "./types";
 /** CE tools that can be dispatched (dry-run always; live when runners are up). */
 export type DispatchTool = CatalogueDispatchTool;
 
-export const ALL_DISPATCH_TOOLS: readonly DispatchTool[] = CATALOGUE_TOOLS;
+const ALL_DISPATCH_TOOLS: readonly DispatchTool[] = CATALOGUE_TOOLS;
 
 export type DispatchJobStatus =
   "queued" | "running" | "succeeded" | "failed" | "skipped";

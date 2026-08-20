@@ -1,0 +1,38 @@
+manifestSchemaVersion: "1.0"
+id: qep-definition
+name: QEP Definition Service
+version: 1.0.0
+kind: service
+
+metadata:
+  category: quality-engineering
+  description: >
+    Durable User Story and Acceptance Criterion aggregates beneath the existing
+    Requirement SoR. Owns idempotent legacy acceptance-criteria promotion,
+    derived coverage, and AC-to-verification-asset links. Does not replace
+    Requirement APIs. Does not create a Test Case store. Does not grant Source.
+  contractPackage: "@apzhub/qep-definition"
+  contractVersion: "1.0.0"
+  owner: APZHUB
+  tags:
+    - qep
+    - definition
+    - user-story
+    - acceptance-criterion
+
+dependencies:
+  platform:
+    - platform-audit
+  integrations: []
+
+integrations: []
+
+service:
+  category: quality-engineering
+  status: active
+
+permissions:
+  - qep.requirements.view
+  - qep.requirements.create
+  - qep.requirements.edit
+  - qep.requirements.archive

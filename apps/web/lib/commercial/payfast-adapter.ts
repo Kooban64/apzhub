@@ -5,6 +5,7 @@
 
 import { createHash } from "node:crypto";
 
+import type { EnvVars } from "@/lib/env-vars";
 export type PayFastConfig = {
   readonly merchantId: string;
   readonly merchantKey: string;
@@ -15,9 +16,7 @@ export type PayFastConfig = {
   readonly notifyUrl: string;
 };
 
-export function resolvePayFastConfig(
-  env: NodeJS.ProcessEnv = process.env,
-): PayFastConfig {
+export function resolvePayFastConfig(env: EnvVars = process.env): PayFastConfig {
   const appUrl =
     env.APP_URL?.trim() || env.NEXT_PUBLIC_APP_URL?.trim() || "http://127.0.0.1:3300";
   return {
@@ -73,7 +72,7 @@ export function signPayFastParams(
  */
 export function createPayFastCheckout(
   input: PayFastCheckoutRequest,
-  env: NodeJS.ProcessEnv = process.env,
+  env: EnvVars = process.env,
 ): PayFastCheckoutSession {
   const config = resolvePayFastConfig(env);
   const amount = (input.amountCents / 100).toFixed(2);
@@ -109,7 +108,7 @@ export function createPayFastCheckout(
 
 export function verifyPayFastItn(
   params: Record<string, string>,
-  env: NodeJS.ProcessEnv = process.env,
+  env: EnvVars = process.env,
 ): boolean {
   const config = resolvePayFastConfig(env);
   const provided = params.signature;
@@ -127,7 +126,7 @@ export type PayFastHealth = {
   readonly detail: string;
 };
 
-export function getPayFastHealth(env: NodeJS.ProcessEnv = process.env): PayFastHealth {
+export function getPayFastHealth(env: EnvVars = process.env): PayFastHealth {
   const config = resolvePayFastConfig(env);
   const configured = Boolean(
     env.PAYFAST_MERCHANT_ID?.trim() && env.PAYFAST_MERCHANT_KEY?.trim(),

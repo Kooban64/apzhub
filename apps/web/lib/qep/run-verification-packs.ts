@@ -19,6 +19,7 @@ import {
 } from "@/lib/qep/verification-dispatch-on-change";
 import type { VerificationDispatchRecord } from "@/lib/qep/verification-dispatch-store";
 
+import type { EnvVars } from "@/lib/env-vars";
 export type RunVerificationPacksResult = {
   readonly changeEventId: string;
   readonly quality: readonly VerificationDispatchRecord[];
@@ -33,7 +34,7 @@ export async function runVerificationPacksForChange(input: {
   readonly changeEventId: string;
   readonly packs?: readonly ("quality" | "security")[];
   readonly force?: boolean;
-  readonly env?: NodeJS.ProcessEnv;
+  readonly env?: EnvVars;
 }): Promise<RunVerificationPacksResult> {
   const changeEventId = input.changeEventId.trim();
   if (!changeEventId) {
@@ -65,7 +66,7 @@ export async function runVerificationPacksForChange(input: {
     source: "manual";
     events: readonly ScmChangeEvent[];
     force: boolean;
-    env: NodeJS.ProcessEnv;
+    env: EnvVars;
     resolveRepositoryFullName: (repositoryId: string) => Promise<string | undefined>;
   } = {
     tenantId: input.tenantId,

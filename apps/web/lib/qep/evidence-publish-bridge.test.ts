@@ -187,7 +187,11 @@ describe("publishAutomationEvidence (Q4)", () => {
         bytes: expect.any(Uint8Array),
       }),
     );
-    const putArg = put.mock.calls[0]![0] as { bytes: Uint8Array };
+    const putCalls = put.mock.calls as unknown as readonly [{ bytes: Uint8Array }][];
+    const putArg = putCalls[0]?.[0];
+    if (!putArg) {
+      throw new Error("expected evidence storage put call");
+    }
     expect(Buffer.from(putArg.bytes).toString("utf8")).toBe("fake-png-bytes");
     expect(capture).toHaveBeenCalledWith(
       expect.objectContaining({

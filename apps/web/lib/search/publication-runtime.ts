@@ -17,6 +17,7 @@ import {
   type SearchPublicationSink,
 } from "@apzhub/search-integration";
 
+import type { EnvVars } from "@/lib/env-vars";
 export type SearchPublicationCompositionRegistration = {
   readonly time: boolean;
   readonly law: boolean;
@@ -64,7 +65,7 @@ export function isSearchCompositionFullyRegisteredForLiveDrain(): boolean {
  * Never throws into product / drain paths.
  */
 export function createMeilisearchMirroringSink(
-  env: NodeJS.ProcessEnv | Record<string, string | undefined> = process.env,
+  env: EnvVars | Record<string, string | undefined> = process.env,
 ): SearchPublicationSink {
   const memory = new InMemorySearchPublicationSink();
   const endpoint = env.SEARCH_MEILISEARCH_ENDPOINT?.trim().replace(/\/$/, "");
@@ -138,7 +139,7 @@ export function createMeilisearchMirroringSink(
   };
 }
 
-function buildIntegration(env: NodeJS.ProcessEnv | Record<string, string | undefined>) {
+function buildIntegration(env: EnvVars | Record<string, string | undefined>) {
   const meiliConfigured = Boolean(env.SEARCH_MEILISEARCH_ENDPOINT?.trim());
   return createSearchIntegration({
     sink: meiliConfigured ? createMeilisearchMirroringSink(env) : undefined,
@@ -149,7 +150,7 @@ function buildIntegration(env: NodeJS.ProcessEnv | Record<string, string | undef
  * Process-level orchestration runtime shared by product wrappers and publication admin.
  */
 export function getSearchPublicationRuntime(
-  env: NodeJS.ProcessEnv | Record<string, string | undefined> = process.env,
+  env: EnvVars | Record<string, string | undefined> = process.env,
 ): SearchOrchestrationRuntime {
   if (runtimeCache) return runtimeCache;
 
@@ -181,7 +182,7 @@ export function getSearchPublicationRuntime(
 
 /** Schedule a non-blocking drain when orchestration is enabled (live drain). */
 export function scheduleSearchPublicationDrain(
-  env: NodeJS.ProcessEnv | Record<string, string | undefined> = process.env,
+  env: EnvVars | Record<string, string | undefined> = process.env,
 ): void {
   if (!isSearchOrchestrationEnabled(env)) return;
   if (drainScheduled) return;

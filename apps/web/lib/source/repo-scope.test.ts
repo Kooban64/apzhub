@@ -18,4 +18,10 @@ describe("source repo scope", () => {
   it("unrestricted with source.*", () => {
     expect(resolveSourceRepoScope(["source.*"])).toEqual({ mode: "unrestricted" });
   });
+
+  it("does not treat qep.* as an unrestricted Source key when repo grants exist", () => {
+    expect(
+      resolveSourceRepoScope(["qep.*", "qep.scm.read", sourceRepoGrantKey("repo_a")]),
+    ).toEqual({ mode: "scoped", resourceIds: ["repo_a"] });
+  });
 });

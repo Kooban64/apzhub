@@ -1,0 +1,32 @@
+manifestSchemaVersion: "1.0"
+id: qep-application
+name: Application Registry Service
+version: 1.0.0
+kind: service
+
+metadata:
+  category: quality-engineering
+  description: >
+    Durable APZQEP Application aggregate — quality context for repositories,
+    environments, and execution targets. Does not execute SSH. Does not grant
+    Source access. Does not store raw secrets.
+  contractPackage: "@apzhub/qep-applications"
+  contractVersion: "1.0.0"
+  owner: APZHUB
+  tags:
+    - qep
+    - application
+
+dependencies:
+  platform: []
+  integrations: []
+
+integrations: []
+
+service:
+  category: quality-engineering
+  status: active
+
+permissions:
+  - qep.portfolio.read
+  - qep.portfolio.operate

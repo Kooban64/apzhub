@@ -1,0 +1,1 @@
+export { QEP_DEFINITION_BASE_PATH, QEP_DEFINITION_ROUTES } from "./routes";

@@ -32,7 +32,7 @@ function requireEngineId(publicId: string): number {
   if (engineId == null) {
     throw new PlatformServiceError({
       category: "validation",
-      code: "VALIDATION_ERROR",
+      code: "VALIDATION_FAILED",
       message: "Invalid Documents DMS document id.",
       correlationId: "documents-dms",
       retryable: false,

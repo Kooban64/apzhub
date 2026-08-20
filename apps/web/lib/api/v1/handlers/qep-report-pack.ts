@@ -77,7 +77,7 @@ export async function handleGetReportPackByChange(
     if (format === "pdf") {
       const pdf = await tryCompileReportPackPdf(pack, {
         actorId: context.serviceContext.userId,
-        correlationId: context.correlationId,
+        correlationId: context.tracing.correlationId,
       });
       if (!pdf.ok) {
         return jsonDataResponse(
@@ -98,7 +98,7 @@ export async function handleGetReportPackByChange(
         appendQepAuditEvent({
           action: "report_pack.pdf_rendered",
           actor: context.serviceContext.userId,
-          correlationId: context.correlationId,
+          correlationId: context.tracing.correlationId,
           detail: `${pack.packId}:${pdf.pdfPath}`,
         });
       } catch {

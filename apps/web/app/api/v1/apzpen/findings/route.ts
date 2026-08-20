@@ -87,6 +87,8 @@ async function handlePost(request: NextRequest, context: PlatformApiRequestConte
     evidenceKind?: string;
     evidenceLabel?: string;
     evidenceRef?: string;
+    reason?: string;
+    remediationChangeRef?: string;
   };
 
   try {

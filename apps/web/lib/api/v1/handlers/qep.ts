@@ -44,6 +44,8 @@ import {
   qepSearchQuerySchema,
 } from "../schemas/qep";
 import { requireQepProjectMembership } from "@/lib/qep/project-acl";
+import { getApplicationService } from "@/lib/qep/application-runtime";
+import { sessionTenantId } from "./require-qep-permission";
 
 type RouteContext = { params: Promise<Record<string, string>> };
 
@@ -116,12 +118,28 @@ async function invoke<T>(
   }
 }
 
+async function requireQepProjectOrApplication(
+  context: PlatformApiRequestContext,
+  projectId: string | undefined,
+): Promise<void> {
+  if (!projectId) {
+    await requireQepProjectMembership(context, projectId);
+    return;
+  }
+  try {
+    await getApplicationService().get(sessionTenantId(context), projectId);
+    return;
+  } catch {
+    await requireQepProjectMembership(context, projectId);
+  }
+}
+
 export async function handleListQepRequirements(
   request: NextRequest,
   context: PlatformApiRequestContext,
 ) {
   const query = parseQuery(qepListQuerySchema, request.nextUrl.searchParams);
-  await requireQepProjectMembership(context, query.projectId);
+  await requireQepProjectOrApplication(context, query.projectId);
   const gateway = await requireQepGateway();
   const result = await invoke(context, () =>
     gateway.qep.requirements.list(context.serviceContext, {
@@ -144,7 +162,7 @@ export async function handleSearchQepRequirements(
   context: PlatformApiRequestContext,
 ) {
   const query = parseQuery(qepSearchQuerySchema, request.nextUrl.searchParams);
-  await requireQepProjectMembership(context, query.projectId);
+  await requireQepProjectOrApplication(context, query.projectId);
   const gateway = await requireQepGateway();
   const result = await invoke(context, () =>
     gateway.qep.requirements.search(context.serviceContext, {
@@ -190,11 +208,17 @@ export async function handleCreateQepRequirement(
     qepRequirementCreateBodySchema,
     PLATFORM_API_MAX_BODY_BYTES,
   );
-  await requireQepProjectMembership(context, body.projectId);
+  await requireQepProjectOrApplication(context, body.projectId);
   const gateway = await requireQepGateway();
   const created = await invoke(context, () =>
     gateway.qep.requirements.create(context.serviceContext, body),
   );
+  try {
+    const { promoteRequirementCriteria } = await import("./qep-definition");
+    await promoteRequirementCriteria(context, created);
+  } catch {
+    /* idempotent promote is best-effort on certified create; GET definition retries */
+  }
   return jsonDataResponse(created, context.tracing, { status: 201 });
 }
 

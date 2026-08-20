@@ -44,7 +44,7 @@ function makeContext(input: {
       tenantId: input.tenantId,
       permissions: [...(input.permissions ?? [])],
     },
-  } as PlatformApiRequestContext;
+  } as unknown as PlatformApiRequestContext;
 }
 
 describe("SPR-COMM-001 catalogue packages", () => {

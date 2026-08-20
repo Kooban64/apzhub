@@ -244,7 +244,7 @@ export function PlatformAdminUserInspector({
               userId={userId}
               currentProducts={q.data.products.map((p) => ({
                 productKey: p.productKey,
-                roleLabel: "roleLabel" in p ? String(p.roleLabel) : p.status,
+                roleLabel: p.roleLabel,
                 status: p.status,
               }))}
             />

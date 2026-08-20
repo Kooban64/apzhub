@@ -24,7 +24,7 @@ function planLabel(planId: string): string {
   }
 }
 
-function unavailable(message: string): TenantListField {
+function unavailable<T = string | number>(message: string): TenantListField<T> {
   return { availability: "unavailable", message };
 }
 
@@ -65,8 +65,8 @@ async function enrichCommercial(tenantId: string): Promise<{
     const subs = await listOrgProductSubscriptionsDurable(tenantId);
     if (subs.length === 0) {
       return {
-        plan: unavailable("No commercial subscription on file"),
-        products: unavailable("No commercial product subscriptions on file"),
+        plan: unavailable<string>("No commercial subscription on file"),
+        products: unavailable<string>("No commercial product subscriptions on file"),
         hasTrialSubscription: false,
       };
     }
@@ -83,8 +83,8 @@ async function enrichCommercial(tenantId: string): Promise<{
     };
   } catch {
     return {
-      plan: unavailable("Commercial subscription lookup failed"),
-      products: unavailable("Commercial product lookup failed"),
+      plan: unavailable<string>("Commercial subscription lookup failed"),
+      products: unavailable<string>("Commercial product lookup failed"),
       hasTrialSubscription: false,
     };
   }
@@ -110,7 +110,7 @@ async function toRow(
   const commercial = await enrichCommercial(tenant.tenantId);
   const users: TenantListField<number> = usersAvailable
     ? ok(userCounts.get(tenant.tenantId) ?? 0)
-    : unavailable("User membership counts unavailable");
+    : unavailable<number>("User membership counts unavailable");
 
   return {
     tenantId: tenant.tenantId,

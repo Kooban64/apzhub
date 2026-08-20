@@ -12,6 +12,7 @@ export type ManifestStepSnapshot = {
   readonly preconditions: readonly string[];
   readonly requireActualResult: boolean;
   readonly allowUnordered: boolean;
+  readonly testDataRef?: string;
 };
 
 export type ExecutionManifest = {
@@ -32,6 +33,7 @@ export type ResolvedManifestInput = {
     readonly preconditions?: readonly string[];
     readonly requireActualResult?: boolean;
     readonly allowUnordered?: boolean;
+    readonly testDataRef?: string;
   }[];
   readonly preconditions?: readonly string[];
 };
@@ -81,6 +83,7 @@ export function normalizeManifestSteps(
       preconditions: [...(step.preconditions ?? [])],
       requireActualResult: step.requireActualResult ?? true,
       allowUnordered: step.allowUnordered ?? false,
+      ...(step.testDataRef?.trim() ? { testDataRef: step.testDataRef.trim() } : {}),
     };
   });
 }

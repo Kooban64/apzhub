@@ -35,6 +35,7 @@ export const TRACE_ENDPOINT_KINDS = [
   "requirement_relationship",
   "test_specification",
   "test_case",
+  "acceptance_criterion",
   "test_execution",
   "evidence",
   "defect",
@@ -44,6 +45,14 @@ export const TRACE_ENDPOINT_KINDS = [
   "certification_artefact",
   "document",
   "external_reference",
+  "exploratory_session",
+  "experience_plan",
+  "experience_verification",
+  "quality_observation",
+  "quality_issue",
+  "test_plan",
+  "suite",
+  "user_story",
 ] as const;
 
 export const TRACE_DIRECTIONS = ["forward", "reverse", "symmetric"] as const;

@@ -353,6 +353,15 @@ importers:
       '@apzhub/platform-visualization':
         specifier: workspace:*
         version: link:../../packages/platform-visualization
+      '@apzhub/qep-ai':
+        specifier: workspace:*
+        version: link:../../packages/qep-ai
+      '@apzhub/qep-applications':
+        specifier: workspace:*
+        version: link:../../packages/qep-applications
+      '@apzhub/qep-assurance':
+        specifier: workspace:*
+        version: link:../../packages/qep-assurance
       '@apzhub/qep-automation':
         specifier: workspace:*
         version: link:../../packages/qep-automation
@@ -365,6 +374,9 @@ importers:
       '@apzhub/qep-defects':
         specifier: workspace:*
         version: link:../../packages/qep-defects
+      '@apzhub/qep-definition':
+        specifier: workspace:*
+        version: link:../../packages/qep-definition
       '@apzhub/qep-evidence':
         specifier: workspace:*
         version: link:../../packages/qep-evidence
@@ -374,6 +386,9 @@ importers:
       '@apzhub/qep-execution-workspace':
         specifier: workspace:*
         version: link:../../packages/qep-execution-workspace
+      '@apzhub/qep-experience':
+        specifier: workspace:*
+        version: link:../../packages/qep-experience
       '@apzhub/qep-quality-intelligence':
         specifier: workspace:*
         version: link:../../packages/qep-quality-intelligence
@@ -395,6 +410,9 @@ importers:
       '@apzhub/qep-test-execution':
         specifier: workspace:*
         version: link:../../packages/qep-test-execution
+      '@apzhub/qep-test-management':
+        specifier: workspace:*
+        version: link:../../packages/qep-test-management
       '@apzhub/qep-test-plans':
         specifier: workspace:*
         version: link:../../packages/qep-test-plans
@@ -1280,6 +1298,33 @@ importers:
 
   packages/platform-visualization: {}
 
+  packages/qep-ai:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/qep-applications:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/qep-assurance:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
   packages/qep-automation:
     dependencies:
       '@apzhub/config':
@@ -1339,6 +1384,15 @@ importers:
       '@apzhub/qep-notification':
         specifier: workspace:*
         version: link:../qep-notification
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/qep-definition:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
       drizzle-orm:
         specifier: '>=0.45.2'
         version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
@@ -1405,6 +1459,15 @@ importers:
       '@apzhub/qep-suites':
         specifier: workspace:*
         version: link:../qep-suites
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/qep-experience:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
       drizzle-orm:
         specifier: '>=0.45.2'
         version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
@@ -1554,6 +1617,15 @@ importers:
         version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
 
   packages/qep-test-execution:
+    dependencies:
+      '@apzhub/config':
+        specifier: workspace:*
+        version: link:../config
+      drizzle-orm:
+        specifier: '>=0.45.2'
+        version: 0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0)
+
+  packages/qep-test-management:
     dependencies:
       '@apzhub/config':
         specifier: workspace:*

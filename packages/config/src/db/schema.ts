@@ -364,6 +364,65 @@ export {
   qepScmChangeEvent,
 } from "./qep-scm-schema";
 export {
+  qepApplicationsSchema,
+  qepApplication,
+  qepApplicationRepository,
+  qepApplicationEnvironment,
+  qepApplicationExecutionTarget,
+  qepApplicationLegacyRef,
+} from "./qep-applications-schema";
+export {
+  qepDefinitionSchema,
+  qepUserStory,
+  qepAcceptanceCriterion,
+  qepAcceptanceCriterionVerification,
+  qepDefinitionKeyCounter,
+} from "./qep-definition-schema";
+export {
+  qepTestManagementSchema,
+  qepTestSpecificationStep,
+  qepSuiteItem,
+  qepTestPlanSuiteItem,
+  qepTestPlanStrategyGroup,
+  qepTestCaseAutomationMapping,
+  qepExecutionDefinitionSnapshot,
+  qepExecutionScopeSnapshot,
+  qepTestExecutionDefect,
+  qepExecutionStrategySnapshot,
+  qepTestExecutionRelation,
+  qepTestExecutionAutomationLink,
+} from "./qep-test-management-schema";
+export {
+  qepExperienceSchema,
+  qepExploratorySession,
+  qepExploratoryArea,
+  qepExperiencePlan,
+  qepExperiencePlanDiscipline,
+  qepExperienceContext,
+  qepExperienceCriterion,
+  qepExperienceVerificationActivity,
+  qepExperienceCriterionResult,
+  qepExperienceContextActivity,
+  qepQualityObservation,
+  qepQualityIssue,
+  qepQualityNote,
+  qepQualityEvidenceLink,
+  qepExploratorySessionHistory,
+  qepExperiencePlanHistory,
+  qepExperienceActivityHistory,
+  qepQualityTraceLink,
+} from "./qep-experience-schema";
+export {
+  qepAssuranceSchema,
+  qepQualityRisk,
+  qepQualityRiskHistory,
+  qepQualityRiskSignal,
+  qepQualityGateDefinition,
+  qepQualityGateEvaluation,
+  qepCertificationException,
+} from "./qep-assurance-schema";
+export { qepAiSchema, qepAiProposal } from "./qep-ai-schema";
+export {
   qepQualityIntelligenceSchema,
   qepQiObservation,
   qepQiSignal,

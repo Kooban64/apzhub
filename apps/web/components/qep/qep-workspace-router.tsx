@@ -12,6 +12,10 @@ import {
   isQepExecutionPlansRoute,
   isQepExecutionWorkspaceRoute,
   isQepSuitesRoute,
+  isQepTestExecutionAssignedRoute,
+  isQepTestExecutionExplorerRoute,
+  isQepTestExecutionNewRoute,
+  isQepTestExecutionReviewRoute,
   isQepTestExecutionRoute,
   isQepTestPlansRoute,
   isQepTestSpecificationsRoute,
@@ -29,38 +33,45 @@ import {
   isQepDomainsRoute,
   isQepEarlyCheckRoute,
   isQepPortfolioRoute,
+  parseQepApplicationRouteId,
   isQepHomeRoute,
   isQepMyWorkRoute,
   isQepReleaseReadinessRoute,
   isQepSearchRoute,
   isQepIntegrationsRoute,
   isQepAiWorkspaceRoute,
+  isQepAiPhase7Route,
   isQepLearningRoute,
   isQepMcpRoute,
   isQepRequirementsRoute,
   isQepWorkspaceRoute,
 } from "@/lib/qep/routes";
+import {
+  isQepExperiencePlansRoute,
+  isQepExploratorySessionsRoute,
+} from "@apzhub/qep-experience/presentation";
+import {
+  isQepQualityGatesRoute,
+  isQepQualityRiskRoute,
+} from "@apzhub/qep-assurance/presentation";
 
 import { QepAutomationRouterView } from "./qep-automation-views";
-import { QepCertificationRouterView } from "./qep-certification-views";
-import { QepDashboardsRouterView } from "./qep-dashboards-views";
 import { QepEarlyCheckRouterView } from "./qep-early-check-views";
 import { QepHomeRouterView } from "./qep-home-views";
 import { QepMyWorkView } from "./qep-my-work-view";
 import { QepIntegrationsRouterView } from "./qep-integrations-views";
-import { QepAiWorkspaceRouterView } from "./qep-ai-workspace-views";
-import { QepMcpRouterView } from "./qep-mcp-views";
-import { QepPortfolioRouterView } from "./qep-portfolio-views";
+import { QepPhase7RouterView, QepLegacyAiSupersededView } from "./qep-phase-7-ai-views";
+import { QepApplicationsView } from "./qep-applications-view";
+import { QepApplicationDetailView } from "./qep-application-detail-view";
 import { QepQualityFlowRouterView } from "./qep-quality-flow-views";
 import { QepQualityIntelligenceRouterView } from "./qep-quality-intelligence-views";
 import { QepQualityJourneyRouterView } from "./qep-quality-journey-views";
 import { QepPrQualityRouterView } from "./qep-pr-quality-views";
 import { QepQualityGraphRouterView } from "./qep-quality-graph-views";
 import { QepDomainsRouterView } from "./qep-domains-views";
-import { QepReleaseReadinessRouterView } from "./qep-release-readiness-views";
+import { QepDashboardsRouterView } from "./qep-dashboards-views";
 import { QepSearchRouterView } from "./qep-search-view";
 import { QepScmRouterView } from "./qep-scm-views";
-import { QepRiskRouterView } from "./qep-risk-views";
 import { QepKnowledgeRouterView } from "./qep-knowledge-views";
 import { QepAdministrationRouterView } from "./qep-administration-views";
 import { QepAuditRouterView } from "./qep-audit-views";
@@ -73,10 +84,26 @@ import { QepEvidenceRouterView } from "./qep-evidence-views";
 import { QepExecutionPlansRouterView } from "./qep-execution-plans-views";
 import { QepExecutionWorkspaceRouterView } from "./qep-execution-workspace-views";
 import { QepRequirementsRouterView } from "./qep-requirements-views";
-import { QepSuitesRouterView } from "./qep-suites-views";
 import { QepTestExecutionRouterView } from "./qep-test-execution-views";
-import { QepTestPlanRouterView } from "./qep-test-plan-views";
 import { QepTestSpecificationRouterView } from "./qep-test-specification-views";
+import { QepPhase3TestCaseDesignerView } from "./qep-phase-3-test-case-designer-view";
+import { QepPhase3TestCaseLibraryView } from "./qep-phase-3-test-case-library-view";
+import { QepPhase3TestPlansView } from "./qep-phase-3-test-plans-view";
+import { QepPhase3TestSuitesView } from "./qep-phase-3-test-suites-view";
+import { QepPhase4ExecutionsView } from "./qep-phase-4-executions-view";
+import { QepPhase5ExploratorySessionsView } from "./qep-phase-5-exploratory-sessions-view";
+import { QepPhase5ExperiencePlansView } from "./qep-phase-5-experience-plans-view";
+import { QepPhase6QualityRiskView } from "./qep-phase-6-quality-risk-view";
+import { QepPhase6QualityGatesView } from "./qep-phase-6-quality-gates-view";
+import { QepPhase6ReleaseReadinessView } from "./qep-phase-6-release-readiness-view";
+import { QepPhase6CertificationView } from "./qep-phase-6-certification-view";
+import {
+  isQepTestSpecificationsExplorerRoute,
+  isQepTestSpecificationsNewRoute,
+  isQepTestSpecificationsReviewRoute,
+  isQepTestSpecificationsSearchRoute,
+  parseQepTestSpecificationRouteId,
+} from "@apzhub/qep-test-specifications/presentation";
 import { QepTraceabilityRouterView } from "./qep-traceability-views";
 import { QepUnavailableModuleView } from "./qep-unavailable-module-view";
 import { QepVerificationRouterView } from "./qep-verification-views";
@@ -128,23 +155,27 @@ export function QepWorkspaceRouter() {
   }
 
   if (isQepReleaseReadinessRoute(pathname)) {
-    return <QepReleaseReadinessRouterView />;
+    return <QepPhase6ReleaseReadinessView />;
   }
 
   if (isQepIntegrationsRoute(pathname)) {
     return <QepIntegrationsRouterView />;
   }
 
-  if (isQepAiWorkspaceRoute(pathname)) {
-    return <QepAiWorkspaceRouterView />;
+  if (isQepAiPhase7Route(pathname) || isQepAiWorkspaceRoute(pathname)) {
+    return <QepPhase7RouterView pathname={pathname} />;
   }
 
   if (isQepMcpRoute(pathname)) {
-    return <QepMcpRouterView />;
+    return <QepLegacyAiSupersededView surface="MCP / DX" />;
   }
 
-  if (isPathPrefix(pathname, "/workspace/qep/risk")) {
-    return <QepRiskRouterView />;
+  if (isQepQualityRiskRoute(pathname)) {
+    return <QepPhase6QualityRiskView pathname={pathname} />;
+  }
+
+  if (isQepQualityGatesRoute(pathname)) {
+    return <QepPhase6QualityGatesView />;
   }
 
   if (isQepLearningRoute(pathname)) {
@@ -165,14 +196,14 @@ export function QepWorkspaceRouter() {
 
   // Catalogue aliases — Cap siblings are the SoR (SPR-210-B)
   if (isPathPrefix(pathname, "/workspace/qep/verification-library")) {
-    return <QepSuitesRouterView pathname="/workspace/qep/suites" />;
+    return <QepPhase3TestSuitesView pathname="/workspace/qep/suites" />;
   }
   if (
     isPathPrefix(pathname, "/workspace/qep/execution") &&
     !isQepExecutionPlansRoute(pathname) &&
     !isQepExecutionWorkspaceRoute(pathname)
   ) {
-    return <QepTestExecutionRouterView pathname="/workspace/qep/test-execution" />;
+    return <QepPhase4ExecutionsView pathname="/workspace/qep/test-execution" />;
   }
   if (
     isPathPrefix(pathname, "/workspace/qep/reporting") &&
@@ -208,11 +239,15 @@ export function QepWorkspaceRouter() {
   }
 
   if (isQepPortfolioRoute(pathname)) {
-    return <QepPortfolioRouterView />;
+    const applicationId = parseQepApplicationRouteId(pathname);
+    if (applicationId) {
+      return <QepApplicationDetailView applicationId={applicationId} />;
+    }
+    return <QepApplicationsView />;
   }
 
   if (isQepCertificationRoute(pathname)) {
-    return <QepCertificationRouterView />;
+    return <QepPhase6CertificationView />;
   }
 
   if (isQepAutomationRoute(pathname)) {
@@ -232,7 +267,7 @@ export function QepWorkspaceRouter() {
   }
 
   if (isQepSuitesRoute(pathname)) {
-    return <QepSuitesRouterView pathname={pathname} />;
+    return <QepPhase3TestSuitesView pathname={pathname} />;
   }
 
   if (isQepExecutionPlansRoute(pathname)) {
@@ -260,15 +295,43 @@ export function QepWorkspaceRouter() {
   }
 
   if (isQepTestSpecificationsRoute(pathname)) {
-    return <QepTestSpecificationRouterView pathname={pathname} />;
+    const id = parseQepTestSpecificationRouteId(pathname);
+    if (id) return <QepPhase3TestCaseDesignerView testCaseId={id} />;
+    if (isQepTestSpecificationsNewRoute(pathname)) {
+      return <QepPhase3TestCaseDesignerView />;
+    }
+    if (
+      isQepTestSpecificationsExplorerRoute(pathname) ||
+      isQepTestSpecificationsReviewRoute(pathname) ||
+      isQepTestSpecificationsSearchRoute(pathname)
+    ) {
+      return <QepTestSpecificationRouterView pathname={pathname} />;
+    }
+    return <QepPhase3TestCaseLibraryView />;
   }
 
   if (isQepTestExecutionRoute(pathname)) {
-    return <QepTestExecutionRouterView pathname={pathname} />;
+    if (
+      isQepTestExecutionExplorerRoute(pathname) ||
+      isQepTestExecutionAssignedRoute(pathname) ||
+      isQepTestExecutionReviewRoute(pathname) ||
+      isQepTestExecutionNewRoute(pathname)
+    ) {
+      return <QepTestExecutionRouterView pathname={pathname} />;
+    }
+    return <QepPhase4ExecutionsView pathname={pathname} />;
   }
 
   if (isQepTestPlansRoute(pathname)) {
-    return <QepTestPlanRouterView pathname={pathname} />;
+    return <QepPhase3TestPlansView pathname={pathname} />;
+  }
+
+  if (isQepExploratorySessionsRoute(pathname)) {
+    return <QepPhase5ExploratorySessionsView pathname={pathname} />;
+  }
+
+  if (isQepExperiencePlansRoute(pathname)) {
+    return <QepPhase5ExperiencePlansView pathname={pathname} />;
   }
 
   if (isQepVerificationRoute(pathname)) {

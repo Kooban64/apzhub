@@ -7,8 +7,8 @@ export interface SidebarItem {
   label: string;
   icon?: string;
   active?: boolean;
-  /** Visual divider — not selectable. */
-  kind?: "item" | "separator";
+  /** Visual divider or compact section heading — not selectable. */
+  kind?: "item" | "separator" | "section";
 }
 
 export interface SidebarProps {
@@ -21,6 +21,24 @@ export function Sidebar({ items, onSelect }: SidebarProps) {
     <aside className="flex w-56 shrink-0 flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)]">
       <nav className="flex flex-col gap-1 p-2" aria-label="Workspace navigation">
         {items.map((item) => {
+          if (item.kind === "separator") {
+            return (
+              <div
+                key={item.id}
+                className="my-1 border-t border-[var(--color-border)]"
+              />
+            );
+          }
+          if (item.kind === "section") {
+            return (
+              <p
+                key={item.id}
+                className="px-3 pb-0.5 pt-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-muted-foreground)]"
+              >
+                {item.label}
+              </p>
+            );
+          }
           const Icon = resolveLucideIcon(item.icon);
           return (
             <button

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>APZQEP Phase 3 — Test Case Library visual authority</title>
+  <style>
+    :root {
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      --sidebar: #0d2137;
+      --sidebar-text: #c5d4e4;
+      --sidebar-muted: #7f96ad;
+      --sidebar-active: #1d4ed8;
+      --primary: #2563eb;
+      --primary-fg: #ffffff;
+      --radius: 6px;
+    }
+    [data-theme="light"] {
+      --bg: #f4f6f9;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --row-hover: #f8fafc;
+      --row-selected: #eff6ff;
+      --header: #ffffff;
+      --badge-ok-bg: #ecfdf5;
+      --badge-ok: #047857;
+      --badge-warn-bg: #fffbeb;
+      --badge-warn: #b45309;
+      --badge-info-bg: #eff6ff;
+      --badge-info: #1d4ed8;
+      --badge-fail-bg: #fef2f2;
+      --badge-fail: #b91c1c;
+      --badge-gap-bg: #f1f5f9;
+      --badge-gap: #475569;
+    }
+    [data-theme="dark"] {
+      --bg: #0b1220;
+      --surface: #111827;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --border: #243044;
+      --row-hover: #172033;
+      --row-selected: #172554;
+      --header: #0f172a;
+      --badge-ok-bg: #064e3b;
+      --badge-ok: #6ee7b7;
+      --badge-warn-bg: #78350f;
+      --badge-warn: #fcd34d;
+      --badge-info-bg: #1e3a8a;
+      --badge-info: #93c5fd;
+      --badge-fail-bg: #7f1d1d;
+      --badge-fail: #fca5a5;
+      --badge-gap-bg: #1e293b;
+      --badge-gap: #cbd5e1;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 13px;
+    }
+    button, input, select { font: inherit; }
+    .app {
+      display: grid;
+      grid-template-columns: 232px 1fr;
+      grid-template-rows: 52px 1fr 28px;
+      height: 100vh;
+    }
+    .header {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 16px;
+      background: var(--header);
+      border-bottom: 1px solid var(--border);
+    }
+    .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: 0.02em; }
+    .brand span { color: var(--muted); font-weight: 600; }
+    .app-select {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: var(--radius);
+      padding: 6px 10px;
+      min-width: 180px;
+    }
+    .search {
+      flex: 1;
+      max-width: 420px;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: var(--radius);
+      padding: 7px 12px;
+    }
+    .header-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+    .btn {
+      border: 0;
+      border-radius: var(--radius);
+      padding: 7px 12px;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-primary { background: var(--primary); color: var(--primary-fg); border-color: var(--primary); }
+    .icon-btn {
+      width: 32px; height: 32px; border-radius: var(--radius);
+      border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    }
+    .avatar {
+      width: 28px; height: 28px; border-radius: 999px;
+      background: #1e3a8a; color: #fff; display: grid; place-items: center;
+      font-size: 11px; font-weight: 700;
+    }
+    .sidebar {
+      background: var(--sidebar);
+      color: var(--sidebar-text);
+      padding: 12px 10px 20px;
+      overflow: auto;
+    }
+    .nav-sec {
+      font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--sidebar-muted); margin: 12px 8px 6px;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 10px; border-radius: 8px; color: var(--sidebar-text);
+    }
+    .nav-item.active { background: var(--sidebar-active); color: #fff; font-weight: 600; }
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 312px;
+      min-height: 0;
+      background: var(--bg);
+    }
+    .main { min-width: 0; padding: 18px 20px; overflow: auto; }
+    .page-title { font-size: 22px; font-weight: 700; margin: 0; }
+    .page-sub { color: var(--muted); margin: 4px 0 14px; }
+    .tabs { display: flex; gap: 18px; border-bottom: 1px solid var(--border); }
+    .tab { padding: 8px 0; color: var(--muted); border-bottom: 2px solid transparent; }
+    .tab.active { color: var(--text); border-color: var(--primary); font-weight: 600; }
+    .filters { display: flex; gap: 8px; margin: 12px 0; flex-wrap: wrap; }
+    .filters input, .filters select {
+      border: 1px solid var(--border); background: var(--surface); color: var(--text);
+      border-radius: var(--radius); padding: 6px 10px;
+    }
+    .filters input { min-width: 220px; }
+    table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    th {
+      text-align: left; font-size: 11px; letter-spacing: 0.06em; color: var(--muted);
+      font-weight: 600; padding: 9px 10px; border-bottom: 1px solid var(--border);
+    }
+    td { padding: 8px 8px; border-bottom: 1px solid var(--border); vertical-align: top; font-size: 12px; }
+    tr.selected td { background: var(--row-selected); }
+    .id { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--primary); }
+    .title { font-weight: 600; }
+    .summary { color: var(--muted); font-size: 12px; margin-top: 2px; }
+    .badge {
+      display: inline-block; border-radius: 999px; padding: 2px 8px; font-size: 11px; font-weight: 600;
+    }
+    .b-ok { background: var(--badge-ok-bg); color: var(--badge-ok); }
+    .b-warn { background: var(--badge-warn-bg); color: var(--badge-warn); }
+    .b-info { background: var(--badge-info-bg); color: var(--badge-info); }
+    .b-fail { background: var(--badge-fail-bg); color: var(--badge-fail); }
+    .b-gap { background: var(--badge-gap-bg); color: var(--badge-gap); }
+    .owner { display: flex; align-items: center; gap: 6px; }
+    .inspector {
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .insp-head { display: flex; justify-content: space-between; align-items: center; }
+    .insp-title { font-size: 15px; font-weight: 700; margin: 10px 0 6px; }
+    .insp-tabs { display: flex; gap: 12px; border-bottom: 1px solid var(--border); margin: 12px 0; }
+    .insp-tabs .tab { font-size: 12px; }
+    dl { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; margin: 0; }
+    dt { color: var(--muted); font-size: 11px; }
+    dd { margin: 2px 0 0; font-weight: 600; }
+    .desc { margin-top: 14px; color: var(--text); line-height: 1.45; }
+    .linked { margin-top: 10px; font-size: 12px; }
+    .linked div { padding: 6px 0; border-bottom: 1px solid var(--border); }
+    .insp-foot { margin-top: auto; padding-top: 12px; display: flex; gap: 8px; }
+    .status {
+      grid-column: 1 / -1;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 12px; background: var(--sidebar); color: #9fb3c8; font-size: 11px;
+    }
+    .dot { width: 7px; height: 7px; border-radius: 99px; background: #22c55e; display: inline-block; margin-right: 6px; }
+
+    /* Mobile */
+    [data-device="mobile"] .app {
+      grid-template-columns: 1fr;
+      grid-template-rows: 48px 1fr 56px;
+    }
+    [data-device="mobile"] .sidebar,
+    [data-device="mobile"] .inspector,
+    [data-device="mobile"] .search,
+    [data-device="mobile"] .app-select,
+    [data-device="mobile"] .header .btn-primary,
+    [data-device="mobile"] .header .btn:not(.notify-btn),
+    [data-device="mobile"] .header .icon-btn:not(.menu-btn),
+    [data-device="mobile"] table,
+    [data-device="mobile"] .tabs,
+    [data-device="mobile"] .filters { display: none; }
+    [data-device="mobile"] .workspace { grid-template-columns: 1fr; }
+    [data-device="mobile"] .header { gap: 8px; }
+    [data-device="mobile"] .header-actions { gap: 6px; }
+    [data-device="mobile"] .mobile-only { display: block; }
+    [data-device="mobile"] .mobile-inspector { display: none; }
+    [data-device="mobile"].show-inspector .cards,
+    [data-device="mobile"].show-inspector .page-title,
+    [data-device="mobile"].show-inspector .page-sub { display: none; }
+    .mobile-only { display: none; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+    .card.selected { outline: 2px solid var(--primary); }
+    .card-top { display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; }
+    .bottom-nav {
+      display: none;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    [data-device="mobile"] .bottom-nav { display: grid; }
+    [data-device="mobile"] .status { display: none; }
+    .bottom-nav div { text-align: center; padding: 8px 0 10px; color: var(--muted); font-size: 11px; }
+    .bottom-nav .on { color: var(--primary); font-weight: 700; }
+    [data-device="mobile"].show-inspector .mobile-inspector {
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100vh - 104px);
+    }
+    [data-device="mobile"].show-inspector .mobile-inspector .insp-foot {
+      margin-top: auto;
+      position: sticky;
+      bottom: 0;
+      background: var(--bg);
+      padding-bottom: 8px;
+    }
+    .mobile-inspector { display: none; }
+  </style>
+</head>
+<body>
+<script>
+  const params = new URLSearchParams(location.search);
+  document.documentElement.setAttribute("data-theme", params.get("theme") === "dark" ? "dark" : "light");
+  document.documentElement.setAttribute("data-device", params.get("device") === "mobile" ? "mobile" : "desktop");
+  if (params.get("panel") === "inspector") document.documentElement.classList.add("show-inspector");
+</script>
+<div class="app">
+  <header class="header">
+    <button class="icon-btn menu-btn mobile-only" aria-label="Menu">☰</button>
+    <div class="brand">APZ <span>APZQEP</span></div>
+    <select class="app-select" aria-label="Application"><option>Application: APZHUB</option></select>
+    <input class="search" value="" placeholder="Search QEP…  Ctrl+K" readonly />
+    <div class="header-actions">
+      <button class="btn btn-primary">+ Create</button>
+      <button class="btn notify-btn">Notifications</button>
+      <button class="icon-btn" aria-label="Help">?</button>
+      <button class="icon-btn" aria-label="Theme">◐</button>
+      <div class="avatar" title="Demo Org Member">DO</div>
+    </div>
+  </header>
+  <nav class="sidebar" aria-label="QEP">
+    <div class="nav-sec">Home</div>
+    <div class="nav-item">Overview</div>
+    <div class="nav-item">My Work</div>
+    <div class="nav-sec">Portfolio</div>
+    <div class="nav-item">Applications</div>
+    <div class="nav-sec">Define</div>
+    <div class="nav-item">Requirements</div>
+    <div class="nav-sec">Test</div>
+    <div class="nav-item active">Test Cases</div>
+    <div class="nav-item">Test Suites</div>
+    <div class="nav-item">Test Plans</div>
+    <div class="nav-item">Test Runs</div>
+    <div class="nav-sec">Verify</div>
+    <div class="nav-item">Manual Execution</div>
+    <div class="nav-item">Automation</div>
+    <div class="nav-sec">Assure</div>
+    <div class="nav-item">Defects</div>
+    <div class="nav-item">Evidence</div>
+    <div class="nav-item">Traceability</div>
+    <div class="nav-item">Coverage</div>
+    <div class="nav-item">Quality Risk</div>
+    <div class="nav-sec">Engineering</div>
+    <div class="nav-item">Builds &amp; CI</div>
+    <div class="nav-item">Source</div>
+    <div class="nav-sec">Release Assurance</div>
+    <div class="nav-item">Readiness</div>
+  </nav>
+  <div class="workspace">
+    <main class="main">
+      <h1 class="page-title">Test Cases</h1>
+      <p class="page-sub">Design and manage verification cases for the selected application.</p>
+      <div class="tabs">
+        <div class="tab active">All Test Cases</div>
+        <div class="tab">My Test Cases</div>
+        <div class="tab">By Type</div>
+        <div class="tab">By Method</div>
+        <div class="tab">By Status</div>
+      </div>
+      <div class="filters">
+        <input placeholder="Search test cases…" value="" readonly />
+        <select><option>Type</option></select>
+        <select><option>Method</option></select>
+        <select><option>Status</option></select>
+        <select><option>Priority</option></select>
+        <button class="btn">Filters</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th><th>Title</th><th>Type</th><th>Method</th><th>Status</th><th>Priority</th><th>Owner</th><th>Linked ACs</th><th>Latest result</th><th>Updated</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="selected">
+            <td class="id">TC-481</td>
+            <td><div class="title">Password reset email delivery</div><div class="summary">Verify reset mail is sent after a valid request</div></td>
+            <td><span class="badge b-info">Functional</span></td>
+            <td><span class="badge b-info">Automated</span></td>
+            <td><span class="badge b-ok">Approved</span></td>
+            <td><span class="badge b-fail">High</span></td>
+            <td><div class="owner"><span class="avatar">JS</span> Jane Smith</div></td>
+            <td>2</td>
+            <td><span class="badge b-fail">Fail</span></td>
+            <td>12 min ago</td>
+          </tr>
+          <tr>
+            <td class="id">TC-482</td>
+            <td><div class="title">Reset token expiry</div><div class="summary">Expired token must not complete reset</div></td>
+            <td><span class="badge b-info">Functional</span></td>
+            <td><span class="badge b-info">Automated</span></td>
+            <td><span class="badge b-ok">Approved</span></td>
+            <td><span class="badge b-fail">High</span></td>
+            <td><div class="owner"><span class="avatar">JS</span> Jane Smith</div></td>
+            <td>1</td>
+            <td><span class="badge b-ok">Pass</span></td>
+            <td>1h ago</td>
+          </tr>
+          <tr>
+            <td class="id">TC-490</td>
+            <td><div class="title">Login page keyboard path</div><div class="summary">Keyboard-only sign-in and reset request</div></td>
+            <td><span class="badge b-info">Accessibility</span></td>
+            <td><span class="badge b-info">Automated</span></td>
+            <td><span class="badge b-warn">Review</span></td>
+            <td><span class="badge b-warn">Medium</span></td>
+            <td><div class="owner"><span class="avatar">KN</span> Ken Nkosi</div></td>
+            <td>1</td>
+            <td><span class="badge b-gap">Unverified</span></td>
+            <td>3h ago</td>
+          </tr>
+          <tr>
+            <td class="id">TC-501</td>
+            <td><div class="title">Password reset UX walkthrough</div><div class="summary">Human confirmation of copy, flow and recovery tone</div></td>
+            <td><span class="badge b-info">Usability</span></td>
+            <td><span class="badge b-gap">Manual</span></td>
+            <td><span class="badge b-info">Draft</span></td>
+            <td><span class="badge b-warn">Medium</span></td>
+            <td>—</td>
+            <td><span class="badge b-gap">Gap</span></td>
+            <td><span class="badge b-gap">—</span></td>
+            <td>1d ago</td>
+          </tr>
+          <tr>
+            <td class="id">TC-512</td>
+            <td><div class="title">Auth API contract</div><div class="summary">Reset request and confirm endpoints</div></td>
+            <td><span class="badge b-info">API</span></td>
+            <td><span class="badge b-info">Automated</span></td>
+            <td><span class="badge b-ok">Approved</span></td>
+            <td><span class="badge b-fail">High</span></td>
+            <td><div class="owner"><span class="avatar">DO</span> Demo Org Member</div></td>
+            <td>3</td>
+            <td><span class="badge b-ok">Pass</span></td>
+            <td>2d ago</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="mobile-only cards">
+        <article class="card selected">
+          <div class="card-top"><span class="id">TC-481</span><span>12 min ago</span></div>
+          <div class="title" style="margin-top:6px">Password reset email delivery</div>
+          <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap">
+            <span class="badge b-info">Functional</span>
+            <span class="badge b-info">Automated</span>
+            <span class="badge b-ok">Approved</span>
+            <span class="badge b-fail">Fail</span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-top"><span class="id">TC-482</span><span>1h ago</span></div>
+          <div class="title" style="margin-top:6px">Reset token expiry</div>
+          <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap">
+            <span class="badge b-info">Functional</span>
+            <span class="badge b-info">Automated</span>
+            <span class="badge b-ok">Approved</span>
+            <span class="badge b-ok">Pass</span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-top"><span class="id">TC-501</span><span>1d ago</span></div>
+          <div class="title" style="margin-top:6px">Password reset UX walkthrough</div>
+          <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap">
+            <span class="badge b-info">Usability</span>
+            <span class="badge b-gap">Manual</span>
+            <span class="badge b-info">Draft</span>
+            <span class="badge b-gap">Gap</span>
+          </div>
+        </article>
+      </div>
+      <section class="mobile-only mobile-inspector">
+        <p class="id">TC-481</p>
+        <h2 class="insp-title">Password reset email delivery</h2>
+        <div style="display:flex; gap:6px; flex-wrap:wrap">
+          <span class="badge b-ok">Approved</span>
+          <span class="badge b-info">Functional</span>
+          <span class="badge b-info">Automated</span>
+          <span class="badge b-fail">High</span>
+        </div>
+        <div class="insp-tabs"><div class="tab active">Details</div><div class="tab">Linked (3)</div><div class="tab">History</div></div>
+        <dl>
+          <div><dt>Test Case ID</dt><dd>TC-481</dd></div>
+          <div><dt>Type</dt><dd>Functional</dd></div>
+          <div><dt>Method</dt><dd>Automated</dd></div>
+          <div><dt>Status</dt><dd>Approved</dd></div>
+          <div><dt>Owner</dt><dd>Jane Smith</dd></div>
+          <div><dt>Linked ACs</dt><dd>2</dd></div>
+          <div><dt>Coverage</dt><dd>Covered</dd></div>
+          <div><dt>Latest result</dt><dd>Fail</dd></div>
+          <div><dt>Application</dt><dd>APZHUB</dd></div>
+          <div><dt>Origin</dt><dd>Human</dd></div>
+        </dl>
+        <p class="desc">Verify that a valid reset request sends the recovery email. Tool, environment and execution target belong on the Test Plan.</p>
+        <div class="insp-foot"><button class="btn btn-primary">Open Test Case</button></div>
+      </section>
+    </main>
+    <aside class="inspector">
+      <div class="insp-head">
+        <strong>TC-481</strong>
+        <span>‹ › ✕</span>
+      </div>
+      <h2 class="insp-title">Password reset email delivery</h2>
+      <div style="display:flex; gap:6px; flex-wrap:wrap">
+        <span class="badge b-ok">Approved</span>
+        <span class="badge b-info">Functional</span>
+        <span class="badge b-info">Automated</span>
+        <span class="badge b-fail">High</span>
+      </div>
+      <p class="summary" style="margin-top:8px">Verify reset mail is sent after a valid request</p>
+      <div class="insp-tabs">
+        <div class="tab active">Details</div>
+        <div class="tab">Linked (3)</div>
+        <div class="tab">History</div>
+        <div class="tab">Attachments (—)</div>
+      </div>
+      <dl>
+        <div><dt>Test Case ID</dt><dd>TC-481</dd></div>
+        <div><dt>Type</dt><dd>Functional</dd></div>
+        <div><dt>Method</dt><dd>Automated</dd></div>
+        <div><dt>Status</dt><dd>Approved</dd></div>
+        <div><dt>Priority</dt><dd>High</dd></div>
+        <div><dt>Owner</dt><dd>Jane Smith</dd></div>
+        <div><dt>Version</dt><dd>1.2</dd></div>
+        <div><dt>Linked ACs</dt><dd>2</dd></div>
+        <div><dt>Coverage</dt><dd>Covered</dd></div>
+        <div><dt>Latest result</dt><dd>Fail</dd></div>
+        <div><dt>Application</dt><dd>APZHUB</dd></div>
+        <div><dt>Origin</dt><dd>Human</dd></div>
+      </dl>
+      <p class="desc">Covered does not mean passed. This case is linked to AC-1 and AC-2. Latest execution failed. Tool, environment and execution target are Test Plan concerns, not library fields.</p>
+      <div class="linked">
+        <div>AC-1 · User must receive reset email</div>
+        <div>AC-2 · Reset token expires after 15 minutes</div>
+        <div>REQ-DEFTHXSN · Password reset</div>
+      </div>
+      <div class="insp-foot">
+        <button class="btn btn-primary">Open Test Case</button>
+        <button class="btn">⋯</button>
+      </div>
+    </aside>
+  </div>
+  <footer class="status">
+    <span>APZHUB · QEP Master — APZQEP</span>
+    <span><span class="dot"></span>Connected</span>
+  </footer>
+  <nav class="bottom-nav" aria-label="Mobile">
+    <div>Home</div>
+    <div>Work</div>
+    <div class="on">Test</div>
+    <div>More</div>
+  </nav>
+</div>
+</body>
+</html>

@@ -148,19 +148,24 @@ describe("composeWorkbenchRail", () => {
     expect(rail.contextSidebarItems.map((i) => i.label)).toContain("Projects");
   });
 
-  it("Quality sidebar uses composeQep Owner vocabulary (Overview / Applications / Test Library)", () => {
+  it("Quality sidebar uses APZQEP Master IA (not flattened catalogue)", () => {
     const rail = composeWorkbenchRail({
       activityBarItems: sampleBar,
       sidebarItems: [{ id: "legacy", label: "Legacy dump", active: false }],
       effectiveProducts: ["qep"],
+      permissions: ["qep.*"],
       pathname: "/workspace/qep",
     });
     expect(rail.mode).toBe("quality");
-    expect(rail.sidebarTitle).toBe("QUALITY");
+    expect(rail.sidebarTitle).toBe("APZQEP");
+    expect(rail.primary.find((i) => i.id === "quality")?.label).toBe("APZQEP");
     const labels = rail.contextSidebarItems.map((i) => i.label);
+    expect(labels).toContain("Home");
     expect(labels).toContain("Overview");
     expect(labels).toContain("Applications");
-    expect(labels).toContain("Test Library");
+    expect(labels).toContain("Test Cases");
+    expect(labels).not.toContain("Test Library");
+    expect(labels).not.toContain("User Stories");
     expect(labels).not.toContain("Legacy dump");
     expect(rail.contextSidebarItems.some((i) => i.id === "qep-source")).toBe(false);
   });
@@ -185,6 +190,20 @@ describe("composeWorkbenchRail", () => {
     expect(withAccess.contextSidebarItems.some((i) => i.id === "qep-source")).toBe(
       true,
     );
+  });
+
+  it("does not add Platform Admin or Organisation Admin from QEP entitlement", () => {
+    const rail = composeWorkbenchRail({
+      activityBarItems: sampleBar,
+      sidebarItems: [],
+      effectiveProducts: ["qep"],
+      pathname: "/workspace/qep",
+      permissions: ["qep.*"],
+    });
+    const ids = [...rail.primary, ...rail.footer].map((i) => i.id);
+    expect(ids).not.toContain("platform-admin");
+    expect(ids).not.toContain("org-admin");
+    expect(ids).toContain("quality");
   });
 
   it("shows Source rail only when hasSourceAccess", () => {

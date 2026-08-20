@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, House, MoreHorizontal, Search } from "lucide-react";
+import { Bell, Bug, House, ListTodo, MoreHorizontal, Search } from "lucide-react";
 import Link from "next/link";
 import { signOut, useSession } from "@apzhub/auth";
 import type { ActivityBarItem, SidebarItem } from "@apzhub/ui";
@@ -82,7 +82,18 @@ import { resolveCommandPaletteMode } from "@/lib/resolve-command-palette-mode";
 import { composeWorkbenchRail } from "@/lib/workbench/compose-workbench-rail";
 import { resolveApzprdSidebarHref } from "@/lib/workbench/compose-apzprd-sidebars";
 import { resolvePenSidebarHref } from "@/lib/workbench/compose-pen-sidebars";
-import { resolveQepSidebarHref } from "@/lib/workbench/compose-qep-sidebars";
+import {
+  resolveQepSidebarHref,
+  isQepSidebarSectionId,
+} from "@/lib/workbench/compose-qep-sidebars";
+import { QepApplicationProvider } from "@/lib/qep/qep-application-context";
+import {
+  QepApplicationLoader,
+  QepApplicationSelector,
+  QepCreateMenu,
+} from "@/components/qep/qep-header-controls";
+import { QEP_HOME_ROUTES } from "@/lib/qep/home-routes";
+import { QEP_DEFECTS_BASE_PATH } from "@apzhub/qep-defects/presentation";
 import { resolveQepBottomPanelContent } from "@/components/workbench/qep-bottom-panels";
 import {
   PEN_BOTTOM_TAB_LABELS,
@@ -98,6 +109,7 @@ async function fetchEffectiveProducts(): Promise<{
   readonly organisationName?: string;
   readonly tenantId?: string | null;
   readonly kind?: string;
+  readonly permissions?: readonly string[];
 }> {
   const res = await fetch("/api/v1/me/home-context", { cache: "no-store" });
   const body = (await res.json()) as {
@@ -107,6 +119,7 @@ async function fetchEffectiveProducts(): Promise<{
       tenantName?: string;
       tenantId?: string | null;
       kind?: string;
+      permissions?: readonly string[];
     };
   };
   if (!res.ok) return { productKeys: [] };
@@ -115,6 +128,7 @@ async function fetchEffectiveProducts(): Promise<{
     organisationName: body.data?.organisationName ?? body.data?.tenantName,
     tenantId: body.data?.tenantId,
     kind: body.data?.kind,
+    permissions: body.data?.permissions,
   };
 }
 
@@ -136,7 +150,9 @@ async function fetchSourceCapabilities(): Promise<{
 export function WorkbenchPage() {
   return (
     <WorkbenchInspectorProvider>
-      <WorkbenchPageInner />
+      <QepApplicationProvider>
+        <WorkbenchPageInner />
+      </QepApplicationProvider>
     </WorkbenchInspectorProvider>
   );
 }
@@ -212,11 +228,13 @@ function WorkbenchPageInner() {
         pathname,
         activeRailId: railOverride,
         hasSourceAccess,
+        permissions: entitlementsQ.data?.permissions,
       }),
     [
       legacyActivityBarItems,
       legacySidebarItems,
       entitlementsQ.data?.productKeys,
+      entitlementsQ.data?.permissions,
       pathname,
       railOverride,
       hasSourceAccess,
@@ -315,7 +333,11 @@ function WorkbenchPageInner() {
   }
 
   function handleSidebarSelect(id: string) {
-    if (id.startsWith("prd-sep-") || id.includes("-sep-")) {
+    if (
+      id.startsWith("prd-sep-") ||
+      id.includes("-sep-") ||
+      isQepSidebarSectionId(id)
+    ) {
       return;
     }
     if (id === "nav-home") {
@@ -408,7 +430,58 @@ function WorkbenchPageInner() {
     [penActive],
   );
 
-  const mobileNav = (
+  const mobileNav = qepActive ? (
+    <nav
+      className="flex h-12 shrink-0 items-center justify-around border-t border-[var(--color-border)] bg-[var(--color-surface)]"
+      data-testid="workbench-mobile-nav"
+      aria-label="APZQEP mobile"
+    >
+      <Link
+        href={QEP_HOME_ROUTES.home}
+        className={`flex flex-col items-center gap-0.5 text-[10px] ${
+          pathname.includes("/workspace/qep/home") || pathname === "/workspace/qep"
+            ? "font-medium text-[var(--color-foreground)]"
+            : "text-[var(--color-muted-foreground)]"
+        }`}
+      >
+        <House className="h-4 w-4" aria-hidden />
+        Home
+      </Link>
+      <Link
+        href={QEP_HOME_ROUTES.myWork}
+        className={`flex flex-col items-center gap-0.5 text-[10px] ${
+          pathname.includes("/workspace/qep/my-work")
+            ? "font-medium text-[var(--color-foreground)]"
+            : "text-[var(--color-muted-foreground)]"
+        }`}
+      >
+        <ListTodo className="h-4 w-4" aria-hidden />
+        Work
+      </Link>
+      <Link
+        href={QEP_DEFECTS_BASE_PATH}
+        className={`flex flex-col items-center gap-0.5 text-[10px] ${
+          pathname.includes("/workspace/qep/defects")
+            ? "font-medium text-[var(--color-foreground)]"
+            : "text-[var(--color-muted-foreground)]"
+        }`}
+      >
+        <Bug className="h-4 w-4" aria-hidden />
+        Defects
+      </Link>
+      <Link
+        href="/workspace/qep/administration"
+        className={`flex flex-col items-center gap-0.5 text-[10px] ${
+          pathname.includes("/workspace/qep/administration")
+            ? "font-medium text-[var(--color-foreground)]"
+            : "text-[var(--color-muted-foreground)]"
+        }`}
+      >
+        <MoreHorizontal className="h-4 w-4" aria-hidden />
+        More
+      </Link>
+    </nav>
+  ) : (
     <nav
       className="flex h-12 shrink-0 items-center justify-around border-t border-[var(--color-border)] bg-[var(--color-surface)]"
       data-testid="workbench-mobile-nav"
@@ -455,12 +528,21 @@ function WorkbenchPageInner() {
 
   return (
     <WorkbenchOperatorRedirect>
+      {qepActive ? <QepApplicationLoader /> : null}
       <DesktopShell
         userName={session?.user.name ?? session?.user.email}
         onSignOut={handleSignOut}
         header={
           <WorkbenchHeader
             organisation={<TenantSwitcher />}
+            productLabel={qepActive ? "APZQEP" : undefined}
+            contextControl={qepActive ? <QepApplicationSelector /> : undefined}
+            searchPlaceholder={qepActive ? "Search QEP..." : "Search APZ..."}
+            createMenu={
+              qepActive ? (
+                <QepCreateMenu permissions={entitlementsQ.data?.permissions} />
+              ) : undefined
+            }
             userName={session?.user.name ?? session?.user.email}
             onSignOut={handleSignOut}
             onOpenSearch={() => setGlobalSearchOpen(true)}
@@ -484,8 +566,9 @@ function WorkbenchPageInner() {
         sidebarItems={[...rail.contextSidebarItems]}
         onSidebarSelect={handleSidebarSelect}
         statusBar={{
-          organisationLabel: orgLabel,
-          rightLabel: "APZ Workbench",
+          organisationLabel: qepActive ? "APZHUB" : orgLabel,
+          leftHint: qepActive ? "QEP Master · APZQEP" : undefined,
+          rightLabel: qepActive ? "Connected" : "APZ Workbench",
         }}
         mobileNav={mobileNav}
         enableCommandPalette
@@ -506,18 +589,25 @@ function WorkbenchPageInner() {
         }}
         enableGlobalShortcuts
         enableContextMenu
-        enableToolbar
+        enableToolbar={!qepActive}
         toolbarRegion="workspace"
         enableNotificationBadge={false}
         enableNotificationPanel={false}
-        enableActivityTimeline
-        enableActivityTimelinePanel
+        enableActivityTimeline={!qepActive}
+        enableActivityTimelinePanel={!qepActive}
         activityTimelineRenderKey={activityTimelineRenderKey}
         contextMenuSurface="workspace"
         contextMenuInput={contextMenuInput}
+        hideActivityRail={qepActive}
+        sidebarTone={qepActive ? "navy" : "default"}
         inspectorDefaultCollapsed
+        desktopMinWidth={qepActive ? 1024 : 768}
         inspectorContent={inspector.selection?.content ?? null}
-        inspectorTitle={inspector.selection?.title ?? "Inspector"}
+        inspectorTitle={
+          qepActive && inspector.selection
+            ? ""
+            : (inspector.selection?.title ?? "Inspector")
+        }
         inspectorExpandToken={inspector.selection ? inspector.expandToken : null}
         bottomDefaultCollapsed
         bottomPanelContent={bottomPanelContent}

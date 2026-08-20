@@ -56,6 +56,7 @@ export const qepTestExecution = pgTable(
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
     updatedBy: text("updated_by").notNull(),
     correlationId: text("correlation_id"),
+    applicationId: text("application_id"),
   },
   (table) => [
     uniqueIndex("qep_test_execution_tenant_number_uidx").on(
@@ -104,6 +105,7 @@ export const qepTestExecutionManifest = pgTable(
           preconditions: string[];
           requireActualResult: boolean;
           allowUnordered: boolean;
+          testDataRef?: string;
         }[]
       >()
       .notNull()

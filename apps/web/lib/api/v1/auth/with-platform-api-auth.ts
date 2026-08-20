@@ -36,7 +36,7 @@ export interface PlatformApiRequestContext {
 export type PlatformApiRouteHandler = (
   request: NextRequest,
   context: PlatformApiRequestContext,
-  routeContext?: { params: Promise<Record<string, string>> },
+  routeContext: { params: Promise<Record<string, string>> },
 ) => NextResponse | Response | Promise<NextResponse | Response>;
 
 export interface WithPlatformApiAuthOptions {
@@ -125,7 +125,7 @@ export function withPlatformApiAuth(
       logPlatformApiRequest(request, context, options.operation);
 
       const response = await runWithTenantContext(serviceContext.tenantId, () =>
-        handler(request, context, routeContext),
+        handler(request, context, routeContext ?? { params: Promise.resolve({}) }),
       );
       logPlatformApiResponse(
         { tracing, session, serviceContext },

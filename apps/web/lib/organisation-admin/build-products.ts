@@ -193,7 +193,7 @@ export async function buildOrganisationAdminProductDetail(
     .catch(() => []);
   const groupById = new Map(groups.map((g) => [g.id, g]));
 
-  const usersOut: OrganisationAdminProductDetailPayload["users"] = [];
+  const usersOut: OrganisationAdminProductDetailPayload["users"][number][] = [];
   for (const userId of userIds) {
     const assignments = await listProductRoleAssignmentsForUser({
       userId,

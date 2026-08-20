@@ -189,27 +189,31 @@ export async function handleConfirmQaGateFindings(
                 : finding.severity === "medium"
                   ? "p2"
                   : "p3";
-          const created = await getDefectRuntime().service.create(actor, {
-            title: `[QA Gate] ${finding.title}`.slice(0, 200),
-            description: [
-              finding.description,
-              finding.location ? `Location: ${finding.location}` : "",
-              `Recommendation: ${finding.recommendation}`,
-              `Tool: ${finding.toolId}`,
-              `changeEventId: ${changeEventId}`,
-              `findingId: ${finding.id}`,
-            ]
-              .filter(Boolean)
-              .join("\n\n"),
-            severity,
-            priority,
-            tags: ["qa-gate", "f15", finding.toolId],
-            customMetadata: {
-              changeEventId,
-              findingId: finding.id,
-              assistOrigin: "f15_qa_gate",
+          const created = await getDefectRuntime().service.create(
+            actor,
+            {
+              title: `[QA Gate] ${finding.title}`.slice(0, 200),
+              description: [
+                finding.description,
+                finding.location ? `Location: ${finding.location}` : "",
+                `Recommendation: ${finding.recommendation}`,
+                `Tool: ${finding.toolId}`,
+                `changeEventId: ${changeEventId}`,
+                `findingId: ${finding.id}`,
+              ]
+                .filter(Boolean)
+                .join("\n\n"),
+              severity,
+              priority,
+              tags: ["qa-gate", "f15", finding.toolId],
+              customMetadata: {
+                changeEventId,
+                findingId: finding.id,
+                assistOrigin: "f15_qa_gate",
+              },
             },
-          });
+            new Date().toISOString(),
+          );
           defectsMeta[findingId] = {
             attempted: true,
             defectId: created.defectId,

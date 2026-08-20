@@ -37,7 +37,8 @@ export function getCommerceProvisionStatus(
   const subscriptions = listOrgProductSubscriptions(organisationId);
   const productKeys = subscriptions.map((s) => s.productKey);
   const intent = getCommercePackageIntent(organisationId);
-  const pkg = intent?.packageId ? getPackage(intent.packageId) : undefined;
+  const primaryPackageId = intent?.packageIds[0];
+  const pkg = primaryPackageId ? getPackage(primaryPackageId) : undefined;
   const expected = pkg?.productKeys ?? productKeys;
 
   const productSteps: ProvisionStep[] = expected.map((key) => ({
@@ -72,7 +73,7 @@ export function getCommerceProvisionStatus(
 
   return {
     organisationId,
-    packageId: intent?.packageId,
+    packageId: primaryPackageId,
     overall,
     steps,
     productKeys,

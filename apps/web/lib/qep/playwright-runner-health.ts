@@ -1,3 +1,4 @@
+import type { EnvVars } from "@/lib/env-vars";
 /**
  * SPR-APZQEP-202 — Playwright runner health against apzqep-testing cluster.
  * Live dispatch only when APZHUB_AUTOMATION_LIVE=true and runner is reachable.
@@ -13,7 +14,7 @@ export type PlaywrightRunnerHealth = {
 };
 
 export function resolvePlaywrightRunnerHealth(
-  env: NodeJS.ProcessEnv = process.env,
+  env: EnvVars = process.env,
 ): PlaywrightRunnerHealth {
   const liveFlag =
     (env.APZHUB_AUTOMATION_LIVE ?? "").toLowerCase() === "true" ||

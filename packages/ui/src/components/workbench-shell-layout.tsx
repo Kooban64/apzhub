@@ -51,6 +51,12 @@ export type WorkbenchShellLayoutProps = {
   readonly statusBar?: WorkbenchStatusBarProps;
   readonly children: ReactNode;
   readonly mobileNav?: ReactNode;
+  /** Viewport width at which rail + context sidebar appear. Default 768. */
+  readonly desktopMinWidth?: number;
+  /** Hide the 52px activity rail (QEP uses a full product sidebar instead). */
+  readonly hideActivityRail?: boolean;
+  /** Navy product sidebar (APZQEP). */
+  readonly sidebarTone?: "default" | "navy";
 };
 
 const BOTTOM_TABS: readonly { id: WorkbenchBottomTabId; label: string }[] = [
@@ -134,25 +140,47 @@ function ContextSidebar({
   sidebarTitle,
   sidebarItems,
   onSidebarSelect,
+  tone = "default",
 }: {
   readonly sidebarTitle?: string;
   readonly sidebarItems: readonly SidebarItem[];
   readonly onSidebarSelect?: (id: string) => void;
+  readonly tone?: "default" | "navy";
 }) {
+  const navy = tone === "navy";
   return (
     <aside
-      className="flex h-full min-h-0 flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)]"
+      className={cn(
+        "flex h-full min-h-0 flex-col border-r",
+        navy
+          ? "border-[var(--qep-nav-foreground)]/10 bg-[var(--qep-nav-background)] text-[var(--qep-nav-foreground)]"
+          : "border-[var(--color-border)] bg-[var(--color-surface)]",
+      )}
       data-testid="workbench-context-sidebar"
       aria-label="Context sidebar"
     >
       {sidebarTitle ? (
-        <p className="border-b border-[var(--color-border)] px-3 py-2 text-[10px] font-semibold tracking-wide text-[var(--color-muted-foreground)] uppercase">
+        <p
+          className={cn(
+            "border-b px-3 py-2.5 text-[11px] font-semibold tracking-wide uppercase",
+            navy
+              ? "border-[var(--qep-nav-foreground)]/10 text-[var(--qep-nav-foreground)]"
+              : "border-[var(--color-border)] text-[var(--color-muted-foreground)]",
+          )}
+        >
           {sidebarTitle}
         </p>
       ) : null}
-      <nav className="flex-1 overflow-y-auto p-1.5">
+      <nav className="flex-1 overflow-y-auto p-2">
         {sidebarItems.length === 0 ? (
-          <p className="px-2 py-3 text-xs text-[var(--color-muted-foreground)]">
+          <p
+            className={cn(
+              "px-2 py-3 text-xs",
+              navy
+                ? "text-[var(--qep-nav-muted)]"
+                : "text-[var(--color-muted-foreground)]",
+            )}
+          >
             No items for this context.
           </p>
         ) : (
@@ -162,10 +190,35 @@ function ContextSidebar({
                 return (
                   <li
                     key={item.id}
-                    className="my-1.5 border-t border-[var(--color-border)]"
+                    className={cn(
+                      "my-1.5 border-t",
+                      navy
+                        ? "border-[var(--qep-nav-foreground)]/10"
+                        : "border-[var(--color-border)]",
+                    )}
                     aria-hidden
                     data-testid={`workbench-sidebar-${item.id}`}
                   />
+                );
+              }
+              if (item.kind === "section") {
+                return (
+                  <li
+                    key={item.id}
+                    className="px-2 pb-0.5 pt-2.5 first:pt-1"
+                    data-testid={`workbench-sidebar-${item.id}`}
+                  >
+                    <p
+                      className={cn(
+                        "text-[10px] font-semibold uppercase tracking-wide",
+                        navy
+                          ? "text-[var(--qep-nav-muted)]"
+                          : "text-[var(--color-muted-foreground)]",
+                      )}
+                    >
+                      {item.label}
+                    </p>
+                  </li>
                 );
               }
               const Icon = resolveLucideIcon(item.icon);
@@ -175,16 +228,20 @@ function ContextSidebar({
                     type="button"
                     onClick={() => onSidebarSelect?.(item.id)}
                     className={cn(
-                      "flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-xs transition-colors",
+                      "flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-xs transition-colors",
                       item.active
-                        ? "bg-[var(--color-muted)] font-medium"
-                        : "hover:bg-[var(--color-muted)]/60",
+                        ? navy
+                          ? "bg-[var(--qep-nav-active)] font-medium text-[var(--qep-nav-active-foreground)]"
+                          : "bg-[var(--color-muted)] font-medium"
+                        : navy
+                          ? "text-[var(--qep-nav-foreground)] hover:bg-[var(--qep-nav-foreground)]/10"
+                          : "hover:bg-[var(--color-muted)]/60",
                     )}
                     data-testid={`workbench-sidebar-${item.id}`}
                   >
                     {Icon ? (
                       <Icon
-                        className="h-3.5 w-3.5 shrink-0 opacity-80"
+                        className="h-3.5 w-3.5 shrink-0 opacity-90"
                         aria-hidden
                         strokeWidth={1.75}
                       />
@@ -225,6 +282,9 @@ export function WorkbenchShellLayout({
   statusBar,
   children,
   mobileNav,
+  desktopMinWidth = 768,
+  hideActivityRail = false,
+  sidebarTone = "default",
 }: WorkbenchShellLayoutProps) {
   const sidebarRef = useRef<ImperativePanelHandle>(null);
   const inspectorRef = useRef<ImperativePanelHandle>(null);
@@ -239,12 +299,12 @@ export function WorkbenchShellLayout({
   const [bottomTab, setBottomTab] = useState<WorkbenchBottomTabId>("problems");
 
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
+    const mq = window.matchMedia(`(min-width: ${desktopMinWidth}px)`);
     const sync = () => setIsDesktop(mq.matches);
     sync();
     mq.addEventListener("change", sync);
     return () => mq.removeEventListener("change", sync);
-  }, []);
+  }, [desktopMinWidth]);
 
   useEffect(() => {
     if (inspectorExpandToken == null || inspectorExpandToken === "") return;
@@ -327,56 +387,58 @@ export function WorkbenchShellLayout({
         className="flex min-h-0 flex-1 overflow-hidden"
         data-testid="workbench-desktop-chrome"
       >
-        <nav
-          className="flex w-[52px] shrink-0 flex-col items-center border-r border-[var(--color-border)] bg-[var(--color-surface)] py-2"
-          aria-label="Activity rail"
-          data-testid="workbench-activity-rail"
-        >
-          <div className="mb-2 flex h-8 w-8 items-center justify-center text-[11px] font-semibold tracking-wide">
-            APZ
-          </div>
-          <div className="flex flex-1 flex-col items-center gap-0.5">
-            {activityBarItems.map((item) => (
-              <RailButton key={item.id} item={item} onSelect={onActivityBarSelect} />
-            ))}
-          </div>
-          <div className="mt-auto flex flex-col items-center gap-0.5 border-t border-[var(--color-border)] pt-2">
-            {activityBarFooterItems.map((item) => (
-              <RailButton
-                key={item.id}
-                item={item}
-                onSelect={onActivityBarFooterSelect}
-              />
-            ))}
-            <button
-              type="button"
-              title={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-              className="flex h-8 w-8 items-center justify-center text-[10px] text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)]"
-              onClick={toggleSidebar}
-              data-testid="workbench-toggle-sidebar"
-            >
-              ‖
-            </button>
-            <button
-              type="button"
-              title={inspectorCollapsed ? "Show inspector" : "Hide inspector"}
-              className="flex h-8 w-8 items-center justify-center text-[10px] text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)]"
-              onClick={toggleInspector}
-              data-testid="workbench-toggle-inspector"
-            >
-              ▣
-            </button>
-            <button
-              type="button"
-              title={bottomCollapsed ? "Show bottom panel" : "Hide bottom panel"}
-              className="flex h-8 w-8 items-center justify-center text-[10px] text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)]"
-              onClick={toggleBottom}
-              data-testid="workbench-toggle-bottom"
-            >
-              ▭
-            </button>
-          </div>
-        </nav>
+        {!hideActivityRail ? (
+          <nav
+            className="flex w-[52px] shrink-0 flex-col items-center border-r border-[var(--color-border)] bg-[var(--color-surface)] py-2"
+            aria-label="Activity rail"
+            data-testid="workbench-activity-rail"
+          >
+            <div className="mb-2 flex h-8 w-8 items-center justify-center text-[11px] font-semibold tracking-wide">
+              APZ
+            </div>
+            <div className="flex flex-1 flex-col items-center gap-0.5">
+              {activityBarItems.map((item) => (
+                <RailButton key={item.id} item={item} onSelect={onActivityBarSelect} />
+              ))}
+            </div>
+            <div className="mt-auto flex flex-col items-center gap-0.5 border-t border-[var(--color-border)] pt-2">
+              {activityBarFooterItems.map((item) => (
+                <RailButton
+                  key={item.id}
+                  item={item}
+                  onSelect={onActivityBarFooterSelect}
+                />
+              ))}
+              <button
+                type="button"
+                title={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+                className="flex h-8 w-8 items-center justify-center text-[10px] text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)]"
+                onClick={toggleSidebar}
+                data-testid="workbench-toggle-sidebar"
+              >
+                ‖
+              </button>
+              <button
+                type="button"
+                title={inspectorCollapsed ? "Show inspector" : "Hide inspector"}
+                className="flex h-8 w-8 items-center justify-center text-[10px] text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)]"
+                onClick={toggleInspector}
+                data-testid="workbench-toggle-inspector"
+              >
+                ▣
+              </button>
+              <button
+                type="button"
+                title={bottomCollapsed ? "Show bottom panel" : "Hide bottom panel"}
+                className="flex h-8 w-8 items-center justify-center text-[10px] text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)]"
+                onClick={toggleBottom}
+                data-testid="workbench-toggle-bottom"
+              >
+                ▭
+              </button>
+            </div>
+          </nav>
+        ) : null}
 
         <PanelGroup
           direction="vertical"
@@ -393,9 +455,9 @@ export function WorkbenchShellLayout({
                 ref={sidebarRef}
                 id="workbench-sidebar"
                 order={1}
-                defaultSize={sidebarDefaultCollapsed ? 0 : 18}
-                minSize={14}
-                maxSize={30}
+                defaultSize={sidebarDefaultCollapsed ? 0 : hideActivityRail ? 22 : 18}
+                minSize={hideActivityRail ? 16 : 14}
+                maxSize={hideActivityRail ? 34 : 30}
                 collapsible
                 collapsedSize={0}
                 onCollapse={() => setSidebarCollapsed(true)}
@@ -405,6 +467,7 @@ export function WorkbenchShellLayout({
                   sidebarTitle={sidebarTitle}
                   sidebarItems={sidebarItems}
                   onSidebarSelect={onSidebarSelect}
+                  tone={sidebarTone}
                 />
               </Panel>
 

@@ -18,6 +18,7 @@ import {
   type VerificationDispatchRecord,
 } from "@/lib/qep/verification-dispatch-store";
 
+import type { EnvVars } from "@/lib/env-vars";
 export type TokenHealth = {
   readonly configured: boolean;
   /** Never the secret — ops signal only. */
@@ -68,7 +69,7 @@ export type QualityProjectInsight = {
   readonly autoCertified: false;
 };
 
-function tokenHealth(env: NodeJS.ProcessEnv = process.env): TokenHealth {
+function tokenHealth(env: EnvVars = process.env): TokenHealth {
   const configured = Boolean(resolveGithubPatFromEnv(env));
   return {
     configured,
@@ -126,7 +127,7 @@ function pickLatestCert(
 export async function composeQualityProjectInsight(input: {
   readonly tenantId: string;
   readonly projectId: string;
-  readonly env?: NodeJS.ProcessEnv;
+  readonly env?: EnvVars;
   readonly changeLimit?: number;
 }): Promise<QualityProjectInsight> {
   const project = getQualityProject(input.tenantId, input.projectId);
@@ -221,6 +222,6 @@ export async function composeQualityProjectInsight(input: {
   };
 }
 
-export function getScmTokenHealth(env: NodeJS.ProcessEnv = process.env): TokenHealth {
+export function getScmTokenHealth(env: EnvVars = process.env): TokenHealth {
   return tokenHealth(env);
 }

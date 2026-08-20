@@ -14,8 +14,9 @@ import {
 
 import { greenboneArtefactRoot } from "@/lib/apzpen/greenbone-artefact";
 
+import type { EnvVars } from "@/lib/env-vars";
 export async function pullGreenboneGmpToArtefact(input?: {
-  readonly env?: NodeJS.ProcessEnv;
+  readonly env?: EnvVars;
   readonly filter?: string;
 }): Promise<{
   readonly ok: boolean;

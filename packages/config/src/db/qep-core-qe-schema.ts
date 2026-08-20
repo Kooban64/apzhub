@@ -57,11 +57,17 @@ export const qepSuite = pgTable(
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
     createdBy: text("created_by").notNull(),
     updatedBy: text("updated_by").notNull(),
+    applicationId: text("application_id"),
+    suiteKey: varchar("suite_key", { length: 32 }),
   },
   (t) => ({
     tenantIdx: index("qep_suite_tenant_idx").on(t.tenantId),
     tenantProjectIdx: index("qep_suite_tenant_project_idx").on(t.tenantId, t.projectId),
     tenantStatusIdx: index("qep_suite_tenant_status_idx").on(t.tenantId, t.status),
+    tenantApplicationIdx: index("qep_suite_tenant_application_idx").on(
+      t.tenantId,
+      t.applicationId,
+    ),
   }),
 );
 
@@ -89,6 +95,7 @@ export const qepExecutionPlan = pgTable(
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
     createdBy: text("created_by").notNull(),
     updatedBy: text("updated_by").notNull(),
+    applicationId: text("application_id"),
   },
   (t) => ({
     tenantHandoffUid: uniqueIndex("qep_execution_plan_tenant_handoff_uidx").on(
@@ -122,6 +129,7 @@ export const qepExecutionSession = pgTable(
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
     createdBy: text("created_by").notNull(),
     updatedBy: text("updated_by").notNull(),
+    applicationId: text("application_id"),
   },
   (t) => ({
     tenantHandoffUid: uniqueIndex("qep_execution_session_tenant_handoff_uidx").on(
@@ -154,9 +162,14 @@ export const qepDefect = pgTable(
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
     createdBy: text("created_by").notNull(),
     updatedBy: text("updated_by").notNull(),
+    testExecutionId: text("test_execution_id"),
   },
   (t) => ({
     tenantIdx: index("qep_defect_tenant_idx").on(t.tenantId),
+    tenantTestExecutionIdx: index("qep_defect_tenant_test_execution_idx").on(
+      t.tenantId,
+      t.testExecutionId,
+    ),
     tenantStatusIdx: index("qep_defect_tenant_status_idx").on(t.tenantId, t.status),
   }),
 );

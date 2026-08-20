@@ -8,6 +8,7 @@ import {
   lookupCommerceInvitePublic,
 } from "@/lib/api/v1/handlers/commerce-invite";
 import { withPlatformApiAuth } from "@/lib/api/v1/auth/with-platform-api-auth";
+import { PlatformApiHttpError } from "@/lib/api/v1/errors";
 import { createPlatformApiTracing } from "@/lib/api/v1/request-context";
 import { jsonDataResponse, methodNotAllowedResponse } from "@/lib/api/v1/response";
 
@@ -32,8 +33,14 @@ export async function GET(
 
 export const POST = withPlatformApiAuth(
   async (request, context, routeContext) => {
-    const params = await routeContext!.params;
-    return handleAcceptCommerceInvite(request, context, params.token);
+    const token = (await routeContext.params).token;
+    if (!token) {
+      throw new PlatformApiHttpError(400, {
+        code: "VALIDATION_FAILED",
+        message: "Invite token is required",
+      });
+    }
+    return handleAcceptCommerceInvite(request, context, token);
   },
   { operation: "commerce.invite.accept" },
 );

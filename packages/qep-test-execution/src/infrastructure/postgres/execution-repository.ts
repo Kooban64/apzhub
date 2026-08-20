@@ -153,6 +153,7 @@ export function createPostgresTestExecutionRepository(
         preconditions: [...step.preconditions],
         requireActualResult: step.requireActualResult,
         allowUnordered: step.allowUnordered,
+        ...(step.testDataRef ? { testDataRef: step.testDataRef } : {}),
       })),
     });
   }

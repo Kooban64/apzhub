@@ -17,6 +17,24 @@ import {
 } from "@/lib/source/repo-scope";
 import { requireQepPermission, sessionTenantId } from "./require-qep-permission";
 
+function hasExclusiveSourceRead(granted: readonly string[]): boolean {
+  return (
+    granted.includes("*") ||
+    granted.includes("source.read") ||
+    granted.includes("source.*")
+  );
+}
+
+function requireSourceRead(context: PlatformApiRequestContext): void {
+  const granted = context.serviceContext.permissions ?? [];
+  if (!hasExclusiveSourceRead(granted)) {
+    throw new PlatformApiHttpError(403, {
+      code: "FORBIDDEN",
+      message: "Missing permission: source.read",
+    });
+  }
+}
+
 type RouteContext = { params: Promise<Record<string, string>> };
 
 function requireParam(
@@ -31,10 +49,6 @@ function requireParam(
     });
   }
   return value;
-}
-
-function requireSourceRead(context: PlatformApiRequestContext): void {
-  requireQepPermission(context, "qep.scm.read", "source.read");
 }
 
 function requireSourceWrite(context: PlatformApiRequestContext): void {

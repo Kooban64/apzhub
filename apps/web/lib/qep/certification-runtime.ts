@@ -14,6 +14,17 @@ import type {
 import { buildChangeImpact } from "@/lib/qep/scm-impact";
 import { getQepOrchestrationRuntime } from "@/lib/qep/orchestration-runtime";
 import { getQepScmRuntime } from "@/lib/qep/scm-runtime";
+import { getApplicationService } from "@/lib/qep/application-runtime";
+import { getAssuranceService } from "@/lib/qep/assurance-runtime";
+import type {
+  CertificationOutcome,
+  ReadinessSnapshot,
+  QualityGateEvaluationRecord,
+  CertificationExceptionRecord,
+  EnvironmentSnapshot,
+  ScmIdentity,
+} from "@apzhub/qep-assurance/domain";
+import { assertCertificationOutcomeAllowed } from "@apzhub/qep-assurance/domain";
 
 export const F4_CERTIFIER_AUTHORITY = "quality_certifier";
 export const F4_CO_APPROVER_AUTHORITY = "quality_co_approver";
@@ -48,24 +59,35 @@ export type CertificationEvidenceLink = {
 };
 
 export type HumanCertificationDecision = {
-  readonly outcome: "GO" | "NO_GO";
+  readonly outcome: CertificationOutcome;
   readonly actorId: string;
   readonly rationale: string;
   readonly decidedAt: string;
   readonly approvalDecisionId: string;
   readonly approvalBundleId: string;
-  /** SPR-210 — both certifier and co-approver when dual GO. */
+  /** SPR-210 — both certifier and co-approver when dual GO / CONDITIONAL_GO. */
   readonly coApproverActorId?: string;
 };
 
 /** Partial authority vote before terminal humanDecision (SPR-210 WF-24). */
 export type CertificationAuthorityVote = {
   readonly authorityId: string;
-  readonly outcome: "GO" | "NO_GO";
+  readonly outcome: CertificationOutcome;
   readonly actorId: string;
   readonly rationale: string;
   readonly decidedAt: string;
   readonly approvalDecisionId: string;
+};
+
+export type Phase6CertificationSnapshot = {
+  readonly applicationId: string;
+  readonly environmentId: string;
+  readonly environmentSnapshot: EnvironmentSnapshot;
+  readonly scmIdentity: ScmIdentity;
+  readonly gateEvaluations: readonly QualityGateEvaluationRecord[];
+  readonly readinessSnapshot: ReadinessSnapshot;
+  readonly exceptionsUsed: readonly CertificationExceptionRecord[];
+  readonly frozen: true;
 };
 
 /** F5 RC face domain tile — user sees domains, never provider brands. */
@@ -77,7 +99,8 @@ export type RcDomainId =
   | "accessibility"
   | "coverage"
   | "risk"
-  | "certification";
+  | "certification"
+  | "code_quality";
 
 export type RcDomainStatus = "pass" | "fail" | "not_present" | "info";
 
@@ -125,6 +148,10 @@ export type CertificationEvaluation = {
   readonly domains: readonly RcDomainTile[];
   readonly impactSummary?: RcImpactSummary;
   readonly title: string;
+  /** Phase 6 — application isolation. Absent on historical F4 records. */
+  readonly applicationId?: string;
+  readonly environmentId?: string;
+  readonly phase6?: Phase6CertificationSnapshot;
 };
 
 let seedPromise: Promise<void> | undefined;
@@ -681,10 +708,52 @@ export async function evaluateChangeCertification(input: {
   readonly tenantId: string;
   readonly changeEventId: string;
   readonly actorId: string;
+  readonly applicationId: string;
+  readonly environmentId: string;
 }): Promise<CertificationEvaluation> {
   await ensureF4Seed();
+  if (!input.applicationId.trim()) {
+    throw new Error("certification.application_required");
+  }
+  if (!input.environmentId.trim()) {
+    throw new Error("certification.environment_required");
+  }
+  const application = await getApplicationService().get(
+    input.tenantId,
+    input.applicationId,
+  );
+  const environment = await getApplicationService().getEnvironment(
+    input.tenantId,
+    input.applicationId,
+    input.environmentId,
+  );
   const orch = await getQepOrchestrationRuntime();
-  const collected = await collectEvidenceForChange(input.tenantId, input.changeEventId);
+  let collected: Awaited<ReturnType<typeof collectEvidenceForChange>> = {
+    evidenceRefs: [],
+    evidenceLinks: [],
+  };
+  let scmIdentity: ScmIdentity = { changeEventId: input.changeEventId };
+  try {
+    collected = await collectEvidenceForChange(input.tenantId, input.changeEventId);
+    const scm = getQepScmRuntime();
+    const changes = await scm.listChangeEvents({
+      tenantId: input.tenantId,
+      limit: 500,
+    });
+    const change = changes.find((c) => c.changeEventId === input.changeEventId);
+    if (change) {
+      scmIdentity = {
+        changeEventId: change.changeEventId,
+        kind: change.kind,
+        externalKey: change.externalKey,
+        ...(change.sha ? { sha: change.sha } : {}),
+      };
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    if (message !== "certification.change_not_found") throw error;
+    scmIdentity = { changeEventId: input.changeEventId };
+  }
 
   // F2 impact projection (graph edges) + F5 requirements/risk tiles.
   let impactSummary: RcImpactSummary | undefined;
@@ -803,8 +872,50 @@ export async function evaluateChangeCertification(input: {
     ...base,
     approvalBundleId: bundle.bundleId,
   });
-  await persistEvaluation(withBundle);
-  return withBundle;
+
+  const decisionContext = {
+    applicationId: application.id,
+    applicationName: application.name,
+    environmentId: environment.id,
+    environmentSnapshot: { id: environment.id, name: environment.name },
+    changeEventId: input.changeEventId,
+    scmIdentity,
+  };
+  const gateEvaluations = await getAssuranceService().evaluateActiveGates({
+    tenantId: input.tenantId,
+    applicationId: application.id,
+    actorId: input.actorId,
+    context: decisionContext,
+  });
+  const composed = await getAssuranceService().composeReadiness({
+    tenantId: input.tenantId,
+    applicationId: application.id,
+    changeEventId: input.changeEventId,
+  });
+  const exceptions = await getAssuranceService().listExceptions(
+    input.tenantId,
+    application.id,
+    input.changeEventId,
+  );
+  const phase6: Phase6CertificationSnapshot = {
+    applicationId: application.id,
+    environmentId: environment.id,
+    environmentSnapshot: { id: environment.id, name: environment.name },
+    scmIdentity,
+    gateEvaluations: [...gateEvaluations],
+    readinessSnapshot: composed.snapshot,
+    exceptionsUsed: exceptions.filter((row) => row.status === "authorised"),
+    frozen: true,
+  };
+  const withPhase6 = withRcFace({
+    ...withBundle,
+    applicationId: application.id,
+    environmentId: environment.id,
+    phase6,
+    summary: `${withBundle.summary} · Current Readiness Posture ${composed.snapshot.posture.replaceAll("_", " ")}`,
+  });
+  await persistEvaluation(withPhase6);
+  return withPhase6;
 }
 
 export async function getCertificationEvaluation(
@@ -829,7 +940,7 @@ export async function getCertificationByChange(
 export async function recordHumanCertificationDecision(input: {
   readonly evaluationId: string;
   readonly actorId: string;
-  readonly outcome: "GO" | "NO_GO";
+  readonly outcome: CertificationOutcome;
   readonly rationale: string;
   /** Defaults to quality_certifier; co-approver uses quality_co_approver. */
   readonly authorityId?: string;
@@ -861,6 +972,35 @@ export async function recordHumanCertificationDecision(input: {
     throw new Error("certification.rationale_required");
   }
 
+  const outcome = input.outcome;
+  if (
+    outcome !== "GO" &&
+    outcome !== "CONDITIONAL_GO" &&
+    outcome !== "NO_GO" &&
+    outcome !== "DEFER"
+  ) {
+    throw new Error("certification.outcome_invalid");
+  }
+  if (!evaluation.phase6 && outcome !== "GO" && outcome !== "NO_GO") {
+    throw new Error("certification.outcome_legacy_go_no_go_only");
+  }
+  if (evaluation.phase6) {
+    const exceptions = await getAssuranceService().listExceptions(
+      evaluation.tenantId,
+      evaluation.phase6.applicationId,
+      evaluation.changeEventId,
+    );
+    assertCertificationOutcomeAllowed({
+      outcome,
+      blockingEvaluations: evaluation.phase6.gateEvaluations.filter(
+        (row) => row.definitionSnapshot.gateType === "blocking",
+      ),
+      exceptions: exceptions.filter(
+        (row) => row.environmentId === evaluation.phase6?.environmentId,
+      ),
+    });
+  }
+
   const authorityId = (input.authorityId ?? F4_AUTHORITY).trim();
   if (authorityId !== F4_AUTHORITY && authorityId !== F4_CO_AUTHORITY) {
     throw new Error("certification.authority_invalid");
@@ -880,7 +1020,7 @@ export async function recordHumanCertificationDecision(input: {
   const bundle = await orch.approvals.submitDecision(evaluation.approvalBundleId, {
     authorityId,
     actorId: actor,
-    state: input.outcome === "GO" ? "approved" : "rejected",
+    state: input.outcome === "NO_GO" ? "rejected" : "approved",
     comments: rationale,
     metadata: {
       flagship: "F4",
@@ -905,13 +1045,13 @@ export async function recordHumanCertificationDecision(input: {
   };
   const votes = [...priorVotes, vote];
 
-  // Fail-closed: any NO_GO finalises immediately.
-  if (input.outcome === "NO_GO") {
+  // Fail-closed: any NO_GO or DEFER finalises immediately.
+  if (input.outcome === "NO_GO" || input.outcome === "DEFER") {
     const updated = withRcFace({
       ...evaluation,
       authorityVotes: votes,
       humanDecision: {
-        outcome: "NO_GO",
+        outcome: input.outcome,
         actorId: actor,
         rationale,
         decidedAt: vote.decidedAt,
@@ -925,9 +1065,14 @@ export async function recordHumanCertificationDecision(input: {
 
   const certVote = votes.find((v) => v.authorityId === F4_AUTHORITY);
   const coVote = votes.find((v) => v.authorityId === F4_CO_AUTHORITY);
-  const bothGo = certVote?.outcome === "GO" && coVote?.outcome === "GO";
+  const dualOutcome =
+    certVote?.outcome &&
+    certVote.outcome === coVote?.outcome &&
+    (certVote.outcome === "GO" || certVote.outcome === "CONDITIONAL_GO")
+      ? certVote.outcome
+      : undefined;
 
-  if (!bothGo) {
+  if (!dualOutcome) {
     const updated = withRcFace({
       ...evaluation,
       authorityVotes: votes,
@@ -936,11 +1081,29 @@ export async function recordHumanCertificationDecision(input: {
     return updated;
   }
 
+  let exceptionsUsed = evaluation.phase6?.exceptionsUsed ?? [];
+  if (evaluation.phase6) {
+    exceptionsUsed = await getAssuranceService().listExceptions(
+      evaluation.tenantId,
+      evaluation.phase6.applicationId,
+      evaluation.changeEventId,
+    );
+  }
+
   const updated = withRcFace({
     ...evaluation,
     authorityVotes: votes,
+    ...(evaluation.phase6
+      ? {
+          phase6: {
+            ...evaluation.phase6,
+            exceptionsUsed,
+            frozen: true as const,
+          },
+        }
+      : {}),
     humanDecision: {
-      outcome: "GO",
+      outcome: dualOutcome,
       actorId: certVote!.actorId,
       coApproverActorId: coVote!.actorId,
       rationale: `Certifier: ${certVote!.rationale} · Co-approver: ${coVote!.rationale}`,

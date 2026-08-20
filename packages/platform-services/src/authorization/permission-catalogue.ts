@@ -57,6 +57,8 @@ import {
   type QepTestSpecificationPermission,
   QEP_TEST_PLAN_PERMISSIONS,
   type QepTestPlanPermission,
+  QEP_EXPERIENCE_PERMISSIONS,
+  type QepExperiencePermission,
 } from "@apzhub/qep-contracts";
 import {
   QEP_TEST_EXECUTION_PERMISSIONS,
@@ -141,6 +143,7 @@ export type PlatformPermissionKey =
   | QepVerificationPermission
   | QepTestSpecificationPermission
   | QepTestPlanPermission
+  | QepExperiencePermission
   | QepTestExecutionPermission
   | QepEvidencePermission
   | "platform.impersonation.use";
@@ -274,6 +277,8 @@ export const PLATFORM_SERVICE_PERMISSION_CATALOGUE = [
   ...QEP_TEST_SPECIFICATION_PERMISSIONS,
   // QEP Test Plans platform services (APZQEP-ENG-060B Part 2)
   ...QEP_TEST_PLAN_PERMISSIONS,
+  // QEP Experience / Exploratory (Phase 5)
+  ...QEP_EXPERIENCE_PERMISSIONS,
   // QEP Test Execution platform services (APZQEP-ENG-100D)
   ...QEP_TEST_EXECUTION_PERMISSIONS,
   // QEP Evidence platform services (APZQEP-ENG-110F)

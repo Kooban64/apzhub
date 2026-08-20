@@ -11,6 +11,7 @@ import {
 } from "@/lib/commercial/catalogue";
 import type { ProductAccessDecision } from "@/lib/commercial/require-product-access";
 
+import type { EnvVars } from "@/lib/env-vars";
 export type EntitlementSnapshotLike = {
   readonly productKeys?: readonly string[];
   readonly orgProductKeys?: readonly string[];
@@ -34,9 +35,7 @@ export function isPillarProductKey(value: string): value is ProductKey {
  * Soft-open empty ledgers only when explicitly bootstrapping CE or in test.
  * Production defaults to hard deny (Phase G).
  */
-export function isEntitlementSoftOpenEnabled(
-  env: NodeJS.ProcessEnv = process.env,
-): boolean {
+export function isEntitlementSoftOpenEnabled(env: EnvVars = process.env): boolean {
   if (env.APZHUB_ENTITLEMENT_HARD_MODE === "true") {
     return false;
   }
